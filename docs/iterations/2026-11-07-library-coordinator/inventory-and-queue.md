@@ -22,8 +22,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 12 | Balderdoush 1.04i | Content\001: Balderdoush 1.04i/Balderdoush 1.04i | 68K (CODE) | not yet measured |
 | 13 | Barney Carnage 2.0 | Content\001: BarneyCarnage2.0ƒ/Barney Carnage 2.0 | 68K (CODE) | not yet measured |
 | 14 | BattleTanks 2.12.1 | Content\001: BattleTanks 2.12.1 | 68K (CODE) | not yet measured |
-| 15 | Bedlam | Content\001: Bedlam 1.1/Bedlam | 68K (CODE) | worker assigned |
-| 16 | Bikaka 1.4 | Content\001: Bikaka 14 Folder/Bikaka 1.4 | 68K (CODE) | pending |
+| 15 | Bedlam1.1 | Content\001: Bedlam 1.1/Bedlam | 68K (CODE) | not yet measured |
+| 16 | Bikaka 1.4 | Content\001: Bikaka 14 Folder/Bikaka 1.4 | 68K (CODE) | worker assigned |
 | 17 | Blobbo | Content\001: Blobbo 1.0 Lite ƒ/Blobbo<br>Content\001: Blobbo 1.0 Lite ƒ/Blobbo 1.0.1 Lite<br>Content\001: Blobbo1.0.1 Fullversion/Blobbo 1.0.1 | 68K (CODE) | pending |
 | 18 | Blood Bath Demo 1.96 | Content\001: Blood Bath Demo 1.96 4cows/Blood Bath Demo PPC 1.96<br>Content\001: Blood Bath Demo 1.96 4cows/Blood Bath™ Demo 1.96 | 68K (CODE), PPC fragment | pending |
 | 19 | Bloodsuckers | Content\001: Blood Suckers Folder/Bloodsuckers | 68K (CODE) | pending |

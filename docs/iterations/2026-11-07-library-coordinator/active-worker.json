@@ -1,8 +1,8 @@
 {
-  "slug": "battletanks-2-12-1",
-  "task_name": "/root/battletanks_2_12_1",
+  "slug": "bedlam",
+  "task_name": "/root/bedlam",
   "status": "reviewed; workload released",
-  "starting_revision": "70c7a51582c593d3e0a56b93e2a3f12e70ff4b0e",
-  "brief": "battletanks-2-12-1-brief.md",
-  "updated_at": "2026-11-07T17:53:14.035183+00:00"
+  "starting_revision": "6225f407c124a900fd266099c447ceae6056f531",
+  "brief": "bedlam-brief.md",
+  "updated_at": "2026-11-07T17:59:08.836806+00:00"
 }

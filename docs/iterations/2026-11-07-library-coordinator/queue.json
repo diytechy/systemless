@@ -430,8 +430,8 @@
     },
     {
       "slug": "bedlam",
-      "title": "Bedlam",
-      "status": "worker assigned",
+      "title": "Bedlam1.1",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Bedlam 1.1/Bedlam",
@@ -451,15 +451,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Documented512x342 monochrome playfield centered in observed800x600x1. Original SIZE variants retained; effective partition uninstrumented.",
+      "preferences_save_id": "Boot Bedlam Preferences preserved and virtual FindFolder/FSMakeFSSpec/resource-open reachability verified. Browser save ID unassigned.",
+      "controls": "Readme mouse movement/button fire, held-fire repeat/early travel skip; New Game click observed, battle input efficacy unverified.",
+      "timing": "No browser baseline; native diagnostic travel transitions only, not real-time performance.",
+      "report": "bedlam/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Seven-file combined fixture verified; parent independently rehashed source001 and all three copies. Preserved preference is reached/opened successfully, monochrome menu/New Game observed. Three completed scripts0errors/exhaustion, but final782ticks still travel; battle and mouse efficacy unresolved. No renderer/service diagnosis or setting change.",
+      "dependencies": "Bedlam Sounds retained with full6file folder; audio loading unverified."
     },
     {
       "slug": "bikaka-1-4",
       "title": "Bikaka 1.4",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Bikaka 14 Folder/Bikaka 1.4",

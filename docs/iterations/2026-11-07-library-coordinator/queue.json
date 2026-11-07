@@ -701,7 +701,7 @@
     {
       "slug": "bonk-1-4-2",
       "title": "Bonk 1.4.2",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)",
@@ -734,15 +734,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Documented color256minimum supports8bit selected variant; actual800x600 exploratory. Original SIZE262144 retained; B&W separate untested.",
+      "preferences_save_id": "No Boot BONK pref; docs no System Folder files. Embedded settings/scores retained, persistence untested. BkHd Bonkheads Deluxe Prefs excluded; no browser ID.",
+      "controls": "Begin/Space bomb/menu observed; documented mouse face clicks,Command-I level increment. Mouse scoring/pause unverified.",
+      "timing": "Native color Level1/action readiness only; release-browser baseline absent, no candidate.",
+      "report": "bonk-1-4-2/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Four-file both-variant fixture verified; parent source001/fixture hashes match. Raw213tick report0assertions/exhaustion and Level1/bomb images reviewed: Space Bombs1to0 plus BOOM observed. Menu opens, mouse scoring and transient-black frame unresolved; B&W behavior untested. Two completed scripts, no runtime/pacing change.",
+      "dependencies": "Both APPL variants, Word documentation and raw color alias preserved in4file fixture; external requirement unestablished."
     },
     {
       "slug": "bonkheads-deluxe",
       "title": "Bonkheads Deluxe",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Bonkheads Deluxe/Bonkheads Deluxe",

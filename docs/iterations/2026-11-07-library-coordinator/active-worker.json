@@ -1,8 +1,8 @@
 {
-  "slug": "bolo",
-  "task_name": "/root/bolo",
+  "slug": "bonk-1-4-2",
+  "task_name": "/root/bonk_1_4_2",
   "status": "reviewed; workload released",
-  "starting_revision": "61c4a224cf769434ee52ae2c65c80813d5a660e6",
-  "brief": "bolo-brief.md",
-  "updated_at": "2026-11-07T18:34:31.878367+00:00"
+  "starting_revision": "36a06cd8f701e8e6c577bc58f4f610eae1f1eee8",
+  "brief": "bonk-1-4-2-brief.md",
+  "updated_at": "2026-11-07T18:38:46.953565+00:00"
 }

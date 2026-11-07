@@ -1827,8 +1827,8 @@
     },
     {
       "slug": "prince-of-persia",
-      "title": "Prince of Persia",
-      "status": "worker active",
+      "title": "Prince of Persia1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Prince of Persia ƒ/Prince of Persia",
@@ -1846,15 +1846,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Readme color/BW memory advice; tested800x600x8. SIZE-1 1024000 vsID0 1638400 preserved, no override; current loader prefers validID0.",
+      "preferences_save_id": "No actual Boot preference found by title/creator. COLOR/BW/LC companions, editor docs and raw aliases retained; only COLOR exercised.",
+      "controls": "Cmd55/ch0+N45/ch110 starts Level1; Escape53/ch27 pauses. Right124/ch29 held40 does not establish distance/direction; Shift alternatives documented.",
+      "timing": "Native Level1 and Escape pause readiness; movement/resume and release baseline pending.",
+      "report": "prince-of-persia/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Thirteen-file fixture verified. Parent matched source004/fixture hashes, raw802tick report with zero assertions/exhaustion and Level1/paused images. CmdN starts level; Escape visibly pauses. Later absent prince makes Right displacement inconclusive. Original SIZE variants retained, COLOR companion opened; no setting change or fidelity certificate."
     },
     {
       "slug": "prince-of-persia-2",
       "title": "Prince of Persia 2",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Prince of Persia 2/Prince of Persia 2",
@@ -1881,7 +1884,7 @@
     {
       "slug": "robowar-4-1-1",
       "title": "RoboWar 4.1.1",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1",

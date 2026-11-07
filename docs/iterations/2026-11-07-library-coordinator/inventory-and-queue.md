@@ -69,8 +69,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 59 | Scruffy | Content\001: Scruffy/Scruffy | 68K (CODE) | not yet measured |
 | 60 | Scruffy II | Content\001: More ScruffyStuff/Scruffy II | 68K (CODE) | not yet measured |
 | 61 | Slithereens | Content\003: Slithereens 1.0.0 ƒ/Slithereens | fat (CODE + PPC fragment) | worker active |
-| 62 | Sloppy Sokoban 1.7 | Content\004: Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7 | PPC fragment | worker assigned |
-| 63 | Spin Doctor | Content\002: Spin Doctor/Spin Doctor | fat (CODE + PPC fragment) | pending |
+| 62 | Sloppy Sokoban 1.7 | Content\004: Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7 | PPC fragment | compatibility blocker |
+| 63 | Spin Doctor | Content\002: Spin Doctor/Spin Doctor | fat (CODE + PPC fragment) | worker assigned |
 | 64 | Star Trek: A Final Unity | Content\002: Star Trek TNG/"A Final Unity" | fat (CODE + PPC fragment) | pending |
 | 65 | Super Munchers | Content\002: Super Munchers/Super Munchers | 68K (CODE) | pending |
 | 66 | System's Twilight v1.0.5 | Content\001: System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5 | 68K (CODE) | pending |

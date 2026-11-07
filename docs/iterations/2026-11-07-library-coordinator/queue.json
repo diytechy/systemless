@@ -2022,7 +2022,7 @@
     {
       "slug": "sloppy-sokoban-1-7",
       "title": "Sloppy Sokoban 1.7",
-      "status": "worker assigned",
+      "status": "compatibility blocker",
       "candidates": [
         {
           "path": "Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7",
@@ -2042,12 +2042,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Immediate failed native startup; no gameplay or release performance measurement.",
+      "report": "sloppy-sokoban-1-7/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source004/Boot and33-file fixture hashes, read failed raw report/frontend1 guest0/zero assertions/exhaustion and owned exit1, inspected blank cyan failure image. PPC PC0 halt after891cycles occurs before title/preferences; specific import/service cause unproved. CarbonLib1.1+/System8.1 requirement documented;24bit advertisement does not establish8bit as halt cause. No settings accepted."
     },
     {
       "slug": "spin-doctor",
       "title": "Spin Doctor",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Spin Doctor/Spin Doctor",

@@ -1,8 +1,8 @@
 {
-  "slug": "slithereens",
-  "task_name": "/root/slithereens",
-  "status": "running; see active-runners.json",
-  "starting_revision": "7b2da7e08532e27997ca4246db8725811ba79ea6",
-  "brief": "slithereens-brief.md",
-  "updated_at": "2026-11-07T21:41:42.439853+00:00"
+  "slug": "sloppy-sokoban-1-7",
+  "task_name": "/root/sloppy_sokoban_1_7",
+  "status": "reviewed; workload released",
+  "starting_revision": "b1d553f3a0de47a7a9da85f905aa154f3718798a",
+  "brief": "sloppy-sokoban-1-7-brief.md",
+  "updated_at": "2026-11-07T21:46:34.316174+00:00"
 }

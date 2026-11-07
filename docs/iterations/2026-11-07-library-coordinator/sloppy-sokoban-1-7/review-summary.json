@@ -1,0 +1,65 @@
+{
+  "title": "Sloppy Sokoban 1.7 (resource version 1.7.0)",
+  "outcome": "compatibility blocker: immediate PPC guest halt",
+  "preservation": {
+    "source_before": "a7493fc55952a462a655158c8abe4e4c063daf45bf5dd2c24f0fbc876bd70985",
+    "source_after": "a7493fc55952a462a655158c8abe4e4c063daf45bf5dd2c24f0fbc876bd70985",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\sloppy-sokoban-1-7\\fixture.img",
+    "fixture_sha256": "f54694a9ce98cead77c66d666736aec52d079fd34b929ccd7113ff2dc1249bb8",
+    "verified_file_count": 33,
+    "scope_limits": "Both forks, Finder fields/raw coordinate words and represented folder dates verified. Folder Finder information unavailable; raw aliases not promised to resolve."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact compile revision unknown; checkout b1d553f3",
+    "architecture": "PPC-only; explicit --prefer-powerpc",
+    "executable": "Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7",
+    "display": "exploratory 8-bit; observed failure800x600; CLI supports only1/2/4/8, readme advertises24-bit",
+    "partition": 7168000,
+    "result": "failed",
+    "error": "guest halted before scenario completed",
+    "frontend_ticks": 1,
+    "guest_tick": 0,
+    "assertions": 0,
+    "budget_exhausted_frames": 0
+  },
+  "behavior": {
+    "observed": [
+      "Immediate halt PC0,891cycles; inspected cyan failure image; no title/menu/gameplay"
+    ],
+    "untested": [
+      "movement/timing",
+      "busy scene",
+      "pause/menu",
+      "controls",
+      "audio",
+      "saves",
+      "physical controller",
+      "preference virtual-path reachability"
+    ]
+  },
+  "dependencies": [
+    "Readme: MacOS X or System8.1+, CarbonLib1.1+,4MB free",
+    "Sibling Sokoban Music and extra level sets preserved",
+    "Existing SdSb preference preserved; not proven loaded"
+  ],
+  "controls": [
+    "Documented mouse point/click, literal arrows by default; command-Z undo/command-R redo; configurable; untested"
+  ],
+  "changes": [
+    "Own title report and private fixture/diagnostics only; no settings accepted"
+  ],
+  "checks": [
+    "Source/Boot before-after hash match",
+    "Reopen comparison verified 33 files",
+    "Runner rejects out-of-scope and missing input before launch/log opening",
+    "Process ownership persisted exited; no workload remains"
+  ],
+  "next_step": "Trace PPC loader/import resolution and PC0 branch in this minimal fixture; establish Carbon support before further gameplay/depth experiments. No grounded implementation estimate yet.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\sloppy-sokoban-1-7\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\sloppy-sokoban-1-7\\evidence-manifest.json",
+  "workload_released": true
+}

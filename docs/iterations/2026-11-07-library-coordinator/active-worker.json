@@ -1,8 +1,8 @@
 {
-  "slug": "brickoids-millenium",
-  "task_name": "/root/brickoids_millenium",
+  "slug": "chiral",
+  "task_name": "/root/chiral",
   "status": "reviewed; workload released",
-  "starting_revision": "af7775bd8061156f8672a367a6dce1562109198c",
-  "brief": "brickoids-millenium-brief.md",
-  "updated_at": "2026-11-07T19:01:32.803030+00:00"
+  "starting_revision": "53063f47dcb20f005805db363da0f0646dd783af",
+  "brief": "chiral-brief.md",
+  "updated_at": "2026-11-07T19:05:38.470901+00:00"
 }

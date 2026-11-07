@@ -866,8 +866,8 @@
     },
     {
       "slug": "chiral",
-      "title": "Chiral",
-      "status": "worker assigned",
+      "title": "Chiral1.0.1",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Chiral 1.0.1 ƒ/Chiral",
@@ -885,15 +885,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Documented256colors; observed800x600x8. Original SIZE1536000 retained; FAQ2.3MBfree not used as partition override.",
+      "preferences_save_id": "Actual Boot Chiral License copied and VFS-seeded at correct path; actual guest open/read unproven. Embedded source state retained; no browser ID.",
+      "controls": "Docs mouse bottom-vial atom placement,CapsLock pause,Esc abort. No visible readiness, all untested.",
+      "timing": "No representative scene; native black startup through1000ticks with0errors/exhaustion. Release-browser unmeasured.",
+      "report": "chiral/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "14file title+actual-license fixture verified; parent source001/fixture hashes and raw1000tick passed0assert/exhaust report reviewed. Black captures120/332/1000 despite CWindow log, no halt/service diagnosis. License VFS seeding proved, guest lookup/read unresolved; no defaults/pref-load claim. Two bounded scenarios complete; no setting change.",
+      "dependencies": "13file source folder with Music/Sounds/Sprites/Titles/Scores and separate Basics1.0.0 helper retained; combined14files includes License."
     },
     {
       "slug": "chrysanthemum-1-01",
       "title": "Chrysanthemum 1.01",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Chrysanthemum 1.01",

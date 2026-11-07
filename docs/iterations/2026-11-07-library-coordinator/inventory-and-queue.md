@@ -34,8 +34,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 24 | BrainJacker1.0.1 | Content\003: BrainJacker ƒ/BrainJacker 1.0.1 | fat (CODE + PPC fragment) | compatibility blocker |
 | 25 | Brickles Plus 3.0 | Content\001: Brickles Plus 3.0 | 68K (CODE) | not yet measured |
 | 26 | Brickoids Millenium1.1 | Content\003: Brickoids Millenium 1.1 GPL/Brickoids Millenium | 68K (CODE) | not yet measured |
-| 27 | Chiral | Content\001: Chiral 1.0.1 ƒ/Chiral | 68K (CODE) | worker assigned |
-| 28 | Chrysanthemum 1.01 | Content\001: Chrysanthemum 1.01 | 68K (CODE) | pending |
+| 27 | Chiral1.0.1 | Content\001: Chiral 1.0.1 ƒ/Chiral | 68K (CODE) | not yet measured |
+| 28 | Chrysanthemum 1.01 | Content\001: Chrysanthemum 1.01 | 68K (CODE) | worker assigned |
 | 29 | Columns | Content\001: Columns | fat (CODE + PPC fragment) | pending |
 | 30 | CRUNCH | Content\001: CRUNCH Folder/CRUNCH | 68K (CODE) | pending |
 | 31 | CTB | Content\001: CTB 2.0/CTB | 68K (CODE) | pending |

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {keysForPad,PadKeys} from './game-controls.mjs';
+import {keysForPad,PadKeys,hasControllerProfile} from './game-controls.mjs';
 const pad=(buttons=[],axes=[0,0])=>({mapping:'standard',axes,buttons:Array.from({length:16},(_,i)=>({pressed:buttons.includes(i)}))});
 const keys=(buttons,game)=>keysForPad(pad(buttons),.35,game);
 test('each game has an isolated controller profile',()=>{
@@ -8,6 +8,8 @@ test('each game has an isolated controller profile',()=>{
  assert.deepEqual([...keys([0,1,2,3],'clockwerx-personal-10')],['Meta','Alt','Control','c']);
  assert.deepEqual([...keys([0,14],'delirium-personal-11')],['ArrowLeft','Meta']);
  assert.equal(keys([0],'unknown').size,0);
+ assert.equal(hasControllerProfile('unknown'),false);
+ assert.equal(hasControllerProfile('clockwerx-personal-10'),true);
  assert.equal(keysForPad({...pad([0]),mapping:''}).size,0);
 });
 test('ClockWerx pause chord retains a shared swing modifier and releases keys first',()=>{

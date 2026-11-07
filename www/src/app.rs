@@ -190,7 +190,7 @@ fn LibraryPage(
                             {if private_library() { "Your Macintosh games" } else { "Classic 68K and PowerPC Macintosh games, running everywhere " }}
                             <em>{if private_library() { "" } else { "with no ROM and no System." }}</em>
                         </h1>
-                        <p>{if private_library() { "Koji, ClockWerx and Delirium. Pick a game and start playing." } else { "Play in your browser now. Nothing to install." }}</p>
+                        <p>{if private_library() { "Pick a game from your private Macintosh library." } else { "Play in your browser now. Nothing to install." }}</p>
                     </div>
                 </div>
             </section>
@@ -475,7 +475,8 @@ fn GamePage(
                     <p class="game-byline">
                         {move || {
                             let game = active_game.get();
-                            format!("{} · {}", game.developer, game.year)
+                            if game.year.is_empty() { game.developer.to_string() }
+                            else { format!("{} · {}", game.developer, game.year) }
                         }}
                     </p>
                 </div>
@@ -844,7 +845,8 @@ fn set_document_head_for_game(game: &Game) {
         .map(|path| absolute_url(&path))
         .unwrap_or_else(|| absolute_url("/assets/icons/favicon.svg"));
     set_document_head(HeadMeta {
-        title: format!("{}{} ({}) | Systemless", if game.approved { "Play " } else { "" }, game.title, game.year),
+        title: format!("{}{}{} | Systemless", if game.approved { "Play " } else { "" }, game.title,
+            if game.year.is_empty() { String::new() } else { format!(" ({})",game.year) }),
         description: game.description.to_string(),
         robots: if game.approved {
             "index,follow"

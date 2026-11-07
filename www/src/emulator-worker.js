@@ -1,5 +1,6 @@
 const PROTOCOL_VERSION = 8;
 let machine = null;
+let runtimeMemory = null;
 let generation = 0;
 let frameSequence = 0;
 let booting = false;
@@ -173,7 +174,8 @@ self.onmessage = async (event) => {
       startGpuCompute(message);
       reply({ type: "progress", progress: JSON.stringify("LoadingExecutable") });
       const bindings = await import(message.moduleUrl);
-      await bindings.default(message.wasmUrl);
+      const wasmExports = await bindings.default(message.wasmUrl);
+      runtimeMemory = wasmExports?.memory ?? null;
       if (typeof bindings.WorkerMachine.runtimeProtocolVersion !== "function"
           || bindings.WorkerMachine.runtimeProtocolVersion() !== PROTOCOL_VERSION) {
         throw new Error("Runtime Wasm assets use an incompatible protocol");
@@ -202,12 +204,14 @@ self.onmessage = async (event) => {
       await machine.flushSaves();
       machine.free();
       machine = null;
+      runtimeMemory = null;
       reply({ type: "stopped" });
       return;
     }
 
     if (message.type === "frame") {
       const result = machine.runFrame(message.queuedAudioSamples ?? -1, !!message.debug, message.outputScale ?? 1, !!message.forceRender, !!message.indexedRender, !!message.compactRender, !!message.measurePresentation, message.cursorScale ?? 0);
+      if (message.measurePresentation) result.wasmLinearMemoryBytes = runtimeMemory?.buffer?.byteLength ?? null;
       guestTick = result.guestTick >>> 0;
       uiTracking = !!result.uiTracking;
       if (result.lastSteps > 0 || !result.running) {

@@ -11,5 +11,19 @@
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T22:26:28.450172+00:00"
+  "updated_at": "2026-11-07T23:16:05.925660+00:00",
+  "coordinator_workload": {
+    "owner": "/root",
+    "phase": "sequential release browser checks",
+    "status": "no active emulator/capture; reviewing integration while pilot discovers assets",
+    "server_ownership": "D:\\SystemlessBuild\\private-library-20261107\\server-test-owned-v1.json",
+    "build_ownership": "D:\\SystemlessBuild\\private-library-20261107\\build-owned-v1.json"
+  },
+  "pilot_worker": {
+    "task_name": "/root/clockwerx_html5",
+    "status": "active",
+    "phase": "exclusive sequential discovery lease; root has no emulator",
+    "lease_expires_at": "2026-11-07T23:29:00Z",
+    "brief": "clockwerx-html5/worker-brief.md"
+  }
 }

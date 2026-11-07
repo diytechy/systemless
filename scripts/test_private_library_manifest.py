@@ -68,6 +68,13 @@ class PrivateManifestTests(unittest.TestCase):
         self.rejects('image_path', 'copy.hfv')
         self.rejects('image_path', str(self.root / 'missing.hfv'))
 
+    def test_reviewed_dsk_and_kpk_get_canonical_packaged_paths(self):
+        for suffix,target in (('.dsk','private/synthetic-game.img'),('.kpk','private/synthetic-game.kpk')):
+            path=self.image.with_suffix(suffix);path.write_bytes(self.image.read_bytes())
+            row=copy.deepcopy(self.entry);row['image_path']=str(path)
+            self.assertEqual(validate_manifest(self.document(row))[0]['packaged_path'],target)
+        self.rejects('packaged_path','private/unreviewed.img')
+
 
 if __name__ == '__main__':
     unittest.main()

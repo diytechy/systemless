@@ -61,6 +61,20 @@ test('a brief key press is visible to one frame, then released', async () => {
   assert.deepEqual(w.frames.map(f => f.keys), [[37], []]);
 });
 
+test('linear memory diagnostics are opt-in, follow growth and distinguish unavailable', async () => {
+  const w = worker();
+  await w.send('frame');
+  assert.equal('wasmLinearMemoryBytes' in w.messages.at(-1), false);
+  await w.send('frame', {measurePresentation:true});
+  assert.equal(w.messages.at(-1).wasmLinearMemoryBytes, null);
+  vm.runInContext('runtimeMemory = {buffer:{byteLength: 32*1024*1024}}',w.context);
+  await w.send('frame', {measurePresentation:true});
+  assert.equal(w.messages.at(-1).wasmLinearMemoryBytes,32*1024*1024);
+  vm.runInContext('runtimeMemory.buffer = {byteLength: 64*1024*1024}',w.context);
+  await w.send('frame', {measurePresentation:true});
+  assert.equal(w.messages.at(-1).wasmLinearMemoryBytes,64*1024*1024);
+});
+
 test('held keys persist and release without an extra frame of delay', async () => {
   const w = worker();
   await w.send('keyDown', { macKey: 126 });

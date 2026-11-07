@@ -1,4 +1,5 @@
 // Browser gamepad adapter. Feeds the same canvas key listeners as the keyboard.
+export const hasControllerProfile = game => ['koji-personal-204','clockwerx-personal-10','delirium-personal-11'].includes(game);
 export function keysForPad(pad, deadzone = 0.35, game = 'koji-personal-204') {
   const keys = new Set();
   if (!pad || pad.mapping !== 'standard') return keys;
@@ -107,6 +108,7 @@ if (typeof document !== 'undefined') {
     const newGame = bar.querySelector('[data-new-game]');
     newGame.hidden = canvas.dataset.gameId !== 'clockwerx-personal-10';
     newGame.onclick = () => chord(['Meta', 'n']);
+    bar.querySelector('[data-pause]').hidden = !hasControllerProfile(canvas.dataset.gameId);
     bar.querySelector('[data-pause]').onclick = () => chord(
       canvas.dataset.gameId === 'clockwerx-personal-10' ? ['Meta', 'p'] : ['p']);
     bar.querySelector('[data-fullscreen]').onclick = async () => {
@@ -134,7 +136,7 @@ if (typeof document !== 'undefined') {
     const game = canvas?.dataset.gameId || '';
     if (game !== activeGame) { release(); activeGame = game; previousStatus = ''; }
     const help = game === 'clockwerx-personal-10' ? 'A: swing · B: bounce · X: flip · Y: reverse' : game === 'delirium-personal-11' ? 'Controller connected · see game controls below' : 'A: jump · X/B: tongue';
-    const label = pad ? `Controller connected · ${help}` :
+    const label = !hasControllerProfile(game) ? 'Use this game’s documented keyboard and mouse controls' : pad ? `Controller connected · ${help}` :
       pads.length ? 'Controller needs a standard mapping; keyboard is available' :
       'Connect a controller and press a button';
     if (status && label !== previousStatus) { status.textContent = label; previousStatus = label; }

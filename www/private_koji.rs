@@ -5,8 +5,15 @@ use systemless_catalogue_tools::catalogue_tools::{
     model::{ArtifactRole, Button, FileType, Redistribution},
 };
 
+pub fn media_directory(site_dir: &Path) -> std::path::PathBuf {
+    env::var_os("SYSTEMLESS_PRIVATE_MEDIA")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| site_dir.join("private"))
+}
+
 pub fn apply(compiled: &mut CompiledCatalogue, site_dir: &Path) {
     println!("cargo:rerun-if-changed=private_koji.rs");
+    println!("cargo:rerun-if-env-changed=SYSTEMLESS_PRIVATE_MEDIA");
     println!("cargo:rerun-if-env-changed=SYSTEMLESS_PRIVATE_KOJI");
     match env::var("SYSTEMLESS_PRIVATE_LIBRARY")
         .or_else(|_| env::var("SYSTEMLESS_PRIVATE_KOJI"))
@@ -20,7 +27,7 @@ pub fn apply(compiled: &mut CompiledCatalogue, site_dir: &Path) {
         env::var_os("SYSTEMLESS_CATALOGUE_PRODUCTION").is_none(),
         "private Koji cannot be built as the upstream public catalogue"
     );
-    let archive = site_dir.join("private/koji.img");
+    let archive = media_directory(site_dir).join("koji.img");
     println!("cargo:rerun-if-changed={}", archive.display());
     assert!(
         archive.is_file(),

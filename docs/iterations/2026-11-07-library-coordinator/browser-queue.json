@@ -1,0 +1,327 @@
+{
+  "schema_version": 1,
+  "normal_origin_untouched": "http://localhost:8087",
+  "test_origin": "http://localhost:55847",
+  "browser_id": "2",
+  "viewport": [
+    672,
+    1000
+  ],
+  "logical_clockwerx": [
+    640,
+    480
+  ],
+  "clockwerx_css": [
+    615,
+    460.75
+  ],
+  "active_tab": null,
+  "next": "Pilot discovery lease through23:29UTC; root source checkpoint, then old3 and additions release checks after release",
+  "games": [
+    {
+      "id": "koji-personal-204",
+      "route": "/koji-the-frog/",
+      "status": "pending"
+    },
+    {
+      "id": "clockwerx-personal-10",
+      "route": "/clockwerx/",
+      "status": "default25 and experimental6 exploratory captures exported; pause/held actions observed; final matched repetitions/fidelity pending"
+    },
+    {
+      "id": "delirium-personal-11",
+      "route": "/delirium/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-3-d-cannon-v1",
+      "route": "/3-d-cannon/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-3d-brick-bash-1-1-1-v1",
+      "route": "/3d-brick-bash-1-1-1/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-acquire-1-0-v1",
+      "route": "/acquire-1-0/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-action-dome-1-0-v1",
+      "route": "/action-dome-1-0/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-adventure-v1",
+      "route": "/adventure/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-angband-v1",
+      "route": "/angband/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-arashi-1-1-1-v1",
+      "route": "/arashi-1-1-1/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-bachman-2-0u-v1",
+      "route": "/bachman-2-0u/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-balderdoush-1-04i-v1",
+      "route": "/balderdoush-1-04i/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-barney-carnage-2-0-v1",
+      "route": "/barney-carnage-2-0/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-battletanks-2-12-1-v1",
+      "route": "/battletanks-2-12-1/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-bedlam-v1",
+      "route": "/bedlam/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-bikaka-1-4-v1",
+      "route": "/bikaka-1-4/",
+      "status": "pending"
+    },
+    {
+      "id": "blobbo-full-personal-101",
+      "route": "/blobbo/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-blood-bath-demo-1-96-v1",
+      "route": "/blood-bath-demo-1-96/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-bloodsuckers-v1",
+      "route": "/bloodsuckers/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-bolo-v1",
+      "route": "/bolo/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-bonk-1-4-2-v1",
+      "route": "/bonk-1-4-2/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-bonkheads-deluxe-v1",
+      "route": "/bonkheads-deluxe/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-brickles-plus-3-0-v1",
+      "route": "/brickles-plus-3-0/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-brickoids-millenium-v1",
+      "route": "/brickoids-millenium/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-chiral-v1",
+      "route": "/chiral/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-chrysanthemum-1-01-v1",
+      "route": "/chrysanthemum-1-01/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-columns-v1",
+      "route": "/columns/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-crunch-v1",
+      "route": "/crunch/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-cybernation-1-1-1-v1",
+      "route": "/cybernation-1-1-1/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-deliverance-v1",
+      "route": "/deliverance/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-dome-wars-v1",
+      "route": "/dome-wars/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-drol-v1",
+      "route": "/drol/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-fantastic-voyage-v1",
+      "route": "/fantastic-voyage/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-gold-digger-v1",
+      "route": "/gold-digger/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-goldpusher-v1",
+      "route": "/goldpusher/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-guy-smiley-vs-the-monsters-v1",
+      "route": "/guy-smiley-vs-the-monsters/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-lawyers-v1",
+      "route": "/lawyers/",
+      "status": "pending"
+    },
+    {
+      "id": "lemmings-personal-152",
+      "route": "/lemmings/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-macpipes-v1",
+      "route": "/macpipes/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-maelstrom-v1",
+      "route": "/maelstrom/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-mantra-v1",
+      "route": "/mantra/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-mantra-ii-v1",
+      "route": "/mantra-ii/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-nort-v1",
+      "route": "/nort/",
+      "status": "pending"
+    },
+    {
+      "id": "oh-no-more-lemmings-personal-10",
+      "route": "/oh-no-more-lemmings/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-oregon-trail-v1",
+      "route": "/oregon-trail/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-pac-in-time-v1",
+      "route": "/pac-in-time/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-pac-the-man-v1",
+      "route": "/pac-the-man/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-particleman-1-0-v1",
+      "route": "/particleman-1-0/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-polybrid-1-0-v1",
+      "route": "/polybrid-1-0/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-prince-of-persia-v1",
+      "route": "/prince-of-persia/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-robowar-4-1-1-v1",
+      "route": "/robowar-4-1-1/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-ruckus-v1",
+      "route": "/ruckus/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-scruffy-v1",
+      "route": "/scruffy/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-scruffy-ii-v1",
+      "route": "/scruffy-ii/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-slithereens-v1",
+      "route": "/slithereens/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-spin-doctor-v1",
+      "route": "/spin-doctor/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-star-trek-final-unity-v1",
+      "route": "/star-trek-final-unity/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-super-munchers-v1",
+      "route": "/super-munchers/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-system-s-twilight-v1-0-5-v1",
+      "route": "/system-s-twilight-v1-0-5/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-the-big-one-v1",
+      "route": "/the-big-one/",
+      "status": "pending"
+    },
+    {
+      "id": "owned-zap-t-balls-v1",
+      "route": "/zap-t-balls/",
+      "status": "pending"
+    }
+  ]
+}

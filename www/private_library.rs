@@ -28,7 +28,7 @@ pub fn apply(compiled: &mut CompiledCatalogue, site_dir: &Path) {
          "Defend the landscape in this classic Macintosh arcade shooter.",
          "<h2>Delirium controls</h2><p>Arrow keys move in Classic mode. In Delirium mode use Up/Down, Space or C to thrust, and V to reverse. Z fires; X uses a smart bomb. Controller A: fire, B: smart bomb, X: reverse, Y: thrust. P pauses; any key resumes. Escape aborts. These mappings match the saved Command/Shift/Control/Space actions; Preferences / Set Keys can change them.</p><p>Use Saved files to download browser-local progress before moving to another browser or device.</p>"),
     ] {
-        let archive = site_dir.join(format!("private/{slug}.img"));
+        let archive = crate::private_koji::media_directory(site_dir).join(format!("{slug}.img"));
         println!("cargo:rerun-if-changed={}",archive.display());
         assert!(archive.is_file(), "Run scripts/extract_library.py first");
         let mut game = template.clone();
@@ -83,7 +83,7 @@ pub fn apply(compiled: &mut CompiledCatalogue, site_dir: &Path) {
         compiled.entries.push(game);
     }
     for (game, slug) in compiled.entries.iter_mut().zip(["koji", "clockwerx", "delirium"]) {
-        let preview = site_dir.join(format!("private/{slug}-preview.png"));
+        let preview = crate::private_koji::media_directory(site_dir).join(format!("{slug}-preview.png"));
         println!("cargo:rerun-if-changed={}", preview.display());
         if preview.is_file() {
             let mut asset = game.assets[0].clone();

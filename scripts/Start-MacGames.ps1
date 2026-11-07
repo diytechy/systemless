@@ -1,8 +1,23 @@
 ﻿[CmdletBinding()]
-param([int]$Port = 8087, [switch]$NoBrowser, [switch]$Stop, [ValidateSet('','koji-the-frog','clockwerx','delirium')][string]$Game='')
+param([int]$Port = 8087, [switch]$NoBrowser, [switch]$Stop, [string]$Game='', [string]$DistDirectory='')
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
-$dist = Join-Path $repo 'www\dist'
+$selectionPath = Join-Path $repo 'www\private\active-library.json'
+if (-not $DistDirectory -and (Test-Path -LiteralPath $selectionPath)) {
+    $selection = Get-Content -LiteralPath $selectionPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($selection.schema_version -ne 1 -or -not [IO.Path]::IsPathRooted($selection.directory)) { throw 'Invalid selected library directory.' }
+    $DistDirectory = $selection.directory
+}
+$dist = if ($DistDirectory) { [IO.Path]::GetFullPath($DistDirectory) } else { Join-Path $repo 'www\dist' }
+if ($Game -and $Game -notmatch '^[a-z0-9]+(-[a-z0-9]+)*$') { throw 'Invalid game route.' }
+$routes = @('koji-the-frog','clockwerx','delirium')
+$metadataPath = Join-Path $dist 'private-library.json'
+if (Test-Path -LiteralPath $metadataPath) {
+    $metadata = Get-Content -LiteralPath $metadataPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    if ($metadata.schema_version -ne 1) { throw 'Unsupported packaged library metadata.' }
+    $routes = @($metadata.entries | ForEach-Object { $_.route.Trim('/') })
+}
+if ($Game -and $Game -notin $routes) { throw 'Game route is not in this packaged library.' }
 $server = Join-Path $PSScriptRoot 'serve_library.py'
 $url = if ($Game) { "http://localhost:$Port/$Game/" } else { "http://localhost:$Port/" }
 function Get-MacGamesServer {

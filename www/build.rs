@@ -6,6 +6,7 @@ use std::{
 
 use systemless_catalogue_tools::catalogue_tools;
 
+mod private_additions;
 mod private_koji;
 mod private_library;
 
@@ -39,8 +40,12 @@ fn main() {
     let mut compiled = catalogue_tools::build(&catalogue).expect("catalogue compilation failed");
     private_koji::apply(&mut compiled, &manifest_dir);
     private_library::apply(&mut compiled, &manifest_dir);
-    let generated =
+    private_additions::apply(&mut compiled, &manifest_dir);
+    let mut generated =
         catalogue_tools::site::rust_games(&compiled).expect("invalid game configuration");
+    if env::var("SYSTEMLESS_PRIVATE_LIBRARY").as_deref() == Ok("1") {
+        generated = generated.replace("year: \"0\"", "year: \"\"");
+    }
     fs::write(
         PathBuf::from(env::var_os("OUT_DIR").expect("OUT_DIR should be set by Cargo"))
             .join("games.rs"),

@@ -103,13 +103,14 @@ def validate_manifest(document, verify_assets=True):
                 else:
                     _text(source, field); _text(target, field)
         path = Path(_text(row['image_path'], 'image_path'))
-        if not path.is_absolute() or path.suffix.lower() not in ('.img', '.hfv'):
-            raise ValueError('Expected absolute copied HFS fixture path')
+        if not path.is_absolute() or path.suffix.lower() not in ('.img', '.hfv', '.dsk', '.kpk'):
+            raise ValueError('Expected absolute reviewed HFS/KPK fixture path')
         expected = row['image_sha256']
         if not isinstance(expected, str) or not re.fullmatch(r'[0-9a-f]{64}', expected):
             raise ValueError('Expected reviewed lowercase image SHA256')
         if verify_assets and (not path.is_file() or sha256_file(path) != expected):
             raise ValueError('Missing or changed reviewed fixture: ' + row['slug'])
+        row['packaged_path'] = 'private/' + row['slug'] + ('.kpk' if path.suffix.lower() == '.kpk' else '.img')
         entries.append(row)
     return entries
 
@@ -123,6 +124,10 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('manifest', type=Path)
+    parser.add_argument('--normalized', action='store_true', help='Emit validated metadata for the private build script')
     args = parser.parse_args()
     rows = load_manifest(args.manifest)
-    print('Verified private additions:', len(rows))
+    if args.normalized:
+        print(json.dumps(rows, ensure_ascii=True))
+    else:
+        print('Verified private additions:', len(rows))

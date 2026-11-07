@@ -4,6 +4,8 @@ Started 2026-11-07 00:44 America/Chicago. Checkout clean at start: dev / ed74c8b
 
 For later per-game updates, current-action.md and review-log.md supersede the historical counts/next-action details below; queue.json is the canonical per-title status. Keep all three updated after reviewing each worker.
 
+Automatic-resume coordination: active-worker.json (when present) stores the exact canonical task name and assignment phase. Check that target with list_agents(path_prefix=task_name) before resuming; wait for a running worker, review an already finished worker's saved evidence, and only spawn when no prior worker/workload remains. The brief generator prints a deterministic underscore task_name; use it verbatim. A 'spawn pending' file alone is not proof an agent was created. This pointer avoids enumerating every completed worker and prevents duplicate game work. Coordinator checkpoint edits are expected unrelated changes for workers to preserve.
+
 Inventory: read-only APPL scan of configured 001/002/003/004/006/Boot and Star Trek disc, also present unconfigured 005/007/008. All source before/after SHA256 equal. Full application inventory is inventory.json. Classification found 68 game families, retaining 81 executable candidates/variants; 145 auxiliary, alias and utility APPL entries are listed separately with reasons in queue.json. Disc catalogue blocked by an out-of-bounds Apple_HFS partition; independent read-only inspection pending.
 
 Order: ClockWerx first attempt reviewed: measurement blocked by Windows Computer Use URL policy stop, zero new captures; see clockwerx/report.md. No settings accepted. Koji 2.0.4 is next, then Delirium 1.1, then the remaining queue. ClockWerx pilot only after every title receives a first-pass result.

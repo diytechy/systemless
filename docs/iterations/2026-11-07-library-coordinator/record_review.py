@@ -53,4 +53,10 @@ Next: {args.next_slug or 'coordinator comparison/pilot phase'}. Generate/read it
 
 Runtime baseline remains ed74c8b4 unless explicitly changed by a reviewed code commit. Supported visible IAB is root-only; subagents use native/source checks and release workload before root captures. Windows Computer Use URL policy path is not retried. Revisit ClockWerx via supported root IAB before final pilot comparison. Pilot only after every title receives a first-pass result. Existing normal routes/saves/media must remain usable and private. No push or deploy.
 ''',encoding='utf-8')
+active_path = root / 'active-worker.json'
+if active_path.exists():
+    active = json.loads(active_path.read_text(encoding='utf-8-sig'))
+    if active['slug'] == args.slug:
+        active.update(status='reviewed; workload released',updated_at=stamp)
+        active_path.write_text(json.dumps(active,indent=2)+'\n',encoding='utf-8')
 print(f'Review persisted: {args.slug}, {len(done)}/{len(queue["games"])}, next={args.next_slug}')

@@ -1,0 +1,71 @@
+{
+  "title": "Bachman 2.0u",
+  "outcome": "Native representative-scene smoke; browser preparation pending",
+  "preservation": {
+    "source_before_after_sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "boot_before_after_sha256": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bachman-2-0u\\bachman.dsk",
+    "fixture_sha256": "023fb815af2f380b37b4ae2a30f234203f2dc44d349870e6d58a8963b749a8d3",
+    "verified_file_count": 3,
+    "preference_history_fixture": {
+      "source_sha256": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+      "image_sha256": "bd45e38f11659de9aa27659c200846394152513d365b8ea85408663c6506503b",
+      "files_verified": 1,
+      "metadata_scope": "File forks/Finder fields and represented folder dates; original folder Finder information not exposed by machfs",
+      "selected_paths": [
+        "System Folder/Preferences/Navigation Services/Recent Items/Bachman 2.0u"
+      ],
+      "image_bytes": 8388608
+    },
+    "scope_limits": "File forks/Finder fields and represented folder dates verified. Original folder Finder info unavailable. Raw aliases retained; resolution unproven. Recent-item alias is not game settings."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact diagnostic compile revision unknown; checkout4b6300cc",
+    "architecture": "68K CODE",
+    "executable": "Bachman 2.0u",
+    "display": "800x600 observed,8-bit exploratory per documentation",
+    "partition": 2048000,
+    "result": "passed214 frontend ticks; no error;60s wall cap not reached",
+    "assertions": 0,
+    "budget_exhaustion": 0
+  },
+  "behavior": {
+    "observed": [
+      "Title and Game menu",
+      "Begin opens Level1 maze",
+      "Character changes position during held Right; enemies visible; score1 by final capture"
+    ],
+    "untested": [
+      "Independent timing/collision/scoring fidelity",
+      "Busy scene",
+      "Pause/resume (final menu not opened)",
+      "Audio",
+      "Persistence",
+      "Physical controller",
+      "Release browser performance"
+    ]
+  },
+  "dependencies": [
+    "Sibling Bachman alias and documentation retained; built-in levels used",
+    "Boot creator/name scan found aliases/history only; Bachman Prefs absent and runtime OpenRFPerm reports missing. Fresh/default state; no copied settings claimed loaded."
+  ],
+  "controls": [
+    "Docs: arrows/keypad/custom keys or optional mouse",
+    "Observed Game/Begin at menu h128,v10 then h135,v27; literal Right key124,ch29 held30 ticks"
+  ],
+  "changes": [
+    "Own report/status only; private fixture/scenarios/captures onD:"
+  ],
+  "checks": [
+    "3 title files and1 history file reopened/verified",
+    "Source001/Boot hashes unchanged",
+    "Synthetic extraction tests passed",
+    "Captures visually inspected"
+  ],
+  "next_step": "Prepare explicit release entry with preserved SIZE and8-bit, then browser baseline and pause/input/audio/save checks; no pacing recommendation.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\bachman-2-0u\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bachman-2-0u\\evidence-hashes.json",
+  "workload_released": true
+}

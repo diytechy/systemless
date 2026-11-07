@@ -317,7 +317,7 @@
     {
       "slug": "bachman-2-0u",
       "title": "Bachman 2.0u",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Bachman 2.0u Folder/Bachman 2.0u",
@@ -335,15 +335,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "800x600 8-bit exploratory; SIZE2048000 unchanged",
+      "preferences_save_id": "Bachman Prefs absent; Boot aliases/history only, retained separately; browser ID/mapping unassigned",
+      "controls": "Arrows/keypad/custom or mouse documented; literal Right movement observed; pause unqualified",
+      "timing": "No compiled browser entry; native scene/input is not performance/fidelity qualification",
+      "report": "bachman-2-0u/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "3file fixture verified and source/fixture independently rehashed. Native title/Begin/Level1 maze and heldRight displacement observed;0assertions/exhaustion. No matching game pref, only history aliases; fresh state explicit. No runtime change.",
+      "dependencies": "3file folder includes documentation/raw alias; built-in levels used"
     },
     {
       "slug": "balderdoush-1-04i",
       "title": "Balderdoush 1.04i",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Balderdoush 1.04i/Balderdoush 1.04i",

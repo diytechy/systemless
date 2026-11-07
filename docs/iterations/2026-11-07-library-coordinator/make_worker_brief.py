@@ -1,6 +1,8 @@
 """Generate a complete fact-bound assignment for a not-yet-prepared title."""
 import argparse
 import json
+import datetime as dt
+import re
 import subprocess
 from pathlib import Path
 
@@ -40,4 +42,9 @@ text = f'''# {game['title']} individual worker assignment
 - Required stopping/result: useful inspected behavior evidence or precise compatibility/preparation blocker, report/status JSON, checks, limits, rollback and next action. Release workload promptly after bounded checks, then finish docs. Follow common-unprepared-worker.md in full and linked skill/worker contract; no permission needed for authorized reversible preparation.
 '''
 out.write_text(text, encoding='utf-8')
+task_name = re.sub('[^a-z0-9_]+', '_', args.slug)
+(root / 'active-worker.json').write_text(json.dumps({'slug':args.slug,'task_name':'/root/' + task_name,
+    'status':'brief prepared; spawn pending','starting_revision':revision,'brief':out.name,
+    'updated_at':dt.datetime.now(dt.timezone.utc).isoformat()},indent=2)+'\n',encoding='utf-8')
 print(out)
+print('Use spawn task_name: ' + task_name)

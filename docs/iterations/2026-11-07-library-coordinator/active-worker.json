@@ -1,8 +1,8 @@
 {
-  "slug": "crunch",
-  "task_name": "/root/crunch",
+  "slug": "ctb",
+  "task_name": "/root/ctb",
   "status": "reviewed; workload released",
-  "starting_revision": "34fd31d36ef5f41c1b8290d839f9ccdd080d2d04",
-  "brief": "crunch-brief.md",
-  "updated_at": "2026-11-07T19:21:15.260956+00:00"
+  "starting_revision": "615654bca616476e57d8a4c93a77043886104c9c",
+  "brief": "ctb-brief.md",
+  "updated_at": "2026-11-07T19:28:06.669995+00:00"
 }

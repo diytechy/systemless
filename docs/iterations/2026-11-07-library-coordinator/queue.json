@@ -986,8 +986,8 @@
     },
     {
       "slug": "ctb",
-      "title": "CTB",
-      "status": "worker assigned",
+      "title": "Catch the Buzz 2.0 (CTB)",
+      "status": "compatibility blocker",
       "candidates": [
         {
           "path": "CTB 2.0/CTB",
@@ -1002,15 +1002,20 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed 800x600x8 at failure, exploratory; original SIZE819200 preferred/716800 minimum retained.",
+      "preferences_save_id": "Actual Boot CTB Settings preserved with exact folder; Preferences lookup/WD open observed, settings-file open/read unproven. No browser ID.",
+      "controls": "Docs mouse piece positioning,click clockwise/Shift-click counterclockwise,J/4 left,L/6 right,K/5 rotate; Run modes/Pause/Stop. Untested.",
+      "timing": "Startup halt before gameplay; release-browser baseline absent. Native diagnostic binary compile revision unknown.",
+      "report": "ctb/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Four-file fixture verified; parent source001/fixture hashes and raw tick2 failure reviewed. Exact PBGetCatInfo cycle and subsequent TrapInstruction2 recorded; preference open/read not reached. Coordinator source/spec review identifies mounted-volume namespace inconsistency, causal halt relationship unproven. Scoped regression follow-up in ctb/vfs-review.md; no runtime patch or setting change.",
+      "dependencies": "Four files: app,Read Me,CTB Tetris stationery,actual CTB Settings; SAT/TransSkel/ShowHelp embedded acknowledgements, no external install established.",
+      "known_issues": "Observed mounted-volume parent traversal cycle; coordinator ctb/vfs-review.md identifies matching source namespace inconsistency and required regression scope. Subsequent TrapInstruction #2 causality unproven; no runtime fix yet."
     },
     {
       "slug": "cybernation-1-1-1",
       "title": "CyberNation 1.1.1",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "CyberNation 1.1.1 ƒ/CyberNation 1.1.1",

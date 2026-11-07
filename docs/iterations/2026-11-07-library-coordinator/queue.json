@@ -745,8 +745,8 @@
     },
     {
       "slug": "bonkheads-deluxe",
-      "title": "Bonkheads Deluxe",
-      "status": "worker assigned",
+      "title": "Bonkheads Deluxe1.0.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Bonkheads Deluxe/Bonkheads Deluxe",
@@ -763,15 +763,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Documented256colors/SoundManager3.0; observed800x600x8, initial game window640x480. Original SIZE3891200 retained.",
+      "preferences_save_id": "Actual Boot Bonkheads Deluxe Prefs BkHd retained alone in corrected pref fixture; native FindFolder/FSMakeFSSpec/ResError reachability observed. Prior broader copies kept; no browser ID.",
+      "controls": "Customizable left/right/jump,CapsLock pause,Esc exit documented; splash click only, gameplay/default mapping unverified.",
+      "timing": "No release baseline; bounded native menu readiness unresolved. Initial332ticks complete0assert/exhaust; stopped runs counters unavailable.",
+      "report": "bonkheads-deluxe/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Corrected12file fixture and actual-pref-only copy verified; parent source004/fixture hashes and raw completed332tick report reviewed. Saved pref virtual lookup exists=true/ResError0. Two later probes stopped75s after menu construction; final counters unavailable and parent confirmed last owned PID absent. GetPicture9501 last log is not causal proof. No service diagnosis or setting change.",
+      "dependencies": "BDX_Data,Original/Bonus Levels/editor subtree retained; levels beside executable per docs.12file corrected combined fixture."
     },
     {
       "slug": "brainjacker-1-0-1",
       "title": "BrainJacker 1.0.1",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "BrainJacker ƒ/BrainJacker 1.0.1",

@@ -1,8 +1,8 @@
 {
-  "slug": "scruffy",
-  "task_name": "/root/scruffy",
-  "status": "running; see active-runners.json",
-  "starting_revision": "beb705fcc9facdf8d274d5fef9ffbccba7860b61",
-  "brief": "scruffy-brief.md",
-  "updated_at": "2026-11-07T21:34:44.277051+00:00"
+  "slug": "scruffy-ii",
+  "task_name": "/root/scruffy_ii",
+  "status": "reviewed; workload released",
+  "starting_revision": "46de0c845bb28ceec09c3a608c27b55d3a1de0e6",
+  "brief": "scruffy-ii-brief.md",
+  "updated_at": "2026-11-07T21:41:28.426775+00:00"
 }

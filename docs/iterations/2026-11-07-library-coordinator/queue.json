@@ -1965,7 +1965,7 @@
     {
       "slug": "scruffy-ii",
       "title": "Scruffy II",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "More ScruffyStuff/Scruffy II",
@@ -1983,12 +1983,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Three complete native diagnostics, one wall-capped longer probe; no real-time release measurement.",
+      "report": "scruffy-ii/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched eight-file fixture/source001/Boot hashes, read raw360/360/392tick passed reports with zero assertions/exhaustion, inspected4bit title v1.0. Guest explicitly rejects8bit. Earlier90s aborted probe has unavailable final counters and readiness confound; no startup blocker. Native gameplay/menu/pause and documented keypad distinction remain unqualified; no settings accepted."
     },
     {
       "slug": "slithereens",
       "title": "Slithereens",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Slithereens 1.0.0 ƒ/Slithereens",

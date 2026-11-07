@@ -1,8 +1,8 @@
 {
-  "slug": "prince-of-persia-2",
-  "task_name": "/root/prince_of_persia_2",
+  "slug": "robowar-4-1-1",
+  "task_name": "/root/robowar_4_1_1",
   "status": "running; see active-runners.json",
-  "starting_revision": "afe22baba245116a21559bff85d6d55e64550dda",
-  "brief": "prince-of-persia-2-brief.md",
-  "updated_at": "2026-11-07T21:12:31.324590+00:00"
+  "starting_revision": "6f72aa8b8980450ce7a006ea894ff225de7b5d0b",
+  "brief": "robowar-4-1-1-brief.md",
+  "updated_at": "2026-11-07T21:20:16.489100+00:00"
 }

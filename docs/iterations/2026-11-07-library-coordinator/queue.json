@@ -1856,8 +1856,8 @@
     },
     {
       "slug": "prince-of-persia-2",
-      "title": "Prince of Persia 2",
-      "status": "worker active",
+      "title": "Prince of Persia2 1.0",
+      "status": "compatibility blocker",
       "candidates": [
         {
           "path": "Prince of Persia 2/Prince of Persia 2",
@@ -1876,15 +1876,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Native800x600x8 exploratory. Original SIZE-1 2560000 vs0/1 3072000 preserved; no override, current loader prefers validID0.",
+      "preferences_save_id": "No actual Boot PRNc/title preference. Existing Data/Prince2.opt and Mohawk.ini retained; virtual option reads/writes observed, no persisted original change.",
+      "controls": "Only inspected error-dialog OK tested; no gameplay input mapping.",
+      "timing": "Startup application error prevents gameplay baseline; precise path-resolution lead, release performance unmeasured.",
+      "report": "prince-of-persia-2/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "33-file fixture verified. Parent matched source004/fixture hashes, raw60tick lookup and failed64tick dismissal reports plus error image. MWHK10310 follows FSMakeFSSpec dirNFErr for a duplicated copied-volume path; actual Config Manager content/service absence is unproven. OK requests supported ExitToShell/A9F4. Existing Prince2.opt is read/written in memory; no source or pacing change."
     },
     {
       "slug": "robowar-4-1-1",
       "title": "RoboWar 4.1.1",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1",
@@ -1909,7 +1912,7 @@
     {
       "slug": "ruckus",
       "title": "Ruckus",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "New Ruckus!/Ruckus",

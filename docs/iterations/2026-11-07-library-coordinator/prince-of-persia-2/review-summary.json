@@ -1,0 +1,67 @@
+{
+  "title": "Prince of Persia 2 1.0",
+  "outcome": "compatibility_blocker",
+  "preservation": {
+    "source_before_after_sha256": {
+      "004": "a7493fc55952a462a655158c8abe4e4c063daf45bf5dd2c24f0fbc876bd70985",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\prince-of-persia-2\\fixture.img",
+    "fixture_sha256": "8afa9edea24445afad9152f9f207b207a7a9c56f6d881a7d6fa8ea99aaac9d64",
+    "verified_files": 33,
+    "scope_limits": "Both forks/Finder fields/raw16 coordinates and selected/Data folder dates verified; folder Finder info unavailable; raw alias resolution unverified."
+  },
+  "native": {
+    "binary": "D:/SystemlessBuild/target/ci-test/systemless.exe",
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Cached executable compile revision unknown; baseline ed74c8b4 recorded by assignment.",
+    "architecture": "68K",
+    "executable": "Prince of Persia 2/Prince of Persia 2",
+    "display": "exploratory 800x600, 8-bit",
+    "partition": "No override; SIZE -1 preferred/min2560000; 0/1 preferred3072000 min2560000; current loader prefers ID0.",
+    "result": "Startup alert persists tick60/340; OK click requests supported ExitToShell/A9F4 at frontend64 guest663 PC00542790. Scenario reports guest halted.",
+    "error": "MWHK - No Config Manager. Error = 10310",
+    "assertions": 0,
+    "budget_exhausted_frames": 0,
+    "wall_cap_seconds": 75,
+    "lookup_trace": "SYSTEMLESS_TRACE_FSSPEC=1; frontend60 guest660; FSMakeFSSpec request_vRefNum0 resolved-1 request_dirID0 resolved20 name='Prince Persia 2:Prince Persia 2:Prince of Persia 2'; dirNFErr (-120 in current source); parent unresolved, no valid existence key exposed."
+  },
+  "behavior": {
+    "observed": [
+      "Config Manager startup error at two checkpoints",
+      "inspected OK click terminates application",
+      "existing Data/Prince2.opt opened/read/written in copied virtual filesystem"
+    ],
+    "untested": [
+      "gameplay",
+      "movement",
+      "busy scene",
+      "pause/menu function",
+      "timing/fidelity",
+      "audible sound",
+      "saves/reload",
+      "physical controller"
+    ]
+  },
+  "dependencies": [
+    "Complete 31-file Data directory retained; Mohawk.ini audio settings, Prince2.opt existing local options, scene and audio resource/data files.",
+    "No relevant Boot preference after title/PRNc search; alias/recent-item false positives excluded.",
+    "Application MWHK10310 follows duplicated-volume FSSpec path dirNFErr; no OS Config Manager requirement established."
+  ],
+  "controls": "Only inspected modal OK mouse v225,h282 tested; no keyboard gameplay mapping verified.",
+  "changes": [
+    "Own documentation and private copied fixture/scenarios only; no shared runtime/catalogue/build/browser/settings changes."
+  ],
+  "checks": [
+    "33-file fork/Finder/date/raw16 reopen comparisons",
+    "selected/Data folder dates round-trip",
+    "source004/Boot hash equality",
+    "sibling/prefix-confusable path rejection and missing-input guard before logs/process",
+    "Three bounded runs and inspected screenshots; all owned processes exited."
+  ],
+  "next_step": "Bounded audit of volume/ancestor path construction and FSMakeFSSpec resolution against preserved fixture; distinguish copied-layout and runtime gap. No extra probe, fix, pacing or effort claim.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\prince-of-persia-2\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\prince-of-persia-2\\evidence-manifest.json",
+  "workload_released": true
+}

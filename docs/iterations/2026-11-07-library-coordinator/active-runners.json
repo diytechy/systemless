@@ -3,18 +3,18 @@
     {
       "slug": "particleman-1-0",
       "task_name": "/root/particleman_1_0",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "particleman-1-0-brief.md"
     },
     {
-      "slug": "polybrid-1-0",
-      "task_name": "/root/polybrid_1_0",
-      "status": "reviewed; workload released",
-      "brief": "polybrid-1-0-brief.md"
+      "slug": "prince-of-persia",
+      "task_name": "/root/prince_of_persia",
+      "status": "running",
+      "brief": "prince-of-persia-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T21:11:35.410667+00:00"
+  "updated_at": "2026-11-07T21:12:16.413735+00:00"
 }

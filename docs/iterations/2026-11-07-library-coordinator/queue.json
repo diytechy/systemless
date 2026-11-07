@@ -1769,8 +1769,8 @@
     },
     {
       "slug": "particleman-1-0",
-      "title": "ParticleMan 1.0",
-      "status": "worker active",
+      "title": "ParticleMan1.0 (titlev1.0.0)",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "ParticleMan 1.0/ParticleMan 1.0",
@@ -1788,10 +1788,13 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Docs color68020+/System7+, tested800x600x8 exploratory; original68K SIZE655360. Titlev1.0.0 versus folder1.0 retained.",
+      "preferences_save_id": "No actual Boot ParticleMan preference, launcher alias only. Embedded title state and sibling sound file preserved; sound dependency unqualified.",
+      "controls": "File Help/SetKeys/NewGame observed. Right124/ch29 and P35/ch112 inconclusive; custom-key setup only reached UP prompt.",
+      "timing": "Native title/help/initial level readiness; movement/pause and release baseline pending.",
+      "report": "particleman-1-0/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Five-file HFSplus fixture verified. Parent matched source004/fixture hashes, raw588tick report with zero assertions/exhaustion and populated level image. Title/Help/NewGame selector respond and delayed transition settles; Right/P do not establish movement/pause with unknown mapping. Eight completed scenarios, no causal renderer/service diagnosis or setting change."
     },
     {
       "slug": "polybrid-1-0",
@@ -1825,7 +1828,7 @@
     {
       "slug": "prince-of-persia",
       "title": "Prince of Persia",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Prince of Persia ƒ/Prince of Persia",
@@ -1851,7 +1854,7 @@
     {
       "slug": "prince-of-persia-2",
       "title": "Prince of Persia 2",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Prince of Persia 2/Prince of Persia 2",

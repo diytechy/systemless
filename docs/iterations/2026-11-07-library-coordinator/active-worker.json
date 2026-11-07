@@ -1,8 +1,8 @@
 {
-  "slug": "polybrid-1-0",
-  "task_name": "/root/polybrid_1_0",
-  "status": "reviewed; workload released",
-  "starting_revision": "53dc82412017b70f884a29f225c3916be5e18092",
-  "brief": "polybrid-1-0-brief.md",
-  "updated_at": "2026-11-07T21:11:35.369432+00:00"
+  "slug": "prince-of-persia",
+  "task_name": "/root/prince_of_persia",
+  "status": "running; see active-runners.json",
+  "starting_revision": "820bdbfeb59a79d07233212a0f936c994fce4d06",
+  "brief": "prince-of-persia-brief.md",
+  "updated_at": "2026-11-07T21:11:52.022558+00:00"
 }

@@ -1,8 +1,8 @@
 {
-  "slug": "drol",
-  "task_name": "/root/drol",
+  "slug": "fantastic-voyage",
+  "task_name": "/root/fantastic_voyage",
   "status": "running; see active-runners.json",
-  "starting_revision": "29d4c3d89de6dc77c5728785b631cf53492f1d41",
-  "brief": "drol-brief.md",
-  "updated_at": "2026-11-07T14:06:58.305709-06:00"
+  "starting_revision": "aeedcddbdf790cc2e72e7290b12411a3fb8771d2",
+  "brief": "fantastic-voyage-brief.md",
+  "updated_at": "2026-11-07T14:08:44.264864-06:00"
 }

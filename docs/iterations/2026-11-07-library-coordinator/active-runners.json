@@ -1,20 +1,20 @@
 {
   "runners": [
     {
-      "slug": "guy-smiley-vs-the-monsters",
-      "task_name": "/root/guy_smiley_vs_the_monsters",
-      "status": "reviewed; workload released",
-      "brief": "guy-smiley-vs-the-monsters-brief.md"
-    },
-    {
       "slug": "lawyers",
       "task_name": "/root/lawyers",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "lawyers-brief.md"
+    },
+    {
+      "slug": "lemmings",
+      "task_name": "/root/lemmings",
+      "status": "running",
+      "brief": "lemmings-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T20:24:05.424738+00:00"
+  "updated_at": "2026-11-07T20:26:55.723622+00:00"
 }

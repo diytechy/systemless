@@ -49,9 +49,9 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 39 | Gold Digger1.3.0 | Content\001: Gold Digger 1.3.0/Gold Digger<br>Content\Boot: Gold Digger 1.3.0/Gold Digger | 68K (CODE) | not yet measured |
 | 40 | GoldPusher1.5 | Content\002: gold-pusher Folder/GoldPusher | 68K (CODE) | not yet measured |
 | 41 | Guy Smiley vs.the Monsters1.0.1 | Content\001: Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters | 68K (CODE) | not yet measured |
-| 42 | Lawyers | Content\001: Lawyers | 68K (CODE) | worker active |
-| 43 | Lemmings | Content\006: Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a<br>Content\006: Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings | 68K (CODE) | worker assigned |
-| 44 | MacPipes | Content\002: MacPipes ƒ/MacPipes 2.2.7<br>Content\001: MacPipes ƒ/MacPipes 2.0.1 | 68K (CODE), fat (CODE + PPC fragment) | pending |
+| 42 | Lawyers1.0 | Content\001: Lawyers | 68K (CODE) | not yet measured |
+| 43 | Lemmings | Content\006: Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a<br>Content\006: Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings | 68K (CODE) | worker active |
+| 44 | MacPipes | Content\002: MacPipes ƒ/MacPipes 2.2.7<br>Content\001: MacPipes ƒ/MacPipes 2.0.1 | 68K (CODE), fat (CODE + PPC fragment) | worker assigned |
 | 45 | Maelstrom | Content\002: Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom | 68K (CODE) | pending |
 | 46 | Mantra | Content\002: Mantra v1.02 Folder/Mantra v1.02<br>Content\004: Mantra v1.02 Folder/Mantra v1.02 | 68K (CODE) | pending |
 | 47 | Mantra II | Content\006: Mantra II v1.02 ƒ/Mantra II v1.02<br>Content\006: Mantra II v1.02 ƒ/Mantra II v1.02 PPC | 68K (CODE), PPC fragment | pending |

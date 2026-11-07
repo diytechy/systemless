@@ -1347,8 +1347,8 @@
     },
     {
       "slug": "lawyers",
-      "title": "Lawyers",
-      "status": "worker active",
+      "title": "Lawyers1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Lawyers",
@@ -1366,15 +1366,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 exploratory; original SIZE1048576 retained,68K1.0.",
+      "preferences_save_id": "Only Boot LWYR/title Recent Items record, separately preserved/unseeded; no actual pref/save mapping.",
+      "controls": "Keypad6 key88/ch54 right16px; ordinary6 key22/ch54 advances anotherturn; right124/ch29/click unqualified; GameBomb menu works.",
+      "timing": "Native Level1/turn/bomb readiness; release-browser baseline pending, concurrent native times not performance.",
+      "report": "lawyers/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Exact one-file fixture verified; parent source001/fixture hashes, raw328tick0assert/exhaust report and before/keypad6/bomb images reviewed. Keypad6 moves blueactor16px right/enemies advance; Bomb rings and1to0inventory observed. Six scenarios complete; menu/instructions render, no fullpause/audio/save/reference qualification. No setting change."
     },
     {
       "slug": "lemmings",
       "title": "Lemmings",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a",
@@ -1443,7 +1446,7 @@
     {
       "slug": "macpipes",
       "title": "MacPipes",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "MacPipes ƒ/MacPipes 2.2.7",

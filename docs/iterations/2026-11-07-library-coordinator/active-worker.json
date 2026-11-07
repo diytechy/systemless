@@ -1,8 +1,8 @@
 {
-  "slug": "lawyers",
-  "task_name": "/root/lawyers",
+  "slug": "lemmings",
+  "task_name": "/root/lemmings",
   "status": "running; see active-runners.json",
-  "starting_revision": "15126c0accbeff891f57f9be9dd4fe1a99fa0807",
-  "brief": "lawyers-brief.md",
-  "updated_at": "2026-11-07T20:21:30.902932+00:00"
+  "starting_revision": "58f089b528072b9ad57464315738da75817cb5e2",
+  "brief": "lemmings-brief.md",
+  "updated_at": "2026-11-07T20:24:34.884785+00:00"
 }

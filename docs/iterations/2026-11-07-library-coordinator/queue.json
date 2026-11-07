@@ -774,8 +774,8 @@
     },
     {
       "slug": "brainjacker-1-0-1",
-      "title": "BrainJacker 1.0.1",
-      "status": "worker assigned",
+      "title": "BrainJacker1.0.1",
+      "status": "compatibility blocker",
       "candidates": [
         {
           "path": "BrainJacker ƒ/BrainJacker 1.0.1",
@@ -794,15 +794,20 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 on68K failure; depth exploratory. Original SIZE6291456preferred/2097152minimum retained.",
+      "preferences_save_id": "Boot PJ97/title hit only Launcher alias, excluded from title-only fixture. Source embedded state retained; no certified defaults or browser ID.",
+      "controls": "Readme explain-the-game button not reached; launcher Mouse Required category suggests mouse only, exact actions unverified.",
+      "timing": "Native68K startup halt and separate bounded PPC startup noncompletion prevent gameplay baseline. Release-browser unmeasured.",
+      "report": "brainjacker-1-0-1/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file/folder-date title-only fixture verified; parent source003/fixture hashes and raw failed103tick68K report reviewed. Splash precedes IllegalInstruction4088 atPC000000C2,0assert/exhaust. One authorized separate PPC request stopped30s before checkpoint/report; counters unavailable, owned PID absent. Director6.5 is runtime, game1.0.1. No causal service diagnosis/default change.",
+      "version_notes": "Readme/version history confirms game1.0.1; vers6.5 names Macromedia Director runtime.",
+      "dependencies": "Three-file title folder retained; Macromedia Director6.5 embedded runtime, external requirements unresolved."
     },
     {
       "slug": "brickles-plus-3-0",
       "title": "Brickles Plus 3.0",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Brickles Plus 3.0",

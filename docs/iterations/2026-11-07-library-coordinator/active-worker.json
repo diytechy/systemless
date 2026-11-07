@@ -1,8 +1,8 @@
 {
-  "slug": "bonkheads-deluxe",
-  "task_name": "/root/bonkheads_deluxe",
+  "slug": "brainjacker-1-0-1",
+  "task_name": "/root/brainjacker_1_0_1",
   "status": "reviewed; workload released",
-  "starting_revision": "363e375531b7d9e173610670e948c50946258bfd",
-  "brief": "bonkheads-deluxe-brief.md",
-  "updated_at": "2026-11-07T18:45:48.696240+00:00"
+  "starting_revision": "b714481fd2d98732d11ff116eeefd678a6acb0fd",
+  "brief": "brainjacker-1-0-1-brief.md",
+  "updated_at": "2026-11-07T18:51:06.825039+00:00"
 }

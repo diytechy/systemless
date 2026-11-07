@@ -60,7 +60,18 @@ def copy_selected(source, selections):
             parent = parent[name]
         if path[-1] in parent:
             raise ValueError('Overlapping selections')
-        parent[path[-1]] = copy.deepcopy(node)
+        selected = copy.deepcopy(node)
+        # machfs resolves raw aliases on read and rewrites them on write. Keep
+        # their original forks/metadata instead; copied aliases can still refer
+        # to the original volume and are not promised to resolve in this image.
+        def preserve_alias_bytes(item):
+            if isinstance(item, machfs.Folder):
+                for child in item.values():
+                    preserve_alias_bytes(child)
+            elif isinstance(item, machfs.File):
+                item.aliastarget = None
+        preserve_alias_bytes(selected)
+        parent[path[-1]] = selected
     return target
 
 def extract(source, output, selections, size, original_root=None):

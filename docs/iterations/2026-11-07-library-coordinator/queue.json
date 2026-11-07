@@ -129,7 +129,7 @@
     {
       "slug": "3d-brick-bash-1-1-1",
       "title": "3d Brick Bash! 1.1.1",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1",
@@ -146,15 +146,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "800x600 native:8-bit draws NewGame;4-bit black. Both exploratory. SIZE1331200",
+      "preferences_save_id": "No Boot preference by filename/creator; browser ID/mapping unassigned",
+      "controls": "ReadMe mouse paddle/button speed;8-bit floor polygon responds, ball/collisions unverified",
+      "timing": "No compiled browser entry; native ball/collision readiness and fidelity unresolved",
+      "report": "3d-brick-bash-1-1-1/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Source hash and3/4file fixture metadata checked;8-bit NewGame/paddle response observed,4-bit black behavior. Coordinator inspected pre/post images; white band unexplained without reference. Alias preservation and guard/date tests pass; no runtime setting accepted."
     },
     {
       "slug": "acquire-1-0",
       "title": "Acquire 1.0",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Acquire ƒ/Acquire 1.0",

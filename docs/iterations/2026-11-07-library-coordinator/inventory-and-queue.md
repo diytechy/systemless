@@ -12,8 +12,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 2 | Koji the Frog | Content\001: Koji the Frog/Koji the Frog 2.0.4<br>Content\005: 2Del/Koji The Frog 1.0.2 ƒ/Koji The Frog 1.0.2 | 68K (CODE), fat (CODE + PPC fragment) | unchanged baseline |
 | 3 | Delirium | Content\001: Delirium 1.1 Folder/Delirium 1.1 | 68K (CODE) | unchanged baseline |
 | 4 | 3-D Cannon | Content\001: 3-D Cannon/3-D Cannon(FAT) | fat (CODE + PPC fragment) | not yet measured |
-| 5 | 3d Brick Bash! 1.1.1 | Content\001: 3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1 | 68K (CODE) | worker assigned |
-| 6 | Acquire 1.0 | Content\001: Acquire ƒ/Acquire 1.0 | 68K (CODE) | pending |
+| 5 | 3d Brick Bash! 1.1.1 | Content\001: 3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1 | 68K (CODE) | not yet measured |
+| 6 | Acquire 1.0 | Content\001: Acquire ƒ/Acquire 1.0 | 68K (CODE) | worker assigned |
 | 7 | Action Dome 1.0 | Content\001: Action Dome/Action Dome 1.0 | 68K (CODE) | pending |
 | 8 | Adventure | Content\004: Adventure/Adventure | 68K (CODE) | pending |
 | 9 | Angband | Content\004: Angband/Angband | 68K (CODE) | pending |

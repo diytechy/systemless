@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "title": "3d Brick Bash! 1.1.1",
+  "slug": "3d-brick-bash-1-1-1",
+  "outcome": "preparation_verified_native_rendering_readiness_issue",
+  "branch": "dev",
+  "starting_revision": "1f02ebf6d1191a7aad8b73ff1862137f89f08d8c",
+  "private_evidence_root": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\3d-brick-bash-1-1-1",
+  "source_unchanged": true,
+  "source_sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+  "executable": "3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1",
+  "architecture": "68K CODE",
+  "preferred_partition_bytes": 1331200,
+  "executable_data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "executable_resource_sha256": "279b44742ecdd94dc5364344a9785c87498a53416fea98306b91cdb33da3411a",
+  "tested_fixture": {
+    "source_sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "image_sha256": "8064bd9557d7a8dbd3d5113173382a7e5ea760fcf06f68d8209bbd24a06b1a47",
+    "files_verified": 3,
+    "metadata_scope": "File forks/Finder fields and represented folder dates; original folder Finder information not exposed by machfs",
+    "selected_paths": [
+      "3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1",
+      "3d Brick Bash! 1.1.1/3d Brick Bash!  README",
+      "3d Brick Bash! 1.1.1/3d Brick Bash!  WHY?"
+    ],
+    "image_bytes": 8388608
+  },
+  "complete_fixture": {
+    "source_sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "image_sha256": "1f4a9cf5598743694322088863e722919811904c5456c92e317f80eafeb57622",
+    "files_verified": 4,
+    "metadata_scope": "File forks/Finder fields and represented folder dates; original folder Finder information not exposed by machfs",
+    "selected_paths": [
+      "3d Brick Bash! 1.1.1"
+    ],
+    "image_bytes": 8388608
+  },
+  "preservation_limit": "Original folder Finder information unavailable; raw aliases retain original-volume target, resolution unverified.",
+  "native_build_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+  "native_build_version": "0.110.1",
+  "native_compile_revision": null,
+  "display": {
+    "dimensions": [
+      800,
+      600
+    ],
+    "exploratory": true,
+    "tested_depths": [
+      4,
+      8
+    ],
+    "partition_override": null
+  },
+  "native_checks": {
+    "launch": {
+      "status": "passed",
+      "error": null,
+      "assertions": 0,
+      "budget_exhausted_frames": 0
+    },
+    "menu": {
+      "status": "passed",
+      "error": null,
+      "assertions": 0,
+      "budget_exhausted_frames": 0
+    },
+    "file": {
+      "status": "passed",
+      "error": null,
+      "assertions": 0,
+      "budget_exhausted_frames": 0
+    },
+    "play": {
+      "status": "passed",
+      "error": null,
+      "assertions": 0,
+      "budget_exhausted_frames": 0
+    },
+    "play2": {
+      "status": "passed",
+      "error": null,
+      "assertions": 0,
+      "budget_exhausted_frames": 0
+    },
+    "probe8": {
+      "status": "passed",
+      "error": null,
+      "assertions": 0,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "observations": [
+    "4-bit startup field and menus render.",
+    "4-bit New Game becomes black; menu input redraws initial field.",
+    "8-bit New Game initializes field and counters. Mouse movement shifts floor polygon.",
+    "8-bit button plus movement sequence leaves large horizontal white/gray slab; ball/collision fidelity unverified."
+  ],
+  "gaps": [
+    "release browser entry and performance baseline absent",
+    "independent reference absent",
+    "ball motion and collision unverified",
+    "busy scene and pause/resume untested",
+    "audio fidelity untested",
+    "save roundtrip and preference persistence untested",
+    "physical controller untested"
+  ],
+  "changes": [
+    "scripts/extract_owned_game.py: clear derived alias target only on deep copies",
+    "scripts/test_extract_owned_game.py: synthetic alias/fork/metadata/date/guard tests",
+    "own report and review-summary.json"
+  ],
+  "validation": {
+    "synthetic_tests_passed": 2,
+    "diff_check": "passed",
+    "complete_extraction_verified_files": 4
+  },
+  "pacing_change": null,
+  "runtime_change": null,
+  "browser_save_id": null,
+  "workload_released": true,
+  "next_step": "Compare finite 8-bit mouse play with independent reference to establish expected ball/paddle drawing before shared-runtime diagnosis; prepare browser entry only after usable gameplay.",
+  "private_evidence_hashes": {
+    "file.json": "373304f5bcddcc0ac85c4d4a1becb9928bd9a938fa394bf1484eb22d054a65bd",
+    "launch.json": "e22a2ab48e8129726b626793fe0c26f74c83c0380d3655a2aeedbbc2ea13d727",
+    "menu.json": "9b70bd944c15030106e2efdc82c26ebe3a2fbad88919d9d91e33c831e3bc5705",
+    "play.json": "ec89d528b563bd51bb038be166bc08ec91c8b8f4c99aff2c692cec05b256238d",
+    "play2.json": "a4f122476b3d6846ec953fdbfcfbf0a556f0a345305bfa4b9a36606e5b03adc4",
+    "probe8.json": "b3943944e7d329c0b7d2a075c84e133101715f1612754c1e11c560869a8fd43b",
+    "file\\file-menu.png": "b89a22d2948951650b2a7583bf0076bdcf12eed68bb8da44024ce7b53f1f3dd8",
+    "file\\report.json": "640ddb96a5543d0d2a131e66650df7c750fd120f96e30adc6c237f33c41b52bf",
+    "launch\\ready.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "launch\\report.json": "05d54d788f309d6ca0116ee598a38f6f9bbdf6f6b38d3fec8a2fa90199047b7f",
+    "menu\\game-menu.png": "5cb0a276898658e44517ecc4de50817f10cccd6961b9ae8e1694e1234ca0f404",
+    "menu\\report.json": "525bbc55ce7924f09c01e18392b1799bda23bf180f69a1416479125ec075a7e3",
+    "play\\later.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play\\moved.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play\\new-game.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play\\paused-menu.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play\\paused.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play\\report.json": "8bf3a3db2d86220ce62821d18c762b0fe3c2108450e043b902684b838841fb2d",
+    "play2\\menu.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play2\\moved.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play2\\new-game.png": "5b99be9ecabf27789ce07cbbb26d4b3257b3d1f19fe1c4057746403085d8f0bb",
+    "play2\\report.json": "8c93b3307d73bdee46f91358d73d413f289ef444bdb7a294c513edffade3f41d",
+    "probe8\\after-button.png": "700110f76aa020bf855729efa8e2237d6552cf8eaf575135aacd7075a120c1d2",
+    "probe8\\menu.png": "f276fe62191e657113ec9e5899021b3f9d2cc30269c2f95eb7dd2f3ce031d9f0",
+    "probe8\\moved.png": "e5166247808820972879dc50d7d6a8e73a7045088b4803dd66e5acb4ec071782",
+    "probe8\\new-game.png": "aeccbf621de8d56992787d1bec2b733031013a9282f1f7927315f3865e2138a0",
+    "probe8\\report.json": "e97bedc0d4fe649701bdef7862ff5ba20df5b363fd436198f738278cd2222c52"
+  }
+}

@@ -1,8 +1,8 @@
 {
-  "slug": "cybernation-1-1-1",
-  "task_name": "/root/cybernation_1_1_1",
+  "slug": "deliverance",
+  "task_name": "/root/deliverance",
   "status": "reviewed; workload released",
-  "starting_revision": "49d35c3901faf2ffe25c516506fd7ab6c72b8099",
-  "brief": "cybernation-1-1-1-brief.md",
-  "updated_at": "2026-11-07T19:37:58.329065+00:00"
+  "starting_revision": "fe5293f3c3043d8804ceb6805596eb18f977fb43",
+  "brief": "deliverance-brief.md",
+  "updated_at": "2026-11-07T19:44:18.450006+00:00"
 }

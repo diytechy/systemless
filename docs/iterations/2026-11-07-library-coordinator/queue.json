@@ -1042,8 +1042,8 @@
     },
     {
       "slug": "deliverance",
-      "title": "Deliverance™",
-      "status": "worker assigned",
+      "title": "Deliverance™ 1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Deliverance™ ƒ/Deliverance™",
@@ -1060,15 +1060,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Resources ColorQuickDraw and16/256colors; actual800x600x8, dimensions exploratory. Original SIZE2252800 retained.",
+      "preferences_save_id": "Boot SystemFolder title/DELI scan no match; resources name Deliverance Prefs. Copied registration state unresolved, no browser ID or defaults certification.",
+      "controls": "Resource labels Jump/Kneel/Left/Right/Fire,Cmd-P Pause,Cmd-Q Quit; actual assignments/behavior untested.",
+      "timing": "Registration UI only; gameplay/release-browser timing unavailable until owned installation state or serial located.",
+      "report": "deliverance/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file Boot-source fixture verified; parent Boot/fixture hashes and raw120tick completed report reviewed, zero assertions/exhaustion. Parent inspected empty-serial registration dialog; no gameplay reached. Narrow SystemFolder DELI/title scan finds no matching registration pref, original embedded state retained. Copied-state registration gap, no emulator incompatibility or setting change.",
+      "dependencies": "Complete3file game/Joystick subtree with GamePad/MouseStickII settings retained; hardware/driver requirement unestablished. Legitimate registration state needed for further readiness."
     },
     {
       "slug": "desk-invaders-ii",
       "title": "Desk Invaders II",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Desk Invaders II ƒ/Desk Invaders II",

@@ -1,3 +1,7 @@
+# Current follow-up outcome
+
+CD dependencies are now preserved and opened successfully in a two-volume diagnostic pack. Initial readiness remains unresolved through360 frontend ticks. See [bounded follow-up](followup.md) for authoritative current results; the first-pass record below is historical.
+
 # Star Trek: A Final Unity first pass
 
 The selected installed 68K slice reaches a fatal missing-resource dialog because this finite copied installation lacks CD content. This is a preparation blocker, with no demonstrated emulator incompatibility or pacing candidate. The configured disc contains the named resource archive; its APM boundary discrepancy does not establish corruption.
@@ -41,3 +45,6 @@ Run startup.json: run60, screenshot startup, run120, screenshot later; max180 fr
 New absolute-path runner checks resolved ancestry for fixture/scenario/output/log/ownership before writing or starting a child; input existence and out-of-scope guard were tested without an emulator. Original media was opened read-only. Private logs contain configuration-dependent paths and remain outside Git. Existing diagnostics were not replaced. Evidence-manifest.json records private script/log/scenario/capture/report hashes. preservation.json records individual fork hashes and exact copied names. Native and extraction workload released before documentation.
 
 No runtime settings changed. Rollback is simply to leave these owned diagnostic files unused; originals, existing library/save identities and shared changes remain intact. The next useful step is coordinator-controlled preparation of complete CD content under the correct Star Trek volume/path identity, preserving full forks/Finder metadata and checking every extent before another68K launch. Do not alter the original preference or silently flatten the disc. Runtime QuickTime/Sound Manager support remains a later discovery task. A bounded dependency-preparation task is justified; an implementation effort range is not yet grounded.
+
+
+Follow-up: [bounded CD dependency preparation](followup.md) resolves the resource-path error with a verified two-volume diagnostic pack. Startup readiness remains unresolved. Original first-pass evidence above is retained.

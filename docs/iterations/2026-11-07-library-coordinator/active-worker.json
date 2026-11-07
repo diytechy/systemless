@@ -1,8 +1,8 @@
 {
-  "slug": "bedlam",
-  "task_name": "/root/bedlam",
+  "slug": "bikaka-1-4",
+  "task_name": "/root/bikaka_1_4",
   "status": "reviewed; workload released",
-  "starting_revision": "6225f407c124a900fd266099c447ceae6056f531",
-  "brief": "bedlam-brief.md",
-  "updated_at": "2026-11-07T17:59:08.836806+00:00"
+  "starting_revision": "a23c65d17ba90008afdc5ac77e6ff19be80f7b88",
+  "brief": "bikaka-1-4-brief.md",
+  "updated_at": "2026-11-07T18:04:37.622584+00:00"
 }

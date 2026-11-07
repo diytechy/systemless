@@ -463,7 +463,7 @@
     {
       "slug": "bikaka-1-4",
       "title": "Bikaka 1.4",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Bikaka 14 Folder/Bikaka 1.4",
@@ -481,15 +481,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600;8bit completed,4bit partial. Docs allow B/W through256colors. Original SIZE512000 retained.",
+      "preferences_save_id": "Source application resource fork/potential embedded settings retained. Boot title/creator no match; Bikaka Prefs runtime lookup missing. Active embedded settings/persistence unverified; no browser ID.",
+      "controls": "Configurable keys/special-key ASCII numbers documented; active controls unresolved after literal-left and menu tap.",
+      "timing": "No release-browser baseline; short8bit native readiness only,4bit incomplete excluded from completed counters.",
+      "report": "bikaka-1-4/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Two-file fixture verified; parent independently rehashed source001/fixture and inspected raw76tick8bit report0assertions/exhaustion. Colored initial board observed but unchanged left/menu captures leave controls and falling motion unresolved. Separate4bit run self-aborted~96s without final report; no proven rendering/service defect. Embedded settings retained, defaults not assumed. No runtime change.",
+      "dependencies": "Two-file title folder preserved; no external companion established."
     },
     {
       "slug": "blobbo",
       "title": "Blobbo",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Blobbo 1.0 Lite ƒ/Blobbo",

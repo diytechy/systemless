@@ -1448,8 +1448,8 @@
     },
     {
       "slug": "macpipes",
-      "title": "MacPipes",
-      "status": "worker active",
+      "title": "MacPipes2.2.7",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "MacPipes ƒ/MacPipes 2.2.7",
@@ -1482,15 +1482,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Docs68020+,OS7.0.1+,256colors/SoundMgr3; tested800x600x8, original SIZE1257472.",
+      "preferences_save_id": "No original Boot McPP/title pref; native missingthencreated MacPipes Preferences at virtual SystemFolder path, fresh/default test.",
+      "controls": "Documented mouse,Spaceflow,Optionbomb,Shiftstack,Ppause,Escabort; modal probesonly, gameplayunqualified.",
+      "timing": "Title/shareware-modal readiness only; actualplay/release baseline pending, no proven service blocker.",
+      "report": "macpipes/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "16file HFSplus fixture verified; parent source002/fixture hashes, raw442tick0assert/exhaust report and enabled-looking reminder PNG reviewed. NewGame opens modal; insideNotYet click after250ticks leaves it unchanged. Older2.2.1PPC reminder bug only documentarycontext, no diagnosis for2.2.7 explicit68K. Freshprefs created; no gameplay/setting acceptance. Parent corrected Unicode path transcription."
     },
     {
       "slug": "maelstrom",
       "title": "Maelstrom",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom",
@@ -1516,7 +1519,7 @@
     {
       "slug": "mantra",
       "title": "Mantra",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Mantra v1.02 Folder/Mantra v1.02",

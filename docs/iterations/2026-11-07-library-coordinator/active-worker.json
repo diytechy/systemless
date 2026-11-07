@@ -1,8 +1,8 @@
 {
-  "slug": "macpipes",
-  "task_name": "/root/macpipes",
+  "slug": "maelstrom",
+  "task_name": "/root/maelstrom",
   "status": "running; see active-runners.json",
-  "starting_revision": "c811cc2ca25261464ca04562ee8e7cc21e77ed8c",
-  "brief": "macpipes-brief.md",
-  "updated_at": "2026-11-07T20:27:13.281725+00:00"
+  "starting_revision": "1375cf7bd683562f196dc035aa8dfa1cc868e7b1",
+  "brief": "maelstrom-brief.md",
+  "updated_at": "2026-11-07T20:31:54.925211+00:00"
 }

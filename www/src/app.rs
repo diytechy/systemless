@@ -148,6 +148,9 @@ struct GithubStarBadge {
 }
 
 async fn fetch_github_star_count() -> Option<String> {
+    if option_env!("SYSTEMLESS_PRIVATE_KOJI") == Some("1") {
+        return None;
+    }
     let repository = SYSTEMLESS_REPOSITORY
         .strip_prefix("https://github.com/")?
         .trim_end_matches('/');

@@ -6,6 +6,8 @@ use std::{
 
 use systemless_catalogue_tools::catalogue_tools;
 
+mod private_koji;
+
 const UNKNOWN: &str = "unknown";
 const SYSTEMLESS_REPOSITORY: &str = "https://github.com/benletchford/systemless";
 
@@ -33,7 +35,8 @@ fn main() {
         _ => panic!("SYSTEMLESS_CATALOGUE_PRODUCTION must be 1 or unset"),
     };
     let catalogue = catalogue_tools::load(&manifest_dir, mode).expect("invalid embedded catalogue");
-    let compiled = catalogue_tools::build(&catalogue).expect("catalogue compilation failed");
+    let mut compiled = catalogue_tools::build(&catalogue).expect("catalogue compilation failed");
+    private_koji::apply(&mut compiled, &manifest_dir);
     let generated =
         catalogue_tools::site::rust_games(&compiled).expect("invalid game configuration");
     fs::write(

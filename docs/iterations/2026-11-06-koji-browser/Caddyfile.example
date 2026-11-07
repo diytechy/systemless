@@ -1,0 +1,16 @@
+# Example only. Adapt to the existing HomeHub private HTTPS deployment.
+# Mount the built www/dist directory read-only at /srv/koji in the Caddy container.
+koji.example.invalid {
+    root * /srv/koji
+    encode zstd gzip
+    header {
+        Cross-Origin-Opener-Policy same-origin
+        Cross-Origin-Embedder-Policy credentialless
+        X-Content-Type-Options nosniff
+        X-Robots-Tag "noindex, nofollow"
+        Cache-Control "no-cache"
+    }
+    redir / /koji-the-frog/ 302
+    try_files {path} /index.html
+    file_server
+}

@@ -31,3 +31,7 @@ __pycache__/
 
 # Local structured-play artifacts
 /play-output/
+
+# Private extracted game media and local browser bundle.
+/www/private/
+/koji-browser.zip

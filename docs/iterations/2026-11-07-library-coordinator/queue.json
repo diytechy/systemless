@@ -257,8 +257,8 @@
     },
     {
       "slug": "angband",
-      "title": "Angband",
-      "status": "worker assigned",
+      "title": "Angband 2.0.2 (Macintosh)",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Angband/Angband",
@@ -275,15 +275,20 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "800x600 8-bit preserved-pref readiness observed;1-bit gap onlyfresh state; SIZE972800 unchanged",
+      "preferences_save_id": "Boot Angband Preferences copied and discovered at virtual SystemFolder/Preferences; browser ID/mapping unassigned",
+      "controls": "Character creation manual rolling; keypad directions,6 observed; i inventory observed",
+      "timing": "No compiled private browser entry or real-time baseline; native ticks are behavior only",
+      "report": "angband/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "5file preserved-preference fixture verified; source/Boot/new fixture independently rehashed.8-bit town/keypad6/inventory observed,0assertions/exhaustion. Existing Boot pref now found without create sequence. Prior1-bit evidence is default-state only; no runtime change.",
+      "version_notes": "Mac port2.0.2, underlying PC game code approximately1.3.1",
+      "dependencies": "System6.0.4+ documented;4title files plus copied Boot preference; no external game dependency documented"
     },
     {
       "slug": "arashi-1-1-1",
       "title": "Arashi 1.1.1",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "ARASHI 1.1.1 ƒ/Arashi 1.1.1",

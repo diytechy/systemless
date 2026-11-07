@@ -1124,8 +1124,8 @@
     },
     {
       "slug": "dome-wars",
-      "title": "Dome Wars",
-      "status": "worker active",
+      "title": "Dome Wars Public Beta",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Dome Wars/Dome Wars",
@@ -1142,15 +1142,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Readme System7/640K; original SIZE768000. Observed800x600x8 exploratory.",
+      "preferences_save_id": "No title/NTST Boot preference; unrelated Action Dome hits excluded; no save mapping established.",
+      "controls": "File New Game/Help Controls; arrows/keypadpower,Command precision documented, turret direction wording ambiguous; no accepted input observed.",
+      "timing": "Native title/menu-bar readiness only; actual play and release-browser baseline pending.",
+      "report": "dome-wars/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file fixture verified; parent source001/fixture hashes match, raw550tick report0assert/exhaust and title/canyon screenshot reviewed. Five finite completed scripts, no title dismissal/menu response or gameplay established. No proven service defect or pacing change; slow native readiness is not final incompatibility."
     },
     {
       "slug": "drol",
       "title": "Drol",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Drol ƒ/Drol",
@@ -1176,7 +1179,7 @@
     {
       "slug": "fantastic-voyage",
       "title": "Fantastic Voyage",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "FVoy Folder/Fantastic Voyage 1.1a",

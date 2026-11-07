@@ -1,8 +1,8 @@
 {
-  "slug": "dome-wars",
-  "task_name": "/root/dome_wars",
-  "status": "running; see active-runners.json for both assignments",
-  "starting_revision": "46b8279d9c5e1a6e79c2761fc57ad8b7c2214f96",
-  "brief": "dome-wars-brief.md",
-  "updated_at": "2026-11-07T20:04:09.4650985Z"
+  "slug": "drol",
+  "task_name": "/root/drol",
+  "status": "running; see active-runners.json",
+  "starting_revision": "29d4c3d89de6dc77c5728785b631cf53492f1d41",
+  "brief": "drol-brief.md",
+  "updated_at": "2026-11-07T14:06:58.305709-06:00"
 }

@@ -1492,8 +1492,8 @@
     },
     {
       "slug": "maelstrom",
-      "title": "Maelstrom",
-      "status": "worker active",
+      "title": "Maelstrom1.4.3",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom",
@@ -1511,15 +1511,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Documented256colors/2.3MB; tested800x600x8 exploratorydimensions, original SIZE2355200.",
+      "preferences_save_id": "Actual Boot Maelstrom License preserved+PBOpenreachable under OwnedGame/SystemFolder/Preferences; Scores/Sounds/Sprites/Titles retained; no browserID yet.",
+      "controls": "P35/ch112 held3 fromfresh title startsWave1; configurablemovement/fire unresolved; CapsLockpause/Escabort documentedonly.",
+      "timing": "Native title/Wave1 readiness afterisolatedP; release-browser baseline/fidelity pending.",
+      "report": "maelstrom/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "18file HFSplus+actual-license fixture verified; parent source002/fixture hashes, raw303tick0assert/exhaust isolatedP report and Wave1 image reviewed. FreshP35/ch112 after120ticks reaches ship/asteroids/HUD; priorC/config sequence confounded gameplaystart. License PBOpenvirtualpath confirmed. Movement/fire/pause unqualified; no setting change. Parent corrected report encoding."
     },
     {
       "slug": "mantra",
       "title": "Mantra",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Mantra v1.02 Folder/Mantra v1.02",
@@ -1560,7 +1563,7 @@
     {
       "slug": "mantra-ii",
       "title": "Mantra II",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Mantra II v1.02 ƒ/Mantra II v1.02",

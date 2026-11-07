@@ -52,9 +52,9 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 42 | Lawyers1.0 | Content\001: Lawyers | 68K (CODE) | not yet measured |
 | 43 | Lemmings1.5.2 | Content\006: Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a<br>Content\006: Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings | 68K (CODE) | not yet measured |
 | 44 | MacPipes2.2.7 | Content\002: MacPipes ƒ/MacPipes 2.2.7<br>Content\001: MacPipes ƒ/MacPipes 2.0.1 | 68K (CODE), fat (CODE + PPC fragment) | not yet measured |
-| 45 | Maelstrom | Content\002: Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom | 68K (CODE) | worker active |
-| 46 | Mantra | Content\002: Mantra v1.02 Folder/Mantra v1.02<br>Content\004: Mantra v1.02 Folder/Mantra v1.02 | 68K (CODE) | worker assigned |
-| 47 | Mantra II | Content\006: Mantra II v1.02 ƒ/Mantra II v1.02<br>Content\006: Mantra II v1.02 ƒ/Mantra II v1.02 PPC | 68K (CODE), PPC fragment | pending |
+| 45 | Maelstrom1.4.3 | Content\002: Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom | 68K (CODE) | not yet measured |
+| 46 | Mantra | Content\002: Mantra v1.02 Folder/Mantra v1.02<br>Content\004: Mantra v1.02 Folder/Mantra v1.02 | 68K (CODE) | worker active |
+| 47 | Mantra II | Content\006: Mantra II v1.02 ƒ/Mantra II v1.02<br>Content\006: Mantra II v1.02 ƒ/Mantra II v1.02 PPC | 68K (CODE), PPC fragment | worker assigned |
 | 48 | nort | Content\001: Nort Folder/nort | 68K (CODE) | pending |
 | 49 | Oh No! More Lemmings | Content\006: Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings | 68K (CODE) | pending |
 | 50 | Oregon Trail | Content\003: Oregon Trail/Oregon Trail | 68K (CODE) | pending |

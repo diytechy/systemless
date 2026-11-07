@@ -1,0 +1,71 @@
+{
+  "title": "Maelstrom 1.4.3",
+  "outcome": "prepared; title and initial Wave1 gameplay observed",
+  "preservation": {
+    "source_before": {
+      "002": "8119cbbb69d4a0d5ea4d2cbc2011467fbe396846c79ea0341919a399951ba946",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "source_after": {
+      "002": "8119cbbb69d4a0d5ea4d2cbc2011467fbe396846c79ea0341919a399951ba946",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\maelstrom\\maelstrom143.hfv",
+    "fixture_sha256": "3ba600b3a65c1ef9de18875888e74000519103399d30831c4e4138e1dcd7ad8e",
+    "verified_file_count": 18,
+    "scope_limits": "Both forks/Finder fields/raw coordinate words and represented folder dates verified; folder Finder info unavailable; raw alias resolution unqualified."
+  },
+  "native": {
+    "binary": "D:/SystemlessBuild/target/ci-test/systemless.exe",
+    "sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "compile revision unknown; runtime baseline ed74c8b4 recorded by coordinator",
+    "architecture": "68k",
+    "executable": "Maelstrom 1.4.3 \u0192 (LEFT OUT)/Maelstrom",
+    "display": "800x600 exploratory; 8-bit documented 256 colors",
+    "partition": 2355200,
+    "result": "three passed scenarios; frontend ticks 332/283/303; normal exits",
+    "error": null,
+    "assertions": 0,
+    "budget_exhaustion": 0
+  },
+  "behavior": {
+    "observed": [
+      "title/score screen",
+      "C opens blank white panel; Return restores title",
+      "copied virtual preference successfully opened",
+      "isolated P35/112 held3 reaches Wave1 ship/asteroid/HUD scene after180 ticks"
+    ],
+    "untested": [
+      "gameplay movement/fire",
+      "pause/resume",
+      "busy scene",
+      "audible sound",
+      "save round trip",
+      "controller",
+      "reference timing/fidelity"
+    ]
+  },
+  "dependencies": [
+    "Maelstrom Scores/Sounds/Sprites/Titles retained",
+    "Boot preference selected and virtual path confirmed; values private"
+  ],
+  "controls": {
+    "documented": "Caps Lock pause; Escape abort; configurable ship keys",
+    "probe": "C8/99 Return36/13 P35/112 Shift56/0 Space49/32 Caps57/0 Esc53/27; gameplay not reached; fresh isolated P35/112 held3 successfully starts gameplay"
+  },
+  "changes": [
+    "own report/status and private fixtures only; no runtime/settings changes"
+  ],
+  "checks": [
+    "source hashes unchanged",
+    "18 reopened file comparisons",
+    "folder/ancestor dates explicit check",
+    "all nine PNG checkpoints inspected",
+    "three completed owned-process runs; no benchmark"
+  ],
+  "next_step": "Separate bounded movement/fire/pause checks using verified controls; release integration authorized, deferred coordinator phase. No pacing recommendation.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\maelstrom\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\maelstrom\\evidence-hashes.json",
+  "workload_released": true
+}

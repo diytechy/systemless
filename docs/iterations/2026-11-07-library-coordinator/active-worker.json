@@ -1,8 +1,8 @@
 {
-  "slug": "maelstrom",
-  "task_name": "/root/maelstrom",
+  "slug": "mantra",
+  "task_name": "/root/mantra",
   "status": "running; see active-runners.json",
-  "starting_revision": "1375cf7bd683562f196dc035aa8dfa1cc868e7b1",
-  "brief": "maelstrom-brief.md",
-  "updated_at": "2026-11-07T20:31:54.925211+00:00"
+  "starting_revision": "82031c3ae39bbfb348aaa6186ac729bd14d78008",
+  "brief": "mantra-brief.md",
+  "updated_at": "2026-11-07T20:34:36.046612+00:00"
 }

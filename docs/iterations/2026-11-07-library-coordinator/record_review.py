@@ -32,7 +32,11 @@ for option, field in ((args.depth_size,'depth_size'), (args.controls,'controls')
         row[field] = option
 row.setdefault('accepted_setting', 'No runtime setting change accepted by this review')
 if args.next_slug:
-    next(r for r in queue['games'] if r['slug'] == args.next_slug)['status'] = 'worker assigned'
+    next_row = next(r for r in queue['games'] if r['slug'] == args.next_slug)
+    if next_row['status'] not in ('pending','worker assigned','worker active'):
+        raise SystemExit('Next title already reviewed: ' + args.next_slug)
+    if next_row['status'] != 'worker active':
+        next_row['status'] = 'worker assigned'
 queue_file.write_text(json.dumps(queue, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 done = [r for r in queue['games'] if r['status'] not in ('pending','worker assigned','worker active')]
 stamp = dt.datetime.now(dt.timezone.utc).isoformat()

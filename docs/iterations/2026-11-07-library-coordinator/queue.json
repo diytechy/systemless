@@ -807,7 +807,7 @@
     {
       "slug": "brickles-plus-3-0",
       "title": "Brickles Plus 3.0",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Brickles Plus 3.0",
@@ -824,15 +824,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "800x600 logged,8bit exploratory supported color/BW help. Original SIZE262144 retained.",
+      "preferences_save_id": "Actual Boot Brickles+Data preserved; PBOpen path plus PBRead676bytes confirm loading. Holds settings/colors/highscores; no deletion or browser ID.",
+      "controls": "Help File New Game1/2/4paddles,click begin/next click pause,mouse paddle,P panic direction once per ball. All untested.",
+      "timing": "Native startup noncompletion at75s prevents readiness; counters unavailable and release-browser unmeasured.",
+      "report": "brickles-plus-3-0/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Exact2file app+pref fixture verified; parent source001/fixture hashes and stopped ownership record reviewed, PID absent. PBOpen/PBRead676 establish original-pref reachability. First run120 action did not complete by75s; no screen/final report/counters. Superseded broad fixture excluded from testing. Last preference read is not causal proof; no setting/service diagnosis.",
+      "dependencies": "Exact root APPL and Brickles+Data only in tested2file fixture; embedded TEXT help. Unrelated broad discovery copy superseded."
     },
     {
       "slug": "brickoids-millenium",
       "title": "Brickoids Millenium",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Brickoids Millenium 1.1 GPL/Brickoids Millenium",

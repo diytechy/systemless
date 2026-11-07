@@ -32,8 +32,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 22 | Bonk 1.4.2 | Content\001: Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)<br>Content\001: Bonk 1.4.2 Folder/Bonk 1.4.2 (Black & White) | 68K (CODE) | not yet measured |
 | 23 | Bonkheads Deluxe1.0.0 | Content\004: Bonkheads Deluxe/Bonkheads Deluxe | 68K (CODE) | not yet measured |
 | 24 | BrainJacker1.0.1 | Content\003: BrainJacker ƒ/BrainJacker 1.0.1 | fat (CODE + PPC fragment) | compatibility blocker |
-| 25 | Brickles Plus 3.0 | Content\001: Brickles Plus 3.0 | 68K (CODE) | worker assigned |
-| 26 | Brickoids Millenium | Content\003: Brickoids Millenium 1.1 GPL/Brickoids Millenium | 68K (CODE) | pending |
+| 25 | Brickles Plus 3.0 | Content\001: Brickles Plus 3.0 | 68K (CODE) | not yet measured |
+| 26 | Brickoids Millenium | Content\003: Brickoids Millenium 1.1 GPL/Brickoids Millenium | 68K (CODE) | worker assigned |
 | 27 | Chiral | Content\001: Chiral 1.0.1 ƒ/Chiral | 68K (CODE) | pending |
 | 28 | Chrysanthemum 1.01 | Content\001: Chrysanthemum 1.01 | 68K (CODE) | pending |
 | 29 | Columns | Content\001: Columns | fat (CODE + PPC fragment) | pending |

@@ -2194,7 +2194,7 @@
     {
       "slug": "verttice",
       "title": "DreamLight Verttice",
-      "status": "worker assigned",
+      "status": "compatibility blocker",
       "candidates": [
         {
           "path": "DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0",
@@ -2230,12 +2230,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Immediate PPC import halt before readiness; no real-time release measurement.",
+      "report": "verttice/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source002/Boot and69-file fixture hashes, read failed raw frontend1/guest0 report with zero assertions/exhaustion and exact unsupported InterfaceLib:PBMakeFSSpecSync log, inspected cyan failure image and owned exit1. Help resolves game3.0 versus Director7.0.2 vers; existing DLVT preference preserved but not proven loaded. No title/gameplay or pacing qualification; later imports unknown."
     },
     {
       "slug": "zap-t-balls",
       "title": "Zap'T'Balls",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",

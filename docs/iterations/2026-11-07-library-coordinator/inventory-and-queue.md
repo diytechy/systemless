@@ -36,8 +36,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 26 | Brickoids Millenium1.1 | Content\003: Brickoids Millenium 1.1 GPL/Brickoids Millenium | 68K (CODE) | not yet measured |
 | 27 | Chiral1.0.1 | Content\001: Chiral 1.0.1 ƒ/Chiral | 68K (CODE) | not yet measured |
 | 28 | Chrysanthemum1.01 | Content\001: Chrysanthemum 1.01 | 68K (CODE) | not yet measured |
-| 29 | Columns | Content\001: Columns | fat (CODE + PPC fragment) | worker assigned |
-| 30 | CRUNCH | Content\001: CRUNCH Folder/CRUNCH | 68K (CODE) | pending |
+| 29 | Columns1.0 | Content\001: Columns | fat (CODE + PPC fragment) | not yet measured |
+| 30 | CRUNCH | Content\001: CRUNCH Folder/CRUNCH | 68K (CODE) | worker assigned |
 | 31 | CTB | Content\001: CTB 2.0/CTB | 68K (CODE) | pending |
 | 32 | CyberNation 1.1.1 | Content\001: CyberNation 1.1.1 ƒ/CyberNation 1.1.1 | 68K (CODE) | pending |
 | 33 | Deliverance™ | Content\Boot: Deliverance™ ƒ/Deliverance™ | 68K (CODE) | pending |

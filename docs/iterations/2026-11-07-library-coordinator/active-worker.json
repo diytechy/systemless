@@ -1,8 +1,8 @@
 {
-  "slug": "chrysanthemum-1-01",
-  "task_name": "/root/chrysanthemum_1_01",
+  "slug": "columns",
+  "task_name": "/root/columns",
   "status": "reviewed; workload released",
-  "starting_revision": "ca81007c02b4214d390d1d07c6f9d9ccad4cd411",
-  "brief": "chrysanthemum-1-01-brief.md",
-  "updated_at": "2026-11-07T19:10:32.557932+00:00"
+  "starting_revision": "260a1e7c3cfef42edb3ffb1619051b318bb1ef75",
+  "brief": "columns-brief.md",
+  "updated_at": "2026-11-07T19:15:51.880483+00:00"
 }

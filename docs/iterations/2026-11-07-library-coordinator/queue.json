@@ -926,8 +926,8 @@
     },
     {
       "slug": "columns",
-      "title": "Columns",
-      "status": "worker assigned",
+      "title": "Columns1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Columns",
@@ -945,15 +945,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 exploratory; original SIZE819200 retained, explicit68K slice of fat app.",
+      "preferences_save_id": "Root source001 columns.prefs retained and guest open/read840bytes toEOF verified; setting semantics unqualified. Boot scan no matches; no SystemFolder mapping or browser ID.",
+      "controls": "Cmd-N NewGame/Cmd-P pause-resume and Options menu observed. Right-arrow3ticks not established; rotation/directional keys unresolved.",
+      "timing": "Native falling-gem motion/pause/menu readiness; release-browser baseline pending, no candidate.",
+      "report": "columns/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Exact2file app+root-pref fixture verified; parent source001/fixture hashes match. Raw281tick0assert/exhaust report and pause/still/resume images reviewed: falling gems,40tick paused stability and resumed motion observed. Existing columns.prefs open/read840bytes toEOF confirmed, root-relative lookup. Direction/rotation/scoring unresolved; no pacing change.",
+      "dependencies": "Exact root Columns+columns.prefs2files only; no external content established. Resource copyright years differ, version consistently1.0."
     },
     {
       "slug": "crunch",
       "title": "CRUNCH",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "CRUNCH Folder/CRUNCH",

@@ -1072,7 +1072,7 @@
     {
       "slug": "desk-invaders-ii",
       "title": "Desk Invaders II",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Desk Invaders II ƒ/Desk Invaders II",
@@ -1122,7 +1122,7 @@
     {
       "slug": "dome-wars",
       "title": "Dome Wars",
-      "status": "pending",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Dome Wars/Dome Wars",

@@ -41,8 +41,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 31 | Catch the Buzz 2.0 (CTB) | Content\001: CTB 2.0/CTB | 68K (CODE) | compatibility blocker |
 | 32 | CyberNation 1.1.1 | Content\001: CyberNation 1.1.1 ƒ/CyberNation 1.1.1 | 68K (CODE) | not yet measured |
 | 33 | Deliverance™ 1.0 | Content\Boot: Deliverance™ ƒ/Deliverance™ | 68K (CODE) | not yet measured |
-| 34 | Desk Invaders II | Content\001: Desk Invaders II ƒ/Desk Invaders II | unknown | worker assigned |
-| 35 | Dome Wars | Content\001: Dome Wars/Dome Wars | 68K (CODE) | pending |
+| 34 | Desk Invaders II | Content\001: Desk Invaders II ƒ/Desk Invaders II | unknown | worker active |
+| 35 | Dome Wars | Content\001: Dome Wars/Dome Wars | 68K (CODE) | worker active |
 | 36 | Drol | Content\001: Drol ƒ/Drol | 68K (CODE) | pending |
 | 37 | Fantastic Voyage | Content\001: FVoy Folder/Fantastic Voyage 1.1a | 68K (CODE) | pending |
 | 38 | Gerbils! | Content\002: Gerbils! Folder/Gerbils! | PPC fragment | pending |

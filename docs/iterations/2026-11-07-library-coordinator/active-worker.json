@@ -1,8 +1,8 @@
 {
-  "slug": "deliverance",
-  "task_name": "/root/deliverance",
-  "status": "reviewed; workload released",
-  "starting_revision": "fe5293f3c3043d8804ceb6805596eb18f977fb43",
-  "brief": "deliverance-brief.md",
-  "updated_at": "2026-11-07T19:44:18.450006+00:00"
+  "slug": "dome-wars",
+  "task_name": "/root/dome_wars",
+  "status": "running; see active-runners.json for both assignments",
+  "starting_revision": "46b8279d9c5e1a6e79c2761fc57ad8b7c2214f96",
+  "brief": "dome-wars-brief.md",
+  "updated_at": "2026-11-07T20:04:09.4650985Z"
 }

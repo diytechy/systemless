@@ -2,6 +2,8 @@
 
 Started 2026-11-07 00:44 America/Chicago. Checkout clean at start: dev / ed74c8b4, two local commits ahead of origin. No push/deploy authorized.
 
+Post-crash user correction: up to two independent diagnostic game runners are now authorized. Read concurrency.md and active-runners.json; they supersede historical one-worker restrictions below. Controlled performance captures and heavy builds remain sequential. Restart inspection found no surviving game worker/Systemless process; 33/69 reviews are committed, Desk Invaders II has no saved result and is restarted alongside Dome Wars. Original media and existing runtime settings remain untouched.
+
 For later per-game updates, current-action.md and review-log.md supersede the historical counts/next-action details below; queue.json is the canonical per-title status. Keep all three updated after reviewing each worker.
 
 Automatic-resume coordination: active-worker.json (when present) stores the exact canonical task name and assignment phase. Check that target with list_agents(path_prefix=task_name) before resuming; wait for a running worker, review an already finished worker's saved evidence, and only spawn when no prior worker/workload remains. The brief generator prints a deterministic underscore task_name; use it verbatim. A 'spawn pending' file alone is not proof an agent was created. This pointer avoids enumerating every completed worker and prevents duplicate game work. Coordinator checkpoint edits are expected unrelated changes for workers to preserve.

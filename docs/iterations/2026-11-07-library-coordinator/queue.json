@@ -1994,7 +1994,7 @@
     {
       "slug": "slithereens",
       "title": "Slithereens",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Slithereens 1.0.0 ƒ/Slithereens",
@@ -2017,7 +2017,10 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Two360tick native deterministic scripts; no gameplay/release performance measurement.",
+      "report": "slithereens/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source003/Boot and29-file corrected-date fixture hashes; read both passed raw360tick reports with zero assertions/errors/exhaustion and owned exit0; inspected pale cyan final image. Existing660byte Slithereens Prefs opens/read via corrected Untitled VFS path, while Scores/License use unproved. No title by120/360 is a bounded readiness result, not diagnosed incompatibility/rendering defect. Original SIZE retained; no pacing accepted."
     },
     {
       "slug": "sloppy-sokoban-1-7",
@@ -2050,7 +2053,7 @@
     {
       "slug": "spin-doctor",
       "title": "Spin Doctor",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Spin Doctor/Spin Doctor",
@@ -2076,7 +2079,7 @@
     {
       "slug": "star-trek-final-unity",
       "title": "Star Trek: A Final Unity",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Star Trek TNG/\"A Final Unity\"",

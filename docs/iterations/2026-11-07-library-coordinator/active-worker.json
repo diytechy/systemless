@@ -1,8 +1,8 @@
 {
-  "slug": "sloppy-sokoban-1-7",
-  "task_name": "/root/sloppy_sokoban_1_7",
-  "status": "reviewed; workload released",
-  "starting_revision": "b1d553f3a0de47a7a9da85f905aa154f3718798a",
-  "brief": "sloppy-sokoban-1-7-brief.md",
-  "updated_at": "2026-11-07T21:46:34.316174+00:00"
+  "slug": "spin-doctor",
+  "task_name": "/root/spin_doctor",
+  "status": "running; see active-runners.json",
+  "starting_revision": "20cdd4e20dbee366ab5b6ee004db0289d07b8ae4",
+  "brief": "spin-doctor-brief.md",
+  "updated_at": "2026-11-07T21:46:45.870147+00:00"
 }

@@ -157,7 +157,7 @@
     {
       "slug": "acquire-1-0",
       "title": "Acquire 1.0",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Acquire ƒ/Acquire 1.0",
@@ -178,12 +178,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Release browser entry absent; native behavior is not timing or fidelity qualification",
+      "report": "acquire-1-0/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "3file forks/Finder scope and original hashes checked. Native splash/NewGame/File menu and cross-click score0to100 observed,0assertions,0exhaustion. No blocker in bounded smoke; no runtime change."
     },
     {
       "slug": "action-dome-1-0",
       "title": "Action Dome 1.0",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Action Dome/Action Dome 1.0",

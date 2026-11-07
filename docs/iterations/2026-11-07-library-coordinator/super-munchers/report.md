@@ -1,0 +1,29 @@
+# Super Munchers 1.0 first pass
+
+Initial Animals/Beginner gameplay, one-cell right movement, eating feedback and Return pause/continue were observed. A separate instructions branch fails with an application fatal error in PictProc. This is native behavior evidence, not a release-browser readiness or fidelity certificate. No pacing or shared changes are proposed.
+
+## Preserved input and settings
+
+Whole `Super Munchers` folder from original Content/002 retained: executable (APPL/SMUN, CODE, version1.0, original SIZE preferred870400), Super Color, Super Config and raw alias. Exact executable selected `Super Munchers/Super Munchers`, explicit `--prefer-classic-68k`. Exploratory depth8, default observed800x600; required minimum display is unknown. No memory or timing override. Existing diagnostic binary0.110.1 SHA25670062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c; exact compile revision unknown and current shared source edits were not built.
+
+Whole fixture reopened and6 files compared across both forks, type/creator, flags, coordinates and dates. HFS+ signed coordinates preserved modulo65536. Original folder Finder info is unavailable through machfs; represented selected/ancestor folder dates retained. Raw aliases preserved, resolution unverified. Narrow Boot System Folder recursive SMUN/title scan found two launcher aliases, no actual preference. Both retained; they are not preference-loaded evidence. Local Super Config was read (PBRead2884) in the log; this test uses copied source configuration rather than a newly created Boot preference. Values remain private.
+
+Original002 and Boot before/after hashes and fixture hash are in review-summary.json and private preservation.json. Original media were never mounted or executed writable. Existing fixtures and browser saves remain untouched.
+
+## Inspected behavior
+
+Startup at tick60 followed by later240 reaches colorful title. Instructions page1 describes matching categories and avoiding Troggles; pages4/5 document controls and pause. Page6, reached by five Next clicks from Instructions, produces fatal error0 in PictProc. Log says GetPicture(5515) NIL; selected executable and Super Color resource inventories contain no resource5515. This may reflect missing source content or a resource-choice/service issue; no particular runtime defect is established. Stop this branch rather than patch bytes or shared services. The subsequent play click in that scenario was blocked by the modal error and cannot establish gameplay failure.
+
+Fresh isolated Play reaches Animals choice. OK then Beginner radio and OK reaches Level1, rule four-legged animals. At frontend408 the Muncher is in row4/column3. Right hardware124/character29 moves to row4/column4 (wasp); Space49/32 initiates eat. Return36/13 changes Time Out to Continue; paused and paused-later screenshots30ticks apart are identical. Second Return restores Time Out and displays the correct wrong-answer message for wasp versus four-legged animals, with one life lost. This is a small input/pause observation; score advancement, correct answers, collisions and full timing fidelity remain unqualified.
+
+Documented alternatives: mouse click cell to move, click again to eat; arrows or A(up)/Z(down) and I(up)/J(left)/K(right)/M(down), Space eat, V Answer Vision in Super mode. Only right/Space/Return were tested. No full mouse gameplay, audio assertion/audible quality, saves, physical controller, busy/later-level, reference or real-time performance test. Native frontend ticks and guest ticks are diagnostic clocks.
+
+## Reproduction and evidence
+
+Private root `D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/super-munchers`. `prepare.py` extracts read-only and verifies; `run.py NAME` runs the explicitly owned fixture/scenario with90second wall limit and writes durable owned-process.json. Scenario generators and exact argv retained. Reproduce existing scenario in a new empty owned output/log location: existing outputs intentionally refuse overwrite. Commands used cached Python `D:/SystemlessBuild/uv-cache/archive-v0/YghSmGhw_A5RgPIr/Scripts/python.exe` for prepare.py and run.py with names startup, instructions, controls, play, fresh-play, animals, beginner, input. Native args: fixture.hfv --headless --prefer-classic-68k --screen-depth8 --play-script ABS_SCENARIO --play-output NEW_ABS_OUTPUT; environment SYSTEMLESS_LOAD_EXECUTABLE as above (actual flag/value separated in saved argv).
+
+All8 scenarios returned status passed, zero assertions and zero exhausted frames. This means their action scripts completed, including the scenario displaying fatal application error. Final input run494frontend/1092guest ticks. Every native run exited inside90seconds. Evidence-manifest.json includes inspected raw report copies, all private artifact SHA256 and inspected capture list. Runner tested resolved ancestry rejection and missing inputs before redirected logs or children; copied extraction verified every selected file. `scripts/test_extract_owned_game.py`:2 synthetic checks pass. No build or browser run.
+
+## Next step and rollback
+
+Useful first-pass behavior obtained, with an instructions compatibility/source-content gap. Review missing picture5515 against source completeness before estimating a fix; no grounded implementation estimate or missing-service conclusion is possible yet. Prepare an explicit browser entry retaining Super Color/Super Config and original partition, then baseline default pacing in release. No candidate tuning accepted. Rollback is remove only this title's report/private scratch if unwanted; shared runtime/catalogue and original media unchanged. Workload released; owned-process.json final state exited. Tool/model selection was supplied by coordinator; worker does not independently verify model identity.

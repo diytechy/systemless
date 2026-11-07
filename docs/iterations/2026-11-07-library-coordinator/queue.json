@@ -2112,7 +2112,7 @@
     {
       "slug": "super-munchers",
       "title": "Super Munchers",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Super Munchers/Super Munchers",
@@ -2133,7 +2133,10 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Native final494ticks only; action-pass includes application-error branch, no release performance.",
+      "report": "super-munchers/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source002/Boot and6-file fixture hashes, read eight raw action reports/zero assertions/exhaustion, inspected before/right/resumed images and identical paused PNG hashes. One-cell right, wrong-eat feedback and Return pause/continue observed. Super Config read documented; two Boot matches are launcher aliases, corrected misleading JSON scope. Separate instruction-page6 fatal PictProc/GetPicture5515 NIL has unproved cause; gameplay bypasses it. No pacing accepted."
     },
     {
       "slug": "system-s-twilight-v1-0-5",
@@ -2168,7 +2171,7 @@
     {
       "slug": "the-big-one",
       "title": "The Big One",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "The Big One",
@@ -2191,7 +2194,7 @@
     {
       "slug": "verttice",
       "title": "DreamLight Verttice",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0",

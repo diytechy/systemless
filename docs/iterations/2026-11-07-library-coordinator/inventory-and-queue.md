@@ -72,8 +72,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 62 | Sloppy Sokoban 1.7 | Content\004: Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7 | PPC fragment | compatibility blocker |
 | 63 | Spin Doctor | Content\002: Spin Doctor/Spin Doctor | fat (CODE + PPC fragment) | not yet measured |
 | 64 | Star Trek: A Final Unity | Content\002: Star Trek TNG/"A Final Unity" | fat (CODE + PPC fragment) | not yet measured |
-| 65 | Super Munchers | Content\002: Super Munchers/Super Munchers | 68K (CODE) | worker active |
+| 65 | Super Munchers | Content\002: Super Munchers/Super Munchers | 68K (CODE) | not yet measured |
 | 66 | System's Twilight v1.0.5 | Content\001: System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5 | 68K (CODE) | not yet measured |
-| 67 | The Big One | Content\002: The Big One | 68K (CODE) | worker assigned |
-| 68 | DreamLight Verttice | Content\002: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0<br>Content\006: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0 | PPC fragment | pending |
+| 67 | The Big One | Content\002: The Big One | 68K (CODE) | worker active |
+| 68 | DreamLight Verttice | Content\002: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0<br>Content\006: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0 | PPC fragment | worker assigned |
 | 69 | Zap'T'Balls | Content\003: Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)<br>Content\001: Zap'T'Balls v3.6 | 68K (CODE), fat (CODE + PPC fragment) | pending |

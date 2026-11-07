@@ -1,8 +1,8 @@
 {
-  "slug": "blobbo",
-  "task_name": "/root/blobbo",
+  "slug": "blood-bath-demo-1-96",
+  "task_name": "/root/blood_bath_demo_1_96",
   "status": "reviewed; workload released",
-  "starting_revision": "15203badda1913fb19f4814ece13373d63f6fd64",
-  "brief": "blobbo-brief.md",
-  "updated_at": "2026-11-07T18:10:41.197226+00:00"
+  "starting_revision": "c88f395270dcfc63ae4a5395fe6d3a5ccd33be44",
+  "brief": "blood-bath-demo-1-96-brief.md",
+  "updated_at": "2026-11-07T18:16:42.723921+00:00"
 }

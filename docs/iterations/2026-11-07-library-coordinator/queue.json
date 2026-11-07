@@ -550,7 +550,7 @@
     {
       "slug": "blood-bath-demo-1-96",
       "title": "Blood Bath Demo 1.96",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Blood Bath Demo 1.96 4cows/Blood Bath Demo PPC 1.96",
@@ -583,15 +583,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Documented256colors, observed800x600x8. Original SIZE variants retained, no partition override.",
+      "preferences_save_id": "Boot title/creator Vlte scan no match. Copied title High.Scores retained; persistence untested, no browser ID.",
+      "controls": "Documented mouse aim/fire, bottom-screen reload,1/2/3weapons, comma/period volume; gameplay input unverified.",
+      "timing": "Release-browser baseline absent; native title-readiness unresolved, no pacing candidate.",
+      "report": "blood-bath-demo-1-96/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "74file fixture including literal HFS Tips/Tricks name verified, source001/fixture independently rehashed. Raw422tick final report0assertions/exhaustion reviewed; three finite probes reach changing title but early/later Demo clicks do not establish play. Missing music absent exact-name source001 search, causal role unknown. No proven service/rendering defect or runtime change.",
+      "dependencies": "Full74file folder preserved; companion data open. Requested Blood Bath Demo.music absent exact-name source001 search, requirement unknown. SoundManager3.0 multichannel requirement documented."
     },
     {
       "slug": "bloodsuckers",
       "title": "Bloodsuckers",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Blood Suckers Folder/Bloodsuckers",

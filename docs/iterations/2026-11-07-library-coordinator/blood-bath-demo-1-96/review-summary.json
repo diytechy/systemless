@@ -1,0 +1,63 @@
+{
+  "title": "Blood Bath Demo1.96",
+  "outcome": "Prepared74-file fixture;68K title visible; gameplay readiness unresolved. No pacing candidate.",
+  "preservation": {
+    "source_before": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "source_after": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\blood-bath-demo-1-96\\game.img",
+    "fixture_sha256": "a64681272d05c84f03ba38167d01f4286d741000978d4f34a8b5ec6f4b882f4e",
+    "verified_file_count": 74,
+    "scope_limits": "Both forks/Finder file fields/represented dates verified. Literal Tips/Tricks filename retained. Folder Finder info unexposed; raw aliases retained, resolution unverified."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact diagnostic compile revision unknown; checkout c88f3952, runtime baseline ed74c8b4",
+    "architecture": "68K explicit --prefer-classic-68k; separate PPC sibling untested",
+    "executable": "Blood Bath Demo 1.96 4cows/Blood Bath\u2122 Demo 1.96",
+    "display": "800x600 observed;8-bit documented256colors; resolution exploratory",
+    "partition": "Unmodified SIZE:ID-1 preferred3121152;ID0/1 preferred5169152, minimum3121152; no override",
+    "result": "Three scenarios passed360/152/422frontend_ticks; inspected title remains after early/later Demo clicks",
+    "error": null,
+    "assertions": 0,
+    "budget_exhaustion": 0
+  },
+  "behavior": {
+    "observed": [
+      "Title visible, text brightens120to360ticks",
+      "Mouse Demo down/up delivered at120and360; title remains after30/60ticks",
+      "Companion DATA/resources open successfully"
+    ],
+    "untested": [
+      "Gameplay motion/timing/fidelity",
+      "Busy scene/collisions/scoring",
+      "Pause/options responsiveness",
+      "Audible sound",
+      "Saves/reload/export/import",
+      "Physical controller",
+      "Release browser"
+    ]
+  },
+  "dependencies": [
+    "Full title folder retained including High.Scores and companion resources",
+    "No Boot Preferences name/creator Vlte match",
+    "Blood Bath Demo.music requested twice; absent folder and exact-name source001 search; necessity/cause unknown",
+    "Readme:System6.07+,256colors,3MB;SoundManager3.0 for multichannel"
+  ],
+  "controls": "Documented mouse fire; bottom-screen reload;1/2/3weapons;comma/period volume. Demo v465,h270 did not establish gameplay readiness.",
+  "changes": [
+    "Own report/review JSON and private D:fixture/evidence only; no runtime/catalogue/browser/commit changes"
+  ],
+  "checks": [
+    "Original executable fork hashes match assignment",
+    "74files reopened/compared;source/Boot hashes unchanged",
+    "Native architecture/framebuffer and completed reports checked",
+    "Finite final run~65s; no kill required"
+  ],
+  "next_step": "Original/reference title-readiness and button behavior capture, then one matching native probe. Cause/effort estimate not grounded yet; no shared fix warranted.",
+  "report": "docs/iterations/2026-11-07-library-coordinator/blood-bath-demo-1-96/report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\blood-bath-demo-1-96\\evidence-manifest.json",
+  "workload_released": true
+}

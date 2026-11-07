@@ -1,8 +1,8 @@
 # Current coordinator action
 
-Updated 2026-11-07T20:39:45.100545+00:00. Read this alongside checkpoint.md and queue.json; this file supersedes older next-action prose.
+Updated 2026-11-07T20:43:05.441836+00:00. Read this alongside checkpoint.md and queue.json; this file supersedes older next-action prose.
 
-Reviewed first-pass results: 46/69. Last reviewed: mantra — not yet measured. Eleven-file corrected fixture verified. Parent matched source002/fixture hashes, reviewed the completed510tick report with zero assertions/exhaustion, beach/status images and actual preference UseResFile trace. Initial beach and S panel render; movement readiness and Return recovery remain unresolved. No causal service diagnosis or setting change.
+Reviewed first-pass results: 46/69. Last reviewed: mantra — not yet measured. Original gameplay review stands. A copied Mantra II runner overwrote four scratch text paths; parent independently checked original manifest: every file except startup.stderr now matches, including fixture, useful510tick evidence, startup report/PNGs and exact restored ownership record. Lost original startup stderr is explicitly excluded; collided copies/original manifest/provenance retained. No new native run or setting change. Corrected runner rejects cross-title/missing-input writes.
 
 Next: nort. Read active-runners.json and concurrency.md before filling an available slot with a fresh gpt-6.1-sol worker. Latest user authorization permits two independent diagnostic runners; heavy builds and real-time benchmarks remain sequential. Review raw evidence and behavior boundaries before committing settings; no setting accepted by this checkpoint helper.
 

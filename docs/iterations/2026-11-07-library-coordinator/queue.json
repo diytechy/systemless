@@ -1558,10 +1558,10 @@
       "depth_size": "Docs68020/System7/32bitQD,min512x342/16colors,prefer256; tested800x600x8, original SIZE2097152.",
       "preferences_save_id": "Actual Boot Mantra Prefs preserved and opened/used through Owned Game/System Folder/Preferences. Earlier broad fixture retained; corrected copy excludes Recent Items alias.",
       "controls": "Arrows/keypad,Cmd run,Space sword,Shift item,I/S/H panels documented. S panel observed; direction and panel recovery unqualified.",
-      "timing": "Partial native beach/status readiness; release-browser baseline and dialog recovery pending.",
+      "timing": "Partial native beach/status readiness; release baseline pending. One earlier startup stderr log lost; primary gameplay evidence intact.",
       "report": "mantra/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Eleven-file corrected fixture verified. Parent matched source002/fixture hashes, reviewed the completed510tick report with zero assertions/exhaustion, beach/status images and actual preference UseResFile trace. Initial beach and S panel render; movement readiness and Return recovery remain unresolved. No causal service diagnosis or setting change."
+      "review": "Original gameplay review stands. A copied Mantra II runner overwrote four scratch text paths; parent independently checked original manifest: every file except startup.stderr now matches, including fixture, useful510tick evidence, startup report/PNGs and exact restored ownership record. Lost original startup stderr is explicitly excluded; collided copies/original manifest/provenance retained. No new native run or setting change. Corrected runner rejects cross-title/missing-input writes."
     },
     {
       "slug": "mantra-ii",

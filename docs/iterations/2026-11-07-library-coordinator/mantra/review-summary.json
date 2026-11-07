@@ -65,7 +65,8 @@
     "11 files and folder dates reopen-compared",
     "ReadMe/About tt ro text inspected",
     "All useful PNGs inspected",
-    "Owned PID67528 exited"
+    "Owned PID67528 exited",
+    "Collision audit: useful/fixture/startup PNG+report hashes unchanged; exact ownership recovered against old hash. startup.stderr raw lost; current bytes are Mantra II load failure, excluded. recovery-20261107-collision/provenance.json retains collided copies and original manifest. No rerun."
   ],
   "next_step": "Coordinator integrate preserved fixture as authorized; establish readiness and mouse dialog dismissal in release browser before baseline. No pacing candidate.",
   "report": "docs/iterations/2026-11-07-library-coordinator/mantra/report.md",

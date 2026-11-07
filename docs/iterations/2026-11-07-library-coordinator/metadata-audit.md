@@ -13,3 +13,12 @@ Both active workers released their runtimes; root confirmed no systemless.exe pr
 | Delirium | b6b2d59f486c8ba1cfaa2d1c37a8c524b042adfb53488072f5c9cf3b5398b458 | 4 / 3 |
 
 Private audit evidence: D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/metadata-audit/baseline-audit.json and staged-comparison.json. The staged extraction manifest also records hashes. Before selecting a replacement bundle, preserve/export browser saves and run representative behavior checks; no gameplay/fidelity result follows from metadata verification alone. Roll back by selecting retained baseline media/bundle; no original source or browser save migration occurred.
+
+After all69 first passes, a read-only cross-check selected66 additional copied fixtures by their reviewed image hashes and matched their application forks to the original inventory. Ambiguities were resolved explicitly: complete Brick Bash folder, Bachman's .dsk, Blobbo Full with preferences, Bonkheads' narrow game fixture. It found missing ancestor dates in the earlier3-D Cannon fixture (three folders) and Verttice fixture (two Boot folders), despite the latter's initial roundtrip claim. All other represented folder dates in the selected66 matched their source. Separate corrected copies now live in D:/SystemlessBuild/private-library-20261107/media-corrected-v1; all3/69 files respectively retain identical forks and inspected file metadata. Prior images/native evidence remain intact; corrected copies have not been replayed. These are metadata corrections, not new compatibility results.
+
+| Additional corrected copy | SHA256 |
+| --- | --- |
+| 3-D Cannon | a6e7a80d112d705738e6ac9e97cbe0acfec3baeffd528f446543858fdc9435b2 |
+| Verttice | 848dbe338a718e90edbbc6920ac57de3ad7367307ab7ded22fe97b3c5cb72c95 |
+
+Exact copied volume labels were read from the HFS MDB Pascal drVN bytes and preserved. machfs.Volume.read retains dates but leaves its .name property at default Untitled; that property must not establish a browser executable path or silently rename a serialized correction. Verified raw labels include the existing Koji/ClockWerx/Delirium identities and Verttice Copy. Private candidate-audit.json and metadata-corrections.json under D:/SystemlessBuild/private-library-20261107 retain selection/path/date evidence. Browser catalogue preparation must overlay the corrected copies and use the raw volume-prefixed executable paths.

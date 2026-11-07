@@ -1,20 +1,15 @@
 {
   "runners": [
     {
-      "slug": "the-big-one",
-      "task_name": "/root/the_big_one",
-      "status": "reviewed; workload released",
-      "brief": "the-big-one-brief.md"
-    },
-    {
-      "slug": "zap-t-balls",
-      "task_name": "/root/zap_t_balls",
-      "status": "reviewed; workload released",
-      "brief": "zap-t-balls-brief.md"
+      "slug": "star-trek-final-unity",
+      "task_name": "/root/star_trek_final_unity",
+      "status": "controlled CD dependency follow-up; single workload lease",
+      "phase": "bulk media audit/copy then one bounded native probe",
+      "lease_started_at": "2026-11-07T22:16:39.103798+00:00"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T22:10:06.161203+00:00"
+  "updated_at": "2026-11-07T22:16:39.103798+00:00"
 }

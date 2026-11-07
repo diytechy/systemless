@@ -64,5 +64,13 @@
   "next_step": "Implement/test PPC PBMakeFSSpecSync dispatch in separate authorized shared-runtime task, then rerun exact preserved fixture. Later imports may block; no grounded duration estimate. Verify preference virtual reachability before recommending settings.",
   "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\verttice\\report.md",
   "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\verttice\\evidence-manifest.json",
-  "workload_released": true
+  "workload_released": true,
+  "post_review_metadata_correction": {
+    "fixture": "D:\\SystemlessBuild\\private-library-20261107\\media-corrected-v1\\verttice.img",
+    "fixture_sha256": "848dbe338a718e90edbbc6920ac57de3ad7367307ab7ded22fe97b3c5cb72c95",
+    "files_unchanged": 69,
+    "folders_corrected": 2,
+    "volume_name": "Verttice Copy",
+    "native_replay": "not yet run; native evidence above uses retained original fixture"
+  }
 }

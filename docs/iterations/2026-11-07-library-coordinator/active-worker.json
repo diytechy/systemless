@@ -1,8 +1,6 @@
 {
-  "slug": "zap-t-balls",
-  "task_name": "/root/zap_t_balls",
-  "status": "reviewed; workload released",
-  "starting_revision": "511d3d055e21343ffd4fca065f01d4bb5d4f86ca",
-  "brief": "zap-t-balls-brief.md",
-  "updated_at": "2026-11-07T22:10:06.118524+00:00"
+  "slug": "star-trek-final-unity",
+  "task_name": "/root/star_trek_final_unity",
+  "status": "controlled follow-up; workload lease granted",
+  "updated_at": "2026-11-07T22:16:39.103798+00:00"
 }

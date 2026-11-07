@@ -83,5 +83,13 @@
   "report": "docs\\iterations\\2026-11-07-library-coordinator\\3-d-cannon\\report.md",
   "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\3-d-cannon",
   "runtime_catalogue_defaults_changed": false,
-  "workload_released": true
+  "workload_released": true,
+  "post_review_metadata_correction": {
+    "fixture": "D:\\SystemlessBuild\\private-library-20261107\\media-corrected-v1\\3-d-cannon.img",
+    "fixture_sha256": "a6e7a80d112d705738e6ac9e97cbe0acfec3baeffd528f446543858fdc9435b2",
+    "files_unchanged": 3,
+    "folders_corrected": 3,
+    "volume_name": "Untitled",
+    "native_replay": "not yet run; native evidence above uses retained original fixture"
+  }
 }

@@ -2170,8 +2170,8 @@
     },
     {
       "slug": "the-big-one",
-      "title": "The Big One",
-      "status": "worker active",
+      "title": "The Big One Demo1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "The Big One",
@@ -2189,7 +2189,10 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Native deterministic comparison; differing shot counts are not rate evidence. Release browser unmeasured.",
+      "report": "the-big-one/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source002/Boot and2-file corrected fixture hashes, read six passed raw reports/zero assertions/errors/exhaustion and owned exit0; inspected monochrome ready/right/shoot captures showing hero movement, bullets and30to28 ammo. About identifies Demo1.0/MarkFong1990, sound disabled by author.8bit lacks sprites while counters work; no independent renderer diagnosis or productiondepth accepted. Retained recent-item record is not game preference. No pacing accepted."
     },
     {
       "slug": "verttice",
@@ -2238,7 +2241,7 @@
     {
       "slug": "zap-t-balls",
       "title": "Zap'T'Balls",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",

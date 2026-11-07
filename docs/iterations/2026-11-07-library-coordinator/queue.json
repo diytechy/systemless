@@ -1071,8 +1071,8 @@
     },
     {
       "slug": "desk-invaders-ii",
-      "title": "Desk Invaders II",
-      "status": "worker active",
+      "title": "Desk Invaders II (readme Desk Invaders2.3)",
+      "status": "unsupported requirement",
       "candidates": [
         {
           "path": "Desk Invaders II ƒ/Desk Invaders II",
@@ -1113,10 +1113,13 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; desk-accessory requirements to verify",
-      "preferences_save_id": "unassigned; no browser entry",
-      "controls": "unverified",
-      "timing": "not yet measured",
+      "depth_size": "No established display/partition requirement;8bit request never reached guest. No SIZE resource.",
+      "preferences_save_id": "No title/DsKi Boot pref; unrelated desktop hits excluded. Embedded hscr retained, persistence untested.",
+      "controls": "Unknown; readme DA implementation/asynchronous sound, no exercised input.",
+      "timing": "No guest execution or gameplay baseline; requires scoped DA host/DRVR lifecycle work, implementation extent unknown.",
+      "report": "desk-invaders-ii/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file DA fixture verified; parent independently matched source001/Boot/fixture hashes and raw pre-guest loader failure. Readme Desk Invaders2.3 plus dfil/DRVR12 with no CODE/cfrg/SIZE confirms accessory requirement. No executable found,0ticks/assertions/exhaustion; OpenDeskAcc source stub not reached. No pacing change.",
       "known_issues": "Source preinspection only: src/systems/macintosh/desk_manager.rs:71 OpenDeskAcc returns0/no accessory opened. Desk-accessory hosting requirement must be confirmed by assigned worker; not yet title reproduction."
     },
     {
@@ -1147,7 +1150,7 @@
     {
       "slug": "drol",
       "title": "Drol",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Drol ƒ/Drol",

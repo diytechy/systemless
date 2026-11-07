@@ -1,8 +1,8 @@
 {
-  "slug": "particleman-1-0",
-  "task_name": "/root/particleman_1_0",
-  "status": "running; see active-runners.json",
-  "starting_revision": "ae3757b1cc6695d5e08f70518ea787ce9c5b9365",
-  "brief": "particleman-1-0-brief.md",
-  "updated_at": "2026-11-07T21:04:42.323272+00:00"
+  "slug": "polybrid-1-0",
+  "task_name": "/root/polybrid_1_0",
+  "status": "reviewed; workload released",
+  "starting_revision": "53dc82412017b70f884a29f225c3916be5e18092",
+  "brief": "polybrid-1-0-brief.md",
+  "updated_at": "2026-11-07T21:11:35.369432+00:00"
 }

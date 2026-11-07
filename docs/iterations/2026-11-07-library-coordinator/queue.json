@@ -1795,8 +1795,8 @@
     },
     {
       "slug": "polybrid-1-0",
-      "title": "Polybrid 1.0",
-      "status": "worker assigned",
+      "title": "Polybrid1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Polybrid Folder/Polybrid 1.0",
@@ -1814,15 +1814,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Readme color/B&W,System6/7; tested640x480x8 exploratory, original68K SIZE1024000.",
+      "preferences_save_id": "No Boot Polybrid/PlbD pref; embedded PREF0-4 andPlbD0 bytes retained, consumption/persistence untraced.",
+      "controls": "Configurable move/drop/rotate/flip; Right124/ch29 unchanged, actual bindings unknown. Menu opens and Pause highlights; transition/resume unconfirmed.",
+      "timing": "Native populated well/piece motion/menu readiness; controls, pause and release baseline pending.",
+      "report": "polybrid-1-0/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file fixture verified. Parent matched source001/fixture hashes, raw173tick report with zero assertions/exhaustion and before/later well images. OK enters play and a piece descends; right-arrow response and retained-menu Pause remain unqualified. Embedded PREF resources preserved without claiming values consumed. No blocker or setting change."
     },
     {
       "slug": "prince-of-persia",
       "title": "Prince of Persia",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Prince of Persia ƒ/Prince of Persia",

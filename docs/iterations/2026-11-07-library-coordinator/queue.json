@@ -595,7 +595,7 @@
     {
       "slug": "bloodsuckers",
       "title": "Bloodsuckers",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Blood Suckers Folder/Bloodsuckers",
@@ -610,15 +610,20 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 exploratory, documented requirement unknown. Original SIZE3072000 retained.",
+      "preferences_save_id": "Generic creator???? Boot matches ambiguous; title matches launcher/recent aliases, no attributable actual pref. Embedded settings retained; defaults not certified. No browser ID.",
+      "controls": "Documented mouse hand/swat,Qquit,Escape menu,CapsLock pause. Menu mouse response observed; gameplay/pause unverified.",
+      "timing": "No release-browser baseline; completed native menu/input evidence only, not wall-time pace.",
+      "report": "bloodsuckers/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "12file fixture verified and source001/fixture independently rehashed. All3probes completed; raw568tick input report0assertions/exhaustion reviewed. Parent inspected animated menu and visible Play indicator coordinates; active hit region and gameplay entry unresolved. Mouse-hand response observed, no service diagnosis or setting change. Earlier apparent stall resolved; no incomplete final run.",
+      "version_notes": "No numerical version established; documentation Pangea/1993 attribution/date evidence only.",
+      "dependencies": "All12folder files/Data/readmes/Sounds retained; external requirement not established."
     },
     {
       "slug": "bob-s-bricks-millennium-edition",
       "title": "Bob's Bricks Millennium Edition",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Bob's Bricks Millennium Edition/Bob's Bricks Millennium Edition",

@@ -1,8 +1,8 @@
 {
-  "slug": "blood-bath-demo-1-96",
-  "task_name": "/root/blood_bath_demo_1_96",
+  "slug": "bloodsuckers",
+  "task_name": "/root/bloodsuckers",
   "status": "reviewed; workload released",
-  "starting_revision": "c88f395270dcfc63ae4a5395fe6d3a5ccd33be44",
-  "brief": "blood-bath-demo-1-96-brief.md",
-  "updated_at": "2026-11-07T18:16:42.723921+00:00"
+  "starting_revision": "576ec3b6b49cd4189873117a4acc0c981333fab9",
+  "brief": "bloodsuckers-brief.md",
+  "updated_at": "2026-11-07T18:22:32.410298+00:00"
 }

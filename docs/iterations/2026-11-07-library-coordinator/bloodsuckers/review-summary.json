@@ -1,0 +1,67 @@
+{
+  "title": "Bloodsuckers",
+  "outcome": "Prepared private fixture; animated menu and mouse response observed; initial gameplay unresolved",
+  "preservation": {
+    "source_before": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "source_after": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bloodsuckers\\game.img",
+    "fixture_sha256": "0d23430ae3a82622dd03d99438f7f7299efea836bec39391bda4c93190cd9bf7",
+    "verified_files": 12,
+    "scope_limits": "Both forks and represented file Finder fields/dates verified. Folder Finder info unavailable in machfs; raw aliases retained without resolution promise. Creator ???? nonunique: Boot scan found generic matches and title launcher/recent-item references, no attributable title preference. Embedded settings retained, state not certified defaults."
+  },
+  "native": {
+    "binary": "D:/SystemlessBuild/target/ci-test/systemless.exe",
+    "sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact native compile revision unknown; checkout dev 576ec3b6",
+    "architecture": "68K",
+    "executable": "Blood Suckers Folder/Bloodsuckers",
+    "display": "Observed 800x600 8-bit; exploratory default, documented requirement unknown",
+    "partition": 3072000,
+    "result": "Three scenarios passed; input completed568 ticks within about75seconds",
+    "error": null,
+    "assertions": 0,
+    "budget_exhausted_frames": 0
+  },
+  "behavior": {
+    "observed": [
+      "Donation click enters animated title menu",
+      "Hand follows mouse across menu",
+      "Finite Play-button click did not reach gameplay",
+      "Escape after center click leaves menu visible"
+    ],
+    "untested": [
+      "Gameplay movement/collision/scoring/pace",
+      "Busy scene",
+      "Pause/resume",
+      "Audible sound fidelity",
+      "Saves/reload/export/import",
+      "Physical controller",
+      "Release-browser performance",
+      "Independent reference fidelity"
+    ]
+  },
+  "dependencies": [
+    "Entire12-file folder retained: Data images/shapes/Sounds/about.data, both readmes, raw alias",
+    "No external dependency established"
+  ],
+  "controls": {
+    "documented": "Mouse move hand; button swats; Q quit; Escape menu; CapsLock pause",
+    "tested": "Donation click, mouse movement, menu click and Escape; gameplay actions unverified"
+  },
+  "changes": [
+    "Own report/status only; private fixture/scenarios/captures outside Git"
+  ],
+  "checks": [
+    "Fixture reopened and12file forks/Finder fields compared",
+    "001 and Boot before/after hashes match",
+    "Three reports parsed; screenshots visually inspected; no guest error or exhaustion",
+    "No build/runtime/catalogue/settings changes"
+  ],
+  "next_step": "Inspect Play hit-testing/input readiness with small pre/post-button capture and independent original reference; no runtime fix justified yet. No pacing recommendation.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\bloodsuckers\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bloodsuckers\\evidence-manifest.json",
+  "workload_released": true
+}

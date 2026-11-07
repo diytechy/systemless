@@ -26,8 +26,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 16 | Bikaka 1.4 | Content\001: Bikaka 14 Folder/Bikaka 1.4 | 68K (CODE) | not yet measured |
 | 17 | Blobbo Full1.0.1; Lite1.0/1.0.1 separately preserved | Content\001: Blobbo 1.0 Lite ƒ/Blobbo<br>Content\001: Blobbo 1.0 Lite ƒ/Blobbo 1.0.1 Lite<br>Content\001: Blobbo1.0.1 Fullversion/Blobbo 1.0.1 | 68K (CODE) | not yet measured |
 | 18 | Blood Bath Demo 1.96 | Content\001: Blood Bath Demo 1.96 4cows/Blood Bath Demo PPC 1.96<br>Content\001: Blood Bath Demo 1.96 4cows/Blood Bath™ Demo 1.96 | 68K (CODE), PPC fragment | not yet measured |
-| 19 | Bloodsuckers | Content\001: Blood Suckers Folder/Bloodsuckers | 68K (CODE) | worker assigned |
-| 20 | Bob's Bricks Millennium Edition | Content\006: Bob's Bricks Millennium Edition/Bob's Bricks Millennium Edition | PPC fragment | pending |
+| 19 | Bloodsuckers | Content\001: Blood Suckers Folder/Bloodsuckers | 68K (CODE) | not yet measured |
+| 20 | Bob's Bricks Millennium Edition | Content\006: Bob's Bricks Millennium Edition/Bob's Bricks Millennium Edition | PPC fragment | worker assigned |
 | 21 | Bolo | Content\002: Bolo f/Bolo 0.99.7<br>Content\001: Bolo/Bolo 0.99.5 | 68K (CODE) | pending |
 | 22 | Bonk 1.4.2 | Content\001: Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)<br>Content\001: Bonk 1.4.2 Folder/Bonk 1.4.2 (Black & White) | 68K (CODE) | pending |
 | 23 | Bonkheads Deluxe | Content\004: Bonkheads Deluxe/Bonkheads Deluxe | 68K (CODE) | pending |

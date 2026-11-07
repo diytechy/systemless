@@ -69,6 +69,35 @@ for volume in inventory['volumes']:
         candidate = {key: app.get(key) for key in ('path', 'architecture', 'version_strings', 'preferred_partition_bytes', 'data_sha256', 'resource_sha256')}
         candidate.update(source=volume['source'], configured=volume['configured'])
         row['candidates'].append(candidate)
+excluded_non_appl = []
+container_audit = []
+for volume in inventory['volumes']:
+    for item in volume.get('container_candidates', []):
+        path = item['path']
+        if path.startswith('Lemmings/ONML/'):
+            associated = 'oh-no-more-lemmings' if '/Oh No! More Lemmings/' in path else 'lemmings'
+            reason = 'Original disk-image variant/content for the queued Lemmings title; not a new family'
+        elif path == 'Gold_Digger_1.3.0.sit':
+            associated, reason = 'gold-digger', 'Archive for an already queued title; contents/version not independently checked'
+        elif path == 'Trash/Koji_the_Frog.SIT':
+            associated, reason = 'koji', 'Trash archive variant, version unverified; preserve without replacing current2.0.4/save identity'
+        elif '/Recent Items/' in path:
+            associated, reason = None, 'Zero-data Recent Items reference, not a selected archive payload'
+        else:
+            associated, reason = None, 'Runtime/tool/tutorial container by source location/name; not identified as a game'
+        record = dict(item, source=volume['source'], associated_game=associated, classification=reason)
+        container_audit.append(record)
+        if associated in games:
+            games[associated].setdefault('associated_containers', []).append(record)
+    for app in volume.get('non_appl_program_candidates', []):
+        if app['path'].startswith('Desk Invaders II'):
+            row = games.setdefault('desk-invaders-ii', {'slug':'desk-invaders-ii','title':'Desk Invaders II','status':'pending','candidates':[],
+                'depth_size':'unknown; desk-accessory requirements to verify','preferences_save_id':'unassigned; no browser entry','controls':'unverified','timing':'not yet measured'})
+            candidate = {key: app.get(key) for key in ('path','architecture','version_strings','preferred_partition_bytes','data_sha256','resource_sha256','finder_type','resource_types','program_kind')}
+            candidate.update(source=volume['source'],configured=volume['configured'])
+            row['candidates'].append(candidate)
+        else:
+            excluded_non_appl.append({'source':volume['source'],'path':app['path'],'reason':'System/utility desk accessory; not classified as a game'})
 first = ['clockwerx', 'koji', 'delirium']
 queue = [games[k] for k in first] + [games[k] for k in sorted(games) if k not in first]
 for row in queue:
@@ -80,11 +109,13 @@ for row in queue:
             if field in previous[row['slug']]:
                 row[field] = previous[row['slug']][field]
 result = {'schema': 1, 'games': queue, 'excluded_applications': excluded,
+          'excluded_non_application_programs': excluded_non_appl,
+          'container_audit': container_audit,
           'disc_note': 'Configured Star Trek disc catalogue has an out-of-bounds partition; its game executable was separately found on 002. No disc content silently inferred.'}
 queue_path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 lines = ['# Inventory and sequential queue', '',
          'Read-only catalogue evidence, 2026-11-07. All nine disk images and the configured disc were hashed before/after with equal hashes. No source mounted or modified. APPL/Finder type and CODE/cfrg establish candidate architecture, not runtime compatibility. Boot Recent Items are aliases; helpers and Trash copies are explicitly classified in queue.json. Unconfigured 005/007/008 were inspected as supplementary media.', '',
-         'Default depth, required sibling resources, preferences and controls for unprepared games remain unverified until their worker inspects the title. Resource version strings can include library versions; workers must resolve ambiguity. Absence of a browser route is preparation work, not proof of incompatibility.', '',
+         'Default depth, required sibling resources, preferences and controls for unprepared games remain unverified until their worker inspects the title. Resource version strings can include library versions; workers must resolve ambiguity. Absence of a browser route is preparation work, not proof of incompatibility. The coverage audit also records container-like files, top-level folders and non-APPL desk accessories; Desk Invaders II is queued separately rather than omitted for lacking APPL type.', '',
          f'{len(queue)} game families; alternate versions/architectures remain listed under their individual title. {len(excluded)} auxiliary/alias/utility APPL entries excluded with reasons. Configured Star Trek disc has a partition-boundary error, preserved in inventory.json.', '',
          '| Order | Title | Sources / executable candidates | Architecture evidence | Status |', '|---:|---|---|---|---|']
 for i, row in enumerate(queue, 1):

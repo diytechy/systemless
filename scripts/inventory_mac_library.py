@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 import struct
+from collections import Counter
 from pathlib import Path
 
 import machfs
@@ -77,6 +78,40 @@ def describe(path, creator, data, rsrc):
     return result
 
 
+def container_inventory(raw):
+    """Name-only coverage audit for compressed/media candidates, no contents."""
+    rows, top_folders, non_appl = [], [], []
+    if raw[1024:1026] in (b'H+', b'HX') or raw[1148:1150] == b'H+':
+        reader = HfsPlusReader(raw)
+        for cnid, (parent, name, kind, record) in reader.records.items():
+            if kind == 1 and parent == 2:
+                top_folders.append(name)
+            elif kind == 2:
+                rows.append((reader.path(cnid), record[48:52], struct.unpack_from('>Q', record, 88)[0]))
+                if record[48:52].lower() == b'dfil':
+                    non_appl.append(dict(describe(reader.path(cnid), record[52:56], reader.read_fork(record[88:168]), reader.read_fork(record[168:248])), finder_type=record[48:52].decode('mac_roman'), program_kind='desk accessory candidate'))
+        format_name = 'HFS+'
+    else:
+        volume = machfs.Volume(); volume.read(raw)
+        top_folders = [name for name, node in volume.items() if isinstance(node, machfs.Folder)]
+        for folder, _, names in volume.walk():
+            for name in names:
+                file = volume[folder + (name,)]
+                rows.append(('/'.join(folder + (name,)), file.type, len(file.data)))
+                if file.type.lower() == b'dfil':
+                    non_appl.append(dict(describe('/'.join(folder + (name,)), file.creator, file.data, file.rsrc), finder_type=file.type.decode('mac_roman'), program_kind='desk accessory candidate'))
+        format_name = 'HFS'
+    extensions = ('.sit', '.sitx', '.hqx', '.zip', '.sea', '.img', '.dsk', '.dmg', '.toast', '.gz', '.tar', '.bin')
+    candidates = [{'path': path, 'finder_type': kind.decode('mac_roman'), 'data_bytes': size}
+                  for path, kind, size in rows if path.lower().endswith(extensions) or kind.startswith(b'SIT')]
+    type_counts = Counter(kind.decode('mac_roman') for _, kind, _ in rows)
+    return {'format': format_name, 'file_count': len(rows), 'top_level_folders': sorted(top_folders),
+            'finder_type_counts': [{'finder_type': key, 'count': count} for key, count in sorted(type_counts.items())],
+            'container_candidates': candidates,
+            'non_appl_program_candidates': non_appl,
+            'container_method': 'Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.'}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--installation', type=Path, required=True)
@@ -94,7 +129,9 @@ def main():
         row = {'source': str(path.relative_to(installation)), 'configured': path in configured,
                'bytes': path.stat().st_size, 'sha256_before': before}
         try:
-            row['applications'] = [describe(*app) for app in applications(path.read_bytes())]
+            raw = path.read_bytes()
+            row['applications'] = [describe(*app) for app in applications(raw)]
+            row.update(container_inventory(raw))
         except Exception as exc:
             row['catalogue_error'] = str(exc)
         row['sha256_after'] = digest(path)

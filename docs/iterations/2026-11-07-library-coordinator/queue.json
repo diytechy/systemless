@@ -67,6 +67,16 @@
       "preferences_save_id": "koji-personal-204; Koji 2.0 Registration/Koji Registration",
       "controls": "Native left/right/tongue/pause; browser resume+movement+jump observed; water unqualified",
       "timing": "3 focused release-browser captures at25; median59.959 guest ticks/sec, range59.903-60.128; same initial level, manually observed readiness",
+      "associated_containers": [
+        {
+          "path": "Trash/Koji_the_Frog.SIT",
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "data_bytes": 858353,
+          "source": "Content\\Boot",
+          "associated_game": "koji",
+          "classification": "Trash archive variant, version unverified; preserve without replacing current2.0.4/save identity"
+        }
+      ],
       "report": "koji/report.md",
       "accepted_setting": "25 MHz unchanged; no candidate warranted by first-level clock evidence",
       "review": "Coordinator and Sol worker reviewed raw rates, resource hashes, scope and behavior gaps"
@@ -175,9 +185,9 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
+      "depth_size": "800x600 8-bit native exploratory; SIZE768000;640x480 unverified",
+      "preferences_save_id": "No Boot preference by name/creator; launcher alias only; browser ID/mapping unassigned",
+      "controls": "Mouse click items; cross removed and score0to100 observed; penalties/end/pause untested",
       "timing": "Release browser entry absent; native behavior is not timing or fidelity qualification",
       "report": "acquire-1-0/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
@@ -945,6 +955,55 @@
       "timing": "not yet measured"
     },
     {
+      "slug": "desk-invaders-ii",
+      "title": "Desk Invaders II",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Desk Invaders II ƒ/Desk Invaders II",
+          "architecture": "unknown",
+          "version_strings": [],
+          "preferred_partition_bytes": [],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "c3650aa9987d553a3e38f400bfbda75352374063d55b66c9f4ae01484f665abf",
+          "finder_type": "dfil",
+          "resource_types": [
+            "ALRT",
+            "BNDL",
+            "CURS",
+            "DATA",
+            "DITL",
+            "DLOG",
+            "DRVR",
+            "DsKi",
+            "FREF",
+            "ICN#",
+            "MENU",
+            "PICT",
+            "STR#",
+            "WIND",
+            "alis",
+            "dast",
+            "dctb",
+            "hscr",
+            "icl4",
+            "icl8",
+            "nrct",
+            "snd ",
+            "wctb",
+            "wloc"
+          ],
+          "program_kind": "desk accessory candidate",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; desk-accessory requirements to verify",
+      "preferences_save_id": "unassigned; no browser entry",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
       "slug": "dome-wars",
       "title": "Dome Wars",
       "status": "pending",
@@ -1084,7 +1143,17 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "not yet measured",
+      "associated_containers": [
+        {
+          "path": "Gold_Digger_1.3.0.sit",
+          "finder_type": "SIT!",
+          "data_bytes": 617314,
+          "source": "Content\\Boot",
+          "associated_game": "gold-digger",
+          "classification": "Archive for an already queued title; contents/version not independently checked"
+        }
+      ]
     },
     {
       "slug": "goldpusher",
@@ -1203,7 +1272,33 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "not yet measured",
+      "associated_containers": [
+        {
+          "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Graphics Disk.img",
+          "finder_type": "rohd",
+          "data_bytes": 758272,
+          "source": "Content\\006",
+          "associated_game": "lemmings",
+          "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+        },
+        {
+          "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Levels and Music.img",
+          "finder_type": "rohd",
+          "data_bytes": 721408,
+          "source": "Content\\006",
+          "associated_game": "lemmings",
+          "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+        },
+        {
+          "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Program Disk.img",
+          "finder_type": "rohd",
+          "data_bytes": 678400,
+          "source": "Content\\006",
+          "associated_game": "lemmings",
+          "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+        }
+      ]
     },
     {
       "slug": "macpipes",
@@ -1402,7 +1497,25 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "not yet measured",
+      "associated_containers": [
+        {
+          "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK ONE.img",
+          "finder_type": "rohd",
+          "data_bytes": 560640,
+          "source": "Content\\006",
+          "associated_game": "oh-no-more-lemmings",
+          "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+        },
+        {
+          "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK TWO.img",
+          "finder_type": "rohd",
+          "data_bytes": 608256,
+          "source": "Content\\006",
+          "associated_game": "oh-no-more-lemmings",
+          "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+        }
+      ]
     },
     {
       "slug": "oregon-trail",
@@ -2671,6 +2784,164 @@
       "source": "Content\\Boot",
       "path": "Utilities/At Ease-IDE Utility/At Ease-IDE Utility",
       "reason": "OS/utility/helper application, outside game queue"
+    }
+  ],
+  "excluded_non_application_programs": [
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Apple Menu Items/Calculator",
+      "reason": "System/utility desk accessory; not classified as a game"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Apple Menu Items/Chooser",
+      "reason": "System/utility desk accessory; not classified as a game"
+    }
+  ],
+  "container_audit": [
+    {
+      "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Graphics Disk.img",
+      "finder_type": "rohd",
+      "data_bytes": 758272,
+      "source": "Content\\006",
+      "associated_game": "lemmings",
+      "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+    },
+    {
+      "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Levels and Music.img",
+      "finder_type": "rohd",
+      "data_bytes": 721408,
+      "source": "Content\\006",
+      "associated_game": "lemmings",
+      "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+    },
+    {
+      "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Program Disk.img",
+      "finder_type": "rohd",
+      "data_bytes": 678400,
+      "source": "Content\\006",
+      "associated_game": "lemmings",
+      "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+    },
+    {
+      "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK ONE.img",
+      "finder_type": "rohd",
+      "data_bytes": 560640,
+      "source": "Content\\006",
+      "associated_game": "oh-no-more-lemmings",
+      "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+    },
+    {
+      "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK TWO.img",
+      "finder_type": "rohd",
+      "data_bytes": 608256,
+      "source": "Content\\006",
+      "associated_game": "oh-no-more-lemmings",
+      "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
+    },
+    {
+      "path": "Gold_Digger_1.3.0.sit",
+      "finder_type": "SIT!",
+      "data_bytes": 617314,
+      "source": "Content\\Boot",
+      "associated_game": "gold-digger",
+      "classification": "Archive for an already queued title; contents/version not independently checked"
+    },
+    {
+      "path": "Serial-MReader-v0.03-2021.sit",
+      "finder_type": "SIT!",
+      "data_bytes": 1945810,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Runtime/tool/tutorial container by source location/name; not identified as a game"
+    },
+    {
+      "path": "Applications/StuffIt Deluxe 6.0/Tutorial Files/Sample Archive.sit",
+      "finder_type": "SIT5",
+      "data_bytes": 2967,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Runtime/tool/tutorial container by source location/name; not identified as a game"
+    },
+    {
+      "path": "System Folder/Extensions/MRJ Libraries/MRJClasses/JDKClasses.zip",
+      "finder_type": "ZIP ",
+      "data_bytes": 9197691,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Runtime/tool/tutorial container by source location/name; not identified as a game"
+    },
+    {
+      "path": "System Folder/Extensions/MRJ Libraries/MRJClasses/MRJClasses.zip",
+      "finder_type": "ZIP ",
+      "data_bytes": 764771,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Runtime/tool/tutorial container by source location/name; not identified as a game"
+    },
+    {
+      "path": "System Folder/Extensions/MRJ Libraries/MRJClasses/Properties.zip",
+      "finder_type": "ZIP ",
+      "data_bytes": 23990,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Runtime/tool/tutorial container by source location/name; not identified as a game"
+    },
+    {
+      "path": "System Folder/Extensions/MS Library Folder/Classes (4.01)/classes.ms.zip",
+      "finder_type": "ZIP ",
+      "data_bytes": 3495239,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Runtime/tool/tutorial container by source location/name; not identified as a game"
+    },
+    {
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/COPYROM.HQX",
+      "finder_type": "TEXT",
+      "data_bytes": 0,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Zero-data Recent Items reference, not a selected archive payload"
+    },
+    {
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/MODE32.HQX",
+      "finder_type": "TEXT",
+      "data_bytes": 0,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Zero-data Recent Items reference, not a selected archive payload"
+    },
+    {
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Prince_of_Persia.sit",
+      "finder_type": "SIT!",
+      "data_bytes": 0,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Zero-data Recent Items reference, not a selected archive payload"
+    },
+    {
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Start_Up.img",
+      "finder_type": "rohd",
+      "data_bytes": 0,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Zero-data Recent Items reference, not a selected archive payload"
+    },
+    {
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/TRANSFER.HQX",
+      "finder_type": "TEXT",
+      "data_bytes": 0,
+      "source": "Content\\Boot",
+      "associated_game": null,
+      "classification": "Zero-data Recent Items reference, not a selected archive payload"
+    },
+    {
+      "path": "Trash/Koji_the_Frog.SIT",
+      "finder_type": "\u0000\u0000\u0000\u0000",
+      "data_bytes": 858353,
+      "source": "Content\\Boot",
+      "associated_game": "koji",
+      "classification": "Trash archive variant, version unverified; preserve without replacing current2.0.4/save identity"
     }
   ],
   "disc_note": "Configured Star Trek disc catalogue has an out-of-bounds partition; its game executable was separately found on 002. No disc content silently inferred."

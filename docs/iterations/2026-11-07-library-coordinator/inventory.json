@@ -1042,6 +1042,178 @@
           ]
         }
       ],
+      "format": "HFS+",
+      "file_count": 305,
+      "top_level_folders": [
+        "Bolo f",
+        "ClockWerx Folder",
+        "Desktop Folder",
+        "DreamLight® Verttice™ 3.0 ƒ",
+        "Gerbils! Folder",
+        "MacPipes ƒ",
+        "Maelstrom 1.4.3 ƒ (LEFT OUT)",
+        "Mantra v1.02 Folder",
+        "New Ruckus!",
+        "Spin Doctor",
+        "Star Trek TNG",
+        "Super Munchers",
+        "TheFindByContentFolder",
+        "Trash",
+        "gold-pusher Folder"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "count": 3
+        },
+        {
+          "finder_type": "\u0000í\u0000!",
+          "count": 1
+        },
+        {
+          "finder_type": "3DMF",
+          "count": 5
+        },
+        {
+          "finder_type": "APPL",
+          "count": 22
+        },
+        {
+          "finder_type": "BBRN",
+          "count": 1
+        },
+        {
+          "finder_type": "BINA",
+          "count": 8
+        },
+        {
+          "finder_type": "BMAP",
+          "count": 16
+        },
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "Bltz",
+          "count": 1
+        },
+        {
+          "finder_type": "DTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        },
+        {
+          "finder_type": "GIFf",
+          "count": 56
+        },
+        {
+          "finder_type": "JPEG",
+          "count": 2
+        },
+        {
+          "finder_type": "KAMR",
+          "count": 2
+        },
+        {
+          "finder_type": "LINK",
+          "count": 3
+        },
+        {
+          "finder_type": "PICT",
+          "count": 23
+        },
+        {
+          "finder_type": "PROJ",
+          "count": 2
+        },
+        {
+          "finder_type": "SCOR",
+          "count": 1
+        },
+        {
+          "finder_type": "SDDc",
+          "count": 5
+        },
+        {
+          "finder_type": "SDLv",
+          "count": 1
+        },
+        {
+          "finder_type": "SMCF",
+          "count": 1
+        },
+        {
+          "finder_type": "SMDF",
+          "count": 1
+        },
+        {
+          "finder_type": "Sndz",
+          "count": 1
+        },
+        {
+          "finder_type": "TEXT",
+          "count": 70
+        },
+        {
+          "finder_type": "Tart",
+          "count": 1
+        },
+        {
+          "finder_type": "URL ",
+          "count": 3
+        },
+        {
+          "finder_type": "WDBN",
+          "count": 2
+        },
+        {
+          "finder_type": "XdDt",
+          "count": 4
+        },
+        {
+          "finder_type": "XdGm",
+          "count": 1
+        },
+        {
+          "finder_type": "ZAPY",
+          "count": 10
+        },
+        {
+          "finder_type": "ZIPY",
+          "count": 21
+        },
+        {
+          "finder_type": "ZOPY",
+          "count": 2
+        },
+        {
+          "finder_type": "adrp",
+          "count": 11
+        },
+        {
+          "finder_type": "fdrp",
+          "count": 1
+        },
+        {
+          "finder_type": "icon",
+          "count": 9
+        },
+        {
+          "finder_type": "rsrc",
+          "count": 4
+        },
+        {
+          "finder_type": "ttro",
+          "count": 8
+        }
+      ],
+      "container_candidates": [],
+      "non_appl_program_candidates": [],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "8119cbbb69d4a0d5ea4d2cbc2011467fbe396846c79ea0341919a399951ba946",
       "unchanged": true
     },
@@ -1468,6 +1640,103 @@
           ]
         }
       ],
+      "format": "HFS+",
+      "file_count": 64,
+      "top_level_folders": [
+        "BrainJacker ƒ",
+        "Brickoids Millenium 1.1 GPL",
+        "Desktop Folder",
+        "Oregon Trail",
+        "Slithereens 1.0.0 ƒ",
+        "TheFindByContentFolder",
+        "Trash",
+        "Zap'T'Balls v7.1"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "count": 3
+        },
+        {
+          "finder_type": "APPL",
+          "count": 8
+        },
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "DTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        },
+        {
+          "finder_type": "LINK",
+          "count": 2
+        },
+        {
+          "finder_type": "ORCF",
+          "count": 1
+        },
+        {
+          "finder_type": "ORDF",
+          "count": 1
+        },
+        {
+          "finder_type": "PICT",
+          "count": 5
+        },
+        {
+          "finder_type": "SrpL",
+          "count": 1
+        },
+        {
+          "finder_type": "SrpM",
+          "count": 1
+        },
+        {
+          "finder_type": "SrpN",
+          "count": 1
+        },
+        {
+          "finder_type": "SrpS",
+          "count": 1
+        },
+        {
+          "finder_type": "SrpT",
+          "count": 1
+        },
+        {
+          "finder_type": "TEXT",
+          "count": 18
+        },
+        {
+          "finder_type": "URL ",
+          "count": 3
+        },
+        {
+          "finder_type": "adrp",
+          "count": 5
+        },
+        {
+          "finder_type": "icon",
+          "count": 2
+        },
+        {
+          "finder_type": "ttro",
+          "count": 7
+        },
+        {
+          "finder_type": "∫å¬¬",
+          "count": 1
+        }
+      ],
+      "container_candidates": [],
+      "non_appl_program_candidates": [],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "98020ab8debcd8c077ee8b6534a05611f4e946fd975762aeea97d521b21c2476",
       "unchanged": true
     },
@@ -2010,6 +2279,109 @@
           ]
         }
       ],
+      "format": "HFS+",
+      "file_count": 113,
+      "top_level_folders": [
+        "Adventure",
+        "Angband",
+        "Bonkheads Deluxe",
+        "Desktop Folder",
+        "Mantra v1.02 Folder",
+        "ParticleMan 1.0",
+        "Prince of Persia 2",
+        "Prince of Persia ƒ",
+        "Sloppy Sokoban 1.7 ƒ",
+        "TheFindByContentFolder"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "count": 6
+        },
+        {
+          "finder_type": "APPL",
+          "count": 11
+        },
+        {
+          "finder_type": "BDXD",
+          "count": 1
+        },
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "DTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        },
+        {
+          "finder_type": "JPEG",
+          "count": 1
+        },
+        {
+          "finder_type": "LVLS",
+          "count": 2
+        },
+        {
+          "finder_type": "MPG3",
+          "count": 1
+        },
+        {
+          "finder_type": "PART",
+          "count": 1
+        },
+        {
+          "finder_type": "PPgf",
+          "count": 3
+        },
+        {
+          "finder_type": "PPsg",
+          "count": 1
+        },
+        {
+          "finder_type": "TEXT",
+          "count": 26
+        },
+        {
+          "finder_type": "WDBN",
+          "count": 1
+        },
+        {
+          "finder_type": "XdDt",
+          "count": 4
+        },
+        {
+          "finder_type": "adrp",
+          "count": 6
+        },
+        {
+          "finder_type": "fdrp",
+          "count": 1
+        },
+        {
+          "finder_type": "icon",
+          "count": 3
+        },
+        {
+          "finder_type": "rsrc",
+          "count": 30
+        },
+        {
+          "finder_type": "sfil",
+          "count": 1
+        },
+        {
+          "finder_type": "ttro",
+          "count": 11
+        }
+      ],
+      "container_candidates": [],
+      "non_appl_program_candidates": [],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "a7493fc55952a462a655158c8abe4e4c063daf45bf5dd2c24f0fbc876bd70985",
       "unchanged": true
     },
@@ -2460,6 +2832,141 @@
           ]
         }
       ],
+      "format": "HFS+",
+      "file_count": 162,
+      "top_level_folders": [
+        "Bob's Bricks Millennium Edition",
+        "Desktop Folder",
+        "DreamLight® Verttice™ 3.0 ƒ",
+        "Lemmings/ONML",
+        "Mantra II v1.02 ƒ",
+        "PactheMan4.5.1",
+        "TheFindByContentFolder",
+        "Trash"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "count": 1
+        },
+        {
+          "finder_type": "APPL",
+          "count": 10
+        },
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "DTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        },
+        {
+          "finder_type": "GIFf",
+          "count": 57
+        },
+        {
+          "finder_type": "JPEG",
+          "count": 5
+        },
+        {
+          "finder_type": "LEM£",
+          "count": 3
+        },
+        {
+          "finder_type": "LEM§",
+          "count": 3
+        },
+        {
+          "finder_type": "LEM¶",
+          "count": 6
+        },
+        {
+          "finder_type": "Levl",
+          "count": 2
+        },
+        {
+          "finder_type": "MooV",
+          "count": 23
+        },
+        {
+          "finder_type": "PDF ",
+          "count": 4
+        },
+        {
+          "finder_type": "PICT",
+          "count": 1
+        },
+        {
+          "finder_type": "Psnd",
+          "count": 5
+        },
+        {
+          "finder_type": "TEXT",
+          "count": 17
+        },
+        {
+          "finder_type": "XNDD",
+          "count": 1
+        },
+        {
+          "finder_type": "XNDM",
+          "count": 1
+        },
+        {
+          "finder_type": "clpp",
+          "count": 1
+        },
+        {
+          "finder_type": "icon",
+          "count": 8
+        },
+        {
+          "finder_type": "ilht",
+          "count": 1
+        },
+        {
+          "finder_type": "rohd",
+          "count": 5
+        },
+        {
+          "finder_type": "ttro",
+          "count": 5
+        }
+      ],
+      "container_candidates": [
+        {
+          "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Graphics Disk.img",
+          "finder_type": "rohd",
+          "data_bytes": 758272
+        },
+        {
+          "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Levels and Music.img",
+          "finder_type": "rohd",
+          "data_bytes": 721408
+        },
+        {
+          "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Program Disk.img",
+          "finder_type": "rohd",
+          "data_bytes": 678400
+        },
+        {
+          "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK ONE.img",
+          "finder_type": "rohd",
+          "data_bytes": 560640
+        },
+        {
+          "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK TWO.img",
+          "finder_type": "rohd",
+          "data_bytes": 608256
+        }
+      ],
+      "non_appl_program_candidates": [],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "1e3bad7c04080835db71fd18f54a1b63f04f3a41a0bb31d8c2ad097778a724fc",
       "unchanged": true
     },
@@ -4785,6 +5292,266 @@
           ]
         }
       ],
+      "format": "HFS",
+      "file_count": 479,
+      "top_level_folders": [
+        "3-D Cannon",
+        "3d Brick Bash! 1.1.1",
+        "ARASHI 1.1.1 ƒ",
+        "Acquire ƒ",
+        "Action Dome",
+        "Bachman 2.0u Folder",
+        "Balderdoush 1.04i",
+        "BarneyCarnage2.0ƒ",
+        "Bedlam 1.1",
+        "Bikaka 14 Folder",
+        "Blobbo 1.0 Lite ƒ",
+        "Blobbo1.0.1 Fullversion",
+        "Blood Bath Demo 1.96 4cows",
+        "Blood Suckers Folder",
+        "Bolo",
+        "Bonk 1.4.2 Folder",
+        "CRUNCH Folder",
+        "CTB 2.0",
+        "Chiral 1.0.1 ƒ",
+        "CyberNation 1.1.1 ƒ",
+        "Delirium 1.1 Folder",
+        "Desk Invaders II ƒ",
+        "Desktop Folder",
+        "Dome Wars",
+        "Drol ƒ",
+        "FVoy Folder",
+        "Gold Digger 1.3.0",
+        "Guy Smiley v1.0.1 Folder",
+        "Koji the Frog",
+        "MacPipes ƒ",
+        "Marthon Tools",
+        "More ScruffyStuff",
+        "Nort Folder",
+        "Polybrid Folder",
+        "RoboWar 4.1.1 Archive Folder",
+        "Scruffy",
+        "System’s Twilight v1.0.5 ƒ",
+        "TheFindByContentFolder",
+        "Trash"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "count": 15
+        },
+        {
+          "finder_type": "8BCT",
+          "count": 1
+        },
+        {
+          "finder_type": "????",
+          "count": 1
+        },
+        {
+          "finder_type": "APPL",
+          "count": 53
+        },
+        {
+          "finder_type": "BBRN",
+          "count": 1
+        },
+        {
+          "finder_type": "BINA",
+          "count": 1
+        },
+        {
+          "finder_type": "BlSc",
+          "count": 4
+        },
+        {
+          "finder_type": "Blbo",
+          "count": 52
+        },
+        {
+          "finder_type": "CLUT",
+          "count": 1
+        },
+        {
+          "finder_type": "DASH",
+          "count": 3
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        },
+        {
+          "finder_type": "GDSF",
+          "count": 5
+        },
+        {
+          "finder_type": "HISC",
+          "count": 1
+        },
+        {
+          "finder_type": "Imag",
+          "count": 4
+        },
+        {
+          "finder_type": "KHsc",
+          "count": 1
+        },
+        {
+          "finder_type": "KPct",
+          "count": 2
+        },
+        {
+          "finder_type": "KSnd",
+          "count": 1
+        },
+        {
+          "finder_type": "KSpr",
+          "count": 1
+        },
+        {
+          "finder_type": "Levl",
+          "count": 1
+        },
+        {
+          "finder_type": "MTfl",
+          "count": 5
+        },
+        {
+          "finder_type": "MzOb",
+          "count": 25
+        },
+        {
+          "finder_type": "PICT",
+          "count": 1
+        },
+        {
+          "finder_type": "PREF",
+          "count": 1
+        },
+        {
+          "finder_type": "PROJ",
+          "count": 2
+        },
+        {
+          "finder_type": "RobP",
+          "count": 1
+        },
+        {
+          "finder_type": "RobW",
+          "count": 71
+        },
+        {
+          "finder_type": "SCDT",
+          "count": 3
+        },
+        {
+          "finder_type": "SHPS",
+          "count": 40
+        },
+        {
+          "finder_type": "SNDs",
+          "count": 1
+        },
+        {
+          "finder_type": "ScDT",
+          "count": 5
+        },
+        {
+          "finder_type": "Shap",
+          "count": 2
+        },
+        {
+          "finder_type": "TEXT",
+          "count": 115
+        },
+        {
+          "finder_type": "Text",
+          "count": 1
+        },
+        {
+          "finder_type": "TwZs",
+          "count": 2
+        },
+        {
+          "finder_type": "WDBN",
+          "count": 12
+        },
+        {
+          "finder_type": "WORD",
+          "count": 1
+        },
+        {
+          "finder_type": "adrp",
+          "count": 24
+        },
+        {
+          "finder_type": "cndt",
+          "count": 1
+        },
+        {
+          "finder_type": "dfil",
+          "count": 1
+        },
+        {
+          "finder_type": "rsrc",
+          "count": 6
+        },
+        {
+          "finder_type": "scen",
+          "count": 1
+        },
+        {
+          "finder_type": "shlb",
+          "count": 1
+        },
+        {
+          "finder_type": "ttro",
+          "count": 8
+        }
+      ],
+      "container_candidates": [],
+      "non_appl_program_candidates": [
+        {
+          "path": "Desk Invaders II ƒ/Desk Invaders II",
+          "creator": "DsKi",
+          "data_bytes": 0,
+          "resource_bytes": 149666,
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "c3650aa9987d553a3e38f400bfbda75352374063d55b66c9f4ae01484f665abf",
+          "architecture": "unknown",
+          "resource_types": [
+            "ALRT",
+            "BNDL",
+            "CURS",
+            "DATA",
+            "DITL",
+            "DLOG",
+            "DRVR",
+            "DsKi",
+            "FREF",
+            "ICN#",
+            "MENU",
+            "PICT",
+            "STR#",
+            "WIND",
+            "alis",
+            "dast",
+            "dctb",
+            "hscr",
+            "icl4",
+            "icl8",
+            "nrct",
+            "snd ",
+            "wctb",
+            "wloc"
+          ],
+          "version_strings": [],
+          "preferred_partition_bytes": [],
+          "finder_type": "dfil",
+          "program_kind": "desk accessory candidate"
+        }
+      ],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
       "unchanged": true
     },
@@ -9763,6 +10530,786 @@
           ]
         }
       ],
+      "format": "HFS",
+      "file_count": 2049,
+      "top_level_folders": [
+        "Adaptec Toast Deluxe 4.0",
+        "Adobe Fonts",
+        "After Dark 4.0",
+        "Apple Extras",
+        "Applications",
+        "Assistants",
+        "Cleanup At Startup",
+        "Deliverance™ ƒ",
+        "Desktop Folder",
+        "Documents",
+        "File Transfer Folder\u0003\r",
+        "Gold Digger 1.3.0",
+        "Iomega Tools",
+        "Serial MReader v0.03 2021-08 ƒ",
+        "StuffIt",
+        "System Folder",
+        "TheFindByContentFolder",
+        "Trash",
+        "Utilities"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "count": 24
+        },
+        {
+          "finder_type": "3DMF",
+          "count": 6
+        },
+        {
+          "finder_type": "????",
+          "count": 4
+        },
+        {
+          "finder_type": "ACSR",
+          "count": 1
+        },
+        {
+          "finder_type": "AINI",
+          "count": 1
+        },
+        {
+          "finder_type": "ALTH",
+          "count": 2
+        },
+        {
+          "finder_type": "ALTp",
+          "count": 1
+        },
+        {
+          "finder_type": "APPC",
+          "count": 14
+        },
+        {
+          "finder_type": "APPD",
+          "count": 2
+        },
+        {
+          "finder_type": "APPL",
+          "count": 121
+        },
+        {
+          "finder_type": "ATR ",
+          "count": 2
+        },
+        {
+          "finder_type": "Alic",
+          "count": 2
+        },
+        {
+          "finder_type": "BLLN",
+          "count": 1
+        },
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "CLIP",
+          "count": 1
+        },
+        {
+          "finder_type": "CLRS",
+          "count": 1
+        },
+        {
+          "finder_type": "CMdt",
+          "count": 1
+        },
+        {
+          "finder_type": "CPnl",
+          "count": 20
+        },
+        {
+          "finder_type": "CTBs",
+          "count": 1
+        },
+        {
+          "finder_type": "CUdt",
+          "count": 1
+        },
+        {
+          "finder_type": "CWDB",
+          "count": 2
+        },
+        {
+          "finder_type": "CWSS",
+          "count": 2
+        },
+        {
+          "finder_type": "CWWP",
+          "count": 2
+        },
+        {
+          "finder_type": "Clss",
+          "count": 1
+        },
+        {
+          "finder_type": "DASH",
+          "count": 2
+        },
+        {
+          "finder_type": "DVtr",
+          "count": 1
+        },
+        {
+          "finder_type": "DXTN",
+          "count": 1
+        },
+        {
+          "finder_type": "Data",
+          "count": 1
+        },
+        {
+          "finder_type": "ESET",
+          "count": 1
+        },
+        {
+          "finder_type": "FERP",
+          "count": 1
+        },
+        {
+          "finder_type": "FFIL",
+          "count": 90
+        },
+        {
+          "finder_type": "FNDR",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        },
+        {
+          "finder_type": "FURy",
+          "count": 1
+        },
+        {
+          "finder_type": "Fltr",
+          "count": 38
+        },
+        {
+          "finder_type": "FrTp",
+          "count": 10
+        },
+        {
+          "finder_type": "GDPF",
+          "count": 1
+        },
+        {
+          "finder_type": "GDSF",
+          "count": 5
+        },
+        {
+          "finder_type": "GIFf",
+          "count": 252
+        },
+        {
+          "finder_type": "HSpr",
+          "count": 1
+        },
+        {
+          "finder_type": "HYPH",
+          "count": 1
+        },
+        {
+          "finder_type": "Hdpf",
+          "count": 1
+        },
+        {
+          "finder_type": "ICAp",
+          "count": 1
+        },
+        {
+          "finder_type": "INIT",
+          "count": 36
+        },
+        {
+          "finder_type": "IPRT",
+          "count": 1
+        },
+        {
+          "finder_type": "JPEG",
+          "count": 15
+        },
+        {
+          "finder_type": "KHsc",
+          "count": 1
+        },
+        {
+          "finder_type": "KPct",
+          "count": 2
+        },
+        {
+          "finder_type": "KSnd",
+          "count": 1
+        },
+        {
+          "finder_type": "KSpr",
+          "count": 3
+        },
+        {
+          "finder_type": "LWFN",
+          "count": 16
+        },
+        {
+          "finder_type": "LogF",
+          "count": 1
+        },
+        {
+          "finder_type": "MCPP",
+          "count": 1
+        },
+        {
+          "finder_type": "MSoP",
+          "count": 1
+        },
+        {
+          "finder_type": "MePI",
+          "count": 2
+        },
+        {
+          "finder_type": "MooV",
+          "count": 5
+        },
+        {
+          "finder_type": "NSPL",
+          "count": 1
+        },
+        {
+          "finder_type": "PDF ",
+          "count": 5
+        },
+        {
+          "finder_type": "PICT",
+          "count": 17
+        },
+        {
+          "finder_type": "PREF",
+          "count": 8
+        },
+        {
+          "finder_type": "PRER",
+          "count": 11
+        },
+        {
+          "finder_type": "PRES",
+          "count": 1
+        },
+        {
+          "finder_type": "Pref",
+          "count": 12
+        },
+        {
+          "finder_type": "ProG",
+          "count": 1
+        },
+        {
+          "finder_type": "RDEV",
+          "count": 1
+        },
+        {
+          "finder_type": "RSET",
+          "count": 2
+        },
+        {
+          "finder_type": "SDSc",
+          "count": 2
+        },
+        {
+          "finder_type": "SDSe",
+          "count": 2
+        },
+        {
+          "finder_type": "SFST",
+          "count": 1
+        },
+        {
+          "finder_type": "SIT!",
+          "count": 3
+        },
+        {
+          "finder_type": "SIT5",
+          "count": 1
+        },
+        {
+          "finder_type": "STOT",
+          "count": 20
+        },
+        {
+          "finder_type": "SrpP",
+          "count": 2
+        },
+        {
+          "finder_type": "TEXT",
+          "count": 451
+        },
+        {
+          "finder_type": "TH02",
+          "count": 1
+        },
+        {
+          "finder_type": "TVex",
+          "count": 1
+        },
+        {
+          "finder_type": "WAFF",
+          "count": 3
+        },
+        {
+          "finder_type": "Wprf",
+          "count": 1
+        },
+        {
+          "finder_type": "XTRL",
+          "count": 1
+        },
+        {
+          "finder_type": "XdPf",
+          "count": 1
+        },
+        {
+          "finder_type": "ZIP ",
+          "count": 4
+        },
+        {
+          "finder_type": "acdp",
+          "count": 1
+        },
+        {
+          "finder_type": "adev",
+          "count": 2
+        },
+        {
+          "finder_type": "adrp",
+          "count": 65
+        },
+        {
+          "finder_type": "afpp",
+          "count": 1
+        },
+        {
+          "finder_type": "almb",
+          "count": 1
+        },
+        {
+          "finder_type": "almn",
+          "count": 9
+        },
+        {
+          "finder_type": "appe",
+          "count": 8
+        },
+        {
+          "finder_type": "aupf",
+          "count": 1
+        },
+        {
+          "finder_type": "bbp2",
+          "count": 1
+        },
+        {
+          "finder_type": "blrb",
+          "count": 1
+        },
+        {
+          "finder_type": "cLKz",
+          "count": 1
+        },
+        {
+          "finder_type": "cbnd",
+          "count": 2
+        },
+        {
+          "finder_type": "cdCh",
+          "count": 1
+        },
+        {
+          "finder_type": "cdPr",
+          "count": 1
+        },
+        {
+          "finder_type": "cdev",
+          "count": 30
+        },
+        {
+          "finder_type": "cidm",
+          "count": 2
+        },
+        {
+          "finder_type": "claF",
+          "count": 2
+        },
+        {
+          "finder_type": "cmpi",
+          "count": 3
+        },
+        {
+          "finder_type": "comd",
+          "count": 3
+        },
+        {
+          "finder_type": "cpup",
+          "count": 1
+        },
+        {
+          "finder_type": "dCLU",
+          "count": 15
+        },
+        {
+          "finder_type": "dGRD",
+          "count": 4
+        },
+        {
+          "finder_type": "dPPT",
+          "count": 5
+        },
+        {
+          "finder_type": "dSet",
+          "count": 1
+        },
+        {
+          "finder_type": "dfil",
+          "count": 2
+        },
+        {
+          "finder_type": "eFrP",
+          "count": 1
+        },
+        {
+          "finder_type": "ecpg",
+          "count": 4
+        },
+        {
+          "finder_type": "expt",
+          "count": 1
+        },
+        {
+          "finder_type": "fact",
+          "count": 1
+        },
+        {
+          "finder_type": "fbce",
+          "count": 2
+        },
+        {
+          "finder_type": "fbnd",
+          "count": 3
+        },
+        {
+          "finder_type": "fdrp",
+          "count": 8
+        },
+        {
+          "finder_type": "fext",
+          "count": 1
+        },
+        {
+          "finder_type": "gbly",
+          "count": 1
+        },
+        {
+          "finder_type": "hdsk",
+          "count": 4
+        },
+        {
+          "finder_type": "help",
+          "count": 2
+        },
+        {
+          "finder_type": "icon",
+          "count": 9
+        },
+        {
+          "finder_type": "issp",
+          "count": 27
+        },
+        {
+          "finder_type": "lcfl",
+          "count": 13
+        },
+        {
+          "finder_type": "libr",
+          "count": 22
+        },
+        {
+          "finder_type": "lzcn",
+          "count": 1
+        },
+        {
+          "finder_type": "lzlg",
+          "count": 1
+        },
+        {
+          "finder_type": "mSet",
+          "count": 1
+        },
+        {
+          "finder_type": "mlts",
+          "count": 54
+        },
+        {
+          "finder_type": "ndrv",
+          "count": 12
+        },
+        {
+          "finder_type": "npdt",
+          "count": 1
+        },
+        {
+          "finder_type": "osas",
+          "count": 59
+        },
+        {
+          "finder_type": "osax",
+          "count": 5
+        },
+        {
+          "finder_type": "otsl",
+          "count": 4
+        },
+        {
+          "finder_type": "pltn",
+          "count": 1
+        },
+        {
+          "finder_type": "poco",
+          "count": 26
+        },
+        {
+          "finder_type": "pref",
+          "count": 80
+        },
+        {
+          "finder_type": "prf2",
+          "count": 1
+        },
+        {
+          "finder_type": "prof",
+          "count": 61
+        },
+        {
+          "finder_type": "pshr",
+          "count": 1
+        },
+        {
+          "finder_type": "qtif",
+          "count": 1
+        },
+        {
+          "finder_type": "rohd",
+          "count": 1
+        },
+        {
+          "finder_type": "rsrc",
+          "count": 32
+        },
+        {
+          "finder_type": "sbkt",
+          "count": 2
+        },
+        {
+          "finder_type": "sdev",
+          "count": 10
+        },
+        {
+          "finder_type": "shlb",
+          "count": 89
+        },
+        {
+          "finder_type": "tbnd",
+          "count": 2
+        },
+        {
+          "finder_type": "thng",
+          "count": 14
+        },
+        {
+          "finder_type": "tsnd",
+          "count": 1
+        },
+        {
+          "finder_type": "ttro",
+          "count": 24
+        },
+        {
+          "finder_type": "ttvf",
+          "count": 25
+        },
+        {
+          "finder_type": "utbl",
+          "count": 11
+        },
+        {
+          "finder_type": "xxxx",
+          "count": 2
+        },
+        {
+          "finder_type": "zsyr",
+          "count": 1
+        },
+        {
+          "finder_type": "zsys",
+          "count": 1
+        },
+        {
+          "finder_type": "∫å¬¬",
+          "count": 1
+        }
+      ],
+      "container_candidates": [
+        {
+          "path": "Gold_Digger_1.3.0.sit",
+          "finder_type": "SIT!",
+          "data_bytes": 617314
+        },
+        {
+          "path": "Serial-MReader-v0.03-2021.sit",
+          "finder_type": "SIT!",
+          "data_bytes": 1945810
+        },
+        {
+          "path": "Applications/StuffIt Deluxe 6.0/Tutorial Files/Sample Archive.sit",
+          "finder_type": "SIT5",
+          "data_bytes": 2967
+        },
+        {
+          "path": "System Folder/Extensions/MRJ Libraries/MRJClasses/JDKClasses.zip",
+          "finder_type": "ZIP ",
+          "data_bytes": 9197691
+        },
+        {
+          "path": "System Folder/Extensions/MRJ Libraries/MRJClasses/MRJClasses.zip",
+          "finder_type": "ZIP ",
+          "data_bytes": 764771
+        },
+        {
+          "path": "System Folder/Extensions/MRJ Libraries/MRJClasses/Properties.zip",
+          "finder_type": "ZIP ",
+          "data_bytes": 23990
+        },
+        {
+          "path": "System Folder/Extensions/MS Library Folder/Classes (4.01)/classes.ms.zip",
+          "finder_type": "ZIP ",
+          "data_bytes": 3495239
+        },
+        {
+          "path": "System Folder/Preferences/Navigation Services/Recent Items/COPYROM.HQX",
+          "finder_type": "TEXT",
+          "data_bytes": 0
+        },
+        {
+          "path": "System Folder/Preferences/Navigation Services/Recent Items/MODE32.HQX",
+          "finder_type": "TEXT",
+          "data_bytes": 0
+        },
+        {
+          "path": "System Folder/Preferences/Navigation Services/Recent Items/Prince_of_Persia.sit",
+          "finder_type": "SIT!",
+          "data_bytes": 0
+        },
+        {
+          "path": "System Folder/Preferences/Navigation Services/Recent Items/Start_Up.img",
+          "finder_type": "rohd",
+          "data_bytes": 0
+        },
+        {
+          "path": "System Folder/Preferences/Navigation Services/Recent Items/TRANSFER.HQX",
+          "finder_type": "TEXT",
+          "data_bytes": 0
+        },
+        {
+          "path": "Trash/Koji_the_Frog.SIT",
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "data_bytes": 858353
+        }
+      ],
+      "non_appl_program_candidates": [
+        {
+          "path": "System Folder/Apple Menu Items/Calculator",
+          "creator": "calc",
+          "data_bytes": 0,
+          "resource_bytes": 7031,
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "20d6a2773527f04079409f402098b6333b94869d8a2d664e419570ae7953bd47",
+          "architecture": "unknown",
+          "resource_types": [
+            "BNDL",
+            "DRVR",
+            "FREF",
+            "ICN#",
+            "STR#",
+            "WIND",
+            "calc",
+            "icl4",
+            "icl8",
+            "ics#",
+            "ics4",
+            "ics8",
+            "ppat",
+            "vers",
+            "wctb"
+          ],
+          "version_strings": [
+            "7.5",
+            "7.5",
+            "8.5"
+          ],
+          "preferred_partition_bytes": [],
+          "finder_type": "dfil",
+          "program_kind": "desk accessory candidate"
+        },
+        {
+          "path": "System Folder/Apple Menu Items/Chooser",
+          "creator": "chzr",
+          "data_bytes": 0,
+          "resource_bytes": 35607,
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "7fae702e28304cc0fe82c6ae8a2dcc46d7c5cbaaf6ba6c94007b5b76db80b98d",
+          "architecture": "unknown",
+          "resource_types": [
+            "BNDL",
+            "CNTL",
+            "DITL",
+            "DLOG",
+            "DRVR",
+            "FREF",
+            "ICN#",
+            "STR ",
+            "STR#",
+            "TMPL",
+            "chzr",
+            "clst",
+            "dast",
+            "dctb",
+            "finf",
+            "ftag",
+            "gdir",
+            "hdlg",
+            "icl4",
+            "icl8",
+            "ics#",
+            "ics4",
+            "ics8",
+            "nrct",
+            "vers"
+          ],
+          "version_strings": [
+            "7.6.2",
+            "8.5"
+          ],
+          "preferred_partition_bytes": [],
+          "finder_type": "dfil",
+          "program_kind": "desk accessory candidate"
+        }
+      ],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
       "unchanged": true
     },
@@ -9830,6 +11377,62 @@
           ]
         }
       ],
+      "format": "HFS+",
+      "file_count": 14,
+      "top_level_folders": [
+        "2Del",
+        "Desktop Folder",
+        "TheFindByContentFolder"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "\u0000\u0000\u0000\u0000",
+          "count": 1
+        },
+        {
+          "finder_type": "APPL",
+          "count": 1
+        },
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "DTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        },
+        {
+          "finder_type": "KHsc",
+          "count": 1
+        },
+        {
+          "finder_type": "KPct",
+          "count": 1
+        },
+        {
+          "finder_type": "KSnd",
+          "count": 1
+        },
+        {
+          "finder_type": "KSpr",
+          "count": 1
+        },
+        {
+          "finder_type": "TEXT",
+          "count": 4
+        },
+        {
+          "finder_type": "adrp",
+          "count": 1
+        }
+      ],
+      "container_candidates": [],
+      "non_appl_program_candidates": [],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "6940959116e4cc730881fc7af323a194ff7918d16bfe9823e13ec4ce8e5d5340",
       "unchanged": true
     },
@@ -9839,6 +11442,29 @@
       "bytes": 104857600,
       "sha256_before": "ddfba3a495ea0c726725c4143804a06dfd8d72c83163a60b41a544592879a988",
       "applications": [],
+      "format": "HFS+",
+      "file_count": 3,
+      "top_level_folders": [
+        "Desktop Folder",
+        "TheFindByContentFolder"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "DTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        }
+      ],
+      "container_candidates": [],
+      "non_appl_program_candidates": [],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "ddfba3a495ea0c726725c4143804a06dfd8d72c83163a60b41a544592879a988",
       "unchanged": true
     },
@@ -9848,6 +11474,29 @@
       "bytes": 104857600,
       "sha256_before": "92369d7eb6fa12e089fd6772ed8267e9cf409ba7ce56db069e1ae847460991f5",
       "applications": [],
+      "format": "HFS+",
+      "file_count": 3,
+      "top_level_folders": [
+        "Desktop Folder",
+        "TheFindByContentFolder"
+      ],
+      "finder_type_counts": [
+        {
+          "finder_type": "BTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "DTFL",
+          "count": 1
+        },
+        {
+          "finder_type": "FOLD",
+          "count": 1
+        }
+      ],
+      "container_candidates": [],
+      "non_appl_program_candidates": [],
+      "container_method": "Name suffix or SIT Finder-type heuristic; not proof that each container is a game. Unrecognized types remain in type counts.",
       "sha256_after": "92369d7eb6fa12e089fd6772ed8267e9cf409ba7ce56db069e1ae847460991f5",
       "unchanged": true
     }

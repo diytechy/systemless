@@ -12,6 +12,9 @@ parser.add_argument('--review', required=True)
 parser.add_argument('--timing', required=True)
 parser.add_argument('--next', dest='next_slug')
 parser.add_argument('--report', default='report.md')
+parser.add_argument('--depth-size')
+parser.add_argument('--controls')
+parser.add_argument('--preferences')
 args = parser.parse_args()
 root = Path(__file__).parent
 queue_file = root / 'queue.json'
@@ -21,6 +24,9 @@ report = root / args.slug / args.report
 if not report.is_file():
     raise SystemExit('Missing reviewed report: ' + str(report))
 row.update(status=args.outcome, timing=args.timing, report=args.slug + '/' + args.report, review=args.review)
+for option, field in ((args.depth_size,'depth_size'), (args.controls,'controls'), (args.preferences,'preferences_save_id')):
+    if option is not None:
+        row[field] = option
 row.setdefault('accepted_setting', 'No runtime setting change accepted by this review')
 if args.next_slug:
     next(r for r in queue['games'] if r['slug'] == args.next_slug)['status'] = 'worker assigned'

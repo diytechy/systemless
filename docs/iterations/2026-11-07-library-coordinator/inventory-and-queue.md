@@ -2,9 +2,9 @@
 
 Read-only catalogue evidence, 2026-11-07. All nine disk images and the configured disc were hashed before/after with equal hashes. No source mounted or modified. APPL/Finder type and CODE/cfrg establish candidate architecture, not runtime compatibility. Boot Recent Items are aliases; helpers and Trash copies are explicitly classified in queue.json. Unconfigured 005/007/008 were inspected as supplementary media.
 
-Default depth, required sibling resources, preferences and controls for unprepared games remain unverified until their worker inspects the title. Resource version strings can include library versions; workers must resolve ambiguity. Absence of a browser route is preparation work, not proof of incompatibility.
+Default depth, required sibling resources, preferences and controls for unprepared games remain unverified until their worker inspects the title. Resource version strings can include library versions; workers must resolve ambiguity. Absence of a browser route is preparation work, not proof of incompatibility. The coverage audit also records container-like files, top-level folders and non-APPL desk accessories; Desk Invaders II is queued separately rather than omitted for lacking APPL type.
 
-68 game families; alternate versions/architectures remain listed under their individual title. 145 auxiliary/alias/utility APPL entries excluded with reasons. Configured Star Trek disc has a partition-boundary error, preserved in inventory.json.
+69 game families; alternate versions/architectures remain listed under their individual title. 145 auxiliary/alias/utility APPL entries excluded with reasons. Configured Star Trek disc has a partition-boundary error, preserved in inventory.json.
 
 | Order | Title | Sources / executable candidates | Architecture evidence | Status |
 |---:|---|---|---|---|
@@ -41,38 +41,39 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 31 | CTB | Content\001: CTB 2.0/CTB | 68K (CODE) | pending |
 | 32 | CyberNation 1.1.1 | Content\001: CyberNation 1.1.1 ƒ/CyberNation 1.1.1 | 68K (CODE) | pending |
 | 33 | Deliverance™ | Content\Boot: Deliverance™ ƒ/Deliverance™ | 68K (CODE) | pending |
-| 34 | Dome Wars | Content\001: Dome Wars/Dome Wars | 68K (CODE) | pending |
-| 35 | Drol | Content\001: Drol ƒ/Drol | 68K (CODE) | pending |
-| 36 | Fantastic Voyage | Content\001: FVoy Folder/Fantastic Voyage 1.1a | 68K (CODE) | pending |
-| 37 | Gerbils! | Content\002: Gerbils! Folder/Gerbils! | PPC fragment | pending |
-| 38 | Gold Digger | Content\001: Gold Digger 1.3.0/Gold Digger<br>Content\Boot: Gold Digger 1.3.0/Gold Digger | 68K (CODE) | pending |
-| 39 | GoldPusher | Content\002: gold-pusher Folder/GoldPusher | 68K (CODE) | pending |
-| 40 | Guy Smiley vs. the Monsters | Content\001: Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters | 68K (CODE) | pending |
-| 41 | Lawyers | Content\001: Lawyers | 68K (CODE) | pending |
-| 42 | Lemmings | Content\006: Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a<br>Content\006: Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings | 68K (CODE) | pending |
-| 43 | MacPipes | Content\002: MacPipes ƒ/MacPipes 2.2.7<br>Content\001: MacPipes ƒ/MacPipes 2.0.1 | 68K (CODE), fat (CODE + PPC fragment) | pending |
-| 44 | Maelstrom | Content\002: Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom | 68K (CODE) | pending |
-| 45 | Mantra | Content\002: Mantra v1.02 Folder/Mantra v1.02<br>Content\004: Mantra v1.02 Folder/Mantra v1.02 | 68K (CODE) | pending |
-| 46 | Mantra II | Content\006: Mantra II v1.02 ƒ/Mantra II v1.02<br>Content\006: Mantra II v1.02 ƒ/Mantra II v1.02 PPC | 68K (CODE), PPC fragment | pending |
-| 47 | nort | Content\001: Nort Folder/nort | 68K (CODE) | pending |
-| 48 | Oh No! More Lemmings | Content\006: Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings | 68K (CODE) | pending |
-| 49 | Oregon Trail | Content\003: Oregon Trail/Oregon Trail | 68K (CODE) | pending |
-| 50 | PAC IN TIME | Content\002: PAC IN TIME | 68K (CODE) | pending |
-| 51 | Pac the Man | Content\006: PactheMan4.5.1/Pac the Man | fat (CODE + PPC fragment) | pending |
-| 52 | ParticleMan 1.0 | Content\004: ParticleMan 1.0/ParticleMan 1.0 | 68K (CODE) | pending |
-| 53 | Polybrid 1.0 | Content\001: Polybrid Folder/Polybrid 1.0 | 68K (CODE) | pending |
-| 54 | Prince of Persia | Content\004: Prince of Persia ƒ/Prince of Persia | 68K (CODE) | pending |
-| 55 | Prince of Persia 2 | Content\004: Prince of Persia 2/Prince of Persia 2 | 68K (CODE) | pending |
-| 56 | RoboWar 4.1.1 | Content\001: RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1 | fat (CODE + PPC fragment) | pending |
-| 57 | Ruckus | Content\002: New Ruckus!/Ruckus | 68K (CODE) | pending |
-| 58 | Scruffy | Content\001: Scruffy/Scruffy | 68K (CODE) | pending |
-| 59 | Scruffy II | Content\001: More ScruffyStuff/Scruffy II | 68K (CODE) | pending |
-| 60 | Slithereens | Content\003: Slithereens 1.0.0 ƒ/Slithereens | fat (CODE + PPC fragment) | pending |
-| 61 | Sloppy Sokoban 1.7 | Content\004: Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7 | PPC fragment | pending |
-| 62 | Spin Doctor | Content\002: Spin Doctor/Spin Doctor | fat (CODE + PPC fragment) | pending |
-| 63 | Star Trek: A Final Unity | Content\002: Star Trek TNG/"A Final Unity" | fat (CODE + PPC fragment) | pending |
-| 64 | Super Munchers | Content\002: Super Munchers/Super Munchers | 68K (CODE) | pending |
-| 65 | System's Twilight v1.0.5 | Content\001: System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5 | 68K (CODE) | pending |
-| 66 | The Big One | Content\002: The Big One | 68K (CODE) | pending |
-| 67 | DreamLight Verttice | Content\002: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0<br>Content\006: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0 | PPC fragment | pending |
-| 68 | Zap'T'Balls | Content\003: Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)<br>Content\001: Zap'T'Balls v3.6 | 68K (CODE), fat (CODE + PPC fragment) | pending |
+| 34 | Desk Invaders II | Content\001: Desk Invaders II ƒ/Desk Invaders II | unknown | pending |
+| 35 | Dome Wars | Content\001: Dome Wars/Dome Wars | 68K (CODE) | pending |
+| 36 | Drol | Content\001: Drol ƒ/Drol | 68K (CODE) | pending |
+| 37 | Fantastic Voyage | Content\001: FVoy Folder/Fantastic Voyage 1.1a | 68K (CODE) | pending |
+| 38 | Gerbils! | Content\002: Gerbils! Folder/Gerbils! | PPC fragment | pending |
+| 39 | Gold Digger | Content\001: Gold Digger 1.3.0/Gold Digger<br>Content\Boot: Gold Digger 1.3.0/Gold Digger | 68K (CODE) | pending |
+| 40 | GoldPusher | Content\002: gold-pusher Folder/GoldPusher | 68K (CODE) | pending |
+| 41 | Guy Smiley vs. the Monsters | Content\001: Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters | 68K (CODE) | pending |
+| 42 | Lawyers | Content\001: Lawyers | 68K (CODE) | pending |
+| 43 | Lemmings | Content\006: Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a<br>Content\006: Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings | 68K (CODE) | pending |
+| 44 | MacPipes | Content\002: MacPipes ƒ/MacPipes 2.2.7<br>Content\001: MacPipes ƒ/MacPipes 2.0.1 | 68K (CODE), fat (CODE + PPC fragment) | pending |
+| 45 | Maelstrom | Content\002: Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom | 68K (CODE) | pending |
+| 46 | Mantra | Content\002: Mantra v1.02 Folder/Mantra v1.02<br>Content\004: Mantra v1.02 Folder/Mantra v1.02 | 68K (CODE) | pending |
+| 47 | Mantra II | Content\006: Mantra II v1.02 ƒ/Mantra II v1.02<br>Content\006: Mantra II v1.02 ƒ/Mantra II v1.02 PPC | 68K (CODE), PPC fragment | pending |
+| 48 | nort | Content\001: Nort Folder/nort | 68K (CODE) | pending |
+| 49 | Oh No! More Lemmings | Content\006: Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings | 68K (CODE) | pending |
+| 50 | Oregon Trail | Content\003: Oregon Trail/Oregon Trail | 68K (CODE) | pending |
+| 51 | PAC IN TIME | Content\002: PAC IN TIME | 68K (CODE) | pending |
+| 52 | Pac the Man | Content\006: PactheMan4.5.1/Pac the Man | fat (CODE + PPC fragment) | pending |
+| 53 | ParticleMan 1.0 | Content\004: ParticleMan 1.0/ParticleMan 1.0 | 68K (CODE) | pending |
+| 54 | Polybrid 1.0 | Content\001: Polybrid Folder/Polybrid 1.0 | 68K (CODE) | pending |
+| 55 | Prince of Persia | Content\004: Prince of Persia ƒ/Prince of Persia | 68K (CODE) | pending |
+| 56 | Prince of Persia 2 | Content\004: Prince of Persia 2/Prince of Persia 2 | 68K (CODE) | pending |
+| 57 | RoboWar 4.1.1 | Content\001: RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1 | fat (CODE + PPC fragment) | pending |
+| 58 | Ruckus | Content\002: New Ruckus!/Ruckus | 68K (CODE) | pending |
+| 59 | Scruffy | Content\001: Scruffy/Scruffy | 68K (CODE) | pending |
+| 60 | Scruffy II | Content\001: More ScruffyStuff/Scruffy II | 68K (CODE) | pending |
+| 61 | Slithereens | Content\003: Slithereens 1.0.0 ƒ/Slithereens | fat (CODE + PPC fragment) | pending |
+| 62 | Sloppy Sokoban 1.7 | Content\004: Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7 | PPC fragment | pending |
+| 63 | Spin Doctor | Content\002: Spin Doctor/Spin Doctor | fat (CODE + PPC fragment) | pending |
+| 64 | Star Trek: A Final Unity | Content\002: Star Trek TNG/"A Final Unity" | fat (CODE + PPC fragment) | pending |
+| 65 | Super Munchers | Content\002: Super Munchers/Super Munchers | 68K (CODE) | pending |
+| 66 | System's Twilight v1.0.5 | Content\001: System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5 | 68K (CODE) | pending |
+| 67 | The Big One | Content\002: The Big One | 68K (CODE) | pending |
+| 68 | DreamLight Verttice | Content\002: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0<br>Content\006: DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0 | PPC fragment | pending |
+| 69 | Zap'T'Balls | Content\003: Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)<br>Content\001: Zap'T'Balls v3.6 | 68K (CODE), fat (CODE + PPC fragment) | pending |

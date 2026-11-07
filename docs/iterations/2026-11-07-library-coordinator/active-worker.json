@@ -1,8 +1,8 @@
 {
-  "slug": "guy-smiley-vs-the-monsters",
-  "task_name": "/root/guy_smiley_vs_the_monsters",
+  "slug": "lawyers",
+  "task_name": "/root/lawyers",
   "status": "running; see active-runners.json",
-  "starting_revision": "25f3685523bddffd0e494b49bcd3d109086aeaa0",
-  "brief": "guy-smiley-vs-the-monsters-brief.md",
-  "updated_at": "2026-11-07T20:19:33.538544+00:00"
+  "starting_revision": "15126c0accbeff891f57f9be9dd4fe1a99fa0807",
+  "brief": "lawyers-brief.md",
+  "updated_at": "2026-11-07T20:21:30.902932+00:00"
 }

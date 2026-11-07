@@ -1311,7 +1311,7 @@
       ],
       "depth_size": "Docs8bitColorQD/1500K, original SIZE1536000; actual800x600x8, dimensions exploratory.",
       "preferences_save_id": "No actual Boot GOUD/name pref; historical aliases separate and unseeded, Rooms SAVE/TOPS retained; no browsermapping yet.",
-      "controls": "h/j/k/l orkeypad,Space throw,p/Tab/click/CmdPpause documented; l right observed, fullresume untaught.",
+      "controls": "h/j/k/l orkeypad,Space throw,p/Tab/click/CmdPpause documented; l right observed, fullresume untested.",
       "timing": "Native room1/right/menu readiness and partial pause; release-browser baseline pending.",
       "report": "goldpusher/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
@@ -1319,8 +1319,8 @@
     },
     {
       "slug": "guy-smiley-vs-the-monsters",
-      "title": "Guy Smiley vs. the Monsters",
-      "status": "worker active",
+      "title": "Guy Smiley vs.the Monsters1.0.1",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters",
@@ -1337,15 +1337,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "DocsSystem6.0.4+,ColorQD,13inch+,anydepth; observed800x600x8 and1; original SIZE98304 no override.",
+      "preferences_save_id": "Boot GSvM/title only launcher alias, no actual pref. Original embeddedstate and styledreadme/rawalias retained.",
+      "controls": "D/K/5pass documented; D2/ch100 tried blank; directionalpads illustration unresolved; no gameplay/pausequalified.",
+      "timing": "Native menus/settings only; board readiness unresolved at1/8bit, release-browser unmeasured.",
+      "report": "guy-smiley-vs-the-monsters/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file fixture verified; parent source001/fixture hashes, raw240tick8bit and1bit completed reports and blank-board/Settings images reviewed. Four finite scenarios0assert/exhaust; File menu and Settings respond but no visible board after NewGame/Dpass at either depth. Readme anydepth confirmed. No causal renderer diagnosis or setting change."
     },
     {
       "slug": "lawyers",
       "title": "Lawyers",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Lawyers",
@@ -1371,7 +1374,7 @@
     {
       "slug": "lemmings",
       "title": "Lemmings",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a",

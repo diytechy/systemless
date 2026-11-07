@@ -622,8 +622,8 @@
     },
     {
       "slug": "bob-s-bricks-millennium-edition",
-      "title": "Bob's Bricks Millennium Edition",
-      "status": "worker assigned",
+      "title": "Bob's Bricks Millennium Edition1.0.2",
+      "status": "compatibility blocker",
       "candidates": [
         {
           "path": "Bob's Bricks Millennium Edition/Bob's Bricks Millennium Edition",
@@ -641,15 +641,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 at failure, meets documented256color minimum;16bit CLI rejected. Original SIZE13455360 retained.",
+      "preferences_save_id": "Boot Bob/bricks/BBME scan no match; ReadMe settings reset on quit. No browser ID or save changes.",
+      "controls": "ReadMe held left/right accelerate/wrap,Down warp,Esc cancel; untested due halt.",
+      "timing": "No baseline possible in current diagnostic: PPC startup halt before UI. Exact binary compile revision unknown, release unmeasured.",
+      "report": "bob-s-bricks-millennium-edition/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Corrected3file HFS+ fixture retains represented folder dates; old copy kept. Parent source006/corrected-fixture hashes and raw corrected failure report reviewed: explicit PPC halts tick1 pc0 cycles108 before UI,0assertions/exhaustion. ReadMe OS9/CarbonLib requirement and186import gaps are context, causal symbol unresolved. No runtime/pacing change.",
+      "dependencies": "ReadMe OS9+,CarbonLib,G3+,256colors,12MB;3PPC fragments/186import gaps, not causal proof. Trace first null indirect call before repair estimate."
     },
     {
       "slug": "bolo",
       "title": "Bolo",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Bolo f/Bolo 0.99.7",

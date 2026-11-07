@@ -1,0 +1,65 @@
+{
+  "title": "Bob's Bricks Millennium Edition 1.0.2",
+  "outcome": "compatibility blocker: PPC startup halt before UI",
+  "preservation": {
+    "source_before": "1e3bad7c04080835db71fd18f54a1b63f04f3a41a0bb31d8c2ad097778a724fc",
+    "source_after": "1e3bad7c04080835db71fd18f54a1b63f04f3a41a0bb31d8c2ad097778a724fc",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bob-s-bricks-millennium-edition\\game-preserved-dates.img",
+    "fixture_sha256": "5e2346242114d8fb528dde89299f56ae0625a0145e6e1f120b5b9480cc4d1762",
+    "files_verified": 3,
+    "scope_limits": "All selected file forks/Finder fields and represented selected/ancestor folder dates verified; original folder Finder information unexposed; raw aliases not guaranteed to resolve."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "existing diagnostic executable exact compile revision unknown; checkout38447db1",
+    "architecture": "PPC explicit --prefer-powerpc",
+    "executable": "Bob's Bricks Millennium Edition/Bob's Bricks Millennium Edition",
+    "display": "--screen-depth8 exploratory; actual800x600;16-bit option rejected",
+    "partition": 13455360,
+    "result": "corrected fixture failed action1 at frontend1/guest0: guest halted before scenario completed; pc0 cycles108 lr03008F64",
+    "assertions": 0,
+    "budget_exhausted_frames": 0
+  },
+  "behavior": {
+    "observed": [
+      "load-time and failure screenshots blank pale cyan",
+      "startup halts before first60tick run completes"
+    ],
+    "untested": [
+      "gameplay/motion/timing",
+      "busy scene",
+      "input/menu/pause",
+      "sound",
+      "saves",
+      "physical controller",
+      "release browser performance"
+    ]
+  },
+  "dependencies": [
+    "ReadMe: OS9+,CarbonLib,G3+,at least256colors,12MBfreeRAM,8MBdisk",
+    "3PPCfragments;186distinct import gaps; CarbonLib and OpenTransport unsupported/weak gaps; no causal symbol isolated"
+  ],
+  "controls": [
+    "documented left/right arrows held accelerate and edge-wrap",
+    "down arrow random warp",
+    "Esc cancels game; Edit Preferences settings reset at quit"
+  ],
+  "changes": [
+    "own report/status only; private fixture/scenario/logs/audit/manifest"
+  ],
+  "checks": [
+    "three files reopened and selected forks/Finder fields verified",
+    "source006/Boot before-after hash equality",
+    "Boot names Bob/bricks and creator BBME scan no matches",
+    "explicit PPC scenario bounded75wall seconds exited in about9seconds",
+    "failure screenshot inspected",
+    "Corrected selected title folder crdate/mddate/bkdate retained from HFS+ offsets12/16/28; reopened-compared; bounded corrected probe same halt; old probe preserved"
+  ],
+  "next_step": "Trace first PPC indirect call reaching0, identify minimal required CarbonLib/STRuntime behavior; no pacing change justified. Estimate needs focused trace; repair scope unknown.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\bob-s-bricks-millennium-edition\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bob-s-bricks-millennium-edition\\evidence-manifest.json",
+  "workload_released": true
+}

@@ -1,0 +1,2662 @@
+{
+  "schema": 1,
+  "games": [
+    {
+      "slug": "clockwerx",
+      "title": "ClockWerx",
+      "status": "measurement blocked",
+      "candidates": [
+        {
+          "path": "ClockWerx Folder/ClockWerx",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0 © 1993-5 Callisto Corp.",
+            "1.0 © 1993-5 Callisto Corp."
+          ],
+          "preferred_partition_bytes": [
+            4096000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "522b65b20f89eca12139d6d488c9636ce3138099379ef8b7a59734f563a828b3",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "640x480, 8-bit",
+      "preferences_save_id": "clockwerx-personal-10; ClockWerx Scores/Settings",
+      "controls": "unverified",
+      "timing": "zero new captures; Windows Computer Use URL policy stop; prior 6 MHz remains experimental"
+    },
+    {
+      "slug": "koji",
+      "title": "Koji the Frog",
+      "status": "worker assigned",
+      "candidates": [
+        {
+          "path": "Koji the Frog/Koji the Frog 2.0.4",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "v2.0.4",
+            "v2.0.4"
+          ],
+          "preferred_partition_bytes": [
+            2560000
+          ],
+          "data_sha256": "96350718f393f9743594058d5dc54029ed08d548c42260b4d280967f1b9c1746",
+          "resource_sha256": "8ce7bcd91501814979c67663b073d3cde6bdd17656b2498ac96c10588fed18d6",
+          "source": "Content\\001",
+          "configured": true
+        },
+        {
+          "path": "2Del/Koji The Frog 1.0.2 ƒ/Koji The Frog 1.0.2",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "v1.0.2",
+            "v1.0.2"
+          ],
+          "preferred_partition_bytes": [
+            1945600
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "19b4ba85928e2d6eed3d3a4f3beb9e189b77135a1e841e8d4d867637b2b2960a",
+          "source": "Content\\005",
+          "configured": false
+        }
+      ],
+      "depth_size": "640x480, 8-bit",
+      "preferences_save_id": "koji-personal-204; Koji 2.0 Registration/Koji Registration",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "delirium",
+      "title": "Delirium",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Delirium 1.1 Folder/Delirium 1.1",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "© Tuan Huynh 1994-1995",
+            "1.1"
+          ],
+          "preferred_partition_bytes": [
+            2048000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "628b8f3a3f043dccbe1f5d07c820de38e52c5b5f36d5e6a358f65ced337334ad",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "640x480, 4-bit",
+      "preferences_save_id": "delirium-personal-11; Delirium 1.1 Preferences",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "3-d-cannon",
+      "title": "3-D Cannon",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "3-D Cannon/3-D Cannon(FAT)",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            5120000
+          ],
+          "data_sha256": "d1d51bde8fb57290080f05f9154290a9379afb9be39a8ed42eeac538f45e1e70",
+          "resource_sha256": "8c6d7e1ba122a17019fa750c6df78986cdc5867170e5ab0842fe2a7d2e5b44cb",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "3d-brick-bash-1-1-1",
+      "title": "3d Brick Bash! 1.1.1",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "3d Brick Bash! 1.1.1"
+          ],
+          "preferred_partition_bytes": [
+            1331200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "279b44742ecdd94dc5364344a9785c87498a53416fea98306b91cdb33da3411a",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "acquire-1-0",
+      "title": "Acquire 1.0",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Acquire ƒ/Acquire 1.0",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0",
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            768000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "4f5fe2050757a78789f5cf10d49221f2d22056166496e485527955cb27556bfd",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "action-dome-1-0",
+      "title": "Action Dome 1.0",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Action Dome/Action Dome 1.0",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "©Slovis Software inc. 1995"
+          ],
+          "preferred_partition_bytes": [
+            5120000,
+            5120000,
+            5120000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "2c9a5dc1bda1153c4b05cfaba3d332766d538f4cf300e15c626820d11cad1e78",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "adventure",
+      "title": "Adventure",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Adventure/Adventure",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.1",
+            "1.1"
+          ],
+          "preferred_partition_bytes": [
+            174080
+          ],
+          "data_sha256": "26845430434361658db355b0aca142bff734c98323d1bfff0d4b6bfb1cee9ed3",
+          "resource_sha256": "5d1aca7bc85faddfee56aca987b4cdf99595bd44af03449ff942f8ab9b08a849",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "angband",
+      "title": "Angband",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Angband/Angband",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "2.0.2"
+          ],
+          "preferred_partition_bytes": [
+            972800
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "1e22908a21976b4dcf6287ad5fa87d4132e746b83673b97310f96901923cf81e",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "arashi-1-1-1",
+      "title": "Arashi 1.1.1",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "ARASHI 1.1.1 ƒ/Arashi 1.1.1",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "ARASHI 1.1.1"
+          ],
+          "preferred_partition_bytes": [
+            1433600
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "880e0362f7e7616ef519690a83b2546dea7ddcbd160f0d5087f82b948a7aee48",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bachman-2-0u",
+      "title": "Bachman 2.0u",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Bachman 2.0u Folder/Bachman 2.0u",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Bachman 2.0u"
+          ],
+          "preferred_partition_bytes": [
+            2048000,
+            2048000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "b845982a32c9ea8a1157b48b8395217b83795579aa17aa72f5d236ea9c53fb7e",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "balderdoush-1-04i",
+      "title": "Balderdoush 1.04i",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Balderdoush 1.04i/Balderdoush 1.04i",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            819200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "173746bd2f695b2261bbcc8b10b6fc85b8de196bcafa937bcc8d919d5d68f044",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "barney-carnage-2-0",
+      "title": "Barney Carnage 2.0",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "BarneyCarnage2.0ƒ/Barney Carnage 2.0",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            2560000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "278efbbcea0809c9f1959375f41f87d3729b7d896275e7ac481efe2de08d1f36",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "battletanks-2-12-1",
+      "title": "BattleTanks 2.12.1",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "BattleTanks 2.12.1",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Battle Tanks"
+          ],
+          "preferred_partition_bytes": [
+            307200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "deb045396d02eeb9f0b38904677f6d715577eb138535dd61d38ad95e46426ff3",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bedlam",
+      "title": "Bedlam",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Bedlam 1.1/Bedlam",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.1",
+            ""
+          ],
+          "preferred_partition_bytes": [
+            1638400,
+            2355200,
+            2355200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "0bd6c764a100f8665b3ca6827df0ff4bd1bb463a8cedf5b799f96329dd69e2ad",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bikaka-1-4",
+      "title": "Bikaka 1.4",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Bikaka 14 Folder/Bikaka 1.4",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Bikaka 1.4"
+          ],
+          "preferred_partition_bytes": [
+            512000,
+            512000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "4f82aeded8cded3017ecdd49799c043bd3036310b90e8715b30173d9f0ddbc84",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "blobbo",
+      "title": "Blobbo",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Blobbo 1.0 Lite ƒ/Blobbo",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Blobbo 1.0 Lite"
+          ],
+          "preferred_partition_bytes": [
+            819200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "359e9d61b00571a51e6961f5f617c7f6625f4ec3f0e9bb65b5ebf795d3929ff8",
+          "source": "Content\\001",
+          "configured": true
+        },
+        {
+          "path": "Blobbo 1.0 Lite ƒ/Blobbo 1.0.1 Lite",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Blobbo 1.0.1 Lite"
+          ],
+          "preferred_partition_bytes": [
+            819200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "9bc07736d193102939aa44647346aa49ac02c1c0d82f5115f200e4eb1ce3f31d",
+          "source": "Content\\001",
+          "configured": true
+        },
+        {
+          "path": "Blobbo1.0.1 Fullversion/Blobbo 1.0.1",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Blobbo 1.0.1"
+          ],
+          "preferred_partition_bytes": [
+            819200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "a667b5198c3c9cff811aa2310bb2b0d52a3f00dedb3274aa474ab8b82bf79e57",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "blood-bath-demo-1-96",
+      "title": "Blood Bath Demo 1.96",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Blood Bath Demo 1.96 4cows/Blood Bath Demo PPC 1.96",
+          "architecture": "PPC fragment",
+          "version_strings": [
+            "©UnderWorld, 1995-97."
+          ],
+          "preferred_partition_bytes": [
+            5120000
+          ],
+          "data_sha256": "2f28544239d708d1206aad7aaee8131f9546a9f5f2d33b5f8f79c402562dc877",
+          "resource_sha256": "a79df728e0a8509137ed5d5c374d5224fd6ed3b4d97f2c40b708d81a7d8371c9",
+          "source": "Content\\001",
+          "configured": true
+        },
+        {
+          "path": "Blood Bath Demo 1.96 4cows/Blood Bath™ Demo 1.96",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "©UnderWorld, 1995-97."
+          ],
+          "preferred_partition_bytes": [
+            3121152,
+            5169152,
+            5169152
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "e183664e4b24a82cb3e1e18054207f6fcd7dc5267cbb483a715064960e1d101c",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bloodsuckers",
+      "title": "Bloodsuckers",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Blood Suckers Folder/Bloodsuckers",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            3072000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "7016ca68f96d8dfff2432aba97650124d3d623121ca93c15aa623772acd6e435",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bob-s-bricks-millennium-edition",
+      "title": "Bob's Bricks Millennium Edition",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Bob's Bricks Millennium Edition/Bob's Bricks Millennium Edition",
+          "architecture": "PPC fragment",
+          "version_strings": [
+            "1.0.2",
+            "1.0.2"
+          ],
+          "preferred_partition_bytes": [
+            13455360
+          ],
+          "data_sha256": "343d71ff00222ec677a08bb68f2482bd7ccb1d1b578db2f56de7bed317a04859",
+          "resource_sha256": "3718e0b3ee957834764d9a6aa6dd84e41ecc70bcad2bfc39c7082d06635df2f3",
+          "source": "Content\\006",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bolo",
+      "title": "Bolo",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Bolo f/Bolo 0.99.7",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "0.99.7",
+            "0.99.7"
+          ],
+          "preferred_partition_bytes": [
+            1536000,
+            15360000,
+            15360000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "47d642e0882424e18f258b0a5be7c9d930d769f2aa30362a794ad917d4522e38",
+          "source": "Content\\002",
+          "configured": true
+        },
+        {
+          "path": "Bolo/Bolo 0.99.5",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "0.99.5",
+            "0.99.5"
+          ],
+          "preferred_partition_bytes": [
+            1536000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "d9b794c53435979abb51a5d5fc564dc085f085ea66612cc0e0318a17947eb5eb",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bonk-1-4-2",
+      "title": "Bonk 1.4.2",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.4.2",
+            "1.4.2"
+          ],
+          "preferred_partition_bytes": [
+            262144
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "7b5a7fadd49c369c13e1b77d1da88dc9c3795f3e5e4b3cc09e78585b8d0ad5ef",
+          "source": "Content\\001",
+          "configured": true
+        },
+        {
+          "path": "Bonk 1.4.2 Folder/Bonk 1.4.2 (Black & White)",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.4.2",
+            "1.4.2"
+          ],
+          "preferred_partition_bytes": [
+            262144
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "ee11f1b876cf4eca2beb26a25abbeec7a0cf429f19c3514fea7c08e3f476506d",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "bonkheads-deluxe",
+      "title": "Bonkheads Deluxe",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Bonkheads Deluxe/Bonkheads Deluxe",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0.0"
+          ],
+          "preferred_partition_bytes": [
+            3891200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "47614d4dbd6fb2c7650792b48cb5913dcf8c1d1db9d42baf76156df5303be4b5",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "brainjacker-1-0-1",
+      "title": "BrainJacker 1.0.1",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "BrainJacker ƒ/BrainJacker 1.0.1",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "",
+            "6.5",
+            "6.5"
+          ],
+          "preferred_partition_bytes": [
+            6291456
+          ],
+          "data_sha256": "326fefee261905a1535e8774b7808d1987203dd79e3f1a9dca569f4635576914",
+          "resource_sha256": "18ba453ad17a977080704f62e516fcce4b06a5ebc3d056caaa2b452facfebd91",
+          "source": "Content\\003",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "brickles-plus-3-0",
+      "title": "Brickles Plus 3.0",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Brickles Plus 3.0",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "3.0"
+          ],
+          "preferred_partition_bytes": [
+            262144
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "5a850bdbc1a9b41ef6940ab014fe9243a2268b0b0f653cbba627d8dfebd97cf5",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "brickoids-millenium",
+      "title": "Brickoids Millenium",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Brickoids Millenium 1.1 GPL/Brickoids Millenium",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Brickoids Millenium 1.1"
+          ],
+          "preferred_partition_bytes": [
+            3956736,
+            3956736,
+            3956736
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "64ddc69de06d7a2a2c96de2cde1a11dc51f97b735b90ef7faaa0603c080e6a2b",
+          "source": "Content\\003",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "chiral",
+      "title": "Chiral",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Chiral 1.0.1 ƒ/Chiral",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0.1",
+            "1.0.1"
+          ],
+          "preferred_partition_bytes": [
+            1536000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "3572a5a638edf8e5cd978fc2c24765950400a4f8fc351e558ee24def1c884b5b",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "chrysanthemum-1-01",
+      "title": "Chrysanthemum 1.01",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Chrysanthemum 1.01",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.01",
+            "1.01"
+          ],
+          "preferred_partition_bytes": [
+            870400
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "786f77d2feafef4726b88635a990507b6b696fe16e1df894ef02f479131cc581",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "columns",
+      "title": "Columns",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Columns",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "1.0",
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            819200
+          ],
+          "data_sha256": "9de0b241f57c3036b4ce23c397601db7c122eb0a2e2b1e2c3a3ebf687fbf1c1f",
+          "resource_sha256": "330aac8bb198732948eaf7600ab81f9308be84d07cba5b88dab7b838407fcb82",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "crunch",
+      "title": "CRUNCH",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "CRUNCH Folder/CRUNCH",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Crunch! 2.0"
+          ],
+          "preferred_partition_bytes": [
+            2097152,
+            2097152
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "b9e2ba1d663e3229fb9b1f39ad6f607c03d578da8ceedd7d32161e9e3ca4c36e",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "ctb",
+      "title": "CTB",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "CTB 2.0/CTB",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            819200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "79337cc1549d94e1303b17abec3097a91ba9e0ecefb59bf2b2131462591582f0",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "cybernation-1-1-1",
+      "title": "CyberNation 1.1.1",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "CyberNation 1.1.1 ƒ/CyberNation 1.1.1",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            2097152,
+            2097152
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "c5e07dfed0c18d962fb95f3568713f0cd5a4f556737c5e3a495ea9beb8ec0ce6",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "deliverance",
+      "title": "Deliverance™",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Deliverance™ ƒ/Deliverance™",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            2252800
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "14393a86856776cfa7568bbf5e01a86a18b0c76359bbee686deaffade73cda42",
+          "source": "Content\\Boot",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "dome-wars",
+      "title": "Dome Wars",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Dome Wars/Dome Wars",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Public Beta"
+          ],
+          "preferred_partition_bytes": [
+            768000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "b7edc08364d67819f42e511eb76e217047f62db5761160e395b137cc71438510",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "drol",
+      "title": "Drol",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Drol ƒ/Drol",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "v0.9",
+            "v0.9"
+          ],
+          "preferred_partition_bytes": [
+            786432
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "11ead36436cf2b58d07bd1f62b85d160fbd46120039b001bd6e6ad157b28d0d4",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "fantastic-voyage",
+      "title": "Fantastic Voyage",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "FVoy Folder/Fantastic Voyage 1.1a",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "v1.1a"
+          ],
+          "preferred_partition_bytes": [
+            1024000,
+            1024000,
+            1024000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "fa8838a44df8ecede5af5e5d73b3351d9a644dacc6cbfa5e3775b42dd8eefa5d",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "gerbils",
+      "title": "Gerbils!",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Gerbils! Folder/Gerbils!",
+          "architecture": "PPC fragment",
+          "version_strings": [
+            "1.0.3"
+          ],
+          "preferred_partition_bytes": [
+            3800000
+          ],
+          "data_sha256": "df1a7ac8b512f2cb3c09a2ee9ec84d262c314419cf4379825d98b82b3a43bbfa",
+          "resource_sha256": "20bea501a8f3b2b78e24c9770959ccc07addf885b54ed49f28a5425dc415e32b",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "gold-digger",
+      "title": "Gold Digger",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Gold Digger 1.3.0/Gold Digger",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            4194304,
+            41943040,
+            41943040
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "d7fd7d6bdec13bfe484353fcf9ad323400bd013ebe33f3ba3c9eecc432a67fc5",
+          "source": "Content\\001",
+          "configured": true
+        },
+        {
+          "path": "Gold Digger 1.3.0/Gold Digger",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            4194304,
+            41943040,
+            41943040
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "d7fd7d6bdec13bfe484353fcf9ad323400bd013ebe33f3ba3c9eecc432a67fc5",
+          "source": "Content\\Boot",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "goldpusher",
+      "title": "GoldPusher",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "gold-pusher Folder/GoldPusher",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.5, 1998, VreeWare™"
+          ],
+          "preferred_partition_bytes": [
+            1536000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "c8c20854dd61f0575e1b5f8218350e2bcf87172a02f67f05e2de52bdc0335ad5",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "guy-smiley-vs-the-monsters",
+      "title": "Guy Smiley vs. the Monsters",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0.1"
+          ],
+          "preferred_partition_bytes": [
+            98304
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "0664a845f849f587d4e451ac5e3326d3e198e0b89c68262da8b66acb9114c430",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "lawyers",
+      "title": "Lawyers",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Lawyers",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "Lawyers 1.0",
+            "Lawyers 1.0"
+          ],
+          "preferred_partition_bytes": [
+            1048576
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "98afc515ebd66157e62f88732af793f9e08c302e163f53f9edacfe6d242a2639",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "lemmings",
+      "title": "Lemmings",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.4.2.a"
+          ],
+          "preferred_partition_bytes": [
+            819200,
+            2048000,
+            2048000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "fdb1cfce54fb970f37654c910a7c15b2b19189e368001bec4201ea9219e85187",
+          "source": "Content\\006",
+          "configured": true
+        },
+        {
+          "path": "Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.5.2"
+          ],
+          "preferred_partition_bytes": [
+            819200,
+            2048000,
+            2048000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "e4fb726ba6da7946962f3ca603907ba9083f963ffe15e47165255d671c3c9168",
+          "source": "Content\\006",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "macpipes",
+      "title": "MacPipes",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "MacPipes ƒ/MacPipes 2.2.7",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "2.2.7",
+            "2.2.7"
+          ],
+          "preferred_partition_bytes": [
+            1257472
+          ],
+          "data_sha256": "1793a35a6db5edcddb737f2217fbb1932eec3336c290bfdd11ce23ebec7aa6b1",
+          "resource_sha256": "4e1d464e94313f4cbe1131d5d7c9003f104c5d3be1f5f35a26c897554459b6ed",
+          "source": "Content\\002",
+          "configured": true
+        },
+        {
+          "path": "MacPipes ƒ/MacPipes 2.0.1",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "2.0.1",
+            "MacPipes 2.0.1"
+          ],
+          "preferred_partition_bytes": [
+            1048576
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "2af7251b171f1299ed84c9500c98fa712e16847d820998f8ee1f2ec18a7f4f32",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "maelstrom",
+      "title": "Maelstrom",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.4.3",
+            "1.4.3"
+          ],
+          "preferred_partition_bytes": [
+            2355200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "ad3a3b04aefcca625c206fb5828f0d79772cf080ba26e20a91a3a180b96fd12d",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "mantra",
+      "title": "Mantra",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Mantra v1.02 Folder/Mantra v1.02",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0.2",
+            ""
+          ],
+          "preferred_partition_bytes": [
+            2097152
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "bcffe9c28a82506fbe20fe407880bf13c7cdbf2532787a6a92886dbec0596222",
+          "source": "Content\\002",
+          "configured": true
+        },
+        {
+          "path": "Mantra v1.02 Folder/Mantra v1.02",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0.2",
+            ""
+          ],
+          "preferred_partition_bytes": [
+            2097152
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "bcffe9c28a82506fbe20fe407880bf13c7cdbf2532787a6a92886dbec0596222",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "mantra-ii",
+      "title": "Mantra II",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Mantra II v1.02 ƒ/Mantra II v1.02",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.02",
+            "1.02"
+          ],
+          "preferred_partition_bytes": [
+            6144000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "8eb14464a939f9e5d8ee8639d217043afce3b685302747e55a0e829d71349d06",
+          "source": "Content\\006",
+          "configured": true
+        },
+        {
+          "path": "Mantra II v1.02 ƒ/Mantra II v1.02 PPC",
+          "architecture": "PPC fragment",
+          "version_strings": [
+            "1.02",
+            "1.02"
+          ],
+          "preferred_partition_bytes": [
+            8388608,
+            10485760,
+            10485760
+          ],
+          "data_sha256": "9191d9b0cff6a03ac1cb1591b32068560ca773d79f384f06d634e2844eaa4757",
+          "resource_sha256": "26977f2dc3e98b528b63c16035b10e6f1c72d07e9673a4576de44e164ae6b363",
+          "source": "Content\\006",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "nort",
+      "title": "nort",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Nort Folder/nort",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            2048000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "64d26afd7933a5b7f837eb519b83bd96ca849621896db8822ad57fb4370a44d9",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "oh-no-more-lemmings",
+      "title": "Oh No! More Lemmings",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            2048000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "c211a006039d99be078b9f82b172de9dbb3ef008d5f6aaaad724aa521650c644",
+          "source": "Content\\006",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "oregon-trail",
+      "title": "Oregon Trail",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Oregon Trail/Oregon Trail",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.1"
+          ],
+          "preferred_partition_bytes": [
+            1024000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "7781c8cea88a8e900f740bbf6facc7c5f37b6e6335a317bb29085e0cfcc3749e",
+          "source": "Content\\003",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "pac-in-time",
+      "title": "PAC IN TIME",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "PAC IN TIME",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            3072000,
+            3072000,
+            3072000
+          ],
+          "data_sha256": "efd97886a38a6a95a266ac6afe7e10d44172a15946e23f9bd2186542fa113ab2",
+          "resource_sha256": "84ef58180d3f3b0f837d6d690f924a651c38a0066e394a191a9fee05e5253aff",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "pac-the-man",
+      "title": "Pac the Man",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "PactheMan4.5.1/Pac the Man",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "4.5.1"
+          ],
+          "preferred_partition_bytes": [
+            2252800
+          ],
+          "data_sha256": "539c1591edf484725fc777e6b147be1217b824d6f58e9b5ead1c498a1a93a0b5",
+          "resource_sha256": "25e0c3107fee5f4d029c5b39bae04f4b103cfc4452373d99c1b80950760a52ce",
+          "source": "Content\\006",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "particleman-1-0",
+      "title": "ParticleMan 1.0",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "ParticleMan 1.0/ParticleMan 1.0",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "ParticleMan",
+            "ParticleMan"
+          ],
+          "preferred_partition_bytes": [
+            655360
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "2022cdf8b23ef743a9b4e8ad495ee5bed08e0f7e89507ce3d21cd5108fd2932a",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "polybrid-1-0",
+      "title": "Polybrid 1.0",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Polybrid Folder/Polybrid 1.0",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            1024000,
+            1024000
+          ],
+          "data_sha256": "f4a28e0fa6e1d8631f9ed46a30ce55fd38d114473006eaebaa8acd7e2867a207",
+          "resource_sha256": "ef976adbc9bb20f1fd6ec07862f68ca9e9a424715aec38cd5ea2c984a698931d",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "prince-of-persia",
+      "title": "Prince of Persia",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Prince of Persia ƒ/Prince of Persia",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            1024000,
+            1638400
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "6e3213d02d44e58fe957de06ec9247645f107a581d894b17b2f84f28573cd14a",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "prince-of-persia-2",
+      "title": "Prince of Persia 2",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Prince of Persia 2/Prince of Persia 2",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            2560000,
+            3072000,
+            3072000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "265116438b41e703115cc78262be1a1a31e7c08eb451fbac6ee2a946ba384550",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "robowar-4-1-1",
+      "title": "RoboWar 4.1.1",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "RoboWar 4.1.1"
+          ],
+          "preferred_partition_bytes": [
+            512000
+          ],
+          "data_sha256": "0f26f06e3262cdf70dd0e00441de3413b56ce3d8ee8604617dd23be84fffdd0b",
+          "resource_sha256": "b46ef507a84adb301baa6dbfef1a61c00756cf7ae97693efe27ccbd4dbe16c04",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "ruckus",
+      "title": "Ruckus",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "New Ruckus!/Ruckus",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            3072000
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "dd6303f794aabf977878479607c54603ac00ae07cbd1b7e30d0598fcd78a9532",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "scruffy",
+      "title": "Scruffy",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Scruffy/Scruffy",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            819200,
+            819200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "87471dc52dad1d3fc47ed5975fcdb85ae4102bff72c6f372a8157436d4af02f1",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "scruffy-ii",
+      "title": "Scruffy II",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "More ScruffyStuff/Scruffy II",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            2621440
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "790eb11b4e6a3391c598c51dc16609f5432252ee7db4be5c0eeff17f1e6f98a4",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "slithereens",
+      "title": "Slithereens",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Slithereens 1.0.0 ƒ/Slithereens",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "1.0.0",
+            "1.0.0"
+          ],
+          "preferred_partition_bytes": [
+            10240000,
+            51200000,
+            51200000
+          ],
+          "data_sha256": "85c202abcec14d6967a13a79f6d08e94466295953fb642eb5b45eb6ddc3f52da",
+          "resource_sha256": "92c658f358f33e0beaa3db5863c5a1efc398de96861c60092c7db88dc454063a",
+          "source": "Content\\003",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "sloppy-sokoban-1-7",
+      "title": "Sloppy Sokoban 1.7",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7",
+          "architecture": "PPC fragment",
+          "version_strings": [
+            "1.7.0"
+          ],
+          "preferred_partition_bytes": [
+            7168000
+          ],
+          "data_sha256": "c1a2e206eef0fec283d5cc05dba9450087cf799de365416bbf0ac2c1da009cf9",
+          "resource_sha256": "4e24847e75f0c67f539f6153a922d918e74a4f7ed3b5bd03d958163a3a9c3f59",
+          "source": "Content\\004",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "spin-doctor",
+      "title": "Spin Doctor",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Spin Doctor/Spin Doctor",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "1.2 © 1993-5 Callisto Corp.",
+            "1.2 © 1993-5 Callisto Corp."
+          ],
+          "preferred_partition_bytes": [
+            2560000
+          ],
+          "data_sha256": "52ddbfb6e6f5e1f86ea17c8500effef7646af0bc5a0a32fbf40f797dc7aa62cd",
+          "resource_sha256": "cb098b0d29038a758470096f72e8ff3ce4390538fe7aec97f3cc722dc2fbb5bb",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "star-trek-final-unity",
+      "title": "Star Trek: A Final Unity",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Star Trek TNG/\"A Final Unity\"",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "STTNG: \"A Final Unity\" mac"
+          ],
+          "preferred_partition_bytes": [
+            11776000,
+            15390720,
+            15390720
+          ],
+          "data_sha256": "05c451a9e30fdf4b605366477a9fa4ee7638d4c7f5342fe236d6a70554f9e6eb",
+          "resource_sha256": "4573853c979494d8ed857935277b54e5931ac22ae48bed63bee843a55b3f9847",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "super-munchers",
+      "title": "Super Munchers",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Super Munchers/Super Munchers",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0"
+          ],
+          "preferred_partition_bytes": [
+            870400,
+            870400
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "073d67bf2fbd0fae89b1d6f751ff63cb893637e57bef0e5d1fd957a754ea75a8",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "system-s-twilight-v1-0-5",
+      "title": "System's Twilight v1.0.5",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "1.0.5"
+          ],
+          "preferred_partition_bytes": [
+            786432,
+            1310720,
+            1310720
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "6026bde31523b59d7681ff5d226bc4262efb1418972697bd21ae3d80df385a57",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "the-big-one",
+      "title": "The Big One",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "The Big One",
+          "architecture": "68K (CODE)",
+          "version_strings": [],
+          "preferred_partition_bytes": [
+            614400
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "dc59edaa9ad7bdcb2946a09b25fae102cad57c2e919844aa2d81a00ffcd9d8a0",
+          "source": "Content\\002",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "verttice",
+      "title": "DreamLight Verttice",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0",
+          "architecture": "PPC fragment",
+          "version_strings": [
+            "7.0.2",
+            "7.0.2"
+          ],
+          "preferred_partition_bytes": [
+            6291456
+          ],
+          "data_sha256": "5d81aa1749de43c93384dae945f78e18800fb3c6ec5fa55285cde80ae1e10847",
+          "resource_sha256": "03e9d8a460a5990cc8a1d9221067de64735ce3116a34f2d0afb5a2d921442633",
+          "source": "Content\\002",
+          "configured": true
+        },
+        {
+          "path": "DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0",
+          "architecture": "PPC fragment",
+          "version_strings": [
+            "7.0.2",
+            "7.0.2"
+          ],
+          "preferred_partition_bytes": [
+            6291456
+          ],
+          "data_sha256": "5d81aa1749de43c93384dae945f78e18800fb3c6ec5fa55285cde80ae1e10847",
+          "resource_sha256": "03e9d8a460a5990cc8a1d9221067de64735ce3116a34f2d0afb5a2d921442633",
+          "source": "Content\\006",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    },
+    {
+      "slug": "zap-t-balls",
+      "title": "Zap'T'Balls",
+      "status": "pending",
+      "candidates": [
+        {
+          "path": "Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",
+          "architecture": "fat (CODE + PPC fragment)",
+          "version_strings": [
+            "",
+            ""
+          ],
+          "preferred_partition_bytes": [
+            5242880
+          ],
+          "data_sha256": "5391691965be45d9cb1013c1304d88df0490544304da5acfb75845974db0eb62",
+          "resource_sha256": "2c78e51aa2e1f75bfbf03c0041f9d724b809c756a2b9a9207c3b98d335515118",
+          "source": "Content\\003",
+          "configured": true
+        },
+        {
+          "path": "Zap'T'Balls v3.6",
+          "architecture": "68K (CODE)",
+          "version_strings": [
+            "",
+            ""
+          ],
+          "preferred_partition_bytes": [
+            2867200
+          ],
+          "data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "resource_sha256": "fb832e01fab92f2f57dacf44946ad441e725720cdc874a4faf07462c46d5fef2",
+          "source": "Content\\001",
+          "configured": true
+        }
+      ],
+      "depth_size": "unknown; verify per executable",
+      "preferences_save_id": "unassigned; no browser entry yet",
+      "controls": "unverified",
+      "timing": "not yet measured"
+    }
+  ],
+  "excluded_applications": [
+    {
+      "source": "Content\\002",
+      "path": "gold-pusher Folder/Gold Edit",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\002",
+      "path": "MacPipes ƒ/Registration/Register MacPipes",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\002",
+      "path": "Maelstrom 1.4.3 ƒ (LEFT OUT)/Register Maelstrom",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\002",
+      "path": "New Ruckus!/Ruckus Manual",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\002",
+      "path": "Bolo f/BMAPEdit 2.0.1/BMAPEdit 2.0.1",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\002",
+      "path": "Bolo f/Bolo Finder 1.0.2/Bolo Finder",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\002",
+      "path": "Bolo f/Internet Bolo Buddy 1.0.1 ƒ/Internet Bolo Buddy 1.0.1",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\002",
+      "path": "Bolo f/Ladmo 0.6 ƒ/Bolo Team App.ƒ/Bolo Team App",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\003",
+      "path": "Slithereens 1.0.0 ƒ/Register Slithereens",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\003",
+      "path": "Slithereens 1.0.0 ƒ/Slithereens Installer",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\003",
+      "path": "Zap'T'Balls v7.1/Register",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\004",
+      "path": "Prince of Persia ƒ/The Prince of Persia Editor f/PoPE 1.0",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\004",
+      "path": "Bonkheads Deluxe/The Bonkreator/Blueprints",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\004",
+      "path": "Bonkheads Deluxe/The Bonkreator/Bonkreator",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\006",
+      "path": "Lemmings/ONML/Lemmings/Extras/LemmingsCheat 1.0b1/LemmingsCheat",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\006",
+      "path": "Lemmings/ONML/Lemmings/Extras/Version 1.4.2a patch/Lemmings 1.4.2a patch",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Blobbo 1.0 Lite ƒ/Blobbo 1.0->1.0.1 Lite patch",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Blobbo1.0.1 Fullversion/ScenMaker",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Chiral 1.0.1 ƒ/Chiral Basics",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Delirium 1.1 Folder/Register Me (Delirium 1.1)",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\001",
+      "path": "FVoy Folder/FVoyage File Converter",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\001",
+      "path": "MacPipes ƒ/Register MacPipes",
+      "reason": "Auxiliary editor/manual/installer/registration application"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Marthon Tools/Marathon Sound Transporter/Sound Transporter",
+      "reason": "Marathon editing tools; no Marathon game executable in this folder"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Marthon Tools/Mia1.0b17 Folder/Mia! 1.0b17",
+      "reason": "Marathon editing tools; no Marathon game executable in this folder"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Marthon Tools/Pfhred ƒ/Pfhred 1.1.3",
+      "reason": "Marathon editing tools; no Marathon game executable in this folder"
+    },
+    {
+      "source": "Content\\001",
+      "path": "Trash/Gold Digger 1.2.1/Gold Digger",
+      "reason": "Trash duplicate; not selected over an active copy"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "StuffIt Expander™",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Adaptec Toast Deluxe 4.0/Adaptec Toast",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "After Dark 4.0/After Dark Manual",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/Apple LaserWriter Software/Desktop Printer Utility",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/Script Editor",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/Automated Tasks/Add Alias to Apple Menu",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/Automated Tasks/Share a Folder",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/Automated Tasks/Share a Folder (no Guest)",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/Automated Tasks/Start File Sharing",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/Automated Tasks/Stop File Sharing",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/More Automated Tasks/Alert When Folder Changes",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/More Automated Tasks/Hide/Show Folder Sizes",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/AppleScript/More Automated Tasks/Synchronize Folders",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/Iomega/Tools",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/Monitors Extras Folder/DigitalColor Meter",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Apple Extras/QuickDraw™ 3D Folder/SimpleText",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/Apple Video Player",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/AppleCD Audio Player",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/Network Browser",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/SimpleText",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/QuickTime/MoviePlayer",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/QuickTime/PictureViewer",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/ArchiveSearch",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/StuffIt Deluxe",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/StuffIt Drag and Drop/DropConverter",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/StuffIt Drag and Drop/DropSegment",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/StuffIt Drag and Drop/DropStuff",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/StuffIt Drag and Drop/DropZip",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/StuffIt Drag and Drop/Secure Delete",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/StuffIt Deluxe 6.0/StuffIt Drag and Drop/Stuffit Expander",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/Toast Folder/Adaptec Toast 3.5.7",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/Toast Folder/Goodies/AppleScript Samples/Drop•Burn",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/Toast Folder/Goodies/AppleScript Samples/Hybridizer",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Applications/Toast Folder/Goodies/Toast Audio Extractor/Toast Audio Extractor 1.0",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Copy Machine",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Copy Machine Help (Pre-7.5)",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Findit",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Iomega Guest",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Iomega Register",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Tools",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Backup by Dantz/DiskFit Direct",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Backup by Dantz/DiskFit Demo/DiskFit Demo",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Backup by Dantz/Retrospect Remote Demo/Retrospect Remote Demo",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Manuals and Help/Findit Help",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Manuals and Help/Iomega Drive Options Help",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Manuals and Help/Iomega Guest Help",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Manuals and Help/Iomega Software Manual",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Iomega Tools/Manuals and Help/Tools Online Help",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Serial MReader v0.03 2021-08 ƒ/Serial MReader v0.03 68K",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Serial MReader v0.03 2021-08 ƒ/Serial MReader v0.03 PPC",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "StuffIt/StuffIt Standard 7.0.3/DropStuff",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "StuffIt/StuffIt Standard 7.0.3/DropTar",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "StuffIt/StuffIt Standard 7.0.3/DropZip",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "StuffIt/StuffIt Standard 7.0.3/StuffIt Expander",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Network Assistant Security",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Apple Menu Items/Note Pad",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Apple Menu Items/Scrapbook",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Apple Menu Items/Sherlock",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Claris/QuickHelp",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Control Panels/Adobe Gamma",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Control Panels/Configuration Manager",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Control Panels/Internet Config",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Extensions/PrintMonitor",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Extensions/Find/Find by Content Indexing",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Extensions/QuickTime Extensions/Icon\r",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Extensions (Disabled)/Desktop PrintMonitor",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Help/Apple Help Viewer/Help Viewer",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Action Dome 1.0",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Arashi 1.1.1",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Bachman 2.0u",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Barney Carnage 2.0",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/BattleTanks 2.12.1",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Bedlam",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Blobbo 1.0.1",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Bloodsuckers",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Bolo 0.99.5",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Bonk 1.4.2 (256 Colors)",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Bonkheads Deluxe",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Brickles Plus 3.0",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Chrysanthemum 1.01",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/ClockWerx",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/CRUNCH",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/CyberNation 1.1.1",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Delirium 1.1",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/DreamLight® Verttice™ 3.0",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Drol",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Fantastic Voyage 1.1a",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Gerbils!",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Gold Digger",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/GoldPusher",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Koji The Frog 2.0.1",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Koji the Frog 2.0.4",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Lawyers",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/MacPipes 2.0.1",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Mantra v1.02",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/PAC IN TIME",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Ruckus",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Scruffy",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Scruffy II",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Slithereens",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Spin Doctor",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/System's Twilight v1.0.5",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/The Big One",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Zap'T'Balls v3.6",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/Zap'T'Balls v7.1 (FAT)",
+      "reason": "Finder alias, not a separate executable"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Scripting Additions/Network Setup Scripting",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "System Folder/Scripting Additions/URL Access Scripting",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Trash/Koji the Frog/Koji the Frog 2.0.4",
+      "reason": "Trash duplicate; not selected over an active copy"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Desktop Printer Utility",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Disc Burner",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Disk Copy",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Disk First Aid",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Drive Setup",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Remote Desktop Security",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Assistants/Mac OS Setup Assistant",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Assistants/Internet Setup/Internet Editor Assistant",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Assistants/Internet Setup/Internet Setup Assistant",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/Assistants/Internet Setup/ISP Referral Assistant",
+      "reason": "OS/utility/helper application, outside game queue"
+    },
+    {
+      "source": "Content\\Boot",
+      "path": "Utilities/At Ease-IDE Utility/At Ease-IDE Utility",
+      "reason": "OS/utility/helper application, outside game queue"
+    }
+  ],
+  "disc_note": "Configured Star Trek disc catalogue has an out-of-bounds partition; its game executable was separately found on 002. No disc content silently inferred."
+}

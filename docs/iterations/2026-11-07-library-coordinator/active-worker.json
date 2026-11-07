@@ -1,8 +1,8 @@
 {
-  "slug": "robowar-4-1-1",
-  "task_name": "/root/robowar_4_1_1",
+  "slug": "ruckus",
+  "task_name": "/root/ruckus",
   "status": "running; see active-runners.json",
-  "starting_revision": "6f72aa8b8980450ce7a006ea894ff225de7b5d0b",
-  "brief": "robowar-4-1-1-brief.md",
-  "updated_at": "2026-11-07T21:20:16.489100+00:00"
+  "starting_revision": "30819eb439e0164b42098f78ca528b697a3beafd",
+  "brief": "ruckus-brief.md",
+  "updated_at": "2026-11-07T21:21:37.610974+00:00"
 }

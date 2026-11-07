@@ -1887,7 +1887,7 @@
     {
       "slug": "robowar-4-1-1",
       "title": "RoboWar 4.1.1",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1",
@@ -1907,12 +1907,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Four native scripts360/172/197/202 frontend ticks; deterministic diagnostics only, no release performance.",
+      "report": "robowar-4-1-1/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent independently matched source001/Boot and81-file fixture hashes, read four passed raw reports (zero assertions/errors/exhaustion), inspected functional Open Robot picker and actual94-byte RoboPrefs open/read. Empty arena and menus work; supplied robot selection/battle remain untested at bounded follow-up cap. No runtime blocker or pacing qualification established."
     },
     {
       "slug": "ruckus",
       "title": "Ruckus",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "New Ruckus!/Ruckus",
@@ -1935,7 +1938,7 @@
     {
       "slug": "scruffy",
       "title": "Scruffy",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Scruffy/Scruffy",

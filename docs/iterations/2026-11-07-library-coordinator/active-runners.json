@@ -1,20 +1,20 @@
 {
   "runners": [
     {
-      "slug": "prince-of-persia-2",
-      "task_name": "/root/prince_of_persia_2",
-      "status": "reviewed; workload released",
-      "brief": "prince-of-persia-2-brief.md"
-    },
-    {
       "slug": "robowar-4-1-1",
       "task_name": "/root/robowar_4_1_1",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "robowar-4-1-1-brief.md"
+    },
+    {
+      "slug": "ruckus",
+      "task_name": "/root/ruckus",
+      "status": "running",
+      "brief": "ruckus-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T21:20:53.380126+00:00"
+  "updated_at": "2026-11-07T21:34:12.925394+00:00"
 }

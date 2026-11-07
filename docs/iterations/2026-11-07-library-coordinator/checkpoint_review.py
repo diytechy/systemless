@@ -46,7 +46,8 @@ def main():
         print('Checkpoint preconditions checked; no mutation: ' + slug)
         return
     for path in (report, summary):
-        path.write_text(path.read_text(encoding='utf-8-sig').rstrip() + '\n', encoding='utf-8')
+        lines = path.read_text(encoding='utf-8-sig').splitlines()
+        path.write_text('\n'.join(line.rstrip() for line in lines).rstrip() + '\n', encoding='utf-8')
     run(sys.executable, str(root / 'record_review.py'), *review_args, cwd=repo)
     for row in runners['runners']:
         if row['slug'] == slug:

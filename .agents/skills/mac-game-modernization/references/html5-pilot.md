@@ -4,11 +4,11 @@ The purpose is to measure the effort and outcome of one genuine browser reimplem
 
 ## Select and bound the slice
 
-Use the inventory and observed behavior to compare candidate games. Koji is a natural first candidate because it was the initial target, not because its effort has been established. Record resource accessibility, available source/documentation, amount of hidden logic, representative mechanics, animation/audio complexity and the user's desired enhancement.
+Use the title selected by the user; the current handoff explicitly selects ClockWerx. If no title has been selected for a later task, use the inventory and observed behavior to compare candidates. Record resource accessibility, available source/documentation, amount of hidden logic, representative mechanics, animation/audio complexity and the user's desired enhancement.
 
 Inspect assets and behavior before choosing a framework. Keep extracted sprites, maps, sounds and private reverse-engineering scratch outside Git. Retain original dimensions, palette/transparent masks, animation order, sprite anchors, timing and asset IDs. Do not assume an image export reveals collision or level rules.
 
-Set a finite discovery/prototype budget with the task's scope. If none is supplied, propose a small explicit slice and record it before implementation; do not silently turn feasibility work into a full game rewrite. A suitable Koji slice could be one small scene with movement, jump, tongue interaction, one obstacle/enemy, collision, restart and one sound. Verify which mechanics actually occur in the chosen reference scene.
+Set a finite discovery/prototype budget with the task's scope. If none is supplied, propose a small explicit slice and record it before implementation; do not silently turn feasibility work into a full game rewrite. For ClockWerx, a suitable slice is one verified tutorial board with a rotating hand, dot/pivot transfer, the original actions relevant to that board, failure/completion, pause, restart and representative sound. Verify the actual mechanics and timing in the chosen reference scene before implementing them.
 
 Write acceptance checks from observed original behavior, labeling approximations. Identify what the slice excludes: full campaign, all enemies, menus, save compatibility, music and other unsupported mechanics. Keep a list of unknowns that could dominate full-port effort.
 
@@ -22,12 +22,13 @@ Start with original-resolution assets and an explicit logical collision model. T
 
 ## Measure outcome and effort
 
-Compare the same machine/browser, scene, window size and workload. Report both the tuned Systemless baseline and the pilot's actual scope. A simplified scene can be faster because it omits work; it does not prove the complete port will have the same gain.
+Compare the same machine/browser, scene, window size, input workload, sound state and real-world gameplay pace. Run default Systemless, the best fidelity-checked tuned configuration and the HTML5 slice sequentially. If the tuned candidate is still experimental, label it. Report the pilot's actual scope. A simplified scene can be faster because it omits work; it does not prove the complete port will have the same gain. Distinguish measured end-to-end resource differences from isolated emulation overhead; differences in rules, presentation, pacing and omitted features can also explain a gap.
 
 | Dimension | Evidence to collect |
 |---|---|
 | Startup and portability | Asset/bundle size, cold/warm load, local/static-host behavior, tested browsers; offline support only if tested. |
 | Responsiveness | Frame-time distribution, missed frames, input-to-visible-response method and limitations; no invented latency number. |
+| Runtime resources | Browser CPU and memory using a documented, comparable measurement boundary; host-wide load is context, not the game's own CPU. Guest ticks/MIPS and requestAnimationFrame rates are not interchangeable with HTML5 animation FPS. |
 | Fidelity | Movement/jump/rotation timing, interactions, collision, scoring, level progression, side-by-side observed discrepancies. |
 | Presentation | Original versus enhanced art, sprite alignment, crisp/smooth scaling, audio timing and synchronization. |
 | Usability/state | Keyboard/controller, focus loss, pause, restart, persistence and recovery. |

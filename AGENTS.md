@@ -6,7 +6,7 @@ This checkout includes the upstream Systemless emulator and an opt-in private Ma
 
 Use [mac-game-modernization](.agents/skills/mac-game-modernization/SKILL.md) for extracting owned games, adding library entries, profiling or tuning individual titles, controller integration, and assessing an HTML5 rewrite. Read its linked tuning or pilot reference for the task at hand.
 
-Start resumed work with the [next-session handoff](docs/iterations/2026-11-07-game-modernization/next-session.md). The [performance investigation](docs/iterations/2026-11-06-private-library/performance-investigation.md) contains measured results and their limits. Session paths and measurements are evidence, not permanent defaults.
+Start resumed work with the [next-session handoff](docs/iterations/2026-11-07-game-modernization/next-session.md). For the user's requested sequential Sol coordinator run, use the [coordinator prompt](docs/iterations/2026-11-07-game-modernization/coordinator-prompt.md) and [per-game worker brief](docs/iterations/2026-11-07-game-modernization/game-agent-brief.md); that workflow delegates one game at a time and finishes with a ClockWerx HTML5 comparison. The [performance investigation](docs/iterations/2026-11-06-private-library/performance-investigation.md) contains measured results and their limits. Session paths and measurements are evidence, not permanent defaults.
 
 For structured native guest interaction, also use [systemless-headless](.agents/skills/systemless-headless/SKILL.md). Deterministic frontend ticks are not a real-time performance benchmark.
 

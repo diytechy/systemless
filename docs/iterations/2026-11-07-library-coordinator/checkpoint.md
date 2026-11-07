@@ -2,6 +2,8 @@
 
 Started 2026-11-07 00:44 America/Chicago. Checkout clean at start: dev / ed74c8b4, two local commits ahead of origin. No push/deploy authorized.
 
+For later per-game updates, current-action.md and review-log.md supersede the historical counts/next-action details below; queue.json is the canonical per-title status. Keep all three updated after reviewing each worker.
+
 Inventory: read-only APPL scan of configured 001/002/003/004/006/Boot and Star Trek disc, also present unconfigured 005/007/008. All source before/after SHA256 equal. Full application inventory is inventory.json. Classification found 68 game families, retaining 81 executable candidates/variants; 145 auxiliary, alias and utility APPL entries are listed separately with reasons in queue.json. Disc catalogue blocked by an out-of-bounds Apple_HFS partition; independent read-only inspection pending.
 
 Order: ClockWerx first attempt reviewed: measurement blocked by Windows Computer Use URL policy stop, zero new captures; see clockwerx/report.md. No settings accepted. Koji 2.0.4 is next, then Delirium 1.1, then the remaining queue. ClockWerx pilot only after every title receives a first-pass result.

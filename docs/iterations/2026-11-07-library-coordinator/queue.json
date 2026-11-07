@@ -103,7 +103,7 @@
     {
       "slug": "3-d-cannon",
       "title": "3-D Cannon",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "3-D Cannon/3-D Cannon(FAT)",
@@ -118,15 +118,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "800x600 8-bit native exploratory; source SIZE5120000; browser display unverified",
+      "preferences_save_id": "Existing3-D Cannon Preferences copied privately; browser ID/mapping unassigned",
+      "controls": "ReadMe arrows aim, < > velocity, Space fire, Command accelerates; Space transition observed only",
+      "timing": "Browser baseline pending compiled entry/route; native ticks are behavior only",
+      "report": "3-d-cannon/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Read-only hashes/file forks/Finder fields verified; native title/map/Space response,0assertions. Synthetic partial-ancestor dates/path guards pass. machfs original folder Finder information unavailable; diagnostic fixture scope explicit; no settings accepted"
     },
     {
       "slug": "3d-brick-bash-1-1-1",
       "title": "3d Brick Bash! 1.1.1",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1",

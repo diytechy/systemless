@@ -33,7 +33,18 @@ def main():
     staged = subprocess.check_output(['git', 'diff', '--cached', '--name-only'], cwd=repo, text=True).strip()
     if staged:
         raise SystemExit('Existing staged changes require coordinator review before checkpoint')
-    report = root / slug / 'report.md'
+    report_name = 'report.md'
+    for index, value in enumerate(review_args):
+        if value == '--report':
+            if index + 1 >= len(review_args):
+                parser.error('Missing report filename')
+            report_name = review_args[index + 1]
+        elif value.startswith('--report='):
+            report_name = value.partition('=')[2]
+    if Path(report_name).name != report_name or Path(report_name).suffix != '.md':
+        parser.error('Report must be a Markdown filename within this title')
+    report = root / slug / report_name
+    report_paths = list(dict.fromkeys([root / slug / 'report.md', report]))
     summary = root / slug / 'review-summary.json'
     result = json.loads(summary.read_text(encoding='utf-8-sig'))
     if result.get('workload_released') is not True or not report.is_file():
@@ -45,7 +56,7 @@ def main():
     if args.check_only:
         print('Checkpoint preconditions checked; no mutation: ' + slug)
         return
-    for path in (report, summary):
+    for path in (*report_paths, summary):
         lines = path.read_text(encoding='utf-8-sig').splitlines()
         path.write_text('\n'.join(line.rstrip() for line in lines).rstrip() + '\n', encoding='utf-8')
     run(sys.executable, str(root / 'record_review.py'), *review_args, cwd=repo)
@@ -55,7 +66,7 @@ def main():
     runners['updated_at'] = dt.datetime.now(dt.timezone.utc).isoformat()
     runners_path.write_text(json.dumps(runners, indent=2) + '\n', encoding='utf-8')
     run(sys.executable, str(root / 'classify_inventory.py'), cwd=repo, stdout=subprocess.DEVNULL)
-    paths = [root / (slug + '-brief.md'), report, summary, runners_path]
+    paths = [root / (slug + '-brief.md'), *report_paths, summary, runners_path]
     paths += [root / name for name in ('active-worker.json', 'current-action.md', 'queue.json',
                                       'inventory-and-queue.md', 'review-log.md')]
     run('git', 'add', '-f', '--', *(str(p) for p in paths), cwd=repo)

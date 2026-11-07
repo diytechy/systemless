@@ -1,0 +1,65 @@
+{
+  "title": "Gold Digger 1.3.0",
+  "outcome": "Prepared copied fixture; native initial gameplay observed; unchanged settings",
+  "preservation": {
+    "source_before_after": {
+      "001": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\gold-digger\\gold-digger-with-prefs.hfv",
+    "fixture_sha256": "ac826501da6a617f565a5771fb72d34936ba6ad6ae33bc112d17f6350421a958",
+    "verified_files": 8,
+    "additional_archive_files": 1,
+    "limits": "Forks/Finder file fields and represented folder dates verified. Folder Finder info unavailable. Raw alias retained, not claimed resolvable. Associated SIT retained, contents not checked."
+  },
+  "native": {
+    "binary": "D:/SystemlessBuild/target/ci-test/systemless.exe",
+    "sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Compile revision unestablished; baseline ed74c8b4 reference only",
+    "architecture": "68k",
+    "executable": "Gold Digger 1.3.0/Gold Digger",
+    "display": "800x600 8-bit exploratory; readme recommends >=600x380 >=256 colors",
+    "partition": "No override; SIZE0=40MiB Finder override; SIZE-1=4MiB developer default; SIZE1=40MiB retained",
+    "result": "Four scenarios passed",
+    "error": null,
+    "assertions": 0,
+    "budget_exhausted_frames": 0
+  },
+  "behavior": {
+    "observed": [
+      "Title v1.3.0",
+      "Original preference opened at virtual System Folder/Preferences path",
+      "Game menu/New Game selection",
+      "Screen1 playfield after transition",
+      "Changed player position after raw arrow probe; directional causality unproven"
+    ],
+    "untested": [
+      "Independent timing/fidelity",
+      "Busy scenes",
+      "Pause/resume",
+      "Audible sound",
+      "Save roundtrip",
+      "Controller"
+    ]
+  },
+  "dependencies": [
+    "The Official Lost Mines opened successfully",
+    "Novice Mines retained",
+    "Gold Digger Preferences retained and loaded"
+  ],
+  "controls": "Menu mouse sequence inspected. Right arrow key124/ch29 held20 ticks exploratory only. No mapping recommended.",
+  "changes": [
+    "Own report and private copied evidence only; no runtime/catalogue/pacing changes"
+  ],
+  "checks": [
+    "001/Boot source hashes unchanged",
+    "Reopened fork/Finder/date comparison",
+    "Four native reports passed; inspected screenshots",
+    "All child processes exited inside75s cap"
+  ],
+  "next_step": "Root may prepare release entry and test documented controls/pause with original preference; no pacing recommendation.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\gold-digger\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\gold-digger\\evidence-manifest.json",
+  "workload_released": true
+}

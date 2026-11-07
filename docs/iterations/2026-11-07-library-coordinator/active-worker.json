@@ -1,8 +1,8 @@
 {
-  "slug": "gold-digger",
-  "task_name": "/root/gold_digger",
+  "slug": "goldpusher",
+  "task_name": "/root/goldpusher",
   "status": "running; see active-runners.json",
-  "starting_revision": "e62a26750362f20507e2f20cb8180681fd56cff4",
-  "brief": "gold-digger-brief.md",
-  "updated_at": "2026-11-07T14:13:27.535312-06:00"
+  "starting_revision": "62e292f05dec1e01143f7dc77e2bd2c8710de6c3",
+  "brief": "goldpusher-brief.md",
+  "updated_at": "2026-11-07T14:15:07.496594-06:00"
 }

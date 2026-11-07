@@ -46,9 +46,9 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 36 | Drol v0.9 (ReadMe beta0.9b1) | Content\001: Drol ƒ/Drol | 68K (CODE) | not yet measured |
 | 37 | Fantastic Voyage1.1a | Content\001: FVoy Folder/Fantastic Voyage 1.1a | 68K (CODE) | not yet measured |
 | 38 | Gerbils!1.0.3 | Content\002: Gerbils! Folder/Gerbils! | PPC fragment | compatibility blocker |
-| 39 | Gold Digger | Content\001: Gold Digger 1.3.0/Gold Digger<br>Content\Boot: Gold Digger 1.3.0/Gold Digger | 68K (CODE) | worker active |
-| 40 | GoldPusher | Content\002: gold-pusher Folder/GoldPusher | 68K (CODE) | worker assigned |
-| 41 | Guy Smiley vs. the Monsters | Content\001: Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters | 68K (CODE) | pending |
+| 39 | Gold Digger1.3.0 | Content\001: Gold Digger 1.3.0/Gold Digger<br>Content\Boot: Gold Digger 1.3.0/Gold Digger | 68K (CODE) | not yet measured |
+| 40 | GoldPusher | Content\002: gold-pusher Folder/GoldPusher | 68K (CODE) | worker active |
+| 41 | Guy Smiley vs. the Monsters | Content\001: Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters | 68K (CODE) | worker assigned |
 | 42 | Lawyers | Content\001: Lawyers | 68K (CODE) | pending |
 | 43 | Lemmings | Content\006: Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a<br>Content\006: Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings | 68K (CODE) | pending |
 | 44 | MacPipes | Content\002: MacPipes ƒ/MacPipes 2.2.7<br>Content\001: MacPipes ƒ/MacPipes 2.0.1 | 68K (CODE), fat (CODE + PPC fragment) | pending |

@@ -1239,8 +1239,8 @@
     },
     {
       "slug": "gold-digger",
-      "title": "Gold Digger",
-      "status": "worker active",
+      "title": "Gold Digger1.3.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Gold Digger 1.3.0/Gold Digger",
@@ -1271,10 +1271,10 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured",
+      "depth_size": "Readme recommends600x380/256colors; observed800x600x8. Original SIZE-1 4MiB vs0/1 40MiB retained, no override.",
+      "preferences_save_id": "Actual Boot Gold Digger Preferences reachable; separate preserved associated SIT unexpanded, no existing browser save ID.",
+      "controls": "New Game menu works; right124/ch29 changes image but autonomous motion confounds direction; pause untested.",
+      "timing": "Native menu/New Game/playfield readiness; release-browser baseline pending.",
       "associated_containers": [
         {
           "path": "Gold_Digger_1.3.0.sit",
@@ -1284,12 +1284,15 @@
           "associated_game": "gold-digger",
           "classification": "Archive for an already queued title; contents/version not independently checked"
         }
-      ]
+      ],
+      "report": "gold-digger/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Eight-file game+actual-pref fixture verified; parent source001/Boot/fixture hashes, raw322tick0assert/exhaust report and clean screen1 inspected. Original pref PBOpen/PBRead and official-mine reads observed. Four complete probes; transient122tick stripes settle by302. Directional attribution unresolved; SIZE variants unchanged, no pacing candidate."
     },
     {
       "slug": "goldpusher",
       "title": "GoldPusher",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "gold-pusher Folder/GoldPusher",
@@ -1314,7 +1317,7 @@
     {
       "slug": "guy-smiley-vs-the-monsters",
       "title": "Guy Smiley vs. the Monsters",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters",

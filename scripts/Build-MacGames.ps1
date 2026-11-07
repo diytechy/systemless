@@ -1,0 +1,3 @@
+[CmdletBinding()]
+param([string]$BuildRoot='D:\SystemlessBuild',[string]$Source='D:\SheepShaver_MAC_Emulator\Content',[switch]$Extract)
+& "$PSScriptRoot\Build-KojiBrowser.ps1" -BuildRoot $BuildRoot -Source $Source -Extract:$Extract -Library

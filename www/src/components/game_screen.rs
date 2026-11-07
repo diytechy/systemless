@@ -782,7 +782,10 @@ fn GameFilesDialog(
                     if let Some(element) = web_sys::window().and_then(|w| w.document())
                         .and_then(|d| d.get_element_by_id(&format!("{}-tab-{id}", game.id)))
                         .and_then(|e| e.dyn_into::<HtmlElement>().ok()) {
-                        let _ = element.focus();
+                        // Keep changing information tabs from moving the page.
+                        let options = web_sys::FocusOptions::new();
+                        options.set_prevent_scroll(true);
+                        let _ = element.focus_with_options(&options);
                     }
                 }
             >
@@ -4512,6 +4515,7 @@ fn mobile_key_code(key: &str) -> Option<(u8, u8)> {
         "Escape" => map_key("Escape", "Escape"),
         "Shift" => map_key("Shift", "ShiftLeft"),
         "Control" => map_key("Control", "ControlLeft"),
+        "Alt" => map_key("Alt", "AltLeft"),
         "Meta" => map_key("Meta", "MetaLeft"),
         keypad if keypad.starts_with("Numpad") => map_key(keypad, keypad),
         "None" => None,
@@ -4552,7 +4556,11 @@ fn perf_now_ms() -> f64 {
 
 fn focus_canvas(canvas: &HtmlCanvasElement) {
     if let Some(element) = canvas.dyn_ref::<HtmlElement>() {
-        let _ = element.focus();
+        // A scroll during pointerdown would change the bounding rect before
+        // translating this same pointer event into guest coordinates.
+        let options = web_sys::FocusOptions::new();
+        options.set_prevent_scroll(true);
+        let _ = element.focus_with_options(&options);
     }
 }
 

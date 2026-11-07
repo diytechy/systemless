@@ -8,7 +8,10 @@ use systemless_catalogue_tools::catalogue_tools::{
 pub fn apply(compiled: &mut CompiledCatalogue, site_dir: &Path) {
     println!("cargo:rerun-if-changed=private_koji.rs");
     println!("cargo:rerun-if-env-changed=SYSTEMLESS_PRIVATE_KOJI");
-    match env::var("SYSTEMLESS_PRIVATE_KOJI").as_deref() {
+    match env::var("SYSTEMLESS_PRIVATE_LIBRARY")
+        .or_else(|_| env::var("SYSTEMLESS_PRIVATE_KOJI"))
+        .as_deref()
+    {
         Err(env::VarError::NotPresent) => return,
         Ok("1") => {}
         _ => panic!("SYSTEMLESS_PRIVATE_KOJI must be 1 or unset"),

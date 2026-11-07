@@ -1,0 +1,15 @@
+# Example only: use the existing private HomeHub HTTPS/access configuration.
+# Mount www/dist read-only as /srv/mac-games in the Caddy container.
+mac-games.example.invalid {
+    root * /srv/mac-games
+    encode zstd gzip
+    header {
+        Cross-Origin-Opener-Policy same-origin
+        Cross-Origin-Embedder-Policy credentialless
+        X-Content-Type-Options nosniff
+        X-Robots-Tag "noindex, nofollow"
+        Cache-Control "no-cache"
+    }
+    try_files {path} /index.html
+    file_server
+}

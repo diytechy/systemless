@@ -16,6 +16,7 @@ const SYSTEMLESS_REPOSITORY: &str = env!("SYSTEMLESS_REPOSITORY");
 const SYSTEMLESS_VERSION: &str = env!("SYSTEMLESS_VERSION");
 const SYSTEMLESS_GIT_SHA: &str = env!("SYSTEMLESS_GIT_SHA");
 const UNKNOWN: &str = "unknown";
+fn private_library() -> bool { option_env!("SYSTEMLESS_PRIVATE_LIBRARY") == Some("1") }
 const COMPACT_DOCUMENT_TITLE: &str = "Systemless";
 const COMPACT_DOCUMENT_TITLE_MEDIA: &str =
     "(max-width: 760px), (display-mode: standalone), (hover: none) and (pointer: coarse)";
@@ -91,7 +92,7 @@ fn SiteHeader(
                         navigate_to_library(set_view);
                     }
                 >
-                    "systemless.org"
+                    {if private_library() { "Macintosh Arcade" } else { "systemless.org" }}
                 </a>
                 <nav class="site-header__nav" aria-label="Site navigation">
                     <button
@@ -148,7 +149,7 @@ struct GithubStarBadge {
 }
 
 async fn fetch_github_star_count() -> Option<String> {
-    if option_env!("SYSTEMLESS_PRIVATE_KOJI") == Some("1") {
+    if private_library() || option_env!("SYSTEMLESS_PRIVATE_KOJI") == Some("1") {
         return None;
     }
     let repository = SYSTEMLESS_REPOSITORY
@@ -186,11 +187,10 @@ fn LibraryPage(
                             <span class="eyebrow">"Preview library"</span>
                         })}
                         <h1>
-                            "Classic 68K and PowerPC Macintosh games, running everywhere "
-                            <em>"with no ROM and no System"</em>
-                            "."
+                            {if private_library() { "Your Macintosh games" } else { "Classic 68K and PowerPC Macintosh games, running everywhere " }}
+                            <em>{if private_library() { "" } else { "with no ROM and no System." }}</em>
                         </h1>
-                        <p>"Play in your browser now. Nothing to install."</p>
+                        <p>{if private_library() { "Koji, ClockWerx and Delirium. Pick a game and start playing." } else { "Play in your browser now. Nothing to install." }}</p>
                     </div>
                 </div>
             </section>
@@ -879,6 +879,16 @@ fn set_document_head(meta: HeadMeta) {
         return;
     };
 
+    if private_library() {
+        let title = if meta.title.starts_with("Systemless |") {
+            "Macintosh Arcade".to_string()
+        } else {
+            meta.title.replace(" | Systemless", " | Macintosh Arcade")
+        };
+        document.set_title(&title);
+        set_meta_name(&document, "robots", "noindex,nofollow");
+        return;
+    }
     document.set_title(&display_document_title(&meta.title));
     set_meta_name(&document, "description", &meta.description);
     set_meta_name(&document, "robots", meta.robots);

@@ -12081,6 +12081,49 @@ impl super::TrapDispatcher {
                         Ok(())
                     }
 
+                    // LAddColumn (selector 4 / $04)
+                    // FUNCTION LAddColumn(count, colNum: INTEGER; lHandle: ListHandle): INTEGER;
+                    // Inside Macintosh Volume IV, IV-271. Like LAddRow, insertion
+                    // shifts existing cells and selection and returns the first
+                    // added index. A zero-row list can still acquire columns.
+                    0x04 => {
+                        let list_handle = bus.read_long(sp + 2);
+                        let col = bus.read_word(sp + 6) as i16;
+                        let count = bus.read_word(sp + 8) as i16;
+                        let result_addr = sp + 10;
+                        let mut result_col = 0;
+                        self.list_states.with_record_mut(list_handle, |state| {
+                            let col = col.clamp(state.data_bounds.1, state.data_bounds.3);
+                            result_col = col;
+                            if count > 0 {
+                                state.cells = state.cells.drain().map(|((row, cell_col), data)| {
+                                    let new_col = if cell_col >= col { cell_col + count } else { cell_col };
+                                    ((row, new_col), data)
+                                }).collect();
+                                state.selected = state.selected.iter().map(|&(row, cell_col)| {
+                                    let new_col = if cell_col >= col { cell_col + count } else { cell_col };
+                                    (row, new_col)
+                                }).collect();
+                                state.data_bounds.3 += count;
+                                state.visible = Self::compute_list_visible_rect(
+                                    state.view_rect, state.data_bounds, state.cell_size,
+                                );
+                                Self::sync_list_state_to_guest(bus, list_handle, state);
+                            }
+                            if trace_list_manager_enabled() {
+                                eprintln!(
+                                    "[LIST] LAddColumn handle=${:08X} col={} count={} bounds=({},{},{},{})",
+                                    list_handle, result_col, count,
+                                    state.data_bounds.0, state.data_bounds.1,
+                                    state.data_bounds.2, state.data_bounds.3,
+                                );
+                            }
+                        });
+                        bus.write_word(result_addr, result_col as u16);
+                        cpu.write_reg(Register::A7, result_addr);
+                        Ok(())
+                    }
+
                     // LAddRow (selector 8 / $08)
                     // Inserts rows into the list and returns the first added row.
                     // FUNCTION LAddRow(count, rowNum: INTEGER; lHandle: ListHandle): INTEGER;
@@ -12778,7 +12821,7 @@ impl super::TrapDispatcher {
             //
             // Inside Macintosh Volume IV (1986), pages IV-259..IV-279.
             // More Macintosh Toolbox Essentials (1993), 4-1..4-107.
-            // Pack1 / List Manager ($A9E8): Per-selector Pascal frames per IM:IV-269 EQU table: $00 LActivate pop 8, $04 LAddColumn pop 10 result@SP+10 (returns 0), $08 LAddRow pop 10 result@SP+10 (returns 0), $0C LAddToCell pop 16, $10 LAutoScroll pop 6, $14 LCellSize pop 10, $18 LClick pop 12 result@SP+12 (returns FALSE), $1C LClrCell pop 10, $20 LDelColumn pop 10, $24 LDelRow pop 10, $28 LDispose pop 6 (frees the list state), $2C LDoDraw pop 8, $30 LDraw pop 10, $34 LFind pop 18 (writes 0/0 to VAR offset/len), $38 LGetCell pop 18 (writes 0 to VAR dataLen), $3C LGetSelect pop 12 result@SP+12 (returns FALSE), $40 LLastClick pop 6 result@SP+6 (returns Cell(0,0)), $44 LNew pop 28 result@SP+28 (creates a live ListHandle), $48 LNextCell pop 14 result@SP+14 (returns FALSE), $4C LRect pop 14 (writes 0,0,0,0 to VAR cellRect), $50 LScroll pop 10, $54 LSearch pop 20 result@SP+20 (returns FALSE), $58 LSetCell pop 16, $5C LSetSelect pop 12, $60 LSize pop 10, $64 LUpdate pop 10. Unknown selector pops only the 2-byte selector word.
+            // Pack1 / List Manager ($A9E8): Per-selector Pascal frames per IM:IV-269 EQU table: $00 LActivate pop 8, $04 LAddColumn pop 10 result@SP+10 (returns first inserted column), $08 LAddRow pop 10 result@SP+10 (returns 0), $0C LAddToCell pop 16, $10 LAutoScroll pop 6, $14 LCellSize pop 10, $18 LClick pop 12 result@SP+12 (returns FALSE), $1C LClrCell pop 10, $20 LDelColumn pop 10, $24 LDelRow pop 10, $28 LDispose pop 6 (frees the list state), $2C LDoDraw pop 8, $30 LDraw pop 10, $34 LFind pop 18 (writes 0/0 to VAR offset/len), $38 LGetCell pop 18 (writes 0 to VAR dataLen), $3C LGetSelect pop 12 result@SP+12 (returns FALSE), $40 LLastClick pop 6 result@SP+6 (returns Cell(0,0)), $44 LNew pop 28 result@SP+28 (creates a live ListHandle), $48 LNextCell pop 14 result@SP+14 (returns FALSE), $4C LRect pop 14 (writes 0,0,0,0 to VAR cellRect), $50 LScroll pop 10, $54 LSearch pop 20 result@SP+20 (returns FALSE), $58 LSetCell pop 16, $5C LSetSelect pop 12, $60 LSize pop 10, $64 LUpdate pop 10. Unknown selector pops only the 2-byte selector word.
             (true, 0x1E8) => {
                 let sp = cpu.read_reg(Register::A7);
                 let selector = bus.read_word(sp);
@@ -12791,6 +12834,7 @@ impl super::TrapDispatcher {
                 if matches!(
                     selector,
                     0x0000
+                        | 0x0004
                         | 0x0008
                         | 0x000C
                         | 0x0010
@@ -12822,15 +12866,6 @@ impl super::TrapDispatcher {
                     // = 8 bytes.
                     0x0000 => {
                         cpu.write_reg(Register::A7, sp + 8);
-                    }
-                    // FUNCTION LAddColumn(count, colNum: INTEGER;
-                    //                     lHandle: ListHandle): INTEGER;
-                    // IM:IV-269. Stack: sel(2) + lHandle(4) + colNum(2)
-                    // + count(2) + result(2) = 12; pop 10,
-                    // result@SP+10. No list, nothing added → return 0.
-                    0x0004 => {
-                        bus.write_word(sp + 10, 0);
-                        cpu.write_reg(Register::A7, sp + 10);
                     }
                     // FUNCTION LAddRow(count, rowNum: INTEGER;
                     //                  lHandle: ListHandle): INTEGER;

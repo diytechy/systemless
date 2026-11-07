@@ -1582,6 +1582,8 @@ pub struct TrapDispatcher {
     /// U.S. Roman keyboard-layout resource ID 0 is present in every
     /// System file and is used directly by apps that call KeyTranslate.
     pub(crate) system_kchr_cache: HashMap<i16, u32>,
+    /// Roman international bundle used to discover the standard keyboard layout.
+    pub(crate) system_itlb_cache: HashMap<i16, u32>,
     /// Cache of the synthetic standard `'KMAP'` ID 0 resource. Classic apps
     /// may read its 128-byte hardware-to-virtual-key map directly when
     /// implementing configurable controls.
@@ -3896,6 +3898,7 @@ impl TrapDispatcher {
             system_clut_cache: HashMap::default(),
             system_wctb_cache: HashMap::default(),
             system_kchr_cache: HashMap::default(),
+            system_itlb_cache: HashMap::default(),
             system_kmap_cache: HashMap::default(),
             system_wdef_cache: HashMap::default(),
             system_mdef_cache: HashMap::default(),
@@ -7340,6 +7343,30 @@ impl TrapDispatcher {
         let ptr = bus.alloc(crate::menu_manager::STANDARD_MENU_DEFINITION_SHIM.len() as u32);
         bus.write_bytes(ptr, &crate::menu_manager::STANDARD_MENU_DEFINITION_SHIM);
         self.system_mdef_cache.insert(res_id, ptr);
+        Some(ptr)
+    }
+
+    /// The original 20-byte ItlbRecord for the built-in U.S. Roman script.
+    /// All resource IDs, language and representation codes are zero, including
+    /// itlbKeys at byte 16, which selects our existing KCHR 0. No extended-record
+    /// flag is set. Layout: Apple's IntlResources.h, ItlbRecord.
+    pub(crate) fn synthesize_system_itlb(
+        &mut self,
+        bus: &mut MacMemoryBus,
+        res_id: i16,
+    ) -> Option<u32> {
+        if res_id != 0 {
+            return None;
+        }
+        if let Some(&ptr) = self.system_itlb_cache.get(&res_id) {
+            return Some(ptr);
+        }
+        let ptr = bus.alloc(20);
+        if ptr == 0 {
+            return None;
+        }
+        bus.write_bytes(ptr, &[0; 20]);
+        self.system_itlb_cache.insert(res_id, ptr);
         Some(ptr)
     }
 

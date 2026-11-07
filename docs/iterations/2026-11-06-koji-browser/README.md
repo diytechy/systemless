@@ -1,3 +1,5 @@
+> This single-game iteration is retained as history. The current launcher and build instructions are in [the three-game iteration](../2026-11-06-private-library/README.md). Play-Koji.cmd now opens Koji through that shared launcher.
+
 # Private Koji browser bundle
 
 The local entry point is `C:\Projects\systemless\Play-Koji.cmd`. It starts a hidden, loopback-only server and opens `http://localhost:8087/koji-the-frog/` in the default browser. `Stop-Koji.cmd` stops only the matching server launched from this checkout. Python must remain installed; neither SheepShaver nor a Mac ROM is needed to play this build.

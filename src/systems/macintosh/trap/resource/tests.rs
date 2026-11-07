@@ -12011,3 +12011,38 @@ fn classic_resource_materialization_applies_changed_attributes_when_loading() {
     assert_ne!(bus.read_long(handle), 0);
     assert_eq!(disp.handle_state_bits(handle), Some(0x60));
 }
+
+#[test]
+fn roman_bundle_resolves_a_stable_usable_keyboard_layout() {
+    let (mut disp, mut cpu, mut bus) = setup();
+    let mut previous = 0;
+    for _ in 0..2 {
+        cpu.write_reg(Register::A7, TEST_SP);
+        bus.write_word(TEST_SP, 0);
+        bus.write_long(TEST_SP + 2, u32::from_be_bytes(*b"itlb"));
+        call(&mut disp, true, 0x1A0, &mut cpu, &mut bus).unwrap();
+        let handle = bus.read_long(TEST_SP + 6);
+        assert_ne!(handle, 0);
+        if previous != 0 { assert_eq!(handle, previous); }
+        previous = handle;
+        let bundle = bus.read_long(handle);
+        assert_eq!(bus.get_alloc_size(bundle), Some(20));
+        assert_eq!(bus.read_word(bundle + 6), 0, "no extended-record flag");
+        let keyboard_id = bus.read_word(bundle + 16);
+        cpu.write_reg(Register::A7, TEST_SP);
+        bus.write_word(TEST_SP, keyboard_id);
+        bus.write_long(TEST_SP + 2, u32::from_be_bytes(*b"KCHR"));
+        call(&mut disp, true, 0x1A0, &mut cpu, &mut bus).unwrap();
+        let keyboard = bus.read_long(bus.read_long(TEST_SP + 6));
+        assert_ne!(keyboard, 0);
+        assert_eq!(bus.read_byte(keyboard + 2 + 256 + 2), b'a');
+    }
+    // Only Roman is synthesized; Get1Resource must still search only its file.
+    for (trap, id) in [(0x1A0, 1), (0x01F, 0)] {
+        cpu.write_reg(Register::A7, TEST_SP);
+        bus.write_word(TEST_SP, id);
+        bus.write_long(TEST_SP + 2, u32::from_be_bytes(*b"itlb"));
+        call(&mut disp, true, trap, &mut cpu, &mut bus).unwrap();
+        assert_eq!(bus.read_long(TEST_SP + 6), 0);
+    }
+}

@@ -9216,6 +9216,258 @@ fn pack0_lupdate_custom_ldef_arms_draw_proc_trampoline() {
 }
 
 #[test]
+fn pack0_and_pack1_laddcolumn_keeps_cell_data_and_selection() {
+    for trap in [0x1E7, 0x1E8] {
+        let (mut disp, mut cpu, mut bus) = setup();
+        let sp = TEST_SP;
+        let view = bus.alloc(8);
+        let bounds = bus.alloc(8);
+        for (i, value) in [0, 0, 100, 100].into_iter().enumerate() {
+            bus.write_word(view + i as u32 * 2, value);
+        }
+        for (i, value) in [0, 0, 0, 1].into_iter().enumerate() {
+            bus.write_word(bounds + i as u32 * 2, value);
+        }
+        // Begin with no rows and one column, as a dynamically populated list.
+        cpu.write_reg(Register::A7, sp);
+        bus.write_word(sp, 0x0044); // LNew
+        for offset in [2, 4, 6, 8] {
+            bus.write_word(sp + offset, 0);
+        }
+        bus.write_long(sp + 10, 0);
+        bus.write_word(sp + 14, 0);
+        bus.write_word(sp + 16, 12);
+        bus.write_word(sp + 18, 50);
+        bus.write_long(sp + 20, bounds);
+        bus.write_long(sp + 24, view);
+        bus.write_long(sp + 28, 0);
+        disp.dispatch_toolbox(true, trap, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        let list = bus.read_long(sp + 28);
+        let list_ptr = bus.read_long(list);
+
+        cpu.write_reg(Register::A7, sp);
+        bus.write_word(sp, 0x0004); // LAddColumn(1, 1, list)
+        bus.write_long(sp + 2, list);
+        bus.write_word(sp + 6, 1);
+        bus.write_word(sp + 8, 1);
+        disp.dispatch_toolbox(true, trap, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        assert_eq!(cpu.read_reg(Register::A7), sp + 10);
+        assert_eq!(bus.read_word(sp + 10), 1);
+        assert_eq!(bus.read_word(list_ptr + 78), 2); // dataBounds.right
+
+        cpu.write_reg(Register::A7, sp);
+        bus.write_word(sp, 0x0008); // LAddRow(2, 0, list)
+        bus.write_long(sp + 2, list);
+        bus.write_word(sp + 6, 0);
+        bus.write_word(sp + 8, 2);
+        disp.dispatch_toolbox(true, trap, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        let data = b"secondcolumn";
+        let data_ptr = bus.alloc(data.len() as u32);
+        bus.write_bytes(data_ptr, data);
+        cpu.write_reg(Register::A7, sp);
+        bus.write_word(sp, 0x0058); // LSetCell(data, 12, (1, 1), list)
+        bus.write_long(sp + 2, list);
+        bus.write_word(sp + 6, 1);
+        bus.write_word(sp + 8, 1);
+        bus.write_word(sp + 10, data.len() as u16);
+        bus.write_long(sp + 12, data_ptr);
+        disp.dispatch_toolbox(true, trap, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        assert_eq!(
+            disp.list_states.get_record(list).unwrap().cells[&(1, 1)],
+            data
+        );
+
+        cpu.write_reg(Register::A7, sp);
+        bus.write_word(sp, 0x005C); // LSetSelect(true, (1, 1), list)
+        bus.write_long(sp + 2, list);
+        bus.write_word(sp + 6, 1);
+        bus.write_word(sp + 8, 1);
+        bus.write_word(sp + 10, 0x0100);
+        disp.dispatch_toolbox(true, trap, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        cpu.write_reg(Register::A7, sp);
+        bus.write_word(sp, 0x0004); // Insert before the populated column.
+        bus.write_long(sp + 2, list);
+        bus.write_word(sp + 6, 0);
+        bus.write_word(sp + 8, 1);
+        disp.dispatch_toolbox(true, trap, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        assert_eq!(bus.read_word(sp + 10), 0);
+        let state = disp.list_states.get_record(list).unwrap();
+        assert_eq!(state.data_bounds, (0, 0, 2, 3));
+        assert_eq!(state.cells[&(1, 2)], data);
+        assert!(!state.cells.contains_key(&(1, 1)));
+        assert_eq!(state.selected, [(1, 2)].into());
+        assert_eq!(bus.read_word(list_ptr + 84), 12); // maxIndex
+
+        let len_ptr = bus.alloc(2);
+        bus.write_word(len_ptr, data.len() as u16);
+        bus.fill_bytes(data_ptr, data.len() as u32, 0);
+        cpu.write_reg(Register::A7, sp);
+        bus.write_word(sp, 0x0038); // LGetCell at its shifted location.
+        bus.write_long(sp + 2, list);
+        bus.write_word(sp + 6, 1);
+        bus.write_word(sp + 8, 2);
+        bus.write_long(sp + 10, len_ptr);
+        bus.write_long(sp + 14, data_ptr);
+        disp.dispatch_toolbox(true, trap, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        assert_eq!(bus.read_word(len_ptr), data.len() as u16);
+        assert_eq!(bus.read_bytes(data_ptr, data.len()), data);
+    }
+}
+
+// Exercise the generated code, not just its instruction operands. A custom
+// LDEF may read its packed data through ListRec.cells and keep callback state
+// in ListRec.refCon; each row must retain its own arguments across the chain.
+#[test]
+fn pack0_lupdate_executes_custom_ldef_for_distinct_cells() {
+    let (mut disp, _, mut bus) = setup();
+    let mut cpu = crate::cpu::M68kCpu::new();
+    let sp = TEST_SP;
+    let return_pc = 0x0019_0000;
+    let list_ptr = bus.alloc(88);
+    let list_handle = bus.alloc(4);
+    let cells_handle = bus.alloc(4);
+    let proc_handle = bus.alloc(4);
+    let records = bus.alloc(48);
+    bus.write_long(list_handle, list_ptr);
+    bus.write_long(cells_handle, 0);
+    bus.write_long(list_ptr + 60, records); // refCon: next output record
+    bus.write_long(list_ptr + 64, proc_handle);
+    bus.write_long(list_ptr + 80, cells_handle);
+
+    // Pascal LDEF(message, selected, rect, cell, offset, length, list).
+    // Append all arguments and the cell's longword to a 24-byte record.
+    let code: &[u16] = &[
+        0x4E56, 0x0000, // LINK A6,#0
+        0x206E, 0x0008, // MOVEA.L list(A6),A0
+        0x2050, // MOVEA.L (A0),A0
+        0x2268, 0x003C, // MOVEA.L refCon(A0),A1
+        0x32EE, 0x001A, // MOVE.W message(A6),(A1)+
+        0x32EE, 0x0018, // MOVE.W selected(A6),(A1)+
+        0x22EE, 0x0010, // MOVE.L cell(A6),(A1)+
+        0x32EE, 0x000E, // MOVE.W offset(A6),(A1)+
+        0x32EE, 0x000C, // MOVE.W length(A6),(A1)+
+        0x246E, 0x0014, // MOVEA.L rect(A6),A2
+        0x22DA, // MOVE.L (A2)+,(A1)+
+        0x22DA, // MOVE.L (A2)+,(A1)+
+        0x2468, 0x0050, // MOVEA.L cells(A0),A2
+        0x2452, // MOVEA.L (A2),A2
+        0x302E, 0x000E, // MOVE.W offset(A6),D0
+        0xD4C0, // ADDA.W D0,A2
+        0x22D2, // MOVE.L (A2),(A1)+
+        0x2149, 0x003C, // MOVE.L A1,refCon(A0)
+        0x4E5E, // UNLK A6
+        0x4E74, 0x0014, // RTD #20
+    ];
+    let proc_addr = bus.alloc(code.len() as u32 * 2);
+    for (i, word) in code.iter().enumerate() {
+        bus.write_word(proc_addr + i as u32 * 2, *word);
+    }
+    bus.write_long(proc_handle, proc_addr);
+    disp.list_states.insert_record(
+        list_handle,
+        super::super::dispatch::ListState {
+            handle: list_handle,
+            cells_handle,
+            view_rect: (10, 20, 34, 120),
+            data_bounds: (0, 0, 2, 1),
+            cell_size: (12, 100),
+            visible: (0, 0, 2, 1),
+            port: 0,
+            draw_enabled: true,
+            active: true,
+            cells: [
+                ((0, 0), vec![0x11, 0x22, 0x33, 0x44]),
+                ((1, 0), vec![0x55, 0x66, 0x77, 0x88]),
+            ]
+            .into(),
+            selected: [(1, 0)].into(),
+            last_click: (-1, -1),
+            last_click_tick: 0,
+        },
+    );
+    let preserved = [
+        Register::D0,
+        Register::D1,
+        Register::D2,
+        Register::D3,
+        Register::A0,
+        Register::A1,
+        Register::A2,
+        Register::A3,
+        Register::A5,
+        Register::A6,
+    ];
+    for (i, reg) in preserved.iter().enumerate() {
+        cpu.write_reg(*reg, 0x0018_0000 + i as u32 * 4);
+    }
+
+    // A second update also exercises rewriting the reused first trampoline.
+    for pass in 0..2 {
+        if pass == 1 {
+            disp.list_states
+                .with_record_mut(list_handle, |state| {
+                    state.selected = [(0, 0)].into();
+                    state.cells.insert((0, 0), vec![0x99, 0xAA, 0xBB, 0xCC]);
+                })
+                .unwrap();
+        }
+        bus.write_long(list_ptr + 60, records);
+        cpu.write_reg(Register::A7, sp);
+        cpu.write_reg(Register::PC, return_pc);
+        bus.write_word(sp, 0x0064); // LUpdate
+        bus.write_long(sp + 2, list_handle);
+        bus.write_long(sp + 6, 0);
+        disp.dispatch_toolbox(true, 0x1E7, &mut cpu, &mut bus)
+            .unwrap()
+            .unwrap();
+        cpu.run_batch(&mut bus, 500, &[return_pc]);
+        assert_eq!(cpu.read_reg(Register::PC), return_pc, "pass {pass}");
+        assert_eq!(cpu.read_reg(Register::A7), sp + 10, "pass {pass}");
+        assert_eq!(bus.read_long(list_ptr + 60), records + 48);
+        for row in 0..2u32 {
+            let record = records + row * 24;
+            assert_eq!(bus.read_word(record), 1); // lDrawMsg
+            assert_eq!(
+                bus.read_word(record + 2),
+                if row == 1 - pass { 0x0100 } else { 0 }
+            );
+            assert_eq!(bus.read_long(record + 4), row << 16);
+            assert_eq!(bus.read_word(record + 8), (row * 4) as u16);
+            assert_eq!(bus.read_word(record + 10), 4);
+            assert_eq!(bus.read_word(record + 12), (10 + row * 12) as u16);
+            assert_eq!(bus.read_word(record + 14), 20);
+            assert_eq!(bus.read_word(record + 16), (22 + row * 12) as u16);
+            assert_eq!(bus.read_word(record + 18), 120);
+            assert_eq!(
+                bus.read_long(record + 20),
+                match (pass, row) {
+                    (0, 0) => 0x1122_3344,
+                    (1, 0) => 0x99AA_BBCC,
+                    _ => 0x5566_7788,
+                }
+            );
+        }
+        for (i, reg) in preserved.iter().enumerate() {
+            assert_eq!(cpu.read_reg(*reg), 0x0018_0000 + i as u32 * 4);
+        }
+    }
+}
+
+#[test]
 fn pack0_lclick_custom_ldef_arms_hilite_for_selection_delta() {
     let (mut disp, mut cpu, mut bus) = setup();
     let sp = TEST_SP;

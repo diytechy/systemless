@@ -15,8 +15,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 5 | 3d Brick Bash! 1.1.1 | Content\001: 3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1 | 68K (CODE) | not yet measured |
 | 6 | Acquire 1.0 | Content\001: Acquire ƒ/Acquire 1.0 | 68K (CODE) | not yet measured |
 | 7 | Alien Action Dome 1.0 | Content\001: Action Dome/Action Dome 1.0 | 68K (CODE) | not yet measured |
-| 8 | Adventure | Content\004: Adventure/Adventure | 68K (CODE) | worker assigned |
-| 9 | Angband | Content\004: Angband/Angband | 68K (CODE) | pending |
+| 8 | Adventure 1.1 | Content\004: Adventure/Adventure | 68K (CODE) | compatibility blocker |
+| 9 | Angband | Content\004: Angband/Angband | 68K (CODE) | worker assigned |
 | 10 | Arashi 1.1.1 | Content\001: ARASHI 1.1.1 ƒ/Arashi 1.1.1 | 68K (CODE) | pending |
 | 11 | Bachman 2.0u | Content\001: Bachman 2.0u Folder/Bachman 2.0u | 68K (CODE) | pending |
 | 12 | Balderdoush 1.04i | Content\001: Balderdoush 1.04i/Balderdoush 1.04i | 68K (CODE) | pending |

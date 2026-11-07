@@ -1,0 +1,67 @@
+{
+  "title": "Adventure 1.1",
+  "outcome": "Native readiness unresolved: empty titled window/blank menubar in bounded first-pass probes; copied fixture qualified within limits.",
+  "preservation": {
+    "source_before": "a7493fc55952a462a655158c8abe4e4c063daf45bf5dd2c24f0fbc876bd70985",
+    "source_after": "a7493fc55952a462a655158c8abe4e4c063daf45bf5dd2c24f0fbc876bd70985",
+    "fixture_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\adventure\\adventure.hfv",
+    "fixture_sha256": "544284c2cd6d23ee3065901a6d802f49173e3588cc875e9bcfe4ba7819341867",
+    "verified_file_count": 4,
+    "scope_limits": "Both forks and exposed Finder fields/folder dates compared; original folder Finder info unexposed, raw alias preserved but resolution unverified; HFS+ inline extents only."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Compile revision unknown; checkout ef02d2e7 is not binary provenance.",
+    "architecture": "68K",
+    "executable": "Adventure/Adventure",
+    "display": "800x600; exploratory1-bit and8-bit; Auto/platform",
+    "partition": "SIZE preferred174080; no override",
+    "result": "1-bit120 and8-bit94 ticks passed actions but blank; final8-bit startup-only120-to480 extension stopped after>90s without new meaningful log/capture progress; only tick120 image exists.",
+    "error": null,
+    "assertions": 0,
+    "budget_exhaustion": 0,
+    "extended_run": {
+      "completed": false,
+      "exit": 1,
+      "termination": "Only owned PID185628 stopped after wall bound; CPU119.42s",
+      "final_ticks": "unknown",
+      "final_budget_exhaustion": "unknown",
+      "error": "No final report; exact stalled service unknown; no proven IO loop"
+    }
+  },
+  "behavior": {
+    "observed": [
+      "Fixture load/data-fork reads",
+      "Titled empty window",
+      "Return/menu-bar click produced no visible response"
+    ],
+    "untested": [
+      "Gameplay",
+      "Pace/fidelity/busy scene",
+      "Audio",
+      "Save/restore/preferences",
+      "Physical controller"
+    ]
+  },
+  "dependencies": [
+    "README System4.1+; no external game dependency documented; only four-file title folder copied"
+  ],
+  "controls": [
+    "Documented typed commands, Command/Movement menus, Command+keypad; space/Return/Enter advances [more]. Not qualified."
+  ],
+  "changes": [
+    "Assigned report and review-summary only; private fixture/evidence on D:"
+  ],
+  "checks": [
+    "Two extractor synthetic tests passed",
+    "Source unchanged and four files reopened/compared",
+    "Executable CODE/vers/SIZE rechecked",
+    "All initial screenshots inspected",
+    "Final extension tick120 screenshot inspected; aborted attempt preserved"
+  ],
+  "next_step": "Trace THINK C console/text initialization and data-fork loading, obtain original reference; localize service before runtime fix/release entry.",
+  "report": "docs/iterations/2026-11-07-library-coordinator/adventure/report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\adventure\\evidence-manifest.json",
+  "workload_released": true
+}

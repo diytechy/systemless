@@ -1711,8 +1711,8 @@
     },
     {
       "slug": "pac-in-time",
-      "title": "PAC IN TIME",
-      "status": "worker active",
+      "title": "PAC IN TIME1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "PAC IN TIME",
@@ -1731,15 +1731,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Resources16/256colors,screen at least640x480; tested800x600x8 exploratory. Original68K SIZE3072000.",
+      "preferences_save_id": "Actual Boot PAC-IN-TIME Prefs preserved and PBOpenRF loaded at Owned PAC/System Folder/Preferences. Substantial app data fork retained, unrelated root apps excluded.",
+      "controls": "Configurable Left/Right/Up/Down/Fire/Power; actual mappings unverified. CmdN and fresh Game-header probes do not establish new game.",
+      "timing": "Animated intro/title only; initial play and release-browser baseline unresolved.",
+      "report": "pac-in-time/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Two-file executable+actual-pref fixture verified. Parent matched source002/fixture hashes, original1824tick report/title and corrected1705tick menu-only report. Six bounded scenarios complete with zero assertions/exhaustion; fresh Game-header click exposes no dropdown and returns splash/fade. Original pref PBOpenRF loaded. No gameplay, causal service claim or setting change."
     },
     {
       "slug": "pac-the-man",
       "title": "Pac the Man",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "PactheMan4.5.1/Pac the Man",
@@ -1764,7 +1767,7 @@
     {
       "slug": "particleman-1-0",
       "title": "ParticleMan 1.0",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "ParticleMan 1.0/ParticleMan 1.0",

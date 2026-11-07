@@ -58,9 +58,9 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 48 | Nort (version unknown) | Content\001: Nort Folder/nort | 68K (CODE) | not yet measured |
 | 49 | Oh No! More Lemmings1.0 | Content\006: Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings | 68K (CODE) | not yet measured |
 | 50 | Oregon Trail1.1 | Content\003: Oregon Trail/Oregon Trail | 68K (CODE) | not yet measured |
-| 51 | PAC IN TIME | Content\002: PAC IN TIME | 68K (CODE) | worker active |
-| 52 | Pac the Man | Content\006: PactheMan4.5.1/Pac the Man | fat (CODE + PPC fragment) | worker assigned |
-| 53 | ParticleMan 1.0 | Content\004: ParticleMan 1.0/ParticleMan 1.0 | 68K (CODE) | pending |
+| 51 | PAC IN TIME1.0 | Content\002: PAC IN TIME | 68K (CODE) | not yet measured |
+| 52 | Pac the Man | Content\006: PactheMan4.5.1/Pac the Man | fat (CODE + PPC fragment) | worker active |
+| 53 | ParticleMan 1.0 | Content\004: ParticleMan 1.0/ParticleMan 1.0 | 68K (CODE) | worker assigned |
 | 54 | Polybrid 1.0 | Content\001: Polybrid Folder/Polybrid 1.0 | 68K (CODE) | pending |
 | 55 | Prince of Persia | Content\004: Prince of Persia ƒ/Prince of Persia | 68K (CODE) | pending |
 | 56 | Prince of Persia 2 | Content\004: Prince of Persia 2/Prince of Persia 2 | 68K (CODE) | pending |

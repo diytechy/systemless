@@ -1,0 +1,78 @@
+{
+  "title": "PAC IN TIME1.0",
+  "outcome": "Prepared; animated intro/title observed; initial gameplay readiness unresolved",
+  "preservation": {
+    "source_before": {
+      "002": "8119cbbb69d4a0d5ea4d2cbc2011467fbe396846c79ea0341919a399951ba946",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "source_after": {
+      "002": "8119cbbb69d4a0d5ea4d2cbc2011467fbe396846c79ea0341919a399951ba946",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\pac-in-time\\pac-with-prefs.hfv",
+    "fixture_sha256": "c57d46adc26897770d29881fd588e9515d8d0e671ab2678afd7b31bb71580f83",
+    "files_verified": 2,
+    "scope_limits": "Both forks/Finder fields, raw coordinate words and root/ancestor dates compared. Folder Finder info unavailable; unrelated root apps excluded. Original preference copied separately and confirmed loaded."
+  },
+  "native": {
+    "binary": "D:/SystemlessBuild/target/ci-test/systemless.exe",
+    "sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact compile revision unknown; assignment starting5712bf9a; checkout advanced during other coordinator review. No runtime changes by worker.",
+    "architecture": "68k",
+    "executable": "PAC IN TIME",
+    "display": "exploratory800x6008bit; resources offer16/256colors and require at least640x480",
+    "partition": 3072000,
+    "result": "6scenarios passed; menu-only correction1705ticks still no dropdown; initial play unresolved",
+    "error": null,
+    "assertions": 0,
+    "budget_exhausted_frames": 0,
+    "wall_bound_seconds": 75
+  },
+  "behavior": {
+    "observed": [
+      "Kalisto splash",
+      "Illustrated animated intro",
+      "PAC-IN-TIME title",
+      "Escape/Return/mouse/Command-N probes; title/menu visible, no new-game dialog yet",
+      "Original preference resource fork loaded",
+      "Menu-only correction: fresh title Game header mouse-down returns Kalisto splash/fade; no New Game row exposed"
+    ],
+    "untested": [
+      "Gameplay movement/collision/scoring/pace",
+      "Busy scene",
+      "Pause/resume",
+      "Audible sound/music fidelity",
+      "Save persistence",
+      "Physical controller",
+      "Browser performance",
+      "Independent reference fidelity"
+    ]
+  },
+  "dependencies": [
+    "Executable substantial data fork retained",
+    "Original PAC-IN-TIME Prefs preserved and loaded",
+    "No external content dependency established; no title readme sibling found"
+  ],
+  "controls": [
+    "Resources show configurable Left/Right/Up/Down/Fire/Power controls; mappings not verified",
+    "Game menu New Game commandN; Resume commandP",
+    "Raw probes: Return36/13,Escape53/27,Command55/0+N45/110"
+  ],
+  "changes": [
+    "Own report/status only; private extraction/scenarios/captures"
+  ],
+  "checks": [
+    "Source002/Boot hashes unchanged",
+    "Two copied files forks/Finder fields verified; root/twofolder dates verified",
+    "Out-of-scope and missing-input guards rejected",
+    "Five reports passed0exhaustion; inspected screenshots",
+    "Owned final process exited; no build/browser/runtime edits",
+    "Authorized bounded menu correction completed; PID76908 exited0; source hashes rechecked"
+  ],
+  "next_step": "Readiness remains unresolved after isolated actual Game-header probe; independently establish original title/menu interaction before further diagnostic branching. No service diagnosis or pacing recommendation.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\pac-in-time\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\pac-in-time\\evidence-manifest.json",
+  "workload_released": true
+}

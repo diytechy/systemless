@@ -1,8 +1,8 @@
 {
-  "slug": "pac-in-time",
-  "task_name": "/root/pac_in_time",
+  "slug": "pac-the-man",
+  "task_name": "/root/pac_the_man",
   "status": "running; see active-runners.json",
-  "starting_revision": "5712bf9a7cd9d85fb5b3cf3e538501d9eadef4ee",
-  "brief": "pac-in-time-brief.md",
-  "updated_at": "2026-11-07T20:55:02.235983+00:00"
+  "starting_revision": "fa1b0e0013f2b5ec89972d3ca5fd41aa13389a9a",
+  "brief": "pac-the-man-brief.md",
+  "updated_at": "2026-11-07T20:55:43.328141+00:00"
 }

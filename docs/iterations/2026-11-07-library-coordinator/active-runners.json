@@ -1,20 +1,20 @@
 {
   "runners": [
     {
-      "slug": "oregon-trail",
-      "task_name": "/root/oregon_trail",
-      "status": "reviewed; workload released",
-      "brief": "oregon-trail-brief.md"
-    },
-    {
       "slug": "pac-in-time",
       "task_name": "/root/pac_in_time",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "pac-in-time-brief.md"
+    },
+    {
+      "slug": "pac-the-man",
+      "task_name": "/root/pac_the_man",
+      "status": "running",
+      "brief": "pac-the-man-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T20:55:27.583230+00:00"
+  "updated_at": "2026-11-07T21:04:15.424705+00:00"
 }

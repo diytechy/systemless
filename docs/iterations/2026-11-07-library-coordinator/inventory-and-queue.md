@@ -39,8 +39,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 29 | Columns1.0 | Content\001: Columns | fat (CODE + PPC fragment) | not yet measured |
 | 30 | Crunch!2.0 | Content\001: CRUNCH Folder/CRUNCH | 68K (CODE) | not yet measured |
 | 31 | Catch the Buzz 2.0 (CTB) | Content\001: CTB 2.0/CTB | 68K (CODE) | compatibility blocker |
-| 32 | CyberNation 1.1.1 | Content\001: CyberNation 1.1.1 ƒ/CyberNation 1.1.1 | 68K (CODE) | worker assigned |
-| 33 | Deliverance™ | Content\Boot: Deliverance™ ƒ/Deliverance™ | 68K (CODE) | pending |
+| 32 | CyberNation 1.1.1 | Content\001: CyberNation 1.1.1 ƒ/CyberNation 1.1.1 | 68K (CODE) | not yet measured |
+| 33 | Deliverance™ | Content\Boot: Deliverance™ ƒ/Deliverance™ | 68K (CODE) | worker assigned |
 | 34 | Desk Invaders II | Content\001: Desk Invaders II ƒ/Desk Invaders II | unknown | pending |
 | 35 | Dome Wars | Content\001: Dome Wars/Dome Wars | 68K (CODE) | pending |
 | 36 | Drol | Content\001: Drol ƒ/Drol | 68K (CODE) | pending |

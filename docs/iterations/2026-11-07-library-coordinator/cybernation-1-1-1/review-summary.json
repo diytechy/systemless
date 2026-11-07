@@ -1,0 +1,63 @@
+{
+  "title": "CyberNation 1.1.1",
+  "outcome": "Prepared private fixture; native initial room and right movement observed; partial visual/pause qualification",
+  "preservation": {
+    "source_before": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "source_after": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\cybernation-1-1-1\\cybernation.hfv",
+    "fixture_sha256": "d542b3391b32bdceecbc3382857659953ea3dcc0dcb6c26b3e0200ba1326e8a1",
+    "verified_file_count": 8,
+    "scope_limits": "All selected forks/file Finder fields/represented dates reopened; folder Finder information unavailable; raw aliases retained, resolution unverified."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact cached compile revision unknown; checkout49d35c39/runtime baseline ed74c8b4",
+    "architecture": "68k",
+    "executable": "CyberNation 1.1.1",
+    "display": "8-bit exploratory; actual PNG800x600; docs B&W/16/256 colors",
+    "partition": "Original SIZE2097152; no override",
+    "result": "5 scenarios passed, final234 frontend/834 guest ticks, exit0",
+    "error": null,
+    "assertions": 0,
+    "budget_exhaustion": 0,
+    "wall_cap_seconds": 75
+  },
+  "behavior": {
+    "observed": [
+      "Title and initial room after Command-N",
+      "Right124/ch29 held24ticks moves Arnie right",
+      "File menu visibly opens",
+      "Enemies differ between captures"
+    ],
+    "untested": [
+      "P pause/resume remains ambiguous",
+      "Busy scenes and timing/reference fidelity",
+      "Audio fidelity",
+      "Saves/reload/export",
+      "Physical controller",
+      "Fire/pickup/level progression",
+      "Alternating partial HUD/sprite imagery cause"
+    ]
+  },
+  "dependencies": [
+    "CyberNation Data sibling opened",
+    "Copied Boot CyberNation Prefs resolved/opened as ref190; Get1Resource CNPr259 requested with current190; guest consumption not proven"
+  ],
+  "controls": "Rules: arrows or keypad4/8/6/2 steer;0/Command fire;Space pickup;A abort;P pause;Q quit;S sound. Menu confirms Command-N New game.",
+  "changes": [
+    "Own report and review JSON only; private fixture/scenarios/logs/captures/manifest on D:"
+  ],
+  "checks": [
+    "Source001/Boot hashes unchanged",
+    "8 files reopened compare all helper fields",
+    "5 passed final reports and exact child exit records",
+    "Inspected title/room/menu/right/P PNGs"
+  ],
+  "next_step": "Reference-check alternating drawing and qualify pause; use prepared fixture for coordinated release entry/browser baseline; no pacing recommendation.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\cybernation-1-1-1\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\cybernation-1-1-1\\evidence-manifest.json",
+  "workload_released": true
+}

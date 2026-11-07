@@ -1,8 +1,8 @@
 {
-  "slug": "ctb",
-  "task_name": "/root/ctb",
+  "slug": "cybernation-1-1-1",
+  "task_name": "/root/cybernation_1_1_1",
   "status": "reviewed; workload released",
-  "starting_revision": "615654bca616476e57d8a4c93a77043886104c9c",
-  "brief": "ctb-brief.md",
-  "updated_at": "2026-11-07T19:28:06.669995+00:00"
+  "starting_revision": "49d35c3901faf2ffe25c516506fd7ab6c72b8099",
+  "brief": "cybernation-1-1-1-brief.md",
+  "updated_at": "2026-11-07T19:37:58.329065+00:00"
 }

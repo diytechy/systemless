@@ -1015,7 +1015,7 @@
     {
       "slug": "cybernation-1-1-1",
       "title": "CyberNation 1.1.1",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "CyberNation 1.1.1 ƒ/CyberNation 1.1.1",
@@ -1031,15 +1031,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Docs B&W/16/256 colors, System6+,2MB; actual800x600x8. Original SIZE2097152 retained.",
+      "preferences_save_id": "Actual Boot CyberNation Prefs copied; FindFolder/HOpenResFile/UseResFile190 and Get1Resource CNPr259 request prove access path, consumption untraced. No browser ID.",
+      "controls": "Cmd-N New game and right124/ch29 observed; arrows/keypad steering,0/Command fire,Space pickup,A abort,P pause,Q quit,S sound documented. Other actions unverified.",
+      "timing": "Native room movement readiness; verbose traced 73.1s run is not performance. Release-browser baseline pending.",
+      "report": "cybernation-1-1-1/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Eight-file fixture verified; parent source001/fixture hashes and raw 234-tick report reviewed (zero assertions/exhaustion). Parent confirmed Arnie center-to-right movement in room after Cmd-N. Five scenarios exited normally; P pause and alternating partial drawing remain unqualified. Pref open/current190/CNPr259 request observed, guest consumption untraced. No setting change.",
+      "dependencies": "Required CyberNation Data opened; complete folder plus actual preference retained,8 files. Update notes confirm1.1.1."
     },
     {
       "slug": "deliverance",
       "title": "Deliverance™",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Deliverance™ ƒ/Deliverance™",

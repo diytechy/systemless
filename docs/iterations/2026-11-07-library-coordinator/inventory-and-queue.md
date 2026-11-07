@@ -65,9 +65,9 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 55 | Prince of Persia1.0 | Content\004: Prince of Persia ƒ/Prince of Persia | 68K (CODE) | not yet measured |
 | 56 | Prince of Persia2 1.0 | Content\004: Prince of Persia 2/Prince of Persia 2 | 68K (CODE) | compatibility blocker |
 | 57 | RoboWar 4.1.1 | Content\001: RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1 | fat (CODE + PPC fragment) | not yet measured |
-| 58 | Ruckus | Content\002: New Ruckus!/Ruckus | 68K (CODE) | worker active |
-| 59 | Scruffy | Content\001: Scruffy/Scruffy | 68K (CODE) | worker assigned |
-| 60 | Scruffy II | Content\001: More ScruffyStuff/Scruffy II | 68K (CODE) | pending |
+| 58 | Ruckus | Content\002: New Ruckus!/Ruckus | 68K (CODE) | not yet measured |
+| 59 | Scruffy | Content\001: Scruffy/Scruffy | 68K (CODE) | worker active |
+| 60 | Scruffy II | Content\001: More ScruffyStuff/Scruffy II | 68K (CODE) | worker assigned |
 | 61 | Slithereens | Content\003: Slithereens 1.0.0 ƒ/Slithereens | fat (CODE + PPC fragment) | pending |
 | 62 | Sloppy Sokoban 1.7 | Content\004: Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7 | PPC fragment | pending |
 | 63 | Spin Doctor | Content\002: Spin Doctor/Spin Doctor | fat (CODE + PPC fragment) | pending |

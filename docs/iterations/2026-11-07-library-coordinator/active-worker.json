@@ -1,8 +1,8 @@
 {
-  "slug": "ruckus",
-  "task_name": "/root/ruckus",
+  "slug": "scruffy",
+  "task_name": "/root/scruffy",
   "status": "running; see active-runners.json",
-  "starting_revision": "30819eb439e0164b42098f78ca528b697a3beafd",
-  "brief": "ruckus-brief.md",
-  "updated_at": "2026-11-07T21:21:37.610974+00:00"
+  "starting_revision": "beb705fcc9facdf8d274d5fef9ffbccba7860b61",
+  "brief": "scruffy-brief.md",
+  "updated_at": "2026-11-07T21:34:44.277051+00:00"
 }

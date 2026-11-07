@@ -1915,7 +1915,7 @@
     {
       "slug": "ruckus",
       "title": "Ruckus",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "New Ruckus!/Ruckus",
@@ -1933,12 +1933,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Completed native scripts242/366/428/460/480 ticks; capped final probe has no final report/counters. No release-browser measurement.",
+      "report": "ruckus/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source002/Boot and clean48-file fixture hashes, read five completed raw reports (0 assertions/errors/exhaustion), inspected gameplay and changed viewport at hostage building. Existing Players/Anonymous opens and retained mission9 state documented. Final action probe stopped at75s during held Game-menu2ticks after pause screenshot519; final counters/menu unavailable, pause and vehicle controls unqualified. No defect or pacing inference."
     },
     {
       "slug": "scruffy",
       "title": "Scruffy",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Scruffy/Scruffy",
@@ -1962,7 +1965,7 @@
     {
       "slug": "scruffy-ii",
       "title": "Scruffy II",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "More ScruffyStuff/Scruffy II",

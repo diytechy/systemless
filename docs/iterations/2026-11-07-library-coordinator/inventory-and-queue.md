@@ -17,8 +17,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 7 | Alien Action Dome 1.0 | Content\001: Action Dome/Action Dome 1.0 | 68K (CODE) | not yet measured |
 | 8 | Adventure 1.1 | Content\004: Adventure/Adventure | 68K (CODE) | compatibility blocker |
 | 9 | Angband 2.0.2 (Macintosh) | Content\004: Angband/Angband | 68K (CODE) | not yet measured |
-| 10 | Arashi 1.1.1 | Content\001: ARASHI 1.1.1 ƒ/Arashi 1.1.1 | 68K (CODE) | worker assigned |
-| 11 | Bachman 2.0u | Content\001: Bachman 2.0u Folder/Bachman 2.0u | 68K (CODE) | pending |
+| 10 | Arashi 1.1.1 | Content\001: ARASHI 1.1.1 ƒ/Arashi 1.1.1 | 68K (CODE) | not yet measured |
+| 11 | Bachman 2.0u | Content\001: Bachman 2.0u Folder/Bachman 2.0u | 68K (CODE) | worker assigned |
 | 12 | Balderdoush 1.04i | Content\001: Balderdoush 1.04i/Balderdoush 1.04i | 68K (CODE) | pending |
 | 13 | Barney Carnage 2.0 | Content\001: BarneyCarnage2.0ƒ/Barney Carnage 2.0 | 68K (CODE) | pending |
 | 14 | BattleTanks 2.12.1 | Content\001: BattleTanks 2.12.1 | 68K (CODE) | pending |

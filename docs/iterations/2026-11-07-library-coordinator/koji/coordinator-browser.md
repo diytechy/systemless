@@ -23,3 +23,5 @@ Private screenshots: browser-paused.png, browser-resumed-moved.png, browser-jump
 Memory boundary: summed process working sets can count shared pages multiple times; these totals are not unique physical RAM or an isolated game allocation.
 
 Recommendation: unchanged baseline at 25 MHz. No demonstrated guest-clock deficit in this first level warrants lowering its instruction budget. This is limited scene evidence, not comprehensive compatibility. Next useful tuning work requires a repeatable demanding scene and independent pace/audio/save checks. Rollback: documentary files and resource sampler only; no game setting to revert.
+
+Later concurrency audit: the earlier app inventory showed an old Edge ClockWerx tab from the stopped attempt. Its background activity during these captures was not observable. Only one new coordinator test/worker was running, but full single-emulator isolation was not established; downgrade these to contextual scene probes under that uncertainty. No setting was promoted. The user subsequently reported that old tab closed or paused before future captures; this does not retroactively qualify these runs.

@@ -66,7 +66,7 @@
       "depth_size": "640x480, 8-bit",
       "preferences_save_id": "koji-personal-204; Koji 2.0 Registration/Koji Registration",
       "controls": "Native left/right/tongue/pause; browser resume+movement+jump observed; water unqualified",
-      "timing": "3 focused release-browser captures at25; median59.959 guest ticks/sec, range59.903-60.128; same initial level, manually observed readiness",
+      "timing": "3 focused release-browser captures at25; median59.959 guest ticks/sec, range59.903-60.128; same initial level, manually observed readiness; prior Edge emulator activity unverified during captures, isolation downgraded",
       "associated_containers": [
         {
           "path": "Trash/Koji_the_Frog.SIT",
@@ -105,7 +105,7 @@
       "depth_size": "640x480, 4-bit",
       "preferences_save_id": "delirium-personal-11; Delirium 1.1 Preferences",
       "controls": "Native up/down/fire/pause/resume observed; browser pause message; audio/reference/saves/controller unqualified",
-      "timing": "3 default25 captures: median56.462Hz range55.797-58.010. One12MHz60.149Hz capture unmatched and heavily contended; no paired comparison/adoption",
+      "timing": "3 default25 captures: median56.462Hz range55.797-58.010. One12MHz60.149Hz capture unmatched and heavily contended; no paired comparison/adoption; prior Edge emulator activity also unverified",
       "report": "delirium/report.md",
       "accepted_setting": "25 MHz unchanged;12 remains exploratory/unmatched",
       "review": "Coordinator reviewed raw evidence; Sol worker reviewed hypothesis and conservative early stop"
@@ -288,7 +288,7 @@
     {
       "slug": "arashi-1-1-1",
       "title": "Arashi 1.1.1",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "ARASHI 1.1.1 ƒ/Arashi 1.1.1",
@@ -305,15 +305,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "256colors/grays documented;800x600 8-bit native exploratory; SIZE1433600",
+      "preferences_save_id": "Boot name/AR|F creator scan found no matches; browser ID/mapping unassigned",
+      "controls": "Documented mouse move/fire, Space superzap,P pause; effects not qualified",
+      "timing": "No representative scene or release entry; native696ticks are not wall-time speed",
+      "report": "arashi-1-1-1/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "7file extraction and source/Boot hashes reviewed; coordinator source/fixture hashes match. Startup/selector/changing stars reached,0assertions/exhaustion; representative gameplay/fire/pause unresolved. No diagnosed service or runtime change.",
+      "dependencies": "Embedded defaults documented; supplementary scripts; optional adjacent script fnfErr not proven blocker"
     },
     {
       "slug": "bachman-2-0u",
       "title": "Bachman 2.0u",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Bachman 2.0u Folder/Bachman 2.0u",

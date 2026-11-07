@@ -4,7 +4,7 @@
     {
       "slug": "clockwerx",
       "title": "ClockWerx",
-      "status": "measurement blocked",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "ClockWerx Folder/ClockWerx",
@@ -25,7 +25,9 @@
       "depth_size": "640x480, 8-bit",
       "preferences_save_id": "clockwerx-personal-10; ClockWerx Scores/Settings",
       "controls": "unverified",
-      "timing": "zero new captures; Windows Computer Use URL policy stop; prior 6 MHz remains experimental"
+      "timing": "Root exploratory release25=27.4277Hz and6=60.1331Hz; final repeated comparison pending, no pacing accepted",
+      "original_firstpass_status": "measurement blocked",
+      "followup_report": "release-browser-review.md"
     },
     {
       "slug": "koji",
@@ -227,7 +229,7 @@
     {
       "slug": "adventure",
       "title": "Adventure 1.1",
-      "status": "compatibility blocker",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Adventure/Adventure",
@@ -251,9 +253,10 @@
       "timing": "No gameplay baseline; wall-aborted extension is not completed480ticks or performance evidence; native compile revision unknown",
       "report": "adventure/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Diagnostic native readiness unresolved:1/8-bit empty window,0assertions; startup extension stopped at>90s without final report. No proven IO loop or service diagnosis.4file forks and source/fixture hashes checked; no runtime edits.",
+      "review": "Diagnostic native readiness unresolved:1/8-bit empty window,0assertions; startup extension stopped at>90s without final report. No proven IO loop or service diagnosis.4file forks and source/fixture hashes checked; no runtime edits.; Bounded blank readiness is unresolved, not diagnosed broad incompatibility; experimental release route prepared",
       "version_notes": "Resource1.1 and README1.1 correction; README heading1.0",
-      "dependencies": "README System4.1+; no external game dependency documented;4file folder"
+      "dependencies": "README System4.1+; no external game dependency documented;4file folder",
+      "original_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "angband",

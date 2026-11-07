@@ -16,6 +16,7 @@ if (Test-Path -LiteralPath $metadataPath) {
     $metadata = Get-Content -LiteralPath $metadataPath -Raw -Encoding UTF8 | ConvertFrom-Json
     if ($metadata.schema_version -ne 1) { throw 'Unsupported packaged library metadata.' }
     $routes = @($metadata.entries | ForEach-Object { $_.route.Trim('/') })
+    if ($metadata.experiments) { $routes += @($metadata.experiments | ForEach-Object { $_.route.Trim('/') }) }
 }
 if ($Game -and $Game -notin $routes) { throw 'Game route is not in this packaged library.' }
 $server = Join-Path $PSScriptRoot 'serve_library.py'

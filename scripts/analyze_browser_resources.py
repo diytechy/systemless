@@ -20,6 +20,15 @@ def stats(values):
     return dict(mean=statistics.mean(values),median=statistics.median(values),min=values[0],max=values[-1]) if values else None
 
 
+def capture_bounds(timing):
+    start=timing.get('captureStartedAt') or timing.get('captureUtc')
+    end=timing.get('capturedAt') or timing.get('completionUtc')
+    if not isinstance(start,str) or not isinstance(end,str):
+        raise ValueError('Missing explicit UTC capture boundaries')
+    if timestamp(end)<=timestamp(start):raise ValueError('Capture must have a positive duration')
+    return start,end
+
+
 def summarize_resources(document,start,end):
     start,end=timestamp(start),timestamp(end)
     if end<=start:raise ValueError('Capture must have a positive duration')
@@ -69,7 +78,7 @@ if __name__=='__main__':
     parser.add_argument('--output',type=Path)
     args=parser.parse_args()
     timing=json.loads(args.timing.read_text(encoding='utf-8-sig'))
-    result=summarize_resources(json.loads(args.resources.read_text(encoding='utf-8-sig')),timing['captureStartedAt'],timing['capturedAt'])
+    result=summarize_resources(json.loads(args.resources.read_text(encoding='utf-8-sig')),*capture_bounds(timing))
     output=json.dumps(result,indent=2)+'\n'
     if args.output:args.output.write_text(output,encoding='utf-8')
     else:print(output,end='')

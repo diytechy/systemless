@@ -1,5 +1,5 @@
 import unittest
-from analyze_browser_resources import summarize_resources,timestamp
+from analyze_browser_resources import summarize_resources,timestamp,capture_bounds
 
 
 class ResourceTests(unittest.TestCase):
@@ -28,6 +28,12 @@ class ResourceTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.summary([self.sample(0,[]),self.sample(1,[])],1,1)
     def test_windows_seven_digit_timestamps(self):
         self.assertEqual(timestamp('2026-11-07T21:53:27.9908876+00:00').microsecond,990887)
+    def test_original_and_prototype_explicit_capture_boundaries(self):
+        start,end='2026-11-07T00:00:00Z','2026-11-07T00:00:20Z'
+        self.assertEqual(capture_bounds(dict(captureStartedAt=start,capturedAt=end)),(start,end))
+        self.assertEqual(capture_bounds(dict(captureUtc=start,completionUtc=end)),(start,end))
+        for invalid in ({},{'capturedAt':end},{'captureUtc':end,'completionUtc':start}):
+            with self.assertRaises(ValueError):capture_bounds(invalid)
 
 
 if __name__=='__main__':unittest.main()

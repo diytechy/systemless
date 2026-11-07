@@ -1,0 +1,74 @@
+{
+  "status": "playable-source-frozen-root-browser-validation-pending",
+  "sourceFreezeUtc": "2026-11-07T23:38:00Z",
+  "scope": "one actual Movement board; original assets/private map; no deployment",
+  "privateAssets": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\assets",
+  "assetManifestSha256": "307bdb47b12fd6874358e8f0434d1b3d7fdd258999afa5a8c9968549631d8463",
+  "fixtureSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4",
+  "sourceFiles": [
+    {
+      "path": "prototypes/clockwerx-html5/.gitignore",
+      "bytes": 24,
+      "sha256": "8bdd33ee103416cb8afb00ab9c44ed7f175055f0eb4df3abb4a1a85e243652f3"
+    },
+    {
+      "path": "prototypes/clockwerx-html5/app.mjs",
+      "bytes": 13887,
+      "sha256": "2f2a8fd940293af142c9c18264f732f3d023da16d2e56aed8cd90b1eda7ef6bf"
+    },
+    {
+      "path": "prototypes/clockwerx-html5/board.mjs",
+      "bytes": 907,
+      "sha256": "dcc1a1dfd4e0635447515435511d61be48ba78e00ebaf9a6a8d1e73feb325888"
+    },
+    {
+      "path": "prototypes/clockwerx-html5/engine.mjs",
+      "bytes": 3265,
+      "sha256": "799b61eaeda3e4b4d3572b9f9114c5618ad76ac3b4216d230a0303fb6867ddcb"
+    },
+    {
+      "path": "prototypes/clockwerx-html5/engine.test.mjs",
+      "bytes": 2102,
+      "sha256": "875ed1ed2bfe94389e62b35c55be315f7da678a2f407407cffcf1b5fbdcf3649"
+    },
+    {
+      "path": "prototypes/clockwerx-html5/extract_assets.py",
+      "bytes": 6468,
+      "sha256": "75810b9ae2784a6dc9a523a67b7c16d6015af280c6d03624b09b73a61494eb90"
+    },
+    {
+      "path": "prototypes/clockwerx-html5/index.html",
+      "bytes": 3474,
+      "sha256": "bcd7c4b1d0508184a4b7bafd79a2b21b923cf89d7217c351232e9961b2d6093a"
+    },
+    {
+      "path": "prototypes/clockwerx-html5/README.md",
+      "bytes": 4012,
+      "sha256": "8c26d18ed64c7027bcb691e82fa52b58d76e4ca72cc063d3d47881e7cb58c3a6"
+    }
+  ],
+  "tests": [
+    "node --test engine.test.mjs pass",
+    "node --check app/board/engine pass",
+    "Python source AST parse pass"
+  ],
+  "limits": [
+    "original-versus-pilot browser behavior pending",
+    "timing observed experimental6MHz approximation",
+    "48px logical collision, shorter artwork",
+    "actor access masks inferred",
+    "demo choreography/fonts/shadows/goal overlay reconstructed",
+    "hardware controller/audio fidelity unqualified",
+    "original scores/music/save compatibility/campaign omitted"
+  ],
+  "workloadReleased": true,
+  "ownedProcessesExited": [
+    178020,
+    192636,
+    191656,
+    194008,
+    194240
+  ],
+  "rollback": "Remove separate prototype route/source/private generated assets; original game/save mappings untouched",
+  "nextAction": "Root packages frozen source/assets, performs supported browser GUI acceptance and sequential comparison"
+}

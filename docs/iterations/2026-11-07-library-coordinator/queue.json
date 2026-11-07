@@ -1211,8 +1211,8 @@
     },
     {
       "slug": "gerbils",
-      "title": "Gerbils!",
-      "status": "worker active",
+      "title": "Gerbils!1.0.3",
+      "status": "compatibility blocker",
       "candidates": [
         {
           "path": "Gerbils! Folder/Gerbils!",
@@ -1229,15 +1229,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "PPC default16bit (explicitCLI only1/2/4/8), observed800x600 exploratory. Original SIZE3800000.",
+      "preferences_save_id": "Boot title/GERB launcher/recent aliases only; separate historical copy excluded, no established pref or save mapping.",
+      "controls": "Readme mouse track edits,Delete,Camera/Rendering/File menus; unexercised.",
+      "timing": "PPC startup import halt before gameplay; no release-browser performance baseline.",
+      "report": "gerbils/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "24file/3folder-date fixture directly verified including raw16bit coordinates; parent source002/fixture hashes and raw1tick failure/stderr/PNG reviewed. ExplicitPPC halts at unsupported QuickDraw3D Q3Error_Register before gameplay; original models/textures kept. Separate historical aliases excluded. No broad PPC diagnosis or setting change."
     },
     {
       "slug": "gold-digger",
       "title": "Gold Digger",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Gold Digger 1.3.0/Gold Digger",
@@ -1286,7 +1289,7 @@
     {
       "slug": "goldpusher",
       "title": "GoldPusher",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "gold-pusher Folder/GoldPusher",

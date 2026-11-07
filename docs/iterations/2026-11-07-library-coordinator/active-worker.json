@@ -1,8 +1,8 @@
 {
-  "slug": "gerbils",
-  "task_name": "/root/gerbils",
+  "slug": "gold-digger",
+  "task_name": "/root/gold_digger",
   "status": "running; see active-runners.json",
-  "starting_revision": "53e637a6141dd96726b11c6489b0807e7750d398",
-  "brief": "gerbils-brief.md",
-  "updated_at": "2026-11-07T14:11:23.027438-06:00"
+  "starting_revision": "e62a26750362f20507e2f20cb8180681fd56cff4",
+  "brief": "gold-digger-brief.md",
+  "updated_at": "2026-11-07T14:13:27.535312-06:00"
 }

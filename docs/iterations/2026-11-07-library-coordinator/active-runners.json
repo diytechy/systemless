@@ -1,20 +1,20 @@
 {
   "runners": [
     {
-      "slug": "fantastic-voyage",
-      "task_name": "/root/fantastic_voyage",
-      "status": "reviewed; workload released",
-      "brief": "fantastic-voyage-brief.md"
-    },
-    {
       "slug": "gerbils",
       "task_name": "/root/gerbils",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "gerbils-brief.md"
+    },
+    {
+      "slug": "gold-digger",
+      "task_name": "/root/gold_digger",
+      "status": "running",
+      "brief": "gold-digger-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T20:13:26.8447982Z"
+  "updated_at": "2026-11-07T20:15:06.8283782Z"
 }

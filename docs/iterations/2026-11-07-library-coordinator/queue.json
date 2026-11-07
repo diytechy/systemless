@@ -1521,8 +1521,8 @@
     },
     {
       "slug": "mantra",
-      "title": "Mantra",
-      "status": "worker active",
+      "title": "Mantra v1.02 (resource1.0.2)",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Mantra v1.02 Folder/Mantra v1.02",
@@ -1555,15 +1555,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Docs68020/System7/32bitQD,min512x342/16colors,prefer256; tested800x600x8, original SIZE2097152.",
+      "preferences_save_id": "Actual Boot Mantra Prefs preserved and opened/used through Owned Game/System Folder/Preferences. Earlier broad fixture retained; corrected copy excludes Recent Items alias.",
+      "controls": "Arrows/keypad,Cmd run,Space sword,Shift item,I/S/H panels documented. S panel observed; direction and panel recovery unqualified.",
+      "timing": "Partial native beach/status readiness; release-browser baseline and dialog recovery pending.",
+      "report": "mantra/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Eleven-file corrected fixture verified. Parent matched source002/fixture hashes, reviewed the completed510tick report with zero assertions/exhaustion, beach/status images and actual preference UseResFile trace. Initial beach and S panel render; movement readiness and Return recovery remain unresolved. No causal service diagnosis or setting change."
     },
     {
       "slug": "mantra-ii",
       "title": "Mantra II",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Mantra II v1.02 ƒ/Mantra II v1.02",
@@ -1606,7 +1609,7 @@
     {
       "slug": "nort",
       "title": "nort",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Nort Folder/nort",

@@ -1,8 +1,8 @@
 {
-  "slug": "mantra",
-  "task_name": "/root/mantra",
+  "slug": "mantra-ii",
+  "task_name": "/root/mantra_ii",
   "status": "running; see active-runners.json",
-  "starting_revision": "82031c3ae39bbfb348aaa6186ac729bd14d78008",
-  "brief": "mantra-brief.md",
-  "updated_at": "2026-11-07T20:34:36.046612+00:00"
+  "starting_revision": "3edee09ce48bf19542545eb1ff8efc4ac41a842c",
+  "brief": "mantra-ii-brief.md",
+  "updated_at": "2026-11-07T20:37:56.636766+00:00"
 }

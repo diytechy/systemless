@@ -1,0 +1,112 @@
+{
+  "title": "Alien Action Dome 1.0",
+  "slug": "action-dome-1-0",
+  "outcome": "prepared-native-gameplay-first-pass",
+  "source_revision": "34cc78e129ec11607288e6f5bbaf045d6410539f",
+  "runtime_baseline": "ed74c8b4 (coordinator provenance); exact native compile revision unknown",
+  "source_sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+  "source_unchanged": true,
+  "fixture_sha256": "3412f06ee4cd3dbe456834518119b5b41327a7026197943c3ba748507f5fe875",
+  "native_executable_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+  "executable": "Action Dome/Action Dome 1.0",
+  "original_executable_data_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "original_executable_resource_sha256": "2c9a5dc1bda1153c4b05cfaba3d332766d538f4cf300e15c626820d11cad1e78",
+  "extraction": {
+    "selected_paths": [
+      "Action Dome"
+    ],
+    "files_verified": 7,
+    "scope": "File data/resource forks, type/creator, flags, dates, x/y; represented folder dates",
+    "limits": "Original folder Finder info not exposed by machfs; preserved raw aliases may still refer to original volume",
+    "fixture_bytes": 8388608
+  },
+  "settings": {
+    "architecture": "68k",
+    "screen_depth": 8,
+    "screen_dimensions": [
+      800,
+      600
+    ],
+    "dimensions_basis": "native default observed; requirement not established",
+    "partition_bytes": 5120000,
+    "partition_override": null,
+    "pacing_change": null
+  },
+  "controls": {
+    "up": "keypad8",
+    "down": "keypad2",
+    "right": "keypad6",
+    "left": "keypad4",
+    "stop": "Esc",
+    "pause": "Return",
+    "source": "inspected saved Options UI"
+  },
+  "evidence_root": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\action-dome-1-0",
+  "scenario": "assertions.json",
+  "report": {
+    "version": 1,
+    "systemless_version": "0.110.1",
+    "archive": "D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/action-dome-1-0/action-dome.hfv",
+    "script": "D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/action-dome-1-0/assertions.json",
+    "reference_directory": null,
+    "mac_time_secs": 3871497600,
+    "application_partition_size": null,
+    "architecture": "68k",
+    "status": "passed",
+    "error": null,
+    "failed_action": null,
+    "frontend_ticks": 1116,
+    "guest_tick": 1716,
+    "budget_exhausted_frames": 0,
+    "assertions": 3,
+    "checkpoints": [
+      {
+        "name": "play",
+        "frontend_ticks": 722,
+        "guest_tick": 1322,
+        "differing_pixels": null
+      },
+      {
+        "name": "field",
+        "frontend_ticks": 1022,
+        "guest_tick": 1622,
+        "differing_pixels": null
+      },
+      {
+        "name": "right",
+        "frontend_ticks": 1052,
+        "guest_tick": 1652,
+        "differing_pixels": null
+      },
+      {
+        "name": "pause",
+        "frontend_ticks": 1084,
+        "guest_tick": 1684,
+        "differing_pixels": null
+      },
+      {
+        "name": "resume",
+        "frontend_ticks": 1116,
+        "guest_tick": 1716,
+        "differing_pixels": null
+      }
+    ]
+  },
+  "behavior": {
+    "launch": "observed",
+    "stage1": "observed",
+    "right_movement": "observed; input-key88/ch54, no independent reference",
+    "pause_resume": "observed visually",
+    "menu_instructions_options": "observed",
+    "timing_fidelity": "untested",
+    "busy_scene": "untested",
+    "sound": "untested",
+    "saves": "untested",
+    "physical_controller": "untested",
+    "browser_performance": "not measured; no compiled entry"
+  },
+  "changes": [
+    "Own report/status only; private fixture/scenarios/captures"
+  ],
+  "next_action": "Coordinator may prepare explicit entry with Sprund and saved folder files, 8-bit probe and discovered controls, then release-browser baseline; preserve save mapping choices deliberately."
+}

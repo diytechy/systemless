@@ -105,7 +105,7 @@ for row in queue:
         row['depth_size'] = '640x480, ' + ('4-bit' if row['slug'] == 'delirium' else '8-bit')
         row['preferences_save_id'] = {'clockwerx': 'clockwerx-personal-10; ClockWerx Scores/Settings', 'koji': 'koji-personal-204; Koji 2.0 Registration/Koji Registration', 'delirium': 'delirium-personal-11; Delirium 1.1 Preferences'}[row['slug']]
     if row['slug'] in previous:
-        for field in ('status', 'timing', 'report', 'accepted_setting', 'review', 'depth_size', 'preferences_save_id', 'controls'):
+        for field in ('status', 'timing', 'report', 'accepted_setting', 'review', 'depth_size', 'preferences_save_id', 'controls', 'title', 'version_notes', 'dependencies'):
             if field in previous[row['slug']]:
                 row[field] = previous[row['slug']][field]
 result = {'schema': 1, 'games': queue, 'excluded_applications': excluded,

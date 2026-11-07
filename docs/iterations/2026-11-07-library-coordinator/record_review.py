@@ -15,6 +15,9 @@ parser.add_argument('--report', default='report.md')
 parser.add_argument('--depth-size')
 parser.add_argument('--controls')
 parser.add_argument('--preferences')
+parser.add_argument('--title')
+parser.add_argument('--dependencies')
+parser.add_argument('--version-notes')
 args = parser.parse_args()
 root = Path(__file__).parent
 queue_file = root / 'queue.json'
@@ -24,7 +27,7 @@ report = root / args.slug / args.report
 if not report.is_file():
     raise SystemExit('Missing reviewed report: ' + str(report))
 row.update(status=args.outcome, timing=args.timing, report=args.slug + '/' + args.report, review=args.review)
-for option, field in ((args.depth_size,'depth_size'), (args.controls,'controls'), (args.preferences,'preferences_save_id')):
+for option, field in ((args.depth_size,'depth_size'), (args.controls,'controls'), (args.preferences,'preferences_save_id'), (args.title,'title'), (args.dependencies,'dependencies'), (args.version_notes,'version_notes')):
     if option is not None:
         row[field] = option
 row.setdefault('accepted_setting', 'No runtime setting change accepted by this review')

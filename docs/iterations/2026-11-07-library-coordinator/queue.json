@@ -195,8 +195,8 @@
     },
     {
       "slug": "action-dome-1-0",
-      "title": "Action Dome 1.0",
-      "status": "worker assigned",
+      "title": "Alien Action Dome 1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Action Dome/Action Dome 1.0",
@@ -215,15 +215,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "256colors required;800x600 8-bit native observed;640x480 unverified; SIZE5120000",
+      "preferences_save_id": "Existing preferences/scores retained inside private folder; browser ID/mappings unassigned",
+      "controls": "Saved keypad8/2/6/4 movement, Esc stop, Return pause; right and pause/resume observed",
+      "timing": "Release browser entry absent; native timing/fidelity unqualified",
+      "report": "action-dome-1-0/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "7file fixture preservation reviewed; coordinator independently rehashed source and fixture. Stage1/right movement/Return pause-resume observed;3pixel assertions pass,0exhaustion. No native blocker or runtime change.",
+      "dependencies": "Sprund sprite/sound file mandatory; whole7file folder includes saved preferences/scores"
     },
     {
       "slug": "adventure",
       "title": "Adventure",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Adventure/Adventure",

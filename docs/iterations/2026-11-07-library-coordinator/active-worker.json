@@ -1,8 +1,8 @@
 {
-  "slug": "chiral",
-  "task_name": "/root/chiral",
+  "slug": "chrysanthemum-1-01",
+  "task_name": "/root/chrysanthemum_1_01",
   "status": "reviewed; workload released",
-  "starting_revision": "53063f47dcb20f005805db363da0f0646dd783af",
-  "brief": "chiral-brief.md",
-  "updated_at": "2026-11-07T19:05:38.470901+00:00"
+  "starting_revision": "ca81007c02b4214d390d1d07c6f9d9ccad4cd411",
+  "brief": "chrysanthemum-1-01-brief.md",
+  "updated_at": "2026-11-07T19:10:32.557932+00:00"
 }

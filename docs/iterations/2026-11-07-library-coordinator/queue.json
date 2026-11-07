@@ -896,8 +896,8 @@
     },
     {
       "slug": "chrysanthemum-1-01",
-      "title": "Chrysanthemum 1.01",
-      "status": "worker assigned",
+      "title": "Chrysanthemum1.01",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Chrysanthemum 1.01",
@@ -915,15 +915,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Actual800x600x8, dimensions/default and depth exploratory. Original SIZE870400 retained; embedded System7+ requirement.",
+      "preferences_save_id": "Actual Boot Chrysanth Prefs samePrp; creator preserved. FindFolder/FSpOpenDF path and PBRead608request observed; return/application not established. No browser ID.",
+      "controls": "Embedded File PlayCmd-G/InstructionsCmd-I/ChooseKeysCmd-K; PauseCmd-P/EndCmd-period/SoundCmd-S/MusicCmd-M. Actual gameplay/saved mappings unverified.",
+      "timing": "First120tick action incomplete at75s; final counters unavailable. No release-browser baseline.",
+      "report": "chrysanthemum-1-01/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Exact2file app+actual-pref fixture verified; parent source001/fixture hashes and75s stopped ownership reviewed, PID absent. Guest resolves Chrysanth Prefs and requests PBRead608; completion/settings application unproven. No first screenshot/final report/counters; no causal file-service fault established. No runtime/pacing change.",
+      "dependencies": "Exact root APPL+actual pref only; no external content established, instructions embedded artwork uninspected."
     },
     {
       "slug": "columns",
       "title": "Columns",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Columns",

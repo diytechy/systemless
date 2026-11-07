@@ -1,8 +1,8 @@
 {
-  "slug": "spin-doctor",
-  "task_name": "/root/spin_doctor",
+  "slug": "star-trek-final-unity",
+  "task_name": "/root/star_trek_final_unity",
   "status": "running; see active-runners.json",
-  "starting_revision": "20cdd4e20dbee366ab5b6ee004db0289d07b8ae4",
-  "brief": "spin-doctor-brief.md",
-  "updated_at": "2026-11-07T21:46:45.870147+00:00"
+  "starting_revision": "fc2121b1a30cbbc06a5b5b70d92581e75d987a64",
+  "brief": "star-trek-final-unity-brief.md",
+  "updated_at": "2026-11-07T21:48:23.424123+00:00"
 }

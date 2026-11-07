@@ -2053,7 +2053,7 @@
     {
       "slug": "spin-doctor",
       "title": "Spin Doctor",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Spin Doctor/Spin Doctor",
@@ -2074,12 +2074,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Two finite native scripts; no real-time release measurement.",
+      "report": "spin-doctor/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source002/Boot and7-file corrected fixture hashes, read raw120/221tick passed reports and owned exit0; inspected1:Grid with Paused overlay. Actual Settings/Scores opens evidenced. Wand orientation changes and P pause observed; Command action effect not isolated, resume/sound/saves/busy level untested. Executable1.2 supersedes bundled ReadMe label1.0 as version evidence. No pacing setting accepted."
     },
     {
       "slug": "star-trek-final-unity",
       "title": "Star Trek: A Final Unity",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Star Trek TNG/\"A Final Unity\"",
@@ -2106,7 +2109,7 @@
     {
       "slug": "super-munchers",
       "title": "Super Munchers",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Super Munchers/Super Munchers",

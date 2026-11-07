@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "systemless_version": "0.110.1",
+  "archive": "D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/koji/koji.img",
+  "script": "D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/koji/behavior.json",
+  "reference_directory": null,
+  "mac_time_secs": 3871497600,
+  "application_partition_size": null,
+  "architecture": "68k",
+  "status": "passed",
+  "error": null,
+  "failed_action": null,
+  "frontend_ticks": 489,
+  "guest_tick": 1089,
+  "budget_exhausted_frames": 0,
+  "assertions": 2,
+  "checkpoints": [
+    {
+      "name": "ready",
+      "frontend_ticks": 302,
+      "guest_tick": 902,
+      "differing_pixels": null
+    },
+    {
+      "name": "right",
+      "frontend_ticks": 314,
+      "guest_tick": 914,
+      "differing_pixels": null
+    },
+    {
+      "name": "left",
+      "frontend_ticks": 326,
+      "guest_tick": 926,
+      "differing_pixels": null
+    },
+    {
+      "name": "tongue",
+      "frontend_ticks": 329,
+      "guest_tick": 929,
+      "differing_pixels": null
+    },
+    {
+      "name": "paused",
+      "frontend_ticks": 335,
+      "guest_tick": 935,
+      "differing_pixels": null
+    },
+    {
+      "name": "paused_wait",
+      "frontend_ticks": 395,
+      "guest_tick": 995,
+      "differing_pixels": null
+    },
+    {
+      "name": "resumed",
+      "frontend_ticks": 409,
+      "guest_tick": 1009,
+      "differing_pixels": null
+    },
+    {
+      "name": "jump",
+      "frontend_ticks": 421,
+      "guest_tick": 1021,
+      "differing_pixels": null
+    },
+    {
+      "name": "water",
+      "frontend_ticks": 429,
+      "guest_tick": 1029,
+      "differing_pixels": null
+    },
+    {
+      "name": "after_audio",
+      "frontend_ticks": 489,
+      "guest_tick": 1089,
+      "differing_pixels": null
+    }
+  ]
+}

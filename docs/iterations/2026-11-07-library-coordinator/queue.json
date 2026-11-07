@@ -30,7 +30,7 @@
     {
       "slug": "koji",
       "title": "Koji the Frog",
-      "status": "worker assigned",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Koji the Frog/Koji the Frog 2.0.4",
@@ -65,13 +65,16 @@
       ],
       "depth_size": "640x480, 8-bit",
       "preferences_save_id": "koji-personal-204; Koji 2.0 Registration/Koji Registration",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "controls": "Native left/right/tongue/pause; browser resume+movement+jump observed; water unqualified",
+      "timing": "3 focused release-browser captures at25; median59.959 guest ticks/sec, range59.903-60.128; same initial level, manually observed readiness",
+      "report": "koji/report.md",
+      "accepted_setting": "25 MHz unchanged; no candidate warranted by first-level clock evidence",
+      "review": "Coordinator and Sol worker reviewed raw rates, resource hashes, scope and behavior gaps"
     },
     {
       "slug": "delirium",
       "title": "Delirium",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Delirium 1.1 Folder/Delirium 1.1",

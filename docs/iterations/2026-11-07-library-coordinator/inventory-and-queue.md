@@ -8,9 +8,9 @@ Default depth, required sibling resources, preferences and controls for unprepar
 
 | Order | Title | Sources / executable candidates | Architecture evidence | Status |
 |---:|---|---|---|---|
-| 1 | ClockWerx | Content\002: ClockWerx Folder/ClockWerx | 68K (CODE) | worker active |
-| 2 | Koji the Frog | Content\001: Koji the Frog/Koji the Frog 2.0.4<br>Content\005: 2Del/Koji The Frog 1.0.2 ƒ/Koji The Frog 1.0.2 | 68K (CODE), fat (CODE + PPC fragment) | pending |
-| 3 | Delirium | Content\001: Delirium 1.1 Folder/Delirium 1.1 | 68K (CODE) | pending |
+| 1 | ClockWerx | Content\002: ClockWerx Folder/ClockWerx | 68K (CODE) | measurement blocked |
+| 2 | Koji the Frog | Content\001: Koji the Frog/Koji the Frog 2.0.4<br>Content\005: 2Del/Koji The Frog 1.0.2 ƒ/Koji The Frog 1.0.2 | 68K (CODE), fat (CODE + PPC fragment) | unchanged baseline |
+| 3 | Delirium | Content\001: Delirium 1.1 Folder/Delirium 1.1 | 68K (CODE) | worker assigned |
 | 4 | 3-D Cannon | Content\001: 3-D Cannon/3-D Cannon(FAT) | fat (CODE + PPC fragment) | pending |
 | 5 | 3d Brick Bash! 1.1.1 | Content\001: 3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1 | 68K (CODE) | pending |
 | 6 | Acquire 1.0 | Content\001: Acquire ƒ/Acquire 1.0 | 68K (CODE) | pending |

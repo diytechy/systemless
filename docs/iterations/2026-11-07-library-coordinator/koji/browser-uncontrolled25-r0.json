@@ -1,0 +1,56 @@
+{
+  "capturedAt": "2026-11-07T15:51:37.051Z",
+  "path": "/koji-the-frog/",
+  "reason": "complete",
+  "testCpuMhz": null,
+  "visible": true,
+  "focused": true,
+  "runtime": "true",
+  "renderer": "webgl",
+  "canvas": [
+    1280,
+    960
+  ],
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "animationCallbacksPerSecond": 164.8626174015337,
+  "frames": 2739,
+  "wallSeconds": 20.004534999996423,
+  "sampledSeconds": 19.97823000000417,
+  "runtimeFramesPerSecond": 137.04917803025737,
+  "guestTicksPerSecond": 59.965272198775864,
+  "guestMips": 2.211641872177404,
+  "firstGuestTick": 5142,
+  "lastGuestTick": 6340,
+  "guestExecutionMs": {
+    "mean": 1.8283461118895628,
+    "p95": 13.804999992251396,
+    "max": 15.230000004172325
+  },
+  "snapshotMs": {
+    "mean": 0.8909784592266455,
+    "p95": 4.829999998211861,
+    "max": 6.945000007748604
+  },
+  "jsCopyMs": {
+    "mean": 0.24338079599970316,
+    "p95": 1.4099999964237213,
+    "max": 6.064999997615814
+  },
+  "roundTripMs": {
+    "mean": 3.2239393941478687,
+    "p95": 19.83500000834465,
+    "max": 23.265000000596046
+  },
+  "ticksBehind": {
+    "mean": 0.4304490690032859,
+    "p95": 2,
+    "max": 5
+  },
+  "cpuBudgetMs": {
+    "mean": 9,
+    "p95": 13,
+    "max": 13
+  },
+  "cpuMhz": 25,
+  "visualFrames": 556
+}

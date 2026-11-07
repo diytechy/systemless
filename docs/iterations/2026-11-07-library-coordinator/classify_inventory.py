@@ -5,6 +5,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent
 inventory = json.loads((ROOT / 'inventory.json').read_text(encoding='utf-8'))
+queue_path = ROOT / 'queue.json'
+previous = {row['slug']: row for row in json.loads(queue_path.read_text(encoding='utf-8-sig'))['games']} if queue_path.exists() else {}
 aliases = {
     'ClockWerx Folder': ('clockwerx', 'ClockWerx'),
     'Koji the Frog': ('koji', 'Koji the Frog'),
@@ -64,18 +66,22 @@ for volume in inventory['volumes']:
                                      'depth_size': 'unknown; verify per executable',
                                      'preferences_save_id': 'unassigned; no browser entry yet',
                                      'controls': 'unverified', 'timing': 'not yet measured'})
-        row['candidates'].append({key: app.get(key) for key in ('path', 'architecture', 'version_strings', 'preferred_partition_bytes', 'data_sha256', 'resource_sha256')} | {'source': volume['source'], 'configured': volume['configured']})
+        candidate = {key: app.get(key) for key in ('path', 'architecture', 'version_strings', 'preferred_partition_bytes', 'data_sha256', 'resource_sha256')}
+        candidate.update(source=volume['source'], configured=volume['configured'])
+        row['candidates'].append(candidate)
 first = ['clockwerx', 'koji', 'delirium']
 queue = [games[k] for k in first] + [games[k] for k in sorted(games) if k not in first]
 for row in queue:
     if row['slug'] in first:
         row['depth_size'] = '640x480, ' + ('4-bit' if row['slug'] == 'delirium' else '8-bit')
         row['preferences_save_id'] = {'clockwerx': 'clockwerx-personal-10; ClockWerx Scores/Settings', 'koji': 'koji-personal-204; Koji 2.0 Registration/Koji Registration', 'delirium': 'delirium-personal-11; Delirium 1.1 Preferences'}[row['slug']]
-    if row['slug'] == 'clockwerx':
-        row['status'] = 'worker active'
+    if row['slug'] in previous:
+        for field in ('status', 'timing', 'report', 'accepted_setting', 'review', 'depth_size', 'preferences_save_id', 'controls'):
+            if field in previous[row['slug']]:
+                row[field] = previous[row['slug']][field]
 result = {'schema': 1, 'games': queue, 'excluded_applications': excluded,
           'disc_note': 'Configured Star Trek disc catalogue has an out-of-bounds partition; its game executable was separately found on 002. No disc content silently inferred.'}
-(ROOT / 'queue.json').write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+queue_path.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 lines = ['# Inventory and sequential queue', '',
          'Read-only catalogue evidence, 2026-11-07. All nine disk images and the configured disc were hashed before/after with equal hashes. No source mounted or modified. APPL/Finder type and CODE/cfrg establish candidate architecture, not runtime compatibility. Boot Recent Items are aliases; helpers and Trash copies are explicitly classified in queue.json. Unconfigured 005/007/008 were inspected as supplementary media.', '',
          'Default depth, required sibling resources, preferences and controls for unprepared games remain unverified until their worker inspects the title. Resource version strings can include library versions; workers must resolve ambiguity. Absence of a browser route is preparation work, not proof of incompatibility.', '',

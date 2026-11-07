@@ -1,0 +1,991 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {
+      "slug": "3-d-cannon",
+      "id": "owned-3-d-cannon-v1",
+      "title": "3-D Cannon",
+      "summary": "Your original Macintosh copy of 3-D Cannon.",
+      "image_path": "D:\\SystemlessBuild\\private-library-20261107\\media-corrected-v1\\3-d-cannon.img",
+      "image_sha256": "a6e7a80d112d705738e6ac9e97cbe0acfec3baeffd528f446543858fdc9435b2",
+      "architecture": "68k",
+      "executable_path": "Untitled/3-D Cannon/3-D Cannon(FAT)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "3d-brick-bash-1-1-1",
+      "id": "owned-3d-brick-bash-1-1-1-v1",
+      "title": "3d Brick Bash! 1.1.1",
+      "summary": "Your original Macintosh copy of 3d Brick Bash! 1.1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\3d-brick-bash-1-1-1\\complete.img",
+      "image_sha256": "1f4a9cf5598743694322088863e722919811904c5456c92e317f80eafeb57622",
+      "architecture": "68k",
+      "executable_path": "Owned Game/3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "acquire-1-0",
+      "id": "owned-acquire-1-0-v1",
+      "title": "Acquire 1.0",
+      "summary": "Your original Macintosh copy of Acquire 1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\acquire-1-0\\acquire.hfv",
+      "image_sha256": "d8cd9839985132c73bdd47ed824788dfdd79bd1d540005070f73da95b11488b1",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Acquire ƒ/Acquire 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Start with New Game in the File menu, then click targets.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "action-dome-1-0",
+      "id": "owned-action-dome-1-0-v1",
+      "title": "Alien Action Dome 1.0",
+      "summary": "Your original Macintosh copy of Alien Action Dome 1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\action-dome-1-0\\action-dome.hfv",
+      "image_sha256": "3412f06ee4cd3dbe456834518119b5b41327a7026197943c3ba748507f5fe875",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Action Dome/Action Dome 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Numeric keypad moves; Return pauses, Escape stops.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "adventure",
+      "id": "owned-adventure-v1",
+      "title": "Adventure 1.1",
+      "summary": "Your original Macintosh copy of Adventure 1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\adventure\\adventure.hfv",
+      "image_sha256": "544284c2cd6d23ee3065901a6d802f49173e3588cc875e9bcfe4ba7819341867",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Adventure/Adventure",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "angband",
+      "id": "owned-angband-v1",
+      "title": "Angband 2.0.2 (Macintosh)",
+      "summary": "Your original Macintosh copy of Angband 2.0.2 (Macintosh).",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\angband\\angband-preserved-pref.hfv",
+      "image_sha256": "b51a5f4bf83cb713a8a00a54e7480032c68e227b13629c52f611bbae3c312b56",
+      "architecture": "68k",
+      "executable_path": "Untitled/Angband/Angband",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Role-Playing",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "arashi-1-1-1",
+      "id": "owned-arashi-1-1-1-v1",
+      "title": "Arashi 1.1.1",
+      "summary": "Your original Macintosh copy of Arashi 1.1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\arashi-1-1-1\\arashi.img",
+      "image_sha256": "149f85f31b99e11b23fb7f6b2fe37956cc9da7d1898f048f7842ac24ed6fa6c9",
+      "architecture": "68k",
+      "executable_path": "Owned Game/ARASHI 1.1.1 ƒ/Arashi 1.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "bachman-2-0u",
+      "id": "owned-bachman-2-0u-v1",
+      "title": "Bachman 2.0u",
+      "summary": "Your original Macintosh copy of Bachman 2.0u.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bachman-2-0u\\bachman.dsk",
+      "image_sha256": "023fb815af2f380b37b4ae2a30f234203f2dc44d349870e6d58a8963b749a8d3",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Bachman 2.0u Folder/Bachman 2.0u",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Choose Game / Begin. Arrow keys move.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "balderdoush-1-04i",
+      "id": "owned-balderdoush-1-04i-v1",
+      "title": "Balderdoush 1.04i",
+      "summary": "Your original Macintosh copy of Balderdoush 1.04i.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\balderdoush-1-04i\\game.hfv",
+      "image_sha256": "6b417a8e4055b0cdd2abd7dce60be5f7b05b6fa2fd54911e0a8aeb8c6fec442f",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Balderdoush 1.04i/Balderdoush 1.04i",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "barney-carnage-2-0",
+      "id": "owned-barney-carnage-2-0-v1",
+      "title": "Barney Carnage 2.0",
+      "summary": "Your original Macintosh copy of Barney Carnage 2.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\barney-carnage-2-0\\game.hfv",
+      "image_sha256": "88770f04e5ad4431795520228eaa35de233e12f665e21a991a2f826b8d44ec46",
+      "architecture": "68k",
+      "executable_path": "Owned Game/BarneyCarnage2.0ƒ/Barney Carnage 2.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "battletanks-2-12-1",
+      "id": "owned-battletanks-2-12-1-v1",
+      "title": "BattleTanks 2.12.1",
+      "summary": "Your original Macintosh copy of BattleTanks 2.12.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\battletanks-2-12-1\\game.hfv",
+      "image_sha256": "65181d06c52b9c20a2593e95d14fedf8846e55d18e0d18c3066c1f2d0e1995ef",
+      "architecture": "68k",
+      "executable_path": "Owned Game/BattleTanks 2.12.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "bedlam",
+      "id": "owned-bedlam-v1",
+      "title": "Bedlam1.1",
+      "summary": "Your original Macintosh copy of Bedlam1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bedlam\\bedlam-with-preferences.hfv",
+      "image_sha256": "48508c527441056916891eb8efdbc33a9c312501e0e4a8a96bb9d00e3404603c",
+      "architecture": "68k",
+      "executable_path": "Untitled/Bedlam 1.1/Bedlam",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 1,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "bikaka-1-4",
+      "id": "owned-bikaka-1-4-v1",
+      "title": "Bikaka 1.4",
+      "summary": "Your original Macintosh copy of Bikaka 1.4.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bikaka-1-4\\bikaka.img",
+      "image_sha256": "af55f6280cc5e6d072144d519b9e458960eecc3c5cbc88a6c5f8aaee900daba4",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Bikaka 14 Folder/Bikaka 1.4",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "blobbo",
+      "id": "blobbo-full-personal-101",
+      "title": "Blobbo Full 1.0.1",
+      "summary": "Your original Macintosh copy of Blobbo Full 1.0.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\blobbo\\full-with-prefs.img",
+      "image_sha256": "9496bd4122a3c08ab62ab7ca4657ada4f539ddb262b093c48c09e8b4e2e6240e",
+      "architecture": "68k",
+      "executable_path": "Untitled/Blobbo1.0.1 Fullversion/Blobbo 1.0.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Click in a direction to move Blobbo.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "blood-bath-demo-1-96",
+      "id": "owned-blood-bath-demo-1-96-v1",
+      "title": "Blood Bath Demo 1.96",
+      "summary": "Your original Macintosh copy of Blood Bath Demo 1.96.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\blood-bath-demo-1-96\\game.img",
+      "image_sha256": "a64681272d05c84f03ba38167d01f4286d741000978d4f34a8b5ec6f4b882f4e",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Blood Bath Demo 1.96 4cows/Blood Bath™ Demo 1.96",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "bloodsuckers",
+      "id": "owned-bloodsuckers-v1",
+      "title": "Bloodsuckers",
+      "summary": "Your original Macintosh copy of Bloodsuckers.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bloodsuckers\\game.img",
+      "image_sha256": "0d23430ae3a82622dd03d99438f7f7299efea836bec39391bda4c93190cd9bf7",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Blood Suckers Folder/Bloodsuckers",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "bolo",
+      "id": "owned-bolo-v1",
+      "title": "Bolo0.99.7;0.99.5 variant retained separately in inventory",
+      "summary": "Your original Macintosh copy of Bolo0.99.7;0.99.5 variant retained separately in inventory.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bolo\\game.img",
+      "image_sha256": "d9eae16ef58225db617fcd8b0d066574fb45b350fcc61109af0647189c190a21",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Bolo f/Bolo 0.99.7",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Strategy",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "bonk-1-4-2",
+      "id": "owned-bonk-1-4-2-v1",
+      "title": "Bonk 1.4.2",
+      "summary": "Your original Macintosh copy of Bonk 1.4.2.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bonk-1-4-2\\bonk-both.hfv",
+      "image_sha256": "8692041ea61c0b6daa31726389d5d9f30873d23dba300910cfcc8ef5aa1d0538",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Click faces. Space uses a bomb.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "bonkheads-deluxe",
+      "id": "owned-bonkheads-deluxe-v1",
+      "title": "Bonkheads Deluxe1.0.0",
+      "summary": "Your original Macintosh copy of Bonkheads Deluxe1.0.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\bonkheads-deluxe\\game-narrow.img",
+      "image_sha256": "72434c62518600b25df2d3b35a595fb32b6cff79b918c35865c58f45365cc74b",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Bonkheads Deluxe/Bonkheads Deluxe",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "brickles-plus-3-0",
+      "id": "owned-brickles-plus-3-0-v1",
+      "title": "Brickles Plus 3.0",
+      "summary": "Your original Macintosh copy of Brickles Plus 3.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\brickles-plus-3-0\\brickles-exact.hfv",
+      "image_sha256": "c577fcf6da8fb6639131b70b5928f2e0f45642ea1d8d7e2e18d13f7ea414467d",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Brickles Plus 3.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "brickoids-millenium",
+      "id": "owned-brickoids-millenium-v1",
+      "title": "Brickoids Millenium1.1",
+      "summary": "Your original Macintosh copy of Brickoids Millenium1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\brickoids-millenium\\game.img",
+      "image_sha256": "35f8c522b278ffcd554d2d5a73c01457c1589939fc00cdd962dda56780fd0df7",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Brickoids Millenium 1.1 GPL/Brickoids Millenium",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "chiral",
+      "id": "owned-chiral-v1",
+      "title": "Chiral1.0.1",
+      "summary": "Your original Macintosh copy of Chiral1.0.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\chiral\\game-with-preferences.img",
+      "image_sha256": "3e218d88630a1475f83f6f5d2f11c6dcfbf4150f2686e0a023bcda58c0bf511f",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Chiral 1.0.1 ƒ/Chiral",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "chrysanthemum-1-01",
+      "id": "owned-chrysanthemum-1-01-v1",
+      "title": "Chrysanthemum1.01",
+      "summary": "Your original Macintosh copy of Chrysanthemum1.01.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\chrysanthemum-1-01\\game-with-preferences.img",
+      "image_sha256": "f84e48190642212cf4f5690f98811c93bbe9a619568ff599648734afc9fe7662",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Chrysanthemum 1.01",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "columns",
+      "id": "owned-columns-v1",
+      "title": "Columns1.0",
+      "summary": "Your original Macintosh copy of Columns1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\columns\\columns-with-prefs.hfv",
+      "image_sha256": "45be4e5ddecc87bd5af46cfe6c2f6f7e23d1a68fe37a2389e5ce91fbeed415ae",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Columns",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "crunch",
+      "id": "owned-crunch-v1",
+      "title": "Crunch!2.0",
+      "summary": "Your original Macintosh copy of Crunch!2.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\crunch\\crunch.hfv",
+      "image_sha256": "3de7d1aa9aa0933b100e55a0ecd94c4d78b668b5fc0ebe9b60ad65e6c8cd640b",
+      "architecture": "68k",
+      "executable_path": "Owned Game/CRUNCH Folder/CRUNCH",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "cybernation-1-1-1",
+      "id": "owned-cybernation-1-1-1-v1",
+      "title": "CyberNation 1.1.1",
+      "summary": "Your original Macintosh copy of CyberNation 1.1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\cybernation-1-1-1\\cybernation.hfv",
+      "image_sha256": "d542b3391b32bdceecbc3382857659953ea3dcc0dcb6c26b3e0200ba1326e8a1",
+      "architecture": "68k",
+      "executable_path": "Owned Game/CyberNation 1.1.1 ƒ/CyberNation 1.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "deliverance",
+      "id": "owned-deliverance-v1",
+      "title": "Deliverance™ 1.0",
+      "summary": "Your original Macintosh copy of Deliverance™ 1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\deliverance\\deliverance.hfv",
+      "image_sha256": "56d08bf63df1274746196cdec3e8e6f4884d478060a125901af9a7efe14faa8f",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Deliverance™ ƒ/Deliverance™",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "dome-wars",
+      "id": "owned-dome-wars-v1",
+      "title": "Dome Wars Public Beta",
+      "summary": "Your original Macintosh copy of Dome Wars Public Beta.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\dome-wars\\dome-wars.hfv",
+      "image_sha256": "e19e33e134791cd7e6a3f49db8e24c452de1e7ec2922aa6ab506c05b5048f89f",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Dome Wars/Dome Wars",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "drol",
+      "id": "owned-drol-v1",
+      "title": "Drol v0.9 (ReadMe beta0.9b1)",
+      "summary": "Your original Macintosh copy of Drol v0.9 (ReadMe beta0.9b1).",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\drol\\drol.hfv",
+      "image_sha256": "c4fa274152508b07ba22b9351fc6828db01fe31f8f2a42ecd94cf520444b8c3a",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Drol ƒ/Drol",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "fantastic-voyage",
+      "id": "owned-fantastic-voyage-v1",
+      "title": "Fantastic Voyage1.1a",
+      "summary": "Your original Macintosh copy of Fantastic Voyage1.1a.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\fantastic-voyage\\fantastic-voyage.hfv",
+      "image_sha256": "901e338d78e1b27f12a8cee92e4ce8509f76feafb4c92269402c34a9f2feb649",
+      "architecture": "68k",
+      "executable_path": "Owned Game/FVoy Folder/Fantastic Voyage 1.1a",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "gold-digger",
+      "id": "owned-gold-digger-v1",
+      "title": "Gold Digger1.3.0",
+      "summary": "Your original Macintosh copy of Gold Digger1.3.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\gold-digger\\gold-digger-with-prefs.hfv",
+      "image_sha256": "ac826501da6a617f565a5771fb72d34936ba6ad6ae33bc112d17f6350421a958",
+      "architecture": "68k",
+      "executable_path": "Untitled/Gold Digger 1.3.0/Gold Digger",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "goldpusher",
+      "id": "owned-goldpusher-v1",
+      "title": "GoldPusher1.5",
+      "summary": "Your original Macintosh copy of GoldPusher1.5.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\goldpusher\\game.img",
+      "image_sha256": "907a46269ed16c089fbd0247e33472ca19c5de0e3c6acb087713185955e42c3d",
+      "architecture": "68k",
+      "executable_path": "Owned Game/gold-pusher Folder/GoldPusher",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "guy-smiley-vs-the-monsters",
+      "id": "owned-guy-smiley-vs-the-monsters-v1",
+      "title": "Guy Smiley vs.the Monsters1.0.1",
+      "summary": "Your original Macintosh copy of Guy Smiley vs.the Monsters1.0.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\guy-smiley-vs-the-monsters\\game.hfv",
+      "image_sha256": "168d3ffba8ad3e3ca309ae9bf2bc875fa91f96395c316e5050c31c4ae204ba44",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "lawyers",
+      "id": "owned-lawyers-v1",
+      "title": "Lawyers1.0",
+      "summary": "Your original Macintosh copy of Lawyers1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\lawyers\\game.img",
+      "image_sha256": "71aed557a40b4e0d4917dac34d5ef9c68028bad71265116324e528ae99e406fc",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Lawyers",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the numeric keypad to move.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "lemmings",
+      "id": "lemmings-personal-152",
+      "title": "Lemmings1.5.2",
+      "summary": "Your original Macintosh copy of Lemmings1.5.2.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\lemmings\\lemmings-preserved.hfv",
+      "image_sha256": "9413ec5047c680f2fe09e0a882d06f0952d72208361b15298a4198818817e1b7",
+      "architecture": "68k",
+      "executable_path": "Lemmings Owned/Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "macpipes",
+      "id": "owned-macpipes-v1",
+      "title": "MacPipes2.2.7",
+      "summary": "Your original Macintosh copy of MacPipes2.2.7.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\macpipes\\macpipes-227.hfv",
+      "image_sha256": "14c51016350d86318f182eedd0f923e6bbb0e7b88d5e02bffaf28661c29007e5",
+      "architecture": "68k",
+      "executable_path": "Owned Game/MacPipes ƒ/MacPipes 2.2.7",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "maelstrom",
+      "id": "owned-maelstrom-v1",
+      "title": "Maelstrom1.4.3",
+      "summary": "Your original Macintosh copy of Maelstrom1.4.3.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\maelstrom\\maelstrom143.hfv",
+      "image_sha256": "3ba600b3a65c1ef9de18875888e74000519103399d30831c4e4138e1dcd7ad8e",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "mantra",
+      "id": "owned-mantra-v1",
+      "title": "Mantra v1.02 (resource1.0.2)",
+      "summary": "Your original Macintosh copy of Mantra v1.02 (resource1.0.2).",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\mantra\\mantra102-corrected.hfv",
+      "image_sha256": "7d0b98ea951ea30eee20499a80cad59cee4cb2d7f8d553cfc1edc3c4ba8f6e17",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Mantra v1.02 Folder/Mantra v1.02",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "mantra-ii",
+      "id": "owned-mantra-ii-v1",
+      "title": "Mantra II1.02",
+      "summary": "Your original Macintosh copy of Mantra II1.02.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\mantra-ii\\mantra-ii.hfv",
+      "image_sha256": "915f342315d4a08f925171e52258431e0bc83be97d36a81f6a2d306708582c32",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Mantra II v1.02 ƒ/Mantra II v1.02",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the numeric keypad to move.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "nort",
+      "id": "owned-nort-v1",
+      "title": "Nort (version unknown)",
+      "summary": "Your original Macintosh copy of Nort (version unknown).",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\nort\\nort.hfv",
+      "image_sha256": "276be9639b2e7c6bea32b0dd1466db80e4f76c2949eb6d5e977a4b2b8faac758",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Nort Folder/nort",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "oh-no-more-lemmings",
+      "id": "oh-no-more-lemmings-personal-10",
+      "title": "Oh No! More Lemmings1.0",
+      "summary": "Your original Macintosh copy of Oh No! More Lemmings1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\oh-no-more-lemmings\\onml-preserved.hfv",
+      "image_sha256": "d0a33b6a55e72bb69f3e8c1f5ebe6572f5df57e6b7e2b4fd3afce541a2ccd009",
+      "architecture": "68k",
+      "executable_path": "ONML Owned/Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "oregon-trail",
+      "id": "owned-oregon-trail-v1",
+      "title": "Oregon Trail1.1",
+      "summary": "Your original Macintosh copy of Oregon Trail1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\oregon-trail\\oregon-trail-v2.hfv",
+      "image_sha256": "a111ef2828319cc92a31d215534335ffce22204db39560ae78930e54eb0d50b8",
+      "architecture": "68k",
+      "executable_path": "Untitled/Oregon Trail/Oregon Trail",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Simulation",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "pac-in-time",
+      "id": "owned-pac-in-time-v1",
+      "title": "PAC IN TIME1.0",
+      "summary": "Your original Macintosh copy of PAC IN TIME1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\pac-in-time\\pac-with-prefs.hfv",
+      "image_sha256": "c57d46adc26897770d29881fd588e9515d8d0e671ab2678afd7b31bb71580f83",
+      "architecture": "68k",
+      "executable_path": "Owned PAC/PAC IN TIME",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "pac-the-man",
+      "id": "owned-pac-the-man-v1",
+      "title": "Pac the Man4.5.1",
+      "summary": "Your original Macintosh copy of Pac the Man4.5.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\pac-the-man\\pac-with-preferences.hfv",
+      "image_sha256": "d7c7dbb9b61f2839cf9c1d3b99dc2b411f391992f6950919cf3484423b5ca025",
+      "architecture": "68k",
+      "executable_path": "Untitled/PactheMan4.5.1/Pac the Man",
+      "screen_size": [
+        640,
+        480
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "particleman-1-0",
+      "id": "owned-particleman-1-0-v1",
+      "title": "ParticleMan1.0 (titlev1.0.0)",
+      "summary": "Your original Macintosh copy of ParticleMan1.0 (titlev1.0.0).",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\particleman-1-0\\particleman.img",
+      "image_sha256": "8a4005b92e8b96833e78e2435d6bf412e385ef70987b1def43df1d2ec905fd5d",
+      "architecture": "68k",
+      "executable_path": "Owned Game/ParticleMan 1.0/ParticleMan 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "polybrid-1-0",
+      "id": "owned-polybrid-1-0-v1",
+      "title": "Polybrid1.0",
+      "summary": "Your original Macintosh copy of Polybrid1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\polybrid-1-0\\polybrid-original.hfv",
+      "image_sha256": "7a07557b13c2a7f34c0b232ac0d937a150ce5f8b69ff50ffcba0fa91e0e1890a",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Polybrid Folder/Polybrid 1.0",
+      "screen_size": [
+        640,
+        480
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "prince-of-persia",
+      "id": "owned-prince-of-persia-v1",
+      "title": "Prince of Persia1.0",
+      "summary": "Your original Macintosh copy of Prince of Persia1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\prince-of-persia\\prince-of-persia.hfv",
+      "image_sha256": "a1c3e3bd54ac934e800cf023e547cbddaee82321c06455b522977a630cb339f6",
+      "architecture": "68k",
+      "executable_path": "Owned Prince/Prince of Persia ƒ/Prince of Persia",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "robowar-4-1-1",
+      "id": "owned-robowar-4-1-1-v1",
+      "title": "RoboWar 4.1.1",
+      "summary": "Your original Macintosh copy of RoboWar 4.1.1.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\robowar-4-1-1\\robowar.hfv",
+      "image_sha256": "7c4655cbb72b8f1bb241a2d40f0c6c3150e6023d52dd3427845ff9b243ce3e45",
+      "architecture": "68k",
+      "executable_path": "Owned Game/RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Strategy",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "ruckus",
+      "id": "owned-ruckus-v1",
+      "title": "Ruckus",
+      "summary": "Your original Macintosh copy of Ruckus.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\ruckus\\ruckus-clean.img",
+      "image_sha256": "87269aced66cecfb5108f50d7a5d965956ba4fb5747927a0d3252f2e892bb1ac",
+      "architecture": "68k",
+      "executable_path": "Untitled/New Ruckus!/Ruckus",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Strategy",
+      "notes_html": "<p>Use the mouse to select and scroll; numeric keypad controls vehicles.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "scruffy",
+      "id": "owned-scruffy-v1",
+      "title": "Scruffy",
+      "summary": "Your original Macintosh copy of Scruffy.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\scruffy\\scruffy.hfv",
+      "image_sha256": "64e55ca01f875fda451f29f488748efbef39a9366bdbe1c9c29ad72f580eca49",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Scruffy/Scruffy",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 1,
+      "category": "Arcade",
+      "notes_html": "<p>A/D move, Space jumps, Q drops bombs, Tab pauses.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "scruffy-ii",
+      "id": "owned-scruffy-ii-v1",
+      "title": "Scruffy II 1.0",
+      "summary": "Your original Macintosh copy of Scruffy II 1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\scruffy-ii\\scruffy-ii.hfv",
+      "image_sha256": "538495d7e95317fc356eb25b556cb9695b3523bdb456838ce68226956a5ec867",
+      "architecture": "68k",
+      "executable_path": "Owned Game/More ScruffyStuff/Scruffy II",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 4,
+      "category": "Arcade",
+      "notes_html": "<p>Use Change Keys to inspect or adjust controls.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "slithereens",
+      "id": "owned-slithereens-v1",
+      "title": "Slithereens",
+      "summary": "Your original Macintosh copy of Slithereens.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\slithereens\\slithereens-preserved.hfv",
+      "image_sha256": "2daad00e0d7064cca324fecb5b330e68ed6ca6c58181a8d6ea4765f217b07eb2",
+      "architecture": "68k",
+      "executable_path": "Untitled/Slithereens 1.0.0 ƒ/Slithereens",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "spin-doctor",
+      "id": "owned-spin-doctor-v1",
+      "title": "Spin Doctor 1.2",
+      "summary": "Your original Macintosh copy of Spin Doctor 1.2.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\spin-doctor\\spin-doctor-v2.img",
+      "image_sha256": "260bd77b51e30f2047c2714d763a1632aa6f7b0be550a3e726272dc9279845ab",
+      "architecture": "68k",
+      "executable_path": "Spin Doctor Copy/Spin Doctor/Spin Doctor",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "star-trek-final-unity",
+      "id": "owned-star-trek-final-unity-v1",
+      "title": "Star Trek: A Final Unity",
+      "summary": "Your original Macintosh copy of Star Trek: A Final Unity.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\star-trek-final-unity\\followup-two-volume.kpk",
+      "image_sha256": "c483258e7bbfe889b68f9a7a12e5d042ec927842ce6b32cec606695a34930885",
+      "architecture": "68k",
+      "executable_path": "Owned Star Trek/Star Trek TNG/\"A Final Unity\"",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "super-munchers",
+      "id": "owned-super-munchers-v1",
+      "title": "Super Munchers",
+      "summary": "Your original Macintosh copy of Super Munchers.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\super-munchers\\super-munchers.hfv",
+      "image_sha256": "fbad661db4b022d2bcae3cc54e1954d32e46ab9d42240c49d684d10fc4acd936",
+      "architecture": "68k",
+      "executable_path": "Owned Munchers/Super Munchers/Super Munchers",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Arrow keys move, Space eats, Return pauses or continues.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "system-s-twilight-v1-0-5",
+      "id": "owned-system-s-twilight-v1-0-5-v1",
+      "title": "System's Twilight v1.0.5",
+      "summary": "Your original Macintosh copy of System's Twilight v1.0.5.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\system-s-twilight-v1-0-5\\game.hfv",
+      "image_sha256": "bdc35005475a0bf04d34eed83c87afa5bfa8c38171692f41f22144866a27cdae",
+      "architecture": "68k",
+      "executable_path": "Owned Game/System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Puzzle",
+      "notes_html": "<p>Use the game’s menus and instructions for controls and options.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "the-big-one",
+      "id": "owned-the-big-one-v1",
+      "title": "The Big One Demo 1.0",
+      "summary": "Your original Macintosh copy of The Big One Demo 1.0.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\the-big-one\\the-big-one-corrected.img",
+      "image_sha256": "2a2028c977aa3d4bab895544ac58a65e33bd508a6d4c5bd52f3e05d4ca187067",
+      "architecture": "68k",
+      "executable_path": "The Big One/The Big One",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 1,
+      "category": "Arcade",
+      "notes_html": "<p>Comma/period move, S shoots, Space jumps. This original demo has sound disabled.</p><p>Compatibility is still being checked.</p>"
+    },
+    {
+      "slug": "zap-t-balls",
+      "id": "owned-zap-t-balls-v1",
+      "title": "Zap'T'Balls",
+      "summary": "Your original Macintosh copy of Zap'T'Balls.",
+      "image_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\zap-t-balls\\fixture.hfv",
+      "image_sha256": "70b351a1c91230c78ed39ece1ebccf109c28c1f1f4f41d5cadd7f8478f91f99b",
+      "architecture": "68k",
+      "executable_path": "Owned Game/Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "category": "Arcade",
+      "notes_html": "<p>Choose File / New Game / Normal Mode. Mouse controls play; Caps Lock pauses, Q aborts.</p><p>Compatibility is still being checked.</p>"
+    }
+  ]
+}

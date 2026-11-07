@@ -1,0 +1,947 @@
+{
+  "entries": [
+    {
+      "slug": "3-d-cannon",
+      "id": "owned-3-d-cannon-v1",
+      "fixture_sha256": "a6e7a80d112d705738e6ac9e97cbe0acfec3baeffd528f446543858fdc9435b2",
+      "executable_path": "Untitled/3-D Cannon/3-D Cannon(FAT)",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "3-d-cannon/report.md",
+      "metadata_correction": true,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "3d-brick-bash-1-1-1",
+      "id": "owned-3d-brick-bash-1-1-1-v1",
+      "fixture_sha256": "1f4a9cf5598743694322088863e722919811904c5456c92e317f80eafeb57622",
+      "executable_path": "Owned Game/3d Brick Bash! 1.1.1/3d Brick Bash! 1.1.1",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "3d-brick-bash-1-1-1/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "acquire-1-0",
+      "id": "owned-acquire-1-0-v1",
+      "fixture_sha256": "d8cd9839985132c73bdd47ed824788dfdd79bd1d540005070f73da95b11488b1",
+      "executable_path": "Owned Game/Acquire ƒ/Acquire 1.0",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "acquire-1-0/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "action-dome-1-0",
+      "id": "owned-action-dome-1-0-v1",
+      "fixture_sha256": "3412f06ee4cd3dbe456834518119b5b41327a7026197943c3ba748507f5fe875",
+      "executable_path": "Owned Game/Action Dome/Action Dome 1.0",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "action-dome-1-0/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "adventure",
+      "id": "owned-adventure-v1",
+      "fixture_sha256": "544284c2cd6d23ee3065901a6d802f49173e3588cc875e9bcfe4ba7819341867",
+      "executable_path": "Owned Game/Adventure/Adventure",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "adventure/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "angband",
+      "id": "owned-angband-v1",
+      "fixture_sha256": "b51a5f4bf83cb713a8a00a54e7480032c68e227b13629c52f611bbae3c312b56",
+      "executable_path": "Untitled/Angband/Angband",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "angband/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "arashi-1-1-1",
+      "id": "owned-arashi-1-1-1-v1",
+      "fixture_sha256": "149f85f31b99e11b23fb7f6b2fe37956cc9da7d1898f048f7842ac24ed6fa6c9",
+      "executable_path": "Owned Game/ARASHI 1.1.1 ƒ/Arashi 1.1.1",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "arashi-1-1-1/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "bachman-2-0u",
+      "id": "owned-bachman-2-0u-v1",
+      "fixture_sha256": "023fb815af2f380b37b4ae2a30f234203f2dc44d349870e6d58a8963b749a8d3",
+      "executable_path": "Owned Game/Bachman 2.0u Folder/Bachman 2.0u",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "bachman-2-0u/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "balderdoush-1-04i",
+      "id": "owned-balderdoush-1-04i-v1",
+      "fixture_sha256": "6b417a8e4055b0cdd2abd7dce60be5f7b05b6fa2fd54911e0a8aeb8c6fec442f",
+      "executable_path": "Owned Game/Balderdoush 1.04i/Balderdoush 1.04i",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "balderdoush-1-04i/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "barney-carnage-2-0",
+      "id": "owned-barney-carnage-2-0-v1",
+      "fixture_sha256": "88770f04e5ad4431795520228eaa35de233e12f665e21a991a2f826b8d44ec46",
+      "executable_path": "Owned Game/BarneyCarnage2.0ƒ/Barney Carnage 2.0",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "barney-carnage-2-0/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "battletanks-2-12-1",
+      "id": "owned-battletanks-2-12-1-v1",
+      "fixture_sha256": "65181d06c52b9c20a2593e95d14fedf8846e55d18e0d18c3066c1f2d0e1995ef",
+      "executable_path": "Owned Game/BattleTanks 2.12.1",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "battletanks-2-12-1/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "bedlam",
+      "id": "owned-bedlam-v1",
+      "fixture_sha256": "48508c527441056916891eb8efdbc33a9c312501e0e4a8a96bb9d00e3404603c",
+      "executable_path": "Untitled/Bedlam 1.1/Bedlam",
+      "display": [
+        800,
+        600,
+        1
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "bedlam/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "bikaka-1-4",
+      "id": "owned-bikaka-1-4-v1",
+      "fixture_sha256": "af55f6280cc5e6d072144d519b9e458960eecc3c5cbc88a6c5f8aaee900daba4",
+      "executable_path": "Owned Game/Bikaka 14 Folder/Bikaka 1.4",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "bikaka-1-4/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "blobbo",
+      "id": "blobbo-full-personal-101",
+      "fixture_sha256": "9496bd4122a3c08ab62ab7ca4657ada4f539ddb262b093c48c09e8b4e2e6240e",
+      "executable_path": "Untitled/Blobbo1.0.1 Fullversion/Blobbo 1.0.1",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "blobbo/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "blood-bath-demo-1-96",
+      "id": "owned-blood-bath-demo-1-96-v1",
+      "fixture_sha256": "a64681272d05c84f03ba38167d01f4286d741000978d4f34a8b5ec6f4b882f4e",
+      "executable_path": "Owned Game/Blood Bath Demo 1.96 4cows/Blood Bath™ Demo 1.96",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "blood-bath-demo-1-96/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "bloodsuckers",
+      "id": "owned-bloodsuckers-v1",
+      "fixture_sha256": "0d23430ae3a82622dd03d99438f7f7299efea836bec39391bda4c93190cd9bf7",
+      "executable_path": "Owned Game/Blood Suckers Folder/Bloodsuckers",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "bloodsuckers/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "bolo",
+      "id": "owned-bolo-v1",
+      "fixture_sha256": "d9eae16ef58225db617fcd8b0d066574fb45b350fcc61109af0647189c190a21",
+      "executable_path": "Owned Game/Bolo f/Bolo 0.99.7",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "bolo/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "bonk-1-4-2",
+      "id": "owned-bonk-1-4-2-v1",
+      "fixture_sha256": "8692041ea61c0b6daa31726389d5d9f30873d23dba300910cfcc8ef5aa1d0538",
+      "executable_path": "Owned Game/Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "bonk-1-4-2/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "bonkheads-deluxe",
+      "id": "owned-bonkheads-deluxe-v1",
+      "fixture_sha256": "72434c62518600b25df2d3b35a595fb32b6cff79b918c35865c58f45365cc74b",
+      "executable_path": "Owned Game/Bonkheads Deluxe/Bonkheads Deluxe",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "bonkheads-deluxe/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "brickles-plus-3-0",
+      "id": "owned-brickles-plus-3-0-v1",
+      "fixture_sha256": "c577fcf6da8fb6639131b70b5928f2e0f45642ea1d8d7e2e18d13f7ea414467d",
+      "executable_path": "Owned Game/Brickles Plus 3.0",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "brickles-plus-3-0/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "brickoids-millenium",
+      "id": "owned-brickoids-millenium-v1",
+      "fixture_sha256": "35f8c522b278ffcd554d2d5a73c01457c1589939fc00cdd962dda56780fd0df7",
+      "executable_path": "Owned Game/Brickoids Millenium 1.1 GPL/Brickoids Millenium",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "brickoids-millenium/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "chiral",
+      "id": "owned-chiral-v1",
+      "fixture_sha256": "3e218d88630a1475f83f6f5d2f11c6dcfbf4150f2686e0a023bcda58c0bf511f",
+      "executable_path": "Owned Game/Chiral 1.0.1 ƒ/Chiral",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "chiral/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "chrysanthemum-1-01",
+      "id": "owned-chrysanthemum-1-01-v1",
+      "fixture_sha256": "f84e48190642212cf4f5690f98811c93bbe9a619568ff599648734afc9fe7662",
+      "executable_path": "Owned Game/Chrysanthemum 1.01",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "chrysanthemum-1-01/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "columns",
+      "id": "owned-columns-v1",
+      "fixture_sha256": "45be4e5ddecc87bd5af46cfe6c2f6f7e23d1a68fe37a2389e5ce91fbeed415ae",
+      "executable_path": "Owned Game/Columns",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "columns/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "crunch",
+      "id": "owned-crunch-v1",
+      "fixture_sha256": "3de7d1aa9aa0933b100e55a0ecd94c4d78b668b5fc0ebe9b60ad65e6c8cd640b",
+      "executable_path": "Owned Game/CRUNCH Folder/CRUNCH",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "crunch/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "cybernation-1-1-1",
+      "id": "owned-cybernation-1-1-1-v1",
+      "fixture_sha256": "d542b3391b32bdceecbc3382857659953ea3dcc0dcb6c26b3e0200ba1326e8a1",
+      "executable_path": "Owned Game/CyberNation 1.1.1 ƒ/CyberNation 1.1.1",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "cybernation-1-1-1/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "deliverance",
+      "id": "owned-deliverance-v1",
+      "fixture_sha256": "56d08bf63df1274746196cdec3e8e6f4884d478060a125901af9a7efe14faa8f",
+      "executable_path": "Owned Game/Deliverance™ ƒ/Deliverance™",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "deliverance/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "dome-wars",
+      "id": "owned-dome-wars-v1",
+      "fixture_sha256": "e19e33e134791cd7e6a3f49db8e24c452de1e7ec2922aa6ab506c05b5048f89f",
+      "executable_path": "Owned Game/Dome Wars/Dome Wars",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "dome-wars/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "drol",
+      "id": "owned-drol-v1",
+      "fixture_sha256": "c4fa274152508b07ba22b9351fc6828db01fe31f8f2a42ecd94cf520444b8c3a",
+      "executable_path": "Owned Game/Drol ƒ/Drol",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "drol/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "fantastic-voyage",
+      "id": "owned-fantastic-voyage-v1",
+      "fixture_sha256": "901e338d78e1b27f12a8cee92e4ce8509f76feafb4c92269402c34a9f2feb649",
+      "executable_path": "Owned Game/FVoy Folder/Fantastic Voyage 1.1a",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "fantastic-voyage/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "gold-digger",
+      "id": "owned-gold-digger-v1",
+      "fixture_sha256": "ac826501da6a617f565a5771fb72d34936ba6ad6ae33bc112d17f6350421a958",
+      "executable_path": "Untitled/Gold Digger 1.3.0/Gold Digger",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "gold-digger/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "goldpusher",
+      "id": "owned-goldpusher-v1",
+      "fixture_sha256": "907a46269ed16c089fbd0247e33472ca19c5de0e3c6acb087713185955e42c3d",
+      "executable_path": "Owned Game/gold-pusher Folder/GoldPusher",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "goldpusher/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "guy-smiley-vs-the-monsters",
+      "id": "owned-guy-smiley-vs-the-monsters-v1",
+      "fixture_sha256": "168d3ffba8ad3e3ca309ae9bf2bc875fa91f96395c316e5050c31c4ae204ba44",
+      "executable_path": "Owned Game/Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "guy-smiley-vs-the-monsters/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "lawyers",
+      "id": "owned-lawyers-v1",
+      "fixture_sha256": "71aed557a40b4e0d4917dac34d5ef9c68028bad71265116324e528ae99e406fc",
+      "executable_path": "Owned Game/Lawyers",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "lawyers/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "lemmings",
+      "id": "lemmings-personal-152",
+      "fixture_sha256": "9413ec5047c680f2fe09e0a882d06f0952d72208361b15298a4198818817e1b7",
+      "executable_path": "Lemmings Owned/Lemmings/ONML/Lemmings/Lemmings 1.5.2/Lemmings",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "lemmings/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "macpipes",
+      "id": "owned-macpipes-v1",
+      "fixture_sha256": "14c51016350d86318f182eedd0f923e6bbb0e7b88d5e02bffaf28661c29007e5",
+      "executable_path": "Owned Game/MacPipes ƒ/MacPipes 2.2.7",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "macpipes/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "maelstrom",
+      "id": "owned-maelstrom-v1",
+      "fixture_sha256": "3ba600b3a65c1ef9de18875888e74000519103399d30831c4e4138e1dcd7ad8e",
+      "executable_path": "Owned Game/Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "maelstrom/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "mantra",
+      "id": "owned-mantra-v1",
+      "fixture_sha256": "7d0b98ea951ea30eee20499a80cad59cee4cb2d7f8d553cfc1edc3c4ba8f6e17",
+      "executable_path": "Owned Game/Mantra v1.02 Folder/Mantra v1.02",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "mantra/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "mantra-ii",
+      "id": "owned-mantra-ii-v1",
+      "fixture_sha256": "915f342315d4a08f925171e52258431e0bc83be97d36a81f6a2d306708582c32",
+      "executable_path": "Owned Game/Mantra II v1.02 ƒ/Mantra II v1.02",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "mantra-ii/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "nort",
+      "id": "owned-nort-v1",
+      "fixture_sha256": "276be9639b2e7c6bea32b0dd1466db80e4f76c2949eb6d5e977a4b2b8faac758",
+      "executable_path": "Owned Game/Nort Folder/nort",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "nort/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "oh-no-more-lemmings",
+      "id": "oh-no-more-lemmings-personal-10",
+      "fixture_sha256": "d0a33b6a55e72bb69f3e8c1f5ebe6572f5df57e6b7e2b4fd3afce541a2ccd009",
+      "executable_path": "ONML Owned/Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "oh-no-more-lemmings/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "oregon-trail",
+      "id": "owned-oregon-trail-v1",
+      "fixture_sha256": "a111ef2828319cc92a31d215534335ffce22204db39560ae78930e54eb0d50b8",
+      "executable_path": "Untitled/Oregon Trail/Oregon Trail",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "oregon-trail/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "pac-in-time",
+      "id": "owned-pac-in-time-v1",
+      "fixture_sha256": "c57d46adc26897770d29881fd588e9515d8d0e671ab2678afd7b31bb71580f83",
+      "executable_path": "Owned PAC/PAC IN TIME",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "pac-in-time/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "pac-the-man",
+      "id": "owned-pac-the-man-v1",
+      "fixture_sha256": "d7c7dbb9b61f2839cf9c1d3b99dc2b411f391992f6950919cf3484423b5ca025",
+      "executable_path": "Untitled/PactheMan4.5.1/Pac the Man",
+      "display": [
+        640,
+        480,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "pac-the-man/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "particleman-1-0",
+      "id": "owned-particleman-1-0-v1",
+      "fixture_sha256": "8a4005b92e8b96833e78e2435d6bf412e385ef70987b1def43df1d2ec905fd5d",
+      "executable_path": "Owned Game/ParticleMan 1.0/ParticleMan 1.0",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "particleman-1-0/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "polybrid-1-0",
+      "id": "owned-polybrid-1-0-v1",
+      "fixture_sha256": "7a07557b13c2a7f34c0b232ac0d937a150ce5f8b69ff50ffcba0fa91e0e1890a",
+      "executable_path": "Owned Game/Polybrid Folder/Polybrid 1.0",
+      "display": [
+        640,
+        480,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "polybrid-1-0/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "prince-of-persia",
+      "id": "owned-prince-of-persia-v1",
+      "fixture_sha256": "a1c3e3bd54ac934e800cf023e547cbddaee82321c06455b522977a630cb339f6",
+      "executable_path": "Owned Prince/Prince of Persia ƒ/Prince of Persia",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "prince-of-persia/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "robowar-4-1-1",
+      "id": "owned-robowar-4-1-1-v1",
+      "fixture_sha256": "7c4655cbb72b8f1bb241a2d40f0c6c3150e6023d52dd3427845ff9b243ce3e45",
+      "executable_path": "Owned Game/RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "robowar-4-1-1/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "ruckus",
+      "id": "owned-ruckus-v1",
+      "fixture_sha256": "87269aced66cecfb5108f50d7a5d965956ba4fb5747927a0d3252f2e892bb1ac",
+      "executable_path": "Untitled/New Ruckus!/Ruckus",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "ruckus/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "scruffy",
+      "id": "owned-scruffy-v1",
+      "fixture_sha256": "64e55ca01f875fda451f29f488748efbef39a9366bdbe1c9c29ad72f580eca49",
+      "executable_path": "Owned Game/Scruffy/Scruffy",
+      "display": [
+        800,
+        600,
+        1
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "scruffy/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "scruffy-ii",
+      "id": "owned-scruffy-ii-v1",
+      "fixture_sha256": "538495d7e95317fc356eb25b556cb9695b3523bdb456838ce68226956a5ec867",
+      "executable_path": "Owned Game/More ScruffyStuff/Scruffy II",
+      "display": [
+        800,
+        600,
+        4
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "scruffy-ii/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "slithereens",
+      "id": "owned-slithereens-v1",
+      "fixture_sha256": "2daad00e0d7064cca324fecb5b330e68ed6ca6c58181a8d6ea4765f217b07eb2",
+      "executable_path": "Untitled/Slithereens 1.0.0 ƒ/Slithereens",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "slithereens/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "spin-doctor",
+      "id": "owned-spin-doctor-v1",
+      "fixture_sha256": "260bd77b51e30f2047c2714d763a1632aa6f7b0be550a3e726272dc9279845ab",
+      "executable_path": "Spin Doctor Copy/Spin Doctor/Spin Doctor",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "spin-doctor/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "star-trek-final-unity",
+      "id": "owned-star-trek-final-unity-v1",
+      "fixture_sha256": "c483258e7bbfe889b68f9a7a12e5d042ec927842ce6b32cec606695a34930885",
+      "executable_path": "Owned Star Trek/Star Trek TNG/\"A Final Unity\"",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "star-trek-final-unity/followup.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "super-munchers",
+      "id": "owned-super-munchers-v1",
+      "fixture_sha256": "fbad661db4b022d2bcae3cc54e1954d32e46ab9d42240c49d684d10fc4acd936",
+      "executable_path": "Owned Munchers/Super Munchers/Super Munchers",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "super-munchers/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "system-s-twilight-v1-0-5",
+      "id": "owned-system-s-twilight-v1-0-5-v1",
+      "fixture_sha256": "bdc35005475a0bf04d34eed83c87afa5bfa8c38171692f41f22144866a27cdae",
+      "executable_path": "Owned Game/System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "system-s-twilight-v1-0-5/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "the-big-one",
+      "id": "owned-the-big-one-v1",
+      "fixture_sha256": "2a2028c977aa3d4bab895544ac58a65e33bd508a6d4c5bd52f3e05d4ca187067",
+      "executable_path": "The Big One/The Big One",
+      "display": [
+        800,
+        600,
+        1
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "the-big-one/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    },
+    {
+      "slug": "zap-t-balls",
+      "id": "owned-zap-t-balls-v1",
+      "fixture_sha256": "70b351a1c91230c78ed39ece1ebccf109c28c1f1f4f41d5cadd7f8478f91f99b",
+      "executable_path": "Owned Game/Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",
+      "display": [
+        800,
+        600,
+        8
+      ],
+      "partition": "Original SIZE; no override",
+      "pacing": "Unchanged default25/2catchup/4reset; no accepted tuning",
+      "source_report": "zap-t-balls/report.md",
+      "metadata_correction": false,
+      "basis": "Existing per-game report, inventory fork match and root candidate audit; release checks pending"
+    }
+  ],
+  "excluded": [
+    "bob-s-bricks-millennium-edition",
+    "brainjacker-1-0-1",
+    "ctb",
+    "desk-invaders-ii",
+    "gerbils",
+    "prince-of-persia-2",
+    "sloppy-sokoban-1-7",
+    "verttice"
+  ],
+  "default_ids_preserved": [
+    "koji-personal-204",
+    "clockwerx-personal-10",
+    "delirium-personal-11"
+  ]
+}

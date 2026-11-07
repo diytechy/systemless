@@ -1,8 +1,8 @@
 {
-  "slug": "goldpusher",
-  "task_name": "/root/goldpusher",
+  "slug": "guy-smiley-vs-the-monsters",
+  "task_name": "/root/guy_smiley_vs_the_monsters",
   "status": "running; see active-runners.json",
-  "starting_revision": "62e292f05dec1e01143f7dc77e2bd2c8710de6c3",
-  "brief": "goldpusher-brief.md",
-  "updated_at": "2026-11-07T14:15:07.496594-06:00"
+  "starting_revision": "25f3685523bddffd0e494b49bcd3d109086aeaa0",
+  "brief": "guy-smiley-vs-the-monsters-brief.md",
+  "updated_at": "2026-11-07T20:19:33.538544+00:00"
 }

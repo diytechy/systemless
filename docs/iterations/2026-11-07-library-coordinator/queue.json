@@ -1291,8 +1291,8 @@
     },
     {
       "slug": "goldpusher",
-      "title": "GoldPusher",
-      "status": "worker active",
+      "title": "GoldPusher1.5",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "gold-pusher Folder/GoldPusher",
@@ -1309,15 +1309,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Docs8bitColorQD/1500K, original SIZE1536000; actual800x600x8, dimensions exploratory.",
+      "preferences_save_id": "No actual Boot GOUD/name pref; historical aliases separate and unseeded, Rooms SAVE/TOPS retained; no browsermapping yet.",
+      "controls": "h/j/k/l orkeypad,Space throw,p/Tab/click/CmdPpause documented; l right observed, fullresume untaught.",
+      "timing": "Native room1/right/menu readiness and partial pause; release-browser baseline pending.",
+      "report": "goldpusher/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Six-file HFSplus fixture verified including direct folderdates/rawcoordinates; parent source002/fixture hashes, raw254tick0assert/exhaust and room1 right/held-right images reviewed. Green-hat actor moves underheld l; Game menu opens. p retains objects while actor blinks, fullresume untested. No setting change; parent corrected report hash transcription."
     },
     {
       "slug": "guy-smiley-vs-the-monsters",
       "title": "Guy Smiley vs. the Monsters",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Guy Smiley v1.0.1 Folder/Guy Smiley vs. the Monsters",
@@ -1342,7 +1345,7 @@
     {
       "slug": "lawyers",
       "title": "Lawyers",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Lawyers",

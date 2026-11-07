@@ -1,0 +1,56 @@
+{
+  "capturedAt": "2026-11-07T16:04:22.005Z",
+  "path": "/delirium/",
+  "reason": "complete",
+  "testCpuMhz": null,
+  "visible": true,
+  "focused": true,
+  "runtime": "true",
+  "renderer": "webgl",
+  "canvas": [
+    640,
+    480
+  ],
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "animationCallbacksPerSecond": 165.00569597071546,
+  "frames": 1676,
+  "wallSeconds": 20.005369999989867,
+  "sampledSeconds": 19.979244999989866,
+  "runtimeFramesPerSecond": 83.83700184871098,
+  "guestTicksPerSecond": 58.010200085167774,
+  "guestMips": 23.98636940486205,
+  "firstGuestTick": 3280,
+  "lastGuestTick": 4439,
+  "guestExecutionMs": {
+    "mean": 10.173821599224942,
+    "p95": 15.320000007748604,
+    "max": 17.320000007748604
+  },
+  "snapshotMs": {
+    "mean": 0.2731951071762953,
+    "p95": 0.4599999934434891,
+    "max": 0.75
+  },
+  "jsCopyMs": {
+    "mean": 0.19025059679171918,
+    "p95": 0.3499999940395355,
+    "max": 0.7199999988079071
+  },
+  "roundTripMs": {
+    "mean": 10.882992243629865,
+    "p95": 16.305000007152557,
+    "max": 18.34000000357628
+  },
+  "ticksBehind": {
+    "mean": 1.244033412887828,
+    "p95": 4,
+    "max": 5
+  },
+  "cpuBudgetMs": {
+    "mean": 11.5,
+    "p95": 13,
+    "max": 13
+  },
+  "cpuMhz": 25,
+  "visualFrames": 1257
+}

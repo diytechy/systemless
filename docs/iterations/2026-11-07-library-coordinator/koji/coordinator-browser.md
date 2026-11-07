@@ -20,4 +20,6 @@ Browser behavior after run 3: Pause/resume displayed red GAME PAUSED. Resuming a
 
 Private screenshots: browser-paused.png, browser-resumed-moved.png, browser-jump.png and browser-final-paused.png under D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/koji. Browser test tab closed before the next title's workload. No game assets/screenshots/preferences are staged for Git.
 
+Memory boundary: summed process working sets can count shared pages multiple times; these totals are not unique physical RAM or an isolated game allocation.
+
 Recommendation: unchanged baseline at 25 MHz. No demonstrated guest-clock deficit in this first level warrants lowering its instruction budget. This is limited scene evidence, not comprehensive compatibility. Next useful tuning work requires a repeatable demanding scene and independent pace/audio/save checks. Rollback: documentary files and resource sampler only; no game setting to revert.

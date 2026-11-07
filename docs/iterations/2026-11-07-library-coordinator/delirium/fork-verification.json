@@ -1,0 +1,33 @@
+{
+  "read_only": true,
+  "files": [
+    {
+      "path": "Delirium 1.1 Folder/About Delirium 1.1",
+      "data_match": true,
+      "resource_match": true,
+      "type_match": true,
+      "creator_match": true
+    },
+    {
+      "path": "Delirium 1.1 Folder/Delirium 1.1",
+      "data_match": true,
+      "resource_match": true,
+      "type_match": true,
+      "creator_match": true
+    },
+    {
+      "path": "Delirium 1.1 Folder/Register Me (Delirium 1.1)",
+      "data_match": true,
+      "resource_match": true,
+      "type_match": true,
+      "creator_match": true
+    },
+    {
+      "path": "System Folder/Preferences/Delirium 1.1 Preferences",
+      "data_match": true,
+      "resource_match": true,
+      "type_match": true,
+      "creator_match": true
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "systemless_version": "0.110.1",
+  "archive": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\delirium\\fixture.img",
+  "script": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\delirium\\behavior.json",
+  "reference_directory": null,
+  "mac_time_secs": 3871497600,
+  "application_partition_size": 2048000,
+  "architecture": "68k",
+  "status": "passed",
+  "error": null,
+  "failed_action": null,
+  "frontend_ticks": 840,
+  "guest_tick": 1440,
+  "budget_exhausted_frames": 0,
+  "assertions": 0,
+  "checkpoints": [
+    {
+      "name": "menu",
+      "frontend_ticks": 363,
+      "guest_tick": 963,
+      "differing_pixels": null
+    },
+    {
+      "name": "play",
+      "frontend_ticks": 456,
+      "guest_tick": 1056,
+      "differing_pixels": null
+    },
+    {
+      "name": "before-input",
+      "frontend_ticks": 636,
+      "guest_tick": 1236,
+      "differing_pixels": null
+    },
+    {
+      "name": "moving-firing",
+      "frontend_ticks": 676,
+      "guest_tick": 1276,
+      "differing_pixels": null
+    },
+    {
+      "name": "after-down",
+      "frontend_ticks": 736,
+      "guest_tick": 1336,
+      "differing_pixels": null
+    },
+    {
+      "name": "paused",
+      "frontend_ticks": 748,
+      "guest_tick": 1348,
+      "differing_pixels": null
+    },
+    {
+      "name": "pause-later",
+      "frontend_ticks": 808,
+      "guest_tick": 1408,
+      "differing_pixels": null
+    },
+    {
+      "name": "resumed",
+      "frontend_ticks": 840,
+      "guest_tick": 1440,
+      "differing_pixels": null
+    }
+  ]
+}

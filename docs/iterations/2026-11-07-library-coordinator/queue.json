@@ -74,7 +74,7 @@
     {
       "slug": "delirium",
       "title": "Delirium",
-      "status": "worker assigned",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Delirium 1.1 Folder/Delirium 1.1",
@@ -94,13 +94,16 @@
       ],
       "depth_size": "640x480, 4-bit",
       "preferences_save_id": "delirium-personal-11; Delirium 1.1 Preferences",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "controls": "Native up/down/fire/pause/resume observed; browser pause message; audio/reference/saves/controller unqualified",
+      "timing": "3 default25 captures: median56.462Hz range55.797-58.010. One12MHz60.149Hz capture unmatched and heavily contended; no paired comparison/adoption",
+      "report": "delirium/report.md",
+      "accepted_setting": "25 MHz unchanged;12 remains exploratory/unmatched",
+      "review": "Coordinator reviewed raw evidence; Sol worker reviewed hypothesis and conservative early stop"
     },
     {
       "slug": "3-d-cannon",
       "title": "3-D Cannon",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "3-D Cannon/3-D Cannon(FAT)",

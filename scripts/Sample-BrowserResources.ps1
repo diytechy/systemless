@@ -17,7 +17,7 @@ while ($timer.Elapsed.TotalSeconds -lt $Seconds) {
     Start-Sleep -Milliseconds 1000
 }
 $report = [pscustomobject]@{
-    boundary='All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context.'
+    boundary='All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.'
     logicalProcessors=$logical
     samples=$rows
 }

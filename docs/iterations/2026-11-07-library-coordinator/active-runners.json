@@ -1,21 +1,20 @@
 {
   "runners": [
     {
-      "slug": "mantra-ii",
-      "task_name": "/root/mantra_ii",
-      "status": "reviewed; workload released",
-      "phase": "audit cleared; guarded native follow-up resumed",
-      "brief": "mantra-ii-brief.md"
-    },
-    {
       "slug": "nort",
       "task_name": "/root/nort",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "nort-brief.md"
+    },
+    {
+      "slug": "oh-no-more-lemmings",
+      "task_name": "/root/oh_no_more_lemmings",
+      "status": "running",
+      "brief": "oh-no-more-lemmings-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T20:47:29.155337+00:00"
+  "updated_at": "2026-11-07T20:48:31.195198+00:00"
 }

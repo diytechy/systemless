@@ -1611,8 +1611,8 @@
     },
     {
       "slug": "nort",
-      "title": "nort",
-      "status": "worker active",
+      "title": "Nort (version unknown)",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Nort Folder/nort",
@@ -1627,15 +1627,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "No explicit display requirement found. Tested800x600x8 exploratory, original68K SIZE2048000, version unknown.",
+      "preferences_save_id": "No Boot Nort/NORT preference. Application options and MADF/PICT resources retained; optional external music unqualified.",
+      "controls": "Configurable title keys; G5/ch103 and T17/ch116 direction probes inconclusive. Initial D probe invalid; no pause shortcut established.",
+      "timing": "Native title and changing arenas only; steering, fidelity and release-browser baseline pending.",
+      "report": "nort/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file fixture verified. Parent matched source001/fixture hashes, reviewed raw482tick report with zero assertions/exhaustion and split-arena image. Title/Play progresses through delayed transition; G/T steering remains confounded by readiness and imagery lacks an independent reference. No renderer/service diagnosis or setting change."
     },
     {
       "slug": "oh-no-more-lemmings",
       "title": "Oh No! More Lemmings",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings",
@@ -1678,7 +1681,7 @@
     {
       "slug": "oregon-trail",
       "title": "Oregon Trail",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Oregon Trail/Oregon Trail",

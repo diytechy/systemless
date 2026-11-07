@@ -1,8 +1,8 @@
 {
-  "slug": "nort",
-  "task_name": "/root/nort",
+  "slug": "oh-no-more-lemmings",
+  "task_name": "/root/oh_no_more_lemmings",
   "status": "running; see active-runners.json",
-  "starting_revision": "b20c60f78d698f1c6c7078771a55a8f6577da49f",
-  "brief": "nort-brief.md",
-  "updated_at": "2026-11-07T20:43:26.880505+00:00"
+  "starting_revision": "0fe6fb6eea55da7c9e7e83d807b92b29d56a5453",
+  "brief": "oh-no-more-lemmings-brief.md",
+  "updated_at": "2026-11-07T20:47:56.533950+00:00"
 }

@@ -1,8 +1,8 @@
 {
-  "slug": "lemmings",
-  "task_name": "/root/lemmings",
+  "slug": "macpipes",
+  "task_name": "/root/macpipes",
   "status": "running; see active-runners.json",
-  "starting_revision": "58f089b528072b9ad57464315738da75817cb5e2",
-  "brief": "lemmings-brief.md",
-  "updated_at": "2026-11-07T20:24:34.884785+00:00"
+  "starting_revision": "c811cc2ca25261464ca04562ee8e7cc21e77ed8c",
+  "brief": "macpipes-brief.md",
+  "updated_at": "2026-11-07T20:27:13.281725+00:00"
 }

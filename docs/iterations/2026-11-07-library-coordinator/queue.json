@@ -1376,8 +1376,8 @@
     },
     {
       "slug": "lemmings",
-      "title": "Lemmings",
-      "status": "worker active",
+      "title": "Lemmings1.5.2",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a",
@@ -1412,10 +1412,10 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured",
+      "depth_size": "Docsmonochrome/256colors; tested800x600x8. Original SIZE-1 819200 vs0/1 2048000, nooverride.",
+      "preferences_save_id": "No Boot Preferences Lemmings/Psyg match; fresh/defaultstate. Literalcomponents and originalmedia variants retained; no browserID yet.",
+      "controls": "Mouse readiness/toolbar selection and50/ch96 backtickpause/resume observed; actualdig assignment/menus unresolved.",
+      "timing": "Native Fun1 spawn/walk/pause readiness; release-browser timing/reference fidelity pending.",
       "associated_containers": [
         {
           "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Graphics Disk.img",
@@ -1441,12 +1441,15 @@
           "associated_game": "lemmings",
           "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
         }
-      ]
+      ],
+      "report": "lemmings/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "18file/5folder fixture verified with literalLemmings/ONML name/rawCNIDs preserved; parent source006/fixture hashes, raw914tick0assert/exhaust report and initialplay PNG reviewed. Pause PNG hashes match over60ticks, resumed walking observed.1.5.2 selected for documentedlater-system support,1.4.2a and3disks retained. Diggerassignment/menu unconfirmed; no setting change."
     },
     {
       "slug": "macpipes",
       "title": "MacPipes",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "MacPipes ƒ/MacPipes 2.2.7",
@@ -1487,7 +1490,7 @@
     {
       "slug": "maelstrom",
       "title": "Maelstrom",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom",

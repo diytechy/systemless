@@ -1,0 +1,27 @@
+# Oh No! More Lemmings first pass
+
+Outcome: original owned patched version1.0 reaches Tame1 gameplay, visible motion and documented pause/resume. No pacing change or general compatibility certification. Worker selected by coordinator as gpt-6.1-sol; tool selection is reported, model identity not independently verified. Branch dev; initial unrelated modifications were coordinator active-runner/queue files. No shared edits, builds, commits or browser state changes.
+
+## Preservation and requirements
+
+Read AGENTS, modernization/tuning, handoff, worker brief, common requirements, concurrency and headless/play skills. Read-only Source006 selection uses raw catalogue components, including CNID31 as ONE literal `Lemmings/ONML` folder. Copied complete ONML subtree:15 files,6 folders, including patched executable, BW Graphics,Graphics,Levels,Music,READ ME,Extras,Manuals and two original disk-image variants. All file forks,type,creator,flags,dates and coordinate words compare after reopen; folder dates12/16/28 compare. Raw signed coordinates represented as unsigned16-bit words without bit changes. Folder Finder info unavailable in machfs; aliases retain bytes with no promise of resolution. No source bytes patched. SOURCE and Boot before/after hashes and full fork hashes are in preservation.json.
+
+Executable resource SHA256 c211a006039d99be078b9f82b172de9dbb3ef008d5f6aaaad724aa521650c644; empty data fork. CODE68K; vers1.0 (1993 Psygnosis). SIZE preferred/minimum2048000 unchanged. READ ME explicitly identifies existing copy-protection bypass and points to originals in preserved disks; no new patch made. Boot/System Folder/Preferences narrow check by lemm name or creator Pson finds no match; no preference transplant or invented mapping. Test is copied default state; saves remain unqualified.
+
+Supplement scanned PDF pages1-3 inspected by rendered pages: B/W or256 colors only; color Macintosh LC/LCII/II with4MB,System6.0.5 and32-bit QuickDraw; B/W1MB (+System7 additional memory),System4.1. Companion graphics,music,levels required. Both graphics variants may coexist. Preferred2048K mentioned; retained executable SIZE2048000 rather than override. Native8bit is supported by documentation;800x600 is exploratory native default, not a proven minimum. General Manual PDF retained; scanned text extraction empty, no claim of exhaustive reading.
+
+## Native reproduction and observations
+
+Cached binary D:/SystemlessBuild/target/ci-test/systemless.exe version0.110.1 SHA25670062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c; exact compile revision unavailable. Repository runtime baseline supplied ed74c8b4; not asserted to be binary compile. Run `D:/SystemlessBuild/uv-cache/archive-v0/YghSmGhw_A5RgPIr/Scripts/python.exe PRIVATE_ROOT/run_owned.py action`, replacing PRIVATE_ROOT with the private evidence root below. Runner sets exact executable path, headless/prefer-classic-68k/screen-depth8 and absolute fixture/scenario/output. No partition override. Five finite scenarios passed, no errors/assertions/budget exhaustion. Each process had75s wall cap and durable owned PID/start/paths; all exited0 without kill. This overlapped another diagnostic runner; no performance inference.
+
+start: tick120 publisher splash;tick360 title. play: early tick120 title-position click was during splash and does not test title input. ready: corrected tick360 click(v408,h218) opens Tame1 briefing. game: after120ticks click(v458,h400) continues;field604 showsOUT0,time3:59, motion844 showsOUT1,time3:56 and lemming atx317. Game-menu bar probe did not open menu; inconclusive.
+
+action: same start; wait360 after briefing to844, skill-bar click(v477,h353) then mouse move/click(v254,h317). Later OUT2 and time3:55, but skill count20 unchanged: assignment not demonstrated. Grave hardware50,char96 then2ticks/up2ticks pauses. paused974 and held1154 PNG bytes identical across180ticks; second grave/down2/up and120ticks resumes, timer3:53 and lemmings advance. Useful pause/input evidence; not skill fidelity proof. Supplement documents mouse, Z/X or left/right selecting skills and grave pause; only mouse startup and grave tested. Native logs show Graphics,Levels,Music opened successfully.
+
+## Limits, checks and next action
+
+Motion and pause/resume observed; busy scene, successful skill assignment, completion, collision/scoring/pace against independent reference, sound, saves and physical controller untested. No release entry/build for this title; browser absence is preparation pending rather than compatibility failure. No browser saves touched and no pacing recommendation from frontend ticks.
+
+Guarded newly authored preparation/runner use strict owned absolute root. Out-of-scope test rejected; missing scenario invocation rejected before logs or child. Fixture/scenario exist before redirected output opens. Source hashes unchanged and exact executable hash matches assignment. Private evidence-manifest.json hashes all existing artifacts; preservation.json lists every file. All final owned processes exited; workload released before documentation. Rollback: remove only this title's new report/private artifacts if unwanted; originals/shared runtime unchanged. Next: coordinator prepare explicit browser entry/save mapping, verify skill assignment, then obtain release-browser baseline and independent fidelity reference.
+
+Private evidence root: D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/oh-no-more-lemmings

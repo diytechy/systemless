@@ -1637,8 +1637,8 @@
     },
     {
       "slug": "oh-no-more-lemmings",
-      "title": "Oh No! More Lemmings",
-      "status": "worker active",
+      "title": "Oh No! More Lemmings1.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings",
@@ -1655,10 +1655,10 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured",
+      "depth_size": "Docs B/W or256 colors, tested800x600x8; original68K SIZE2048000.",
+      "preferences_save_id": "No Boot lemm/Pson preference; fresh copied state. Graphics/Levels/Music opened, both disks and manuals preserved.",
+      "controls": "Mouse title/briefing and grave50/ch96 pause/resume observed. Skill click and menu inconclusive; Z/X/arrows documented only.",
+      "timing": "Native Tame1 motion/pause readiness; release-browser baseline and fidelity pending.",
       "associated_containers": [
         {
           "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK ONE.img",
@@ -1676,12 +1676,15 @@
           "associated_game": "oh-no-more-lemmings",
           "classification": "Original disk-image variant/content for the queued Lemmings title; not a new family"
         }
-      ]
+      ],
+      "report": "oh-no-more-lemmings/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "15-file/6-folder fixture verified with literal CNID31 slash name and two disk variants preserved. Parent matched source006/fixture hashes, raw1276tick report with zero assertions/exhaustion, identical180tick paused PNG hashes and resumed gameplay image. Tame1 motion/timer and grave pause/resume observed; skill assignment/menu unconfirmed. No new binary patch or setting change."
     },
     {
       "slug": "oregon-trail",
       "title": "Oregon Trail",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Oregon Trail/Oregon Trail",
@@ -1706,7 +1709,7 @@
     {
       "slug": "pac-in-time",
       "title": "PAC IN TIME",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "PAC IN TIME",

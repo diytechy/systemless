@@ -1,8 +1,8 @@
 {
-  "slug": "oh-no-more-lemmings",
-  "task_name": "/root/oh_no_more_lemmings",
+  "slug": "oregon-trail",
+  "task_name": "/root/oregon_trail",
   "status": "running; see active-runners.json",
-  "starting_revision": "0fe6fb6eea55da7c9e7e83d807b92b29d56a5453",
-  "brief": "oh-no-more-lemmings-brief.md",
-  "updated_at": "2026-11-07T20:47:56.533950+00:00"
+  "starting_revision": "7fd9399ae6f44ae3647ca2dabb2c80ad8a56d8ff",
+  "brief": "oregon-trail-brief.md",
+  "updated_at": "2026-11-07T20:48:46.869160+00:00"
 }

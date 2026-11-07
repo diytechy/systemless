@@ -1,20 +1,20 @@
 {
   "runners": [
     {
-      "slug": "nort",
-      "task_name": "/root/nort",
-      "status": "reviewed; workload released",
-      "brief": "nort-brief.md"
-    },
-    {
       "slug": "oh-no-more-lemmings",
       "task_name": "/root/oh_no_more_lemmings",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "oh-no-more-lemmings-brief.md"
+    },
+    {
+      "slug": "oregon-trail",
+      "task_name": "/root/oregon_trail",
+      "status": "running",
+      "brief": "oregon-trail-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T20:48:31.195198+00:00"
+  "updated_at": "2026-11-07T20:54:46.331517+00:00"
 }

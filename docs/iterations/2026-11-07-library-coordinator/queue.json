@@ -347,7 +347,7 @@
     {
       "slug": "balderdoush-1-04i",
       "title": "Balderdoush 1.04i",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Balderdoush 1.04i/Balderdoush 1.04i",
@@ -362,15 +362,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "ReadMe recommends640x480/supports1-8bit; native800x600x8 exploratory; SIZE819200",
+      "preferences_save_id": "No Balderdoush.PREF found;2recent aliases retained separately; default-state test",
+      "controls": "Configurable movement; Right scrolling/digging observed; Shift pickup/pause keys documented not qualified",
+      "timing": "No compiled release route/real-time baseline; pause/audio/reference/saves unqualified",
+      "report": "balderdoush-1-04i/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "6file fixture verified; coordinator independently checked source/fixture hashes. Game/Space/level01 and right-arrow scrolling/digging observed; completed150tick probe0assertions/exhaustion. Separate longer startup aborted90s, not completed evidence. Defaults/no actual pref; no runtime change.",
+      "dependencies": "BDD_Game1 opened/read; Boulder CWS and other folder content retained, not separately played"
     },
     {
       "slug": "barney-carnage-2-0",
       "title": "Barney Carnage 2.0",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "BarneyCarnage2.0ƒ/Barney Carnage 2.0",

@@ -374,7 +374,7 @@
     {
       "slug": "barney-carnage-2-0",
       "title": "Barney Carnage 2.0",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "BarneyCarnage2.0ƒ/Barney Carnage 2.0",
@@ -389,15 +389,20 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "800x600 observed,8-bit exploratory; SIZE2560000 unchanged",
+      "preferences_save_id": "Generic???? creator16matches separate/not imported; title match only recent alias; no actual preference established",
+      "controls": "Mouse start/advance; mouse shooting documented, aimed hit unverified",
+      "timing": "No release route/real-time baseline; initial native smoke only",
+      "report": "barney-carnage-2-0/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "4file fixture verified; source/fixture independently rehashed. Title/story/initial playfield and moving target observed;3finite probes0assertions/exhaustion. Shot/hit/scoring and Options unresolved. Generic creator prefs ambiguous; no runtime change.",
+      "version_notes": "ReadMe confirms2.0",
+      "dependencies": "4file folder includes readme/alias/icon;5levels documented, initial one only observed"
     },
     {
       "slug": "battletanks-2-12-1",
       "title": "BattleTanks 2.12.1",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "BattleTanks 2.12.1",

@@ -20,8 +20,8 @@ Default depth, required sibling resources, preferences and controls for unprepar
 | 10 | Arashi 1.1.1 | Content\001: ARASHI 1.1.1 ƒ/Arashi 1.1.1 | 68K (CODE) | not yet measured |
 | 11 | Bachman 2.0u | Content\001: Bachman 2.0u Folder/Bachman 2.0u | 68K (CODE) | not yet measured |
 | 12 | Balderdoush 1.04i | Content\001: Balderdoush 1.04i/Balderdoush 1.04i | 68K (CODE) | not yet measured |
-| 13 | Barney Carnage 2.0 | Content\001: BarneyCarnage2.0ƒ/Barney Carnage 2.0 | 68K (CODE) | worker assigned |
-| 14 | BattleTanks 2.12.1 | Content\001: BattleTanks 2.12.1 | 68K (CODE) | pending |
+| 13 | Barney Carnage 2.0 | Content\001: BarneyCarnage2.0ƒ/Barney Carnage 2.0 | 68K (CODE) | not yet measured |
+| 14 | BattleTanks 2.12.1 | Content\001: BattleTanks 2.12.1 | 68K (CODE) | worker assigned |
 | 15 | Bedlam | Content\001: Bedlam 1.1/Bedlam | 68K (CODE) | pending |
 | 16 | Bikaka 1.4 | Content\001: Bikaka 14 Folder/Bikaka 1.4 | 68K (CODE) | pending |
 | 17 | Blobbo | Content\001: Blobbo 1.0 Lite ƒ/Blobbo<br>Content\001: Blobbo 1.0 Lite ƒ/Blobbo 1.0.1 Lite<br>Content\001: Blobbo1.0.1 Fullversion/Blobbo 1.0.1 | 68K (CODE) | pending |

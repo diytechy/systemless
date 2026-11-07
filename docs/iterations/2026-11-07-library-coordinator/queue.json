@@ -1941,7 +1941,7 @@
     {
       "slug": "scruffy",
       "title": "Scruffy",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Scruffy/Scruffy",
@@ -1960,7 +1960,10 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Native deterministic first pass only; controls/fidelity/release performance unqualified.",
+      "report": "scruffy/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source001/Boot and7-file fixture hashes, read5 passed raw reports (175/242/360/366/444ticks, zero assertions/errors/exhaustion), inspected recognizable monochrome puppy/platform/bones/cloud first scene. Malformed8bit vs clean1bit is evidenced exploratory depth difference; no production setting accepted. Controls occurred during welcome transition; screenshot labels pause/resume do not prove pause. Missing Scores open is not established startup blocker."
     },
     {
       "slug": "scruffy-ii",
@@ -1991,7 +1994,7 @@
     {
       "slug": "slithereens",
       "title": "Slithereens",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Slithereens 1.0.0 ƒ/Slithereens",
@@ -2019,7 +2022,7 @@
     {
       "slug": "sloppy-sokoban-1-7",
       "title": "Sloppy Sokoban 1.7",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7",

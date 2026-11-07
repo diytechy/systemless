@@ -1,8 +1,8 @@
 {
-  "slug": "scruffy-ii",
-  "task_name": "/root/scruffy_ii",
-  "status": "reviewed; workload released",
-  "starting_revision": "46de0c845bb28ceec09c3a608c27b55d3a1de0e6",
-  "brief": "scruffy-ii-brief.md",
-  "updated_at": "2026-11-07T21:41:28.426775+00:00"
+  "slug": "slithereens",
+  "task_name": "/root/slithereens",
+  "status": "running; see active-runners.json",
+  "starting_revision": "7b2da7e08532e27997ca4246db8725811ba79ea6",
+  "brief": "slithereens-brief.md",
+  "updated_at": "2026-11-07T21:41:42.439853+00:00"
 }

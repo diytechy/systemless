@@ -1,8 +1,8 @@
 {
-  "slug": "super-munchers",
-  "task_name": "/root/super_munchers",
-  "status": "running; see active-runners.json",
-  "starting_revision": "6f23515c120474e00675e0e595305ae67687b2e8",
-  "brief": "super-munchers-brief.md",
-  "updated_at": "2026-11-07T21:52:50.161655+00:00"
+  "slug": "system-s-twilight-v1-0-5",
+  "task_name": "/root/system_s_twilight_v1_0_5",
+  "status": "reviewed; workload released",
+  "starting_revision": "8e5a05d787bca3a456d48748639d0d31ad81ad9b",
+  "brief": "system-s-twilight-v1-0-5-brief.md",
+  "updated_at": "2026-11-07T22:00:36.438711+00:00"
 }

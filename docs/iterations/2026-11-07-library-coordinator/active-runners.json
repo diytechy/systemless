@@ -1,20 +1,20 @@
 {
   "runners": [
     {
-      "slug": "star-trek-final-unity",
-      "task_name": "/root/star_trek_final_unity",
-      "status": "reviewed; workload released",
-      "brief": "star-trek-final-unity-brief.md"
-    },
-    {
       "slug": "super-munchers",
       "task_name": "/root/super_munchers",
       "status": "running",
       "brief": "super-munchers-brief.md"
+    },
+    {
+      "slug": "system-s-twilight-v1-0-5",
+      "task_name": "/root/system_s_twilight_v1_0_5",
+      "status": "reviewed; workload released",
+      "brief": "system-s-twilight-v1-0-5-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T21:53:10.169888+00:00"
+  "updated_at": "2026-11-07T22:00:36.528989+00:00"
 }

@@ -1,0 +1,71 @@
+{
+  "title": "System's Twilight v1.0.5",
+  "outcome": "prepared; ready New Game click reaches save-new-game picker; gameplay untested",
+  "preservation": {
+    "source_sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "image_sha256": "bdc35005475a0bf04d34eed83c87afa5bfa8c38171692f41f22144866a27cdae",
+    "files_verified": 7,
+    "metadata_scope": "File forks/Finder fields and represented folder dates; original folder Finder information not exposed by machfs",
+    "selected_paths": [
+      "System\u2019s Twilight v1.0.5 \u0192"
+    ],
+    "image_bytes": 8388608,
+    "source_after_sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "boot_before_and_after_sha256": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "exact diagnostic binary compile revision unknown; no build performed",
+    "architecture": "68K",
+    "executable": "System\u2019s Twilight v1.0.5 \u0192/System's Twilight v1.0.5",
+    "display": "exploratory default 800x600, explicit 8-bit; readme supports 256 colors",
+    "partition": "original SIZE retained; assignment reports 786432/1310720/1310720 bytes; no override",
+    "result": "six scenarios passed; corrected360-tick ready click reaches Standard File save-new-game picker at492",
+    "error": null,
+    "assertions": 0,
+    "budget_exhausted_frames": 0
+  },
+  "behavior": {
+    "observed": [
+      "initial art at120 before button readiness; visible New Game buttons at360",
+      "fresh wait360, inspected pre-click, move100,216, settle2ticks, down10ticks/up, run120 reaches save-new-game picker",
+      "prior120-tick input probes were premature and do not establish input failure"
+    ],
+    "untested": [
+      "gameplay/motion/timing fidelity",
+      "busy scene",
+      "pause",
+      "effective menu selection",
+      "audio fidelity",
+      "save read/write and autosave",
+      "physical controller",
+      "release browser performance",
+      "accepting save-new-game picker and entering gameplay"
+    ]
+  },
+  "dependencies": [
+    "complete seven-file original folder including two save documents, docs and alias retained",
+    "Boot title/STwZ narrow scan: launcher and recent-item aliases only; no actual preference found",
+    "raw aliases preserved, resolution to old volume unverified"
+  ],
+  "controls": [
+    "New Game mouse button responsive after360-tick readiness",
+    "Return36/ch13 was tested prematurely; no conclusion",
+    "readme directs in-game help for gameplay controls; detailed help not reached"
+  ],
+  "changes": [
+    "own report/private copied fixture and scenarios only; no shared settings/runtime/catalogue edits"
+  ],
+  "checks": [
+    "source001 before/after hashes match",
+    "Boot before/after hashes match",
+    "seven selected files reopened and fork/Finder/date compared by existing helper",
+    "out-of-scope/missing-input runner guards checked before launch",
+    "six bounded scenarios exited0; owned-process state exited"
+  ],
+  "next_step": "Fresh wait360/click New Game, choose a unique disposable save filename rather than existing Player, then inspect initial gameplay and help. No compatibility blocker or pacing recommendation established.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\system-s-twilight-v1-0-5\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\system-s-twilight-v1-0-5\\evidence-manifest.json",
+  "workload_released": true
+}

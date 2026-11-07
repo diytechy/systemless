@@ -2138,7 +2138,7 @@
     {
       "slug": "system-s-twilight-v1-0-5",
       "title": "System's Twilight v1.0.5",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5",
@@ -2160,12 +2160,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Finite native diagnostics360/182/362/140/252/492ticks; no release performance.",
+      "report": "system-s-twilight-v1-0-5/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source001/Boot and7-file fixture hashes and read six complete raw reports/zero assertions/errors/exhaustion. Root found startup120 lacks buttons: earlier inputs were premature. Authorized360tick readyclick reached visible Standard File new-game picker at492; inspected before/after captures. No source or copied existing save overwritten. Gameplay/help/pause/saves unqualified; no input defect or pacing accepted."
     },
     {
       "slug": "the-big-one",
       "title": "The Big One",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "The Big One",

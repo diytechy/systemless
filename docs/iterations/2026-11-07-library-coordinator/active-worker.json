@@ -1,8 +1,8 @@
 {
-  "slug": "brickles-plus-3-0",
-  "task_name": "/root/brickles_plus_3_0",
+  "slug": "brickoids-millenium",
+  "task_name": "/root/brickoids_millenium",
   "status": "reviewed; workload released",
-  "starting_revision": "a886bab2b62bc65cf3fb5fac0f6ae332918a7102",
-  "brief": "brickles-plus-3-0-brief.md",
-  "updated_at": "2026-11-07T18:56:18.813148+00:00"
+  "starting_revision": "af7775bd8061156f8672a367a6dce1562109198c",
+  "brief": "brickoids-millenium-brief.md",
+  "updated_at": "2026-11-07T19:01:32.803030+00:00"
 }

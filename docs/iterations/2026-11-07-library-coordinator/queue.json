@@ -835,8 +835,8 @@
     },
     {
       "slug": "brickoids-millenium",
-      "title": "Brickoids Millenium",
-      "status": "worker assigned",
+      "title": "Brickoids Millenium1.1",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Brickoids Millenium 1.1 GPL/Brickoids Millenium",
@@ -855,15 +855,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Source System7+,16bit preferred/8bit fallback,640x480 game window; actual800x600x8. Original preferred SIZE3956736 retained.",
+      "preferences_save_id": "Boot Brik/title hit launcher alias only, preserved separately/excluded runnable. Embedded SCOR1000 state retained; persistence untested, no browser ID.",
+      "controls": "Source mouse paddle,Space/button launch,Ppause,Qend,FileNew/Options; untested.",
+      "timing": "Native partial splash only, final counters unavailable after75s stop. Release-browser baseline unmeasured.",
+      "report": "brickoids-millenium/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "21file/3folder-date source+game fixture verified; parent source003/fixture hashes match, owned PID absent, partial120tick splash PNG inspected. Later action stopped75s without final report/counters. Actual C/header/project source and GPL notices found and kept private. Source narrows splash/sound/gamma/delay transition, no cause proven; no setting change.",
+      "dependencies": "Full21file title/Documentation/Source Code subtree retained, actual GPL/C/CodeWarrior material. Build/source completeness untested."
     },
     {
       "slug": "chiral",
       "title": "Chiral",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Chiral 1.0.1 ƒ/Chiral",

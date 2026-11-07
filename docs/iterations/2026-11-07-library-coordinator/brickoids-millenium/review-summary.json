@@ -1,0 +1,60 @@
+{
+  "title": "Brickoids Millenium1.1",
+  "outcome": "preserved preparation; partial startup;75s bounded readiness blocker; unchanged settings",
+  "preservation": {
+    "source_before": "98020ab8debcd8c077ee8b6534a05611f4e946fd975762aeea97d521b21c2476",
+    "source_after": "98020ab8debcd8c077ee8b6534a05611f4e946fd975762aeea97d521b21c2476",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\brickoids-millenium\\game.img",
+    "fixture_sha256": "35f8c522b278ffcd554d2d5a73c01457c1589939fc00cdd962dda56780fd0df7",
+    "verified_file_count": 21,
+    "scope_limits": "All exact title-folder forks/exposed Finder fields and3folder dates; raw16bit coordinates verified modulo65536; folder Finder info unavailable; raw aliases retained, resolution unqualified. Boot launcher alias excluded."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "exact compile revision unknown; supplied checkout af7775bd/runtime ed74c8b4",
+    "architecture": "explicit68K CODE",
+    "executable": "Brickoids Millenium 1.1 GPL/Brickoids Millenium",
+    "display": "exploratory8-bit; native800x600; game640x480; source prefers16 with8fallback",
+    "partition": "original preferred3956736, no override",
+    "result": "Inspected frontend120 Soth PRESENTS splash; run212 incomplete at75s wallcap; child stopped exit1; no final report",
+    "error": "readiness unresolved, named missing service unestablished",
+    "assertions": null,
+    "budget_exhaustion": null
+  },
+  "behavior": {
+    "observed": [
+      "publisher splash at frontend120",
+      "native centered640x480 game window creation"
+    ],
+    "untested": [
+      "play/movement/busy scene",
+      "input/menu/pause efficacy",
+      "timing/collision/scoring fidelity",
+      "audible audio",
+      "saves/persistence",
+      "physical controller",
+      "release-browser performance"
+    ]
+  },
+  "dependencies": [
+    "21selected files including actual C/header/CodeWarrior source and GPL notices; build completeness untested",
+    "System7+; color8fallback/16preferred from source",
+    "Boot title/Brik creator scan: launcher alias only, no preference candidate; embedded SCOR1000 retained"
+  ],
+  "controls": "Source-derived: mouse paddle; Space/button launch; P pause; Q end game; File New Game/Options. Unexercised.",
+  "changes": [
+    "Own report/review-summary and private fixtures/scripts/logs only"
+  ],
+  "checks": [
+    "21file direct source/reopen comparisons;3folder dates",
+    "source003/Boot unchanged; app hashes match brief",
+    "startup PNG inspected; owned PID finalized at cap; no active workload"
+  ],
+  "next_step": "Instrument splash sound/gamma/DelayFor to DrawScreen transition in separate bounded diagnostic; no known cause or grounded effort estimate.",
+  "report": "docs/iterations/2026-11-07-library-coordinator/brickoids-millenium/report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\brickoids-millenium\\evidence-manifest.json",
+  "workload_released": true
+}

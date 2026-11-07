@@ -1181,8 +1181,8 @@
     },
     {
       "slug": "fantastic-voyage",
-      "title": "Fantastic Voyage",
-      "status": "worker active",
+      "title": "Fantastic Voyage1.1a",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "FVoy Folder/Fantastic Voyage 1.1a",
@@ -1201,15 +1201,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "ReadMe B/W or color,System6.0.3–7.1 tested; actual800x600x8 exploratory, original SIZE1024000.",
+      "preferences_save_id": "Boot title/FVOY hits are launcher/recent item, no distinct pref; original embedded state retained.",
+      "controls": "Help QOPM and alternate IJKL/keypad8046; Special Pause CmdP; only splash click exercised.",
+      "timing": "Splash readiness only; finite post-dismissal native noncompletion. Release-browser gameplay/baseline pending.",
+      "report": "fantastic-voyage/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Four-file fixture verified; parent source001/fixture hashes, raw completed120tick report and splash inspected. Post-click logs create game windows but later action stopped75s, final counters null; parent confirms owned PID absent. No game capture or causal missing-service proof. No setting change."
     },
     {
       "slug": "gerbils",
       "title": "Gerbils!",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Gerbils! Folder/Gerbils!",
@@ -1234,7 +1237,7 @@
     {
       "slug": "gold-digger",
       "title": "Gold Digger",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Gold Digger 1.3.0/Gold Digger",

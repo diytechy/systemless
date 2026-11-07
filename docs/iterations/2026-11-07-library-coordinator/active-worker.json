@@ -1,8 +1,8 @@
 {
-  "slug": "fantastic-voyage",
-  "task_name": "/root/fantastic_voyage",
+  "slug": "gerbils",
+  "task_name": "/root/gerbils",
   "status": "running; see active-runners.json",
-  "starting_revision": "aeedcddbdf790cc2e72e7290b12411a3fb8771d2",
-  "brief": "fantastic-voyage-brief.md",
-  "updated_at": "2026-11-07T14:08:44.264864-06:00"
+  "starting_revision": "53e637a6141dd96726b11c6489b0807e7750d398",
+  "brief": "gerbils-brief.md",
+  "updated_at": "2026-11-07T14:11:23.027438-06:00"
 }

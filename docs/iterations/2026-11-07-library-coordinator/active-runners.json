@@ -1,20 +1,20 @@
 {
   "runners": [
     {
-      "slug": "drol",
-      "task_name": "/root/drol",
-      "status": "reviewed; workload released",
-      "brief": "drol-brief.md"
-    },
-    {
       "slug": "fantastic-voyage",
       "task_name": "/root/fantastic_voyage",
-      "status": "running",
+      "status": "reviewed; workload released",
       "brief": "fantastic-voyage-brief.md"
+    },
+    {
+      "slug": "gerbils",
+      "task_name": "/root/gerbils",
+      "status": "running",
+      "brief": "gerbils-brief.md"
     }
   ],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T20:11:22.3783983Z"
+  "updated_at": "2026-11-07T20:13:26.8447982Z"
 }

@@ -1,0 +1,69 @@
+{
+  "title": "Fantastic Voyage 1.1a",
+  "outcome": "post-splash readiness unresolved: finite75s noncompletion; missing service unproved",
+  "preservation": {
+    "source_before": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "source_after": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\fantastic-voyage\\fantastic-voyage.hfv",
+    "fixture_sha256": "901e338d78e1b27f12a8cee92e4ce8509f76feafb4c92269402c34a9f2feb649",
+    "verified_files": 4,
+    "scope_limits": "File forks/Finder fields and represented folder dates; folder Finder info unavailable; copied raw alias resolution unverified."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact compile revision unknown; checkout aeedcddbdf790cc2e72e7290b12411a3fb8771d2",
+    "architecture": "68K",
+    "executable": "FVoy Folder/Fantastic Voyage 1.1a",
+    "display": "default 800x600, exploratory 8-bit",
+    "partition_bytes": 1024000,
+    "result": "startup script passed; later scenario stopped at75s wall cap",
+    "error": "No final report for stopped scenario; missing service unidentified",
+    "assertions": null,
+    "budget_exhaustion": null,
+    "final_frontend_ticks": null,
+    "final_guest_tick": null,
+    "startup_assertions": 0,
+    "startup_frontend_ticks": 120,
+    "startup_budget_exhausted_frames": 0
+  },
+  "behavior": {
+    "observed": [
+      "Inspected splash at frontend120",
+      "Dismissal input followed by log creation of game windows; no completed gameplay image"
+    ],
+    "untested": [
+      "Actual play/movement",
+      "Busy scenes",
+      "Pause/menu interaction",
+      "Sound",
+      "Saves",
+      "Physical controller",
+      "Fidelity/performance"
+    ]
+  },
+  "dependencies": [
+    "Four title-folder files preserved including raw alias, converter, Word Read Me",
+    "No distinct Boot preference found by title/creator; launcher/recent-item hits only",
+    "SAT toolkit credited; external dependency not established"
+  ],
+  "controls": {
+    "documented": "Q up, O left, P right, M catch; alternate IJKL and keypad8046; Command-A grab/drop, Command-L release, Command-D untangle; Special Pause Command-P",
+    "tested": "Splash click only; no gameplay key probe"
+  },
+  "changes": [
+    "Own report/evidence only; no runtime/pacing/catalogue changes"
+  ],
+  "checks": [
+    "Source001 and Boot SHA256 unchanged",
+    "Reopened fixture compares four file forks/Finder fields and represented folder dates",
+    "Inspected startup PNG",
+    "Ownership/start/path verified before exact PID stop"
+  ],
+  "next_step": "Investigate minimal splash-dismissal reproduction in SAT startup/drawing path; missing service remains unknown. Small evidence review15–30min; targeted debug likely1–3h, high estimate open pending fault localization.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\fantastic-voyage\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\fantastic-voyage\\evidence-manifest.json",
+  "workload_released": true
+}

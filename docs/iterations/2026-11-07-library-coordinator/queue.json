@@ -956,8 +956,8 @@
     },
     {
       "slug": "crunch",
-      "title": "CRUNCH",
-      "status": "worker assigned",
+      "title": "Crunch!2.0",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "CRUNCH Folder/CRUNCH",
@@ -975,15 +975,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Readme System7,256colors,>512x384; actual800x600x8. Original SIZE2097152preferred/1048576minimum retained.",
+      "preferences_save_id": "Boot RYAN/title hits confirmed launcher/recent alis only, excluded. Embedded original score/state retained privately; no actual external pref or browser ID.",
+      "controls": "Cmd-B Begin,rightkey124/ch29 and Space pause/resume observed. Docs arrows/keypad/mouse velocity,E end,Cmd-E menu End; mouse/keypad/menus unverified.",
+      "timing": "Native play/right/pause readiness; release-browser baseline pending, no pacing candidate.",
+      "report": "crunch/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Three-file fixture verified; parent source001/fixture hashes and raw220tick0assert/exhaust report reviewed. Parent visually verified rightward marble displacement and matched30tick paused PNG hashes; resume observed by worker. Cmd-B starts level; rightkey124/ch29 works where ch0 inconclusive. Embedded saved state retained without values; no setting change.",
+      "dependencies": "Exact3file folder includes APPL/readme/raw alias; no additional helper/content established. RuntimeSystem6 error text differs from stronger readmeSystem7."
     },
     {
       "slug": "ctb",
       "title": "CTB",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "CTB 2.0/CTB",

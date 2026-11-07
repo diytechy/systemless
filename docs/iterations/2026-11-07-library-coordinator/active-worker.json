@@ -1,8 +1,8 @@
 {
-  "slug": "columns",
-  "task_name": "/root/columns",
+  "slug": "crunch",
+  "task_name": "/root/crunch",
   "status": "reviewed; workload released",
-  "starting_revision": "260a1e7c3cfef42edb3ffb1619051b318bb1ef75",
-  "brief": "columns-brief.md",
-  "updated_at": "2026-11-07T19:15:51.880483+00:00"
+  "starting_revision": "34fd31d36ef5f41c1b8290d839f9ccdd080d2d04",
+  "brief": "crunch-brief.md",
+  "updated_at": "2026-11-07T19:21:15.260956+00:00"
 }

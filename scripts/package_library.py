@@ -25,6 +25,7 @@ def package(dist):
         preview=ROOT/'www/private'/f'{game}-preview.png'
         if preview.is_file(): shutil.copy2(preview,private/preview.name)
     shutil.copy2(ROOT/'scripts/game-controls.mjs',dist/'game-controls.mjs')
+    shutil.copy2(ROOT/'scripts/runtime-profiler.js',dist/'runtime-profiler.js')
     title='<title>Macintosh Arcade</title><meta name="robots" content="noindex,nofollow">'
     html=re.sub(r'<!-- systemless-seo -->.*?<!-- /systemless-seo -->',title,html,flags=re.S)
     html=re.sub(r'<!-- systemless-fallback -->.*?<!-- /systemless-fallback -->','<p>Loading your Macintosh games…</p>',html,flags=re.S)
@@ -43,6 +44,8 @@ def package(dist):
 .library-hero{padding-bottom:24px}.library-hero__copy h1{max-width:900px}
 '''
     html=html.replace('</head>',f'<!-- private-library --><script type="module" src="/game-controls.mjs"></script><style>{css}</style><!-- /private-library --></head>')
+    html=html.replace('<script src="/runtime-profiler.js"></script>','')
+    html=html.replace('<head>','<head><script src="/runtime-profiler.js"></script>')
     index.write_text(html,encoding='utf-8')
     (dist/'service-worker.js').write_text("self.addEventListener('install',()=>self.skipWaiting());self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));\n",encoding='utf-8')
     (dist/'manifest.webmanifest').write_text(json.dumps({'name':'Macintosh Arcade','short_name':'Mac Games','start_url':'/','scope':'/','display':'standalone','theme_color':'#111111','background_color':'#111111'}),encoding='utf-8')

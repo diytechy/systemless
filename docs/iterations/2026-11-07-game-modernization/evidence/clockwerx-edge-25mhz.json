@@ -1,0 +1,55 @@
+{
+  "capturedAt": "2026-11-07T06:08:46.241Z",
+  "path": "/clockwerx/",
+  "reason": "complete",
+  "visible": true,
+  "focused": true,
+  "runtime": "true",
+  "renderer": "webgl",
+  "canvas": [
+    640,
+    480
+  ],
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0",
+  "animationCallbacksPerSecond": 164.97315061977596,
+  "frames": 1476,
+  "wallSeconds": 20.00325499999523,
+  "sampledSeconds": 19.97339500001073,
+  "runtimeFramesPerSecond": 73.84823661671977,
+  "guestTicksPerSecond": 30.640759870801695,
+  "guestMips": 12.817794170688684,
+  "firstGuestTick": 3149,
+  "lastGuestTick": 3761,
+  "guestExecutionMs": {
+    "mean": 13.080352303498806,
+    "p95": 13.230000004172325,
+    "max": 13.825000002980232
+  },
+  "snapshotMs": {
+    "mean": 0.0493936314068351,
+    "p95": 0.19500000774860382,
+    "max": 0.3349999934434891
+  },
+  "jsCopyMs": {
+    "mean": 0.07151761509700197,
+    "p95": 0.2800000011920929,
+    "max": 0.5150000005960464
+  },
+  "roundTripMs": {
+    "mean": 13.452909891814155,
+    "p95": 13.884999990463257,
+    "max": 20.189999997615814
+  },
+  "ticksBehind": {
+    "mean": 3.152439024390244,
+    "p95": 5,
+    "max": 5
+  },
+  "cpuBudgetMs": {
+    "mean": 13,
+    "p95": 13,
+    "max": 13
+  },
+  "cpuMhz": 25,
+  "visualFrames": 431
+}

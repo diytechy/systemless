@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mac Game Modernization"
+  short_description: "Tune Mac game playback and assess an HTML5 pilot"
+  default_prompt: "Use $mac-game-modernization to resume the private game library, measure one title, and evaluate the next tuning or HTML5 pilot step."

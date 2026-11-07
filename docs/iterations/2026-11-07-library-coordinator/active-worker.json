@@ -1,8 +1,8 @@
 {
   "slug": "nort",
   "task_name": "/root/nort",
-  "status": "brief prepared; spawn pending",
+  "status": "running; see active-runners.json",
   "starting_revision": "b20c60f78d698f1c6c7078771a55a8f6577da49f",
   "brief": "nort-brief.md",
-  "updated_at": "2026-11-07T20:39:46.194679+00:00"
+  "updated_at": "2026-11-07T20:43:26.880505+00:00"
 }

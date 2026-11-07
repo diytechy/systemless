@@ -1565,8 +1565,8 @@
     },
     {
       "slug": "mantra-ii",
-      "title": "Mantra II",
-      "status": "worker active",
+      "title": "Mantra II1.02",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Mantra II v1.02 ƒ/Mantra II v1.02",
@@ -1601,15 +1601,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Docs8bit and640x480 troubleshooting; native tested800x600x8, original68K SIZE6144000. PPC sibling preserved unrun.",
+      "preferences_save_id": "Boot name-only Xndr candidates belong original Mantra; II executable creatorXND2 has no proven pref. Fresh/default state; Data/Map/Music retained.",
+      "controls": "Keypad6 key88/ch54 movement observed. P35/ch112 pause inconclusive; I,Space,Option,Tab,Shift documented only.",
+      "timing": "Native initial play/keypad movement; release baseline, pause and reference fidelity pending.",
+      "report": "mantra-ii/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "33-file/3-folder fixture verified. Parent matched source006/fixture hashes, raw253tick report with zero assertions/exhaustion and play/right PNGs: player moves40px on keypad6. P and hidden-menubar attempts do not qualify pause/resume. Scratch collision and one unrecoverable Mantra startup log disclosed; guarded follow-up validated. No setting change; tested800x600 retained for preparation."
     },
     {
       "slug": "nort",
       "title": "nort",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Nort Folder/nort",
@@ -1632,7 +1635,7 @@
     {
       "slug": "oh-no-more-lemmings",
       "title": "Oh No! More Lemmings",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings",

@@ -1,0 +1,1836 @@
+{
+  "schema_version": 1,
+  "purpose": "Navigation clues from reviewed native evidence; not new browser observations",
+  "plans": [
+    {
+      "slug": "3-d-cannon",
+      "id": "owned-3-d-cannon-v1",
+      "route": "/3-d-cannon/",
+      "title": "3-D Cannon",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "ReadMe arrows aim, < > velocity, Space fire, Command accelerates; Space transition observed only",
+      "native_observations": [
+        "blank window tick120",
+        "title 1 Player/2 Players/Quit tick332",
+        "1 Player terrain map tick454",
+        "Space response perspective/crosshair tick546"
+      ],
+      "report": "3-d-cannon/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Browser baseline pending compiled entry/route; native ticks are behavior only"
+    },
+    {
+      "slug": "3d-brick-bash-1-1-1",
+      "id": "owned-3d-brick-bash-1-1-1-v1",
+      "route": "/3d-brick-bash-1-1-1/",
+      "title": "3d Brick Bash! 1.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "ReadMe mouse paddle/button speed;8-bit floor polygon responds, ball/collisions unverified",
+      "native_observations": [
+        "4-bit startup field and menus render.",
+        "4-bit New Game becomes black; menu input redraws initial field.",
+        "8-bit New Game initializes field and counters. Mouse movement shifts floor polygon.",
+        "8-bit button plus movement sequence leaves large horizontal white/gray slab; ball/collision fidelity unverified."
+      ],
+      "report": "3d-brick-bash-1-1-1/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No compiled browser entry; native ball/collision readiness and fidelity unresolved"
+    },
+    {
+      "slug": "acquire-1-0",
+      "id": "owned-acquire-1-0-v1",
+      "route": "/acquire-1-0/",
+      "title": "Acquire 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Mouse click items; cross removed and score0to100 observed; penalties/end/pause untested",
+      "native_observations": null,
+      "report": "acquire-1-0/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Release browser entry absent; native behavior is not timing or fidelity qualification"
+    },
+    {
+      "slug": "action-dome-1-0",
+      "id": "owned-action-dome-1-0-v1",
+      "route": "/action-dome-1-0/",
+      "title": "Alien Action Dome 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Saved keypad8/2/6/4 movement, Esc stop, Return pause; right and pause/resume observed",
+      "native_observations": {
+        "launch": "observed",
+        "stage1": "observed",
+        "right_movement": "observed; input-key88/ch54, no independent reference",
+        "pause_resume": "observed visually",
+        "menu_instructions_options": "observed",
+        "timing_fidelity": "untested",
+        "busy_scene": "untested",
+        "sound": "untested",
+        "saves": "untested",
+        "physical_controller": "untested",
+        "browser_performance": "not measured; no compiled entry"
+      },
+      "report": "action-dome-1-0/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Release browser entry absent; native timing/fidelity unqualified"
+    },
+    {
+      "slug": "adventure",
+      "id": "owned-adventure-v1",
+      "route": "/adventure/",
+      "title": "Adventure 1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Documented typed commands/Command and Movement menus; not qualified",
+      "native_observations": {
+        "observed": [
+          "Fixture load/data-fork reads",
+          "Titled empty window",
+          "Return/menu-bar click produced no visible response"
+        ],
+        "untested": [
+          "Gameplay",
+          "Pace/fidelity/busy scene",
+          "Audio",
+          "Save/restore/preferences",
+          "Physical controller"
+        ]
+      },
+      "report": "adventure/report.md",
+      "prior_outcome": "compatibility blocker",
+      "reason": "No gameplay baseline; wall-aborted extension is not completed480ticks or performance evidence; native compile revision unknown"
+    },
+    {
+      "slug": "angband",
+      "id": "owned-angband-v1",
+      "route": "/angband/",
+      "title": "Angband 2.0.2 (Macintosh)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Character creation manual rolling; keypad directions,6 observed; i inventory observed",
+      "native_observations": {
+        "observed": [
+          "Responsive File menu/New",
+          "Human/Male/Warrior selection",
+          "Manual rolling and accepted stats",
+          "Named character reaches town map",
+          "Keypad6 scene change; inventory displays carried objects"
+        ],
+        "untested": [
+          "Pace/fidelity and busy combat",
+          "Pause/resume",
+          "Audible sound/music",
+          "Save/restore/preferences persistence",
+          "Physical controller",
+          "Release browser"
+        ]
+      },
+      "report": "angband/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No compiled private browser entry or real-time baseline; native ticks are behavior only"
+    },
+    {
+      "slug": "arashi-1-1-1",
+      "id": "owned-arashi-1-1-1-v1",
+      "route": "/arashi-1-1-1/",
+      "title": "Arashi 1.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Documented mouse move/fire, Space superzap,P pause; effects not qualified",
+      "native_observations": {
+        "observed": [
+          "Startup options",
+          "Start Game accepted",
+          "Level selector",
+          "Changing star transition with score/lives/level"
+        ],
+        "untested": [
+          "Representative gameplay readiness",
+          "Mouse movement/fire effect",
+          "Pause/resume (P no visible dialog)",
+          "Sound fidelity",
+          "Saves",
+          "Controller",
+          "Performance",
+          "Independent fidelity"
+        ]
+      },
+      "report": "arashi-1-1-1/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No representative scene or release entry; native696ticks are not wall-time speed"
+    },
+    {
+      "slug": "bachman-2-0u",
+      "id": "owned-bachman-2-0u-v1",
+      "route": "/bachman-2-0u/",
+      "title": "Bachman 2.0u",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Arrows/keypad/custom or mouse documented; literal Right movement observed; pause unqualified",
+      "native_observations": {
+        "observed": [
+          "Title and Game menu",
+          "Begin opens Level1 maze",
+          "Character changes position during held Right; enemies visible; score1 by final capture"
+        ],
+        "untested": [
+          "Independent timing/collision/scoring fidelity",
+          "Busy scene",
+          "Pause/resume (final menu not opened)",
+          "Audio",
+          "Persistence",
+          "Physical controller",
+          "Release browser performance"
+        ]
+      },
+      "report": "bachman-2-0u/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No compiled browser entry; native scene/input is not performance/fidelity qualification"
+    },
+    {
+      "slug": "balderdoush-1-04i",
+      "id": "owned-balderdoush-1-04i-v1",
+      "route": "/balderdoush-1-04i/",
+      "title": "Balderdoush 1.04i",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Configurable movement; Right scrolling/digging observed; Shift pickup/pause keys documented not qualified",
+      "native_observations": {
+        "observed": [
+          "Title/level selector",
+          "Game\u21923 men/level01/Space prompt",
+          "Space\u2192playfield",
+          "Right-arrow8ticks\u2192horizontal scene scroll and dug passage"
+        ],
+        "untested": [
+          "Timing/fidelity/busy levels",
+          "Pause/menu interaction",
+          "Audio fidelity",
+          "Save persistence",
+          "Physical controller",
+          "Browser performance"
+        ]
+      },
+      "report": "balderdoush-1-04i/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No compiled release route/real-time baseline; pause/audio/reference/saves unqualified"
+    },
+    {
+      "slug": "barney-carnage-2-0",
+      "id": "owned-barney-carnage-2-0-v1",
+      "route": "/barney-carnage-2-0/",
+      "title": "Barney Carnage 2.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Mouse start/advance; mouse shooting documented, aimed hit unverified",
+      "native_observations": {
+        "observed": [
+          "Title",
+          "Mouse-click advance to Level1 story and playfield",
+          "Target position changed"
+        ],
+        "untested": [
+          "Verified shot/hit/scoring",
+          "Timing fidelity",
+          "Busy levels",
+          "Pause/menu operation",
+          "Sound fidelity",
+          "Saves",
+          "Physical controller",
+          "Release browser"
+        ]
+      },
+      "report": "barney-carnage-2-0/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No release route/real-time baseline; initial native smoke only"
+    },
+    {
+      "slug": "battletanks-2-12-1",
+      "id": "owned-battletanks-2-12-1-v1",
+      "route": "/battletanks-2-12-1/",
+      "title": "BattleTanks 2.12.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Mouse File/New dialog responds; angle/power controls and firing unqualified.",
+      "native_observations": {
+        "observed": [
+          "toolbar",
+          "File menu",
+          "New player/name dialog",
+          "dialog dismissal",
+          "field unchanged after click and later observation"
+        ],
+        "untested": [
+          "representative gameplay",
+          "motion/fidelity",
+          "busy scene",
+          "pause",
+          "audio",
+          "save roundtrip",
+          "controller",
+          "browser performance"
+        ]
+      },
+      "report": "battletanks-2-12-1/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No browser baseline; native ticks are behavior only. Gameplay readiness unresolved."
+    },
+    {
+      "slug": "bedlam",
+      "id": "owned-bedlam-v1",
+      "route": "/bedlam/",
+      "title": "Bedlam1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 1,
+      "controls": "Readme mouse movement/button fire, held-fire repeat/early travel skip; New Game click observed, battle input efficacy unverified.",
+      "native_observations": {
+        "observed": [
+          "Title/menu",
+          "Mouse New Game transitions to cockpit travel",
+          "Existing preference FindFolder(pref)/FSMakeFSSpec exists=true/resource open ResError=0"
+        ],
+        "untested": [
+          "Actual battle readiness",
+          "Ship movement/fire efficacy",
+          "Gameplay timing/fidelity",
+          "Busy scene",
+          "Pause/resume",
+          "Audio",
+          "Saves",
+          "Controller"
+        ]
+      },
+      "report": "bedlam/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No browser baseline; native diagnostic travel transitions only, not real-time performance."
+    },
+    {
+      "slug": "bikaka-1-4",
+      "id": "owned-bikaka-1-4-v1",
+      "route": "/bikaka-1-4/",
+      "title": "Bikaka 1.4",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Configurable keys/special-key ASCII numbers documented; active controls unresolved after literal-left and menu tap.",
+      "native_observations": {
+        "observed": [
+          "8-bit colored playfield, score, next-piece and statistics windows",
+          "4-bit pale/clipped partial screenshot, cause unverified",
+          "literal-left and File-position tap produced identical captures"
+        ],
+        "untested": [
+          "responsive movement/drop/rotation",
+          "pause/menu",
+          "busy scene",
+          "timing/collision/scoring fidelity",
+          "audible sound/music",
+          "saves",
+          "physical controller"
+        ]
+      },
+      "report": "bikaka-1-4/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No release-browser baseline; short8bit native readiness only,4bit incomplete excluded from completed counters."
+    },
+    {
+      "slug": "blobbo",
+      "id": "blobbo-full-personal-101",
+      "route": "/blobbo/",
+      "title": "Blobbo Full 1.0.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Full Page3 directional mouse click observed; configurable keyboard and pause untested.",
+      "native_observations": {
+        "observed": [
+          "About dismisses to WELCOME/01",
+          "Documented mouse click moves one cell left",
+          "Status: Moves1, Toy Boxes0/64",
+          "File/Status menus render",
+          "Existing Boot preference opened through virtual preferences path"
+        ],
+        "untested": [
+          "Real-time pace/reference fidelity",
+          "Busy scenes/level completion/collision/scoring",
+          "Keyboard mapping and pause",
+          "Audible sound",
+          "Saves across reload/export/import",
+          "Physical controller",
+          "Release browser"
+        ]
+      },
+      "report": "blobbo/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native Full first-board mouse response observed; release-browser performance not measured, no candidate."
+    },
+    {
+      "slug": "blood-bath-demo-1-96",
+      "id": "owned-blood-bath-demo-1-96-v1",
+      "route": "/blood-bath-demo-1-96/",
+      "title": "Blood Bath Demo 1.96",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Documented mouse aim/fire, bottom-screen reload,1/2/3weapons, comma/period volume; gameplay input unverified.",
+      "native_observations": {
+        "observed": [
+          "Title visible, text brightens120to360ticks",
+          "Mouse Demo down/up delivered at120and360; title remains after30/60ticks",
+          "Companion DATA/resources open successfully"
+        ],
+        "untested": [
+          "Gameplay motion/timing/fidelity",
+          "Busy scene/collisions/scoring",
+          "Pause/options responsiveness",
+          "Audible sound",
+          "Saves/reload/export/import",
+          "Physical controller",
+          "Release browser"
+        ]
+      },
+      "report": "blood-bath-demo-1-96/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Release-browser baseline absent; native title-readiness unresolved, no pacing candidate."
+    },
+    {
+      "slug": "bloodsuckers",
+      "id": "owned-bloodsuckers-v1",
+      "route": "/bloodsuckers/",
+      "title": "Bloodsuckers",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Documented mouse hand/swat,Qquit,Escape menu,CapsLock pause. Menu mouse response observed; gameplay/pause unverified.",
+      "native_observations": {
+        "observed": [
+          "Donation click enters animated title menu",
+          "Hand follows mouse across menu",
+          "Finite Play-button click did not reach gameplay",
+          "Escape after center click leaves menu visible"
+        ],
+        "untested": [
+          "Gameplay movement/collision/scoring/pace",
+          "Busy scene",
+          "Pause/resume",
+          "Audible sound fidelity",
+          "Saves/reload/export/import",
+          "Physical controller",
+          "Release-browser performance",
+          "Independent reference fidelity"
+        ]
+      },
+      "report": "bloodsuckers/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No release-browser baseline; completed native menu/input evidence only, not wall-time pace."
+    },
+    {
+      "slug": "bolo",
+      "id": "owned-bolo-v1",
+      "route": "/bolo/",
+      "title": "Bolo0.99.7;0.99.5 variant retained separately in inventory",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Tutorial Return advances,Q forwards,A brake; Return/Q response observed, isolated displacement/steering/fire/pause unverified.",
+      "native_observations": {
+        "observed": [
+          "Network Selection default Tutorial",
+          "Welcome and Q/A instruction dialogs",
+          "Return dialog response",
+          "Return plus heldQ reaches unobstructed boat/island playfield"
+        ],
+        "untested": [
+          "isolated displacement/steering/braking/fire",
+          "pause/menus",
+          "busy scene",
+          "audio",
+          "saves/preferences persistence",
+          "physical controller",
+          "network",
+          "browser timing/fidelity"
+        ]
+      },
+      "report": "bolo/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Offline Tutorial native readiness; release-browser baseline and isolated movement/braking unmeasured."
+    },
+    {
+      "slug": "bonk-1-4-2",
+      "id": "owned-bonk-1-4-2-v1",
+      "route": "/bonk-1-4-2/",
+      "title": "Bonk 1.4.2",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Begin/Space bomb/menu observed; documented mouse face clicks,Command-I level increment. Mouse scoring/pause unverified.",
+      "native_observations": {
+        "observed": [
+          "starting-level selector",
+          "Begin enters level1 four-by-four playfield",
+          "Space shows BOOM!! and Bombs1 to0",
+          "Bonk menu opens with Pause/Sound/Abort/Increment",
+          "intermediate motion screenshot transiently black; later redraw present"
+        ],
+        "untested": [
+          "mouse hit scoring",
+          "pause/resume",
+          "busy scene",
+          "audio fidelity",
+          "saved-score persistence",
+          "physical controller",
+          "B&W launch",
+          "independent-reference timing/collision/scoring fidelity",
+          "release-browser performance"
+        ]
+      },
+      "report": "bonk-1-4-2/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native color Level1/action readiness only; release-browser baseline absent, no candidate."
+    },
+    {
+      "slug": "bonkheads-deluxe",
+      "id": "owned-bonkheads-deluxe-v1",
+      "route": "/bonkheads-deluxe/",
+      "title": "Bonkheads Deluxe1.0.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Customizable left/right/jump,CapsLock pause,Esc exit documented; splash click only, gameplay/default mapping unverified.",
+      "native_observations": {
+        "observed": [
+          "publisher splash",
+          "main-menu window construction in logs",
+          "corrected fixture FindFolder(pref)/FSMakeFSSpec exists=true and ResError0"
+        ],
+        "untested": [
+          "gameplay/movement/jump",
+          "timing/fidelity/scoring/collision",
+          "busy scene",
+          "pause/menu selection",
+          "sound fidelity",
+          "saves",
+          "physical controllers"
+        ]
+      },
+      "report": "bonkheads-deluxe/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No release baseline; bounded native menu readiness unresolved. Initial332ticks complete0assert/exhaust; stopped runs counters unavailable."
+    },
+    {
+      "slug": "brickles-plus-3-0",
+      "id": "owned-brickles-plus-3-0-v1",
+      "route": "/brickles-plus-3-0/",
+      "title": "Brickles Plus 3.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Help File New Game1/2/4paddles,click begin/next click pause,mouse paddle,P panic direction once per ball. All untested.",
+      "native_observations": {
+        "observed": [
+          "Window creation logged",
+          "Existing preference path opened and read"
+        ],
+        "untested": [
+          "Actual rendered screen",
+          "Motion/timing and collision/scoring",
+          "Busy scene",
+          "Mouse/menu/pause",
+          "Audible sound",
+          "Save roundtrip",
+          "Physical controller"
+        ]
+      },
+      "report": "brickles-plus-3-0/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native startup noncompletion at75s prevents readiness; counters unavailable and release-browser unmeasured."
+    },
+    {
+      "slug": "brickoids-millenium",
+      "id": "owned-brickoids-millenium-v1",
+      "route": "/brickoids-millenium/",
+      "title": "Brickoids Millenium1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Source mouse paddle,Space/button launch,Ppause,Qend,FileNew/Options; untested.",
+      "native_observations": {
+        "observed": [
+          "publisher splash at frontend120",
+          "native centered640x480 game window creation"
+        ],
+        "untested": [
+          "play/movement/busy scene",
+          "input/menu/pause efficacy",
+          "timing/collision/scoring fidelity",
+          "audible audio",
+          "saves/persistence",
+          "physical controller",
+          "release-browser performance"
+        ]
+      },
+      "report": "brickoids-millenium/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native partial splash only, final counters unavailable after75s stop. Release-browser baseline unmeasured."
+    },
+    {
+      "slug": "chiral",
+      "id": "owned-chiral-v1",
+      "route": "/chiral/",
+      "title": "Chiral1.0.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Docs mouse bottom-vial atom placement,CapsLock pause,Esc abort. No visible readiness, all untested.",
+      "native_observations": {
+        "observed": [
+          "Black captures inspected at120,332,1000; CWindow creation logged",
+          "Finite actions complete; not gameplay compatibility"
+        ],
+        "untested": [
+          "atom placement",
+          "pause/resume",
+          "abort/menu",
+          "busy scene",
+          "motion/timing fidelity",
+          "audio fidelity",
+          "save roundtrip",
+          "physical controller",
+          "browser performance"
+        ]
+      },
+      "report": "chiral/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "No representative scene; native black startup through1000ticks with0errors/exhaustion. Release-browser unmeasured."
+    },
+    {
+      "slug": "chrysanthemum-1-01",
+      "id": "owned-chrysanthemum-1-01-v1",
+      "route": "/chrysanthemum-1-01/",
+      "title": "Chrysanthemum1.01",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Embedded File PlayCmd-G/InstructionsCmd-I/ChooseKeysCmd-K; PauseCmd-P/EndCmd-period/SoundCmd-S/MusicCmd-M. Actual gameplay/saved mappings unverified.",
+      "native_observations": {
+        "observed": [
+          "Loading dialog and game window creation traced",
+          "FindFolder pref followed by FSpOpenDF resolving preserved preference and PBRead608 request"
+        ],
+        "untested": [
+          "Visible initial frame",
+          "gameplay",
+          "motion/timing/fidelity",
+          "busy scene",
+          "play input",
+          "pause/menu execution",
+          "sound/music",
+          "saves",
+          "physical controller",
+          "browser performance"
+        ]
+      },
+      "report": "chrysanthemum-1-01/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "First120tick action incomplete at75s; final counters unavailable. No release-browser baseline."
+    },
+    {
+      "slug": "columns",
+      "id": "owned-columns-v1",
+      "route": "/columns/",
+      "title": "Columns1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Cmd-N NewGame/Cmd-P pause-resume and Options menu observed. Right-arrow3ticks not established; rotation/directional keys unresolved.",
+      "native_observations": {
+        "observed": [
+          "title/highscores",
+          "Cmd-N starts falling-gem scene",
+          "vertical motion",
+          "Cmd-P pause40ticks with identical captures; resume motion",
+          "Options retained menu opens"
+        ],
+        "untested": [
+          "browser performance",
+          "pace/collision/scoring fidelity",
+          "busy scene",
+          "audible sound/music",
+          "save persistence",
+          "physical controller",
+          "directional/rotation controls"
+        ]
+      },
+      "report": "columns/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native falling-gem motion/pause/menu readiness; release-browser baseline pending, no candidate."
+    },
+    {
+      "slug": "crunch",
+      "id": "owned-crunch-v1",
+      "route": "/crunch/",
+      "title": "Crunch!2.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Cmd-B Begin,rightkey124/ch29 and Space pause/resume observed. Docs arrows/keypad/mouse velocity,E end,Cmd-E menu End; mouse/keypad/menus unverified.",
+      "native_observations": {
+        "observed": [
+          "title and actual marble level",
+          "Cmd-B Begin",
+          "right arrow character29 moves orange marble",
+          "enemy motion",
+          "Space pause: byte-identical captures30 ticks apart; resume restores motion"
+        ],
+        "untested": [
+          "mouse/keypad",
+          "retained menus",
+          "busy scenes",
+          "collision/scoring and independent timing fidelity",
+          "audible audio",
+          "save round trip",
+          "physical controller",
+          "release browser performance"
+        ]
+      },
+      "report": "crunch/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native play/right/pause readiness; release-browser baseline pending, no pacing candidate."
+    },
+    {
+      "slug": "cybernation-1-1-1",
+      "id": "owned-cybernation-1-1-1-v1",
+      "route": "/cybernation-1-1-1/",
+      "title": "CyberNation 1.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Cmd-N New game and right124/ch29 observed; arrows/keypad steering,0/Command fire,Space pickup,A abort,P pause,Q quit,S sound documented. Other actions unverified.",
+      "native_observations": {
+        "observed": [
+          "Title and initial room after Command-N",
+          "Right124/ch29 held24ticks moves Arnie right",
+          "File menu visibly opens",
+          "Enemies differ between captures"
+        ],
+        "untested": [
+          "P pause/resume remains ambiguous",
+          "Busy scenes and timing/reference fidelity",
+          "Audio fidelity",
+          "Saves/reload/export",
+          "Physical controller",
+          "Fire/pickup/level progression",
+          "Alternating partial HUD/sprite imagery cause"
+        ]
+      },
+      "report": "cybernation-1-1-1/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native room movement readiness; verbose traced 73.1s run is not performance. Release-browser baseline pending."
+    },
+    {
+      "slug": "deliverance",
+      "id": "owned-deliverance-v1",
+      "route": "/deliverance/",
+      "title": "Deliverance\u00e2\u201e\u00a2 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Resource labels Jump/Kneel/Left/Right/Fire,Cmd-P Pause,Cmd-Q Quit; actual assignments/behavior untested.",
+      "native_observations": {
+        "observed": [
+          "Rendered registration dialog asks name/organization/serial from Disk1; Cancel and OK visible"
+        ],
+        "untested": [
+          "Gameplay/movement/fire/jump/kneel",
+          "Pause/menu behavior",
+          "Busy scenes",
+          "Guest-clock/browser performance and reference fidelity",
+          "Audio",
+          "Saves/reload/export",
+          "Physical controller"
+        ]
+      },
+      "report": "deliverance/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Registration UI only; gameplay/release-browser timing unavailable until owned installation state or serial located."
+    },
+    {
+      "slug": "dome-wars",
+      "id": "owned-dome-wars-v1",
+      "route": "/dome-wars/",
+      "title": "Dome Wars Public Beta",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "File New Game/Help Controls; arrows/keypadpower,Command precision documented, turret direction wording ambiguous; no accepted input observed.",
+      "native_observations": {
+        "observed": [
+          "canyon/menu bar",
+          "title graphic by360ticks",
+          "finite mouse probes completed; no visible dismissal/menu response established"
+        ],
+        "untested": [
+          "actual gameplay",
+          "movement/fire",
+          "busy scene",
+          "pause/resume",
+          "audible fidelity",
+          "saves",
+          "physical controller",
+          "reference fidelity",
+          "browser performance"
+        ]
+      },
+      "report": "dome-wars/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native title/menu-bar readiness only; actual play and release-browser baseline pending."
+    },
+    {
+      "slug": "drol",
+      "id": "owned-drol-v1",
+      "route": "/drol/",
+      "title": "Drol v0.9 (ReadMe beta0.9b1)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Documented arrows,A/Z,Escape pause,CmdRrestart/CmdSsound/CmdQquit; Space removes title,Aup/Escape confirmed, horizontal unresolved.",
+      "native_observations": {
+        "observed": [
+          "title and changing minimap",
+          "space removes title overlay",
+          "A raises player",
+          "Escape stable active scene60ticks; second Escape resumes enemies"
+        ],
+        "untested": [
+          "horizontal displacement unresolved in124/ch29 probe",
+          "left/Z/commands",
+          "busy levels/collision/scoring fidelity",
+          "sound",
+          "saves",
+          "physical controller",
+          "release-browser performance"
+        ]
+      },
+      "report": "drol/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native initial play/vertical/pause readiness; release-browser baseline pending."
+    },
+    {
+      "slug": "fantastic-voyage",
+      "id": "owned-fantastic-voyage-v1",
+      "route": "/fantastic-voyage/",
+      "title": "Fantastic Voyage1.1a",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Help QOPM and alternate IJKL/keypad8046; Special Pause CmdP; only splash click exercised.",
+      "native_observations": {
+        "observed": [
+          "Inspected splash at frontend120",
+          "Dismissal input followed by log creation of game windows; no completed gameplay image"
+        ],
+        "untested": [
+          "Actual play/movement",
+          "Busy scenes",
+          "Pause/menu interaction",
+          "Sound",
+          "Saves",
+          "Physical controller",
+          "Fidelity/performance"
+        ]
+      },
+      "report": "fantastic-voyage/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Splash readiness only; finite post-dismissal native noncompletion. Release-browser gameplay/baseline pending."
+    },
+    {
+      "slug": "gold-digger",
+      "id": "owned-gold-digger-v1",
+      "route": "/gold-digger/",
+      "title": "Gold Digger1.3.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "New Game menu works; right124/ch29 changes image but autonomous motion confounds direction; pause untested.",
+      "native_observations": {
+        "observed": [
+          "Title v1.3.0",
+          "Original preference opened at virtual System Folder/Preferences path",
+          "Game menu/New Game selection",
+          "Screen1 playfield after transition",
+          "Changed player position after raw arrow probe; directional causality unproven"
+        ],
+        "untested": [
+          "Independent timing/fidelity",
+          "Busy scenes",
+          "Pause/resume",
+          "Audible sound",
+          "Save roundtrip",
+          "Controller"
+        ]
+      },
+      "report": "gold-digger/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native menu/New Game/playfield readiness; release-browser baseline pending."
+    },
+    {
+      "slug": "goldpusher",
+      "id": "owned-goldpusher-v1",
+      "route": "/goldpusher/",
+      "title": "GoldPusher1.5",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "h/j/k/l orkeypad,Space throw,p/Tab/click/CmdPpause documented; l right observed, fullresume untested.",
+      "native_observations": {
+        "observed": [
+          "Animated demo",
+          "Room1 Look around populated playfield",
+          "Held l moved player right",
+          "p then30ticks retained object positions; player blinked",
+          "Game menu opens"
+        ],
+        "untested": [
+          "independent-reference pace/collision/scoring fidelity",
+          "busy later rooms",
+          "audible sound/music fidelity",
+          "save/reload/export",
+          "physical controller",
+          "browser performance",
+          "full pause/resume cycle"
+        ]
+      },
+      "report": "goldpusher/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native room1/right/menu readiness and partial pause; release-browser baseline pending."
+    },
+    {
+      "slug": "guy-smiley-vs-the-monsters",
+      "id": "owned-guy-smiley-vs-the-monsters-v1",
+      "route": "/guy-smiley-vs-the-monsters/",
+      "title": "Guy Smiley vs.the Monsters1.0.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "D/K/5pass documented; D2/ch100 tried blank; directionalpads illustration unresolved; no gameplay/pausequalified.",
+      "native_observations": {
+        "observed": [
+          "titled white-client window at ticks60 and360",
+          "File menu",
+          "Settings dialog",
+          "New Game and D/pass probes leave blank client",
+          "1-bit repeat: blank New Game/pass client; monochrome settings dialog"
+        ],
+        "untested": [
+          "movement",
+          "timing fidelity",
+          "busy scene",
+          "pause/resume",
+          "sound",
+          "saves",
+          "physical controller",
+          "collision/scoring"
+        ]
+      },
+      "report": "guy-smiley-vs-the-monsters/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native menus/settings only; board readiness unresolved at1/8bit, release-browser unmeasured."
+    },
+    {
+      "slug": "lawyers",
+      "id": "owned-lawyers-v1",
+      "route": "/lawyers/",
+      "title": "Lawyers1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Keypad6 key88/ch54 right16px; ordinary6 key22/ch54 advances anotherturn; right124/ch29/click unqualified; GameBomb menu works.",
+      "native_observations": {
+        "observed": [
+          "title/Level1",
+          "keypad6 right turn; ordinary6 turn",
+          "menu/instructions",
+          "bomb rings; inventory1\u21920"
+        ],
+        "untested": [
+          "busy gameplay",
+          "full controls",
+          "independent fidelity/timing",
+          "pause/resume",
+          "audio",
+          "saves",
+          "controller"
+        ]
+      },
+      "report": "lawyers/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native Level1/turn/bomb readiness; release-browser baseline pending, concurrent native times not performance."
+    },
+    {
+      "slug": "lemmings",
+      "id": "lemmings-personal-152",
+      "route": "/lemmings/",
+      "title": "Lemmings1.5.2",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Mouse readiness/toolbar selection and50/ch96 backtickpause/resume observed; actualdig assignment/menus unresolved.",
+      "native_observations": {
+        "observed": [
+          "title and Fun1 Just dig briefing",
+          "spawn/walk/timer changes",
+          "toolbar digger selection and WALKER1 pointer feedback",
+          "key50/ch96 pause: identical screenshots over60ticks; movement resumes"
+        ],
+        "untested": [
+          "confirmed skill assignment/digging",
+          "menu access (probe unconfirmed)",
+          "busy scenes",
+          "sound fidelity",
+          "collision/scoring fidelity",
+          "save persistence/export",
+          "physical controller",
+          "reference pace",
+          "release browser performance"
+        ]
+      },
+      "report": "lemmings/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native Fun1 spawn/walk/pause readiness; release-browser timing/reference fidelity pending."
+    },
+    {
+      "slug": "macpipes",
+      "id": "owned-macpipes-v1",
+      "route": "/macpipes/",
+      "title": "MacPipes2.2.7",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Documented mouse,Spaceflow,Optionbomb,Shiftstack,Ppause,Escabort; modal probesonly, gameplayunqualified.",
+      "native_observations": {
+        "observed": [
+          "2.2.7 title",
+          "New Game opens reminder",
+          "Not Yet probes and250tick extension leave byte-identical reminder"
+        ],
+        "untested": [
+          "Actual placement/movement/flow",
+          "Pause/menu during gameplay",
+          "Busy scene/collision/scoring/fidelity",
+          "Audible sound/music",
+          "Save roundtrip",
+          "Physical controller",
+          "Release-browser timing"
+        ]
+      },
+      "report": "macpipes/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Title/shareware-modal readiness only; actualplay/release baseline pending, no proven service blocker."
+    },
+    {
+      "slug": "maelstrom",
+      "id": "owned-maelstrom-v1",
+      "route": "/maelstrom/",
+      "title": "Maelstrom1.4.3",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "P35/ch112 held3 fromfresh title startsWave1; configurablemovement/fire unresolved; CapsLockpause/Escabort documentedonly.",
+      "native_observations": {
+        "observed": [
+          "title/score screen",
+          "C opens blank white panel; Return restores title",
+          "copied virtual preference successfully opened",
+          "isolated P35/112 held3 reaches Wave1 ship/asteroid/HUD scene after180 ticks"
+        ],
+        "untested": [
+          "gameplay movement/fire",
+          "pause/resume",
+          "busy scene",
+          "audible sound",
+          "save round trip",
+          "controller",
+          "reference timing/fidelity"
+        ]
+      },
+      "report": "maelstrom/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native title/Wave1 readiness afterisolatedP; release-browser baseline/fidelity pending."
+    },
+    {
+      "slug": "mantra",
+      "id": "owned-mantra-v1",
+      "route": "/mantra/",
+      "title": "Mantra v1.02 (resource1.0.2)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Arrows/keypad,Cmd run,Space sword,Shift item,I/S/H panels documented. S panel observed; direction and panel recovery unqualified.",
+      "native_observations": {
+        "observed": [
+          "Title artwork and initial beach gameplay render",
+          "S statistics dialog opens",
+          "Return leaves black except OK; Escape unchanged",
+          "NewGame readiness uncertain; later key coincides with gameplay transition"
+        ],
+        "untested": [
+          "Independent directional movement",
+          "Pause/resume",
+          "Busy scenes",
+          "Audio fidelity",
+          "Saves/export/reload",
+          "Physical controller",
+          "Reference timing/collision/scoring"
+        ]
+      },
+      "report": "mantra/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Partial native beach/status readiness; release baseline pending. One earlier startup stderr log lost; primary gameplay evidence intact."
+    },
+    {
+      "slug": "mantra-ii",
+      "id": "owned-mantra-ii-v1",
+      "route": "/mantra-ii/",
+      "title": "Mantra II1.02",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Keypad6 key88/ch54 movement observed. P35/ch112 pause inconclusive; I,Space,Option,Tab,Shift documented only.",
+      "native_observations": {
+        "observed": [
+          "title",
+          "File menu/New Game",
+          "name dialog",
+          "initial colored playfield/NPC motion",
+          "keypad6 player movement"
+        ],
+        "untested": [
+          "pause/resume not established by P/menu attempt",
+          "timing/collision/scoring fidelity",
+          "busy scene",
+          "audible sound/music",
+          "saves/reload/export/import",
+          "physical controller",
+          "release browser"
+        ]
+      },
+      "report": "mantra-ii/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native initial play/keypad movement; release baseline, pause and reference fidelity pending."
+    },
+    {
+      "slug": "nort",
+      "id": "owned-nort-v1",
+      "route": "/nort/",
+      "title": "Nort (version unknown)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Configurable title keys; G5/ch103 and T17/ch116 direction probes inconclusive. Initial D probe invalid; no pause shortcut established.",
+      "native_observations": {
+        "observed": [
+          "title/options",
+          "Play clicked",
+          "delayed split arenas and changing imagery"
+        ],
+        "untested": [
+          "proven steering",
+          "rendering fidelity",
+          "collision/scoring",
+          "busy scene",
+          "pause/menu",
+          "sound fidelity",
+          "save roundtrip",
+          "physical controller",
+          "release browser pacing"
+        ]
+      },
+      "report": "nort/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native title and changing arenas only; steering, fidelity and release-browser baseline pending."
+    },
+    {
+      "slug": "oh-no-more-lemmings",
+      "id": "oh-no-more-lemmings-personal-10",
+      "route": "/oh-no-more-lemmings/",
+      "title": "Oh No! More Lemmings1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Mouse title/briefing and grave50/ch96 pause/resume observed. Skill click and menu inconclusive; Z/X/arrows documented only.",
+      "native_observations": {
+        "observed": [
+          "Publisher and animated title",
+          "Tame1 Down And Out Lemmings briefing/playfield",
+          "OUT0\u21922, moving lemmings and timer",
+          "Grave key pause holds exact screenshot180ticks; resumes motion/timer"
+        ],
+        "untested": [
+          "Successful skill assignment",
+          "Busy scene and level completion",
+          "Independent pace/collision/scoring fidelity",
+          "Sound fidelity",
+          "Saves/reload",
+          "Physical controller",
+          "Browser performance"
+        ]
+      },
+      "report": "oh-no-more-lemmings/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native Tame1 motion/pause readiness; release-browser baseline and fidelity pending."
+    },
+    {
+      "slug": "oregon-trail",
+      "id": "owned-oregon-trail-v1",
+      "route": "/oregon-trail/",
+      "title": "Oregon Trail1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Mouse Travel/Continue/Farmer selection observed; keyboard, journey/hunting and pause untested.",
+      "native_observations": {
+        "observed": [
+          "Illustrated title",
+          "Travel the Trail click opens welcome",
+          "Continue opens player/party setup",
+          "Farmer radio selection replaces Banker"
+        ],
+        "untested": [
+          "Actual journey/hunting",
+          "Motion/timing/busy scenes/fidelity",
+          "Pause/menu tracking",
+          "Audio",
+          "Saves/reload/export/import",
+          "Physical controller",
+          "Browser performance"
+        ]
+      },
+      "report": "oregon-trail/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native title/setup and occupation decision only; actual journey and release-browser baseline pending."
+    },
+    {
+      "slug": "pac-in-time",
+      "id": "owned-pac-in-time-v1",
+      "route": "/pac-in-time/",
+      "title": "PAC IN TIME1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Configurable Left/Right/Up/Down/Fire/Power; actual mappings unverified. CmdN and fresh Game-header probes do not establish new game.",
+      "native_observations": {
+        "observed": [
+          "Kalisto splash",
+          "Illustrated animated intro",
+          "PAC-IN-TIME title",
+          "Escape/Return/mouse/Command-N probes; title/menu visible, no new-game dialog yet",
+          "Original preference resource fork loaded",
+          "Menu-only correction: fresh title Game header mouse-down returns Kalisto splash/fade; no New Game row exposed"
+        ],
+        "untested": [
+          "Gameplay movement/collision/scoring/pace",
+          "Busy scene",
+          "Pause/resume",
+          "Audible sound/music fidelity",
+          "Save persistence",
+          "Physical controller",
+          "Browser performance",
+          "Independent reference fidelity"
+        ]
+      },
+      "report": "pac-in-time/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Animated intro/title only; initial play and release-browser baseline unresolved."
+    },
+    {
+      "slug": "pac-the-man",
+      "id": "owned-pac-the-man-v1",
+      "route": "/pac-the-man/",
+      "title": "Pac the Man4.5.1",
+      "screen_size": [
+        640,
+        480
+      ],
+      "screen_depth": 8,
+      "controls": "Raw Right124/ch29 and Up126/ch30 sent but readiness/stall confound direction. Space PAUSE observed; second Space remains paused, menu Resume untested.",
+      "native_observations": {
+        "observed": [
+          "4.5.1 title",
+          "File menu/New Game",
+          "level1 maze/player/ghost motion",
+          "Space PAUSE overlay",
+          "second Space remained paused"
+        ],
+        "untested": [
+          "verified directional response",
+          "resume",
+          "busy scene",
+          "audio fidelity",
+          "saves",
+          "physical controller",
+          "reference pacing/collision/scoring fidelity"
+        ]
+      },
+      "report": "pac-the-man/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native initial maze/motion and Space PAUSE observed; later directional probe incomplete. Release baseline pending."
+    },
+    {
+      "slug": "particleman-1-0",
+      "id": "owned-particleman-1-0-v1",
+      "route": "/particleman-1-0/",
+      "title": "ParticleMan1.0 (titlev1.0.0)",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "File Help/SetKeys/NewGame observed. Right124/ch29 and P35/ch112 inconclusive; custom-key setup only reached UP prompt.",
+      "native_observations": {
+        "observed": [
+          "title v1.0.0",
+          "title dismissal/high scores",
+          "File menu",
+          "Help rules",
+          "starting screen selector",
+          "populated initial level",
+          "changing counters"
+        ],
+        "untested": [
+          "confirmed directional movement",
+          "pause/resume",
+          "busy scene",
+          "independent pace/collision/scoring fidelity",
+          "audible sound",
+          "save round trip",
+          "physical controller"
+        ]
+      },
+      "report": "particleman-1-0/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native title/help/initial level readiness; movement/pause and release baseline pending."
+    },
+    {
+      "slug": "polybrid-1-0",
+      "id": "owned-polybrid-1-0-v1",
+      "route": "/polybrid-1-0/",
+      "title": "Polybrid1.0",
+      "screen_size": [
+        640,
+        480
+      ],
+      "screen_depth": 8,
+      "controls": "Configurable move/drop/rotate/flip; Right124/ch29 unchanged, actual bindings unknown. Menu opens and Pause highlights; transition/resume unconfirmed.",
+      "native_observations": {
+        "observed": [
+          "Title and OK readiness",
+          "OK enters populated well/preview/score0",
+          "Piece descends between127 and169ticks",
+          "Polybrid menu opens; Pause highlights"
+        ],
+        "untested": [
+          "Directional mapping/response (Right124/ch29 unchanged)",
+          "Pause/resume transition (retained menu)",
+          "Busy scenes/collision/matching/scoring fidelity",
+          "Audio",
+          "Saves/persistence",
+          "Physical controller",
+          "Release browser pacing and reference fidelity"
+        ]
+      },
+      "report": "polybrid-1-0/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native populated well/piece motion/menu readiness; controls, pause and release baseline pending."
+    },
+    {
+      "slug": "prince-of-persia",
+      "id": "owned-prince-of-persia-v1",
+      "route": "/prince-of-persia/",
+      "title": "Prince of Persia1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "Cmd55/ch0+N45/ch110 starts Level1; Escape53/ch27 pauses. Right124/ch29 held40 does not establish distance/direction; Shift alternatives documented.",
+      "native_observations": {
+        "observed": [
+          "color credits",
+          "Cmd-N enters Level1",
+          "Escape displays paused..."
+        ],
+        "untested": [
+          "directional distance (sprite absent after right probe)",
+          "resume",
+          "busy scenes",
+          "collision/scoring/fidelity",
+          "audible sound/music",
+          "saves",
+          "physical controller",
+          "release-browser timing"
+        ]
+      },
+      "report": "prince-of-persia/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native Level1 and Escape pause readiness; movement/resume and release baseline pending."
+    },
+    {
+      "slug": "robowar-4-1-1",
+      "id": "owned-robowar-4-1-1-v1",
+      "route": "/robowar-4-1-1/",
+      "title": "RoboWar 4.1.1",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "readable splash",
+          "click dismisses splash to six-slot empty arena",
+          "Arena menu opens/readable",
+          "actual sibling RoboPrefs open/read94 bytes logged",
+          "File/Open Robot opens functional standard picker; folders visible; branch cap before selection"
+        ],
+        "untested": [
+          "robot selection/battle/motion/scoring",
+          "busy scene",
+          "pause/resume",
+          "audible fidelity",
+          "save/reload",
+          "controller hardware",
+          "reference pace/fidelity"
+        ]
+      },
+      "report": "robowar-4-1-1/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Four native scripts360/172/197/202 frontend ticks; deterministic diagnostics only, no release performance."
+    },
+    {
+      "slug": "ruckus",
+      "id": "owned-ruckus-v1",
+      "route": "/ruckus/",
+      "title": "Ruckus",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "title/freeware/player UI",
+          "mission9 Deep Vault preparation",
+          "gameplay field",
+          "held mouse-edge scrolling changes viewport",
+          "Command-P probe captured; pause not established"
+        ],
+        "untested": [
+          "vehicle movement/fire",
+          "busy combat/timing/collision/scoring fidelity",
+          "pause/resume/menu completion",
+          "sound fidelity",
+          "save round trip",
+          "physical controller",
+          "release-browser performance"
+        ]
+      },
+      "report": "ruckus/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Completed native scripts242/366/428/460/480 ticks; capped final probe has no final report/counters. No release-browser measurement."
+    },
+    {
+      "slug": "scruffy",
+      "id": "owned-scruffy-v1",
+      "route": "/scruffy/",
+      "title": "Scruffy",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 1,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "Frank Software splash dismissal",
+          "Mazes/Title/Sounds companion opens resolve",
+          "1-bit full title with copyright 1991 Brian Barnes",
+          "1-bit Level 1 puppy/platforms/bones/cloud scene; cloud differs between final captures"
+        ],
+        "untested": [
+          "D/A movement response; Space jump; Q bombs",
+          "Tab pause/resume: sent during welcome transition; labels do not prove pause",
+          "busy scene; pace/collision/scoring fidelity",
+          "audible sound/music",
+          "save persistence; physical controller; browser performance"
+        ]
+      },
+      "report": "scruffy/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native deterministic first pass only; controls/fidelity/release performance unqualified."
+    },
+    {
+      "slug": "scruffy-ii",
+      "id": "owned-scruffy-ii-v1",
+      "route": "/scruffy-ii/",
+      "title": "Scruffy II 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 4,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "8-bit requirement alert",
+          "4-bit splash",
+          "Squeek interaction",
+          "Scruffy II v1.0 title"
+        ],
+        "untested": [
+          "gameplay",
+          "motion/timing/fidelity",
+          "busy scene",
+          "pause/menu",
+          "sound",
+          "save round trip",
+          "physical controller",
+          "browser performance"
+        ]
+      },
+      "report": "scruffy-ii/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Three complete native diagnostics, one wall-capped longer probe; no real-time release measurement."
+    },
+    {
+      "slug": "slithereens",
+      "id": "owned-slithereens-v1",
+      "route": "/slithereens/",
+      "title": "Slithereens",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "Copied existing Slithereens Prefs successfully opened/read from virtual System Folder/Preferences",
+          "Uniform pale cyan at frontend120/360 on both fixtures"
+        ],
+        "untested": [
+          "Readiness/title",
+          "Movement/timing/collision/scoring",
+          "Busy scene",
+          "Pause/menu/action inputs",
+          "Audio fidelity",
+          "Scores/saves/reload/export-import",
+          "Physical controller",
+          "Browser performance/reference fidelity"
+        ]
+      },
+      "report": "slithereens/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Two360tick native deterministic scripts; no gameplay/release performance measurement."
+    },
+    {
+      "slug": "spin-doctor",
+      "id": "owned-spin-doctor-v1",
+      "route": "/spin-doctor/",
+      "title": "Spin Doctor 1.2",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "title",
+          "actual copied Settings/Scores virtual Preferences paths opened",
+          "mouse Play reached1:Grid",
+          "wand orientation changed",
+          "P displayed Paused"
+        ],
+        "untested": [
+          "isolated Command/Option/Space effects",
+          "resume/menu",
+          "goal completion/busy scene",
+          "timing/collision/scoring fidelity",
+          "audible sound",
+          "save roundtrip",
+          "physical controller",
+          "release browser"
+        ]
+      },
+      "report": "spin-doctor/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Two finite native scripts; no real-time release measurement."
+    },
+    {
+      "slug": "star-trek-final-unity",
+      "id": "owned-star-trek-final-unity-v1",
+      "route": "/star-trek-final-unity/",
+      "title": "Star Trek: A Final Unity",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "Exact original installed68K executable selected",
+          "Original installed68K preference read",
+          "Distinct Star Trek CD STTNG.ZIP opened/read",
+          "Black startup playfield through360 ticks; no title readiness"
+        ],
+        "untested": [
+          "gameplay",
+          "motion/timing",
+          "busy scene",
+          "input/pause/menu",
+          "sound fidelity",
+          "save read/write",
+          "physical controller",
+          "browser performance"
+        ]
+      },
+      "report": "star-trek-final-unity/followup.md",
+      "prior_outcome": "not yet measured",
+      "reason": "One bounded native follow-up; no release gameplay/performance. CD lease released."
+    },
+    {
+      "slug": "super-munchers",
+      "id": "owned-super-munchers-v1",
+      "route": "/super-munchers/",
+      "title": "Super Munchers",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "title and instructions",
+          "Animals Beginner Level1",
+          "right key moves one cell",
+          "Space eat and wrong-answer feedback",
+          "Return pause/continue; paused screenshots identical"
+        ],
+        "untested": [
+          "pace/fidelity reference",
+          "busy or later levels",
+          "audible sound/music",
+          "save persistence/export",
+          "physical controller",
+          "browser release"
+        ]
+      },
+      "report": "super-munchers/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native final494ticks only; action-pass includes application-error branch, no release performance."
+    },
+    {
+      "slug": "system-s-twilight-v1-0-5",
+      "id": "owned-system-s-twilight-v1-0-5-v1",
+      "route": "/system-s-twilight-v1-0-5/",
+      "title": "System's Twilight v1.0.5",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "initial art at120 before button readiness; visible New Game buttons at360",
+          "fresh wait360, inspected pre-click, move100,216, settle2ticks, down10ticks/up, run120 reaches save-new-game picker",
+          "prior120-tick input probes were premature and do not establish input failure"
+        ],
+        "untested": [
+          "gameplay/motion/timing fidelity",
+          "busy scene",
+          "pause",
+          "effective menu selection",
+          "audio fidelity",
+          "save read/write and autosave",
+          "physical controller",
+          "release browser performance",
+          "accepting save-new-game picker and entering gameplay"
+        ]
+      },
+      "report": "system-s-twilight-v1-0-5/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Finite native diagnostics360/182/362/140/252/492ticks; no release performance."
+    },
+    {
+      "slug": "the-big-one",
+      "id": "owned-the-big-one-v1",
+      "route": "/the-big-one/",
+      "title": "The Big One Demo 1.0",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 1,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "title/About/instructions",
+          "Begin/Level 1 transition",
+          "timer counts down",
+          "1-bit hero/enemies render",
+          "period moves right",
+          "S renders bullets and consumes ammunition"
+        ],
+        "untested": [
+          "jump visual result after settled scene",
+          "left/duck/kick/combined controls",
+          "pause/abort",
+          "busy levels/collision/scoring/fidelity",
+          "audio playback (demo declares sound disabled)",
+          "saves",
+          "physical controller",
+          "browser performance"
+        ]
+      },
+      "report": "the-big-one/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native deterministic comparison; differing shot counts are not rate evidence. Release browser unmeasured."
+    },
+    {
+      "slug": "zap-t-balls",
+      "id": "owned-zap-t-balls-v1",
+      "route": "/zap-t-balls/",
+      "title": "Zap'T'Balls",
+      "screen_size": [
+        800,
+        600
+      ],
+      "screen_depth": 8,
+      "controls": "unverified",
+      "native_observations": {
+        "observed": [
+          "title rendered after finite startup",
+          "File/New Game submenu opens and closes",
+          "copied preference read via virtual preferences path"
+        ],
+        "untested": [
+          "gameplay movement/fire",
+          "pause/Q abort",
+          "busy scene",
+          "sound fidelity",
+          "save roundtrip",
+          "physical controller",
+          "real-time browser performance"
+        ]
+      },
+      "report": "zap-t-balls/report.md",
+      "prior_outcome": "not yet measured",
+      "reason": "Native deterministic title/menu evidence only; release gameplay unmeasured. No production change."
+    }
+  ]
+}

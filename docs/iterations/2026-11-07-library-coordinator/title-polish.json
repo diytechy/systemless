@@ -1,0 +1,145 @@
+{
+  "scope": "Display labels only; all IDs, paths, assets, versions, architecture, depth and pacing preserved. Provenance remains in native reports/inventory. Requires one final batched build after browser workload release.",
+  "changes": [
+    {
+      "slug": "bedlam",
+      "old_title": "Bedlam1.1",
+      "title": "Bedlam 1.1"
+    },
+    {
+      "slug": "bolo",
+      "old_title": "Bolo0.99.7;0.99.5 variant retained separately in inventory",
+      "title": "Bolo 0.99.7"
+    },
+    {
+      "slug": "bonkheads-deluxe",
+      "old_title": "Bonkheads Deluxe1.0.0",
+      "title": "Bonkheads Deluxe 1.0.0"
+    },
+    {
+      "slug": "brickoids-millenium",
+      "old_title": "Brickoids Millenium1.1",
+      "title": "Brickoids Millenium 1.1"
+    },
+    {
+      "slug": "chiral",
+      "old_title": "Chiral1.0.1",
+      "title": "Chiral 1.0.1"
+    },
+    {
+      "slug": "chrysanthemum-1-01",
+      "old_title": "Chrysanthemum1.01",
+      "title": "Chrysanthemum 1.01"
+    },
+    {
+      "slug": "columns",
+      "old_title": "Columns1.0",
+      "title": "Columns 1.0"
+    },
+    {
+      "slug": "crunch",
+      "old_title": "Crunch!2.0",
+      "title": "Crunch! 2.0"
+    },
+    {
+      "slug": "drol",
+      "old_title": "Drol v0.9 (ReadMe beta0.9b1)",
+      "title": "Drol 0.9"
+    },
+    {
+      "slug": "fantastic-voyage",
+      "old_title": "Fantastic Voyage1.1a",
+      "title": "Fantastic Voyage 1.1a"
+    },
+    {
+      "slug": "gold-digger",
+      "old_title": "Gold Digger1.3.0",
+      "title": "Gold Digger 1.3.0"
+    },
+    {
+      "slug": "goldpusher",
+      "old_title": "GoldPusher1.5",
+      "title": "GoldPusher 1.5"
+    },
+    {
+      "slug": "guy-smiley-vs-the-monsters",
+      "old_title": "Guy Smiley vs.the Monsters1.0.1",
+      "title": "Guy Smiley vs. the Monsters 1.0.1"
+    },
+    {
+      "slug": "lawyers",
+      "old_title": "Lawyers1.0",
+      "title": "Lawyers 1.0"
+    },
+    {
+      "slug": "lemmings",
+      "old_title": "Lemmings1.5.2",
+      "title": "Lemmings 1.5.2"
+    },
+    {
+      "slug": "macpipes",
+      "old_title": "MacPipes2.2.7",
+      "title": "MacPipes 2.2.7"
+    },
+    {
+      "slug": "maelstrom",
+      "old_title": "Maelstrom1.4.3",
+      "title": "Maelstrom 1.4.3"
+    },
+    {
+      "slug": "mantra",
+      "old_title": "Mantra v1.02 (resource1.0.2)",
+      "title": "Mantra 1.02"
+    },
+    {
+      "slug": "mantra-ii",
+      "old_title": "Mantra II1.02",
+      "title": "Mantra II 1.02"
+    },
+    {
+      "slug": "nort",
+      "old_title": "Nort (version unknown)",
+      "title": "Nort"
+    },
+    {
+      "slug": "oh-no-more-lemmings",
+      "old_title": "Oh No! More Lemmings1.0",
+      "title": "Oh No! More Lemmings 1.0"
+    },
+    {
+      "slug": "oregon-trail",
+      "old_title": "Oregon Trail1.1",
+      "title": "Oregon Trail 1.1"
+    },
+    {
+      "slug": "pac-in-time",
+      "old_title": "PAC IN TIME1.0",
+      "title": "Pac-in-Time 1.0"
+    },
+    {
+      "slug": "pac-the-man",
+      "old_title": "Pac the Man4.5.1",
+      "title": "Pac the Man 4.5.1"
+    },
+    {
+      "slug": "particleman-1-0",
+      "old_title": "ParticleMan1.0 (titlev1.0.0)",
+      "title": "ParticleMan 1.0"
+    },
+    {
+      "slug": "polybrid-1-0",
+      "old_title": "Polybrid1.0",
+      "title": "Polybrid 1.0"
+    },
+    {
+      "slug": "prince-of-persia",
+      "old_title": "Prince of Persia1.0",
+      "title": "Prince of Persia 1.0"
+    },
+    {
+      "slug": "system-s-twilight-v1-0-5",
+      "old_title": "System's Twilight v1.0.5",
+      "title": "System's Twilight 1.0.5"
+    }
+  ]
+}

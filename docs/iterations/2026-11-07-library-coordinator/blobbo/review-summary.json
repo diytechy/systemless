@@ -1,0 +1,74 @@
+{
+  "title": "Blobbo (Full 1.0.1 initial test; Lite 1.0/1.0.1 preserved separately)",
+  "outcome": "Prepared copied fixtures; Full first board, one mouse move and menus observed. No pacing candidate.",
+  "preservation": {
+    "source_before": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "source_after": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+    "boot_before": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "boot_after": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+    "fixture_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\blobbo\\full-with-prefs.img",
+    "fixture_sha256": "9496bd4122a3c08ab62ab7ca4657ada4f539ddb262b093c48c09e8b4e2e6240e",
+    "verified_file_count": 83,
+    "other_fixtures": {
+      "lite.img": {
+        "files": 8,
+        "sha256": "0e178a22cf8b8b0c58c13216a6df1b5ac97aa7c211e87bdabe9d71a367506156"
+      },
+      "full.img": {
+        "files": 82,
+        "sha256": "319a44944315d1fb2cff5b029fbdac61db732197f468454704f00e3ace83a9f9"
+      }
+    },
+    "scope_limits": "Both forks/Finder fields/represented dates verified; original folder Finder information unexposed. Raw aliases retained, resolution unverified. Lite saves not mixed with Full."
+  },
+  "native": {
+    "binary_sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "Exact binary compile revision unknown; checkout15203bad, runtime baseline ed74c8b4.",
+    "architecture": "68K CODE, explicitly --prefer-classic-68k",
+    "executable": "Blobbo1.0.1 Fullversion/Blobbo 1.0.1",
+    "display": "Observed800x600; exploratory8-bit",
+    "partition": 819200,
+    "result": "startup/menu/input passed360/154/166frontend_ticks",
+    "error": null,
+    "assertions": 0,
+    "budget_exhaustion": 0
+  },
+  "behavior": {
+    "observed": [
+      "About dismisses to WELCOME/01",
+      "Documented mouse click moves one cell left",
+      "Status: Moves1, Toy Boxes0/64",
+      "File/Status menus render",
+      "Existing Boot preference opened through virtual preferences path"
+    ],
+    "untested": [
+      "Real-time pace/reference fidelity",
+      "Busy scenes/level completion/collision/scoring",
+      "Keyboard mapping and pause",
+      "Audible sound",
+      "Saves across reload/export/import",
+      "Physical controller",
+      "Release browser"
+    ]
+  },
+  "dependencies": [
+    "Full folder with custom worlds/solutions and helper retained; dependency necessity unqualified",
+    "Boot System Folder/Preferences/Blobbo Preferencs; native HOpenResFile and close refnum96 confirm reachability; version association unverified",
+    "Original embedded resource settings retained"
+  ],
+  "controls": "Page3 help: mouse direction click; keyboard configurable. About v263,h396; move v282,h236; Status v10,h125.",
+  "changes": [
+    "Own report/review JSON only; private fixtures/scenarios/captures on D:. No runtime/catalogue/browser changes."
+  ],
+  "checks": [
+    "Three exact version/fork hashes matched brief",
+    "Source/Boot before-after identical",
+    "Reopened8/82/83file fixtures verified",
+    "All named native screenshots inspected; no performance inference"
+  ],
+  "next_step": "Prepare separately identified Full entry/save mapping, then coordinator release-browser baseline and broader fidelity/save/audio checks.",
+  "report": "docs/iterations/2026-11-07-library-coordinator/blobbo/report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\blobbo\\evidence-manifest.json",
+  "workload_released": true
+}

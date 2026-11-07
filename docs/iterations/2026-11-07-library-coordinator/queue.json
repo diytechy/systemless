@@ -492,8 +492,8 @@
     },
     {
       "slug": "blobbo",
-      "title": "Blobbo",
-      "status": "worker assigned",
+      "title": "Blobbo Full1.0.1; Lite1.0/1.0.1 separately preserved",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Blobbo 1.0 Lite ƒ/Blobbo",
@@ -538,15 +538,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 exploratory; original SIZE819200 retained for all variants.",
+      "preferences_save_id": "Exact Boot Blobbo Preferencs retained and HOpenResFile/close reachability observed. Lite/Full pref association unverified; no browser ID yet.",
+      "controls": "Full Page3 directional mouse click observed; configurable keyboard and pause untested.",
+      "timing": "Native Full first-board mouse response observed; release-browser performance not measured, no candidate.",
+      "report": "blobbo/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Full83file combined and separate Lite8/Full82 fixtures verified; parent source/fixture hashes match. Raw166tick report0assertions/exhaustion reviewed; parent visually verified one-cell-left and Status Moves1. File/Status menus and original-pref open observed. Full/Lite association of Boot pref uncertain; versions kept separate. Native readiness only, no setting change.",
+      "dependencies": "Full82file folder and Boot pref retained; Lite8file folder separate. Worlds/solutions/helpers preserved, requirement not fully qualified."
     },
     {
       "slug": "blood-bath-demo-1-96",
       "title": "Blood Bath Demo 1.96",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Blood Bath Demo 1.96 4cows/Blood Bath Demo PPC 1.96",

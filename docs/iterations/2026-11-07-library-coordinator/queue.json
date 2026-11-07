@@ -1683,8 +1683,8 @@
     },
     {
       "slug": "oregon-trail",
-      "title": "Oregon Trail",
-      "status": "worker active",
+      "title": "Oregon Trail1.1",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Oregon Trail/Oregon Trail",
@@ -1701,15 +1701,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 exploratory; no independent display requirement found. Original68K1.1 SIZE1024000.",
+      "preferences_save_id": "Boot ORGN/title scan finds only launcher alias. Preserved in-folder Oregon Config and Color are actually opened; no browser save identity yet.",
+      "controls": "Mouse Travel/Continue/Farmer selection observed; keyboard, journey/hunting and pause untested.",
+      "timing": "Native title/setup and occupation decision only; actual journey and release-browser baseline pending.",
+      "report": "oregon-trail/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Corrected five-file fixture verified including represented root dates. Parent matched source003/fixture hashes, raw681tick report with zero assertions/exhaustion and Farmer selection image. Travel/Welcome/Continue/setup respond; Oregon Color and in-folder Config open. Journey, hunting and pause remain unqualified. No setting change."
     },
     {
       "slug": "pac-in-time",
       "title": "PAC IN TIME",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "PAC IN TIME",
@@ -1736,7 +1739,7 @@
     {
       "slug": "pac-the-man",
       "title": "Pac the Man",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "PactheMan4.5.1/Pac the Man",

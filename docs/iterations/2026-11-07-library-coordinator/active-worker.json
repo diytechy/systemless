@@ -1,8 +1,8 @@
 {
-  "slug": "oregon-trail",
-  "task_name": "/root/oregon_trail",
+  "slug": "pac-in-time",
+  "task_name": "/root/pac_in_time",
   "status": "running; see active-runners.json",
-  "starting_revision": "7fd9399ae6f44ae3647ca2dabb2c80ad8a56d8ff",
-  "brief": "oregon-trail-brief.md",
-  "updated_at": "2026-11-07T20:48:46.869160+00:00"
+  "starting_revision": "5712bf9a7cd9d85fb5b3cf3e538501d9eadef4ee",
+  "brief": "pac-in-time-brief.md",
+  "updated_at": "2026-11-07T20:55:02.235983+00:00"
 }

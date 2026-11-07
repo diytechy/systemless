@@ -1,8 +1,8 @@
 {
-  "slug": "bob-s-bricks-millennium-edition",
-  "task_name": "/root/bob_s_bricks_millennium_edition",
+  "slug": "bolo",
+  "task_name": "/root/bolo",
   "status": "reviewed; workload released",
-  "starting_revision": "38447db1fa273e0fcf1e00dc6fe3d8c9f32414e4",
-  "brief": "bob-s-bricks-millennium-edition-brief.md",
-  "updated_at": "2026-11-07T18:28:33.621517+00:00"
+  "starting_revision": "61c4a224cf769434ee52ae2c65c80813d5a660e6",
+  "brief": "bolo-brief.md",
+  "updated_at": "2026-11-07T18:34:31.878367+00:00"
 }

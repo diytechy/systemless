@@ -652,8 +652,8 @@
     },
     {
       "slug": "bolo",
-      "title": "Bolo",
-      "status": "worker assigned",
+      "title": "Bolo0.99.7;0.99.5 variant retained separately in inventory",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Bolo f/Bolo 0.99.7",
@@ -688,15 +688,20 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Observed800x600x8 exploratory. Original SIZE0/1preferred15360000 versus-1preferred1536000 retained; native zone~14.9MBfree consistent with larger allocation.",
+      "preferences_save_id": "Boot BOLO/title matches only0.99.5 Launcher/Recent references, no identified actual pref. Archive state retained; persistence untested, no browser ID.",
+      "controls": "Tutorial Return advances,Q forwards,A brake; Return/Q response observed, isolated displacement/steering/fire/pause unverified.",
+      "timing": "Offline Tutorial native readiness; release-browser baseline and isolated movement/braking unmeasured.",
+      "report": "bolo/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "82file/10folder-date fixture verified, raw16bit Finder coordinates retained; parent source002/fixture hashes match. Raw386tick0assert/exhaust report and before/after images reviewed: Return dismisses Q/A instruction into boat/island scene; prior dialog obscures displacement, no motion fidelity claim. Four completed offline scenarios; no live networking or0.99.5 state mixing. No setting change.",
+      "version_notes": "vers0.99.7 while About resource0.99.6; preserve internal ambiguity, do not substitute0.99.5.",
+      "dependencies": "Full82file folder/maps/brains/docs/helpers retained; explicit0.99.7 game only. Tutorial offline, network modes untested."
     },
     {
       "slug": "bonk-1-4-2",
       "title": "Bonk 1.4.2",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)",

@@ -43,7 +43,7 @@ if not log.exists():
 with log.open('a',encoding='utf-8') as stream:
     stream.write(f'\n- {stamp} — {row["title"]} (`{args.slug}`): **{args.outcome}**. {args.review} Timing: {args.timing}. Report: [{args.report}]({args.slug}/{args.report}). Starting review revision `{revision}`. Completed first-pass results: {len(done)}/{len(queue["games"])}. Next: {args.next_slug or "coordinator comparison/pilot phase"}.\n')
 checkpoint = root / 'current-action.md'
-checkpoint.write_text(f'''# Current sequential action
+checkpoint.write_text(f'''# Current coordinator action
 
 Updated {stamp}. Read this alongside checkpoint.md and queue.json; this file supersedes older next-action prose.
 

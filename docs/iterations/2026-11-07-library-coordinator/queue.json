@@ -2082,7 +2082,7 @@
     {
       "slug": "star-trek-final-unity",
       "title": "Star Trek: A Final Unity",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Star Trek TNG/\"A Final Unity\"",
@@ -2104,12 +2104,15 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Native diagnostic stops at application dependency error; no gameplay/release measurement.",
+      "report": "star-trek-final-unity/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched12-file installed fixture hash, source002/Boot hashes, raw180tick passed report and owned exit0; inspected missing-resource/CD-path fatal dialog. Original sttng.prefs.68k loaded then seeks Star Trek:sttng.zip. Bounded disc catalogue establishes474238510-byte STTNG.ZIP/movies despite3072byte APM overrun, without complete fork integrity. This is pending controlled media preparation, not emulator incompatibility or disc corruption. QuickTime requirements remain unqualified; no settings accepted."
     },
     {
       "slug": "super-munchers",
       "title": "Super Munchers",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "Super Munchers/Super Munchers",
@@ -2135,7 +2138,7 @@
     {
       "slug": "system-s-twilight-v1-0-5",
       "title": "System's Twilight v1.0.5",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5",

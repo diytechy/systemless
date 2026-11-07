@@ -1,8 +1,8 @@
 {
-  "slug": "star-trek-final-unity",
-  "task_name": "/root/star_trek_final_unity",
+  "slug": "super-munchers",
+  "task_name": "/root/super_munchers",
   "status": "running; see active-runners.json",
-  "starting_revision": "fc2121b1a30cbbc06a5b5b70d92581e75d987a64",
-  "brief": "star-trek-final-unity-brief.md",
-  "updated_at": "2026-11-07T21:48:23.424123+00:00"
+  "starting_revision": "6f23515c120474e00675e0e595305ae67687b2e8",
+  "brief": "super-munchers-brief.md",
+  "updated_at": "2026-11-07T21:52:50.161655+00:00"
 }

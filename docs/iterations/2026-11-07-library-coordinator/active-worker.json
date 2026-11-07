@@ -1,8 +1,8 @@
 {
-  "slug": "pac-the-man",
-  "task_name": "/root/pac_the_man",
+  "slug": "particleman-1-0",
+  "task_name": "/root/particleman_1_0",
   "status": "running; see active-runners.json",
-  "starting_revision": "fa1b0e0013f2b5ec89972d3ca5fd41aa13389a9a",
-  "brief": "pac-the-man-brief.md",
-  "updated_at": "2026-11-07T20:55:43.328141+00:00"
+  "starting_revision": "ae3757b1cc6695d5e08f70518ea787ce9c5b9365",
+  "brief": "particleman-1-0-brief.md",
+  "updated_at": "2026-11-07T21:04:42.323272+00:00"
 }

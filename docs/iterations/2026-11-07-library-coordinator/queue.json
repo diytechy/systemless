@@ -1741,8 +1741,8 @@
     },
     {
       "slug": "pac-the-man",
-      "title": "Pac the Man",
-      "status": "worker active",
+      "title": "Pac the Man4.5.1",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "PactheMan4.5.1/Pac the Man",
@@ -1759,15 +1759,18 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Docs68020/System7/2MB and QT2 instruments for MIDI; tested640x480x8 exploratory, original68K SIZE2252800.",
+      "preferences_save_id": "Exactly Pac the Man Preferences seeded with11 title files; FindFolder/exists true, open selector/ResError0 and prf4 count1 observed. Individual setting consumption untraced.",
+      "controls": "Raw Right124/ch29 and Up126/ch30 sent but readiness/stall confound direction. Space PAUSE observed; second Space remains paused, menu Resume untested.",
+      "timing": "Native initial maze/motion and Space PAUSE observed; later directional probe incomplete. Release baseline pending.",
+      "report": "pac-the-man/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Twelve-file title+actual-pref fixture verified. Parent matched source006/fixture hashes, completed338tick report with zero assertions/exhaustion, maze/PAUSE images and resource-open trace. Later refinement reached active play at284 then stopped75s during Right run45; parent confirms owned PID absent. Final counters corrected to unavailable separately from completed runs. Directions/resume unqualified; no service diagnosis or setting change."
     },
     {
       "slug": "particleman-1-0",
       "title": "ParticleMan 1.0",
-      "status": "worker assigned",
+      "status": "worker active",
       "candidates": [
         {
           "path": "ParticleMan 1.0/ParticleMan 1.0",
@@ -1793,7 +1796,7 @@
     {
       "slug": "polybrid-1-0",
       "title": "Polybrid 1.0",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Polybrid Folder/Polybrid 1.0",

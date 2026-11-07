@@ -1,8 +1,8 @@
 {
   "slug": "zap-t-balls",
   "task_name": "/root/zap_t_balls",
-  "status": "running; see active-runners.json",
+  "status": "reviewed; workload released",
   "starting_revision": "511d3d055e21343ffd4fca065f01d4bb5d4f86ca",
   "brief": "zap-t-balls-brief.md",
-  "updated_at": "2026-11-07T22:05:20.541211+00:00"
+  "updated_at": "2026-11-07T22:10:06.118524+00:00"
 }

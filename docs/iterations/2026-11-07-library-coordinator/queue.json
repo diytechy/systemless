@@ -2241,7 +2241,7 @@
     {
       "slug": "zap-t-balls",
       "title": "Zap'T'Balls",
-      "status": "worker active",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",
@@ -2277,7 +2277,10 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "not yet measured"
+      "timing": "Native deterministic title/menu evidence only; release gameplay unmeasured. No production change.",
+      "report": "zap-t-balls/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Parent matched source003/001/Boot and7-file fixture hashes, read raw600/662tick passed reports (zero assertions/errors/exhaustion) and owned exit0; inspected New Game submenu. Existing768byte ZapPrefs open/read and disposableVFS rewrite evidenced; older3.6 separately retained.7.1 established by vers bytes/ReadMe. NormalMode not selected at two-probe cap, so no gameplay failure/compatibility blocker or pacing adoption. All69 source/native first-pass results now reviewed; integration, release measurements and ClockWerx pilot remain."
     }
   ],
   "excluded_applications": [

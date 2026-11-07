@@ -1,0 +1,78 @@
+{
+  "title": "Zap'T'Balls 7.1",
+  "outcome": "prepared; title and menu observed; gameplay qualification incomplete",
+  "preservation": {
+    "source_before": {
+      "003": "98020ab8debcd8c077ee8b6534a05611f4e946fd975762aeea97d521b21c2476",
+      "001": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "source_after": {
+      "003": "98020ab8debcd8c077ee8b6534a05611f4e946fd975762aeea97d521b21c2476",
+      "001": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+      "Boot": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393"
+    },
+    "fixture": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\zap-t-balls\\fixture.hfv",
+    "fixture_sha256": "70b351a1c91230c78ed39ece1ebccf109c28c1f1f4f41d5cadd7f8478f91f99b",
+    "verified_files": 7,
+    "older_variant": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\zap-t-balls\\older-36.hfv",
+    "scope_limits": "Folder Finder information unavailable; raw aliases retained but may refer to original volume; signed coordinates preserved modulo 65536"
+  },
+  "native": {
+    "binary": "D:/SystemlessBuild/target/ci-test/systemless.exe",
+    "sha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+    "version": "0.110.1",
+    "revision_limit": "exact compile revision unknown",
+    "architecture": "68k explicitly preferred",
+    "executable": "Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",
+    "display": "800x600 8-bit exploratory default",
+    "partition": 5242880,
+    "result": "two scripts passed; zero assertions; no error; zero budget exhausted frames",
+    "frontend_ticks": [
+      600,
+      662
+    ],
+    "guest_tick": [
+      1200,
+      1230
+    ]
+  },
+  "behavior": {
+    "observed": [
+      "title rendered after finite startup",
+      "File/New Game submenu opens and closes",
+      "copied preference read via virtual preferences path"
+    ],
+    "untested": [
+      "gameplay movement/fire",
+      "pause/Q abort",
+      "busy scene",
+      "sound fidelity",
+      "save roundtrip",
+      "physical controller",
+      "real-time browser performance"
+    ]
+  },
+  "dependencies": [
+    "full title folder retained including Register, readmes, alias and optional16bit level data in original subfolder",
+    "Boot preference retained separately and mapped into fixture; read768 then rewritten in disposable VFS"
+  ],
+  "controls": [
+    "Read Me: mouse; Caps Lock pause; Q abort",
+    "menu Normal Mode Cmd-N; Help Mode Cmd-P; these shortcuts untested"
+  ],
+  "changes": [
+    "own reports and private fixtures only; no runtime/catalogue/pacing edits"
+  ],
+  "checks": [
+    "source hashes unchanged",
+    "seven selected files reopen-compared forks/Finder metadata/dates",
+    "older variant separate reopen verification",
+    "strict own-scratch and missing-input guards passed",
+    "actual screenshots inspected"
+  ],
+  "next_step": "Fresh bounded run: settle600ticks, File New Game then Normal Mode at observed submenu h250/v35; inspect gameplay before mouse movement/button probes. Retain existing SIZE. No pacing adoption.",
+  "report": "C:\\Projects\\systemless\\docs\\iterations\\2026-11-07-library-coordinator\\zap-t-balls\\report.md",
+  "private_evidence": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\zap-t-balls\\evidence-manifest.json",
+  "workload_released": true
+}

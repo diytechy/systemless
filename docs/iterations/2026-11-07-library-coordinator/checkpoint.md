@@ -29,3 +29,5 @@ Next concrete action: fresh gpt-6.1-sol 3-D Cannon worker from 3-d-cannon-brief.
 Common procedure: same release bundle/browser/scene/size/sound/input; 20-second captures alternating baseline/candidate with three valid repetitions each; visible/focused; no overlapping emulator, heavy build or conversion. Separate host load, browser process CPU, guest clock, work timing, displayed animation and observed gameplay. Missing evidence stays missing.
 
 Current release WASM SHA256: aa25ac7a47cbd323ce6b4909892db2158f3d4e7d03d8346575949e5e5840674c. Existing source media, save IDs and defaults preserved.
+
+User confirmed old Edge game tab closed or paused in resumed chat. This clears future isolation precondition only; prior Koji/Delirium captures retain their recorded isolation limits.

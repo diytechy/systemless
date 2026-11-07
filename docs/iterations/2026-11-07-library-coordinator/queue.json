@@ -402,7 +402,7 @@
     {
       "slug": "battletanks-2-12-1",
       "title": "BattleTanks 2.12.1",
-      "status": "worker assigned",
+      "status": "not yet measured",
       "candidates": [
         {
           "path": "BattleTanks 2.12.1",
@@ -419,15 +419,19 @@
           "configured": true
         }
       ],
-      "depth_size": "unknown; verify per executable",
-      "preferences_save_id": "unassigned; no browser entry yet",
-      "controls": "unverified",
-      "timing": "not yet measured"
+      "depth_size": "Native observed800x600x8 exploratory; original SIZE307200 retained.",
+      "preferences_save_id": "Boot title/creator matches only aliases preserved separately; no actual title setting found, fresh/default state. No browser save ID assigned.",
+      "controls": "Mouse File/New dialog responds; angle/power controls and firing unqualified.",
+      "timing": "No browser baseline; native ticks are behavior only. Gameplay readiness unresolved.",
+      "report": "battletanks-2-12-1/report.md",
+      "accepted_setting": "No runtime setting change accepted by this review",
+      "review": "Exact1file fixture verified and source/fixture independently rehashed. Five bounded probes exit0 without exhaustion; File/New setup responds but representative tanks/terrain absent through518 ticks. Readiness unresolved; no missing-service or renderer diagnosis established. Version filename/resource ambiguity retained. No runtime change.",
+      "version_notes": "Filename2.12.1 versus vers textv2.0; unresolved."
     },
     {
       "slug": "bedlam",
       "title": "Bedlam",
-      "status": "pending",
+      "status": "worker assigned",
       "candidates": [
         {
           "path": "Bedlam 1.1/Bedlam",

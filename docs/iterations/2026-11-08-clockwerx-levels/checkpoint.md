@@ -1,7 +1,7 @@
 # Progress checkpoint
 
-Seven bounded Child scenes are validated and activated locally: Movement, Spikes, Walls, Doors, Oil, Combo, More Spikes. All100catalog entries are inventoried and120resources decode toEOF. The remaining-level request is unfinished.
+Eight bounded Child scenes are validated and activated locally: Movement, Spikes, Walls, Doors, Oil, Combo, More Spikes and More Doors. All 100 catalog entries are inventoried and 120 resources decode to EOF. The remaining-level request is unfinished.
 
-More Doors8 is current. Original initial scene is reviewed; three long-horizontal doors and six paired switches need route/phase checks. More Spikes7 original33sample program trajectory,26pivot native goal, browser goal and166onsets pass. No native/build/benchmark active. AstraDoors prepares8route; AstraSpikes prepares source-only9transfer helper; future9/10art is not accepted.
+Some Dots9 is current. Its rings, checkpoint/protection art and static enemy-transfer helpers remain unaccepted. Native8 corrected goal passes20/20 pivots; first wrong-key run is preserved. Normal8087 has eight scenes,18 runtime files/51payloads,1,589,184uncompressed bytes. No native/build/benchmark is active at this checkpoint. A single light private9checkpoint vector revision is next, then native9initial and source-backed integration.
 
-Read [current action](current-action.md), [queue](queue.json), [requirements](requirements.md), [More Spikes acceptance](more-spikes-review.md). Preserve media/saves; no push/deploy.
+Read [current action](current-action.md), [queue](queue.json), [requirements](requirements.md), [More Doors acceptance](more-doors-review.md) and the proposed [generation method](generation-method.md). Preserve media/saves; no push/deploy.

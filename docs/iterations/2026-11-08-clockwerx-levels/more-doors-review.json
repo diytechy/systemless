@@ -1,0 +1,41 @@
+{
+  "schema": "clockwerx-level-review-v1",
+  "ordinal": 8,
+  "title": "More Doors",
+  "scope": "bounded Child goal route; not full gameplay qualification",
+  "nativeGoal": {
+    "status": "passed",
+    "frontend_ticks": 5151,
+    "guest_tick": 5749,
+    "budget_exhausted_frames": 0
+  },
+  "nativePivotMatches": 20,
+  "nativeMaxChannelError": 4.280068728522337,
+  "nativeBonusPoints": 6000,
+  "nativeChildCompletionPoints": 1000,
+  "browser": {
+    "complete": true,
+    "time": 66.78333333333255,
+    "transfers": 20,
+    "bonuses": 3,
+    "resets": 0,
+    "doorPhases": [
+      10,
+      10,
+      10
+    ],
+    "toggles": 7
+  },
+  "clockOnsetCases": 266,
+  "actualOutlineTests": 6,
+  "sourceFiles": 18,
+  "payloads": 51,
+  "sizes": {
+    "sourceBytes": 103894,
+    "assetBytes": 841368,
+    "manifestBytes": 643922,
+    "totalBytes": 1589184
+  },
+  "failedFirstRoutePreserved": true,
+  "inputCorrectionActions": 2
+}

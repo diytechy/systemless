@@ -1,0 +1,67 @@
+{
+  "status": "source-only-released",
+  "ordinaryPlayer0": {
+    "grabKeys": [
+      7,
+      47,
+      55
+    ],
+    "bounceKeys": [
+      44,
+      6,
+      58
+    ],
+    "bothKeys": [
+      56,
+      59
+    ],
+    "command55": "G1 B0 swing",
+    "control59": "G1 B1 forward",
+    "space49": "not an ordinary action key",
+    "heldSampling": "cardinal source frames; buffered path and collision input flags are separate"
+  },
+  "humanTarget": {
+    "permission": "DOInfo+0x11",
+    "bounceAndGrabBothRequirePermission": true,
+    "directReverseNeedsTarget": false
+  },
+  "directReverse": {
+    "sourceDefaultKeysAllRequired": [
+      49,
+      58,
+      55
+    ],
+    "map": "A5-0x42ae",
+    "test": "jump2b0a -> CODE5:26fe GKAllTest",
+    "previousTest": "A5-0x442c",
+    "pendingLatch": "A5-0x43fc",
+    "trigger": "false-to-true, toggles pending latch, then guarded WADirectHero consumption",
+    "spaceAloneObservedByCoordinator": "20/20 modeled poses with one reverse",
+    "staticVsNativeDiscrepancy": "unresolved; do not claim Space-alone source-proven default"
+  },
+  "scriptAudit": {
+    "keyDownActionIndex": 96,
+    "keyUpActionIndex": 98,
+    "key": 49,
+    "ch": 32,
+    "scriptedHeldKeysAtDown": [
+      49
+    ]
+  },
+  "nativeWorkloadRun": false,
+  "runtimeEdits": false,
+  "preferencesOrSavesOpened": false,
+  "sourceRefs": [
+    "CODE6:bbc2-bdfe",
+    "CODE6:c822-ca90",
+    "CODE6:c65e-c794",
+    "CODE6:e7c6-e7fa",
+    "CODE5:26a8-274c"
+  ],
+  "limits": [
+    "actual guest keyboard bitmap not captured",
+    "fixture buffering preference not established",
+    "no cause attributed beyond wrong script key",
+    "corrected native replay is root-owned"
+  ]
+}

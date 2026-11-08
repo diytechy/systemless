@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 8,
-  "currentAction": "More Doors: qualify long-horizontal leaves/caps and paired switches; native and browser goal route",
+  "currentOrdinal": 9,
+  "currentAction": "Some Dots: qualify static enemy transfers, disappearing rings, checkpoints and protection; native and browser evidence",
   "levels": [
     {
       "ordinal": 1,
@@ -527,11 +527,28 @@
       "menuTitle": "More Doors",
       "resourceTitle": "More Doors",
       "sha256": "730995924ad5fcfb283bc5ba1e4822c47206e4fec18c25111efbe38d6620b1cd",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "more-doors/native-play-01/report.json",
+        "more-doors/native-goal-route-01/report.json (failed goal)",
+        "more-doors/native-goal-route-02/report.json",
+        "more-doors/native-goal-route-02-route-review.json",
+        "more-doors/visual-review/native-run02-manual-review.json"
+      ],
+      "requirements": [
+        "three long horizontal gates and attached caps",
+        "six independent switches paired by color",
+        "entry-edge toggle and in-flight reversal",
+        "retain physical gate lethal vs bounce masks",
+        "native keyboard semantics distinct from HTML controls"
+      ],
+      "svgStatus": "eighth scene activated; corrected native20transfer goal and browser goal checked",
+      "generationConstraints": [
+        "retain switch entry history/occupancy and gate phase/direction",
+        "avoid unintended switch re-entry",
+        "model attached caps even at open endpoint",
+        "validate translated native key mapping independently of semantic input traces"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 57,

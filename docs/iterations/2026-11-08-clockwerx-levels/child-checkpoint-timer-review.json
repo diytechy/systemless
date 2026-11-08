@@ -1,0 +1,74 @@
+{
+  "status": "source-only-future-unaccepted",
+  "mode": "Child single-player",
+  "countdownEnabled": false,
+  "enableSource": [
+    "CODE1:59c4-59d6 difficulty !=0",
+    "CODE7:607a A5-0xada"
+  ],
+  "disabledBranches": {
+    "periodic": "CODE7:7156",
+    "draw": "CODE7:726a",
+    "expiry": "CODE7:75b0",
+    "timeAwards": "CODE7:6d2c/6d48"
+  },
+  "timerState": {
+    "original": "A5-0xaf4",
+    "current": "A5-0xaf8",
+    "savedReset": "A5-0xaf0",
+    "restoreOverride": "A5-0xae0, -1 means none",
+    "freshSomeDotsInteger": 90,
+    "childDecrement": false,
+    "checkpoint": "copy current integer to savedReset only when saved grid changes",
+    "normalDeathReset": "SCSetTimer(savedReset), clears started and paused",
+    "explicitRestart": "SCSetTimer(original), restoring current and savedReset",
+    "units": "integer source seconds, not simulation elapsed; enabled deadlines use guest TickCount*60 conversion"
+  },
+  "deathOrder": [
+    "SCPauseTimer",
+    "ROFreeze(false)",
+    "activate death effect",
+    "effect completion barrier",
+    "ROReset callbacks including SCReset",
+    "substate1/reveal"
+  ],
+  "humanTarget": {
+    "bounceDeniedWhenHumanUnavailable": true,
+    "humanPermission": "DOInfo+0x11",
+    "nonhumanPermission": "DOInfo+0x10",
+    "secondaryLowNibble": "difficulty activation mask, NOT human grab mask",
+    "maskMiss": "clears selected special properties, preserves presence",
+    "colorPermission": false,
+    "wallEdgeFallback": "separate unqualified branch"
+  },
+  "initialOccupancy": {
+    "DOInitialGrabbedCalledByWAReset": true,
+    "temporaryBonusSuppression": true,
+    "humanArrivalHooks": true,
+    "perFrameOccupancyTrigger": false
+  },
+  "checkpointAnimation": {
+    "immediateIncrement": false,
+    "grab": "attach shared unscaled80 clock and set step+1",
+    "differentPrevious": "both frames79, step0, detach static timer",
+    "regrabAt89": "89 immediately; next callback79 then80..89; stop/detach on reaching89",
+    "partialRegrab": "continue from current frame",
+    "source": [
+      "CODE6:469a-471a",
+      "CODE6:26e4-26ee and2810-2826",
+      "jump2cfa -> CODE4:3de2",
+      "CODE4:3e26-3e46",
+      "CODE4:32dc",
+      "CODE6:2f18/2f20"
+    ]
+  },
+  "limitations": [
+    "not native equivalence",
+    "higher difficulties not integrated",
+    "overall game-duration limit separate",
+    "loaded-state override requires explicit adapter",
+    "human wall/edge target fallback separate"
+  ],
+  "filesReleased": true,
+  "runtimeEdits": false
+}

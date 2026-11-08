@@ -1,0 +1,75 @@
+{
+  "schema": "clockwerx-more-doors-route-preparation-v1",
+  "ordinal": 8,
+  "resourceId": 227,
+  "sourceSha256": "730995924ad5fcfb283bc5ba1e4822c47206e4fec18c25111efbe38d6620b1cd",
+  "status": "prepared-unaccepted",
+  "privateRoot": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/more-doors/route-prep",
+  "inventory": {
+    "presentDots": 57,
+    "bonuses": 9,
+    "goal": 1,
+    "longHorizontalDoors": 3,
+    "pairedSwitches": 6,
+    "wallSpecs": 9,
+    "activeEnemies": 0,
+    "activeSpikes": 0,
+    "activePuddles": 0,
+    "unusedPrograms": 7
+  },
+  "model": {
+    "transfers": 20,
+    "flips": 19,
+    "swings": 1,
+    "clockPhaseCases": 266,
+    "successful": 266,
+    "noDeathsOrResets": true,
+    "minimumSeconds": 66.70833333333249,
+    "maximumSeconds": 66.78333333333255,
+    "nativeWindowModelCases": 9,
+    "nativeWindowModelSuccessful": 9,
+    "nativeEquivalence": false
+  },
+  "focusedTests": {
+    "passed": 6,
+    "failed": 0,
+    "privateFile": "door-contract.test.mjs"
+  },
+  "existingNativeScreenshotMatch": {
+    "group": 700,
+    "frame": 9,
+    "meanAbsoluteChannelError": 0.23369565217391305,
+    "nextBestError": 58.82716049382716,
+    "newNativeExecution": false
+  },
+  "nativeCandidate": {
+    "file": "native-goal-route-candidate.json",
+    "sha256": "81eb52d2480d75113e0740f380157e3a43e36eb194865ae311f93f00bd1ddc1a",
+    "firstCenterEstimateGuestTicks": 109.25,
+    "firstHoldFrontendTicks": [
+      94,
+      124
+    ],
+    "totalRunTicks": 5151,
+    "maxTicks": 5451,
+    "executedByThisWorker": false,
+    "accepted": false
+  },
+  "preservedBaselinePayloads": 51,
+  "runtimeEdited": false,
+  "candidateActivation": false,
+  "limitations": [
+    "continuous model input and source traversal approximation",
+    "finite clock phase cases, not exhaustive",
+    "native frontend/guest conversion not measured",
+    "goal path does not exercise deliberate lethal moving edge",
+    "all six switch/cap visual comparisons require coordinator evidence"
+  ],
+  "bombsCorrection": {
+    "source": "CODE6:d98e-d9b4",
+    "automaticResurrectionOnlyType": 5,
+    "ordinaryType1And2": "hidden until reset",
+    "correctedOwnReport": true
+  },
+  "released": true
+}

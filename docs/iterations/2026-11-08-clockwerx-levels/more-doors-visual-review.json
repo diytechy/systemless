@@ -1,0 +1,249 @@
+{
+  "schema": "clockwerx-more-doors-visual-review-v1",
+  "status": "bounded-art-and-goal-evidence-accepted-after-corrected-run02",
+  "captures": 17,
+  "nativeGameRectangle": [
+    80,
+    60,
+    720,
+    540
+  ],
+  "logicalOrigin": [
+    74,
+    72
+  ],
+  "inventory": {
+    "longHorizontalDoors": 3,
+    "switches": 6,
+    "closedPhase": 0,
+    "secondaryClosedLeafEmpty": true
+  },
+  "sourceFits": {
+    "doorPhaseSelections": [
+      0
+    ],
+    "maximumInteriorMeanChannelError": 0.6955128205128205,
+    "maximumColoredCapError": 0.41025641025641024,
+    "maximumWholeCapError": 3.5324074074074074,
+    "switchObservations": 102,
+    "pressedSwitchObservations": 0,
+    "maximumSwitchError": 0.7113821138211383
+  },
+  "privateFit": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-doors\\visual-review\\native-play-01-source-fits.json",
+    "sha256": "9d691a7ef575ae980dc35ac99858a2a11183828aa6c63e76170bf496a7f1aeaf"
+  },
+  "script": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-doors\\visual-review\\fit-native-doors.py",
+    "sha256": "009141233d17aebee463d08b6d34d395e73c2494e5c1a037090c3fb2a371f091",
+    "boundary": "Read saved images only; numeric arrays; JSON output; validates capture directory stays directly under task root"
+  },
+  "inputs": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-doors\\native-play-01\\initial-after-reveal.png",
+      "sha256": "2fadb2f287f27a39b778984659c6c01ba886dab52dbd90fd582b8a491532a029"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-doors\\native-play-01\\report.json",
+      "sha256": "e7d1238d8f1e151d5cd0325f19eadeb9b2c1dddc190e018d8ecb1a3da741917a"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\source-profile.json",
+      "sha256": "3ebb7768e3d23cb92abc45cbc296e45d6c3ccc3f13019d49e4ac9f0c918194bd"
+    }
+  ],
+  "pending": [
+    "Clean pressed-switch artwork comparison",
+    "Full eleven-phase/cadence comparison",
+    "Native bonus-award scoring policy"
+  ],
+  "limits": [
+    "Cap/leaf/wall shared edges prevent isolated full-cap identity",
+    "Occlusion/fades/completion panels invalidate automatic state inference",
+    "No timing or functional-route qualification"
+  ],
+  "newRuntimeRenderingBuildBenchmark": false,
+  "runtimeAssetsEdited": false,
+  "workloadReleased": true,
+  "browserStatic": {
+    "boundary": "Existing exact browser canvas versus native640x480crop, fixed closed-leaf interior ROIs only; excludes caps/walls, no pose synchronization needed for static leaves. Not whole-scene pixel parity.",
+    "doorInteriors": [
+      {
+        "color": 2,
+        "meanAbsoluteChannelError": 7.786324786324786
+      },
+      {
+        "color": 0,
+        "meanAbsoluteChannelError": 7.786324786324786
+      },
+      {
+        "color": 1,
+        "meanAbsoluteChannelError": 7.786324786324786
+      }
+    ],
+    "baseline": {
+      "payloads": 51,
+      "unchanged": 51
+    },
+    "images": [
+      {
+        "file": "browser-initial-canvas.png",
+        "sha256": "d93fa4ec8331c50a88aef6f165e0ba0fae5c390dfd3006a690dc4f1f7be8be0a",
+        "size": [
+          640,
+          480
+        ]
+      },
+      {
+        "file": "browser-goal.png",
+        "sha256": "c72ba13b2f981183fd42e10b4663def666894a4061a2783fd4b157fe00aeeda5",
+        "size": [
+          900,
+          1100
+        ]
+      }
+    ]
+  },
+  "browserCompletionOverlayReviewed": true,
+  "requestedVisualCorrections": [],
+  "sourceSceneInventory": {
+    "presentDots": 57,
+    "bonusFlags": 9,
+    "goalFlags": 1,
+    "doors": 3,
+    "switches": 6,
+    "visibleHumans": 1,
+    "enemies": 0,
+    "spikes": 0,
+    "textRecords": 4
+  },
+  "nativeRun01": {
+    "scriptFinished": true,
+    "goalSucceeded": false,
+    "coordinatorPivotMatches": 12,
+    "intendedPivots": 20,
+    "frontendTicks": 5151,
+    "guestTicks": 5749,
+    "budgetExhaustedFrames": 0,
+    "artObservationCount": 26,
+    "doorPhases": {
+      "blue": [
+        0,
+        2,
+        10
+      ],
+      "red": [
+        0,
+        3,
+        10
+      ],
+      "green": [
+        0,
+        3,
+        10
+      ]
+    },
+    "maximumInteriorError": 0.6955128205128205,
+    "switchObservationCount": 156,
+    "cleanUnpressedObservations": 155,
+    "occludedPressedCandidate": {
+      "switch": 1,
+      "color": 1,
+      "bestPressed": true,
+      "meanAbsoluteChannelError": 17.942073170731707,
+      "scoresUnpressedPressed": [
+        19.58028455284553,
+        17.942073170731707
+      ]
+    },
+    "pressedArtQualified": false,
+    "privateFits": {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-doors\\visual-review\\native-goal-route-01-source-fits.json",
+      "sha256": "36a9278a5b92875975406437f15d0de21f007cd02d05f48adc9e48e77edcbed2"
+    },
+    "boundary": "Wrong-input route retains unoccluded source-frame art evidence; script passed is not goal success; high-error switch preference is not occupancy proof"
+  },
+  "nativeRun02": {
+    "schema": "clockwerx-more-doors-run02-manual-fit-review-v1",
+    "sourceFits": {
+      "file": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-doors\\visual-review\\native-goal-route-02-source-fits.json",
+      "sha256": "86632a800ef396b30e1d6aebd16398dfe3a391f88cb238b796740c69b0dea5cf"
+    },
+    "excludeEntireCheckpoints": [
+      "after-route"
+    ],
+    "excludeDoorRois": [
+      {
+        "checkpoint": "transfer-17",
+        "color": "green",
+        "reason": "human/pickup effect overlap"
+      },
+      {
+        "checkpoint": "transfer-18",
+        "color": "red",
+        "reason": "human/pickup effect overlap"
+      },
+      {
+        "checkpoint": "transfer-19",
+        "color": "blue",
+        "reason": "human/pickup effect overlap"
+      }
+    ],
+    "validDoorObservations": 72,
+    "validUnpressedSwitchObservations": 150,
+    "cleanPressedArtQualified": false,
+    "visibleNativeScore": {
+      "bonusPoints": 6000,
+      "childCompletionPoints": 1000,
+      "totalPoints": 7000,
+      "bonusPickupCountNotInferred": true
+    },
+    "nativeGoalVisible": true,
+    "coordinatorPivotMatches": 20,
+    "intendedPivots": 20,
+    "maximumCoordinatorPivotFitError": 4.28,
+    "frontendTicks": 5151,
+    "guestTicks": 5749,
+    "budgetExhaustedFrames": 0,
+    "validPhases": {
+      "blue": [
+        0,
+        10
+      ],
+      "red": [
+        0,
+        3,
+        10
+      ],
+      "green": [
+        0,
+        7,
+        10
+      ]
+    }
+  },
+  "browserFinalState": {
+    "complete": true,
+    "time": 66.78333333333255,
+    "transfers": 20,
+    "doorPhases": [
+      10,
+      10,
+      10
+    ],
+    "doorDirections": [
+      0,
+      0,
+      0
+    ],
+    "switchOccupants": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sourceSha256": "b9f4144cc073109ab996de41414e0d7b7558e4edd5eb6e78b9b5ec7a55216cba"
+  }
+}

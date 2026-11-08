@@ -1,13 +1,13 @@
 # ClockWerx behavior and generation requirements
 
-The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Movement, Spikes, Walls, Doors, Oil and Combo have bounded playable increments with native/browser checks. More Spikes (ordinal 7) is next; the complete catalog inventory is not a full runtime port. The map, artwork, original text and source analysis remain private.
+The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Movement through More Doors have eight bounded playable increments with native/browser checks. Some Dots (ordinal 9) is current; the complete catalog inventory is not a full runtime port. The map, artwork, original text and source analysis remain private. The [generation method](generation-method.md) describes a proposed generator and its validation requirements.
 
 ## How a level is stored
 
 ClockWerx Levels is a Macintosh resource file. Its RNDm catalog gives play order and names; each RND2 resource contains a complete round definition. It is more than a list of map tiles:
 
 1. A signature, format version, raw round timer and display-size selector.
-2. Eight serialized rows of eleven dot cells, including absent cells. The first word holds independent flags; newer versions add a permission/activation word. Some present cells carry inline programs.
+2. Eight serialized rows of eleven dot cells, including absent cells. The first word holds independent flags; newer versions add an activation/color word. Some present cells carry inline programs.
 3. Sixteen counted sections for object classes, actor programs, actor starting states and positioned text. Programs use variable-length Pascal strings, so a fixed byte stride cannot locate all sections.
 4. Per-actor starting dot, type, initial phase, signed direction, speed class, program reference and activation state. A negative program reference means no program, even when unused programs are present elsewhere in the resource.
 5. TX records with font, size/style, coordinates, text and conditional prefixes. The tutorial text is rendered independently over the background; it is not baked into the bitmap collage.
@@ -18,7 +18,7 @@ Observed versions are 5, 6, 11 and 12. Older layouts lack fields introduced late
 
 | Area | Source/native behavior | Port boundary |
 |---|---|---|
-| Dot flags | Presence, bonus and goal are independent. Initial-state bit 0x4000 is separate. Permission colors are independent of occupancy. | Movement ring fix accepted; other special bits need qualification. |
+| Dot flags | Presence, bonus and goal are independent. Initial-state bit 0x4000 is separate. Difficulty-selected colors are independent of occupancy. | Movement bonus forms accepted; other special bits need qualification. |
 | Bonus | Initial attachment, bounce and tutorial demonstrations preserve it. A human grab consumes it once; same-color ring becomes a sphere. | Original pickup observed; actual-map deterministic test passes; browser pickup attempt rejected due to throttling. |
 | Bonus score | First award 1,000; source increments by 1,000 up to 5,000. | Scoring/reset/multiplayer system is not yet ported. |
 | Movement | Swing transfers and reverses direction; flip transfers and retains direction; bounce reflects without grabbing; reverse changes direction at the same pivot. | Bounded Movement engine; logical 48-pixel reach and 120 Hz simulation. |
@@ -93,4 +93,14 @@ The accepted mixed-action route uses13transfers and leaves optional bonuses avai
 
 ## More Spikes and canonical programs
 
-+Level7 introduces an active bounce program rather than another free rotator. The source clock advances integer frames before cardinal commands; PascalPC1 begins at the first byte, whilePC0 is the length byte. Commands advance even if the facing nonhuman dot is unavailable. The shared capped actor latch, per-class remainders and canonical PC/frame drive rules; continuous SVG presentation does not. The accepted route needs four swing direction changes and survives166clock-onset tests. Generator state must carry these clocks, PC and direction, and certify playable input windows. All-flip geometry solutions can fail at spikes or rotating enemies. Transfers/sliding and programmed wall response remain gated. See [More Spikes evidence](more-spikes-review.md).
+Level 7 introduces an active bounce program rather than another free rotator. The source clock advances integer frames before cardinal commands; Pascal PC1 begins at the first byte, while PC0 is the length byte. Commands advance even if the facing nonhuman dot is unavailable. The shared capped actor latch, per-class remainders and canonical PC/frame drive rules; continuous SVG presentation does not. The accepted route needs four swing direction changes and survives 166 clock-onset tests. Generator state must carry these clocks, PC and direction, and certify playable input windows. All-flip geometry solutions can fail at spikes or rotating enemies. Transfers/sliding and programmed wall response remain gated. See [More Spikes evidence](more-spikes-review.md).
+
+## Activation, color and runtime permission are different
+
+Further source review retracts the early assumption that the secondary word's low nibble is a human grab mask. It is a difficulty activation mask. A mask miss clears selected optional properties while preserving a present pivot. Higher nibbles select appearance colors by difficulty. Actual human and nonhuman grab permissions are separate runtime bytes; a collapsed ring can deny humans while remaining a target for enemies. Even human bounce requires a permitted target. The accepted source scenes so far use low nibble15, making the old human mask test inert; future conditional-dot support must replace that assumption. The original Movement demonstration inference remains a bounded legacy path, not a general source rule.
+
+Child has no active round countdown, despite retaining current and saved integer time. Checkpoints update the saved spawn and time only when the saved position changes; initial occupancy runs arrival hooks with bonus collection temporarily suppressed. These are source findings for the next increment, not acceptance of rings/checkpoints. See [Child and checkpoint contract](child-checkpoint-timer-review.md).
+
+## More Doors and input translation
+
+Three long horizontal gates share six paired switches. One swing in the goal route avoids a repeat switch entry that would close a gate. The input certificate must preserve switch-entry history, door phases and cap outlines. A semantic route alone does not validate its translation to original-game keys: the first native attempt sent the wrong key, reproduced a reverse, and failed after12matched transfers. Changing exactly two key events then gave20/20original pivot matches and completion. Keep failed experiments and distinguish script completion from reaching the goal. See [More Doors evidence](more-doors-review.md).

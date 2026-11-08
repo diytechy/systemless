@@ -1,0 +1,39 @@
+{
+  "schema": "clockwerx-more-doors-native-input-recovery-v1",
+  "status": "Proposed input-only correction; native candidate not executed by this worker",
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-doors\\recovery",
+  "cause": "In this observed native fixture, Space49 produced the reverse signature rather than the intended swing. Accepted Combo fixture uses Command55 for swing; configured GK masks prevent treating this as a universal binding claim.",
+  "correction": {
+    "keyBefore": 49,
+    "characterBefore": 32,
+    "keyAfter": 55,
+    "characterAfter": 0,
+    "transfer": 13,
+    "beginFrontendTick": 2602,
+    "endFrontendTick": 2632,
+    "changedActions": 2,
+    "timingChanged": false
+  },
+  "comparison": {
+    "nativeCaptures": 20,
+    "exactPivotAndFrameMatchesUsingReverseInput": 20,
+    "genuineSwingModelCompletes": true,
+    "originalNormalizedReplayLimitation": "Previous replay interpreted key49 as swing by assumption; its nine successful cases validate the intended semantic route, not the actual native key mapping."
+  },
+  "sourceReferences": [
+    "CODE6:e7c6-e7fa reverse-key rising-edge polling",
+    "CODE6:c7ca WAReverseKey pending latch",
+    "CODE6:c822-c88e WAGetKeys separate transfer/bounce controls",
+    "CODE6:c8c4-c8cc WADirectHero cardinal-frame gate",
+    "Accepted Combo private prepare-native-cases.py swing55/flip59 mapping"
+  ],
+  "originalScenarioSha256": "81eb52d2480d75113e0740f380157e3a43e36eb194865ae311f93f00bd1ddc1a",
+  "correctedScenarioSha256": "bfa41d45433e77e629233c98c64098eee496266669299a836140e392d50f3062",
+  "limits": [
+    "No new native run, browser, build, conversion or physics change.",
+    "The twenty native pose fits were supplied by coordinator; comparison here replays source-backed model with legal inputs.",
+    "Source callback/input subframe approximation persists; corrected native completion remains to be observed.",
+    "Space-alone reverse and Command swing are fixture-qualified observations; universal binding semantics await GK-mask source audit."
+  ],
+  "supersedes": "more-doors-route-prep.md paragraph claiming Space is the established swing mapping; original report retained unchanged."
+}

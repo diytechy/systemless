@@ -244,12 +244,21 @@
     {
       "id": "owned-crunch-v1",
       "route": "/crunch/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/crunch.json",
+      "scene": "Firstmarblelevel, afterRight300ms/Spacepause-resume, score2/lives5 beforecapture toscore8/lives2after, noinput20seconds, activefieldretained",
+      "accepted_change": null
     },
     {
       "id": "owned-cybernation-1-1-1-v1",
       "route": "/cybernation-1-1-1/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/cybernation-active.json",
+      "scene": "FreshCmdN initialroom/Right400ms; NO P commands beforecapture; noinput20seconds, NPCpositions/playerstate changebyend",
+      "accepted_change": null,
+      "prior_browser_reports": [
+        "release-browser-reviews/cybernation.json"
+      ]
     },
     {
       "id": "owned-deliverance-v1",

@@ -1,0 +1,12 @@
+{
+  "id": "owned-3d-brick-bash-1-1-1-v1",
+  "scene": "8bit brick room/counters and menu; attempted CommandN; mouse drag changes central polygon to broad white horizontal band",
+  "observed_checks": "Release route boots; counter Balls changed; drag caused visible response matching native white band; PNG saved",
+  "remaining_limits": "Ball/collision/gameplay readiness remains unresolved, so no meaningful release timing baseline or tuning comparison. No specific runtime cause proven; full controls/audio/saves/hardware untested.",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {}
+}

@@ -50,12 +50,18 @@
     {
       "id": "owned-3d-brick-bash-1-1-1-v1",
       "route": "/3d-brick-bash-1-1-1/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/brick-bash.json",
+      "scene": "8bit brick room/counters and menu; attempted CommandN; mouse drag changes central polygon to broad white horizontal band",
+      "accepted_change": null
     },
     {
       "id": "owned-acquire-1-0-v1",
       "route": "/acquire-1-0/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/acquire.json",
+      "scene": "First timed board score100 aftercross selection; no inputs20seconds, random icons continue",
+      "accepted_change": null
     },
     {
       "id": "owned-action-dome-1-0-v1",

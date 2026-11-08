@@ -367,22 +367,34 @@
     {
       "id": "owned-nort-v1",
       "route": "/nort/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/nort.json",
+      "scene": "Nort titleoptions render; Play click CSS289,411 entersblackfield which persists through bounded observations and5secondexplicitwait plusmanualgaps",
+      "accepted_change": null
     },
     {
       "id": "oh-no-more-lemmings-personal-10",
       "route": "/oh-no-more-lemmings/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/onml.json",
+      "scene": "Tame1 Down And Out Lemmings, release1 initialOUT1/IN0/time3:57; noinput20seconds, postcaptureOUT13/time3:25",
+      "accepted_change": null
     },
     {
       "id": "owned-oregon-trail-v1",
       "route": "/oregon-trail/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/oregon-trail.json",
+      "scene": "DisposableBanker P/defaultparty,4oxen1000food, April1departure; journey movingwagon/map afterReturn, noinput20seconds; postcaptureApril4 traveled61mi nextlandmark42mi food945",
+      "accepted_change": null
     },
     {
       "id": "owned-pac-in-time-v1",
       "route": "/pac-in-time/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/pac-in-time.json",
+      "scene": "Newtestgame p firstdesertmarker, activepurpleframedsmallplatformfield withyellowplayer leftofstonearch, noinput20seconds afterRight500ms",
+      "accepted_change": null
     },
     {
       "id": "owned-pac-the-man-v1",

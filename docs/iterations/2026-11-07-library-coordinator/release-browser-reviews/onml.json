@@ -1,0 +1,277 @@
+{
+  "id": "oh-no-more-lemmings-personal-10",
+  "scene": "Tame1 Down And Out Lemmings, release1 initialOUT1/IN0/time3:57; noinput20seconds, postcaptureOUT13/time3:25",
+  "observed_checks": "Returnpublisherintro, LetsGo andbriefingclick reachfield; lemmingsspawnandwalk, timerprogresses; browsergravepause notretaken afterLemmingsmappingfailure, nativepause separate",
+  "remaining_limits": "Singleexploratorybaseline, timerendpointsincludemanualgaps; no confirmedskillassignment, busy/referencepace, browserpause, sound/saves/controller qualification",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {
+    "path": "/oh-no-more-lemmings/",
+    "canvas": [
+      800,
+      600
+    ],
+    "boot": {
+      "id": "oh-no-more-lemmings-personal-10",
+      "architecture": "68k",
+      "screenSize": [
+        800,
+        600
+      ],
+      "screenDepth": 8,
+      "partition": null,
+      "pacing": {
+        "adaptive_min_cpu_mhz": null,
+        "cpu_mhz": 25,
+        "max_ticks_per_paint": 2,
+        "reset_slack_ticks": 4
+      }
+    },
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "runtime": "true",
+    "renderer": "webgl",
+    "frames": 3300,
+    "guestTicksPerSecond": 60.12407969392235,
+    "guestExecutionMs": {
+      "mean": 0.5595954545655034,
+      "p95": 3.9149999991059303,
+      "max": 6.4849999994039536
+    },
+    "roundTripMs": {
+      "mean": 1.0333681817962366,
+      "p95": 7.224999997764826,
+      "max": 10.075000002980232
+    },
+    "workerWasmLinearMemoryBytes": {
+      "mean": 175308800,
+      "p95": 175308800,
+      "max": 175308800
+    },
+    "firstFrameAfterBootMs": 260.80500000342727,
+    "timing_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\release-browser-v2\\onml-timing.json",
+    "timing_sha256": "0ad9c1b881b730d0c832a261d81cbddb66b588d6eba16c958e932bfbaf32cac4",
+    "resources_path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\release-browser-v2\\onml-resources.json",
+    "resource_summary": {
+      "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+      "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+      "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+      "requestedStart": "2026-11-08T03:16:21.655000+00:00",
+      "requestedEnd": "2026-11-08T03:16:41.660000+00:00",
+      "coverageBracketsCapture": true,
+      "samplesWithinCapture": 15,
+      "measuredCpuIntervalSeconds": 18.224793,
+      "aggregateCpuPercentOfHostTimeWeighted": 2.0683533963869993,
+      "cpuSecondsByProcessName": {
+        "msedge": 0.046875,
+        "ChatGPT": 8.890625,
+        "codex": 0.078125,
+        "msedgewebview2": 0.0,
+        "codex-code-mode-host": 0.0,
+        "codex-computer-use-swift": 0.03125
+      },
+      "hostCpuPercent": {
+        "mean": 35.666666666666664,
+        "median": 35,
+        "min": 25,
+        "max": 49
+      },
+      "aggregateWorkingSetBytes": {
+        "mean": 5035851229.866667,
+        "median": 5034885120,
+        "min": 5006086144,
+        "max": 5064126464
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5914762717.866667,
+        "median": 5912010752,
+        "min": 5881999360,
+        "max": 5941735424
+      },
+      "reducedSamples": [
+        {
+          "at": "2026-11-08T03:16:22.8144182+00:00",
+          "hostTotalCpuPercent": 29,
+          "aggregateWorkingSetBytes": 5049638912,
+          "aggregatePrivateBytes": 5935362048,
+          "matchingProcesses": 58
+        },
+        {
+          "at": "2026-11-08T03:16:24.1096882+00:00",
+          "hostTotalCpuPercent": 33,
+          "aggregateWorkingSetBytes": 5015830528,
+          "aggregatePrivateBytes": 5901471744,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.29527,
+          "aggregateCpuPercentOfHost": 1.960257320867464,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:25.4185305+00:00",
+          "hostTotalCpuPercent": 48,
+          "aggregateWorkingSetBytes": 5055971328,
+          "aggregatePrivateBytes": 5941084160,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.308842,
+          "aggregateCpuPercentOfHost": 2.5865739842293163,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:26.7288644+00:00",
+          "hostTotalCpuPercent": 32,
+          "aggregateWorkingSetBytes": 5018636288,
+          "aggregatePrivateBytes": 5903183872,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.310334,
+          "aggregateCpuPercentOfHost": 3.5276470223113594,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:28.0266168+00:00",
+          "hostTotalCpuPercent": 29,
+          "aggregateWorkingSetBytes": 5056946176,
+          "aggregatePrivateBytes": 5935607808,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.297752,
+          "aggregateCpuPercentOfHost": 3.4615146037147313,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:29.3235680+00:00",
+          "hostTotalCpuPercent": 35,
+          "aggregateWorkingSetBytes": 5028069376,
+          "aggregatePrivateBytes": 5904793600,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.296952,
+          "aggregateCpuPercentOfHost": 1.6565281521598332,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:30.6386754+00:00",
+          "hostTotalCpuPercent": 49,
+          "aggregateWorkingSetBytes": 5056794624,
+          "aggregatePrivateBytes": 5934444544,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.315107,
+          "aggregateCpuPercentOfHost": 1.9306889097236954,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:31.9391657+00:00",
+          "hostTotalCpuPercent": 25,
+          "aggregateWorkingSetBytes": 5027729408,
+          "aggregatePrivateBytes": 5905096704,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.30049,
+          "aggregateCpuPercentOfHost": 2.0024503584546336,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:33.2387990+00:00",
+          "hostTotalCpuPercent": 37,
+          "aggregateWorkingSetBytes": 5064126464,
+          "aggregatePrivateBytes": 5941735424,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.299634,
+          "aggregateCpuPercentOfHost": 1.3525442547671114,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:34.5399268+00:00",
+          "hostTotalCpuPercent": 48,
+          "aggregateWorkingSetBytes": 5034885120,
+          "aggregatePrivateBytes": 5912010752,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.301127,
+          "aggregateCpuPercentOfHost": 2.0014700076677117,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:35.8523504+00:00",
+          "hostTotalCpuPercent": 28,
+          "aggregateWorkingSetBytes": 5006086144,
+          "aggregatePrivateBytes": 5881999360,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.312424,
+          "aggregateCpuPercentOfHost": 2.133060022269226,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:37.1421267+00:00",
+          "hostTotalCpuPercent": 27,
+          "aggregateWorkingSetBytes": 5043838976,
+          "aggregatePrivateBytes": 5919600640,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.289776,
+          "aggregateCpuPercentOfHost": 1.3628820043170287,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:38.4412256+00:00",
+          "hostTotalCpuPercent": 38,
+          "aggregateWorkingSetBytes": 5011656704,
+          "aggregatePrivateBytes": 5887000576,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.299099,
+          "aggregateCpuPercentOfHost": 1.4032161264589278,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:39.7292829+00:00",
+          "hostTotalCpuPercent": 42,
+          "aggregateWorkingSetBytes": 5049085952,
+          "aggregatePrivateBytes": 5924499456,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.288057,
+          "aggregateCpuPercentOfHost": 2.1734124861451525,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        },
+        {
+          "at": "2026-11-08T03:16:41.0392117+00:00",
+          "hostTotalCpuPercent": 35,
+          "aggregateWorkingSetBytes": 5018472448,
+          "aggregatePrivateBytes": 5893550080,
+          "matchingProcesses": 58,
+          "cpuIntervalSeconds": 1.309929,
+          "aggregateCpuPercentOfHost": 1.391614863604567,
+          "newProcessesNotCountedForCpu": 0,
+          "exitedProcessesNotCountedForCpu": 0,
+          "invalidCpuPairs": 1
+        }
+      ]
+    }
+  },
+  "geometry": {
+    "css_extent": "not separately recorded; backing is in timing data when captured",
+    "viewport": "default part geometry; do not assume Clock comparison override",
+    "gui_png_dimensions": "see private saved PNGs; these are screenshot dimensions, not an asserted CSS viewport"
+  }
+}

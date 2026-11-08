@@ -303,22 +303,34 @@
     {
       "id": "owned-goldpusher-v1",
       "route": "/goldpusher/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/goldpusher.json",
+      "scene": "Room1 Look around populated field afterReturn fromdemo; noinput20seconds, moving enemies/objects and score0to3",
+      "accepted_change": null
     },
     {
       "id": "owned-guy-smiley-vs-the-monsters-v1",
       "route": "/guy-smiley-vs-the-monsters/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/guy-smiley.json",
+      "scene": "Titled white client remains blank afterNewGame actual File menu selection andD pass300ms",
+      "accepted_change": null
     },
     {
       "id": "owned-lawyers-v1",
       "route": "/lawyers/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/lawyers.json",
+      "scene": "New random Lawyers field afterdiscarding isolated currentgame; score0, blueplayer and4enemies; noinput20seconds turnwaiting",
+      "accepted_change": null
     },
     {
       "id": "lemmings-personal-152",
       "route": "/lemmings/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/lemmings.json",
+      "scene": "Fun1 Just dig, release50 tenlemmings, noinput20seconds, timer4:58 beforemanualsamplersetup to4:28 postcapture, OUT0to10 IN0percent",
+      "accepted_change": null
     },
     {
       "id": "owned-macpipes-v1",

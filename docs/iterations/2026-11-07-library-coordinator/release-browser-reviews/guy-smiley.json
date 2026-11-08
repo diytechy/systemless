@@ -1,0 +1,17 @@
+{
+  "id": "owned-guy-smiley-vs-the-monsters-v1",
+  "scene": "Titled white client remains blank afterNewGame actual File menu selection andD pass300ms",
+  "observed_checks": "File menu visibly NewGame CmdY, EndGame CmdE, GameSettings CmdS; initialCmdN not relevant; actualNewGame target CSS84,174 selected menu row, thenD leaveswhiteclient",
+  "remaining_limits": "No populated board or representative gameplay baseline; exact presentation/service/input cause unknown; no pacing change, sound/saves/controller/fidelity unqualified",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {},
+  "geometry": {
+    "css_extent": "not separately recorded; backing is in timing data when captured",
+    "viewport": "default part geometry; do not assume Clock comparison override",
+    "gui_png_dimensions": "see private saved PNGs; these are screenshot dimensions, not an asserted CSS viewport"
+  }
+}

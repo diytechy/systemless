@@ -243,6 +243,18 @@ test('canonical ordinary wall response reverses each actual source pose without 
  assert.equal(g.events.filter(e=>e.type==='enemy-wall-bounce').length,1);
 });
 
+test('programmed wall collision reverses before the cardinal program command and transfer',()=>{
+ const {board,options}=specialFixture({enemy:true});board.dots[0].ring=false;board.staticEnemyWallRules=true;
+ Object.assign(board.enemies[0],{pivot:'a',frame:63,unwrappedFrame:63,angle:0,direction:1,checksWalls:true,program:'f',sourcePC:1});
+ const near={left:-1,top:-1,right:1,bottom:1,rows:null},far={left:20,top:-1,right:22,bottom:1,rows:null};
+ options.outlines.groups['4400'].frames=Array.from({length:64},(_,i)=>({...((i===0)?near:far)}));
+ options.outlines.groups['800']={frames:[near]};board.walls=[{id:'w',x:0,y:0,frame:0}];
+ const g=new SourceRound(board,options),enemy=g.enemies[0];
+ g.animateStaticEnemy(enemy,1,{remainder:0,multiplier:1,divisor:2},{remaining:38,clientRemainder:0},true);
+ assert.equal(enemy.pivot,'b');assert.equal(enemy.frame,32);assert.equal(enemy.direction,-1);assert.equal(enemy.sourcePC,1);
+ assert.deepEqual(g.events.map(e=>e.type),['enemy-wall-bounce','program-transfer']);
+});
+
 test('GO time and flat score compose with a protected WY return while a fresh restart clears progress',()=>{
  const {board,options}=specialFixture();board.dots[0].ring=false;board.dots[1].protected=true;
  board.goodieOnlyRules=true;board.childScoreRules=true;board.origin={x:0,y:0};

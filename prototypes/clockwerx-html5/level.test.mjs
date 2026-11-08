@@ -67,6 +67,34 @@ test('inactive difficulty records are not instantiated or program/type qualified
  assert.equal(board.enemies.length,1);assert.equal(board.inactiveActorCount,1);
  assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU,activeMask:2}),/unqualified difficulty/);
 });
+
+test('extended enemy clocks require canonical ordinary actors and preserve class2/5 timing',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];actor.version12ByteRaw=0;
+ const options={angularSpeed:TAU,allowExtendedEnemyClocks:true,allowEnemyStaticPrograms:true};
+ for(const speedClass of [2,5]){
+  actor.rawWords[7]=speedClass;
+  assert.ok(levelRequirements(level,{allowEnemyStaticPrograms:true}).includes('actor speed class '+speedClass));
+  assert.ok(levelRequirements(level,{allowExtendedEnemyClocks:true}).includes('actor speed class '+speedClass));
+  const enemy=buildDecodedBoard(level,options).enemies[0];
+  assert.equal(enemy.speedClass,speedClass);assert.equal(enemy.canonicalFrame,true);
+  assert.equal(enemy.divisor,speedClass===2?8:1);assert.equal(enemy.multiplier,speedClass===2?3:1);
+ }
+ level.blocks[0].records[0].rawWords[7]=2;
+ assert.ok(levelRequirements(level,options).includes('actor speed class 2'));
+ level.blocks[0].records[0].rawWords[7]=0;actor.rawWords[7]=6;
+ assert.ok(levelRequirements(level,options).includes('actor speed class 6'));
+});
+
+test('initially open doors require an independent gate while existing closed doors remain available',()=>{
+ const level=fixture(),door={rawWords:[0,0,0,0x100]};
+ level.blocks.push({kind:'DR',count:1,records:[door]});
+ assert.ok(levelRequirements(level).includes('initially open doors'));
+ assert.throws(()=>buildDecodedBoard(level,{angularSpeed:TAU}),/initially open doors/);
+ const board=buildDecodedBoard(level,{angularSpeed:TAU,allowInitiallyOpenDoors:true});
+ assert.equal(board.doors[0].initiallyClosed,false);assert.equal(board.doors[0].long,true);
+ door.rawWords[2]=1;assert.ok(!levelRequirements(level).includes('initially open doors'));
+ assert.equal(buildDecodedBoard(level,{angularSpeed:TAU}).doors[0].initiallyClosed,true);
+});
 test('inactive spikes require qualification and do not consume an active sprite phase',()=>{
  const level=fixture(),spikes=level.blocks.find(b=>b.kind==='SP').records;
  spikes[0].rawWords[5]=14;
@@ -179,4 +207,8 @@ test('canonical wall response is qualified independently while programmed walls 
  assert.equal(board.staticEnemyWallRules,true);assert.equal(board.enemies[0].checksWalls,true);
  actor.programReferenceRaw=0;level.blocks.push({kind:'WP',count:1,records:[{text:'b'}]});
  assert.ok(levelRequirements(level,{...options,allowStaticEnemyWalls:true}).includes('programmed wall-reacting actor'));
+ const qualified={...options,allowStaticEnemyWalls:true,allowProgrammedEnemyWalls:true};
+ assert.equal(buildDecodedBoard(level,qualified).enemies[0].program,'b');
+ assert.ok(levelRequirements(level,{...qualified,allowStaticEnemyWalls:false}).includes('programmed wall-reacting actor'));
+ assert.ok(levelRequirements(level,{...qualified,allowEnemyStaticPrograms:false,allowEnemyBouncePrograms:true}).includes('programmed wall-reacting actor'));
 });

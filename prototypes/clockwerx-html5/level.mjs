@@ -18,7 +18,7 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false}={}){
  const unsupported=[];
  if(allowBombs&&allowGoodies)unsupported.push('exclusive bomb or goodie-only scope required');
  if(allowGoodies&&!allowSpecialDots)unsupported.push('goodie-only source timer qualification');
@@ -28,6 +28,7 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
  if(![7,8].includes(level.header?.displaySizeRaw))unsupported.push('unqualified display-size selector');
  for(const block of level.blocks||[]){
   if(block.count&&!['SP','WL','DR','DS','WP','WA','TX',...(allowOil?['PU']:[]),...(allowSpecialDots?['WY']:[]),...(allowBombs?['BO','GO']:allowGoodies?['GO']:[])].includes(block.kind))unsupported.push('object class '+block.kind);
+  if(block.kind==='DR'&&!allowInitiallyOpenDoors&&block.records.some(r=>!decodeDoorRecord(r).initiallyClosed))unsupported.push('initially open doors');
   if(block.kind==='SP')for(const spike of block.records){
    const mask=spike.rawWords[4]*65536+spike.rawWords[5];
    if(mask!==15&&(!Number.isInteger(mask)||!(allowInactiveSpikes&&!(mask&activeMask))))unsupported.push('conditional spike activation');
@@ -43,11 +44,12 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
      if(![1,2,3].includes(actor.actorTypeRaw)||typeof program!=='string'||!program.length||program.length>255||[...program].some(c=>!(allowEnemyStaticPrograms?'nsbf':'b').includes(c)))unsupported.push(allowEnemyStaticPrograms?'non-static actor program':'non-bounce actor program');
      if(!Number.isInteger(pc)||pc<0||pc>(program?.length??0))unsupported.push('source program PC');
      if(!allowEnemyStaticPrograms&&pc===0&&[102,115].includes(program?.length))unsupported.push('length-byte program transfer');
-     if(actorChecksWalls(actor.version12ByteRaw??1))unsupported.push('programmed wall-reacting actor');
+     if(actorChecksWalls(actor.version12ByteRaw??1)&&!(allowProgrammedEnemyWalls&&allowEnemyStaticPrograms&&allowStaticEnemyWalls))unsupported.push('programmed wall-reacting actor');
     }
    }
    if(allowEnemyStaticPrograms&&[1,2,3].includes(actor.actorTypeRaw)&&actorChecksWalls(actor.version12ByteRaw??1)&&!allowStaticEnemyWalls)unsupported.push('canonical enemy wall response');
-   if(!((allowBombs||(allowClass3Enemies&&[1,2,3].includes(actor.actorTypeRaw)))?[0,1,3,4]:[0,1,4]).includes(actor.rawWords?.[7]))unsupported.push('actor speed class '+actor.rawWords?.[7]);
+   const extendedClock=allowExtendedEnemyClocks&&allowEnemyStaticPrograms&&[1,2,3].includes(actor.actorTypeRaw)&&[2,5].includes(actor.rawWords?.[7]);
+   if(!extendedClock&&!((allowBombs||(allowClass3Enemies&&[1,2,3].includes(actor.actorTypeRaw)))?[0,1,3,4]:[0,1,4]).includes(actor.rawWords?.[7]))unsupported.push('actor speed class '+actor.rawWords?.[7]);
   }
  }
  for(const cell of level.cells||[]){
@@ -67,8 +69,8 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);

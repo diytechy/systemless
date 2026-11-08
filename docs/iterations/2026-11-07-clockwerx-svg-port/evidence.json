@@ -1,0 +1,79 @@
+{
+  "branch": "SVG-Port",
+  "source_base": "df8d0c1e",
+  "sizes": {
+    "bitmap": {
+      "source": 21533,
+      "assets": 220030,
+      "manifest": 165615,
+      "asset_files": 364,
+      "total": 407178
+    },
+    "svg": {
+      "source": 24057,
+      "assets": 65428,
+      "manifest": 3315,
+      "asset_files": 15,
+      "total": 92800
+    },
+    "reduction_percent": 77.20898476833227,
+    "bitmap_runtime_referenced_asset_bytes": 132171,
+    "bitmap_unreferenced_packaged_asset_bytes": 87859,
+    "bitmap_runtime_referenced_total": 319319,
+    "svg_vs_runtime_referenced_reduction_percent": 70.93815275633457
+  },
+  "timing_sanity": {
+    "valid": true,
+    "invalidReasons": [],
+    "presentation": "svg-continuous",
+    "logicalSize": [
+      640,
+      480
+    ],
+    "backingSize": [
+      640,
+      480
+    ],
+    "cssSize": [
+      615,
+      461.25
+    ],
+    "devicePixelRatio": 1,
+    "counters": {
+      "rafCallbacks": 3301,
+      "renderCalls": 3301,
+      "fixedStepCalls": 2401,
+      "activeSimulationSteps": 2401,
+      "droppedCatchupSeconds": 0
+    },
+    "durationMs": 20001.520000000746,
+    "mean_work_ms": 0.6185156013032264,
+    "p95_work_ms": 0.8449999988079071,
+    "raw_sha256": "6e186209543969f282cdaae1916efbbf910019bd244976c491a3e240716a7e97",
+    "boundary": "One illustrative SVG-only capture; no matched CPU/memory comparison or physical presentation/input-latency claim"
+  },
+  "validated_gameplay": [
+    "rootkeyboardheldswing30+20secondswithtoolgap reachesGoaloverlay",
+    "freshheldX9seconds showsonegridrightpivottransfer",
+    "sixsecondbounce retainedinitialpivot inobservedstill",
+    "Ppause/resume,Restart andPNGexport work",
+    "blackhandtoggleissued; savedcroppedimage doesnot independentlyshowblackplayer"
+  ],
+  "preservation": {
+    "engine_unchanged": true,
+    "board_unchanged": true,
+    "background_and_three_wavs_unchanged": true,
+    "original_media_not_opened_or_modified": true,
+    "save_key_unchanged": "systemless.clockwerx-html5.pilot.v1",
+    "private_bitmap_backup": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-svg-port\\live-bitmap-reference",
+    "scope": "generatedSVGs/bitmaps/map/audio/captures remainprivate onD"
+  },
+  "remaining_limits": [
+    "SVG outlines/shading areapproximations; rotatedlightingdiffers fromper-anglebitmaps",
+    "browsercheckedatDPR1;HiDPIallocationtestedarithmetically,notphysicalDPR2display",
+    "interpolateddisplaycanlagbyone120Hzstep;inputlatencynotmeasured",
+    "audioaudibility,hardwarecontroller,browsercoverage/fullgame stillunqualified",
+    "oneboardonly;noCPU/RAMgainclaim",
+    "sizegainincludesunusedassetandmetadataremoval;notsolelySVGversusPNGencoding"
+  ]
+}

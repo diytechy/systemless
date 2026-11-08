@@ -39,6 +39,19 @@ class PilotPackagingTests(unittest.TestCase):
         route=self.dist/'clockwerx-html5';route.mkdir();(route/'keep.txt').write_text('unrelated')
         with self.assertRaisesRegex(ValueError,'no owned pilot marker'):package(self.dist,self.assets)
         self.assertEqual((route/'keep.txt').read_text(),'unrelated')
+    def test_unlisted_vector_reference_is_rejected_before_copy(self):
+        self.manifest['vectorAssets']=dict(dots=['missing.svg'],hands={})
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+    def test_vector_references_and_renderer_are_packaged(self):
+        vector=self.assets/'hand.svg';vector.write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
+        self.manifest['files'].append(dict(name=vector.name,sha256=sha256_file(vector),bytes=vector.stat().st_size))
+        self.manifest['vectorAssets']=dict(dots=['hand.svg'],hands={'700':dict(file='hand.svg')})
+        self.save_manifest();record=package(self.dist,self.assets)
+        self.assertEqual(record['presentation'],'svg-continuous')
+        self.assertTrue((self.dist/'clockwerx-html5/rendering.mjs').is_file())
+        self.assertEqual((self.dist/'clockwerx-html5/assets/hand.svg').read_bytes(),vector.read_bytes())
 
 
 if __name__=='__main__':unittest.main()

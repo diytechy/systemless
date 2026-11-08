@@ -1,0 +1,54 @@
+{
+  "id": "owned-battletanks-2-12-1-v1",
+  "scene": "Two-player newgameaccepted, Save/SaveAsenabled, flatgreenfieldstillnotanks/terrain",
+  "observed_checks": "CorrectCSS drag opensFile andGameSpeed (earlierGameSpace labelwasmisread); GameSpeedNormalchecked/preserved; CommandN new2namedtestplayersandcorrectCSSOK328453accepted; FileSaveenabledaftersetup; PNGsaved",
+  "remaining_limits": "No representativebattle despiteacceptedsetup. No gameplaytiming/candidate or diagnosedterraincause. Tankmenuattemptunresolved; audio,savesroundtrip,pause,hardware unqualified. Earlierapproximateclickattempts superseded.",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {},
+  "geometry": {
+    "live_dom_canvas_css": [
+      608,
+      455.5
+    ],
+    "live_window_inner": [
+      665,
+      672
+    ],
+    "gui_png_dimensions": [
+      650,
+      657
+    ],
+    "backing": [
+      800,
+      600
+    ],
+    "file_menu_drag": [
+      [
+        61,
+        160
+      ],
+      [
+        65,
+        178
+      ]
+    ],
+    "game_speed_drag": [
+      [
+        165,
+        160
+      ],
+      [
+        165,
+        178
+      ]
+    ],
+    "setup_ok_css": [
+      328,
+      453
+    ]
+  }
+}

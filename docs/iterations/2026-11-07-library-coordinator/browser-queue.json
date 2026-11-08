@@ -12,7 +12,7 @@
     460.75
   ],
   "active_tab": null,
-  "next": "CorrectedCSS mouse-target recheck owned-battletanks-2-12-1-v1",
+  "next": "First pending title in games order; resolve followup_experiments before final completion; one release emulator at a time",
   "games": [
     {
       "id": "koji-personal-204",
@@ -121,9 +121,12 @@
       "id": "owned-battletanks-2-12-1-v1",
       "route": "/battletanks-2-12-1/",
       "status": "reviewed release follow-up",
-      "report": "release-browser-reviews/battletanks.json",
-      "scene": "Toolbar andflatgreenfield; CommandN two-player setup entered anddismissed, no tanksor terrain",
-      "accepted_change": null
+      "report": "release-browser-reviews/battletanks-css.json",
+      "scene": "Two-player newgameaccepted, Save/SaveAsenabled, flatgreenfieldstillnotanks/terrain",
+      "accepted_change": null,
+      "prior_browser_reports": [
+        "release-browser-reviews/battletanks.json"
+      ]
     },
     {
       "id": "owned-bedlam-v1",
@@ -199,9 +202,12 @@
       "id": "owned-brickles-plus-3-0-v1",
       "route": "/brickles-plus-3-0/",
       "status": "reviewed release follow-up",
-      "report": "release-browser-reviews/brickles.json",
-      "scene": "Visiblewindow/dottedBRICKLESPLUSarrangement, ClickToBegin thenheaderBricklesPlus/laterOOPS, no clearlyidentifiedball/paddle",
-      "accepted_change": null
+      "report": "release-browser-reviews/brickles-css.json",
+      "scene": "ActualCmd1 one-paddle game starts; score0/5balls later7/2balls andbrickgap, butnativeframe andGUIshow noclearball/paddle",
+      "accepted_change": null,
+      "prior_browser_reports": [
+        "release-browser-reviews/brickles.json"
+      ]
     },
     {
       "id": "owned-brickoids-millenium-v1",
@@ -409,6 +415,13 @@
       "id": "owned-bikaka-1-4-v1",
       "status": "singledefault26.024Hz contextualcounterdeficit; no candidate yet; activeMleft/Ndown andpause established, originalpaceunknown",
       "accepted_change": null
+    },
+    {
+      "id": "owned-brickles-plus-3-0-v1",
+      "status": "lightSol presentation/settingsreview active; no controlled workload",
+      "task_name": "/root/brickles_browser_review",
+      "brief": "brickles-plus-3-0/browser-followup-brief.md",
+      "accepted_change": null
     }
   ],
   "clock_comparison_requested_viewport": [
@@ -418,9 +431,6 @@
   "geometry_note": "Clock final9 comparison verified actual CSS615x460.75/backing640x480. Later release followup parts use default IAB geometry unless individually measured. Saved PNG dimensions are not asserted CSS viewport dimensions; no uniform672x1000 claim for smokes.",
   "mouse_target_rechecks": {
     "reason": "Displayed nativePNG650x657 isscaled fromlivewindow665x672; Tab.click usesCSS coordinates. Earlier small screenshot-coordinate clicks may miss. Corrected transform startsBrickoids. Recheckbeforeacceptingreadinesslimits.",
-    "pending": [
-      "owned-battletanks-2-12-1-v1",
-      "owned-brickles-plus-3-0-v1"
-    ]
+    "pending": []
   }
 }

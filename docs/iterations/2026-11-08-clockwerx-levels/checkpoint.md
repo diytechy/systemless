@@ -1,5 +1,5 @@
 # Progress checkpoint
 
-Movement bonus accepted and committed. Spikes accepted as bounded playable second scene and activated; source/visual/native evidence reviewed. Catalog inventory100/100 and structural decode120/120 complete; full runtime queue still at Walls3.
+Movement, Spikes and Walls are validated bounded scenes and activated locally. All100catalog entries are inventoried;120resources decode completely. Runtime work is at Doors4, with native initial run and Astra source candidate ready for root review. The full remaining-level task is unfinished.
 
-Exact resumable action, active native session and preservation boundaries: [current action](current-action.md). All original-game and candidate evidence remains private. No push/deploy.
+[Exact action/workload state](current-action.md), [queue](queue.json), [requirements](requirements.md), [Walls evidence](walls-review.md). No push/deploy; private source/media/saves preserved.

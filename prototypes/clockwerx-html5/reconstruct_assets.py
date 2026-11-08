@@ -110,6 +110,7 @@ def build(source, profile_path, output):
         references.add(manifest['vectorAssets']['starbursts']['file'])
     references.update(d['file'] for d in manifest['vectorAssets'].get('dotVariants',{}).values())
     references.update(d['file'] for d in manifest['vectorAssets'].get('spikes',{}).get('frames',[]))
+    references.update(d['file'] for d in manifest['vectorAssets'].get('walls',{}).get('frames',[]))
     death=manifest['vectorAssets'].get('death',{})
     if death.get('file'):references.add(death['file'])
     else:references.update(d['file'] for d in death.get('frames',[]))

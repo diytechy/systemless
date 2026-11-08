@@ -1,0 +1,98 @@
+{
+  "schema": "clockwerx-walls-astra-review-v1",
+  "catalogIndex": 3,
+  "resourceId": 222,
+  "status": "source-candidate-native-comparison-required",
+  "sourceWallSpecifications": 12,
+  "mergedTiles": 51,
+  "sourceProfileFrames": 24,
+  "candidateSvgFrames": 17,
+  "storedPrograms": 3,
+  "referencedPrograms": 0,
+  "actorRecords": 6,
+  "baselineFilesPreserved": 27,
+  "tests": {
+    "command": "node --test prototypes/clockwerx-html5/walls.test.mjs prototypes/clockwerx-html5/programs.test.mjs",
+    "passed": 10
+  },
+  "privateEvidence": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_6.bin",
+      "sha256": "d2384c535eaf50b5b87320fc60efeb461a0ea25721482e07b176b43b3c4c6783"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\data.bin",
+      "sha256": "1b2286712f7783848730474051c6497323400be31fc303e078f0c748977346dc"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\pltt_1000.bin",
+      "sha256": "76dd4ac97887e3aaf90c3ca0034208905075cc9860b8e9ead206f177714539c7"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\collision-profile.json",
+      "sha256": "36d8593629ac8c389787578cfa53dacbbfd03082cfb773b649dab244f75de5df"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\level-profile.json",
+      "sha256": "42cd4c3c664e8c1a96d880cd3474f2e0b0aaebf95af17c8bb5e55dd8cc1fb11a"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\assets\\manifest.json",
+      "sha256": "fecdb7583c42f530748dfa43d3dc161ae3fc5f46c08f83838183609ed3345f0c"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\wall-source-contact.png",
+      "sha256": "9cfede6fbbb2eb16c6e8fa3a842a7075724c5b9ee1688d7e1f6afb172e230025"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\wall-19-preview.png",
+      "sha256": "52d7c17d575fa31b4ed96ccce601fde50e07ddf90ed4548c622198c210707836"
+    }
+  ],
+  "offsetContract": {
+    "wallDescriptorSubtract": [
+      6,
+      5
+    ],
+    "WA": [
+      44,
+      43
+    ],
+    "SP": [
+      8,
+      7
+    ]
+  },
+  "sourceOffsets": {
+    "wallSchema": "CODE6:aee4-af96",
+    "tileUnion": "CODE6:ad5a-aec4",
+    "wallRender": "CODE6:b7b0-b8b8",
+    "wallSprites": "CODE6:b568-b79e",
+    "wallCollision": "CODE6:ba82-bac4",
+    "actorWallGate": "CODE6:d00e-d056",
+    "bounce": "CODE6:cf50-cf8e",
+    "reverse": "CODE6:c5be-c63c",
+    "humanFourthContactDeath": "CODE6:d4c6-d4e8",
+    "heroOrdering": "CODE6:d498-d54e",
+    "enemyOrdering": "CODE6:d938-d9c0",
+    "programBinding": "CODE6:f10c-f178",
+    "programConsumption": "CODE6:caba-cb80",
+    "programEligibility": "CODE6:cbac-cbda"
+  },
+  "uncertainties": [
+    "Native Walls anchors and current difficulty visibility",
+    "Bounce and fourth-contact death runtime comparison",
+    "Hero versus enemy callback stage integration",
+    "Enhanced steel bevel/shadow visual comparison",
+    "Text/sound/goal reachability",
+    "Dot programs, shatter, bomb interactions excluded"
+  ],
+  "workloadReleased": true,
+  "writableFilesReleased": [
+    "prototypes/clockwerx-html5/walls.mjs",
+    "prototypes/clockwerx-html5/walls.test.mjs",
+    "prototypes/clockwerx-html5/programs.mjs",
+    "prototypes/clockwerx-html5/programs.test.mjs"
+  ],
+  "noRuntimeOrActivation": true
+}

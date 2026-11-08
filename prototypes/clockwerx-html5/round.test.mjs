@@ -28,7 +28,7 @@ test('single-player death freezes actors then resets actors and bonuses after th
  const {board,options}=fixture();const g=new SourceRound(board,options);
  g.player.pivot='b';board.dots[1].collected=true;
  const enemyBefore=g.enemies[0].angle;g.update(1/120);
- assert.equal(g.death!==null,true);assert.equal(g.snapshot().events.at(-1).cause.reason,'spike');
+ assert.equal(g.death!==null,true);assert.equal(g.snapshot().events.at(-1).cause.reason,'enemy');
  const frozen=g.player.angle,enemyFrozen=g.enemies[0].angle,clockBefore=g.deathClock.snapshot();
  g.reverse();g.update(1/120,{swing:true});assert.equal(g.player.angle,frozen);assert.equal(g.enemies[0].angle,enemyFrozen);
  assert.equal(board.dots[1].collected,true);
@@ -39,6 +39,53 @@ test('single-player death freezes actors then resets actors and bonuses after th
  assert.equal(g.events.at(-1).type,'round-reset');
  g.reset();assert.equal(board.dots[1].collected,undefined);assert.equal(g.roundRestarts,0);
  assert.equal(g.enemies[0].angle,enemyBefore);
+});
+test('wall trapping counts source-class contacts rather than 120Hz updates',()=>{
+ const {board,options}=fixture();board.enemies=[];board.spikes=[];board.player.checksWalls=true;
+ board.walls=[{id:'w',x:0,y:0,frame:0}];
+ options.outlines.groups['800']={frames:[{left:-1,top:-1,right:1,bottom:1,rows:null}]};
+ const g=new SourceRound(board,options);
+ for(let i=0;i<12;i++)g.update(1/120);
+ assert.equal(g.player.wallContacts,0);
+ for(let i=0;i<100&&!g.death;i++)g.update(1/120);
+ assert.equal(g.player.wallContacts,4);assert.ok(g.elapsedTime>.25);
+ assert.equal(g.events.at(-1).cause.reason,'trapped-wall');
+});
+test('smooth fractional phase cannot repeat the same wall pose into a false trap',()=>{
+ const {board,options}=fixture();board.enemies=[];board.spikes=[];board.player.checksWalls=true;
+ board.angularSpeed=TAU*960/(76*64);board.player.angle=(54+.84)*TAU/64;
+ board.walls=[{id:'w',x:0,y:0,frame:0}];
+ const near={left:-1,top:-1,right:1,bottom:1,rows:null},far={left:20,top:-1,right:22,bottom:1,rows:null};
+ options.outlines.groups['700'].frames=Array.from({length:64},(_,i)=>({...([54,55].includes(i)?near:far)}));
+ options.outlines.groups['800']={frames:[near]};
+ const g=new SourceRound(board,options);g.actorClock.advance(7);
+ const contact=g.wallCollision.bind(g),poses=[];
+ g.wallCollision=hand=>{const hit=contact(hand);if(hit)poses.push(sourceFrame(hand.angle));return hit;};
+ for(let i=0;i<120;i++)g.update(1/120);
+ assert.deepEqual(poses,[54]);assert.equal(g.death,null);assert.equal(g.roundRestarts,0);
+});
+test('enemy wall permission controls response independently of its color',()=>{
+ for(const enabled of [false,true]){
+  const {board,options}=fixture();board.spikes=[];board.enemies[0].checksWalls=enabled;
+  board.walls=[{id:'w',x:48,y:0,frame:0}];
+  options.outlines.groups['800']={frames:[{left:-1,top:-1,right:1,bottom:1,rows:null}]};
+  const g=new SourceRound(board,options);for(let i=0;i<20;i++)g.update(1/120);
+  assert.equal(g.enemies[0].direction,enabled?1:-1);
+ }
+});
+test('missing source outline pointers remain noncollidable',()=>{
+ const {options}=fixture();options.outlines.groups['800']={frames:[{left:0,top:0,right:10,bottom:10,rows:null,collidable:false}]};
+ assert.equal(worldOutline(options.outlines,800,0,{x:0,y:0}),null);
+});
+test('queued reverse waits for an eligible source step and wall bounce suppresses it',()=>{
+ for(const wall of [false,true]){
+  const {board,options}=fixture();board.enemies=[];board.spikes=[];board.player.checksWalls=true;
+  if(wall){board.walls=[{id:'w',x:0,y:0,frame:0}];options.outlines.groups['800']={frames:[{left:-1,top:-1,right:1,bottom:1,rows:null}]};}
+  const g=new SourceRound(board,options);g.reverse();assert.equal(g.player.direction,1);
+  for(let i=0;i<20;i++)g.update(1/120);
+  assert.equal(g.player.direction,-1);assert.equal(g.pendingReverse,false);
+  assert.equal(g.events.some(e=>e.type==='reverse'),!wall);
+ }
 });
 test('pause freezes shared clocks and enemy animation',()=>{
  const {board,options}=fixture();const g=new SourceRound(board,options);g.paused=true;

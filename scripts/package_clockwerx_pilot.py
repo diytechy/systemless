@@ -13,7 +13,7 @@ from private_library_manifest import BUILTINS, sha256_file
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
-      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs')
+      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -48,6 +48,7 @@ def package(dist,assets):
         if vector.get('starbursts'):references.add(vector['starbursts']['file'])
         references.update(dot['file'] for dot in vector.get('dotVariants',{}).values())
         references.update(frame['file'] for frame in vector.get('spikes',{}).get('frames',[]))
+        references.update(frame['file'] for frame in vector.get('walls',{}).get('frames',[]))
         if vector.get('death',{}).get('file'):references.add(vector['death']['file'])
         else:references.update(frame['file'] for frame in vector.get('death',{}).get('frames',[]))
     if manifest.get('levelDefinition'):references.add(manifest['levelDefinition']['outlinesFile'])

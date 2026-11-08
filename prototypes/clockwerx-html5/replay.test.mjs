@@ -5,6 +5,7 @@ test('replay emits exact idle/action step counts then releases every input',()=>
  const r=createInputReplay([[2,null],[1,'flip'],[2,'swing']]);
  assert.deepEqual(Array.from({length:7},()=>r.next()),[{},{},{flip:true},{swing:true},{swing:true},{},{}]);
  assert.equal(r.done,true);assert.equal(r.snapshot().step,5);
+ assert.equal(r.snapshot().lastAction,null);
 });
 test('caller mutation cannot alter the bounded playback',()=>{
  const input=[[1,'bounce']];const r=createInputReplay(input);input[0][1]='flip';input.push([1,'swing']);

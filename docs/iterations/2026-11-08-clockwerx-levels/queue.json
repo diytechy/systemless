@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 3,
-  "currentAction": "Walls: review source/helpers, native placement/collision checks, then integrate tile collisions and actor wall gates",
+  "currentOrdinal": 4,
+  "currentAction": "Doors: review native frames and source helper, integrate switch entry edges/occupancy, scalable door timing and ordered collisions",
   "levels": [
     {
       "ordinal": 1,
@@ -162,8 +162,13 @@
       "menuTitle": "Walls",
       "resourceTitle": "Walls",
       "sha256": "25c19a60e38ded75756c9c53f3630acbfe77c06359e67d65fd78e956cb44ff5b",
-      "status": "source-prepared-native-integration-pending",
-      "nativeEvidence": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "walls/native-placement-review.json",
+        "walls/native-route-review.json",
+        "walls/native-goal-route-01/after-route.png",
+        "walls/pilot-goal-state.json"
+      ],
       "requirements": [
         "12WL specs merge into51tiles",
         "v12 actor wall permission",
@@ -171,8 +176,13 @@
         "enemy animate-before-collision; overlap separate periodic pass",
         "all3storedWP programs unused"
       ],
-      "svgStatus": "17 candidate tile variants; native check pending",
-      "generationConstraints": [],
+      "svgStatus": "silver SVG walls activated; source tile placement and native/browser goal checked",
+      "generationConstraints": [
+        "18spec source capacity; union inclusive third-cell tile masks",
+        "preserve actor wall permissions and Child activation masks",
+        "phase-aware safe rotations and fourth-contact guard",
+        "retain seed, initial clock phase and input-only solution trace"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 62,
@@ -218,7 +228,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "qualificationBoundary": "Child goal route, source geometry and bounded38phase checks; not exhaustive timing/higher difficulty/shattering/sound qualification"
     },
     {
       "ordinal": 4,
@@ -226,10 +237,16 @@
       "menuTitle": "Doors",
       "resourceTitle": "Doors",
       "sha256": "0fee9a2eaac8f80d76baa80787219495884d7732d407cb454ad823bfdcbdbeea",
-      "status": "queued",
+      "status": "source-prepared-native-run-active",
       "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
+      "requirements": [
+        "per-actor switch entry toggles matching door colors",
+        "occupancy changes pressed art; release does not toggle",
+        "Child scalable80 door clock adjusted133",
+        "ordinary green presses switches but ignores doors",
+        "invisible group3800 lethal outlines checked before normal bounce"
+      ],
+      "svgStatus": "three candidate atlases; native review pending",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {

@@ -1,6 +1,6 @@
 # ClockWerx HTML5 pilot
 
-Buildless Canvas2D reimplementation of owned ClockWerx1.0 Movement and Spikes tutorial boards, with an SVG foreground. This is a playable rules reconstruction, not an emulator or an automatic binary conversion. Private artwork/map/audio are deliberately absent from this directory and Git.
+Buildless Canvas2D reimplementation of owned ClockWerx1.0 Movement, Spikes and Walls tutorial boards, with an SVG foreground. This is a playable rules reconstruction, not an emulator or an automatic binary conversion. Private artwork/map/audio are deliberately absent from this directory and Git.
 
 ## Prepare locally
 
@@ -15,7 +15,7 @@ The extractor checks the known copied fixture SHA256 before reading its HFS reso
 
 The vectorizer verifies the extracted input hashes and writes a separate asset set. It traces/simplifies each canonical zero-angle hand, preserving transparent holes; gradients reconstruct shading. Dots use analytic circles/gradients. One SVG per hand replaces all64 bitmap directions. The background and three WAV effects retain their exact bytes. Outlines/shading are deliberate approximations, visible at large scale. Neither SVGs nor original PNGs belong inGit.
 
-Serve `index.html`, `app.mjs`, `engine.mjs`, `board.mjs`, `rendering.mjs`, `sparkles.mjs`, `dots.mjs` and the private `svg-assets` directory renamed to `assets/` under a separate local route. Missing assets produce a visible error. Root's library packager owns the final private route. No dependency installation or Rust build is needed for the prototype itself. No hosting/upload/deployment is authorized.
+Use `scripts/package_clockwerx_pilot.py` to serve the runtime files enumerated in its `CODE` list and the verified private assets. The local route has no dependency install or Rust build requirement. Missing assets produce a visible error. Private assets must remain outside Git; hosting/upload/deployment is not authorized.
 
 ## Controls and scope
 
@@ -57,3 +57,5 @@ Starburst update: original gameplay creates deterministic flourishes around the 
 Bonus update: all ten Movement bonuses use ring artwork, including the colored tutorial rings. Presence, bonus and goal are independent cell flags; dot color comes from resource permissions, independently of occupancy. A player grab consumes a ring once and displays its same-color ordinary sphere. Initial occupancy, bouncing and tutorial demonstrations preserve it; restart restores it. A private `vectorAssets.dotVariants` map supplies source-qualified art and anchors. Unsupported color variants fail explicitly. Scoring and original ring-shaped shadows remain outside this increment. [Level and bonus evidence](../../docs/iterations/2026-11-08-clockwerx-levels/bonus-review.md).
 
 Spikes update: a private multi-scene manifest enables a Level picker with Movement as default. `level.mjs` adapts decoded rounds and rejects unsupported requirements. `hazards.mjs`/`round.mjs` use private scanline collision outlines, distinct gold/black profiles and source-derived spike clocks. `death.mjs` handles fifteen staggered explosion particles; single-player death freezes play then resets actors, bonuses and flourishes. `replay.mjs` supplies bounded input-only route checks. Exact original callback timing, scoring, reveal pacing and full campaign support remain omitted or unqualified. Use `scripts/package_clockwerx_pilot.py` to copy all twelve required runtime files and verified assets. [Coordinator evidence](../../docs/iterations/2026-11-08-clockwerx-levels/spikes-review.md), [catalog inventory](../../docs/iterations/2026-11-08-clockwerx-levels/catalog-inventory.md), and [behavior/generation requirements](../../docs/iterations/2026-11-08-clockwerx-levels/requirements.md).
+
+Walls update: source specs compile into merged tiles with original collision spans, independently gated actor permissions and Child-mode activation. Static SVG walls are cached at backing resolution. Wall/door trapping is counted on source-class steps; automatic bounces preserve attention flourishes and suppress queued reverse. A phase regression prevents smooth reflection from spuriously repeating an identical source pose. The corresponding original/browser goal route and 38 model clock-start phases pass. Current packager copies thirteen runtime files, including `walls.mjs`; `programs.mjs` is a tested source-language helper, while referenced-program execution remains gated. [Walls evidence and limits](../../docs/iterations/2026-11-08-clockwerx-levels/walls-review.md).

@@ -7,15 +7,15 @@ export function createInputReplay(segments){
    ![null,'swing','flip','bounce'].includes(segment[1]))throw new TypeError('Invalid input segment');
   return [...segment];
  });
- let index=0,remaining=copy[0][0],step=0;
+ let index=0,remaining=copy[0][0],step=0,lastAction=null;
  return {
   next(){
-   if(index===copy.length)return {};
-   const action=copy[index][1];step++;remaining--;
+   if(index===copy.length){lastAction=null;return {};}
+   const action=copy[index][1];lastAction=action;step++;remaining--;
    if(remaining===0){index++;remaining=copy[index]?.[0]??0;}
    return action?{[action]:true}:{};
   },
   get done(){return index===copy.length;},
-  snapshot(){return {step,segment:index,remaining,done:index===copy.length};}
+  snapshot(){return {step,segment:index,remaining,done:index===copy.length,lastAction};}
  };
 }

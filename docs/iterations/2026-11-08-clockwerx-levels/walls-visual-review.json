@@ -1,0 +1,511 @@
+{
+  "schema": "clockwerx-walls-visual-review-v1",
+  "status": "silver-candidate-local-rasterization-reviewed-browser-acceptance-pending",
+  "measurements": {
+    "boundary": "Saved canvas compared with native crop; candidate is ImageMagick SVG rasterization, not browser output. Palette categories exclude source RGB130/background ambiguity.",
+    "overallExcludingRgb130": {
+      "pilot": {
+        "pixels": 13343,
+        "meanAbsoluteChannelError": 48.22878413150466,
+        "meanRgb": [
+          69.38889305253691,
+          75.24154987633965,
+          75.28996477553774
+        ]
+      },
+      "candidate": {
+        "pixels": 13343,
+        "meanAbsoluteChannelError": 4.5552724274900696,
+        "meanRgb": [
+          119.0202353293862,
+          119.28914037322942,
+          119.57873042044518
+        ]
+      }
+    },
+    "surfaces": {
+      "highlight": {
+        "native": {
+          "pixels": 1029,
+          "meanAbsoluteChannelError": 0.0,
+          "meanRgb": [
+            238.0,
+            238.0,
+            238.0
+          ]
+        },
+        "pilot": {
+          "pixels": 1029,
+          "meanAbsoluteChannelError": 122.86783284742468,
+          "meanRgb": [
+            108.13216715257532,
+            116.13216715257532,
+            121.13216715257532
+          ]
+        },
+        "candidate": {
+          "pixels": 1029,
+          "meanAbsoluteChannelError": 0.2099125364431487,
+          "meanRgb": [
+            237.79008746355686,
+            237.79008746355686,
+            237.79008746355686
+          ]
+        }
+      },
+      "front": {
+        "native": {
+          "pixels": 2242,
+          "meanAbsoluteChannelError": 0.0,
+          "meanRgb": [
+            202.0,
+            202.0,
+            202.0
+          ]
+        },
+        "pilot": {
+          "pixels": 2242,
+          "meanAbsoluteChannelError": 56.82173654475171,
+          "meanRgb": [
+            138.96743978590544,
+            146.97457627118644,
+            150.47948260481712
+          ]
+        },
+        "candidate": {
+          "pixels": 2242,
+          "meanAbsoluteChannelError": 0.16057091882247992,
+          "meanRgb": [
+            202.09634255129347,
+            202.09634255129347,
+            202.09634255129347
+          ]
+        }
+      },
+      "side": {
+        "native": {
+          "pixels": 7206,
+          "meanAbsoluteChannelError": 0.0,
+          "meanRgb": [
+            80.0,
+            80.0,
+            80.0
+          ]
+        },
+        "pilot": {
+          "pixels": 7206,
+          "meanAbsoluteChannelError": 32.381441391433064,
+          "meanRgb": [
+            45.043019705800724,
+            49.70843741326672,
+            48.38925895087427
+          ]
+        },
+        "candidate": {
+          "pixels": 7206,
+          "meanAbsoluteChannelError": 1.216393745952447,
+          "meanRgb": [
+            79.29530946433528,
+            79.29711351651402,
+            79.29905634193727
+          ]
+        }
+      },
+      "outerShadow": {
+        "native": {
+          "pixels": 2415,
+          "meanAbsoluteChannelError": 0.0,
+          "meanRgb": [
+            107.0,
+            107.0,
+            107.0
+          ]
+        },
+        "pilot": {
+          "pixels": 2415,
+          "meanAbsoluteChannelError": 50.5639751552795,
+          "meanRgb": [
+            53.13291925465838,
+            59.122567287784676,
+            57.16438923395445
+          ]
+        },
+        "candidate": {
+          "pixels": 2415,
+          "meanAbsoluteChannelError": 14.88999309868875,
+          "meanRgb": [
+            92.65714285714286,
+            92.66252587991718,
+            92.66832298136646
+          ]
+        }
+      }
+    },
+    "textInk": {
+      "narrative": {
+        "native": {
+          "brightNeutralPixels": 712,
+          "bounds": [
+            152,
+            75,
+            435,
+            87
+          ]
+        },
+        "pilot": {
+          "brightNeutralPixels": 188,
+          "bounds": [
+            155,
+            75,
+            428,
+            86
+          ]
+        }
+      },
+      "goForIt": {
+        "native": {
+          "brightNeutralPixels": 75,
+          "bounds": [
+            512,
+            142,
+            552,
+            149
+          ]
+        },
+        "pilot": {
+          "brightNeutralPixels": 15,
+          "bounds": [
+            514,
+            143,
+            543,
+            150
+          ]
+        }
+      },
+      "flipHere": {
+        "native": {
+          "brightNeutralPixels": 84,
+          "bounds": [
+            461,
+            286,
+            501,
+            295
+          ]
+        },
+        "pilot": {
+          "brightNeutralPixels": 20,
+          "bounds": [
+            463,
+            287,
+            495,
+            294
+          ]
+        }
+      },
+      "tinyWall": {
+        "native": {
+          "brightNeutralPixels": 78,
+          "bounds": [
+            128,
+            374,
+            169,
+            383
+          ]
+        },
+        "pilot": {
+          "brightNeutralPixels": 17,
+          "bounds": [
+            129,
+            375,
+            159,
+            384
+          ]
+        }
+      },
+      "goalDot": {
+        "native": {
+          "brightNeutralPixels": 81,
+          "bounds": [
+            488,
+            374,
+            524,
+            381
+          ]
+        },
+        "pilot": {
+          "brightNeutralPixels": 27,
+          "bounds": [
+            490,
+            375,
+            523,
+            382
+          ]
+        }
+      }
+    },
+    "inventory": {
+      "presentDots": 62,
+      "bonusDots": 9,
+      "goalDots": 1,
+      "markedDots": [
+        {
+          "row": 1,
+          "column": 10,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 2,
+          "column": 9,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 3,
+          "column": 5,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 3,
+          "column": 6,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 4,
+          "column": 8,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 4,
+          "column": 9,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 5,
+          "column": 8,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 5,
+          "column": 9,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        },
+        {
+          "row": 6,
+          "column": 9,
+          "bonus": false,
+          "goal": true,
+          "mask": 15
+        },
+        {
+          "row": 7,
+          "column": 3,
+          "bonus": true,
+          "goal": false,
+          "mask": 15
+        }
+      ]
+    },
+    "inputs": [
+      {
+        "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\pilot-initial.png",
+        "sha256": "3fc6fab5b1ccbc6e193aff241f07fba8fc08b937688ebe056ceaf53a34bab15c"
+      },
+      {
+        "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\native-play-01\\swing-03.png",
+        "sha256": "6644bc124f668c3f218610e0157e3e511dc3f1b427d03e86e01326316da483da"
+      },
+      {
+        "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\native-play-01\\after-release.png",
+        "sha256": "eb94229f47817858d7521ba1f11ed2aabe54618ec793b0579cdfdb8a0f113e0b"
+      },
+      {
+        "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\source-wall-composite.png",
+        "sha256": "330f5f26e103d66516ba2e3afcbf1cadcbbcf24f1df84203f45e144e071a5f42"
+      },
+      {
+        "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\native-placement-review.json",
+        "sha256": "cc16f776ff5253e6589a918f2a26a0420f679ee2ac1e4e50948837059ef82290"
+      },
+      {
+        "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\visual-review\\silver-candidate\\assets\\manifest.json",
+        "sha256": "e10a6acf2ebf6ac1d4cd3af9ba2ff1af44180de4603142dd549092779536abd7"
+      }
+    ]
+  },
+  "candidate": {
+    "candidateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\walls\\visual-review\\silver-candidate\\assets",
+    "manifestSha256": "e10a6acf2ebf6ac1d4cd3af9ba2ff1af44180de4603142dd549092779536abd7",
+    "changedFiles": [
+      "wall-0.svg",
+      "wall-1.svg",
+      "wall-5.svg",
+      "wall-6.svg",
+      "wall-7.svg",
+      "wall-8.svg",
+      "wall-9.svg",
+      "wall-10.svg",
+      "wall-11.svg",
+      "wall-12.svg",
+      "wall-13.svg",
+      "wall-14.svg",
+      "wall-15.svg",
+      "wall-16.svg",
+      "wall-17.svg",
+      "wall-18.svg",
+      "wall-19.svg"
+    ],
+    "preservedFiles": [
+      "ActionBounce.wav",
+      "ActionFlip.wav",
+      "ActionSwing.wav",
+      "backdrop.png",
+      "death.svg",
+      "dot-0.svg",
+      "dot-1.svg",
+      "dot-10.svg",
+      "dot-12.svg",
+      "dot-2.svg",
+      "dot-3.svg",
+      "dot-4.svg",
+      "dot-5.svg",
+      "dot-9.svg",
+      "goal.svg",
+      "hand-4300.svg",
+      "hand-4400.svg",
+      "hand-4500.svg",
+      "hand-500.svg",
+      "hand-700.svg",
+      "source-outlines.json",
+      "spike-0.svg",
+      "spike-1.svg",
+      "spike-2.svg",
+      "spike-3.svg",
+      "starbursts.svg"
+    ],
+    "baselineHashes": {
+      "ActionBounce.wav": "433fd9daec2e4e05e839aae9f9cb717cf7b788661e6fffa653f1905a43be50b1",
+      "ActionFlip.wav": "3e7171e136dbacb60b090d57977f2e8739d65adc32b3c94506a4ed78bf04ac12",
+      "ActionSwing.wav": "b1de69ca81fed617770266ec1ca678f9534ed6ff6b86ca610ab032a56be85365",
+      "backdrop.png": "f3abc35ed9d64c64dd5a1f0121020633d7c7a41985178db10c9541011e005b3e",
+      "death.svg": "70970b4cf1646a41262055c9804500e803435e610fb03375708c49e13d70f1bc",
+      "dot-0.svg": "20f1a0bf3c2808e97c7c25f9fe60fb55b8611ba730ca7d005c43b433635944ae",
+      "dot-1.svg": "c66ad0c1e93c99d836594066f8f4a46415ba80ce34493e42454d3346f74d4fac",
+      "dot-10.svg": "4fa31d6e13e721b37d030ab5708736b71778f5677054abba42f1e2640bfa9679",
+      "dot-12.svg": "ddb026202d85352409dbd8b3adef711604c40346a513026526558952438ab1c0",
+      "dot-2.svg": "3a839bd722c193dca3e76682175b34c71c0528616edfc239619e36fe90df9f4f",
+      "dot-3.svg": "838e25abb0955da34ee09ad0231ac07783b3297169efad303b5f1e4a8d5c6f9e",
+      "dot-4.svg": "d1e825ac4d3e6132c6c175be93e7d8da7a05d93b5a3321a6f714c201c47af82f",
+      "dot-5.svg": "90788083661859b42b10f418557bece7494e331654ad3afad7adbac80e137713",
+      "dot-9.svg": "d3bac20232fc1ac82aa39c115457f13c3f0f9ff224c119d6ee0b3d363cd8ac2b",
+      "goal.svg": "197715a591f771e99f830c8181c5a9f84529b3f2edc5b3e0a97dbf8da4955b13",
+      "hand-4300.svg": "376758d1b7cd1ccfa47ffa8b78b5871210b027daebe7da8a9e76344a4d32df17",
+      "hand-4400.svg": "887bc83ba85ca1468184a7d880cd7a6ce52545b4471988c97880197778861eb2",
+      "hand-4500.svg": "e503891069a0260c9277d2a1041eea183cece9b8c4e846437fdae6dde83778c7",
+      "hand-500.svg": "0f373cd0389e1b60588d71713f9cd3853fd1b7b855ba2eaf3c7011a07440ecec",
+      "hand-700.svg": "ad9e202ad97536018ecea72d1b2cc0c5d1b6c5e447909e72614192e8fad8dfbf",
+      "manifest.json": "9ff998f4ccaf0f350a5d72f3bb394e8bd51cd4b979dd2f867eafec11ce798b08",
+      "source-outlines.json": "2f082ce0fbfa1272dd99f94baffee7ab407cdb1bcbd30833952f1d5dcd30a269",
+      "spike-0.svg": "ff4e9193c82632abfcd7ec64b60370d7dd0e34f5a9eec0d8a8fef6cb57323bdc",
+      "spike-1.svg": "3f7516c24b44ec64a6701f424ce53ef72acf73844d3f60dabe9bb3f7fc8fdb9c",
+      "spike-2.svg": "852e1de87f2db15e4b914976f276ebab7f75a31a21cf287e16873c8309d8a4a7",
+      "spike-3.svg": "fe1aad0bb24286e2fbffdbb68c924d4a830e1f408a4dc5712e465ac711feff32",
+      "starbursts.svg": "84a14d6e48cfc40fe2aa1ace7e6ade0b8af4541dc723205dd6e6defd07e2df40",
+      "wall-0.svg": "87afb1cfa18b28bd8fca4b693274f5ebb2385a86ca90efb59ce0e636c5a11c28",
+      "wall-1.svg": "9649e1036aebe081474dacf498c145dc98273a6dc3af81d5f7ffd22df40145a9",
+      "wall-10.svg": "7bcf5a456710fab939b7deab4a9591bc0570ff419612eeb087e0bc5b5193bc9a",
+      "wall-11.svg": "3e2f3e128a42c20d1dfdc628ec916c1ccc27310b447a62a247365771e8d0d275",
+      "wall-12.svg": "b8ea92eed97c7e2f049fa7e365721df00e15cae0f6c7f390db143f4f23e65346",
+      "wall-13.svg": "6a9caa6acdcb8ae482cc8beafeaeebe185245ac028a11e70d61d894a1da43129",
+      "wall-14.svg": "1a25f37ef3b4b08ec41a6871df9b7c0ba8fd589d510a388eb0f221e28990e776",
+      "wall-15.svg": "082b0314c549a916e0832381e0575821c69ca380051e66f4365e4e4182aa388c",
+      "wall-16.svg": "b39ecb7cf2eb9daadbd14297038bfab7cf63889fc0e613df3a9391c1ab53fdca",
+      "wall-17.svg": "196fec8fa54c64b9215133fda455ddd925f2d76aa456b2165746fdc3d60c3006",
+      "wall-18.svg": "5a8fd772c307a5efa84bf17420e2f6e428eae1cb336c07d2468b4d3d69382ecc",
+      "wall-19.svg": "0244800361824c26ac9b3e0611c99dc1a01e9c2f66388471f6018faa31d28055",
+      "wall-5.svg": "c8af361226c12843ecb322c1aa45028df86a9b7d2335f41ff2e655be32a71450",
+      "wall-6.svg": "f33956b99d60f181da44fc79ea660dc2aea3c1018946c34216001adcb5ea08ce",
+      "wall-7.svg": "bd6c087748fea5528146c9dc3de30c45c8d7fd77e5aed65697f4df8a01efbca8",
+      "wall-8.svg": "a525a7b24edec3263eca5eb4476d9e98b20fb62d8b1f8610908d37c2bb92f9c4",
+      "wall-9.svg": "b93a2b9cf0048e7200d22da62a2eb6a53ea613aaf15ab444449707965ca33676"
+    },
+    "framesAndAnchorsUnchanged": true,
+    "collisionFileUnchanged": true,
+    "colors": {
+      "topLeftHighlight": [
+        238,
+        238,
+        238
+      ],
+      "front": [
+        202,
+        202,
+        202
+      ],
+      "bottomRightBevel": [
+        130,
+        130,
+        130
+      ],
+      "side": [
+        79,
+        79,
+        79
+      ],
+      "outerShadow": [
+        106,
+        106,
+        106
+      ],
+      "cap": [
+        217,
+        235,
+        255
+      ]
+    },
+    "method": "Union of authored axis-aligned 4px rectangles, diagonal sweep to7/8pixels, exposed-edge bevels; no source-pixel contour tracing",
+    "previewBoundary": "ImageMagick rasterization; saved local diagnostic, not actual browser render"
+  },
+  "nativePlacement": {
+    "source": "walls/native-placement-review.json",
+    "opaquePixels": 14496,
+    "bestOffset": [
+      0,
+      0
+    ],
+    "meanAbsoluteChannelError": 0.6637003311258278,
+    "fractionWithin2": 1.0,
+    "offsetsChanged": false
+  },
+  "childInventory": {
+    "activeMask": 1,
+    "visibleHumans": 1,
+    "visibleEnemies": 1,
+    "enemy": "lower green",
+    "rightStackActors": 0,
+    "spikes": 2,
+    "secondHuman": "separately hidden in single-player"
+  },
+  "limitations": [
+    "Candidate previews use ImageMagick, not actual browser rendering",
+    "Outer-shadow edge coverage and antialiased caps/junctions remain approximate",
+    "Dot shadows and Geneva font substitution remain visually different",
+    "Captures have different actor poses and attention phases",
+    "No runtime qualification performed by this worker"
+  ],
+  "workloadReleased": true
+}

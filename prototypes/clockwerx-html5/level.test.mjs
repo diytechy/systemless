@@ -25,12 +25,18 @@ test('decoded single-player board preserves duplicate spike cells and actor iden
  assert.equal(b.dots[1].kind,'bonus');assert.equal(b.player.pivot,'0,0');
 });
 test('unsupported mechanics, programs and conditional activation fail explicitly',()=>{
- const b=fixture();b.blocks.push({kind:'WL',count:1,records:[]});
+ const b=fixture();b.blocks.push({kind:'DR',count:1,records:[]});
  b.blocks[0].records[2].programReferenceRaw=0;b.cells[0].flagsRaw|=0x2000;
  const requirements=levelRequirements(b);
- assert.ok(requirements.includes('object class WL'));assert.ok(requirements.includes('actor programs'));
+ assert.ok(requirements.includes('object class DR'));assert.ok(requirements.includes('actor programs'));
  assert.ok(requirements.some(r=>r.startsWith('special dot flags')));
  assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU}),/Unsupported level/);
+});
+test('inactive difficulty records are not instantiated or program/type qualified',()=>{
+ const b=fixture();b.blocks[0].records.push({actorTypeRaw:5,activationMaskRaw:14,programReferenceRaw:0});
+ const board=buildDecodedBoard(b,{angularSpeed:TAU});
+ assert.equal(board.enemies.length,1);assert.equal(board.inactiveActorCount,1);
+ assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU,activeMask:2}),/unqualified difficulty/);
 });
 test('missing pivots, wrong human slots and unspecified clock never become playable',()=>{
  const b=fixture();b.blocks[0].records[0].gridPosition.column=9;

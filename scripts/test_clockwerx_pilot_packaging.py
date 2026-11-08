@@ -70,11 +70,11 @@ class PilotPackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
     def test_unverified_hazard_effect_and_collision_data_are_rejected(self):
-        for field in ('spikes','death','levelDefinition'):
+        for field in ('spikes','walls','death','levelDefinition'):
             with self.subTest(field=field):
                 self.manifest.pop('levelDefinition',None)
                 self.manifest['vectorAssets']=dict(dots=[],hands={})
-                if field=='spikes':self.manifest['vectorAssets']['spikes']=dict(frames=[dict(file='missing.svg')])
+                if field in ('spikes','walls'):self.manifest['vectorAssets'][field]=dict(frames=[dict(file='missing.svg')])
                 elif field=='death':self.manifest['vectorAssets']['death']=dict(file='missing.svg')
                 else:self.manifest['levelDefinition']=dict(outlinesFile='missing.json')
                 self.save_manifest()

@@ -1,6 +1,6 @@
 # ClockWerx behavior and generation requirements
 
-The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Spikes (ordinal 2) has a bounded playable candidate; its independent native route comparison is still running. Walls is the next implementation target. The map, artwork, original text and source analysis remain private.
+The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Movement, Spikes and Walls have bounded playable increments with native/browser checks. Doors (ordinal 4) is next; the complete catalog inventory is not a full runtime port. The map, artwork, original text and source analysis remain private.
 
 ## How a level is stored
 
@@ -68,3 +68,7 @@ A useful generator should create both a level and a reproducible solution trace.
 6. Replay the solution without solver privileges, retain the seed and action trace, and rate difficulty from timing windows, required decisions, waits, optional collection and mechanic combinations. Validate generated examples with native behavior where relevant.
 
 Initially, a Movement-only generator could provide meaningful guarantees within the bounded Movement model. Adding Spikes requires phase-aware collision and death/respawn semantics; adding programmable enemies requires the original instruction timing. A solver proves only the modeled rules, so claims of original-game solvability must wait for independent behavior qualification. No full-game generator or solvability guarantee is implemented yet.
+
+## Walls findings
+
+Twelve WL specs become51merged source tiles; frame masks, tiny joints and the inclusive third-cell intervals matter. Child activeMask1 excludes right-stack actors before instantiation; lower green remains active and has wall permission. Source wall contact reverses, with a fourth-consecutive human contact guard evaluated on source substeps. A wall bounce preserves attention flourishes and suppresses queued reverse; an accepted input/action disables them. Human hazard/wall checks precede animation; enemy wall checks follow animation; human-enemy overlap is a separate periodic check. Static SVG walls cache at backing resolution. Future shattering must invalidate that cache. Native placement and the legal fourteen-transfer goal route are independently checked. The widened route passes38shared-clock phases in the bounded model; this does not constitute a general solver or original timing proof. See walls-review.md and source supplements.

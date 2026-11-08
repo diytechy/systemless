@@ -1,0 +1,46 @@
+{
+  "schema": "clockwerx-vector-art-prep-v1",
+  "ordinal": 10,
+  "title": "Bombs",
+  "status": "private-candidate-native-review-required",
+  "candidateRoot": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/bombs/vector-candidate",
+  "baselinePayloadsPreserved": 51,
+  "baselineManifestPreserved": true,
+  "newPayloads": 13,
+  "atlasSha256": "2e4f98e0ca6d3a21c5b24ab426a102ea443d9640a6a81eec093da6dbd23abf89",
+  "sourceProfileSha256": "32f00e98ad66218c714c481dd2fb3ee8d48ad05981f99cdf049f6e92ba505a44",
+  "frameCounts": {
+    "1400": 15,
+    "1500": 12,
+    "1600": 18,
+    "1800": 10,
+    "1900": 17,
+    "300": 8,
+    "4100": 8
+  },
+  "validation": {
+    "baseline51PayloadHashes": true,
+    "baselineManifestHash": true,
+    "sourceDescriptorOffsetsSizesAndFlip": true,
+    "originalOutlineRowsAndHashes": true,
+    "SVGParsedNoEmbeddedRasterOrExternalReferences": true,
+    "allNonemptyFramesRendered": 88,
+    "emptySentinelsPreserved": 0,
+    "atlasFramesChecked": 88,
+    "atlasBleed": false
+  },
+  "limitations": [
+    "native object/raw-anchor placement unqualified",
+    "crater grain/asymmetric lighting approximated by radial rim/cracks",
+    "analytic dynamite/barrel silhouette and fuse attachment need native review",
+    "flame/ember density and hourglass turn require native-size comparison",
+    "burnt-dot shading approximated",
+    "Some Dots dependency independently gated"
+  ],
+  "rootRuntimeOrManifestEdited": false,
+  "nativeQualification": false,
+  "publicAssetsAdded": false,
+  "released": true,
+  "historicalPreparation": true,
+  "supersededByRootAcceptance": "bombs-review.json"
+}

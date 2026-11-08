@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 10,
-  "currentAction": "Bombs: integrate and qualify BO/GO/LI/fuse/explosion/burnt-dot mechanics under Child; preserve accepted nine-scene baseline",
+  "currentOrdinal": 11,
+  "currentAction": "Curves: source inventory and fresh native initial/goal/checkpoint checks; reuse qualified mechanics only after level-specific review",
   "levels": [
     {
       "ordinal": 1,
@@ -676,11 +676,32 @@
       "menuTitle": "Bombs",
       "resourceTitle": "Bombs",
       "sha256": "89ae570509b3cdcd3e40e310e8811105deff14dfb7f730081699b6c6a0db4b2f",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "bombs/native-play-01/report.json",
+        "bombs/program-review",
+        "bombs/native-chain-01/report.json",
+        "bombs/native-goal-route-01/report.json",
+        "bombs/native-spark-reset-01/report.json"
+      ],
+      "requirements": [
+        "ordered BO fuse paths and match ignition, not carried inventory",
+        "scaled103spark and unscaled100/150/200source clocks",
+        "cached-successor pools and previous-descriptor blast tests",
+        "topology-based blast damage and persistent pivots",
+        "GO deferred hide and rightward four-phase score effect",
+        "live+10time distinct from saved reset time",
+        "Child GO1000/completion1000/no time bonus",
+        "class3 canonical enemy speed"
+      ],
+      "svgStatus": "tenth Child scene active; native program/chain/GO/goal/spark-reset and browser goal/reset reviewed",
+      "generationConstraints": [
+        "serialized next-BO order and entry/exit route compatibility",
+        "terminal neighborhood and6explosion/17spark/5match/15GO capacities",
+        "phase-sensitive spark/blast safe corridors and usable input windows",
+        "restore transient topology, keep score through normal death, clear fresh play",
+        "retain timing uncertainty and rejected observations"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 88,
@@ -727,7 +748,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "boundedGameplayQualification": "documented Child routes and samples accepted; full-game gameplayQualified flag remains false"
     },
     {
       "ordinal": 11,

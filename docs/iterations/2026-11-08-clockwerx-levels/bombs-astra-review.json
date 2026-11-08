@@ -1,0 +1,142 @@
+{
+  "schema": "clockwerx-bombs-source-review-v1",
+  "ordinal": 10,
+  "resourceId": 10963,
+  "title": "Bombs",
+  "sourceSha256": "89ae570509b3cdcd3e40e310e8811105deff14dfb7f730081699b6c6a0db4b2f",
+  "status": "source-prepared-runtime-gated",
+  "gameplayQualified": false,
+  "inventory": {
+    "grid": [
+      11,
+      8
+    ],
+    "time": 90,
+    "dots": 88,
+    "bonus": 0,
+    "goal": 1,
+    "rings": 6,
+    "blocks": {
+      "SP": 2,
+      "WL": 3,
+      "PU": 2,
+      "BO": 8,
+      "GO": 2,
+      "WP": 3,
+      "WA": 5,
+      "TX": 4
+    },
+    "childActivePU": 0,
+    "childActiveOrdinaryEnemies": 2
+  },
+  "sourceContracts": {
+    "boFlags": "high byte; low byte ignored padding; no difficulty filter",
+    "roles": {
+      "bomb": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "fuse": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "match": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    "limits": {
+      "BO": 60,
+      "LI": 5,
+      "SR": 17,
+      "explosions": 6,
+      "GO": 15
+    },
+    "periods": {
+      "LI": {
+        "period": 100,
+        "scaled": false
+      },
+      "BO": {
+        "period": 150,
+        "scaled": false
+      },
+      "GO": {
+        "period": 200,
+        "scaled": false
+      },
+      "SR": {
+        "period": 62,
+        "scaled": true,
+        "startDelay": "MTAdjustPeriod(60), strict fresh TickCount > deadline"
+      }
+    },
+    "frame3Stationary": [
+      "SP",
+      "DS",
+      "EL",
+      "GN",
+      "TR",
+      "WL",
+      "DO"
+    ],
+    "frame3through10Moving": [
+      "DO",
+      "DP",
+      "WA"
+    ],
+    "frame4AfterMoving": [
+      "paint crater1400/14",
+      "stationary DO",
+      "empty WLAnnihilateSprites"
+    ],
+    "collisionDescriptor": "previous committed descriptor; callback frame10 uses9",
+    "chain": "increment serialized BO index at nonterminal path exhaustion",
+    "goodie": {
+      "points": 1000,
+      "timeSeconds": 10,
+      "sound": 22,
+      "hide": "flourish callback",
+      "serializedFrame59": "out-of-range ignored"
+    },
+    "bombedEnemyVisibility": {
+      "deadlineAssignedToAllHits": true,
+      "automaticResurrectionType": 5,
+      "ordinaryTypes1And2": "stay hidden until round reset",
+      "source": "CODE6:d98e-d9b4",
+      "correction": "Supersedes earlier broad ordinary enemy timed-return claim; independently source-confirmed after coordinator transfer audit"
+    }
+  },
+  "helper": "prototypes/clockwerx-html5/bombs.mjs",
+  "tests": {
+    "command": "node --test prototypes/clockwerx-html5/bombs.test.mjs",
+    "passed": 8,
+    "failed": 0
+  },
+  "privateRoot": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/bombs",
+  "privateProfileSha256": "62c13cfd24827e34fea0793ed9e7acde346bea913a104f4459c07243c5f9535c",
+  "originalAssetsConverted": false,
+  "acceptedBaselinesModified": false,
+  "gates": [
+    "ordered private fuse paths and scaled clocks",
+    "live source traversal and old-descriptor collision",
+    "wall topology/background mutation",
+    "burnt dot appearance and permission",
+    "rings and n/s/b/f enemy programs, class3",
+    "goodie score/time/deferred hide",
+    "full death/reset and type-specific enemy visibility",
+    "native and enhanced-visual comparison",
+    "higher difficulties and absent actor families"
+  ],
+  "released": true,
+  "historicalPreparation": true,
+  "supersededByRootAcceptance": "bombs-review.json"
+}

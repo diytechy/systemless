@@ -45,7 +45,7 @@ export class MovementGame {
       // goal effects. Ordinary Movement has no additional grab observer.
       if(this.onHumanGrab?.(target)===false)return;
       if(target.kind==='bonus'&&!target.collected){target.collected=true;this.event('bonus',h,target);}
-      if(target.kind==='goal'){this.complete=true;this.event('goal',h,target);}
+      if(target.kind==='goal'){this.onGoal?.(target);this.complete=true;this.event('goal',h,target);}
     }
   }
   snapshot(){return {time:this.time,steps:this.steps,activeSteps:this.activeSteps,paused:this.paused,complete:this.complete,player:{...this.player},demos:this.demos.map(h=>({...h})),events:[...this.events]};}

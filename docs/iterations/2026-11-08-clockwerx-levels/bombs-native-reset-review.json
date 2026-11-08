@@ -1,0 +1,41 @@
+{
+  "schema": "clockwerx-bombs-native-reset-review-v1",
+  "status": "spark-associated-DE-and-original-start-return-observed",
+  "summary": {
+    "status": "passed",
+    "frontend_ticks": 3306,
+    "guest_tick": 3904,
+    "budget_exhausted_frames": 0,
+    "assertions": 0
+  },
+  "approach": {
+    "transfers": 6,
+    "matches": 6,
+    "maxChannelMAE": 0.273
+  },
+  "returnFits": {
+    "cleanPoses": 25,
+    "firstGuestTick": 3414,
+    "maxChannelMAE": 0.7965812087059021,
+    "direction": "increasing canonical frames",
+    "spawn": "original player start"
+  },
+  "sourceDeathReason": 15,
+  "nativeReasonMeasured": false,
+  "deathPhotographs": {
+    "firstHeroOccludedGuestTick": 3244,
+    "visibleDEImage": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bombs\\native-spark-reset-01\\after-approach-60.png",
+    "returnImage": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bombs\\native-spark-reset-01\\after-approach-82.png"
+  },
+  "observations": [
+    "Hero clean at last approach position through guest3234; DE visibly active after that.",
+    "Clean start-pivot fit returns at3414; additional starburst-occluded samples excluded.",
+    "Match is rearmed, fuse/explosion hidden, original wall and dot state present after reset."
+  ],
+  "limits": [
+    "Source reason15 inferred from the nearby travelling spark and remote other hazards, not read from native memory.",
+    "Continuous pilot human motion/source callback phase differs; exact native DE onset is not claimed.",
+    "This native reset occurs before terminal blast, so restoration of blasted walls is unit/source evidence, not directly photographed in this run.",
+    "No score was collected before this reset; score retention is source/test evidence and earlier native9 evidence."
+  ]
+}

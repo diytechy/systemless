@@ -55,11 +55,12 @@ class PilotPackagingTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
 
     def test_oil_atlases_and_profiles_cannot_escape_verified_payloads(self):
-        for field in ('puddles','droplets','oilOutlinesFile','dotOutlinesFile'):
+        for field in ('puddles','droplets','oilOutlinesFile','dotOutlinesFile','bombOutlinesFile','bombs','bombDots'):
             with self.subTest(field=field):
                 self.manifest['vectorAssets']=dict(dots=[],hands={})
                 self.manifest['scenes']=[dict(title='Synthetic',levelDefinition=dict(outlinesFile='sample.png'))]
                 if field.endswith('File'):self.manifest['scenes'][0]['levelDefinition'][field]='missing.json'
+                elif field in ('bombs','bombDots'):self.manifest['vectorAssets'][field]={'synthetic':dict(file='missing.svg')}
                 else:self.manifest['vectorAssets']['oil']={field:dict(file='missing.svg')}
                 self.save_manifest()
                 with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)

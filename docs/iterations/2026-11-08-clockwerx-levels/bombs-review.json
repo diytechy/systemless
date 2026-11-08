@@ -1,0 +1,77 @@
+{
+  "schema": "clockwerx-level-acceptance-v1",
+  "ordinal": 10,
+  "title": "Bombs",
+  "mode": "Child single-player",
+  "status": "bounded-playable-increment-accepted",
+  "sourceSha256": "89ae570509b3cdcd3e40e310e8811105deff14dfb7f730081699b6c6a0db4b2f",
+  "runtimeTests": 171,
+  "packagingTests": 12,
+  "priorSceneRegressions": 9,
+  "goalOnsetCases": 16,
+  "native": {
+    "programPoseMatches": 66,
+    "chainTransfers": 7,
+    "acceptedSparkPoses": 95,
+    "acceptedExplosionPoses": 3,
+    "goalTransfers": 18,
+    "resetTransfers": 6,
+    "postReturnPoses": 25,
+    "goodieFlashPoses": 6,
+    "goodieScorePoses": 18,
+    "levelPoints": 2000
+  },
+  "browser": {
+    "goal": {
+      "validIdleCapture": true,
+      "complete": true,
+      "transfers": 18,
+      "points": 2000,
+      "time": 87.40000000001562,
+      "currentTime": 100,
+      "savedTime": 90
+    },
+    "reset": {
+      "validIdleCapture": true,
+      "roundRestarts": 1,
+      "pivot": "1,6",
+      "reason": "spark",
+      "currentTime": 90,
+      "savedTime": 90,
+      "visibleSparks": 0
+    },
+    "captureBoundary": "Idle after the functional event, not a matched gameplay performance benchmark",
+    "rejectedCaptures": [
+      "qa-invalid-background-capture.json",
+      "qa-goal-catchup-rejected.json"
+    ]
+  },
+  "preservation": {
+    "priorPayloads": 55,
+    "addedPayloads": 14,
+    "totalPayloads": 69,
+    "sourceModules": 24,
+    "sourceDescriptorsAndOutlinesIndependentlyRechecked": 104,
+    "sharedFilesUnchanged": true,
+    "saveKeyUnchanged": "systemless.clockwerx-html5.pilot.v1",
+    "mediaSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4"
+  },
+  "sizes": {
+    "sourceBytes": 155690,
+    "assetBytes": 1677332,
+    "manifestBytes": 889336,
+    "totalBytes": 2722358
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bombs",
+  "limitations": [
+    "Only actual Child static BOMBs/GO combination and documented routes qualified; other difficulty/actor/dynamic combinations remain gated.",
+    "Strict affine spark phase fails by0.0583callback; all95 positions fit within1guest tick observation uncertainty; source period retained.",
+    "Continuous human motion, exact input/reveal/random DE cadence remain approximate.",
+    "Flourish/float start and disposal boundaries partly source-derived; captured source poses and rightward/color-wave motion checked.",
+    "Crater grain, raster silhouettes and fonts simplified; original collision masks remain authoritative.",
+    "Native reset precedes terminal blast; blasted-wall restoration is source/unit-tested, not directly native-photographed here.",
+    "Full audio/campaign saves and physical controller hardware remain unqualified.",
+    "Existing default/tuned/prototype and frozen bitmap/SVG benchmarks are earlier versions; new10scene bundle has not been rebenchmarked.",
+    "Level generator is still a documented proposal."
+  ]
+}

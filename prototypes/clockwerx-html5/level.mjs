@@ -18,14 +18,14 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false}={}){
  const unsupported=[];
  const programs=level.blocks?.find(b=>b.kind==='WP')?.records.map(r=>r.text)||[];
  if(activeMask!==1)unsupported.push('unqualified difficulty clock');
  if(level.structuralStatus!=='complete')unsupported.push('incomplete source stream');
  if(![7,8].includes(level.header?.displaySizeRaw))unsupported.push('unqualified display-size selector');
  for(const block of level.blocks||[]){
-  if(block.count&&!['SP','WL','DR','DS','WP','WA','TX',...(allowOil?['PU']:[]),...(allowSpecialDots?['WY']:[])].includes(block.kind))unsupported.push('object class '+block.kind);
+  if(block.count&&!['SP','WL','DR','DS','WP','WA','TX',...(allowOil?['PU']:[]),...(allowSpecialDots?['WY']:[]),...(allowBombs?['BO','GO']:[])].includes(block.kind))unsupported.push('object class '+block.kind);
   if(block.kind==='WA')for(const actor of block.records){
    if(!(actor.activationMaskRaw&activeMask))continue;
    if(!(actor.actorTypeRaw in GROUPS))unsupported.push('actor type '+actor.actorTypeRaw);
@@ -39,7 +39,7 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyB
      if(actorChecksWalls(actor.version12ByteRaw??1))unsupported.push('programmed wall-reacting actor');
     }
    }
-   if(![0,1,4].includes(actor.rawWords?.[7]))unsupported.push('actor speed class '+actor.rawWords?.[7]);
+   if(!(allowBombs?[0,1,3,4]:[0,1,4]).includes(actor.rawWords?.[7]))unsupported.push('actor speed class '+actor.rawWords?.[7]);
   }
  }
  for(const cell of level.cells||[]){
@@ -56,17 +56,18 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyB
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
  const dots=level.cells.filter(c=>c.present).map(c=>{
   const state=decodeDot(c.flagsRaw);
-  return {id:`${c.column},${c.row}`,sourceIndex:c.row*11+c.column,x:origin.x+c.column*48,y:origin.y+c.row*48,
+  return {id:`${c.column},${c.row}`,sourceIndex:c.row*11+c.column,row:c.row,column:c.column,x:origin.x+c.column*48,y:origin.y+c.row*48,
    humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,
    present:true,motion:'static',slideMask:0,teleport:false,color:dotColorOffset(c.secondaryRaw,0),
    ring:allowSpecialDots&&!!(c.flagsRaw&8),protected:allowSpecialDots&&!!(c.flagsRaw&0x40),
+   bonus:state.bonus,sourceInBackground:!(c.flagsRaw&0x1e),
    cell:c.flagsRaw,flags:c.secondaryRaw,kind:state.goal?'goal':state.bonus?'bonus':'dot'};
  });
  const records=kind=>level.blocks.find(b=>b.kind===kind)?.records||[];
@@ -91,9 +92,9 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
    program,sourcePC:program?a.rawWords[6]:undefined,canonicalFrame:allowEnemyStaticPrograms&&index>=2,
    frame:program||(allowEnemyStaticPrograms&&index>=2)?frame:undefined,unwrappedFrame:program||(allowEnemyStaticPrograms&&index>=2)?frame:undefined,
    visible:true,orphaned:false,hiddenUntil:0,
-   group:GROUPS[a.actorTypeRaw],sourceActorType:a.actorTypeRaw,speedClass:a.rawWords[7],...actorTiming(a.rawWords[7]),checksWalls:actorChecksWalls(a.version12ByteRaw??1)};
+   group:GROUPS[a.actorTypeRaw],sourceSlot:index,sourceActorType:a.actorTypeRaw,speedClass:a.rawWords[7],...actorTiming(a.rawWords[7]),checksWalls:actorChecksWalls(a.version12ByteRaw??1)};
  };
- const spikes=records('SP').map((r,index)=>({id:index,...spikeGridPoint(r,origin),phase:index%4,activationMask:r.rawWords[4]*65536+r.rawWords[5]}));
+ const spikes=records('SP').map((r,index)=>({id:index,row:r.rawWords[0],column:r.rawWords[1],subrow:r.rawWords[2],subcolumn:r.rawWords[3],...spikeGridPoint(r,origin),phase:index%4,activationMask:r.rawWords[4]*65536+r.rawWords[5]}));
  if(spikes.some(s=>s.activationMask!==15))throw new Error('Conditional spike activation is unqualified');
  const wallTiles=compileWallTiles(records('WL').map(r=>({axis:r.rawWords[0]>>>8,
   fixed:signedWord(r.rawWords[1]),start:signedWord(r.rawWords[2]),startInset:signedWord(r.rawWords[3]),
@@ -105,6 +106,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
  return {ordinal,title,resourceId:level.resourceId,origin,dots,radius:48,distanceTolerance:1,angularSpeed,handOffsetY:1,
   player:hand(actors[0],0),demos:[],enemies:actors.slice(2).map((a,i)=>hand(a,i+2)),spikes,walls,doors,switches,
   puddles:allowOil?activePuddleSpecs(records('PU'),activeMask):[],
+  bombRules:allowBombs,bombs:allowBombs?records('BO'):[],goodies:allowBombs?records('GO').filter(r=>(r.rawWords[3]*65536+r.rawWords[4])&activeMask).map(r=>({row:r.rawWords[0],column:r.rawWords[1],initialFrame:r.rawWords[2]})):[],
   activeMask,difficulty:'Child',sourceDotPermissions:true,specialDotRules:allowSpecialDots,staticEnemyCallbacks:allowEnemyStaticPrograms,timeLimit:level.header.timeLimitRaw,
   inactiveActorCount:records('WA').length-actors.length,
   texts:records('TX').map(t=>({font:t.fontName,size:t.fontSize,face:t.fontFaceRaw,

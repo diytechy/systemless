@@ -1,6 +1,6 @@
 # ClockWerx behavior and generation requirements
 
-The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Movement through Some Dots have nine bounded playable increments with native/browser checks. Bombs (ordinal 10) is current; the complete catalog inventory is not a full runtime port. The map, artwork, original text and source analysis remain private. The [generation method](generation-method.md) describes a proposed generator and its validation requirements.
+The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Movement through Bombs have ten bounded playable increments with native/browser checks. Curves (ordinal11) is current; the complete catalog inventory is not a full runtime port. The map, artwork, original text and source analysis remain private. The [generation method](generation-method.md) describes a proposed generator and its validation requirements.
 
 ## How a level is stored
 
@@ -108,3 +108,9 @@ Three long horizontal gates share six paired switches. One swing in the goal rou
 ## Some Dots: state beyond the map
 
 Disappearing rings retain enemy lookup while denying human actions, including bounce. Orphaned enemies continue their programs while flickering/hiding. Waypoints save a return specification and integer time, not board state; normal death and explicit restart have different animation/spawn effects. Protection is ordinary-enemy immunity, with spike death still possible. The two input certificates cover goal and checkpoint return over266clock samples each; native contact is independently confirmed in16overlap captures. Legal off-cardinal reverse belongs in the solver state. See [Some Dots evidence](some-dots-review.md).
+
+## Bombs: serialized paths and callback-local damage
+
+BO flags are a high byte plus ignored padding, not a difficulty mask. Matches ignite a source-ordered fuse list rather than adding a carried item. A generator must retain each entry/exit token, transformed original path, serialized successor and terminal2x2neighborhood. It must budget17sparks,6explosions,5matches and15goodies, and keep callback-local insertions/count references. Travelling sparks and the old explosion descriptor require their own original-outline checks; nearby graph pivots alone do not certify safety. Blasts change wall/spike topology and dot appearance without deleting pivots or grab permissions.
+
+GO awards1,000points and+10live time, leaves saved reset time untouched, and hides at a deferred flash callback. Its score effect moves right and cycles four digit colors. Child completion adds1,000without a time bonus. Normal death restores transient objects and retains earned score; an explicit fresh pilot play clears score. The accepted18transfer route passes16sampled onset cases, plus native/browser goal and separate spark-reset checks. Exact observation phase remains uncertain by roughly one guest tick. See [Bombs evidence](bombs-review.md); this does not enable future GO/dynamic/protected/checkpoint combinations automatically.

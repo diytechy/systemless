@@ -10,6 +10,7 @@ import {createActorClocks} from './actor-clocks.mjs';
 import {advanceBounceEnemy} from './programs.mjs';
 import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs';
 import {StaticDotRuntime} from './special-dot-runtime.mjs';
+import {BombScene} from './bomb-scene.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -21,7 +22,7 @@ export function worldOutline(profile,group,frame,point){
 }
 
 export class SourceRound extends MovementGame {
- constructor(board,{outlines,doorOutlines,oilOutlines,dotOutlines,oilBounds,deathFactory,guestTicksPerSecond=60}={}){
+ constructor(board,{outlines,doorOutlines,oilOutlines,dotOutlines,oilBounds,bombOutlines,bombRoutes,deathFactory,guestTicksPerSecond=60}={}){
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
@@ -31,6 +32,7 @@ export class SourceRound extends MovementGame {
    this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
    this.remainingTime=board.timeLimit;this.onHumanGrab(this.point(this.player));
   }
+  if(board.bombRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
  }
  reset({preserveCheckpoint=false}={}){
   super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
@@ -46,6 +48,7 @@ export class SourceRound extends MovementGame {
   this.spikeStates=new Map((this.board.spikes||[]).map(s=>[s.id,{frame:s.phase,reference:Math.floor((this.spikeCount+s.phase)/4)}]));
   this.death=null;this.roundRestarts=0;this.elapsedTime=0;this.pendingReverse=false;
   this.oil?.reset(this.player.pivot);
+  this.bombScene?.reset({restartLevel:!preserveCheckpoint});
   this.guestTicks??=0;
   if(this.board.specialDotRules){
    this.dotClock??=createSourceTimerChain(40,2);this.protectionClock??=createSourceTimerChain(50,1);
@@ -63,11 +66,17 @@ export class SourceRound extends MovementGame {
   this.player.group=group;this.board.player.group=group;
  }
  spikeFrame(spike){return this.spikeStates.get(spike.id).frame;}
+ advanceSpikes(){
+  for(const spike of this.board.spikes){
+   const state=this.spikeStates.get(spike.id),reference=Math.floor((this.spikeCount+spike.phase)/4);
+   if(reference!==state.reference){state.reference=reference;state.frame=(state.frame+1)%4;}
+  }
+ }
  point(hand){return this.board.dots.find(d=>d.id===hand.pivot);}
  collider(hand){return hand.visible===false?null:worldOutline(this.outlines,hand.group,hand.program||hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),this.point(hand));}
  spikeCollision(){
   const hero=this.collider(this.player);
-  for(const spike of this.board.spikes)if(outlineCollision(hero,worldOutline(this.outlines,200,this.spikeFrame(spike),spike)))
+  for(const spike of this.board.spikes)if(spike.visible!==false&&outlineCollision(hero,worldOutline(this.outlines,200,this.spikeFrame(spike),spike)))
    return {reason:'spike',object:spike.id};
   return null;
  }
@@ -81,7 +90,7 @@ export class SourceRound extends MovementGame {
  wallCollision(hand){
   if(!hand.checksWalls)return null;
   const actor=this.collider(hand);
-  return (this.board.walls||[]).find(w=>outlineCollision(actor,worldOutline(this.outlines,800,w.frame,w)))||null;
+  return (this.board.walls||[]).find(w=>w.visible!==false&&outlineCollision(actor,worldOutline(this.outlines,800,w.frame,w)))||null;
  }
  programTarget(hand){
   const offset={0:[48,0],16:[0,48],32:[-48,0],48:[0,-48]}[hand.frame];
@@ -162,6 +171,7 @@ export class SourceRound extends MovementGame {
    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});
   }});
  }
+ onGoal(){this.bombScene?.finish();}
  restartAfterDeath(){
   const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,
    events:this.events,roundRestarts:this.roundRestarts+1,elapsedTime:this.elapsedTime};
@@ -178,6 +188,7 @@ export class SourceRound extends MovementGame {
   this.spikeCount=this.spikeClock.advance(elapsed).clientCount;
   this.deathClock.advance(elapsed);
   this.oil?.advanceClocks(elapsed);
+  this.bombScene?.advanceClocks(elapsed);
   const doorCount=this.doorClock.advance(elapsed).clientCount;
   const actorTimer=this.actorClock.advance(elapsed),actorState=this.actorClasses.latch(actorTimer.clientCount),substeps=new Map();
   for(const hand of [this.player,...this.enemies]){
@@ -187,19 +198,20 @@ export class SourceRound extends MovementGame {
   const actorSubstep=substeps.has(this.player);
   const dotCount=this.dotClock?.advance(elapsed).clientCount,overlayCount=this.protectionClock?.advance(elapsed).clientCount;
   if(this.dotAnimations&&!this.death)this.dotAnimations.observeClocks({dotCount,overlayCount,guestTick:this.guestTicks});
-  if(!this.death)for(const spike of this.board.spikes){
-   const state=this.spikeStates.get(spike.id),reference=Math.floor((this.spikeCount+spike.phase)/4);
-   // SUProcessSprite advances once when the shared clock changes, including
-   // a missed interval; it does not catch up by an arbitrary clock delta.
-   if(reference!==state.reference){state.reference=reference;state.frame=(state.frame+1)%4;}
-  }
+  // Existing scenes retain their qualified phase. BO scenes place layer2
+  // after the upper fuse/GO/Oil layers, before appended explosion callbacks.
+  if(!this.death&&!this.bombScene)this.advanceSpikes();
   // Door callbacks observe one changed shared count, rather than catching up
   // every missed phase. Cross-layer source traversal phase remains approximate.
   if(!this.death)this.doorSystem.observeClock(doorCount);
+  this.bombScene?.processUpper();
   // Physical source layer11 (PU/DP) precedes enemy1, then human0. A droplet
   // arrival may latch death and freeze the remaining sprite callbacks.
   if(!this.death)this.oil?.processSprites({onDeath:reason=>this.beginDeath({reason:'oil',sourceReason:reason}),isFrozen:()=>!!this.death});
+  if(!this.death&&this.bombScene)this.advanceSpikes();
+  this.bombScene?.processExplosions();
   if(!this.death)for(const enemy of this.enemies){
+   this.bombScene?.runtime.checkMatch(enemy);
    if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}
    if(enemy.program){this.animateProgramEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer);continue;}
    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);
@@ -211,8 +223,11 @@ export class SourceRound extends MovementGame {
   if(!this.death&&actorSubstep){
    const spike=this.spikeCollision();
    if(spike)this.beginDeath(spike);
-   else{
+   this.bombScene?.runtime.checkGoodie(this.player);
+   if(!spike||this.bombScene){
     this.oil?.contactHuman(this.collider(this.player));
+    this.bombScene?.runtime.checkMatch(this.player);
+    this.bombScene?.runtime.checkSpark(this.player);
     const wall=this.wallCollision(this.player),door=wall?null:this.doorCollision(this.player);
     if(door?.lethal)this.beginDeath({reason:'door',object:door.doorIndex});
     else{
@@ -226,6 +241,7 @@ export class SourceRound extends MovementGame {
     }
    }
   }
+  this.bombScene?.processEffects();
   if(this.death){
    this.steps++;this.activeSteps++;
    this.death.update(elapsed);
@@ -236,6 +252,6 @@ export class SourceRound extends MovementGame {
    if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
   }
  }
- snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+  snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

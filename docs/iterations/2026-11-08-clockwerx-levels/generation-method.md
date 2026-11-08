@@ -49,7 +49,7 @@ The source surveys now cover all100listed levels. This establishes requirements,
 
 | Later family | Additional generator state or constraint |
 |---|---|
-| Bombs and goodies | Fuse routes, shared effect capacities, ordered blast passes, burnt appearance without deleting pivots, score/time and match pickups |
+| Bombs and goodies | Fuse routes, shared effect capacities, ordered blast passes, burnt appearance without deleting pivots, score/live-time and match ignition |
 | Up/down dots | Shared channels, entry history, intermediate phase, independent permissions, rider motion and endpoint orphan/death handling |
 | Teleports | Paired endpoints, supported nonrecursive arrival/release hooks and actor eligibility |
 | Sliding connectors | Explicit EX route masks, fixed three-pixel steps and16-step completion, angle retention and reversal; ordinary pivot transfer is a different action |
@@ -61,3 +61,5 @@ The source surveys now cover all100listed levels. This establishes requirements,
 Some original records deliberately or accidentally exceed a program array or refer to an invalid goodie frame. The original can disable those objects/programs; generated levels should reject dangling references instead of relying on that fallback. A color-mismatched trigger still changes its own occupancy even when it fires no gun. Capacities and no-op instruction bytes belong in validation, rather than being inferred from a convenient word such as “left.”
 
 Detailed source surveys: [11–22](follow-on-11-22-review.md), [23–40](follow-on-23-40-review.md), [41–60](follow-on-41-60-review.md), [61–80](follow-on-61-80-review.md), [81–100](follow-on-81-100-review.md). Their remaining native, timing, RNG and numerical uncertainties remain gates. Some Dots also demonstrates why an invulnerability test should force actual overlap: safe waiting alone did not exercise it, whereas a legal off-cardinal reverse did.
+
+Bombs adds a serialization constraint to the proposed generator: connected-looking rope geometry is insufficient. Successor order, route entry/exit tokens and transform flags must produce a terminating chain within pool limits. Preserve source callback clocks and test the actual human hand outline against travelling sparks and old blast descriptors. A witness can deliberately ignite, retreat, wait for a wall gap, collect a GO and finish, as the accepted18transfer certificate demonstrates. Store rejected routes and clock-phase tolerances with the seed. No new-level generator has been implemented.

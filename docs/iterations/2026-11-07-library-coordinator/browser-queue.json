@@ -16,12 +16,15 @@
     460.75
   ],
   "active_tab": null,
-  "next": "CorrectedpilotGUI then9alternating matchedcaptures; original6heldSpace30+18sadvancedMovementtoSpikes,total2000; prototype30+18sreachedgoaloverlay; rootclosedalltabs",
+  "next": "First pending title in games order; Clock final comparison already reviewed; one release emulator at a time",
   "games": [
     {
       "id": "koji-personal-204",
       "route": "/koji-the-frog/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/koji.json",
+      "scene": "Level1 lily-pad field, score0, synthetic test origin, no input20seconds, insects and deaths/respawns continue",
+      "accepted_change": null
     },
     {
       "id": "clockwerx-personal-10",
@@ -31,12 +34,18 @@
     {
       "id": "delirium-personal-11",
       "route": "/delirium/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/delirium.json",
+      "scene": "Classic field after PREPARE message cleared, score100, orb/landscape visible, no input20seconds; actual readiness phase differs from earlier score0 runs",
+      "accepted_change": null
     },
     {
       "id": "owned-3-d-cannon-v1",
       "route": "/3-d-cannon/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/3-d-cannon.json",
+      "scene": "OnePlayer terrain/perspective, Red0 Blue0, aim359.6 afterRight, velocity50percent, no input20seconds afterSpace view transition",
+      "accepted_change": null
     },
     {
       "id": "owned-3d-brick-bash-1-1-1-v1",

@@ -1,0 +1,12 @@
+{
+  "id": "owned-blood-bath-demo-1-96-v1",
+  "scene": "Partiallyvisible Demo title overdominantredfield; Demo control didnotadvance",
+  "observed_checks": "Route loads title; Demo position clicked500ms then1500ms andReturn; title remains; PNGsaved",
+  "remaining_limits": "No representativegameplay, therefore no validgameplaytiming/candidate. Matches native symptom; missingmusic causalrole/rendering causeunproven. Inputhitregion and readinessunresolved; sound/saves/hardware unqualified.",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {}
+}

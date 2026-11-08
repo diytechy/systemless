@@ -140,17 +140,26 @@
     {
       "id": "owned-bikaka-1-4-v1",
       "route": "/bikaka-1-4/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/bikaka.json",
+      "scene": "FreshCommandN initialfallinghexpiece, score0/level1/lines0, noinput20seconds, activeboardretained",
+      "accepted_change": null
     },
     {
       "id": "blobbo-full-personal-101",
       "route": "/blobbo/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/blobbo.json",
+      "scene": "FullWelcome01 board afterleftmousemovement, noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-blood-bath-demo-1-96-v1",
       "route": "/blood-bath-demo-1-96/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/blood-bath.json",
+      "scene": "Partiallyvisible Demo title overdominantredfield; Demo control didnotadvance",
+      "accepted_change": null
     },
     {
       "id": "owned-bloodsuckers-v1",

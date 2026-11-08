@@ -1,0 +1,149 @@
+{
+  "title": "Barney Carnage 2.0",
+  "outcome": "unchanged baseline; bounded diagnostic experiment justified",
+  "recommendation": "Authorize only a reversible 12 MHz per-title diagnostic comparison against 25 MHz, gated on confirming the same active Level 1 scene; accept no runtime change from present evidence.",
+  "accepted_change": null,
+  "candidate_mhz": 12,
+  "baseline_mhz": 25,
+  "workload_released": true,
+  "workload_run": "none; light read-only source/raw-evidence review",
+  "reviewed_revision": "6a61b88bd4bb7d1fb2e812d69a38f139974bda8b",
+  "compiled_revision": "7170f7e7",
+  "wasm_sha256": "af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "identity": {
+    "id": "owned-barney-carnage-2-0-v1",
+    "architecture": "68k",
+    "screenSize": [
+      800,
+      600
+    ],
+    "screenDepth": 8,
+    "partition": null,
+    "pacing": {
+      "adaptive_min_cpu_mhz": null,
+      "cpu_mhz": 25,
+      "max_ticks_per_paint": 2,
+      "reset_slack_ticks": 4
+    }
+  },
+  "capture": {
+    "captureStartedAt": "2026-11-08T01:27:33.539Z",
+    "capturedAt": "2026-11-08T01:27:53.544Z",
+    "reason": "complete",
+    "visible": true,
+    "focused": true,
+    "frames": 1484,
+    "sampledSeconds": 19.975620000001044,
+    "guestTicksPerSecond": 5.006102438872724,
+    "guestMips": 1.8674003610400103,
+    "runtimeFramesPerSecond": 74.2404991684825,
+    "animationCallbacksPerSecond": 165.01262464053983,
+    "visualFrames": 1,
+    "guestExecutionMs": {
+      "mean": 13.190512129351637,
+      "p95": 13.324999999254942,
+      "max": 13.440000001341105
+    },
+    "roundTripMs": {
+      "mean": 13.401735175159983,
+      "p95": 13.599999997764826,
+      "max": 16.21499999985099
+    },
+    "snapshotMs": {
+      "mean": 0.00207884096593227,
+      "p95": 0.004999998956918716,
+      "max": 2.300000000745058
+    },
+    "jsCopyMs": {
+      "mean": 0.00028975741219809757,
+      "p95": 0,
+      "max": 0.4299999997019768
+    },
+    "workerWasmLinearMemoryBytes": {
+      "mean": 164102144,
+      "p95": 164102144,
+      "max": 164102144
+    }
+  },
+  "raw_review": {
+    "rows_checked": 1484,
+    "nonmonotonic_rows": 0,
+    "tick_delta_counts": {
+      "0": 1383,
+      "1": 100
+    },
+    "backlog_counts": {
+      "1": 25,
+      "2": 372,
+      "3": 369,
+      "4": 374,
+      "5": 344
+    },
+    "all_cpu_budget_ms": 13,
+    "all_actual_cpu_mhz": 25,
+    "resource_samples_checked": 30,
+    "resource_process_records_checked": 1936,
+    "resource_samples_in_capture": 15,
+    "resource_coverage_brackets_capture": true,
+    "resource_max_sample_gap_seconds": 1.611215
+  },
+  "resource_context": {
+    "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+    "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+    "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+    "measuredCpuIntervalSeconds": 19.021003,
+    "aggregateCpuPercentOfHostTimeWeighted": 5.794718299905987,
+    "hostCpuPercent": {
+      "mean": 37.46666666666667,
+      "median": 41,
+      "min": 6,
+      "max": 57
+    },
+    "aggregateWorkingSetBytes": {
+      "mean": 5906216004.266666,
+      "median": 5957836800,
+      "min": 5675765760,
+      "max": 5980123136
+    },
+    "aggregatePrivateBytes": {
+      "mean": 5950319274.666667,
+      "median": 5969862656,
+      "min": 5868167168,
+      "max": 5992595456
+    }
+  },
+  "evidence_sha256": {
+    "barney-timing.json": "8f151a728868ffd100b89faf3e948e0d37b4cb3dda765ef19a0d229523503d1b",
+    "barney-resources.json": "bd0a96ec912ba272b990d3620a7479a99b3955b95001b499e558a766e5995531",
+    "barney-resource-summary.json": "f977a4b6d167c66129464a6551bb71394b54089426eee21bfee5fc55a59699a2"
+  },
+  "source_sha256": {
+    "www/src/emulator.rs": "ea18f75d34bdb433fc307d598a1974a6dddbef27b7667fdcbb2977f393ad059a",
+    "www/src/worker_runtime.rs": "acbcbf0f04904ff95f76610726fba07f5111b679274ec16f997113169aa146f6",
+    "www/src/emulator-worker.js": "c881c614c41418586d8c8fb817384f61dcbe9878336fafff1affb87fa398a5c4",
+    "scripts/runtime-profiler.js": "80caed233d9aaddf5a53ab2fff434b4dbed1a01934e5b9c97c57570d5db78b3a",
+    "www/src/components/game_screen.rs": "0c5247ef11758321440cfefab9f9ab4fd4d784d260139a6be68e8cb4732a53ac"
+  },
+  "protocol": {
+    "order_mhz": [
+      25,
+      12,
+      25,
+      12,
+      25,
+      12
+    ],
+    "valid_repetitions_each": 3,
+    "capture_seconds": 20,
+    "input_during_capture": "none; same freshly reached Level 1 white field, starting target region and cursor position",
+    "gate": "Confirm active scene with timestamped before/after screenshots and visible target motion; stop if menu/pause/scene cannot be matched.",
+    "acceptance": "Diagnostic evidence only; compare medians/ranges for clocks, execution/backlog and observed target displacement/events. Require trusted reference and busy scenes/audio/input/saves qualification before promotion."
+  },
+  "limits": [
+    "Only one visual-work frame during existing capture; target motion rate not established",
+    "No original/reference pace; 60.15 guest Hz is runtime clock convention, not proven game pace",
+    "Shot red burst observed by coordinator after capture; hit/scoring/rules unverified",
+    "Busy levels, pause/menu, audio, saves and physical controller unqualified",
+    "Broad process CPU/memory includes unrelated applications; no game-only attribution"
+  ]
+}

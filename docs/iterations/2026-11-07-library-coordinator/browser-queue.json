@@ -471,17 +471,26 @@
     {
       "id": "owned-spin-doctor-v1",
       "route": "/spin-doctor/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/spin-doctor.json",
+      "scene": "Actualselected2 Wands, lives4 score0, fourrotatinghands, noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-star-trek-final-unity-v1",
       "route": "/star-trek-final-unity/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/star-trek-startup.json",
+      "scene": "Two-volume674420308byte package fetched/mounted, initialblackfield ongrayborder; noinput20secondstartupdiagnostic endswhitecentralrectangleonblack",
+      "accepted_change": null
     },
     {
       "id": "owned-super-munchers-v1",
       "route": "/super-munchers/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/super-munchers.json",
+      "scene": "Animals Beginner Level1 amphibians, score0 full3lives, Right100ms thennoinput20seconds; enemiesenterfield/lifedecrement",
+      "accepted_change": null
     },
     {
       "id": "owned-system-s-twilight-v1-0-5-v1",

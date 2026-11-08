@@ -43,6 +43,7 @@ def package(dist,assets):
         vector=manifest['vectorAssets']
         references.update(vector['dots'])
         references.update(hand['file'] for hand in vector['hands'].values())
+        if vector.get('goal'):references.add(vector['goal']['file'])
     for name in references:filename(name)
     if not references<=files.keys():raise ValueError('Manifest references an unverified asset')
     for name in CODE:

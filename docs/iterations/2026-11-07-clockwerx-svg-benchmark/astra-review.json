@@ -1,0 +1,90 @@
+{
+  "status": "candidate ready for coordinator acceptance",
+  "model": "Astra as assigned; no substitution or nested agents",
+  "method": "Manual multi-view interpretation; half-Bezier outlines and cutouts reflected exactly; palette sampled from original canonical PNGs",
+  "manifest": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-svg-benchmark\\astra\\assets\\manifest.json",
+  "privateProfile": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-svg-benchmark\\astra\\design-profile.json",
+  "viewedInputs": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-svg-benchmark\\astra\\viewed-inputs.json",
+  "viewedReferenceCount": 25,
+  "viewedFrames": [
+    0,
+    8,
+    16,
+    24,
+    32
+  ],
+  "sourceManifestSha256": "937b97771c5613c170323584186c022cf92e69c9f4a06947548451e9985535ab",
+  "profileSha256": "0e8e4d42d2fcd9797017ced06d68e90b0cf3a595be2ec5976675306ca1e7b52c",
+  "manifestSha256": "358a3b57ff6d6eae0bc23accd9cd2b78975ffb355bb4740d83f3a7c4917220b5",
+  "originalContactSheetSha256": "72b0582089411f4d0e564dbeacd9a642ab3e73cd96639b0c0d907da5395f14bc",
+  "reviewContactSheetSha256": "f5252a0a49623a60029fe5a838bb7f16f7f5482ceed6406c56ec36b7f5afe41b",
+  "handChecks": {
+    "500": {
+      "exactMirroredSegmentCheck": true,
+      "segments": 18,
+      "svgBytes": 795
+    },
+    "4400": {
+      "exactMirroredSegmentCheck": true,
+      "segments": 8,
+      "svgBytes": 565
+    },
+    "4500": {
+      "exactMirroredSegmentCheck": true,
+      "segments": 8,
+      "svgBytes": 539
+    },
+    "700": {
+      "exactMirroredSegmentCheck": true,
+      "segments": 16,
+      "svgBytes": 801
+    },
+    "4300": {
+      "exactMirroredSegmentCheck": true,
+      "segments": 16,
+      "svgBytes": 801
+    }
+  },
+  "identicalPreservedFiles": [
+    "ActionBounce.wav",
+    "ActionFlip.wav",
+    "ActionSwing.wav",
+    "backdrop.png",
+    "dot-0.svg",
+    "dot-1.svg",
+    "dot-2.svg",
+    "dot-3.svg",
+    "dot-4.svg",
+    "dot-5.svg"
+  ],
+  "preservedManifestFields": [
+    "vectorAssets",
+    "board",
+    "logicalSize",
+    "sounds",
+    "backdrop",
+    "fixtureSha256"
+  ],
+  "assetFileCount": 15,
+  "assetBytes": 66697,
+  "manifestBytes": 3315,
+  "handSvgBytes": 3501,
+  "genericTests": {
+    "passed": 4,
+    "command": "python -m unittest test_reconstruct_assets.py",
+    "cwd": "prototypes/clockwerx-html5"
+  },
+  "limitations": [
+    "Intentional interpretation, not pixel-exact recovery of unavailable source vectors",
+    "Directional gradients approximate palette and lighting; symmetric geometry does not imply symmetric RGB pixels",
+    "No browser, emulator, gameplay, performance, sound, save or controller validation in this work unit",
+    "Coordinator must inspect native-size and rotation/pivot alignment in game before acceptance"
+  ],
+  "estimatedActiveMinutes": 12,
+  "workLogMinutes": {
+    "readAndInspect": 3,
+    "genericGeneratorAndPrivateDesign": 6,
+    "renderAndValidate": 2,
+    "report": 1
+  }
+}

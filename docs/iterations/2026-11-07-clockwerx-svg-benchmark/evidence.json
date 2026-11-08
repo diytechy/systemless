@@ -1,0 +1,5264 @@
+{
+  "schema": "clockwerx-foreground-comparison-v1",
+  "privateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-svg-benchmark",
+  "frozenHashes": {
+    "bitmap": {
+      "source": {
+        "index.html": "6ab0955fd5e1834068519e29d177d4e970be080e67c82f5f14961d636cb24092",
+        "app.mjs": "a154e361145e158b334e3c66ca1c0ee1a5fccac4a8f839d1fbb8f25ce67c41c8",
+        "engine.mjs": "799b61eaeda3e4b4d3572b9f9114c5618ad76ac3b4216d230a0303fb6867ddcb",
+        "board.mjs": "dcc1a1dfd4e0635447515435511d61be48ba78e00ebaf9a6a8d1e73feb325888",
+        "rendering.mjs": "c2b2124aadb7f7d3d2c9f42006d3d0cbed3718722b7fdc3a7c2268c222e31a6d"
+      },
+      "assetsManifest": "307bdb47b12fd6874358e8f0434d1b3d7fdd258999afa5a8c9968549631d8463",
+      "assetFiles": 364,
+      "assetBytes": 220030,
+      "manifestBytes": 165615,
+      "sourceBytes": 25033
+    },
+    "current": {
+      "source": {
+        "index.html": "6ab0955fd5e1834068519e29d177d4e970be080e67c82f5f14961d636cb24092",
+        "app.mjs": "a154e361145e158b334e3c66ca1c0ee1a5fccac4a8f839d1fbb8f25ce67c41c8",
+        "engine.mjs": "799b61eaeda3e4b4d3572b9f9114c5618ad76ac3b4216d230a0303fb6867ddcb",
+        "board.mjs": "dcc1a1dfd4e0635447515435511d61be48ba78e00ebaf9a6a8d1e73feb325888",
+        "rendering.mjs": "c2b2124aadb7f7d3d2c9f42006d3d0cbed3718722b7fdc3a7c2268c222e31a6d"
+      },
+      "assetsManifest": "937b97771c5613c170323584186c022cf92e69c9f4a06947548451e9985535ab",
+      "assetFiles": 15,
+      "assetBytes": 65428,
+      "manifestBytes": 3315,
+      "sourceBytes": 25033
+    },
+    "astra": {
+      "source": {
+        "index.html": "6ab0955fd5e1834068519e29d177d4e970be080e67c82f5f14961d636cb24092",
+        "app.mjs": "a154e361145e158b334e3c66ca1c0ee1a5fccac4a8f839d1fbb8f25ce67c41c8",
+        "engine.mjs": "799b61eaeda3e4b4d3572b9f9114c5618ad76ac3b4216d230a0303fb6867ddcb",
+        "board.mjs": "dcc1a1dfd4e0635447515435511d61be48ba78e00ebaf9a6a8d1e73feb325888",
+        "rendering.mjs": "c2b2124aadb7f7d3d2c9f42006d3d0cbed3718722b7fdc3a7c2268c222e31a6d"
+      },
+      "assetsManifest": "358a3b57ff6d6eae0bc23accd9cd2b78975ffb355bb4740d83f3a7c4917220b5",
+      "assetFiles": 15,
+      "assetBytes": 66697,
+      "manifestBytes": 3315,
+      "sourceBytes": 25033
+    }
+  },
+  "aggregate": {
+    "bitmap": {
+      "meanFrameWorkMsMedian": 0.42924090917589086,
+      "meanFrameWorkMsRange": [
+        0.3759209330706335,
+        0.5056689065279725
+      ],
+      "p95FrameWorkMsMedian": 0.6599999964237213,
+      "mainThreadWorkOccupancyPercentMedian": 7.08152430676507,
+      "pageAssociatedMemoryBytesMedian": 4126840,
+      "pageAssociatedMemoryBytesRange": [
+        4125510,
+        4178204
+      ],
+      "broadProcessCpuHostPercentMedian": 4.805100498562838,
+      "broadProcessCpuHostPercentRange": [
+        4.263336241613543,
+        5.184837355794516
+      ],
+      "orientationChangesPerSecondMedian": 12.649927262918238,
+      "positiveAngleStepDegreesMedian": 5.625000000000006,
+      "repeatedPoseFractionMedian": 0.923310093967869
+    },
+    "current": {
+      "meanFrameWorkMsMedian": 0.7455558921240092,
+      "meanFrameWorkMsRange": [
+        0.6332787878292077,
+        0.8712344743950156
+      ],
+      "p95FrameWorkMsMedian": 1.0099999979138374,
+      "mainThreadWorkOccupancyPercentMedian": 12.303486807308602,
+      "pageAssociatedMemoryBytesMedian": 4116065,
+      "pageAssociatedMemoryBytesRange": [
+        4061603,
+        4233701
+      ],
+      "broadProcessCpuHostPercentMedian": 5.8035635896227955,
+      "broadProcessCpuHostPercentRange": [
+        4.195296367107229,
+        5.846674211074015
+      ],
+      "orientationChangesPerSecondMedian": 164.95057732702065,
+      "positiveAngleStepDegreesMedian": 0.43153268183090143,
+      "repeatedPoseFractionMedian": 0.0
+    },
+    "astra": {
+      "meanFrameWorkMsMedian": 0.755969403294118,
+      "meanFrameWorkMsRange": [
+        0.7440724327345094,
+        0.9834126022770454
+      ],
+      "p95FrameWorkMsMedian": 1.2000000029802322,
+      "mainThreadWorkOccupancyPercentMedian": 12.475491006157583,
+      "pageAssociatedMemoryBytesMedian": 4039535,
+      "pageAssociatedMemoryBytesRange": [
+        4033807,
+        4218938
+      ],
+      "broadProcessCpuHostPercentMedian": 5.631885473813955,
+      "broadProcessCpuHostPercentRange": [
+        4.235053514977541,
+        7.712379979540131
+      ],
+      "orientationChangesPerSecondMedian": 164.94888659501552,
+      "positiveAngleStepDegreesMedian": 0.4315326818307996,
+      "repeatedPoseFractionMedian": 0.00030303030303024947
+    }
+  },
+  "runs": [
+    {
+      "label": "r1-bitmap",
+      "sourceHashes": {
+        "timing": "3c2a40076a12f0d8fb0179fe3e8b6607f5cc009e4ef6bf5fb8f90657c791fdc1",
+        "memory": "af50d5b04af025bedfe7bb1d3d86a2c79852389460b21770b15fe9ad86bd4108",
+        "resources": "659f59c993d0d90bdd3589748d395204696a57ff07b578b36acd7b0dacbee7e2"
+      },
+      "captureUtc": "2026-11-08T05:28:05.572Z",
+      "durationMs": 20002.454999999703,
+      "presentation": "bitmap-64-directions",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.3759209330706335,
+        "median": 0.36500000208616257,
+        "p95": 0.5300000011920929,
+        "max": 1.089999996125698
+      },
+      "renderMs": {
+        "mean": 0.3028279309700164,
+        "median": 0.29500000178813934,
+        "p95": 0.4299999997019768,
+        "max": 0.8949999958276749
+      },
+      "rafGapMs": {
+        "mean": 6.0606060606060606,
+        "median": 6.059999999997672,
+        "p95": 6.130000000001019,
+        "max": 6.459999999999127
+      },
+      "mainThreadWorkOccupancyPercent": 6.2038134822259545,
+      "repeatedPoseFraction": 0.9233333333333333,
+      "orientationChangesPerSecond": 12.65,
+      "positiveAngleStepDegrees": {
+        "mean": 5.625,
+        "median": 5.625000000000006,
+        "p95": 5.625000000000032,
+        "max": 5.625000000000032
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:28:35.122Z",
+        "completionUtc": "2026-11-08T05:28:40.814Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/bitmap/"
+                }
+              ],
+              "bytes": 1421312,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 93496,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/bitmap/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 1434596,
+              "types": [
+                "Shared"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            }
+          ],
+          "bytes": 4178204
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:28:05.572000+00:00",
+        "requestedEnd": "2026-11-08T05:28:25.575000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 14,
+        "measuredCpuIntervalSeconds": 16.996298999999997,
+        "aggregateCpuPercentOfHostTimeWeighted": 4.263336241613543,
+        "cpuSecondsByProcessName": {
+          "chrome": 0.84375,
+          "msedge": 3.40625,
+          "ChatGPT": 12.921875,
+          "codex": 0.203125,
+          "msedgewebview2": 0.0,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.015625,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 54.42857142857143,
+          "median": 55.5,
+          "min": 40,
+          "max": 67
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6313679433.142858,
+          "median": 6310461440.0,
+          "min": 6304718848,
+          "max": 6329802752
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5756740169.142858,
+          "median": 5752530944.0,
+          "min": 5741400064,
+          "max": 5780582400
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:28:07.3226694+00:00",
+            "hostTotalCpuPercent": 43,
+            "aggregateWorkingSetBytes": 6329802752,
+            "aggregatePrivateBytes": 5780582400,
+            "matchingProcesses": 66
+          },
+          {
+            "at": "2026-11-08T05:28:08.6504991+00:00",
+            "hostTotalCpuPercent": 64,
+            "aggregateWorkingSetBytes": 6324428800,
+            "aggregatePrivateBytes": 5768925184,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.32783,
+            "aggregateCpuPercentOfHost": 4.6088668479147685,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:09.9599616+00:00",
+            "hostTotalCpuPercent": 60,
+            "aggregateWorkingSetBytes": 6325719040,
+            "aggregatePrivateBytes": 5769351168,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.309462,
+            "aggregateCpuPercentOfHost": 4.872389067673086,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:11.2559808+00:00",
+            "hostTotalCpuPercent": 63,
+            "aggregateWorkingSetBytes": 6322315264,
+            "aggregatePrivateBytes": 5763719168,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.296019,
+            "aggregateCpuPercentOfHost": 4.470822444218282,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:12.5793681+00:00",
+            "hostTotalCpuPercent": 56,
+            "aggregateWorkingSetBytes": 6316613632,
+            "aggregatePrivateBytes": 5758132224,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.323388,
+            "aggregateCpuPercentOfHost": 4.673531748310649,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:13.9051933+00:00",
+            "hostTotalCpuPercent": 40,
+            "aggregateWorkingSetBytes": 6314291200,
+            "aggregatePrivateBytes": 5756321792,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.325825,
+            "aggregateCpuPercentOfHost": 4.370313452630123,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:15.2005852+00:00",
+            "hostTotalCpuPercent": 47,
+            "aggregateWorkingSetBytes": 6307405824,
+            "aggregatePrivateBytes": 5748346880,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.295392,
+            "aggregateCpuPercentOfHost": 2.9652381930205935,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:16.4938958+00:00",
+            "hostTotalCpuPercent": 46,
+            "aggregateWorkingSetBytes": 6307442688,
+            "aggregatePrivateBytes": 5748740096,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.29331,
+            "aggregateCpuPercentOfHost": 3.7250994218967866,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:17.8175875+00:00",
+            "hostTotalCpuPercent": 55,
+            "aggregateWorkingSetBytes": 6306390016,
+            "aggregatePrivateBytes": 5746753536,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.323692,
+            "aggregateCpuPercentOfHost": 4.574090876125261,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:19.1253678+00:00",
+            "hostTotalCpuPercent": 44,
+            "aggregateWorkingSetBytes": 6306127872,
+            "aggregatePrivateBytes": 5746163712,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.30778,
+            "aggregateCpuPercentOfHost": 3.434971860710517,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:20.4180172+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6307450880,
+            "aggregatePrivateBytes": 5747437568,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.29265,
+            "aggregateCpuPercentOfHost": 3.12262277749842,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:21.7113357+00:00",
+            "hostTotalCpuPercent": 61,
+            "aggregateWorkingSetBytes": 6305333248,
+            "aggregatePrivateBytes": 5742292992,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.293318,
+            "aggregateCpuPercentOfHost": 4.681514909712847,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:23.0224913+00:00",
+            "hostTotalCpuPercent": 66,
+            "aggregateWorkingSetBytes": 6304718848,
+            "aggregatePrivateBytes": 5741400064,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.311156,
+            "aggregateCpuPercentOfHost": 3.426127402078776,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:28:24.3189680+00:00",
+            "hostTotalCpuPercent": 67,
+            "aggregateWorkingSetBytes": 6313472000,
+            "aggregatePrivateBytes": 5776195584,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.296477,
+            "aggregateCpuPercentOfHost": 6.477891624764649,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r1-current",
+      "sourceHashes": {
+        "timing": "e2d0ce19201d61aa101fb1f51e86e5479b40c9f29a547bfc3b0308e950a5a5af",
+        "memory": "a3ae306895867c24e626fcde3c78f356e7e323e4dc1aa6e7cb6e964b9183d7e5",
+        "resources": "be1b52dc45943a93013755115a84107f6b161e841ea9fadc463933a885c26ad3"
+      },
+      "captureUtc": "2026-11-08T05:29:20.264Z",
+      "durationMs": 20001.654999998213,
+      "presentation": "svg-continuous",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.8712344743950156,
+        "median": 0.8449999988079071,
+        "p95": 1.2250000014901161,
+        "max": 3.2299999967217445
+      },
+      "renderMs": {
+        "mean": 0.7901757043673211,
+        "median": 0.7699999958276749,
+        "p95": 1.1050000041723251,
+        "max": 3.185000002384186
+      },
+      "rafGapMs": {
+        "mean": 6.060584848484848,
+        "median": 6.06000000000131,
+        "p95": 6.154999999998836,
+        "max": 7.024999999997817
+      },
+      "mainThreadWorkOccupancyPercent": 14.378535176105196,
+      "repeatedPoseFraction": 0.00030303030303024947,
+      "orientationChangesPerSecond": 164.95057732702065,
+      "positiveAngleStepDegrees": {
+        "mean": 0.4315636927592049,
+        "median": 0.43153268183090143,
+        "p95": 0.4382976331136905,
+        "max": 0.5002503448615806
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:29:48.930Z",
+        "completionUtc": "2026-11-08T05:29:51.605Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/current/"
+                }
+              ],
+              "bytes": 1752085,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/current/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 109856,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 1142960,
+              "types": [
+                "Shared"
+              ]
+            }
+          ],
+          "bytes": 4233701
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:29:20.264000+00:00",
+        "requestedEnd": "2026-11-08T05:29:40.267000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 15,
+        "measuredCpuIntervalSeconds": 18.462241,
+        "aggregateCpuPercentOfHostTimeWeighted": 5.846674211074015,
+        "cpuSecondsByProcessName": {
+          "chrome": 1.015625,
+          "msedge": 3.9375,
+          "ChatGPT": 20.796875,
+          "codex": 0.09375,
+          "msedgewebview2": 0.015625,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.046875,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 60.53333333333333,
+          "median": 60,
+          "min": 47,
+          "max": 75
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6383586781.866667,
+          "median": 6375120896,
+          "min": 6361083904,
+          "max": 6410080256
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5800262314.666667,
+          "median": 5791756288,
+          "min": 5774159872,
+          "max": 5834575872
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:29:20.8112832+00:00",
+            "hostTotalCpuPercent": 65,
+            "aggregateWorkingSetBytes": 6398652416,
+            "aggregatePrivateBytes": 5825150976,
+            "matchingProcesses": 66
+          },
+          {
+            "at": "2026-11-08T05:29:22.1405644+00:00",
+            "hostTotalCpuPercent": 66,
+            "aggregateWorkingSetBytes": 6408118272,
+            "aggregatePrivateBytes": 5834575872,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.329281,
+            "aggregateCpuPercentOfHost": 7.395523720467431,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:23.4627274+00:00",
+            "hostTotalCpuPercent": 75,
+            "aggregateWorkingSetBytes": 6410080256,
+            "aggregatePrivateBytes": 5825789952,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.322163,
+            "aggregateCpuPercentOfHost": 6.056600056120161,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:24.8027499+00:00",
+            "hostTotalCpuPercent": 68,
+            "aggregateWorkingSetBytes": 6403694592,
+            "aggregatePrivateBytes": 5819179008,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.340022,
+            "aggregateCpuPercentOfHost": 5.878712563425576,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:26.1293955+00:00",
+            "hostTotalCpuPercent": 60,
+            "aggregateWorkingSetBytes": 6403457024,
+            "aggregatePrivateBytes": 5817638912,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.326646,
+            "aggregateCpuPercentOfHost": 4.907425693566081,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:27.4398254+00:00",
+            "hostTotalCpuPercent": 59,
+            "aggregateWorkingSetBytes": 6391066624,
+            "aggregatePrivateBytes": 5804560384,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.31043,
+            "aggregateCpuPercentOfHost": 5.713375889339122,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:28.7496204+00:00",
+            "hostTotalCpuPercent": 60,
+            "aggregateWorkingSetBytes": 6389248000,
+            "aggregatePrivateBytes": 5800681472,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.309795,
+            "aggregateCpuPercentOfHost": 6.2132019387257795,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:30.1083399+00:00",
+            "hostTotalCpuPercent": 47,
+            "aggregateWorkingSetBytes": 6373068800,
+            "aggregatePrivateBytes": 5787332608,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.358719,
+            "aggregateCpuPercentOfHost": 6.564470529471754,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:31.4192610+00:00",
+            "hostTotalCpuPercent": 63,
+            "aggregateWorkingSetBytes": 6375120896,
+            "aggregatePrivateBytes": 5789917184,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310922,
+            "aggregateCpuPercentOfHost": 4.866962590705881,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:32.7295430+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6371012608,
+            "aggregatePrivateBytes": 5785550848,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310282,
+            "aggregateCpuPercentOfHost": 5.912769795611428,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:34.0399937+00:00",
+            "hostTotalCpuPercent": 68,
+            "aggregateWorkingSetBytes": 6372171776,
+            "aggregatePrivateBytes": 5786726400,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.31045,
+            "aggregateCpuPercentOfHost": 6.21009640454297,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:35.3773527+00:00",
+            "hostTotalCpuPercent": 57,
+            "aggregateWorkingSetBytes": 6369923072,
+            "aggregatePrivateBytes": 5784080384,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.337359,
+            "aggregateCpuPercentOfHost": 5.014157878824359,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:36.6714941+00:00",
+            "hostTotalCpuPercent": 53,
+            "aggregateWorkingSetBytes": 6362509312,
+            "aggregatePrivateBytes": 5776834560,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.294142,
+            "aggregateCpuPercentOfHost": 5.4834432130837785,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:37.9664607+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6361083904,
+            "aggregatePrivateBytes": 5774159872,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.294966,
+            "aggregateCpuPercentOfHost": 4.926931157523312,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:29:39.2735243+00:00",
+            "hostTotalCpuPercent": 67,
+            "aggregateWorkingSetBytes": 6364594176,
+            "aggregatePrivateBytes": 5791756288,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.307064,
+            "aggregateCpuPercentOfHost": 6.674469141016302,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r1-astra",
+      "sourceHashes": {
+        "timing": "da98a3c1beb0acbb9efe5cec5fa324cb2aa5e6cdc22a58f7e368f7da3282bb2c",
+        "memory": "4999d65369e4081191bf35f36c851d8ff0fec9e845fe9f5d41674828bc41f41d",
+        "resources": "e9acb44c7cff33a46e31ddf4d430eeb2c48c63defbaa8659f7ca5e94d0788eff"
+      },
+      "captureUtc": "2026-11-08T05:30:29.069Z",
+      "durationMs": 20002.85999999672,
+      "presentation": "svg-continuous",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.755969403294118,
+        "median": 0.7250000014901161,
+        "p95": 1.0549999997019768,
+        "max": 2.655000001192093
+      },
+      "renderMs": {
+        "mean": 0.6902650712327103,
+        "median": 0.6649999991059303,
+        "p95": 0.9600000008940697,
+        "max": 2.399999998509884
+      },
+      "rafGapMs": {
+        "mean": 6.060628787878787,
+        "median": 6.059999999997672,
+        "p95": 6.144999999996799,
+        "max": 6.545000000000073
+      },
+      "mainThreadWorkOccupancyPercent": 12.475491006157583,
+      "repeatedPoseFraction": 0.0,
+      "orientationChangesPerSecond": 164.99938125232035,
+      "positiveAngleStepDegrees": {
+        "mean": 0.43145870253902907,
+        "median": 0.4315326818306979,
+        "p95": 0.43758553297828645,
+        "max": 0.4660695383800221
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:30:57.389Z",
+        "completionUtc": "2026-11-08T05:30:59.085Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/astra/"
+                }
+              ],
+              "bytes": 1797088,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 110784,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [],
+              "bytes": 1082266,
+              "types": [
+                "Shared"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/astra/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            }
+          ],
+          "bytes": 4218938
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:30:29.069000+00:00",
+        "requestedEnd": "2026-11-08T05:30:49.073000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 15,
+        "measuredCpuIntervalSeconds": 18.324247,
+        "aggregateCpuPercentOfHostTimeWeighted": 4.235053514977541,
+        "cpuSecondsByProcessName": {
+          "chrome": 1.15625,
+          "msedge": 0.078125,
+          "ChatGPT": 17.265625,
+          "codex": 0.109375,
+          "msedgewebview2": 0.015625,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.0,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 45.4,
+          "median": 44,
+          "min": 33,
+          "max": 58
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6343224797.866667,
+          "median": 6336798720,
+          "min": 6330519552,
+          "max": 6370693120
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5797156454.4,
+          "median": 5789261824,
+          "min": 5784002560,
+          "max": 5830508544
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:30:29.7634497+00:00",
+            "hostTotalCpuPercent": 47,
+            "aggregateWorkingSetBytes": 6370238464,
+            "aggregatePrivateBytes": 5830254592,
+            "matchingProcesses": 66
+          },
+          {
+            "at": "2026-11-08T05:30:31.0763911+00:00",
+            "hostTotalCpuPercent": 45,
+            "aggregateWorkingSetBytes": 6370693120,
+            "aggregatePrivateBytes": 5830508544,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.312942,
+            "aggregateCpuPercentOfHost": 4.809888149413047,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:32.3851272+00:00",
+            "hostTotalCpuPercent": 37,
+            "aggregateWorkingSetBytes": 6353973248,
+            "aggregatePrivateBytes": 5806518272,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.308736,
+            "aggregateCpuPercentOfHost": 4.576616929108188,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:33.6969788+00:00",
+            "hostTotalCpuPercent": 57,
+            "aggregateWorkingSetBytes": 6352977920,
+            "aggregatePrivateBytes": 5805654016,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.311851,
+            "aggregateCpuPercentOfHost": 4.516122003693001,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:35.0060936+00:00",
+            "hostTotalCpuPercent": 52,
+            "aggregateWorkingSetBytes": 6350069760,
+            "aggregatePrivateBytes": 5803036672,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.309115,
+            "aggregateCpuPercentOfHost": 5.271532040093244,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:36.3147828+00:00",
+            "hostTotalCpuPercent": 44,
+            "aggregateWorkingSetBytes": 6341959680,
+            "aggregatePrivateBytes": 5795348480,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.308689,
+            "aggregateCpuPercentOfHost": 4.178800310845434,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:37.6235147+00:00",
+            "hostTotalCpuPercent": 39,
+            "aggregateWorkingSetBytes": 6336798720,
+            "aggregatePrivateBytes": 5789261824,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.308732,
+            "aggregateCpuPercentOfHost": 3.631457140703113,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:38.9342666+00:00",
+            "hostTotalCpuPercent": 33,
+            "aggregateWorkingSetBytes": 6335492096,
+            "aggregatePrivateBytes": 5786656768,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310752,
+            "aggregateCpuPercentOfHost": 3.3278447537495017,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:40.2285947+00:00",
+            "hostTotalCpuPercent": 58,
+            "aggregateWorkingSetBytes": 6336839680,
+            "aggregatePrivateBytes": 5789585408,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.294328,
+            "aggregateCpuPercentOfHost": 5.029958918192812,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:41.5518386+00:00",
+            "hostTotalCpuPercent": 43,
+            "aggregateWorkingSetBytes": 6334640128,
+            "aggregatePrivateBytes": 5787090944,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.323244,
+            "aggregateCpuPercentOfHost": 3.886833544430707,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:42.8478635+00:00",
+            "hostTotalCpuPercent": 41,
+            "aggregateWorkingSetBytes": 6332911616,
+            "aggregatePrivateBytes": 5786075136,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.296025,
+            "aggregateCpuPercentOfHost": 3.5665946515949414,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:44.1579692+00:00",
+            "hostTotalCpuPercent": 54,
+            "aggregateWorkingSetBytes": 6332293120,
+            "aggregatePrivateBytes": 5785735168,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310106,
+            "aggregateCpuPercentOfHost": 4.472443451140594,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:45.4683526+00:00",
+            "hostTotalCpuPercent": 45,
+            "aggregateWorkingSetBytes": 6330519552,
+            "aggregatePrivateBytes": 5784002560,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310383,
+            "aggregateCpuPercentOfHost": 3.6268817335593226,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:46.7769037+00:00",
+            "hostTotalCpuPercent": 43,
+            "aggregateWorkingSetBytes": 6334701568,
+            "aggregatePrivateBytes": 5788655616,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.308551,
+            "aggregateCpuPercentOfHost": 3.7812180546777827,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:30:48.0876960+00:00",
+            "hostTotalCpuPercent": 43,
+            "aggregateWorkingSetBytes": 6334263296,
+            "aggregatePrivateBytes": 5788962816,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310793,
+            "aggregateCpuPercentOfHost": 4.61910271110694,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r2-current",
+      "sourceHashes": {
+        "timing": "52a576c49e4fa73261edf775de21c2287ca048ac7d69e23b801686c856099f5d",
+        "memory": "69146592c9ccd1d0e77cdd9d83ef902d1ba6c88af8508c3e7308fec33195becd",
+        "resources": "f0e0b5e02e9275b9bc50d60d7265f3040f373a702d80963d7324af21d0e500c8"
+      },
+      "captureUtc": "2026-11-08T05:31:45.790Z",
+      "durationMs": 20003.109999999404,
+      "presentation": "svg-continuous",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.7455558921240092,
+        "median": 0.7249999940395355,
+        "p95": 1.0099999979138374,
+        "max": 1.9250000044703484
+      },
+      "renderMs": {
+        "mean": 0.6817676461589802,
+        "median": 0.6600000038743019,
+        "p95": 0.9299999997019768,
+        "max": 1.6899999976158142
+      },
+      "rafGapMs": {
+        "mean": 6.060601515151515,
+        "median": 6.059999999997672,
+        "p95": 6.129999999997381,
+        "max": 6.530000000002474
+      },
+      "mainThreadWorkOccupancyPercent": 12.303486807308602,
+      "repeatedPoseFraction": 0.0,
+      "orientationChangesPerSecond": 165.0001237500928,
+      "positiveAngleStepDegrees": {
+        "mean": 0.4314637735551872,
+        "median": 0.4315326818306979,
+        "p95": 0.4365173827758801,
+        "max": 0.46500138817766656
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:32:16.917Z",
+        "completionUtc": "2026-11-08T05:32:18.940Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [],
+              "bytes": 1086974,
+              "types": [
+                "Shared"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [],
+              "bytes": 109856,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/current/"
+                }
+              ],
+              "bytes": 1690435,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/current/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            }
+          ],
+          "bytes": 4116065
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:31:45.790000+00:00",
+        "requestedEnd": "2026-11-08T05:32:05.794000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 15,
+        "measuredCpuIntervalSeconds": 18.265122999999996,
+        "aggregateCpuPercentOfHostTimeWeighted": 4.195296367107229,
+        "cpuSecondsByProcessName": {
+          "chrome": 0.65625,
+          "msedge": 0.109375,
+          "ChatGPT": 17.484375,
+          "codex": 0.125,
+          "msedgewebview2": 0.0,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.015625,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 49.6,
+          "median": 50,
+          "min": 37,
+          "max": 66
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6252402551.466666,
+          "median": 6243049472,
+          "min": 6241427456,
+          "max": 6283816960
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5785365162.666667,
+          "median": 5773647872,
+          "min": 5771730944,
+          "max": 5826646016
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:31:46.3040138+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6283816960,
+            "aggregatePrivateBytes": 5826646016,
+            "matchingProcesses": 66
+          },
+          {
+            "at": "2026-11-08T05:31:47.6128478+00:00",
+            "hostTotalCpuPercent": 44,
+            "aggregateWorkingSetBytes": 6275985408,
+            "aggregatePrivateBytes": 5819064320,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.308834,
+            "aggregateCpuPercentOfHost": 4.67575847408202,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:48.9218673+00:00",
+            "hostTotalCpuPercent": 38,
+            "aggregateWorkingSetBytes": 6266339328,
+            "aggregatePrivateBytes": 5806526464,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.30902,
+            "aggregateCpuPercentOfHost": 3.531188089817828,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:50.2349695+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6266830848,
+            "aggregatePrivateBytes": 5800882176,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.313102,
+            "aggregateCpuPercentOfHost": 4.214336865427565,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:51.5577279+00:00",
+            "hostTotalCpuPercent": 55,
+            "aggregateWorkingSetBytes": 6259314688,
+            "aggregatePrivateBytes": 5791952896,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.322758,
+            "aggregateCpuPercentOfHost": 4.3312281359603695,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:52.8537607+00:00",
+            "hostTotalCpuPercent": 55,
+            "aggregateWorkingSetBytes": 6251253760,
+            "aggregatePrivateBytes": 5783003136,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.296033,
+            "aggregateCpuPercentOfHost": 4.2698404798849,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:54.1486479+00:00",
+            "hostTotalCpuPercent": 64,
+            "aggregateWorkingSetBytes": 6244352000,
+            "aggregatePrivateBytes": 5774077952,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.294887,
+            "aggregateCpuPercentOfHost": 4.876953870620886,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:55.4587021+00:00",
+            "hostTotalCpuPercent": 45,
+            "aggregateWorkingSetBytes": 6243049472,
+            "aggregatePrivateBytes": 5773647872,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310055,
+            "aggregateCpuPercentOfHost": 3.876268553610345,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:56.7527689+00:00",
+            "hostTotalCpuPercent": 37,
+            "aggregateWorkingSetBytes": 6241845248,
+            "aggregatePrivateBytes": 5772668928,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.294066,
+            "aggregateCpuPercentOfHost": 4.678808886100091,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:58.0439383+00:00",
+            "hostTotalCpuPercent": 46,
+            "aggregateWorkingSetBytes": 6241648640,
+            "aggregatePrivateBytes": 5772242944,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.29117,
+            "aggregateCpuPercentOfHost": 3.630428216268965,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:31:59.3400413+00:00",
+            "hostTotalCpuPercent": 44,
+            "aggregateWorkingSetBytes": 6241427456,
+            "aggregatePrivateBytes": 5771915264,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.296103,
+            "aggregateCpuPercentOfHost": 3.6166107168951847,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:32:00.6486520+00:00",
+            "hostTotalCpuPercent": 52,
+            "aggregateWorkingSetBytes": 6242353152,
+            "aggregatePrivateBytes": 5771739136,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.308611,
+            "aggregateCpuPercentOfHost": 5.02480938440326,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:32:01.9457952+00:00",
+            "hostTotalCpuPercent": 66,
+            "aggregateWorkingSetBytes": 6242328576,
+            "aggregatePrivateBytes": 5771730944,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.297143,
+            "aggregateCpuPercentOfHost": 4.065424937728531,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:32:03.2563759+00:00",
+            "hostTotalCpuPercent": 51,
+            "aggregateWorkingSetBytes": 6242574336,
+            "aggregatePrivateBytes": 5771997184,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.31058,
+            "aggregateCpuPercentOfHost": 4.570177580409691,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:32:04.5691363+00:00",
+            "hostTotalCpuPercent": 47,
+            "aggregateWorkingSetBytes": 6242918400,
+            "aggregatePrivateBytes": 5772382208,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.312761,
+            "aggregateCpuPercentOfHost": 3.372345258073125,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r2-astra",
+      "sourceHashes": {
+        "timing": "a30d44641c28e482798b2cfc983b6296c6f445719e9f6e0b26cc2b65ff74a2ac",
+        "memory": "4ef7e37ebcb5cee1654d65ad69e0d66fb2c1981a98ca0a5b8c83a3a1bc9fc77b",
+        "resources": "d51480c199a227937f0c167d2009d498d8d24937afd18e66471c71cc9be6f504"
+      },
+      "captureUtc": "2026-11-08T05:33:01.543Z",
+      "durationMs": 20001.664999999404,
+      "presentation": "svg-continuous",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3272,
+        "renderCalls": 3272,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.7440724327345094,
+        "median": 0.6849999949336052,
+        "p95": 1.2000000029802322,
+        "max": 7.4799999967217445
+      },
+      "renderMs": {
+        "mean": 0.6742985940750115,
+        "median": 0.6150000020861626,
+        "p95": 1.0700000002980232,
+        "max": 7.33500000089407
+      },
+      "rafGapMs": {
+        "mean": 6.114364108835218,
+        "median": 6.06000000000131,
+        "p95": 6.229999999999563,
+        "max": 18.229999999995925
+      },
+      "mainThreadWorkOccupancyPercent": 12.172011679564612,
+      "repeatedPoseFraction": 0.0003057169061448928,
+      "orientationChangesPerSecond": 163.49930512795322,
+      "positiveAngleStepDegrees": {
+        "mean": 0.4353905804932347,
+        "median": 0.43153268183090143,
+        "p95": 0.4436383841264857,
+        "max": 1.298158546167409
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:33:29.572Z",
+        "completionUtc": "2026-11-08T05:33:32.885Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [],
+              "bytes": 110784,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 970836,
+              "types": [
+                "Shared"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/astra/"
+                }
+              ],
+              "bytes": 1723387,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/astra/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            }
+          ],
+          "bytes": 4033807
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:33:01.543000+00:00",
+        "requestedEnd": "2026-11-08T05:33:21.546000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 16,
+        "measuredCpuIntervalSeconds": 19.70967,
+        "aggregateCpuPercentOfHostTimeWeighted": 5.631885473813955,
+        "cpuSecondsByProcessName": {
+          "chrome": 1.0,
+          "msedge": 0.515625,
+          "ChatGPT": 25.0625,
+          "codex": 0.0625,
+          "msedgewebview2": 0.0,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.0,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 55.625,
+          "median": 54.0,
+          "min": 37,
+          "max": 84
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6287653888,
+          "median": 6286434304.0,
+          "min": 6237671424,
+          "max": 6315589632
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5900550144,
+          "median": 5874221056.0,
+          "min": 5849907200,
+          "max": 6034948096
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:33:01.7441708+00:00",
+            "hostTotalCpuPercent": 54,
+            "aggregateWorkingSetBytes": 6306168832,
+            "aggregatePrivateBytes": 6034948096,
+            "matchingProcesses": 67
+          },
+          {
+            "at": "2026-11-08T05:33:03.0538913+00:00",
+            "hostTotalCpuPercent": 67,
+            "aggregateWorkingSetBytes": 6311997440,
+            "aggregatePrivateBytes": 6034432000,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.309721,
+            "aggregateCpuPercentOfHost": 9.046933150902623,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:04.3754248+00:00",
+            "hostTotalCpuPercent": 52,
+            "aggregateWorkingSetBytes": 6315589632,
+            "aggregatePrivateBytes": 5973323776,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.321533,
+            "aggregateCpuPercentOfHost": 14.72997332138761,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:05.7169743+00:00",
+            "hostTotalCpuPercent": 37,
+            "aggregateWorkingSetBytes": 6303363072,
+            "aggregatePrivateBytes": 5915447296,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.34155,
+            "aggregateCpuPercentOfHost": 3.5911507832979264,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:07.0258489+00:00",
+            "hostTotalCpuPercent": 40,
+            "aggregateWorkingSetBytes": 6291415040,
+            "aggregatePrivateBytes": 5886951424,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.308874,
+            "aggregateCpuPercentOfHost": 4.426912623624071,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:08.3347622+00:00",
+            "hostTotalCpuPercent": 57,
+            "aggregateWorkingSetBytes": 6291996672,
+            "aggregatePrivateBytes": 5887401984,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.308914,
+            "aggregateCpuPercentOfHost": 4.3770382673473325,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:09.6401929+00:00",
+            "hostTotalCpuPercent": 61,
+            "aggregateWorkingSetBytes": 6288347136,
+            "aggregatePrivateBytes": 5880532992,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.30543,
+            "aggregateCpuPercentOfHost": 5.086925380908972,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:10.9632791+00:00",
+            "hostTotalCpuPercent": 38,
+            "aggregateWorkingSetBytes": 6287597568,
+            "aggregatePrivateBytes": 5878538240,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.323087,
+            "aggregateCpuPercentOfHost": 4.4777699173725285,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:12.2724121+00:00",
+            "hostTotalCpuPercent": 55,
+            "aggregateWorkingSetBytes": 6285271040,
+            "aggregatePrivateBytes": 5869903872,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.309133,
+            "aggregateCpuPercentOfHost": 4.127652296087054,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:13.5648697+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6284529664,
+            "aggregatePrivateBytes": 5868756992,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.292457,
+            "aggregateCpuPercentOfHost": 4.634261204305701,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:14.8735361+00:00",
+            "hostTotalCpuPercent": 54,
+            "aggregateWorkingSetBytes": 6280638464,
+            "aggregatePrivateBytes": 5865771008,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.308667,
+            "aggregateCpuPercentOfHost": 4.726103610263981,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:16.1842135+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6283501568,
+            "aggregatePrivateBytes": 5868941312,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.310677,
+            "aggregateCpuPercentOfHost": 4.619511519619249,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:17.4927772+00:00",
+            "hostTotalCpuPercent": 54,
+            "aggregateWorkingSetBytes": 6277500928,
+            "aggregatePrivateBytes": 5864169472,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.308564,
+            "aggregateCpuPercentOfHost": 5.870780234414722,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:18.7995967+00:00",
+            "hostTotalCpuPercent": 57,
+            "aggregateWorkingSetBytes": 6278639616,
+            "aggregatePrivateBytes": 5865234432,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.306819,
+            "aggregateCpuPercentOfHost": 3.586954275993844,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:20.1127902+00:00",
+            "hostTotalCpuPercent": 84,
+            "aggregateWorkingSetBytes": 6278234112,
+            "aggregatePrivateBytes": 5864542208,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.313194,
+            "aggregateCpuPercentOfHost": 4.8089651389411365,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:33:21.4538403+00:00",
+            "hostTotalCpuPercent": 80,
+            "aggregateWorkingSetBytes": 6237671424,
+            "aggregatePrivateBytes": 5849907200,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.34105,
+            "aggregateCpuPercentOfHost": 6.311130581758075,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 1,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r2-bitmap",
+      "sourceHashes": {
+        "timing": "390ca86c551bddc9406af6d19e82f594d86de4131f6bc98fedac725f7a6c1c6b",
+        "memory": "2e584ba00c897a7463cf0bc85f6766a1c86fdb23c0423ea0e9165b8b1ea429ab",
+        "resources": "02d6710ec2b2ac9c54a96ed3d660fac474cd4868e0a0f56f4a1c4625a8b3ff20"
+      },
+      "captureUtc": "2026-11-08T05:34:12.112Z",
+      "durationMs": 20002.51999999732,
+      "presentation": "bitmap-64-directions",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3274,
+        "renderCalls": 3274,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.5056689065279725,
+        "median": 0.48000000417232513,
+        "p95": 0.75,
+        "max": 1.8550000041723251
+      },
+      "renderMs": {
+        "mean": 0.4140791081520174,
+        "median": 0.39499999582767487,
+        "p95": 0.6050000041723251,
+        "max": 1.3200000002980232
+      },
+      "rafGapMs": {
+        "mean": 6.110643140849374,
+        "median": 6.059999999997672,
+        "p95": 6.279999999998836,
+        "max": 24.049999999995634
+      },
+      "mainThreadWorkOccupancyPercent": 8.276757128465832,
+      "repeatedPoseFraction": 0.9227008860372746,
+      "orientationChangesPerSecond": 12.64991461307636,
+      "positiveAngleStepDegrees": {
+        "mean": 5.625,
+        "median": 5.625000000000006,
+        "p95": 5.625000000000032,
+        "max": 5.625000000000032
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:34:41.202Z",
+        "completionUtc": "2026-11-08T05:34:45.505Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [],
+              "bytes": 93528,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/bitmap/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [],
+              "bytes": 1001547,
+              "types": [
+                "Shared"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/bitmap/"
+                }
+              ],
+              "bytes": 1801635,
+              "types": [
+                "JavaScript"
+              ]
+            }
+          ],
+          "bytes": 4125510
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:34:12.112000+00:00",
+        "requestedEnd": "2026-11-08T05:34:32.116000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 15,
+        "measuredCpuIntervalSeconds": 18.935422000000003,
+        "aggregateCpuPercentOfHostTimeWeighted": 5.184837355794516,
+        "cpuSecondsByProcessName": {
+          "chrome": 1.21875,
+          "msedge": 3.8125,
+          "ChatGPT": 18.328125,
+          "codex": 0.15625,
+          "msedgewebview2": 0.046875,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.0,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 97.2,
+          "median": 99,
+          "min": 88,
+          "max": 100
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6261227520,
+          "median": 6242336768,
+          "min": 6232580096,
+          "max": 6368292864
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5839545412.266666,
+          "median": 5825871872,
+          "min": 5805568000,
+          "max": 5945233408
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:34:12.7368147+00:00",
+            "hostTotalCpuPercent": 88,
+            "aggregateWorkingSetBytes": 6265991168,
+            "aggregatePrivateBytes": 5855481856,
+            "matchingProcesses": 66
+          },
+          {
+            "at": "2026-11-08T05:34:14.0621092+00:00",
+            "hostTotalCpuPercent": 95,
+            "aggregateWorkingSetBytes": 6265098240,
+            "aggregatePrivateBytes": 5854167040,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.325295,
+            "aggregateCpuPercentOfHost": 4.07731549076495,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:15.3876551+00:00",
+            "hostTotalCpuPercent": 95,
+            "aggregateWorkingSetBytes": 6261059584,
+            "aggregatePrivateBytes": 5838376960,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.325546,
+            "aggregateCpuPercentOfHost": 5.549992858288836,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:16.7622259+00:00",
+            "hostTotalCpuPercent": 97,
+            "aggregateWorkingSetBytes": 6257426432,
+            "aggregatePrivateBytes": 5834854400,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.37457,
+            "aggregateCpuPercentOfHost": 4.68896636766407,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:18.1490716+00:00",
+            "hostTotalCpuPercent": 99,
+            "aggregateWorkingSetBytes": 6249082880,
+            "aggregatePrivateBytes": 5826154496,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.386846,
+            "aggregateCpuPercentOfHost": 4.92912515160299,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:19.4879415+00:00",
+            "hostTotalCpuPercent": 99,
+            "aggregateWorkingSetBytes": 6242336768,
+            "aggregatePrivateBytes": 5819031552,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.33887,
+            "aggregateCpuPercentOfHost": 4.7653680591344445,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:20.8519757+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6240817152,
+            "aggregatePrivateBytes": 5813137408,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.364034,
+            "aggregateCpuPercentOfHost": 5.202476013550004,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:22.2398798+00:00",
+            "hostTotalCpuPercent": 99,
+            "aggregateWorkingSetBytes": 6239621120,
+            "aggregatePrivateBytes": 5812523008,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.387904,
+            "aggregateCpuPercentOfHost": 4.268651986496664,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:23.5666093+00:00",
+            "hostTotalCpuPercent": 92,
+            "aggregateWorkingSetBytes": 6234877952,
+            "aggregatePrivateBytes": 5806571520,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.32673,
+            "aggregateCpuPercentOfHost": 3.827549689838927,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:24.9080824+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6234947584,
+            "aggregatePrivateBytes": 5806600192,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.341473,
+            "aggregateCpuPercentOfHost": 3.882548015005396,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:26.2670439+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6234611712,
+            "aggregatePrivateBytes": 5806379008,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.358961,
+            "aggregateCpuPercentOfHost": 3.593048292040758,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:27.6436726+00:00",
+            "hostTotalCpuPercent": 97,
+            "aggregateWorkingSetBytes": 6232580096,
+            "aggregatePrivateBytes": 5805568000,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.376629,
+            "aggregateCpuPercentOfHost": 5.060292811885652,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:28.9680532+00:00",
+            "hostTotalCpuPercent": 99,
+            "aggregateWorkingSetBytes": 6239260672,
+            "aggregatePrivateBytes": 5825871872,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.324381,
+            "aggregateCpuPercentOfHost": 5.161609461325706,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:30.3283354+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6368292864,
+            "aggregatePrivateBytes": 5945233408,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.360282,
+            "aggregateCpuPercentOfHost": 9.620018128593923,
+            "newProcessesNotCountedForCpu": 1,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:34:31.6722362+00:00",
+            "hostTotalCpuPercent": 98,
+            "aggregateWorkingSetBytes": 6352408576,
+            "aggregatePrivateBytes": 5943230464,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.343901,
+            "aggregateCpuPercentOfHost": 7.944843655398228,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r3-astra",
+      "sourceHashes": {
+        "timing": "b38af00c923a9d4cabf94b18471fecf8a06e7e23780c957c3b6be218e315e8e1",
+        "memory": "54aa99d4b33f6d722e634c3d1fab7af725ad00ed39cb7e849d155a64a9f99c1e",
+        "resources": "8415915be981d64f841146dc6a7f46bcae54e27043118839fa41e2cbc34acc07"
+      },
+      "captureUtc": "2026-11-08T05:35:29.326Z",
+      "durationMs": 20001.579999997317,
+      "presentation": "svg-continuous",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.9834126022770454,
+        "median": 0.9399999976158142,
+        "p95": 1.4700000062584877,
+        "max": 2.855000004172325
+      },
+      "renderMs": {
+        "mean": 0.8944319903430741,
+        "median": 0.8549999967217445,
+        "p95": 1.344999998807907,
+        "max": 2.689999997615814
+      },
+      "rafGapMs": {
+        "mean": 6.060646969696969,
+        "median": 6.059999999997672,
+        "p95": 6.194999999999709,
+        "max": 8.465000000003783
+      },
+      "mainThreadWorkOccupancyPercent": 16.22994283510084,
+      "repeatedPoseFraction": 0.00030303030303024947,
+      "orientationChangesPerSecond": 164.94888659501552,
+      "positiveAngleStepDegrees": {
+        "mean": 0.4315616421526425,
+        "median": 0.4315326818307996,
+        "p95": 0.44114603365380556,
+        "max": 0.6027927643069433
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:35:57.881Z",
+        "completionUtc": "2026-11-08T05:35:59.644Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/astra/"
+                }
+              ],
+              "bytes": 1718255,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 110784,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/astra/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 981696,
+              "types": [
+                "Shared"
+              ]
+            }
+          ],
+          "bytes": 4039535
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:35:29.326000+00:00",
+        "requestedEnd": "2026-11-08T05:35:49.328000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 15,
+        "measuredCpuIntervalSeconds": 18.757045,
+        "aggregateCpuPercentOfHostTimeWeighted": 7.712379979540131,
+        "cpuSecondsByProcessName": {
+          "chrome": 1.75,
+          "msedge": 7.90625,
+          "ChatGPT": 24.921875,
+          "codex": 0.125,
+          "msedgewebview2": 0.015625,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.0,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 72.86666666666666,
+          "median": 72,
+          "min": 53,
+          "max": 100
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6334322551.466666,
+          "median": 6335045632,
+          "min": 6318317568,
+          "max": 6356762624
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5900721629.866667,
+          "median": 5899665408,
+          "min": 5868781568,
+          "max": 5941391360
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:35:30.2110641+00:00",
+            "hostTotalCpuPercent": 74,
+            "aggregateWorkingSetBytes": 6355828736,
+            "aggregatePrivateBytes": 5940887552,
+            "matchingProcesses": 67
+          },
+          {
+            "at": "2026-11-08T05:35:31.5226902+00:00",
+            "hostTotalCpuPercent": 62,
+            "aggregateWorkingSetBytes": 6356762624,
+            "aggregatePrivateBytes": 5941391360,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.311626,
+            "aggregateCpuPercentOfHost": 8.189977554577297,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:32.8329535+00:00",
+            "hostTotalCpuPercent": 72,
+            "aggregateWorkingSetBytes": 6349778944,
+            "aggregatePrivateBytes": 5921091584,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.310263,
+            "aggregateCpuPercentOfHost": 7.4531792472198335,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:34.1850263+00:00",
+            "hostTotalCpuPercent": 67,
+            "aggregateWorkingSetBytes": 6340022272,
+            "aggregatePrivateBytes": 5908934656,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.352073,
+            "aggregateCpuPercentOfHost": 6.54858625730021,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:35.5246123+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6339002368,
+            "aggregatePrivateBytes": 5906747392,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.339586,
+            "aggregateCpuPercentOfHost": 6.7554297870137985,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:36.8820187+00:00",
+            "hostTotalCpuPercent": 79,
+            "aggregateWorkingSetBytes": 6333112320,
+            "aggregatePrivateBytes": 5900255232,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.357406,
+            "aggregateCpuPercentOfHost": 9.496513939086759,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:38.1946671+00:00",
+            "hostTotalCpuPercent": 75,
+            "aggregateWorkingSetBytes": 6336360448,
+            "aggregatePrivateBytes": 5898653696,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.312649,
+            "aggregateCpuPercentOfHost": 8.679570217679416,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:39.5483532+00:00",
+            "hostTotalCpuPercent": 74,
+            "aggregateWorkingSetBytes": 6337241088,
+            "aggregatePrivateBytes": 5899665408,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.353686,
+            "aggregateCpuPercentOfHost": 7.598851087573731,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:40.8708055+00:00",
+            "hostTotalCpuPercent": 65,
+            "aggregateWorkingSetBytes": 6335045632,
+            "aggregatePrivateBytes": 5901508608,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.322452,
+            "aggregateCpuPercentOfHost": 6.301425937072448,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:42.2081374+00:00",
+            "hostTotalCpuPercent": 54,
+            "aggregateWorkingSetBytes": 6333886464,
+            "aggregatePrivateBytes": 5898829824,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.337332,
+            "aggregateCpuPercentOfHost": 5.062941239223568,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:43.5462480+00:00",
+            "hostTotalCpuPercent": 53,
+            "aggregateWorkingSetBytes": 6318911488,
+            "aggregatePrivateBytes": 5881495552,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.338111,
+            "aggregateCpuPercentOfHost": 8.90364289659079,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:44.8991248+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6318456832,
+            "aggregatePrivateBytes": 5868781568,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.352876,
+            "aggregateCpuPercentOfHost": 7.555277916576735,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:46.2792642+00:00",
+            "hostTotalCpuPercent": 89,
+            "aggregateWorkingSetBytes": 6319271936,
+            "aggregatePrivateBytes": 5869703168,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.38014,
+            "aggregateCpuPercentOfHost": 8.160781394158082,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:47.6272476+00:00",
+            "hostTotalCpuPercent": 68,
+            "aggregateWorkingSetBytes": 6318317568,
+            "aggregatePrivateBytes": 5880733696,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.347983,
+            "aggregateCpuPercentOfHost": 9.369708915715801,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:35:48.9681099+00:00",
+            "hostTotalCpuPercent": 61,
+            "aggregateWorkingSetBytes": 6322839552,
+            "aggregatePrivateBytes": 5892145152,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.340862,
+            "aggregateCpuPercentOfHost": 7.865742335900339,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r3-bitmap",
+      "sourceHashes": {
+        "timing": "234e819b94c4decd84884af94a99b947999c104714ba89850733116024314088",
+        "memory": "663ca1d2e194a34da8e3e206be5906feeb737fc952204404b558c837cc539674",
+        "resources": "3452908227ab2d14d4345b0f2b55621c1646ac9a884ecbd4823fcd23906528e0"
+      },
+      "captureUtc": "2026-11-08T05:36:38.622Z",
+      "durationMs": 20002.68499999702,
+      "presentation": "bitmap-64-directions",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3300,
+        "renderCalls": 3300,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.42924090917589086,
+        "median": 0.4050000011920929,
+        "p95": 0.6599999964237213,
+        "max": 1.8000000044703484
+      },
+      "renderMs": {
+        "mean": 0.3471515151722865,
+        "median": 0.32500000298023224,
+        "p95": 0.5400000065565109,
+        "max": 1.6349999979138374
+      },
+      "rafGapMs": {
+        "mean": 6.0624780236435285,
+        "median": 6.06000000000131,
+        "p95": 6.165000000000873,
+        "max": 12.165000000000873
+      },
+      "mainThreadWorkOccupancyPercent": 7.08152430676507,
+      "repeatedPoseFraction": 0.923310093967869,
+      "orientationChangesPerSecond": 12.649927262918238,
+      "positiveAngleStepDegrees": {
+        "mean": 5.625,
+        "median": 5.625000000000006,
+        "p95": 5.625000000000032,
+        "max": 5.625000000000032
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:37:08.045Z",
+        "completionUtc": "2026-11-08T05:37:12.338Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/bitmap/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [],
+              "bytes": 93528,
+              "types": [
+                "DOM"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/bitmap/"
+                }
+              ],
+              "bytes": 1784288,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 1020224,
+              "types": [
+                "Shared"
+              ]
+            }
+          ],
+          "bytes": 4126840
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:36:38.622000+00:00",
+        "requestedEnd": "2026-11-08T05:36:58.626000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 15,
+        "measuredCpuIntervalSeconds": 18.602736999999998,
+        "aggregateCpuPercentOfHostTimeWeighted": 4.805100498562838,
+        "cpuSecondsByProcessName": {
+          "chrome": 1.0625,
+          "msedge": 1.921875,
+          "ChatGPT": 18.21875,
+          "codex": 0.1875,
+          "msedgewebview2": 0.015625,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.046875,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 69.33333333333333,
+          "median": 60,
+          "min": 42,
+          "max": 100
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6241109333.333333,
+          "median": 6218756096,
+          "min": 6208356352,
+          "max": 6281224192
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5792558284.8,
+          "median": 5777420288,
+          "min": 5765832704,
+          "max": 5834383360
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:36:39.1209294+00:00",
+            "hostTotalCpuPercent": 88,
+            "aggregateWorkingSetBytes": 6281224192,
+            "aggregatePrivateBytes": 5834383360,
+            "matchingProcesses": 67
+          },
+          {
+            "at": "2026-11-08T05:36:40.4626501+00:00",
+            "hostTotalCpuPercent": 57,
+            "aggregateWorkingSetBytes": 6279917568,
+            "aggregatePrivateBytes": 5832450048,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.341721,
+            "aggregateCpuPercentOfHost": 5.288993886707197,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:41.7942683+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6280658944,
+            "aggregatePrivateBytes": 5826170880,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.331618,
+            "aggregateCpuPercentOfHost": 10.609352056420585,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:43.1748879+00:00",
+            "hostTotalCpuPercent": 42,
+            "aggregateWorkingSetBytes": 6278643712,
+            "aggregatePrivateBytes": 5820731392,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.380619,
+            "aggregateCpuPercentOfHost": 4.809889621973912,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:44.4852341+00:00",
+            "hostTotalCpuPercent": 59,
+            "aggregateWorkingSetBytes": 6274031616,
+            "aggregatePrivateBytes": 5815042048,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.310347,
+            "aggregateCpuPercentOfHost": 4.074143464797238,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:45.8116933+00:00",
+            "hostTotalCpuPercent": 55,
+            "aggregateWorkingSetBytes": 6262034432,
+            "aggregatePrivateBytes": 5802831872,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.326459,
+            "aggregateCpuPercentOfHost": 3.484763444127058,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:47.1212394+00:00",
+            "hostTotalCpuPercent": 58,
+            "aggregateWorkingSetBytes": 6260285440,
+            "aggregatePrivateBytes": 5795311616,
+            "matchingProcesses": 67,
+            "cpuIntervalSeconds": 1.309546,
+            "aggregateCpuPercentOfHost": 4.673216264771659,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:48.4647220+00:00",
+            "hostTotalCpuPercent": 46,
+            "aggregateWorkingSetBytes": 6214651904,
+            "aggregatePrivateBytes": 5772234752,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.343483,
+            "aggregateCpuPercentOfHost": 3.101391433063661,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 1,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:49.7611044+00:00",
+            "hostTotalCpuPercent": 96,
+            "aggregateWorkingSetBytes": 6218756096,
+            "aggregatePrivateBytes": 5777420288,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.296382,
+            "aggregateCpuPercentOfHost": 4.720670039129414,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:51.1163950+00:00",
+            "hostTotalCpuPercent": 51,
+            "aggregateWorkingSetBytes": 6214459392,
+            "aggregatePrivateBytes": 5771722752,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.355291,
+            "aggregateCpuPercentOfHost": 3.8429631225569514,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:52.4266442+00:00",
+            "hostTotalCpuPercent": 60,
+            "aggregateWorkingSetBytes": 6214168576,
+            "aggregatePrivateBytes": 5771370496,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.310249,
+            "aggregateCpuPercentOfHost": 4.322890152940396,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:53.7675936+00:00",
+            "hostTotalCpuPercent": 71,
+            "aggregateWorkingSetBytes": 6210121728,
+            "aggregatePrivateBytes": 5767872512,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.340949,
+            "aggregateCpuPercentOfHost": 4.272471709712052,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:55.0765163+00:00",
+            "hostTotalCpuPercent": 69,
+            "aggregateWorkingSetBytes": 6208356352,
+            "aggregatePrivateBytes": 5765832704,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.308923,
+            "aggregateCpuPercentOfHost": 4.575963088228516,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:56.4001971+00:00",
+            "hostTotalCpuPercent": 88,
+            "aggregateWorkingSetBytes": 6209241088,
+            "aggregatePrivateBytes": 5766680576,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.323681,
+            "aggregateCpuPercentOfHost": 4.47576052437609,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:36:57.7236660+00:00",
+            "hostTotalCpuPercent": 100,
+            "aggregateWorkingSetBytes": 6210088960,
+            "aggregatePrivateBytes": 5768318976,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.323469,
+            "aggregateCpuPercentOfHost": 5.017590136225328,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    },
+    {
+      "label": "r3-current",
+      "sourceHashes": {
+        "timing": "0c497cdea0d1545e429b5a2689d691def91bbd4451fa46ef86bf417e44384541",
+        "memory": "149ac207bbe72780018ddd77b5b1699f1d7f9a1cbc9036497598d0497670592c",
+        "resources": "434ac2aff383a95c73d70ff822b21f8fd06825d67df5f3ea9049947c2f3ec6e9"
+      },
+      "captureUtc": "2026-11-08T05:37:47.441Z",
+      "durationMs": 20002.620000003575,
+      "presentation": "svg-continuous",
+      "startState": {
+        "time": 0,
+        "steps": 0,
+        "activeSteps": 0,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 2.356194490192345,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "1,4",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "1,6",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 0
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.356194490192345,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": []
+      },
+      "endState": {
+        "time": 19.999999999999506,
+        "steps": 2400,
+        "activeSteps": 2400,
+        "paused": false,
+        "complete": false,
+        "player": {
+          "name": "player",
+          "grabMask": 15,
+          "pivot": "1,1",
+          "angle": 27.213178410686574,
+          "direction": 1,
+          "group": 700,
+          "blocked": null,
+          "transfers": 0
+        },
+        "demos": [
+          {
+            "name": "red",
+            "grabMask": 240,
+            "pivot": "5,4",
+            "angle": 8.363622489146229,
+            "direction": 1,
+            "group": 500,
+            "action": "swing",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "green",
+            "grabMask": 3840,
+            "pivot": "5,6",
+            "angle": 8.363622489146591,
+            "direction": 1,
+            "group": 4400,
+            "action": "flip",
+            "blocked": null,
+            "transfers": 6
+          },
+          {
+            "name": "blue",
+            "grabMask": 61440,
+            "pivot": "8,7",
+            "angle": 2.0804371819666625,
+            "direction": 1,
+            "group": 4500,
+            "action": "bounce",
+            "blocked": null,
+            "transfers": 0
+          }
+        ],
+        "events": [
+          {
+            "sequence": 1,
+            "type": "swing",
+            "time": 0.6333333333333335,
+            "hand": "red",
+            "dot": "0,4"
+          },
+          {
+            "sequence": 2,
+            "type": "flip",
+            "time": 0.6333333333333335,
+            "hand": "green",
+            "dot": "0,6"
+          },
+          {
+            "sequence": 3,
+            "type": "bounce",
+            "time": 0.6333333333333335,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 4,
+            "type": "bounce",
+            "time": 3.166666666666658,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 5,
+            "type": "swing",
+            "time": 5.691666666666739,
+            "hand": "red",
+            "dot": "1,4"
+          },
+          {
+            "sequence": 6,
+            "type": "flip",
+            "time": 5.691666666666739,
+            "hand": "green",
+            "dot": "1,6"
+          },
+          {
+            "sequence": 7,
+            "type": "bounce",
+            "time": 5.691666666666739,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 8,
+            "type": "swing",
+            "time": 8.21666666666684,
+            "hand": "red",
+            "dot": "2,4"
+          },
+          {
+            "sequence": 9,
+            "type": "flip",
+            "time": 8.21666666666684,
+            "hand": "green",
+            "dot": "2,6"
+          },
+          {
+            "sequence": 10,
+            "type": "bounce",
+            "time": 8.21666666666684,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 11,
+            "type": "swing",
+            "time": 10.75000000000003,
+            "hand": "red",
+            "dot": "3,4"
+          },
+          {
+            "sequence": 12,
+            "type": "flip",
+            "time": 10.75000000000003,
+            "hand": "green",
+            "dot": "3,6"
+          },
+          {
+            "sequence": 13,
+            "type": "bounce",
+            "time": 10.75000000000003,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 14,
+            "type": "swing",
+            "time": 13.274999999999887,
+            "hand": "red",
+            "dot": "4,4"
+          },
+          {
+            "sequence": 15,
+            "type": "flip",
+            "time": 13.274999999999887,
+            "hand": "green",
+            "dot": "4,6"
+          },
+          {
+            "sequence": 16,
+            "type": "bounce",
+            "time": 13.274999999999887,
+            "hand": "blue",
+            "dot": "9,7"
+          },
+          {
+            "sequence": 17,
+            "type": "swing",
+            "time": 15.799999999999743,
+            "hand": "red",
+            "dot": "5,4"
+          },
+          {
+            "sequence": 18,
+            "type": "flip",
+            "time": 15.799999999999743,
+            "hand": "green",
+            "dot": "5,6"
+          },
+          {
+            "sequence": 19,
+            "type": "bounce",
+            "time": 15.799999999999743,
+            "hand": "blue",
+            "dot": "7,7"
+          },
+          {
+            "sequence": 20,
+            "type": "bounce",
+            "time": 18.333333333332934,
+            "hand": "blue",
+            "dot": "9,7"
+          }
+        ]
+      },
+      "counters": {
+        "rafCallbacks": 3300,
+        "renderCalls": 3300,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+      "workMs": {
+        "mean": 0.6332787878292077,
+        "median": 0.6000000014901161,
+        "p95": 0.9399999976158142,
+        "max": 1.6049999967217445
+      },
+      "renderMs": {
+        "mean": 0.5763939393266584,
+        "median": 0.5399999991059303,
+        "p95": 0.8550000041723251,
+        "max": 1.5
+      },
+      "rafGapMs": {
+        "mean": 6.062496210973022,
+        "median": 6.06000000000131,
+        "p95": 6.170000000001892,
+        "max": 11.965000000000146
+      },
+      "mainThreadWorkOccupancyPercent": 10.447731346373685,
+      "repeatedPoseFraction": 0.0,
+      "orientationChangesPerSecond": 164.94855670012888,
+      "positiveAngleStepDegrees": {
+        "mean": 0.431584630532209,
+        "median": 0.4315326818310032,
+        "p95": 0.43936578331635134,
+        "max": 0.8520278115686503
+      },
+      "pageMemory": {
+        "startUtc": "2026-11-08T05:38:25.282Z",
+        "completionUtc": "2026-11-08T05:38:25.815Z",
+        "status": "completed",
+        "method": "measureUserAgentSpecificMemory",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "result": {
+          "breakdown": [
+            {
+              "attribution": [],
+              "bytes": 0,
+              "types": []
+            },
+            {
+              "attribution": [],
+              "bytes": 1000520,
+              "types": [
+                "Shared"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/current/"
+                }
+              ],
+              "bytes": 1228800,
+              "types": [
+                "Canvas"
+              ]
+            },
+            {
+              "attribution": [
+                {
+                  "scope": "Window",
+                  "url": "http://localhost:8091/current/"
+                }
+              ],
+              "bytes": 1722427,
+              "types": [
+                "JavaScript"
+              ]
+            },
+            {
+              "attribution": [],
+              "bytes": 109856,
+              "types": [
+                "DOM"
+              ]
+            }
+          ],
+          "bytes": 4061603
+        }
+      },
+      "resources": {
+        "boundary": "All matching browser/Codex processes on this host, including unrelated tabs and agents; not isolated game CPU or memory. CPU is cumulative process seconds; hostTotalCpuPercent is host-wide context. Sum of process working sets may count shared pages multiple times and is not unique physical RAM.",
+        "cpuMethod": "Cumulative CPU deltas only for same PID/name at both ends of each wholly-contained sample interval; new/exited/invalid pairs omitted, potentially undercounting. PID reuse with identical name and monotonic CPU cannot be detected.",
+        "memoryMethod": "Sum of sampled process working sets/private bytes; working sets may double-count shared pages; private bytes are committed allocation, not physical RAM.",
+        "requestedStart": "2026-11-08T05:37:47.441000+00:00",
+        "requestedEnd": "2026-11-08T05:38:07.445000+00:00",
+        "coverageBracketsCapture": true,
+        "samplesWithinCapture": 15,
+        "measuredCpuIntervalSeconds": 18.318935,
+        "aggregateCpuPercentOfHostTimeWeighted": 5.8035635896227955,
+        "cpuSecondsByProcessName": {
+          "chrome": 0.59375,
+          "msedge": 1.90625,
+          "ChatGPT": 22.484375,
+          "codex": 0.3125,
+          "msedgewebview2": 0.171875,
+          "codex-code-mode-host": 0.0,
+          "codex-computer-use-swift": 0.046875,
+          "chrome-native-host": 0.0
+        },
+        "hostCpuPercent": {
+          "mean": 52.86666666666667,
+          "median": 52,
+          "min": 36,
+          "max": 69
+        },
+        "aggregateWorkingSetBytes": {
+          "mean": 6251586355.2,
+          "median": 6253957120,
+          "min": 6237425664,
+          "max": 6257975296
+        },
+        "aggregatePrivateBytes": {
+          "mean": 5833979221.333333,
+          "median": 5836144640,
+          "min": 5810053120,
+          "max": 5853597696
+        },
+        "reducedSamples": [
+          {
+            "at": "2026-11-08T05:37:48.1562708+00:00",
+            "hostTotalCpuPercent": 36,
+            "aggregateWorkingSetBytes": 6253957120,
+            "aggregatePrivateBytes": 5853597696,
+            "matchingProcesses": 66
+          },
+          {
+            "at": "2026-11-08T05:37:49.4723098+00:00",
+            "hostTotalCpuPercent": 50,
+            "aggregateWorkingSetBytes": 6246862848,
+            "aggregatePrivateBytes": 5845577728,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.316039,
+            "aggregateCpuPercentOfHost": 4.10599217297765,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:50.7682033+00:00",
+            "hostTotalCpuPercent": 40,
+            "aggregateWorkingSetBytes": 6249652224,
+            "aggregatePrivateBytes": 5839486976,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.295894,
+            "aggregateCpuPercentOfHost": 5.174596970637001,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:52.0952309+00:00",
+            "hostTotalCpuPercent": 68,
+            "aggregateWorkingSetBytes": 6256136192,
+            "aggregatePrivateBytes": 5843177472,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.327027,
+            "aggregateCpuPercentOfHost": 7.3099649316354025,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:53.4360127+00:00",
+            "hostTotalCpuPercent": 69,
+            "aggregateWorkingSetBytes": 6255288320,
+            "aggregatePrivateBytes": 5841432576,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.340782,
+            "aggregateCpuPercentOfHost": 8.983019486637899,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:54.7325257+00:00",
+            "hostTotalCpuPercent": 54,
+            "aggregateWorkingSetBytes": 6257483776,
+            "aggregatePrivateBytes": 5840789504,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.296513,
+            "aggregateCpuPercentOfHost": 6.327067295121607,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:56.0444550+00:00",
+            "hostTotalCpuPercent": 47,
+            "aggregateWorkingSetBytes": 6257975296,
+            "aggregatePrivateBytes": 5838712832,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.31193,
+            "aggregateCpuPercentOfHost": 4.6647242357951,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:57.3568341+00:00",
+            "hostTotalCpuPercent": 66,
+            "aggregateWorkingSetBytes": 6256074752,
+            "aggregatePrivateBytes": 5835489280,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.312379,
+            "aggregateCpuPercentOfHost": 9.772726349121202,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:58.6668112+00:00",
+            "hostTotalCpuPercent": 54,
+            "aggregateWorkingSetBytes": 6256902144,
+            "aggregatePrivateBytes": 5836144640,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.309977,
+            "aggregateCpuPercentOfHost": 4.472883875060401,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:37:59.9779321+00:00",
+            "hostTotalCpuPercent": 49,
+            "aggregateWorkingSetBytes": 6256402432,
+            "aggregatePrivateBytes": 5834838016,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.311121,
+            "aggregateCpuPercentOfHost": 4.717257852885686,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:38:01.2749819+00:00",
+            "hostTotalCpuPercent": 41,
+            "aggregateWorkingSetBytes": 6249324544,
+            "aggregatePrivateBytes": 5828808704,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.297049,
+            "aggregateCpuPercentOfHost": 4.919018736634725,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:38:02.5891296+00:00",
+            "hostTotalCpuPercent": 52,
+            "aggregateWorkingSetBytes": 6248435712,
+            "aggregatePrivateBytes": 5824647168,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.314148,
+            "aggregateCpuPercentOfHost": 4.9540970017583,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:38:03.8843288+00:00",
+            "hostTotalCpuPercent": 61,
+            "aggregateWorkingSetBytes": 6252175360,
+            "aggregatePrivateBytes": 5824364544,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.295199,
+            "aggregateCpuPercentOfHost": 4.322855664136039,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:38:05.1804688+00:00",
+            "hostTotalCpuPercent": 61,
+            "aggregateWorkingSetBytes": 6237425664,
+            "aggregatePrivateBytes": 5810053120,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.29614,
+            "aggregateCpuPercentOfHost": 6.27865881257683,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          },
+          {
+            "at": "2026-11-08T05:38:06.4752057+00:00",
+            "hostTotalCpuPercent": 45,
+            "aggregateWorkingSetBytes": 6239698944,
+            "aggregatePrivateBytes": 5812568064,
+            "matchingProcesses": 66,
+            "cpuIntervalSeconds": 1.294737,
+            "aggregateCpuPercentOfHost": 5.128937382649912,
+            "newProcessesNotCountedForCpu": 0,
+            "exitedProcessesNotCountedForCpu": 0,
+            "invalidCpuPairs": 1
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Frozen pre-goal-correction foregrounds; subsequent animated goal correction not measured by these nine captures",
+  "decisions": {
+    "art": "Accept Astra symmetric hand revision after visual, exact geometry, pivot and play review",
+    "performance": "No supported SVG CPU/memory reduction claim; SVG software poses materially finer; no Astra versus literal SVG performance winner"
+  },
+  "goal": {
+    "source": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\reference-motion-6.json",
+    "sourceSha256": "aaafe63a77e1fb5bb18aeb58c8deb492e8e6ba3394e24def7b43d9396197acc3",
+    "evidence": "32 saved original6MHz rendered frames confirm four triangular markers moving around a stationary sphere",
+    "implementation": "separate private SVG marker overlay, simulation-time rotation period1.25seconds; qualitative reconstruction, exact cadence unqualified"
+  },
+  "activation": {
+    "live": "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\clockwerx-html5",
+    "backup": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-svg-benchmark\\live-literal-svg-reference",
+    "record": {
+      "schema_version": 1,
+      "id": "clockwerx-html5-pilot-v1",
+      "source_files": {
+        "index.html": "955015d3b6257fe2557d57198d8f40b55e2a5ea03fc31febf092c8c5e0a57c57",
+        "app.mjs": "5e8ad22aa85600a4132c3a3bf0813ca45c2b7010d57bb074f540bae312ef8b48",
+        "engine.mjs": "799b61eaeda3e4b4d3572b9f9114c5618ad76ac3b4216d230a0303fb6867ddcb",
+        "board.mjs": "dcc1a1dfd4e0635447515435511d61be48ba78e00ebaf9a6a8d1e73feb325888",
+        "rendering.mjs": "c2b2124aadb7f7d3d2c9f42006d3d0cbed3718722b7fdc3a7c2268c222e31a6d"
+      },
+      "assets_manifest_sha256": "268ae62c8cd0d9ab0ed35029b3eb018a95b944394c1e12c15dddd80397519cf5",
+      "asset_count": 16,
+      "asset_bytes": 67296,
+      "logical_size": [
+        640,
+        480
+      ],
+      "scope": "One reconstructed Movement board; separate engine and storage; original save compatibility omitted",
+      "presentation": "svg-continuous"
+    },
+    "protectedRootFiles": {
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\index.html": "b5c268039ee36c9f521a362b85488fd357e88973e59843b4c48ec6380fa82cf4",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\private-library.json": "3ee66798f1a438b39669c1a5ff56aa242fdbd8643c7d5034600e091f89683418",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\systemless-org-bd51fd0e34e6677f_bg.wasm": "af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f"
+    },
+    "sizes": {
+      "sourceBytes": 25490,
+      "assetBytes": 67296,
+      "manifestBytes": 3640,
+      "totalBytes": 96426
+    },
+    "privateAssetsRemainOutsideGit": true,
+    "benchmarkVariant": "Astra pre-goal overlay; final overlay not included in nine measurements"
+  },
+  "validation": {
+    "nodeEngineAndRendering": "passed",
+    "pythonVectorAndReconstruction": 7,
+    "pythonPackaging": 6,
+    "appSyntax": "passed",
+    "rawFrameRowsReviewed": 29651,
+    "rawResourceSamplesReviewed": 274,
+    "frozenRawAndMemoryFramesIdentical": true,
+    "viewportOverrideReset": true,
+    "normalRouteObservedReady": true,
+    "proofFiles": {
+      "final-canvas.png": "a9fd11c0d17c07291f91aeb436b9bb9ac2da97b9c52f85dffe663c2ce0f16d11",
+      "final-page.png": "9d2d4f2abd1e560dd06ee1a6ea5182b4cc7dc6196914a77e021045ee6e7b9ffd",
+      "black-goal-qa.png": "d1d8a4373498b0b49ae0e8e380db665e2cc0b79aab732f328f46f6bed4ccec80",
+      "flip-qa.png": "4568583933de69d96d0188cbccbbbc380315bff288ff756b6ea3d47b0b07f367",
+      "goal-complete-qa.png": "c7ff4fdc69c6448dae938cb5935a55b7c1ded97d32d51951733e7950e2347ace",
+      "goal-motion-qa-a.png": "5d5f26e35fdd8e8187490a8867a5d531e8f94e0fd4ec5748564684e9e42f1295",
+      "goal-motion-qa-b.png": "0000711e585442c1338657bd6ccff1b055b0bedb4ce6394708d7839bf119d7c3",
+      "goal-native-review.png": "2342ffb8df3c6f2185970800692f57b4150d630782a36145d943c03757b22d42",
+      "goal-motion-review.png": "2e0a574cd0abac562f47a5fca9ee9cfc6e2a3ca79cfb73608da2dac592f50af2"
+    }
+  }
+}

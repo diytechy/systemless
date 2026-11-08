@@ -1,0 +1,9 @@
+# Completed SVG benchmark and revision
+
+Accepted Astra mirrored hands after25reference-view review, exact geometry/pivot/hash checks and native-size/play checks. All9matched20second captures reviewed/reduced;29,651rAF rows,274resource samples; same initial scene,2,400active steps per run, no dropped simulation;9post-capture memory calls completed. Report/evidence/protocol in this folder. Primary conclusion: continuous SVG software poses improve angular stepping; main-thread work increases; no established CPU/RAM saving or Astra performance win. Host load45.4–97.2%limits OS CPU attribution.
+
+User identified goal triangles and their motion. Original saved32frame sequence confirms surrounding moving markers. Added private SVG overlay rotating around stationary sphere from simulation time;1.25sec full turn approximate, original exact cadence/direction/phase unqualified. This correction postdates the frozen9run benchmark and is not included in its measurements.
+
+Final accepted local route http://localhost:8087/clockwerx-html5/ visibly ready, marked as deliverable. Final package96,426B. Previous live literalSVG route retained intact privately; originalbitmap and all frozen benchmark routes also retained. Root library metadata/index/WASM and engine/board unchanged. No original media/preferences/save mappings altered. User's SVG-Port branch used. Generic source/tests/text evidence only committed; no push, upload or public deployment. Normal8087 remains available; preview8091 stopped after final activation. No worker/benchmark remains.
+
+Private root D:/SystemlessBuild/diagnostics/2026-11-07-svg-benchmark contains raw captures, freezes/hashes, activation/owned-process records and proof PNGs. Review report.md/evidence.json for acceptance limits. Prior69title library workflow remains complete; restart automation already removed, do not recreate it.

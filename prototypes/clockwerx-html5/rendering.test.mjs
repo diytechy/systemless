@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {handPoses,renderAngle,resizeCanvas} from './rendering.mjs';
+import {handPoses,renderAngle,resizeCanvas,presentedAngle} from './rendering.mjs';
 import {MovementGame,TAU} from './engine.mjs';
 
 const previous={pivot:'a',angle:TAU-.01,direction:1};
@@ -8,6 +8,9 @@ assert.ok(Math.abs(renderAngle(current,previous,.5)-TAU)<1e-12,'interpolate acro
 assert.equal(renderAngle({...current,pivot:'b'},previous,.5),.01,'never interpolate through empty space after a pivot transfer');
 assert.equal(renderAngle({...current,direction:-1},previous,.5),.01,'reversal is authoritative immediately');
 assert.ok(renderAngle(current,previous,.25)!==renderAngle(current,previous,.75),'sub-step poses must not be rounded to64 directions');
+assert.equal(presentedAngle({angle:TAU+.01},null,0,false),0,'bitmap wraps into its actual nearest direction');
+assert.equal(presentedAngle({angle:TAU/64*.6},null,0,false),TAU/64,'bitmap reports the selected frame angle');
+assert.equal(presentedAngle(current,previous,.5,true),renderAngle(current,previous,.5),'diagnostics use the submitted SVG pose');
 
 const board={radius:48,distanceTolerance:1,angularSpeed:TAU,dots:[{id:'a',x:0,y:0},{id:'b',x:48,y:0,kind:'goal'}],player:{name:'player',pivot:'a',angle:-.1,direction:1},demos:[]};
 const game=new MovementGame(board),before=game.snapshot(),poses=handPoses(game);

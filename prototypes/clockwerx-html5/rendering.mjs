@@ -1,4 +1,9 @@
-import {angleDelta} from './engine.mjs';
+import {angleDelta,TAU} from './engine.mjs';
+export function presentedAngle(hand,previous,alpha,vector){
+ if(vector)return renderAngle(hand,previous,alpha);
+ const normalized=((hand.angle%TAU)+TAU)%TAU;
+ return (Math.round(normalized/TAU*64)%64)*TAU/64;
+}
 
 // Presentation only: never blend between different pivots or across reversals.
 // The 120Hz simulation and its collision/transfer decisions stay authoritative.

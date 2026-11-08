@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 19,
-  "currentAction": "Link19: qualify class2/5 source clocks, programmed walls and initially open doors from fresh through18 baseline",
+  "currentOrdinal": 20,
+  "currentAction": "Balance20: fresh through19 baseline; qualify six active spikes, counter-rotating transfer NPCs and four red gates",
   "levels": [
     {
       "ordinal": 1,
@@ -1320,11 +1320,28 @@
       "menuTitle": "Link",
       "resourceTitle": "Link",
       "sha256": "59d38eae716dc444b0265f433ed4455ffcbf82cd14f14a7feb67fc648f627df2",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "link/native-goal-01/report.json",
+        "link/native-wall-probe-01/link-wall-G2539.png",
+        "link/native-goal-01/link-transfer-06.png",
+        "link/native-goal-01/link-transfer-11.png",
+        "link/native-goal-01/link-after-route.png",
+        "link/native-goal-01/next-after-link.png"
+      ],
+      "requirements": [
+        "shared-upstream class2/5 parity and remainders",
+        "programmed red source wall response",
+        "initially open door specifications versus already animated reveal",
+        "immutable door-cap obstacles in route planning"
+      ],
+      "svgStatus": "activated14transfer/oneGO/2000Childgoal;190onsets and native programmed-wall contact",
+      "generationConstraints": [
+        "derive each class from shared upstream rather than hero count",
+        "route graph includes original immutable cap and wall outlines",
+        "advance switch/door state through reveal",
+        "goal certificate does not imply optional pickup or checkpoint coverage"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 76,
@@ -1351,7 +1368,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1368,7 +1385,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "link-review.md"
     },
     {
       "ordinal": 20,

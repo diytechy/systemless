@@ -1,0 +1,399 @@
+{
+  "status": "accepted-bounded-child-goal",
+  "nativeTransfers": 14,
+  "goalOnsets": 190,
+  "changedSourceFiles": [
+    "app.mjs",
+    "level.mjs"
+  ],
+  "runtimeChecks": 191,
+  "packagingChecks": 13,
+  "priorDecodedBoardsIdentical": 17,
+  "priorMovementAdapterUnchanged": true,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 5179,
+    "guest_tick": 5779,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 2000,
+  "nativeNextLevel": "20: Balance",
+  "nativeProfileTotal": 73000,
+  "nativeMaxHandFitError": 7.994708994708994,
+  "other13MaxHandFitError": 0.28708133971291866,
+  "browser": {
+    "valid": true,
+    "transfers": 14,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 2000,
+      "totalCommitted": 0,
+      "nextDotAward": 1000,
+      "completed": true,
+      "overallEarned": 2000
+    },
+    "timer": {
+      "enabled": false,
+      "original": 90,
+      "current": 100,
+      "saved": 90
+    },
+    "checkpoint": "1,1",
+    "goodies": [
+      {
+        "index": 0,
+        "collected": false
+      },
+      {
+        "index": 1,
+        "collected": false
+      },
+      {
+        "index": 2,
+        "collected": false
+      },
+      {
+        "index": 3,
+        "collected": true
+      },
+      {
+        "index": 4,
+        "collected": false
+      }
+    ],
+    "resets": 0
+  },
+  "clock": {
+    "boundary": "Independent original-art fits over76present pivots constrain source upstream8/19ticks, class1floor(U/2),class2floor(3U/8),class3floor(U/4),class5U and hero48+floor(U/2). Kernel includes actual original wall outlines before program commands; no pose/clock state patches. Finite first16384upstream counts, not absolute hardware timing.",
+    "firstGuestTick": 1864,
+    "heroPoses": 22,
+    "npcPoses": 165,
+    "upstreamPhaseIntervals": [
+      [
+        144.52631578947367,
+        144.57894736842104
+      ]
+    ],
+    "chosenUpstreamPhase": 144.55263157894734,
+    "rejectedHeroCount": 11
+  },
+  "wall": {
+    "boundary": "Native images independently searched over76pivots/64poses, then observed red pose intersects existing qualified original wall outlines. Ordered before/peak/after poses test reversal; no state edits. Class clocks separately constrained.",
+    "nativeReport": {
+      "status": "passed",
+      "frontend_ticks": 1954,
+      "guest_tick": 2554,
+      "budget_exhausted_frames": 0
+    },
+    "observed": [
+      {
+        "sample": "link-fresh-initial",
+        "guestTick": 1864,
+        "pivot": "5,0",
+        "frame": 40,
+        "error": 0.6070460704607046,
+        "intersection": false,
+        "wall": null
+      },
+      {
+        "sample": "link-wall-G2529",
+        "guestTick": 2529,
+        "pivot": "8,0",
+        "frame": 20,
+        "error": 0.5752688172043011,
+        "intersection": false,
+        "wall": null
+      },
+      {
+        "sample": "link-wall-G2534",
+        "guestTick": 2534,
+        "pivot": "8,0",
+        "frame": 21,
+        "error": 0.5661375661375662,
+        "intersection": false,
+        "wall": null
+      },
+      {
+        "sample": "link-wall-G2537",
+        "guestTick": 2537,
+        "pivot": "8,0",
+        "frame": 21,
+        "error": 0.5661375661375662,
+        "intersection": false,
+        "wall": null
+      },
+      {
+        "sample": "link-wall-G2539",
+        "guestTick": 2539,
+        "pivot": "8,0",
+        "frame": 22,
+        "error": 0.6,
+        "intersection": true,
+        "wall": {
+          "id": 5,
+          "frame": 10,
+          "row": 0,
+          "column": 7
+        }
+      },
+      {
+        "sample": "link-wall-G2544",
+        "guestTick": 2544,
+        "pivot": "8,0",
+        "frame": 21,
+        "error": 0.5661375661375662,
+        "intersection": false,
+        "wall": null
+      },
+      {
+        "sample": "link-wall-G2554",
+        "guestTick": 2554,
+        "pivot": "8,0",
+        "frame": 19,
+        "error": 0.608,
+        "intersection": false,
+        "wall": null
+      }
+    ]
+  },
+  "nativeJointDoorBaseline": {
+    "samples": 33,
+    "maxGlobalError": 0.48902195608782434,
+    "maxPerDoorError": 0.682033096926714
+  },
+  "nativeGateCrossings": [
+    {
+      "checkpoint": "link-transfer-06",
+      "guestTick": 2957,
+      "redPhase": 0,
+      "greenPhase": 10,
+      "globalMeanAbsoluteChannelError": 1.359503215790641,
+      "doors": [
+        {
+          "door": 0,
+          "phase": 10,
+          "meanAbsoluteChannelError": 0.17139479905437352,
+          "maxChannelError": 1.0,
+          "roi": [
+            192,
+            174,
+            204,
+            268
+          ]
+        },
+        {
+          "door": 1,
+          "phase": 10,
+          "meanAbsoluteChannelError": 0.08628841607565012,
+          "maxChannelError": 1.0,
+          "roi": [
+            432,
+            174,
+            444,
+            268
+          ]
+        },
+        {
+          "door": 2,
+          "phase": 0,
+          "meanAbsoluteChannelError": 0.6764184397163121,
+          "maxChannelError": 1.0,
+          "roi": [
+            175,
+            191,
+            269,
+            203
+          ]
+        },
+        {
+          "door": 3,
+          "phase": 10,
+          "meanAbsoluteChannelError": 5.91725768321513,
+          "maxChannelError": 130.0,
+          "roi": [
+            271,
+            95,
+            365,
+            107
+          ]
+        },
+        {
+          "door": 4,
+          "phase": 10,
+          "meanAbsoluteChannelError": 0.17139479905437352,
+          "maxChannelError": 1.0,
+          "roi": [
+            271,
+            335,
+            365,
+            347
+          ]
+        },
+        {
+          "door": 5,
+          "phase": 0,
+          "meanAbsoluteChannelError": 0.6764184397163121,
+          "maxChannelError": 1.0,
+          "roi": [
+            336,
+            270,
+            348,
+            364
+          ]
+        }
+      ]
+    },
+    {
+      "checkpoint": "link-transfer-11",
+      "guestTick": 4120,
+      "redPhase": 4,
+      "greenPhase": 10,
+      "globalMeanAbsoluteChannelError": 1.1620647593701485,
+      "doors": [
+        {
+          "door": 0,
+          "phase": 10,
+          "meanAbsoluteChannelError": 0.18203309692671396,
+          "maxChannelError": 1.0,
+          "roi": [
+            192,
+            174,
+            204,
+            268
+          ]
+        },
+        {
+          "door": 1,
+          "phase": 10,
+          "meanAbsoluteChannelError": 5.41193853427896,
+          "maxChannelError": 130.0,
+          "roi": [
+            432,
+            174,
+            444,
+            268
+          ]
+        },
+        {
+          "door": 2,
+          "phase": 4,
+          "meanAbsoluteChannelError": 0.424645390070922,
+          "maxChannelError": 1.0,
+          "roi": [
+            175,
+            191,
+            269,
+            203
+          ]
+        },
+        {
+          "door": 3,
+          "phase": 10,
+          "meanAbsoluteChannelError": 0.08628841607565012,
+          "maxChannelError": 1.0,
+          "roi": [
+            271,
+            95,
+            365,
+            107
+          ]
+        },
+        {
+          "door": 4,
+          "phase": 10,
+          "meanAbsoluteChannelError": 0.13947990543735225,
+          "maxChannelError": 1.0,
+          "roi": [
+            271,
+            335,
+            365,
+            347
+          ]
+        },
+        {
+          "door": 5,
+          "phase": 4,
+          "meanAbsoluteChannelError": 0.38120567375886527,
+          "maxChannelError": 1.0,
+          "roi": [
+            336,
+            270,
+            348,
+            364
+          ]
+        }
+      ]
+    }
+  ],
+  "goodiePlacementReview": [
+    {
+      "index": 0,
+      "samples": 33,
+      "cleanSamples": 33,
+      "cleanMaxError": 0.5685358255451713,
+      "rawMaxError": 0.5685358255451713
+    },
+    {
+      "index": 1,
+      "samples": 33,
+      "cleanSamples": 28,
+      "cleanMaxError": 0.5685358255451713,
+      "rawMaxError": 26.194158075601376
+    },
+    {
+      "index": 2,
+      "samples": 33,
+      "cleanSamples": 31,
+      "cleanMaxError": 0.8642611683848798,
+      "rawMaxError": 22.283505154639176
+    },
+    {
+      "index": 3,
+      "samples": 33,
+      "cleanSamples": 33,
+      "cleanMaxError": 0.5685358255451713,
+      "rawMaxError": 0.5685358255451713
+    },
+    {
+      "index": 4,
+      "samples": 33,
+      "cleanSamples": 33,
+      "cleanMaxError": 0.5685358255451713,
+      "rawMaxError": 0.5685358255451713
+    }
+  ],
+  "background": {
+    "name": "link-fresh-initial",
+    "meanAbsoluteChannelError": 0.5591904057220373,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "fixture": {
+    "sha256": "15e42b9751921e17693aaca6e03a9966a7eaef9db5ce93259d386bf3a58404dc",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true
+  },
+  "limits": [
+    "No bonus pickups in goal witness",
+    "GO0/1/2/4andWY3,7not visited",
+    "crossed-gate ROI retains actual hero overdraw; other same-color gates fit open phase",
+    "native Child timer hidden; current100/saved90source/browser only",
+    "first hand fit attention-star overdraw retained",
+    "continuous human vs canonical NPC fractional cadence approximate",
+    "No real-time resource benchmark"
+  ],
+  "activation": {
+    "sourceBytes": 164575,
+    "assetBytes": 1796422,
+    "manifestBytes": 1510504,
+    "totalBytes": 3471501
+  },
+  "evidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\link"
+}

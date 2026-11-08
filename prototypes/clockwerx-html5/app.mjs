@@ -35,12 +35,11 @@ function draw(){renderCalls++;ctx.imageSmoothingEnabled=false;ctx.fillStyle='#90
  ctx.drawImage(images[manifest.backdrop],0,0);
  ctx.fillStyle='#808080';ctx.fillRect(68,69,504,360);ctx.fillStyle='white';ctx.font='bold 12px sans-serif';ctx.fillText('Level:',106,49);ctx.fillText('1: Movement',92,62);ctx.fillStyle='#ffff00';ctx.fillText('Pilot',441,50);ctx.fillText('Total Score:',493,49);ctx.fillText('—',544,62);
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
- ctx.save();ctx.beginPath();ctx.rect(68,69,504,360);ctx.clip();
  for(const d of game.board.dots){const idx=d.group==='red'?2:d.group==='green'?3:d.group==='blue'&&d.id===game.demos[2].pivot?5:d.kind==='bonus'&&!d.collected?1:0;const im=images[manifest.groups['300'].images[idx]];ctx.fillStyle='rgba(0,0,0,.28)';ctx.beginPath();ctx.ellipse(d.x+8,d.y+9,5,4,0,0,TAU);ctx.fill();ctx.drawImage(im,Math.round(d.x-im.width/2),Math.round(d.y-im.height/2));}
  ctx.fillStyle='white';ctx.font='10px sans-serif';
  const lines=[['You are the spinning gold (or black) hand.',88,150],['Player 1: Use Space to “swing” onto the next dot.',88,162],['The red hand is “swinging”.',109,292],['The green hand is “flipping”.',109,388],['Use X to “flip” onto the next dot.',137,174],['Use C to “instantly reverse”.',137,186],['Use Z to “bounce” off the next dot.',137,198],['The object of the game is to grab onto the “goal” dot.',148,80],['Bonus Dot',487,237],['Goal Dot',534,333],['“Bouncing” blue',410,360]];
  for(const [t,x,y] of lines)ctx.fillText(t,x,y);
- for(const h of [...game.demos,game.player])drawHand(h);ctx.restore();
+ for(const h of [...game.demos,game.player])drawHand(h);
  if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText('Movement complete',320,214);ctx.font='16px sans-serif';ctx.fillText('Goal dot grabbed · Restart to play again',320,250);ctx.textAlign='left';}
 }
 function captureInfo(){return {visibility:document.visibilityState,focused:document.hasFocus()};}

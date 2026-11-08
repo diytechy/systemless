@@ -1,0 +1,119 @@
+[
+  {
+    "label": "25-a",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 13
+      }
+    ]
+  },
+  {
+    "label": "6-a",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  },
+  {
+    "label": "html5-a",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  },
+  {
+    "label": "25-b",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  },
+  {
+    "label": "6-b",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  },
+  {
+    "label": "html5-b",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  },
+  {
+    "label": "25-c",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  },
+  {
+    "label": "6-c",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  },
+  {
+    "label": "html5-c",
+    "invalidPairs": [
+      {
+        "pid": 20352,
+        "name": "codex-windows-sandbox-service",
+        "before": null,
+        "after": null,
+        "reason": "missing/non-numeric CPU",
+        "intervals": 14
+      }
+    ]
+  }
+]

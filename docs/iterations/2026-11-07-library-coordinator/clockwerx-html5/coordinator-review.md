@@ -1,12 +1,12 @@
 # Parent review of the playable ClockWerx pilot
 
-Reviewed on2026-11-07 around23:48UTC. This accepts a bounded playable Movement slice, not a faithful full-game port or a production pacing change. Final repeated resource comparison remains pending.
+Reviewed initially on2026-11-07 around23:48UTC and finalized after the Sol raw-data review on2026-11-08. This accepts a bounded playable Movement slice and the documented nine-run comparison, with its measurement limits. No production pacing change is accepted.
 
 ## Provenance
 
 Root staged release dist-v2 WASM SHA256af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f,14,376,903bytes, compiledHEAD7170f7e7. All61compiled entries/routes/media hashes and build input fingerprints passed; original www/dist remained intact. Build completed exit0 in435.587seconds. No benchmark ran during compilation/conversion. Test origin localhost55847 is isolated from normal8087saves.
 
-Fresh explicitly selected gpt-6.1-sol pilot worker decoded original resources, kept maps/art/sounds private and implemented separate buildless HTML/Canvas2D source. Source freeze and hashes are in review-summary.json; parent subsequently requested only pause styling and actor clipping fixes. Packaged app SHA25693b6e3a5f0b1302f9bfdc31620d9e2e07633b210cd254a19b2e75b980de9e8cf. Private asset manifest SHA256307bdb47b12fd6874358e8f0434d1b3d7fdd258999afa5a8c9968549631d8463.364verified asset files total220,030bytes, excluding manifest/source. package_clockwerx_pilot.py validates hashes/references, preserves existing game entries and adds a separate route/footer link; three synthetic preservation/rejection tests pass.
+Fresh explicitly selected gpt-6.1-sol pilot worker decoded original resources, kept maps/art/sounds private and implemented separate buildless HTML/Canvas2D source. Parent requested small yellow pause styling, then temporarily requested actor clipping based on an insufficient short reference. Longer original observation showed hands intentionally overdraw the frame; the clip was removed before every final prototype capture. Final packaged app SHA2561e04a0e7bc3a86ccc96cb6cc97ed9c39d8e85667c9239e176c7f239848511758. Intermediate93b6... belongs only to the clipped GUI checkpoint. Private asset manifest SHA256307bdb47b12fd6874358e8f0434d1b3d7fdd258999afa5a8c9968549631d8463.364verified asset files total220,030bytes, excluding manifest/source. package_clockwerx_pilot.py validates hashes/references, preserves existing game entries and adds a separate route/footer link; three synthetic preservation/rejection tests pass.
 
 ## Independently observed browser behavior
 
@@ -21,7 +21,7 @@ Supported root IAB, Chrome157/Windows; temporary viewport672×1000. Prototype ca
 | Bounce | Six-second heldZ kept gold pivot at initial dot | Exact original collision window remains inferred |
 | Flip | Six-second heldX moved gold pivot right by two grid intervals | Direction semantics rely also on original help and engine assertions |
 | Reverse | KeyboardC path exercised before pause | Physical input-to-display latency and exact visual reversal timing unmeasured |
-| Actor clipping | Corrected blue/green hands stay inside gray playfield; border remains intact | Demos/choreography/shadows/fonts remain approximations |
+| Actor overdraw | Original longer observation disproved global clipping; final prototype permits frame overdraw | Earlier32-frame/5-second record did not cover full demo extents; choreography/shadows/fonts remain approximations |
 | PNG export | Actual640×480Canvas2D image exported and independently viewed | Private images remain outsideGit |
 | Storage | Distinct key/source design reviewed; no Mac saves read or replaced | Full browser preference roundtrip not qualified |
 | Audio/controller | Original WAVs and standard adapter included; keyboard tested | Audibility, synchronization and physical controller hardware unqualified |
@@ -34,4 +34,4 @@ Original automatically proceeds to Spikes and awards points; pilot stops at its 
 
 Private evidence is D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/clockwerx-html5/: pilot-first-gui.png, pilot-goal-v1.png, pilot-validated-v2.png, original-after-goal-spikes-6.png, original valid reference/motion/rotation/clipping records and package-gui-v1.json. First blank reference-movement-6.png is explicitly invalid. Source/asset hashes distinguish first GUI from corrected app; engine behavior was unchanged by the last presentation fixes.
 
-Next: freeze artifact, collect three alternating default25/experimental6/prototype captures with no input in Movement, soundoff, fixed geometry and one implementation at a time. Record raw work/resource/startup/memory boundaries; do not equate guest ticks, simulation calls, rAF or physical presentation. Return raw results to the Sol worker for review. Then complete remaining release-route checks and final69-game result table. No tuning promotion, normal launcher activation, push or deployment is implied by this prototype acceptance.
+Final review: all nine primary captures and their paired resource windows were completed, parsed and reviewed by the separate Sol pilot worker. Root inspected the raw capture conditions, retained excluded attempts, reviewed the independently recomputed CPU and rotation fits, and reran the meaningful engine assertions. The three memory-enriched exports preserve every timing frame and differ only at pageMemory. See final-comparison-review.md and its JSON for exact values and source hashes. Root accepts those bounded observations and the playable slice. The default scene is slower; experimental6 remains unqualified against an independent original-machine oracle. Host load and API accounting prevent a causal emulation-overhead or physical-RAM claim. No setting is promoted. Expanded release qualification continues separately.

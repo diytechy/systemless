@@ -1,5 +1,5 @@
 {
-  "status": "playable-source-frozen-root-browser-validation-pending",
+  "status": "accepted-bounded-playable-prototype-final9-capture-review-complete",
   "sourceFreezeUtc": "2026-11-07T23:38:00Z",
   "scope": "one actual Movement board; original assets/private map; no deployment",
   "privateAssets": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\assets",
@@ -14,7 +14,7 @@
     {
       "path": "prototypes/clockwerx-html5/app.mjs",
       "bytes": 13887,
-      "sha256": "2f2a8fd940293af142c9c18264f732f3d023da16d2e56aed8cd90b1eda7ef6bf"
+      "sha256": "1e04a0e7bc3a86ccc96cb6cc97ed9c39d8e85667c9239e176c7f239848511758"
     },
     {
       "path": "prototypes/clockwerx-html5/board.mjs",
@@ -33,8 +33,8 @@
     },
     {
       "path": "prototypes/clockwerx-html5/extract_assets.py",
-      "bytes": 6468,
-      "sha256": "75810b9ae2784a6dc9a523a67b7c16d6015af280c6d03624b09b73a61494eb90"
+      "bytes": 6553,
+      "sha256": "1b8745fcb82b1b707e2f359988a12df20c3395c332939d52320b90e0080df3ff"
     },
     {
       "path": "prototypes/clockwerx-html5/index.html",
@@ -53,13 +53,14 @@
     "Python source AST parse pass"
   ],
   "limits": [
-    "original-versus-pilot browser behavior pending",
     "timing observed experimental6MHz approximation",
     "48px logical collision, shorter artwork",
     "actor access masks inferred",
     "demo choreography/fonts/shadows/goal overlay reconstructed",
     "hardware controller/audio fidelity unqualified",
-    "original scores/music/save compatibility/campaign omitted"
+    "original scores/music/save compatibility/campaign omitted",
+    "allgamepace/resourcesnotcausallymatched:defaultslower,prototypeomissions",
+    "new6motionfit~1.1percentfasterthanprototype;PNGoverhead/noindependentoracle"
   ],
   "workloadReleased": true,
   "ownedProcessesExited": [
@@ -70,5 +71,55 @@
     194240
   ],
   "rollback": "Remove separate prototype route/source/private generated assets; original game/save mappings untouched",
-  "nextAction": "Root packages frozen source/assets, performs supported browser GUI acceptance and sequential comparison"
+  "nextAction": "Root independently reviews final evidence, completes remaining release route checks; keep original/pilot separate; no deployment",
+  "guiEvidence": {
+    "prototypeGoal": "root actual keyboard Space30s+18s with toolgap; visible completion",
+    "restart": "pass",
+    "pauseResume": "pass",
+    "pngExport": "pass",
+    "canvasSize": "CSS615x460.75/backing640x480",
+    "actorClip": "removed after original extension observed; short32frame clip hypothesis rejected"
+  },
+  "finalAppSha256": "1e04a0e7bc3a86ccc96cb6cc97ed9c39d8e85667c9239e176c7f239848511758",
+  "finalEvidence": {
+    "rawDirectory": "D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/clockwerx/final-comparison-v2",
+    "reviewMarkdown": "docs\\iterations\\2026-11-07-library-coordinator\\clockwerx-html5\\final-comparison-review.md",
+    "reviewJson": "docs\\iterations\\2026-11-07-library-coordinator\\clockwerx-html5\\final-comparison-review.json",
+    "primaryCaptures": 9,
+    "allResourceWindowsBracketCapture": true,
+    "memoryCopiesOnlyPageMemoryChanged": true,
+    "defaultMotionPeriodSeconds": 13.089326571443795,
+    "sixMotionPeriodSeconds": 5.00020511161233,
+    "prototypeWallPeriodRangeSeconds": [
+      5.054214702431977,
+      5.056658077765523
+    ],
+    "cpuNullPair": {
+      "pid": 20352,
+      "name": "codex-windows-sandbox-service",
+      "reason": "cpuSeconds null; rawassociationunknown"
+    },
+    "noIsolatedGameCpu": true,
+    "noPhysicalRamMeasurement": true,
+    "noProductionTuningPromotion": true
+  },
+  "effort": {
+    "startUtc": "2026-11-07T23:14:05Z",
+    "firstFreezeUtc": "2026-11-07T23:37:55Z",
+    "lastSourceChangeUtc": "2026-11-08T00:12:19Z",
+    "finalReviewResumeUtc": "2026-11-08T00:55:28Z",
+    "activeMinutesEstimated": {
+      "initialDiscoveryImplementationReports": 24,
+      "coordinatedPresentationFixes": 2,
+      "finalEvidenceReviewReports": 10
+    },
+    "estimateBoundary": "Activity estimates, not stopwatch measurements; explicit idle while root benchmarks excluded. Root GUI/capture elapsed~77min including coordination/idle/retries, beyond45min elapsed target; agent minutes do not determine developer-hour plan.",
+    "planningDeveloperHours": {
+      "low": 280,
+      "likely": 800,
+      "high": 2020
+    },
+    "planningBasis": "120RND2resources,38spritegroups,9unknownmechanicfamilies; subjectiveplanningnotmeasuredextrapolation"
+  },
+  "reviewCompletedUtc": "2026-11-08T01:03:33.612923+00:00"
 }

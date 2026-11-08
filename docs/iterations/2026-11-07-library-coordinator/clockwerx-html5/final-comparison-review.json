@@ -1,0 +1,1064 @@
+{
+  "boundary": "Focused source-frozen worker review; no new runtime/build/conversion; all9 primary timing/resources/summaries parsed and every rawframe inspected statistically",
+  "rawDirectory": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx\\final-comparison-v2",
+  "sourceAppSha256": "1e04a0e7bc3a86ccc96cb6cc97ed9c39d8e85667c9239e176c7f239848511758",
+  "wasmSha256": "af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "captures": [
+    {
+      "label": "25-a",
+      "timingFile": "25-a-r1-timing.json",
+      "resourcesFile": "25-a-r1-resources.json",
+      "summaryFile": "25-a-r1-resource-summary.json",
+      "wallSeconds": 20.00470000000112,
+      "rawFrameCount": 1465,
+      "resourceSampleCount": 29,
+      "resourceSamplesWithin": 14,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 91.35714285714286,
+        "median": 92.5,
+        "min": 76,
+        "max": 100
+      },
+      "aggregateBrowserCodexCpuPercent": 8.845733506591873,
+      "aggregateWorkingSet": {
+        "mean": 6648974189.714286,
+        "min": 6627463168,
+        "max": 6688456704
+      },
+      "aggregatePrivateBytes": {
+        "mean": 6151359634.285714,
+        "min": 6103715840,
+        "max": 6218915840
+      },
+      "cpuIntervalSeconds": 17.936200999999997,
+      "invalidCpuPairs": 13,
+      "visible": true,
+      "focused": true,
+      "reason": "complete",
+      "guestHz": 18.12405515220069,
+      "runtimeCallsHz": 73.29728381994975,
+      "animationCallbackHz": 163.86149254924177,
+      "visualWorkCount": 257,
+      "visualWorkHz": 12.846980959473806,
+      "guestWorkMs": {
+        "n": 1465,
+        "mean": 13.110569965916943,
+        "p50": 13.070000000298023,
+        "p95": 13.285000000149012,
+        "p99": 13.606999999806277,
+        "max": 15.609999999403954
+      },
+      "roundTripMs": {
+        "n": 1465,
+        "mean": 13.505047781553133,
+        "p50": 13.404999999329448,
+        "p95": 14.008999999985098,
+        "p99": 14.397000000774852,
+        "max": 16.994999999180436
+      },
+      "workerWasmBytes": [
+        170786816
+      ],
+      "firstFrameAfterBootMs": 587.7450000010431,
+      "firstFrameBoundary": "Worker boot postMessage to first returned frame; excludes earlier navigation/download/user readiness",
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 25,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "resourceTiming": {
+        "entries": 15,
+        "transferBytes": 4500,
+        "encodedBodyBytes": 23203741,
+        "decodedBodyBytes": 23203741,
+        "boundary": "Main-window ResourceTiming only; dedicated-worker fetches are not included. Cache state is not inferred from transferSize alone.",
+        "navigationLoadMs": [
+          258.81499999947846
+        ]
+      },
+      "cpuRecomputedPercent": 8.845733459453433,
+      "cpuRecomputeAbsoluteError": 4.7138440706362417e-08,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 13
+        }
+      ]
+    },
+    {
+      "label": "6-a",
+      "timingFile": "6-a-r1-timing.json",
+      "resourcesFile": "6-a-r1-resources.json",
+      "summaryFile": "6-a-r1-resource-summary.json",
+      "wallSeconds": 20.004884999999778,
+      "rawFrameCount": 3124,
+      "resourceSampleCount": 22,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 26.266666666666666,
+        "median": 27,
+        "min": 13,
+        "max": 54
+      },
+      "aggregateBrowserCodexCpuPercent": 4.546298251386195,
+      "aggregateWorkingSet": {
+        "mean": 5594216584.533334,
+        "min": 5561159680,
+        "max": 5715054592
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5696990958.933333,
+        "min": 5669715968,
+        "max": 5768687616
+      },
+      "cpuIntervalSeconds": 18.716578000000002,
+      "invalidCpuPairs": 14,
+      "visible": true,
+      "focused": true,
+      "reason": "complete",
+      "guestHz": 60.15308509759975,
+      "runtimeCallsHz": 156.287924093015,
+      "animationCallbackHz": 165.0096963816606,
+      "visualWorkCount": 824,
+      "visualWorkHz": 41.18993935731243,
+      "guestWorkMs": {
+        "n": 3124,
+        "mean": 3.05107074263762,
+        "p50": 0.15499999932944775,
+        "p95": 9.844999998807907,
+        "p99": 11.51540000109002,
+        "max": 13.234999999403954
+      },
+      "roundTripMs": {
+        "n": 3124,
+        "mean": 3.6593421895281146,
+        "p50": 0.2949999999254942,
+        "p95": 11.594249998964369,
+        "p99": 13.364649999588726,
+        "max": 16.99500000104308
+      },
+      "workerWasmBytes": [
+        170917888
+      ],
+      "firstFrameAfterBootMs": 344.125,
+      "firstFrameBoundary": "Worker boot postMessage to first returned frame; excludes earlier navigation/download/user readiness",
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 6,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "resourceTiming": {
+        "entries": 15,
+        "transferBytes": 4500,
+        "encodedBodyBytes": 23203741,
+        "decodedBodyBytes": 23203741,
+        "boundary": "Main-window ResourceTiming only; dedicated-worker fetches are not included. Cache state is not inferred from transferSize alone.",
+        "navigationLoadMs": [
+          344.77999999932945
+        ]
+      },
+      "cpuRecomputedPercent": 4.546298249747969,
+      "cpuRecomputeAbsoluteError": 1.6382255552116476e-09,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ]
+    },
+    {
+      "label": "html5-a",
+      "timingFile": "html5-a-timing.json",
+      "resourcesFile": "html5-a-resources.json",
+      "summaryFile": "html5-a-resource-summary.json",
+      "wallSeconds": 20.003369999999705,
+      "rawFrameCount": 3301,
+      "resourceSampleCount": 28,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 87.6,
+        "median": 91,
+        "min": 64,
+        "max": 96
+      },
+      "aggregateBrowserCodexCpuPercent": 5.300364013866315,
+      "aggregateWorkingSet": {
+        "mean": 5191525717.333333,
+        "min": 5185765376,
+        "max": 5203935232
+      },
+      "aggregatePrivateBytes": {
+        "mean": 4972756172.8,
+        "min": 4961849344,
+        "max": 4988903424
+      },
+      "cpuIntervalSeconds": 19.100004999999996,
+      "invalidCpuPairs": 14,
+      "valid": true,
+      "invalidReasons": [],
+      "allFramesVisibleFocused": true,
+      "allFramesNoInput": true,
+      "allFramesActive": true,
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2401,
+        "activeSimulationSteps": 2401,
+        "droppedCatchupSeconds": 0
+      },
+      "rafHz": 165.02219376035382,
+      "mainWorkMs": {
+        "n": 3301,
+        "mean": 0.34076189033639714,
+        "p50": 0.3349999990314245,
+        "p95": 0.4299999997019768,
+        "p99": 0.5199999995529652,
+        "max": 1.200000001117587
+      },
+      "renderMs": {
+        "n": 3301,
+        "mean": 0.28274765224059184,
+        "p50": 0.27500000037252903,
+        "p95": 0.35999999940395355,
+        "p99": 0.4450000002980232,
+        "max": 1.0650000013411045
+      },
+      "rafDeltaMs": {
+        "n": 3301,
+        "mean": 6.060586186004242,
+        "p50": 6.060000000004948,
+        "p95": 6.115000000005239,
+        "p99": 6.179999999993015,
+        "max": 6.349999999998545
+      },
+      "readyMs": 691.929999999702,
+      "startupBoundary": "module evaluation to all required local PNG decode / manifest parse complete",
+      "angularPace": {
+        "deltaRadians": 24.867340997128252,
+        "wallPeriodSeconds": 5.054214702431977,
+        "radiansPerWallSecond": 1.243157577804571,
+        "simulationSeconds": 20.008333333332196,
+        "pivotUnchanged": true,
+        "directionUnchanged": true
+      },
+      "resourceTiming": {
+        "entries": 176,
+        "transferBytes": 66687,
+        "encodedBodyBytes": 310618,
+        "decodedBodyBytes": 310618
+      },
+      "cpuRecomputedPercent": 5.300363972284467,
+      "cpuRecomputeAbsoluteError": 4.158184818692234e-08,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ]
+    },
+    {
+      "label": "25-b",
+      "timingFile": "25-b-timing.json",
+      "resourcesFile": "25-b-resources.json",
+      "summaryFile": "25-b-resource-summary.json",
+      "wallSeconds": 20.004644999999552,
+      "rawFrameCount": 1480,
+      "resourceSampleCount": 29,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 32.4,
+        "median": 30,
+        "min": 18,
+        "max": 49
+      },
+      "aggregateBrowserCodexCpuPercent": 5.814897411093122,
+      "aggregateWorkingSet": {
+        "mean": 5760483328,
+        "min": 5740691456,
+        "max": 5783248896
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5386125038.933333,
+        "min": 5361278976,
+        "max": 5416607744
+      },
+      "cpuIntervalSeconds": 18.787053999999998,
+      "invalidCpuPairs": 14,
+      "visible": true,
+      "focused": true,
+      "reason": "complete",
+      "guestHz": 26.639599765051347,
+      "runtimeCallsHz": 74.06009032426869,
+      "animationCallbackHz": 165.01167603824382,
+      "visualWorkCount": 378,
+      "visualWorkHz": 18.895611494230888,
+      "guestWorkMs": {
+        "n": 1480,
+        "mean": 13.08603040539735,
+        "p50": 13.054999999701977,
+        "p95": 13.234999999403954,
+        "p99": 13.46315000023693,
+        "max": 14.115000002086163
+      },
+      "roundTripMs": {
+        "n": 1480,
+        "mean": 13.418949324297845,
+        "p50": 13.324999999254942,
+        "p95": 13.844999998807907,
+        "p99": 14.105000000447035,
+        "max": 15.850000001490116
+      },
+      "workerWasmBytes": [
+        170524672
+      ],
+      "firstFrameAfterBootMs": 266.5300000011921,
+      "firstFrameBoundary": "Worker boot postMessage to first returned frame; excludes earlier navigation/download/user readiness",
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 25,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "resourceTiming": {
+        "entries": 15,
+        "transferBytes": 4500,
+        "encodedBodyBytes": 23203741,
+        "decodedBodyBytes": 23203741,
+        "boundary": "Main-window ResourceTiming only; dedicated-worker fetches are not included. Cache state is not inferred from transferSize alone.",
+        "navigationLoadMs": [
+          264.8700000010431
+        ]
+      },
+      "cpuRecomputedPercent": 5.814897391937273,
+      "cpuRecomputeAbsoluteError": 1.915584935119341e-08,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ]
+    },
+    {
+      "label": "6-b",
+      "timingFile": "6-b-timing.json",
+      "resourcesFile": "6-b-resources.json",
+      "summaryFile": "6-b-resource-summary.json",
+      "wallSeconds": 20.005114999998362,
+      "rawFrameCount": 2963,
+      "resourceSampleCount": 30,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 38.266666666666666,
+        "median": 33,
+        "min": 21,
+        "max": 94
+      },
+      "aggregateBrowserCodexCpuPercent": 4.8444678654369415,
+      "aggregateWorkingSet": {
+        "mean": 5879952452.266666,
+        "min": 5875212288,
+        "max": 5889134592
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5435282773.333333,
+        "min": 5426515968,
+        "max": 5451689984
+      },
+      "cpuIntervalSeconds": 18.908488,
+      "invalidCpuPairs": 14,
+      "visible": true,
+      "focused": true,
+      "reason": "complete",
+      "guestHz": 59.791106385640134,
+      "runtimeCallsHz": 148.20188879854902,
+      "animationCallbackHz": 165.00779925535394,
+      "visualWorkCount": 816,
+      "visualWorkHz": 40.78956806796996,
+      "guestWorkMs": {
+        "n": 2963,
+        "mean": 4.192215659795502,
+        "p50": 0.8700000010430813,
+        "p95": 11.914000000990928,
+        "p99": 13.110699999965728,
+        "max": 15.855000000447035
+      },
+      "roundTripMs": {
+        "n": 2963,
+        "mean": 4.5365609179935795,
+        "p50": 1.0850000008940697,
+        "p95": 12.528999999538065,
+        "p99": 13.863800000473859,
+        "max": 17.804999999701977
+      },
+      "workerWasmBytes": [
+        170524672
+      ],
+      "firstFrameAfterBootMs": 303.10999999940395,
+      "firstFrameBoundary": "Worker boot postMessage to first returned frame; excludes earlier navigation/download/user readiness",
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 6,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "resourceTiming": {
+        "entries": 15,
+        "transferBytes": 4500,
+        "encodedBodyBytes": 23203741,
+        "decodedBodyBytes": 23203741,
+        "boundary": "Main-window ResourceTiming only; dedicated-worker fetches are not included. Cache state is not inferred from transferSize alone.",
+        "navigationLoadMs": [
+          144.38499999977648
+        ]
+      },
+      "cpuRecomputedPercent": 4.84446785641797,
+      "cpuRecomputeAbsoluteError": 9.018971347529714e-09,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ]
+    },
+    {
+      "label": "html5-b",
+      "timingFile": "html5-b-timing.json",
+      "resourcesFile": "html5-b-resources.json",
+      "summaryFile": "html5-b-resource-summary.json",
+      "wallSeconds": 20.00470499999925,
+      "rawFrameCount": 3301,
+      "resourceSampleCount": 30,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 30.733333333333334,
+        "median": 31,
+        "min": 15,
+        "max": 49
+      },
+      "aggregateBrowserCodexCpuPercent": 3.2692259203328247,
+      "aggregateWorkingSet": {
+        "mean": 5596270318.933333,
+        "min": 5563432960,
+        "max": 5618122752
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5150646272,
+        "min": 5113061376,
+        "max": 5176299520
+      },
+      "cpuIntervalSeconds": 18.759218999999998,
+      "invalidCpuPairs": 14,
+      "valid": true,
+      "invalidReasons": [],
+      "allFramesVisibleFocused": true,
+      "allFramesNoInput": true,
+      "allFramesActive": true,
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2400,
+        "activeSimulationSteps": 2400,
+        "droppedCatchupSeconds": 0
+      },
+      "rafHz": 165.01118111964777,
+      "mainWorkMs": {
+        "n": 3301,
+        "mean": 0.2391214783206668,
+        "p50": 0.23500000312924385,
+        "p95": 0.3099999986588955,
+        "p99": 0.3449999988079071,
+        "max": 0.5249999985098839
+      },
+      "renderMs": {
+        "n": 3301,
+        "mean": 0.20583913965848713,
+        "p50": 0.20499999821186066,
+        "p95": 0.26999999955296516,
+        "p99": 0.2900000028312206,
+        "max": 0.494999997317791
+      },
+      "rafDeltaMs": {
+        "n": 3301,
+        "mean": 6.060577097849135,
+        "p50": 6.06000000000131,
+        "p95": 6.104999999999563,
+        "p99": 6.130000000001019,
+        "max": 6.269999999996799
+      },
+      "readyMs": 499.19999999925494,
+      "startupBoundary": "module evaluation to all required local PNG decode / manifest parse complete",
+      "angularPace": {
+        "deltaRadians": 24.856983920494713,
+        "wallPeriodSeconds": 5.056658077765523,
+        "radiansPerWallSecond": 1.2425568845176993,
+        "simulationSeconds": 19.999999999998863,
+        "pivotUnchanged": true,
+        "directionUnchanged": true
+      },
+      "resourceTiming": {
+        "entries": 176,
+        "transferBytes": 52800,
+        "encodedBodyBytes": 310618,
+        "decodedBodyBytes": 310618
+      },
+      "cpuRecomputedPercent": 3.2692258907732086,
+      "cpuRecomputeAbsoluteError": 2.9559616088192797e-08,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ]
+    },
+    {
+      "label": "25-c",
+      "timingFile": "25-c-timing.json",
+      "resourcesFile": "25-c-resources.json",
+      "summaryFile": "25-c-resource-summary.json",
+      "wallSeconds": 20.00495500000194,
+      "rawFrameCount": 1477,
+      "resourceSampleCount": 30,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 37,
+        "median": 36,
+        "min": 24,
+        "max": 56
+      },
+      "aggregateBrowserCodexCpuPercent": 5.980342998414978,
+      "aggregateWorkingSet": {
+        "mean": 5311578385.066667,
+        "min": 5297795072,
+        "max": 5325934592
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5377136230.4,
+        "min": 5360537600,
+        "max": 5396426752
+      },
+      "cpuIntervalSeconds": 18.93138,
+      "invalidCpuPairs": 14,
+      "visible": true,
+      "focused": true,
+      "reason": "complete",
+      "guestHz": 25.226355234630816,
+      "runtimeCallsHz": 73.8771831871331,
+      "animationCallbackHz": 164.95913137518582,
+      "visualWorkCount": 355,
+      "visualWorkHz": 17.745603526724533,
+      "guestWorkMs": {
+        "n": 1477,
+        "mean": 13.096587677710087,
+        "p50": 13.059999998658895,
+        "p95": 13.245000001043081,
+        "p99": 13.57940000101924,
+        "max": 15.564999997615814
+      },
+      "roundTripMs": {
+        "n": 1477,
+        "mean": 13.444600541656616,
+        "p50": 13.355000000447035,
+        "p95": 13.890000000596046,
+        "p99": 14.286199999898672,
+        "max": 16.16499999910593
+      },
+      "workerWasmBytes": [
+        170524672
+      ],
+      "firstFrameAfterBootMs": 308.26500000059605,
+      "firstFrameBoundary": "Worker boot postMessage to first returned frame; excludes earlier navigation/download/user readiness",
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 25,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "resourceTiming": {
+        "entries": 15,
+        "transferBytes": 4500,
+        "encodedBodyBytes": 23203741,
+        "decodedBodyBytes": 23203741,
+        "boundary": "Main-window ResourceTiming only; dedicated-worker fetches are not included. Cache state is not inferred from transferSize alone.",
+        "navigationLoadMs": [
+          134.38499999791384
+        ]
+      },
+      "memoryCopyRawFramesIdentical": true,
+      "memoryAfterCapture": true,
+      "cpuRecomputedPercent": 5.98034306315009,
+      "cpuRecomputeAbsoluteError": 6.473511238169749e-08,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ],
+      "pageMemory": {
+        "bytes": 20873732,
+        "status": "measured",
+        "start": "2026-11-08T00:50:36.603Z",
+        "completion": "2026-11-08T00:50:46.644Z",
+        "boundary": "Experimental browser application estimate, including attributed workers; not unique physical/GPU RAM",
+        "breakdownBytes": {
+          "Canvas": 14745600,
+          "JavaScript": 4792312,
+          "DOM": 119000,
+          "Shared": 1216820
+        }
+      }
+    },
+    {
+      "label": "6-c",
+      "timingFile": "6-c-timing.json",
+      "resourcesFile": "6-c-resources.json",
+      "summaryFile": "6-c-resource-summary.json",
+      "wallSeconds": 20.003955000001937,
+      "rawFrameCount": 2971,
+      "resourceSampleCount": 29,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 36.6,
+        "median": 38,
+        "min": 25,
+        "max": 52
+      },
+      "aggregateBrowserCodexCpuPercent": 5.344012581596939,
+      "aggregateWorkingSet": {
+        "mean": 5296462779.733334,
+        "min": 5210935296,
+        "max": 5333135360
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5376008738.133333,
+        "min": 5285892096,
+        "max": 5411184640
+      },
+      "cpuIntervalSeconds": 19.041462,
+      "invalidCpuPairs": 14,
+      "visible": true,
+      "focused": true,
+      "reason": "complete",
+      "guestHz": 60.15863276380474,
+      "runtimeCallsHz": 148.52131280839575,
+      "animationCallbackHz": 165.0173678154985,
+      "visualWorkCount": 825,
+      "visualWorkHz": 41.24184442526091,
+      "guestWorkMs": {
+        "n": 2971,
+        "mean": 4.244187142353884,
+        "p50": 0.8899999968707561,
+        "p95": 11.802500000223517,
+        "p99": 13.026500001922251,
+        "max": 13.269999999552965
+      },
+      "roundTripMs": {
+        "n": 2971,
+        "mean": 4.583488724329573,
+        "p50": 1.155000001192093,
+        "p95": 12.490000000223517,
+        "p99": 13.613500002026566,
+        "max": 13.989999998360872
+      },
+      "workerWasmBytes": [
+        170524672
+      ],
+      "firstFrameAfterBootMs": 315.8799999989569,
+      "firstFrameBoundary": "Worker boot postMessage to first returned frame; excludes earlier navigation/download/user readiness",
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 6,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "resourceTiming": {
+        "entries": 15,
+        "transferBytes": 4500,
+        "encodedBodyBytes": 23203741,
+        "decodedBodyBytes": 23203741,
+        "boundary": "Main-window ResourceTiming only; dedicated-worker fetches are not included. Cache state is not inferred from transferSize alone.",
+        "navigationLoadMs": [
+          141.66499999910593
+        ]
+      },
+      "memoryCopyRawFramesIdentical": true,
+      "memoryAfterCapture": true,
+      "cpuRecomputedPercent": 5.344012530238113,
+      "cpuRecomputeAbsoluteError": 5.135882563678251e-08,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ],
+      "pageMemory": {
+        "bytes": 21101318,
+        "status": "measured",
+        "start": "2026-11-08T00:41:52.266Z",
+        "completion": "2026-11-08T00:42:06.273Z",
+        "boundary": "Experimental browser application estimate, including attributed workers; not unique physical/GPU RAM",
+        "breakdownBytes": {
+          "Canvas": 14745600,
+          "JavaScript": 4755813,
+          "DOM": 118856,
+          "Shared": 1481049
+        }
+      }
+    },
+    {
+      "label": "html5-c",
+      "timingFile": "html5-c-timing.json",
+      "resourcesFile": "html5-c-resources.json",
+      "summaryFile": "html5-c-resource-summary.json",
+      "wallSeconds": 20.003904999998507,
+      "rawFrameCount": 3301,
+      "resourceSampleCount": 30,
+      "resourceSamplesWithin": 15,
+      "resourceBracketsCapture": true,
+      "summaryCoverage": true,
+      "hostCpu": {
+        "mean": 34.4,
+        "median": 34,
+        "min": 23,
+        "max": 46
+      },
+      "aggregateBrowserCodexCpuPercent": 3.202232013936114,
+      "aggregateWorkingSet": {
+        "mean": 5059114598.4,
+        "min": 5036744704,
+        "max": 5077663744
+      },
+      "aggregatePrivateBytes": {
+        "mean": 5127038020.266666,
+        "min": 5101641728,
+        "max": 5149519872
+      },
+      "cpuIntervalSeconds": 18.785725,
+      "invalidCpuPairs": 14,
+      "valid": true,
+      "invalidReasons": [],
+      "allFramesVisibleFocused": true,
+      "allFramesNoInput": true,
+      "allFramesActive": true,
+      "counters": {
+        "rafCallbacks": 3301,
+        "renderCalls": 3301,
+        "fixedStepCalls": 2401,
+        "activeSimulationSteps": 2401,
+        "droppedCatchupSeconds": 0
+      },
+      "rafHz": 165.01778027841294,
+      "mainWorkMs": {
+        "n": 3301,
+        "mean": 0.2443789760149074,
+        "p50": 0.24000000208616257,
+        "p95": 0.3150000013411045,
+        "p99": 0.3500000014901161,
+        "max": 0.5899999998509884
+      },
+      "renderMs": {
+        "n": 3301,
+        "mean": 0.21000454406107566,
+        "p50": 0.20500000193715096,
+        "p95": 0.2749999985098839,
+        "p99": 0.29999999701976776,
+        "max": 0.5599999986588955
+      },
+      "rafDeltaMs": {
+        "n": 3301,
+        "mean": 6.0605392305362,
+        "p50": 6.06000000000131,
+        "p95": 6.110000000000582,
+        "p99": 6.139999999999418,
+        "max": 6.2150000000001455
+      },
+      "readyMs": 450.8999999985099,
+      "startupBoundary": "module evaluation to all required local PNG decode / manifest parse complete",
+      "angularPace": {
+        "deltaRadians": 24.867340997128252,
+        "wallPeriodSeconds": 5.054349879897561,
+        "radiansPerWallSecond": 1.2431243298311059,
+        "simulationSeconds": 20.008333333332196,
+        "pivotUnchanged": true,
+        "directionUnchanged": true
+      },
+      "resourceTiming": {
+        "entries": 176,
+        "transferBytes": 52800,
+        "encodedBodyBytes": 310618,
+        "decodedBodyBytes": 310618
+      },
+      "memoryCopyRawFramesIdentical": true,
+      "memoryAfterCapture": true,
+      "cpuRecomputedPercent": 3.202231994038255,
+      "cpuRecomputeAbsoluteError": 1.9897858916095856e-08,
+      "cpuInvalidPairsDetail": [
+        {
+          "pid": 20352,
+          "name": "codex-windows-sandbox-service",
+          "before": null,
+          "after": null,
+          "reason": "missing/non-numeric CPU",
+          "intervals": 14
+        }
+      ],
+      "pageMemory": {
+        "bytes": 5373824,
+        "status": "completed",
+        "start": "2026-11-08T00:45:33.519Z",
+        "completion": "2026-11-08T00:45:38.258Z",
+        "boundary": "browser-reported page-associated memory; not process RSS or physical RAM",
+        "breakdownBytes": {
+          "Canvas": 1228800,
+          "JavaScript": 1507531,
+          "DOM": 92168,
+          "Shared": 2545325
+        }
+      }
+    }
+  ],
+  "motionFits": {
+    "25-c-motion.json": {
+      "periodSeconds": 13.089326571443795,
+      "radiansPerSecond": 0.4800235728618184,
+      "frameCount": 26,
+      "sampleSpanSeconds": 4.9039998054504395,
+      "angleSpanRadians": 2.276160495555792,
+      "rSquared": 0.9939313163804836,
+      "residualRadians": {
+        "n": 26,
+        "mean": 0.04485668829874401,
+        "p50": 0.0368299879118944,
+        "p95": 0.08662244891173226,
+        "p99": 0.13229289111075845,
+        "max": 0.1466199574752941
+      },
+      "requestCompletionMs": {
+        "n": 26,
+        "mean": 66.76920560690073,
+        "p50": 59.49997901916504,
+        "p95": 135.25009155273438,
+        "p99": 147.49997854232788,
+        "max": 148.9999294281006
+      },
+      "visible": true,
+      "focused": true,
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 25,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "method": "PIL gold-pixel centroid outside9px around fixedpivot122,120, unwrapped angle OLS vs request/completion midpoint; PNG overhead and quantization; no independent oracle"
+    },
+    "6-c-motion.json": {
+      "periodSeconds": 5.00020511161233,
+      "radiansPerSecond": 1.2565855133797812,
+      "frameCount": 33,
+      "sampleSpanSeconds": 4.990999937057495,
+      "angleSpanRadians": 6.1808660379712155,
+      "rSquared": 0.9994651805220146,
+      "residualRadians": {
+        "n": 33,
+        "mean": 0.03558773950006895,
+        "p50": 0.036062956916443234,
+        "p95": 0.061771370286091976,
+        "p99": 0.11513349445455076,
+        "max": 0.13776517754065232
+      },
+      "requestCompletionMs": {
+        "n": 33,
+        "mean": 26.696970968535453,
+        "p50": 26.000022888183594,
+        "p95": 42.999982833862305,
+        "p99": 48.4400749206543,
+        "max": 51.000118255615234
+      },
+      "visible": true,
+      "focused": true,
+      "boot": {
+        "id": "clockwerx-personal-10",
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8,
+        "partition": 4096000,
+        "pacing": {
+          "adaptive_min_cpu_mhz": null,
+          "cpu_mhz": 6,
+          "max_ticks_per_paint": 2,
+          "reset_slack_ticks": 4
+        }
+      },
+      "method": "PIL gold-pixel centroid outside9px around fixedpivot122,120, unwrapped angle OLS vs request/completion midpoint; PNG overhead and quantization; no independent oracle"
+    }
+  },
+  "fileSha256": {
+    "25-a-r1-timing.json": "78e197660ce6938f4c536487ec74f858d0de95c0da7e9ab0e83a361390045acd",
+    "25-a-r1-resources.json": "a8c9298a02dc797d7ac6f31d4da17b3293d13434b5a4484870fed6f6dc843732",
+    "25-a-r1-resource-summary.json": "572457acaddc128e59e734f5c7ce56db161f3a018afc4202e0a954e2af8a6bc1",
+    "6-a-r1-timing.json": "d0844602d41b3f5db1f2f42883b7e3e016f0beba843a9722ba18a8878f46dccd",
+    "6-a-r1-resources.json": "5bd50d911052f9ed42db0b917b34185a78f4b5e1ccfd1df6ab2b3fc060c7799e",
+    "6-a-r1-resource-summary.json": "19646e799b25c69b525a1a08f249b5f62a88fb8e9d54fea5e78765d4dbae3a4c",
+    "html5-a-timing.json": "b18289700e19d08c1269dee055f49d5c978f2b7a185f8449afe4cf3273aa9eef",
+    "html5-a-resources.json": "158bd208110e3550c1e5a79f4868afa3f4af716abf42794b4bc0efb28a2790bf",
+    "html5-a-resource-summary.json": "b93c66fb017eca35f08a05c25d82a9e3c17928835f8e75382ff3967c7b10485e",
+    "25-b-timing.json": "c83548d8b7f1de76bc05a70c2104e191c0ff72a48cf8da40138d9d037f1e103c",
+    "25-b-resources.json": "b32bea80abdde833567c0fd8204348767f39b7c06a35b16f835c29f39f1c8c49",
+    "25-b-resource-summary.json": "6e24c08e10ab2c9367373c76f94bf81842b0e902b37a466cc5215fc00f0b582b",
+    "6-b-timing.json": "cb660553c4cb43b21ab398f1fd7367e0620d84f68cce55be7ae2f6171d4caad4",
+    "6-b-resources.json": "09fb2d77c620db94a9f057145b80d6eea1bd3e5dc39c98cd2bde1aa2aaebcb5d",
+    "6-b-resource-summary.json": "7e8645e8f1e8178dc28c7282f213f6b38096b02a47231f64a6fd18d2dbc720b3",
+    "html5-b-timing.json": "e864c17950468d856f33d0116d628d05ca818d7036b637c17e97efa49e87e6f1",
+    "html5-b-resources.json": "676fc5aadce21321ad123d55e46b1aa69bc6dcb97d1e4b705eb8b8931323bef3",
+    "html5-b-resource-summary.json": "e24465bccb6b299b5a8d4473f8728d0fe40fedfefd78ccf5893b5480f843412b",
+    "25-c-timing.json": "e1b47370a40406c84fd6aaa85727de6219f6d4d130d4f3915e7acdc160071b16",
+    "25-c-resources.json": "6369cb33828fc28a32a6bef31517835d14b32e059fef930adab376f33562e7f1",
+    "25-c-resource-summary.json": "8bd1f92ef1b48a8d4c0b6db2aeec86befe623db652fa0f457b9383ae662b9937",
+    "25-c-with-memory.json": "0cc6d3692db583e4a577858b80f3f7813b98f9700e20107a87150a76ecc4d6c0",
+    "6-c-timing.json": "7da50d637bd05c49724e33c21fcea11c283d32cf6faad49e6acaef60778b8557",
+    "6-c-resources.json": "2beb026c014fed6eb94f835db96c61a0bc2ad5c146500ecb391eb883c8fb4cac",
+    "6-c-resource-summary.json": "488ec148c86b2667e0f03f28a08e8d000e7aff776a9a7e2af9e0c40f9e9beeba",
+    "6-c-with-memory.json": "c3e8044ed731ccb10e5724bb636945760f3a2ec81b4008f314b901491a3818d1",
+    "html5-c-timing.json": "f760712ec347df74a3afa5c6fbc0f41061de6a6c73823f02083db4216bf58514",
+    "html5-c-resources.json": "d5988e7ec6087adfebe56e6394f6a1ff02e0b142f7e64b4d783600ea76aa5fb5",
+    "html5-c-resource-summary.json": "518664446536a7f3de037f614485fb57eacb5e2ec98f7a890d6803d66091f588",
+    "html5-c-with-memory.json": "d61717912d9daa30eae41f1adf549fc26010a4c29b1f22b3a046e793b7abee11",
+    "25-c-motion.json": "625cab70fb1f01b89d950175bfbe3fa538ac1b8fc95a38b3ee2553a0b42c4b67",
+    "6-c-motion.json": "80f47ba91fd00b9fd61766793ec22b83482bea8a20bee9248a8c079f38939a02"
+  },
+  "excluded": [
+    "25-a-timing/resources (superseded by25-a-r1)",
+    "6-a-timing-unpaired.json (no pairedresource coverage)"
+  ],
+  "methodLimits": [
+    "All browser/Codex aggregate CPU/memory includes unrelated processes; not isolated game CPU or unique physical RAM",
+    "One constant null-CPU PID20352 codex-windows-sandbox-service omitted each interval; raw data gives no commandline or renderer association",
+    "B/C ambient means more similar than A but uncontrolled; default gameplay materially slower",
+    "Browser memory API estimate and worker Wasm allocation are separate overlapping/uncertain boundaries; no summed RAM total",
+    "Startup metrics have different boundaries; warmed ResourceTiming only, no cold-start ranking",
+    "Motionfits are PNG-sampled experimentalrunner estimates; default partialturn extrapolated; no independentSheepShaveroracle",
+    "Guest ticks/runtimecalls/visualwork/rAF/fixedsteps/physicalpresentation are distinct"
+  ]
+}

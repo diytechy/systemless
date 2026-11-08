@@ -12,7 +12,8 @@ from private_library_manifest import BUILTINS, sha256_file
 
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
-CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs')
+CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
+      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -46,6 +47,12 @@ def package(dist,assets):
         if vector.get('goal'):references.add(vector['goal']['file'])
         if vector.get('starbursts'):references.add(vector['starbursts']['file'])
         references.update(dot['file'] for dot in vector.get('dotVariants',{}).values())
+        references.update(frame['file'] for frame in vector.get('spikes',{}).get('frames',[]))
+        if vector.get('death',{}).get('file'):references.add(vector['death']['file'])
+        else:references.update(frame['file'] for frame in vector.get('death',{}).get('frames',[]))
+    if manifest.get('levelDefinition'):references.add(manifest['levelDefinition']['outlinesFile'])
+    for scene in manifest.get('scenes',[]):
+        if scene.get('levelDefinition'):references.add(scene['levelDefinition']['outlinesFile'])
     for name in references:filename(name)
     if not references<=files.keys():raise ValueError('Manifest references an unverified asset')
     for name in CODE:
@@ -60,7 +67,7 @@ def package(dist,assets):
     output_assets.mkdir(exist_ok=True)
     record=dict(schema_version=1,id=PILOT_ID,source_files={},assets_manifest_sha256=sha256_file(manifest_path),
         asset_count=len(files),asset_bytes=sum((assets/name).stat().st_size for name in files),
-        logical_size=[640,480],scope='One reconstructed Movement board; separate engine and storage; original save compatibility omitted',
+        logical_size=[640,480],scope=('Reconstructed '+', '.join(s['title'] for s in manifest['scenes'])+'; separate engine and storage; original save compatibility omitted') if manifest.get('scenes') else 'One reconstructed Movement board; separate engine and storage; original save compatibility omitted',
         presentation='svg-continuous' if manifest.get('vectorAssets') else 'bitmap-64-directions')
     # Mark ownership before copying, so a partial interrupted copy is resumable.
     (target/'private-pilot.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')

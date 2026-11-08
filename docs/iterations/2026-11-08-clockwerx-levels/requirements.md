@@ -1,9 +1,70 @@
-# Behavior and generation requirements log
+# ClockWerx behavior and generation requirements
 
-Work in catalog order, tracking separate source decoding, native observation, SVG appearance, implemented mechanics and playable validation.100catalogentries are distinct from120resourceblocks. Unknown flags/parameters must remain explicit; a structurally decoded map is not a qualified level.
+The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Spikes (ordinal 2) has a bounded playable candidate; its independent native route comparison is still running. Walls is the next implementation target. The map, artwork, original text and source analysis remain private.
 
-Established Movement requirements: fixed logical dotspacing and handreach; swing/flip/bounce/reverse withheldaction encounter timing; actoraccess masks; player-only bonusconsumption ongrab, initialoccupancy/demos/bouncepreservebonuses; samecolor ringtosphere transition; bonusaward sequence1000..5000requiresfullscore/resetqualification beforeaddingUIscore; goals; tutorialactionprograms; text/fontpositionrecords; initialplayer/goal attentionflourishes stopafterfirstsuccessfulaction; independent sixstategoal shimmer. Sourcepixel/rateinputs are in priorreports andnewbonusreview. Missingmodels toqualifyincludecollisionfailure/death/restart, timers, hazards/enemies, walls/doors/switches, oil, bombs/fuses/guns, specialdots andmultiplayer.
+## How a level is stored
 
-Generation approach, not an implemented full-game generator: normalizeleveldata intoa schema; createa candidate actionroute/start/goal; addmechanics underexplicitconstraints; validatebounds, objectreferences andpermissionflags; solve withthesame deterministicrules; rejectunreachable/deadlockedsolutions; retainseed+solutiontrace; rate difficulty byactionprecision, waitwindows, hazardtiming andrequiredmechanics. Reachability state must include pivot,angle/phase,direction andmechanicstate (switches/doors/collectedbonuses/hazards), notjustgridneighbors. New generatedmaps shouldhaveindependentIDs/persistence andprivateoriginallevelsremainunchanged. Solver guarantees arelimitedbywhichmechanics havebeenqualified.
+ClockWerx Levels is a Macintosh resource file. Its RNDm catalog gives play order and names; each RND2 resource contains a complete round definition. It is more than a list of map tiles:
 
-Per-levelreports will identify geometry/objectclasses, introduced/reusedmechanics, invariants, nativeobservations, SVGdiscrepancies, implementationlimits andgeneratorconstraints. Reusableassetinventory records sourcegroup/descriptor/state/anchor/palette/timer ratherthanassumingonebitmaprevealsbehavior. No fullcampaignsupport orautomaticbinaryconversionclaim.
+1. A signature, format version, raw round timer and display-size selector.
+2. Eight serialized rows of eleven dot cells, including absent cells. The first word holds independent flags; newer versions add a permission/activation word. Some present cells carry inline programs.
+3. Sixteen counted sections for object classes, actor programs, actor starting states and positioned text. Programs use variable-length Pascal strings, so a fixed byte stride cannot locate all sections.
+4. Per-actor starting dot, type, initial phase, signed direction, speed class, program reference and activation state. A negative program reference means no program, even when unused programs are present elsewhere in the resource.
+5. TX records with font, size/style, coordinates, text and conditional prefixes. The tutorial text is rendered independently over the background; it is not baked into the bitmap collage.
+
+Observed versions are 5, 6, 11 and 12. Older layouts lack fields introduced later; they must not receive silently guessed defaults. Display size can be 11 by 8 or 10 by 7, while serialized dot stride remains eleven. Source and size evidence is in the [decoder review](decoder-astra-review.md).
+
+## Requirements established so far
+
+| Area | Source/native behavior | Port boundary |
+|---|---|---|
+| Dot flags | Presence, bonus and goal are independent. Initial-state bit 0x4000 is separate. Permission colors are independent of occupancy. | Movement ring fix accepted; other special bits need qualification. |
+| Bonus | Initial attachment, bounce and tutorial demonstrations preserve it. A human grab consumes it once; same-color ring becomes a sphere. | Original pickup observed; actual-map deterministic test passes; browser pickup attempt rejected due to throttling. |
+| Bonus score | First award 1,000; source increments by 1,000 up to 5,000. | Scoring/reset/multiplayer system is not yet ported. |
+| Movement | Swing transfers and reverses direction; flip transfers and retains direction; bounce reflects without grabbing; reverse changes direction at the same pivot. | Bounded Movement engine; logical 48-pixel reach and 120 Hz simulation. |
+| Actor phase | Source half-index is doubled, then masked to 64 frames. Frame 0 points right, 16 down, 32 left, 48 up. | New decoded adapter uses this; older Movement starts at a capture-relative phase. |
+| Attention flourishes | Player/goal particles appear initially, stop spawning after an accepted action, and existing particles finish. Normal single-player death eventually invokes round reset and creates both chains again. | SVG lifecycle and completed-death reset hook implemented; full reveal timing remains different. |
+| Goal markers | Four triangles use a six-state size/color shimmer independent of the dot and attention particles. | Source-grounded SVG atlas; exact original hardware cadence remains uncertain. |
+| Spikes | Eleven SP records in level 2, including independent subcell offsets selected from 0, 6, 24 and 42 pixels. Visible spikes always collide with the human; enemies are immune. | Four SVG phases and original collision outline profile prepared. Native all-phase anchor matching done; playable integration in progress. |
+| Collision | Original bounds and one inclusive horizontal span per scanline, including vertical reflection; separate from display transparency or SVG silhouette. | Generic helper tested. Preserve source collision frames when smoothing art. |
+| Enemy contact | Different pivots use outlines. Same-pivot contact additionally needs phase separation at most 4 of 64 frames. Ordinary enemy hands respect protected-dot flag 0x2000. | Spikes has ordinary green/blue enemies and no protected dots. Other enemy types remain unqualified. |
+| Spikes enemies | Both program references are negative, so these hands rotate at fixed pivots. The second human slot is hidden in single-player. | Decoded adapter checks slots, types and references. |
+| Normal death | Fifteen staggered explosion particles; single-player freezes actors, waits for the effect, then resets actors/bonuses and attention chains. Underlying unscaled clocks persist. | Corrected source branch independently reviewed; original explosion/reset observed; prototype integration and state replay pass. Total-score policy and reveal pacing remain unqualified. No invented lives counter. |
+| Explicit restart | Restores round-start actors, bonuses and round bookkeeping. | Separate from human respawn; full score preservation still needs review. |
+
+The source/native alignment for the large board has logical grid origin (74,72), pitch 48. Raw source descriptor offsets are x minus 44 / y minus 43 for hands, x minus 8 / y minus 7 for spikes plus subcell offsets, and (-5,-4) for the dot tiles. The one-pixel asymmetry follows the original frame/grid algebra. Three hundred nineteen native spike crops cover all four source phases; unoccluded source pixels typically match to mean channel error about 0.43 after the evidenced display-gamma transform. This is placement evidence, not SVG pixel identity.
+
+Spikes animation uses an unscaled source clock; at a normalized 60 Macintosh guest ticks per second its sustained average is 1.2 frames per second. Sprite processing advances once when the clock changes, rather than catching up arbitrary skipped changes. Hand clocks have difficulty and secondary rate scaling. Host render FPS, guest ticks, simulation steps and original hardware speed must remain distinct.
+
+## Inventory milestones
+
+These are first appearances of source classes in catalog order, not proof that a mechanic is fully understood:
+
+| First level | Newly encountered source classes |
+|---|---|
+| 1 Movement | WP programs, WA actors, TX text |
+| 2 Spikes | SP |
+| 3 Walls | WL |
+| 4 Doors | DR, DS |
+| 5 Oil | PU |
+| 9 Some Dots | WY |
+| 10 Bombs | BO, GO |
+| 23 Candycane | EL |
+| 41 Squiggle | HY |
+| 42 Berserkeley | EX |
+| 61 Diagonals | GN, TR |
+
+Catalog actors use raw types 0 through 6; only the human and ordinary colored-hand mappings have been reviewed here. Present-dot flags collectively include 0x63ff. Every newly used flag, actor type, class, program opcode, timer and activation condition remains an explicit requirement. Reusing an already seen class does not prove a later combination safe or implemented.
+
+## A method for generating new levels
+
+A useful generator should create both a level and a reproducible solution trace. Start with a constrained mechanic subset rather than arbitrary random placement:
+
+1. Choose a seed, difficulty band, supported mechanic set and independent generated-level ID. Keep original campaign resources and save identities untouched.
+2. Construct a route of legal pivot transfers from a safe spawn to the goal, recording swing/flip/bounce/reverse actions, direction and allowed encounter windows. Add optional reachable bonuses and alternative routes.
+3. Place dots with valid permissions and object references. Add walls, hazards and other mechanics only after their state transitions are implemented. Preserve subcell coordinates and distinct objects sharing a grid cell.
+4. Simulate the candidate with the same rule engine used for play. The state includes pivot, source phase, direction, shared clocks, enemy phases, collected bonuses, switches/doors and other persistent mechanic state. A graph of neighboring dots alone is insufficient.
+5. Search for a solution and reject deadlocks, unsafe spawns, unavoidable deaths, missing references and goals reachable only through unsupported behavior. Check the full hazard cycle and original scanline collision geometry rather than SVG outlines or a static hand segment.
+6. Replay the solution without solver privileges, retain the seed and action trace, and rate difficulty from timing windows, required decisions, waits, optional collection and mechanic combinations. Validate generated examples with native behavior where relevant.
+
+Initially, a Movement-only generator could provide meaningful guarantees within the bounded Movement model. Adding Spikes requires phase-aware collision and death/respawn semantics; adding programmable enemies requires the original instruction timing. A solver proves only the modeled rules, so claims of original-game solvability must wait for independent behavior qualification. No full-game generator or solvability guarantee is implemented yet.

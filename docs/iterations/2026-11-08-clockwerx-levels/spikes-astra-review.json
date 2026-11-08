@@ -1,0 +1,83 @@
+{
+  "schema": "clockwerx-spikes-review-v1",
+  "resourceId": 221,
+  "catalogLevel": 2,
+  "gameplayQualified": false,
+  "sourceGrounded": [
+    "SP subcell offsets",
+    "SP hero-only damage dispatch",
+    "collision outline span algorithm",
+    "WA group mapping",
+    "negative program references",
+    "single-player hidden second hero",
+    "same-pivot angular gate"
+  ],
+  "candidateOnly": [
+    "SP normalized collision/render anchors",
+    "four SVG spike phases"
+  ],
+  "unqualified": [
+    "absolute animation timer rates",
+    "enemy dot-state protection integration",
+    "death/restart lifecycle",
+    "goal ordering",
+    "native gameplay completion"
+  ],
+  "assets": {
+    "candidatePayloads": 24,
+    "preservedBaselinePayloads": 20,
+    "newSvgPhases": 4
+  },
+  "collisions": {
+    "profileFrames": 260,
+    "method": "source scanline inclusive left/right spans, exclusive bottom rows",
+    "helper": "prototypes/clockwerx-html5/hazards.mjs"
+  },
+  "tests": {
+    "command": "node --test prototypes/clockwerx-html5/hazards.test.mjs",
+    "passed": 7,
+    "failed": 0,
+    "allProfileRowCountsMatch": true,
+    "baselinePayloadHashesPreserved": true
+  },
+  "evidence": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\collision-profile.json",
+      "sha256": "d8b7557d7820ce43cd030d98e74fed7823d9d803828ea5063fc5b72895089387",
+      "bytes": 693424
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\assets\\manifest.json",
+      "sha256": "b2de0811efb1213d946fa49917f9aa90d4173630dba46b6bbd7695f8133db839",
+      "bytes": 14783
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\build-candidate.py",
+      "sha256": "c1ca3840ae1276a7d62a978807e53fef295c5939c885b46ea33a5171d27b5303",
+      "bytes": 4635
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\native-spikes-initial.png",
+      "sha256": "6c3b6283e116364228a68744367c3edb6e3d1b9e446782ff8ac7210ee14eec4d",
+      "bytes": 271640
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\native-spikes-motion.json",
+      "sha256": "04bc5d5fa995877a6b6ba8819a208822043b39c94b0ae35b32f4c20e236fdfc3",
+      "bytes": 10514436
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\decoded\\v2\\RND2_221.json",
+      "sha256": "dcf9f7aa42e6f3fc448c6fbdc2e97cea004edcf3d431c890aecd116428e37f7f",
+      "bytes": 49549
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\data.bin",
+      "sha256": "1b2286712f7783848730474051c6497323400be31fc303e078f0c748977346dc",
+      "bytes": 1207158
+    }
+  ],
+  "workloadReleased": true,
+  "nativeBrowserBuildBenchmarkWorkloadRun": false,
+  "privateArtActivated": false
+}

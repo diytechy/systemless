@@ -17,7 +17,7 @@ export function presentedAngle(hand,previous,alpha,vector){
 // Presentation only: never blend between different pivots or across reversals.
 // The 120Hz simulation and its collision/transfer decisions stay authoritative.
 export function handPoses(game){
-  return Object.fromEntries([...game.demos,game.player].map(h=>[h.name,{angle:h.angle,pivot:h.pivot,direction:h.direction}]));
+  return Object.fromEntries([...game.demos,...(game.enemies||[]),game.player].map(h=>[h.name,{angle:h.angle,pivot:h.pivot,direction:h.direction}]));
 }
 export function renderAngle(hand,previous,alpha){
   if(!previous||previous.pivot!==hand.pivot||previous.direction!==hand.direction)return hand.angle;

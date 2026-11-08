@@ -109,6 +109,13 @@ def build(source, profile_path, output):
     if manifest['vectorAssets'].get('starbursts'):
         references.add(manifest['vectorAssets']['starbursts']['file'])
     references.update(d['file'] for d in manifest['vectorAssets'].get('dotVariants',{}).values())
+    references.update(d['file'] for d in manifest['vectorAssets'].get('spikes',{}).get('frames',[]))
+    death=manifest['vectorAssets'].get('death',{})
+    if death.get('file'):references.add(death['file'])
+    else:references.update(d['file'] for d in death.get('frames',[]))
+    if manifest.get('levelDefinition'):references.add(manifest['levelDefinition']['outlinesFile'])
+    for scene in manifest.get('scenes',[]):
+        if scene.get('levelDefinition'):references.add(scene['levelDefinition']['outlinesFile'])
     if not references <= verified:
         raise ValueError('Unverified asset reference')
     hands = manifest['vectorAssets']['hands']

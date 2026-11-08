@@ -1,0 +1,164 @@
+{
+  "schema": "clockwerx-spikes-visual-review-v1",
+  "visualParityAccepted": false,
+  "activationPerformed": false,
+  "boundedPasses": [
+    "visible eight-bonus one-goal eleven-spike arrangement",
+    "distinct green and blue hands",
+    "source descriptor anchors319of319 offsets0,0 acrossfour phases"
+  ],
+  "concreteCorrections": [
+    "spike terminal rays too faint in pilot",
+    "three explanatory text lines3pixels too high"
+  ],
+  "textInkBounds": {
+    "native": {
+      "look": {
+        "whiteInkBounds": [
+          249,
+          69,
+          381,
+          78
+        ]
+      },
+      "avoid": {
+        "whiteInkBounds": [
+          356,
+          191,
+          486,
+          203
+        ]
+      },
+      "safe": {
+        "whiteInkBounds": [
+          357,
+          235,
+          516,
+          247
+        ]
+      }
+    },
+    "pilot": {
+      "look": {
+        "whiteInkBounds": [
+          249,
+          66,
+          380,
+          75
+        ]
+      },
+      "avoid": {
+        "whiteInkBounds": [
+          357,
+          188,
+          480,
+          197
+        ]
+      },
+      "safe": {
+        "whiteInkBounds": [
+          357,
+          232,
+          509,
+          243
+        ]
+      }
+    }
+  },
+  "spikeCandidate": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\ray-candidate",
+    "payloads": 25,
+    "changedPayloads": [
+      "spike-0.svg",
+      "spike-1.svg",
+      "spike-2.svg",
+      "spike-3.svg"
+    ],
+    "preservedOtherPayloads": 21,
+    "allOtherPayloadBytesIdentical": true,
+    "frameDescriptorsUnchanged": true,
+    "collisionProfileUnchanged": true,
+    "manifestSha256": "faf65552392aa99f6e33cef293dd933cc8d69795f3d80d7c77801c36799f5072",
+    "status": "candidate for fresh actual canvas review; not activated"
+  },
+  "deathVisualStatus": "source-informed smooth atlas progression plausible; runtime composite/phase alignment unqualified",
+  "differences": [
+    "regular smooth shadow versus source irregular pixel contour",
+    "more spherical smooth spike core",
+    "font width/height differences afterY correction",
+    "death flames flatter color bands and reduced fine texture",
+    "different runtime hand phases and HUD states not synchronized"
+  ],
+  "limitations": [
+    "no phase-matched native/canvas comparison",
+    "no actual browser render of ray candidate",
+    "no per-pixel all-dot audit",
+    "death composite/timing/restart validation belongs to coordinator"
+  ],
+  "evidence": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\pilot-initial.png",
+      "bytes": 166395,
+      "sha256": "85e748d12e8d6b907f2a994152bd7394c1d1e6cc4b4557c835dcb7042da2fbdf"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\native-spikes-initial.png",
+      "bytes": 271640,
+      "sha256": "6c3b6283e116364228a68744367c3edb6e3d1b9e446782ff8ac7210ee14eec4d"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\native-play-01\\swing-11.png",
+      "bytes": 254945,
+      "sha256": "5e1a5c4a25c47cff07c4ce46affd34ccc1e642c45c2c2e9fd6f4e2cd0e10a73f"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\native-anchor-review-v2.json",
+      "bytes": 68978,
+      "sha256": "bbbd72d9bbfe6113fab96acbc6cd2c78dfbe382c2138c7a08c4e3723742ea5b0"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\death\\death-preview.png",
+      "bytes": 186039,
+      "sha256": "8f53338010095ea60167aefad3c77a376636a3e792948cb563b4caa8bdbd9e96"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\native-normalized.png",
+      "bytes": 141680,
+      "sha256": "f803c477069fe08162dbcf8469b542c16eb3fcd920ae3d7179e6b23576a8b5f2"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\spike-comparison.png",
+      "bytes": 5705,
+      "sha256": "5e5a44fc576988952cd1cbbee150e0d5722e4ced900e254d9c5c59c1ee19e7ae"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\text-ink-comparison.json",
+      "bytes": 724,
+      "sha256": "5760d4089d5b3ecd1e7601f7607d03cc6351ce42124f6885b223a60f17f16c51"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\ray-candidate\\assets\\manifest.json",
+      "bytes": 18587,
+      "sha256": "faf65552392aa99f6e33cef293dd933cc8d69795f3d80d7c77801c36799f5072"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\ray-candidate\\ray-profile.json",
+      "bytes": 1321,
+      "sha256": "ee5a11c27f77c6fbea57e6b095589ce3c8caec278d59d0b02651228a15b6174c"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\ray-candidate\\ray-contact.png",
+      "bytes": 13153,
+      "sha256": "a0ac4d2c639e8ba2dfc2c6e874762fab5e9e5200f7791c2651f9727998e939bb"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\visual-review\\ray-candidate\\ray-native-size-contact.png",
+      "bytes": 4132,
+      "sha256": "b6274a8ee4613b22b066ea5aab0e939acfef370ca1d5bf09cb47869c3366ea42"
+    }
+  ],
+  "browserEmulatorBuildBenchmarkRun": false,
+  "releasedHelpersModified": false,
+  "rootQaFilesModified": false,
+  "workloadReleased": true
+}

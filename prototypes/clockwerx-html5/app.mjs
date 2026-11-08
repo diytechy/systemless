@@ -1,6 +1,10 @@
 import {MovementGame,TAU} from './engine.mjs';
 import {buildBoard} from './board.mjs';
 import {dotRenderSpec} from './dots.mjs';
+import {buildDecodedBoard} from './level.mjs';
+import {SourceRound,sourceFrame} from './round.mjs';
+import {createDeathEffect} from './death.mjs';
+import {createInputReplay} from './replay.mjs';
 import {createSparkles} from './sparkles.mjs';
 import {handPoses,presentedAngle,resizeCanvas,atlasFrame} from './rendering.mjs';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
@@ -9,15 +13,17 @@ let settings={black:false,sound:false,completed:0};try{settings={...settings,...
 settings.sound=false; // Every visit starts silent; audio is a deliberate user opt-in.
 let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},padHeld={},previousPad=[],capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
 const startup={bootUtc,boundary:'module evaluation to required foreground/background image decode and manifest parse complete',assetReadyUtc:null,readyMs:null,resourceEntries:[]};
+let inputReplay=null,checkedRoute=null;
+const movementScope=$('scope-description').textContent,movementFidelity=$('fidelity-description').textContent;
 function persist(){try{localStorage.setItem(KEY,JSON.stringify({black:settings.black,completed:settings.completed}))}catch{}}
 function message(s,error=false){$('status').textContent=s;$('status').className=error?'error':'';}
 function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
-function action(name,on){held[name]=on;canvas.focus({preventScroll:true})}
+function action(name,on){inputReplay=null;held[name]=on;canvas.focus({preventScroll:true})}
 function pause(){if(!game)return;game.paused=!game.paused;$('pause').textContent=game.paused?'Resume (P)':'Pause (P)';message(game.paused?'Paused. Press P or Resume to continue.':'Movement resumed.');}
-function restart(){if(!game)return;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;held={};$('pause').textContent='Pause (P)';message('Movement restarted. Hold Space as the hand passes the next dot.');canvas.focus({preventScroll:true});}
-$('pause').onclick=pause;$('restart').onclick=restart;$('reverse').onclick=()=>game?.reverse();$('black').onclick=()=>{if(capture)capture.invalidReasons.add('hand color changed during capture');settings.black=!settings.black;persist()};$('sound').checked=settings.sound;$('sound').onchange=()=>{if(capture)capture.invalidReasons.add('sound changed during capture');settings.sound=$('sound').checked;persist();if(settings.sound)playSound('ActionSwing')};
+function restart(){if(!game)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;held={};$('pause').textContent='Pause (P)';message((game.board.title||'Movement')+' restarted. Hold Space as the hand passes the next dot.');canvas.focus({preventScroll:true});}
+$('pause').onclick=pause;$('restart').onclick=restart;$('reverse').onclick=()=>game?.reverse();$('black').onclick=()=>{if(capture)capture.invalidReasons.add('hand color changed during capture');settings.black=!settings.black;if(game instanceof SourceRound)game.setPlayerGroup(settings.black?4300:700);persist()};$('sound').checked=settings.sound;$('sound').onchange=()=>{if(capture)capture.invalidReasons.add('sound changed during capture');settings.sound=$('sound').checked;persist();if(settings.sound)playSound('ActionSwing')};
 const keys={Space:'swing',KeyZ:'bounce',KeyX:'flip'};
-window.addEventListener('keydown',e=>{if(e.target instanceof HTMLInputElement)return;if(keys[e.code]){e.preventDefault();held[keys[e.code]]=true;}if(!e.repeat&&e.code==='KeyC'){e.preventDefault();game?.reverse()}if(!e.repeat&&e.code==='KeyP'){e.preventDefault();pause()}});
+window.addEventListener('keydown',e=>{if(e.target instanceof HTMLInputElement)return;if(keys[e.code]){e.preventDefault();inputReplay=null;held[keys[e.code]]=true;}if(!e.repeat&&e.code==='KeyC'){e.preventDefault();game?.reverse()}if(!e.repeat&&e.code==='KeyP'){e.preventDefault();pause()}});
 window.addEventListener('keyup',e=>{if(keys[e.code]){e.preventDefault();held[keys[e.code]]=false}});
 window.addEventListener('blur',()=>{held={};padHeld={};previousPad=[];if(capture)capture.invalidReasons.add('window blur');});
 document.addEventListener('visibilitychange',()=>{if(capture&&document.hidden)capture.invalidReasons.add('document hidden');last=performance.now();accumulator=0;});
@@ -51,8 +57,31 @@ function drawHand(h){
  const p=game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(settings.black?'4300':'700'):String(h.group);
  if(manifest.vectorAssets){
   const asset=manifest.vectorAssets.hands[gid],angle=presentedAngle(h,renderPrevious?.[h.name],accumulator/STEP,true);
-  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(angle);ctx.drawImage(images[asset.file],asset.x,asset.y,asset.width,asset.height);ctx.restore();
+  ctx.save();ctx.translate(p.x,p.y+(game.board.handOffsetY||0));ctx.rotate(angle);ctx.drawImage(images[asset.file],asset.x,asset.y,asset.width,asset.height);ctx.restore();
  }else{const a=((h.angle%TAU)+TAU)%TAU;sprite(gid,Math.round(a/TAU*64)%64,p.x,p.y);}
+}
+function drawSpikes(){
+ const spec=manifest.vectorAssets?.spikes;
+ if(!spec)return;
+ for(const spike of game.board.spikes||[]){const f=spec.frames[game.spikeFrame(spike)];ctx.drawImage(images[f.file],spike.x+f.x,spike.y+f.y,f.width,f.height);}
+}
+function drawDeath(){
+ const spec=manifest.vectorAssets?.death;if(!spec||!game.death)return;
+ for(const particle of game.death.snapshot()){
+  const f=spec.frames[particle.frame];
+  if(spec.file)ctx.drawImage(images[spec.file],f.sx,f.sy,f.width,f.height,particle.x+f.x,particle.y+f.y,f.width,f.height);
+  else ctx.drawImage(images[f.file],particle.x+f.x,particle.y+f.y,f.width,f.height);
+ }
+}
+function drawLevelText(){
+ if(!game.board.texts)return false;
+ ctx.fillStyle='white';ctx.textBaseline='top';
+ for(const t of game.board.texts){
+  if(t.condition==='@2'||t.condition==='@M')continue;
+  ctx.font=`${t.face&2?'italic ':''}${t.face&1?'bold ':''}${t.size}px Arial,sans-serif`;
+  ctx.fillText(t.text,t.x,t.y+3);
+ }
+ ctx.textBaseline='alphabetic';return true;
 }
 function drawDot(d){
  const state=dotRenderSpec(d),vector=manifest.vectorAssets,goal=d.kind==='goal'&&vector?.goal;
@@ -66,24 +95,78 @@ function drawDot(d){
 }
 function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixelRatio||1);ctx.setTransform(scale.scaleX,0,0,scale.scaleY,0,0);ctx.imageSmoothingEnabled=false;ctx.fillStyle='#909090';ctx.fillRect(0,0,640,480);if(!ready){ctx.fillStyle='white';ctx.font='16px sans-serif';ctx.fillText('Loading private original assets…',20,50);return;}
  ctx.drawImage(images[manifest.backdrop],0,0);ctx.imageSmoothingEnabled=!!manifest.vectorAssets;
- ctx.fillStyle='#808080';ctx.fillRect(68,69,504,360);ctx.fillStyle='white';ctx.font='bold 12px sans-serif';ctx.fillText('Level:',106,49);ctx.fillText('1: Movement',92,62);ctx.fillStyle='#ffff00';ctx.fillText('Pilot',441,50);ctx.fillText('Total Score:',493,49);ctx.fillText('—',544,62);
+ ctx.fillStyle='#808080';ctx.fillRect(68,69,504,360);ctx.fillStyle='white';ctx.font='bold 12px sans-serif';ctx.fillText('Level:',106,49);ctx.fillText(`${game.board.ordinal||1}: ${game.board.title||'Movement'}`,92,62);ctx.fillStyle='#ffff00';ctx.fillText('Pilot',441,50);ctx.fillText('Total Score:',493,49);ctx.fillText('—',544,62);
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
  for(const d of game.board.dots)drawDot(d);
+ drawSpikes();
  ctx.fillStyle='white';ctx.font='10px sans-serif';
  const lines=[['You are the spinning gold (or black) hand.',88,150],['Player 1: Use Space to “swing” onto the next dot.',88,162],['The red hand is “swinging”.',109,292],['The green hand is “flipping”.',109,388],['Use X to “flip” onto the next dot.',137,174],['Use C to “instantly reverse”.',137,186],['Use Z to “bounce” off the next dot.',137,198],['The object of the game is to grab onto the “goal” dot.',148,80],['Bonus Dot',487,237],['Goal Dot',534,333],['“Bouncing” blue',410,360]];
- for(const [t,x,y] of lines)ctx.fillText(t,x,y);
- for(const h of [...game.demos,game.player])drawHand(h);
+ if(!drawLevelText())for(const [t,x,y] of lines)ctx.fillText(t,x,y);
+ for(const h of [...game.demos,...(game.enemies||[])])drawHand(h);
+ if(!game.death||game.death.heroVisible)drawHand(game.player);
+ drawDeath();
  drawSparkles();
- if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText('Movement complete',320,214);ctx.font='16px sans-serif';ctx.fillText('Goal dot grabbed · Restart to play again',320,250);ctx.textAlign='left';}
+ if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';ctx.fillText('Goal dot grabbed · Restart to play again',320,250);ctx.textAlign='left';}
 }
+function workloadTime(){return game.elapsedTime??game.time;}
 function captureInfo(){return {visibility:document.visibilityState,focused:document.hasFocus()};}
-function finishCapture(now){const c=capture;if(!c)return;lastCapture={schema:'clockwerx-html5-timing-v1',captureUtc:c.utc,completionUtc:new Date().toISOString(),durationMs:now-c.start,requestedDurationMs:20000,valid:c.invalidReasons.size===0,invalidReasons:[...c.invalidReasons],scene:c.fromRestart?'Movement; atomic reset; no-input rotating player and three demos':'Movement; current state at capture start',fromRestart:c.fromRestart,pageUrl:location.href,workload:c.workload,boundary:'main-thread rAF entry through fixed simulation and Canvas2D draw; SVG mode includes interpolated vector image rotation; not physical presentation or input latency',presentation:manifest.vectorAssets?'svg-continuous':'bitmap-64-directions',devicePixelRatio:window.devicePixelRatio||1,logicalSize:[640,480],backingSize:[canvas.width,canvas.height],cssSize:[canvas.getBoundingClientRect().width,canvas.getBoundingClientRect().height],sound:c.sound,handColor:c.handColor,startState:c.state,endState:game.snapshot(),startFocus:c.focus,endFocus:captureInfo(),counters:{rafCallbacks:rafCalls-c.raf,renderCalls:renderCalls-c.render,fixedStepCalls:game.steps-c.steps,activeSimulationSteps:game.activeSteps-c.activeSteps,droppedCatchupSeconds:droppedSeconds-c.dropped},frames:c.frames,startup,pageMemory:memoryResult,userAgent:navigator.userAgent};capture=null;$('capture').disabled=false;$('capture-reset').disabled=false;$('json').disabled=false;$('diagnostics').textContent=`Capture complete: ${lastCapture.valid?'valid':'INVALID — '+lastCapture.invalidReasons.join(', ')}. ${lastCapture.frames.length} raw rAF records. Download JSON.`;}
-function beginCapture(fromRestart=false){if(!ready||capture||memoryPending)return;if(fromRestart){restart();accumulator=0;last=performance.now();padHeld={};previousPad=[];}const focus=captureInfo();capture={fromRestart,sound:settings.sound,handColor:settings.black?'black':'gold',start:performance.now(),utc:new Date().toISOString(),focus,state:game.snapshot(),workload:recordedUntil>game.time?'recorded swing hold until simulation second12':'manual inputs only; idle comparison requires no input',raf:rafCalls,render:renderCalls,steps:game.steps,activeSteps:game.activeSteps,dropped:droppedSeconds,frames:[],invalidReasons:new Set()};if(document.hidden)capture.invalidReasons.add('started hidden');if(!focus.focused)capture.invalidReasons.add('started unfocused');$('capture').disabled=true;$('capture-reset').disabled=true;$('json').disabled=true;$('diagnostics').textContent='Capturing 20 seconds; keep this window visible and focused.';}
+function finishCapture(now){const c=capture;if(!c)return;lastCapture={schema:'clockwerx-html5-timing-v1',captureUtc:c.utc,completionUtc:new Date().toISOString(),durationMs:now-c.start,requestedDurationMs:20000,valid:c.invalidReasons.size===0,invalidReasons:[...c.invalidReasons],scene:(game.board.title||'Movement')+(c.fromRestart?'; atomic reset; no-input rotating scene':'; current state at capture start'),fromRestart:c.fromRestart,pageUrl:location.href,workload:c.workload,boundary:'main-thread rAF entry through fixed simulation and Canvas2D draw; SVG mode includes interpolated vector image rotation; not physical presentation or input latency',presentation:manifest.vectorAssets?'svg-continuous':'bitmap-64-directions',devicePixelRatio:window.devicePixelRatio||1,logicalSize:[640,480],backingSize:[canvas.width,canvas.height],cssSize:[canvas.getBoundingClientRect().width,canvas.getBoundingClientRect().height],sound:c.sound,handColor:c.handColor,startState:c.state,endState:game.snapshot(),startFocus:c.focus,endFocus:captureInfo(),counters:{rafCallbacks:rafCalls-c.raf,renderCalls:renderCalls-c.render,fixedStepCalls:game.steps-c.steps,activeSimulationSteps:game.activeSteps-c.activeSteps,droppedCatchupSeconds:droppedSeconds-c.dropped},frames:c.frames,startup,pageMemory:memoryResult,userAgent:navigator.userAgent};capture=null;$('capture').disabled=false;$('capture-reset').disabled=false;$('json').disabled=false;$('diagnostics').textContent=`Capture complete: ${lastCapture.valid?'valid':'INVALID — '+lastCapture.invalidReasons.join(', ')}. ${lastCapture.frames.length} raw rAF records. Download JSON.`;}
+function beginCapture(fromRestart=false){if(!ready||capture||memoryPending)return;if(fromRestart){restart();accumulator=0;last=performance.now();padHeld={};previousPad=[];}const focus=captureInfo();capture={fromRestart,sound:settings.sound,handColor:settings.black?'black':'gold',start:performance.now(),utc:new Date().toISOString(),focus,state:game.snapshot(),workload:recordedUntil>workloadTime()?'recorded swing hold until simulation second12':'manual inputs only; idle comparison requires no input',raf:rafCalls,render:renderCalls,steps:game.steps,activeSteps:game.activeSteps,dropped:droppedSeconds,frames:[],invalidReasons:new Set()};if(document.hidden)capture.invalidReasons.add('started hidden');if(!focus.focused)capture.invalidReasons.add('started unfocused');$('capture').disabled=true;$('capture-reset').disabled=true;$('json').disabled=true;$('diagnostics').textContent='Capturing 20 seconds; keep this window visible and focused.';}
 $('capture').onclick=()=>beginCapture();$('capture-reset').onclick=()=>beginCapture(true);
 $('json').onclick=()=>{if(lastCapture)download(`clockwerx-html5-${lastCapture.captureUtc.replaceAll(':','-')}.json`,new Blob([JSON.stringify({...lastCapture,pageMemory:memoryResult},null,2)],{type:'application/json'}));};
 $('png').onclick=()=>{if(capture)capture.invalidReasons.add('PNG export during timing capture');draw();canvas.toBlob(b=>{if(b)download('clockwerx-html5-canvas.png',b)},'image/png');};
 $('memory').onclick=async()=>{if(capture){$('diagnostics').textContent='Memory measurement is disabled during capture.';return;}const start=new Date().toISOString();memoryPending=true;$('capture').disabled=true;$('capture-reset').disabled=true;$('memory').disabled=true;$('diagnostics').textContent='Measuring page memory…';try{if(performance.measureUserAgentSpecificMemory){const m=await performance.measureUserAgentSpecificMemory();memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'completed',method:'measureUserAgentSpecificMemory',boundary:'browser-reported page-associated memory; not process RSS or physical RAM',result:m};}else memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'unavailable',boundary:'No supported page memory API; no estimate invented'};}catch(e){memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'failed',error:String(e),boundary:'No memory result'}}finally{memoryPending=false;$('capture').disabled=false;$('capture-reset').disabled=false;$('memory').disabled=false;$('diagnostics').textContent=JSON.stringify(memoryResult);}};
+$('route').onclick=()=>{restart();inputReplay=createInputReplay(checkedRoute);message('Replaying a checked input route through the current game rules.');};
 $('workload').onclick=()=>{restart();recordedUntil=12;message('Recorded input demo: swing held for 12 simulation seconds; no other actions.');};
-function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden){const cap=Math.min(delta,.25);droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){const input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||padHeld[k];if(recordedUntil>game.time)input.swing=true;const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal'){settings.completed++;persist();message('Goal dot grabbed. Movement complete.');}}lastEvent=game.eventSequence;}const drawStart=performance.now();draw();const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>game.time,presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},heldActions:{...held,...Object.fromEntries(Object.entries(padHeld).filter(([,v])=>v))}});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
-async function load(){try{const r=await fetch('./assets/manifest.json');if(!r.ok)throw new Error(`manifest HTTP ${r.status}`);manifest=await r.json();if(!manifest.vectorAssets)$('presentation').textContent='Private HTML5 pilot using the original bitmap foreground and background. One tutorial board; reconstructed rules and timing.';const foreground=manifest.vectorAssets?[...Object.values(manifest.vectorAssets.hands).map(h=>h.file),...manifest.vectorAssets.dots,...Object.values(manifest.vectorAssets.dotVariants||{}).map(d=>d.file),...(manifest.vectorAssets.goal?[manifest.vectorAssets.goal.file]:[]),...(manifest.vectorAssets.starbursts?[manifest.vectorAssets.starbursts.file]:[])]:Object.entries(manifest.groups).flatMap(([gid,g])=>gid==='401'?[]:gid==='300'?g.images.slice(0,16):g.images);const names=[...new Set([...foreground,manifest.backdrop])];await Promise.all(names.map(async name=>{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}));for(const [name,fn] of Object.entries(manifest.sounds||{})){audio[name]=new Audio('./assets/'+fn);audio[name].preload='auto';}game=new MovementGame(buildBoard(manifest));resetSparkles();ready=true;startup.assetReadyUtc=new Date().toISOString();startup.readyMs=performance.now()-bootStart;startup.resourceEntries=performance.getEntriesByType('resource').map(r=>({name:new URL(r.name).pathname,durationMs:r.duration,transferSize:r.transferSize,encodedBodySize:r.encodedBodySize,decodedBodySize:r.decodedBodySize}));message(`Movement ready · ${manifest.vectorAssets?'SVG foreground, continuous rotation':'original bitmap foreground'}. Space swing · Z bounce · X flip · C reverse.`);}catch(e){message(`Private ClockWerx assets missing or unreadable: ${e.message}. Run extract_assets.py on your owned copied fixture and place its output in this route’s assets/ folder.`,true);}}
+function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||padHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death'))inputReplay=null;if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){resetSparkles();renderPrevious=null;}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal'){settings.completed++;persist();message('Goal dot grabbed. '+(game.board.title||'Movement')+' complete.');}}lastEvent=game.eventSequence;}const drawStart=performance.now();draw();const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},heldActions:{...held,...Object.fromEntries(Object.entries(padHeld).filter(([,v])=>v))}});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
+async function loadScene(scene){
+ if(capture){capture.invalidReasons.add('scene changed');finishCapture(performance.now());}
+ ready=false;held={};padHeld={};previousPad=[];inputReplay=null;recordedUntil=0;renderPrevious=null;lastEvent=0;
+ const reference=scene.levelDefinition;
+ if(reference){
+  const profileResponse=await fetch('./assets/'+reference.outlinesFile);
+  if(!profileResponse.ok)throw new Error('Source collision profile is unavailable');
+  const outlines=await profileResponse.json();
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64)});
+  board.player.group=settings.black?4300:700;
+  game=new SourceRound(board,{outlines,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
+  $('presentation').textContent='Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
+  $('scope-description').textContent='Spikes. Rotating enemies and spikes use source collision outlines. A death freezes play, runs staggered explosions, then resets the round. Original scores, music, campaign saves and physical controller hardware are unqualified or omitted. The pilot keeps its separate existing preference key.';
+  $('fidelity-description').textContent='Source map, phases, placements and collision profiles; reconstructed smooth artwork and fonts. Hand motion uses the source Child-speed average with 60 guest ticks per second. Exact input cadence, random stream, reveal pacing and original hardware timing remain under review.';
+ }else{
+  game=new MovementGame(buildBoard(manifest));
+  $('presentation').textContent=manifest.vectorAssets?'Private HTML5 pilot · SVG hands and map dots over the original bitmap background. Reconstructed rules and timing.':'Private HTML5 pilot using the original bitmap foreground and background. Reconstructed rules and timing.';
+  $('scope-description').textContent=movementScope;$('fidelity-description').textContent=movementFidelity;
+ }
+ checkedRoute=scene.checkedRoute||null;$('route').hidden=!checkedRoute;
+ const title=game.board.title||'Movement';document.title=`ClockWerx ${title} — HTML5 pilot`;
+ document.querySelector('h1').textContent=`ClockWerx · ${title}`;canvas.setAttribute('aria-label',title+' game');
+ $('pause').textContent='Pause (P)';resetSparkles();last=performance.now();accumulator=0;ready=true;
+ message(`${title} ready · ${manifest.vectorAssets?'SVG foreground, continuous rotation':'original bitmap foreground'}. Space swing · Z bounce · X flip · C reverse.`);
+}
+async function load(){
+ try{
+  const r=await fetch('./assets/manifest.json');if(!r.ok)throw new Error(`manifest HTTP ${r.status}`);
+  manifest=await r.json();const vector=manifest.vectorAssets;
+  if(!vector)$('presentation').textContent='Private HTML5 pilot using the original bitmap foreground and background. One tutorial board; reconstructed rules and timing.';
+  const foreground=vector?[
+   ...Object.values(vector.hands).map(h=>h.file),...vector.dots,
+   ...Object.values(vector.dotVariants||{}).map(d=>d.file),
+   ...(vector.goal?[vector.goal.file]:[]),...(vector.starbursts?[vector.starbursts.file]:[]),
+   ...(vector.spikes?.frames||[]).map(f=>f.file),
+   ...(vector.death?.file?[vector.death.file]:(vector.death?.frames||[]).map(f=>f.file))
+  ]:Object.entries(manifest.groups).flatMap(([gid,g])=>gid==='401'?[]:gid==='300'?g.images.slice(0,16):g.images);
+  const names=[...new Set([...foreground,manifest.backdrop])];
+  await Promise.all(names.map(async name=>{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}));
+  for(const [name,fn] of Object.entries(manifest.sounds||{})){audio[name]=new Audio('./assets/'+fn);audio[name].preload='auto';}
+  const scenes=manifest.scenes||[{id:'single',title:manifest.levelDefinition?.title||'Movement',levelDefinition:manifest.levelDefinition,checkedRoute:manifest.checkedRoute}];
+  $('level').replaceChildren(...scenes.map((scene,index)=>{const option=document.createElement('option');option.value=String(index);option.textContent=(scene.ordinal?scene.ordinal+': ':'')+scene.title;return option;}));
+  $('level-picker').hidden=scenes.length<2;
+  $('level').onchange=()=>loadScene(scenes[Number($('level').value)]).catch(e=>message('Level unavailable: '+e.message,true));
+  await loadScene(scenes[0]);
+startup.assetReadyUtc=new Date().toISOString();startup.readyMs=performance.now()-bootStart;
+  startup.resourceEntries=performance.getEntriesByType('resource').map(r=>({name:new URL(r.name).pathname,durationMs:r.duration,transferSize:r.transferSize,encodedBodySize:r.encodedBodySize,decodedBodySize:r.decodedBodySize}));
+  message(`${game.board.title||'Movement'} ready · ${vector?'SVG foreground, continuous rotation':'original bitmap foreground'}. Space swing · Z bounce · X flip · C reverse.`);
+ }catch(e){message(`Private ClockWerx assets missing or unreadable: ${e.message}. Run extract_assets.py on your owned copied fixture and place its output in this route’s assets/ folder.`,true);}
+}
 load();requestAnimationFrame(frame);

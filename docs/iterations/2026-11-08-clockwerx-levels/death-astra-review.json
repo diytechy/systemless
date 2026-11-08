@@ -1,0 +1,84 @@
+{
+  "schema": "clockwerx-death-review-v1",
+  "sourceResourceGroup": 2600,
+  "sourceFrames": 10,
+  "particles": 15,
+  "sourceLifecycleImplemented": true,
+  "gameplayQualified": false,
+  "nativeVisualQualified": false,
+  "normalSinglePlayerDeathResetsRound": true,
+  "priorHeroOnlyConclusionRetracted": true,
+  "deathState": "freeze ordinary layers, pause score timer, activate DE, wait all particles, ROReset, initial flourishes, reveal",
+  "lifeCounterInvented": false,
+  "rngOrder": "unsigned16%100 position then unsigned16%60 delay per particle",
+  "geometry": "integer truncation of48*cos/sin before percentage truncation; stationary particle points",
+  "descriptorOffset": {
+    "x": -31,
+    "y": -30
+  },
+  "timer": {
+    "basePeriod": 40,
+    "clientDivisor": 2,
+    "unitsPerGuestTick": 16,
+    "strictClientThreshold": true,
+    "spriteCatchUp": false,
+    "strictStartDeadline": true,
+    "preserveClockAcrossRoundReset": true
+  },
+  "assets": {
+    "payloads": 25,
+    "preservedBaselinePayloads": 24,
+    "allBaselineBytesIdentical": true,
+    "newFiles": [
+      "death.svg"
+    ]
+  },
+  "tests": {
+    "command": "node --test prototypes/clockwerx-html5/death.test.mjs",
+    "passed": 7,
+    "failed": 0
+  },
+  "limitations": [
+    "Macintosh RNG algorithm/seed/global consumption unqualified",
+    "native death atlas pixel anchors/timing and browser rendering unqualified",
+    "total-score and timer checkpoint policy belongs to coordinator SC review",
+    "round reveal transition remains separately qualified",
+    "moving dot/slide death pivot not exercised in stationary Spikes"
+  ],
+  "evidence": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\death\\assets\\manifest.json",
+      "bytes": 18495,
+      "sha256": "ff298c6784e6dfc858b8901bf073411c33c0d9aa39f2abc8341cafd4f77c1bfa"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\death\\assets\\death.svg",
+      "bytes": 168954,
+      "sha256": "70970b4cf1646a41262055c9804500e803435e610fb03375708c49e13d70f1bc"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\death\\death-profile.json",
+      "bytes": 7281,
+      "sha256": "6b6c5916aead4c8307edfbe4e1c7ea06f8c64f6ee476fd7eeb6a9d623115c8d3"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\death\\build-candidate.py",
+      "bytes": 6253,
+      "sha256": "e92bcee55519f8f58809a9573c41d93e480d042772ac63c09086d05dc32114d5"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\death\\death-preview.png",
+      "bytes": 186039,
+      "sha256": "8f53338010095ea60167aefad3c77a376636a3e792948cb563b4caa8bdbd9e96"
+    }
+  ],
+  "coordinatorNativeEvidence": {
+    "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/spikes/native-play-01/report.json",
+    "frontendTicks": 1730,
+    "guestTicks": 2328,
+    "assertions": 0,
+    "workerRanNative": false
+  },
+  "workloadReleased": true,
+  "browserEmulatorBuildBenchmarkRun": false
+}

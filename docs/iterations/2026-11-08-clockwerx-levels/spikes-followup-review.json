@@ -1,0 +1,69 @@
+{
+  "schema": "clockwerx-spikes-followup-v1",
+  "resourceId": 221,
+  "integrationReady": [
+    "SP per-axis descriptor offset(-8,-7), WA(-44,-43)",
+    "SP unscaled base40/client divisor5 and16units per guesttick",
+    "WA half-index doubled to64-angle frame",
+    "protected dot flag0x2000 with presence/activation gating"
+  ],
+  "nativeQualificationStillRequired": [
+    "SVG spike phases and shadow appearance",
+    "selected native difficulty enum and secondary clock rate",
+    "source death-particle presentation and exact elapsed completion",
+    "explicit restart score state via coordinator SC work"
+  ],
+  "spikeClock": {
+    "basePeriod": 40,
+    "clientDivisor": 5,
+    "strictClientThreshold": true,
+    "unitsPerGuestTick": 16,
+    "phaseDivisor": 4,
+    "nominalFrameHzAt60GuestTicks": 1.2,
+    "spriteAdvancePolicy": "one frame per observed phase-clock change; snapshot reference at creation/reset; no count-delta catch-up"
+  },
+  "sourceAnchorOffsets": {
+    "SP": {
+      "x": -8,
+      "y": -7
+    },
+    "WA": {
+      "x": -44,
+      "y": -43
+    }
+  },
+  "protectedDotCount": 0,
+  "normalDeathResetsRound": true,
+  "lifeCounterInvented": false,
+  "tests": {
+    "passed": 11,
+    "failed": 0,
+    "command": "node --test prototypes/clockwerx-html5/hazards.test.mjs"
+  },
+  "evidence": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\qualified\\collision-profile.json",
+      "bytes": 700663,
+      "sha256": "f108d9aef6de8f2a6de854ad3b178b12eab93613e79d02ac4dfb16bc6f4a23bc"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\qualified\\assets\\manifest.json",
+      "bytes": 14896,
+      "sha256": "65abc19d01a0f9f232d0eda664844bb9911b869b87468273fd3ba32a0060ea02"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spikes\\qualified\\build-candidate.py",
+      "bytes": 4849,
+      "sha256": "8910e138830acb0797cc65b51c7fc60c37810713fff709a82d129df99b2affba"
+    }
+  ],
+  "workloadReleased": true,
+  "browserEmulatorBuildBenchmarkRun": false,
+  "nativeAnchorEvidence": {
+    "crops": 319,
+    "frames": 29,
+    "phaseCount": 4,
+    "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/spikes/native-anchor-review.json"
+  },
+  "deathCorrection": "Prior hero-only conclusion retracted; see death-astra-review.md. gameType0 enters frozen substate3, completes DE barrier, ROReset and reveal; reset both initial star chains."
+}

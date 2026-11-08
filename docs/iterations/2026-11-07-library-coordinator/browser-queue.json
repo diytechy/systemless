@@ -279,7 +279,10 @@
     {
       "id": "owned-drol-v1",
       "route": "/drol/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/drol.json",
+      "scene": "Initiallevel afterSpace/A300ms, noinput20seconds, activeplatforms/enemies retained, lives4to3",
+      "accepted_change": null
     },
     {
       "id": "owned-fantastic-voyage-v1",

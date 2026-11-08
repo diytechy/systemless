@@ -423,17 +423,26 @@
     {
       "id": "owned-prince-of-persia-v1",
       "route": "/prince-of-persia/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/prince.json",
+      "scene": "Level1 firstdungeonroom threehealth initial60minutes, Right300ms beforecapture, noinput20seconds; playerlateragainstwall",
+      "accepted_change": null
     },
     {
       "id": "owned-robowar-4-1-1-v1",
       "route": "/robowar-4-1-1/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/robowar.json",
+      "scene": "Two suppliedrobots firstRobotsfolderentry andDumBot, BattleB started; noinput20seconds includesmovingrobots/shots thenresult DumBot NoProgram times246",
+      "accepted_change": null
     },
     {
       "id": "owned-ruckus-v1",
       "route": "/ruckus/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/ruckus.json",
+      "scene": "Mission9 DeepVault field, troops0 selectionnone, scrolledfromhomeflagtohostagebuilding, noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-scruffy-v1",

@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "nativeTransfers": 13,
+  "goalOnsets": 190,
+  "runtimeSourceByteIdenticalToAccepted14": true,
+  "inheritedRuntimeChecks": 187,
+  "inheritedPackagingChecks": 13,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 4528,
+    "guest_tick": 5128,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 16000,
+  "nativeNextLevel": "16:Sparse",
+  "nativeProfileTotal": 55000,
+  "browser": {
+    "valid": true,
+    "transfers": 13,
+    "bonuses": 5,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 16000,
+      "totalCommitted": 0,
+      "nextDotAward": 5000,
+      "completed": true,
+      "overallEarned": 16000
+    },
+    "resets": 0
+  },
+  "clock": {
+    "boundary": "Independent original descriptor fits constrain source4/19hero plus two canonical n/s/b/f programs, including negative initial direction. Pure NPC kernel uses original static pivots/permissions; door contact does not alter these wall-free NPC trajectories. Coincident/overdrawn second-pivot fits are excluded. First8192hero-frame aliases only; not absolute reveal/hardware timing or gate proof.",
+    "firstGuestTick": 1864,
+    "heroPoses": 27,
+    "redPoses": 66,
+    "phaseIntervals": [
+      [
+        73.26315789473684,
+        73.3157894736842
+      ]
+    ],
+    "chosenPhase": 73.28947368421052,
+    "rejectedHeroPoses": 6
+  },
+  "elevatedHumanFits": [
+    {
+      "transfer": 5,
+      "expectedPivot": "4,3",
+      "observedPivot": "4,3",
+      "match": true,
+      "sourceFrame": 44,
+      "meanAbsoluteChannelError": 12.99074074074074
+    },
+    {
+      "transfer": 6,
+      "expectedPivot": "4,4",
+      "observedPivot": "4,4",
+      "match": true,
+      "sourceFrame": 44,
+      "meanAbsoluteChannelError": 11.690740740740742
+    },
+    {
+      "transfer": 7,
+      "expectedPivot": "5,4",
+      "observedPivot": "5,4",
+      "match": true,
+      "sourceFrame": 35,
+      "meanAbsoluteChannelError": 2.7099099099099098
+    },
+    {
+      "transfer": 8,
+      "expectedPivot": "6,4",
+      "observedPivot": "6,4",
+      "match": true,
+      "sourceFrame": 35,
+      "meanAbsoluteChannelError": 2.7099099099099098
+    },
+    {
+      "transfer": 9,
+      "expectedPivot": "6,5",
+      "observedPivot": "6,5",
+      "match": true,
+      "sourceFrame": 44,
+      "meanAbsoluteChannelError": 9.512962962962963
+    }
+  ],
+  "compositeDots": {
+    "dots": 9,
+    "normal": 7,
+    "bonus": 2,
+    "nativeSamples": 297,
+    "maxOriginalMAE": 0.401516,
+    "newSVGBytes": 2698,
+    "semantics": "red upper/blue lower; existing smooth art geometry/style"
+  },
+  "background": {
+    "name": "ramble-fresh-initial",
+    "meanAbsoluteChannelError": 0.5591904057220373,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0
+  },
+  "oldPayloadsPreserved": 70,
+  "newPayloads": 2,
+  "limits": [
+    "Child gold-hand bounded goal,5of19bonus dots",
+    "human average versus canonical NPC fractional scheduling remains approximate despite native route success",
+    "complete audio/pickup effects/campaign/save/highscore/controller parity unqualified",
+    "no new comparable resource benchmark"
+  ],
+  "schema": "clockwerx-accepted-level-v1",
+  "ordinal": 15,
+  "title": "Ramble",
+  "sourceResource": 179,
+  "sourceSha256": "3d2357f21760f9a0d5d482ba57b4d11afe9e645e2e547cddcae3d628fa4b4204",
+  "privateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\ramble",
+  "activation": {
+    "sourceBytes": 163579,
+    "assetBytes": 1796422,
+    "manifestBytes": 1221253,
+    "totalBytes": 3181254
+  }
+}

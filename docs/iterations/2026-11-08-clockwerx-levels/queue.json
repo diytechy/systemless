@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 15,
-  "currentAction": "Ramble15: fresh native baseline from verified through14progress; composite red-blue ordinary/bonus art and counter-rotating programmed actors require review",
+  "currentOrdinal": 16,
+  "currentAction": "Sparse16: fresh native baseline from verified through15progress; qualify small-board static programs and actual maze/goal",
   "levels": [
     {
       "ordinal": 1,
@@ -1041,11 +1041,23 @@
       "menuTitle": "Ramble",
       "resourceTitle": "Ramble",
       "sha256": "3d2357f21760f9a0d5d482ba57b4d11afe9e645e2e547cddcae3d628fa4b4204",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "ramble/native-goal-01/report.json",
+        "ramble/native-goal-01/ram-after-route.png",
+        "ramble/native-goal-01/next-after-ramble.png"
+      ],
+      "requirements": [
+        "mixed red-blue ordinary/bonus assets",
+        "negative initial ordinary program direction",
+        "source b/f/n/s target/timing semantics"
+      ],
+      "svgStatus": "activated13transfer/fivebonus/16000Childgoal;190onsets and rootIAB verified",
+      "generationConstraints": [
+        "preserve negative direction and source PC",
+        "mixed bonus becomes matching mixed ordinary look after collection",
+        "static wall path needs dynamic program/clock collision checks"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 54,
@@ -1072,7 +1084,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1089,7 +1101,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "ramble-review.md"
     },
     {
       "ordinal": 16,

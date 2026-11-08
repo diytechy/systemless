@@ -18,8 +18,9 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyBouncePrograms=false}={}){
  const unsupported=[];
+ const programs=level.blocks?.find(b=>b.kind==='WP')?.records.map(r=>r.text)||[];
  if(activeMask!==1)unsupported.push('unqualified difficulty clock');
  if(level.structuralStatus!=='complete')unsupported.push('incomplete source stream');
  if(![7,8].includes(level.header?.displaySizeRaw))unsupported.push('unqualified display-size selector');
@@ -28,7 +29,16 @@ export function levelRequirements(level,{activeMask=1,allowOil=false}={}){
   if(block.kind==='WA')for(const actor of block.records){
    if(!(actor.activationMaskRaw&activeMask))continue;
    if(!(actor.actorTypeRaw in GROUPS))unsupported.push('actor type '+actor.actorTypeRaw);
-   if(actor.programReferenceRaw>=0)unsupported.push('actor programs');
+   if(actor.programReferenceRaw>=0){
+    const program=programs[actor.programReferenceRaw],pc=actor.rawWords?.[6];
+    if(!allowEnemyBouncePrograms)unsupported.push('actor programs');
+    else{
+     if(![1,2,3].includes(actor.actorTypeRaw)||typeof program!=='string'||!program.length||program.length>255||[...program].some(c=>c!=='b'))unsupported.push('non-bounce actor program');
+     if(!Number.isInteger(pc)||pc<0||pc>(program?.length??0))unsupported.push('source program PC');
+     if(pc===0&&[102,115].includes(program?.length))unsupported.push('length-byte program transfer');
+     if(actorChecksWalls(actor.version12ByteRaw??1))unsupported.push('programmed wall-reacting actor');
+    }
+   }
    if(![0,1,4].includes(actor.rawWords?.[7]))unsupported.push('actor speed class '+actor.rawWords?.[7]);
   }
  }
@@ -41,8 +51,8 @@ export function levelRequirements(level,{activeMask=1,allowOil=false}={}){
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowEnemyBouncePrograms=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowEnemyBouncePrograms});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
@@ -54,6 +64,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
  });
  const records=kind=>level.blocks.find(b=>b.kind===kind)?.records||[];
  const actors=records('WA').filter(a=>a.activationMaskRaw&activeMask);
+ const programs=records('WP').map(r=>r.text);
  if(actors.length<2||actors[0].actorTypeRaw!==0||actors[1].actorTypeRaw!==6)
   throw new Error('Unqualified human actor slot layout');
  const hand=(a,index)=>{
@@ -61,8 +72,10 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
   if(!dots.some(d=>d.id===pivot))throw new Error('Actor starts on an absent dot');
   const direction=signedWord(a.rawWords[4]);
   if(![-1,1].includes(direction))throw new Error('Unqualified actor direction');
+  const program=a.programReferenceRaw>=0?programs[a.programReferenceRaw]:null,frame=sourceInitialFrame(a.initialFrameHalfIndexRaw);
   return {name:index===0?'player':`enemy-${index}`,pivot,grabMask:15<<(a.actorTypeRaw*4),
    angle:sourceInitialFrame(a.initialFrameHalfIndexRaw)*TAU/64,direction,
+   program,sourcePC:program?a.rawWords[6]:undefined,frame:program?frame:undefined,unwrappedFrame:program?frame:undefined,
    group:GROUPS[a.actorTypeRaw],sourceActorType:a.actorTypeRaw,speedClass:a.rawWords[7],...actorTiming(a.rawWords[7]),checksWalls:actorChecksWalls(a.version12ByteRaw??1)};
  };
  const spikes=records('SP').map((r,index)=>({id:index,...spikeGridPoint(r,origin),phase:index%4,activationMask:r.rawWords[4]*65536+r.rawWords[5]}));

@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 7,
-  "currentAction": "More Spikes: canonical bounce-program integration and native trajectory/goal/browser validation",
+  "currentOrdinal": 8,
+  "currentAction": "More Doors: qualify long-horizontal leaves/caps and paired switches; native and browser goal route",
   "levels": [
     {
       "ordinal": 1,
@@ -456,11 +456,27 @@
       "menuTitle": "More Spikes",
       "resourceTitle": "More Spikes",
       "sha256": "601329c8e9e919edd5e2f6e60b5ee548130a3fa657af162c389970f70f6da845",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "more-spikes/native-play-01/report.json",
+        "more-spikes/program-review/native-fits.json",
+        "more-spikes/root-native-program-review.json",
+        "more-spikes/native-goal-route-01/report.json",
+        "more-spikes/native-route-review.json"
+      ],
+      "requirements": [
+        "canonical integer frame before cardinal program",
+        "source Pascal PC semantics and denied target advancement",
+        "nonhuman target permission gates bounce",
+        "shared capped actor-class latch and smooth presentation"
+      ],
+      "svgStatus": "seventh scene activated; native programmed arc and26transfer goal/browser checked",
+      "generationConstraints": [
+        "simulate PC/direction/frame/class remainders and spike phases",
+        "validate facing nonhuman target rather than drawing color",
+        "preserve denied-command PC advancement",
+        "certify held input windows over clock onsets"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 62,

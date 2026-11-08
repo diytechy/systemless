@@ -1,0 +1,110 @@
+{
+  "schema": "clockwerx-more-spikes-visual-review-v1",
+  "status": "no-material-scene-specific-static-visual-correction-requested",
+  "privateEvidenceRoot": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/more-spikes",
+  "inputs": [
+    {
+      "file": "native-play-01/initial-after-reveal.png",
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "aa9a6a7b7a56b1fd4f379d18b1376b9272750c978f9b3d51b2b34ebdcea7cd7b"
+    },
+    {
+      "file": "native-goal-route-01/after-route.png",
+      "size": [
+        800,
+        600
+      ],
+      "sha256": "e6a26b20a4b64cdaad5a9f5414bc278e2f4f2fcb6ccccac94b5a7158fdb6a1a9"
+    },
+    {
+      "file": "browser-route-view.png",
+      "size": [
+        900,
+        1100
+      ],
+      "sha256": "732ddb256445e0d947698114618b48ffccbc14635d5f405ab2560d07bbf4d881"
+    },
+    {
+      "file": "browser-goal.png",
+      "size": [
+        900,
+        1100
+      ],
+      "sha256": "60068c9977f030caa500c737ca33a1b448a11aafedc445fd66f5716765563b2a"
+    }
+  ],
+  "nativeGameRectangle": [
+    80,
+    60,
+    720,
+    540
+  ],
+  "browserCaptureBoundary": {
+    "type": "full-page active route screenshot",
+    "logicalCanvasSize": [
+      640,
+      480
+    ],
+    "metadataCssSize": [
+      615,
+      461.25
+    ],
+    "pixelComparisonPerformed": false
+  },
+  "excludedCapture": {
+    "file": "browser-initial.png",
+    "reason": "Paused/blank; not missing-inventory evidence"
+  },
+  "sourceInventory": {
+    "presentDots": 62,
+    "bonusFlags": 11,
+    "goalFlags": 1,
+    "spikes": 6,
+    "visibleHuman": 1,
+    "visibleGreenEnemy": 1,
+    "visibleBlueEnemy": 1,
+    "textRecords": 7,
+    "allPresentDotAndSpikeMasks": 15
+  },
+  "findings": [
+    "Expected upper, central and lower hazard distribution is visible",
+    "Green/blue hand and pivot colors agree; accepted smooth art remains readable",
+    "Bonus rings and goal remain distinguishable and correctly placed",
+    "Instruction regions and line grouping agree; font/scaling differences remain",
+    "No new scene-specific art defect identified"
+  ],
+  "nativeCompletionVisible": {
+    "levelBonusPoints": 0,
+    "childCompletionPoints": 1000,
+    "totalPoints": 1000
+  },
+  "browserCompletionReviewed": true,
+  "baseline": {
+    "source": "accepted Combo QA assets",
+    "payloads": 51,
+    "unchangedByIndependentHashComparison": 51,
+    "manifestExcluded": true
+  },
+  "limits": [
+    "Different animation phases and route progress",
+    "Hand/sparkle occlusion and scaled full-page screenshot",
+    "No pixel-color or sharpness metric",
+    "No program, bounce, collision, route, audio, save or performance qualification"
+  ],
+  "writes": [
+    "more-spikes-visual-review.md",
+    "more-spikes-visual-review.json"
+  ],
+  "runtimeAssetsEdited": false,
+  "newRuntimeRenderingBuildBenchmark": false,
+  "workloadReleased": true,
+  "browserCompletion": {
+    "overlayVisible": true,
+    "savedStateComplete": true,
+    "savedStateTime": 67.13333333333283,
+    "boundary": "Pilot centered completion/restart overlay; native score-breakdown UI is not reproduced; no independent route/timing claim"
+  }
+}

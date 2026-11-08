@@ -1,0 +1,484 @@
+{
+  "schema": "clockwerx-more-spikes-native-program-review-v1",
+  "status": "native fixed-pivot program observation; not whole-level acceptance",
+  "resourceId": 226,
+  "catalogOrdinal": 7,
+  "title": "More Spikes",
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\more-spikes\\program-review",
+  "nativeRun": {
+    "status": "passed",
+    "frontend_ticks": 2030,
+    "guest_tick": 2628,
+    "budget_exhausted_frames": 0,
+    "assertions": 0
+  },
+  "method": "fixed decoded pivot, qualified source anchors/reflections, all64 descriptor candidates, gamma0.7 original RGB compared on source alpha mask",
+  "actors": [
+    {
+      "group": "4500",
+      "actorType": 3,
+      "sampleCount": 33,
+      "minimumMAE": 0.17647058823529413,
+      "maximumMAE": 0.289272030651341,
+      "minimumRunnerUpGap": 51.24098153233188,
+      "samples": [
+        {
+          "checkpoint": "initial-after-reveal",
+          "guestTick": 1668,
+          "sourceFrame": 53,
+          "meanAbsoluteChannelError": 0.289272030651341
+        },
+        {
+          "checkpoint": "idle-01",
+          "guestTick": 1698,
+          "sourceFrame": 49,
+          "meanAbsoluteChannelError": 0.2389937106918239
+        },
+        {
+          "checkpoint": "idle-02",
+          "guestTick": 1728,
+          "sourceFrame": 55,
+          "meanAbsoluteChannelError": 0.210752688172043
+        },
+        {
+          "checkpoint": "idle-03",
+          "guestTick": 1758,
+          "sourceFrame": 61,
+          "meanAbsoluteChannelError": 0.21777777777777776
+        },
+        {
+          "checkpoint": "idle-04",
+          "guestTick": 1788,
+          "sourceFrame": 60,
+          "meanAbsoluteChannelError": 0.2229580573951435
+        },
+        {
+          "checkpoint": "idle-05",
+          "guestTick": 1818,
+          "sourceFrame": 54,
+          "meanAbsoluteChannelError": 0.19389978213507625
+        },
+        {
+          "checkpoint": "idle-06",
+          "guestTick": 1848,
+          "sourceFrame": 48,
+          "meanAbsoluteChannelError": 0.20934959349593496
+        },
+        {
+          "checkpoint": "idle-07",
+          "guestTick": 1878,
+          "sourceFrame": 55,
+          "meanAbsoluteChannelError": 0.210752688172043
+        },
+        {
+          "checkpoint": "idle-08",
+          "guestTick": 1908,
+          "sourceFrame": 61,
+          "meanAbsoluteChannelError": 0.21777777777777776
+        },
+        {
+          "checkpoint": "idle-09",
+          "guestTick": 1938,
+          "sourceFrame": 61,
+          "meanAbsoluteChannelError": 0.21777777777777776
+        },
+        {
+          "checkpoint": "idle-10",
+          "guestTick": 1968,
+          "sourceFrame": 54,
+          "meanAbsoluteChannelError": 0.19389978213507625
+        },
+        {
+          "checkpoint": "idle-11",
+          "guestTick": 1998,
+          "sourceFrame": 48,
+          "meanAbsoluteChannelError": 0.20934959349593496
+        },
+        {
+          "checkpoint": "idle-12",
+          "guestTick": 2028,
+          "sourceFrame": 54,
+          "meanAbsoluteChannelError": 0.19389978213507625
+        },
+        {
+          "checkpoint": "idle-13",
+          "guestTick": 2058,
+          "sourceFrame": 61,
+          "meanAbsoluteChannelError": 0.21777777777777776
+        },
+        {
+          "checkpoint": "idle-14",
+          "guestTick": 2088,
+          "sourceFrame": 61,
+          "meanAbsoluteChannelError": 0.21777777777777776
+        },
+        {
+          "checkpoint": "idle-15",
+          "guestTick": 2118,
+          "sourceFrame": 55,
+          "meanAbsoluteChannelError": 0.210752688172043
+        },
+        {
+          "checkpoint": "idle-16",
+          "guestTick": 2148,
+          "sourceFrame": 48,
+          "meanAbsoluteChannelError": 0.20934959349593496
+        },
+        {
+          "checkpoint": "idle-17",
+          "guestTick": 2178,
+          "sourceFrame": 54,
+          "meanAbsoluteChannelError": 0.19389978213507625
+        },
+        {
+          "checkpoint": "idle-18",
+          "guestTick": 2208,
+          "sourceFrame": 60,
+          "meanAbsoluteChannelError": 0.2229580573951435
+        },
+        {
+          "checkpoint": "idle-19",
+          "guestTick": 2238,
+          "sourceFrame": 61,
+          "meanAbsoluteChannelError": 0.21777777777777776
+        },
+        {
+          "checkpoint": "idle-20",
+          "guestTick": 2268,
+          "sourceFrame": 55,
+          "meanAbsoluteChannelError": 0.210752688172043
+        },
+        {
+          "checkpoint": "idle-21",
+          "guestTick": 2298,
+          "sourceFrame": 49,
+          "meanAbsoluteChannelError": 0.2389937106918239
+        },
+        {
+          "checkpoint": "idle-22",
+          "guestTick": 2328,
+          "sourceFrame": 53,
+          "meanAbsoluteChannelError": 0.289272030651341
+        },
+        {
+          "checkpoint": "idle-23",
+          "guestTick": 2358,
+          "sourceFrame": 60,
+          "meanAbsoluteChannelError": 0.2229580573951435
+        },
+        {
+          "checkpoint": "idle-24",
+          "guestTick": 2388,
+          "sourceFrame": 62,
+          "meanAbsoluteChannelError": 0.24282560706401765
+        },
+        {
+          "checkpoint": "idle-25",
+          "guestTick": 2418,
+          "sourceFrame": 56,
+          "meanAbsoluteChannelError": 0.17647058823529413
+        },
+        {
+          "checkpoint": "idle-26",
+          "guestTick": 2448,
+          "sourceFrame": 49,
+          "meanAbsoluteChannelError": 0.2389937106918239
+        },
+        {
+          "checkpoint": "idle-27",
+          "guestTick": 2478,
+          "sourceFrame": 53,
+          "meanAbsoluteChannelError": 0.289272030651341
+        },
+        {
+          "checkpoint": "idle-28",
+          "guestTick": 2508,
+          "sourceFrame": 59,
+          "meanAbsoluteChannelError": 0.23160173160173161
+        },
+        {
+          "checkpoint": "idle-29",
+          "guestTick": 2538,
+          "sourceFrame": 62,
+          "meanAbsoluteChannelError": 0.24282560706401765
+        },
+        {
+          "checkpoint": "idle-30",
+          "guestTick": 2568,
+          "sourceFrame": 56,
+          "meanAbsoluteChannelError": 0.17647058823529413
+        },
+        {
+          "checkpoint": "idle-31",
+          "guestTick": 2598,
+          "sourceFrame": 50,
+          "meanAbsoluteChannelError": 0.2681992337164751
+        },
+        {
+          "checkpoint": "idle-32",
+          "guestTick": 2628,
+          "sourceFrame": 53,
+          "meanAbsoluteChannelError": 0.289272030651341
+        }
+      ]
+    },
+    {
+      "group": "4400",
+      "actorType": 2,
+      "sampleCount": 33,
+      "minimumMAE": 0.26506024096385544,
+      "maximumMAE": 0.36853002070393376,
+      "minimumRunnerUpGap": 64.68663877065147,
+      "samples": [
+        {
+          "checkpoint": "initial-after-reveal",
+          "guestTick": 1668,
+          "sourceFrame": 11,
+          "meanAbsoluteChannelError": 0.26506024096385544
+        },
+        {
+          "checkpoint": "idle-01",
+          "guestTick": 1698,
+          "sourceFrame": 17,
+          "meanAbsoluteChannelError": 0.2774327122153209
+        },
+        {
+          "checkpoint": "idle-02",
+          "guestTick": 1728,
+          "sourceFrame": 23,
+          "meanAbsoluteChannelError": 0.3333333333333333
+        },
+        {
+          "checkpoint": "idle-03",
+          "guestTick": 1758,
+          "sourceFrame": 29,
+          "meanAbsoluteChannelError": 0.2848101265822785
+        },
+        {
+          "checkpoint": "idle-04",
+          "guestTick": 1788,
+          "sourceFrame": 36,
+          "meanAbsoluteChannelError": 0.31875
+        },
+        {
+          "checkpoint": "idle-05",
+          "guestTick": 1818,
+          "sourceFrame": 42,
+          "meanAbsoluteChannelError": 0.27944111776447106
+        },
+        {
+          "checkpoint": "idle-06",
+          "guestTick": 1848,
+          "sourceFrame": 48,
+          "meanAbsoluteChannelError": 0.2830188679245283
+        },
+        {
+          "checkpoint": "idle-07",
+          "guestTick": 1878,
+          "sourceFrame": 55,
+          "meanAbsoluteChannelError": 0.29878048780487804
+        },
+        {
+          "checkpoint": "idle-08",
+          "guestTick": 1908,
+          "sourceFrame": 61,
+          "meanAbsoluteChannelError": 0.32075471698113206
+        },
+        {
+          "checkpoint": "idle-09",
+          "guestTick": 1938,
+          "sourceFrame": 3,
+          "meanAbsoluteChannelError": 0.32075471698113206
+        },
+        {
+          "checkpoint": "idle-10",
+          "guestTick": 1968,
+          "sourceFrame": 10,
+          "meanAbsoluteChannelError": 0.2834331337325349
+        },
+        {
+          "checkpoint": "idle-11",
+          "guestTick": 1998,
+          "sourceFrame": 16,
+          "meanAbsoluteChannelError": 0.2830188679245283
+        },
+        {
+          "checkpoint": "idle-12",
+          "guestTick": 2028,
+          "sourceFrame": 22,
+          "meanAbsoluteChannelError": 0.27944111776447106
+        },
+        {
+          "checkpoint": "idle-13",
+          "guestTick": 2058,
+          "sourceFrame": 29,
+          "meanAbsoluteChannelError": 0.2848101265822785
+        },
+        {
+          "checkpoint": "idle-14",
+          "guestTick": 2088,
+          "sourceFrame": 35,
+          "meanAbsoluteChannelError": 0.2848101265822785
+        },
+        {
+          "checkpoint": "idle-15",
+          "guestTick": 2118,
+          "sourceFrame": 41,
+          "meanAbsoluteChannelError": 0.3333333333333333
+        },
+        {
+          "checkpoint": "idle-16",
+          "guestTick": 2148,
+          "sourceFrame": 48,
+          "meanAbsoluteChannelError": 0.2830188679245283
+        },
+        {
+          "checkpoint": "idle-17",
+          "guestTick": 2178,
+          "sourceFrame": 54,
+          "meanAbsoluteChannelError": 0.2834331337325349
+        },
+        {
+          "checkpoint": "idle-18",
+          "guestTick": 2208,
+          "sourceFrame": 60,
+          "meanAbsoluteChannelError": 0.36853002070393376
+        },
+        {
+          "checkpoint": "idle-19",
+          "guestTick": 2238,
+          "sourceFrame": 3,
+          "meanAbsoluteChannelError": 0.32075471698113206
+        },
+        {
+          "checkpoint": "idle-20",
+          "guestTick": 2268,
+          "sourceFrame": 9,
+          "meanAbsoluteChannelError": 0.29878048780487804
+        },
+        {
+          "checkpoint": "idle-21",
+          "guestTick": 2298,
+          "sourceFrame": 15,
+          "meanAbsoluteChannelError": 0.28817204301075267
+        },
+        {
+          "checkpoint": "idle-22",
+          "guestTick": 2328,
+          "sourceFrame": 21,
+          "meanAbsoluteChannelError": 0.3033932135728543
+        },
+        {
+          "checkpoint": "idle-23",
+          "guestTick": 2358,
+          "sourceFrame": 28,
+          "meanAbsoluteChannelError": 0.31875
+        },
+        {
+          "checkpoint": "idle-24",
+          "guestTick": 2388,
+          "sourceFrame": 34,
+          "meanAbsoluteChannelError": 0.28270042194092826
+        },
+        {
+          "checkpoint": "idle-25",
+          "guestTick": 2418,
+          "sourceFrame": 40,
+          "meanAbsoluteChannelError": 0.3153692614770459
+        },
+        {
+          "checkpoint": "idle-26",
+          "guestTick": 2448,
+          "sourceFrame": 47,
+          "meanAbsoluteChannelError": 0.2774327122153209
+        },
+        {
+          "checkpoint": "idle-27",
+          "guestTick": 2478,
+          "sourceFrame": 53,
+          "meanAbsoluteChannelError": 0.26506024096385544
+        },
+        {
+          "checkpoint": "idle-28",
+          "guestTick": 2508,
+          "sourceFrame": 59,
+          "meanAbsoluteChannelError": 0.3047034764826176
+        },
+        {
+          "checkpoint": "idle-29",
+          "guestTick": 2538,
+          "sourceFrame": 2,
+          "meanAbsoluteChannelError": 0.32696390658174096
+        },
+        {
+          "checkpoint": "idle-30",
+          "guestTick": 2568,
+          "sourceFrame": 8,
+          "meanAbsoluteChannelError": 0.3092369477911647
+        },
+        {
+          "checkpoint": "idle-31",
+          "guestTick": 2598,
+          "sourceFrame": 14,
+          "meanAbsoluteChannelError": 0.301010101010101
+        },
+        {
+          "checkpoint": "idle-32",
+          "guestTick": 2628,
+          "sourceFrame": 21,
+          "meanAbsoluteChannelError": 0.3033932135728543
+        }
+      ]
+    }
+  ],
+  "clockControl": {
+    "observedFrameAdvance": 202,
+    "guestTickInterval": 960,
+    "normalizedFramesPer60GuestTicks": 12.625,
+    "sourceExpectedFramesPer60GuestTicks": 12.631578947368421,
+    "hostPerformanceClaim": false
+  },
+  "programComparison": {
+    "sourceInitialFrame": 48,
+    "sourceInitialDirection": 1,
+    "sourceInitialPC": 1,
+    "PC1ModelMatches": 33,
+    "PC0ModelMatches": 1,
+    "sampleCount": 33,
+    "inferredTurnaroundsWithinObservedInterval": 13,
+    "inferredEndpoints": [
+      48,
+      0
+    ],
+    "directlyCapturedEndpointFrames": [
+      48
+    ],
+    "exactTurnaroundGuestTicksDirectlyObserved": false,
+    "independentControl": "unwrapped green class1 source frames determine each sample advance",
+    "assumptions": [
+      "same source class1 shared clock",
+      "source-defined initial phases/directions",
+      "fewer than64 frames per30guesttick interval",
+      "static decoded neighbor permissions"
+    ],
+    "limits": [
+      "identical action instructions prevent distinguishing every valid internalPC",
+      "PC wrap and failed-target behavior remain source-derived",
+      "initial screenshot is after motion, not reset phase"
+    ]
+  },
+  "notQualified": [
+    "whole goal route",
+    "player control",
+    "sound",
+    "transfer/f actions",
+    "arbitraryPC0 programs",
+    "moving-dot targets",
+    "slowdown transitions",
+    "death/reset",
+    "newSVG quality"
+  ],
+  "runtimeEdited": false,
+  "newNativeBrowserRenderBuildBenchmark": false,
+  "filesReleased": true
+}

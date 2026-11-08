@@ -1,7 +1,7 @@
 # Progress checkpoint
 
-Six bounded scenes are validated and activated locally: Movement, Spikes, Walls, Doors, Oil, Combo. All100catalog entries are inventoried and120resources decode toEOF. The remaining-level request is unfinished.
+Seven bounded Child scenes are validated and activated locally: Movement, Spikes, Walls, Doors, Oil, Combo, More Spikes. All100catalog entries are inventoried and120resources decode toEOF. The remaining-level request is unfinished.
 
-More Spikes7 is current. Its original programmed-blue trajectory is reviewed; canonical program integration is pending. No native/build/benchmark active. Source11-22 and vector9/10 preparation run independently.
+More Doors8 is current. Original initial scene is reviewed; three long-horizontal doors and six paired switches need route/phase checks. More Spikes7 original33sample program trajectory,26pivot native goal, browser goal and166onsets pass. No native/build/benchmark active. AstraDoors prepares8route; AstraSpikes prepares source-only9transfer helper; future9/10art is not accepted.
 
-Read [current action](current-action.md),[queue](queue.json),[requirements](requirements.md),[Combo acceptance](combo-review.md). Preserve media/saves; no push/deploy.
+Read [current action](current-action.md), [queue](queue.json), [requirements](requirements.md), [More Spikes acceptance](more-spikes-review.md). Preserve media/saves; no push/deploy.

@@ -6,6 +6,8 @@ import {createDeathClock} from './death.mjs';
 import {advanceWallContactGuard} from './walls.mjs';
 import {createDoorSystem,findDoorContact} from './doors.mjs';
 import {OilRuntime} from './oil-runtime.mjs';
+import {createActorClocks} from './actor-clocks.mjs';
+import {advanceBounceEnemy} from './programs.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -29,7 +31,9 @@ export class SourceRound extends MovementGame {
   this.spikeClock??=createSourceTimerChain(40,5);this.spikeCount??=0;this.guestTickRemainder??=0;
   this.deathClock??=createDeathClock();
   this.actorClock??=createSourceTimerChain(38,1);
-  for(const hand of [this.player,...this.enemies])hand.frameReference=this.actorFrame(hand,this.actorClock.advance(0).clientCount);
+  this.actorClasses??=createActorClocks(this.actorClock.advance(0).clientCount);
+  const classes=this.actorClasses.snapshot().classes;
+  for(const hand of [this.player,...this.enemies])hand.frameReference=classes[hand.speedClass??0].count;
   this.doorClock??=createSourceTimerChain(133,1);
   this.doorSystem??=createDoorSystem(this.board.doors||[],this.board.switches||[]);
   this.doorSystem.reset(this.doorClock.advance(0).clientCount);
@@ -37,8 +41,7 @@ export class SourceRound extends MovementGame {
   this.death=null;this.roundRestarts=0;this.elapsedTime=0;this.pendingReverse=false;
   this.oil?.reset(this.player.pivot);
  }
- makeHand(hand){return {...super.makeHand(hand),wallContacts:0};}
- actorFrame(hand,count){return Math.floor(count*(hand.multiplier??1)/(hand.divisor??2));}
+ makeHand(hand){return {...super.makeHand(hand),wallContacts:0,...(hand.program?{presentationPhase:0}:{})};}
  reverse(){if(!this.death&&!this.paused&&!this.complete)this.pendingReverse=true;}
  setPlayerGroup(group){
   if(![700,4300].includes(group)||!this.outlines.groups[String(group)])throw new Error('Unqualified player artwork group');
@@ -46,7 +49,7 @@ export class SourceRound extends MovementGame {
  }
  spikeFrame(spike){return this.spikeStates.get(spike.id).frame;}
  point(hand){return this.board.dots.find(d=>d.id===hand.pivot);}
- collider(hand){return worldOutline(this.outlines,hand.group,sourceFrame(hand.angle),this.point(hand));}
+ collider(hand){return worldOutline(this.outlines,hand.group,hand.program?hand.frame:sourceFrame(hand.angle),this.point(hand));}
  spikeCollision(){
   const hero=this.collider(this.player);
   for(const spike of this.board.spikes)if(outlineCollision(hero,worldOutline(this.outlines,200,this.spikeFrame(spike),spike)))
@@ -55,7 +58,7 @@ export class SourceRound extends MovementGame {
  }
  enemyCollision(){
   const hero=this.collider(this.player);
-  for(const enemy of this.enemies)if(enemyFrameGate(this.player.pivot,enemy.pivot,sourceFrame(this.player.angle),sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
+  for(const enemy of this.enemies)if(enemyFrameGate(this.player.pivot,enemy.pivot,sourceFrame(this.player.angle),enemy.program?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
    return {reason:'enemy',object:enemy.name};
   return null;
  }
@@ -64,6 +67,27 @@ export class SourceRound extends MovementGame {
   if(!hand.checksWalls)return null;
   const actor=this.collider(hand);
   return (this.board.walls||[]).find(w=>outlineCollision(actor,worldOutline(this.outlines,800,w.frame,w)))||null;
+ }
+ programTarget(hand){
+  const offset={0:[48,0],16:[0,48],32:[-48,0],48:[0,-48]}[hand.frame];
+  if(!offset)return null;
+  const pivot=this.point(hand),target=this.board.dots.find(d=>d.x===pivot.x+offset[0]&&d.y===pivot.y+offset[1]);
+  return target?.nonhumanCanGrab?target.id:null;
+ }
+ animateProgramEnemy(hand,delta,timing,upstream){
+  if(delta){
+   const result=advanceBounceEnemy(hand,delta,{program:hand.program,findTarget:s=>this.programTarget(s),afterAnimate:s=>this.contactSwitch(s)});
+   Object.assign(hand,result.state);
+   for(const event of result.events)this.event(event.type,hand,{id:event.target});
+  }
+  // Present the fraction toward the next pose from the shared clock phase.
+  // The upstream strict> client starts with one uncounted base event. Clamp
+  // prediction at the next pose until the canonical callback decides a turn.
+  // Render frequency and displayed angle never choose program commands.
+  const basePhase=(38-upstream.remaining+16*this.guestTickRemainder)/38;
+  const pending=Math.max(0,basePhase+upstream.clientRemainder-1);
+  hand.presentationPhase=Math.max(0,Math.min(1,(timing.remainder+pending*timing.multiplier)/timing.divisor));
+  hand.angle=(hand.unwrappedFrame+hand.direction*hand.presentationPhase)*TAU/64;
  }
  doorCollision(hand){
   if(!this.board.doors?.length)return null;
@@ -115,10 +139,10 @@ export class SourceRound extends MovementGame {
   this.deathClock.advance(elapsed);
   this.oil?.advanceClocks(elapsed);
   const doorCount=this.doorClock.advance(elapsed).clientCount;
-  const actorCount=this.actorClock.advance(elapsed).clientCount,substeps=new Set();
+  const actorTimer=this.actorClock.advance(elapsed),actorState=this.actorClasses.latch(actorTimer.clientCount),substeps=new Map();
   for(const hand of [this.player,...this.enemies]){
-   const frame=this.actorFrame(hand,actorCount);if(frame!==hand.frameReference)substeps.add(hand);
-   hand.frameReference=frame;
+   const timer=actorState.classes[hand.speedClass??0];if(timer.count!==hand.frameReference)substeps.set(hand,timer.delta);
+   hand.frameReference=timer.count;
   }
   const actorSubstep=substeps.has(this.player);
   if(!this.death)for(const spike of this.board.spikes){
@@ -134,6 +158,7 @@ export class SourceRound extends MovementGame {
   // arrival may latch death and freeze the remaining sprite callbacks.
   if(!this.death)this.oil?.processSprites({onDeath:reason=>this.beginDeath({reason:'oil',sourceReason:reason}),isFrozen:()=>!!this.death});
   if(!this.death)for(const enemy of this.enemies){
+   if(enemy.program){this.animateProgramEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer);continue;}
    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);
    if(substeps.has(enemy)){const wall=this.wallCollision(enemy);if(wall)this.bounceFromWall(enemy,wall);this.contactSwitch(enemy);}
   }
@@ -168,6 +193,6 @@ export class SourceRound extends MovementGame {
    if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
   }
  }
- snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+ snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

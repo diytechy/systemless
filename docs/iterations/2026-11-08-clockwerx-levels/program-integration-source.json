@@ -1,0 +1,134 @@
+{
+  "schema": "clockwerx-program-integration-source-v1",
+  "status": "source audit; no runtime edits or native acceptance",
+  "scope": "ordinary enemy programs; static More Spikes targets",
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\program-integration",
+  "pc": {
+    "field": "WASpec word6, signed16; WAInfo+0x14",
+    "kind": "Pascal byte offset",
+    "firstCharacter": 1,
+    "lastCharacter": "length",
+    "zero": "read length byte once, then advance to1; lengths98/102/115 decode b/f/s",
+    "increment": "before action; wrap to1 if incremented PC>unsigned length",
+    "boundedValidation": "nonempty length1..255; initialPC0..length; reject negative/outside PC",
+    "zeroBasedAdapter": "sourcePC>=1 => cursor=sourcePC-1; sourcePC0 requires an explicit one-shot length-byte state",
+    "catalog6To9InitialPCs": [
+      1
+    ],
+    "moreSpikesActiveProgramActor": {
+      "type": 3,
+      "programReference": 11,
+      "initialPC": 1,
+      "zeroBasedCursor": 0
+    }
+  },
+  "cardinalOffsets": {
+    "0": [
+      0,
+      1
+    ],
+    "16": [
+      1,
+      0
+    ],
+    "32": [
+      0,
+      -1
+    ],
+    "48": [
+      -1,
+      0
+    ]
+  },
+  "target": {
+    "human": false,
+    "position": "current dot sprite anchor +48*cardinal offset",
+    "staticMatch": "exact Point equality; first configured present source index",
+    "permission": "DOInfo+0x10, independent of rendered visibility",
+    "limits": "moving/state tolerance and cached-secondary-position branches require separate support"
+  },
+  "actions": {
+    "n": {
+      "transfer": false,
+      "reverse": false
+    },
+    "s": {
+      "transfer": true,
+      "reverse": true
+    },
+    "b": {
+      "transfer": false,
+      "reverse": true
+    },
+    "f": {
+      "transfer": true,
+      "reverse": false
+    },
+    "failure": "PC advances, pivot/direction unchanged",
+    "transferFrameShift": 32
+  },
+  "perClassSubstep": [
+    "advance integer frame by current direction",
+    "set frame/descriptor",
+    "collision hooks",
+    "stop sliding",
+    "cardinal program if not sliding",
+    "start sliding"
+  ],
+  "timer": {
+    "recordStride": 28,
+    "fields": {
+      "count": 0,
+      "delta": 4,
+      "remainder": 8,
+      "activeDivisor": 12,
+      "multiplier": 16,
+      "normalDivisor": 20,
+      "slowDivisor": 24
+    },
+    "sharedInput": "single scalable MT client delta",
+    "inputCap": "3*class0.activeDivisor-1-class0.remainder",
+    "perClass": "remainder += cappedInput*multiplier; while remainder>=activeDivisor subtract/increment; delta=newCount-oldCount",
+    "backlog": "snapshot full MT input count; capped excess discarded",
+    "dispatch": "one sprite callback on changed class count; callback loops class.delta times",
+    "presentation": "continuous SVG angle may interpolate but must not determine source decisions"
+  },
+  "generationFields": [
+    "programReference",
+    "programByteLength",
+    "initialSourcePC",
+    "initialHalfIndex",
+    "resolved64Frame",
+    "direction",
+    "clockClass",
+    "pivot",
+    "activationMask",
+    "wallCheckPolicy"
+  ],
+  "midRoundStateFields": [
+    "currentSourcePC",
+    "frame",
+    "direction",
+    "pivot",
+    "slidingState",
+    "classCounts",
+    "classRemainders",
+    "activeDivisors",
+    "multipliers",
+    "MTreferenceAndPhase",
+    "actorSpriteReferences"
+  ],
+  "requiredChecks": [
+    "PC1 adapter",
+    "PC0 length byte",
+    "wrap",
+    "failed-target PC consumption",
+    "cardinal targets",
+    "bounce target requirement",
+    "advance-before-command",
+    "multi-delta reversal"
+  ],
+  "runtimeEdited": false,
+  "nativeOrBrowserOrBuildOrBenchmarkRan": false,
+  "filesReleased": true
+}

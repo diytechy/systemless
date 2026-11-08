@@ -124,7 +124,7 @@ test('door lethal zone kills before a bounce or wall/door guard increment',()=>{
 test('ordinary enemy ignores door leaves but activates a switch at its own slower clock',()=>{
  const {board,options}=doorFixture();
  board.doors[0].base.x=48;options.doorOutlines.groups[1300].frames[0].collidable=true;
- board.enemies=[{name:'green',pivot:'b',angle:0,direction:1,group:4400,divisor:8,multiplier:1,speedScale:.25}];
+ board.enemies=[{name:'green',pivot:'b',angle:0,direction:1,group:4400,speedClass:4,divisor:8,multiplier:1,speedScale:.25}];
  const g=new SourceRound(board,options);
  for(let i=0;i<40;i++)g.update(1/120);
  assert.equal(g.doorSystem.snapshot().switches[0].occupants,0);
@@ -143,4 +143,41 @@ test('death freezes door animation; round reset restores doors and switch occupa
  const after=g.doorSystem.snapshot();assert.equal(g.roundRestarts,1);
  assert.deepEqual(after.doors[0],{phase:0,direction:0,frame:0,secondFrame:44});assert.equal(after.switches[0].occupants,0);
  assert.ok(after.clockReference>=before.clockReference);
+});
+
+function programFixture({permission=true,renderAngle=15*TAU/64}={}){
+ const f=fixture();f.board.spikes=[];
+ f.board.dots.push({id:'c',x:48,y:48,kind:'dot',flags:15,nonhumanCanGrab:permission});
+ f.board.enemies=[{name:'blue',pivot:'b',angle:renderAngle,direction:1,group:4400,speedClass:1,program:'bb',sourcePC:1,frame:15,unwrappedFrame:15,checksWalls:false}];
+ f.options.outlines.groups['4400'].frames[16]={left:4,top:-1,right:6,bottom:1,rows:null};
+ return f;
+}
+test('program uses canonical frame and nonhuman permission independently of display angle/color',()=>{
+ const {board,options}=programFixture({renderAngle:5.5}),g=new SourceRound(board,options);
+ for(let i=0;i<20;i++)g.update(1/120);
+ const enemy=g.enemies[0];assert.equal(enemy.frame,16);assert.equal(enemy.direction,-1);assert.equal(enemy.sourcePC,2);
+ assert.equal(g.collider(enemy).left,52);assert.notEqual(sourceFrame(enemy.angle),16);
+ assert.equal(g.events.filter(e=>e.type==='program-bounce').length,1);
+});
+test('program display moves between canonical steps without consuming more commands',()=>{
+ const {board,options}=programFixture(),g=new SourceRound(board,options);
+ for(let i=0;i<16;i++)g.update(1/120);
+ const before=g.enemies[0].angle;
+ for(let i=0;i<5;i++)g.update(1/120);
+ assert.equal(g.enemies[0].frame,16);assert.ok(g.enemies[0].angle<before);
+ assert.ok(g.enemies[0].presentationPhase>=0&&g.enemies[0].presentationPhase<=1);
+ assert.equal(g.enemies[0].sourcePC,2);assert.equal(g.events.filter(e=>e.type==='program-bounce').length,1);
+ g.reset();assert.equal(g.enemies[0].frame,15);assert.equal(g.enemies[0].sourcePC,1);
+});
+test('denied cardinal target consumes a program byte without reversing',()=>{
+ const {board,options}=programFixture({permission:false}),g=new SourceRound(board,options);
+ for(let i=0;i<20;i++)g.update(1/120);
+ assert.equal(g.enemies[0].frame,16);assert.equal(g.enemies[0].direction,1);assert.equal(g.enemies[0].sourcePC,2);
+ assert.equal(g.events.some(e=>e.type==='program-bounce'),false);
+});
+test('round consumes each capped class delta before checking the next integer frame',()=>{
+ const {board,options}=programFixture(),g=new SourceRound(board,options);
+ g.actorClock.advance(17);g.update(1/120);
+ assert.equal(g.actorClasses.snapshot().classes[1].delta,2);
+ assert.equal(g.enemies[0].frame,15);assert.equal(g.enemies[0].direction,-1);assert.equal(g.enemies[0].sourcePC,2);
 });

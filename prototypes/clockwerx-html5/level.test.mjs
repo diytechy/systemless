@@ -70,3 +70,13 @@ test('Oil activation requires explicit opt-in, filters source masks and preserve
  assert.equal(board.dots[1].sourceIndex,1);assert.equal(board.dots[1].humanCanGrab,true);
  assert.equal(board.dots[1].nonhumanCanGrab,true);assert.equal(board.dots[1].sourceCollidable,true);
 });
+test('bounce program qualification preserves Pascal PC/frame and rejects transfers/wall coupling',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];actor.programReferenceRaw=0;actor.version12ByteRaw=0;
+ level.blocks.push({kind:'WP',count:1,records:[{text:'bb'}]});
+ assert.ok(levelRequirements(level).includes('actor programs'));
+ const board=buildDecodedBoard(level,{angularSpeed:TAU,allowEnemyBouncePrograms:true});
+ assert.equal(board.enemies[0].program,'bb');assert.equal(board.enemies[0].sourcePC,1);assert.equal(board.enemies[0].frame,48);
+ actor.version12ByteRaw=1;assert.ok(levelRequirements(level,{allowEnemyBouncePrograms:true}).includes('programmed wall-reacting actor'));
+ actor.version12ByteRaw=0;level.blocks.at(-1).records[0].text='sf';
+ assert.ok(levelRequirements(level,{allowEnemyBouncePrograms:true}).includes('non-bounce actor program'));
+});

@@ -13,7 +13,7 @@ from private_library_manifest import BUILTINS, sha256_file
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
-      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','oil.mjs','oil-runtime.mjs')
+      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 

@@ -1,0 +1,35 @@
+{
+  "schema": "clockwerx-level-review-v1",
+  "ordinal": 7,
+  "title": "More Spikes",
+  "scope": "bounded Child goal route, not full game qualification",
+  "nativeGoal": {
+    "status": "passed",
+    "frontend_ticks": 5534,
+    "guest_tick": 6132,
+    "budget_exhausted_frames": 0
+  },
+  "nativePivotMatches": 26,
+  "nativeMaxChannelError": 5.77536231884058,
+  "nativeProgramMatches": 33,
+  "browser": {
+    "complete": true,
+    "time": 67.13333333333283,
+    "transfers": 26,
+    "resets": 0,
+    "bonuses": 0,
+    "programBounces": 53
+  },
+  "clockOnsetCases": 166,
+  "runtimeTests": 109,
+  "packagingTests": 12,
+  "sourceFiles": 18,
+  "payloads": 51,
+  "sizes": {
+    "sourceBytes": 103894,
+    "assetBytes": 841368,
+    "manifestBytes": 595422,
+    "totalBytes": 1540684
+  },
+  "fixtureSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4"
+}

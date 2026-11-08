@@ -169,11 +169,15 @@ async function loadScene(scene){
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
   const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true});
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true});
   board.player.group=settings.black?4300:700;
   game=new SourceRound(board,{outlines,doorOutlines,oilOutlines,dotOutlines,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
   $('presentation').textContent='Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
-  $('scope-description').textContent=board.title+'. '+(board.puddles.length?'Touching sleeping oil wakes it. It pursues you across dots and can split. Avoid letting it grab your pivot. ':'Switch entry toggles matching doors; release changes only the switch art. ')+'A death freezes play, runs staggered explosions, then resets the round. Original scoring, full audio, campaign saves and physical controller hardware are unqualified or omitted.';
+  const rules=[];
+  if(board.puddles.length)rules.push('Touching sleeping oil wakes it. It pursues you across dots and can split. Avoid letting it grab your pivot.');
+  if(board.doors.length)rules.push('Switch entry toggles matching doors; release changes only the switch art.');
+  if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
+  $('scope-description').textContent=board.title+'. '+rules.join(' ')+' A death freezes play, runs staggered explosions, then resets the round. Original scoring, full audio, campaign saves and physical controller hardware are unqualified or omitted.';
   $('fidelity-description').textContent='Source map, phases, placements and collision profiles; reconstructed smooth artwork and fonts. Hand motion uses the source Child-speed average with 60 guest ticks per second. Exact input cadence, random stream, reveal pacing and original hardware timing remain under review.';
  }else{
   game=new MovementGame(buildBoard(manifest));

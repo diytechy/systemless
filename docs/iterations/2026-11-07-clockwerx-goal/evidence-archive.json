@@ -1,0 +1,41 @@
+{
+  "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\evidence-snapshot-2026-11-08",
+  "files": 49,
+  "bytes": 9633918,
+  "manifestSha256": "94c35def71c2a2b32d7cda40c9ce70f51ec77175d75e5b9f4637dd5f2618d4c6",
+  "starburstReference": {
+    "source": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\reference-movement-valid-6.png",
+    "sourceSha256": "62a868f4095538cf5002bce6f5cb1bf6cbbeb9ebf16916c353316c9ae0d8f241",
+    "regions": [
+      {
+        "label": "Starburst near hand",
+        "rectangle": [
+          91,
+          124,
+          115,
+          148
+        ]
+      },
+      {
+        "label": "Starburst near goal",
+        "rectangle": [
+          558,
+          318,
+          582,
+          342
+        ]
+      },
+      {
+        "label": "Goal triangles (included)",
+        "rectangle": [
+          542,
+          300,
+          566,
+          324
+        ]
+      }
+    ],
+    "proofSha256": "efdd4717955a6b7fff2fe04c3e5a6cc1ebeaa4af5bbf5ffaff5206ef4065c176"
+  },
+  "boundary": "Self-contained private evidence snapshot; original media untouched; starburst trigger behavior not established"
+}

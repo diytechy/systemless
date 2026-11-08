@@ -1,0 +1,46 @@
+{
+  "schema": "systemless-play-save-export-review-v1",
+  "status": "validated-with-limits",
+  "storeTests": 16,
+  "playTests": 5,
+  "testCompileSeconds": 258,
+  "nativeBuildSeconds": 19.88,
+  "nativeBinarySha256": "289c2de80e7997efd0ad3605aad240d3f078218a9d715ebb8c7fcaf8aebf0ef8",
+  "exportRun": {
+    "status": "passed",
+    "frontend_ticks": 16883,
+    "guest_tick": 17481,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "pixelIdenticalPrefixCaptures": 140,
+  "prefixCaptures": 140,
+  "fixture": {
+    "sha256": "bb7d132e67de65bd38cdcfa3a1e75cd954748de3cf0ea570962255bffd89cec8",
+    "bytes": 8388608,
+    "filesVerified": 9,
+    "untouchedFiles": 7,
+    "sourceSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4",
+    "metadataScope": "Both forks, file type/creator/flags/dates/raw16coordinates and represented folder dates. Folder Finder information is unexposed by machfs; original source image remains byte-identical. Raw aliases retained, resolution unqualified."
+  },
+  "freshLaunch": {
+    "status": "passed",
+    "frontend_ticks": 2224,
+    "guest_tick": 2824,
+    "budget_exhausted_frames": 0
+  },
+  "defaultExportAbsent": true,
+  "nativeProfileTotal": 34000,
+  "privateArtifacts": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\progress-export",
+  "limits": [
+    "Runtime file metadata fields only; machfs folder Finder information unexposed",
+    "Original media and desktop/browser stores unchanged",
+    "File progress export; execution clocks and in-memory state are relaunched",
+    "Checksummed manifest written last; no atomic power-loss durability claim",
+    "No resource benchmark or release/WASM build"
+  ]
+}

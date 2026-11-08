@@ -1,4 +1,5 @@
 //! Structured headless scenarios. Execution shares the frontend scheduler.
+use super::desktop_save_store::{PlaySaveExport, PlaySaveExportReport};
 use super::{
     configure_realtime_execution_rate, display, game, headless_time, FixtureRunner,
     HostMouseReleaseLatch, InputAction, UiThemeId,
@@ -17,6 +18,8 @@ struct Script {
     application_partition_size: Option<u32>,
     #[serde(default)]
     reference_tolerance: u8,
+    #[serde(default)]
+    export_save_files: bool,
     actions: Vec<Action>,
 }
 
@@ -149,6 +152,8 @@ struct Report {
     budget_exhausted_frames: u32,
     assertions: usize,
     checkpoints: Vec<Checkpoint>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    save_export: Option<PlaySaveExportReport>,
 }
 #[derive(Serialize)]
 struct Checkpoint {
@@ -416,11 +421,16 @@ pub(super) fn run(
         runner.set_ui_theme(theme);
         if gpu {
             runner.set_q3_gpu_renderer(Box::new(super::wgpu_qd3d::Qd3dRenderer::new()));
-            runner.set_quickdraw_gpu_renderer(Box::new(super::wgpu_quickdraw::QuickDrawRenderer::new()));
+            runner.set_quickdraw_gpu_renderer(Box::new(
+                super::wgpu_quickdraw::QuickDrawRenderer::new(),
+            ));
         }
         runner.set_app_start_time(start_time);
         let app = game::load_game_from_path(&mut runner, archive)
             .map_err(|e| format!("load {}: {e}", archive.display()))?;
+        let save_export = script
+            .export_save_files
+            .then(|| PlaySaveExport::new(&mut runner));
         game::init_game_owned(&mut runner, app);
         runner.prepare_text_presentation();
         configure_realtime_execution_rate(&mut runner);
@@ -441,7 +451,15 @@ pub(super) fn run(
             max_ticks: script.max_ticks,
             report: &mut report,
         };
-        let result = execution.actions(&script, output, reference);
+        let mut result = execution.actions(&script, output, reference);
+        if result.is_ok() {
+            if let Some(export) = save_export {
+                match export.write(output, &mut execution.runner) {
+                    Ok(summary) => execution.report.save_export = Some(summary),
+                    Err(err) => result = Err(format!("save export: {err}")),
+                }
+            }
+        }
         if result.is_err() {
             if let Ok(frame) = execution.image() {
                 let _ = frame.save(output.join("failure.png"));
@@ -534,5 +552,24 @@ mod tests {
         );
         assert!(Script::parse(&configured.replace("134217728", "131071")).is_err());
         assert!(Script::parse(&configured.replace("134217728", "4294967296")).is_err());
+    }
+
+    #[test]
+    fn save_export_is_explicit_opt_in_and_has_no_external_destination_field() {
+        let script = r#"{"version":1,"clock":"frontend_ticks","max_ticks":1,"actions":[{"type":"run","ticks":1}]}"#;
+        assert!(!Script::parse(script).unwrap().export_save_files);
+        let configured = script.replacen("{", "{\"export_save_files\":true,", 1);
+        assert!(Script::parse(&configured).unwrap().export_save_files);
+        assert!(Script::parse(&configured.replace("true", "\"somewhere\"")).is_err());
+        assert!(Script::parse(&script.replacen(
+            "{",
+            "{\"save_export_directory\":\"somewhere\",",
+            1
+        ))
+        .is_err());
+        assert!(serde_json::to_value(Report::default())
+            .unwrap()
+            .get("save_export")
+            .is_none());
     }
 }

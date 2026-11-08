@@ -78,6 +78,106 @@ struct StoredSaveMetadata {
     modified_date: u32,
 }
 
+/// One-shot diagnostic export. Unlike the desktop store, this never discovers,
+/// imports, migrates or updates a user's existing save directory.
+pub(super) struct PlaySaveExport {
+    baseline: HashMap<String, VfsFileSummary>,
+}
+
+#[derive(Debug, Serialize)]
+pub(super) struct PlaySaveExportReport {
+    pub directory: &'static str,
+    pub changed_files: usize,
+    pub deleted_files: usize,
+}
+
+#[derive(Serialize)]
+struct PlaySaveExportFile {
+    path: String,
+    data_sha256: String,
+    resource_sha256: String,
+}
+
+#[derive(Serialize)]
+struct PlaySaveExportManifest {
+    schema: &'static str,
+    files: Vec<PlaySaveExportFile>,
+    deleted_files: Vec<String>,
+}
+
+impl PlaySaveExport {
+    pub fn new(runner: &mut FixtureRunner) -> Self {
+        Self {
+            baseline: Self::summaries(runner),
+        }
+    }
+
+    fn summaries(runner: &mut FixtureRunner) -> HashMap<String, VfsFileSummary> {
+        runner
+            .vfs_file_summaries_where(is_user_save_path)
+            .into_iter()
+            .map(|file| (file.path.clone(), file))
+            .collect()
+    }
+
+    pub fn write(
+        &self,
+        output: &Path,
+        runner: &mut FixtureRunner,
+    ) -> io::Result<PlaySaveExportReport> {
+        let root = output.join("save-files");
+        // An interrupted/previous export is evidence, never an overwrite target.
+        fs::create_dir(&root)?;
+        let files_root = root.join("files");
+        fs::create_dir(&files_root)?;
+        let store = DesktopSaveStore::at_root(files_root, HashMap::new());
+        let current = Self::summaries(runner);
+        let mut files = Vec::new();
+        for (path, summary) in &current {
+            // Include fork hashes and both dates: same-length writes can retain
+            // the original timestamp in a deterministic guest session.
+            if self.baseline.get(path) == Some(summary) {
+                continue;
+            }
+            let file = runner.vfs_file_snapshot(path).ok_or_else(|| {
+                io::Error::new(
+                    io::ErrorKind::NotFound,
+                    "VFS file disappeared during export",
+                )
+            })?;
+            store.persist_save_file(&file)?;
+            files.push(PlaySaveExportFile {
+                path: path.clone(),
+                data_sha256: format!("{:x}", Sha256::digest(&file.data_fork)),
+                resource_sha256: format!("{:x}", Sha256::digest(&file.resource_fork)),
+            });
+        }
+        files.sort_by(|a, b| a.path.cmp(&b.path));
+        let mut deleted_files: Vec<_> = self
+            .baseline
+            .keys()
+            .filter(|path| !current.contains_key(*path))
+            .cloned()
+            .collect();
+        deleted_files.sort();
+        let report = PlaySaveExportReport {
+            directory: "save-files",
+            changed_files: files.len(),
+            deleted_files: deleted_files.len(),
+        };
+        let manifest = PlaySaveExportManifest {
+            schema: "systemless-play-save-export-v1",
+            files,
+            deleted_files,
+        };
+        // Written last; missing/invalid manifest means the export is incomplete.
+        let bytes = serde_json::to_vec_pretty(&manifest)
+            .map_err(|err| io::Error::new(io::ErrorKind::InvalidData, err))?;
+        fs::write(root.join("manifest.json"), bytes)?;
+        Ok(report)
+    }
+}
+
 impl DesktopSaveStore {
     pub fn root_for_game_path(game_path: &Path) -> io::Result<PathBuf> {
         Ok(application_data_dir()?
@@ -865,6 +965,76 @@ mod tests {
 
         let loaded = load_saved_files_from_root(&root).unwrap();
         assert_eq!(loaded, vec![original]);
+    }
+
+    #[test]
+    fn play_export_preserves_changed_forks_metadata_new_files_and_deletions() {
+        let temp = tempfile::tempdir().unwrap();
+        let mut runner = FixtureRunner::new(8 * 1024 * 1024, FixtureRunnerConfig::default());
+        let unchanged = snapshot("Pilots/Unchanged");
+        let mut changed = snapshot("System Folder/Preferences/Test Prefs");
+        let mut metadata_only = snapshot("Pilots/Metadata");
+        let removed = snapshot("Pilots/Removed");
+        for file in [&unchanged, &changed, &metadata_only, &removed] {
+            runner.import_vfs_file(file);
+        }
+        let export = PlaySaveExport::new(&mut runner);
+        // Same sizes and dates must not hide writes to either fork.
+        changed.data_fork[0] = 9;
+        changed.resource_fork[0] = 8;
+        metadata_only.created_date += 1;
+        runner.import_vfs_file(&changed);
+        runner.import_vfs_file(&metadata_only);
+        let added = snapshot("Pilots/New");
+        runner.import_vfs_file(&added);
+        assert!(runner.remove_vfs_file(&removed.path));
+        let report = export.write(temp.path(), &mut runner).unwrap();
+        assert_eq!(report.changed_files, 3);
+        assert_eq!(report.deleted_files, 1);
+        let root = temp.path().join(report.directory);
+        let mut loaded = load_saved_files_from_root(&root.join("files")).unwrap();
+        loaded.sort_by(|a, b| a.path.cmp(&b.path));
+        let mut expected = vec![added, changed, metadata_only];
+        expected.sort_by(|a, b| a.path.cmp(&b.path));
+        assert_eq!(loaded, expected);
+        assert_eq!(runner.vfs_file_snapshot(&unchanged.path), Some(unchanged));
+        let manifest: serde_json::Value =
+            serde_json::from_slice(&fs::read(root.join("manifest.json")).unwrap()).unwrap();
+        assert_eq!(manifest["schema"], "systemless-play-save-export-v1");
+        assert_eq!(manifest["deleted_files"], serde_json::json!([removed.path]));
+        for file in &loaded {
+            let entry = manifest["files"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .find(|entry| entry["path"] == file.path)
+                .unwrap();
+            assert_eq!(
+                entry["data_sha256"],
+                format!("{:x}", Sha256::digest(&file.data_fork))
+            );
+            assert_eq!(
+                entry["resource_sha256"],
+                format!("{:x}", Sha256::digest(&file.resource_fork))
+            );
+        }
+    }
+
+    #[test]
+    fn play_export_refuses_to_replace_a_previous_export() {
+        let temp = tempfile::tempdir().unwrap();
+        let mut runner = FixtureRunner::new(8 * 1024 * 1024, FixtureRunnerConfig::default());
+        let export = PlaySaveExport::new(&mut runner);
+        let report = export.write(temp.path(), &mut runner).unwrap();
+        let root = temp.path().join(report.directory);
+        let manifest = fs::read(root.join("manifest.json")).unwrap();
+        fs::write(root.join("sentinel"), b"retained").unwrap();
+        assert_eq!(
+            export.write(temp.path(), &mut runner).unwrap_err().kind(),
+            io::ErrorKind::AlreadyExists
+        );
+        assert_eq!(fs::read(root.join("sentinel")).unwrap(), b"retained");
+        assert_eq!(fs::read(root.join("manifest.json")).unwrap(), manifest);
     }
 
     #[test]

@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 14,
-  "currentAction": "Prepare an isolated opt-in headless progress export, then qualify Tenacity protected checkpoint/goodies/short vertical doors and unprogrammed enemy wall response",
+  "currentAction": "Tenacity14: use verified private progress fixture/fresh baseline; implement explicit protected-waypoint and GO-only scopes, short vertical door validation and canonical unprogrammed enemy wall response",
   "levels": [
     {
       "ordinal": 1,
@@ -967,7 +967,7 @@
       "menuTitle": "Tenacity",
       "resourceTitle": "Tenacity",
       "sha256": "818047bd9a042fea545759dcfcb4d7cf4e32f042a81ace0a5d2df1d702e2981f",
-      "status": "queued",
+      "status": "source-preparation-native-baseline-ready",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -1015,6 +1015,9 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "candidateEvidence": [
+        "progress-export/fresh-tenacity-02/report.json"
       ]
     },
     {

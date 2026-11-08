@@ -64,6 +64,26 @@ use `"application_partition_size": 134217728` to reproduce a catalogue entry's
 128 MiB override. When omitted, the application's existing SIZE preference applies.
 The requested override is recorded in `report.json`.
 
+The optional `export_save_files: true` field exports file changes after successful
+actions into `play-output/save-files/`. The default remains false. The export
+compares the archive-loaded VFS before guest initialization with the final VFS,
+using fork fingerprints and metadata, and uses the desktop user-save path filter.
+It never discovers, imports or writes the desktop save store or adjacent saves.
+
+`save-files/manifest.json` has schema `systemless-play-save-export-v1`, a `files`
+array containing each guest path and SHA-256 of both forks, and a `deleted_files`
+array. Deletions are recorded as data. Snapshots under `save-files/files/` use
+the existing `metadata.json`, `data.fork` and `resource.fork` format, preserving
+runtime file type, creator, Finder flags, creation date and modification date.
+The manifest is written last; an export error fails the report and retains the
+partial output. An existing export directory is refused. `report.json` includes
+`save_export` counts only when an export completes.
+
+These are private file deltas. Starting a later run from game-earned progress
+requires applying them to a separate copied fixture and verifying source forks
+and metadata. Preserve the original fixture, retain incomplete exports as
+evidence, and keep exported preferences and registrations out of Git.
+
 The `clock` field is required. Old guest-tick/instruction-count scenarios are
 not accepted implicitly. Re-author their timing and verify checkpoints after
 conversion. Unknown fields are errors, preventing silently ignored assertions

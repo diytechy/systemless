@@ -228,3 +228,34 @@ test('replayed reverse queues one source-clock action per rising edge, including
  g.update(1/120);for(let i=0;i<20;i++)g.update(1/120,{reverse:true});
  assert.equal(g.events.filter(e=>e.type==='reverse').length,2);assert.equal(g.player.direction,1);
 });
+
+test('canonical ordinary wall response reverses each actual source pose without a human trap guard',()=>{
+ const {board,options}=specialFixture({enemy:true});board.dots[0].ring=false;
+ Object.assign(board.enemies[0],{pivot:'b',frame:0,unwrappedFrame:0,angle:3,direction:1,checksWalls:true});
+ const near={left:-1,top:-1,right:1,bottom:1,rows:null},far={left:20,top:-1,right:22,bottom:1,rows:null};
+ options.outlines.groups['4400'].frames=Array.from({length:64},(_,i)=>({...((i===1)?near:far)}));
+ options.outlines.groups['800']={frames:[near]};board.walls=[{id:'w',x:48,y:0,frame:0}];
+ assert.throws(()=>new SourceRound(board,options),/requires qualification/);
+ board.staticEnemyWallRules=true;const g=new SourceRound(board,options),enemy=g.enemies[0];
+ g.animateStaticEnemy(enemy,3,{remainder:0,multiplier:1,divisor:2},{remaining:38,clientRemainder:0},true);
+ assert.equal(enemy.frame,63);assert.equal(enemy.unwrappedFrame,-1);assert.equal(enemy.direction,-1);
+ assert.equal(enemy.wallContacts,0);assert.equal(g.death,null);
+ assert.equal(g.events.filter(e=>e.type==='enemy-wall-bounce').length,1);
+});
+
+test('GO time and flat score compose with a protected WY return while a fresh restart clears progress',()=>{
+ const {board,options}=specialFixture();board.dots[0].ring=false;board.dots[1].protected=true;
+ board.goodieOnlyRules=true;board.childScoreRules=true;board.origin={x:0,y:0};
+ board.bombs=[];board.goodies=[{row:0,column:0,initialFrame:169}];board.walls=[];board.doors=[];board.switches=[];board.puddles=[];
+ board.player.sourceActorType=0;board.player.sourceSlot=0;
+ board.dots.forEach((d,i)=>Object.assign(d,{row:0,column:i,ring:false,bonus:false,sourceInBackground:false}));
+ options.bombOutlines={groups:{1900:{frames:Array.from({length:17},()=>({left:-1,top:-1,right:1,bottom:1,rows:null}))}}};
+ const g=new SourceRound(board,options);assert.equal(g.bombScene.runtime.goodies[0].frame,0);
+ g.bombScene.runtime.collectGoodie(0,g.player);g.player.pivot='b';g.onHumanGrab(board.dots[1]);
+ assert.equal(g.remainingTime,100);assert.equal(g.dotAnimations.savedTime,100);assert.equal(g.childScore.roundBonus,1000);assert.equal(g.childScore.nextDotAward,1000);
+ g.restartAfterDeath();assert.equal(g.player.pivot,'b');assert.equal(g.player.direction,-1);assert.equal(g.remainingTime,100);
+ assert.equal(g.childScore.totalCommitted,1000);assert.equal(g.childScore.roundBonus,0);assert.equal(g.childScore.nextDotAward,1000);
+ assert.equal(g.bombScene.runtime.goodies[0].collected,false);assert.equal(g.bombScene.runtime.goodies[0].visible,true);
+ const appearance=g.dotAnimations.renderState('b');assert.ok(appearance.main);assert.ok(appearance.overlay);
+ g.reset();assert.equal(g.player.pivot,'a');assert.equal(g.remainingTime,90);assert.equal(g.childScore.totalCommitted,0);
+});

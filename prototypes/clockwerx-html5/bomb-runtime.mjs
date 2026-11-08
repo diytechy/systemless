@@ -39,6 +39,24 @@ export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSec
  return true;
 }
 
+/** GO callbacks compose with qualified static checkpoints/protection and doors.
+ * No fuse, blast, ring, Oil or active spike path is admitted by this scope. */
+export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeSections={}}={}){
+ if(mode!=='Child')throw new Error('Only Child goodie scope is supported');
+ if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
+ for(const d of dots){
+  grid(d);integer(d.color??0,0,7);
+  if(d.motion!=='static'||d.slideMask!==0||d.teleport!==false||d.ring||d.moving||d.movingProgram||d.upDown||d.transferDeath||d.slowdown||d.connector||d.sourceBombDynamic)throw new Error('Unsupported goodie/dynamic dot combination');
+  if(['present','humanCanGrab','nonhumanCanGrab','sourceInBackground','ring','bonus'].some(k=>typeof d[k]!=='boolean'))throw new TypeError('Explicit static goodie dot state required');
+ }
+ for(const a of actors)actor(a);
+ for(const [kind,n]of Object.entries(activeSections)){
+  integer(n);
+  if(n&&!['WL','DR','DS','WY','GO','WP','WA','TX'].includes(kind))throw new Error(`Unqualified active goodie combination: ${kind}`);
+ }
+ return true;
+}
+
 /** Mutates only transient burnt/bonus state. Never removes the pivot or changes
  * grab permissions. Caller owns DO redraw/background/secondary descriptors and
  * restores saved DO specifications on reset, alongside StaticDotRuntime. */
@@ -114,10 +132,16 @@ function routeMap(routes,bombs){
  * Do not advance the pools as a snapshot: call one observe method at each
  * sprite's actual place in the caller's cached-next SU traversal. */
 export class BombRuntime {
- constructor({bombs=[],goodies=[],routes,mode='Child',unsupported=[],scope},adapters){
+ constructor({bombs=[],goodies=[],routes,mode='Child',unsupported=[],scope,scopeMode='bombs'},adapters){
   if(mode!=='Child'||!Array.isArray(unsupported)||unsupported.length)throw new Error('Only bounded static Child bomb combinations are supported');
-  if(scope)assertBombRuntimeScope(scope);
   if(!Array.isArray(bombs)||bombs.length>BOMB_LIMITS.fuses)throw new RangeError('BO capacity exceeded');
+  if(scopeMode==='goodies'){
+   if(!scope)throw new Error('Explicit goodie scope required');
+   if(bombs.length||(routes!==undefined&&(!Array.isArray(routes)||routes.length)))throw new Error('Goodie scope cannot include fuses or routes');
+   assertGoodieRuntimeScope(scope);
+  }else if(scopeMode==='bombs'){
+   if(scope)assertBombRuntimeScope(scope);
+  }else throw new Error('Unknown BO/GO scope');
   if(!Array.isArray(goodies)||goodies.length>BOMB_LIMITS.goodies)throw new RangeError('GO capacity exceeded after mode filtering');
   this.adapters=adapters??{};
   for(const name of ['clock','latchedTick','freshTick','adjustPeriod','gridPixel','effect','collides'])fn(this.adapters[name],name);
@@ -127,7 +151,7 @@ export class BombRuntime {
    return decodeBombRecord({rawWords:[b.row,b.column,b.kind,(b.flags??0)*256+(b.padding??0)]});
   });
   for(const b of this.bombs)if(b.kind<4){integer(b.row,0,6);integer(b.column,0,9);}
-  this.routes=routeMap(routes,this.bombs);this.armed=this.bombs.map(b=>b.role==='match');
+  this.routes=routeMap(scopeMode==='goodies'?[]:routes,this.bombs);this.armed=this.bombs.map(b=>b.role==='match');
   const matchBombs=this.bombs.map((b,index)=>({...b,index})).filter(b=>b.role==='match');
   if(matchBombs.length>BOMB_LIMITS.matches)throw new RangeError('LI capacity exceeded');
   this.matches=matchBombs.map((b,index)=>{

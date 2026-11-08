@@ -27,13 +27,15 @@ export class SourceRound extends MovementGame {
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
+  if(board.goodieOnlyRules&&!board.specialDotRules)throw new Error('Goodie-only source timer state required');
+  if(board.staticEnemyCallbacks&&!board.staticEnemyWallRules&&this.enemies.some(e=>e.checksWalls))throw new Error('Canonical enemy wall response requires qualification');
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
   if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds});
   if(board.specialDotRules){
    this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
    this.remainingTime=board.timeLimit;this.onHumanGrab(this.point(this.player));
   }
-  if(board.bombRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
+  if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
  }
  reset({preserveCheckpoint=false}={}){
   super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
@@ -115,7 +117,11 @@ export class SourceRound extends MovementGame {
  animateStaticEnemy(hand,delta,timing,upstream,dispatched){
   if(dispatched){
    const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
-    afterAnimate:s=>this.contactSwitch(s),onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{}});
+    afterAnimate:s=>{
+     const wall=this.board.staticEnemyWallRules?this.wallCollision(s):null;
+     if(wall){s.direction*=-1;this.event('enemy-wall-bounce',s,this.point(s));}
+     this.contactSwitch(s);
+    },onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{}});
    Object.assign(hand,result.state);
    if(previousVisible!==hand.visible)this.contactSwitch(hand);
    for(const event of result.events)if(event.type==='program-transfer'||event.type==='orphan-expired')this.event(event.type,hand,{id:hand.pivot});

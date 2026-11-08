@@ -7,11 +7,12 @@ export class BombScene {
   if(!outlines?.groups||typeof worldOutline!=='function')throw new Error('Bomb source profiles required');
   this.round=round;this.outlines=outlines;this.worldOutline=worldOutline;
   const b=round.board;
-  if(b.spikes.some(s=>s.subrow!==2||s.subcolumn!==0))throw new Error('Unqualified bomb/spike topology');
+  if(b.goodieOnlyRules&&(b.bombs.length||routes?.length))throw new Error('Goodie-only scene cannot include fuses or routes');
+  if(!b.goodieOnlyRules&&b.spikes.some(s=>s.subrow!==2||s.subcolumn!==0))throw new Error('Unqualified bomb/spike topology');
   this.original={walls:structuredClone(b.walls),spikes:structuredClone(b.spikes),dots:b.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind}))};
   this.clocks=Object.fromEntries(Object.entries(BOMB_CLOCKS).map(([k,v])=>[k,createSourceTimerChain(v.scaled?Math.floor(v.period*100/60):v.period,1)]));
   this.flourishClock=createSourceTimerChain(40,1);this.scoreClock=createSourceTimerChain(80,1);this.effects=[];this.craters=[];this.score=0;this.layer3=[];this.layer2=[];
-  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scope:{dots:b.dots,actors:[round.player,...round.enemies],activeSections:{SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length}}},{
+  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{dots:b.dots,actors:[round.player,...round.enemies],activeSections:{SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length}}},{
    clock:k=>this.clocks[k].advance(0).clientCount,latchedTick:()=>round.guestTicks,freshTick:()=>round.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
    gridPixel:(g,o)=>this.gridPixel(g,o),effect:e=>this.effect(e),collides:(kind,s,a)=>outlineCollision(this.shape(kind,s),round.collider(a))});
   this.layer3.push(...this.runtime.matches.map((_,index)=>({kind:'LI',index})));

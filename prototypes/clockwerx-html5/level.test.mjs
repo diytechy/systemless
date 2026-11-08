@@ -50,7 +50,7 @@ test('actor speed class is word7 and preserves a quarter-rate class4 enemy',()=>
  assert.ok(levelRequirements(level).includes('actor speed class 2'));
 });
 test('class3 ordinary enemies qualify independently of bombs without enabling other actors or classes',()=>{
- const level=fixture(),actor=level.blocks[0].records[2];actor.rawWords[7]=3;
+ const level=fixture(),actor=level.blocks[0].records[2];actor.rawWords[7]=3;actor.version12ByteRaw=0;
  assert.ok(levelRequirements(level).includes('actor speed class 3'));
  const board=buildDecodedBoard(level,{angularSpeed:TAU,allowClass3Enemies:true,allowEnemyStaticPrograms:true});
  assert.equal(board.enemies[0].speedClass,3);assert.equal(board.enemies[0].divisor,4);
@@ -142,4 +142,41 @@ test('static special-dot opt-in preserves WY reset definitions, runtime permissi
  assert.equal(b.enemies[0].canonicalFrame,true);assert.equal(b.enemies[0].visible,true);assert.equal(b.enemies[0].sourcePC,1);
  level.cells[0].flagsRaw=0x49;assert.ok(levelRequirements(level,{allowSpecialDots:true}).includes('combined special dot properties'));
  level.cells[0].flagsRaw=7;assert.ok(levelRequirements(level).includes('combined bonus/goal callback'));
+});
+test('protected waypoints need their own composition gate and preserve both specifications',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.cells[1].flagsRaw=0x4051;level.cells[1].secondaryRaw=7;
+ level.blocks.push({kind:'WY',count:1,records:[{rawWords:[0,1,24,65535,0,7]}]});
+ const options={angularSpeed:TAU,allowSpecialDots:true,allowActiveDotMasks:true};
+ assert.ok(levelRequirements(level,options).includes('combined special dot properties'));
+ const board=buildDecodedBoard(level,{...options,allowProtectedWaypoints:true});
+ assert.equal(board.dots[1].protected,true);assert.equal(board.dots[1].ring,false);
+ assert.deepEqual(board.dots[1].waystation,{halfIndex:24,direction:-1});
+ level.cells[1].flagsRaw=0x4049;
+ assert.ok(levelRequirements(level,{...options,allowProtectedWaypoints:true}).includes('combined special dot properties'));
+});
+test('goodies qualify separately from BO and retain an ignored out-of-range frame request',()=>{
+ const level=fixture();level.header.timeLimitRaw=120;
+ level.blocks.find(b=>b.kind==='SP').records.forEach(r=>r.rawWords[5]=14);
+ level.blocks.push({kind:'GO',count:1,records:[{rawWords:[0,0,169,0,3]}]});
+ assert.ok(levelRequirements(level).includes('object class GO'));
+ const options={angularSpeed:TAU,allowSpecialDots:true,allowInactiveSpikes:true,allowGoodies:true};
+ const board=buildDecodedBoard(level,options);
+ assert.equal(board.bombRules,false);assert.equal(board.goodieOnlyRules,true);assert.deepEqual(board.bombs,[]);
+ assert.equal(board.goodies[0].initialFrame,169);assert.equal(board.spikes.length,0);
+ assert.ok(levelRequirements(level,{...options,allowSpecialDots:false}).includes('goodie-only source timer qualification'));
+ assert.ok(levelRequirements(level,{...options,allowBombs:true}).some(r=>r.includes('exclusive')));
+ const spikes=level.blocks.find(b=>b.kind==='SP').records;
+ spikes.forEach(r=>r.rawWords[5]=15);assert.ok(levelRequirements(level,options).includes('goodies with active spikes'));
+ spikes.forEach(r=>r.rawWords[5]=14);level.cells[1].flagsRaw=0x4009;
+ assert.ok(levelRequirements(level,options).includes('goodies with rings'));level.cells[1].flagsRaw=1;
+ level.blocks.push({kind:'BO',count:1,records:[]});assert.ok(levelRequirements(level,options).includes('object class BO'));
+});
+test('canonical wall response is qualified independently while programmed walls stay gated',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];actor.version12ByteRaw=1;
+ const options={angularSpeed:TAU,allowEnemyStaticPrograms:true};
+ assert.ok(levelRequirements(level,options).includes('canonical enemy wall response'));
+ const board=buildDecodedBoard(level,{...options,allowStaticEnemyWalls:true});
+ assert.equal(board.staticEnemyWallRules,true);assert.equal(board.enemies[0].checksWalls,true);
+ actor.programReferenceRaw=0;level.blocks.push({kind:'WP',count:1,records:[{text:'b'}]});
+ assert.ok(levelRequirements(level,{...options,allowStaticEnemyWalls:true}).includes('programmed wall-reacting actor'));
 });

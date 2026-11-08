@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {BombRuntime,BOMB_CLOCKS,assertBombRuntimeScope,applyBombDotHit,bombStationaryDots,bombActors} from './bomb-runtime.mjs';
+import {BombRuntime,BOMB_CLOCKS,assertBombRuntimeScope,assertGoodieRuntimeScope,applyBombDotHit,bombStationaryDots,bombActors} from './bomb-runtime.mjs';
 
 // Invented two-point paths and tiny boards; no owned map or source samples.
 const routes=()=>[10,4,0].map(kind=>({kind,points:[[0,0],[1,2]],entryLeg:4,forwardExit:4,reverseExit:1,bomb:kind===0,flipVertical:false,flipHorizontal:false,swap:false}));
@@ -44,6 +44,19 @@ test('mode-filtered board scope rejects future actors and active combinations',(
  for(const kind of ['PU','DR','DS','EL','GN','TR','HY','EX'])assert.throws(()=>fixture({scope:{activeSections:{[kind]:1}}}),/Unqualified/);
  assert.throws(()=>fixture({scope:{actors:[{sourceSlot:2,sourceActorType:5}]}}),/ordinary/);
  assert.throws(()=>fixture({scope:{dots:[dot('d',1,1,{movingProgram:'n'})]}}),/Unsupported/);
+});
+test('explicit GO-only scope composes static protected checkpoints and doors without admitting blasts',()=>{
+ const d=dot('w',1,1,{present:true,motion:'static',slideMask:0,teleport:false,protected:true,waystation:{halfIndex:24,direction:-1}});
+ const scope={dots:[d],actors:[hero(),enemy(2)],activeSections:{WL:2,DR:3,DS:4,WY:1,SP:0,BO:0,PU:0}};
+ assert.equal(assertGoodieRuntimeScope(scope),true);assert.throws(()=>assertBombRuntimeScope(scope),/Unsupported/);
+ const config={bombs:[],routes:[],scopeMode:'goodies',scope,goodies:[{row:1,column:1,initialFrame:169}]};
+ const f=fixture(config);assert.equal(f.runtime.goodies[0].frame,0);assert.equal(f.runtime.bombs.length,0);
+ f.runtime.collectGoodie(0,hero());assert.ok(f.seen.some(e=>e.type==='add-bonus'&&e.points===1000));
+ for(const kind of ['BO','SP','PU','HY','EX','GN'])assert.throws(()=>fixture({...config,scope:{...scope,activeSections:{[kind]:1}}}),/Unqualified/);
+ for(const extra of [{ring:true},{motion:'moving'},{teleport:true}])assert.throws(()=>fixture({...config,scope:{...scope,dots:[{...d,...extra}]}}),/Unsupported/);
+ assert.throws(()=>fixture({...config,bombs:bombs()}),/fuses/);assert.throws(()=>fixture({...config,routes:routes()}),/routes/);
+ assert.throws(()=>fixture({...config,scope:undefined}),/Explicit/);
+ assert.throws(()=>fixture({...config,scopeMode:'unknown'}),/Unknown/);
 });
 test('ignition dispatch is synchronous and source armed latch follows spark, LI hide and sound',()=>{
  const f=fixture();const observations=[];

@@ -66,12 +66,18 @@
     {
       "id": "owned-action-dome-1-0-v1",
       "route": "/action-dome-1-0/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/action-dome.json",
+      "scene": "Restarted Stage1, score0/life1/timer45 initially; idle20seconds evolves through death/end to highscore screen",
+      "accepted_change": null
     },
     {
       "id": "owned-adventure-v1",
       "route": "/adventure/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/adventure.json",
+      "scene": "Titled empty Adventure window with blank menu bar at8bit; no text/prompt reached",
+      "accepted_change": null
     },
     {
       "id": "owned-angband-v1",

@@ -67,6 +67,21 @@ test('inactive difficulty records are not instantiated or program/type qualified
  assert.equal(board.enemies.length,1);assert.equal(board.inactiveActorCount,1);
  assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU,activeMask:2}),/unqualified difficulty/);
 });
+test('inactive spikes require qualification and do not consume an active sprite phase',()=>{
+ const level=fixture(),spikes=level.blocks.find(b=>b.kind==='SP').records;
+ spikes[0].rawWords[5]=14;
+ assert.ok(levelRequirements(level).includes('conditional spike activation'));
+ assert.throws(()=>buildDecodedBoard(level,{angularSpeed:TAU}),/conditional spike activation/);
+ let board=buildDecodedBoard(level,{angularSpeed:TAU,allowInactiveSpikes:true});
+ assert.equal(board.spikes.length,1);assert.equal(board.spikes[0].id,0);assert.equal(board.spikes[0].phase,0);
+ assert.deepEqual([board.spikes[0].x,board.spikes[0].y],[74,96]);
+ spikes[1].rawWords[5]=12;board=buildDecodedBoard(level,{angularSpeed:TAU,allowInactiveSpikes:true});
+ assert.equal(board.spikes.length,0);assert.equal(board.dots.length,2);
+ spikes[0].rawWords[5]=3;
+ assert.ok(levelRequirements(level,{allowInactiveSpikes:true}).includes('conditional spike activation'));
+ spikes[0].rawWords.pop();
+ assert.ok(levelRequirements(level,{allowInactiveSpikes:true}).includes('conditional spike activation'));
+});
 test('explicit matching dot masks preserve active properties and color without opening mask-miss behavior',()=>{
  const b=fixture();b.cells[1].secondaryRaw=0x13;
  assert.ok(levelRequirements(b).includes('conditional dot activation'));

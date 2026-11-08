@@ -1,0 +1,164 @@
+{
+  "schema": "clockwerx-level-acceptance-v1",
+  "ordinal": 13,
+  "title": "Touchdown",
+  "mode": "Child single-player",
+  "status": "bounded-playable-increment-accepted",
+  "sourceSha256": "aa1a156210c39722a835f166808f1350000d987ec66c949d56139275f138b90e",
+  "inventory": {
+    "pivots": 28,
+    "bonuses": 6,
+    "goals": 1,
+    "rawSpikes": 2,
+    "activeSpikes": 0,
+    "wallRecords": 6,
+    "doors": 2,
+    "switches": 2,
+    "rawActors": 6,
+    "activeActorsIncludingHumans": 4,
+    "activePrograms": 2,
+    "storedPrograms": 4,
+    "childTime": 120
+  },
+  "validation": {
+    "status": "passed",
+    "runtimeTests": 181,
+    "packagingTests": 13,
+    "priorRoutes": 12,
+    "goalOnsets": 190,
+    "nativeReport": {
+      "status": "passed",
+      "frontend_ticks": 15021,
+      "guest_tick": 15619,
+      "budget_exhausted_frames": 0
+    },
+    "nativeTransfers": 23,
+    "elevatedHumanFits": [
+      {
+        "transfer": 12,
+        "expectedPivot": "8,4",
+        "observedPivot": "8,4",
+        "match": true,
+        "sourceFrame": 44,
+        "meanAbsoluteChannelError": 11.690740740740742
+      },
+      {
+        "transfer": 20,
+        "expectedPivot": "10,4",
+        "observedPivot": "10,4",
+        "match": true,
+        "sourceFrame": 35,
+        "meanAbsoluteChannelError": 5.001801801801802
+      }
+    ],
+    "clock": {
+      "boundary": "Independent original descriptor fits constrain source4/19hero plus two canonical n/s programs. Pure NPC kernel uses original static pivots/permissions; door contact does not alter these wall-free NPC trajectories. Coincident/overdrawn second-pivot fits are excluded. First320hero-frame alias only; not absolute reveal/hardware timing or gate proof.",
+      "firstGuestTick": 9147,
+      "heroPoses": 27,
+      "redPoses": 61,
+      "phaseIntervals": [
+        [
+          112.05263157894737,
+          112.10526315789474
+        ]
+      ],
+      "chosenPhase": 112.07894736842105
+    },
+    "gates": {
+      "0": {
+        "samples": 56,
+        "cleanBody": 54,
+        "phases": [
+          0,
+          3,
+          6,
+          9,
+          10
+        ],
+        "maxCleanBody": 0.5377777777777778,
+        "maxInitialCap": 0.7410071942446043
+      },
+      "1": {
+        "samples": 56,
+        "cleanBody": 54,
+        "phases": [
+          0,
+          10
+        ],
+        "maxCleanBody": 1.0423703703703704,
+        "maxInitialCap": 0.7853717026378897
+      }
+    },
+    "background": {
+      "boundary": "Original Touchdown bitmap border only; HUD/playfield/objects excluded. Existing original PICT402display gamma0.7 reused.",
+      "pixels": 108120,
+      "meanAbsoluteChannelError": 0.5591904057220373,
+      "maxChannelError": 4.0,
+      "fieldColorSamples": [
+        [
+          130,
+          130,
+          130
+        ],
+        [
+          130,
+          130,
+          130
+        ]
+      ],
+      "backdrop": "backdrop-pirouette-402-display.png",
+      "playfield": {
+        "x": 68,
+        "y": 67,
+        "width": 504,
+        "height": 363,
+        "color": "#828282"
+      },
+      "initialMaskResult": {
+        "pixels": 108120,
+        "meanAbsoluteChannelError": 0.6048063879639907,
+        "maxChannelError": 255.0
+      },
+      "selectedClearSample": "touchdown-idle-02",
+      "initialForegroundNote": "Initial fixed mask included33goal-attention-starburst pixels atlogical572..578,193..205. Retained initial statistics. First chronological clear sample verifies the same fixed108120pixel mask without altering asset or ROI."
+    },
+    "nativeLevelPoints": 21000,
+    "nativeBonusTotal": 20000,
+    "nativeFifthSixthPopup": 5000,
+    "setupCampaignPoints": 13000,
+    "browser": {
+      "valid": true,
+      "transfers": 23,
+      "score": {
+        "mode": "Child",
+        "roundBonus": 21000,
+        "totalCommitted": 0,
+        "nextDotAward": 5000,
+        "completed": true,
+        "overallEarned": 21000
+      },
+      "time": 87.1666666666821,
+      "timer": {
+        "enabled": false,
+        "original": 120,
+        "current": 120,
+        "saved": 120
+      }
+    },
+    "payloadsUnchanged": 70,
+    "limits": [
+      "Bounded Child single-player only",
+      "Forced crushing/reset and intermediate green opening not independently sampled",
+      "Exact callback/input/reveal/RNG phase and absolute initial clock alias remain limited",
+      "Source current/saved time120is not a visible native Child countdown",
+      "Full campaign/save/highscore/audio/pickup-effect parity unqualified",
+      "Functional concurrent captures are not resource benchmarks"
+    ]
+  },
+  "bundle": {
+    "sourceBytes": 160105,
+    "assetBytes": 1793724,
+    "manifestBytes": 1076892,
+    "totalBytes": 3030721
+  }
+}

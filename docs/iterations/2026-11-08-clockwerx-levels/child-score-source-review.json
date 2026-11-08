@@ -25,11 +25,14 @@
     "curvesPostDeathRound": 0,
     "curvesPostDeathCommitted": 1000,
     "bombsSingleGoodie": 1000,
-    "bombsCompletion": 2000
+    "bombsCompletion": 2000,
+    "touchdownSixPickups": 20000,
+    "touchdownFifthAndSixthAward": 5000,
+    "touchdownCompletion": 21000
   },
   "implementation": "score.mjs; SourceRound onBonus/onGoal and normal reset hooks; explicit scene qualification",
   "limits": [
-    "Native cap5000and post-death next pickup not directly observed; primary source and synthetic tests cover them.",
+    "Post-death next pickup is not directly observed; primary source and synthetic tests cover it. Touchdown independently confirms the5000cap.",
     "Full campaign continuation/high-score saves and multiplayer/difficulty formulas remain unqualified.",
     "Combined bonus+goal handling remains rejected; post-goal bonus calls fail closed.",
     "Prior1-10scoring modes are not automatically migrated.",

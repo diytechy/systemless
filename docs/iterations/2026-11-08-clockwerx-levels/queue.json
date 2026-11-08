@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 13,
-  "currentAction": "Touchdown: filter its two inactive Child spikes, qualify long vertical red/green doors and two static-transfer red programs; native reference via normal Curves\u2192Homer progression",
+  "currentOrdinal": 14,
+  "currentAction": "Prepare an isolated opt-in headless progress export, then qualify Tenacity protected checkpoint/goodies/short vertical doors and unprogrammed enemy wall response",
   "levels": [
     {
       "ordinal": 1,
@@ -901,10 +901,21 @@
       "menuTitle": "Touchdown",
       "resourceTitle": "Touchdown",
       "sha256": "aa1a156210c39722a835f166808f1350000d987ec66c949d56139275f138b90e",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "touchdown/native-initial-01/report.json",
+        "touchdown/native-goal-02/report.json",
+        "touchdown/native-clock-review.json",
+        "touchdown/native-gate-review.json"
+      ],
+      "requirements": [
+        "inactive Child spike filtering before allocated phase/capacity",
+        "two canonical class1red n/s programs and320frame joint period",
+        "hand/button outline entry and independent NPC door control",
+        "long vertical red/green gate geometry and attached caps",
+        "six progressive bonuses including fifth/sixth5000cap"
+      ],
+      "svgStatus": "thirteenth scene active; native/browser23transfer sixbonus goal and original gates reviewed",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {

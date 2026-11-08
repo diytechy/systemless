@@ -124,3 +124,7 @@ Child bonus-dot awards rise1,000at a time to5,000; normal traversals preserve th
 ## Homer: plain mask misses and slow clocks
 
 A mask miss can retain a present pivot. Homer's two plain mask12 dots remain usable and Childcolor0; raw flag activation is not actor instantiation or grab permission. Keep the small display origin separate from serialized stride11. Native normal progression also exposes carried clock parity: class3 has divisor4 versus hero divisor2, so a64hero-frame alias can change an enemy's half-turn. Both mask-missing pivots, a one-bonus goal and a two-bonus contact/return are now checked against original gameplay. See [Homer evidence](homer-review.md).
+
+## Touchdown: physical switch contact and programmed gates
+
+The two mask14spikes are inactive in Child and consume no allocated phase or pool slot. Switch entry means overlap of the rotating original hand/button outlines, not merely arrival at a nearby pivot. The human controls green while programmed red hands independently operate red. Carry angle, direction, program PC and contact history; these two trajectories have a320frame joint period. The accepted23transfer witness collects six bonuses, with native/browser21,000points and direct fifth/sixth5,000awards. See [Touchdown](touchdown-review.md).

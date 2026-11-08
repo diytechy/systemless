@@ -18,7 +18,7 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false}={}){
  const unsupported=[];
  const programs=level.blocks?.find(b=>b.kind==='WP')?.records.map(r=>r.text)||[];
  if(activeMask!==1)unsupported.push('unqualified difficulty clock');
@@ -26,6 +26,10 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyB
  if(![7,8].includes(level.header?.displaySizeRaw))unsupported.push('unqualified display-size selector');
  for(const block of level.blocks||[]){
   if(block.count&&!['SP','WL','DR','DS','WP','WA','TX',...(allowOil?['PU']:[]),...(allowSpecialDots?['WY']:[]),...(allowBombs?['BO','GO']:[])].includes(block.kind))unsupported.push('object class '+block.kind);
+  if(block.kind==='SP')for(const spike of block.records){
+   const mask=spike.rawWords[4]*65536+spike.rawWords[5];
+   if(mask!==15&&(!Number.isInteger(mask)||!(allowInactiveSpikes&&!(mask&activeMask))))unsupported.push('conditional spike activation');
+  }
   if(block.kind==='WA')for(const actor of block.records){
    if(!(actor.activationMaskRaw&activeMask))continue;
    if(!(actor.actorTypeRaw in GROUPS))unsupported.push('actor type '+actor.actorTypeRaw);
@@ -58,8 +62,8 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyB
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
@@ -96,7 +100,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
    visible:true,orphaned:false,hiddenUntil:0,
    group:GROUPS[a.actorTypeRaw],sourceSlot:index,sourceActorType:a.actorTypeRaw,speedClass:a.rawWords[7],...actorTiming(a.rawWords[7]),checksWalls:actorChecksWalls(a.version12ByteRaw??1)};
  };
- const spikes=records('SP').map((r,index)=>({id:index,row:r.rawWords[0],column:r.rawWords[1],subrow:r.rawWords[2],subcolumn:r.rawWords[3],...spikeGridPoint(r,origin),phase:index%4,activationMask:r.rawWords[4]*65536+r.rawWords[5]}));
+ const spikes=records('SP').filter(r=>!allowInactiveSpikes||((r.rawWords[4]*65536+r.rawWords[5])&activeMask)).map((r,index)=>({id:index,row:r.rawWords[0],column:r.rawWords[1],subrow:r.rawWords[2],subcolumn:r.rawWords[3],...spikeGridPoint(r,origin),phase:index%4,activationMask:r.rawWords[4]*65536+r.rawWords[5]}));
  if(spikes.some(s=>s.activationMask!==15))throw new Error('Conditional spike activation is unqualified');
  const wallTiles=compileWallTiles(records('WL').map(r=>({axis:r.rawWords[0]>>>8,
   fixed:signedWord(r.rawWords[1]),start:signedWord(r.rawWords[2]),startInset:signedWord(r.rawWords[3]),

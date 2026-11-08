@@ -228,12 +228,18 @@
     {
       "id": "owned-chrysanthemum-1-01-v1",
       "route": "/chrysanthemum-1-01/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/chrysanthemum.json",
+      "scene": "Level1 CakeWalk introduction/emptyflowerarrangementfield, score0initial then200, time1:29to1:09 acrosscaptureandUIgaps; noflowersclearlyvisible",
+      "accepted_change": null
     },
     {
       "id": "owned-columns-v1",
       "route": "/columns/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/columns.json",
+      "scene": "NewGame initialfallinggems score0, noinput20seconds evolves toGameOver/highscorenameprompt; notsubmitted",
+      "accepted_change": null
     },
     {
       "id": "owned-crunch-v1",
@@ -426,6 +432,11 @@
       "brief": "brickles-plus-3-0/browser-followup-brief.md",
       "accepted_change": null,
       "report": "brickles-plus-3-0/coordinator-color-review.md"
+    },
+    {
+      "id": "owned-chrysanthemum-1-01-v1",
+      "status": "bounded readinessdiagnostic13.9147guestHz; missingvisibleflowerstate blocks representativegameplay; no pacingcandidateaccepted; future same-statepixel/reference investigation",
+      "accepted_change": null
     }
   ],
   "clock_comparison_requested_viewport": [

@@ -1,0 +1,104 @@
+{
+  "schema": "clockwerx-combo-visual-review-v1",
+  "status": "no-material-static-visual-correction-requested",
+  "initialBody": {
+    "native": {
+      "bounds": [
+        268,
+        123,
+        283,
+        139
+      ],
+      "pixels": 167,
+      "meanRgb": [
+        131.76047904191617,
+        77.58083832335329,
+        0.0
+      ]
+    },
+    "browser": {
+      "bounds": [
+        268,
+        123,
+        283,
+        139
+      ],
+      "pixels": 193,
+      "meanRgb": [
+        133.51295336787564,
+        80.20725388601036,
+        4.005181347150259
+      ]
+    }
+  },
+  "baseline": {
+    "payloads": 51,
+    "unchanged": 51
+  },
+  "inputs": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\combo\\browser-idle.png",
+      "sha256": "5433ed53ee7b8494d0832f43a9523b26aed9001e9274092286d5d23731de6c2a"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\combo\\native-play-01\\initial-after-reveal.png",
+      "sha256": "0c04ba871a85cf327449aafd79f8a4e6419999d16e261715372534a16ce29fca"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\combo\\native-wake-01\\report.json",
+      "sha256": "3fdbbe1aecfb72b381e1ede01a6566211b7fa665f8153c47ba9e5fc5c996e4d6"
+    }
+  ],
+  "inventory": {
+    "presentDots": 53,
+    "bonusFlags": 5,
+    "goalFlags": 1,
+    "wallTilesCoordinatorReported": 75,
+    "spikes": 4,
+    "activePuddles": 1,
+    "puddleKind": 0,
+    "visibleHumans": 1,
+    "visibleRedEnemies": 1,
+    "visibleBlueEnemies": 0,
+    "childMask": 1
+  },
+  "visualFindings": [
+    "Kind0 pool bounds and amber mean color agree",
+    "Silver highlights, extrusion orientation and wall joins consistent",
+    "Child red bonus pivot and neutral higher-difficulty blue dot consistent",
+    "Shared text/dot smooth-art differences remain; timestamps differ"
+  ],
+  "wakeEvidence": {
+    "sampleCount": 25,
+    "kind0RawBase": [
+      241,
+      105
+    ],
+    "targetRawBase": [
+      250,
+      105
+    ],
+    "cleanWakingFrames": [
+      7,
+      6,
+      5,
+      4
+    ],
+    "cleanApproachFrames": [
+      10,
+      13
+    ],
+    "partialApproachFrame": 16,
+    "dropletVisibleAtTick": 2832,
+    "deathVisibleAtTick": 2862,
+    "resetVisibleByTick": 3012,
+    "boundary": "Colored-pixel source fitting, gray shadows excluded; hero/death overlays prevent exact phases/ticks; reason10 is source interpretation, not pixel-readable"
+  },
+  "privateFits": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\combo\\visual-review\\native-frame-fits.json",
+    "sha256": "33c0096c7ec4d5db3fc3ab958abe678665f0e403487fc3147a74b5332946e8b8"
+  },
+  "runtimeAssetsManifestsEdited": false,
+  "newRuntimeRenderingBuildBenchmark": false,
+  "workloadReleased": true
+}

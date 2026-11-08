@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 6,
-  "currentAction": "Combo: solve enemy/wall/spike route; native kind0 Oil wake/death and goal; browser/visual checks before activation",
+  "currentOrdinal": 7,
+  "currentAction": "More Spikes: canonical bounce-program integration and native trajectory/goal/browser validation",
   "levels": [
     {
       "ordinal": 1,
@@ -385,11 +385,27 @@
       "menuTitle": "Combo",
       "resourceTitle": "Combo",
       "sha256": "b8f85d924f7fdc668c15838a81d772e2889e224da1314602dba725b57af29b64",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "combo/native-play-01/report.json",
+        "combo/native-goal-route-01/report.json",
+        "combo/native-route-review.json",
+        "combo/native-wake-01/report.json",
+        "combo/native-wake-route-review.json"
+      ],
+      "requirements": [
+        "kind0PUoffsets/ranges andoccupied-pivot spawn",
+        "redordinaryenemy ignoreswalls",
+        "mixedswing/flip directionhistory",
+        "widerinputwindows across persistentclocks"
+      ],
+      "svgStatus": "sixth scene activated; mixed-action goal and kind0 Oil wake/reset validated",
+      "generationConstraints": [
+        "geometry-onlyBFS insufficientforrotatingenemy",
+        "searchlegalactionchoices and certifywindows",
+        "retainfailednarrowtraces asdiagnostics",
+        "modelkind0delayedactivation andDPwall-independence"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 53,

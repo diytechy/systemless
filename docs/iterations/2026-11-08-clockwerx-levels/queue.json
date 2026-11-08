@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 11,
-  "currentAction": "Curves: source inventory and fresh native initial/goal/checkpoint checks; reuse qualified mechanics only after level-specific review",
+  "currentOrdinal": 12,
+  "currentAction": "Homer: qualify small10x7 origin, two class3red hands and two present plain pivots whose property masks miss Child; preserve eleven-scene baseline",
   "levels": [
     {
       "ordinal": 1,
@@ -757,11 +757,30 @@
       "menuTitle": "Curves",
       "resourceTitle": "Curves",
       "sha256": "ad3a552eed79a1e71e465de5a44e61e5a080e06011b0038bcdece6a39141b4b6",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "curves/native-play-02/report.json",
+        "curves/native-goal-route-01/report.json",
+        "curves/native-checkpoint-01/report.json",
+        "curves/native-return-summary.json",
+        "curves/native-waypoint-look-review.json"
+      ],
+      "requirements": [
+        "Child-matching property masks preserve active pivots and checkpoint hooks",
+        "three unprogrammed class1canonical red hands",
+        "two waypoint replacement and direction-1return/time60",
+        "scene-specific original bitmap/display palette",
+        "progressive capped Child dot awards and round-to-total commit"
+      ],
+      "svgStatus": "eleventh scene active with original per-scene bitmap and Child score tracker; native/browser goal and dual-checkpoint return reviewed",
+      "generationConstraints": [
+        "dot presence separate from property-mask matches",
+        "preserve both checkpoint masks and saved return specification",
+        "carry roundBonus/totalCommitted/nextDotAward separately",
+        "ordinary dots do not reset increasing bonus value; normal round start does",
+        "prove safe saved return and usable action windows",
+        "retain heading-click and obscured-fit failures"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 42,
@@ -803,7 +822,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "boundedGameplayQualification": "documented Child routes and samples accepted; full-game gameplayQualified remains false"
     },
     {
       "ordinal": 12,

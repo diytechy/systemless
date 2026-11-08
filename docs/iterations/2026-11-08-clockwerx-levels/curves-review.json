@@ -1,0 +1,103 @@
+{
+  "schema": "clockwerx-level-acceptance-v1",
+  "ordinal": 11,
+  "title": "Curves",
+  "mode": "Child single-player",
+  "status": "bounded-playable-increment-accepted",
+  "sourceSha256": "ad3a552eed79a1e71e465de5a44e61e5a080e06011b0038bcdece6a39141b4b6",
+  "inventory": {
+    "presentDots": 42,
+    "bonuses": 7,
+    "goals": 1,
+    "checkpoints": 2,
+    "activeEnemies": 3,
+    "activePrograms": 0,
+    "storedPrograms": 2,
+    "rawActors": 8,
+    "createdActorsIncludingHumans": 5,
+    "childTime": 60
+  },
+  "runtimeTests": 178,
+  "packagingTests": 13,
+  "priorSceneRegressions": 10,
+  "goalOnsets": 190,
+  "checkpointOnsets": 190,
+  "native": {
+    "heroPhaseSamples": 33,
+    "redPoseMatches": 99,
+    "goalPivots": 18,
+    "checkpointPivots": 19,
+    "postReturnUsablePoses": 26,
+    "waypointLookSequence": [
+      79,
+      89,
+      79
+    ],
+    "points": 11000,
+    "postDeathRound": 0,
+    "postDeathTotal": 1000
+  },
+  "browser": {
+    "goal": {
+      "validIdleExport": true,
+      "transfers": 18,
+      "bonuses": 4,
+      "score": {
+        "mode": "Child",
+        "roundBonus": 11000,
+        "totalCommitted": 0,
+        "nextDotAward": 5000,
+        "completed": true,
+        "overallEarned": 11000
+      },
+      "elapsed": 45.599999999998055
+    },
+    "checkpoint": {
+      "validIdleExport": true,
+      "roundRestarts": 1,
+      "pivot": "4,6",
+      "direction": -1,
+      "score": {
+        "mode": "Child",
+        "roundBonus": 0,
+        "totalCommitted": 1000,
+        "nextDotAward": 1000,
+        "completed": false,
+        "overallEarned": 1000
+      },
+      "time": {
+        "enabled": false,
+        "original": 60,
+        "current": 60,
+        "saved": 60
+      }
+    },
+    "boundary": "Valid idle exports after functional outcomes; not matched gameplay resource benchmarks"
+  },
+  "preservation": {
+    "priorPayloads": 69,
+    "newPayloads": 1,
+    "totalPayloads": 70,
+    "sourceModules": 25,
+    "mediaSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4",
+    "saveIdentityUnchanged": true,
+    "sharedFilesUnchanged": true,
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\curves\\previous-live-pilot"
+  },
+  "sizes": {
+    "sourceBytes": 158797,
+    "assetBytes": 1793724,
+    "manifestBytes": 951012,
+    "totalBytes": 2903533
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\curves",
+  "limits": [
+    "Child only; mask matches admitted while optional-property mask misses remain gated.",
+    "Full campaign score continuation/high-score saves, multiplayer/difficulty scoring and full pickup/audio effects remain unqualified.",
+    "Cap5000and next post-reset pickup are source/test evidence, not direct native pickup observations.",
+    "Prior1-10scoring modes are unchanged; new tracker is explicitly enabled first on11.",
+    "SVG silhouettes, font/HUD/completion presentation, exact input/reveal/random death cadence remain approximations.",
+    "Elevated/overdrawn native fits are retained and not called clean; no host performance claim.",
+    "Generator remains a proposal;89listed playable integrations remain unfinished."
+  ]
+}

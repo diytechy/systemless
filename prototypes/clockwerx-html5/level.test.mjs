@@ -55,6 +55,14 @@ test('inactive difficulty records are not instantiated or program/type qualified
  assert.equal(board.enemies.length,1);assert.equal(board.inactiveActorCount,1);
  assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU,activeMask:2}),/unqualified difficulty/);
 });
+test('explicit matching dot masks preserve active properties and color without opening mask-miss behavior',()=>{
+ const b=fixture();b.cells[1].secondaryRaw=0x13;
+ assert.ok(levelRequirements(b).includes('conditional dot activation'));
+ const board=buildDecodedBoard(b,{angularSpeed:TAU,allowActiveDotMasks:true});
+ assert.equal(board.dots[1].present,true);assert.equal(board.dots[1].kind,'bonus');assert.equal(board.dots[1].color,1);assert.equal(board.dots[1].humanCanGrab,true);
+ b.cells[1].secondaryRaw=12;assert.ok(levelRequirements(b,{allowActiveDotMasks:true}).includes('conditional dot activation'));
+ assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU,allowActiveDotMasks:true}),/conditional dot activation/);
+});
 test('missing pivots, wrong human slots and unspecified clock never become playable',()=>{
  const b=fixture();b.blocks[0].records[0].gridPosition.column=9;
  assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU}),/absent dot/);

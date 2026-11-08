@@ -24,6 +24,13 @@ test('source outline placement preserves integer per-axis bounds and reflection'
  assert.deepEqual([c.left,c.top,c.right,c.bottom],[73,71,75,73]);
  assert.throws(()=>worldOutline(options.outlines,500,0,{x:0,y:0}),/Missing qualified/);
 });
+test('opted-in Child scores commit after a real spike death and fresh play clears both counters',()=>{
+ const {board,options}=fixture();board.childScoreRules=true;board.enemies=[];const g=new SourceRound(board,options);
+ g.update(1/120,{flip:true});assert.equal(g.childScore.roundBonus,1000);assert.equal(g.events.find(e=>e.type==='bonus').points,1000);
+ for(let i=0;i<80&&!g.roundRestarts;i++)g.update(1/120);
+ assert.equal(g.roundRestarts,1);assert.equal(g.events.find(e=>e.type==='death').cause.reason,'spike');assert.equal(g.childScore.totalCommitted,1000);assert.equal(g.childScore.roundBonus,0);assert.equal(g.childScore.nextDotAward,1000);
+ g.reset();assert.equal(g.childScore.totalCommitted,0);assert.equal(g.childScore.roundBonus,0);
+});
 test('single-player death freezes actors then resets actors and bonuses after the effect',()=>{
  const {board,options}=fixture();const g=new SourceRound(board,options);
  g.player.pivot='b';board.dots[1].collected=true;

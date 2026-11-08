@@ -11,6 +11,7 @@ import {advanceBounceEnemy} from './programs.mjs';
 import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs';
 import {StaticDotRuntime} from './special-dot-runtime.mjs';
 import {BombScene} from './bomb-scene.mjs';
+import {ChildRoundScore} from './score.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -36,6 +37,11 @@ export class SourceRound extends MovementGame {
  }
  reset({preserveCheckpoint=false}={}){
   super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
+  if(this.board.childScoreRules){
+   if(!this.childScore)this.childScore=new ChildRoundScore();
+   else if(preserveCheckpoint)this.childScore.startRound();
+   else this.childScore.resetGame();
+  }
   this.spikeClock??=createSourceTimerChain(40,5);this.spikeCount??=0;this.guestTickRemainder??=0;
   this.deathClock??=createDeathClock();
   this.actorClock??=createSourceTimerChain(38,1);
@@ -171,7 +177,8 @@ export class SourceRound extends MovementGame {
    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});
   }});
  }
- onGoal(){this.bombScene?.finish();}
+ onBonus(){return this.childScore?.bonusDot();}
+ onGoal(){this.childScore?.complete();this.bombScene?.finish();}
  restartAfterDeath(){
   const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,
    events:this.events,roundRestarts:this.roundRestarts+1,elapsedTime:this.elapsedTime};
@@ -252,6 +259,6 @@ export class SourceRound extends MovementGame {
    if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
   }
  }
-  snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+  snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

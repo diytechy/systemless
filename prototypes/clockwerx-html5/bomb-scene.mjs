@@ -53,7 +53,7 @@ export class BombScene {
   if(e.type==='death')r.beginDeath({reason:'spark',sourceReason:e.reason});
   if(e.type==='flourish'||e.type==='floating-score')this.effects.push({kind:e.type,point:this.gridPixel(e.grid,e.gridOffset),frame:0,visible:true,callbacks:0,count:(e.type==='flourish'?this.flourishClock:this.scoreClock).advance(0).clientCount,finish:e.finish});
   if(e.type==='add-time')r.remainingTime+=e.seconds;
-  if(e.type==='add-bonus'){this.score+=e.points;r.event('goodie',r.player);}
+  if(e.type==='add-bonus'){this.score+=e.points;r.childScore?.addFlatBonus(e.points);r.event('goodie',r.player);}
   if(['spark-activated','paint-crater'].includes(e.type))r.event(e.type,r.player);
  }
  finish(){if(!this.completed){this.completed=true;this.score+=1000;this.round.event('completion-bonus',this.round.player);}}

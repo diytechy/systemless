@@ -1,0 +1,7 @@
+# Child single-player scoring contract
+
+An ordinary human bonus-dot grab awards the current value, starting1,000, then raises the next value by1,000up to5,000(SCBonusDot, CODE7:6f12–6f82). Ordinary nonbonus traversals do not reset it. The four Curves pickups total10,000; the observed Child completion adds1,000and no time bonus, giving11,000. GO's flat1,000is separate and does not advance this dot progression, as the existing source/BO evidence establishes.
+
+SCStart(CODE7:6e14–6e64) commits the current round bonus into the total, clears that round counter and resets the next dot value to1,000. The original Curves death/return HUD directly shows round0/total1,000. The next post-return pickup and the5,000cap are source/test evidence, not independently photographed transitions. A fresh pilot play clears both counters. Full campaign continuation and high-score persistence remain unimplemented.
+
+The bounded score.mjs tracker is opt-in for Child single-player, first enabled on Curves. SourceRound routes actual human bonus/goal hooks and normal round reset into it. Tests cover progressive/capped awards, independent flat pickups, fixed/idempotent completion, round commit/reset, fresh play, invalid scope/overflow and a real collision/reset integration. Existing1–10scoring modes remain unchanged. The combined bonus+goal case remains gated for later native review; score calls after completion fail closed. Full multi-value pickup effects remain a separate fidelity task.

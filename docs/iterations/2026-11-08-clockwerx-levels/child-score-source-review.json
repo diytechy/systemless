@@ -1,0 +1,38 @@
+{
+  "schema": "clockwerx-child-score-source-review-v1",
+  "scope": "opt-in Child single-player per-scene tracker; first enabled on Curves11",
+  "sourceOffsets": {
+    "SCStart": "CODE7:6e14-6e64",
+    "SCReset": "CODE7:6e74-6ede",
+    "SCBonusDot": "CODE7:6f12-6f82",
+    "SCAddBonus": "CODE7:6f96"
+  },
+  "rules": {
+    "initialDotAward": 1000,
+    "dotAwardIncrement": 1000,
+    "dotAwardCap": 5000,
+    "ordinaryDotsDoNotResetProgression": true,
+    "goodieFlatPoints": 1000,
+    "goodieDoesNotAdvanceDotAward": true,
+    "childCompletion": 1000,
+    "childTimeBonus": 0,
+    "normalRoundStart": "commit roundBonus to totalCommitted, clear roundBonus, set nextDotAward1000",
+    "freshPilotPlay": "clear both counters and nextDotAward1000"
+  },
+  "nativeEvidence": {
+    "curvesFourPickups": 10000,
+    "curvesCompletion": 11000,
+    "curvesPostDeathRound": 0,
+    "curvesPostDeathCommitted": 1000,
+    "bombsSingleGoodie": 1000,
+    "bombsCompletion": 2000
+  },
+  "implementation": "score.mjs; SourceRound onBonus/onGoal and normal reset hooks; explicit scene qualification",
+  "limits": [
+    "Native cap5000and post-death next pickup not directly observed; primary source and synthetic tests cover them.",
+    "Full campaign continuation/high-score saves and multiplayer/difficulty formulas remain unqualified.",
+    "Combined bonus+goal handling remains rejected; post-goal bonus calls fail closed.",
+    "Prior1-10scoring modes are not automatically migrated.",
+    "Pickup flourish/floating2000..5000art remains a separate visual task."
+  ]
+}

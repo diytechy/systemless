@@ -44,7 +44,7 @@ export class MovementGame {
       // DOGrabbed checks the latched death from DPWandGrabbed before bonus or
       // goal effects. Ordinary Movement has no additional grab observer.
       if(this.onHumanGrab?.(target)===false)return;
-      if(target.kind==='bonus'&&!target.collected){target.collected=true;this.event('bonus',h,target);}
+      if(target.kind==='bonus'&&!target.collected){target.collected=true;const points=this.onBonus?.(target),event=this.event('bonus',h,target);if(points!==undefined)event.points=points;}
       if(target.kind==='goal'){this.onGoal?.(target);this.complete=true;this.event('goal',h,target);}
     }
   }

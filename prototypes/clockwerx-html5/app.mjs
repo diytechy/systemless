@@ -15,6 +15,7 @@ let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready
 const startup={bootUtc,boundary:'module evaluation to required foreground/background image decode and manifest parse complete',assetReadyUtc:null,readyMs:null,resourceEntries:[]};
 let inputReplay=null,checkedRoute=null;
 let wallLayer=null,wallLayerBoard=null,wallLayerRevision=null;
+let activeBackdrop,activePlayfield;
 const movementScope=$('scope-description').textContent,movementFidelity=$('fidelity-description').textContent;
 function persist(){try{localStorage.setItem(KEY,JSON.stringify({black:settings.black,completed:settings.completed}))}catch{}}
 function message(s,error=false){$('status').textContent=s;$('status').className=error?'error':'';}
@@ -161,8 +162,11 @@ function drawBombs(stage){
  if(stage==='effects')for(const e of state.effects)if(e.visible)draw(e.kind==='flourish'?'2400':'2500',e.frame,e.point);
 }
 function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixelRatio||1);ctx.setTransform(scale.scaleX,0,0,scale.scaleY,0,0);ctx.imageSmoothingEnabled=false;ctx.fillStyle='#909090';ctx.fillRect(0,0,640,480);if(!ready){ctx.fillStyle='white';ctx.font='16px sans-serif';ctx.fillText('Loading private original assets…',20,50);return;}
- ctx.drawImage(images[manifest.backdrop],0,0);ctx.imageSmoothingEnabled=!!manifest.vectorAssets;
- ctx.fillStyle='#808080';ctx.fillRect(68,69,504,360);ctx.fillStyle='white';ctx.font='bold 12px sans-serif';ctx.fillText('Level:',106,49);ctx.fillText(`${game.board.ordinal||1}: ${game.board.title||'Movement'}`,92,62);ctx.fillStyle='#ffff00';ctx.fillText('Pilot',441,50);ctx.fillText(game.bombScene?'Level Score:':'Total Score:',493,49);ctx.fillText(String(game.bombScene?.score??'—'),536,62);
+ ctx.drawImage(images[activeBackdrop||manifest.backdrop],0,0);ctx.imageSmoothingEnabled=!!manifest.vectorAssets;
+ const field=activePlayfield||{x:68,y:69,width:504,height:360,color:'#808080'};
+ ctx.fillStyle=field.color;ctx.fillRect(field.x,field.y,field.width,field.height);ctx.fillStyle='white';ctx.font='bold 12px sans-serif';ctx.fillText('Level:',106,49);ctx.fillText(`${game.board.ordinal||1}: ${game.board.title||'Movement'}`,92,62);ctx.fillStyle='#ffff00';
+ if(game.childScore){ctx.fillText('Round:',431,49);ctx.fillText('Total:',505,49);ctx.textAlign='right';ctx.fillText(game.childScore.roundBonus.toLocaleString(),477,62);ctx.fillText(game.childScore.totalCommitted.toLocaleString(),568,62);ctx.textAlign='left';}
+ else{ctx.fillText('Pilot',441,50);ctx.fillText(game.bombScene?'Level Score:':'Total Score:',493,49);ctx.fillText(String(game.bombScene?.score??'—'),536,62);}
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
  drawBombs('background');drawWalls();for(const d of game.board.dots)drawDot(d);
  drawDoors();
@@ -178,7 +182,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  drawDeath();
  drawBombs('effects');
  drawSparkles();
- if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';if(game.bombScene)ctx.fillText(game.bombScene.score.toLocaleString()+' points · Child completion bonus 1,000',320,239);ctx.fillText('Goal dot grabbed · Restart to play again',320,game.bombScene?268:250);ctx.textAlign='left';}
+ if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';const points=game.childScore?.roundBonus??game.bombScene?.score;if(points!==undefined)ctx.fillText(points.toLocaleString()+' points · Child completion bonus 1,000',320,239);ctx.fillText('Goal dot grabbed · Restart to play again',320,points!==undefined?268:250);ctx.textAlign='left';}
 }
 function workloadTime(){return game.elapsedTime??game.time;}
 function captureInfo(){return {visibility:document.visibilityState,focused:document.hasFocus()};}
@@ -195,6 +199,7 @@ async function loadScene(scene){
  if(capture){capture.invalidReasons.add('scene changed');finishCapture(performance.now());}
  ready=false;held={};padHeld={};previousPad=[];inputReplay=null;recordedUntil=0;renderPrevious=null;lastEvent=0;
  const reference=scene.levelDefinition;
+ activeBackdrop=scene.backdrop||manifest.backdrop;activePlayfield=scene.playfield||null;
  if(reference){
   const profileResponse=await fetch('./assets/'+reference.outlinesFile);
   if(!profileResponse.ok)throw new Error('Source collision profile is unavailable');
@@ -203,7 +208,7 @@ async function loadScene(scene){
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
   const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true});
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
   board.player.group=settings.black?4300:700;
   game=new SourceRound(board,{outlines,doorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
   $('presentation').textContent='Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
@@ -214,7 +219,7 @@ async function loadScene(scene){
   else if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
   if(board.specialDotRules)rules.push('Rings disappear after you leave them and later return. Checkpoints change your return position. Green protection stops ordinary enemy contact, but not spikes.');
   if(board.bombRules)rules.push('Swing across a match to light its fuse. Avoid the travelling spark and blast. Hourglasses award 1000 points and ten seconds.');
-  $('scope-description').textContent=board.title+'. '+rules.join(' ')+' A death freezes play, runs staggered explosions, then resets the round. Original scoring, full audio, campaign saves and physical controller hardware are unqualified or omitted.';
+  $('scope-description').textContent=board.title+'. '+rules.join(' ')+' A death freezes play, runs staggered explosions, then resets the round. '+(board.childScoreRules?'Child bonus progression and round commits are tracked. Campaign totals, full pickup effects, full audio, saves and physical controller hardware remain unqualified.':'Original scoring, full audio, campaign saves and physical controller hardware are unqualified or omitted.');
   $('fidelity-description').textContent='Source map, phases, placements and collision profiles; reconstructed smooth artwork and fonts. Hand motion uses the source Child-speed average with 60 guest ticks per second. Exact input cadence, random stream, reveal pacing and original hardware timing remain under review.';
  }else{
   game=new MovementGame(buildBoard(manifest));
@@ -244,7 +249,7 @@ async function load(){
    ...Object.values(vector.bombs||{}).map(atlas=>atlas.file),...Object.values(vector.bombDots||{}).map(atlas=>atlas.file),
    ...(vector.death?.file?[vector.death.file]:(vector.death?.frames||[]).map(f=>f.file))
   ]:Object.entries(manifest.groups).flatMap(([gid,g])=>gid==='401'?[]:gid==='300'?g.images.slice(0,16):g.images);
-  const names=[...new Set([...foreground,manifest.backdrop])];
+  const names=[...new Set([...foreground,manifest.backdrop,...(manifest.scenes||[]).map(s=>s.backdrop).filter(Boolean)])];
   await Promise.all(names.map(async name=>{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}));
   for(const [name,fn] of Object.entries(manifest.sounds||{})){audio[name]=new Audio('./assets/'+fn);audio[name].preload='auto';}
   const scenes=manifest.scenes||[{id:'single',title:manifest.levelDefinition?.title||'Movement',levelDefinition:manifest.levelDefinition,checkedRoute:manifest.checkedRoute}];

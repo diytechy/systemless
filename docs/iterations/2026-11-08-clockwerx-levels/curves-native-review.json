@@ -1,0 +1,124 @@
+{
+  "schema": "clockwerx-curves-native-review-v1",
+  "ordinal": 11,
+  "sourceSha256": "ad3a552eed79a1e71e465de5a44e61e5a080e06011b0038bcdece6a39141b4b6",
+  "status": "native-evidence-reviewed-and-bounded-scene-accepted",
+  "runs": {
+    "native-play-02": {
+      "status": "passed",
+      "frontend_ticks": 2030,
+      "guest_tick": 2628,
+      "budget_exhausted_frames": 0
+    },
+    "native-goal-route-01": {
+      "status": "passed",
+      "frontend_ticks": 4117,
+      "guest_tick": 4715,
+      "budget_exhausted_frames": 0
+    },
+    "native-checkpoint-01": {
+      "status": "passed",
+      "frontend_ticks": 4673,
+      "guest_tick": 5271,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "rejectedRun": {
+    "name": "native-play-01",
+    "reason": "row325categoryheading, no gameplay; image-fit MAE>55; corrected337"
+  },
+  "clock": {
+    "heroSamples": 33,
+    "redPoseMatches": 99,
+    "phaseInterval": [
+      27.0,
+      27.05263157894737
+    ],
+    "chosenPhase": 27.026315789473685,
+    "firstRightCenter": 252,
+    "boundary": "One common4/19 line from hero; three independent fixed-pivot red fits share each phase. Minimum first-turn alias only; not absolute reveal parity."
+  },
+  "redMaximumMAE": 0.6381766381766382,
+  "goal": {
+    "transfers": 18,
+    "matched": 18,
+    "cleanFits": 15,
+    "elevatedFits": [
+      {
+        "transfer": 1,
+        "mae": 12.405405405405405
+      },
+      {
+        "transfer": 13,
+        "mae": 2.7099099099099098
+      },
+      {
+        "transfer": 17,
+        "mae": 4.37037037037037
+      }
+    ],
+    "nativeBonusPoints": 10000,
+    "nativeCompletionPoints": 1000,
+    "nativeLevelPoints": 11000,
+    "noTimeBonus": true
+  },
+  "checkpoint": {
+    "transfers": 19,
+    "matched": 19,
+    "elevatedFits": [
+      {
+        "transfer": 1,
+        "mae": 12.405405405405405
+      }
+    ],
+    "postReturnUsablePoses": 26,
+    "postReturnMaximumMAE": 1.4508771929824562,
+    "returnDirection": -1,
+    "firstUsableReturnGuestTick": 4981,
+    "roundBonusAfterReturn": 0,
+    "totalCommittedAfterReturn": 1000,
+    "waypointLookSequence": [
+      79,
+      89,
+      79
+    ],
+    "waypointLookMaximumMAE": 0.432,
+    "lastClearPreContactGuestTick": 4811,
+    "contactOverdrawByGuestTick": 4821,
+    "visibleDEConfirmedByGuestTick": 4871
+  },
+  "background": {
+    "sourceResourceForkSha256": "522b65b20f89eca12139d6d488c9636ce3138099379ef8b7a59734f563a828b3",
+    "pictResourceId": 402,
+    "pictResourceSha256": "b7f4753352ebfe140a1dc4a8f6363e5769b979cf112c98ee21d38ca68d4194ac",
+    "paddedPictSha256": "c94c84613aa83c46c0cfe4982287b6b80b2989d03bd42aeba0f2e1323242f015",
+    "outputSha256": "40596219aef34303c2e7a60caeb1d1ee119e72f75a0b57c2339dbc2270a03cab",
+    "dimensions": [
+      640,
+      480
+    ],
+    "durationSeconds": 0.125,
+    "nativeOuterBorderPixels": 87250,
+    "nativeOuterBorderMAE": 22.031377268385864,
+    "originalSourceUnchanged": true,
+    "displayGamma": 0.7,
+    "displayOutputSha256": "3ffac88cc7e256c43d16e638680a991757e7ca188a22b73343e692f529deb624",
+    "nativeOuterBorderDisplayMAE": 0.5742120343839542,
+    "playfield": {
+      "x": 68,
+      "y": 67,
+      "width": 504,
+      "height": 363,
+      "color": "#828282"
+    },
+    "nativeSamplingBoundary": "87250outerborderpixels; central field/HUD excluded; exact source sprite gamma .7 policy reused, no per-pixel fitting"
+  },
+  "limits": [
+    "Three goal and one checkpoint transfer fit are elevated/overdrawn; all pivots and adjacent clear captures plus completion corroborate them.",
+    "26post-return fits include two light-overdraw cases below1.451MAE; four heavily obscured post-return samples excluded.",
+    "Next bonus reset/cap and exact count-down bookkeeping are source evidence; no second post-reset native bonus pickup performed.",
+    "Native input/callback/death timing is sampled; not exact reveal/input latency or host performance.",
+    "Smooth SVG silhouettes/fonts/HUD and full pickup effects/audio differ from original."
+  ],
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\curves"
+}

@@ -107,5 +107,11 @@ class PilotPackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
 
+    def test_scene_backdrop_requires_a_verified_payload(self):
+        self.manifest['scenes']=[dict(title='Synthetic',backdrop='missing.png')]
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+
 
 if __name__=='__main__':unittest.main()

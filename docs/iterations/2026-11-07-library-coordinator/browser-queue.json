@@ -164,7 +164,10 @@
     {
       "id": "owned-bloodsuckers-v1",
       "route": "/bloodsuckers/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/bloodsuckers.json",
+      "scene": "Animatedfly/titlemenu, handpointerfollowsmouse; no gameplayarm/meters",
+      "accepted_change": null
     },
     {
       "id": "owned-bolo-v1",
@@ -375,6 +378,20 @@
       "id": "owned-zap-t-balls-v1",
       "route": "/zap-t-balls/",
       "status": "pending"
+    }
+  ],
+  "followup_experiments": [
+    {
+      "id": "owned-barney-carnage-2-0-v1",
+      "status": "pending active-scene motion gate, then proposed25vs12 threealternatingpairs if comparable",
+      "brief": "barney-carnage-2-0/browser-followup-brief.md",
+      "sol_review": "barney-carnage-2-0/browser-followup-review.md",
+      "accepted_change": null
+    },
+    {
+      "id": "owned-bikaka-1-4-v1",
+      "status": "singledefault26.024Hz contextualcounterdeficit; no candidate yet; activeMleft/Ndown andpause established, originalpaceunknown",
+      "accepted_change": null
     }
   ]
 }

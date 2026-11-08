@@ -295,7 +295,10 @@
     {
       "id": "owned-gold-digger-v1",
       "route": "/gold-digger/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/gold-digger.json",
+      "scene": "Official Lost Mines Screen1, score0 lives4 fullhealth initial, noinput20seconds; mine and actors rendered",
+      "accepted_change": null
     },
     {
       "id": "owned-goldpusher-v1",
@@ -443,10 +446,11 @@
     },
     {
       "id": "owned-bikaka-1-4-v1",
-      "status": "lightSol rawdata/candidate-protocol review active, no setting accepted",
+      "status": "Sol raw review parent verified; pending25vs12 threealternatingfreshpairs diagnostic; no setting accepted",
       "accepted_change": null,
       "task_name": "/root/bikaka_browser_review",
-      "brief": "bikaka-1-4/browser-followup-brief.md"
+      "brief": "bikaka-1-4/browser-followup-brief.md",
+      "sol_review": "bikaka-1-4/browser-followup-review.md"
     },
     {
       "id": "owned-brickles-plus-3-0-v1",

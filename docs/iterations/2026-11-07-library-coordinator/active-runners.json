@@ -3,7 +3,7 @@
     {
       "slug": "bikaka-1-4",
       "task_name": "/root/bikaka_browser_review",
-      "status": "active lightreview only",
+      "status": "completed; raw evidence parent-reviewed; workload released",
       "phase": "rawdata/source review; no controlled workload",
       "brief": "bikaka-1-4/browser-followup-brief.md"
     }
@@ -15,7 +15,7 @@
   "coordinator_workload": {
     "owner": "/root",
     "phase": "sequential root IAB prototype and release checks",
-    "status": "rootGoldDiggerreadinessGUI next; no controlledcapture whileBikakaSolreview active",
+    "status": "root sequential release captures; Bikaka light review released",
     "server_ownership": "D:/SystemlessBuild/private-library-20261107/server-test-owned-v2.json",
     "build_ownership": "D:/SystemlessBuild/private-library-20261107/build-owned-v2.json"
   },

@@ -495,17 +495,26 @@
     {
       "id": "owned-system-s-twilight-v1-0-5-v1",
       "route": "/system-s-twilight-v1-0-5/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/twilight.json",
+      "scene": "WaitedactualNewGamebuttons, save-new-game picker acceptednewtestfilename1, alert Unable to swap in new 1 error -1303",
+      "accepted_change": null
     },
     {
       "id": "owned-the-big-one-v1",
       "route": "/the-big-one/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/big-one.json",
+      "scene": "1bit Level1 Area1, score0 lives3 time100 initially; period300ms/S200ms thennoinput20seconds endsGameOver score200",
+      "accepted_change": null
     },
     {
       "id": "owned-zap-t-balls-v1",
       "route": "/zap-t-balls/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/zap.json",
+      "scene": "CmdN fromtitle reacheslakephoto/player/redball; mouseclick300ms thennoinput20seconds endsCongratulations highscore nameprompt unsubmitted",
+      "accepted_change": null
     }
   ],
   "followup_experiments": [

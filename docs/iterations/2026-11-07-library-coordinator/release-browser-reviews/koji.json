@@ -256,5 +256,14 @@
         }
       ]
     }
+  },
+  "geometry": {
+    "css_extent": "not separately recorded; raw timing contains backing extent",
+    "viewport": "not separately recorded; do not assume Clock final comparison override",
+    "gui_png_dimensions": [
+      657,
+      978
+    ],
+    "note": "PNG pixel dimensions are evidence, not inferred CSS viewport dimensions."
   }
 }

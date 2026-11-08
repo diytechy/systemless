@@ -3,10 +3,6 @@
   "normal_origin_untouched": "http://localhost:8087",
   "test_origin": "http://localhost:55847",
   "browser_id": "2",
-  "viewport": [
-    672,
-    1000
-  ],
   "logical_clockwerx": [
     640,
     480
@@ -172,12 +168,18 @@
     {
       "id": "owned-bolo-v1",
       "route": "/bolo/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/bolo.json",
+      "scene": "OfflineTutorial water/riverapproach, instructiondialogcleared andboatstoppedafterA, noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-bonk-1-4-2-v1",
       "route": "/bonk-1-4-2/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/bonk.json",
+      "scene": "Level1 facegrid initially, noinput20seconds evolves backtolevelselector beforepostcaptureinput",
+      "accepted_change": null
     },
     {
       "id": "owned-bonkheads-deluxe-v1",
@@ -393,5 +395,10 @@
       "status": "singledefault26.024Hz contextualcounterdeficit; no candidate yet; activeMleft/Ndown andpause established, originalpaceunknown",
       "accepted_change": null
     }
-  ]
+  ],
+  "clock_comparison_requested_viewport": [
+    672,
+    1000
+  ],
+  "geometry_note": "Clock final9 comparison verified actual CSS615x460.75/backing640x480. Later release followup parts use default IAB geometry unless individually measured. Saved PNG dimensions are not asserted CSS viewport dimensions; no uniform672x1000 claim for smokes."
 }

@@ -32,7 +32,7 @@ Canonical right-facing SVG angle, screen Y down: `((2*halfIndex)&63)*2π/64`. De
 
 ## Protected dots and contact
 
-`DOIsInvulnerable:CODE6:3f76–3f94` reads DOInfo+0x1f. `DOCreate:378a–3794` copies DOSpec at DOInfo+0x14, so this is DOSpec+0x0b. `DOCreateAll:3a8a–3a96` loads it from first flags-word **0x2000**, only for present dots, clearing it if activation mask misses active mode (`3ae2–3af6`). This is independent of bonus, goal, initial0x4000 state and visual color. `isProtectedDot` exposes the rule.
+`DOIsInvulnerable:CODE6:3f76–3f94` reads DOInfo+0x1f. `DOCreate:378a–3794` copies DOSpec at DOInfo+0x14, so this is DOSpec+0x0b. `DOCreateAll:3a9c–3aa6` loads it from first flags-word **0x40**, only for present dots, clearing it if activation mask misses active mode (`3ae2–3af6`). This is independent of bonus, goal, initial0x4000 state and visual color. `isProtectedDot` exposes the rule.
 
 After visible-enemy outline contact and the same-pivot angular gate, `WAHitEnemy:e5a2–e5d2` tests enemy WAInfo+0x28. This is true for ordinary hands, false for types4/5 (`daa4–dade`). If true and the **hero's current pivot** is invulnerable, it plays sound40 without reporting death. Otherwise it calls `RODied(hero,0)`. Type5 has an earlier special branch and is outside this ordinary-hand rule. Spikes has zero protected dots and enemies of types2/3, so its qualified enemy contacts are lethal. SP bypasses dot protection and calls `RODied(hero,8)`.
 
@@ -47,3 +47,5 @@ SP sprite-clock clarification: i%4 is the initial frame; floor((clientCount+(i&3
 ## Delivery
 
 Eleven synthetic tests pass in `hazards.test.mjs`, including protection gating,64-angle initial phase, strict clock thresholds and long-gap collapse. The private qualified profile has260 original source frames; all twenty prior payload hashes are unchanged. Companion JSON records current paths/hashes. No browser/emulator/build/benchmark, original-media/save change, commit or upload ran. Source workload and writable files are released to the coordinator.
+
+Scoped correction during Some Dots preparation: the earlier raw0x2000 claim was a stack-local offset error. Raw0x40 maps to DOSpec+0xb/DOInfo+0x1f; raw0x2000 maps to a separate DOSpec+0xd field. Accepted catalog levels1–5 contain neither special bit, and their runtime gate still rejects both. This correction does not qualify Some Dots or raw0x2000 semantics.

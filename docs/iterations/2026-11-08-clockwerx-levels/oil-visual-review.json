@@ -1,0 +1,310 @@
+{
+  "schema": "clockwerx-oil-visual-review-v1",
+  "status": "actual-browser-amber-static-color-improvement-confirmed",
+  "initialVisual": {
+    "native": {
+      "threshold": "R>G+25 and G>B+20 within fixed pool ROI",
+      "bounds": [
+        345,
+        173,
+        360,
+        188
+      ],
+      "pixels": 164,
+      "meanRgb": [
+        140.08536585365854,
+        84.5,
+        0.0
+      ]
+    },
+    "browser": {
+      "threshold": "R>G+25 and G>B+20 within fixed pool ROI",
+      "bounds": [
+        345,
+        173,
+        360,
+        188
+      ],
+      "pixels": 193,
+      "meanRgb": [
+        179.04145077720207,
+        120.19689119170984,
+        42.77720207253886
+      ]
+    }
+  },
+  "baseline": {
+    "payloads": 47,
+    "unchanged": 47
+  },
+  "recommendation": "Retain amber revision: static body color improved, original bounds retained; no motion or gameplay claim",
+  "timeline": {
+    "captures": 41,
+    "subOneBestFits": 34,
+    "first24IdleMaximumError": 0.4870259481037924,
+    "firstDistinctWakeTick": 2714,
+    "distinctApproachTicks": [
+      2984,
+      3014,
+      3044
+    ],
+    "spawnBracketExclusiveInclusive": [
+      3044,
+      3074
+    ],
+    "standingThroughTick": 3314,
+    "firstTravelTick": 3344,
+    "nativeMinusModelTickOffset": 1549,
+    "modelPredictionsNativeTicks": {
+      "trigger": 2701,
+      "acquisition": 2955,
+      "spawn": 3069
+    },
+    "matchesBoundary": "Original opaque colored source pixels only, gray shadows excluded; identical frame/subregion alternatives retained privately",
+    "limitations": [
+      "No exact trigger tick from repeated frame0",
+      "Approach-start19 and dormant0 overlap visually",
+      "Standing DP and travel images have color-only alternatives",
+      "Hero/death/fade overlays obscure later phase/reset timing"
+    ]
+  },
+  "privateFits": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\visual-review\\native-frame-fits.json",
+    "sha256": "db10b259e41b81057f38d72b5ef06c4b016d7e5cc6e611b8c8a5537fdcef7410"
+  },
+  "inputs": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\browser-idle.png",
+      "sha256": "2f741e77866b4ac582e0f11ec5c6b355b805446575d3d4e03d9b1da24298e4b8"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\native-play-01\\initial-after-reveal.png",
+      "sha256": "32c2017714d809520a64d03951e3d9ed7566f90d6864e7e2cd1ad62ebbc5c430"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\native-play-01\\report.json",
+      "sha256": "06e818172d113851efb3022d5dcf34822e90e4c16fab022b95100a992025c230"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\native-script-model.json",
+      "sha256": "affc613dc1df71090ef7bb5d7af86d7ad6f6b6a1f919f581cd676b872ef41513"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\source-profile.json",
+      "sha256": "60aa1f3324d0c1508ed12a85cd3f83336542c6f7578afb2a686ec953aa057099"
+    }
+  ],
+  "writes": [
+    "oil-visual-review.md",
+    "oil-visual-review.json",
+    "private visual-review/fit-existing.py",
+    "private visual-review/native-frame-fits.json",
+    "private amber-candidate/ atlases, preparation script, previews and color report",
+    "private visual-review/actual-browser-amber-review.json"
+  ],
+  "workloadReleased": true,
+  "amberCandidate": {
+    "schema": "clockwerx-oil-amber-candidate-v1",
+    "scope": "Only colors and highlight radii/opacity changed; smooth body silhouettes, dimensions, atlas frames, source colliders and shadows unchanged",
+    "replacements": {
+      "#ffce51": "#f1b400",
+      "#efa338": "#9d6000",
+      "#ba7621": "#874e00",
+      "#703b13": "#704000",
+      "#704217": "#704000",
+      "#ffdc63": "#f7d300"
+    },
+    "highlight": {
+      "radiusScale": 0.55,
+      "opacity": 0.55
+    },
+    "files": [
+      {
+        "file": "oil-puddles.svg",
+        "sha256": "48baecc8db96ddbfe1ad3511b81627ebe41b1d3bcd366f63bdd61bb600c6d3d4",
+        "previousSha256": "47089758ed7e211feb22072cde1a10906d62c603013e1278fc0e2422b9b543c9"
+      },
+      {
+        "file": "oil-droplets.svg",
+        "sha256": "50d9f59bcf2729cd452329722106eb6b9595238c592c532c83fa0f252c0bca6d",
+        "previousSha256": "d3feaa85e43dd3a9b7ae619a4520ad23094606716649cdaa684b449b1459e008"
+      }
+    ],
+    "originalCandidateUnchanged": true,
+    "doorsBaselinePayloadsPreserved": 47,
+    "metrics": [
+      {
+        "group": 1200,
+        "frame": 0,
+        "sourceColoredMeanRgb": [
+          139.3658536585366,
+          83.88414634146342,
+          0.0
+        ],
+        "candidateColoredMeanRgb": [
+          136.76041666666666,
+          83.08854166666667,
+          1.75
+        ],
+        "sourceBodyPixelCount": 164,
+        "candidateBodyPixelCount": 192
+      },
+      {
+        "group": 1200,
+        "frame": 3,
+        "sourceColoredMeanRgb": [
+          133.6172839506173,
+          79.20370370370371,
+          0.0
+        ],
+        "candidateColoredMeanRgb": [
+          135.8783068783069,
+          80.92063492063492,
+          0.9259259259259259
+        ],
+        "sourceBodyPixelCount": 162,
+        "candidateBodyPixelCount": 189
+      },
+      {
+        "group": 1200,
+        "frame": 24,
+        "sourceColoredMeanRgb": [
+          143.08333333333334,
+          86.32738095238095,
+          0.0
+        ],
+        "candidateColoredMeanRgb": [
+          134.9848484848485,
+          80.0959595959596,
+          1.1313131313131313
+        ],
+        "sourceBodyPixelCount": 168,
+        "candidateBodyPixelCount": 198
+      },
+      {
+        "group": 1200,
+        "frame": 27,
+        "sourceColoredMeanRgb": [
+          149.36893203883494,
+          91.97572815533981,
+          0.0
+        ],
+        "candidateColoredMeanRgb": [
+          138.99163179916317,
+          83.69037656903765,
+          0.698744769874477
+        ],
+        "sourceBodyPixelCount": 206,
+        "candidateBodyPixelCount": 239
+      },
+      {
+        "group": 2200,
+        "frame": 0,
+        "sourceColoredMeanRgb": [
+          148.46428571428572,
+          93.25,
+          0.0
+        ],
+        "candidateColoredMeanRgb": [
+          143.00757575757575,
+          89.3030303030303,
+          0.0
+        ],
+        "sourceBodyPixelCount": 112,
+        "candidateBodyPixelCount": 132
+      },
+      {
+        "group": 2200,
+        "frame": 5,
+        "sourceColoredMeanRgb": [
+          153.74590163934425,
+          96.35245901639344,
+          0.0
+        ],
+        "candidateColoredMeanRgb": [
+          142.85714285714286,
+          88.93571428571428,
+          0.0
+        ],
+        "sourceBodyPixelCount": 122,
+        "candidateBodyPixelCount": 140
+      },
+      {
+        "group": 2200,
+        "frame": 83,
+        "sourceColoredMeanRgb": [
+          153.25806451612902,
+          95.94354838709677,
+          0.0
+        ],
+        "candidateColoredMeanRgb": [
+          142.78571428571428,
+          88.87142857142857,
+          0.0
+        ],
+        "sourceBodyPixelCount": 124,
+        "candidateBodyPixelCount": 140
+      }
+    ],
+    "preview": "Local ImageMagick; not browser acceptance",
+    "manifestEdited": false
+  },
+  "localAtlasRasterPreviewPasses": 2,
+  "newNativeBrowserBuildOrBenchmarkWorkloads": false,
+  "actualBrowserAmberReview": {
+    "boundary": "Actual saved browser captures, fixed pool ROI; body threshold R>G+25 and G>B+20. Error samples exactly the164native body pixels; no temporal comparison outside static dormant pool.",
+    "results": [
+      {
+        "file": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\native-play-01\\initial-after-reveal.png",
+        "sha256": "32c2017714d809520a64d03951e3d9ed7566f90d6864e7e2cd1ad62ebbc5c430",
+        "bodyBounds": [
+          345,
+          173,
+          360,
+          188
+        ],
+        "bodyPixels": 164,
+        "bodyMeanRgb": [
+          140.08536585365854,
+          84.5,
+          0.0
+        ],
+        "nativeBodyMaskMeanAbsoluteChannelError": 0.0
+      },
+      {
+        "file": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\browser-idle.png",
+        "sha256": "2f741e77866b4ac582e0f11ec5c6b355b805446575d3d4e03d9b1da24298e4b8",
+        "bodyBounds": [
+          345,
+          173,
+          360,
+          188
+        ],
+        "bodyPixels": 193,
+        "bodyMeanRgb": [
+          179.04145077720207,
+          120.19689119170984,
+          42.77720207253886
+        ],
+        "nativeBodyMaskMeanAbsoluteChannelError": 44.24593495934959
+      },
+      {
+        "file": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\browser-amber-idle.png",
+        "sha256": "813c90f9a1be96c7af68a08a0c01170078b64d259f05a49459495a8ff598bbb0",
+        "bodyBounds": [
+          345,
+          173,
+          360,
+          188
+        ],
+        "bodyPixels": 192,
+        "bodyMeanRgb": [
+          137.73958333333334,
+          84.91145833333333,
+          3.9270833333333335
+        ],
+        "nativeBodyMaskMeanAbsoluteChannelError": 14.66260162601626
+      }
+    ]
+  }
+}

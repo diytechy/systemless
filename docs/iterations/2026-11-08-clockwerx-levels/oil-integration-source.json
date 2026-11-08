@@ -1,0 +1,224 @@
+{
+  "schema": "clockwerx-oil-integration-source-v1",
+  "status": "source-contract-resolved-runtime-validation-owned-by-root",
+  "catalog": {
+    "ordinal": 5,
+    "resourceId": 224,
+    "rawHumanActorTypes": [
+      0,
+      6
+    ]
+  },
+  "staticDots": {
+    "serializedSlots": 88,
+    "stride": 11,
+    "present": 50,
+    "allPresentSecondaryRaw": 15,
+    "rawPixelOffsetFromLogicalCenter": [
+      -16,
+      -15
+    ],
+    "humanPermission": "presence",
+    "nonhumanPermission": "presence",
+    "secondaryActivationMask": 15,
+    "secondaryColorMask": 65520,
+    "difficultyChannelMasks": {
+      "red": [
+        16,
+        32,
+        64,
+        128
+      ],
+      "green": [
+        256,
+        512,
+        1024,
+        2048
+      ],
+      "blue": [
+        4096,
+        8192,
+        16384,
+        32768
+      ]
+    },
+    "colorFrameFormula": {
+      "bonus": "1 + red + 2*green + 4*blue",
+      "ordinary": "9 + red + 2*green + 4*blue"
+    },
+    "oilFrames": {
+      "uncollectedBonus": 1,
+      "ordinaryCollectedUnderGoal": 9,
+      "goalDecoration": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ]
+    },
+    "initialBackgroundizedMainDots": 41,
+    "initialVisibleBonusMainDots": 9,
+    "collectedBonus": "frame1 to9; remains visible, background flag false",
+    "goal": "main frame9 collider; separate17..22 decoration has no outlines"
+  },
+  "adapters": {
+    "findGrabbable": {
+      "slotOrder": "0..87",
+      "eligible": "saved presence+0x18",
+      "coordinates": "current raw dot pixel",
+      "test": "inclusive target +/-6 in X and Y; target +=48*GridPos",
+      "return": "first match, irrespective of permission"
+    },
+    "canGrab": {
+      "false": "read first found nonhuman byte+0x10",
+      "true": "read first found human byte+0x11",
+      "deniedFirstMatch": "return false without continuing"
+    },
+    "checkCollisions": {
+      "slotOrder": "0..87",
+      "eligible": "main sprite exists AND (DOInfo+0x12 OR sprite visibility+0x37)",
+      "test": "current main frame RAW source outline against DP current frame",
+      "return": "first collision; DP then ignores previousDot",
+      "exclude": "misc goal decoration and attention flourishes"
+    }
+  },
+  "clip": {
+    "sourceLocalFull": {
+      "left": 0,
+      "top": 0,
+      "right": 584,
+      "bottom": 424
+    },
+    "canonicalFull": {
+      "left": 28,
+      "top": 28,
+      "right": 612,
+      "bottom": 452
+    },
+    "frameOrigin": [
+      28,
+      28
+    ],
+    "testedPosition": "raw sprite base, not descriptor extents",
+    "comparison": "outside on <left, >right, <top, >bottom; equality inside",
+    "when": "active collision phases only, after contact reposition",
+    "nativeLimitation": "current SU clip can be reduced by window/screen clipping"
+  },
+  "traversal": {
+    "layerOrder": [
+      [
+        5
+      ],
+      [
+        4,
+        7
+      ],
+      [
+        8,
+        9
+      ],
+      [
+        3
+      ],
+      [
+        10,
+        15
+      ],
+      [
+        11
+      ],
+      [
+        2
+      ],
+      [
+        1
+      ],
+      [
+        0
+      ],
+      [
+        12
+      ],
+      [
+        13,
+        14,
+        16
+      ]
+    ],
+    "oilLayer": 11,
+    "enemyWALayer": 1,
+    "humanWALayer": 0,
+    "priorityZeroInsertion": "tail append",
+    "nextPointer": "cached BEFORE callback; resumed from cached pointer",
+    "appendVisitedSameSweep": "possible if an older successor existed; not if current sprite was old tail",
+    "newFrameCallbackSameCount": false,
+    "reason": "new PU-spawned DP, cloned DP and faders snapshot live client count",
+    "cloneSynchronousOrder": [
+      "DPCreate with clock snapshot and tail insertion",
+      "DPGrabbed initial permission/death",
+      "inverse axis preference and DPCalcDir",
+      "child moveDeadline=1",
+      "parent clone deadline reset",
+      "parent base/frame/previousDot/currentDot update",
+      "parent one-frame advance"
+    ]
+  },
+  "humanGrab": {
+    "hook": "DPWandGrabbed at start of DOGrabbed",
+    "deathGate": "RODidDie(hero) before goal and bonus",
+    "deathSuppressesGoal": true,
+    "deathSuppressesBonus": true,
+    "initialAttachment": "temporarily clears bonus flag, calls DOGrabbed, restores bonus"
+  },
+  "sourceReferences": {
+    "dotDecode": "CODE6:393c-3b80",
+    "dotSpecAndPermissions": "CODE6:3484-36b0",
+    "colorAndFrames": "CODE6:3752-3800;2c08-2e28",
+    "goalMisc": "CODE6:2e58-2e8a;3118-327e",
+    "dotOptimize": "CODE6:3cca-3dae",
+    "dotUnbonus": "CODE6:4944-49e2",
+    "rawPixel": "CODE6:2a80-2aa0;2b60-2ba6",
+    "lookup": "CODE6:4260-44fe",
+    "dotCollision": "CODE6:4d0a-4d56",
+    "universeFrame": "CODE1:5900-595e;CODE4:4568-46b4;0008-01bc",
+    "clip": "CODE4:475c-482c;CODE7:09b0-0a14",
+    "layerOrder": "CODE7:4652-46e8;4ea2-4f0a",
+    "actorLayer": "CODE6:dbe0-dbee",
+    "spriteInsertion": "CODE4:2594-2644",
+    "traversal": "CODE4:4a66-4a9c",
+    "clockGate": "CODE4:3e6c-3e9a",
+    "humanDeathGate": "CODE6:4612-461a;471e-472a;CODE7:5274-5286"
+  },
+  "privateProfile": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\oil\\dot-source-outlines.json",
+    "sha256": "3015133401f7df3b7325692b0d6d10ef6db0449cf54070d65db04a151ffb97a5",
+    "frames": 207,
+    "scope": "all frames stored for direct indexing; only bounded static subset behavior-reviewed",
+    "candidatePayloadsUnchanged": 50,
+    "candidateManifestSha256": "aecf537aeb7e48e6ac1ba02ffcc5f8091ba6a346a1758102defea321e43d75a8"
+  },
+  "helper": {
+    "api": "advanceDroplet optional onClone(event,parentSnapshot)",
+    "synchronous": true,
+    "returnedCloneEvent": "diagnostic; do not dispatch twice",
+    "testCommand": "node --test prototypes/clockwerx-html5/oil.test.mjs",
+    "passed": 12,
+    "failed": 0,
+    "files": {
+      "oil.mjs": "605bf182b14cf8a1d69b6b493e4305e3bed23a5cf940b540829ce26495382120",
+      "oil.test.mjs": "c83dba8f9a18aefc7d172a62109d1dcd0f2b48d892410493973a3125ee1bc168"
+    }
+  },
+  "scope": {
+    "nativeRuns": 0,
+    "browserRuns": 0,
+    "builds": 0,
+    "benchmarks": 0,
+    "commits": 0,
+    "uploads": 0,
+    "rootRuntimeEdits": false,
+    "releasedToRoot": true
+  }
+}

@@ -1,0 +1,292 @@
+{
+  "schema": "clockwerx-follow-on-6-8-review-v1",
+  "status": "source requirements prepared; not gameplay acceptance",
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\follow-on-6-8",
+  "levels": [
+    {
+      "ordinal": 6,
+      "resourceId": 225,
+      "title": "Combo",
+      "sourceResourceSha256": "b8f85d924f7fdc668c15838a81d772e2889e224da1314602dba725b57af29b64",
+      "decodedInputSha256": "db19de2a555fb7c201c5890ec567ee9615d3e43a17df4b25b919585297724615",
+      "structuralStatus": "complete",
+      "displaySizeRaw": 8,
+      "presentDots": 53,
+      "bonuses": 5,
+      "goals": 1,
+      "nonemptySections": {
+        "SP": 4,
+        "WL": 14,
+        "PU": 1,
+        "WP": 6,
+        "WA": 4,
+        "TX": 2
+      },
+      "childActiveActors": [
+        {
+          "type": 0,
+          "clockClass": 0,
+          "hasProgram": false,
+          "checksWalls": true
+        },
+        {
+          "type": 6,
+          "clockClass": 0,
+          "hasProgram": false,
+          "checksWalls": true
+        },
+        {
+          "type": 1,
+          "clockClass": 1,
+          "hasProgram": false,
+          "checksWalls": false
+        }
+      ],
+      "childInactiveActorCount": 1,
+      "activePrograms": 0,
+      "unusedStoredPrograms": 6,
+      "dotFlags": {
+        "0x1": 40,
+        "0x4001": 7,
+        "0x4003": 2,
+        "0x3": 3,
+        "0x5": 1
+      },
+      "dotAttributes": {
+        "0xf": 51,
+        "0xff": 1,
+        "0xe00f": 1
+      },
+      "conditionalDotMasks": false,
+      "inlinePrograms": 0,
+      "mergedWallTiles": 75,
+      "wallFrames": [
+        0,
+        1,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        18,
+        19
+      ],
+      "doorTypes": [],
+      "activePuddleKinds": [
+        0
+      ],
+      "nativeQualified": false,
+      "visualQualified": false,
+      "activated": false,
+      "gates": [
+        "Oil kind0 wake/acquisition/approach native qualification",
+        "Oil source traversal and dot collision integration",
+        "combined human spike/oil/wall callback order",
+        "ordinary red enemy immunity to walls/puddle wakeups",
+        "difficulty-dependent color remains white at Child"
+      ]
+    },
+    {
+      "ordinal": 7,
+      "resourceId": 226,
+      "title": "More Spikes",
+      "sourceResourceSha256": "601329c8e9e919edd5e2f6e60b5ee548130a3fa657af162c389970f70f6da845",
+      "decodedInputSha256": "92200cd04b52119fffe834a67561860ec7495b7a9ee4035a442d5a96a247d8f9",
+      "structuralStatus": "complete",
+      "displaySizeRaw": 8,
+      "presentDots": 62,
+      "bonuses": 11,
+      "goals": 1,
+      "nonemptySections": {
+        "SP": 6,
+        "WP": 12,
+        "WA": 4,
+        "TX": 7
+      },
+      "childActiveActors": [
+        {
+          "type": 0,
+          "clockClass": 0,
+          "hasProgram": false,
+          "checksWalls": true
+        },
+        {
+          "type": 6,
+          "clockClass": 0,
+          "hasProgram": false,
+          "checksWalls": true
+        },
+        {
+          "type": 2,
+          "clockClass": 1,
+          "hasProgram": false,
+          "checksWalls": false
+        },
+        {
+          "type": 3,
+          "clockClass": 1,
+          "hasProgram": true,
+          "checksWalls": false
+        }
+      ],
+      "childInactiveActorCount": 0,
+      "activePrograms": 1,
+      "unusedStoredPrograms": 11,
+      "dotFlags": {
+        "0x1": 47,
+        "0x3": 9,
+        "0x4001": 3,
+        "0x4005": 1,
+        "0x4003": 2
+      },
+      "dotAttributes": {
+        "0xf": 60,
+        "0xf0f": 1,
+        "0xf00f": 1
+      },
+      "conditionalDotMasks": false,
+      "inlinePrograms": 0,
+      "mergedWallTiles": 0,
+      "wallFrames": [],
+      "doorTypes": [],
+      "activePuddleKinds": [],
+      "nativeQualified": false,
+      "visualQualified": false,
+      "activated": false,
+      "gates": [
+        "active enemy program counter and reset",
+        "cardinal post-animation conditional bounce",
+        "nonhuman DOCanGrab exact query",
+        "native blue reversal and phase qualification",
+        "new spike placements and clearance"
+      ]
+    },
+    {
+      "ordinal": 8,
+      "resourceId": 227,
+      "title": "More Doors",
+      "sourceResourceSha256": "730995924ad5fcfb283bc5ba1e4822c47206e4fec18c25111efbe38d6620b1cd",
+      "decodedInputSha256": "ec8193c04a8a770e7598cf30e5ad309f04deaa0aba17038adbe767d79ded6b13",
+      "structuralStatus": "complete",
+      "displaySizeRaw": 8,
+      "presentDots": 57,
+      "bonuses": 9,
+      "goals": 1,
+      "nonemptySections": {
+        "WL": 9,
+        "DR": 3,
+        "DS": 6,
+        "WP": 7,
+        "WA": 2,
+        "TX": 4
+      },
+      "childActiveActors": [
+        {
+          "type": 0,
+          "clockClass": 0,
+          "hasProgram": false,
+          "checksWalls": true
+        },
+        {
+          "type": 6,
+          "clockClass": 0,
+          "hasProgram": false,
+          "checksWalls": true
+        }
+      ],
+      "childInactiveActorCount": 0,
+      "activePrograms": 0,
+      "unusedStoredPrograms": 7,
+      "dotFlags": {
+        "0x1": 44,
+        "0x4001": 3,
+        "0x3": 7,
+        "0x4003": 2,
+        "0x4005": 1
+      },
+      "dotAttributes": {
+        "0xf": 57
+      },
+      "conditionalDotMasks": false,
+      "inlinePrograms": 0,
+      "mergedWallTiles": 23,
+      "wallFrames": [
+        0,
+        1,
+        7,
+        9,
+        10,
+        13,
+        14,
+        15,
+        16,
+        18
+      ],
+      "doorTypes": [
+        3,
+        3,
+        3
+      ],
+      "activePuddleKinds": [],
+      "nativeQualified": false,
+      "visualQualified": false,
+      "activated": false,
+      "gates": [
+        "long-horizontal leaf/cap/wall placement",
+        "type3 lethal outline native qualification",
+        "paired same-color entry edges and transit reversal",
+        "native/browser input-only route"
+      ]
+    }
+  ],
+  "enemyProgramContract": {
+    "sourceRoutines": [
+      "CODE6:f10c-f178",
+      "CODE6:dc3a-dc40",
+      "CODE6:d938-d98a",
+      "CODE6:cbac-cbd8",
+      "CODE6:caba-cb80",
+      "CODE6:c65e-c79c"
+    ],
+    "consumeAt": "after animation/collision/stop-sliding, on source frame&15==0 and not sliding",
+    "counter": "spec word6; read then increment; wrap to1 beyond Pascal length; advance even when action fails",
+    "bounce": "nonhuman DOCanGrab success gates reversal; no pivot transfer",
+    "supportedIncrement": "only bounce-only active program required by these three resources; retain gate for unimplemented instructions"
+  },
+  "sourceClockRatios": {
+    "class0": {
+      "multiplier": 1,
+      "normalDivisor": 2,
+      "slowDivisor": 2
+    },
+    "class1": {
+      "multiplier": 1,
+      "normalDivisor": 2,
+      "slowDivisor": 4
+    }
+  },
+  "assetCoverage": {
+    "baseline": "oil/assets/manifest.json",
+    "allRequiredInventoryPresent": true,
+    "nativeVisualAcceptance": false,
+    "newArtGenerated": false
+  },
+  "oilNarrativeCorrection": "Oil224 actor types are0 and6, not both6; released file not edited",
+  "checks": [
+    "queue mapping",
+    "decoded actor/mask/program/dot inventory",
+    "source routine trace",
+    "read-only helper geometry",
+    "manifest descriptor/frame inventory"
+  ],
+  "runtimeEdits": false,
+  "nativeWorkloads": 0,
+  "browserWorkloads": 0,
+  "buildsOrBenchmarks": 0,
+  "released": true,
+  "activeWorkloads": 0
+}

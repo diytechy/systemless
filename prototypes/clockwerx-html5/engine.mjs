@@ -37,6 +37,9 @@ export class MovementGame {
     h.pivot=target.id;h.transfers++;if(action==='swing')h.direction*=-1;
     h.angle=hit+Math.PI+remaining*h.direction;h.blocked=hit+Math.PI;this.event(action,h,target);
     if(h===this.player){
+      // DOGrabbed checks the latched death from DPWandGrabbed before bonus or
+      // goal effects. Ordinary Movement has no additional grab observer.
+      if(this.onHumanGrab?.(target)===false)return;
       if(target.kind==='bonus'&&!target.collected){target.collected=true;this.event('bonus',h,target);}
       if(target.kind==='goal'){this.complete=true;this.event('goal',h,target);}
     }

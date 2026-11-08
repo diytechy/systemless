@@ -34,11 +34,14 @@ test('same-pivot collision gate handles frame wrap and different pivots', () => 
   assert.equal(enemyFrameGate(1,2,32,0),true);
 });
 test('protection requires a present flag-bearing dot and active mask', () => {
-  const cell={present:true,flagsRaw:0x2001,activationMaskRaw:2};
+  const cell={present:true,flagsRaw:0x4041,activationMaskRaw:2};
   assert.equal(isProtectedDot(cell,2),true);
   assert.equal(isProtectedDot(cell,1),false);
   assert.equal(isProtectedDot({...cell,present:false},2),false);
   assert.equal(isProtectedDot({...cell,flagsRaw:0x4003},2),false);
+  assert.equal(isProtectedDot({...cell,flagsRaw:0x2000},2),false);
+  assert.equal(isProtectedDot({...cell,flagsRaw:0x2001},2),false);
+  assert.equal(isProtectedDot({...cell,flagsRaw:0x41},2),true);
 });
 test('serialized half-index doubles into actual 64-angle source frame', () => {
   assert.equal(actorInitialFrame(24),48);

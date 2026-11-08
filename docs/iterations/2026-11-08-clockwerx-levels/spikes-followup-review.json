@@ -5,7 +5,7 @@
     "SP per-axis descriptor offset(-8,-7), WA(-44,-43)",
     "SP unscaled base40/client divisor5 and16units per guesttick",
     "WA half-index doubled to64-angle frame",
-    "protected dot flag0x2000 with presence/activation gating"
+    "protected dot flag0x40 with presence/activation gating"
   ],
   "nativeQualificationStillRequired": [
     "SVG spike phases and shadow appearance",
@@ -65,5 +65,11 @@
     "phaseCount": 4,
     "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/spikes/native-anchor-review.json"
   },
-  "deathCorrection": "Prior hero-only conclusion retracted; see death-astra-review.md. gameType0 enters frozen substate3, completes DE barrier, ROReset and reveal; reset both initial star chains."
+  "deathCorrection": "Prior hero-only conclusion retracted; see death-astra-review.md. gameType0 enters frozen substate3, completes DE barrier, ROReset and reveal; reset both initial star chains.",
+  "protectedFlagCorrection": {
+    "previousClaim": "0x2000",
+    "verifiedRawFlag": "0x40",
+    "cause": "DOSpec local base offset error",
+    "scope": "Accepted catalog1\u20135 have neither bit; runtime gate still rejects both; no new level acceptance."
+  }
 }

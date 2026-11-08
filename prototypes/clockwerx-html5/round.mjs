@@ -5,6 +5,7 @@ import {outlineCollision,enemyFrameGate,createSourceTimerChain} from './hazards.
 import {createDeathClock} from './death.mjs';
 import {advanceWallContactGuard} from './walls.mjs';
 import {createDoorSystem,findDoorContact} from './doors.mjs';
+import {OilRuntime} from './oil-runtime.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -16,11 +17,12 @@ export function worldOutline(profile,group,frame,point){
 }
 
 export class SourceRound extends MovementGame {
- constructor(board,{outlines,doorOutlines,deathFactory,guestTicksPerSecond=60}={}){
+ constructor(board,{outlines,doorOutlines,oilOutlines,dotOutlines,oilBounds,deathFactory,guestTicksPerSecond=60}={}){
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
+  if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds});
  }
  reset(){
   super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
@@ -33,6 +35,7 @@ export class SourceRound extends MovementGame {
   this.doorSystem.reset(this.doorClock.advance(0).clientCount);
   this.spikeStates=new Map((this.board.spikes||[]).map(s=>[s.id,{frame:s.phase,reference:Math.floor((this.spikeCount+s.phase)/4)}]));
   this.death=null;this.roundRestarts=0;this.elapsedTime=0;this.pendingReverse=false;
+  this.oil?.reset(this.player.pivot);
  }
  makeHand(hand){return {...super.makeHand(hand),wallContacts:0};}
  actorFrame(hand,count){return Math.floor(count*(hand.multiplier??1)/(hand.divisor??2));}
@@ -88,8 +91,14 @@ export class SourceRound extends MovementGame {
   this.event(type,hand,this.point(hand));
  }
  beginDeath(cause){
+  if(this.death)return;
   this.death=this.deathFactory(this.point(this.player),this.player,this.deathClock);
   this.event('death',this.player);this.events[this.events.length-1].cause=cause;
+ }
+ onHumanGrab(dot){
+  const deaths=this.oil?.humanGrab(dot.id)||[];
+  for(const event of deaths)this.beginDeath({reason:'oil',sourceReason:event.reason,object:dot.id});
+  return !this.death;
  }
  restartAfterDeath(){
   const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,
@@ -104,6 +113,7 @@ export class SourceRound extends MovementGame {
   const elapsed=Math.floor(this.guestTickRemainder+1e-9);this.guestTickRemainder-=elapsed;
   this.spikeCount=this.spikeClock.advance(elapsed).clientCount;
   this.deathClock.advance(elapsed);
+  this.oil?.advanceClocks(elapsed);
   const doorCount=this.doorClock.advance(elapsed).clientCount;
   const actorCount=this.actorClock.advance(elapsed).clientCount,substeps=new Set();
   for(const hand of [this.player,...this.enemies]){
@@ -120,6 +130,13 @@ export class SourceRound extends MovementGame {
   // Door callbacks observe one changed shared count, rather than catching up
   // every missed phase. Cross-layer source traversal phase remains approximate.
   if(!this.death)this.doorSystem.observeClock(doorCount);
+  // Physical source layer11 (PU/DP) precedes enemy1, then human0. A droplet
+  // arrival may latch death and freeze the remaining sprite callbacks.
+  if(!this.death)this.oil?.processSprites({onDeath:reason=>this.beginDeath({reason:'oil',sourceReason:reason}),isFrozen:()=>!!this.death});
+  if(!this.death)for(const enemy of this.enemies){
+   enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);
+   if(substeps.has(enemy)){const wall=this.wallCollision(enemy);if(wall)this.bounceFromWall(enemy,wall);this.contactSwitch(enemy);}
+  }
   // Human spike/wall tests precede input and animation. The contact guard is
   // evaluated at source-class clock changes, never on every 120Hz update.
   // Continuous poses/input remain a disclosed approximation of WA callbacks.
@@ -127,6 +144,7 @@ export class SourceRound extends MovementGame {
    const spike=this.spikeCollision();
    if(spike)this.beginDeath(spike);
    else{
+    this.oil?.contactHuman(this.collider(this.player));
     const wall=this.wallCollision(this.player),door=wall?null:this.doorCollision(this.player);
     if(door?.lethal)this.beginDeath({reason:'door',object:door.doorIndex});
     else{
@@ -146,14 +164,10 @@ export class SourceRound extends MovementGame {
    if(this.death.complete)this.restartAfterDeath();
   }else{
    super.update(dt,input);if(this.complete)return;
-   for(const enemy of this.enemies){
-    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);
-    if(substeps.has(enemy)){const wall=this.wallCollision(enemy);if(wall)this.bounceFromWall(enemy,wall);this.contactSwitch(enemy);}
-   }
    // Hero/enemy overlaps are a separate periodic pass after sprite processing.
-   const hit=this.enemyCollision();if(hit)this.beginDeath(hit);
+   if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
   }
  }
- snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),doors:this.doorSystem.snapshot(),roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+ snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

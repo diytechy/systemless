@@ -53,6 +53,16 @@ class PilotPackagingTests(unittest.TestCase):
                 else:self.manifest['vectorAssets']['doors']={field:dict(file='missing.svg')}
                 self.save_manifest()
                 with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+
+    def test_oil_atlases_and_profiles_cannot_escape_verified_payloads(self):
+        for field in ('puddles','droplets','oilOutlinesFile','dotOutlinesFile'):
+            with self.subTest(field=field):
+                self.manifest['vectorAssets']=dict(dots=[],hands={})
+                self.manifest['scenes']=[dict(title='Synthetic',levelDefinition=dict(outlinesFile='sample.png'))]
+                if field.endswith('File'):self.manifest['scenes'][0]['levelDefinition'][field]='missing.json'
+                else:self.manifest['vectorAssets']['oil']={field:dict(file='missing.svg')}
+                self.save_manifest()
+                with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
     def test_vector_references_and_renderer_are_packaged(self):
         vector=self.assets/'hand.svg';vector.write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')

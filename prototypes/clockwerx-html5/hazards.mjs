@@ -49,11 +49,11 @@ export function enemyFrameGate(heroPivot, enemyPivot, heroFrame, enemyFrame) {
   return separation <= 4 || separation >= 60;
 }
 
-/** DOCreateAll bit 0x2000 -> DOSpec+0xb -> DOInfo+0x1f.
+/** DOCreateAll bit 0x40 -> DOSpec+0xb -> DOInfo+0x1f.
  * This protects against ordinary enemy hands, not spikes or every enemy type.
  */
 export function isProtectedDot(cell, activeMask) {
-  return Boolean(cell?.present && (cell.flagsRaw & 0x2000) &&
+  return Boolean(cell?.present && (cell.flagsRaw & 0x40) &&
     ((cell.activationMaskRaw ?? 15) & activeMask));
 }
 

@@ -5,6 +5,7 @@ import {decodeDot} from './dots.mjs';
 import {spikeGridPoint,actorInitialFrame,actorTiming} from './hazards.mjs';
 import {compileWallTiles,actorChecksWalls} from './walls.mjs';
 import {decodeDoorRecord,decodeSwitchRecord,doorGeometry,switchGeometry} from './doors.mjs';
+import {activePuddleSpecs} from './oil.mjs';
 
 const GROUPS={0:700,1:500,2:4400,3:4500,6:4300};
 const signedWord=n=>n>32767?n-65536:n;
@@ -17,13 +18,13 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false}={}){
  const unsupported=[];
  if(activeMask!==1)unsupported.push('unqualified difficulty clock');
  if(level.structuralStatus!=='complete')unsupported.push('incomplete source stream');
  if(![7,8].includes(level.header?.displaySizeRaw))unsupported.push('unqualified display-size selector');
  for(const block of level.blocks||[]){
-  if(block.count&&!['SP','WL','DR','DS','WP','WA','TX'].includes(block.kind))unsupported.push('object class '+block.kind);
+  if(block.count&&!['SP','WL','DR','DS','WP','WA','TX',...(allowOil?['PU']:[])].includes(block.kind))unsupported.push('object class '+block.kind);
   if(block.kind==='WA')for(const actor of block.records){
    if(!(actor.activationMaskRaw&activeMask))continue;
    if(!(actor.actorTypeRaw in GROUPS))unsupported.push('actor type '+actor.actorTypeRaw);
@@ -40,14 +41,15 @@ export function levelRequirements(level,{activeMask=1}={}){
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1}={}){
- const unsupported=levelRequirements(level,{activeMask});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
  const dots=level.cells.filter(c=>c.present).map(c=>{
   const state=decodeDot(c.flagsRaw);
-  return {id:`${c.column},${c.row}`,x:origin.x+c.column*48,y:origin.y+c.row*48,
+  return {id:`${c.column},${c.row}`,sourceIndex:c.row*11+c.column,x:origin.x+c.column*48,y:origin.y+c.row*48,
+   humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,
    cell:c.flagsRaw,flags:c.secondaryRaw,kind:state.goal?'goal':state.bonus?'bonus':'dot'};
  });
  const records=kind=>level.blocks.find(b=>b.kind===kind)?.records||[];
@@ -74,6 +76,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
  const switches=records('DS').map((r,id)=>{const spec=decodeSwitchRecord(r);return {id,...spec,...switchGeometry(spec,origin)};});
  return {ordinal,title,resourceId:level.resourceId,origin,dots,radius:48,distanceTolerance:1,angularSpeed,handOffsetY:1,
   player:hand(actors[0],0),demos:[],enemies:actors.slice(2).map((a,i)=>hand(a,i+2)),spikes,walls,doors,switches,
+  puddles:allowOil?activePuddleSpecs(records('PU'),activeMask):[],
   activeMask,difficulty:'Child',inactiveActorCount:records('WA').length-actors.length,
   texts:records('TX').map(t=>({font:t.fontName,size:t.fontSize,face:t.fontFaceRaw,
    style:t.renderingStyleByteRaw,x:t.positionWords[0]+28,y:t.positionWords[1]+28,

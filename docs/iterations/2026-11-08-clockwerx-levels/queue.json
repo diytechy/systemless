@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 5,
-  "currentAction": "Oil: review PU/DP source helper, integrate dot acquisition/pursuit/cloning/death clocks, native and browser qualification",
+  "currentOrdinal": 6,
+  "currentAction": "Combo: solve enemy/wall/spike route; native kind0 Oil wake/death and goal; browser/visual checks before activation",
   "levels": [
     {
       "ordinal": 1,
@@ -310,11 +310,31 @@
       "menuTitle": "Oil",
       "resourceTitle": "Oil",
       "sha256": "8c18a65f0f71fa484951a886e9e91f14845011a16491febd3e2e851c343c0639",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "oil/native-play-01/report.json",
+        "oil/native-approach-review.json",
+        "oil/native-goal-route-01/report.json",
+        "oil/native-route-review.json",
+        "oil/native-clone-01/report.json",
+        "oil/native-clone-review.json"
+      ],
+      "requirements": [
+        "PU wake/acquisition/approach spawns separateDP",
+        "source raw-dot permissions/order/outlines",
+        "250/1166guesttick delays, distinctMTclientclocks",
+        "axis pursuit/gap extension/synchronouscloning",
+        "Oil-before-hands traversal and fatal-grab suppression",
+        "32lifetime allocations, fullfreeze/reset"
+      ],
+      "svgStatus": "fifth scene activated; bounded Child goal, pursuit/reset and native clone evidence",
+      "generationConstraints": [
+        "modeldelayedwake/acquisition and raw permission lookups",
+        "preserveaxispreference/currentpreviousdot and travelphase",
+        "maintainclone/callback order and cachedhumanpivot",
+        "rejectunsupported dynamic/specialdot interactions",
+        "retaininput-onlysolution; clock-onset samples notexhaustiveproof"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 50,

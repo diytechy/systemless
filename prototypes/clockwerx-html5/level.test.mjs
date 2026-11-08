@@ -62,3 +62,11 @@ test('missing pivots, wrong human slots and unspecified clock never become playa
  const c=fixture();c.blocks[0].records[1].actorTypeRaw=2;
  assert.throws(()=>buildDecodedBoard(c,{angularSpeed:TAU}),/human actor slot/);
 });
+test('Oil activation requires explicit opt-in, filters source masks and preserves slot permissions',()=>{
+ const level=fixture();level.blocks.push({kind:'PU',count:2,records:[{rawWords:[0,0,0,0,12]},{rawWords:[0,0,1,0,15]}]});
+ assert.ok(levelRequirements(level).includes('object class PU'));
+ const board=buildDecodedBoard(level,{angularSpeed:TAU,allowOil:true});
+ assert.equal(board.puddles.length,1);assert.equal(board.puddles[0].kind,1);
+ assert.equal(board.dots[1].sourceIndex,1);assert.equal(board.dots[1].humanCanGrab,true);
+ assert.equal(board.dots[1].nonhumanCanGrab,true);assert.equal(board.dots[1].sourceCollidable,true);
+});

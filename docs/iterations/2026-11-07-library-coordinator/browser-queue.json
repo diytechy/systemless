@@ -287,7 +287,10 @@
     {
       "id": "owned-fantastic-voyage-v1",
       "route": "/fantastic-voyage/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/fantastic-voyage.json",
+      "scene": "Mouthroom/player/allies10/score0/mission0, timerabout00:57tocaptureend00:39, noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-gold-digger-v1",
@@ -440,8 +443,10 @@
     },
     {
       "id": "owned-bikaka-1-4-v1",
-      "status": "singledefault26.024Hz contextualcounterdeficit; no candidate yet; activeMleft/Ndown andpause established, originalpaceunknown",
-      "accepted_change": null
+      "status": "lightSol rawdata/candidate-protocol review active, no setting accepted",
+      "accepted_change": null,
+      "task_name": "/root/bikaka_browser_review",
+      "brief": "bikaka-1-4/browser-followup-brief.md"
     },
     {
       "id": "owned-brickles-plus-3-0-v1",

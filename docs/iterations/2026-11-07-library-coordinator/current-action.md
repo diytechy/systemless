@@ -2,10 +2,12 @@
 
 All69 source/native first passes reviewed. Final playable ClockWerx pilot and9-run comparison reviewed/committed c339e9a7; no pacing accepted. Expanded61-entry release v2 compiled/verified on7170f7e7, WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f.
 
-Last completed release follow-up: owned-drol-v1; Initiallevel afterSpace/A300ms, noinput20seconds, activeplatforms/enemies retained, lives4to3. Exact report release-browser-reviews/drol.json; checkpoint browser-queue.json.
+Last completed release follow-up: owned-fantastic-voyage-v1; Mouthroom/player/allies10/score0/mission0, timerabout00:57tocaptureend00:39, noinput20seconds. Exact report release-browser-reviews/fantastic-voyage.json; checkpoint browser-queue.json.
 
-Next: /fantastic-voyage/ root-supported IAB release check, then remaining pending routes one emulator at a time. Current part may be active; inspect chat/agents/processes and browser tabs before launching. No performance capture overlaps another emulator/build/conversion. Source/native table final-game-table.md needs browser follow-up column integration.
+Next: /gold-digger/ root-supported IAB release check, then remaining pending routes one emulator at a time. Current part may be active; inspect chat/agents/processes and browser tabs before launching. No performance capture overlaps another emulator/build/conversion. Source/native table final-game-table.md needs browser follow-up column integration.
 
 Test server http://localhost:55847 serves D:/SystemlessBuild/private-library-20261107/dist-v2; owned server188256 in server-test-owned-v2.json. Normal8087/real browser saves/launcher untouched, no activation pointer. Root IAB2; record actual geometry per part, do not assume viewport override. Clock final9 verified672x1000/CSS615x460.75. Never retry Windows URL policy block. Original disks/forks/Finder metadata/preferences retained; all assets private onD. User allows2runners but benchmarks/builds/conversions sequential. Existing restart automation remains until WHOLE task completes.
 
 Final pending: complete applicable61 release follow-ups; resolve followup_experiments in browser-queue (Barney25vs12 motion gate/repeateddiagnostic; Bikaka counter deficit noted, no candidate yet); merge69-game table/final comparison/resources/effort/limits; activate verified opt-in bundle judiciously without touching normal-origin saves; commit validated changes ondev; no push/deploy/upload; disable existing restart automation only on whole-task completion.
+
+BikakaSolreviewactive /root/bikaka_browser_review (briefbikaka-1-4/browser-followup-brief.md), noemulator/build/conversion; rootGoldDiggerreadiness onlyuntilreviewrelease. No benchmark while revieweractive.

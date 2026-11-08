@@ -1,0 +1,13 @@
+# Bikaka release timing follow-up
+
+Fresh gpt-6.1-sol; bounded LIGHT raw-data/source review only. Read AGENTS.md, modernization/tuning, original game-agent-brief and this title report/review-summary. Work C:/Projects/systemless on dev, HEAD453eb03c or later documentary commits; preserve root changes. No nested agents.
+
+Explicit68K Bikaka1.4, owned-bikaka-1-4-v1,800x600/8bit, original512000 SIZE by omission. Compiled7170f7e7 WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f; test-only55847/dist-v2. Normal8087/saves untouched. Existing app resources retained; no actual external preference found by native worker.4bit native extension hit wall cap, not a qualified alternative.
+
+Root release readiness improved: visible falling/locking hex pieces, next-piece/statistics changes; FileConfigureKeys confirms Mleft/Ndown, source bindings retained. M300ms visibly shifts pink piece far left. CommandP displays PAUSE, resume works. Fresh CommandN resets first board score0/level1/lines0 before capture; noP/input during20s capture. Score6/activeboard afterwards. GUI actualCSS608x455.5, backing800x600, window665x672; outputPNG650x657 is scaled. No claim672x1000 for this exploratory smoke.
+
+Review D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/release-browser-v2/bikaka-timing.json, bikaka-resources.json and bikaka-resource-summary.json, plus private bikaka-keys.png and bikaka-active.png. Public release-browser-reviews/bikaka.json. Actual25 MHz; guest26.024339Hz. All raw frames/conditions/coverage must be reviewed, not just summary. CPU samples include all browser/Codex processes, not game CPU. Page memory/physical latency not measured.
+
+Decide if one reversible per-title quota diagnostic (e.g. intermediate12 vs25, not importing Clock6 blindly) is justified. If so, predeclare3alternating pairs on fresh NewGame initialboard, noinput20s, same actual geometry/sound/options, separate postcaptureM path. Random pieces/phase and any pace difference limit causal resource interpretation; guest60Hz is not independently established original game pace. Existing single25 capture is exploratory and should not substitute for matched new repetitions. Do not recommend production settings without fidelity/audio/busy/save evidence. If no experiment is defensible, give precise reason and smallest next evidence.
+
+No browser/emulator/build/asset conversion/benchmark, private media mutation, source edit, commit or upload. Root prepares GoldDigger GUI and avoids controlled captures during review. Keep ~3active minutes. Writable only bikaka-1-4/browser-followup-review.md and .json. Include exact hashes/raw statistics, grounded hypothesis or refusal, scene/gates/stop conditions/limits and explicit workload release.

@@ -335,22 +335,34 @@
     {
       "id": "owned-macpipes-v1",
       "route": "/macpipes/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/macpipes.json",
+      "scene": "MacPipes2.2.7 shareware reminder; NotYet250ms briefly clearsgreen thenreminder returns",
+      "accepted_change": null
     },
     {
       "id": "owned-maelstrom-v1",
       "route": "/maelstrom/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/maelstrom.json",
+      "scene": "Wave1 ship/asteroids initialscore0/lives2, noinput20seconds; postcapture lives1 bonus1370",
+      "accepted_change": null
     },
     {
       "id": "owned-mantra-v1",
       "route": "/mantra/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/mantra.json",
+      "scene": "Initial beach/trees, money0 green/redbars full; Right500ms first, noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-mantra-ii-v1",
       "route": "/mantra-ii/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/mantra-ii.json",
+      "scene": "Initial green/tile/river field, disposablePilot defaultFemale, full10/10bars; KP6 beforecapture; noinput20seconds endsNPCdialog aboutlucky tobehere",
+      "accepted_change": null
     },
     {
       "id": "owned-nort-v1",

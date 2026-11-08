@@ -18,7 +18,7 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowActiveDotMasks=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false}={}){
  const unsupported=[];
  const programs=level.blocks?.find(b=>b.kind==='WP')?.records.map(r=>r.text)||[];
  if(activeMask!==1)unsupported.push('unqualified difficulty clock');
@@ -39,7 +39,7 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyB
      if(actorChecksWalls(actor.version12ByteRaw??1))unsupported.push('programmed wall-reacting actor');
     }
    }
-   if(!(allowBombs?[0,1,3,4]:[0,1,4]).includes(actor.rawWords?.[7]))unsupported.push('actor speed class '+actor.rawWords?.[7]);
+   if(!((allowBombs||(allowClass3Enemies&&[1,2,3].includes(actor.actorTypeRaw)))?[0,1,3,4]:[0,1,4]).includes(actor.rawWords?.[7]))unsupported.push('actor speed class '+actor.rawWords?.[7]);
   }
  }
  for(const cell of level.cells||[]){
@@ -49,17 +49,17 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowEnemyB
   if((cell.flagsRaw&6)===6)unsupported.push('combined bonus/goal callback');
   if(allowSpecialDots&&(cell.flagsRaw&0x58)&&![0x9,0x4009,0x4011,0x4041].includes(cell.flagsRaw))unsupported.push('combined special dot properties');
   if(cell.secondaryRaw===null)unsupported.push('legacy dot permissions');
-  // Mask matches need no property clearing. Mask misses retain pivots but
-  // require a separate, still-gated optional-property normalization path.
-  else if((cell.secondaryRaw&15)!==15&&!(allowActiveDotMasks&&(cell.secondaryRaw&activeMask)))unsupported.push('conditional dot activation');
+  // Mask matches need no property clearing. Plain mask misses retain their
+  // pivots; optional properties on a mask miss still require qualification.
+  else if((cell.secondaryRaw&15)!==15&&!(allowActiveDotMasks&&(cell.secondaryRaw&activeMask))&&!(allowInactivePlainDotMasks&&!(cell.secondaryRaw&activeMask)&&!(cell.flagsRaw&~0x4001)))unsupported.push('conditional dot activation');
  }
  if(allowEnemyStaticPrograms&&allowOil&&activePuddleSpecs(level.blocks?.find(b=>b.kind==='PU')?.records||[],activeMask).length)unsupported.push('static enemy transfer with active Oil');
  if(allowSpecialDots&&(!Number.isInteger(level.header?.timeLimitRaw)||level.header.timeLimitRaw<0))unsupported.push('source Child timer specification');
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowActiveDotMasks=false,allowChildScoring=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowActiveDotMasks});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);

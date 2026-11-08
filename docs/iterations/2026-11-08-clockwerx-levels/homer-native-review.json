@@ -1,0 +1,124 @@
+{
+  "schema": "clockwerx-native-scene-review-v1",
+  "ordinal": 12,
+  "status": "bounded-qualified",
+  "routeReports": {
+    "native-via-curves-04": {
+      "status": "passed",
+      "frontend_ticks": 5439,
+      "guest_tick": 6037,
+      "budget_exhausted_frames": 0
+    },
+    "native-goal-05": {
+      "status": "passed",
+      "frontend_ticks": 7647,
+      "guest_tick": 8245,
+      "budget_exhausted_frames": 0
+    },
+    "native-return-06": {
+      "status": "passed",
+      "frontend_ticks": 7623,
+      "guest_tick": 8221,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "clock": {
+    "usableHeroPoses": 22,
+    "usableRedPoses": 58,
+    "rejectedPoses": 19,
+    "firstUsable": "homer-idle-04",
+    "firstGuestTick": 5197,
+    "phaseIntervals": [
+      [
+        3.94736842105263,
+        4.0
+      ]
+    ],
+    "class3ReferenceHeroParity": 1
+  },
+  "goal": {
+    "pivots": 10,
+    "maxError": 1.9964726631393297,
+    "levelPoints": 2000
+  },
+  "contactReturn": {
+    "pivots": 5,
+    "maxRouteError": 3.3897707231040566,
+    "elevatedTransferFits": [
+      {
+        "transfer": 3,
+        "expectedPivot": "5,3",
+        "observedPivot": "5,3",
+        "match": true,
+        "sourceFrame": 35,
+        "meanAbsoluteChannelError": 2.7099099099099098
+      },
+      {
+        "transfer": 5,
+        "expectedPivot": "5,5",
+        "observedPivot": "5,5",
+        "match": true,
+        "sourceFrame": 51,
+        "meanAbsoluteChannelError": 3.3897707231040566
+      }
+    ],
+    "usableReturnPoses": 46,
+    "maxReturnError": 0.7425044091710759,
+    "firstUsableGuestTick": 7671,
+    "direction": 1,
+    "phaseFits": [
+      {
+        "direction": 1,
+        "phaseIntervals": [
+          [
+            19.789473684210527,
+            19.842105263157897
+          ]
+        ]
+      },
+      {
+        "direction": -1,
+        "phaseIntervals": []
+      }
+    ],
+    "nativeRoundScore": 0,
+    "nativeTotalScore": 14000,
+    "setupCurvesScore": 11000,
+    "homerCommittedDelta": 3000,
+    "contactFreezeBy": 7501,
+    "DEVisibleBy": 7521
+  },
+  "background": {
+    "boundary": "Original Homer via normal Curves progression; outer bitmap pixels only, excluding HUD/playfield/actors. PICT402 display gamma0.7 is unchanged from accepted Curves.",
+    "pixels": 108120,
+    "meanAbsoluteChannelError": 0.5591904057220373,
+    "maxChannelError": 4.0,
+    "fieldColorSamples": [
+      [
+        130,
+        130,
+        130
+      ],
+      [
+        130,
+        130,
+        130
+      ]
+    ],
+    "backdrop": "backdrop-pirouette-402-display.png",
+    "playfield": {
+      "x": 68,
+      "y": 67,
+      "width": 504,
+      "height": 363,
+      "color": "#828282"
+    }
+  },
+  "limits": [
+    "Direct selection confirmation returns to Options; normal Curves progression used instead",
+    "Original cumulative setup score differs from isolated pilot; compare Homer increments explicitly",
+    "Exact DE/callback/reveal/random timing and absolute class reference parity are not fully qualified",
+    "Child current/saved time90 and next bonus1000 are source/runtime bookkeeping, not visible native countdown/second post-reset pickup",
+    "Campaign, higher difficulties, multiplayer, audio, high-score save compatibility and full pickup effects remain unqualified"
+  ]
+}

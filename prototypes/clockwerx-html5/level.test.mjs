@@ -49,6 +49,18 @@ test('actor speed class is word7 and preserves a quarter-rate class4 enemy',()=>
  level.blocks[0].records[2].rawWords[7]=2;
  assert.ok(levelRequirements(level).includes('actor speed class 2'));
 });
+test('class3 ordinary enemies qualify independently of bombs without enabling other actors or classes',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];actor.rawWords[7]=3;
+ assert.ok(levelRequirements(level).includes('actor speed class 3'));
+ const board=buildDecodedBoard(level,{angularSpeed:TAU,allowClass3Enemies:true,allowEnemyStaticPrograms:true});
+ assert.equal(board.enemies[0].speedClass,3);assert.equal(board.enemies[0].divisor,4);
+ assert.equal(board.enemies[0].canonicalFrame,true);assert.equal(board.bombRules,false);
+ actor.rawWords[7]=2;assert.ok(levelRequirements(level,{allowClass3Enemies:true}).includes('actor speed class 2'));
+ actor.rawWords[7]=3;level.blocks[0].records[0].rawWords[7]=3;
+ assert.ok(levelRequirements(level,{allowClass3Enemies:true}).includes('actor speed class 3'));
+ level.blocks.push({kind:'BO',count:1,records:[]});
+ assert.ok(levelRequirements(level,{allowClass3Enemies:true}).includes('object class BO'));
+});
 test('inactive difficulty records are not instantiated or program/type qualified',()=>{
  const b=fixture();b.blocks[0].records.push({actorTypeRaw:5,activationMaskRaw:14,programReferenceRaw:0});
  const board=buildDecodedBoard(b,{angularSpeed:TAU});
@@ -62,6 +74,21 @@ test('explicit matching dot masks preserve active properties and color without o
  assert.equal(board.dots[1].present,true);assert.equal(board.dots[1].kind,'bonus');assert.equal(board.dots[1].color,1);assert.equal(board.dots[1].humanCanGrab,true);
  b.cells[1].secondaryRaw=12;assert.ok(levelRequirements(b,{allowActiveDotMasks:true}).includes('conditional dot activation'));
  assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU,allowActiveDotMasks:true}),/conditional dot activation/);
+});
+test('plain mask misses retain pivots, Child colors and serialized stride through a separate gate',()=>{
+ const level=fixture();level.header.displaySizeRaw=7;
+ Object.assign(level.cells[1],{flagsRaw:0x4001,secondaryRaw:0xe00c,row:2,column:3});
+ level.blocks[0].records[2].gridPosition={row:2,column:3};
+ assert.ok(levelRequirements(level,{allowActiveDotMasks:true}).includes('conditional dot activation'));
+ const board=buildDecodedBoard(level,{angularSpeed:TAU,allowInactivePlainDotMasks:true});
+ const dot=board.dots[1];assert.equal(dot.id,'3,2');assert.equal(dot.sourceIndex,25);
+ assert.deepEqual([dot.x,dot.y,dot.color],[242,192,0]);
+ assert.equal(dot.present,true);assert.equal(dot.humanCanGrab,true);assert.equal(dot.nonhumanCanGrab,true);
+ assert.equal(dot.kind,'dot');assert.equal(dot.sourceInBackground,true);
+ level.cells[1].flagsRaw=0x4003;
+ assert.ok(levelRequirements(level,{allowInactivePlainDotMasks:true}).includes('conditional dot activation'));
+ level.cells[1].flagsRaw=0x4001;level.cells[1].secondaryRaw=3;
+ assert.ok(levelRequirements(level,{allowInactivePlainDotMasks:true}).includes('conditional dot activation'));
 });
 test('missing pivots, wrong human slots and unspecified clock never become playable',()=>{
  const b=fixture();b.blocks[0].records[0].gridPosition.column=9;

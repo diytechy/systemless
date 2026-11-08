@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 12,
-  "currentAction": "Homer: qualify small10x7 origin, two class3red hands and two present plain pivots whose property masks miss Child; preserve eleven-scene baseline",
+  "currentOrdinal": 13,
+  "currentAction": "Touchdown: filter its two inactive Child spikes, qualify long vertical red/green doors and two static-transfer red programs; native reference via normal Curves\u2192Homer progression",
   "levels": [
     {
       "ordinal": 1,
@@ -831,11 +831,26 @@
       "menuTitle": "Homer",
       "resourceTitle": "Homer",
       "sha256": "19d4073d15e15408a1ce75048fedea35628339d6f90d22bbd98a2f47903aea46",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "homer/native-via-curves-04/report.json",
+        "homer/native-goal-05/report.json",
+        "homer/native-return-06/report.json",
+        "homer/native-clock-review.json",
+        "homer/native-return-summary.json"
+      ],
+      "requirements": [
+        "plain property-mask misses retain pivots and Child colors",
+        "small10x7 visible origin with serialized stride11",
+        "independent class3 ordinary enemy opt-in and carried class clock parity",
+        "progressive Child score and original spawn return"
+      ],
+      "svgStatus": "twelfth scene active; native/browser goal and slow-red contact/return qualified with stated limits",
+      "generationConstraints": [
+        "separate presence from property activation and grab permission",
+        "carry clock count/remainder state and128hero-frame aliases for class3",
+        "report setup campaign score separately from scene reward"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 25,

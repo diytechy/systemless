@@ -1,0 +1,265 @@
+{
+  "status": "accepted-bounded-child-goal",
+  "nativeTransfers": 10,
+  "goalOnsets": 190,
+  "sourceUnchanged": true,
+  "changedSourceFiles": [],
+  "inheritedRuntimeChecks": 191,
+  "inheritedPackagingChecks": 13,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 4411,
+    "guest_tick": 5011,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 2000,
+  "nativeNextLevel": "21: Doubleback",
+  "nativeProfileTotal": 75000,
+  "nativeHandFits": {
+    "matches": 10,
+    "rawMaxError": 9.390924956369982,
+    "overdraw": [
+      {
+        "transfer": 1,
+        "expectedPivot": "5,1",
+        "observedPivot": "5,1",
+        "match": true,
+        "sourceFrame": 45,
+        "meanAbsoluteChannelError": 9.390924956369982
+      },
+      {
+        "transfer": 5,
+        "expectedPivot": "7,3",
+        "observedPivot": "7,3",
+        "match": true,
+        "sourceFrame": 46,
+        "meanAbsoluteChannelError": 6.8901098901098905
+      }
+    ],
+    "otherEightMaxError": 0.2862129144851658
+  },
+  "browser": {
+    "valid": true,
+    "transfers": 10,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 2000,
+      "totalCommitted": 0,
+      "nextDotAward": 2000,
+      "completed": true,
+      "overallEarned": 2000
+    },
+    "timer": {
+      "enabled": false,
+      "original": 90,
+      "current": 90,
+      "saved": 90
+    },
+    "checkpoint": "5,0",
+    "resets": 0
+  },
+  "clock": {
+    "boundary": "Independent original descriptor fits constrain source4/19hero plus three canonical class1 enemies, including a counter-rotating programmed green. Pure NPC kernel uses original static pivots/permissions; NPC wall checks are false and fixed SP contacts are human-only. Coincident/overdrawn second-pivot fits are excluded. First8192hero-frame aliases only; not absolute reveal/hardware timing or gate proof.",
+    "firstGuestTick": 1864,
+    "heroPoses": 22,
+    "npcPoses": 99,
+    "phaseIntervals": [
+      [
+        72.26315789473684,
+        72.3157894736842
+      ],
+      [
+        1352.2631578947369,
+        1352.3157894736842
+      ],
+      [
+        2632.2631578947367,
+        2632.315789473684
+      ],
+      [
+        3912.2631578947367,
+        3912.315789473684
+      ],
+      [
+        5192.263157894737,
+        5192.315789473684
+      ],
+      [
+        6472.263157894737,
+        6472.315789473684
+      ],
+      [
+        7752.263157894737,
+        7752.315789473684
+      ]
+    ],
+    "chosenPhase": 72.28947368421052,
+    "rejectedHeroCount": 11
+  },
+  "jointPeriod": {
+    "boundary": "Pure static class1 NPC full state including pivots/frame/direction/PC/visibility/orphan plus hero64. Not wall-time gameplay performance.",
+    "jointSourceFramePeriod": 1280
+  },
+  "spikePlacement": [
+    {
+      "index": 0,
+      "samples": 33,
+      "usableSamples": 31,
+      "usableFrames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxUsableError": 0.45307443365695793,
+      "rawMaxError": 29.009708737864077
+    },
+    {
+      "index": 1,
+      "samples": 33,
+      "usableSamples": 33,
+      "usableFrames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxUsableError": 0.45307443365695793,
+      "rawMaxError": 0.45307443365695793
+    },
+    {
+      "index": 2,
+      "samples": 33,
+      "usableSamples": 32,
+      "usableFrames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxUsableError": 1.3268608414239482,
+      "rawMaxError": 21.71197411003236
+    },
+    {
+      "index": 3,
+      "samples": 33,
+      "usableSamples": 33,
+      "usableFrames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxUsableError": 0.45307443365695793,
+      "rawMaxError": 0.45307443365695793
+    },
+    {
+      "index": 4,
+      "samples": 33,
+      "usableSamples": 33,
+      "usableFrames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxUsableError": 0.45307443365695793,
+      "rawMaxError": 0.45307443365695793
+    },
+    {
+      "index": 5,
+      "samples": 33,
+      "usableSamples": 33,
+      "usableFrames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxUsableError": 0.45307443365695793,
+      "rawMaxError": 0.45307443365695793
+    }
+  ],
+  "spikeClock": {
+    "boundary": "Analytic source SP client period12.5guest ticks and each fourth client count advances a sprite phase. Search one200guest-tick cycle at1/16guest resolution, creation-reference modulo4 and actual allocated phase i%4. No source/runtime/pose edits. Fits constrain a sampled phase, not an absolute original reveal clock.",
+    "firstGuestTick": 1864,
+    "usablePoses": 195,
+    "excludedRawPoses": 3,
+    "cases": [
+      {
+        "creationCountModulo4": 0,
+        "fitSamples": 0,
+        "first": null,
+        "last": null
+      },
+      {
+        "creationCountModulo4": 1,
+        "fitSamples": 40,
+        "first": 190.03125,
+        "last": 192.46875
+      },
+      {
+        "creationCountModulo4": 2,
+        "fitSamples": 0,
+        "first": null,
+        "last": null
+      },
+      {
+        "creationCountModulo4": 3,
+        "fitSamples": 0,
+        "first": null,
+        "last": null
+      }
+    ]
+  },
+  "doorBaseline": {
+    "samples": 33,
+    "phases": [
+      0
+    ],
+    "maxGlobalError": 0.68,
+    "maxPerDoorError": 0.6764184397163121
+  },
+  "doorGoal": {
+    "samples": 12,
+    "phases": [
+      0,
+      10
+    ],
+    "maxGlobalError": 2.1021428571428573,
+    "maxPerDoorError": 7.75886524822695,
+    "boundary": "Raw hero/hand overdraw retained; shared-color phase fit from fixed full body ROIs"
+  },
+  "background": {
+    "name": "balance-fresh-initial",
+    "meanAbsoluteChannelError": 0.5591904057220373,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "fixture": {
+    "sha256": "443f3d9c33bace41990d04df93bda24456169354ee93f01ce7bc176c70130098",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true
+  },
+  "limits": [
+    "Other15bonuses and WY10,1not visited",
+    "No forced20spike contact or checkpoint return",
+    "Analytic SP phase is sampled fixture evidence, not absolute hardware/reveal clock",
+    "Source/browser90timer hidden in native ChildHUD",
+    "No comparable resource benchmark"
+  ],
+  "activation": {
+    "sourceBytes": 164575,
+    "assetBytes": 1796422,
+    "manifestBytes": 1582014,
+    "totalBytes": 3543011
+  },
+  "evidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\balance"
+}

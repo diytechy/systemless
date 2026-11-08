@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 20,
-  "currentAction": "Balance20: fresh through19 baseline; qualify six active spikes, counter-rotating transfer NPCs and four red gates",
+  "currentOrdinal": 21,
+  "currentAction": "Doubleback21: fresh through20 baseline; prepare original PICT403 lunar backdrop and qualify four white rings/two red programs",
   "levels": [
     {
       "ordinal": 1,
@@ -1394,11 +1394,25 @@
       "menuTitle": "Balance",
       "resourceTitle": "Balance",
       "sha256": "087005ea7a92b2898cb75107a8f373160b4757ae688b0c8a5c9ab4780d6ddff1",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "balance/native-goal-01/report.json",
+        "balance/native-goal-01/balance-bonus-01.png",
+        "balance/native-goal-01/balance-after-route.png",
+        "balance/native-goal-01/next-after-balance.png"
+      ],
+      "requirements": [
+        "six active SP phases and subcell anchors",
+        "class1 counter-rotating programs",
+        "four red gate fanout and immutable angular cap sectors"
+      ],
+      "svgStatus": "activated10transfer/onebonus/2000Childgoal;190onsets and native SPI/gate/pose checks",
+      "generationConstraints": [
+        "graph state includes incoming hand angle and connected safe rotation sector",
+        "open leaves do not remove permanent caps",
+        "static path proposals require timed simulation with spikes and NPCs",
+        "preserve SP birth references and per-instance phase after filtering"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 59,
@@ -1425,7 +1439,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1442,7 +1456,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "balance-review.md"
     },
     {
       "ordinal": 21,

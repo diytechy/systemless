@@ -13,7 +13,7 @@ from private_library_manifest import BUILTINS, sha256_file
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
-      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs')
+      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -51,6 +51,7 @@ def package(dist,assets):
         references.update(frame['file'] for frame in vector.get('walls',{}).get('frames',[]))
         references.update(vector['doors'][key]['file'] for key in ('leaves','caps','switches') if key in vector.get('doors',{}))
         references.update(vector['oil'][key]['file'] for key in ('puddles','droplets') if key in vector.get('oil',{}))
+        references.update(atlas['file'] for atlas in vector.get('specialDots',{}).values())
         if vector.get('death',{}).get('file'):references.add(vector['death']['file'])
         else:references.update(frame['file'] for frame in vector.get('death',{}).get('frames',[]))
     definitions=[manifest.get('levelDefinition'),*(scene.get('levelDefinition') for scene in manifest.get('scenes',[]))]

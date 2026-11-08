@@ -1,0 +1,111 @@
+{
+  "status": "source-only-future-released",
+  "logicalLayers": {
+    "dotMain": 4,
+    "ring": 4,
+    "checkpoint": 4,
+    "dotSecondary": 5,
+    "protectionMiscType2": 4,
+    "goalMiscType1": 4,
+    "oil": 11,
+    "ordinaryEnemySlotsAbove1": 1,
+    "humanSlots0And1": 0,
+    "optimizedDotMain": 6
+  },
+  "physicalProcessingOrder": [
+    [
+      5
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      3
+    ],
+    [
+      10,
+      15
+    ],
+    [
+      11
+    ],
+    [
+      2
+    ],
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      12
+    ],
+    [
+      13,
+      14,
+      16
+    ]
+  ],
+  "layer6InNormalActiveSweep": false,
+  "insertion": "priority0 appends; each main before its misc, source cell creation order",
+  "traversal": "head through next; cache successor before callback; frozen layers skip",
+  "ordinaryReset": {
+    "DOResetBeforeWAReset": true,
+    "plainCheckpoint": "retain main/secondary frame, main step0, detach static timer; clear selected pointer",
+    "actualSomeDotsCheckpointRawFlags": "0x4011",
+    "protectionMisc": "preserve frame, direction, saved count reference; after thaw changed count permits one coalesced step",
+    "rings": "resurrect source ring state",
+    "combinedDotLimit": "earlier burnt/bonus/ring branches can alter frame; plain checkpoint rule not universal",
+    "actorOrder": "reinitialize all actors ascending slots, then initial-grab human slots"
+  },
+  "explicitRestart": {
+    "caller": "CODE1:5f00-5f2c",
+    "order": [
+      "WARestartLevel",
+      "DORestartLevel",
+      "ROReset",
+      "substate1",
+      "reveal"
+    ],
+    "selectedCheckpoint": "only currently selected main/secondary set79 and detach before ordinary reset",
+    "unselectedCheckpoint": "no global frame79 reset",
+    "protectionMisc": "preserve phase/direction/reference",
+    "resourceReload": false
+  },
+  "switchCheckpointSelection": {
+    "previousSelected": "main/secondary79, step0, detach",
+    "newSelected": "activate from current frame, no immediate increment"
+  },
+  "freshLoad": {
+    "sprites": "new source initial state",
+    "humanCreation": "initial grab immediately after individual actor WASpec2Info",
+    "laterROReset": "initial grabs again after all actors reinitialized"
+  },
+  "sourceRefs": {
+    "DOCreate": "CODE6:3872-38a0",
+    "miscTable": "A5-0x832, type2 stride14",
+    "DOCreateMisc": "CODE6:3118-327e",
+    "ROLayer": "CODE7:4652-46e8",
+    "layerAppend": "CODE7:4ea2-4f0a",
+    "SUTraversal": "CODE4:4a66-4aa2",
+    "SUAppend": "CODE4:2594-2644 and4872-48aa",
+    "DOReset": "CODE6:2220-230c",
+    "WAReset": "CODE6:dd46-de4a",
+    "DORestart": "CODE6:4be6-4c30",
+    "freshHumanGrab": "CODE6:e1fa-e216"
+  },
+  "rootFilesEdited": false,
+  "nativeWorkload": false,
+  "limitations": [
+    "not native phase acceptance",
+    "combined special dots require branch qualification",
+    "dynamic list changes require cached-successor traversal",
+    "no helper edits"
+  ]
+}

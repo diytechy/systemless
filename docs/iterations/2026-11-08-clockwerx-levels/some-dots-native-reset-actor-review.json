@@ -1,0 +1,307 @@
+{
+  "schema": "clockwerx-some-dots-native-reset-actor-review-v1",
+  "status": "Read-only post-reset actor position/direction evidence; no level acceptance or reset-boundary phase claim",
+  "nativeRun": {
+    "status": "passed",
+    "frontend_ticks": 5699,
+    "guest_tick": 6297,
+    "budget_exhausted_frames": 0,
+    "assertions": 0
+  },
+  "sourceLevelSha256": "a5dd77d0bab6bfa0041a92bed0b45a8a9b0f2a74c773f8c896c8b48659d86712",
+  "method": "Independent hero-only all-present-pivot x64-pose fit; gamma0.7 source RGBA with qualified anchors. Acceptance requires MAE<2,runner gap>10 and>=40 source opaque pixels. Starburst-corrupted fits above threshold are rejected; no reset-phase constraint.",
+  "captures": 25,
+  "accepted": 20,
+  "rejected": 5,
+  "allAcceptedPivotsMatchPreviouslyReachedSavedWaypoint": true,
+  "allAcceptedPivotsDifferFromLevelStart": true,
+  "observedSignedDirection": -1,
+  "guestTickSpan": [
+    5577,
+    6297
+  ],
+  "totalDecreasingFrameAdvance": 152,
+  "acceptedMAERange": [
+    0.2192513164989451,
+    0.7534014643455038
+  ],
+  "minimumAcceptedRunnerUpGap": 39.36841951945182,
+  "acceptedFrames": [
+    {
+      "checkpoint": "after-approach-08",
+      "guestTick": 5577,
+      "sourceFrame": 41,
+      "mae": 0.26846845472181163
+    },
+    {
+      "checkpoint": "after-approach-09",
+      "guestTick": 5607,
+      "sourceFrame": 34,
+      "mae": 0.28621290117034115
+    },
+    {
+      "checkpoint": "after-approach-11",
+      "guestTick": 5667,
+      "sourceFrame": 22,
+      "mae": 0.2580644956199072
+    },
+    {
+      "checkpoint": "after-approach-12",
+      "guestTick": 5697,
+      "sourceFrame": 15,
+      "mae": 0.7534014643455038
+    },
+    {
+      "checkpoint": "after-approach-13",
+      "guestTick": 5727,
+      "sourceFrame": 9,
+      "mae": 0.23369565217391305
+    },
+    {
+      "checkpoint": "after-approach-14",
+      "guestTick": 5757,
+      "sourceFrame": 3,
+      "mae": 0.2809773190483373
+    },
+    {
+      "checkpoint": "after-approach-16",
+      "guestTick": 5817,
+      "sourceFrame": 54,
+      "mae": 0.2192513368983957
+    },
+    {
+      "checkpoint": "after-approach-17",
+      "guestTick": 5847,
+      "sourceFrame": 48,
+      "mae": 0.7049441542922025
+    },
+    {
+      "checkpoint": "after-approach-18",
+      "guestTick": 5877,
+      "sourceFrame": 41,
+      "mae": 0.26846845472181163
+    },
+    {
+      "checkpoint": "after-approach-19",
+      "guestTick": 5907,
+      "sourceFrame": 35,
+      "mae": 0.2720720858187289
+    },
+    {
+      "checkpoint": "after-approach-21",
+      "guestTick": 5967,
+      "sourceFrame": 22,
+      "mae": 0.2580644956199072
+    },
+    {
+      "checkpoint": "after-approach-22",
+      "guestTick": 5997,
+      "sourceFrame": 16,
+      "mae": 0.69377990430622
+    },
+    {
+      "checkpoint": "after-approach-23",
+      "guestTick": 6027,
+      "sourceFrame": 10,
+      "mae": 0.2192513164989451
+    },
+    {
+      "checkpoint": "after-approach-24",
+      "guestTick": 6057,
+      "sourceFrame": 3,
+      "mae": 0.2809773190483373
+    },
+    {
+      "checkpoint": "after-approach-26",
+      "guestTick": 6117,
+      "sourceFrame": 55,
+      "mae": 0.2336956314418627
+    },
+    {
+      "checkpoint": "after-approach-27",
+      "guestTick": 6147,
+      "sourceFrame": 49,
+      "mae": 0.6938775510204082
+    },
+    {
+      "checkpoint": "after-approach-28",
+      "guestTick": 6177,
+      "sourceFrame": 42,
+      "mae": 0.25806451612903225
+    },
+    {
+      "checkpoint": "after-approach-29",
+      "guestTick": 6207,
+      "sourceFrame": 36,
+      "mae": 0.25362319531648053
+    },
+    {
+      "checkpoint": "after-approach-31",
+      "guestTick": 6267,
+      "sourceFrame": 23,
+      "mae": 0.26846845472181163
+    },
+    {
+      "checkpoint": "after-approach-32",
+      "guestTick": 6297,
+      "sourceFrame": 17,
+      "mae": 0.7354497354497355
+    }
+  ],
+  "rejectedFits": [
+    {
+      "checkpoint": "after-approach-10",
+      "mae": 3.2663046795388926,
+      "reason": "Fails MAE<2 gate; attention-starburst occlusion, not used for direction inference"
+    },
+    {
+      "checkpoint": "after-approach-15",
+      "mae": 5.6515157680318815,
+      "reason": "Fails MAE<2 gate; attention-starburst occlusion, not used for direction inference"
+    },
+    {
+      "checkpoint": "after-approach-20",
+      "mae": 9.318919578758447,
+      "reason": "Fails MAE<2 gate; attention-starburst occlusion, not used for direction inference"
+    },
+    {
+      "checkpoint": "after-approach-25",
+      "mae": 9.342060188972512,
+      "reason": "Fails MAE<2 gate; attention-starburst occlusion, not used for direction inference"
+    },
+    {
+      "checkpoint": "after-approach-30",
+      "mae": 18.715531434064136,
+      "reason": "Fails MAE<2 gate; attention-starburst occlusion, not used for direction inference"
+    }
+  ],
+  "intervals": [
+    {
+      "from": "after-approach-08",
+      "to": "after-approach-09",
+      "guestTicks": 30,
+      "signedFrameAdvance": -7
+    },
+    {
+      "from": "after-approach-09",
+      "to": "after-approach-11",
+      "guestTicks": 60,
+      "signedFrameAdvance": -12
+    },
+    {
+      "from": "after-approach-11",
+      "to": "after-approach-12",
+      "guestTicks": 30,
+      "signedFrameAdvance": -7
+    },
+    {
+      "from": "after-approach-12",
+      "to": "after-approach-13",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-13",
+      "to": "after-approach-14",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-14",
+      "to": "after-approach-16",
+      "guestTicks": 60,
+      "signedFrameAdvance": -13
+    },
+    {
+      "from": "after-approach-16",
+      "to": "after-approach-17",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-17",
+      "to": "after-approach-18",
+      "guestTicks": 30,
+      "signedFrameAdvance": -7
+    },
+    {
+      "from": "after-approach-18",
+      "to": "after-approach-19",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-19",
+      "to": "after-approach-21",
+      "guestTicks": 60,
+      "signedFrameAdvance": -13
+    },
+    {
+      "from": "after-approach-21",
+      "to": "after-approach-22",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-22",
+      "to": "after-approach-23",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-23",
+      "to": "after-approach-24",
+      "guestTicks": 30,
+      "signedFrameAdvance": -7
+    },
+    {
+      "from": "after-approach-24",
+      "to": "after-approach-26",
+      "guestTicks": 60,
+      "signedFrameAdvance": -12
+    },
+    {
+      "from": "after-approach-26",
+      "to": "after-approach-27",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-27",
+      "to": "after-approach-28",
+      "guestTicks": 30,
+      "signedFrameAdvance": -7
+    },
+    {
+      "from": "after-approach-28",
+      "to": "after-approach-29",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    },
+    {
+      "from": "after-approach-29",
+      "to": "after-approach-31",
+      "guestTicks": 60,
+      "signedFrameAdvance": -13
+    },
+    {
+      "from": "after-approach-31",
+      "to": "after-approach-32",
+      "guestTicks": 30,
+      "signedFrameAdvance": -6
+    }
+  ],
+  "visualInspection": [
+    "after-approach-10 confirms attention starburst over the hero"
+  ],
+  "limits": [
+    "First accepted capture is fully revealed at guest5577/frame41, not the reset instant. No exact fresh reset frame48 or spawn time is inferred.",
+    "Direction is established from short30/60guest-tick intervals under the independently qualified class0 speed; rejected images are skipped.",
+    "No waypoint animation frame, selected-state reset or death-effect lifecycle is asserted here; separate dot/reset review owns those.",
+    "No universal key binding, absolute SourceRound startup contract, audio/controller or level acceptance claim."
+  ],
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\protection-review",
+  "runtimeOrAssetEdits": false,
+  "newNativeBrowserBuildConversion": false,
+  "filesReleased": true
+}

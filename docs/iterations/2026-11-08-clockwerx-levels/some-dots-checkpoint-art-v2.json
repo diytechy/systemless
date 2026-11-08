@@ -1,0 +1,73 @@
+{
+  "schema": "clockwerx-some-dots-checkpoint-v2-review-v1",
+  "status": "future-native-unaccepted-private-candidate",
+  "candidateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\vector-candidate-v2\\assets",
+  "changedFrames": [
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89
+  ],
+  "changedPayloads": [
+    "some-dots-group-300.svg",
+    "some-dots-vector-atlas.json"
+  ],
+  "checks": {
+    "baseline51PayloadsAndManifestPreserved": true,
+    "mainNonCheckpointFrameSpansBytePreserved": 30,
+    "unchangedMainFramesAlphaExactRgbWithinOne": 30,
+    "previewQuantizationNote": "Explicit8bit PNG32 output differs from existing preview by at most1RGBvalue in unchanged frames; alpha identical. Serialized SVG frame spans are byte-identical.",
+    "secondaryAtlasAndMetadataPreserved": true,
+    "collisionBytesPreserved": true,
+    "atlasFramesChecked": 82,
+    "frame4xDimensionsChecked": true,
+    "atlasBleed": false,
+    "checkpointAlphaSupportExact": true,
+    "geometricOuterCircleAndClipExact": true,
+    "checkpointAlphaValuesBoundaryNote": "Nonzero alpha support is identical; antialiased alpha values may differ where old layered interior paths touched the clip boundary. Original collider unaffected."
+  },
+  "newFiles": {
+    "some-dots-group-300.svg": {
+      "sha256": "e56b6796804902f4e660fa2b1f8b582a1de933f71451a8e4023dde37a0ebab88",
+      "bytes": 25894
+    },
+    "some-dots-vector-atlas.json": {
+      "sha256": "7aa2e8b6914fd5c2f0259169155112a59198df272ee6b5b1f53b9bda9cc1999b",
+      "bytes": 32393
+    }
+  },
+  "visualContactInspected": true,
+  "design": "Stable blue orb, balanced analytic curved cross bands, single directional moving glint, smaller red onset88 and larger89",
+  "alphaBoundaryValueDifferences": [
+    22,
+    31,
+    14,
+    15,
+    17,
+    22,
+    22,
+    22,
+    22,
+    22,
+    22
+  ],
+  "nativeQualified": false,
+  "accepted": false,
+  "runtimeManifestChanged": false,
+  "conversionJobs": 1,
+  "conversionWorkloadReleased": true,
+  "privateValidationSha256": "8909e1e3f231b822725c14b0200b89ef4c56958f320a6867156fac0263938d82",
+  "pending": [
+    "Native level9 anchors and scale",
+    "Checkpoint phase/glint and selected-marker comparison",
+    "Actual-browser visual acceptance"
+  ],
+  "workloadReleased": true
+}

@@ -13,6 +13,13 @@ for(const [action,expectedPivot,expectedDirection] of [['swing','b',-1],['flip',
 }
 console.log('PASS: documented swing/flip/bounce/reverse semantics, early release, pause, restart, goal, combined flip.');
 {
+ const b=fixture();b.sourceDotPermissions=true;b.dots[1].humanCanGrab=false;
+ for(const action of ['swing','flip','bounce']){const g=new MovementGame(b);g.update(.02,{[action]:true});assert.equal(g.player.pivot,'a');assert.equal(g.player.direction,1,'source bounce also requires runtime human permission');}
+ b.dots[1].humanCanGrab=true;b.dots[1].flags=0;const g=new MovementGame(b),hooks=[];
+ g.onHumanRelease=(d,h)=>hooks.push(['release',d.id,h.pivot,h.direction]);g.onHumanGrab=d=>hooks.push(['grab',d.id,g.player.pivot,g.player.direction]);
+ g.update(.02,{swing:true});assert.deepEqual(hooks,[['release','a','a',-1],['grab','b','b',-1]]);
+}
+{
  const b=fixture();b.player.grabMask=0x00f0;b.dots[1].flags=0x000f;b.dots[1].kind='dot';const g=new MovementGame(b);g.update(.02,{swing:true});assert.equal(g.player.pivot,'a','inferred actor mask blocks grabbing a neighbor');
  const h=new MovementGame(b);h.update(.02,{bounce:true});assert.equal(h.player.direction,-1,'bounce reflects without grabbing a masked neighbor');
  const c=fixture();c.player.grabMask=0x000f;c.dots[1].flags=0x00ff;const p=new MovementGame(c);p.update(.02,{flip:true});assert.equal(p.player.pivot,'b','player nibble permits colored demonstration dots');

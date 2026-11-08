@@ -1,0 +1,73 @@
+{
+  "schema": "clockwerx-level-review-v1",
+  "ordinal": 9,
+  "title": "Some Dots",
+  "scope": "bounded Child scene; not full game qualification",
+  "native": {
+    "native-play-01": {
+      "status": "passed",
+      "frontend_ticks": 2030,
+      "guest_tick": 2628,
+      "budget_exhausted_frames": 0
+    },
+    "native-ring-01": {
+      "status": "passed",
+      "frontend_ticks": 1756,
+      "guest_tick": 2354,
+      "budget_exhausted_frames": 0
+    },
+    "native-goal-route-01": {
+      "status": "passed",
+      "frontend_ticks": 4394,
+      "guest_tick": 4992,
+      "budget_exhausted_frames": 0
+    },
+    "native-checkpoint-01": {
+      "status": "passed",
+      "frontend_ticks": 5699,
+      "guest_tick": 6297,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "nativeGoalPivotMatches": 17,
+  "nativeProgramMatches": {
+    "red": 33,
+    "green": 33
+  },
+  "nativeProtection": {
+    "actorFits": 134,
+    "transferFits": 18,
+    "overlapCaptures": 16,
+    "minimumVisibleRedFraction": 0.9113
+  },
+  "nativeResetAcceptedHeroFits": 20,
+  "browserGoal": {
+    "time": 53.19999999999762,
+    "transfers": 17,
+    "resets": 0,
+    "bonuses": 0
+  },
+  "browserReset": {
+    "pivotOmitted": true,
+    "direction": -1,
+    "resets": 1,
+    "roundTimer": {
+      "enabled": false,
+      "original": 90,
+      "current": 90,
+      "saved": 90
+    }
+  },
+  "goalClockCases": 266,
+  "checkpointClockCases": 266,
+  "runtimeTests": 137,
+  "packagingTests": 12,
+  "sourceFiles": 21,
+  "payloads": 55,
+  "sizes": {
+    "sourceBytes": 125348,
+    "assetBytes": 994200,
+    "manifestBytes": 740933,
+    "totalBytes": 1860481
+  }
+}

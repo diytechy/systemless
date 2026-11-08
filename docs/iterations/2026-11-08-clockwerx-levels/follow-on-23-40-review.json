@@ -1,0 +1,5606 @@
+{
+  "schema": "clockwerx-follow-on-23-40-source-review-v1",
+  "status": "Source inventory and requirements only; no level acceptance, activation or generator implementation",
+  "activeMode": "Child single-player, active mask 1",
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\follow-on-23-40",
+  "levels": [
+    {
+      "ordinal": 23,
+      "resourceId": 148,
+      "title": "Candycane",
+      "sourceSha256": "29c97f3abb5f860e03b70ef809ceeffa570630ff0311278dabaf765b2c542011",
+      "decodedArtifactSha256": "c70bd2ea3b9bf520793547cff7b6523f193cd5b0a4dc0d820f0ea6423f919690",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 90,
+      "presentDots": 79,
+      "rawBonuses": 7,
+      "rawGoals": 1,
+      "childBonuses": 7,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 69,
+        "0x101": 2,
+        "0x3": 7,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "8": 2
+      },
+      "childMaskMissPresentDots": 2,
+      "childColorIndices": {
+        "0": 67,
+        "1": 4,
+        "4": 8
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 2,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "WP": 6,
+        "WA": 27,
+        "EL": 1
+      },
+      "childFilteredSections": {
+        "EL": 0
+      },
+      "childEnemyCount": 13,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 5,
+          "initialPC": 1,
+          "programReference": 5,
+          "programLength": 32,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "5": {
+          "multiplier": 1,
+          "normalDivisor": 1,
+          "slowDivisor": 2
+        }
+      },
+      "storedProgramCount": 6,
+      "storedOpcodeSet": [
+        "b",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 4,
+      "childOpcodeSet": [
+        "b",
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "WA rotating spikes with class-specific clocks, nonordinary hooks and protection bypass",
+        "Property-mask misses retain present ordinary pivots",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "EL and two up/down properties are inactive in Child. Thirteen enemies include one fast class 5 rotating spike.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 1,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 24,
+      "resourceId": 165,
+      "title": "Forced Entry",
+      "sourceSha256": "581ea30113b3ebf5f27814cb3c9517a6e65640df2d5f5ca3a999d051a5d2874e",
+      "decodedArtifactSha256": "2f4a1ae5d1465a1189db52155de2e92820ad5a9a703d7ba5c70a9b0b8a630548",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 150,
+      "presentDots": 54,
+      "rawBonuses": 14,
+      "rawGoals": 1,
+      "childBonuses": 14,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 40,
+        "0x3": 13,
+        "0x7": 1
+      },
+      "conditionalDotMasks": {},
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 47,
+        "1": 7
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "WL": 9,
+        "BO": 17,
+        "WP": 3,
+        "WA": 11
+      },
+      "childFilteredSections": {},
+      "childEnemyCount": 3,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 20,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 4,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 20,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 3,
+      "storedOpcodeSet": [
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 1,
+      "childOpcodeSet": [
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {
+        "12": 1,
+        "13": 1,
+        "2": 2,
+        "4": 6,
+        "6": 2,
+        "7": 2,
+        "9": 3
+      },
+      "bombActivationFlagBytes": {
+        "0": 6,
+        "64": 11
+      },
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "A single dot is both bonus and goal (raw 0x0007). Seventeen serialized bomb/fuse records; fourteen bonuses include that goal.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 1
+    },
+    {
+      "ordinal": 25,
+      "resourceId": 199,
+      "title": "Tricolor",
+      "sourceSha256": "09a5a29e779dba786b42f407c999e69e87e814a8e575bf4d38d8bd03e4edee7f",
+      "decodedArtifactSha256": "ce0ee6522e144a5b4951dea16cbf67dcebf04ffbfcde0d178e2622b929a20bc3",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 90,
+      "presentDots": 56,
+      "rawBonuses": 11,
+      "rawGoals": 1,
+      "childBonuses": 11,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 37,
+        "0x3": 11,
+        "0x4001": 1,
+        "0x4005": 1,
+        "0x4009": 6
+      },
+      "conditionalDotMasks": {
+        "14": 3,
+        "8": 3
+      },
+      "childMaskMissPresentDots": 6,
+      "childColorIndices": {
+        "0": 38,
+        "1": 4,
+        "2": 3,
+        "3": 1,
+        "4": 4,
+        "6": 1,
+        "7": 5
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "WP": 11,
+        "WA": 20
+      },
+      "childFilteredSections": {},
+      "childEnemyCount": 15,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 26,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 6,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 5,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 26,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 6,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 6,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 26,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 8,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 7,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 4,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 26,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 6,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 26,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 6,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 9,
+          "programLength": 24,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 10,
+          "programLength": 24,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 11,
+      "storedOpcodeSet": [
+        "f",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 9,
+      "childOpcodeSet": [
+        "f",
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Property-mask misses retain present ordinary pivots",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "Fifteen active ordinary enemies; noncardinal starting frames. Six raw rings are mask-disabled but remain ordinary pivots. Composite colors include white.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 26,
+      "resourceId": 159,
+      "title": "Cyclone",
+      "sourceSha256": "645460c002f5168cd0ae331032a5355ac8d39464e81f7214ad87fe04d6977672",
+      "decodedArtifactSha256": "0418e0642cc8f1e1095d58dc05a70ae1f5fa93b1ed4e5e60285e4f0206556347",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 150,
+      "presentDots": 38,
+      "rawBonuses": 9,
+      "rawGoals": 1,
+      "childBonuses": 9,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 28,
+        "0x3": 9,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {},
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 32,
+        "1": 2,
+        "2": 2,
+        "4": 2
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "BO": 21,
+        "WP": 5,
+        "WA": 18
+      },
+      "childFilteredSections": {},
+      "childEnemyCount": 6,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 8,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 8,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 3,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 24,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 3,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 24,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 8,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 8,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 2,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 24,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 2,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 24,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 4,
+          "opcodes": [
+            "f"
+          ],
+          "checksWalls": false,
+          "initialFrame": 8,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 4,
+          "opcodes": [
+            "f"
+          ],
+          "checksWalls": false,
+          "initialFrame": 56,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 4,
+          "opcodes": [
+            "f"
+          ],
+          "checksWalls": false,
+          "initialFrame": 40,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 4,
+          "opcodes": [
+            "f"
+          ],
+          "checksWalls": false,
+          "initialFrame": 24,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "2": {
+          "multiplier": 3,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        },
+        "3": {
+          "multiplier": 1,
+          "normalDivisor": 4,
+          "slowDivisor": 8
+        }
+      },
+      "storedProgramCount": 5,
+      "storedOpcodeSet": [
+        "f",
+        "n"
+      ],
+      "childReferencedPrograms": 0,
+      "childOpcodeSet": [],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {
+        "11": 1,
+        "13": 1,
+        "2": 1,
+        "3": 1,
+        "4": 3,
+        "5": 1,
+        "6": 2,
+        "7": 5,
+        "8": 1,
+        "9": 5
+      },
+      "bombActivationFlagBytes": {
+        "0": 15,
+        "64": 6
+      },
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath"
+      ],
+      "notes": "Three enemy speed classes with no active program reference; twenty-one bomb/fuse records.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 27,
+      "resourceId": 196,
+      "title": "Prosperity",
+      "sourceSha256": "51a79879ed5435c24fea57ea69bca0a256e9cbde8421e6136ec75d5a16b6dd2e",
+      "decodedArtifactSha256": "b5bd092f4454155ee8eb3a4d6ff486ebd4cca42e7ac39e2843cbab529103f46c",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 90,
+      "presentDots": 59,
+      "rawBonuses": 30,
+      "rawGoals": 1,
+      "childBonuses": 30,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 28,
+        "0x3": 30,
+        "0x4005": 1
+      },
+      "conditionalDotMasks": {},
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 53,
+        "2": 3,
+        "4": 3
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 7,
+        "BO": 56,
+        "GO": 4,
+        "WP": 4,
+        "WA": 16
+      },
+      "childFilteredSections": {
+        "SP": 0,
+        "GO": 4
+      },
+      "childEnemyCount": 6,
+      "childEnemies": [
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 1,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 1,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 1,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 6,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 6,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 6,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 6,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 8,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 4,
+      "storedOpcodeSet": [
+        "b",
+        "n"
+      ],
+      "childReferencedPrograms": 0,
+      "childOpcodeSet": [],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {
+        "1": 1,
+        "10": 1,
+        "11": 2,
+        "12": 1,
+        "13": 1,
+        "2": 1,
+        "3": 3,
+        "4": 4,
+        "5": 9,
+        "6": 8,
+        "7": 9,
+        "8": 7,
+        "9": 9
+      },
+      "bombActivationFlagBytes": {
+        "0": 11,
+        "185": 31,
+        "64": 14
+      },
+      "goodieInitialFrameRequests": {
+        "169": 4
+      },
+      "requirements": [
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath"
+      ],
+      "notes": "Fifty-six bomb/fuse records approach the sixty-record capacity. All seven SP records are inactive; four goodies request invalid initial frame 169.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 28,
+      "resourceId": 203,
+      "title": "Enclosure",
+      "sourceSha256": "6acc7e4c95445522595981cb0f143522991615faa0c2c4e28dc5ec9d5dec5095",
+      "decodedArtifactSha256": "8a66a7abd013449c2b4775554874e3092a24e1550f5be14700158caf4b98ec00",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 240,
+      "presentDots": 88,
+      "rawBonuses": 30,
+      "rawGoals": 1,
+      "childBonuses": 30,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 56,
+        "0x3": 30,
+        "0x4005": 1,
+        "0x4011": 1
+      },
+      "conditionalDotMasks": {
+        "7": 1
+      },
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 84,
+        "1": 1,
+        "2": 2,
+        "4": 1
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 1,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 1,
+        "WL": 9,
+        "DR": 3,
+        "DS": 3,
+        "BO": 18,
+        "WY": 1,
+        "WP": 7,
+        "WA": 18
+      },
+      "childFilteredSections": {
+        "SP": 1,
+        "WY": 1
+      },
+      "childEnemyCount": 5,
+      "childEnemies": [
+        {
+          "type": 2,
+          "activationMask": 11,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 8,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": true,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 3,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 6,
+          "programLength": 2,
+          "opcodes": [
+            "b"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": true,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": true,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 5,
+          "programLength": 4,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 8,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": true,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": true,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 22,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": true,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 2,
+          "opcodes": [
+            "b"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "4": {
+          "multiplier": 1,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        }
+      },
+      "storedProgramCount": 7,
+      "storedOpcodeSet": [
+        "b",
+        "f",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 2,
+      "childOpcodeSet": [
+        "b",
+        "n",
+        "s"
+      ],
+      "doorVariants": [
+        {
+          "vertical": false,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 1
+        },
+        {
+          "vertical": false,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 0
+        },
+        {
+          "vertical": false,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 2
+        }
+      ],
+      "switchColorSubcellVariants": {
+        "color0/subcell3": 1,
+        "color1/subcell3": 1,
+        "color2/subcell1": 1
+      },
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {
+        "type1/frame2": 1
+      },
+      "elevatorVariants": {},
+      "bombKinds": {
+        "0": 1,
+        "10": 1,
+        "4": 5,
+        "5": 7,
+        "6": 1,
+        "7": 1,
+        "8": 2
+      },
+      "bombActivationFlagBytes": {
+        "0": 12,
+        "185": 4,
+        "64": 2
+      },
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath",
+        "WA rotating spikes with class-specific clocks, nonordinary hooks and protection bypass",
+        "Ordinary enemy wall response before program decisions",
+        "Door phase, paired/shared-color switch history and leaf/cap collisions",
+        "Source Pascal PC, cardinal decisions and failed-action advancement",
+        "Checkpoint entry, reset spawn and timer"
+      ],
+      "notes": "First active class 4 in this batch, including a wall-checking red hand. Three long horizontal doors, one rotating spike and a checkpoint.",
+      "childWallCheckingEnemyCount": 1,
+      "childRotatingSpikeCount": 1,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 29,
+      "resourceId": 5002,
+      "title": "Crossing",
+      "sourceSha256": "d031b60f874f50b97a948a708ffac9a7eb388b56dd7074d3c85c9360a3d6601d",
+      "decodedArtifactSha256": "5583a4f6c5e6871f6eb550f4db12fbf96646e9eb5cf87ab7041b05cd4b36be10",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 180,
+      "presentDots": 62,
+      "rawBonuses": 3,
+      "rawGoals": 1,
+      "childBonuses": 3,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 53,
+        "0x3": 3,
+        "0x4001": 2,
+        "0x4009": 2,
+        "0x4011": 1,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "14": 2,
+        "7": 1
+      },
+      "childMaskMissPresentDots": 2,
+      "childColorIndices": {
+        "0": 45,
+        "1": 10,
+        "4": 6,
+        "5": 1
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 1,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 21,
+        "BO": 39,
+        "WY": 1,
+        "WP": 11,
+        "WA": 14
+      },
+      "childFilteredSections": {
+        "SP": 10,
+        "WY": 1
+      },
+      "childEnemyCount": 6,
+      "childEnemies": [
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 4,
+          "opcodes": [
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 16,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 5,
+          "programLength": 16,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 6,
+          "programLength": 24,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 7,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 10,
+          "programLength": 24,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 48,
+          "opcodes": [
+            "b",
+            "f",
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 48,
+          "opcodes": [
+            "b",
+            "f",
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 8,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 9,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 11,
+      "storedOpcodeSet": [
+        "b",
+        "f",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 6,
+      "childOpcodeSet": [
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {
+        "type0/frame2": 8,
+        "type2/frame0": 1,
+        "type2/frame2": 1
+      },
+      "elevatorVariants": {},
+      "bombKinds": {
+        "0": 1,
+        "1": 1,
+        "10": 3,
+        "12": 2,
+        "2": 1,
+        "3": 2,
+        "4": 16,
+        "5": 4,
+        "6": 2,
+        "7": 3,
+        "8": 2,
+        "9": 2
+      },
+      "bombActivationFlagBytes": {
+        "0": 39
+      },
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath",
+        "Property-mask misses retain present ordinary pivots",
+        "Source Pascal PC, cardinal decisions and failed-action advancement",
+        "Checkpoint entry, reset spawn and timer"
+      ],
+      "notes": "Ten active SP hazards; all two raw rings are mask-disabled. Four bomb kinds occur across five starter-led chains; checkpoint.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 30,
+      "resourceId": 5001,
+      "title": "Labyrinth",
+      "sourceSha256": "90e80009d7d1ca3b2ed593500e74f857caa3d4901e4438103b77cdb9c0a9a4cd",
+      "decodedArtifactSha256": "35457c71f6b3cdd5ed8e74d09a827605e1afe113df0c9a0a1b740ce0a8e0baf7",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 180,
+      "presentDots": 88,
+      "rawBonuses": 9,
+      "rawGoals": 1,
+      "childBonuses": 9,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 76,
+        "0x3": 9,
+        "0x4011": 1,
+        "0x4051": 1,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "1": 1,
+        "3": 1
+      },
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 61,
+        "1": 8,
+        "2": 8,
+        "4": 3,
+        "5": 8
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 2,
+        "protected": 1,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 2,
+        "WL": 12,
+        "DR": 8,
+        "DS": 8,
+        "BO": 9,
+        "WY": 2,
+        "WP": 14,
+        "WA": 20
+      },
+      "childFilteredSections": {
+        "SP": 2,
+        "WY": 2
+      },
+      "childEnemyCount": 8,
+      "childEnemies": [
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 18,
+          "opcodes": [
+            "b",
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": true,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 6,
+          "programLength": 26,
+          "opcodes": [
+            "f",
+            "n",
+            "s"
+          ],
+          "checksWalls": true,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 7,
+          "programLength": 16,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 8,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 10,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 16,
+          "opcodes": [
+            "b",
+            "f",
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 5,
+          "programLength": 8,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 13,
+          "programLength": 9,
+          "opcodes": [
+            "b",
+            "f",
+            "n"
+          ],
+          "checksWalls": true,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 9,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 11,
+          "programLength": 14,
+          "opcodes": [
+            "b",
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 12,
+          "programLength": 12,
+          "opcodes": [
+            "b",
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "4": {
+          "multiplier": 1,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        }
+      },
+      "storedProgramCount": 14,
+      "storedOpcodeSet": [
+        "b",
+        "f",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 6,
+      "childOpcodeSet": [
+        "b",
+        "f",
+        "n",
+        "s"
+      ],
+      "doorVariants": [
+        {
+          "vertical": true,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 0
+        },
+        {
+          "vertical": false,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 1
+        },
+        {
+          "vertical": true,
+          "initiallyClosed": true,
+          "long": false,
+          "color": 0
+        },
+        {
+          "vertical": true,
+          "initiallyClosed": false,
+          "long": true,
+          "color": 0
+        },
+        {
+          "vertical": false,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 0
+        },
+        {
+          "vertical": true,
+          "initiallyClosed": false,
+          "long": true,
+          "color": 0
+        },
+        {
+          "vertical": false,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 2
+        },
+        {
+          "vertical": true,
+          "initiallyClosed": true,
+          "long": true,
+          "color": 2
+        }
+      ],
+      "switchColorSubcellVariants": {
+        "color0/subcell1": 3,
+        "color0/subcell3": 2,
+        "color1/subcell3": 1,
+        "color2/subcell1": 1,
+        "color2/subcell2": 1
+      },
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {
+        "type0/frame2": 1,
+        "type1/frame2": 1
+      },
+      "elevatorVariants": {},
+      "bombKinds": {
+        "0": 1,
+        "12": 1,
+        "4": 4,
+        "5": 1,
+        "6": 1,
+        "8": 1
+      },
+      "bombActivationFlagBytes": {
+        "0": 9
+      },
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath",
+        "WA rotating spikes with class-specific clocks, nonordinary hooks and protection bypass",
+        "Ordinary enemy wall response before program decisions",
+        "Protection overlay and actor-type-specific immunity",
+        "Door phase, paired/shared-color switch history and leaf/cap collisions",
+        "Source Pascal PC, cardinal decisions and failed-action advancement",
+        "Checkpoint entry, reset spawn and timer"
+      ],
+      "notes": "Eight doors include long vertical/horizontal and short vertical variants; two wall-checking red hands, two rotating spikes, two checkpoints, one protected.",
+      "childWallCheckingEnemyCount": 2,
+      "childRotatingSpikeCount": 2,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 31,
+      "resourceId": 169,
+      "title": "Hallway",
+      "sourceSha256": "afab5fb07feaba4f154e2b44f6b17aab6107a22d11ad22a34e9932a905f00d97",
+      "decodedArtifactSha256": "f20f77fee0fef3ae359d9e8100ec2bba4868f6aa4b5e04765635b024bb13a531",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 180,
+      "presentDots": 69,
+      "rawBonuses": 12,
+      "rawGoals": 1,
+      "childBonuses": 12,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 55,
+        "0x3": 12,
+        "0x4011": 1,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "7": 1
+      },
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 60,
+        "1": 9
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 1,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "WL": 5,
+        "PU": 2,
+        "WY": 1,
+        "WP": 4,
+        "WA": 7
+      },
+      "childFilteredSections": {
+        "PU": 1,
+        "WY": 1
+      },
+      "childEnemyCount": 2,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 32,
+          "opcodes": [
+            "b",
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 22,
+          "opcodes": [
+            "b",
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 4,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 16,
+          "opcodes": [
+            "f",
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 16,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "3": {
+          "multiplier": 1,
+          "normalDivisor": 4,
+          "slowDivisor": 8
+        }
+      },
+      "storedProgramCount": 4,
+      "storedOpcodeSet": [
+        "b",
+        "f",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 1,
+      "childOpcodeSet": [
+        "b",
+        "f",
+        "n"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {
+        "3": 1
+      },
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "PU/DP acquisition and pursuit with this level's active kinds and dynamic-dot interactions where present",
+        "Source Pascal PC, cardinal decisions and failed-action advancement",
+        "Checkpoint entry, reset spawn and timer"
+      ],
+      "notes": "First active kind 3 puddle in this catalog range; one checkpoint and a slow red enemy with bounce/flip opcodes.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 32,
+      "resourceId": 202,
+      "title": "Sentry",
+      "sourceSha256": "e74dd6076515b305b76a25183f501a2a273ee02b5d75dae4344f9eeca506fe6d",
+      "decodedArtifactSha256": "d803c5c458236b288b8f8657a44143acec6af707c328a2158ce370b940a00c88",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 150,
+      "presentDots": 56,
+      "rawBonuses": 16,
+      "rawGoals": 1,
+      "childBonuses": 16,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 35,
+        "0x3": 14,
+        "0x4001": 4,
+        "0x4003": 2,
+        "0x4005": 1
+      },
+      "conditionalDotMasks": {},
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 53,
+        "1": 3
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "WL": 6,
+        "PU": 6,
+        "WP": 1,
+        "WA": 7
+      },
+      "childFilteredSections": {
+        "PU": 1
+      },
+      "childEnemyCount": 3,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": true,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": true,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "4": {
+          "multiplier": 1,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        }
+      },
+      "storedProgramCount": 1,
+      "storedOpcodeSet": [
+        "b",
+        "n"
+      ],
+      "childReferencedPrograms": 0,
+      "childOpcodeSet": [],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {
+        "1": 1
+      },
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "PU/DP acquisition and pursuit with this level's active kinds and dynamic-dot interactions where present",
+        "Ordinary enemy wall response before program decisions"
+      ],
+      "notes": "All three Child enemies use class 4; one checks walls. Kind 1 puddle remains active.",
+      "childWallCheckingEnemyCount": 1,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 33,
+      "resourceId": 5008,
+      "title": "Sinkers",
+      "sourceSha256": "81edccd4f42982baa7ce226395afd52a1e128d4ca57d5562a4333d294a351994",
+      "decodedArtifactSha256": "239125e145479f64766928c5a2987d709e952d5d365120e5ca1fc7b4a7d6e142",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 120,
+      "presentDots": 63,
+      "rawBonuses": 5,
+      "rawGoals": 1,
+      "childBonuses": 5,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 51,
+        "0x101": 4,
+        "0x201": 2,
+        "0x3": 5,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "12": 2,
+        "14": 2
+      },
+      "childMaskMissPresentDots": 4,
+      "childColorIndices": {
+        "0": 56,
+        "1": 4,
+        "4": 3
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 6,
+        "childCount": 2,
+        "childChannels": {
+          "1": 2
+        },
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 2
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "PU": 2,
+        "WP": 5,
+        "WA": 8,
+        "EL": 3
+      },
+      "childFilteredSections": {
+        "PU": 0,
+        "EL": 2
+      },
+      "childEnemyCount": 3,
+      "childEnemies": [
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 4,
+          "opcodes": [
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 8,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 5,
+      "storedOpcodeSet": [
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 3,
+      "childOpcodeSet": [
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {
+        "placement3/channel1": 2
+      },
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Linked up/down dot state, moving sprite and rider positions, human/nonhuman permissions, endpoint orphan/death, reset and source clocks",
+        "Elevator switch entry/occupancy, linked channel toggles, original outlines and bomb destruction",
+        "Property-mask misses retain present ordinary pivots",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "First Child-active EL mechanics: two channel 1 controls and two initially raised channel 1 dots. Other up/down properties and both puddles are inactive.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 34,
+      "resourceId": 188,
+      "title": "Pigeonholes",
+      "sourceSha256": "3396d292744a6e107031e6ba822310f72bfdea3e706fd339f71d64182ff088fd",
+      "decodedArtifactSha256": "e837a4700fe4be4e0f36cb6d0845a78bc25d3315d89b89a10195e00d084aaa3c",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 150,
+      "presentDots": 55,
+      "rawBonuses": 14,
+      "rawGoals": 1,
+      "childBonuses": 14,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 38,
+        "0x3": 13,
+        "0x4001": 2,
+        "0x4003": 1,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {},
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 16,
+        "1": 1,
+        "2": 13,
+        "3": 3,
+        "4": 12,
+        "6": 9,
+        "7": 1
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 9,
+        "PU": 4,
+        "WP": 10,
+        "WA": 14
+      },
+      "childFilteredSections": {
+        "SP": 7,
+        "PU": 1
+      },
+      "childEnemyCount": 6,
+      "childEnemies": [
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 7,
+          "programLength": 16,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 28,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 20,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 20,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 9,
+          "programLength": 16,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 16,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 6,
+          "programLength": 16,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 5,
+          "programLength": 12,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 8,
+          "programLength": 28,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 10,
+      "storedOpcodeSet": [
+        "b",
+        "f",
+        "n"
+      ],
+      "childReferencedPrograms": 5,
+      "childOpcodeSet": [
+        "f",
+        "n"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {
+        "2": 1
+      },
+      "spikeTypeFrameVariants": {
+        "type0/frame2": 1,
+        "type2/frame0": 5,
+        "type2/frame2": 1
+      },
+      "elevatorVariants": {},
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "PU/DP acquisition and pursuit with this level's active kinds and dynamic-dot interactions where present",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "Active kind 2 puddle, seven SP hazards, six programmed ordinary enemies; composite green-blue and white dots.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 35,
+      "resourceId": 228,
+      "title": "Hiccup",
+      "sourceSha256": "ce5cda4d71c4061cc32339044cb2cebdd8517c4f2722df58cde0514659895540",
+      "decodedArtifactSha256": "35607454968ee67370dd4a0846e8b84528afcbb964538decec4938b3178082dd",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 270,
+      "presentDots": 56,
+      "rawBonuses": 13,
+      "rawGoals": 1,
+      "childBonuses": 13,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 36,
+        "0x101": 4,
+        "0x3": 13,
+        "0x4001": 2,
+        "0x4005": 1
+      },
+      "conditionalDotMasks": {},
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 46,
+        "1": 4,
+        "2": 2,
+        "4": 4
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 4,
+        "childCount": 4,
+        "childChannels": {
+          "0": 4
+        },
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 4
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 2,
+        "PU": 3,
+        "WP": 6,
+        "WA": 12,
+        "EL": 1
+      },
+      "childFilteredSections": {
+        "SP": 2,
+        "PU": 1,
+        "EL": 1
+      },
+      "childEnemyCount": 6,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 12,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 4,
+          "opcodes": [
+            "b",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 5,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 6,
+      "storedOpcodeSet": [
+        "b",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 4,
+      "childOpcodeSet": [
+        "b",
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {
+        "3": 1
+      },
+      "spikeTypeFrameVariants": {
+        "type0/frame2": 1,
+        "type1/frame2": 1
+      },
+      "elevatorVariants": {
+        "placement2/channel0": 1
+      },
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Linked up/down dot state, moving sprite and rider positions, human/nonhuman permissions, endpoint orphan/death, reset and source clocks",
+        "Elevator switch entry/occupancy, linked channel toggles, original outlines and bomb destruction",
+        "PU/DP acquisition and pursuit with this level's active kinds and dynamic-dot interactions where present",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "One channel 0 EL control toggles four raised dots; kind 3 oil and two SP hazards.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 36,
+      "resourceId": 142,
+      "title": "Stutter",
+      "sourceSha256": "904ba13112fa37c386d45651c3a0a06b69d0fe0e5846c3edaaa5884091af1b2a",
+      "decodedArtifactSha256": "eb493c7a0870acafad457810e6440c54e5877dfd4a196cb932a8ae68aa54438a",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 270,
+      "presentDots": 81,
+      "rawBonuses": 10,
+      "rawGoals": 1,
+      "childBonuses": 10,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 54,
+        "0x101": 6,
+        "0x201": 7,
+        "0x3": 10,
+        "0x301": 2,
+        "0x4011": 1,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "7": 1,
+        "8": 2
+      },
+      "childMaskMissPresentDots": 2,
+      "childColorIndices": {
+        "0": 75,
+        "1": 3,
+        "2": 3
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 1,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 15,
+        "childCount": 13,
+        "childChannels": {
+          "0": 6,
+          "1": 7
+        },
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 13
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "WL": 15,
+        "PU": 9,
+        "BO": 18,
+        "GO": 3,
+        "WY": 1,
+        "WP": 5,
+        "WA": 13,
+        "EL": 3
+      },
+      "childFilteredSections": {
+        "PU": 2,
+        "GO": 3,
+        "WY": 1,
+        "EL": 2
+      },
+      "childEnemyCount": 7,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 3,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 0,
+          "programLength": 12,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 8,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 8,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 8,
+          "opcodes": [
+            "b",
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 4,
+          "programLength": 8,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "2": {
+          "multiplier": 3,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        },
+        "3": {
+          "multiplier": 1,
+          "normalDivisor": 4,
+          "slowDivisor": 8
+        },
+        "4": {
+          "multiplier": 1,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        }
+      },
+      "storedProgramCount": 5,
+      "storedOpcodeSet": [
+        "b",
+        "f",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 1,
+      "childOpcodeSet": [
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {
+        "0": 1,
+        "2": 1
+      },
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {
+        "placement1/channel0": 1,
+        "placement3/channel1": 1
+      },
+      "bombKinds": {
+        "11": 1,
+        "2": 1,
+        "4": 5,
+        "5": 4,
+        "6": 2,
+        "7": 1,
+        "8": 2,
+        "9": 2
+      },
+      "bombActivationFlagBytes": {
+        "0": 18
+      },
+      "goodieInitialFrameRequests": {
+        "169": 2,
+        "54": 1
+      },
+      "requirements": [
+        "Linked up/down dot state, moving sprite and rider positions, human/nonhuman permissions, endpoint orphan/death, reset and source clocks",
+        "Elevator switch entry/occupancy, linked channel toggles, original outlines and bomb destruction",
+        "PU/DP acquisition and pursuit with this level's active kinds and dynamic-dot interactions where present",
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath",
+        "WA rotating spikes with class-specific clocks, nonordinary hooks and protection bypass",
+        "Property-mask misses retain present ordinary pivots",
+        "Source Pascal PC, cardinal decisions and failed-action advancement",
+        "Checkpoint entry, reset spawn and timer"
+      ],
+      "notes": "Thirteen raised dots on two channels, two EL controls, oil kinds 0 and 2, bombs, three rotating spikes, checkpoint and three goodies.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 3,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 37,
+      "resourceId": 135,
+      "title": "Quincunx",
+      "sourceSha256": "b7d29423b2a8239963a4b6bb7ce26510d3969864733b61fc3ef059225c1943e4",
+      "decodedArtifactSha256": "59b05c69e0f63c59eca2f209024c61225a512b3fa9f9d91b2349779d9c750ab6",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 7,
+        "displayColumns": 10,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 210,
+      "presentDots": 63,
+      "rawBonuses": 6,
+      "rawGoals": 1,
+      "childBonuses": 6,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 56,
+        "0x3": 4,
+        "0x4003": 2,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {},
+      "childMaskMissPresentDots": 0,
+      "childColorIndices": {
+        "0": 56,
+        "1": 3,
+        "2": 2,
+        "4": 2
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "PU": 2,
+        "BO": 28,
+        "WA": 31
+      },
+      "childFilteredSections": {
+        "PU": 0
+      },
+      "childEnemyCount": 15,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 13,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": -1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 8,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": -1
+        },
+        {
+          "type": 3,
+          "activationMask": 8,
+          "clockClass": 2,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "2": {
+          "multiplier": 3,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        },
+        "3": {
+          "multiplier": 1,
+          "normalDivisor": 4,
+          "slowDivisor": 8
+        }
+      },
+      "storedProgramCount": 0,
+      "storedOpcodeSet": [],
+      "childReferencedPrograms": 0,
+      "childOpcodeSet": [],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {
+        "0": 1,
+        "10": 1,
+        "12": 1,
+        "2": 1,
+        "4": 16,
+        "6": 2,
+        "7": 2,
+        "8": 2,
+        "9": 2
+      },
+      "bombActivationFlagBytes": {
+        "0": 28
+      },
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "Serialized fuse chains and explosion capacities/callback ordering, wall and actor aftermath",
+        "WA rotating spikes with class-specific clocks, nonordinary hooks and protection bypass"
+      ],
+      "notes": "Small 10 by 7 display with serialized stride 11; fifteen enemies include seven rotating spikes over three clock classes. Oil is inactive.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 7,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 38,
+      "resourceId": 220,
+      "title": "Tempest",
+      "sourceSha256": "8313aa4b29785471116eb57e8e53c91d4a876bbf16fe45f08e51e8a22961e6a3",
+      "decodedArtifactSha256": "9c8eaa7b1292f9c47d253d06ea34dbd0bb622658ef396978662e89abf0f8124d",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 150,
+      "presentDots": 48,
+      "rawBonuses": 12,
+      "rawGoals": 1,
+      "childBonuses": 12,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 23,
+        "0x3": 7,
+        "0x4001": 7,
+        "0x4003": 2,
+        "0x4005": 1,
+        "0x4041": 3,
+        "0x4043": 3,
+        "0x4051": 2
+      },
+      "conditionalDotMasks": {
+        "12": 1,
+        "7": 2,
+        "8": 2
+      },
+      "childMaskMissPresentDots": 3,
+      "childColorIndices": {
+        "0": 30,
+        "2": 13,
+        "4": 5
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 1,
+        "protected": 7,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 0,
+        "childCount": 0,
+        "childChannels": {},
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 0
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "WY": 2,
+        "WP": 2,
+        "WA": 28
+      },
+      "childFilteredSections": {
+        "WY": 1
+      },
+      "childEnemyCount": 13,
+      "childEnemies": [
+        {
+          "type": 2,
+          "activationMask": 11,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 11,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 18,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 50,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 50,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 16,
+          "opcodes": [
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 18,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 18,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 50,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 50,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 18,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 18,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 8,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 2,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 50,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 2,
+      "storedOpcodeSet": [
+        "b",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 1,
+      "childOpcodeSet": [
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {},
+      "elevatorVariants": {},
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {},
+      "requirements": [
+        "WA rotating spikes with class-specific clocks, nonordinary hooks and protection bypass",
+        "Property-mask misses retain present ordinary pivots",
+        "Protection overlay and actor-type-specific immunity",
+        "Source Pascal PC, cardinal decisions and failed-action advancement",
+        "Checkpoint entry, reset spawn and timer"
+      ],
+      "notes": "Seven active protected dots, including one checkpoint; four rotating spikes bypass ordinary protected-dot immunity. Noncardinal starting frames.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 4,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 39,
+      "resourceId": 181,
+      "title": "Dodger",
+      "sourceSha256": "735faf0ac77023f98de0658b5ba799f6d5845af9091161fb24c50a8354c71bfc",
+      "decodedArtifactSha256": "b12a5bdd7c2bf945044fd4a732d49e851b6808769ab34fa53ef48d4ee1e22823",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 150,
+      "presentDots": 60,
+      "rawBonuses": 12,
+      "rawGoals": 1,
+      "childBonuses": 12,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 22,
+        "0x101": 4,
+        "0x201": 5,
+        "0x3": 10,
+        "0x301": 5,
+        "0x4001": 4,
+        "0x4003": 2,
+        "0x4041": 1,
+        "0x4201": 6,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "12": 3,
+        "14": 1,
+        "8": 3
+      },
+      "childMaskMissPresentDots": 7,
+      "childColorIndices": {
+        "0": 51,
+        "1": 4,
+        "2": 3,
+        "4": 2
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 1,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 20,
+        "childCount": 14,
+        "childChannels": {
+          "1": 11,
+          "2": 3
+        },
+        "childInitiallyDownCount": 6,
+        "childInitiallyUpCount": 8
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 10,
+        "PU": 5,
+        "GO": 3,
+        "WP": 2,
+        "WA": 13,
+        "EL": 10
+      },
+      "childFilteredSections": {
+        "SP": 6,
+        "PU": 0,
+        "GO": 3,
+        "EL": 10
+      },
+      "childEnemyCount": 9,
+      "childEnemies": [
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": -1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 3,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": -1
+        },
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 4,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 4,
+          "opcodes": [
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 8,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 32,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        "3": {
+          "multiplier": 1,
+          "normalDivisor": 4,
+          "slowDivisor": 8
+        },
+        "4": {
+          "multiplier": 1,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        }
+      },
+      "storedProgramCount": 2,
+      "storedOpcodeSet": [
+        "b",
+        "n"
+      ],
+      "childReferencedPrograms": 1,
+      "childOpcodeSet": [
+        "n"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {
+        "type2/frame0": 2,
+        "type2/frame2": 4
+      },
+      "elevatorVariants": {
+        "placement1/channel0": 1,
+        "placement1/channel1": 2,
+        "placement3/channel1": 6,
+        "placement3/channel2": 1
+      },
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {
+        "169": 3
+      },
+      "requirements": [
+        "Linked up/down dot state, moving sprite and rider positions, human/nonhuman permissions, endpoint orphan/death, reset and source clocks",
+        "Elevator switch entry/occupancy, linked channel toggles, original outlines and bomb destruction",
+        "Property-mask misses retain present ordinary pivots",
+        "Protection overlay and actor-type-specific immunity",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "Fourteen linked dots include six initially lowered dots. Ten EL controls include channel 0 with no Child-active channel 0 dot. Puddles are inactive.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 0,
+      "childBonusGoalCoincidences": 0
+    },
+    {
+      "ordinal": 40,
+      "resourceId": 213,
+      "title": "Hollow",
+      "sourceSha256": "0982002b6c9141cd011910e6f5977332402c770dd1fc01880af37adb083b4032",
+      "decodedArtifactSha256": "f806e7039a22419cb07356366f095799d65ab195741625a426b2b3a49f91ccb5",
+      "version": 12,
+      "structuralStatus": "complete",
+      "grid": {
+        "displayRows": 8,
+        "displayColumns": 11,
+        "serializedRows": 8,
+        "serializedColumns": 11
+      },
+      "timeLimitRaw": 180,
+      "presentDots": 78,
+      "rawBonuses": 12,
+      "rawGoals": 1,
+      "childBonuses": 12,
+      "childGoals": 1,
+      "dotFlags": {
+        "0x1": 35,
+        "0x101": 5,
+        "0x201": 9,
+        "0x3": 10,
+        "0x301": 6,
+        "0x4001": 10,
+        "0x4003": 2,
+        "0x5": 1
+      },
+      "conditionalDotMasks": {
+        "14": 8
+      },
+      "childMaskMissPresentDots": 8,
+      "childColorIndices": {
+        "0": 6,
+        "1": 31,
+        "2": 21,
+        "3": 2,
+        "4": 15,
+        "6": 2,
+        "7": 1
+      },
+      "childSpecialDots": {
+        "ring": 0,
+        "waystationMarker": 0,
+        "protected": 0,
+        "slowdown": 0,
+        "movingProgram": 0,
+        "raw0x2000": 0
+      },
+      "upDown": {
+        "rawCount": 20,
+        "childCount": 12,
+        "childChannels": {
+          "0": 2,
+          "1": 6,
+          "2": 4
+        },
+        "childInitiallyDownCount": 0,
+        "childInitiallyUpCount": 12
+      },
+      "inlineDotPrograms": 0,
+      "nonemptySections": {
+        "SP": 32,
+        "GO": 4,
+        "WP": 4,
+        "WA": 11,
+        "EL": 12
+      },
+      "childFilteredSections": {
+        "SP": 32,
+        "GO": 4,
+        "EL": 12
+      },
+      "childEnemyCount": 4,
+      "childEnemies": [
+        {
+          "type": 1,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 2,
+          "programLength": 62,
+          "opcodes": [
+            "f",
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 2,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 3,
+          "programLength": 60,
+          "opcodes": [
+            "f",
+            "n",
+            "s"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 3,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": 1,
+          "programLength": 32,
+          "opcodes": [
+            "f",
+            "n"
+          ],
+          "checksWalls": false,
+          "initialFrame": 0,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 15,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        }
+      ],
+      "inactiveActors": [
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 16,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 12,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        },
+        {
+          "type": 4,
+          "activationMask": 14,
+          "clockClass": 1,
+          "initialPC": 1,
+          "programReference": -1,
+          "programLength": null,
+          "opcodes": [],
+          "checksWalls": false,
+          "initialFrame": 48,
+          "direction": 1
+        }
+      ],
+      "childActorClassRatios": {
+        "1": {
+          "multiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      },
+      "storedProgramCount": 4,
+      "storedOpcodeSet": [
+        "b",
+        "f",
+        "n",
+        "s"
+      ],
+      "childReferencedPrograms": 3,
+      "childOpcodeSet": [
+        "f",
+        "n",
+        "s"
+      ],
+      "doorVariants": [],
+      "switchColorSubcellVariants": {},
+      "puddleKinds": {},
+      "spikeTypeFrameVariants": {
+        "type0/frame2": 1,
+        "type1/frame2": 6,
+        "type2/frame0": 2,
+        "type2/frame1": 6,
+        "type2/frame2": 4,
+        "type2/frame3": 7,
+        "type3/frame2": 6
+      },
+      "elevatorVariants": {
+        "placement1/channel0": 1,
+        "placement1/channel1": 1,
+        "placement1/channel2": 2,
+        "placement2/channel0": 1,
+        "placement2/channel1": 2,
+        "placement2/channel2": 2,
+        "placement3/channel1": 1,
+        "placement3/channel2": 2
+      },
+      "bombKinds": {},
+      "bombActivationFlagBytes": {},
+      "goodieInitialFrameRequests": {
+        "169": 4
+      },
+      "requirements": [
+        "Linked up/down dot state, moving sprite and rider positions, human/nonhuman permissions, endpoint orphan/death, reset and source clocks",
+        "Elevator switch entry/occupancy, linked channel toggles, original outlines and bomb destruction",
+        "WA rotating spikes with class-specific clocks, nonordinary hooks and protection bypass",
+        "Property-mask misses retain present ordinary pivots",
+        "Source Pascal PC, cardinal decisions and failed-action advancement"
+      ],
+      "notes": "Twelve EL controls reach the source capacity. Twelve active raised dots span all three channels; thirty-two SP hazards and one rotating spike.",
+      "childWallCheckingEnemyCount": 0,
+      "childRotatingSpikeCount": 1,
+      "childBonusGoalCoincidences": 0
+    }
+  ],
+  "sourceOnly": true,
+  "runtimeOrAssetsEdited": false,
+  "filesReleased": true,
+  "sourceRules": {
+    "noLegacyVersions": true,
+    "noInlineDotPrograms": true,
+    "newBlockClassRelativeTo1To22": [
+      "EL"
+    ],
+    "firstRawELOrdinal": 23,
+    "firstChildActiveELOrdinal": 33,
+    "activeEnemyTypes": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "type5Absent": true,
+    "activeOpcodeAlphabet": [
+      "b",
+      "f",
+      "n",
+      "s"
+    ],
+    "dotMaskMiss": "Presence and color remain; listed special properties including up/down selector clear. Do not delete pivots.",
+    "ringQualifier": "All raw ring dots in this batch miss Child property masks; there are zero Child-active rings.",
+    "currentGenerator": "Proposed design only; none implemented or requested.",
+    "clockClass4Occurrence": {
+      "firstWithinThisBatch": 28,
+      "alreadyQualifiedEarlier": "Doors, ordinal 4: green class 4 hand; this is not a library-first claim"
+    }
+  },
+  "newMechanicContracts": {
+    "EL": {
+      "stream": "CODE6:508e reads position, placement word, channel word, 32-bit mask for version >6; older default mask 15",
+      "create": "CODE6:5182 filters before count; capacity 12; layer 16",
+      "art": "Group 3400, background channel frame 0..2; contact indicator 3+2*channel idle, +1 occupied; background destruction frame 9",
+      "contact": "WACheckElevators cc76 compares first visible original-outline hit with saved actor index; new contact before old release; no occupancy hold logic",
+      "activation": "ELActivate 5250 calls DOActivateUpDown for every entering eligible actor even if another actor already occupies control; occupancy count controls indicator only",
+      "dotChannels": "((flagsRaw & 0x300)>>8)-1 gives -1 none, 0..2 channels; flag 0x4000 selects initially lowered state when channel enabled",
+      "toggle": "DOActivateUpDown 4d80 reverses ongoing motion, clamps endpoint reversals, or starts toward opposite endpoint. All 88 source slots inspected for matching saved channel.",
+      "reset": "ELReset 4fae restores every active record, zero occupancy and idle indicators. DOReset 2220 invokes DOInitUpDownInfo 332e for each up/down dot; shared clocks persist."
+    },
+    "upDown": {
+      "phase": "0 lowered through 12 raised; twelve one-unit callback moves for a full transition, with early reversal possible",
+      "clock": "DO uses WA class 1 timer via 35a6/ef94 and callback 262e; rate is source clock-derived, not measured native duration",
+      "permission": "Lowering from phase 12 clears human +0x11; reaching 12 raises it. Nonhuman +0x10 is independent. Initial lowered initialization moves/hides sprites but does not explicitly clear +0x11 in 33a6..345a; preserve source lookup/position gates rather than deriving permission solely from visibility.",
+      "riders": "28b2/2902 invokes DOPositionAllRiders during every step, including PU/DP rider updates; static-dot adapters insufficient",
+      "visibility": "Main/shadow visible only phase >=2 during motion. Auxiliary layer 4 visible below phase 6 using frame 158-phase; layer 5 channel animation freezes below raised endpoint.",
+      "endpoint": "At phase 0 invoke WAOrphanOccupants(dot,-1) then DPOrphanOccupants(dot). Human pivot occupant triggers RODied reason 38; enemies blink until strict adjusted deadline then hide; DP occupants hide/detach.",
+      "orphan": "WAOrphan eb46 stores latchedTick+MTAdjustPeriod(15); WAEnemyFrame da22 tests strict > then hides/clears orphan and resurrection deadline; before deadline toggles visibility each callback.",
+      "art": "Group 300 and shadow 4100 descriptors 125..158; animated channel ranges 127..134, 136..143, 145..152; hidden initialization parks preceding frame 126/135/144; auxiliary 153..158. Metadata only extracted.",
+      "auxiliaryClock": "Layer 5 channel decoration uses unscaled 160, source DOInit 20f6..2102 and misc table type 3. Position changes use WA class 1 timer; clocks must stay separate."
+    },
+    "bonusGoal": "Forced Entry raw 0x0007 requires independent flags. DOGrabbed 471e first gates death; 472e..4746 calls ROWon (CODE7:5116) for goal before 477c..47bc performs bonus handling. Do not stop callback at goal and drop bonus side effects; scoring finalization timing still requires native evidence."
+  },
+  "visualInventory": {
+    "privateFile": "new-visual-inventory-private.json",
+    "newELGroup": 3400,
+    "ELDescriptorCount": 10,
+    "ELCollidableFrames": 6,
+    "upDownSelectedDescriptorsPerDotGroup": 34,
+    "upDownSelectedCollidableFrames": 0,
+    "rotatingSpikeDescriptors": 64,
+    "newArtProduced": false,
+    "noConversion": true,
+    "existingArtQualification": "Group 3500 and EL/up-down remain source-only inventory; existing 51-payload baseline untouched."
+  },
+  "validation": {
+    "catalogEntries": 18,
+    "sourceHashesMatchQueue": 18,
+    "completeVersion12Records": 18,
+    "allChildGoalCounts": 1,
+    "noExactMapsCoordinatesOrProgramStringsInPublicReport": true,
+    "checks": "Inventory assertions and private source excerpt/hash provenance; no runtime, emulator, browser, build or conversion test."
+  },
+  "uncertainties": [
+    "EL placement transform and 4-pixel indicator collider must be independently checked against native visuals before runtime adoption.",
+    "Up/down initial lowered permission, previous-position grab fallback, callback order and orphan effects need focused synthetic integration and native traces.",
+    "Cross-mechanic explosion/EL destruction, oil riders and simultaneous source callbacks remain unqualified.",
+    "Clock ratios are reconstructed; full transition wall time and exact input windows are not measured.",
+    "No generated board, solver, route or catalog acceptance is provided."
+  ]
+}

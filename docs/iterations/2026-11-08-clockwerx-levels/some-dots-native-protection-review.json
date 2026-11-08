@@ -1,0 +1,370 @@
+{
+  "schema": "clockwerx-some-dots-native-protection-review-v1",
+  "status": "Native image/source-outline evidence for protected ordinary-hand contact and fixture reversal; not level acceptance",
+  "sourceLevelSha256": "a5dd77d0bab6bfa0041a92bed0b45a8a9b0f2a74c773f8c896c8b48659d86712",
+  "sourceHashMatchesQueue": true,
+  "nativeRun": {
+    "status": "passed",
+    "frontend_ticks": 5699,
+    "guest_tick": 6297,
+    "budget_exhausted_frames": 0,
+    "assertions": 0
+  },
+  "method": "Independent all-present-pivot x64-pose fit; gamma0.7 source RGBA with qualified anchors. Red excludes only confidently fitted hero opaque pixels; acceptance requires MAE<2,runner gap>10,>=50percent and>=40 opaque pixels. Original outline spans then intersect; same-pivot angular gate applied.",
+  "fitMetrics": {
+    "700": {
+      "accepted": 67,
+      "total": 67,
+      "maeRange": [
+        0.2192513164989451,
+        0.6269430051813472
+      ],
+      "minimumRunnerUpGap": 41.48566223472677,
+      "minimumVisibleFraction": 1.0,
+      "minimumVisiblePixels": 180,
+      "rejectedCheckpoints": []
+    },
+    "500": {
+      "accepted": 67,
+      "total": 67,
+      "maeRange": [
+        0.5691055670017149,
+        0.6369046483721051
+      ],
+      "minimumRunnerUpGap": 33.04580152671756,
+      "minimumVisibleFraction": 0.9112903225806451,
+      "minimumVisiblePixels": 112,
+      "rejectedCheckpoints": []
+    }
+  },
+  "rejectedFits": [],
+  "transferChecks": [
+    {
+      "checkpoint": "checkpoint-transfer-01",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-02",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-03",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-04",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-05",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-06",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-07",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-08",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-09",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-10",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-11",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-12",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-13",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-14",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-15",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-16",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-17",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    },
+    {
+      "checkpoint": "checkpoint-transfer-18",
+      "matchesExpectedPivot": true,
+      "acceptedFit": true
+    }
+  ],
+  "protectedCaptures": 47,
+  "heroProtectedPivotUnchanged": true,
+  "protectedDotRawFlagVerified": true,
+  "sourceContactCaptureCount": 16,
+  "sourceContacts": [
+    {
+      "checkpoint": "protected-sample-15",
+      "guestTick": 4297,
+      "heroFrame": 38,
+      "redFrame": 52,
+      "outlineOverlapPixels": 1,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9920634920634921,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-16",
+      "guestTick": 4299,
+      "heroFrame": 38,
+      "redFrame": 52,
+      "outlineOverlapPixels": 1,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9920634920634921,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-17",
+      "guestTick": 4301,
+      "heroFrame": 38,
+      "redFrame": 52,
+      "outlineOverlapPixels": 1,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9920634920634921,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-18",
+      "guestTick": 4303,
+      "heroFrame": 37,
+      "redFrame": 53,
+      "outlineOverlapPixels": 7,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9682539682539683,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-19",
+      "guestTick": 4305,
+      "heroFrame": 37,
+      "redFrame": 53,
+      "outlineOverlapPixels": 7,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9682539682539683,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-20",
+      "guestTick": 4307,
+      "heroFrame": 36,
+      "redFrame": 54,
+      "outlineOverlapPixels": 16,
+      "differentPivots": true,
+      "redVisibleFraction": 0.975609756097561,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-21",
+      "guestTick": 4309,
+      "heroFrame": 36,
+      "redFrame": 54,
+      "outlineOverlapPixels": 16,
+      "differentPivots": true,
+      "redVisibleFraction": 0.975609756097561,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-22",
+      "guestTick": 4311,
+      "heroFrame": 36,
+      "redFrame": 54,
+      "outlineOverlapPixels": 16,
+      "differentPivots": true,
+      "redVisibleFraction": 0.975609756097561,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-23",
+      "guestTick": 4313,
+      "heroFrame": 35,
+      "redFrame": 55,
+      "outlineOverlapPixels": 12,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9112903225806451,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-24",
+      "guestTick": 4315,
+      "heroFrame": 35,
+      "redFrame": 55,
+      "outlineOverlapPixels": 12,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9112903225806451,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-25",
+      "guestTick": 4317,
+      "heroFrame": 34,
+      "redFrame": 56,
+      "outlineOverlapPixels": 5,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9572649572649573,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-26",
+      "guestTick": 4319,
+      "heroFrame": 34,
+      "redFrame": 56,
+      "outlineOverlapPixels": 5,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9572649572649573,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-27",
+      "guestTick": 4321,
+      "heroFrame": 33,
+      "redFrame": 57,
+      "outlineOverlapPixels": 1,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9921259842519685,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-28",
+      "guestTick": 4323,
+      "heroFrame": 33,
+      "redFrame": 57,
+      "outlineOverlapPixels": 1,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9921259842519685,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-29",
+      "guestTick": 4325,
+      "heroFrame": 33,
+      "redFrame": 57,
+      "outlineOverlapPixels": 1,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9921259842519685,
+      "heroAccepted": true,
+      "redAccepted": true
+    },
+    {
+      "checkpoint": "protected-sample-33",
+      "guestTick": 4361,
+      "heroFrame": 25,
+      "redFrame": 1,
+      "outlineOverlapPixels": 3,
+      "differentPivots": true,
+      "redVisibleFraction": 0.9504132231404959,
+      "heroAccepted": true,
+      "redAccepted": true
+    }
+  ],
+  "outlineCrosscheck": {
+    "validComparisons": 67,
+    "sourceContactCaptures": 16,
+    "discrepancies": []
+  },
+  "reversal": {
+    "key": 49,
+    "character": 32,
+    "heldGuestTicks": 6,
+    "preKeyGuestTick": 4265,
+    "postKeyGuestTick": 4271,
+    "preKeyHeroFrame": 45,
+    "postKeyHeroFrame": 44,
+    "preInputProgression": [
+      35,
+      42,
+      45
+    ],
+    "postInputDirection": -1,
+    "postInputGuestTickSpan": 504,
+    "postInputSourceFrameAdvance": 106,
+    "pivotUnchangedDuringInput": true,
+    "bindingQualifier": "Observed behavior of this existing native fixture only. Prior source/default binding interpretation remains unresolved; no universal Space-alone binding is claimed."
+  },
+  "survivalEvidence": [
+    "Hero remains a confidently fitted live source hand at the protected pivot in every one of47 protected samples, including16 source-outline contacts.",
+    "First contact sequence is samples15-29; a second sampled overlap occurs at33. Later samples34-47 show continued rotation at that pivot.",
+    "Subsequent transfer15 and transfers16-18 independently match expected pivots, demonstrating departure after the contact window."
+  ],
+  "counterfactualBoundary": "The root model with protection disabled predicts an ordinary-enemy death; this report does not use that model to establish native contact or survival. Contact is computed independently from fitted native poses and original source outlines.",
+  "limits": [
+    "Screenshots establish visible poses and source geometry, not direct reads of WAHitEnemy return values or an invulnerability memory flag.",
+    "Source-contact capture counts are not counts of distinct engine callback hits; repeated images can share a pose.",
+    "Sampling does not identify the first hidden collision tick or exclude additional unsampled contacts.",
+    "Hero opaque pixels are excluded only from red RGB fitting; original outline pixels are never masked from collision tests. At least91.13percent of red source opaque pixels remain at every sample.",
+    "No arbitrary predicted enemy position, frame, time offset or teleport state restricted the fitting.",
+    "Final transfer18 retains a clear hero pose, but no later SPI/death/reset timeline was fitted here. AstraWalls/root own that timeline.",
+    "Protection evidence concerns an ordinary red hand; no claim extends to spikes, bullets, rotating spikes or buster behavior.",
+    "Actual key49 reversal is fixture-specific; static binding discrepancy remains open.",
+    "No level acceptance, gameplay completeness, sound/controller or browser fidelity claim."
+  ],
+  "visualReview": [
+    "protected-sample-20",
+    "protected-sample-33",
+    "checkpoint-transfer-18"
+  ],
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\protection-review",
+  "boundary": {
+    "runtimeEdits": false,
+    "assetsEdits": false,
+    "queueEdits": false,
+    "newEmulatorRun": false,
+    "browserBuildConversion": false
+  },
+  "filesReleased": true
+}

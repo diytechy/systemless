@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 9,
-  "currentAction": "Some Dots: qualify static enemy transfers, disappearing rings, checkpoints and protection; native and browser evidence",
+  "currentOrdinal": 10,
+  "currentAction": "Bombs: integrate and qualify BO/GO/LI/fuse/explosion/burnt-dot mechanics under Child; preserve accepted nine-scene baseline",
   "levels": [
     {
       "ordinal": 1,
@@ -597,11 +597,33 @@
       "menuTitle": "Some Dots",
       "resourceTitle": "Some Dots",
       "sha256": "a5dd77d0bab6bfa0041a92bed0b45a8a9b0f2a74c773f8c896c8b48659d86712",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "some-dots/native-play-01/report.json",
+        "some-dots/program-review",
+        "some-dots/native-ring-01/report.json",
+        "some-dots/native-goal-route-01/report.json",
+        "some-dots/native-route-review.json",
+        "some-dots/native-checkpoint-01/report.json",
+        "some-dots/protection-review",
+        "some-dots/native-checkpoint-review"
+      ],
+      "requirements": [
+        "static nsbf canonical enemy transfer and orphan lifecycle",
+        "human/nonhuman runtime dot permissions",
+        "ring collapse/hide/strict wait/regrowth",
+        "WY saved spawn/time and distinct reset/restart hooks",
+        "ordinary-only protection and separate overlay clock",
+        "legal rising-edge reverse in input certificates"
+      ],
+      "svgStatus": "ninth scene activated; native goal/program/ring/protection/checkpoint and browser goal/reset reviewed",
+      "generationConstraints": [
+        "time-dependent availability and orphan flags",
+        "saved spawn/time differs from whole-board state",
+        "qualify actual contact rather than safe waiting",
+        "carry PC/class clocks and reverse edge",
+        "retain failed routes, labels and rejected occluded observations"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 74,
@@ -5922,5 +5944,13 @@
       "catalogStatus": "not-listed",
       "status": "resource-inventoried"
     }
+  ],
+  "sourceRequirementsReviewFiles": [
+    "follow-on-6-8-review.md",
+    "follow-on-11-22-review.md",
+    "follow-on-23-40-review.md",
+    "follow-on-41-60-review.md",
+    "follow-on-61-80-review.md",
+    "follow-on-81-100-review.md"
   ]
 }

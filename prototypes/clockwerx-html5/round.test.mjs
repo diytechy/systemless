@@ -181,3 +181,43 @@ test('round consumes each capped class delta before checking the next integer fr
  assert.equal(g.actorClasses.snapshot().classes[1].delta,2);
  assert.equal(g.enemies[0].frame,15);assert.equal(g.enemies[0].direction,-1);assert.equal(g.enemies[0].sourcePC,2);
 });
+
+function specialFixture({enemy=false}={}){
+ const f=fixture();f.board.specialDotRules=true;f.board.sourceDotPermissions=true;f.board.staticEnemyCallbacks=true;f.board.timeLimit=90;
+ f.board.spikes=[];f.board.dots[0].ring=true;f.board.dots[0].color=0;f.board.dots[1].kind='dot';f.board.dots[1].waystation={halfIndex:24,direction:-1};
+ for(const d of f.board.dots)Object.assign(d,{present:true,humanCanGrab:true,nonhumanCanGrab:true,motion:'static',slideMask:0,teleport:false});
+ f.board.player.angle=-.1;f.board.enemies=enemy?[{name:'enemy',pivot:'a',group:4400,sourceActorType:2,canonicalFrame:true,frame:32,unwrappedFrame:32,angle:Math.PI,direction:1,speedClass:1,program:null,visible:true,orphaned:false,hiddenUntil:0}]:[];
+ return f;
+}
+test('human release collapses old ring; normal death restores saved WY while explicit restart restores original spawn',()=>{
+ const {board,options}=specialFixture(),g=new SourceRound(board,options);
+ for(let i=0;i<3;i++)g.update(1/120,{swing:true});
+ assert.equal(g.player.pivot,'b');assert.equal(board.dots[0].humanCanGrab,false);assert.equal(board.dots[0].nonhumanCanGrab,true);
+ assert.equal(g.dotAnimations.renderState('a').main.frame,24);assert.equal(g.dotAnimations.savedSpawn.pivot,'b');
+ g.beginDeath({reason:'contract'});for(let i=0;i<40&&!g.roundRestarts;i++)g.update(1/120);
+ assert.equal(g.roundRestarts,1);assert.equal(g.player.pivot,'b');assert.equal(g.player.direction,-1);assert.equal(g.player.angle,TAU*.75);
+ assert.equal(board.dots[0].humanCanGrab,true);assert.deepEqual(g.snapshot().roundTimer,{enabled:false,original:90,current:90,saved:90});
+ assert.equal(g.dotAnimations.selectedCheckpoint,'b');g.reset();assert.equal(g.player.pivot,'a');assert.equal(g.dotAnimations.selectedCheckpoint,null);
+});
+test('ring occupant orphaning flickers only on source callbacks then hides while canonical movement continues',()=>{
+ const {board,options}=specialFixture({enemy:true}),g=new SourceRound(board,options);
+ for(let i=0;i<3;i++)g.update(1/120,{flip:true});
+ assert.equal(g.enemies[0].orphaned,true);const deadline=g.enemies[0].orphanDeadline;
+ assert.equal(deadline,g.guestTicks+25);const visible=g.enemies[0].visible;g.update(1/120);assert.equal(g.enemies[0].visible,visible);
+ for(let i=0;i<160;i++)g.update(1/120);
+ assert.equal(g.death,null);assert.equal(g.enemies[0].visible,false);assert.equal(g.enemies[0].orphaned,false);
+ const frame=g.enemies[0].frame;for(let i=0;i<30;i++)g.update(1/120);
+ assert.notEqual(g.enemies[0].frame,frame);assert.equal(g.enemies[0].visible,false);
+});
+test('protection skips ordinary enemy contact while spike collision remains lethal',()=>{
+ const {board,options}=fixture();board.dots[0].protected=true;board.enemies[0].pivot='a';board.enemies[0].sourceActorType=2;board.enemies[0].angle=0;
+ const g=new SourceRound(board,options);assert.equal(g.enemyCollision(),null);
+ board.spikes[0].x=0;assert.equal(g.spikeCollision().reason,'spike');
+});
+test('replayed reverse queues one source-clock action per rising edge, including held inputs',()=>{
+ const {board,options}=fixture();board.spikes=[];board.enemies=[];const g=new SourceRound(board,options);
+ for(let i=0;i<40;i++)g.update(1/120,{reverse:true});
+ assert.equal(g.events.filter(e=>e.type==='reverse').length,1);assert.equal(g.player.direction,-1);
+ g.update(1/120);for(let i=0;i<20;i++)g.update(1/120,{reverse:true});
+ assert.equal(g.events.filter(e=>e.type==='reverse').length,2);assert.equal(g.player.direction,1);
+});

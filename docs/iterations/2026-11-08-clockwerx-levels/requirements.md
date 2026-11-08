@@ -1,6 +1,6 @@
 # ClockWerx behavior and generation requirements
 
-The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Movement through More Doors have eight bounded playable increments with native/browser checks. Some Dots (ordinal 9) is current; the complete catalog inventory is not a full runtime port. The map, artwork, original text and source analysis remain private. The [generation method](generation-method.md) describes a proposed generator and its validation requirements.
+The [catalog inventory](catalog-inventory.md) covers all 100 listed levels in order. There are another 20 unlisted RND2 resources. The full stream decoder reads all 120 to EOF, but playable implementation and native visual review are separate gates. Movement through Some Dots have nine bounded playable increments with native/browser checks. Bombs (ordinal 10) is current; the complete catalog inventory is not a full runtime port. The map, artwork, original text and source analysis remain private. The [generation method](generation-method.md) describes a proposed generator and its validation requirements.
 
 ## How a level is stored
 
@@ -104,3 +104,7 @@ Child has no active round countdown, despite retaining current and saved integer
 ## More Doors and input translation
 
 Three long horizontal gates share six paired switches. One swing in the goal route avoids a repeat switch entry that would close a gate. The input certificate must preserve switch-entry history, door phases and cap outlines. A semantic route alone does not validate its translation to original-game keys: the first native attempt sent the wrong key, reproduced a reverse, and failed after12matched transfers. Changing exactly two key events then gave20/20original pivot matches and completion. Keep failed experiments and distinguish script completion from reaching the goal. See [More Doors evidence](more-doors-review.md).
+
+## Some Dots: state beyond the map
+
+Disappearing rings retain enemy lookup while denying human actions, including bounce. Orphaned enemies continue their programs while flickering/hiding. Waypoints save a return specification and integer time, not board state; normal death and explicit restart have different animation/spawn effects. Protection is ordinary-enemy immunity, with spike death still possible. The two input certificates cover goal and checkpoint return over266clock samples each; native contact is independently confirmed in16overlap captures. Legal off-cardinal reverse belongs in the solver state. See [Some Dots evidence](some-dots-review.md).

@@ -1,0 +1,75 @@
+{
+  "schema": "clockwerx-some-dots-browser-static-review-v1",
+  "status": "candidate-static-layout-readability-accepted-runtime-native-goal-pending",
+  "nativeGameRectangle": [
+    80,
+    60,
+    720,
+    540
+  ],
+  "browserCanvasSize": [
+    640,
+    480
+  ],
+  "workingCanvasReviewed": true,
+  "priorPreloadFailureExcludedFromInventoryEvidence": true,
+  "v2MainAtlasMatchesQA": true,
+  "inputs": [
+    {
+      "file": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\browser-initial-canvas.png",
+      "sha256": "6f31cb7d34a26f4d9c084e1bc1e62922d9cc13dbee753410977d2a1bdd4197a9"
+    },
+    {
+      "file": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\browser-initial-idle.json",
+      "sha256": "ed55d905f5bf561985c9f2482f351a7dc2ebfcb759890f472665c910815cfccd"
+    },
+    {
+      "file": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-play-01\\initial-after-reveal.png",
+      "sha256": "b287a4ce43985b60ef1c740c2234af47bc6f2c04c377ccc98a2708560af70f4c"
+    }
+  ],
+  "ringComparison": {
+    "sourceMaskPixels": 56,
+    "ringCount": 51,
+    "medianNativeMean": 201.46428571428572,
+    "medianBrowserMean": 175.85714285714286,
+    "medianChannelError": 46.57142857142857,
+    "boundary": "Same source opaque ring-pixel mask; smooth antialias and shading differences, not perceived total contrast or pixel fidelity claim"
+  },
+  "sourceInventory": {
+    "presentDots": 74,
+    "ringDots": 51,
+    "bonusFlags": 7,
+    "goalFlags": 1,
+    "waystations": 2,
+    "protectedOverlays": 1,
+    "spikes": 1,
+    "doors": 1,
+    "switches": 1,
+    "visibleHumans": 1,
+    "redEnemies": 1,
+    "greenEnemies": 1,
+    "activePuddlesAtChild": 0,
+    "nonemptyTextRecords": 7,
+    "emptyTextRecords": 1
+  },
+  "findings": [
+    "V2 resting checkpoints read as compact symmetric blue orbs with coherent bands/glint",
+    "Main/secondary placement agrees with native contract",
+    "Rings readable but softer/dimmer than native",
+    "Protection pose differs by phase; no extra secondary shadow",
+    "Expected colored hands/pivots, bonus/goal, door/switch and text regions present"
+  ],
+  "requestedBlockingArtCorrections": [],
+  "pending": [
+    "Ring collapse/regrowth",
+    "Checkpoint80\u201389 selection and reset lifecycle",
+    "Protection behavior and full browser sequence",
+    "Enemy programs/transfers",
+    "Source timing",
+    "Native goal and broader gameplay acceptance"
+  ],
+  "newRuntimeRenderingBuildBenchmark": false,
+  "runtimeAssetsEdited": false,
+  "workloadReleased": true
+}

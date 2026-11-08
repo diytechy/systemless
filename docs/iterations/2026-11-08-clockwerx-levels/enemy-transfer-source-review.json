@@ -1,0 +1,199 @@
+{
+  "status": "future-unlinked-unaccepted",
+  "scope": {
+    "catalog": [
+      9,
+      10
+    ],
+    "titles": [
+      "Some Dots",
+      "Bombs"
+    ],
+    "resources": [
+      11330,
+      10963
+    ],
+    "mode": "Child single-player",
+    "ordinaryActorTypes": [
+      1,
+      2,
+      3
+    ]
+  },
+  "implementation": {
+    "files": [
+      "prototypes/clockwerx-html5/enemy-transfer.mjs",
+      "prototypes/clockwerx-html5/enemy-transfer.test.mjs"
+    ],
+    "exports": [
+      "advanceStaticEnemyCallback",
+      "markEnemyOrphaned"
+    ],
+    "linked": false,
+    "rootOwnedFilesEdited": false,
+    "tests": {
+      "command": "node --test prototypes/clockwerx-html5/enemy-transfer.test.mjs",
+      "passed": 10,
+      "nativeEquivalence": false
+    }
+  },
+  "ordering": {
+    "inner": [
+      "angular advance",
+      "canonical frame",
+      "collision hook",
+      "stop sliding (gated)",
+      "program command",
+      "start sliding (gated)"
+    ],
+    "afterAllInnerSteps": [
+      "orphan strict expiry or one visibility toggle"
+    ],
+    "delta": "shared class delta at dispatched sprite callback; not display-frame count",
+    "programPC": "Pascal byte offset; PC0 reads length once; wrap above length to1"
+  },
+  "staticTransfer": {
+    "cardinalFrameOffsets": {
+      "0": [
+        48,
+        0
+      ],
+      "16": [
+        0,
+        48
+      ],
+      "32": [
+        -48,
+        0
+      ],
+      "48": [
+        0,
+        -48
+      ]
+    },
+    "lookup": "first present positional match then nonhuman permission; no visibility/color/human-availability filter",
+    "directionReverse": "eligible target AND (grab XOR secondActionBit)",
+    "grab": [
+      "release old dot after optional reversal",
+      "assign pivot",
+      "frame+32 modulo64",
+      "snap source anchor",
+      "DP hook",
+      "unavailable human target invokes orphan",
+      "remaining qualified nonhuman hooks"
+    ],
+    "easing": "none in source static transfer",
+    "failedTarget": "consumes PC, no reverse or grab"
+  },
+  "orphan": {
+    "guard": "visible AND not already orphaned",
+    "deadline": "latched guestTick + MTAdjustPeriod(15)",
+    "childAdjustedTicks": 25,
+    "deadlineRefresh": false,
+    "expiryComparison": "strictly greater",
+    "preExpiry": "one visibility toggle per callback after all inner steps",
+    "expiry": [
+      "visible=false",
+      "orphaned=false",
+      "hiddenUntil=0"
+    ],
+    "movementAndProgramsContinue": true,
+    "goodPivotCures": false,
+    "ringRegrowthResurrects": false,
+    "reset": "separate source reset/recreation adapter"
+  },
+  "trueSliding": {
+    "implemented": false,
+    "sourceRequirement": "EX-derived route mask, not wall topology",
+    "positiveQuarterBits": [
+      2,
+      4,
+      8,
+      1
+    ],
+    "negativeQuarterBits": [
+      8,
+      1,
+      2,
+      4
+    ],
+    "routeVelocityPixels": [
+      [
+        3,
+        0
+      ],
+      [
+        0,
+        3
+      ],
+      [
+        -3,
+        0
+      ],
+      [
+        0,
+        -3
+      ]
+    ],
+    "completionProgress": 16,
+    "angularFrameDuringSlide": "retained",
+    "completionFrameHalfTurn": false,
+    "reverse": "negate angular step, progress step and pixel velocity",
+    "gates": [
+      "EX endpoint validity",
+      "dynamic dot positions",
+      "teleport ordering",
+      "slide collisions",
+      "slide render anchors"
+    ]
+  },
+  "authoredScope": {
+    "SomeDotsAndBombsEXRecords": 0,
+    "movingUpDownTeleportDots": false,
+    "ordinaryStaticTransfersSufficientForThisMechanic": true,
+    "levelAcceptance": false
+  },
+  "correction": {
+    "topic": "earlier broad Bombs ordinary-enemy timed return",
+    "source": "CODE6:d98e-d9b4",
+    "finding": "hiddenUntil return check applies only to saved actor type5; do not infer ordinary type1-3 timed return from a WABombed timestamp"
+  },
+  "adapterGates": [
+    "dispatch only actual source sprite callbacks",
+    "preserve shared delta and actor iteration order",
+    "canonical collision-before-program",
+    "hidden enemy collision and switch occupancy",
+    "human ring release occupant orphan hook",
+    "DP-first grab hook",
+    "separate human WY/goal/bonus permissions",
+    "source reset state",
+    "root freeze/death policy"
+  ],
+  "sourceReferences": {
+    "oneFrame": "CODE6:d938-d98a",
+    "callback": "CODE6:d9f2-da60",
+    "action": "CODE6:c6d8-c766",
+    "grab": "CODE6:c3a2-c592",
+    "PC": "CODE6:caba-cb48",
+    "permissions": "CODE6:4494-44d4",
+    "dotGrab": "CODE6:45fa-47ee",
+    "dotRelease": "CODE6:4818-48fa",
+    "orphan": "CODE6:eb46-eb7e",
+    "occupants": "CODE6:eb90-ec06",
+    "adjustPeriod": "CODE7:3656 via jump2342",
+    "EXdirs": "CODE6:3532-354a and5d8e-5dfe",
+    "willSlide": "CODE6:4c48-4cf2",
+    "slideStart": "CODE6:d37a-d40e",
+    "slideVelocity": "CODE6:d318-d35a",
+    "slideAnimate": "CODE6:d898-d8e6",
+    "slideStop": "CODE6:d200-d2fa"
+  },
+  "workloads": {
+    "native": false,
+    "browser": false,
+    "build": false,
+    "conversion": false,
+    "assetOrSaveChanges": false
+  },
+  "released": true
+}

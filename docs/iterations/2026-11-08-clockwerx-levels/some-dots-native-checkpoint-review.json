@@ -1,0 +1,39 @@
+{
+  "schema": "clockwerx-some-dots-native-checkpoint-review-v1",
+  "status": "bounded-native-checkpoint-reset-evidence-qualified-level-unaccepted",
+  "run": {"frontendTicks": 5699, "guestTicks": 6297, "budgetExhaustedFrames": 0, "scriptCompleted": true},
+  "method": {"savedImagesOnly": true, "gamma": 0.7, "sharedRawBaseSubtract": [16,15], "descriptorAppliedOnce": true, "opaqueSourceMaskMeanChannelError": true, "fadeAndOcclusionRejected": true},
+  "selectedMain": [
+    {"guestTicks": [1668,2700], "frame": 79, "error": 0.431818, "scope": "initial and saved pre-activation transfers"},
+    {"guestTick": 2928, "frame": 82, "error": 0.454545},
+    {"guestTicks": [3232,5487], "frame": 89, "error": 0.424242, "scope": "sampled captures including visible death effects"},
+    {"guestTicks": [5517,5547], "accepted": false, "reason": "scene fade/reveal changes palette"},
+    {"guestTick": 5577, "frame": 85, "errorApprox": 0.432},
+    {"guestTicks": [5607,6297], "frame": 89, "error": 0.424242, "scope": "sampled returned-human captures"}
+  ],
+  "secondary": {
+    "commonImageFrames": [79,81,82,83,85,86,87,88,89],
+    "differentImageFrames": [80,84],
+    "clearCommonImageError": 1.0,
+    "independentPhaseIdentification": false,
+    "occlusionRejectedGuestTicks": [5697,5727,5757,5997,6027,6057,6297]
+  },
+  "restorationAtGuestTick5577": {
+    "rings": 51, "ringMainFrame": 23, "ringMainMaxError": 0.214286,
+    "ringShadows": 51, "ringShadowMaxError": 1.0,
+    "uncollectedBonuses": 7, "bonusMaxError": 0.433333,
+    "doorPhase": 0, "doorError": 0.695513,
+    "returnedToSelectedCheckpointVisually": true,
+    "returnedToOriginalStart": false
+  },
+  "consumedBonusContrast": {"beforeGuestTick": 5487, "ordinaryError": 0.560606, "uncollectedErrorBefore": 53.470370, "afterGuestTick": 5577, "uncollectedErrorAfter": 0.433333, "ordinaryErrorAfter": 54.060606},
+  "preResetDoor": {"phase": 10, "error": 0.098291},
+  "deathEffectsVisibleGuestTicks": [5397,5427],
+  "hud": {"observed1000RetainedInTotalAfterReset": true, "scoringPolicyQualified": false, "countdownReadable": false},
+  "sourceOnly": ["normal reset retains plain checkpoint frame before human initial arrival", "retained89 wraps79 on next eligible animation callback", "Child countdown disabled and saved integer90", "exact reset/callback and death-reason semantics"],
+  "unobserved": ["exact89-to79 wrap instant", "all animation phases and exact cadence", "internal freeze bytes", "numeric death reason", "explicit Restart Level", "browser reset fidelity"],
+  "privateResults": "some-dots/native-checkpoint-review/native-checkpoint-fits.json",
+  "privateResultsSha256": "efdfeb49f22dad2c6b65ad9c867706cc3c689d1fd3fe791bee9b9a350562e2b8",
+  "runtimeOrAssetEdits": false,
+  "filesAndWorkloadReleased": true
+}

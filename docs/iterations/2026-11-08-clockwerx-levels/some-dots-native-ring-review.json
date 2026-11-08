@@ -1,0 +1,102 @@
+{
+  "schema": "clockwerx-some-dots-native-ring-review-v1",
+  "status": "bounded-native-ring-visual-lifecycle-supported",
+  "execution": {
+    "status": "passed",
+    "frontend_ticks": 1756,
+    "guest_tick": 2354,
+    "budget_exhausted_frames": 0
+  },
+  "heroTransfers": {
+    "matches": 2,
+    "count": 2,
+    "sourceFrames": [
+      51,
+      51
+    ],
+    "maxError": 0.24514991181657847
+  },
+  "observations": {
+    "cleanMainFrames": [
+      23,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "cleanSecondaryFrames": [
+      23,
+      25,
+      29
+    ],
+    "firstPhase25Tick": 1852,
+    "lastVisibleBeforeHiddenTick": 1874,
+    "firstHiddenTick": 1879,
+    "lastHiddenTick": 2174,
+    "growingPhase25Tick": 2204,
+    "restoredPhase23ByTick": 2234,
+    "stableRestoredThroughTick": 2354,
+    "mainSecondaryHiddenTogether": true,
+    "visibleFrame30Qualified": false
+  },
+  "manualLimits": {
+    "earlyMainReleaseSamples": "1836\u20131850 hand-covered; exact phase rejected",
+    "collapseSecondary": "1852\u20131869 hand/shadow overlap rejected",
+    "outerRoi2144": "Hand-edge mismatch; main and secondary separate ROIs both exactly hidden",
+    "unseenFrames": "Initial collapse24 and early regrowth29\u201326 not independently captured"
+  },
+  "timing": {
+    "disappearanceExclusiveInclusive": [
+      1874,
+      1879
+    ],
+    "sourceChildWaitTicks": 300,
+    "sourceDerivedDeadlineExclusiveInclusive": [
+      2174,
+      2179
+    ],
+    "fiveTickCadenceCompatible": true,
+    "strictGreaterThanIndependentlyDistinguished": false,
+    "exactFirstReappearanceMeasured": false
+  },
+  "privateFit": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-ring-review\\native-ring-fits.json",
+    "sha256": "e07580cab242e81f5b3cada2bdafbf50c4313430c7461ecab2ff7720dcd1b9b6"
+  },
+  "inputs": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-ring-01\\report.json",
+      "sha256": "f067feb2bb8f1aba2c7af1172e57ac37527f40282514d0aaa79be3a36c1c123d"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-ring-01\\transfer-01.png",
+      "sha256": "92d46c811e0fafbf2ef2f6e1ddb37c1bee8ca8ec96252189b4b497f8ebbb4da3"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-ring-01\\transfer-02.png",
+      "sha256": "d71a75b64c33560b1190348a802e04fe5506f67583f68da54470d51ef5a385a8"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-ring-01\\collapse-03.png",
+      "sha256": "169fc18a8ab6509896d470266897bb9c8d985f778bb17312cdb46ae2d10b1417"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-ring-01\\regrow-09.png",
+      "sha256": "eaa0514ee9178100abf7a3c964caae6d3e4cb2a178bb0d9ce2e2e65b5b703efb"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-ring-01\\regrow-10.png",
+      "sha256": "6481052ac12d17f45b78e8112074a017d8fe81f4464b100719f36e29166bd21c"
+    }
+  ],
+  "pending": [
+    "Browser ring lifecycle comparison",
+    "Human/nonhuman availability and orphaning",
+    "Checkpoint/reset behavior",
+    "Separate native goal acceptance"
+  ],
+  "newRuntimeRenderingBuildBenchmark": false,
+  "runtimeAssetsEdited": false,
+  "workloadReleased": true
+}

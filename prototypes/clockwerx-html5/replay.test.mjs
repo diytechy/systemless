@@ -12,6 +12,10 @@ test('caller mutation cannot alter the bounded playback',()=>{
  assert.deepEqual(r.next(),{bounce:true});assert.equal(r.done,true);
 });
 test('invalid durations, ambiguous actions and unimplemented events fail explicitly',()=>{
- for(const input of [[],[[0,null]],[[.5,'flip']],[[1,'reverse']],[[1,'unknown']],[[1,null,2]]])
+ for(const input of [[],[[0,null]],[[.5,'flip']],[[1,'unknown']],[[1,null,2]]])
   assert.throws(()=>createInputReplay(input),TypeError);
+});
+test('reverse is a bounded input flag; the game owns its rising-edge and clock semantics',()=>{
+ const r=createInputReplay([[2,'reverse'],[1,null],[1,'reverse']]);
+ assert.deepEqual(Array.from({length:5},()=>r.next()),[{reverse:true},{reverse:true},{},{reverse:true},{}]);
 });

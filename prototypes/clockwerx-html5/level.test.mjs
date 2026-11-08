@@ -80,3 +80,16 @@ test('bounce program qualification preserves Pascal PC/frame and rejects transfe
  actor.version12ByteRaw=0;level.blocks.at(-1).records[0].text='sf';
  assert.ok(levelRequirements(level,{allowEnemyBouncePrograms:true}).includes('non-bounce actor program'));
 });
+
+test('static special-dot opt-in preserves WY reset definitions, runtime permissions and enemy PCs',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.cells[0].flagsRaw=9;level.cells[1].flagsRaw=0x4011;
+ const actor=level.blocks[0].records[2];actor.version12ByteRaw=0;actor.programReferenceRaw=0;
+ level.blocks.push({kind:'WP',count:1,records:[{text:'nsbf'}]},{kind:'WY',count:1,records:[{rawWords:[0,1,24,65535,0,15]}]});
+ assert.ok(levelRequirements(level).some(r=>r.includes('special dot')));
+ const b=buildDecodedBoard(level,{angularSpeed:TAU,allowSpecialDots:true,allowEnemyStaticPrograms:true});
+ assert.equal(b.specialDotRules,true);assert.equal(b.staticEnemyCallbacks,true);assert.equal(b.dots[0].ring,true);
+ assert.deepEqual(b.dots[1].waystation,{halfIndex:24,direction:-1});assert.equal(b.dots[0].nonhumanCanGrab,true);
+ assert.equal(b.enemies[0].canonicalFrame,true);assert.equal(b.enemies[0].visible,true);assert.equal(b.enemies[0].sourcePC,1);
+ level.cells[0].flagsRaw=0x49;assert.ok(levelRequirements(level,{allowSpecialDots:true}).includes('combined special dot properties'));
+ level.cells[0].flagsRaw=7;assert.ok(levelRequirements(level).includes('combined bonus/goal callback'));
+});

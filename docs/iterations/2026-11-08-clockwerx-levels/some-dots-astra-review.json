@@ -1,0 +1,147 @@
+{
+  "schema": "clockwerx-some-dots-source-review-v1",
+  "status": "source preparation only; not activated or gameplay/visual accepted",
+  "catalogOrdinal": 9,
+  "resourceId": 11330,
+  "title": "Some Dots",
+  "sourceSha256": "a5dd77d0bab6bfa0041a92bed0b45a8a9b0f2a74c773f8c896c8b48659d86712",
+  "structuralStatus": "complete",
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots",
+  "inventory": {
+    "presentDots": 74,
+    "bonuses": 7,
+    "goals": 1,
+    "rings": 51,
+    "waypoints": 2,
+    "protectedDots": 1,
+    "ringColors": [
+      "white"
+    ],
+    "nonemptySections": {
+      "SP": 1,
+      "DR": 1,
+      "DS": 1,
+      "PU": 2,
+      "WY": 2,
+      "WP": 2,
+      "WA": 4,
+      "TX": 8
+    },
+    "inlineDotPrograms": 0,
+    "childInactivePuddles": 2,
+    "activeEnemyPrograms": 2,
+    "enemyProgramAlphabet": [
+      "n",
+      "s",
+      "b"
+    ],
+    "dotFlags": {
+      "0x9": 50,
+      "0x1": 12,
+      "0x3": 7,
+      "0x4041": 1,
+      "0x4011": 2,
+      "0x4009": 1,
+      "0x4005": 1
+    }
+  },
+  "protection": {
+    "verifiedFlag": "0x40",
+    "retractedFlag": "0x2000",
+    "source": "CODE6:3a9c\u20133aa6; DOSpec+0xb \u2192 DOInfo+0x1f",
+    "accepted1To5ContainNeitherBit": true,
+    "acceptedRuntimeGateStillRejectsBoth": true,
+    "scope": "ordinary enemy contact only; not spikes or universal immunity"
+  },
+  "rings": {
+    "staticOnlyHelper": "prototypes/clockwerx-html5/special-dots.mjs",
+    "rawFlag": "0x8",
+    "minimumFrame": "23+7*colorIndex",
+    "maximumFrame": "minimum+7",
+    "actualRequiredFrames": [
+      23,
+      30
+    ],
+    "clock": {
+      "unscaledPeriod": 80,
+      "basePeriod": 40,
+      "divisor": 2,
+      "callbackPolicy": "one per observed client-count change; no catch-up"
+    },
+    "hiddenDelayGuestTicksByDifficulty": [
+      300,
+      600,
+      900,
+      1200
+    ],
+    "deadlineComparison": ">",
+    "delayStartsAt": "full disappearance, using fresh TickCount",
+    "humanAvailableUntil": "human release",
+    "nonhumanAvailableWhileHidden": true,
+    "enemyHiddenGrab": "WAOrphan in DOGrabbed",
+    "humanAvailableAgain": "reverse animation reaches minimum"
+  },
+  "waypoints": {
+    "createdBy": "active WY record, not raw0x10 alone",
+    "uniqueCapacity": 10,
+    "duplicates": "replace definition",
+    "frames": [
+      79,
+      89
+    ],
+    "changedCheckpointUpdates": [
+      "saved WASpec position",
+      "saved reset half-index/direction",
+      "SC remaining integer timer reset value"
+    ],
+    "doesNotUpdate": [
+      "live angle",
+      "live pivot",
+      "whole-board snapshot"
+    ],
+    "repeatSameCheckpointRefreshesTimer": false,
+    "normalDeath": "existing frozen particle barrier then ROReset uses updated checkpoint; transient board state resets",
+    "explicitRestart": "restore original saved actor/timer specs first"
+  },
+  "invulnerabilityArt": {
+    "group": 300,
+    "frames": [
+      117,
+      124
+    ],
+    "mode": "separate overlay, ping-pong endpoints",
+    "clock": "unscaled50, base50/divisor1; DATA type2 pointer A5-0x7a14"
+  },
+  "artInventory": {
+    "sourceGroups": [
+      300,
+      4100
+    ],
+    "framesPerGroup": 41,
+    "newSVGsCreated": 0,
+    "existingPayloadsModified": 0,
+    "notes": "extra red/green ring frames are inventory only; existing original main-dot outlines copied privately"
+  },
+  "tests": {
+    "hazards": 11,
+    "staticRing": 4,
+    "result": "passed"
+  },
+  "requiredIntegration": [
+    "checkpoint saved spawn/time and reset hooks",
+    "ring human/nonhuman permissions and orphan hooks",
+    "invul overlay and contact behavior",
+    "n/s/b program transfer rules",
+    "source-informed smooth art with original outlines"
+  ],
+  "unqualified": [
+    "native ring timing and visual comparison",
+    "checkpoint death return and timer",
+    "hidden-ring enemy behavior",
+    "new dot geometry/shadows",
+    "goal path",
+    "other difficulties/combined moving-dot flags"
+  ],
+  "prohibitedWorkloadsRun": false,
+  "filesReleased": true
+}

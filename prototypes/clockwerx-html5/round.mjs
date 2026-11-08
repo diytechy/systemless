@@ -8,6 +8,8 @@ import {createDoorSystem,findDoorContact} from './doors.mjs';
 import {OilRuntime} from './oil-runtime.mjs';
 import {createActorClocks} from './actor-clocks.mjs';
 import {advanceBounceEnemy} from './programs.mjs';
+import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs';
+import {StaticDotRuntime} from './special-dot-runtime.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -25,8 +27,12 @@ export class SourceRound extends MovementGame {
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
   if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds});
+  if(board.specialDotRules){
+   this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
+   this.remainingTime=board.timeLimit;this.onHumanGrab(this.point(this.player));
+  }
  }
- reset(){
+ reset({preserveCheckpoint=false}={}){
   super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
   this.spikeClock??=createSourceTimerChain(40,5);this.spikeCount??=0;this.guestTickRemainder??=0;
   this.deathClock??=createDeathClock();
@@ -40,8 +46,17 @@ export class SourceRound extends MovementGame {
   this.spikeStates=new Map((this.board.spikes||[]).map(s=>[s.id,{frame:s.phase,reference:Math.floor((this.spikeCount+s.phase)/4)}]));
   this.death=null;this.roundRestarts=0;this.elapsedTime=0;this.pendingReverse=false;
   this.oil?.reset(this.player.pivot);
+  this.guestTicks??=0;
+  if(this.board.specialDotRules){
+   this.dotClock??=createSourceTimerChain(40,2);this.protectionClock??=createSourceTimerChain(50,1);
+   if(this.dotAnimations){
+    const reset=this.dotAnimations.reset({restartLevel:!preserveCheckpoint,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
+    for(const key of ['pivot','angle','direction'])this.player[key]=reset.player[key];
+    this.remainingTime=reset.remainingTime;this.onHumanGrab(this.point(this.player));
+   }
+  }
  }
- makeHand(hand){return {...super.makeHand(hand),wallContacts:0,...(hand.program?{presentationPhase:0}:{})};}
+ makeHand(hand){return {...super.makeHand(hand),wallContacts:0,...(hand.program||hand.canonicalFrame?{presentationPhase:0}:{})};}
  reverse(){if(!this.death&&!this.paused&&!this.complete)this.pendingReverse=true;}
  setPlayerGroup(group){
   if(![700,4300].includes(group)||!this.outlines.groups[String(group)])throw new Error('Unqualified player artwork group');
@@ -49,7 +64,7 @@ export class SourceRound extends MovementGame {
  }
  spikeFrame(spike){return this.spikeStates.get(spike.id).frame;}
  point(hand){return this.board.dots.find(d=>d.id===hand.pivot);}
- collider(hand){return worldOutline(this.outlines,hand.group,hand.program?hand.frame:sourceFrame(hand.angle),this.point(hand));}
+ collider(hand){return hand.visible===false?null:worldOutline(this.outlines,hand.group,hand.program||hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),this.point(hand));}
  spikeCollision(){
   const hero=this.collider(this.player);
   for(const spike of this.board.spikes)if(outlineCollision(hero,worldOutline(this.outlines,200,this.spikeFrame(spike),spike)))
@@ -58,7 +73,7 @@ export class SourceRound extends MovementGame {
  }
  enemyCollision(){
   const hero=this.collider(this.player);
-  for(const enemy of this.enemies)if(enemyFrameGate(this.player.pivot,enemy.pivot,sourceFrame(this.player.angle),enemy.program?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
+  for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
    return {reason:'enemy',object:enemy.name};
   return null;
  }
@@ -80,6 +95,19 @@ export class SourceRound extends MovementGame {
    Object.assign(hand,result.state);
    for(const event of result.events)this.event(event.type,hand,{id:event.target});
   }
+  this.presentCanonicalEnemy(hand,timing,upstream);
+ }
+ animateStaticEnemy(hand,delta,timing,upstream,dispatched){
+  if(dispatched){
+   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
+    afterAnimate:s=>this.contactSwitch(s),onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{}});
+   Object.assign(hand,result.state);
+   if(previousVisible!==hand.visible)this.contactSwitch(hand);
+   for(const event of result.events)if(event.type==='program-transfer'||event.type==='orphan-expired')this.event(event.type,hand,{id:hand.pivot});
+  }
+  this.presentCanonicalEnemy(hand,timing,upstream);
+ }
+ presentCanonicalEnemy(hand,timing,upstream){
   // Present the fraction toward the next pose from the shared clock phase.
   // The upstream strict> client starts with one uncounted base event. Clamp
   // prediction at the next pose until the canonical callback decides a turn.
@@ -122,19 +150,31 @@ export class SourceRound extends MovementGame {
  onHumanGrab(dot){
   const deaths=this.oil?.humanGrab(dot.id)||[];
   for(const event of deaths)this.beginDeath({reason:'oil',sourceReason:event.reason,object:dot.id});
-  return !this.death;
+  if(this.death)return false;
+  if(this.dotAnimations){
+   const result=this.dotAnimations.humanGrab(dot.id,this.remainingTime);
+   if(result.checkpointChanged)this.event('checkpoint',this.player,dot);
+  }
+  return true;
+ }
+ onHumanRelease(dot,hand){
+  this.dotAnimations?.humanRelease(dot.id,{releasingActor:hand.name,orphanOccupants:id=>{
+   for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});
+  }});
  }
  restartAfterDeath(){
   const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,
    events:this.events,roundRestarts:this.roundRestarts+1,elapsedTime:this.elapsedTime};
-  this.reset();Object.assign(this,history);this.event('round-reset',this.player);
+  this.reset({preserveCheckpoint:true});Object.assign(this,history);this.event('round-reset',this.player);
  }
  update(dt,input={}){
   if(!(dt>0&&dt<=1/60+1e-9))throw new RangeError('Round requires fixed steps no longer than one guest tick');
   if(this.paused||this.complete){this.steps++;return;}
+  if(input.reverse&&!this.reverseHeld)this.reverse();this.reverseHeld=!!input.reverse;
   this.elapsedTime+=dt;
   this.guestTickRemainder+=dt*this.guestTicksPerSecond;
   const elapsed=Math.floor(this.guestTickRemainder+1e-9);this.guestTickRemainder-=elapsed;
+  this.guestTicks+=elapsed;
   this.spikeCount=this.spikeClock.advance(elapsed).clientCount;
   this.deathClock.advance(elapsed);
   this.oil?.advanceClocks(elapsed);
@@ -145,6 +185,8 @@ export class SourceRound extends MovementGame {
    hand.frameReference=timer.count;
   }
   const actorSubstep=substeps.has(this.player);
+  const dotCount=this.dotClock?.advance(elapsed).clientCount,overlayCount=this.protectionClock?.advance(elapsed).clientCount;
+  if(this.dotAnimations&&!this.death)this.dotAnimations.observeClocks({dotCount,overlayCount,guestTick:this.guestTicks});
   if(!this.death)for(const spike of this.board.spikes){
    const state=this.spikeStates.get(spike.id),reference=Math.floor((this.spikeCount+spike.phase)/4);
    // SUProcessSprite advances once when the shared clock changes, including
@@ -158,6 +200,7 @@ export class SourceRound extends MovementGame {
   // arrival may latch death and freeze the remaining sprite callbacks.
   if(!this.death)this.oil?.processSprites({onDeath:reason=>this.beginDeath({reason:'oil',sourceReason:reason}),isFrozen:()=>!!this.death});
   if(!this.death)for(const enemy of this.enemies){
+   if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}
    if(enemy.program){this.animateProgramEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer);continue;}
    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);
    if(substeps.has(enemy)){const wall=this.wallCollision(enemy);if(wall)this.bounceFromWall(enemy,wall);this.contactSwitch(enemy);}
@@ -193,6 +236,6 @@ export class SourceRound extends MovementGame {
    if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
   }
  }
- snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+ snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

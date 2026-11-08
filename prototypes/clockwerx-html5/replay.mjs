@@ -4,7 +4,7 @@ export function createInputReplay(segments){
  if(!Array.isArray(segments)||!segments.length)throw new TypeError('Input segments required');
  const copy=segments.map(segment=>{
   if(!Array.isArray(segment)||segment.length!==2||!Number.isSafeInteger(segment[0])||segment[0]<1||
-   ![null,'swing','flip','bounce'].includes(segment[1]))throw new TypeError('Invalid input segment');
+   ![null,'swing','flip','bounce','reverse'].includes(segment[1]))throw new TypeError('Invalid input segment');
   return [...segment];
  });
  let index=0,remaining=copy[0][0],step=0,lastAction=null;

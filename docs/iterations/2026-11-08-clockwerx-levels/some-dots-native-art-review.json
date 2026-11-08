@@ -1,0 +1,163 @@
+{
+  "schema": "clockwerx-some-dots-native-art-review-v1",
+  "status": "source-idle-anchors-qualified-runtime-and-vector-appearance-pending",
+  "fixedCaptureSnapshot": {
+    "initial": true,
+    "idleFirst": 1,
+    "idleLast": 21,
+    "count": 22,
+    "activeReportReadOrPolled": false
+  },
+  "drawingContract": {
+    "logicalOrigin": [
+      74,
+      72
+    ],
+    "rawBaseSubtract": [
+      16,
+      15
+    ],
+    "mainSecondaryOverlayShareRawBase": true,
+    "addEachOwnDescriptorExactlyOnce": true,
+    "emptySecondaryProtectionSkipped": true
+  },
+  "initialFits": [
+    {
+      "kind": "rings",
+      "group": 300,
+      "frame": 23,
+      "best": {
+        "shift": [
+          0,
+          0
+        ],
+        "medianError": 0.21428571428571427,
+        "maxError": 0.21428571428571427,
+        "samples": 51
+      },
+      "wrongExtraMainOffset": {
+        "shift": [
+          11,
+          11
+        ],
+        "medianError": 76.14285714285714,
+        "maxError": 76.16071428571429,
+        "samples": 51
+      }
+    },
+    {
+      "kind": "rings",
+      "group": 4100,
+      "frame": 23,
+      "best": {
+        "shift": [
+          0,
+          0
+        ],
+        "medianError": 1.0,
+        "maxError": 1.0,
+        "samples": 51
+      },
+      "wrongExtraMainOffset": {
+        "shift": [
+          11,
+          11
+        ],
+        "medianError": 23.142857142857142,
+        "maxError": 54.392857142857146,
+        "samples": 51
+      }
+    },
+    {
+      "kind": "waystations",
+      "group": 300,
+      "frame": 79,
+      "best": {
+        "shift": [
+          0,
+          0
+        ],
+        "medianError": 0.4318181818181818,
+        "maxError": 0.4318181818181818,
+        "samples": 2
+      },
+      "wrongExtraMainOffset": {
+        "shift": [
+          11,
+          11
+        ],
+        "medianError": 66.12878787878788,
+        "maxError": 67.54924242424242,
+        "samples": 2
+      }
+    },
+    {
+      "kind": "waystations",
+      "group": 4100,
+      "frame": 79,
+      "best": {
+        "shift": [
+          0,
+          0
+        ],
+        "medianError": 1.0,
+        "maxError": 1.0,
+        "samples": 2
+      },
+      "wrongExtraMainOffset": {
+        "shift": [
+          11,
+          11
+        ],
+        "medianError": 50.18125,
+        "maxError": 61.9,
+        "samples": 2
+      }
+    }
+  ],
+  "protection": {
+    "samples": 22,
+    "observedFrames": [
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124
+    ],
+    "allBestShiftsZero": true,
+    "allMasksExact": true,
+    "maximumColorError": 0.5833333333333334,
+    "clockBoundary": "Source unscaled50 contract; screenshot fits do not measure cadence or onset"
+  },
+  "privateFit": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-art-review\\native-art-fits.json",
+    "sha256": "cdf36cfd9b814fd675de5b68dde6f91ffa831dcbdc6d941075e986a3bcb166a5"
+  },
+  "inputs": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\native-play-01\\initial-after-reveal.png",
+      "sha256": "b287a4ce43985b60ef1c740c2234af47bc6f2c04c377ccc98a2708560af70f4c"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\RND2_11330.json",
+      "sha256": "dc0765f7871b5fbf9fea6689b4ab1afaf2ec7b04bfb27d93f0471847d2465609"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\vector-candidate-v2\\assets\\some-dots-vector-source-outlines.json",
+      "sha256": "b7a9ad9723406246320baf01c8c095fb6ba49bda811aba238c6cc748d6549459"
+    }
+  ],
+  "pending": [
+    "Ring collapse/regrowth states",
+    "Waystation80\u201389 activation/selected-marker art",
+    "Checkpoint/protection runtime behavior",
+    "Source timing and traversal",
+    "V2 actual-browser visual comparison"
+  ],
+  "newRuntimeRenderingBuildBenchmark": false,
+  "runtimeAssetsEdited": false,
+  "workloadReleased": true
+}

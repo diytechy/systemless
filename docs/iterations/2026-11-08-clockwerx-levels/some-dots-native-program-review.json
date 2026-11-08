@@ -1,0 +1,350 @@
+{
+  "schema": "clockwerx-some-dots-native-program-review-v1",
+  "status": "Read-only native source-sprite fitting and conditioned pure callback validation; not level acceptance or absolute startup qualification",
+  "sourceLevelSha256": "a5dd77d0bab6bfa0041a92bed0b45a8a9b0f2a74c773f8c896c8b48659d86712",
+  "sourceHashMatchesQueue": true,
+  "nativeRun": {
+    "status": "passed",
+    "frontend_ticks": 2030,
+    "guest_tick": 2628,
+    "budget_exhausted_frames": 0,
+    "assertions": 0
+  },
+  "sampleIntervalGuestTicks": 30,
+  "sampleSpanGuestTicks": 960,
+  "samplesPerActor": 33,
+  "spriteMethod": "All64 original descriptor poses, source RGBA opaque pixels with gamma0.7, qualified per-axis anchors, full present-pivot search for enemies and fixed source start for hero; no timing/model restrictions in fitting",
+  "actors": [
+    {
+      "actorType": 0,
+      "sourceGroup": 700,
+      "captures": 33,
+      "search": "source fixed start x 64 poses",
+      "meanAbsoluteChannelErrorRange": [
+        0.2192513346672058,
+        23.36142349243164
+      ],
+      "cleanErrorRange": [
+        0.2192513346672058,
+        0.2870813310146332
+      ],
+      "cleanCaptureCount": 27,
+      "minimumRunnerUpGap": 37.82086944580078,
+      "occludedCheckpoints": [
+        "idle-04",
+        "idle-09",
+        "idle-14",
+        "idle-19",
+        "idle-24",
+        "idle-29"
+      ],
+      "frameSelectionAmbiguous": false
+    },
+    {
+      "actorType": 1,
+      "sourceGroup": 500,
+      "captures": 33,
+      "search": "all present source pivots x 64 poses",
+      "meanAbsoluteChannelErrorRange": [
+        0.5661375522613525,
+        0.6381766200065613
+      ],
+      "cleanErrorRange": [
+        0.5661375522613525,
+        0.6381766200065613
+      ],
+      "cleanCaptureCount": 33,
+      "minimumRunnerUpGap": 33.045802533626556,
+      "occludedCheckpoints": [],
+      "frameSelectionAmbiguous": false
+    },
+    {
+      "actorType": 2,
+      "sourceGroup": 4400,
+      "captures": 33,
+      "search": "all present source pivots x 64 poses",
+      "meanAbsoluteChannelErrorRange": [
+        0.2645833194255829,
+        0.3685300350189209
+      ],
+      "cleanErrorRange": [
+        0.2645833194255829,
+        0.3685300350189209
+      ],
+      "cleanCaptureCount": 33,
+      "minimumRunnerUpGap": 64.81051090359688,
+      "occludedCheckpoints": [],
+      "frameSelectionAmbiguous": false
+    }
+  ],
+  "independentClock": {
+    "samples": 33,
+    "minimumAdvanceAtFirstCapture": 26,
+    "advanceOver960GuestTicks": 202,
+    "fixedRateNumerator": 4,
+    "fixedRateDenominator": 19,
+    "phaseInterval": [
+      26.526315789473685,
+      26.578947368421055
+    ],
+    "chosenPhase": 26.55263157894737,
+    "allFramesMatch": true
+  },
+  "comparisons": [
+    {
+      "actorType": 1,
+      "samples": 33,
+      "matchingPositionAndFrame": 33,
+      "failedComparisons": [],
+      "sourceInitialPC": 1,
+      "sourceCommands": 14,
+      "sourceTransfers": 5,
+      "sourceActionCounts": [
+        {
+          "action": "no-action",
+          "targetPermitted": true,
+          "count": 9
+        },
+        {
+          "action": "grab",
+          "targetPermitted": true,
+          "count": 5
+        }
+      ],
+      "sampledOrphanStates": 0,
+      "sampledHiddenStates": 0
+    },
+    {
+      "actorType": 2,
+      "samples": 33,
+      "matchingPositionAndFrame": 33,
+      "failedComparisons": [],
+      "sourceInitialPC": 1,
+      "sourceCommands": 14,
+      "sourceTransfers": 4,
+      "sourceActionCounts": [
+        {
+          "action": "no-action",
+          "targetPermitted": true,
+          "count": 7
+        },
+        {
+          "action": "grab",
+          "targetPermitted": true,
+          "count": 4
+        },
+        {
+          "action": "bounce",
+          "targetPermitted": true,
+          "count": 1
+        },
+        {
+          "action": "bounce",
+          "targetPermitted": false,
+          "count": 1
+        },
+        {
+          "action": "grab",
+          "targetPermitted": false,
+          "count": 1
+        }
+      ],
+      "sampledOrphanStates": 0,
+      "sampledHiddenStates": 0
+    }
+  ],
+  "failedPrimaryComparisons": [],
+  "fullTurnAliasControls": [
+    {
+      "extraFullHeroTurns": 0,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 33
+        },
+        {
+          "actorType": 2,
+          "matches": 33
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 1,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 3
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 2,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 3
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 3,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 33
+        },
+        {
+          "actorType": 2,
+          "matches": 1
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 4,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 11
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 5,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 1
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 6,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 33
+        },
+        {
+          "actorType": 2,
+          "matches": 1
+        }
+      ]
+    }
+  ],
+  "wrongPCControls": [
+    {
+      "actorType": 1,
+      "initialPC": 0,
+      "matches": 7,
+      "failedCheckpoints": [
+        "idle-01",
+        "idle-02",
+        "idle-03",
+        "idle-04",
+        "idle-05",
+        "idle-06",
+        "idle-07",
+        "idle-08",
+        "idle-09",
+        "idle-10",
+        "idle-11",
+        "idle-12",
+        "idle-13",
+        "idle-17",
+        "idle-18",
+        "idle-19",
+        "idle-20",
+        "idle-21",
+        "idle-22",
+        "idle-23",
+        "idle-24",
+        "idle-25",
+        "idle-26",
+        "idle-27",
+        "idle-28",
+        "idle-32"
+      ]
+    },
+    {
+      "actorType": 2,
+      "initialPC": 0,
+      "matches": 4,
+      "failedCheckpoints": [
+        "idle-04",
+        "idle-05",
+        "idle-06",
+        "idle-07",
+        "idle-08",
+        "idle-09",
+        "idle-10",
+        "idle-11",
+        "idle-12",
+        "idle-13",
+        "idle-14",
+        "idle-15",
+        "idle-16",
+        "idle-17",
+        "idle-18",
+        "idle-19",
+        "idle-20",
+        "idle-21",
+        "idle-22",
+        "idle-23",
+        "idle-24",
+        "idle-25",
+        "idle-26",
+        "idle-27",
+        "idle-28",
+        "idle-29",
+        "idle-30",
+        "idle-31",
+        "idle-32"
+      ]
+    }
+  ],
+  "interpretation": [
+    "Both native ordinary enemy trajectories agree with source PC1 and animate-before-program callback semantics under a single hero-derived clock phase.",
+    "Red includes five successful transfers; green includes four transfers, one permitted bounce, one rejected bounce and one rejected grab in the conditioned model. Sampled position/frame agreement supports these inferred intervening decisions, but individual decision ticks were not captured.",
+    "All99 sampled actor frame selections are unique within the tested source poses and pivots; hero has six visibly starburst-occluded captures.",
+    "No full program strings, map coordinates or source images are copied to public reports."
+  ],
+  "limits": [
+    "Absolute startup before first capture is conditioned on minimum hero advance; not a SourceRound reveal/startup claim.",
+    "No user input or dot disappearance occurs; all present static dots are human/nonhuman available in this idle fixture.",
+    "One inner step at a time is adequate for these non-orphan static states but does not independently validate multi-delta outer callbacks.",
+    "Hidden/respawn/orphan/death and exact unsampled transfer tick are not established by 30-guest-tick image spacing.",
+    "Six high-error hero frames are starburst-occluded; idle29 was visually checked. Their selected poses retain a minimum33-plus error gap across the whole actor fitting set, and the single fixed clock line agrees.",
+    "Direct visual review covered initial and idle29 images; remaining capture conclusions use numerical full-pivot/pose matching.",
+    "Hidden sprite states are not candidates in this fitter; its low error enemy matches show visible actors at these captures, not continuous visibility proof.",
+    "No human actions, ring collapse, checkpoint activation/reset, protection collision, goal, death, sound or browser rendering is accepted here.",
+    "No per-sample timing adjustment or native enemy state was injected into the model. SourceRound was not run and its reveal/startup timing is not established.",
+    "Additional full hero turns0..6 were tested as aliases; only offset0 matched both actors. This is bounded alias testing, not a global uniqueness proof.",
+    "The native run reported zero scripted assertions; the comparisons here are a separate read-only analysis."
+  ],
+  "boundary": {
+    "runtimeEdited": false,
+    "assetsEdited": false,
+    "queueEdited": false,
+    "newEmulatorOrBrowserRun": false,
+    "buildOrConversion": false,
+    "acceptance": false
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\some-dots\\program-review",
+  "filesReleased": true
+}

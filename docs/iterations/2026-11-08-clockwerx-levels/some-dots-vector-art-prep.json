@@ -1,0 +1,37 @@
+{
+  "schema": "clockwerx-vector-art-prep-v1",
+  "ordinal": 9,
+  "title": "Some Dots",
+  "status": "private-candidate-native-review-required",
+  "candidateRoot": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/some-dots/vector-candidate",
+  "baselinePayloadsPreserved": 51,
+  "baselineManifestPreserved": true,
+  "newPayloads": 4,
+  "atlasSha256": "8559ec653a589fed7a7ebf6de21184168bdd976233bc184da1bbb6b37d0d4c8f",
+  "sourceProfileSha256": "b7a9ad9723406246320baf01c8c095fb6ba49bda811aba238c6cc748d6549459",
+  "frameCounts": {
+    "300": 41,
+    "4100": 41
+  },
+  "validation": {
+    "baseline51PayloadHashes": true,
+    "baselineManifestHash": true,
+    "sourceDescriptorOffsetsSizesAndFlip": true,
+    "originalOutlineRowsAndHashes": true,
+    "SVGParsedNoEmbeddedRasterOrExternalReferences": true,
+    "allNonemptyFramesRendered": 74,
+    "emptySentinelsPreserved": 8,
+    "atlasFramesChecked": 82,
+    "atlasBleed": false
+  },
+  "limitations": [
+    "native main/secondary/overlay placement unqualified",
+    "checkpoint highlights and analytic shading approximated",
+    "ring hollow/closed phases need native-size review",
+    "extra colored ring variants inventoried only"
+  ],
+  "rootRuntimeOrManifestEdited": false,
+  "nativeQualification": false,
+  "publicAssetsAdded": false,
+  "released": true
+}

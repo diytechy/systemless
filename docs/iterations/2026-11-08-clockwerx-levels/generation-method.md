@@ -42,3 +42,22 @@ Source review confirms that Child disables the round countdown. Its initialized,
 A useful generated-level certificate would contain the board seed/hash, permitted mechanics, difficulty, engine version, an input-only solution, tested clock onsets, timing margins and any required randomness assumptions. It would support a bounded claim such as “reaches the goal for these starting phases and input windows.” It would not prove every route safe, every bonus collectible or complete original-game equivalence.
 
 A reasonable progression is static dots and bonuses first, then walls/spikes, then switches/doors, followed by qualified programmed hands and Oil. Keep later mechanics disabled until their independent source/native/browser checks pass. A difficulty score can then consider required action changes, minimum safe input window, crossing wait time, detour cost for bonuses and recovery opportunities. Those are proposed generator features; no automatic generator has been implemented yet.
+
+## Source requirements across the full catalog
+
+The source surveys now cover all100listed levels. This establishes requirements, not playable support for the later mechanics. The accepted scene queue remains separate.
+
+| Later family | Additional generator state or constraint |
+|---|---|
+| Bombs and goodies | Fuse routes, shared effect capacities, ordered blast passes, burnt appearance without deleting pivots, score/time and match pickups |
+| Up/down dots | Shared channels, entry history, intermediate phase, independent permissions, rider motion and endpoint orphan/death handling |
+| Teleports | Paired endpoints, supported nonrecursive arrival/release hooks and actor eligibility |
+| Sliding connectors | Explicit EX route masks, fixed three-pixel steps and16-step completion, angle retention and reversal; ordinary pivot transfer is a different action |
+| Moving dots | Inline byte programs, position/direction/progress, bounded missed-callback behavior and saved intermediate positions. Movement can survive an optional-property mask miss |
+| Transfer-death dots | Human grab is lethal only when both old and destination dots carry the relevant property; bounce and ordinary enemies differ |
+| Guns, triggers and busters | Color matching, trigger occupancy, shared projectile pool, insertion/destruction order, movement/rounding and RNG assumptions |
+| Slowdown | Human arrival selects a global enemy-class divisor table. Preserve counts/remainders; human class0 is unchanged. Release alone does not undo it |
+
+Some original records deliberately or accidentally exceed a program array or refer to an invalid goodie frame. The original can disable those objects/programs; generated levels should reject dangling references instead of relying on that fallback. A color-mismatched trigger still changes its own occupancy even when it fires no gun. Capacities and no-op instruction bytes belong in validation, rather than being inferred from a convenient word such as “left.”
+
+Detailed source surveys: [11–22](follow-on-11-22-review.md), [23–40](follow-on-23-40-review.md), [41–60](follow-on-41-60-review.md), [61–80](follow-on-61-80-review.md), [81–100](follow-on-81-100-review.md). Their remaining native, timing, RNG and numerical uncertainties remain gates. Some Dots also demonstrates why an invulnerability test should force actual overlap: safe waiting alone did not exercise it, whereas a legal off-cardinal reverse did.

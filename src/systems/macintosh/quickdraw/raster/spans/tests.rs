@@ -200,3 +200,44 @@ fn rrect_spans_match_reference_for_large_rects() {
         );
     }
 }
+
+#[test]
+fn rrect_spans_reject_nonrepresentable_signed_word_extents() {
+    for &(left, right) in &[(20_000, -20_000), (-20_000, 20_000), (i16::MIN, i16::MAX)] {
+        let horizontal = Rect {
+            top: 0,
+            left,
+            bottom: 4,
+            right,
+        };
+        assert!(compute_rrect_spans(&horizontal, 4, 4).is_empty());
+        let vertical = Rect {
+            top: left,
+            left: 0,
+            bottom: right,
+            right: 4,
+        };
+        assert!(compute_rrect_spans(&vertical, 4, 4).is_empty());
+    }
+}
+
+#[test]
+fn rrect_spans_preserve_small_corners_at_signed_coordinate_limits() {
+    for left in [i16::MIN, i16::MAX - 4] {
+        let r = Rect {
+            top: -2,
+            left,
+            bottom: 2,
+            right: left + 4,
+        };
+        assert_eq!(
+            compute_rrect_spans(&r, 4, 4),
+            vec![
+                (left + 1, left + 3),
+                (left, left + 4),
+                (left, left + 4),
+                (left + 1, left + 3),
+            ]
+        );
+    }
+}

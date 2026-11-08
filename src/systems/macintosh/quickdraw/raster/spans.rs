@@ -69,8 +69,15 @@ pub(crate) fn compute_oval_spans(width: i16, height: i16) -> Vec<(i16, i16)> {
 }
 
 pub(crate) fn compute_rrect_spans(r: &Rect, ow: i16, oh: i16) -> Vec<(i16, i16)> {
-    let width = r.right - r.left;
-    let height = r.bottom - r.top;
+    // The oval engine takes positive signed-word dimensions. Empty guest
+    // rectangles can have extreme/inverted edges; do not let subtraction
+    // panic in checked builds or wrap into a different shape in release.
+    let Some(width) = r.right.checked_sub(r.left) else {
+        return vec![];
+    };
+    let Some(height) = r.bottom.checked_sub(r.top) else {
+        return vec![];
+    };
     if width <= 0 || height <= 0 {
         return vec![];
     }

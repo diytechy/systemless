@@ -8212,6 +8212,16 @@ impl super::TrapDispatcher {
         oval_height: i16,
         pen_size: i16,
     ) {
+        let r = Rect {
+            top,
+            left,
+            bottom,
+            right,
+        };
+        let outer_spans = Self::compute_rrect_spans(&r, oval_width, oval_height);
+        if outer_spans.is_empty() {
+            return;
+        }
         let (screen_base, row_bytes, screen_width, screen_height, pixel_size) =
             self.get_screen_params();
         let slot = bus.presentation.clone();
@@ -8239,14 +8249,6 @@ impl super::TrapDispatcher {
                 )
             })
             .flatten();
-        let r = Rect {
-            top,
-            left,
-            bottom,
-            right,
-        };
-        let outer_spans = Self::compute_rrect_spans(&r, oval_width, oval_height);
-
         let r_inset = Rect {
             top: top + pen_size,
             left: left + pen_size,

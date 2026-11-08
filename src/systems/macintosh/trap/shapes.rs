@@ -1137,13 +1137,10 @@ impl super::TrapDispatcher {
     ) {
         let (pen_h, pen_w) = self.pn_size;
 
-        let width = r.right - r.left;
-        let height = r.bottom - r.top;
-        if width <= 0 || height <= 0 {
+        let spans = Self::compute_rrect_spans(r, ow, oh);
+        if spans.is_empty() {
             return;
         }
-
-        let spans = Self::compute_rrect_spans(r, ow, oh);
 
         let r_inset = Rect {
             top: r.top + pen_h,

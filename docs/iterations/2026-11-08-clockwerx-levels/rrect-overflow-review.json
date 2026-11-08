@@ -1,0 +1,15 @@
+{
+  "schema": "systemless-functional-fix-review-v1",
+  "status": "validated-with-limits",
+  "focusedRustTests": 6,
+  "normalScenarioCaptures": 25,
+  "pixelIdenticalCaptures": 25,
+  "oldBinarySha256": "70062993d3a1a628b17b31d51fa988057a68a1acb21cd1f040e77c507a24757c",
+  "fixedBinarySha256": "c6d9f8d594524e7898da43d44f1b234e9fe4bd18cb96130a4ffcce7da5a21c47",
+  "nativeBuildSeconds": 318.8824858,
+  "originalFixtureSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4",
+  "wasmBuild": false,
+  "directHomerLaunchQualified": false,
+  "ppcApplicationQualified": false,
+  "privateEvidence": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/homer"
+}

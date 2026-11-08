@@ -4387,6 +4387,16 @@ pub(super) fn ppc_frame_front_round_rect(
     thickness: i16,
     color: PpcRgbColor,
 ) -> bool {
+    let outer = Rect {
+        top: rect.0,
+        left: rect.1,
+        bottom: rect.2,
+        right: rect.3,
+    };
+    let outer_spans = TrapDispatcher::compute_rrect_spans(&outer, oval, oval);
+    if outer_spans.is_empty() {
+        return false;
+    }
     let slot = memory.presentation();
     let detail = if matches!(front.depth, 8 | 16) {
         let fallback = TrapDispatcher::standard_mac_8bpp_clut();
@@ -4421,19 +4431,12 @@ pub(super) fn ppc_frame_front_round_rect(
     } else {
         None
     };
-    let outer = Rect {
-        top: rect.0,
-        left: rect.1,
-        bottom: rect.2,
-        right: rect.3,
-    };
     let inner = Rect {
         top: rect.0.saturating_add(thickness),
         left: rect.1.saturating_add(thickness),
         bottom: rect.2.saturating_sub(thickness),
         right: rect.3.saturating_sub(thickness),
     };
-    let outer_spans = TrapDispatcher::compute_rrect_spans(&outer, oval, oval);
     let inner_spans = TrapDispatcher::compute_rrect_spans(
         &inner,
         oval.saturating_sub(thickness.saturating_mul(2)),

@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 18,
-  "currentAction": "Offshoots18: fresh baseline through17, fourGO/two protected checkpoints and seven transfer programs",
+  "currentOrdinal": 19,
+  "currentAction": "Link19: qualify class2/5 source clocks, programmed walls and initially open doors from fresh through18 baseline",
   "levels": [
     {
       "ordinal": 1,
@@ -1249,11 +1249,25 @@
       "menuTitle": "Offshoots",
       "resourceTitle": "Offshoots",
       "sha256": "21322e9fc2c58e3da985fd1756c479f4808a4ecb08f7fb34c15c87f26e177e76",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "offshoots/native-goal-01/report.json",
+        "offshoots/native-goal-01/off-goodie-01.png",
+        "offshoots/native-goal-01/off-goodie-02.png",
+        "offshoots/native-goal-01/off-after-route.png",
+        "offshoots/native-goal-01/next-after-offshoots.png"
+      ],
+      "requirements": [
+        "seven n/s transfer programs and eight class1 clocks",
+        "noncardinal green initial frame56",
+        "four GO placements and protected-WY composition"
+      ],
+      "svgStatus": "activated18transfer/twoGO/3000Childgoal;190onsets",
+      "generationConstraints": [
+        "adjacency alone fails around moving transfer enemies",
+        "protected waiting permits timed departure but action choice still matters",
+        "keep current140 and checkpoint-saved130time separate"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 65,
@@ -1280,7 +1294,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1297,7 +1311,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "offshoots-review.md"
     },
     {
       "ordinal": 19,

@@ -4,14 +4,14 @@
     {
       "slug": "clockwerx",
       "title": "ClockWerx",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "ClockWerx Folder/ClockWerx",
           "architecture": "68K (CODE)",
           "version_strings": [
-            "1.0 © 1993-5 Callisto Corp.",
-            "1.0 © 1993-5 Callisto Corp."
+            "1.0 \u00c2\u00a9 1993-5 Callisto Corp.",
+            "1.0 \u00c2\u00a9 1993-5 Callisto Corp."
           ],
           "preferred_partition_bytes": [
             4096000
@@ -24,10 +24,10 @@
       ],
       "depth_size": "640x480, 8-bit",
       "preferences_save_id": "clockwerx-personal-10; ClockWerx Scores/Settings",
-      "controls": "unverified",
-      "timing": "Root exploratory release25=27.4277Hz and6=60.1331Hz; final repeated comparison pending, no pacing accepted",
+      "controls": "Keyboard swing/flip/bounce/reverse and pause observed; hardware unqualified",
+      "timing": "Final3x25/6: median guest25.2264/60.1531Hz; Movement actual rotation13.089s(defaultpartialturn)/5.0002s(6);6experimental only, no original oracle or full fidelity qualification",
       "original_firstpass_status": "measurement blocked",
-      "followup_report": "release-browser-review.md"
+      "followup_report": "clockwerx-html5/final-comparison-review.md"
     },
     {
       "slug": "koji",
@@ -50,7 +50,7 @@
           "configured": true
         },
         {
-          "path": "2Del/Koji The Frog 1.0.2 ƒ/Koji The Frog 1.0.2",
+          "path": "2Del/Koji The Frog 1.0.2 \u00c6\u2019/Koji The Frog 1.0.2",
           "architecture": "68K (CODE)",
           "version_strings": [
             "v1.0.2",
@@ -92,7 +92,7 @@
           "path": "Delirium 1.1 Folder/Delirium 1.1",
           "architecture": "68K (CODE)",
           "version_strings": [
-            "© Tuan Huynh 1994-1995",
+            "\u00c2\u00a9 Tuan Huynh 1994-1995",
             "1.1"
           ],
           "preferred_partition_bytes": [
@@ -172,7 +172,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Acquire ƒ/Acquire 1.0",
+          "path": "Acquire \u00c6\u2019/Acquire 1.0",
           "architecture": "68K (CODE)",
           "version_strings": [
             "1.0",
@@ -204,7 +204,7 @@
           "path": "Action Dome/Action Dome 1.0",
           "architecture": "68K (CODE)",
           "version_strings": [
-            "©Slovis Software inc. 1995"
+            "\u00c2\u00a9Slovis Software inc. 1995"
           ],
           "preferred_partition_bytes": [
             5120000,
@@ -294,7 +294,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "ARASHI 1.1.1 ƒ/Arashi 1.1.1",
+          "path": "ARASHI 1.1.1 \u00c6\u2019/Arashi 1.1.1",
           "architecture": "68K (CODE)",
           "version_strings": [
             "ARASHI 1.1.1"
@@ -380,7 +380,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "BarneyCarnage2.0ƒ/Barney Carnage 2.0",
+          "path": "BarneyCarnage2.0\u00c6\u2019/Barney Carnage 2.0",
           "architecture": "68K (CODE)",
           "version_strings": [],
           "preferred_partition_bytes": [
@@ -499,7 +499,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Blobbo 1.0 Lite ƒ/Blobbo",
+          "path": "Blobbo 1.0 Lite \u00c6\u2019/Blobbo",
           "architecture": "68K (CODE)",
           "version_strings": [
             "Blobbo 1.0 Lite"
@@ -513,7 +513,7 @@
           "configured": true
         },
         {
-          "path": "Blobbo 1.0 Lite ƒ/Blobbo 1.0.1 Lite",
+          "path": "Blobbo 1.0 Lite \u00c6\u2019/Blobbo 1.0.1 Lite",
           "architecture": "68K (CODE)",
           "version_strings": [
             "Blobbo 1.0.1 Lite"
@@ -559,7 +559,7 @@
           "path": "Blood Bath Demo 1.96 4cows/Blood Bath Demo PPC 1.96",
           "architecture": "PPC fragment",
           "version_strings": [
-            "©UnderWorld, 1995-97."
+            "\u00c2\u00a9UnderWorld, 1995-97."
           ],
           "preferred_partition_bytes": [
             5120000
@@ -570,10 +570,10 @@
           "configured": true
         },
         {
-          "path": "Blood Bath Demo 1.96 4cows/Blood Bath™ Demo 1.96",
+          "path": "Blood Bath Demo 1.96 4cows/Blood Bath\u00e2\u201e\u00a2 Demo 1.96",
           "architecture": "68K (CODE)",
           "version_strings": [
-            "©UnderWorld, 1995-97."
+            "\u00c2\u00a9UnderWorld, 1995-97."
           ],
           "preferred_partition_bytes": [
             3121152,
@@ -781,7 +781,7 @@
       "status": "compatibility blocker",
       "candidates": [
         {
-          "path": "BrainJacker ƒ/BrainJacker 1.0.1",
+          "path": "BrainJacker \u00c6\u2019/BrainJacker 1.0.1",
           "architecture": "fat (CODE + PPC fragment)",
           "version_strings": [
             "",
@@ -873,7 +873,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Chiral 1.0.1 ƒ/Chiral",
+          "path": "Chiral 1.0.1 \u00c6\u2019/Chiral",
           "architecture": "68K (CODE)",
           "version_strings": [
             "1.0.1",
@@ -1021,7 +1021,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "CyberNation 1.1.1 ƒ/CyberNation 1.1.1",
+          "path": "CyberNation 1.1.1 \u00c6\u2019/CyberNation 1.1.1",
           "architecture": "68K (CODE)",
           "version_strings": [],
           "preferred_partition_bytes": [
@@ -1045,11 +1045,11 @@
     },
     {
       "slug": "deliverance",
-      "title": "Deliverance™ 1.0",
+      "title": "Deliverance\u00e2\u201e\u00a2 1.0",
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Deliverance™ ƒ/Deliverance™",
+          "path": "Deliverance\u00e2\u201e\u00a2 \u00c6\u2019/Deliverance\u00e2\u201e\u00a2",
           "architecture": "68K (CODE)",
           "version_strings": [
             "1.0"
@@ -1078,7 +1078,7 @@
       "status": "unsupported requirement",
       "candidates": [
         {
-          "path": "Desk Invaders II ƒ/Desk Invaders II",
+          "path": "Desk Invaders II \u00c6\u2019/Desk Invaders II",
           "architecture": "unknown",
           "version_strings": [],
           "preferred_partition_bytes": [],
@@ -1159,7 +1159,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Drol ƒ/Drol",
+          "path": "Drol \u00c6\u2019/Drol",
           "architecture": "68K (CODE)",
           "version_strings": [
             "v0.9",
@@ -1204,7 +1204,7 @@
           "configured": true
         }
       ],
-      "depth_size": "ReadMe B/W or color,System6.0.3–7.1 tested; actual800x600x8 exploratory, original SIZE1024000.",
+      "depth_size": "ReadMe B/W or color,System6.0.3\u00e2\u20ac\u201c7.1 tested; actual800x600x8 exploratory, original SIZE1024000.",
       "preferences_save_id": "Boot title/FVOY hits are launcher/recent item, no distinct pref; original embedded state retained.",
       "controls": "Help QOPM and alternate IJKL/keypad8046; Special Pause CmdP; only splash click exercised.",
       "timing": "Splash readiness only; finite post-dismissal native noncompletion. Release-browser gameplay/baseline pending.",
@@ -1301,7 +1301,7 @@
           "path": "gold-pusher Folder/GoldPusher",
           "architecture": "68K (CODE)",
           "version_strings": [
-            "1.5, 1998, VreeWare™"
+            "1.5, 1998, VreeWare\u00e2\u201e\u00a2"
           ],
           "preferred_partition_bytes": [
             1536000
@@ -1455,7 +1455,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "MacPipes ƒ/MacPipes 2.2.7",
+          "path": "MacPipes \u00c6\u2019/MacPipes 2.2.7",
           "architecture": "fat (CODE + PPC fragment)",
           "version_strings": [
             "2.2.7",
@@ -1470,7 +1470,7 @@
           "configured": true
         },
         {
-          "path": "MacPipes ƒ/MacPipes 2.0.1",
+          "path": "MacPipes \u00c6\u2019/MacPipes 2.0.1",
           "architecture": "68K (CODE)",
           "version_strings": [
             "2.0.1",
@@ -1499,7 +1499,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Maelstrom 1.4.3 ƒ (LEFT OUT)/Maelstrom",
+          "path": "Maelstrom 1.4.3 \u00c6\u2019 (LEFT OUT)/Maelstrom",
           "architecture": "68K (CODE)",
           "version_strings": [
             "1.4.3",
@@ -1572,7 +1572,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Mantra II v1.02 ƒ/Mantra II v1.02",
+          "path": "Mantra II v1.02 \u00c6\u2019/Mantra II v1.02",
           "architecture": "68K (CODE)",
           "version_strings": [
             "1.02",
@@ -1587,7 +1587,7 @@
           "configured": true
         },
         {
-          "path": "Mantra II v1.02 ƒ/Mantra II v1.02 PPC",
+          "path": "Mantra II v1.02 \u00c6\u2019/Mantra II v1.02 PPC",
           "architecture": "PPC fragment",
           "version_strings": [
             "1.02",
@@ -1834,7 +1834,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Prince of Persia ƒ/Prince of Persia",
+          "path": "Prince of Persia \u00c6\u2019/Prince of Persia",
           "architecture": "68K (CODE)",
           "version_strings": [
             "1.0"
@@ -2000,7 +2000,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "Slithereens 1.0.0 ƒ/Slithereens",
+          "path": "Slithereens 1.0.0 \u00c6\u2019/Slithereens",
           "architecture": "fat (CODE + PPC fragment)",
           "version_strings": [
             "1.0.0",
@@ -2031,7 +2031,7 @@
       "status": "compatibility blocker",
       "candidates": [
         {
-          "path": "Sloppy Sokoban 1.7 ƒ/Sloppy Sokoban 1.7",
+          "path": "Sloppy Sokoban 1.7 \u00c6\u2019/Sloppy Sokoban 1.7",
           "architecture": "PPC fragment",
           "version_strings": [
             "1.7.0"
@@ -2062,8 +2062,8 @@
           "path": "Spin Doctor/Spin Doctor",
           "architecture": "fat (CODE + PPC fragment)",
           "version_strings": [
-            "1.2 © 1993-5 Callisto Corp.",
-            "1.2 © 1993-5 Callisto Corp."
+            "1.2 \u00c2\u00a9 1993-5 Callisto Corp.",
+            "1.2 \u00c2\u00a9 1993-5 Callisto Corp."
           ],
           "preferred_partition_bytes": [
             2560000
@@ -2147,7 +2147,7 @@
       "status": "not yet measured",
       "candidates": [
         {
-          "path": "System’s Twilight v1.0.5 ƒ/System's Twilight v1.0.5",
+          "path": "System\u00e2\u20ac\u2122s Twilight v1.0.5 \u00c6\u2019/System's Twilight v1.0.5",
           "architecture": "68K (CODE)",
           "version_strings": [
             "1.0.5"
@@ -2203,7 +2203,7 @@
       "status": "compatibility blocker",
       "candidates": [
         {
-          "path": "DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0",
+          "path": "DreamLight\u00c2\u00ae Verttice\u00e2\u201e\u00a2 3.0 \u00c6\u2019/DreamLight\u00c2\u00ae Verttice\u00e2\u201e\u00a2 3.0",
           "architecture": "PPC fragment",
           "version_strings": [
             "7.0.2",
@@ -2218,7 +2218,7 @@
           "configured": true
         },
         {
-          "path": "DreamLight® Verttice™ 3.0 ƒ/DreamLight® Verttice™ 3.0",
+          "path": "DreamLight\u00c2\u00ae Verttice\u00e2\u201e\u00a2 3.0 \u00c6\u2019/DreamLight\u00c2\u00ae Verttice\u00e2\u201e\u00a2 3.0",
           "architecture": "PPC fragment",
           "version_strings": [
             "7.0.2",
@@ -2294,12 +2294,12 @@
     },
     {
       "source": "Content\\002",
-      "path": "MacPipes ƒ/Registration/Register MacPipes",
+      "path": "MacPipes \u00c6\u2019/Registration/Register MacPipes",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
       "source": "Content\\002",
-      "path": "Maelstrom 1.4.3 ƒ (LEFT OUT)/Register Maelstrom",
+      "path": "Maelstrom 1.4.3 \u00c6\u2019 (LEFT OUT)/Register Maelstrom",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
@@ -2319,22 +2319,22 @@
     },
     {
       "source": "Content\\002",
-      "path": "Bolo f/Internet Bolo Buddy 1.0.1 ƒ/Internet Bolo Buddy 1.0.1",
+      "path": "Bolo f/Internet Bolo Buddy 1.0.1 \u00c6\u2019/Internet Bolo Buddy 1.0.1",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
       "source": "Content\\002",
-      "path": "Bolo f/Ladmo 0.6 ƒ/Bolo Team App.ƒ/Bolo Team App",
+      "path": "Bolo f/Ladmo 0.6 \u00c6\u2019/Bolo Team App.\u00c6\u2019/Bolo Team App",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
       "source": "Content\\003",
-      "path": "Slithereens 1.0.0 ƒ/Register Slithereens",
+      "path": "Slithereens 1.0.0 \u00c6\u2019/Register Slithereens",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
       "source": "Content\\003",
-      "path": "Slithereens 1.0.0 ƒ/Slithereens Installer",
+      "path": "Slithereens 1.0.0 \u00c6\u2019/Slithereens Installer",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
@@ -2344,7 +2344,7 @@
     },
     {
       "source": "Content\\004",
-      "path": "Prince of Persia ƒ/The Prince of Persia Editor f/PoPE 1.0",
+      "path": "Prince of Persia \u00c6\u2019/The Prince of Persia Editor f/PoPE 1.0",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
@@ -2369,7 +2369,7 @@
     },
     {
       "source": "Content\\001",
-      "path": "Blobbo 1.0 Lite ƒ/Blobbo 1.0->1.0.1 Lite patch",
+      "path": "Blobbo 1.0 Lite \u00c6\u2019/Blobbo 1.0->1.0.1 Lite patch",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
@@ -2379,7 +2379,7 @@
     },
     {
       "source": "Content\\001",
-      "path": "Chiral 1.0.1 ƒ/Chiral Basics",
+      "path": "Chiral 1.0.1 \u00c6\u2019/Chiral Basics",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
@@ -2394,7 +2394,7 @@
     },
     {
       "source": "Content\\001",
-      "path": "MacPipes ƒ/Register MacPipes",
+      "path": "MacPipes \u00c6\u2019/Register MacPipes",
       "reason": "Auxiliary editor/manual/installer/registration application"
     },
     {
@@ -2409,7 +2409,7 @@
     },
     {
       "source": "Content\\001",
-      "path": "Marthon Tools/Pfhred ƒ/Pfhred 1.1.3",
+      "path": "Marthon Tools/Pfhred \u00c6\u2019/Pfhred 1.1.3",
       "reason": "Marathon editing tools; no Marathon game executable in this folder"
     },
     {
@@ -2419,7 +2419,7 @@
     },
     {
       "source": "Content\\Boot",
-      "path": "StuffIt Expander™",
+      "path": "StuffIt Expander\u00e2\u201e\u00a2",
       "reason": "OS/utility/helper application, outside game queue"
     },
     {
@@ -2494,7 +2494,7 @@
     },
     {
       "source": "Content\\Boot",
-      "path": "Apple Extras/QuickDraw™ 3D Folder/SimpleText",
+      "path": "Apple Extras/QuickDraw\u00e2\u201e\u00a2 3D Folder/SimpleText",
       "reason": "OS/utility/helper application, outside game queue"
     },
     {
@@ -2574,7 +2574,7 @@
     },
     {
       "source": "Content\\Boot",
-      "path": "Applications/Toast Folder/Goodies/AppleScript Samples/Drop•Burn",
+      "path": "Applications/Toast Folder/Goodies/AppleScript Samples/Drop\u00e2\u20ac\u00a2Burn",
       "reason": "OS/utility/helper application, outside game queue"
     },
     {
@@ -2659,12 +2659,12 @@
     },
     {
       "source": "Content\\Boot",
-      "path": "Serial MReader v0.03 2021-08 ƒ/Serial MReader v0.03 68K",
+      "path": "Serial MReader v0.03 2021-08 \u00c6\u2019/Serial MReader v0.03 68K",
       "reason": "OS/utility/helper application, outside game queue"
     },
     {
       "source": "Content\\Boot",
-      "path": "Serial MReader v0.03 2021-08 ƒ/Serial MReader v0.03 PPC",
+      "path": "Serial MReader v0.03 2021-08 \u00c6\u2019/Serial MReader v0.03 PPC",
       "reason": "OS/utility/helper application, outside game queue"
     },
     {
@@ -2839,7 +2839,7 @@
     },
     {
       "source": "Content\\Boot",
-      "path": "System Folder/Preferences/Navigation Services/Recent Items/DreamLight® Verttice™ 3.0",
+      "path": "System Folder/Preferences/Navigation Services/Recent Items/DreamLight\u00c2\u00ae Verttice\u00e2\u201e\u00a2 3.0",
       "reason": "Finder alias, not a separate executable"
     },
     {

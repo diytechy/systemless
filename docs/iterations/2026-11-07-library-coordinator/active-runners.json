@@ -1,28 +1,20 @@
 {
-  "runners": [
-    {
-      "slug": "star-trek-final-unity",
-      "task_name": "/root/star_trek_final_unity",
-      "status": "reviewed; workload released",
-      "phase": "bulk media audit/copy then one bounded native probe",
-      "lease_started_at": "2026-11-07T22:16:39.103798+00:00"
-    }
-  ],
+  "runners": [],
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-07T23:18:32.183919+00:00",
+  "updated_at": "2026-11-08T01:21:43.523585+00:00",
   "coordinator_workload": {
     "owner": "/root",
     "phase": "sequential root IAB prototype and release checks",
-    "status": "build v2 completed; source/assets frozen; no active emulator, prototype GUI next; test server188256 serves dist-v2",
+    "status": "root sole controlled emulator; sequential release followups; browser-queue/current-action canonical",
     "server_ownership": "D:/SystemlessBuild/private-library-20261107/server-test-owned-v2.json",
     "build_ownership": "D:/SystemlessBuild/private-library-20261107/build-owned-v2.json"
   },
   "pilot_worker": {
     "task_name": "/root/clockwerx_html5",
-    "status": "active",
-    "phase": "source frozen; all conversion/native workloads released; standing by for root GUI feedback",
+    "status": "completed; workload released",
+    "phase": "final9capture review and69table completed",
     "lease_expires_at": "2026-11-07T23:29:00Z",
     "brief": "clockwerx-html5/worker-brief.md"
   }

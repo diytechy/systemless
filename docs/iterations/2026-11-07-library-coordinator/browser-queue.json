@@ -29,7 +29,9 @@
     {
       "id": "clockwerx-personal-10",
       "route": "/clockwerx/",
-      "status": "default25 and experimental6 exploratory captures exported; pause/held actions observed; final matched repetitions/fidelity pending"
+      "status": "reviewed final comparison; unchanged25,6experimental",
+      "report": "clockwerx-html5/final-comparison-review.md",
+      "accepted_change": null
     },
     {
       "id": "delirium-personal-11",
@@ -82,7 +84,10 @@
     {
       "id": "owned-angband-v1",
       "route": "/angband/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/angband.json",
+      "scene": "NewHumanMaleWarrior town, namedt, inventoryclosed, noinput20seconds; turnwaitingidle",
+      "accepted_change": null
     },
     {
       "id": "owned-arashi-1-1-1-v1",

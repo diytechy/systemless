@@ -1,5 +1,7 @@
 # Sequential library coordinator checkpoint
 
+CURRENT OVERRIDE Nov8: all69 source/native first passes reviewed,61-route v2 release built/verified; playable ClockWerx pilot plus9capture comparison accepted as bounded observations, commitc339e9a7. No pacing setting promoted. Root sequential browser followups recorded in browser-queue.json and release-browser-reviews/. Exact next action in current-action.md supersedes historical counts below. Normal8087/saves/launcher untouched; test55847/dist-v2 only.
+
 Started 2026-11-07 00:44 America/Chicago. Checkout clean at start: dev / ed74c8b4, two local commits ahead of origin. No push/deploy authorized.
 
 Post-crash user correction: up to two independent diagnostic game runners are now authorized. Read concurrency.md and active-runners.json; they supersede historical one-worker restrictions below. Controlled performance captures and heavy builds remain sequential. Restart inspection found no surviving game worker/Systemless process; 33/69 reviews are committed, Desk Invaders II has no saved result and is restarted alongside Dome Wars. Original media and existing runtime settings remain untouched.

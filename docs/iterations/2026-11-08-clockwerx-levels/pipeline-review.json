@@ -1,0 +1,267 @@
+{
+  "status": "passed",
+  "nativeTransfers": 15,
+  "goalOnsets": 190,
+  "changedSourceFiles": [
+    "app.mjs"
+  ],
+  "appChange": "Level-specific scope help only; node syntax and actual browser help reviewed; simulation modules unchanged",
+  "inheritedRuntimeChecks": 187,
+  "inheritedPackagingChecks": 13,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 7165,
+    "guest_tick": 7765,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 2000,
+  "nativeNextLevel": "18:Offshoots",
+  "nativeProfileTotal": 68000,
+  "browser": {
+    "valid": true,
+    "transfers": 15,
+    "bonuses": 1,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 2000,
+      "totalCommitted": 0,
+      "nextDotAward": 2000,
+      "completed": true,
+      "overallEarned": 2000
+    },
+    "checkpoint": {
+      "name": "player",
+      "pivot": "5,6",
+      "grabMask": 15,
+      "angle": 4.71238898038469,
+      "direction": -1,
+      "program": null,
+      "canonicalFrame": false,
+      "visible": true,
+      "orphaned": false,
+      "hiddenUntil": 0,
+      "group": 700,
+      "sourceSlot": 0,
+      "sourceActorType": 0,
+      "speedClass": 0,
+      "divisor": 2,
+      "multiplier": 1,
+      "speedScale": 1,
+      "checksWalls": true
+    },
+    "timer": {
+      "enabled": false,
+      "original": 150,
+      "current": 150,
+      "saved": 150
+    },
+    "resets": 0
+  },
+  "clock": {
+    "boundary": "Original image fits over73present pivots constrain hero initial16, class1source4/19 and class3source2/19. Independent per-actor static b/n kernels test both class3starting parities. Bounded8192frame search, not absolute reveal/hardware timing or exhaustive input/collision parity.",
+    "firstGuestTick": 1864,
+    "heroInitialFrame": 16,
+    "heroPoses": 22,
+    "cases": [
+      {
+        "class3HeroParity": 0,
+        "phaseIntervals": [
+          [
+            73.26315789473684,
+            73.3157894736842
+          ],
+          [
+            457.2631578947368,
+            457.3157894736842
+          ],
+          [
+            841.2631578947369,
+            841.3157894736842
+          ],
+          [
+            1225.2631578947369,
+            1225.3157894736842
+          ],
+          [
+            1609.2631578947369,
+            1609.3157894736842
+          ],
+          [
+            1993.2631578947369,
+            1993.3157894736842
+          ],
+          [
+            2377.2631578947367,
+            2377.315789473684
+          ],
+          [
+            2761.2631578947367,
+            2761.315789473684
+          ],
+          [
+            3145.2631578947367,
+            3145.315789473684
+          ],
+          [
+            3529.2631578947367,
+            3529.315789473684
+          ],
+          [
+            3913.2631578947367,
+            3913.315789473684
+          ],
+          [
+            4297.263157894737,
+            4297.315789473684
+          ],
+          [
+            4681.263157894737,
+            4681.315789473684
+          ],
+          [
+            5065.263157894737,
+            5065.315789473684
+          ],
+          [
+            5449.263157894737,
+            5449.315789473684
+          ],
+          [
+            5833.263157894737,
+            5833.315789473684
+          ],
+          [
+            6217.263157894737,
+            6217.315789473684
+          ],
+          [
+            6601.263157894737,
+            6601.315789473684
+          ],
+          [
+            6985.263157894737,
+            6985.315789473684
+          ],
+          [
+            7369.263157894737,
+            7369.315789473684
+          ],
+          [
+            7753.263157894737,
+            7753.315789473684
+          ],
+          [
+            8137.263157894737,
+            8137.315789473684
+          ]
+        ],
+        "npcPoses": 259
+      },
+      {
+        "class3HeroParity": 1,
+        "phaseIntervals": [],
+        "npcPoses": 259
+      }
+    ],
+    "rejectedHeroCount": 11,
+    "rejectedNpcCount": 5
+  },
+  "jointPeriod": {
+    "boundary": "Pure static mixed class1/3 NPC kernel including pivot/frame/direction/PC/visibility/orphan plus hero64 and class3parity0; full-state period, not a host benchmark",
+    "jointSourceFramePeriod": 384,
+    "class3HeroParity": 0
+  },
+  "nativeProtectedOverlapWitnesses": [
+    {
+      "checkpoint": "pipe-protected-01",
+      "guestTick": 4725,
+      "hero": {
+        "error": 0.26527050610820246,
+        "frame": 19,
+        "row": 6,
+        "column": 5
+      },
+      "green": {
+        "error": 0.2848101265822785,
+        "frame": 35,
+        "row": 7,
+        "column": 5
+      },
+      "qualified": true,
+      "originalOutlineOverlap": true
+    },
+    {
+      "checkpoint": "pipe-protected-04",
+      "guestTick": 5029,
+      "hero": {
+        "error": 0.26527050610820246,
+        "frame": 19,
+        "row": 6,
+        "column": 5
+      },
+      "green": {
+        "error": 0.2848101265822785,
+        "frame": 35,
+        "row": 7,
+        "column": 5
+      },
+      "qualified": true,
+      "originalOutlineOverlap": true
+    },
+    {
+      "checkpoint": "pipe-protected-07",
+      "guestTick": 5333,
+      "hero": {
+        "error": 0.26527050610820246,
+        "frame": 19,
+        "row": 6,
+        "column": 5
+      },
+      "green": {
+        "error": 0.2848101265822785,
+        "frame": 35,
+        "row": 7,
+        "column": 5
+      },
+      "qualified": true,
+      "originalOutlineOverlap": true
+    }
+  ],
+  "protectionBoundary": "Independent original pixel fits over all73pivots/64poses place a living gold hero and green hand; source integer outlines tested at those observed poses. Proposed/model overlap times are not substituted for observed frames. Nominal WY-wait00 may precede the actual transfer latch; retained unqualified.",
+  "protectionRawSamples": 13,
+  "qualifiedPosePairs": 5,
+  "modelProtectedOverlapSteps": 207,
+  "maxNativeHandFit": 1.5619546247818499,
+  "background": {
+    "name": "pipeline-fresh-idle-03",
+    "meanAbsoluteChannelError": 0.5591904057220373,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "oldPayloadsPreserved": 72,
+  "newPayloads": 0,
+  "limits": [
+    "Child gold-hand route;1of15bonuses",
+    "Protected survival witnessed against ordinary green; exhaustive hazard types/timings not tested",
+    "Exact input/hardware/reveal cadence and full audio/effects/campaign/save/highscore/controller parity unqualified",
+    "No new comparable resource benchmark"
+  ],
+  "schema": "clockwerx-accepted-level-v1",
+  "ordinal": 17,
+  "title": "Pipeline",
+  "sourceResource": 1003,
+  "sourceSha256": "e6e3a3ad57acff39142206dd497b20d1f19528fdb0f2b69a2777c0ea9d4e067e",
+  "privateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\pipeline",
+  "activation": {
+    "sourceBytes": 163702,
+    "assetBytes": 1796422,
+    "manifestBytes": 1355610,
+    "totalBytes": 3315734
+  }
+}

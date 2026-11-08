@@ -215,9 +215,11 @@ async function loadScene(scene){
   const rules=[];
   if(board.puddles.length)rules.push('Touching sleeping oil wakes it. It pursues you across dots and can split. Avoid letting it grab your pivot.');
   if(board.doors.length)rules.push('Switch entry toggles matching doors; release changes only the switch art.');
-  if(board.staticEnemyCallbacks)rules.push('Enemy hands follow timed routes between available dots.');
+  if(board.staticEnemyCallbacks)rules.push('Enemy hands rotate and follow their own timed patterns.');
   else if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
-  if(board.specialDotRules)rules.push('Rings disappear after you leave them and later return. Checkpoints change your return position. Green protection stops ordinary enemy contact, but not spikes.');
+  if(board.dots.some(d=>d.ring))rules.push('Rings disappear after you leave them and later return.');
+  if(board.dots.some(d=>d.waystation))rules.push('Checkpoints store your return position and time.');
+  if(board.dots.some(d=>d.protected))rules.push('Protected dots stop ordinary enemy contact; spikes remain lethal.');
   if(board.bombRules)rules.push('Swing across a match to light its fuse. Avoid the travelling spark and blast. Hourglasses award 1000 points and ten seconds.');
   if(board.goodieOnlyRules)rules.push('Hourglasses award 1000 points and ten seconds. A checkpoint stores your time when you reach it.');
   $('scope-description').textContent=board.title+'. '+rules.join(' ')+' A death freezes play, runs staggered explosions, then resets the round. '+(board.childScoreRules?'Child bonus progression and round commits are tracked. Campaign totals, full pickup effects, full audio, saves and physical controller hardware remain unqualified.':'Original scoring, full audio, campaign saves and physical controller hardware are unqualified or omitted.');

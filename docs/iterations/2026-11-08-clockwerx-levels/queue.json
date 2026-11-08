@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 17,
-  "currentAction": "Pipeline17: fresh native baseline through16; qualify mixed class1/3 programs and protected checkpoint composition",
+  "currentOrdinal": 18,
+  "currentAction": "Offshoots18: fresh baseline through17, fourGO/two protected checkpoints and seven transfer programs",
   "levels": [
     {
       "ordinal": 1,
@@ -1179,11 +1179,24 @@
       "menuTitle": "Pipeline",
       "resourceTitle": "Pipeline",
       "sha256": "e6e3a3ad57acff39142206dd497b20d1f19528fdb0f2b69a2777c0ea9d4e067e",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "pipeline/native-goal-01/report.json",
+        "pipeline/native-goal-01/pipe-protected-01.png",
+        "pipeline/native-goal-01/pipe-after-route.png",
+        "pipeline/native-goal-01/next-after-pipeline.png"
+      ],
+      "requirements": [
+        "mixed class1/3 b/n canonical clocks",
+        "protected WY source composition",
+        "hero initial frame16 and green bonus sharing-pivot timing"
+      ],
+      "svgStatus": "activated15transfer/onegreenbonus/2000Childgoal;190onsets and native protected-overlap witnesses",
+      "generationConstraints": [
+        "preserve per-class source remainders and initial pose",
+        "protected WY can supply safe ordinary-contact waiting",
+        "departing checkpoint still needs timed action/direction checks"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 73,
@@ -1210,7 +1223,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1227,7 +1240,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "pipeline-review.md"
     },
     {
       "ordinal": 18,

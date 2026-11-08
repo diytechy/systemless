@@ -37,7 +37,6 @@
     "boundary": "Independent original descriptor fits constrain source4/19hero plus two canonical n/s/b/f programs, including negative initial direction. Pure NPC kernel uses original static pivots/permissions; door contact does not alter these wall-free NPC trajectories. Coincident/overdrawn second-pivot fits are excluded. First8192hero-frame aliases only; not absolute reveal/hardware timing or gate proof.",
     "firstGuestTick": 1864,
     "heroPoses": 27,
-    "redPoses": 66,
     "phaseIntervals": [
       [
         73.26315789473684,
@@ -45,7 +44,8 @@
       ]
     ],
     "chosenPhase": 73.28947368421052,
-    "rejectedHeroPoses": 6
+    "rejectedHeroPoses": 6,
+    "npcPoses": 66
   },
   "elevatedHumanFits": [
     {

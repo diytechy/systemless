@@ -1,0 +1,203 @@
+{
+  "status": "passed",
+  "nativeTransfers": 12,
+  "goalOnsets": 190,
+  "runtimeSourceByteIdenticalToAccepted15": true,
+  "inheritedRuntimeChecks": 187,
+  "inheritedPackagingChecks": 13,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 5721,
+    "guest_tick": 6321,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 11000,
+  "nativeNextLevel": "17:Pipeline",
+  "nativeProfileTotal": 66000,
+  "browser": {
+    "valid": true,
+    "transfers": 12,
+    "bonuses": 4,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 11000,
+      "totalCommitted": 0,
+      "nextDotAward": 5000,
+      "completed": true,
+      "overallEarned": 11000
+    },
+    "resets": 0
+  },
+  "clock": {
+    "boundary": "Independent original descriptor fits constrain source4/19hero plus four canonical ordinary enemies, including three programs and a free green hand. Pure NPC kernel uses original static pivots/permissions; door contact does not alter these wall-free NPC trajectories. Coincident/overdrawn second-pivot fits are excluded. First8192hero-frame aliases only; not absolute reveal/hardware timing or gate proof.",
+    "firstGuestTick": 1864,
+    "heroPoses": 27,
+    "npcPoses": 132,
+    "phaseIntervals": [
+      [
+        73.26315789473684,
+        73.3157894736842
+      ],
+      [
+        457.2631578947368,
+        457.3157894736842
+      ],
+      [
+        841.2631578947369,
+        841.3157894736842
+      ],
+      [
+        1225.2631578947369,
+        1225.3157894736842
+      ],
+      [
+        1609.2631578947369,
+        1609.3157894736842
+      ],
+      [
+        1993.2631578947369,
+        1993.3157894736842
+      ],
+      [
+        2377.2631578947367,
+        2377.315789473684
+      ],
+      [
+        2761.2631578947367,
+        2761.315789473684
+      ],
+      [
+        3145.2631578947367,
+        3145.315789473684
+      ],
+      [
+        3529.2631578947367,
+        3529.315789473684
+      ],
+      [
+        3913.2631578947367,
+        3913.315789473684
+      ],
+      [
+        4297.263157894737,
+        4297.315789473684
+      ],
+      [
+        4681.263157894737,
+        4681.315789473684
+      ],
+      [
+        5065.263157894737,
+        5065.315789473684
+      ],
+      [
+        5449.263157894737,
+        5449.315789473684
+      ],
+      [
+        5833.263157894737,
+        5833.315789473684
+      ],
+      [
+        6217.263157894737,
+        6217.315789473684
+      ],
+      [
+        6601.263157894737,
+        6601.315789473684
+      ],
+      [
+        6985.263157894737,
+        6985.315789473684
+      ],
+      [
+        7369.263157894737,
+        7369.315789473684
+      ],
+      [
+        7753.263157894737,
+        7753.315789473684
+      ],
+      [
+        8137.263157894737,
+        8137.315789473684
+      ]
+    ],
+    "chosenPhase": 73.28947368421052,
+    "rejectedHeroPoses": 6
+  },
+  "jointPeriod": {
+    "boundary": "Pure original static NPC kernel joint state including pivot/frame/direction/PC/visibility/orphan and hero64; not a host-time measurement",
+    "jointSourceFramePeriod": 384
+  },
+  "elevatedHumanFits": [
+    {
+      "transfer": 4,
+      "expectedPivot": "4,1",
+      "observedPivot": "4,1",
+      "match": true,
+      "sourceFrame": 35,
+      "meanAbsoluteChannelError": 2.7099099099099098
+    },
+    {
+      "transfer": 5,
+      "expectedPivot": "5,1",
+      "observedPivot": "5,1",
+      "match": true,
+      "sourceFrame": 35,
+      "meanAbsoluteChannelError": 2.7099099099099098
+    },
+    {
+      "transfer": 6,
+      "expectedPivot": "6,1",
+      "observedPivot": "6,1",
+      "match": true,
+      "sourceFrame": 35,
+      "meanAbsoluteChannelError": 2.7099099099099098
+    },
+    {
+      "transfer": 7,
+      "expectedPivot": "7,1",
+      "observedPivot": "7,1",
+      "match": true,
+      "sourceFrame": 35,
+      "meanAbsoluteChannelError": 2.7099099099099098
+    }
+  ],
+  "wall": {
+    "samples": 33,
+    "maxMAE": 0.7222222222222222
+  },
+  "background": {
+    "name": "sparse-fresh-initial",
+    "meanAbsoluteChannelError": 0.5591904057220373,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0
+  },
+  "oldPayloadsPreserved": 72,
+  "newPayloads": 0,
+  "limits": [
+    "Child gold-hand upper goal route;4of8bonus dots",
+    "wall placement qualified but route avoids wall; forced wall contact not tested on16",
+    "human average/canonical NPC exact hardware timing unqualified",
+    "full audio/effects/campaign/save/highscore/controller parity unqualified",
+    "no new comparable resource benchmark"
+  ],
+  "schema": "clockwerx-accepted-level-v1",
+  "ordinal": 16,
+  "title": "Sparse",
+  "sourceResource": 171,
+  "sourceSha256": "463c50f4625f7210112e8f0ef4e84f0de74c198e5003d6faf176f0f2cf5ad887",
+  "privateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\sparse",
+  "activation": {
+    "sourceBytes": 163579,
+    "assetBytes": 1796422,
+    "manifestBytes": 1283381,
+    "totalBytes": 3243382
+  }
+}

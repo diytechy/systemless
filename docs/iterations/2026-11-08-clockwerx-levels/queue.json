@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 16,
-  "currentAction": "Sparse16: fresh native baseline from verified through15progress; qualify small-board static programs and actual maze/goal",
+  "currentOrdinal": 17,
+  "currentAction": "Pipeline17: fresh native baseline through16; qualify mixed class1/3 programs and protected checkpoint composition",
   "levels": [
     {
       "ordinal": 1,
@@ -1110,11 +1110,23 @@
       "menuTitle": "Sparse",
       "resourceTitle": "Sparse",
       "sha256": "463c50f4625f7210112e8f0ef4e84f0de74c198e5003d6faf176f0f2cf5ad887",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "sparse/native-goal-01/report.json",
+        "sparse/native-goal-01/spar-after-route.png",
+        "sparse/native-goal-01/next-after-sparse.png"
+      ],
+      "requirements": [
+        "small-board origin with serialized stride11",
+        "three ordinary programs plus unprogrammed green phase",
+        "blue pure-f conditional transfer loop"
+      ],
+      "svgStatus": "activated12transfer/fourbonus/11000Childgoal;190onsets and rootIAB verified",
+      "generationConstraints": [
+        "preserve small display origin separately from serialized dimensions",
+        "f preserves direction and adds32facing on transfer",
+        "static path safety depends on shared clock/program phase"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 29,
@@ -1141,7 +1153,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1158,7 +1170,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "sparse-review.md"
     },
     {
       "ordinal": 17,

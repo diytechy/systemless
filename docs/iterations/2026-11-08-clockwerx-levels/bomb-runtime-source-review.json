@@ -1,0 +1,136 @@
+{
+  "schema": "clockwerx-bomb-runtime-source-review-v1",
+  "status": "Unlinked source-only implementation preparation; not level 10 acceptance",
+  "filesReleased": true,
+  "runtimeLinked": false,
+  "sourceResource": {
+    "ordinal": 10,
+    "resourceId": 10963,
+    "sha256": "89ae570509b3cdcd3e40e310e8811105deff14dfb7f730081699b6c6a0db4b2f",
+    "rawQueueDecodedHashMatch": true
+  },
+  "files": {
+    "prototypes/clockwerx-html5/bomb-runtime.mjs": "3e145cb07971e4c04403e11dc3232a2e98f7e598f5a32a8a82c1dd117d5fb1b8",
+    "prototypes/clockwerx-html5/bomb-runtime.test.mjs": "905ce66ec6f88f0d349bb840a33b664f68174f06a73134fe85f815509d246c7d",
+    "prototypes/clockwerx-html5/bombs.mjs": "8809e981d6b78909787162b47c31d50b3b71a165d1c06f7309ab89e6d64519d3",
+    "prototypes/clockwerx-html5/bombs.test.mjs": "6b5e4deddd0ab517e7562024014877be1131d6a89c9b2cc974a0f040b8df2de2"
+  },
+  "validation": {
+    "command": "node --test prototypes/clockwerx-html5/bomb-runtime.test.mjs prototypes/clockwerx-html5/bombs.test.mjs",
+    "newTests": 20,
+    "existingTests": 8,
+    "passed": 28,
+    "failed": 0,
+    "privateProbe": {
+      "status": "Private source-data adapter probe only; not gameplay/native acceptance",
+      "resourceId": 10963,
+      "sourceSha256": "89ae570509b3cdcd3e40e310e8811105deff14dfb7f730081699b6c6a0db4b2f",
+      "routeSha256": "2428b123476e85671b71325fa808de8689e99a8a411b588e75dfbfa7f6bf9189",
+      "bombRecords": 8,
+      "activeGoodies": 2,
+      "sparkCallbacksToTerminal": 339,
+      "explosionCallbacksToHide": 10,
+      "goodieInvalidInitialRequestsIgnored": true
+    }
+  },
+  "scope": {
+    "mode": "Child single-player",
+    "BOCapacity": 60,
+    "LICapacity": 5,
+    "SRCapacity": 17,
+    "explosionCapacity": 6,
+    "GOCapacity": 15,
+    "sourcePaths": "Injected privately; no original path samples in repository",
+    "accepted": false
+  },
+  "clocks": {
+    "LI": {
+      "period": 100,
+      "scaled": false
+    },
+    "SR": {
+      "period": 62,
+      "scaled": true
+    },
+    "explosion": {
+      "period": 150,
+      "scaled": false
+    },
+    "GO": {
+      "period": 200,
+      "scaled": false
+    },
+    "dispatch": "One callback per observed changed client count, no catch-up; snapshot at dynamic activation. Caller owns persistent clocks and SU traversal."
+  },
+  "contracts": {
+    "sourceOrder": "Per-sprite observe methods; synchronous effect adapter; diagnostic returned events must not be redispatched. Original source outline at pre-commit descriptorFrame drives explosion collision.",
+    "explosionFrame3": [
+      "SP",
+      "DS",
+      "EL",
+      "GN",
+      "TR",
+      "WL",
+      "DO",
+      "moving DO",
+      "moving DP",
+      "moving WA"
+    ],
+    "explosionFrame4": [
+      "moving DO",
+      "moving DP",
+      "moving WA",
+      "paint crater",
+      "stationary DO"
+    ],
+    "explosionFrame10": [
+      "moving DO",
+      "moving DP",
+      "moving WA",
+      "hide/detach; clamp descriptor to 9"
+    ],
+    "spark": "Strict fresh TickCount > latchedTick + adjustPeriod(60), then frames 4..8, travelling starts at 8 without path advance until next callback. Serialized next BO index and exit token choose next route direction.",
+    "goodie": "Sound, flourish at RO offset(+18,+18), floating score at x+10/y+16, collected latch, +10 time, +1000 actor bonus. Still visible until flourish completion; first visible collision can be already collected and block later overlaps.",
+    "match": "Any armed human match; ordinary nonhuman requires any nonzero flags. Synchronous spark allocation then hide all same-grid LI then sound 11 then disarm, even on SR exhaustion.",
+    "actorBomb": "Source-slot order, visible/original-outline collision; hide and set Child deadline +300 ticks; human slots 0/1 invoke reason -1. Ordinary types 1-3 never auto-resurrect.",
+    "dotBomb": "Human permission +0x11 required; ring prevents adding burnt look; clear bonus when applicable; preserve pivot/goal/colors/grab permission. Source +0x12 is optimized background state, separate from sourceCollidable. Repaint optimized background even unchanged. Changed live sprite look resets current frame and main/secondary min/max, not clock/permissions."
+  },
+  "specialDotSourceReview": {
+    "availablePureRing": "Runtime ring look 0x200 prevents adding burnt 0x40. Range remains 23+7*color through +7; unavailable ring is skipped. Bonus removal can reset range/current frame through DOUpdateLook. Human release still uses ring bit and current range.",
+    "checkpoint": "Look 0x100 wins ahead of burnt and retains 79..89. First hit can still set burnt metadata and call DOUpdateLook, resetting current frame to 79 without automatically changing angular step/clock.",
+    "protection": "Raw 0x40 maps to DOSpec+0xb / DOInfo+0x1f and separate misc type 2. It is not runtime look0x80, which is slowdown. Ordinary protected base can become burnt, keeping protection and separate overlay.",
+    "reset": "DOReset first clears burnt bit and invokes DOUpdateLook, then restores saved bonus and invokes DOUpdateLook, resurrects rings, stops/detaches checkpoints, handles slowdown/moving/updown, clears selected checkpoint pointer. Burnt checkpoint resets to 79 via earlier look update; unburnt nonbonus checkpoint can retain phase. DORestartLevel explicitly sets selected checkpoint to 79.",
+    "implementationGate": "New helper permits plain static/ring dots only, rejects protection/checkpoint/slowdown/transfer-death/moving/updown/connectors. No root ring/checkpoint/protection helper edits."
+  },
+  "unsupported": [
+    "Non-Child modes",
+    "Rotating spike/type4 and buster/type5 actor hooks",
+    "Moving pivots, moving/updown dots, connectors, teleport interactions",
+    "Protected/checkpoint/slowdown/transfer-death bomb combinations",
+    "Door/switch/elevator/gun/trigger/oil integrations; stage callbacks remain present but caller must reject those active combinations",
+    "Exact live SU scheduler, native sound/timing/route equivalence",
+    "Background topology restoration, original colliders, scoreboard and live renderer integration"
+  ],
+  "sourceOffsets": {
+    "SUClockAndDescriptor": "CODE4:3de2-3f60",
+    "BOActivationAndExplosion": "CODE6:05fa-07c2,0934-09c0,0b7c-0ccc",
+    "SR": "CODE6:9216-9660",
+    "LI": "CODE6:79fe-7a58,7aee-7cca",
+    "GO": "CODE6:6e98-6fea,70ec-72e4",
+    "DOAnnihilate": "CODE6:4944-4b1e",
+    "DOOptimizeAndBackground": "CODE6:3cca-3e9e",
+    "DOLookAndUpdate": "CODE6:2c54-2e3a,2eec-2f5c",
+    "DOResetRingAndCheckpoint": "CODE6:2188-230c,4818-48fa,4be6-4c30",
+    "DOFlags": "CODE6:3484-35c6,3a4a-3b0c",
+    "WABombedAndResurrection": "CODE6:d16e-d1e0,d98e-d9c0"
+  },
+  "limitations": [
+    "Original hidden terminal SRPosition performs one out-of-path sample after hiding; this implementation deliberately omits that unobservable private-memory read.",
+    "Constructor validates starter termination and terminal safe neighborhood, but geometry continuity, route/profile hashes and supported active catalog features are caller prerequisites.",
+    "All effects are synchronous adapters; no collision geometry, wall topology, sound playback, score persistence or actual sprite list is implemented here.",
+    "External DO/SP/WL/WA reset remains caller-owned; BombRuntime.reset only restores its BO/LI/SR/GO/explosion state.",
+    "Freeze at source barrier, after completing the current actor collision sequence; do not suppress later source side effects merely because a death latch was set.",
+    "Native and browser qualification, goal route, reset visuals and timing remain outstanding."
+  ],
+  "assetBoundary": "Root reports accepted Some Dots V2 normal baseline has 55 payloads. Future Bombs QA must preserve every one and copy only the nine Bomb-owned additions; old candidate Some Dots V1 files must never replace accepted V2 assets. No asset mutation or conversion performed here."
+}

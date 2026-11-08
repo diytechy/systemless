@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-ready-for-root-review",
+  "workloadReleased": true,
+  "fixtureSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4",
+  "candidate": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\candidate\\assets",
+  "sourceHashes": {
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\app.rsrc": "522b65b20f89eca12139d6d488c9636ce3138099379ef8b7a59734f563a828b3",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_1.bin": "60e4ce54cb1635ea6a1867394db3d7d24e2f8645698756c23719864cb2dad66a",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_4.bin": "45e1a634759b082aaed758cc2dd3784b20d9c5dcd188271538706f05688efdab",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_5.bin": "9b886f9d815b36ed39313ab5fa2c70daac96f123d9ba6d9b77856eb43d29e177",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_6.bin": "d2384c535eaf50b5b87320fc60efeb461a0ea25721482e07b176b43b3c4c6783",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_7.bin": "78fd636a389d13ab674e1a98af7538b9ee472abd63b51d2afbdfbb2359556456",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\DATA_0.bin": "ead750365e369adea6f71dcd3c90f13e68bbc1dcf7bbb9cdfc8430dc39725fef",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\data.bin": "1b2286712f7783848730474051c6497323400be31fc303e078f0c748977346dc",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\pltt_1000.bin": "76dd4ac97887e3aaf90c3ca0034208905075cc9860b8e9ead206f177714539c7",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\original-stationary-pointer.json": "c49468a2bce5171944345e33b224b569bc968a4a81dce2a4ce62cc6b9b7e4f6f",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\original-relocated-pointer.json": "c084144b2c071f90d57f3105affefc921d0543b4703a1eed204c0021e22f8192",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\original-reverse-direction.json": "a63326083b8c93698fae4c49e97847f17046affdeff9e1588f77e8b2bc59a7be",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\candidate\\assets\\starbursts.svg": "84a14d6e48cfc40fe2aa1ace7e6ade0b8af4541dc723205dd6e6defd07e2df40"
+  },
+  "behavior": {
+    "role": "initial player and goal attention marquees",
+    "cursorFollowing": false,
+    "randomGameplaySpawns": false,
+    "offsetsXY": [
+      [
+        0,
+        -24
+      ],
+      [
+        17,
+        -17
+      ],
+      [
+        24,
+        0
+      ],
+      [
+        17,
+        17
+      ],
+      [
+        0,
+        24
+      ],
+      [
+        -17,
+        17
+      ],
+      [
+        -24,
+        0
+      ],
+      [
+        -17,
+        -17
+      ]
+    ],
+    "firstOffsetIndex": 0,
+    "goalDirection": 1,
+    "playerDirection": "negated initial hand direction, retained in callback",
+    "successorFrame": 5,
+    "frameCount": 11,
+    "sourceTimerUnits": 40,
+    "timerUnitsPerGuestTick": 16,
+    "normalizedGuestTicksPerSecond": 60,
+    "frameSeconds": 0.041666666666666664,
+    "spawnIntervalSeconds": 0.20833333333333334,
+    "lifetimeSeconds": 0.4583333333333333,
+    "ringSeconds": 1.6666666666666667,
+    "stopTrigger": "accepted player grab/action or accepted instant reverse; suppress future spawns, existing particles expire",
+    "drawLayer": 14,
+    "anchor": "resolve current target location only at birth; existing particles remain fixed"
+  },
+  "denseMeasurements": {
+    "stationary-pointer": {
+      "player": {
+        "matchedSamples": 128,
+        "frameSecondsWall": 0.05449177463766146,
+        "guestTicksPerFrame": 2.4986003014006384,
+        "linearResidualFrames": 0.31423834819610896,
+        "firstLast": [
+          [
+            57951.8200000003,
+            3684,
+            9
+          ],
+          [
+            62938.515000000596,
+            3897,
+            94
+          ]
+        ]
+      },
+      "goal": {
+        "matchedSamples": 128,
+        "frameSecondsWall": 0.05449177463766146,
+        "guestTicksPerFrame": 2.4986003014006384,
+        "linearResidualFrames": 0.31423834819610896,
+        "firstLast": [
+          [
+            57951.8200000003,
+            3684,
+            9
+          ],
+          [
+            62938.515000000596,
+            3897,
+            94
+          ]
+        ]
+      }
+    },
+    "relocated-pointer": {
+      "player": {
+        "matchedSamples": 121,
+        "frameSecondsWall": 0.05730926179406589,
+        "guestTicksPerFrame": 2.4905565974281383,
+        "linearResidualFrames": 0.34344734320536263,
+        "firstLast": [
+          [
+            103667.34499999881,
+            5801,
+            15
+          ],
+          [
+            108660.57999999821,
+            6014,
+            101
+          ]
+        ]
+      },
+      "goal": {
+        "matchedSamples": 121,
+        "frameSecondsWall": 0.05730926179406589,
+        "guestTicksPerFrame": 2.4905565974281383,
+        "linearResidualFrames": 0.34344734320536263,
+        "firstLast": [
+          [
+            103667.34499999881,
+            5801,
+            15
+          ],
+          [
+            108660.57999999821,
+            6014,
+            101
+          ]
+        ]
+      }
+    },
+    "reverse-direction": {
+      "player": {
+        "matchedSamples": 92,
+        "frameSecondsWall": 0.042137563568693616,
+        "guestTicksPerFrame": 2.4888773138291382,
+        "linearResidualFrames": 0.37056853096003395,
+        "firstLast": [
+          [
+            146763.7749999985,
+            7674,
+            4
+          ],
+          [
+            149491.5700000003,
+            7832,
+            67
+          ]
+        ]
+      },
+      "goal": {
+        "matchedSamples": 91,
+        "frameSecondsWall": 0.042038929803187984,
+        "guestTicksPerFrame": 2.486826281056811,
+        "linearResidualFrames": 0.36279354571460365,
+        "firstLast": [
+          [
+            146763.7749999985,
+            7674,
+            4
+          ],
+          [
+            149443.25500000268,
+            7829,
+            67
+          ]
+        ]
+      }
+    }
+  },
+  "appearance": {
+    "sourceGroup": 2400,
+    "sourceFrameIds": [
+      2400,
+      2401,
+      2402,
+      2403,
+      2404,
+      2405,
+      2406,
+      2407,
+      2408,
+      2409,
+      2410
+    ],
+    "maxDimensions": [
+      17,
+      17
+    ],
+    "sourceOpaquePixels": [
+      1,
+      5,
+      21,
+      45,
+      97,
+      98,
+      100,
+      95,
+      49,
+      25,
+      5
+    ],
+    "sourceAlpha": [
+      0,
+      255
+    ],
+    "displayGammaExponent": 0.7,
+    "paletteMeanAbsoluteMatchErrorTypical": 0.25,
+    "svg": "private palette-layer polygons simplified at0.65logicalpixel tolerance; continuous vector edges, no rasterimages or globalalpha fade",
+    "svgBytes": 11170,
+    "preservedPriorPayloads": 16
+  },
+  "tests": {
+    "command": "node --test prototypes/clockwerx-html5/sparkles.test.mjs",
+    "passed": 5,
+    "failed": 0
+  },
+  "limitations": [
+    "No complete campaign behavior claim; other flourish uses include random award-screen decoration.",
+    "Native readback slows wall clock and guestTick metadata can lag visible frame.",
+    "Lifecycle uses uniform1/24s frames; original guest tick quantization alternates2/3ticks and renderer may skip updates underload.",
+    "Vector contours are a simplified source-grounded interpretation, pending root browser visual review.",
+    "Third trace proves disable/drain after KeyC, not persistent dynamic reversal.",
+    "No physicalcontroller qualification, fullplaythrough, audio or savechanges."
+  ],
+  "workLog": {
+    "approximateActiveMinutes": 12,
+    "activities": [
+      "resource inventory and allgroup extraction",
+      "bounded source disassembly and DATAinitialization decode",
+      "source trigger/timer/anchor analysis",
+      "three existing/new capture analyses",
+      "private vectoratlas generation",
+      "generic lifecycle and5focusedtests",
+      "review report and workloadrelease"
+    ],
+    "remainingEstimateHours": {
+      "low": 0.5,
+      "likely": 1,
+      "high": 2,
+      "scope": "root integration, visualreview, pause/restart/action-stopsmoke; no additional emulation benchmark"
+    }
+  },
+  "privateRegenerationScripts": [
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\discover.py",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\extract-all.py",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\decode-data.py",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\match-stars.py",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\analyze-dense.py",
+    "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\build-candidate.py"
+  ]
+}

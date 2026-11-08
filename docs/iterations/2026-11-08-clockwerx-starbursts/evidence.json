@@ -1,0 +1,150 @@
+{
+  "status": "accepted-and-activated",
+  "workerReviewSha256": "8ce01afed1e34efd1360f2508a5d5e9e36b4ca970447c45dfee6702cd5fe5c89",
+  "privateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts",
+  "independentOriginalReview": [
+    {
+      "trace": "stationary-pointer",
+      "rawRows": 150,
+      "sourcePixelMatchesVerified": 256,
+      "fits": {
+        "player": {
+          "matchedSamples": 128,
+          "guestTicksPerFrame": 2.498600301400639
+        },
+        "goal": {
+          "matchedSamples": 128,
+          "guestTicksPerFrame": 2.498600301400639
+        }
+      },
+      "rawSha256": "c49468a2bce5171944345e33b224b569bc968a4a81dce2a4ce62cc6b9b7e4f6f"
+    },
+    {
+      "trace": "relocated-pointer",
+      "rawRows": 144,
+      "sourcePixelMatchesVerified": 242,
+      "fits": {
+        "player": {
+          "matchedSamples": 121,
+          "guestTicksPerFrame": 2.490556597428137
+        },
+        "goal": {
+          "matchedSamples": 121,
+          "guestTicksPerFrame": 2.490556597428137
+        }
+      },
+      "rawSha256": "c084144b2c071f90d57f3105affefc921d0543b4703a1eed204c0021e22f8192"
+    },
+    {
+      "trace": "reverse-direction",
+      "rawRows": 160,
+      "sourcePixelMatchesVerified": 183,
+      "fits": {
+        "player": {
+          "matchedSamples": 92,
+          "guestTicksPerFrame": 2.4888773138291373
+        },
+        "goal": {
+          "matchedSamples": 91,
+          "guestTicksPerFrame": 2.48682628105681
+        }
+      },
+      "rawSha256": "a63326083b8c93698fae4c49e97847f17046affdeff9e1588f77e8b2bc59a7be"
+    }
+  ],
+  "pilotIntegrationReview": {
+    "valid": true,
+    "rawFrameRows": 3301,
+    "activeSimulationSteps": 2400,
+    "shortSwingRows": 7,
+    "shortSwingTimeRange": [
+      0.24166666666666664,
+      0.275
+    ],
+    "acceptedAction": {
+      "sequence": 4,
+      "type": "reverse",
+      "time": 1.7083333333333297,
+      "hand": "player"
+    },
+    "preActionAttentionRows": 192,
+    "postDrainEmptyRows": 2935,
+    "maxPreActionParticleIds": [
+      7,
+      7
+    ],
+    "playerPivotUnchanged": true,
+    "rawSha256": "d448e80f3caae4726698c2271ba1a92dd09ded083f46256cae5f2d739867014a",
+    "presentedParticleRowsWithVerifiedFrameAndPosition": 1362
+  },
+  "activation": {
+    "live": "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\clockwerx-html5",
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\previous-live-pilot",
+    "record": {
+      "schema_version": 1,
+      "id": "clockwerx-html5-pilot-v1",
+      "source_files": {
+        "index.html": "57050522258ea4c84bb34858ce6f1f950d15821deffe3e75c71485aeda0b003e",
+        "app.mjs": "7eec59e7375cb3866ce34e4505cf79a51c2068efc615f893a207f9a4d96a9e85",
+        "engine.mjs": "799b61eaeda3e4b4d3572b9f9114c5618ad76ac3b4216d230a0303fb6867ddcb",
+        "board.mjs": "dcc1a1dfd4e0635447515435511d61be48ba78e00ebaf9a6a8d1e73feb325888",
+        "rendering.mjs": "0287455dfc2204e8f192a1435cd62d9bd44e9551441dd651a45dbd63ac7f70d1",
+        "sparkles.mjs": "219361652dfee571b2548078d6ffe2bad736ba96f081e1731cc8bcd9bbeedfcd"
+      },
+      "assets_manifest_sha256": "3abe34ed07266c3e26fec23830294a479c5280149a746826df0e0ba2d988925d",
+      "asset_count": 17,
+      "asset_bytes": 84136,
+      "logical_size": [
+        640,
+        480
+      ],
+      "scope": "One reconstructed Movement board; separate engine and storage; original save compatibility omitted",
+      "presentation": "svg-continuous"
+    },
+    "protectedFiles": {
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\index.html": "b5c268039ee36c9f521a362b85488fd357e88973e59843b4c48ec6380fa82cf4",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\private-library.json": "3ee66798f1a438b39669c1a5ff56aa242fdbd8643c7d5034600e091f89683418",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\runtime-profiler.js": "80caed233d9aaddf5a53ab2fff434b4dbed1a01934e5b9c97c57570d5db78b3a",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\systemless-org-bd51fd0e34e6677f_bg.wasm": "af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f"
+    },
+    "sizes": {
+      "sourceBytes": 30617,
+      "assetBytes": 84136,
+      "manifestBytes": 4726,
+      "totalBytes": 119479
+    }
+  },
+  "temporaryDiagnostics": {
+    "live": "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\runtime-profiler.js",
+    "originalSha256": "80caed233d9aaddf5a53ab2fff434b4dbed1a01934e5b9c97c57570d5db78b3a",
+    "temporarySha256": "fa281652cde8187fb4b2306b8b01052fa1ab50fbb46d69865399c76b56bcd9aa",
+    "state": "restored",
+    "restoredSha256": "80caed233d9aaddf5a53ab2fff434b4dbed1a01934e5b9c97c57570d5db78b3a"
+  },
+  "proofs": {
+    "original-reference.png": "fce0864ff861768ebef3f5efe1eef9ec61ba6b62cd97b220de50cb7855d6c849",
+    "pilot-idle.png": "d2191656ffb0b963b03590a281d89f795dc1f6a7aab7de8373161fd0a2a23c20",
+    "pilot-after-action.png": "d7af3fa7e73f63ff642203ee9e1cd16e3e032b879aeac6c984fc02a613ca60b7",
+    "pilot-restarted.png": "4846823e5b2df0c0a842198bf239d7487cd52744f5f02895c61e9d4c3ab28192",
+    "pilot-successful-swing.png": "470b568501b3bfc43b9b4068af1104fb7c7fc04b7c87c504ffa48da4dcfac8cd",
+    "final-canvas.png": "5ad0f1335f7a73a78d9a6b25b2ca9e78705561a78ee265908cb9dc002bce11ce",
+    "final-page.png": "ff46b769c0aaeaf71fac60be12d16615ca633569fafaeec40157848d85b08cc7"
+  },
+  "validation": {
+    "nodeTests": "engine/rendering assertions and5sparkle lifecycle cases passed",
+    "pythonGeometryChecks": 7,
+    "pythonPackagingChecks": 7,
+    "appSyntax": "passed",
+    "gitWhitespace": "passed",
+    "all17AssetHashesVerified": true,
+    "all16PriorPayloadsByteIdentical": true,
+    "sourceAtlasSize": [
+      198,
+      18
+    ],
+    "engineBoardUnchanged": true,
+    "normalRouteObservedReady": true,
+    "viewportOverrideReset": true
+  },
+  "performanceBoundary": "New frames are appearance/trigger observations only. No new CPU/RAM claims; prior nine-run foreground benchmark remains frozen without these particles."
+}

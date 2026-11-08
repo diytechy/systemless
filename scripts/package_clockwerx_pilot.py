@@ -12,7 +12,7 @@ from private_library_manifest import BUILTINS, sha256_file
 
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
-CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs')
+CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -44,6 +44,7 @@ def package(dist,assets):
         references.update(vector['dots'])
         references.update(hand['file'] for hand in vector['hands'].values())
         if vector.get('goal'):references.add(vector['goal']['file'])
+        if vector.get('starbursts'):references.add(vector['starbursts']['file'])
     for name in references:filename(name)
     if not references<=files.keys():raise ValueError('Manifest references an unverified asset')
     for name in CODE:

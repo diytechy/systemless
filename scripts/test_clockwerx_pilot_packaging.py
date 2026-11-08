@@ -51,9 +51,15 @@ class PilotPackagingTests(unittest.TestCase):
         self.save_manifest();record=package(self.dist,self.assets)
         self.assertEqual(record['presentation'],'svg-continuous')
         self.assertTrue((self.dist/'clockwerx-html5/rendering.mjs').is_file())
+        self.assertTrue((self.dist/'clockwerx-html5/sparkles.mjs').is_file())
         self.assertEqual((self.dist/'clockwerx-html5/assets/hand.svg').read_bytes(),vector.read_bytes())
     def test_goal_art_must_be_verified(self):
         self.manifest['vectorAssets']=dict(dots=[],hands={},goal=dict(file='missing-goal.svg'))
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+    def test_starburst_art_must_be_verified(self):
+        self.manifest['vectorAssets']=dict(dots=[],hands={},starbursts=dict(file='missing-stars.svg'))
         self.save_manifest()
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())

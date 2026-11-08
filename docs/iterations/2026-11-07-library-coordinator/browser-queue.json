@@ -184,12 +184,18 @@
     {
       "id": "owned-bonkheads-deluxe-v1",
       "route": "/bonkheads-deluxe/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/bonkheads.json",
+      "scene": "1Player Surfaceville Level1, score0 trolls2initial then1, noinput20seconds, enemiesandfieldremainactive",
+      "accepted_change": null
     },
     {
       "id": "owned-brickles-plus-3-0-v1",
       "route": "/brickles-plus-3-0/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/brickles.json",
+      "scene": "Visiblewindow/dottedBRICKLESPLUSarrangement, ClickToBegin thenheaderBricklesPlus/laterOOPS, no clearlyidentifiedball/paddle",
+      "accepted_change": null
     },
     {
       "id": "owned-brickoids-millenium-v1",

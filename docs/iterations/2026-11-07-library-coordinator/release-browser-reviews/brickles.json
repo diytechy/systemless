@@ -1,0 +1,30 @@
+{
+  "id": "owned-brickles-plus-3-0-v1",
+  "scene": "Visiblewindow/dottedBRICKLESPLUSarrangement, ClickToBegin thenheaderBricklesPlus/laterOOPS, no clearlyidentifiedball/paddle",
+  "observed_checks": "Release passes native noncompletionboundary andrenders; canvasclickchangesbeginheader; CommandNpathattempted; laterheader/counterschange, ball/paddlemotionunqualified; PNGsaved",
+  "remaining_limits": "Partialreadiness no representativeplay/motion, so no validgameplaytiming/candidate. Existingprefpalette/rendering/inputcauseunknown; sound/save/pause/hardware untested.",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {},
+  "geometry": {
+    "live_dom_canvas_css": [
+      608,
+      455.5
+    ],
+    "live_document_client_size": [
+      650,
+      672
+    ],
+    "gui_png_dimensions": [
+      650,
+      657
+    ],
+    "backing": [
+      800,
+      600
+    ]
+  }
+}

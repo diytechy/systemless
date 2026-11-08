@@ -447,17 +447,26 @@
     {
       "id": "owned-scruffy-v1",
       "route": "/scruffy/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/scruffy.json",
+      "scene": "1bit Level1 puppy/platforms/bones/cloud, D400ms beforecapture shiftsworld; noinput20seconds endsGameOver finalscore0",
+      "accepted_change": null
     },
     {
       "id": "owned-scruffy-ii-v1",
       "route": "/scruffy-ii/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/scruffy-ii.json",
+      "scene": "4bit Franksplash/Squeek reachesScruffyIIv1title, titlepersists afterReturn,5secondwait, centeredclickandSpace",
+      "accepted_change": null
     },
     {
       "id": "owned-slithereens-v1",
       "route": "/slithereens/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/slithereens.json",
+      "scene": "Uniformpalecyan startup withnomenu/title; ReturnthenCmdN leaveunchanged",
+      "accepted_change": null
     },
     {
       "id": "owned-spin-doctor-v1",

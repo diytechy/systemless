@@ -1,4 +1,13 @@
 import {angleDelta,TAU} from './engine.mjs';
+export function atlasFrame(animation,seconds){
+ if(!animation||animation.type!=='atlas')return null;
+ const {frameWidth,frameHeight,frameCount,frameSeconds}=animation;
+ if(![frameWidth,frameHeight,frameSeconds].every(v=>Number.isFinite(v)&&v>0)||!Number.isInteger(frameCount)||frameCount<1)throw new Error('Invalid animation atlas');
+ const order=animation.frameOrder||Array.from({length:frameCount},(_,i)=>i);
+ if(!order.length||!order.every(i=>Number.isInteger(i)&&i>=0&&i<frameCount))throw new Error('Invalid animation frame order');
+ const phase=Math.floor(Math.max(0,seconds)/frameSeconds)%order.length;
+ return {x:order[phase]*frameWidth,y:0,width:frameWidth,height:frameHeight};
+}
 export function presentedAngle(hand,previous,alpha,vector){
  if(vector)return renderAngle(hand,previous,alpha);
  const normalized=((hand.angle%TAU)+TAU)%TAU;

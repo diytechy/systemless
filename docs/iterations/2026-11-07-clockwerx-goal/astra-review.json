@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-ready-for-root-renderer-integration-and-visual-review",
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal",
+  "assetDirectory": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\refined\\assets",
+  "goalSha256": "197715a591f771e99f830c8181c5a9f84529b3f2edc5b3e0a97dbf8da4955b13",
+  "manifestSha256": "48f057c7bfc2d916c0217ce16bf97d015b9f0b0022f4eda0b2ac99da7cddf6d5",
+  "unchangedAssetCount": 15,
+  "sourceMotionSha256": "aaafe63a77e1fb5bb18aeb58c8deb492e8e6ba3394e24def7b43d9396197acc3",
+  "sourceGraphicsSha256": "1b2286712f7783848730474051c6497323400be31fc303e078f0c748977346dc",
+  "sourceGoalStates": 6,
+  "sourceOpaquePixelsByState": [
+    76,
+    48,
+    20,
+    12,
+    20,
+    48
+  ],
+  "sourceAlphaValues": [
+    0,
+    255
+  ],
+  "sourceMarkersExtent": [
+    18,
+    18,
+    16,
+    14,
+    16,
+    18
+  ],
+  "meanSourceOpaquePixels": 37.333333333333336,
+  "priorVectorPolygonArea": 110,
+  "candidateMeanVectorArea": 37.333333333333336,
+  "transparencyConclusion": "Binary source mask; apparent fading comes from changing coverage and palette luminosity. No exact fractional source opacity inferred.",
+  "animation": {
+    "type": "atlas",
+    "frameWidth": 18,
+    "frameHeight": 18,
+    "frameCount": 6,
+    "frameSeconds": 0.052083333333333336,
+    "frameOrder": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "timingStatus": "estimated-source-clock-normalized-60-ticks-per-second"
+  },
+  "sourceCadenceCandidates": [
+    {
+      "statesPerSecond": 57.78199999958565,
+      "fullRotationSeconds": 0.41535426257609814,
+      "phaseCoherence": 0.9501726057444111
+    },
+    {
+      "statesPerSecond": 19.24999999967548,
+      "fullRotationSeconds": 1.2467532467742646,
+      "phaseCoherence": 0.9326689299588214
+    },
+    {
+      "statesPerSecond": 96.31599999949586,
+      "fullRotationSeconds": 0.24917978321489287,
+      "phaseCoherence": 0.9064174170437982
+    },
+    {
+      "statesPerSecond": -19.286000000234722,
+      "fullRotationSeconds": 1.2444260084884324,
+      "phaseCoherence": 0.8578851759765885
+    },
+    {
+      "statesPerSecond": -57.8260000001449,
+      "fullRotationSeconds": 0.4150382181015436,
+      "phaseCoherence": 0.7414744385668318
+    }
+  ],
+  "checks": [
+    "All manifest files exist with matching recorded SHA256 and byte counts",
+    "15 non-goal assets byte-identical",
+    "Six vector-cell coverage areas follow six source states",
+    "Private visual source/candidate comparison inspected",
+    "69 frames each in two dense original references: valid crop; source six-state order; max observed forward step1"
+  ],
+  "limitations": [
+    "Most recent worker guestTick is not exact presented-frame attribution; capture wall time slowed to about49 guest ticks/sec.",
+    "SVG browser rendering left to root",
+    "No benchmark, gameplay, save, audio, or physical controller qualification",
+    "Candidate shading is a smooth approximation; exact raster palette texture not reproduced"
+  ],
+  "regeneration": [
+    "python D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\make_contacts.py",
+    "python D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\analyze.py",
+    "python D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\match.py",
+    "python D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\sparse_cadence.py",
+    "python D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\refine.py",
+    "python D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\dense_analyze.py 1",
+    "python D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\dense_analyze.py 2"
+  ],
+  "effort": "About 17 active minutes including two small dense-reference analyses; no builds, benchmarks, browser use, commits, or nested agents by worker.",
+  "denseCaptureSummaries": [
+    {
+      "run": 1,
+      "samples": 69,
+      "durationSeconds": 2.016469999998808,
+      "statesPerSecondObserved": 15.868153094162919,
+      "fullRotationSecondsObserved": 1.5124633508122864,
+      "statesPerGuestTickFit": 0.31808338718523516,
+      "guestTicksPerStateFit": 3.1438297009131513,
+      "guestTicksPerSecondObserved": 49.59161306642753,
+      "largestObservedForwardStep": 1
+    },
+    {
+      "run": 2,
+      "samples": 69,
+      "durationSeconds": 1.969984999999404,
+      "statesPerSecondObserved": 15.648249910390629,
+      "fullRotationSecondsObserved": 1.533717836654929,
+      "statesPerGuestTickFit": 0.32033248675219106,
+      "guestTicksPerStateFit": 3.1217564291991375,
+      "guestTicksPerSecondObserved": 48.22371743948748,
+      "largestObservedForwardStep": 1
+    }
+  ],
+  "denseCaptureSha256": {
+    "original-goal-dense-1.json": "e51b31632493cda00b05a5939ea00f4c061750394393385349abaf72ccdb8c8b",
+    "original-goal-dense-2.json": "240d974f572abab314d77ecf26b68bba5990c3c70f7b416013c75917c1c91fcb"
+  },
+  "cadenceConclusion": "Dense changes only advance +1 in source six-state order. Normalize fitted state/guestTick slope to 60 ticks/sec: conceptual full turns 1.258 and 1.249 seconds. Choose 1.25 seconds/24 states, i.e. frameSeconds=0.052083333333333336 and six-state repeat=0.3125 seconds. An estimate, not exact disassembled source timer."
+}

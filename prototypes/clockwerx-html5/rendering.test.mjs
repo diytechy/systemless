@@ -1,6 +1,15 @@
 import assert from 'node:assert/strict';
-import {handPoses,renderAngle,resizeCanvas,presentedAngle} from './rendering.mjs';
+import {handPoses,renderAngle,resizeCanvas,presentedAngle,atlasFrame} from './rendering.mjs';
 import {MovementGame,TAU} from './engine.mjs';
+const animation={type:'atlas',frameWidth:18,frameHeight:18,frameCount:6,frameSeconds:1.25/24};
+assert.deepEqual(atlasFrame(animation,0),{x:0,y:0,width:18,height:18});
+assert.equal(atlasFrame(animation,animation.frameSeconds*.99).x,0);
+assert.equal(atlasFrame(animation,animation.frameSeconds*1.01).x,18,'advance at the configured cadence');
+assert.equal(atlasFrame(animation,animation.frameSeconds*6).x,0,'six phases loop');
+assert.equal(atlasFrame({...animation,frameOrder:[2,1,0]},animation.frameSeconds*1.01).x,18);
+assert.throws(()=>atlasFrame({...animation,frameSeconds:0},1),/Invalid animation/);
+assert.throws(()=>atlasFrame({...animation,frameOrder:[6]},1),/Invalid animation frame order/);
+assert.equal(atlasFrame(null,1),null,'static/legacy artwork remains supported');
 
 const previous={pivot:'a',angle:TAU-.01,direction:1};
 const current={pivot:'a',angle:.01,direction:1};

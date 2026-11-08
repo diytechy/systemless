@@ -1,0 +1,92 @@
+{
+  "status": "accepted-and-activated",
+  "workerReportSha256": "c5a756ba5863b7b0496edb15e0e137e834b7796d324dea06168b876e0ec16348",
+  "independentRawReview": [
+    {
+      "run": 1,
+      "rows": 69,
+      "allStatesMatchWorker": true,
+      "observedFullTurnSeconds": 1.512463350812287,
+      "normalized60TickFullTurnSeconds": 1.2575318803652602,
+      "largestStateStep": 1,
+      "rawSha256": "e51b31632493cda00b05a5939ea00f4c061750394393385349abaf72ccdb8c8b"
+    },
+    {
+      "run": 2,
+      "rows": 69,
+      "allStatesMatchWorker": true,
+      "observedFullTurnSeconds": 1.5337178366549282,
+      "normalized60TickFullTurnSeconds": 1.2487025716796547,
+      "largestStateStep": 1,
+      "rawSha256": "240d974f572abab314d77ecf26b68bba5990c3c70f7b416013c75917c1c91fcb"
+    }
+  ],
+  "activation": {
+    "live": "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\clockwerx-html5",
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-clockwerx-goal\\previous-live-pilot",
+    "record": {
+      "schema_version": 1,
+      "id": "clockwerx-html5-pilot-v1",
+      "source_files": {
+        "index.html": "107ea55f30e62bfba3ed708ccc739edad66e48769bbc7ee46dce32b8782f6c80",
+        "app.mjs": "f9ce0f88ed173eec567404113574cdce38a6df961c43865526a525fe65edc542",
+        "engine.mjs": "799b61eaeda3e4b4d3572b9f9114c5618ad76ac3b4216d230a0303fb6867ddcb",
+        "board.mjs": "dcc1a1dfd4e0635447515435511d61be48ba78e00ebaf9a6a8d1e73feb325888",
+        "rendering.mjs": "0287455dfc2204e8f192a1435cd62d9bd44e9551441dd651a45dbd63ac7f70d1"
+      },
+      "assets_manifest_sha256": "48f057c7bfc2d916c0217ce16bf97d015b9f0b0022f4eda0b2ac99da7cddf6d5",
+      "asset_count": 16,
+      "asset_bytes": 72966,
+      "logical_size": [
+        640,
+        480
+      ],
+      "scope": "One reconstructed Movement board; separate engine and storage; original save compatibility omitted",
+      "presentation": "svg-continuous"
+    },
+    "protectedFiles": {
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\index.html": "b5c268039ee36c9f521a362b85488fd357e88973e59843b4c48ec6380fa82cf4",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\private-library.json": "3ee66798f1a438b39669c1a5ff56aa242fdbd8643c7d5034600e091f89683418",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\runtime-profiler.js": "80caed233d9aaddf5a53ab2fff434b4dbed1a01934e5b9c97c57570d5db78b3a",
+      "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\systemless-org-bd51fd0e34e6677f_bg.wasm": "af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f"
+    },
+    "sizes": {
+      "sourceBytes": 26392,
+      "assetBytes": 72966,
+      "manifestBytes": 3800,
+      "totalBytes": 103158
+    }
+  },
+  "temporaryDiagnostics": {
+    "live": "D:\\SystemlessBuild\\private-library-20261107\\dist-v2\\runtime-profiler.js",
+    "originalSha256": "80caed233d9aaddf5a53ab2fff434b4dbed1a01934e5b9c97c57570d5db78b3a",
+    "temporarySha256": "1ef660941f640311d9a854056de05902b71e3273f3c5fd70edfbe234dc968a56",
+    "state": "restored",
+    "restoredSha256": "80caed233d9aaddf5a53ab2fff434b4dbed1a01934e5b9c97c57570d5db78b3a"
+  },
+  "tutorialText": {
+    "source": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Levels\\RND2_151.bin",
+    "sha256": "16a7069f99bafb6e0bbbfd9e83693678a994082c6b922dbb542f1293277c5f5c",
+    "bytes": 2902,
+    "textIsPresentInLevelRecords": true,
+    "fontName": "Geneva",
+    "backgroundIsSeparate": true,
+    "pilotMethod": "Canvas2D fillText;10px sans-serif in tutorial; manual positions/line breaks; no text/font change in this task"
+  },
+  "checks": {
+    "engineRenderingTests": "passed; includes atlas cadence, wrap, order and invalid data",
+    "pythonGeometryTests": 7,
+    "packagingTests": 6,
+    "syntax": "passed",
+    "browser": "native-scale placement, three distinct cropped phases from six PNG exports, pause/restart, final normal route ready,640x480PNG export",
+    "viewportOverrideReset": true,
+    "sourceClockCaveat": "Latest received worker tick may lag presented frame; exact source timer constants and independent original-hardware cadence not recovered",
+    "noNewCpuMemoryClaims": true
+  },
+  "proofs": {
+    "original-reference.png": "4b784a28950f7ca922e8ac6225892bd0ac0a57b70a1aef58c9b7a8e2fb8a1191",
+    "pilot-rendered-phases.png": "31f185fbf0724966aedb09962d0e3641601f07adba2bb22f911408393881a3cb",
+    "final-canvas.png": "424b94812f63ec4219af3386ea83730aed785038e621d55b28fee0d00aa33c88",
+    "final-page.png": "c5d0fc49be6380a7ec52cf6892e86eef1bbf45be7badf7a147dc88750eca5b87"
+  }
+}

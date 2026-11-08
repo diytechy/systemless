@@ -271,7 +271,10 @@
     {
       "id": "owned-dome-wars-v1",
       "route": "/dome-wars/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/dome-wars.json",
+      "scene": "Firstterrain/waitinghumanturn, Player1Human(defaultname) plus4IdiotAI, power300 afterUp; noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-drol-v1",

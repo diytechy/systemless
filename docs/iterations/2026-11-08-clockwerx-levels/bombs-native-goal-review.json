@@ -1,0 +1,59 @@
+{
+  "schema": "clockwerx-bombs-native-goal-review-v1",
+  "status": "original-goal-and-goodie-observed",
+  "summary": {
+    "status": "passed",
+    "frontend_ticks": 6634,
+    "guest_tick": 7232,
+    "budget_exhausted_frames": 0
+  },
+  "inputTransfers": 18,
+  "pivotsMatched": 18,
+  "cleanPoseFits": 17,
+  "cleanMaximumMAE": 0.28136200716845877,
+  "occludedFit": {
+    "transfer": 14,
+    "mae": 13.003603603603604,
+    "cause": "floating1000 overlay crosses hero; correct pivot also corroborated by adjacent clean transfers"
+  },
+  "score": {
+    "goodieBonus": 1000,
+    "childCompletionBonus": 1000,
+    "timeBonus": 0,
+    "totalForLevel": 2000
+  },
+  "nativeCompletionImage": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bombs\\native-goal-route-01\\after-route-04.png",
+  "nativeGoodieImages": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bombs\\native-goal-route-01\\goodie-01.png through goodie-24.png",
+  "limits": [
+    "Child time bonus is visibly disabled; live deadline+10 and saved-reset-time separation are source-derived, not measured from a visible Child countdown.",
+    "Original score display/reveal/fonts differ from the simplified pilot HUD.",
+    "Captured flash/score poses are independently fitted; exact start/hide and full floating-score lifetime remain source-derived.",
+    "No real-time host performance measurement."
+  ],
+  "collectionFits": {
+    "flash": {
+      "poses": 6,
+      "frames": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "maxChannelMAE": 0.252
+    },
+    "floatingScore": {
+      "poses": 18,
+      "frames": 4,
+      "maxChannelMAE": 0.191,
+      "rawXChange": [
+        0,
+        10
+      ],
+      "rawYChange": 0,
+      "motion": "one pixel right per surviving callback; color wave advances across four digits",
+      "priorDownwardInterpretationRejected": true
+    }
+  }
+}

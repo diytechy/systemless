@@ -1,0 +1,151 @@
+{
+  "schema": "clockwerx-bombs-native-program-review-v1",
+  "status": "bounded-static-Child-classes1-and3-supported",
+  "sourceSha256": "89ae570509b3cdcd3e40e310e8811105deff14dfb7f730081699b6c6a0db4b2f",
+  "method": "One fixed 4/19 hero/class1 line; class3 uses half its integer advances, phase interval inferred ONLY from fixed-start hero. Source initial PC1 and frame, no actor-state or per-sample timing fitting. Pure static kernel uses integer source steps and actual present dots; no human input, ring release, teleport, or collision state replacement.",
+  "nativeSummary": {
+    "status": "passed",
+    "frontend_ticks": 2030,
+    "guest_tick": 2628,
+    "budget_exhausted_frames": 0
+  },
+  "hero": {
+    "samples": 33,
+    "minimumAdvanceAtFirstCapture": 25,
+    "advanceOver960GuestTicks": 202,
+    "fixedRateNumerator": 4,
+    "fixedRateDenominator": 19,
+    "phaseInterval": [
+      25.526315789473685,
+      25.578947368421055
+    ],
+    "chosenPhase": 25.55263157894737,
+    "allFramesMatch": true
+  },
+  "actors": [
+    {
+      "actorType": 1,
+      "speedClass": 1,
+      "samples": 33,
+      "matches": 33,
+      "transfers": 8
+    },
+    {
+      "actorType": 2,
+      "speedClass": 3,
+      "samples": 33,
+      "matches": 33,
+      "transfers": 3
+    }
+  ],
+  "aliasControls": [
+    {
+      "extraFullHeroTurns": 0,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 33
+        },
+        {
+          "actorType": 2,
+          "matches": 33
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 1,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 0
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 2,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 0
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 3,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 0
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 4,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 0
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 5,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 0
+        }
+      ]
+    },
+    {
+      "extraFullHeroTurns": 6,
+      "actors": [
+        {
+          "actorType": 1,
+          "matches": 0
+        },
+        {
+          "actorType": 2,
+          "matches": 0
+        }
+      ]
+    }
+  ],
+  "wrongInitialPC": [
+    {
+      "actorType": 1,
+      "matches": 0
+    },
+    {
+      "actorType": 2,
+      "matches": 12
+    }
+  ],
+  "limits": [
+    "Absolute startup before first capture is conditioned on minimum hero advance; not a SourceRound reveal/startup claim.",
+    "No user input or dot disappearance occurs; all present static dots are human/nonhuman available in this idle fixture.",
+    "One inner step at a time is adequate for these non-orphan static states but does not independently validate multi-delta outer callbacks.",
+    "Hidden/respawn/orphan/death and exact unsampled transfer tick are not established by 30-guest-tick image spacing."
+  ],
+  "rawEvidenceDirectory": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bombs\\program-review"
+}

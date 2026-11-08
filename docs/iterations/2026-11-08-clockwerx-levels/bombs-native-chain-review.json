@@ -1,0 +1,54 @@
+{
+  "schema": "clockwerx-bombs-native-chain-review-v1",
+  "status": "chain-observed-goal-reset-pending",
+  "nativeSummary": {
+    "status": "passed",
+    "frontend_ticks": 4958,
+    "guest_tick": 5556,
+    "budget_exhausted_frames": 0
+  },
+  "transfers": {
+    "samples": 7,
+    "matches": 7,
+    "maxChannelMAE": 0.28097731239092494
+  },
+  "spark": {
+    "samples": 114,
+    "accepted": 95,
+    "maxChannelMAE": 0.2222222222222222,
+    "sourceCallbacksToTerminal": 339,
+    "strictSingleAffinePhaseFits": false,
+    "phaseSpread": 1.058252427184442,
+    "oneGuestTickTolerancePhaseInterval": [
+      7.145631067961169,
+      7.398058252427212
+    ],
+    "interpretation": "All95 accepted path poses agree within one guest tick of the source scaled103/16 cadence. Strict single affine floor fails by0.0583callback. Unsampled call/traversal/screenshot phase remains uncertain; no period retuning was applied."
+  },
+  "explosion": {
+    "acceptedPoses": 3,
+    "frames": [
+      1,
+      4,
+      8
+    ],
+    "guestTicks": [
+      5016,
+      5046,
+      5076
+    ],
+    "maxChannelMAE": 0.5786516853932584
+  },
+  "staticAnchors": {
+    "objects": 11,
+    "unoccludedMaxChannelMAE": 0.8940809968847352,
+    "starterFuseOccludedByMatch": true
+  },
+  "limits": [
+    "Ignition onset precedes first spark sample.",
+    "Sparse explosion samples do not independently measure every damage callback.",
+    "No native hourglass award, goal completion or death/reset qualification in this chain run.",
+    "Smooth vector silhouettes, grain and fonts deliberately approximate raster appearance."
+  ],
+  "rawEvidenceDirectory": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bombs"
+}

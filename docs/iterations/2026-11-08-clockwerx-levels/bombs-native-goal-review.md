@@ -1,0 +1,9 @@
+# Bombs native goal and hourglass
+
+The original Child game completes the input-only18transfer route after the terminal bomb clears the wall. Every transfer photograph supports the expected pivot. Seventeen are clean original-pose fits with maximum channel MAE0.282; transfer14 is occluded by the floating1000 text (MAE13.004), so it is not counted as a clean pose measurement. Adjacent clean captures corroborate that transfer.
+
+The final original completion screen reads: bonus during level1,000; no time bonus for Child mode; completion bonus1,000; total for this level2,000. The hourglass disappears and its flash/floating score are preserved in24original captures. The source live-time increase is+10 without changing the saved reset time, but Child has no visible countdown to independently measure this separation.
+
+The run passed at6634 frontend/7232 guest ticks with zero exhausted-budget frames. All controls were legal held keys; no memory or game-state replacement was used. Private raw inputs, captures and independent fit results remain under bombs/native-goal-route-01 and its companion files. The bitmap media hash is preserved. Native flash/float per-pose fitting, deliberate death/reset, final browser qualification and activation remain separate gates.
+
+Independent collection fitting now supports six visible flash phases (2,4,5,6,7,8) at the source anchor, each with channel MAE below0.252. Eighteen floating-score images match the four original red/pink/white digit-wave frames with MAE below0.191. Free position search shows X increasing by0..10pixels while Y stays fixed; the earlier inferred downward Point interpretation was rejected. The pilot now moves right one pixel per surviving callback and uses all four clean vector color phases. Exact flash start/hide and full24callback float lifetime remain source-derived because the captures cover only part of those lifecycles.

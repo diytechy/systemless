@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 4,
-  "currentAction": "Doors: review native frames and source helper, integrate switch entry edges/occupancy, scalable door timing and ordered collisions",
+  "currentOrdinal": 5,
+  "currentAction": "Oil: review PU/DP source helper, integrate dot acquisition/pursuit/cloning/death clocks, native and browser qualification",
   "levels": [
     {
       "ordinal": 1,
@@ -237,17 +237,27 @@
       "menuTitle": "Doors",
       "resourceTitle": "Doors",
       "sha256": "0fee9a2eaac8f80d76baa80787219495884d7732d407cb454ad823bfdcbdbeea",
-      "status": "source-prepared-native-run-active",
-      "nativeEvidence": [],
-      "requirements": [
-        "per-actor switch entry toggles matching door colors",
-        "occupancy changes pressed art; release does not toggle",
-        "Child scalable80 door clock adjusted133",
-        "ordinary green presses switches but ignores doors",
-        "invisible group3800 lethal outlines checked before normal bounce"
+      "status": "bounded-playable-increment-accepted",
+      "nativeEvidence": [
+        "doors/native-goal-route-01/report.json",
+        "doors/native-route-review.json",
+        "doors/timer-probe-02/report.json",
+        "doors/native-gate-review.json"
       ],
-      "svgStatus": "three candidate atlases; native review pending",
-      "generationConstraints": [],
+      "requirements": [
+        "per-actor word7 clock class; class4 quarterhero",
+        "small-board centered grid; fixed text origin",
+        "entry-edge colored switch toggles and occupancy",
+        "two-leaf eleven-phase door collision/lethal zones/caps",
+        "persistent scalable133clock and coherent death reset"
+      ],
+      "svgStatus": "fourth scene activated; bounded Child goal route native+browser validated",
+      "generationConstraints": [
+        "per-actor previous switch index/occupancy and shared clocks in state",
+        "time solution through intermediate gate phases and separate lethal outlines",
+        "retain exact fixed wall-arm attachments",
+        "route must survive interaction with slower switch-operating enemy"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 58,

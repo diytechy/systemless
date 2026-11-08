@@ -1,0 +1,288 @@
+{
+  "status": "resolved source class4; native angular rate consistent; actor pointer probe pending",
+  "supersedes": "Incorrect assumption that Doors green rawWords[7]=1; actual class4. Earlier unresolved-factor conclusion retracted.",
+  "runtimeEdits": false,
+  "nativeWorkloadsLaunched": 0,
+  "sourceIdentity": {
+    "fixtureSha256": "03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4",
+    "appResourceForkSha256": "522b65b20f89eca12139d6d488c9636ce3138099379ef8b7a59734f563a828b3",
+    "nativeAndSourceForkIdentical": true,
+    "allExtractedCodeAndDataResourcesIdentical": true
+  },
+  "staticSource": {
+    "baseParameter": 47,
+    "childMaster": 60,
+    "secondaryInitial": 100,
+    "requestedCommonPeriod": 23,
+    "childAdjustedCommonPeriod": 38,
+    "multipliers": [
+      1,
+      1,
+      3,
+      1,
+      1,
+      1
+    ],
+    "normalDivisors": [
+      2,
+      2,
+      8,
+      4,
+      8,
+      1
+    ],
+    "slowDivisors": [
+      2,
+      4,
+      16,
+      8,
+      16,
+      2
+    ],
+    "clockClassSource": "signed word at WASpec+14, direct 28-byte record indexing",
+    "childEnemyOverrideLocated": false,
+    "runtimeValuesObserved": false,
+    "childEnemyOverrideRequired": false,
+    "doorsGreenClockClass": 4
+  },
+  "nativeDoors": {
+    "evidence": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/doors/native-enemy-clock-review.json",
+    "group": 4400,
+    "frames": [
+      6,
+      7,
+      9,
+      11,
+      12,
+      14,
+      15,
+      17,
+      19
+    ],
+    "intervalGuestTicks": 30,
+    "totalGuestTicks": 240,
+    "frameDelta": 13,
+    "normalizedFramesPerSecond": 3.25,
+    "staticDivisor2FramesPerSecond": 12.631578947368421,
+    "scope": "Child Doors green enemy, normalized guest ticks; not a host benchmark",
+    "sourceClockClass": 4,
+    "sourceNormalDivisor": 8,
+    "sourceFramesPerSecond": 3.1578947368421053
+  },
+  "integration": {
+    "divisor8SourceResolved": true,
+    "divisor8NativeConsistent": true,
+    "nativeActorPointerProbe": "pending",
+    "globallyChangeClass1": false,
+    "rootOwnsRuntimeDecision": true
+  },
+  "nextDiscriminator": {
+    "waTimersA5Offset": -17396,
+    "recordBytes": 28,
+    "recordCount": 6,
+    "fields": {
+      "count": 0,
+      "delta": 4,
+      "accumulator": 8,
+      "divisor": 12,
+      "multiplier": 16,
+      "normalDivisor": 20,
+      "slowDivisor": 24
+    },
+    "enemyClockPointerWAInfoOffset": 82,
+    "commonClientPointerA5Offset": -17228,
+    "masterA5Offset": -802,
+    "secondaryA5Offset": -800,
+    "status": "Root actor-pointer probe pending; expected values below are source predictions",
+    "confirmedCurrentA5": "0x5e6000",
+    "confirmedClass1Divisor": 2,
+    "minimalExpectedWordProbes": [
+      {
+        "address": "0x5e1f12",
+        "expected": "0x005e",
+        "purpose": "green slot2 clock pointer high word"
+      },
+      {
+        "address": "0x5e1f14",
+        "expected": "0x1c7c",
+        "purpose": "green slot2 clock pointer low word, class4"
+      },
+      {
+        "address": "0x5e1f24",
+        "expected": 4,
+        "purpose": "green stored spec clock class"
+      },
+      {
+        "address": "0x5e1c8a",
+        "expected": 8,
+        "purpose": "class4 current divisor low word"
+      }
+    ]
+  },
+  "released": true,
+  "activeWorkloads": 0,
+  "childActiveInventory": [
+    {
+      "round": "Movement",
+      "resourceId": 151,
+      "active": [
+        {
+          "actorType": 0,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 6,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 1,
+          "clockClass": 1,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        {
+          "actorType": 2,
+          "clockClass": 1,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        {
+          "actorType": 3,
+          "clockClass": 1,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      ],
+      "inactive": []
+    },
+    {
+      "round": "Spikes",
+      "resourceId": 221,
+      "active": [
+        {
+          "actorType": 0,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 6,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 2,
+          "clockClass": 1,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        },
+        {
+          "actorType": 3,
+          "clockClass": 1,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      ],
+      "inactive": []
+    },
+    {
+      "round": "Walls",
+      "resourceId": 222,
+      "active": [
+        {
+          "actorType": 0,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 6,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 2,
+          "clockClass": 1,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 4
+        }
+      ],
+      "inactive": [
+        {
+          "actorType": 2,
+          "clockClass": 1,
+          "activationMask": 14
+        },
+        {
+          "actorType": 1,
+          "clockClass": 1,
+          "activationMask": 12
+        },
+        {
+          "actorType": 3,
+          "clockClass": 1,
+          "activationMask": 8
+        }
+      ]
+    },
+    {
+      "round": "Doors",
+      "resourceId": 223,
+      "active": [
+        {
+          "actorType": 0,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 6,
+          "clockClass": 0,
+          "normalMultiplier": 1,
+          "normalDivisor": 2,
+          "slowDivisor": 2
+        },
+        {
+          "actorType": 2,
+          "clockClass": 4,
+          "normalMultiplier": 1,
+          "normalDivisor": 8,
+          "slowDivisor": 16
+        }
+      ],
+      "inactive": []
+    }
+  ],
+  "childActiveInventoryNote": "Activation-mask active, includes hidden single-player type6 second-human record; no map positions.",
+  "nativeMemoryConfirmation": {
+    "report": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\timer-probe-02\\report.json",
+    "status": "passed",
+    "assertions": 6,
+    "guestTick": 1668,
+    "CurrentA5": "0x5e6000",
+    "greenTimerPointer": "0x5e1c7c",
+    "greenClass": 4,
+    "currentDivisor": 8,
+    "budgetExhaustedFrames": 0,
+    "readOnly": true
+  }
+}

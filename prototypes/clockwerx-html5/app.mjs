@@ -85,6 +85,19 @@ function drawDeath(){
   else ctx.drawImage(images[f.file],particle.x+f.x,particle.y+f.y,f.width,f.height);
  }
 }
+function drawDoors(){
+ const spec=manifest.vectorAssets?.doors;if(!spec||!game.doorSystem)return;
+ const state=game.doorSystem.snapshot();
+ const draw=(kind,index,base)=>{
+  const atlas=spec[kind],f=atlas.frames[index];if(!f||!f.width||!f.height)return;
+  ctx.drawImage(images[atlas.file],f.sx,f.sy,f.width,f.height,base.x+f.x,base.y+f.y,f.width,f.height);
+ };
+ for(const [i,door] of (game.board.doors||[]).entries()){
+  for(const cap of door.caps)draw('caps',cap.frame,cap);
+  draw('leaves',state.doors[i].frame,door.base);draw('leaves',state.doors[i].secondFrame,door.base);
+ }
+ for(const [i,s] of (game.board.switches||[]).entries())draw('switches',state.switches[i].frame,s);
+}
 function drawLevelText(){
  if(!game.board.texts)return false;
  ctx.fillStyle='white';ctx.textBaseline='top';
@@ -110,6 +123,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  ctx.fillStyle='#808080';ctx.fillRect(68,69,504,360);ctx.fillStyle='white';ctx.font='bold 12px sans-serif';ctx.fillText('Level:',106,49);ctx.fillText(`${game.board.ordinal||1}: ${game.board.title||'Movement'}`,92,62);ctx.fillStyle='#ffff00';ctx.fillText('Pilot',441,50);ctx.fillText('Total Score:',493,49);ctx.fillText('—',544,62);
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
  drawWalls();for(const d of game.board.dots)drawDot(d);
+ drawDoors();
  drawSpikes();
  ctx.fillStyle='white';ctx.font='10px sans-serif';
  const lines=[['You are the spinning gold (or black) hand.',88,150],['Player 1: Use Space to “swing” onto the next dot.',88,162],['The red hand is “swinging”.',109,292],['The green hand is “flipping”.',109,388],['Use X to “flip” onto the next dot.',137,174],['Use C to “instantly reverse”.',137,186],['Use Z to “bounce” off the next dot.',137,198],['The object of the game is to grab onto the “goal” dot.',148,80],['Bonus Dot',487,237],['Goal Dot',534,333],['“Bouncing” blue',410,360]];
@@ -139,11 +153,13 @@ async function loadScene(scene){
   const profileResponse=await fetch('./assets/'+reference.outlinesFile);
   if(!profileResponse.ok)throw new Error('Source collision profile is unavailable');
   const outlines=await profileResponse.json();
+  let doorOutlines;
+  if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64)});
   board.player.group=settings.black?4300:700;
-  game=new SourceRound(board,{outlines,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
+  game=new SourceRound(board,{outlines,doorOutlines,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
   $('presentation').textContent='Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
-  $('scope-description').textContent=board.title+'. Rotating enemies, spikes and walls use source collision outlines. A death freezes play, runs staggered explosions, then resets the round. Original scores, music, campaign saves and physical controller hardware are unqualified or omitted. The pilot keeps its separate existing preference key.';
+  $('scope-description').textContent=board.title+'. Rotating enemies, spikes, walls and doors use source collision outlines. Switch entry toggles matching doors; release changes only the switch art. A death freezes play, runs staggered explosions, then resets the round. Original scores, music, campaign saves and physical controller hardware are unqualified or omitted. The pilot keeps its separate existing preference key.';
   $('fidelity-description').textContent='Source map, phases, placements and collision profiles; reconstructed smooth artwork and fonts. Hand motion uses the source Child-speed average with 60 guest ticks per second. Exact input cadence, random stream, reveal pacing and original hardware timing remain under review.';
  }else{
   game=new MovementGame(buildBoard(manifest));
@@ -167,6 +183,7 @@ async function load(){
    ...(vector.goal?[vector.goal.file]:[]),...(vector.starbursts?[vector.starbursts.file]:[]),
    ...(vector.spikes?.frames||[]).map(f=>f.file),
    ...(vector.walls?.frames||[]).map(f=>f.file),
+   ...['leaves','caps','switches'].flatMap(key=>vector.doors?.[key]?[vector.doors[key].file]:[]),
    ...(vector.death?.file?[vector.death.file]:(vector.death?.frames||[]).map(f=>f.file))
   ]:Object.entries(manifest.groups).flatMap(([gid,g])=>gid==='401'?[]:gid==='300'?g.images.slice(0,16):g.images);
   const names=[...new Set([...foreground,manifest.backdrop])];

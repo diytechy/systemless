@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {sourceInitialFrame,levelRequirements,buildDecodedBoard} from './level.mjs';
+import {sourceInitialFrame,levelRequirements,buildDecodedBoard,decodedGridOrigin} from './level.mjs';
 import {TAU} from './engine.mjs';
 
 function fixture(){
@@ -17,6 +17,16 @@ test('source half-index selects actual 64-angle descriptor, including wrap',()=>
  assert.equal(sourceInitialFrame(24),48);assert.equal(sourceInitialFrame(40),16);
  assert.equal(sourceInitialFrame(-1),62);assert.throws(()=>sourceInitialFrame(.5),TypeError);
 });
+test('display size centers dot/object grids while leaving text in its fixed frame',()=>{
+ assert.deepEqual(decodedGridOrigin({displaySizeRaw:8}),{x:74,y:72});
+ assert.deepEqual(decodedGridOrigin({displaySizeRaw:7}),{x:98,y:96});
+ const level=fixture();level.header.displaySizeRaw=7;
+ level.blocks.push({kind:'TX',count:1,records:[{fontName:'Geneva',fontSize:12,fontFaceRaw:0,renderingStyleByteRaw:0,positionWords:[20,30],text:'Synthetic'}]});
+ const board=buildDecodedBoard(level,{angularSpeed:TAU});
+ assert.deepEqual([board.dots[0].x,board.dots[0].y],[98,96]);
+ assert.deepEqual([board.texts[0].x,board.texts[0].y],[48,58]);
+ assert.throws(()=>decodedGridOrigin({displaySizeRaw:9}),/Unqualified/);
+});
 test('decoded single-player board preserves duplicate spike cells and actor identity',()=>{
  const b=buildDecodedBoard(fixture(),{ordinal:2,title:'Synthetic',angularSpeed:TAU});
  assert.equal(b.player.angle,TAU*.75);assert.equal(b.enemies.length,1);
@@ -25,12 +35,19 @@ test('decoded single-player board preserves duplicate spike cells and actor iden
  assert.equal(b.dots[1].kind,'bonus');assert.equal(b.player.pivot,'0,0');
 });
 test('unsupported mechanics, programs and conditional activation fail explicitly',()=>{
- const b=fixture();b.blocks.push({kind:'DR',count:1,records:[]});
+ const b=fixture();b.blocks.push({kind:'PU',count:1,records:[]});
  b.blocks[0].records[2].programReferenceRaw=0;b.cells[0].flagsRaw|=0x2000;
  const requirements=levelRequirements(b);
- assert.ok(requirements.includes('object class DR'));assert.ok(requirements.includes('actor programs'));
+ assert.ok(requirements.includes('object class PU'));assert.ok(requirements.includes('actor programs'));
  assert.ok(requirements.some(r=>r.startsWith('special dot flags')));
  assert.throws(()=>buildDecodedBoard(b,{angularSpeed:TAU}),/Unsupported level/);
+});
+test('actor speed class is word7 and preserves a quarter-rate class4 enemy',()=>{
+ const level=fixture();level.blocks[0].records[2].rawWords[7]=4;
+ const board=buildDecodedBoard(level,{angularSpeed:TAU});
+ assert.equal(board.player.speedScale,1);assert.equal(board.enemies[0].divisor,8);assert.equal(board.enemies[0].speedScale,.25);
+ level.blocks[0].records[2].rawWords[7]=2;
+ assert.ok(levelRequirements(level).includes('actor speed class 2'));
 });
 test('inactive difficulty records are not instantiated or program/type qualified',()=>{
  const b=fixture();b.blocks[0].records.push({actorTypeRaw:5,activationMaskRaw:14,programReferenceRaw:0});

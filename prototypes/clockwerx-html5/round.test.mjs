@@ -76,6 +76,8 @@ test('enemy wall permission controls response independently of its color',()=>{
 test('missing source outline pointers remain noncollidable',()=>{
  const {options}=fixture();options.outlines.groups['800']={frames:[{left:0,top:0,right:10,bottom:10,rows:null,collidable:false}]};
  assert.equal(worldOutline(options.outlines,800,0,{x:0,y:0}),null);
+ options.outlines.groups['800'].frames[0]={left:0,top:0,right:10,bottom:10,rows:null,outlineIndex:-1};
+ assert.equal(worldOutline(options.outlines,800,0,{x:0,y:0}),null);
 });
 test('queued reverse waits for an eligible source step and wall bounce suppresses it',()=>{
  for(const wall of [false,true]){
@@ -99,4 +101,46 @@ test('gold and black use their own source collision profiles and retain the choi
  const g=new SourceRound(board,options);assert.equal(g.collision(),null);
  g.setPlayerGroup(4300);assert.equal(g.collision().reason,'spike');
  g.reset();assert.equal(g.player.group,4300);assert.throws(()=>g.setPlayerGroup(500),/Unqualified/);
+});
+
+function doorFixture(){
+ const f=fixture();f.board.spikes=[];f.board.enemies=[];
+ const rect={left:-2,top:-2,right:2,bottom:2,rows:null};
+ const empty={...rect,collidable:false};
+ f.options.doorOutlines={groups:{1300:{frames:Array.from({length:88},()=>({...empty}))},
+  3800:{frames:Array.from({length:88},()=>({...empty}))},
+  2900:{frames:Array.from({length:12},()=>({...empty}))},1000:{frames:Array.from({length:6},()=>({...rect}))}}};
+ f.board.doors=[{row:0,column:0,color:1,vertical:true,initiallyClosed:true,long:false,base:{x:0,y:0},caps:[]}];
+ f.board.switches=[{row:0,column:1,subcell:0,color:1,x:48,y:0}];
+ return f;
+}
+test('door lethal zone kills before a bounce or wall/door guard increment',()=>{
+ const {board,options}=doorFixture();
+ for(const group of [1300,3800])options.doorOutlines.groups[group].frames[0].collidable=true;
+ const g=new SourceRound(board,options);for(let i=0;i<30&&!g.death;i++)g.update(1/120);
+ assert.ok(g.death);assert.equal(g.player.wallContacts,0);
+ assert.equal(g.events.at(-1).cause.reason,'door');assert.equal(g.events.some(e=>e.type==='door-bounce'),false);
+});
+test('ordinary enemy ignores door leaves but activates a switch at its own slower clock',()=>{
+ const {board,options}=doorFixture();
+ board.doors[0].base.x=48;options.doorOutlines.groups[1300].frames[0].collidable=true;
+ board.enemies=[{name:'green',pivot:'b',angle:0,direction:1,group:4400,divisor:8,multiplier:1,speedScale:.25}];
+ const g=new SourceRound(board,options);
+ for(let i=0;i<40;i++)g.update(1/120);
+ assert.equal(g.doorSystem.snapshot().switches[0].occupants,0);
+ for(let i=0;i<50;i++)g.update(1/120);
+ assert.equal(g.doorSystem.snapshot().switches[0].occupants,1);
+ assert.equal(g.enemies[0].direction,1);assert.equal(g.events.some(e=>e.type==='door-bounce'),false);
+ assert.ok(Math.abs(g.enemies[0].angle-board.angularSpeed*g.elapsedTime*.25)<1e-9);
+});
+test('death freezes door animation; round reset restores doors and switch occupancy on the continuing clock',()=>{
+ const {board,options}=doorFixture();board.switches[0].x=0;
+ const g=new SourceRound(board,options);for(let i=0;i<30;i++)g.update(1/120);
+ assert.equal(g.doorSystem.snapshot().switches[0].occupants,1);
+ const before=g.doorSystem.snapshot();g.beginDeath({reason:'test'});
+ g.update(1/120);assert.deepEqual(g.doorSystem.snapshot(),before);
+ for(let i=0;i<30&&g.roundRestarts===0;i++)g.update(1/120);
+ const after=g.doorSystem.snapshot();assert.equal(g.roundRestarts,1);
+ assert.deepEqual(after.doors[0],{phase:0,direction:0,frame:0,secondFrame:44});assert.equal(after.switches[0].occupants,0);
+ assert.ok(after.clockReference>=before.clockReference);
 });

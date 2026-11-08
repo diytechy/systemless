@@ -15,7 +15,7 @@ export class MovementGame {
   }
   move(h,dt,action){
     const pivot=this.board.dots.find(d=>d.id===h.pivot),radius=this.board.radius;
-    const advance=this.board.angularSpeed*dt*h.direction,old=h.angle,next=old+advance;
+    const advance=this.board.angularSpeed*dt*h.direction*(h.speedScale??1),old=h.angle,next=old+advance;
     if(h.blocked!==null&&Math.abs(angleDelta(next,h.blocked))>0.22)h.blocked=null;
     let target=null,nearest=Infinity;
     if(action)for(const d of this.board.dots){

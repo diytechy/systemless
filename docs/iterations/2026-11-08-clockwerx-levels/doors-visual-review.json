@@ -1,0 +1,45 @@
+{
+  "schema": "clockwerx-doors-visual-review-v1",
+  "status": "no-material-door-art-defect-in-supplied-idle-capture",
+  "method": "Read-only visual inspection of existing local captures, source contact sheet and existing previews; no new rendering or runtime workload",
+  "privateEvidenceRoot": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/doors",
+  "nativeGameRectangle": [80, 60, 720, 540],
+  "browserSize": [640, 480],
+  "logicalOrigin": [98, 96],
+  "captures": [
+    {"file": "native-play-01/initial-after-reveal.png", "sha256": "83ba244b428102184832970081de4092ffd32f69500b1cb0eb19aa77811bfb3b"},
+    {"file": "native-play-01/idle-04.png", "sha256": "257e7392136010a86c50ab0cc5f304d98639a28d198e184b4189777f3533441c"},
+    {"file": "browser-idle.png", "sha256": "5a1d5e75238ad29ff9e907aa2dfeac33b5b1fb079cbd47a0d8e8a2f3df99e6ac"}
+  ],
+  "findings": {
+    "leaves": "Neutral silver faces and bevel orientation consistent; closed red/blue joins and open green passage show no material displacement or stray leaf",
+    "caps": "Correct color indicators and fixed endpoints; no anchor change warranted",
+    "switches": "Correct locations and colors; smoother metal and simplified rim remain enhancement differences",
+    "text": "Shared font substitution changes weight, sharpness and widths; separate typography work if fidelity requires",
+    "visibleInventory": {"hero": 1, "greenEnemy": 1, "redSpikes": 3}
+  },
+  "sourceFitEvidence": {
+    "file": "native-gate-review.json",
+    "owner": "coordinator",
+    "phases": [1, 5, 8, 10],
+    "meanAbsoluteChannelErrors": [0.3862433862433862, 0.1746031746031746, 0.04497354497354497, 0.032407407407407406],
+    "boundary": "Original green leaf pairs plus original caps against native; not SVG error scores"
+  },
+  "candidate": {
+    "path": "qa/assets",
+    "payloads": 47,
+    "unchangedWallsBaselinePayloads": 43,
+    "manifestSha256": "8c284c05187f765cff66cfe01c9c8e13e015d820fe143db433410e26c29c259f",
+    "baselineHashesIndependentlyCompared": true
+  },
+  "requestedCorrections": [],
+  "nextAction": "Retain current door art/anchors; use phase-aligned evidence before any later leaf geometry correction",
+  "limits": [
+    "Different capture timestamps; no pose or attention-phase synchronization",
+    "No full door animation sequence or pressed-switch transition qualification",
+    "No collision, timing, sound, goal-route or gameplay acceptance claim",
+    "No new images, renders, builds, emulators, browser sessions or benchmarks"
+  ],
+  "writes": ["doors-visual-review.md", "doors-visual-review.json"],
+  "workloadReleased": true
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "clockwerx-small-board-geometry-review-v1",
+  "status": "source-qualified correction; native acceptance remains coordinator-owned",
+  "resourceId": 223,
+  "displaySizeRaw": 7,
+  "serializedDimensions": {
+    "rows": 8,
+    "columns": 11
+  },
+  "displayDimensions": {
+    "rows": 7,
+    "columns": 10
+  },
+  "playfieldSize": [
+    584,
+    424
+  ],
+  "contentSize": [
+    640,
+    480
+  ],
+  "frameOrigin": [
+    28,
+    28
+  ],
+  "sourceRawOrigin": [
+    86,
+    85
+  ],
+  "logicalOrigin": [
+    98,
+    96
+  ],
+  "supersededLogicalOrigin": [
+    74,
+    72
+  ],
+  "delta": [
+    24,
+    24
+  ],
+  "formula": {
+    "columns": "displaySizeRaw == 8 ? 11 : 10",
+    "rows": "displaySizeRaw == 8 ? 8 : 7",
+    "rawLocalX": "trunc((playfieldWidth-(columns-1)*48)/2)-18",
+    "rawLocalY": "trunc((playfieldHeight-(rows-1)*48)/2)-11",
+    "logical": "frameOrigin+rawLocal+(12,11)"
+  },
+  "normalPlayOnly": true,
+  "TX": {
+    "frameOffset": [
+      28,
+      28
+    ],
+    "gridCentered": false,
+    "source": "CODE6:02fe-035a; CODE4:1216-1376; CODE4:4568-4616",
+    "jumpTargets": {
+      "2d32": "CODE4:4548",
+      "2c2a": "CODE4:1216"
+    }
+  },
+  "sourceOffsets": {
+    "headerRead": "CODE7:4960-4976",
+    "displayBranch": "CODE7:4a32-4a44",
+    "centering": "CODE7:4a46-4a9e",
+    "saveDisplayDimensions": "CODE7:4aa2-4aa6",
+    "rawGridPixel": "CODE7:5298-5314",
+    "frameCreation": "CODE1:5900-5952",
+    "frameCenterHelper": "CODE5:39cc-3a56"
+  },
+  "validation": {
+    "displayOriginCases": 2,
+    "privateRecordPlacementChecks": 6,
+    "candidatePayloadHashesUnchanged": 47,
+    "baselinePayloadsPreserved": 43,
+    "imageConversions": 0
+  },
+  "privateArtifacts": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\level-profile.json",
+      "sha256": "551de1bc08163f91adea52ed5da985c94b85c2edd2fd8349f55ede501317e916"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\candidate-door-board-small.svg",
+      "sha256": "2d1dcf79c3068583582a730fa893e65171ac6012b310cdedc9dbdc129ad2f227"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\small-board-correction-evidence.json",
+      "sha256": "1b6b94d4edb1ad823ee81e7f530fce344f0be30662eb127aeb72b8571ee4e21b"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\preview-candidate.py",
+      "sha256": "b5c46c0f1567067018422c53b8febd3830c9962f51084925aa777fa7f851f996"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\correct-small-board.py",
+      "sha256": "ba162b8bb448e0ccec1a0ecfb5d50984690789105202b3fd1fc32b0433261137"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\source-profile.json",
+      "sha256": "3ebb7768e3d23cb92abc45cbc296e45d6c3ccc3f13019d49e4ac9f0c918194bd"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\assets\\manifest.json",
+      "sha256": "7d2d2b989d1fcd8bfbd8c44f73f595f07a43c2197e63f19d4a16d4effe67800f"
+    }
+  ],
+  "limitations": [
+    "Source-only follow-up; no new native/browser comparison",
+    "Original private PNG retained as superseded; corrected preview is SVG translation without rasterization",
+    "Atlas and source collision descriptors unchanged",
+    "No root runtime/module edits; caller must supply98/96 origin",
+    "Generic arithmetic and metadata only; full map intentionally omitted"
+  ],
+  "workloadReleased": true
+}

@@ -1,0 +1,319 @@
+{
+  "schema": "clockwerx-doors-astra-review-v1",
+  "catalogIndex": 4,
+  "resourceId": 223,
+  "status": "source-helper-art-candidate; native integration and gameplay comparison pending",
+  "workloadReleased": true,
+  "privateCandidate": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\assets",
+  "preservedBaselinePayloads": 43,
+  "candidatePayloads": 47,
+  "sourceHashes": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_1.bin",
+      "sha256": "60e4ce54cb1635ea6a1867394db3d7d24e2f8645698756c23719864cb2dad66a"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_4.bin",
+      "sha256": "45e1a634759b082aaed758cc2dd3784b20d9c5dcd188271538706f05688efdab"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_6.bin",
+      "sha256": "d2384c535eaf50b5b87320fc60efeb461a0ea25721482e07b176b43b3c4c6783"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_7.bin",
+      "sha256": "78fd636a389d13ab674e1a98af7538b9ee472abd63b51d2afbdfbb2359556456"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\DATA_0.bin",
+      "sha256": "ead750365e369adea6f71dcd3c90f13e68bbc1dcf7bbb9cdfc8430dc39725fef"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\data.bin",
+      "sha256": "1b2286712f7783848730474051c6497323400be31fc303e078f0c748977346dc"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\pltt_1000.bin",
+      "sha256": "76dd4ac97887e3aaf90c3ca0034208905075cc9860b8e9ead206f177714539c7"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\decoded\\coordinator-review\\RND2_223.json",
+      "sha256": "8ba799cc4797a21f90b9731c950e8a1032d818a39255116db6c7fb35c90aa51b"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\source-profile.json",
+      "sha256": "3ebb7768e3d23cb92abc45cbc296e45d6c3ccc3f13019d49e4ac9f0c918194bd"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\level-profile.json",
+      "sha256": "551de1bc08163f91adea52ed5da985c94b85c2edd2fd8349f55ede501317e916"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\assets\\manifest.json",
+      "sha256": "7d2d2b989d1fcd8bfbd8c44f73f595f07a43c2197e63f19d4a16d4effe67800f"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\source-contact.png",
+      "sha256": "99886fc1ccf77a06597304b8fb675242ef20ad07e2cb7aeb78079862d185bdd8"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\candidate-contact.png",
+      "sha256": "ca1de43487899c6b2acea7ba23350165bdeccb97177d60829f2734de286a6e32"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\candidate-door-board-small.svg",
+      "sha256": "2d1dcf79c3068583582a730fa893e65171ac6012b310cdedc9dbdc129ad2f227"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\build-candidate.py",
+      "sha256": "d130435fea7f92dbf70c02c4eccbf81560481f1bbf466c3faa7ef33f2ade5ccc"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doors\\preview-candidate.py",
+      "sha256": "b5c46c0f1567067018422c53b8febd3830c9962f51084925aa777fa7f851f996"
+    },
+    {
+      "path": "C:\\Projects\\systemless\\prototypes\\clockwerx-html5\\doors.mjs",
+      "sha256": "bd2480ae817242ed235b0112b2f9f45afeee54bda3d490947d23b1fbdc64f4d4"
+    },
+    {
+      "path": "C:\\Projects\\systemless\\prototypes\\clockwerx-html5\\doors.test.mjs",
+      "sha256": "4dc12a5acf87b99916afa9670acaa442a8bfaa8309728fdb60ae558b9da230b3"
+    }
+  ],
+  "inventory": {
+    "resourceId": 223,
+    "catalogIndex": 4,
+    "referencedPrograms": [],
+    "inlinePrograms": 0,
+    "counts": {
+      "presentDots": 58,
+      "bonusFlags": 9,
+      "goalFlags": 1,
+      "inlinePrograms": 0,
+      "recordCounts": {
+        "HY": 0,
+        "SP": 3,
+        "WL": 4,
+        "DR": 3,
+        "DS": 3,
+        "PU": 0,
+        "BO": 0,
+        "GO": 0,
+        "WY": 0,
+        "WP": 6,
+        "WA": 3,
+        "TX": 12,
+        "EX": 0,
+        "EL": 0,
+        "GN": 0,
+        "TR": 0
+      },
+      "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+    },
+    "geometry": {
+      "displaySizeRaw": 7,
+      "displayRows": 7,
+      "displayColumns": 10,
+      "serializedRows": 8,
+      "serializedColumns": 11,
+      "logicalOrigin": [
+        98,
+        96
+      ],
+      "sourceRawOrigin": [
+        86,
+        85
+      ],
+      "frameOrigin": [
+        28,
+        28
+      ],
+      "supersedes": "superseded-large-board/level-profile.json"
+    },
+    "doorCount": 3,
+    "switchCount": 3,
+    "activeActorClockClasses": [
+      0,
+      0,
+      4
+    ],
+    "storedProgramCount": 6,
+    "actualMapRecords": "private doors/level-profile.json; excluded from Git"
+  },
+  "groups": {
+    "1000": {
+      "frames": 6,
+      "collidable": 6,
+      "scanlineFrames": 6,
+      "flipYFrames": 0
+    },
+    "1300": {
+      "frames": 88,
+      "collidable": 72,
+      "scanlineFrames": 72,
+      "flipYFrames": 0
+    },
+    "2900": {
+      "frames": 12,
+      "collidable": 12,
+      "scanlineFrames": 12,
+      "flipYFrames": 0
+    },
+    "3800": {
+      "frames": 88,
+      "collidable": 68,
+      "scanlineFrames": 68,
+      "flipYFrames": 0
+    }
+  },
+  "sourceOffsets": {
+    "doorSchema": "CODE6:1996-1a4a",
+    "doorSpecToInfo": "CODE6:1550-17a0",
+    "doorActivation": "CODE6:1bb0-1c54",
+    "activateMatchingColors": "CODE6:1c68-1ca0",
+    "doorFrame": "CODE6:18fe-1972",
+    "doorTimer": "CODE6:14e6-14f4; CODE1:5748-5750",
+    "doorReset": "CODE6:17c4-1828",
+    "doorCaps": "CODE6:1ce2-1e6c",
+    "doorCollision": "CODE6:1e94-1f9e",
+    "doorDeathSound": "CODE6:1cba-1cd2",
+    "actorDoorBounce": "CODE6:cfae-cfea",
+    "actorSwitchEdges": "CODE6:cc02-cc4e",
+    "switchSchema": "CODE6:9f2c-9f86",
+    "switchSpecToInfo": "CODE6:9d6e-9e2a",
+    "switchActivation": "CODE6:a0ac-a158",
+    "switchReset": "CODE6:9e4e-9e96",
+    "switchCollision": "CODE6:a256-a29c",
+    "wallArmMask": "CODE6:b8d2-b8fc",
+    "noEnemyDoorCall": "CODE6:d0ee-d122",
+    "sourceSpriteClockObservation": "CODE4:3e6c-3f5c"
+  },
+  "qualifiedSemantics": {
+    "doorBytes": [
+      "vertical",
+      "initiallyClosed",
+      "long",
+      "color"
+    ],
+    "switchWords": [
+      "row",
+      "column",
+      "subcell",
+      "color"
+    ],
+    "colors": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "difficultyMaskStored": false,
+    "allDoorsInitiallyClosed": true,
+    "matchingBy": "color, not switch index or actor color",
+    "trigger": "new per-actor first-visible-switch outline contact",
+    "releaseToggles": false,
+    "holdingRetriggers": false,
+    "eachAdditionalOccupantToggles": true,
+    "automaticCloseTimer": false,
+    "pressedSwitchFrame": "color+3 while count>0",
+    "doorType": "(vertical?0:1)+(long?2:0)",
+    "primaryFrame": "type*11+phase",
+    "secondFrame": "primary+44",
+    "closedPhase": 0,
+    "openPhase": 10,
+    "phaseStepPerObservedClockChange": 1,
+    "lethalGroup": 3800,
+    "lethalSoundArgument": 13,
+    "lethalDirectionGated": false,
+    "lethalGuardIncrement": false,
+    "secondLeafWinsDualContact": true,
+    "capsAfterAllLeaves": true,
+    "ordinaryEnemyChecksDoors": false,
+    "normalRoundReset": "DR saved states + DS occupancy/art + WA contact indices; preserve underlying clocks"
+  },
+  "clock": {
+    "scalable": true,
+    "requestedPeriod": 80,
+    "registeredBase": 80,
+    "clientDivisor": 1,
+    "childMaster": 60,
+    "secondary": 100,
+    "adjustedBase": 133,
+    "unitsPerGuestTick": 16,
+    "calculatedFramesPerSecondAt60GuestTicks": 7.2180451127819545,
+    "tenCallbackSeconds": 1.3854166666666667,
+    "MTThreshold": "strictly greater",
+    "qualification": "source calculation; no real-time benchmark; observation phase and frame skips matter"
+  },
+  "anchorContract": {
+    "profileFrameBounds": "RAW descriptor coordinates relative to helper geometry base",
+    "bodyBaseFromLogicalGrid": [
+      -6,
+      -5
+    ],
+    "switchBaseFromLogicalGrid": [
+      -12,
+      -11
+    ],
+    "switchSubcellPitch": 24,
+    "gridPitch": 48,
+    "caps": "doorGeometry cap bases already include body offset and per-type cap offsets",
+    "avoidDoubleSubtract": true
+  },
+  "tests": {
+    "command": "node --test prototypes/clockwerx-html5/doors.test.mjs",
+    "passed": 10,
+    "failed": 0,
+    "scope": "synthetic helper behavior and geometry; not native gameplay"
+  },
+  "visualChecks": [
+    "Three SVG atlases locally rasterized via ImageMagick",
+    "candidate-contact.png inspected beside source-contact.png",
+    "194 source frame descriptor/outline tables structurally checked",
+    "43 baseline payloads verified unchanged"
+  ],
+  "limitations": [
+    "Native Doors source placement and current scene phase unverified by worker",
+    "Source-derived door clock cadence is not measured gameplay timing",
+    "Cross-layer traversal timing remains coordinator qualification",
+    "Existing continuous120Hz actor/input approximation remains",
+    "Beam seam/shadow and switch disk detail are smooth art approximations",
+    "No actual browser/native run, benchmark, build, commit, activation, upload, deployment, media/save change",
+    "Audio IDs qualified; playback and sound overlap untested",
+    "No full campaign, physical controller, save or performance qualification",
+    "Original absolute Doors placements used wrong large-board origin; corrected to98/96 by small-board source audit. TX stays frame-relative28/28."
+  ],
+  "workLog": {
+    "scope": [
+      "source field/callback trace",
+      "private original descriptor/outline inventory",
+      "generic helper with ten meaningful tests",
+      "private SVG atlas candidate",
+      "local raster visual inspection",
+      "integration report"
+    ],
+    "activeTime": "not separately instrumented"
+  },
+  "geometryCorrection": {
+    "displaySizeRaw": 7,
+    "displayRows": 7,
+    "displayColumns": 10,
+    "serializedRows": 8,
+    "serializedColumns": 11,
+    "logicalOrigin": [
+      98,
+      96
+    ],
+    "sourceRawOrigin": [
+      86,
+      85
+    ],
+    "frameOrigin": [
+      28,
+      28
+    ],
+    "supersedes": "superseded-large-board/level-profile.json"
+  }
+}

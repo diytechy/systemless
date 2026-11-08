@@ -65,6 +65,17 @@ export function actorInitialFrame(halfIndex) {
   return (halfIndex * 2) & 63;
 }
 
+/** Child normal-speed WATimer records. The class is WASpec word7; word6 is
+ * unrelated. Movement of each actor consumes its own multiplier/divisor.
+ * Runtime/native confirmation currently covers hero0 and ordinary enemy4.
+ */
+export function actorTiming(speedClass){
+ const divisors=[2,2,8,4,8,1],multipliers=[1,1,3,1,1,1];
+ if(!Number.isInteger(speedClass)||speedClass<0||speedClass>=divisors.length)throw new RangeError('Unknown actor speed class');
+ const divisor=divisors[speedClass],multiplier=multipliers[speedClass];
+ return {divisor,multiplier,speedScale:2*multiplier/divisor};
+}
+
 /** TM + MT source clock chain, stepped in elapsed Macintosh guest ticks.
  * TM subtracts 16 units/tick; pauses >5000 units collapse to one base count.
  * MT advances while the accumulator is strictly greater than its divisor.

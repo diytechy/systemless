@@ -141,3 +141,8 @@ Chronological accepted evidence boundaries; no automatic runtime adoption. Earli
 ### Release integration and pilot assignment 2026-11-07T23:16:05.925660+00:00
 
 Parent reviewed compiled61entry release, explicitmanifest/ID/route/media validation, preservedoriginal3 identities and rollbackbundle. Source/runtime controls remain25/2/4. Root exploratoryClock6export complete/focused60.1331Hz vs exploratory25=27.4277Hz, differenthostload andplayerpivot (notfinalpairedcaptures); no tuningaccepted. Resourceboundaries andrawprivatepaths in release-browser-review.md. Startedseparatefreshgpt-6.1-sol ClockHTML5pilot after69firstpasses, initialexclusive discoverylease,nooverlapcapture/build.
+
+
+## Release follow-up milestone Nov8 around02:10UTC
+
+All69 source/native firstpasses remain reviewed.25of61 preparedroutes nowhave rootIAB followups, including completed Clock9capture/pilot review(c339e9a7). Actualpergame reports andrawhashes in browser-queue.json/release-browser-reviews. Most meaningfuldefaultscenes~60guestHz; Barney5.006/Bikaka26.024 remain boundeddeficits,no settingsaccepted. BarneySolreview proposes25/12 motion-gated3pairs, stillpending; BricklesSol/parentreview concludespresentationuncertain, no change. Chiral andBonkheads reached gameplay beyond nativeblack/cappedprobes. Some20s idlecaptures includeend/title transitions, explicitlycontextonly. Correctedsmall-mouse-target rechecks completed forBloodBath,Bloodsuckers,BattleTanks,Brickles; no readinessdiagnosis basedsolelyonmisscaledclicks. Tabclick usesCSS whileGUI PNGscaled; recordactualDOMgeometryperpart. Nooriginal/normal8087 saves touched,noactivationpointer,push,upload,deploy. Currentaction/queue controlnextwork, nothistoriccounts.

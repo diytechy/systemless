@@ -1,0 +1,13 @@
+# Parent color follow-up
+
+Root reviewed the separate Sol source/evidence report and performed its next bounded check. No setting is accepted. Original media, staged fixture, normal8087 save origin, executable/depth/SIZE and production entry remain unchanged.
+
+On isolated55847, focused Command-K opens the appearance dialog. Initial preview shows a black ball and paddle against cyan; actual gameplay exports show a black field without clear sprites. Preview color equality with the game background is therefore not established, and no preference or rendering cause is diagnosed.
+
+Clicking Ball Color changed the preview ball to white without a separate numeric picker. Root attempted Cancel and Command-K, but the dialog never visibly closed; that sequence is **not** proof of cancellation/reopening. The image named brickles-colors-cancel-reopened.png is an attempted checkpoint, not a confirmed reopen. No OK was accepted. Root closed that tab, made a genuinely fresh load, opened Command-K without clicking any color control, and observed the initial black ball/paddle, cyan preview and black/white pattern controls again. Fresh Saved Files count remained0. That narrow cold-load observation supersedes the earlier cancellation claim; it does not certify all preference persistence behavior.
+
+Private evidence in D:/SystemlessBuild/diagnostics/2026-11-07-coordinator/release-browser-v2/: brickles-color-preview.png, brickles-colors-cancel-reopened.png and **brickles-color-fresh-readonly.png**. All tabs were closed. Private native-resolution export brickles-native-frame.png establishes that CSS screenshot scaling alone does not explain that particular absent-sprite frame. It is a presented canvas export, not a raw guest-memory dump.
+
+Root also read the unchanged68K PACK12 GetColor selector implementation: it returns FALSE/cancel without changing the RGB output; its focused unit test covers that contract. No trace establishes that this title used that trap during the observed button action, so it is a capability limit, not a diagnosis. The reviewed renderer retains both outer snapshot gating and inner RGBA caches; forceRender alone is not a decisive raw-pixel bypass.
+
+The next discriminating investigation would compare same-state logical guest pixels, port/palette/color state, the emitted owner packet and final canvas, or compare the preserved appearance on an owned original/reference runtime. Current counters/brick removals establish game progress, not ball/paddle drawing, collision fidelity or gameplay pace. Keep25MHz/8bit/original262144 SIZE and colors unchanged; no timing capture in this incomplete presentation is accepted as a representative baseline.

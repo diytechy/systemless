@@ -220,7 +220,10 @@
     {
       "id": "owned-chiral-v1",
       "route": "/chiral/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/chiral.json",
+      "scene": "PracticeLevel1 afteroneplacedatom, noinput20seconds; bonusrunsout/returnstotitle bypostcapture",
+      "accepted_change": null
     },
     {
       "id": "owned-chrysanthemum-1-01-v1",
@@ -418,10 +421,11 @@
     },
     {
       "id": "owned-brickles-plus-3-0-v1",
-      "status": "lightSol presentation/settingsreview active; no controlled workload",
+      "status": "boundedSol/parent color review complete, presentation unresolved; no setting accepted; future same-state pixel/reference diagnosis",
       "task_name": "/root/brickles_browser_review",
       "brief": "brickles-plus-3-0/browser-followup-brief.md",
-      "accepted_change": null
+      "accepted_change": null,
+      "report": "brickles-plus-3-0/coordinator-color-review.md"
     }
   ],
   "clock_comparison_requested_viewport": [

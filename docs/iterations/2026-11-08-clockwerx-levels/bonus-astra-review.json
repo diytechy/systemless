@@ -1,0 +1,442 @@
+{
+  "status": "private candidate ready; coordinator native-size and collection acceptance pending",
+  "candidate": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets",
+  "sourceInputs": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\original-reference.png",
+      "bytes": 271589,
+      "sha256": "fce0864ff861768ebef3f5efe1eef9ec61ba6b62cd97b220de50cb7855d6c849"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\all-source.json",
+      "bytes": 115453,
+      "sha256": "026c8ab6ff7ca819545ed2e9339688223a419c8903ec2e9df09bf6605ea5f16a"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\initial-a5.bin",
+      "bytes": 131072,
+      "sha256": "d790166fae2337654a9b6ebd70bd07abc28a59381b537f21eef14e13ea33fc9a"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_6.bin",
+      "bytes": 63130,
+      "sha256": "d2384c535eaf50b5b87320fc60efeb461a0ea25721482e07b176b43b3c4c6783"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\CODE_7.bin",
+      "bytes": 30612,
+      "sha256": "78fd636a389d13ab674e1a98af7538b9ee472abd63b51d2afbdfbb2359556456"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-07-coordinator\\clockwerx-html5\\ClockWerx_Graphics\\pltt_1000.bin",
+      "bytes": 4112,
+      "sha256": "76dd4ac97887e3aaf90c3ca0034208905075cc9860b8e9ead206f177714539c7"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-0.png",
+      "bytes": 327,
+      "sha256": "908ebec88cfbe12e7bcf197a989a72840d0cabff16c302ed1150f43bad12cebe"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-1.png",
+      "bytes": 341,
+      "sha256": "c478c1903dfe6c5e6dd4df0270e2a97082f798eb628a8de59bf279a80ab59cba"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-2.png",
+      "bytes": 248,
+      "sha256": "6e3ea1ea3bc2bb4bc88666026df6ffba2be699b79c739707aedbb830f33404b9"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-3.png",
+      "bytes": 300,
+      "sha256": "bfb9965270cf10a33b8be8c9384fb7d8cd29b6db17cecc972f973affdc10cbfe"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-5.png",
+      "bytes": 299,
+      "sha256": "e44daeb50a538896a0de0ea56cd8f88634f0dd3be45505b640cbb3296df28264"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-9.png",
+      "bytes": 253,
+      "sha256": "a2661f1045198c8d0f2480540987971abf83ea14b3524deea73d3810072f8c10"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-10.png",
+      "bytes": 279,
+      "sha256": "08e7ab0ac73d7455aab6d901ac09acc3946491af83b359ee7cf50586899b2b7d"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-starbursts\\source\\300-12.png",
+      "bytes": 307,
+      "sha256": "31ede8ebe3c78041117f32ac36daca4a638e727722b4d44883b02a8596104b13"
+    }
+  ],
+  "regeneration": {
+    "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\build-candidate.py",
+    "bytes": 3468,
+    "sha256": "97039da3c8e806047b1c7efd0d864e72b611085079a6d89af4e05b8b39bc0434"
+  },
+  "outputs": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\ActionBounce.wav",
+      "bytes": 2044,
+      "sha256": "433fd9daec2e4e05e839aae9f9cb717cf7b788661e6fffa653f1905a43be50b1"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\ActionFlip.wav",
+      "bytes": 2044,
+      "sha256": "3e7171e136dbacb60b090d57977f2e8739d65adc32b3c94506a4ed78bf04ac12"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\ActionSwing.wav",
+      "bytes": 1139,
+      "sha256": "b1de69ca81fed617770266ec1ca678f9534ed6ff6b86ca610ab032a56be85365"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\backdrop.png",
+      "bytes": 55563,
+      "sha256": "f3abc35ed9d64c64dd5a1f0121020633d7c7a41985178db10c9541011e005b3e"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-0.svg",
+      "bytes": 401,
+      "sha256": "20f1a0bf3c2808e97c7c25f9fe60fb55b8611ba730ca7d005c43b433635944ae"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-1.svg",
+      "bytes": 837,
+      "sha256": "c66ad0c1e93c99d836594066f8f4a46415ba80ce34493e42454d3346f74d4fac"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-10.svg",
+      "bytes": 369,
+      "sha256": "4fa31d6e13e721b37d030ab5708736b71778f5677054abba42f1e2640bfa9679"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-12.svg",
+      "bytes": 369,
+      "sha256": "ddb026202d85352409dbd8b3adef711604c40346a513026526558952438ab1c0"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-2.svg",
+      "bytes": 837,
+      "sha256": "3a839bd722c193dca3e76682175b34c71c0528616edfc239619e36fe90df9f4f"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-3.svg",
+      "bytes": 837,
+      "sha256": "838e25abb0955da34ee09ad0231ac07783b3297169efad303b5f1e4a8d5c6f9e"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-4.svg",
+      "bytes": 401,
+      "sha256": "d1e825ac4d3e6132c6c175be93e7d8da7a05d93b5a3321a6f714c201c47af82f"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-5.svg",
+      "bytes": 837,
+      "sha256": "90788083661859b42b10f418557bece7494e331654ad3afad7adbac80e137713"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\dot-9.svg",
+      "bytes": 369,
+      "sha256": "d3bac20232fc1ac82aa39c115457f13c3f0f9ff224c119d6ee0b3d363cd8ac2b"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\goal.svg",
+      "bytes": 6269,
+      "sha256": "197715a591f771e99f830c8181c5a9f84529b3f2edc5b3e0a97dbf8da4955b13"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\hand-4300.svg",
+      "bytes": 801,
+      "sha256": "376758d1b7cd1ccfa47ffa8b78b5871210b027daebe7da8a9e76344a4d32df17"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\hand-4400.svg",
+      "bytes": 565,
+      "sha256": "887bc83ba85ca1468184a7d880cd7a6ce52545b4471988c97880197778861eb2"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\hand-4500.svg",
+      "bytes": 539,
+      "sha256": "e503891069a0260c9277d2a1041eea183cece9b8c4e846437fdae6dde83778c7"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\hand-500.svg",
+      "bytes": 795,
+      "sha256": "0f373cd0389e1b60588d71713f9cd3853fd1b7b855ba2eaf3c7011a07440ecec"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\hand-700.svg",
+      "bytes": 801,
+      "sha256": "ad9e202ad97536018ecea72d1b2cc0c5d1b6c5e447909e72614192e8fad8dfbf"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\manifest.json",
+      "bytes": 12992,
+      "sha256": "7511dfc73d595a99c336f39fed4d9de7d5e6719836be8ff68d2f0b2b8dc5ce01"
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bonus\\assets\\starbursts.svg",
+      "bytes": 11170,
+      "sha256": "84a14d6e48cfc40fe2aa1ace7e6ade0b8af4541dc723205dd6e6defd07e2df40"
+    }
+  ],
+  "changedPayloads": [
+    "dot-1.svg",
+    "dot-2.svg",
+    "dot-3.svg",
+    "dot-5.svg"
+  ],
+  "addedPayloads": [
+    "dot-10.svg",
+    "dot-12.svg",
+    "dot-9.svg"
+  ],
+  "preservedPayloads": [
+    "ActionBounce.wav",
+    "ActionFlip.wav",
+    "ActionSwing.wav",
+    "backdrop.png",
+    "dot-0.svg",
+    "dot-4.svg",
+    "goal.svg",
+    "hand-4300.svg",
+    "hand-4400.svg",
+    "hand-4500.svg",
+    "hand-500.svg",
+    "hand-700.svg",
+    "starbursts.svg"
+  ],
+  "nativeSourceMatches": [
+    {
+      "cell": [
+        9,
+        3
+      ],
+      "image": 1,
+      "match": {
+        "xy": [
+          501,
+          212
+        ],
+        "mse": 0.43333333333333335
+      }
+    },
+    {
+      "cell": [
+        0,
+        4
+      ],
+      "image": 2,
+      "match": {
+        "xy": [
+          69,
+          260
+        ],
+        "mse": 0.2727272727272727
+      }
+    },
+    {
+      "cell": [
+        2,
+        4
+      ],
+      "image": 2,
+      "match": {
+        "xy": [
+          165,
+          260
+        ],
+        "mse": 0.2727272727272727
+      }
+    },
+    {
+      "cell": [
+        3,
+        4
+      ],
+      "image": 9,
+      "match": {
+        "xy": [
+          213,
+          260
+        ],
+        "mse": 0.2840909090909091
+      }
+    },
+    {
+      "cell": [
+        0,
+        6
+      ],
+      "image": 3,
+      "match": {
+        "xy": [
+          69,
+          356
+        ],
+        "mse": 0.39015151515151514
+      }
+    },
+    {
+      "cell": [
+        3,
+        6
+      ],
+      "image": 10,
+      "match": {
+        "xy": [
+          213,
+          356
+        ],
+        "mse": 0.3371212121212121
+      }
+    },
+    {
+      "cell": [
+        7,
+        7
+      ],
+      "image": 1,
+      "match": {
+        "xy": [
+          405,
+          404
+        ],
+        "mse": 0.43333333333333335
+      }
+    },
+    {
+      "cell": [
+        8,
+        7
+      ],
+      "image": 5,
+      "match": {
+        "xy": [
+          453,
+          404
+        ],
+        "mse": 0.45075757575757575
+      }
+    },
+    {
+      "cell": [
+        9,
+        7
+      ],
+      "image": 1,
+      "match": {
+        "xy": [
+          501,
+          404
+        ],
+        "mse": 0.43333333333333335
+      }
+    }
+  ],
+  "logicalAnchor": [
+    -5,
+    -4
+  ],
+  "gammaExponent": 0.7,
+  "sourceMask": "binary alpha; 10x10; ring center is opaque dark, not a transparent cutout",
+  "renderVariants": {
+    "bonus:0": {
+      "file": "dot-1.svg",
+      "sourceGroup": 300,
+      "sourceImage": 1,
+      "sourceDescriptor": 301,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    },
+    "normal:0": {
+      "file": "dot-0.svg",
+      "sourceGroup": 300,
+      "sourceImage": 0,
+      "sourceDescriptor": 309,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    },
+    "bonus:1": {
+      "file": "dot-2.svg",
+      "sourceGroup": 300,
+      "sourceImage": 2,
+      "sourceDescriptor": 302,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    },
+    "normal:1": {
+      "file": "dot-9.svg",
+      "sourceGroup": 300,
+      "sourceImage": 9,
+      "sourceDescriptor": 310,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    },
+    "bonus:2": {
+      "file": "dot-3.svg",
+      "sourceGroup": 300,
+      "sourceImage": 3,
+      "sourceDescriptor": 303,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    },
+    "normal:2": {
+      "file": "dot-10.svg",
+      "sourceGroup": 300,
+      "sourceImage": 10,
+      "sourceDescriptor": 311,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    },
+    "bonus:4": {
+      "file": "dot-5.svg",
+      "sourceGroup": 300,
+      "sourceImage": 5,
+      "sourceDescriptor": 305,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    },
+    "normal:4": {
+      "file": "dot-12.svg",
+      "sourceGroup": 300,
+      "sourceImage": 12,
+      "sourceDescriptor": 313,
+      "x": -5,
+      "y": -4,
+      "width": 10,
+      "height": 10
+    }
+  },
+  "tests": {
+    "command": "node --test prototypes/clockwerx-html5/dots.test.mjs",
+    "passed": 3,
+    "failed": 0
+  },
+  "limits": [
+    "SVG analytic reconstruction is not pixel-identical",
+    "No fresh native collection execution by worker",
+    "No scoring, mixed-color artwork, up/down gameplay, or shadow implementation",
+    "No browser, build, benchmark, commit, activation, deployment"
+  ],
+  "integration": "See bonus-astra-review.md; root owns board/engine/app integration"
+}

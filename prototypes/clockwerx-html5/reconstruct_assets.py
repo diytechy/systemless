@@ -108,6 +108,7 @@ def build(source, profile_path, output):
         references.add(manifest['vectorAssets']['goal']['file'])
     if manifest['vectorAssets'].get('starbursts'):
         references.add(manifest['vectorAssets']['starbursts']['file'])
+    references.update(d['file'] for d in manifest['vectorAssets'].get('dotVariants',{}).values())
     if not references <= verified:
         raise ValueError('Unverified asset reference')
     hands = manifest['vectorAssets']['hands']

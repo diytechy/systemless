@@ -1,0 +1,546 @@
+{
+  "title": "Bikaka1.4",
+  "decision": "do not adopt12MHz; retain unchanged25MHz production setting",
+  "accepted_change": null,
+  "experiment_status": "six completed bounded diagnostic captures; not three valid matched comparisons",
+  "compiled_revision": "7170f7e7",
+  "wasm_sha256": "af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "raw_review": [
+    {
+      "label": "bikaka-p1-25",
+      "mhz": 25,
+      "rows": 1386,
+      "guest_hz": 17.77362114249679,
+      "sampled_seconds": 19.973420000001788,
+      "visual_rows": 18,
+      "execution_ms": {
+        "mean": 13.96936507932143,
+        "p95": 14.219999998807907,
+        "max": 16.810000002384186
+      },
+      "round_trip_ms": {
+        "mean": 14.320616883100756,
+        "p95": 14.730000000447035,
+        "max": 19.200000002980232
+      },
+      "backlog_counts": {
+        "2": 344,
+        "3": 343,
+        "4": 352,
+        "5": 257,
+        "1": 90
+      },
+      "wasm_linear_memory_bytes": {
+        "mean": 162594816,
+        "p95": 162594816,
+        "max": 162594816
+      },
+      "all_resource_samples": 30,
+      "inside_resource_samples": 15,
+      "contained_cpu_intervals": 14,
+      "cpu_interval_seconds": 18.356245,
+      "aggregate_cpu_percent_of_host": 62.326228530580906,
+      "cpu_seconds_by_name": {
+        "msedgewebview2": 0.0,
+        "codex-code-mode-host": 0.0,
+        "ChatGPT": 24.671875,
+        "msedge": 12.75,
+        "chrome-headless-shell": 236.953125,
+        "codex": 0.140625,
+        "codex-computer-use-swift": 0.0625
+      },
+      "omitted_pairs": {
+        "new": 0,
+        "exited": 0,
+        "invalid": 14
+      },
+      "host_cpu": {
+        "mean": 81.6,
+        "median": 87,
+        "min": 46,
+        "max": 99
+      },
+      "working_set_sum": {
+        "mean": 6415157111.466666,
+        "median": 6419312640,
+        "min": 6366818304,
+        "max": 6444957696
+      },
+      "private_allocation_sum": {
+        "mean": 6898031820.8,
+        "median": 6893109248,
+        "min": 6857441280,
+        "max": 6944870400
+      },
+      "scene_observation_record": "Fresh0/1/0, pinkbluepiece first/goldnext; noinput20s endscore5 level1 lines0, goldactive/pinkbluebottomright; separateM300 goldleftonecell",
+      "hashes": {
+        "bikaka-p1-25-begin.png": "48fcdd03aaffb2e967a8cf847068799c42b7ca06b48f816db6d2a1cce7e16df9",
+        "bikaka-p1-25-end.png": "ac40ed6750d5b6df36d8f559fd1000c2d39c3cd7f3fcf9ce1aa69ee2375ea1e8",
+        "bikaka-p1-25-m.png": "17d5ba1aad154341ae46ec2522043a9ce026650a44c7162cd8015bf29a98ee01",
+        "bikaka-p1-25-resource-summary.json": "7acd64c0c68c28a4ef5a05cc6c6362259090fe2cd9be0915741db166995ad29e",
+        "bikaka-p1-25-resources.json": "c1880c3ffed58df66ecc7e24bd865e6deafa0f4bb4f15c9fd720091bea6b8003",
+        "bikaka-p1-25-timing.json": "23d12e52006ac46cdf349e9708a49efe11087fd437014c8eb2ad9cae341552f6"
+      },
+      "strict_raw_validation": "pass"
+    },
+    {
+      "label": "bikaka-p1-12",
+      "mhz": 12,
+      "rows": 1426,
+      "guest_hz": 44.665356583021435,
+      "sampled_seconds": 19.970734999999404,
+      "visual_rows": 45,
+      "execution_ms": {
+        "mean": 13.563927068752543,
+        "p95": 14.16499999910593,
+        "max": 22.20500000193715
+      },
+      "round_trip_ms": {
+        "mean": 13.916903927067992,
+        "p95": 14.654999997466803,
+        "max": 23.769999999552965
+      },
+      "backlog_counts": {
+        "3": 375,
+        "2": 380,
+        "4": 356,
+        "5": 93,
+        "1": 219,
+        "0": 3
+      },
+      "wasm_linear_memory_bytes": {
+        "mean": 161415168,
+        "p95": 161415168,
+        "max": 161415168
+      },
+      "all_resource_samples": 30,
+      "inside_resource_samples": 15,
+      "contained_cpu_intervals": 14,
+      "cpu_interval_seconds": 18.186623999999995,
+      "aggregate_cpu_percent_of_host": 26.891329583764428,
+      "cpu_seconds_by_name": {
+        "msedgewebview2": 0.015625,
+        "codex-code-mode-host": 0.0,
+        "ChatGPT": 21.5625,
+        "msedge": 10.25,
+        "chrome-headless-shell": 85.34375,
+        "codex": 0.1875,
+        "codex-computer-use-swift": 0.015625
+      },
+      "omitted_pairs": {
+        "new": 1,
+        "exited": 1,
+        "invalid": 14
+      },
+      "host_cpu": {
+        "mean": 49.4,
+        "median": 39,
+        "min": 14,
+        "max": 95
+      },
+      "working_set_sum": {
+        "mean": 6357533218.133333,
+        "median": 6331645952,
+        "min": 6310416384,
+        "max": 6428733440
+      },
+      "private_allocation_sum": {
+        "mean": 6936166400,
+        "median": 6904975360,
+        "min": 6888665088,
+        "max": 7012937728
+      },
+      "scene_observation_record": "Fresh0/1/0 pinkfirst/pinkbluenext; noinput20s endscore13/1/0,5piececolorsinwell, goldactive; M300goldleftonecell",
+      "hashes": {
+        "bikaka-p1-12-begin.png": "63536eea71d8fbef1e38432d85346ada32d8e158363f7386b60bf15a36bad01d",
+        "bikaka-p1-12-end.png": "cef24183339efb38ef6c4d987b668e6e7828da20955f24d4199b81d481fbde1a",
+        "bikaka-p1-12-m.png": "903c9f5a8b59071105fb2e6e46d935131cab6f5758f6abd721d001cccd644c09",
+        "bikaka-p1-12-resource-summary.json": "a9c4081a87858f844f83ee90d405ba87ac82a24cb126c493458a6463ac328741",
+        "bikaka-p1-12-resources.json": "08cb2a9e31565ad195ec5131f6f25f22345315742251e54fc3c25175f2427ab8",
+        "bikaka-p1-12-timing.json": "60cb500b01b1e247008ce9dd7ad2182f76a9cb621dfe185a3fd3467f2b636bf7"
+      },
+      "strict_raw_validation": "pass"
+    },
+    {
+      "label": "bikaka-p2-12",
+      "mhz": 12,
+      "rows": 1355,
+      "guest_hz": 32.79023361664616,
+      "sampled_seconds": 19.975460000000894,
+      "visual_rows": 34,
+      "execution_ms": {
+        "mean": 14.11218450179674,
+        "p95": 14.83499999716878,
+        "max": 19.195000000298023
+      },
+      "round_trip_ms": {
+        "mean": 14.637701106951246,
+        "p95": 16.320000000298023,
+        "max": 23.234999999403954
+      },
+      "backlog_counts": {
+        "2": 315,
+        "3": 353,
+        "4": 385,
+        "5": 162,
+        "1": 140
+      },
+      "wasm_linear_memory_bytes": {
+        "mean": 161415168,
+        "p95": 161415168,
+        "max": 161415168
+      },
+      "all_resource_samples": 31,
+      "inside_resource_samples": 16,
+      "contained_cpu_intervals": 15,
+      "cpu_interval_seconds": 19.737827,
+      "aggregate_cpu_percent_of_host": 31.985035848508893,
+      "cpu_seconds_by_name": {
+        "msedgewebview2": 0.0,
+        "codex-code-mode-host": 0.0,
+        "ChatGPT": 22.96875,
+        "msedge": 15.515625,
+        "chrome-headless-shell": 112.796875,
+        "codex": 0.234375,
+        "codex-computer-use-swift": 0.0
+      },
+      "omitted_pairs": {
+        "new": 1,
+        "exited": 1,
+        "invalid": 15
+      },
+      "host_cpu": {
+        "mean": 83.5,
+        "median": 86.5,
+        "min": 47,
+        "max": 100
+      },
+      "working_set_sum": {
+        "mean": 6329422336,
+        "median": 6329061376.0,
+        "min": 6293827584,
+        "max": 6357495808
+      },
+      "private_allocation_sum": {
+        "mean": 6896361216,
+        "median": 6899611648.0,
+        "min": 6875582464,
+        "max": 6911229952
+      },
+      "scene_observation_record": "Fresh0/1/0 pinkfirst/pinkbluenext; endscore8/1/0 yellowpiececlosebottomstack,goldnext; M300responseunisolated nearlock",
+      "hashes": {
+        "bikaka-p2-12-begin.png": "63536eea71d8fbef1e38432d85346ada32d8e158363f7386b60bf15a36bad01d",
+        "bikaka-p2-12-end.png": "23323209008ae197e8dd1d1a7e7b931dd745fa265ea6378e9f61c92e9df2014e",
+        "bikaka-p2-12-m.png": "715bbe39346b91f1bd02e9428205a2893ca04c1480a54fb3036bc2eebb4ef4fe",
+        "bikaka-p2-12-resource-summary.json": "c00ce70ffeff683ebfc8b891ba5a19a9a9ca1fa1d868ae8955a8db9ea5e91b21",
+        "bikaka-p2-12-resources.json": "cd10deac1f9c121f430156418e8b3c99263c4911525b74c55e046c0e10b9acf1",
+        "bikaka-p2-12-timing.json": "e96c9d22d096d01ee7690461b4942a38103db59558dd0de8a00af0be47d1f294"
+      },
+      "strict_raw_validation": "pass"
+    },
+    {
+      "label": "bikaka-p2-25",
+      "mhz": 25,
+      "rows": 1243,
+      "guest_hz": 11.413042254033925,
+      "sampled_seconds": 19.97714500000328,
+      "visual_rows": 12,
+      "execution_ms": {
+        "mean": 15.070800482618383,
+        "p95": 17.79500000178814,
+        "max": 27.83999999985099
+      },
+      "round_trip_ms": {
+        "mean": 15.919497184164685,
+        "p95": 19.50500000268221,
+        "max": 28.230000000447035
+      },
+      "backlog_counts": {
+        "3": 348,
+        "4": 324,
+        "5": 268,
+        "2": 264,
+        "1": 35,
+        "6": 4
+      },
+      "wasm_linear_memory_bytes": {
+        "mean": 161415168,
+        "p95": 161415168,
+        "max": 161415168
+      },
+      "all_resource_samples": 30,
+      "inside_resource_samples": 14,
+      "contained_cpu_intervals": 13,
+      "cpu_interval_seconds": 17.660214,
+      "aggregate_cpu_percent_of_host": 45.3106237840606,
+      "cpu_seconds_by_name": {
+        "msedgewebview2": 0.03125,
+        "codex-code-mode-host": 0.0,
+        "ChatGPT": 26.203125,
+        "msedge": 17.3125,
+        "chrome-headless-shell": 148.328125,
+        "codex": 0.171875,
+        "codex-computer-use-swift": 0.0
+      },
+      "omitted_pairs": {
+        "new": 0,
+        "exited": 0,
+        "invalid": 13
+      },
+      "host_cpu": {
+        "mean": 98.5,
+        "median": 99.0,
+        "min": 95,
+        "max": 100
+      },
+      "working_set_sum": {
+        "mean": 6386724864,
+        "median": 6415861760.0,
+        "min": 6266171392,
+        "max": 6461841408
+      },
+      "private_allocation_sum": {
+        "mean": 6941422153.142858,
+        "median": 6972968960.0,
+        "min": 6810206208,
+        "max": 7029080064
+      },
+      "scene_observation_record": "Fresh0/1/0 pinkbluefirst/goldnext; noinput20s endscore5/1/0 goldactive/blue next, pinkbluebottomright; separateM300 goldleft",
+      "hashes": {
+        "bikaka-p2-25-begin.png": "eef3c9b5ef20b05828a8ad188bbb4cfee00cd140f51921207c093beb4a881279",
+        "bikaka-p2-25-end.png": "bfbdbb4dae6b41d7579673aa6ede9ab3ee9d53f3e3976e02a57252367285355c",
+        "bikaka-p2-25-m.png": "9945e3f5f84f8acd0faa248a47126acb67b464abc9f29102d726b01e34100832",
+        "bikaka-p2-25-resource-summary.json": "85e9a4003cfaf0d7844784f0640da488cb003d013bd2a6b10a431acb34d3ec71",
+        "bikaka-p2-25-resources.json": "561ad6607f2aa66e5af42c94a744817e8c480d20e8f63c9f9b6913c93b3d67aa",
+        "bikaka-p2-25-timing.json": "08f823af01d8a5b116ce9033bdd16503199c7c54029cba93e497c78ee2aa4883"
+      },
+      "strict_raw_validation": "pass"
+    },
+    {
+      "label": "bikaka-p3-25",
+      "mhz": 25,
+      "rows": 1344,
+      "guest_hz": 16.618866568273244,
+      "sampled_seconds": 19.977294999998062,
+      "visual_rows": 16,
+      "execution_ms": {
+        "mean": 14.241781994074007,
+        "p95": 15.129999998956919,
+        "max": 32.689999997615814
+      },
+      "round_trip_ms": {
+        "mean": 14.751581101201563,
+        "p95": 16.190000001341105,
+        "max": 33.09499999880791
+      },
+      "backlog_counts": {
+        "3": 352,
+        "4": 340,
+        "5": 255,
+        "2": 322,
+        "1": 74,
+        "6": 1
+      },
+      "wasm_linear_memory_bytes": {
+        "mean": 161415168,
+        "p95": 161415168,
+        "max": 161415168
+      },
+      "all_resource_samples": 31,
+      "inside_resource_samples": 15,
+      "contained_cpu_intervals": 14,
+      "cpu_interval_seconds": 18.457046,
+      "aggregate_cpu_percent_of_host": 33.22043200556941,
+      "cpu_seconds_by_name": {
+        "msedgewebview2": 0.03125,
+        "codex-code-mode-host": 0.0,
+        "chrome-headless-shell": 105.4375,
+        "ChatGPT": 26.484375,
+        "msedge": 14.921875,
+        "codex": 0.234375,
+        "codex-computer-use-swift": 0.046875
+      },
+      "omitted_pairs": {
+        "new": 1,
+        "exited": 1,
+        "invalid": 14
+      },
+      "host_cpu": {
+        "mean": 78.13333333333334,
+        "median": 75,
+        "min": 57,
+        "max": 99
+      },
+      "working_set_sum": {
+        "mean": 6395021448.533334,
+        "median": 6435938304,
+        "min": 6272671744,
+        "max": 6478372864
+      },
+      "private_allocation_sum": {
+        "mean": 6895410926.933333,
+        "median": 6943100928,
+        "min": 6763347968,
+        "max": 6983823360
+      },
+      "scene_observation_record": "Fresh0/1/0 pinkbluefirst/goldnext; endscore5/1/0 goldactive/bluenext, pinkbluebottomright; M300notvisiblyisolated atsamestill",
+      "hashes": {
+        "bikaka-p3-25-begin.png": "eef3c9b5ef20b05828a8ad188bbb4cfee00cd140f51921207c093beb4a881279",
+        "bikaka-p3-25-end.png": "4cf8a47292f1bd4c76782658f680496698dfd7665e571d2ecc59d42544f2808f",
+        "bikaka-p3-25-m.png": "e6b856bddbf6d62dc4e3f6a195a8107429826dca4e0773c460b1136c416d316e",
+        "bikaka-p3-25-resource-summary.json": "18a02ea12bf38a51431a7b7826fd5143a5fe0e41d1cc2de0be32df0127e82686",
+        "bikaka-p3-25-resources.json": "acac036a54198bce20eb58dac80d37b6d8686cbe7c4c2c738321b7c9200a7381",
+        "bikaka-p3-25-timing.json": "ed307324ebfbd54dd93e2553a2e167520db31322df2df4833eda52d374d529fd"
+      },
+      "strict_raw_validation": "pass"
+    },
+    {
+      "label": "bikaka-p3-12",
+      "mhz": 12,
+      "rows": 1414,
+      "guest_hz": 45.91321101326285,
+      "sampled_seconds": 19.97246499999985,
+      "visual_rows": 47,
+      "execution_ms": {
+        "mean": 13.685134370575488,
+        "p95": 14.21000000089407,
+        "max": 18.41000000014901
+      },
+      "round_trip_ms": {
+        "mean": 14.049975247539928,
+        "p95": 14.844999998807907,
+        "max": 20.025000002235174
+      },
+      "backlog_counts": {
+        "4": 388,
+        "5": 85,
+        "1": 170,
+        "2": 365,
+        "3": 406
+      },
+      "wasm_linear_memory_bytes": {
+        "mean": 161415168,
+        "p95": 161415168,
+        "max": 161415168
+      },
+      "all_resource_samples": 31,
+      "inside_resource_samples": 16,
+      "contained_cpu_intervals": 15,
+      "cpu_interval_seconds": 19.499563,
+      "aggregate_cpu_percent_of_host": 17.712068940553525,
+      "cpu_seconds_by_name": {
+        "msedgewebview2": 0.0,
+        "codex-code-mode-host": 0.0,
+        "ChatGPT": 24.1875,
+        "msedge": 10.828125,
+        "chrome-headless-shell": 47.578125,
+        "codex": 0.265625,
+        "codex-computer-use-swift": 0.03125
+      },
+      "omitted_pairs": {
+        "new": 1,
+        "exited": 1,
+        "invalid": 15
+      },
+      "host_cpu": {
+        "mean": 42.375,
+        "median": 35.0,
+        "min": 27,
+        "max": 75
+      },
+      "working_set_sum": {
+        "mean": 6192145408,
+        "median": 6194849792.0,
+        "min": 6137077760,
+        "max": 6207090688
+      },
+      "private_allocation_sum": {
+        "mean": 6856126464,
+        "median": 6860627968.0,
+        "min": 6805299200,
+        "max": 6871605248
+      },
+      "scene_observation_record": "Fresh0/1/0 pinkfirst/pinkbluenext; endscore13/1/0 goldactive/orangenext; separateM300goldleftclear",
+      "hashes": {
+        "bikaka-p3-12-begin.png": "63536eea71d8fbef1e38432d85346ada32d8e158363f7386b60bf15a36bad01d",
+        "bikaka-p3-12-end.png": "cef24183339efb38ef6c4d987b668e6e7828da20955f24d4199b81d481fbde1a",
+        "bikaka-p3-12-m.png": "74e7e8d0e3e9ba9b9a336bbd8ce169f75418f2d71fb9594b47cbbaaeeca4b51e",
+        "bikaka-p3-12-resource-summary.json": "fd3a7c2eb9ce4e2ce7f55fe0a7d4cbc59fe6feed377dc1602baef92f4bc4d9e7",
+        "bikaka-p3-12-resources.json": "00645b9c275c888307418f503d796ce1e7102c62f794571f441dabc495b4c41e",
+        "bikaka-p3-12-timing.json": "6d4b0b103f304cdfe2d1c8a73e741c602079f05963c7497eea686af0c02711c4"
+      },
+      "strict_raw_validation": "pass"
+    }
+  ],
+  "summary": {
+    "25": {
+      "guest_hz_median": 16.618866568273244,
+      "guest_hz_range": [
+        11.413042254033925,
+        17.77362114249679
+      ]
+    },
+    "12": {
+      "guest_hz_median": 44.665356583021435,
+      "guest_hz_range": [
+        32.79023361664616,
+        45.91321101326285
+      ]
+    }
+  },
+  "confounds": [
+    "All25MHz beginnings have pinkblue first/gold next; all12MHz beginnings pink first/pinkblue next. Same0/1/0 counters do not match piece sequence or workload.",
+    "Host load differs systematically:25MHz81.6/98.5/78.13333333333334%;12MHz49.4/83.5/42.375%. No three valid matched-load pairs.",
+    "Manual readiness/capture gaps and faster guest progress change phase/work done per20wallseconds."
+  ],
+  "interpretation": "Higher guestclock at12MHz appears in all nominal pairs and ranges do not overlap; descriptive association only. Both initial scene/sequence and host load vary with quota; no clean causal resource-efficiency or correct original pace claim.",
+  "input_review": {
+    "clear_left_after_separate_M": [
+      "p1-25",
+      "p1-12",
+      "p2-25",
+      "p3-12"
+    ],
+    "unqualified": [
+      "p2-12 nearlock/timing unisolated",
+      "p3-25 no isolated same-phase displacement; root labels same visible frame unqualified"
+    ]
+  },
+  "qualification_limits": [
+    "independent original pace/rules",
+    "busy scene and line completion/scoring",
+    "audible sound/synchronization; option checked only, music unchecked",
+    "physical input latency/controller",
+    "save reload/export-import"
+  ],
+  "next_action": "Close bounded diagnostic without automatic retry. Any future qualification needs matched piece sequence/phase and load plus trusted reference pace, followed by missing behavioral gates.",
+  "normal_origin_saves": "8087 untouched per root; isolated55847 evidence only",
+  "files_written": [
+    "final-experiment-review.md",
+    "final-experiment-review.json"
+  ],
+  "workload_released": true,
+  "nominal_pair_descriptive_deltas": [
+    {
+      "pair": 1,
+      "descriptive_hz_delta_12_minus_25": 26.891735440524645,
+      "descriptive_ratio_12_over_25": 2.513013877415583
+    },
+    {
+      "pair": 2,
+      "descriptive_hz_delta_12_minus_25": 21.377191362612237,
+      "descriptive_ratio_12_over_25": 2.873049348875975
+    },
+    {
+      "pair": 3,
+      "descriptive_hz_delta_12_minus_25": 29.29434444498961,
+      "descriptive_ratio_12_over_25": 2.7627161470153974
+    }
+  ],
+  "additional_png_limit": "p1-25 begin/end/M screenshots do not visibly show the next-piece pane that appears in later runs. Goldnext is the root observation record; the first begin PNG alone does not independently confirm it. No additional retry requested.",
+  "raw_totals": {
+    "timing_rows": 8168,
+    "resource_samples": 183,
+    "images_inspected": 18
+  }
+}

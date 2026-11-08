@@ -1,0 +1,32 @@
+{
+  "title": "Barney Carnage 2.0",
+  "decision": "Motion gate sufficient for bounded diagnostic comparison; proceed with six total captures, three at 25 MHz and three at 12 MHz, alternating.",
+  "candidate_accepted": false,
+  "gate_observation": "Both images show the same white playfield, menu bar and two zero counters. The colored target is near the upper right in A and lower/left in B. Visible displacement establishes active motion between screenshots.",
+  "time_before": "2026-11-08T03:44:33.539Z",
+  "time_after": "2026-11-08T03:44:53.743Z",
+  "timestamp_bracket_seconds": 20.204,
+  "timing_limit": "These are gate timestamps spanning screenshot/tool gaps, not exact image acquisition timestamps or a 10-second movement benchmark. No velocity inferred.",
+  "phase_requirement": "Match active white-field/no-shot starting state, displayed counters and fresh-load input/settling procedure; record target position/phase per repetition rather than requiring identical coordinates.",
+  "level_limit": "Level 1 label/story not visible in these screenshots and not observed separately in this fresh gate. Describe the scene by observed readiness rather than asserting Level 1.",
+  "capture_order_mhz": [
+    25,
+    12,
+    25,
+    12,
+    25,
+    12
+  ],
+  "capture_seconds_each": 20,
+  "input_during_capture": "none",
+  "controls": "Fresh reload per repetition, same single centered start click and settling interval where reproducible; visible/focused; same bundle/browser/render settings; confirm actual cpuMhz. Record starting/ending target positions and counters outside timing.",
+  "stop_rule": "Stop if fresh reload cannot reproduce the white active field, counters differ unexpectedly, scene transitions or target is no longer demonstrably active; document invalid captures and do not silently compare different scenes. Random/different target phase alone is not a blocker.",
+  "interpretation": "Compare clock/work/backlog medians and ranges only as a bounded scene diagnostic. Target phase can change workload and must be acknowledged. No original pace, scoring, full gameplay or fidelity qualification follows.",
+  "evidence_sha256": {
+    "barney-motion-gate-a.png": "191093da2d4e0ef5e33772ddbbdc00ecb2b1daa12de58c8452bbf162afcef8e6",
+    "barney-motion-gate-b.png": "5c763926ac9e27a760463cb2be05d5a3101943285e442a187f0cf5a9bae8afc6",
+    "barney-motion-gate-times.json": "8956edb5cc2c188e59798669cb6686cf482ee028d9cd6b1f49f9a4c2f0c0e042"
+  },
+  "workload_released": true,
+  "workload_run": "LIGHT screenshot/timestamp review only; no browser/emulator/build/conversion/benchmark/commit"
+}

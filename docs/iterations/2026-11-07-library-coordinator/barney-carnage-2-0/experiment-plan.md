@@ -1,0 +1,7 @@
+# Barney bounded quota diagnostic
+
+Parent read Sol motion-gate review before captures. Fresh default gate PNGs show same white field/two zero counters and target displacement; elapsed20.204seconds includes tool gaps, no velocity estimate. Level1 story/label not independently observed. Prior starting-region requirement revised BEFORE candidate captures with Sol rationale: record initial/final target location/phase; identical coordinates unnecessary, phase alone notblocker.
+
+Six TOTAL fresh captures in25/12,25/12,25/12 order (threeeach), labels barney-p1-25/12 throughp3. Same IAB2/Chrome157/test55847, compiled7170f7e7/WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f, 800x600/8bit/WebGLworker, CSS608x455.5/window665x672. Reloadtitle eachrun, same centeredCSS325385 click150ms; waitforactualwhitefield/target/twozero counters. Start40sec resourcesampler onlyafterfieldready; recordbeforeimage,20sec noinputcapture, endimage/phase. No aimedshots duringcapture. Allrows actualquota/visible/focused/complete/coverage checked. Stop onscene/readinessmismatch, captureinvalidity, stuckinput/crash or visiblydisruptedbehavior. No quota sweep.
+
+This tests clock/workresponse and preservedmotion, notoriginalpace/fidelity. Targetphase, hostload andactualsimulationwork differ; allbrowser/CodexCPU is notgameCPU. No promotion without hits/scoring/transitions, busy/referencepace, audio/saves/controller evidence. Originalnormal8087/privatefixture remainunchanged.

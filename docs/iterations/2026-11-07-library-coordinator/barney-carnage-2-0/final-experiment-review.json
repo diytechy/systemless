@@ -1,0 +1,54 @@
+{
+  "title": "Barney Carnage 2.0",
+  "decision": "Uphold bounded stop before candidate capture; retain unchanged 25 MHz; no automatic retry.",
+  "workload_released": true,
+  "review_scope": "LIGHT independent document/PNG audit, plus baseline raw-rate/hash verification; no runtime workload",
+  "plan": {
+    "total_captures_planned": 6,
+    "completed_baseline_captures": 1,
+    "completed_candidate_captures": 0,
+    "unperformed_captures": 5,
+    "status": "incomplete"
+  },
+  "baseline": {
+    "label": "barney-p1-25",
+    "actual_mhz_values": [
+      25
+    ],
+    "raw_rows": 1477,
+    "guest_ticks_per_second_recomputed": 4.354110280104192,
+    "visual_rows": 1,
+    "resource_coverage_brackets_capture_reported": true,
+    "cpu_boundary": "Broad browser/Codex aggregate including unrelated activity; not game CPU",
+    "aggregate_cpu_percent_of_host_reported": 18.62713400908565
+  },
+  "png_findings": [
+    "Baseline begin shows colored target on white field and two zero counters.",
+    "Baseline end lacks visible target; afterwait shows target again with counters still zero. Temporary absence does not establish readiness failure or stall.",
+    "Requested-12 screenshot shows repeated magenta marks in a horizontal upper-field row, absent from inspected 25 MHz screenshots. This exceeds target-position/phase variation."
+  ],
+  "candidate": {
+    "requested_mhz": 12,
+    "actual_mhz_verified": false,
+    "actual_mhz_export": null,
+    "capture_performed": false,
+    "persistence": "Additional 5-second check reported by coordinator; single supplied PNG does not independently prove duration.",
+    "cause": "undetermined; no quota causality, game defect, renderer or service diagnosis inferred"
+  },
+  "accepted_change": null,
+  "paired_resource_gain": null,
+  "limits": [
+    "No repeated baseline/candidate comparison, medians/ranges or six-run completion",
+    "No candidate performance or resource-paired gain",
+    "No original pace/fidelity, scoring, busy-level, audio/save/controller qualification"
+  ],
+  "next_step": "Only a separately scoped same-state pixel/presentation/owner-packet comparison with actual quota evidence and independent reference can justify retry; do not automatically rerun/sweep budgets.",
+  "evidence_sha256": {
+    "barney-p1-25-begin.png": "52761013ba0ee12b3db83ee5a5fdd7a274724cab8a5b6812d81308f043841b2c",
+    "barney-p1-25-end.png": "c68ef973a1c4de7d112a53874e059fc4245b5d6fd560648c881700ff1be81401",
+    "barney-p1-25-afterwait.png": "341bdb5b26e23d6946afcc9b60cf20340e9ac3f75f72e09fa9f732b241b2a540",
+    "barney-12-readiness-difference.png": "db74ac3a6ef5dbd31ee6eb14caaba35d1299a480abc1c53545b32f5b57e0546d",
+    "barney-p1-25-timing.json": "f1f4b0642489f6173a4eaae7ab18c3bfcdd49b46ae634e018b3200e0ec70919d",
+    "barney-p1-25-resources.json": "ea514fce634b1593476c679588de5c34eab86b9d6683b078deac572a2a30abbd"
+  }
+}

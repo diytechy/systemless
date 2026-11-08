@@ -27,7 +27,14 @@
       "controls": "Keyboard swing/flip/bounce/reverse and pause observed; hardware unqualified",
       "timing": "Final3x25/6: median guest25.2264/60.1531Hz; Movement actual rotation13.089s(defaultpartialturn)/5.0002s(6);6experimental only, no original oracle or full fidelity qualification",
       "original_firstpass_status": "measurement blocked",
-      "followup_report": "clockwerx-html5/final-comparison-review.md"
+      "followup_report": "clockwerx-html5/final-comparison-review.md",
+      "source_native_firstpass_status": "unchanged baseline",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "clockwerx-html5/final-comparison-review.md",
+        "accepted_change": null,
+        "reason": "Default slower;6 experimental, no independent original-machine oracle; prototype fidelity/resource boundaries explicit."
+      }
     },
     {
       "slug": "koji",
@@ -68,7 +75,7 @@
       "depth_size": "640x480, 8-bit",
       "preferences_save_id": "koji-personal-204; Koji 2.0 Registration/Koji Registration",
       "controls": "Native left/right/tongue/pause; browser resume+movement+jump observed; water unqualified",
-      "timing": "3 focused release-browser captures at25; median59.959 guest ticks/sec, range59.903-60.128; same initial level, manually observed readiness; prior Edge emulator activity unverified during captures, isolation downgraded",
+      "timing": "60.248 guest Hz; Level1 lily-pad field, score0, synthetic test origin, no input20seconds, insects and deaths/respawns continue",
       "associated_containers": [
         {
           "path": "Trash/Koji_the_Frog.SIT",
@@ -81,7 +88,17 @@
       ],
       "report": "koji/report.md",
       "accepted_setting": "25 MHz unchanged; no candidate warranted by first-level clock evidence",
-      "review": "Coordinator and Sol worker reviewed raw rates, resource hashes, scope and behavior gaps"
+      "review": "Coordinator and Sol worker reviewed raw rates, resource hashes, scope and behavior gaps",
+      "source_native_firstpass_status": "unchanged baseline",
+      "followup_report": "release-browser-reviews/koji.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/koji.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "One baseline only; no candidate warranted from this scene. Sound audibility/sync, saves, physical controller, busy/long play, independent original timing unqualified. Scene phases and lives not deterministic.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "delirium",
@@ -107,15 +124,25 @@
       "depth_size": "640x480, 4-bit",
       "preferences_save_id": "delirium-personal-11; Delirium 1.1 Preferences",
       "controls": "Native up/down/fire/pause/resume observed; browser pause message; audio/reference/saves/controller unqualified",
-      "timing": "3 default25 captures: median56.462Hz range55.797-58.010. One12MHz60.149Hz capture unmatched and heavily contended; no paired comparison/adoption; prior Edge emulator activity also unverified",
+      "timing": "60.096 guest Hz; Classic field after PREPARE message cleared, score100, orb/landscape visible, no input20seconds; actual readiness phase differs from earlier score0 runs",
       "report": "delirium/report.md",
       "accepted_setting": "25 MHz unchanged;12 remains exploratory/unmatched",
-      "review": "Coordinator reviewed raw evidence; Sol worker reviewed hypothesis and conservative early stop"
+      "review": "Coordinator reviewed raw evidence; Sol worker reviewed hypothesis and conservative early stop",
+      "source_native_firstpass_status": "unchanged baseline",
+      "followup_report": "release-browser-reviews/delirium.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/delirium.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "One contextual baseline; no matched candidate or pace/fidelity claim. Native/browser ship controls remain incompletely qualified; sound/save/controller/busy play untested; old12 candidate remains unaccepted.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "3-d-cannon",
       "title": "3-D Cannon",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "3-D Cannon/3-D Cannon(FAT)",
@@ -133,10 +160,20 @@
       "depth_size": "800x600 8-bit native exploratory; source SIZE5120000; browser display unverified",
       "preferences_save_id": "Existing3-D Cannon Preferences copied privately; browser ID/mapping unassigned",
       "controls": "ReadMe arrows aim, < > velocity, Space fire, Command accelerates; Space transition observed only",
-      "timing": "Browser baseline pending compiled entry/route; native ticks are behavior only",
+      "timing": "56.232 guest Hz; OnePlayer terrain/perspective, Red0 Blue0, aim359.6 afterRight, velocity50percent, no input20seconds afterSpace view transition",
       "report": "3-d-cannon/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Read-only hashes/file forks/Finder fields verified; native title/map/Space response,0assertions. Synthetic partial-ancestor dates/path guards pass. machfs original folder Finder information unavailable; diagnostic fixture scope explicit; no settings accepted"
+      "review": "Read-only hashes/file forks/Finder fields verified; native title/map/Space response,0assertions. Synthetic partial-ancestor dates/path guards pass. machfs original folder Finder information unavailable; diagnostic fixture scope explicit; no settings accepted",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/3-d-cannon.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/3-d-cannon.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Bounded readiness/input only; shot collision/scoring/pause, busyplay, sound,saves,hardware and original-reference timing unqualified. One baseline no candidate.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "3d-brick-bash-1-1-1",
@@ -161,15 +198,25 @@
       "depth_size": "800x600 native:8-bit draws NewGame;4-bit black. Both exploratory. SIZE1331200",
       "preferences_save_id": "No Boot preference by filename/creator; browser ID/mapping unassigned",
       "controls": "ReadMe mouse paddle/button speed;8-bit floor polygon responds, ball/collisions unverified",
-      "timing": "No compiled browser entry; native ball/collision readiness and fidelity unresolved",
+      "timing": "No gameplay timing; 8bit brick room/counters and menu; attempted CommandN; mouse drag changes central polygon to broad white horizontal band",
       "report": "3d-brick-bash-1-1-1/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Source hash and3/4file fixture metadata checked;8-bit NewGame/paddle response observed,4-bit black behavior. Coordinator inspected pre/post images; white band unexplained without reference. Alias preservation and guard/date tests pass; no runtime setting accepted."
+      "review": "Source hash and3/4file fixture metadata checked;8-bit NewGame/paddle response observed,4-bit black behavior. Coordinator inspected pre/post images; white band unexplained without reference. Alias preservation and guard/date tests pass; no runtime setting accepted.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/brick-bash.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/brick-bash.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Ball/collision/gameplay readiness remains unresolved, so no meaningful release timing baseline or tuning comparison. No specific runtime cause proven; full controls/audio/saves/hardware untested.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "acquire-1-0",
       "title": "Acquire 1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Acquire \u00c6\u2019/Acquire 1.0",
@@ -190,15 +237,25 @@
       "depth_size": "800x600 8-bit native exploratory; SIZE768000;640x480 unverified",
       "preferences_save_id": "No Boot preference by name/creator; launcher alias only; browser ID/mapping unassigned",
       "controls": "Mouse click items; cross removed and score0to100 observed; penalties/end/pause untested",
-      "timing": "Release browser entry absent; native behavior is not timing or fidelity qualification",
+      "timing": "60.126 guest Hz; First timed board score100 aftercross selection; no inputs20seconds, random icons continue",
       "report": "acquire-1-0/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "3file forks/Finder scope and original hashes checked. Native splash/NewGame/File menu and cross-click score0to100 observed,0assertions,0exhaustion. No blocker in bounded smoke; no runtime change."
+      "review": "3file forks/Finder scope and original hashes checked. Native splash/NewGame/File menu and cross-click score0to100 observed,0assertions,0exhaustion. No blocker in bounded smoke; no runtime change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/acquire.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/acquire.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Single exploratory baseline no candidate; randomphase/endgame, pause, original130secondpace, sound,saves,hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "action-dome-1-0",
       "title": "Alien Action Dome 1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Action Dome/Action Dome 1.0",
@@ -220,11 +277,21 @@
       "depth_size": "256colors required;800x600 8-bit native observed;640x480 unverified; SIZE5120000",
       "preferences_save_id": "Existing preferences/scores retained inside private folder; browser ID/mappings unassigned",
       "controls": "Saved keypad8/2/6/4 movement, Esc stop, Return pause; right and pause/resume observed",
-      "timing": "Release browser entry absent; native timing/fidelity unqualified",
+      "timing": "60.120 guest Hz; Restarted Stage1, score0/life1/timer45 initially; idle20seconds evolves through death/end to highscore screen",
       "report": "action-dome-1-0/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "7file fixture preservation reviewed; coordinator independently rehashed source and fixture. Stage1/right movement/Return pause-resume observed;3pixel assertions pass,0exhaustion. No native blocker or runtime change.",
-      "dependencies": "Sprund sprite/sound file mandatory; whole7file folder includes saved preferences/scores"
+      "dependencies": "Sprund sprite/sound file mandatory; whole7file folder includes saved preferences/scores",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/action-dome.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/action-dome.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Exploratory interval includes endgame/highscore, not pure20seconds activearena. No candidate or timing-fidelity inference. Sound/save/hardware and independent reference unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "adventure",
@@ -250,18 +317,28 @@
       "depth_size": "800x600 native1-bit and8-bit exploratory; SIZE174080 unchanged",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "Documented typed commands/Command and Movement menus; not qualified",
-      "timing": "No gameplay baseline; wall-aborted extension is not completed480ticks or performance evidence; native compile revision unknown",
+      "timing": "No gameplay timing; Titled empty Adventure window with blank menu bar at8bit; no text/prompt reached",
       "report": "adventure/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Diagnostic native readiness unresolved:1/8-bit empty window,0assertions; startup extension stopped at>90s without final report. No proven IO loop or service diagnosis.4file forks and source/fixture hashes checked; no runtime edits.; Bounded blank readiness is unresolved, not diagnosed broad incompatibility; experimental release route prepared",
       "version_notes": "Resource1.1 and README1.1 correction; README heading1.0",
       "dependencies": "README System4.1+; no external game dependency documented;4file folder",
-      "original_firstpass_status": "compatibility blocker"
+      "original_firstpass_status": "compatibility blocker",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/adventure.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/adventure.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "No gameplay readiness, so no performance or pacing comparison. Native same symptom; specific runtime/console/IOfault unproven. No sound/save/controller qualification.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "angband",
       "title": "Angband 2.0.2 (Macintosh)",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Angband/Angband",
@@ -281,17 +358,27 @@
       "depth_size": "800x600 8-bit preserved-pref readiness observed;1-bit gap onlyfresh state; SIZE972800 unchanged",
       "preferences_save_id": "Boot Angband Preferences copied and discovered at virtual SystemFolder/Preferences; browser ID/mapping unassigned",
       "controls": "Character creation manual rolling; keypad directions,6 observed; i inventory observed",
-      "timing": "No compiled private browser entry or real-time baseline; native ticks are behavior only",
+      "timing": "60.121 guest Hz; NewHumanMaleWarrior town, namedt, inventoryclosed, noinput20seconds; turnwaitingidle",
       "report": "angband/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "5file preserved-preference fixture verified; source/Boot/new fixture independently rehashed.8-bit town/keypad6/inventory observed,0assertions/exhaustion. Existing Boot pref now found without create sequence. Prior1-bit evidence is default-state only; no runtime change.",
       "version_notes": "Mac port2.0.2, underlying PC game code approximately1.3.1",
-      "dependencies": "System6.0.4+ documented;4title files plus copied Boot preference; no external game dependency documented"
+      "dependencies": "System6.0.4+ documented;4title files plus copied Boot preference; no external game dependency documented",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/angband.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/angband.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Turnwaitingidle is not gameplay pace/inputlatency; no candidate. Busycombat, movement distance, sound,saves,controllerhardware and originalreference unqualified. Generated preference writes restricted to testorigin.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "arashi-1-1-1",
       "title": "Arashi 1.1.1",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "ARASHI 1.1.1 \u00c6\u2019/Arashi 1.1.1",
@@ -311,16 +398,26 @@
       "depth_size": "256colors/grays documented;800x600 8-bit native exploratory; SIZE1433600",
       "preferences_save_id": "Boot name/AR|F creator scan found no matches; browser ID/mapping unassigned",
       "controls": "Documented mouse move/fire, Space superzap,P pause; effects not qualified",
-      "timing": "No representative scene or release entry; native696ticks are not wall-time speed",
+      "timing": "60.167 guest Hz; Selectedlevel9 tube/wireframe score1250; mouse tested before idle20s; capture evolves to highscore entry",
       "report": "arashi-1-1-1/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "7file extraction and source/Boot hashes reviewed; coordinator source/fixture hashes match. Startup/selector/changing stars reached,0assertions/exhaustion; representative gameplay/fire/pause unresolved. No diagnosed service or runtime change.",
-      "dependencies": "Embedded defaults documented; supplementary scripts; optional adjacent script fnfErr not proven blocker"
+      "dependencies": "Embedded defaults documented; supplementary scripts; optional adjacent script fnfErr not proven blocker",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/arashi.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/arashi.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Interval includes highscore transition; not pureactiveplay. Traces/rendering and mouse/firing fidelity, originalpace, audio/save/controllerhardware remain unqualified; no candidate.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "bachman-2-0u",
       "title": "Bachman 2.0u",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Bachman 2.0u Folder/Bachman 2.0u",
@@ -341,16 +438,26 @@
       "depth_size": "800x600 8-bit exploratory; SIZE2048000 unchanged",
       "preferences_save_id": "Bachman Prefs absent; Boot aliases/history only, retained separately; browser ID/mapping unassigned",
       "controls": "Arrows/keypad/custom or mouse documented; literal Right movement observed; pause unqualified",
-      "timing": "No compiled browser entry; native scene/input is not performance/fidelity qualification",
+      "timing": "59.927 guest Hz; Level1 score0, noinput20seconds leads toGameOver; Fastanimationdefault",
       "report": "bachman-2-0u/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "3file fixture verified and source/fixture independently rehashed. Native title/Begin/Level1 maze and heldRight displacement observed;0assertions/exhaustion. No matching game pref, only history aliases; fresh state explicit. No runtime change.",
-      "dependencies": "3file folder includes documentation/raw alias; built-in levels used"
+      "dependencies": "3file folder includes documentation/raw alias; built-in levels used",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/bachman.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/bachman.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Idlecapture includesGameOver; exactmovement/pausestability notisolated. No candidate or originalfidelity; audio,saves,physicalcontroller,busyplay unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "balderdoush-1-04i",
       "title": "Balderdoush 1.04i",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Balderdoush 1.04i/Balderdoush 1.04i",
@@ -368,16 +475,26 @@
       "depth_size": "ReadMe recommends640x480/supports1-8bit; native800x600x8 exploratory; SIZE819200",
       "preferences_save_id": "No Balderdoush.PREF found;2recent aliases retained separately; default-state test",
       "controls": "Configurable movement; Right scrolling/digging observed; Shift pickup/pause keys documented not qualified",
-      "timing": "No compiled release route/real-time baseline; pause/audio/reference/saves unqualified",
+      "timing": "60.121 guest Hz; Level01 score0 3men, initialtime150; noinput20seconds thenRight300ms; fieldremainsactive",
       "report": "balderdoush-1-04i/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "6file fixture verified; coordinator independently checked source/fixture hashes. Game/Space/level01 and right-arrow scrolling/digging observed; completed150tick probe0assertions/exhaustion. Separate longer startup aborted90s, not completed evidence. Defaults/no actual pref; no runtime change.",
-      "dependencies": "BDD_Game1 opened/read; Boulder CWS and other folder content retained, not separately played"
+      "dependencies": "BDD_Game1 opened/read; Boulder CWS and other folder content retained, not separately played",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/balderdoush.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/balderdoush.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Onebaseline no candidate; countdown originalpace unqualified, manualgaps preclude exactrate; pause,collisions, scoring,busyplay,audio,saves,controllerhardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "barney-carnage-2-0",
       "title": "Barney Carnage 2.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "BarneyCarnage2.0\u00c6\u2019/Barney Carnage 2.0",
@@ -395,12 +512,22 @@
       "depth_size": "800x600 observed,8-bit exploratory; SIZE2560000 unchanged",
       "preferences_save_id": "Generic???? creator16matches separate/not imported; title match only recent alias; no actual preference established",
       "controls": "Mouse start/advance; mouse shooting documented, aimed hit unverified",
-      "timing": "No release route/real-time baseline; initial native smoke only",
+      "timing": "5.006 guest Hz; White field with smallmovingtarget nearupper/rightedge, noinput20seconds",
       "report": "barney-carnage-2-0/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "4file fixture verified; source/fixture independently rehashed. Title/story/initial playfield and moving target observed;3finite probes0assertions/exhaustion. Shot/hit/scoring and Options unresolved. Generic creator prefs ambiguous; no runtime change.",
       "version_notes": "ReadMe confirms2.0",
-      "dependencies": "4file folder includes readme/alias/icon;5levels documented, initial one only observed"
+      "dependencies": "4file folder includes readme/alias/icon;5levels documented, initial one only observed",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/barney.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/barney.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Hit/scoring/rules not independentlyverified; no originalpace, pause,audio,saves,hardware qualification. Sparsewhite scene is bounded context no broader compatibility. No candidate.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "battletanks-2-12-1",
@@ -425,11 +552,21 @@
       "depth_size": "Native observed800x600x8 exploratory; original SIZE307200 retained.",
       "preferences_save_id": "Boot title/creator matches only aliases preserved separately; no actual title setting found, fresh/default state. No browser save ID assigned.",
       "controls": "Mouse File/New dialog responds; angle/power controls and firing unqualified.",
-      "timing": "No browser baseline; native ticks are behavior only. Gameplay readiness unresolved.",
+      "timing": "No gameplay timing; Two-player newgameaccepted, Save/SaveAsenabled, flatgreenfieldstillnotanks/terrain",
       "report": "battletanks-2-12-1/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Exact1file fixture verified and source/fixture independently rehashed. Five bounded probes exit0 without exhaustion; File/New setup responds but representative tanks/terrain absent through518 ticks. Readiness unresolved; no missing-service or renderer diagnosis established. Version filename/resource ambiguity retained. No runtime change.",
-      "version_notes": "Filename2.12.1 versus vers textv2.0; unresolved."
+      "version_notes": "Filename2.12.1 versus vers textv2.0; unresolved.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/battletanks-css.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/battletanks-css.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "No representativebattle despiteacceptedsetup. No gameplaytiming/candidate or diagnosedterraincause. Tankmenuattemptunresolved; audio,savesroundtrip,pause,hardware unqualified. Earlierapproximateclickattempts superseded.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "bedlam",
@@ -457,16 +594,26 @@
       "depth_size": "Documented512x342 monochrome playfield centered in observed800x600x1. Original SIZE variants retained; effective partition uninstrumented.",
       "preferences_save_id": "Boot Bedlam Preferences preserved and virtual FindFolder/FSMakeFSSpec/resource-open reachability verified. Browser save ID unassigned.",
       "controls": "Readme mouse movement/button fire, held-fire repeat/early travel skip; New Game click observed, battle input efficacy unverified.",
-      "timing": "No browser baseline; native diagnostic travel transitions only, not real-time performance.",
+      "timing": "No gameplay timing; Monochromemenu thenNewGame, Pluto informationbriefing; heldmousebutton advances to sparseblack/star transition, no cockpitbattle reached",
       "report": "bedlam/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Seven-file combined fixture verified; parent independently rehashed source001 and all three copies. Preserved preference is reached/opened successfully, monochrome menu/New Game observed. Three completed scripts0errors/exhaustion, but final782ticks still travel; battle and mouse efficacy unresolved. No renderer/service diagnosis or setting change.",
-      "dependencies": "Bedlam Sounds retained with full6file folder; audio loading unverified."
+      "dependencies": "Bedlam Sounds retained with full6file folder; audio loading unverified.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/bedlam.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/bedlam.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Representativebattle not reached in boundedfollowup, no meaningful gameplaytiming/candidate. Movement/fireinbattle,pause,sound,saves,hardware,reference unqualified. Sparse transition has no diagnosedcause.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "bikaka-1-4",
       "title": "Bikaka 1.4",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Bikaka 14 Folder/Bikaka 1.4",
@@ -487,16 +634,26 @@
       "depth_size": "Observed800x600;8bit completed,4bit partial. Docs allow B/W through256colors. Original SIZE512000 retained.",
       "preferences_save_id": "Source application resource fork/potential embedded settings retained. Boot title/creator no match; Bikaka Prefs runtime lookup missing. Active embedded settings/persistence unverified; no browser ID.",
       "controls": "Configurable keys/special-key ASCII numbers documented; active controls unresolved after literal-left and menu tap.",
-      "timing": "No release-browser baseline; short8bit native readiness only,4bit incomplete excluded from completed counters.",
+      "timing": "26.024 guest Hz; FreshCommandN initialfallinghexpiece, score0/level1/lines0, noinput20seconds, activeboardretained",
       "report": "bikaka-1-4/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Two-file fixture verified; parent independently rehashed source001/fixture and inspected raw76tick8bit report0assertions/exhaustion. Colored initial board observed but unchanged left/menu captures leave controls and falling motion unresolved. Separate4bit run self-aborted~96s without final report; no proven rendering/service defect. Embedded settings retained, defaults not assumed. No runtime change.",
-      "dependencies": "Two-file title folder preserved; no external companion established."
+      "dependencies": "Two-file title folder preserved; no external companion established.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/bikaka.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/bikaka.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singlebaseline no candidate. Soundchecked inOptions butaudibility/sync unqualified; broaderrules,score,linecompletion,referencepace,saves,controllerhardware untested. ConfigdialogOK preservedvalues.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "blobbo",
       "title": "Blobbo Full1.0.1; Lite1.0/1.0.1 separately preserved",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Blobbo 1.0 Lite \u00c6\u2019/Blobbo",
@@ -544,11 +701,21 @@
       "depth_size": "Observed800x600x8 exploratory; original SIZE819200 retained for all variants.",
       "preferences_save_id": "Exact Boot Blobbo Preferencs retained and HOpenResFile/close reachability observed. Lite/Full pref association unverified; no browser ID yet.",
       "controls": "Full Page3 directional mouse click observed; configurable keyboard and pause untested.",
-      "timing": "Native Full first-board mouse response observed; release-browser performance not measured, no candidate.",
+      "timing": "60.171 guest Hz; FullWelcome01 board afterleftmousemovement, noinput20seconds",
       "report": "blobbo/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Full83file combined and separate Lite8/Full82 fixtures verified; parent source/fixture hashes match. Raw166tick report0assertions/exhaustion reviewed; parent visually verified one-cell-left and Status Moves1. File/Status menus and original-pref open observed. Full/Lite association of Boot pref uncertain; versions kept separate. Native readiness only, no setting change.",
-      "dependencies": "Full82file folder and Boot pref retained; Lite8file folder separate. Worlds/solutions/helpers preserved, requirement not fully qualified."
+      "dependencies": "Full82file folder and Boot pref retained; Lite8file folder separate. Worlds/solutions/helpers preserved, requirement not fully qualified.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/blobbo.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/blobbo.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Bounded puzzleboard interaction; no fullcompletion, collision/scoring, originalpace, busyplay,pause,audio,saves,physicalcontroller qualification. Onebaseline no candidate.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "blood-bath-demo-1-96",
@@ -589,11 +756,21 @@
       "depth_size": "Documented256colors, observed800x600x8. Original SIZE variants retained, no partition override.",
       "preferences_save_id": "Boot title/creator Vlte scan no match. Copied title High.Scores retained; persistence untested, no browser ID.",
       "controls": "Documented mouse aim/fire, bottom-screen reload,1/2/3weapons, comma/period volume; gameplay input unverified.",
-      "timing": "Release-browser baseline absent; native title-readiness unresolved, no pacing candidate.",
+      "timing": "No gameplay timing; Samepartiallyrenderedredtitle aftercorrectedDemo-target recheck",
       "report": "blood-bath-demo-1-96/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "74file fixture including literal HFS Tips/Tricks name verified, source001/fixture independently rehashed. Raw422tick final report0assertions/exhaustion reviewed; three finite probes reach changing title but early/later Demo clicks do not establish play. Missing music absent exact-name source001 search, causal role unknown. No proven service/rendering defect or runtime change.",
-      "dependencies": "Full74file folder preserved; companion data open. Requested Blood Bath Demo.music absent exact-name source001 search, requirement unknown. SoundManager3.0 multichannel requirement documented."
+      "dependencies": "Full74file folder preserved; companion data open. Requested Blood Bath Demo.music absent exact-name source001 search, requirement unknown. SoundManager3.0 multichannel requirement documented.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/blood-bath-css.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/blood-bath-css.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "No gameplayreadiness or timing/candidate; correctCSS attemptstilldoesnotadvance. Missingmusic/service/palettecauseunproven. Nativeearliergapretained, sound/save/hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "bloodsuckers",
@@ -616,12 +793,22 @@
       "depth_size": "Observed800x600x8 exploratory, documented requirement unknown. Original SIZE3072000 retained.",
       "preferences_save_id": "Generic creator???? Boot matches ambiguous; title matches launcher/recent aliases, no attributable actual pref. Embedded settings retained; defaults not certified. No browser ID.",
       "controls": "Documented mouse hand/swat,Qquit,Escape menu,CapsLock pause. Menu mouse response observed; gameplay/pause unverified.",
-      "timing": "No release-browser baseline; completed native menu/input evidence only, not wall-time pace.",
+      "timing": "No gameplay timing; Animatedtitlemenu aftercorrectedPlayballandtextclicks; noarm/meters",
       "report": "bloodsuckers/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "12file fixture verified and source001/fixture independently rehashed. All3probes completed; raw568tick input report0assertions/exhaustion reviewed. Parent inspected animated menu and visible Play indicator coordinates; active hit region and gameplay entry unresolved. Mouse-hand response observed, no service diagnosis or setting change. Earlier apparent stall resolved; no incomplete final run.",
       "version_notes": "No numerical version established; documentation Pangea/1993 attribution/date evidence only.",
-      "dependencies": "All12folder files/Data/readmes/Sounds retained; external requirement not established."
+      "dependencies": "All12folder files/Data/readmes/Sounds retained; external requirement not established.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/bloodsuckers-css.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/bloodsuckers-css.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Playhit/readinessstillunresolvedaftermeasuredcoordinatecorrection; no gameplayperformance/candidate or diagnosedservicecause. Sound/saves/pause/hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "bob-s-bricks-millennium-edition",
@@ -651,12 +838,13 @@
       "report": "bob-s-bricks-millennium-edition/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Corrected3file HFS+ fixture retains represented folder dates; old copy kept. Parent source006/corrected-fixture hashes and raw corrected failure report reviewed: explicit PPC halts tick1 pc0 cycles108 before UI,0assertions/exhaustion. ReadMe OS9/CarbonLib requirement and186import gaps are context, causal symbol unresolved. No runtime/pacing change.",
-      "dependencies": "ReadMe OS9+,CarbonLib,G3+,256colors,12MB;3PPC fragments/186import gaps, not causal proof. Trace first null indirect call before repair estimate."
+      "dependencies": "ReadMe OS9+,CarbonLib,G3+,256colors,12MB;3PPC fragments/186import gaps, not causal proof. Trace first null indirect call before repair estimate.",
+      "source_native_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "bolo",
       "title": "Bolo0.99.7;0.99.5 variant retained separately in inventory",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Bolo f/Bolo 0.99.7",
@@ -694,17 +882,27 @@
       "depth_size": "Observed800x600x8 exploratory. Original SIZE0/1preferred15360000 versus-1preferred1536000 retained; native zone~14.9MBfree consistent with larger allocation.",
       "preferences_save_id": "Boot BOLO/title matches only0.99.5 Launcher/Recent references, no identified actual pref. Archive state retained; persistence untested, no browser ID.",
       "controls": "Tutorial Return advances,Q forwards,A brake; Return/Q response observed, isolated displacement/steering/fire/pause unverified.",
-      "timing": "Offline Tutorial native readiness; release-browser baseline and isolated movement/braking unmeasured.",
+      "timing": "60.172 guest Hz; OfflineTutorial water/riverapproach, instructiondialogcleared andboatstoppedafterA, noinput20seconds",
       "report": "bolo/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "82file/10folder-date fixture verified, raw16bit Finder coordinates retained; parent source002/fixture hashes match. Raw386tick0assert/exhaust report and before/after images reviewed: Return dismisses Q/A instruction into boat/island scene; prior dialog obscures displacement, no motion fidelity claim. Four completed offline scenarios; no live networking or0.99.5 state mixing. No setting change.",
       "version_notes": "vers0.99.7 while About resource0.99.6; preserve internal ambiguity, do not substitute0.99.5.",
-      "dependencies": "Full82file folder/maps/brains/docs/helpers retained; explicit0.99.7 game only. Tutorial offline, network modes untested."
+      "dependencies": "Full82file folder/maps/brains/docs/helpers retained; explicit0.99.7 game only. Tutorial offline, network modes untested.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/bolo.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/bolo.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Onequietbaseline no candidate; steering/fire/combat/network,pause,sound,saves,hardware andoriginalpace unqualified. EarlyAattemptwasconfoundedbydialog; laterstoppedscene supportsboundedbraking.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "bonk-1-4-2",
       "title": "Bonk 1.4.2",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Bonk 1.4.2 Folder/Bonk 1.4.2 (256 Colors)",
@@ -740,16 +938,26 @@
       "depth_size": "Documented color256minimum supports8bit selected variant; actual800x600 exploratory. Original SIZE262144 retained; B&W separate untested.",
       "preferences_save_id": "No Boot BONK pref; docs no System Folder files. Embedded settings/scores retained, persistence untested. BkHd Bonkheads Deluxe Prefs excluded; no browser ID.",
       "controls": "Begin/Space bomb/menu observed; documented mouse face clicks,Command-I level increment. Mouse scoring/pause unverified.",
-      "timing": "Native color Level1/action readiness only; release-browser baseline absent, no candidate.",
+      "timing": "58.870 guest Hz; Level1 facegrid initially, noinput20seconds evolves backtolevelselector beforepostcaptureinput",
       "report": "bonk-1-4-2/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Four-file both-variant fixture verified; parent source001/fixture hashes match. Raw213tick report0assertions/exhaustion and Level1/bomb images reviewed: Space Bombs1to0 plus BOOM observed. Menu opens, mouse scoring and transient-black frame unresolved; B&W behavior untested. Two completed scripts, no runtime/pacing change.",
-      "dependencies": "Both APPL variants, Word documentation and raw color alias preserved in4file fixture; external requirement unestablished."
+      "dependencies": "Both APPL variants, Word documentation and raw color alias preserved in4file fixture; external requirement unestablished.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/bonk.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/bonk.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixedactive/chooserinterval; no browserbomb/scoring,pause,referencepace,audio,saves,hardware qualification; nativebomb checkseparate. Onebaseline no candidate.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "bonkheads-deluxe",
       "title": "Bonkheads Deluxe1.0.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Bonkheads Deluxe/Bonkheads Deluxe",
@@ -769,11 +977,21 @@
       "depth_size": "Documented256colors/SoundManager3.0; observed800x600x8, initial game window640x480. Original SIZE3891200 retained.",
       "preferences_save_id": "Actual Boot Bonkheads Deluxe Prefs BkHd retained alone in corrected pref fixture; native FindFolder/FSMakeFSSpec/ResError reachability observed. Prior broader copies kept; no browser ID.",
       "controls": "Customizable left/right/jump,CapsLock pause,Esc exit documented; splash click only, gameplay/default mapping unverified.",
-      "timing": "No release baseline; bounded native menu readiness unresolved. Initial332ticks complete0assert/exhaust; stopped runs counters unavailable.",
+      "timing": "60.150 guest Hz; 1Player Surfaceville Level1, score0 trolls2initial then1, noinput20seconds, enemiesandfieldremainactive",
       "report": "bonkheads-deluxe/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Corrected12file fixture and actual-pref-only copy verified; parent source004/fixture hashes and raw completed332tick report reviewed. Saved pref virtual lookup exists=true/ResError0. Two later probes stopped75s after menu construction; final counters unavailable and parent confirmed last owned PID absent. GetPicture9501 last log is not causal proof. No service diagnosis or setting change.",
-      "dependencies": "BDX_Data,Original/Bonus Levels/editor subtree retained; levels beside executable per docs.12file corrected combined fixture."
+      "dependencies": "BDX_Data,Original/Bonus Levels/editor subtree retained; levels beside executable per docs.12file corrected combined fixture.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/bonkheads.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/bonkheads.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "No independentfullfidelity, mapping/movement/jump, score/collision, sound/saves/controllerhardware qualification. CapsLockpause unqualified: playfieldchangedbetween3secondPNGs, no explicitpauseoverlay. Onebaseline no candidate.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "brainjacker-1-0-1",
@@ -805,7 +1023,8 @@
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Three-file/folder-date title-only fixture verified; parent source003/fixture hashes and raw failed103tick68K report reviewed. Splash precedes IllegalInstruction4088 atPC000000C2,0assert/exhaust. One authorized separate PPC request stopped30s before checkpoint/report; counters unavailable, owned PID absent. Director6.5 is runtime, game1.0.1. No causal service diagnosis/default change.",
       "version_notes": "Readme/version history confirms game1.0.1; vers6.5 names Macromedia Director runtime.",
-      "dependencies": "Three-file title folder retained; Macromedia Director6.5 embedded runtime, external requirements unresolved."
+      "dependencies": "Three-file title folder retained; Macromedia Director6.5 embedded runtime, external requirements unresolved.",
+      "source_native_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "brickles-plus-3-0",
@@ -830,16 +1049,26 @@
       "depth_size": "800x600 logged,8bit exploratory supported color/BW help. Original SIZE262144 retained.",
       "preferences_save_id": "Actual Boot Brickles+Data preserved; PBOpen path plus PBRead676bytes confirm loading. Holds settings/colors/highscores; no deletion or browser ID.",
       "controls": "Help File New Game1/2/4paddles,click begin/next click pause,mouse paddle,P panic direction once per ball. All untested.",
-      "timing": "Native startup noncompletion at75s prevents readiness; counters unavailable and release-browser unmeasured.",
+      "timing": "No gameplay timing; ActualCmd1 one-paddle game starts; score0/5balls later7/2balls andbrickgap, butnativeframe andGUIshow noclearball/paddle",
       "report": "brickles-plus-3-0/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Exact2file app+pref fixture verified; parent source001/fixture hashes and stopped ownership record reviewed, PID absent. PBOpen/PBRead676 establish original-pref reachability. First run120 action did not complete by75s; no screen/final report/counters. Superseded broad fixture excluded from testing. Last preference read is not causal proof; no setting/service diagnosis.",
-      "dependencies": "Exact root APPL and Brickles+Data only in tested2file fixture; embedded TEXT help. Unrelated broad discovery copy superseded."
+      "dependencies": "Exact root APPL and Brickles+Data only in tested2file fixture; embedded TEXT help. Unrelated broad discovery copy superseded.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/brickles-css.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/brickles-css.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Presentationreadiness unresolveddespitegameprogress; cannotqualifyball/paddlemotion or meaningfulperformance/candidate. P ispanicnotpause; clickpauseattemptunisolated. Soundcheckedbutaudibility,saves,hardware,reference unqualified. EarlierCmdNattemptwasnotNewGame.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "brickoids-millenium",
       "title": "Brickoids Millenium1.1",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Brickoids Millenium 1.1 GPL/Brickoids Millenium",
@@ -861,16 +1090,26 @@
       "depth_size": "Source System7+,16bit preferred/8bit fallback,640x480 game window; actual800x600x8. Original preferred SIZE3956736 retained.",
       "preferences_save_id": "Boot Brik/title hit launcher alias only, preserved separately/excluded runnable. Embedded SCOR1000 state retained; persistence untested, no browser ID.",
       "controls": "Source mouse paddle,Space/button launch,Ppause,Qend,FileNew/Options; untested.",
-      "timing": "Native partial splash only, final counters unavailable after75s stop. Release-browser baseline unmeasured.",
+      "timing": "60.060 guest Hz; Level1 score1 atstart, launched/resumed ball, noinput20seconds; aftercapture score2/balls2",
       "report": "brickoids-millenium/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "21file/3folder-date source+game fixture verified; parent source003/fixture hashes match, owned PID absent, partial120tick splash PNG inspected. Later action stopped75s without final report/counters. Actual C/header/project source and GPL notices found and kept private. Source narrows splash/sound/gamma/delay transition, no cause proven; no setting change.",
-      "dependencies": "Full21file title/Documentation/Source Code subtree retained, actual GPL/C/CodeWarrior material. Build/source completeness untested."
+      "dependencies": "Full21file title/Documentation/Source Code subtree retained, actual GPL/C/CodeWarrior material. Build/source completeness untested.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/brickoids.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/brickoids.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Onebaseline no candidate. Fullcollision/pace/reference,busyplay,audio,saves,controllerhardware unqualified; postcapturescroll/pointermovement affects paddle outside timingwindow.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "chiral",
       "title": "Chiral1.0.1",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Chiral 1.0.1 \u00c6\u2019/Chiral",
@@ -891,11 +1130,21 @@
       "depth_size": "Documented256colors; observed800x600x8. Original SIZE1536000 retained; FAQ2.3MBfree not used as partition override.",
       "preferences_save_id": "Actual Boot Chiral License copied and VFS-seeded at correct path; actual guest open/read unproven. Embedded source state retained; no browser ID.",
       "controls": "Docs mouse bottom-vial atom placement,CapsLock pause,Esc abort. No visible readiness, all untested.",
-      "timing": "No representative scene; native black startup through1000ticks with0errors/exhaustion. Release-browser unmeasured.",
+      "timing": "55.469 guest Hz; PracticeLevel1 afteroneplacedatom, noinput20seconds; bonusrunsout/returnstotitle bypostcapture",
       "report": "chiral/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "14file title+actual-license fixture verified; parent source001/fixture hashes and raw1000tick passed0assert/exhaust report reviewed. Black captures120/332/1000 despite CWindow log, no halt/service diagnosis. License VFS seeding proved, guest lookup/read unresolved; no defaults/pref-load claim. Two bounded scenarios complete; no setting change.",
-      "dependencies": "13file source folder with Music/Sounds/Sprites/Titles/Scores and separate Basics1.0.0 helper retained; combined14files includes License."
+      "dependencies": "13file source folder with Music/Sounds/Sprites/Titles/Scores and separate Basics1.0.0 helper retained; combined14files includes License.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/chiral.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/chiral.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixedboard/titleinterval no pureactive20sorcandidate. Moleculecompletion,rules/fidelity,pace,busyplay,CapsLockpause,audio,saves,hardware unqualified. Nativeblackreadiness supersededbyreleaseGUIprogress.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "chrysanthemum-1-01",
@@ -921,16 +1170,26 @@
       "depth_size": "Actual800x600x8, dimensions/default and depth exploratory. Original SIZE870400 retained; embedded System7+ requirement.",
       "preferences_save_id": "Actual Boot Chrysanth Prefs samePrp; creator preserved. FindFolder/FSpOpenDF path and PBRead608request observed; return/application not established. No browser ID.",
       "controls": "Embedded File PlayCmd-G/InstructionsCmd-I/ChooseKeysCmd-K; PauseCmd-P/EndCmd-period/SoundCmd-S/MusicCmd-M. Actual gameplay/saved mappings unverified.",
-      "timing": "First120tick action incomplete at75s; final counters unavailable. No release-browser baseline.",
+      "timing": "Startup/presentation diagnostic only; 13.915 guest Hz; Level1 CakeWalk introduction/emptyflowerarrangementfield, score0initial then200, time1:29to1:09 acrosscaptureandUIgaps; noflowersclearlyvisible",
       "report": "chrysanthemum-1-01/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Exact2file app+actual-pref fixture verified; parent source001/fixture hashes and75s stopped ownership reviewed, PID absent. Guest resolves Chrysanth Prefs and requests PBRead608; completion/settings application unproven. No first screenshot/final report/counters; no causal file-service fault established. No runtime/pacing change.",
-      "dependencies": "Exact root APPL+actual pref only; no external content established, instructions embedded artwork uninspected."
+      "dependencies": "Exact root APPL+actual pref only; no external content established, instructions embedded artwork uninspected.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/chrysanthemum.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/chrysanthemum.json",
+        "evidence": "Readiness/presentation counter diagnostic only; no representative gameplay baseline or tuning qualification",
+        "reason": "Readiness/presentationcountersonly, no representativegameplay or candidate. No static-keypanelPNG: exporterreportednonewframe, caughttimeout; GUIstillvisible. Keybindingsnotchanged; originalpace, controls/arrangements, pause,audio,saves,hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "columns",
       "title": "Columns1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Columns",
@@ -951,16 +1210,26 @@
       "depth_size": "Observed800x600x8 exploratory; original SIZE819200 retained, explicit68K slice of fat app.",
       "preferences_save_id": "Root source001 columns.prefs retained and guest open/read840bytes toEOF verified; setting semantics unqualified. Boot scan no matches; no SystemFolder mapping or browser ID.",
       "controls": "Cmd-N NewGame/Cmd-P pause-resume and Options menu observed. Right-arrow3ticks not established; rotation/directional keys unresolved.",
-      "timing": "Native falling-gem motion/pause/menu readiness; release-browser baseline pending, no candidate.",
+      "timing": "60.202 guest Hz; NewGame initialfallinggems score0, noinput20seconds evolves toGameOver/highscorenameprompt; notsubmitted",
       "report": "columns/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Exact2file app+root-pref fixture verified; parent source001/fixture hashes match. Raw281tick0assert/exhaust report and pause/still/resume images reviewed: falling gems,40tick paused stability and resumed motion observed. Existing columns.prefs open/read840bytes toEOF confirmed, root-relative lookup. Direction/rotation/scoring unresolved; no pacing change.",
-      "dependencies": "Exact root Columns+columns.prefs2files only; no external content established. Resource copyright years differ, version consistently1.0."
+      "dependencies": "Exact root Columns+columns.prefs2files only; no external content established. Resource copyright years differ, version consistently1.0.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/columns.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/columns.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Timingincludesgameover/nameprompt so mixedcontextonly. Rotation/directionalbindings andpace/fidelity, busyplay,audio,saves,hardware unqualified; no candidate. columns-paused.png isearlierpostcaptureattemptinnameprompt, notpauseproof; actualproofnewpause-a/b pair.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "crunch",
       "title": "Crunch!2.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "CRUNCH Folder/CRUNCH",
@@ -981,11 +1250,21 @@
       "depth_size": "Readme System7,256colors,>512x384; actual800x600x8. Original SIZE2097152preferred/1048576minimum retained.",
       "preferences_save_id": "Boot RYAN/title hits confirmed launcher/recent alis only, excluded. Embedded original score/state retained privately; no actual external pref or browser ID.",
       "controls": "Cmd-B Begin,rightkey124/ch29 and Space pause/resume observed. Docs arrows/keypad/mouse velocity,E end,Cmd-E menu End; mouse/keypad/menus unverified.",
-      "timing": "Native play/right/pause readiness; release-browser baseline pending, no pacing candidate.",
+      "timing": "60.136 guest Hz; Firstmarblelevel, afterRight300ms/Spacepause-resume, score2/lives5 beforecapture toscore8/lives2after, noinput20seconds, activefieldretained",
       "report": "crunch/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Three-file fixture verified; parent source001/fixture hashes and raw220tick0assert/exhaust report reviewed. Parent visually verified rightward marble displacement and matched30tick paused PNG hashes; resume observed by worker. Cmd-B starts level; rightkey124/ch29 works where ch0 inconclusive. Embedded saved state retained without values; no setting change.",
-      "dependencies": "Exact3file folder includes APPL/readme/raw alias; no additional helper/content established. RuntimeSystem6 error text differs from stronger readmeSystem7."
+      "dependencies": "Exact3file folder includes APPL/readme/raw alias; no additional helper/content established. RuntimeSystem6 error text differs from stronger readmeSystem7.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/crunch.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/crunch.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Onebaseline no candidate; causalmovementdistance/referencefidelity, collisions/scoringcorrectness,busyplay, mouse/keypad,audio,saves,hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "ctb",
@@ -1013,12 +1292,13 @@
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Four-file fixture verified; parent source001/fixture hashes and raw tick2 failure reviewed. Exact PBGetCatInfo cycle and subsequent TrapInstruction2 recorded; preference open/read not reached. Coordinator source/spec review identifies mounted-volume namespace inconsistency, causal halt relationship unproven. Scoped regression follow-up in ctb/vfs-review.md; no runtime patch or setting change.",
       "dependencies": "Four files: app,Read Me,CTB Tetris stationery,actual CTB Settings; SAT/TransSkel/ShowHelp embedded acknowledgements, no external install established.",
-      "known_issues": "Observed mounted-volume parent traversal cycle; coordinator ctb/vfs-review.md identifies matching source namespace inconsistency and required regression scope. Subsequent TrapInstruction #2 causality unproven; no runtime fix yet."
+      "known_issues": "Observed mounted-volume parent traversal cycle; coordinator ctb/vfs-review.md identifies matching source namespace inconsistency and required regression scope. Subsequent TrapInstruction #2 causality unproven; no runtime fix yet.",
+      "source_native_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "cybernation-1-1-1",
       "title": "CyberNation 1.1.1",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "CyberNation 1.1.1 \u00c6\u2019/CyberNation 1.1.1",
@@ -1037,11 +1317,21 @@
       "depth_size": "Docs B&W/16/256 colors, System6+,2MB; actual800x600x8. Original SIZE2097152 retained.",
       "preferences_save_id": "Actual Boot CyberNation Prefs copied; FindFolder/HOpenResFile/UseResFile190 and Get1Resource CNPr259 request prove access path, consumption untraced. No browser ID.",
       "controls": "Cmd-N New game and right124/ch29 observed; arrows/keypad steering,0/Command fire,Space pickup,A abort,P pause,Q quit,S sound documented. Other actions unverified.",
-      "timing": "Native room movement readiness; verbose traced 73.1s run is not performance. Release-browser baseline pending.",
+      "timing": "60.143 guest Hz; FreshCmdN initialroom/Right400ms; NO P commands beforecapture; noinput20seconds, NPCpositions/playerstate changebyend",
       "report": "cybernation-1-1-1/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Eight-file fixture verified; parent source001/fixture hashes and raw 234-tick report reviewed (zero assertions/exhaustion). Parent confirmed Arnie center-to-right movement in room after Cmd-N. Five scenarios exited normally; P pause and alternating partial drawing remain unqualified. Pref open/current190/CNPr259 request observed, guest consumption untraced. No setting change.",
-      "dependencies": "Required CyberNation Data opened; complete folder plus actual preference retained,8 files. Update notes confirm1.1.1."
+      "dependencies": "Required CyberNation Data opened; complete folder plus actual preference retained,8 files. Update notes confirm1.1.1.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/cybernation-active.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/cybernation-active.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Oneactivebaseline no candidate. PartialHUD/sprite framesstillpresentationlimit; pausefreezingobserved,resumemethodunqualified; fire/pickup, busyplay,pace/collision/scoring,audio,saves,hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "deliverance",
@@ -1066,11 +1356,21 @@
       "depth_size": "Resources ColorQuickDraw and16/256colors; actual800x600x8, dimensions exploratory. Original SIZE2252800 retained.",
       "preferences_save_id": "Boot SystemFolder title/DELI scan no match; resources name Deliverance Prefs. Copied registration state unresolved, no browser ID or defaults certification.",
       "controls": "Resource labels Jump/Kneel/Left/Right/Fire,Cmd-P Pause,Cmd-Q Quit; actual assignments/behavior untested.",
-      "timing": "Registration UI only; gameplay/release-browser timing unavailable until owned installation state or serial located.",
+      "timing": "No gameplay timing; Name/organization/serial installationdialog asking serial onbackofDisk1; no gameplay",
       "report": "deliverance/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Three-file Boot-source fixture verified; parent Boot/fixture hashes and raw120tick completed report reviewed, zero assertions/exhaustion. Parent inspected empty-serial registration dialog; no gameplay reached. Narrow SystemFolder DELI/title scan finds no matching registration pref, original embedded state retained. Copied-state registration gap, no emulator incompatibility or setting change.",
-      "dependencies": "Complete3file game/Joystick subtree with GamePad/MouseStickII settings retained; hardware/driver requirement unestablished. Legitimate registration state needed for further readiness."
+      "dependencies": "Complete3file game/Joystick subtree with GamePad/MouseStickII settings retained; hardware/driver requirement unestablished. Legitimate registration state needed for further readiness.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/deliverance.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/deliverance.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Ownedserial/correctinstallationstate required beforegameplay; nativeBootscanfoundnoactualDeliverancePrefs. No runtimeincompatibilitydiagnosed. No performance/candidate, controls,pause,audio,saves,hardware orfidelity qualification.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "desk-invaders-ii",
@@ -1123,12 +1423,13 @@
       "report": "desk-invaders-ii/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
       "review": "Three-file DA fixture verified; parent independently matched source001/Boot/fixture hashes and raw pre-guest loader failure. Readme Desk Invaders2.3 plus dfil/DRVR12 with no CODE/cfrg/SIZE confirms accessory requirement. No executable found,0ticks/assertions/exhaustion; OpenDeskAcc source stub not reached. No pacing change.",
-      "known_issues": "Source preinspection only: src/systems/macintosh/desk_manager.rs:71 OpenDeskAcc returns0/no accessory opened. Desk-accessory hosting requirement must be confirmed by assigned worker; not yet title reproduction."
+      "known_issues": "Source preinspection only: src/systems/macintosh/desk_manager.rs:71 OpenDeskAcc returns0/no accessory opened. Desk-accessory hosting requirement must be confirmed by assigned worker; not yet title reproduction.",
+      "source_native_firstpass_status": "unsupported requirement"
     },
     {
       "slug": "dome-wars",
       "title": "Dome Wars Public Beta",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Dome Wars/Dome Wars",
@@ -1148,15 +1449,25 @@
       "depth_size": "Readme System7/640K; original SIZE768000. Observed800x600x8 exploratory.",
       "preferences_save_id": "No title/NTST Boot preference; unrelated Action Dome hits excluded; no save mapping established.",
       "controls": "File New Game/Help Controls; arrows/keypadpower,Command precision documented, turret direction wording ambiguous; no accepted input observed.",
-      "timing": "Native title/menu-bar readiness only; actual play and release-browser baseline pending.",
+      "timing": "60.120 guest Hz; Firstterrain/waitinghumanturn, Player1Human(defaultname) plus4IdiotAI, power300 afterUp; noinput20seconds",
       "report": "dome-wars/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Three-file fixture verified; parent source001/fixture hashes match, raw550tick report0assert/exhaust and title/canyon screenshot reviewed. Five finite completed scripts, no title dismissal/menu response or gameplay established. No proven service defect or pacing change; slow native readiness is not final incompatibility."
+      "review": "Three-file fixture verified; parent source001/fixture hashes match, raw550tick report0assert/exhaust and title/canyon screenshot reviewed. Five finite completed scripts, no title dismissal/menu response or gameplay established. No proven service defect or pacing change; slow native readiness is not final incompatibility.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/dome-wars.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/dome-wars.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Quietturnwaitingcontext doesnotmeasuretrajectory/combatpace. Firing, turretdirection(readmewordingreversed), hit/scoring,pause, busyplay,audio,saves,hardware/reference unqualified; no candidate. Nativeinput-readiness gap supersededbyreleaseGUIsetup/powerproof.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "drol",
       "title": "Drol v0.9 (ReadMe beta0.9b1)",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Drol \u00c6\u2019/Drol",
@@ -1177,15 +1488,25 @@
       "depth_size": "No explicit display requirement found; observed800x600x8 exploratory. Original SIZE786432 retained,68K.",
       "preferences_save_id": "No title/Drol Boot pref; original embedded state/raw alias retained, no browser mapping assigned.",
       "controls": "Documented arrows,A/Z,Escape pause,CmdRrestart/CmdSsound/CmdQquit; Space removes title,Aup/Escape confirmed, horizontal unresolved.",
-      "timing": "Native initial play/vertical/pause readiness; release-browser baseline pending.",
+      "timing": "60.126 guest Hz; Initiallevel afterSpace/A300ms, noinput20seconds, activeplatforms/enemies retained, lives4to3",
       "report": "drol/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Three-file fixture verified; parent source001/fixture hashes, raw456tick0assert/exhaust report and movement images reviewed. A visibly raises player; Escape/60tick paused PNG hashes identical, resume enemy motion observed. Horizontal124/ch29 inconclusive. Concurrent native run is behavior-only; no setting change."
+      "review": "Three-file fixture verified; parent source001/fixture hashes, raw456tick0assert/exhaust report and movement images reviewed. A visibly raises player; Escape/60tick paused PNG hashes identical, resume enemy motion observed. Horizontal124/ch29 inconclusive. Concurrent native run is behavior-only; no setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/drol.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/drol.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Onebaseline no candidate; horizontal/left/Z/fire/restartkeys, busyplay,referencepace/collisions/scoring,audio,saves,hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "fantastic-voyage",
       "title": "Fantastic Voyage1.1a",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "FVoy Folder/Fantastic Voyage 1.1a",
@@ -1207,10 +1528,20 @@
       "depth_size": "ReadMe B/W or color,System6.0.3\u00e2\u20ac\u201c7.1 tested; actual800x600x8 exploratory, original SIZE1024000.",
       "preferences_save_id": "Boot title/FVOY hits are launcher/recent item, no distinct pref; original embedded state retained.",
       "controls": "Help QOPM and alternate IJKL/keypad8046; Special Pause CmdP; only splash click exercised.",
-      "timing": "Splash readiness only; finite post-dismissal native noncompletion. Release-browser gameplay/baseline pending.",
+      "timing": "14.775 guest Hz; Mouthroom/player/allies10/score0/mission0, timerabout00:57tocaptureend00:39, noinput20seconds",
       "report": "fantastic-voyage/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Four-file fixture verified; parent source001/fixture hashes, raw completed120tick report and splash inspected. Post-click logs create game windows but later action stopped75s, final counters null; parent confirms owned PID absent. No game capture or causal missing-service proof. No setting change."
+      "review": "Four-file fixture verified; parent source001/fixture hashes, raw completed120tick report and splash inspected. Post-click logs create game windows but later action stopped75s, final counters null; parent confirms owned PID absent. No game capture or causal missing-service proof. No setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/fantastic-voyage.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/fantastic-voyage.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Onequietroom baseline no candidate. Activecontrolmode/modifierstate behindquitprompt unresolved; no upward/resumeclaim. Busyplay, catch/release/untangle,missionprogress,originalpace/collisions,audio,saves,hardware unqualified.",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "gerbils",
@@ -1238,12 +1569,13 @@
       "timing": "PPC startup import halt before gameplay; no release-browser performance baseline.",
       "report": "gerbils/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "24file/3folder-date fixture directly verified including raw16bit coordinates; parent source002/fixture hashes and raw1tick failure/stderr/PNG reviewed. ExplicitPPC halts at unsupported QuickDraw3D Q3Error_Register before gameplay; original models/textures kept. Separate historical aliases excluded. No broad PPC diagnosis or setting change."
+      "review": "24file/3folder-date fixture directly verified including raw16bit coordinates; parent source002/fixture hashes and raw1tick failure/stderr/PNG reviewed. ExplicitPPC halts at unsupported QuickDraw3D Q3Error_Register before gameplay; original models/textures kept. Separate historical aliases excluded. No broad PPC diagnosis or setting change.",
+      "source_native_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "gold-digger",
       "title": "Gold Digger1.3.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Gold Digger 1.3.0/Gold Digger",
@@ -1277,7 +1609,7 @@
       "depth_size": "Readme recommends600x380/256colors; observed800x600x8. Original SIZE-1 4MiB vs0/1 40MiB retained, no override.",
       "preferences_save_id": "Actual Boot Gold Digger Preferences reachable; separate preserved associated SIT unexpanded, no existing browser save ID.",
       "controls": "New Game menu works; right124/ch29 changes image but autonomous motion confounds direction; pause untested.",
-      "timing": "Native menu/New Game/playfield readiness; release-browser baseline pending.",
+      "timing": "60.122 guest Hz; Official Lost Mines Screen1, score0 lives4 fullhealth initial, noinput20seconds; mine and actors rendered",
       "associated_containers": [
         {
           "path": "Gold_Digger_1.3.0.sit",
@@ -1290,12 +1622,22 @@
       ],
       "report": "gold-digger/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Eight-file game+actual-pref fixture verified; parent source001/Boot/fixture hashes, raw322tick0assert/exhaust report and clean screen1 inspected. Original pref PBOpen/PBRead and official-mine reads observed. Four complete probes; transient122tick stripes settle by302. Directional attribution unresolved; SIZE variants unchanged, no pacing candidate."
+      "review": "Eight-file game+actual-pref fixture verified; parent source001/Boot/fixture hashes, raw322tick0assert/exhaust report and clean screen1 inspected. Original pref PBOpen/PBRead and official-mine reads observed. Four complete probes; transient122tick stripes settle by302. Directional attribution unresolved; SIZE variants unchanged, no pacing candidate.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/gold-digger.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/gold-digger.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Single exploratory counter baseline; actor motion over capture not quantified, no independent pace reference, collision, level completion, audio, saves and controller unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "goldpusher",
       "title": "GoldPusher1.5",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "gold-pusher Folder/GoldPusher",
@@ -1315,10 +1657,20 @@
       "depth_size": "Docs8bitColorQD/1500K, original SIZE1536000; actual800x600x8, dimensions exploratory.",
       "preferences_save_id": "No actual Boot GOUD/name pref; historical aliases separate and unseeded, Rooms SAVE/TOPS retained; no browsermapping yet.",
       "controls": "h/j/k/l orkeypad,Space throw,p/Tab/click/CmdPpause documented; l right observed, fullresume untested.",
-      "timing": "Native room1/right/menu readiness and partial pause; release-browser baseline pending.",
+      "timing": "60.087 guest Hz; Room1 Look around populated field afterReturn fromdemo; noinput20seconds, moving enemies/objects and score0to3",
       "report": "goldpusher/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Six-file HFSplus fixture verified including direct folderdates/rawcoordinates; parent source002/fixture hashes, raw254tick0assert/exhaust and room1 right/held-right images reviewed. Green-hat actor moves underheld l; Game menu opens. p retains objects while actor blinks, fullresume untested. No setting change; parent corrected report hash transcription."
+      "review": "Six-file HFSplus fixture verified including direct folderdates/rawcoordinates; parent source002/fixture hashes, raw254tick0assert/exhaust and room1 right/held-right images reviewed. Green-hat actor moves underheld l; Game menu opens. p retains objects while actor blinks, fullresume untested. No setting change; parent corrected report hash transcription.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/goldpusher.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/goldpusher.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Single exploratory baseline; pause/resume not qualified due mixed click/key toggles; no independent pace, collision/scoring, sound, saves or controller qualification",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "guy-smiley-vs-the-monsters",
@@ -1343,15 +1695,25 @@
       "depth_size": "DocsSystem6.0.4+,ColorQD,13inch+,anydepth; observed800x600x8 and1; original SIZE98304 no override.",
       "preferences_save_id": "Boot GSvM/title only launcher alias, no actual pref. Original embeddedstate and styledreadme/rawalias retained.",
       "controls": "D/K/5pass documented; D2/ch100 tried blank; directionalpads illustration unresolved; no gameplay/pausequalified.",
-      "timing": "Native menus/settings only; board readiness unresolved at1/8bit, release-browser unmeasured.",
+      "timing": "No gameplay timing; Titled white client remains blank afterNewGame actual File menu selection andD pass300ms",
       "report": "guy-smiley-vs-the-monsters/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Three-file fixture verified; parent source001/fixture hashes, raw240tick8bit and1bit completed reports and blank-board/Settings images reviewed. Four finite scenarios0assert/exhaust; File menu and Settings respond but no visible board after NewGame/Dpass at either depth. Readme anydepth confirmed. No causal renderer diagnosis or setting change."
+      "review": "Three-file fixture verified; parent source001/fixture hashes, raw240tick8bit and1bit completed reports and blank-board/Settings images reviewed. Four finite scenarios0assert/exhaust; File menu and Settings respond but no visible board after NewGame/Dpass at either depth. Readme anydepth confirmed. No causal renderer diagnosis or setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/guy-smiley.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/guy-smiley.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "No populated board or representative gameplay baseline; exact presentation/service/input cause unknown; no pacing change, sound/saves/controller/fidelity unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "lawyers",
       "title": "Lawyers1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Lawyers",
@@ -1372,15 +1734,25 @@
       "depth_size": "Observed800x600x8 exploratory; original SIZE1048576 retained,68K1.0.",
       "preferences_save_id": "Only Boot LWYR/title Recent Items record, separately preserved/unseeded; no actual pref/save mapping.",
       "controls": "Keypad6 key88/ch54 right16px; ordinary6 key22/ch54 advances anotherturn; right124/ch29/click unqualified; GameBomb menu works.",
-      "timing": "Native Level1/turn/bomb readiness; release-browser baseline pending, concurrent native times not performance.",
+      "timing": "60.169 guest Hz; New random Lawyers field afterdiscarding isolated currentgame; score0, blueplayer and4enemies; noinput20seconds turnwaiting",
       "report": "lawyers/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Exact one-file fixture verified; parent source001/fixture hashes, raw328tick0assert/exhaust report and before/keypad6/bomb images reviewed. Keypad6 moves blueactor16px right/enemies advance; Bomb rings and1to0inventory observed. Six scenarios complete; menu/instructions render, no fullpause/audio/save/reference qualification. No setting change."
+      "review": "Exact one-file fixture verified; parent source001/fixture hashes, raw328tick0assert/exhaust report and before/keypad6/bomb images reviewed. Keypad6 moves blueactor16px right/enemies advance; Bomb rings and1to0inventory observed. Six scenarios complete; menu/instructions render, no fullpause/audio/save/reference qualification. No setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/lawyers.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/lawyers.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Idle turnwaiting timing not activebattle throughput; HUDlevel/bombdigits incompletelyvisible, bombnativeonly, pause/audio/save/controller/reference pace unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "lemmings",
       "title": "Lemmings1.5.2",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Lemmings/ONML/Lemmings/Lemmings (patched)/Lemmings 1.4.2a",
@@ -1418,7 +1790,7 @@
       "depth_size": "Docsmonochrome/256colors; tested800x600x8. Original SIZE-1 819200 vs0/1 2048000, nooverride.",
       "preferences_save_id": "No Boot Preferences Lemmings/Psyg match; fresh/defaultstate. Literalcomponents and originalmedia variants retained; no browserID yet.",
       "controls": "Mouse readiness/toolbar selection and50/ch96 backtickpause/resume observed; actualdig assignment/menus unresolved.",
-      "timing": "Native Fun1 spawn/walk/pause readiness; release-browser timing/reference fidelity pending.",
+      "timing": "60.126 guest Hz; Fun1 Just dig, release50 tenlemmings, noinput20seconds, timer4:58 beforemanualsamplersetup to4:28 postcapture, OUT0to10 IN0percent",
       "associated_containers": [
         {
           "path": "Lemmings/ONML/Lemmings/Disk Images/Lemmings Graphics Disk.img",
@@ -1447,7 +1819,17 @@
       ],
       "report": "lemmings/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "18file/5folder fixture verified with literalLemmings/ONML name/rawCNIDs preserved; parent source006/fixture hashes, raw914tick0assert/exhaust report and initialplay PNG reviewed. Pause PNG hashes match over60ticks, resumed walking observed.1.5.2 selected for documentedlater-system support,1.4.2a and3disks retained. Diggerassignment/menu unconfirmed; no setting change."
+      "review": "18file/5folder fixture verified with literalLemmings/ONML name/rawCNIDs preserved; parent source006/fixture hashes, raw914tick0assert/exhaust report and initialplay PNG reviewed. Pause PNG hashes match over60ticks, resumed walking observed.1.5.2 selected for documentedlater-system support,1.4.2a and3disks retained. Diggerassignment/menu unconfirmed; no setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/lemmings.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/lemmings.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Single exploratory counter baseline; timer endpoints include manualgaps, notexact20s progression; browsergrave mapping unresolved despite native50/ch96 proof; no skillassignment, busy/reference pace, audio, saves or controller qualification",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "macpipes",
@@ -1488,15 +1870,25 @@
       "depth_size": "Docs68020+,OS7.0.1+,256colors/SoundMgr3; tested800x600x8, original SIZE1257472.",
       "preferences_save_id": "No original Boot McPP/title pref; native missingthencreated MacPipes Preferences at virtual SystemFolder path, fresh/default test.",
       "controls": "Documented mouse,Spaceflow,Optionbomb,Shiftstack,Ppause,Escabort; modal probesonly, gameplayunqualified.",
-      "timing": "Title/shareware-modal readiness only; actualplay/release baseline pending, no proven service blocker.",
+      "timing": "No gameplay timing; MacPipes2.2.7 shareware reminder; NotYet250ms briefly clearsgreen thenreminder returns",
       "report": "macpipes/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "16file HFSplus fixture verified; parent source002/fixture hashes, raw442tick0assert/exhaust report and enabled-looking reminder PNG reviewed. NewGame opens modal; insideNotYet click after250ticks leaves it unchanged. Older2.2.1PPC reminder bug only documentarycontext, no diagnosis for2.2.7 explicit68K. Freshprefs created; no gameplay/setting acceptance. Parent corrected Unicode path transcription."
+      "review": "16file HFSplus fixture verified; parent source002/fixture hashes, raw442tick0assert/exhaust report and enabled-looking reminder PNG reviewed. NewGame opens modal; insideNotYet click after250ticks leaves it unchanged. Older2.2.1PPC reminder bug only documentarycontext, no diagnosis for2.2.7 explicit68K. Freshprefs created; no gameplay/setting acceptance. Parent corrected Unicode path transcription.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/macpipes.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/macpipes.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Modal readiness unresolved, not proven runtimeincompatibility; no gameplay/performance baseline, controls/audio/saves/controller/fidelity unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "maelstrom",
       "title": "Maelstrom1.4.3",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Maelstrom 1.4.3 \u00c6\u2019 (LEFT OUT)/Maelstrom",
@@ -1517,15 +1909,25 @@
       "depth_size": "Documented256colors/2.3MB; tested800x600x8 exploratorydimensions, original SIZE2355200.",
       "preferences_save_id": "Actual Boot Maelstrom License preserved+PBOpenreachable under OwnedGame/SystemFolder/Preferences; Scores/Sounds/Sprites/Titles retained; no browserID yet.",
       "controls": "P35/ch112 held3 fromfresh title startsWave1; configurablemovement/fire unresolved; CapsLockpause/Escabort documentedonly.",
-      "timing": "Native title/Wave1 readiness afterisolatedP; release-browser baseline/fidelity pending.",
+      "timing": "57.695 guest Hz; Wave1 ship/asteroids initialscore0/lives2, noinput20seconds; postcapture lives1 bonus1370",
       "report": "maelstrom/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "18file HFSplus+actual-license fixture verified; parent source002/fixture hashes, raw303tick0assert/exhaust isolatedP report and Wave1 image reviewed. FreshP35/ch112 after120ticks reaches ship/asteroids/HUD; priorC/config sequence confounded gameplaystart. License PBOpenvirtualpath confirmed. Movement/fire/pause unqualified; no setting change. Parent corrected report encoding."
+      "review": "18file HFSplus+actual-license fixture verified; parent source002/fixture hashes, raw303tick0assert/exhaust isolatedP report and Wave1 image reviewed. FreshP35/ch112 after120ticks reaches ship/asteroids/HUD; priorC/config sequence confounded gameplaystart. License PBOpenvirtualpath confirmed. Movement/fire/pause unqualified; no setting change. Parent corrected report encoding.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/maelstrom.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/maelstrom.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Capture beginsinitialwave andincludes idledeaths; singleexploratorybaseline, movement/fireunqualified, no independentoriginalpace/audio/saves/controller/fidelity qualification",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "mantra",
       "title": "Mantra v1.02 (resource1.0.2)",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Mantra v1.02 Folder/Mantra v1.02",
@@ -1561,15 +1963,25 @@
       "depth_size": "Docs68020/System7/32bitQD,min512x342/16colors,prefer256; tested800x600x8, original SIZE2097152.",
       "preferences_save_id": "Actual Boot Mantra Prefs preserved and opened/used through Owned Game/System Folder/Preferences. Earlier broad fixture retained; corrected copy excludes Recent Items alias.",
       "controls": "Arrows/keypad,Cmd run,Space sword,Shift item,I/S/H panels documented. S panel observed; direction and panel recovery unqualified.",
-      "timing": "Partial native beach/status readiness; release baseline pending. One earlier startup stderr log lost; primary gameplay evidence intact.",
+      "timing": "60.156 guest Hz; Initial beach/trees, money0 green/redbars full; Right500ms first, noinput20seconds",
       "report": "mantra/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Original gameplay review stands. A copied Mantra II runner overwrote four scratch text paths; parent independently checked original manifest: every file except startup.stderr now matches, including fixture, useful510tick evidence, startup report/PNGs and exact restored ownership record. Lost original startup stderr is explicitly excluded; collided copies/original manifest/provenance retained. No new native run or setting change. Corrected runner rejects cross-title/missing-input writes."
+      "review": "Original gameplay review stands. A copied Mantra II runner overwrote four scratch text paths; parent independently checked original manifest: every file except startup.stderr now matches, including fixture, useful510tick evidence, startup report/PNGs and exact restored ownership record. Lost original startup stderr is explicitly excluded; collided copies/original manifest/provenance retained. No new native run or setting change. Corrected runner rejects cross-title/missing-input writes.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/mantra.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/mantra.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Single exploratory baseline; no busycombat/sword/item/pause/reference pace/audio/save/controller qualification; nativeSdialog recovery issue not retested",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "mantra-ii",
       "title": "Mantra II1.02",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Mantra II v1.02 \u00c6\u2019/Mantra II v1.02",
@@ -1607,10 +2019,20 @@
       "depth_size": "Docs8bit and640x480 troubleshooting; native tested800x600x8, original68K SIZE6144000. PPC sibling preserved unrun.",
       "preferences_save_id": "Boot name-only Xndr candidates belong original Mantra; II executable creatorXND2 has no proven pref. Fresh/default state; Data/Map/Music retained.",
       "controls": "Keypad6 key88/ch54 movement observed. P35/ch112 pause inconclusive; I,Space,Option,Tab,Shift documented only.",
-      "timing": "Native initial play/keypad movement; release baseline, pause and reference fidelity pending.",
+      "timing": "60.120 guest Hz; Initial green/tile/river field, disposablePilot defaultFemale, full10/10bars; KP6 beforecapture; noinput20seconds endsNPCdialog aboutlucky tobehere",
       "report": "mantra-ii/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "33-file/3-folder fixture verified. Parent matched source006/fixture hashes, raw253tick report with zero assertions/exhaustion and play/right PNGs: player moves40px on keypad6. P and hidden-menubar attempts do not qualify pause/resume. Scratch collision and one unrecoverable Mantra startup log disclosed; guarded follow-up validated. No setting change; tested800x600 retained for preparation."
+      "review": "33-file/3-folder fixture verified. Parent matched source006/fixture hashes, raw253tick report with zero assertions/exhaustion and play/right PNGs: player moves40px on keypad6. P and hidden-menubar attempts do not qualify pause/resume. Scratch collision and one unrecoverable Mantra startup log disclosed; guarded follow-up validated. No setting change; tested800x600 retained for preparation.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/mantra-ii.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/mantra-ii.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixed active/NPCdialog capture, no sustainedgamepace baseline; partialHUDpresentation; pause/combat/rules/audio/saves/controller/reference fidelityunqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "nort",
@@ -1633,15 +2055,25 @@
       "depth_size": "No explicit display requirement found. Tested800x600x8 exploratory, original68K SIZE2048000, version unknown.",
       "preferences_save_id": "No Boot Nort/NORT preference. Application options and MADF/PICT resources retained; optional external music unqualified.",
       "controls": "Configurable title keys; G5/ch103 and T17/ch116 direction probes inconclusive. Initial D probe invalid; no pause shortcut established.",
-      "timing": "Native title and changing arenas only; steering, fidelity and release-browser baseline pending.",
+      "timing": "No gameplay timing; Nort titleoptions render; Play click CSS289,411 entersblackfield which persists through bounded observations and5secondexplicitwait plusmanualgaps",
       "report": "nort/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Three-file fixture verified. Parent matched source001/fixture hashes, reviewed raw482tick report with zero assertions/exhaustion and split-arena image. Title/Play progresses through delayed transition; G/T steering remains confounded by readiness and imagery lacks an independent reference. No renderer/service diagnosis or setting change."
+      "review": "Three-file fixture verified. Parent matched source001/fixture hashes, reviewed raw482tick report with zero assertions/exhaustion and split-arena image. Title/Play progresses through delayed transition; G/T steering remains confounded by readiness and imagery lacks an independent reference. No renderer/service diagnosis or setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/nort.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/nort.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "No representativegameplaytiming or steeringbaseline; cause/readiness/presentation unknown, native frontendticks not walltimeoracle; audio/saves/controller/fidelity unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "oh-no-more-lemmings",
       "title": "Oh No! More Lemmings1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Lemmings/ONML/Oh No! More Lemmings/Oh No! More Lemmings (patched)/Oh No! More Lemmings",
@@ -1661,7 +2093,7 @@
       "depth_size": "Docs B/W or256 colors, tested800x600x8; original68K SIZE2048000.",
       "preferences_save_id": "No Boot lemm/Pson preference; fresh copied state. Graphics/Levels/Music opened, both disks and manuals preserved.",
       "controls": "Mouse title/briefing and grave50/ch96 pause/resume observed. Skill click and menu inconclusive; Z/X/arrows documented only.",
-      "timing": "Native Tame1 motion/pause readiness; release-browser baseline and fidelity pending.",
+      "timing": "60.124 guest Hz; Tame1 Down And Out Lemmings, release1 initialOUT1/IN0/time3:57; noinput20seconds, postcaptureOUT13/time3:25",
       "associated_containers": [
         {
           "path": "Lemmings/ONML/Oh No! More Lemmings/Disk Images/LEMMINGS DISK ONE.img",
@@ -1682,12 +2114,22 @@
       ],
       "report": "oh-no-more-lemmings/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "15-file/6-folder fixture verified with literal CNID31 slash name and two disk variants preserved. Parent matched source006/fixture hashes, raw1276tick report with zero assertions/exhaustion, identical180tick paused PNG hashes and resumed gameplay image. Tame1 motion/timer and grave pause/resume observed; skill assignment/menu unconfirmed. No new binary patch or setting change."
+      "review": "15-file/6-folder fixture verified with literal CNID31 slash name and two disk variants preserved. Parent matched source006/fixture hashes, raw1276tick report with zero assertions/exhaustion, identical180tick paused PNG hashes and resumed gameplay image. Tame1 motion/timer and grave pause/resume observed; skill assignment/menu unconfirmed. No new binary patch or setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/onml.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/onml.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singleexploratorybaseline, timerendpointsincludemanualgaps; no confirmedskillassignment, busy/referencepace, browserpause, sound/saves/controller qualification",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "oregon-trail",
       "title": "Oregon Trail1.1",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Oregon Trail/Oregon Trail",
@@ -1707,15 +2149,25 @@
       "depth_size": "Observed800x600x8 exploratory; no independent display requirement found. Original68K1.1 SIZE1024000.",
       "preferences_save_id": "Boot ORGN/title scan finds only launcher alias. Preserved in-folder Oregon Config and Color are actually opened; no browser save identity yet.",
       "controls": "Mouse Travel/Continue/Farmer selection observed; keyboard, journey/hunting and pause untested.",
-      "timing": "Native title/setup and occupation decision only; actual journey and release-browser baseline pending.",
+      "timing": "24.430 guest Hz; DisposableBanker P/defaultparty,4oxen1000food, April1departure; journey movingwagon/map afterReturn, noinput20seconds; postcaptureApril4 traveled61mi nextlandmark42mi food945",
       "report": "oregon-trail/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Corrected five-file fixture verified including represented root dates. Parent matched source003/fixture hashes, raw681tick report with zero assertions/exhaustion and Farmer selection image. Travel/Welcome/Continue/setup respond; Oregon Color and in-folder Config open. Journey, hunting and pause remain unqualified. No setting change."
+      "review": "Corrected five-file fixture verified including represented root dates. Parent matched source003/fixture hashes, raw681tick report with zero assertions/exhaustion and Farmer selection image. Travel/Welcome/Continue/setup respond; Oregon Color and in-folder Config open. Journey, hunting and pause remain unqualified. No setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/oregon-trail.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/oregon-trail.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singleexploratorybaseline withmanualreadinessgaps; no hunting/events/busy/referencepace/collision/pause/audio/save/controller qualification; testoriginonly",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "pac-in-time",
       "title": "PAC IN TIME1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "PAC IN TIME",
@@ -1737,15 +2189,25 @@
       "depth_size": "Resources16/256colors,screen at least640x480; tested800x600x8 exploratory. Original68K SIZE3072000.",
       "preferences_save_id": "Actual Boot PAC-IN-TIME Prefs preserved and PBOpenRF loaded at Owned PAC/System Folder/Preferences. Substantial app data fork retained, unrelated root apps excluded.",
       "controls": "Configurable Left/Right/Up/Down/Fire/Power; actual mappings unverified. CmdN and fresh Game-header probes do not establish new game.",
-      "timing": "Animated intro/title only; initial play and release-browser baseline unresolved.",
+      "timing": "45.504 guest Hz; Newtestgame p firstdesertmarker, activepurpleframedsmallplatformfield withyellowplayer leftofstonearch, noinput20seconds afterRight500ms",
       "report": "pac-in-time/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Two-file executable+actual-pref fixture verified. Parent matched source002/fixture hashes, original1824tick report/title and corrected1705tick menu-only report. Six bounded scenarios complete with zero assertions/exhaustion; fresh Game-header click exposes no dropdown and returns splash/fade. Original pref PBOpenRF loaded. No gameplay, causal service claim or setting change."
+      "review": "Two-file executable+actual-pref fixture verified. Parent matched source002/fixture hashes, original1824tick report/title and corrected1705tick menu-only report. Six bounded scenarios complete with zero assertions/exhaustion; fresh Game-header click exposes no dropdown and returns splash/fade. Original pref PBOpenRF loaded. No gameplay, causal service claim or setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/pac-in-time.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/pac-in-time.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singleexploratory counterbaseline, controlmapping unverified and no independentlyquantifiedgamepace; smallerinternalgamefield retained, transitioncorruption transient, pause/audio/save/controller/collision/fidelity unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "pac-the-man",
       "title": "Pac the Man4.5.1",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "PactheMan4.5.1/Pac the Man",
@@ -1765,15 +2227,25 @@
       "depth_size": "Docs68020/System7/2MB and QT2 instruments for MIDI; tested640x480x8 exploratory, original68K SIZE2252800.",
       "preferences_save_id": "Exactly Pac the Man Preferences seeded with11 title files; FindFolder/exists true, open selector/ResError0 and prf4 count1 observed. Individual setting consumption untraced.",
       "controls": "Raw Right124/ch29 and Up126/ch30 sent but readiness/stall confound direction. Space PAUSE observed; second Space remains paused, menu Resume untested.",
-      "timing": "Native initial maze/motion and Space PAUSE observed; later directional probe incomplete. Release baseline pending.",
+      "timing": "60.113 guest Hz; Level1 maze score5 afterRight600ms, lives3 initially, noinput20seconds withdeaths/respawns; postcapture score10/lives0",
       "report": "pac-the-man/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Twelve-file title+actual-pref fixture verified. Parent matched source006/fixture hashes, completed338tick report with zero assertions/exhaustion, maze/PAUSE images and resource-open trace. Later refinement reached active play at284 then stopped75s during Right run45; parent confirms owned PID absent. Final counters corrected to unavailable separately from completed runs. Directions/resume unqualified; no service diagnosis or setting change."
+      "review": "Twelve-file title+actual-pref fixture verified. Parent matched source006/fixture hashes, completed338tick report with zero assertions/exhaustion, maze/PAUSE images and resource-open trace. Later refinement reached active play at284 then stopped75s during Right run45; parent confirms owned PID absent. Final counters corrected to unavailable separately from completed runs. Directions/resume unqualified; no service diagnosis or setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/pac-the-man.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/pac-the-man.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixeddeath/respawn capture; pauseoverlayonlyontitleaftertest, resumeunresolved; independentpace/rules/audio/saves/controller unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "particleman-1-0",
       "title": "ParticleMan1.0 (titlev1.0.0)",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "ParticleMan 1.0/ParticleMan 1.0",
@@ -1794,15 +2266,25 @@
       "depth_size": "Docs color68020+/System7+, tested800x600x8 exploratory; original68K SIZE655360. Titlev1.0.0 versus folder1.0 retained.",
       "preferences_save_id": "No actual Boot ParticleMan preference, launcher alias only. Embedded title state and sibling sound file preserved; sound dependency unqualified.",
       "controls": "File Help/SetKeys/NewGame observed. Right124/ch29 and P35/ch112 inconclusive; custom-key setup only reached UP prompt.",
-      "timing": "Native title/help/initial level readiness; movement/pause and release baseline pending.",
+      "timing": "60.147 guest Hz; StartingScreen1 populated paths/items/centralcounter, noinput20seconds afterRight300ms, numericcounters change",
       "report": "particleman-1-0/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Five-file HFSplus fixture verified. Parent matched source004/fixture hashes, raw588tick report with zero assertions/exhaustion and populated level image. Title/Help/NewGame selector respond and delayed transition settles; Right/P do not establish movement/pause with unknown mapping. Eight completed scenarios, no causal renderer/service diagnosis or setting change."
+      "review": "Five-file HFSplus fixture verified. Parent matched source004/fixture hashes, raw588tick report with zero assertions/exhaustion and populated level image. Title/Help/NewGame selector respond and delayed transition settles; Right/P do not establish movement/pause with unknown mapping. Eight completed scenarios, no causal renderer/service diagnosis or setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/particleman.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/particleman.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Smallinternalfield retained; no confirmedmovement/pause/rules/referencepace/audio/save/controller qualification, singleexploratorybaseline",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "polybrid-1-0",
       "title": "Polybrid1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Polybrid Folder/Polybrid 1.0",
@@ -1823,15 +2305,25 @@
       "depth_size": "Readme color/B&W,System6/7; tested640x480x8 exploratory, original68K SIZE1024000.",
       "preferences_save_id": "No Boot Polybrid/PlbD pref; embedded PREF0-4 andPlbD0 bytes retained, consumption/persistence untraced.",
       "controls": "Configurable move/drop/rotate/flip; Right124/ch29 unchanged, actual bindings unknown. Menu opens and Pause highlights; transition/resume unconfirmed.",
-      "timing": "Native populated well/piece motion/menu readiness; controls, pause and release baseline pending.",
+      "timing": "29.236 guest Hz; Populatedwell/preview score0, fallingpiece, Right300ms beforecapture; noinput20seconds endsactivepiece/score12",
       "report": "polybrid-1-0/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Three-file fixture verified. Parent matched source001/fixture hashes, raw173tick report with zero assertions/exhaustion and before/later well images. OK enters play and a piece descends; right-arrow response and retained-menu Pause remain unqualified. Embedded PREF resources preserved without claiming values consumed. No blocker or setting change."
+      "review": "Three-file fixture verified. Parent matched source001/fixture hashes, raw173tick report with zero assertions/exhaustion and before/later well images. OK enters play and a piece descends; right-arrow response and retained-menu Pause remain unqualified. Embedded PREF resources preserved without claiming values consumed. No blocker or setting change.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/polybrid.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/polybrid.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singleexploratorybaseline; configuredmapping/controlledpause/collisionmatching/referencepace/audio/save/controller unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "prince-of-persia",
       "title": "Prince of Persia1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Prince of Persia \u00c6\u2019/Prince of Persia",
@@ -1852,10 +2344,20 @@
       "depth_size": "Readme color/BW memory advice; tested800x600x8. SIZE-1 1024000 vsID0 1638400 preserved, no override; current loader prefers validID0.",
       "preferences_save_id": "No actual Boot preference found by title/creator. COLOR/BW/LC companions, editor docs and raw aliases retained; only COLOR exercised.",
       "controls": "Cmd55/ch0+N45/ch110 starts Level1; Escape53/ch27 pauses. Right124/ch29 held40 does not establish distance/direction; Shift alternatives documented.",
-      "timing": "Native Level1 and Escape pause readiness; movement/resume and release baseline pending.",
+      "timing": "60.170 guest Hz; Level1 firstdungeonroom threehealth initial60minutes, Right300ms beforecapture, noinput20seconds; playerlateragainstwall",
       "report": "prince-of-persia/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Thirteen-file fixture verified. Parent matched source004/fixture hashes, raw802tick report with zero assertions/exhaustion and Level1/paused images. CmdN starts level; Escape visibly pauses. Later absent prince makes Right displacement inconclusive. Original SIZE variants retained, COLOR companion opened; no setting change or fidelity certificate."
+      "review": "Thirteen-file fixture verified. Parent matched source004/fixture hashes, raw802tick report with zero assertions/exhaustion and Level1/paused images. CmdN starts level; Escape visibly pauses. Later absent prince makes Right displacement inconclusive. Original SIZE variants retained, COLOR companion opened; no setting change or fidelity certificate.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/prince.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/prince.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singleexploratorybaseline, idleinitialroom notbusycombat; sustainedpostreleaseplayerprogress needscontrolcheck; jump/grab/combat/referencepace/audio/save/controller/resume unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "prince-of-persia-2",
@@ -1885,12 +2387,13 @@
       "timing": "Startup application error prevents gameplay baseline; precise path-resolution lead, release performance unmeasured.",
       "report": "prince-of-persia-2/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "33-file fixture verified. Parent matched source004/fixture hashes, raw60tick lookup and failed64tick dismissal reports plus error image. MWHK10310 follows FSMakeFSSpec dirNFErr for a duplicated copied-volume path; actual Config Manager content/service absence is unproven. OK requests supported ExitToShell/A9F4. Existing Prince2.opt is read/written in memory; no source or pacing change."
+      "review": "33-file fixture verified. Parent matched source004/fixture hashes, raw60tick lookup and failed64tick dismissal reports plus error image. MWHK10310 follows FSMakeFSSpec dirNFErr for a duplicated copied-volume path; actual Config Manager content/service absence is unproven. OK requests supported ExitToShell/A9F4. Existing Prince2.opt is read/written in memory; no source or pacing change.",
+      "source_native_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "robowar-4-1-1",
       "title": "RoboWar 4.1.1",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "RoboWar 4.1.1 Archive Folder/RoboWar 4.1.1",
@@ -1910,15 +2413,25 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Four native scripts360/172/197/202 frontend ticks; deterministic diagnostics only, no release performance.",
+      "timing": "60.153 guest Hz; Two suppliedrobots firstRobotsfolderentry andDumBot, BattleB started; noinput20seconds includesmovingrobots/shots thenresult DumBot NoProgram times246",
       "report": "robowar-4-1-1/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent independently matched source001/Boot and81-file fixture hashes, read four passed raw reports (zero assertions/errors/exhaustion), inspected functional Open Robot picker and actual94-byte RoboPrefs open/read. Empty arena and menus work; supplied robot selection/battle remain untested at bounded follow-up cap. No runtime blocker or pacing qualification established."
+      "review": "Parent independently matched source001/Boot and81-file fixture hashes, read four passed raw reports (zero assertions/errors/exhaustion), inspected functional Open Robot picker and actual94-byte RoboPrefs open/read. Empty arena and menus work; supplied robot selection/battle remain untested at bounded follow-up cap. No runtime blocker or pacing qualification established.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/robowar.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/robowar.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixedbattle/resultcapture; DumBot NoProgram diagnosticnotqualifiedAIcombat; no referencepace/rules/scoring/pause/audio/save/controller qualification, onlydisposabletestorigin",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "ruckus",
       "title": "Ruckus",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "New Ruckus!/Ruckus",
@@ -1936,15 +2449,25 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Completed native scripts242/366/428/460/480 ticks; capped final probe has no final report/counters. No release-browser measurement.",
+      "timing": "60.138 guest Hz; Mission9 DeepVault field, troops0 selectionnone, scrolledfromhomeflagtohostagebuilding, noinput20seconds",
       "report": "ruckus/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source002/Boot and clean48-file fixture hashes, read five completed raw reports (0 assertions/errors/exhaustion), inspected gameplay and changed viewport at hostage building. Existing Players/Anonymous opens and retained mission9 state documented. Final action probe stopped at75s during held Game-menu2ticks after pause screenshot519; final counters/menu unavailable, pause and vehicle controls unqualified. No defect or pacing inference."
+      "review": "Parent matched source002/Boot and clean48-file fixture hashes, read five completed raw reports (0 assertions/errors/exhaustion), inspected gameplay and changed viewport at hostage building. Existing Players/Anonymous opens and retained mission9 state documented. Final action probe stopped at75s during held Game-menu2ticks after pause screenshot519; final counters/menu unavailable, pause and vehicle controls unqualified. No defect or pacing inference.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/ruckus.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/ruckus.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Idlemissionwaiting withnofriendlytroops, no vehiclemovement/fire/combat/pause/referencepace/audio/save/controller qualification; singleexploratorybaseline",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "scruffy",
       "title": "Scruffy",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Scruffy/Scruffy",
@@ -1963,10 +2486,20 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Native deterministic first pass only; controls/fidelity/release performance unqualified.",
+      "timing": "60.122 guest Hz; 1bit Level1 puppy/platforms/bones/cloud, D400ms beforecapture shiftsworld; noinput20seconds endsGameOver finalscore0",
       "report": "scruffy/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source001/Boot and7-file fixture hashes, read5 passed raw reports (175/242/360/366/444ticks, zero assertions/errors/exhaustion), inspected recognizable monochrome puppy/platform/bones/cloud first scene. Malformed8bit vs clean1bit is evidenced exploratory depth difference; no production setting accepted. Controls occurred during welcome transition; screenshot labels pause/resume do not prove pause. Missing Scores open is not established startup blocker."
+      "review": "Parent matched source001/Boot and7-file fixture hashes, read5 passed raw reports (175/242/360/366/444ticks, zero assertions/errors/exhaustion), inspected recognizable monochrome puppy/platform/bones/cloud first scene. Malformed8bit vs clean1bit is evidenced exploratory depth difference; no production setting accepted. Controls occurred during welcome transition; screenshot labels pause/resume do not prove pause. Missing Scores open is not established startup blocker.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/scruffy.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/scruffy.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixedlevel/death/GameOver capture, no puresteadygamepace; jump/bomb/pause/audio/saves/controller/referencefidelity unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "scruffy-ii",
@@ -1989,10 +2522,20 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Three complete native diagnostics, one wall-capped longer probe; no real-time release measurement.",
+      "timing": "No gameplay timing; 4bit Franksplash/Squeek reachesScruffyIIv1title, titlepersists afterReturn,5secondwait, centeredclickandSpace",
       "report": "scruffy-ii/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched eight-file fixture/source001/Boot hashes, read raw360/360/392tick passed reports with zero assertions/exhaustion, inspected4bit title v1.0. Guest explicitly rejects8bit. Earlier90s aborted probe has unavailable final counters and readiness confound; no startup blocker. Native gameplay/menu/pause and documented keypad distinction remain unqualified; no settings accepted."
+      "review": "Parent matched eight-file fixture/source001/Boot hashes, read raw360/360/392tick passed reports with zero assertions/exhaustion, inspected4bit title v1.0. Guest explicitly rejects8bit. Earlier90s aborted probe has unavailable final counters and readiness confound; no startup blocker. Native gameplay/menu/pause and documented keypad distinction remain unqualified; no settings accepted.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/scruffy-ii.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/scruffy-ii.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Titleonly, no gameplayspeed/control/pause/audio/save/controller/fidelity qualification; causeunknown, nativealsotitleonly",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "slithereens",
@@ -2020,10 +2563,20 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Two360tick native deterministic scripts; no gameplay/release performance measurement.",
+      "timing": "No gameplay timing; Uniformpalecyan startup withnomenu/title; ReturnthenCmdN leaveunchanged",
       "report": "slithereens/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source003/Boot and29-file corrected-date fixture hashes; read both passed raw360tick reports with zero assertions/errors/exhaustion and owned exit0; inspected pale cyan final image. Existing660byte Slithereens Prefs opens/read via corrected Untitled VFS path, while Scores/License use unproved. No title by120/360 is a bounded readiness result, not diagnosed incompatibility/rendering defect. Original SIZE retained; no pacing accepted."
+      "review": "Parent matched source003/Boot and29-file corrected-date fixture hashes; read both passed raw360tick reports with zero assertions/errors/exhaustion and owned exit0; inspected pale cyan final image. Existing660byte Slithereens Prefs opens/read via corrected Untitled VFS path, while Scores/License use unproved. No title by120/360 is a bounded readiness result, not diagnosed incompatibility/rendering defect. Original SIZE retained; no pacing accepted.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/slithereens.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/slithereens.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "No readiness/performance baseline, exactcauseunknown; all controls/audio/saves/controller/fidelity unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "sloppy-sokoban-1-7",
@@ -2051,12 +2604,13 @@
       "timing": "Immediate failed native startup; no gameplay or release performance measurement.",
       "report": "sloppy-sokoban-1-7/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source004/Boot and33-file fixture hashes, read failed raw report/frontend1 guest0/zero assertions/exhaustion and owned exit1, inspected blank cyan failure image. PPC PC0 halt after891cycles occurs before title/preferences; specific import/service cause unproved. CarbonLib1.1+/System8.1 requirement documented;24bit advertisement does not establish8bit as halt cause. No settings accepted."
+      "review": "Parent matched source004/Boot and33-file fixture hashes, read failed raw report/frontend1 guest0/zero assertions/exhaustion and owned exit1, inspected blank cyan failure image. PPC PC0 halt after891cycles occurs before title/preferences; specific import/service cause unproved. CarbonLib1.1+/System8.1 requirement documented;24bit advertisement does not establish8bit as halt cause. No settings accepted.",
+      "source_native_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "spin-doctor",
       "title": "Spin Doctor",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Spin Doctor/Spin Doctor",
@@ -2077,10 +2631,20 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Two finite native scripts; no real-time release measurement.",
+      "timing": "24.129 guest Hz; Actualselected2 Wands, lives4 score0, fourrotatinghands, noinput20seconds",
       "report": "spin-doctor/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source002/Boot and7-file corrected fixture hashes, read raw120/221tick passed reports and owned exit0; inspected1:Grid with Paused overlay. Actual Settings/Scores opens evidenced. Wand orientation changes and P pause observed; Command action effect not isolated, resume/sound/saves/busy level untested. Executable1.2 supersedes bundled ReadMe label1.0 as version evidence. No pacing setting accepted."
+      "review": "Parent matched source002/Boot and7-file corrected fixture hashes, read raw120/221tick passed reports and owned exit0; inspected1:Grid with Paused overlay. Actual Settings/Scores opens evidenced. Wand orientation changes and P pause observed; Command action effect not isolated, resume/sound/saves/busy level untested. Executable1.2 supersedes bundled ReadMe label1.0 as version evidence. No pacing setting accepted.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/spin-doctor.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/spin-doctor.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singleexploratorybaseline; transfer/bounce/flip/reverse/goal/rules/referencepace/audio/saves/controller notqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "star-trek-final-unity",
@@ -2107,15 +2671,25 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "One bounded native follow-up; no release gameplay/performance. CD lease released.",
+      "timing": "Startup/presentation diagnostic only; 9.006 guest Hz; Two-volume674420308byte package fetched/mounted, initialblackfield ongrayborder; noinput20secondstartupdiagnostic endswhitecentralrectangleonblack",
       "report": "star-trek-final-unity/followup.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched674420308-byte KPK hash, read57-entry/fork-volume verification, bulk/native exited ownership and raw360tick passed report with0assertions/exhaustion; inspected black final inset. Exact installed68K selection, original prefs and separate StarTrek/STTNG.ZIP read evidenced. Logical2670byte Icon resource present; only unused allocation tail missing, no fabricated bytes. Raw slice/fulltoast/metadata manifest retain archival fields omitted by KPK. Dependency error resolved, readiness remains unknown; no QuickTime defect or pacing claim. All69 first passes retained."
+      "review": "Parent matched674420308-byte KPK hash, read57-entry/fork-volume verification, bulk/native exited ownership and raw360tick passed report with0assertions/exhaustion; inspected black final inset. Exact installed68K selection, original prefs and separate StarTrek/STTNG.ZIP read evidenced. Logical2670byte Icon resource present; only unused allocation tail missing, no fabricated bytes. Raw slice/fulltoast/metadata manifest retain archival fields omitted by KPK. Dependency error resolved, readiness remains unknown; no QuickTime defect or pacing claim. All69 first passes retained.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/star-trek-startup.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/star-trek-startup.json",
+        "evidence": "Readiness/presentation counter diagnostic only; no representative gameplay baseline or tuning qualification",
+        "reason": "Readinessdiagnostic only, no gameplayspeed or fidelityclaim; nativeCDpathrepaired separately, no provenQuickTime/servicecause; controls/audio/save/controller unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "super-munchers",
       "title": "Super Munchers",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Super Munchers/Super Munchers",
@@ -2136,10 +2710,20 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Native final494ticks only; action-pass includes application-error branch, no release performance.",
+      "timing": "19.325 guest Hz; Animals Beginner Level1 amphibians, score0 full3lives, Right100ms thennoinput20seconds; enemiesenterfield/lifedecrement",
       "report": "super-munchers/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source002/Boot and6-file fixture hashes, read eight raw action reports/zero assertions/exhaustion, inspected before/right/resumed images and identical paused PNG hashes. One-cell right, wrong-eat feedback and Return pause/continue observed. Super Config read documented; two Boot matches are launcher aliases, corrected misleading JSON scope. Separate instruction-page6 fatal PictProc/GetPicture5515 NIL has unproved cause; gameplay bypasses it. No pacing accepted."
+      "review": "Parent matched source002/Boot and6-file fixture hashes, read eight raw action reports/zero assertions/exhaustion, inspected before/right/resumed images and identical paused PNG hashes. One-cell right, wrong-eat feedback and Return pause/continue observed. Super Config read documented; two Boot matches are launcher aliases, corrected misleading JSON scope. Separate instruction-page6 fatal PictProc/GetPicture5515 NIL has unproved cause; gameplay bypasses it. No pacing accepted.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/super-munchers.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/super-munchers.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Singleexploratorybaseline; nativeeat/wronganswerseparate, no browsereat/busy/referencepace/audio/save/controller qualification",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "system-s-twilight-v1-0-5",
@@ -2166,15 +2750,25 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Finite native diagnostics360/182/362/140/252/492ticks; no release performance.",
+      "timing": "No gameplay timing; WaitedactualNewGamebuttons, save-new-game picker acceptednewtestfilename1, alert Unable to swap in new 1 error -1303",
       "report": "system-s-twilight-v1-0-5/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source001/Boot and7-file fixture hashes and read six complete raw reports/zero assertions/errors/exhaustion. Root found startup120 lacks buttons: earlier inputs were premature. Authorized360tick readyclick reached visible Standard File new-game picker at492; inspected before/after captures. No source or copied existing save overwritten. Gameplay/help/pause/saves unqualified; no input defect or pacing accepted."
+      "review": "Parent matched source001/Boot and7-file fixture hashes and read six complete raw reports/zero assertions/errors/exhaustion. Root found startup120 lacks buttons: earlier inputs were premature. Authorized360tick readyclick reached visible Standard File new-game picker at492; inspected before/after captures. No source or copied existing save overwritten. Gameplay/help/pause/saves unqualified; no input defect or pacing accepted.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/twilight.json",
+      "browser_followup": {
+        "result": "not yet measured",
+        "report": "release-browser-reviews/twilight.json",
+        "evidence": "bounded release readiness check; no gameplay timing claim",
+        "reason": "Concreteapplicationreportednewsave/readinesserror -1303, underlyingfilesystem/servicecauseunknown; no gameplay/performance baseline or savesuccessqualification; originalmedia/normaloriginuntouched",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "the-big-one",
       "title": "The Big One Demo1.0",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "The Big One",
@@ -2192,10 +2786,20 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Native deterministic comparison; differing shot counts are not rate evidence. Release browser unmeasured.",
+      "timing": "60.071 guest Hz; 1bit Level1 Area1, score0 lives3 time100 initially; period300ms/S200ms thennoinput20seconds endsGameOver score200",
       "report": "the-big-one/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source002/Boot and2-file corrected fixture hashes, read six passed raw reports/zero assertions/errors/exhaustion and owned exit0; inspected monochrome ready/right/shoot captures showing hero movement, bullets and30to28 ammo. About identifies Demo1.0/MarkFong1990, sound disabled by author.8bit lacks sprites while counters work; no independent renderer diagnosis or productiondepth accepted. Retained recent-item record is not game preference. No pacing accepted."
+      "review": "Parent matched source002/Boot and2-file corrected fixture hashes, read six passed raw reports/zero assertions/errors/exhaustion and owned exit0; inspected monochrome ready/right/shoot captures showing hero movement, bullets and30to28 ammo. About identifies Demo1.0/MarkFong1990, sound disabled by author.8bit lacks sprites while counters work; no independent renderer diagnosis or productiondepth accepted. Retained recent-item record is not game preference. No pacing accepted.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/big-one.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/big-one.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixedactive/death/GameOver capture, notsteadygamepace; demo explicitly sounddisabled; jump/left/duck/kick/pause/saves/controller/referencefidelity unqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     },
     {
       "slug": "verttice",
@@ -2239,12 +2843,13 @@
       "timing": "Immediate PPC import halt before readiness; no real-time release measurement.",
       "report": "verttice/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source002/Boot and69-file fixture hashes, read failed raw frontend1/guest0 report with zero assertions/exhaustion and exact unsupported InterfaceLib:PBMakeFSSpecSync log, inspected cyan failure image and owned exit1. Help resolves game3.0 versus Director7.0.2 vers; existing DLVT preference preserved but not proven loaded. No title/gameplay or pacing qualification; later imports unknown."
+      "review": "Parent matched source002/Boot and69-file fixture hashes, read failed raw frontend1/guest0 report with zero assertions/exhaustion and exact unsupported InterfaceLib:PBMakeFSSpecSync log, inspected cyan failure image and owned exit1. Help resolves game3.0 versus Director7.0.2 vers; existing DLVT preference preserved but not proven loaded. No title/gameplay or pacing qualification; later imports unknown.",
+      "source_native_firstpass_status": "compatibility blocker"
     },
     {
       "slug": "zap-t-balls",
       "title": "Zap'T'Balls",
-      "status": "not yet measured",
+      "status": "unchanged baseline",
       "candidates": [
         {
           "path": "Zap'T'Balls v7.1/Zap'T'Balls v7.1 (FAT)",
@@ -2280,10 +2885,20 @@
       "depth_size": "unknown; verify per executable",
       "preferences_save_id": "unassigned; no browser entry yet",
       "controls": "unverified",
-      "timing": "Native deterministic title/menu evidence only; release gameplay unmeasured. No production change.",
+      "timing": "60.151 guest Hz; CmdN fromtitle reacheslakephoto/player/redball; mouseclick300ms thennoinput20seconds endsCongratulations highscore nameprompt unsubmitted",
       "report": "zap-t-balls/report.md",
       "accepted_setting": "No runtime setting change accepted by this review",
-      "review": "Parent matched source003/001/Boot and7-file fixture hashes, read raw600/662tick passed reports (zero assertions/errors/exhaustion) and owned exit0; inspected New Game submenu. Existing768byte ZapPrefs open/read and disposableVFS rewrite evidenced; older3.6 separately retained.7.1 established by vers bytes/ReadMe. NormalMode not selected at two-probe cap, so no gameplay failure/compatibility blocker or pacing adoption. All69 source/native first-pass results now reviewed; integration, release measurements and ClockWerx pilot remain."
+      "review": "Parent matched source003/001/Boot and7-file fixture hashes, read raw600/662tick passed reports (zero assertions/errors/exhaustion) and owned exit0; inspected New Game submenu. Existing768byte ZapPrefs open/read and disposableVFS rewrite evidenced; older3.6 separately retained.7.1 established by vers bytes/ReadMe. NormalMode not selected at two-probe cap, so no gameplay failure/compatibility blocker or pacing adoption. All69 source/native first-pass results now reviewed; integration, release measurements and ClockWerx pilot remain.",
+      "source_native_firstpass_status": "not yet measured",
+      "followup_report": "release-browser-reviews/zap.json",
+      "browser_followup": {
+        "result": "unchanged baseline",
+        "report": "release-browser-reviews/zap.json",
+        "evidence": "one exploratory release-browser baseline, not repeated candidate qualification",
+        "reason": "Mixedgameplay/endpromptcapture, no sustainedplayqualification; registrationvaluesprivate only, no submission; CapsLockpause/Qabort/referencepace/audio/saves/controller notqualified",
+        "accepted_change": null,
+        "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved"
+      }
     }
   ],
   "excluded_applications": [

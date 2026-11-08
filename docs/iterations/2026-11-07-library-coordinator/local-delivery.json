@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-11-08T04:07:38.326521+00:00",
+  "scope": "Local only; no push/upload/deploy",
+  "selected_bundle": {
+    "schema_version": 1,
+    "directory": "D:\\SystemlessBuild\\private-library-20261107\\dist-v2",
+    "wasm_sha256": "af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+    "metadata_sha256": "3ee66798f1a438b39669c1a5ff56aa242fdbd8643c7d5034600e091f89683418",
+    "entries": 61
+  },
+  "server": {
+    "pid": 80088,
+    "start_utc": "2026-11-08T04:01:49.9261120Z",
+    "origin": "http://localhost:8087",
+    "directory": "D:\\SystemlessBuild\\private-library-20261107\\dist-v2"
+  },
+  "browser_home": "RootIAB observed61titles atnormal8087, no originalgame boot/reset/import",
+  "pilot": "http://localhost:8087/clockwerx-html5/ rendered; leftpausedwithResumeP, ownstoragekey; deliverabletab90",
+  "viewport": "Temporary comparison override reset",
+  "test_server": "Owned188256/start/command/health verified and stopped; rawlogs retained",
+  "original_bundle": "www/dist retained; WASM aa25ac7a47cbd323ce6b4909892db2158f3d4e7d03d8346575949e5e5840674c",
+  "source_originals": "All10 originaldiskimages hashmatch final-preservation.json",
+  "accepted_pacing_changes": []
+}

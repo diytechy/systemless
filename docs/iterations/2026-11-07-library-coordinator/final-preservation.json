@@ -1,0 +1,67 @@
+{
+  "verified_at": "2026-11-08T04:00:19.687902+00:00",
+  "method": "Final read-only streaming SHA256 of all10 inventoried original images, matching inventory before hashes",
+  "volumes": [
+    {
+      "source": "Content\\002",
+      "bytes": 41943040,
+      "sha256": "8119cbbb69d4a0d5ea4d2cbc2011467fbe396846c79ea0341919a399951ba946",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\003",
+      "bytes": 41943040,
+      "sha256": "98020ab8debcd8c077ee8b6534a05611f4e946fd975762aeea97d521b21c2476",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\004",
+      "bytes": 41943040,
+      "sha256": "a7493fc55952a462a655158c8abe4e4c063daf45bf5dd2c24f0fbc876bd70985",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\006",
+      "bytes": 104857600,
+      "sha256": "1e3bad7c04080835db71fd18f54a1b63f04f3a41a0bb31d8c2ad097778a724fc",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\001",
+      "bytes": 41943040,
+      "sha256": "82823905777df7e14e09cd9cd720987d7224ac3639ed7574403aefdfc9198f8e",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\Boot",
+      "bytes": 314572800,
+      "sha256": "01eef1c78b3fe192b3c98f8fb0dfb9e9980161cba1b1b8b55155dba019b71393",
+      "unchanged": true
+    },
+    {
+      "source": "Discs\\StarTrek_FinalUnity.toast",
+      "bytes": 677011456,
+      "sha256": "4478f39535074d51cea2b00baafbad833d92907834cb4898fe466d98bdc9b229",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\005",
+      "bytes": 41943040,
+      "sha256": "6940959116e4cc730881fc7af323a194ff7918d16bfe9823e13ec4ce8e5d5340",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\007",
+      "bytes": 104857600,
+      "sha256": "ddfba3a495ea0c726725c4143804a06dfd8d72c83163a60b41a544592879a988",
+      "unchanged": true
+    },
+    {
+      "source": "Content\\008",
+      "bytes": 104857600,
+      "sha256": "92369d7eb6fa12e089fd6772ed8267e9cf409ba7ce56db069e1ae847460991f5",
+      "unchanged": true
+    }
+  ],
+  "scope_limits": "File forks/Finder fields and represented folder dates verified during extraction; machfs omits originalfolderFinderinfo. See report-specific preservation limits. Hash equality does not qualify game saves/audio/fidelity."
+}

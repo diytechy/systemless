@@ -12,7 +12,7 @@
     460.75
   ],
   "active_tab": null,
-  "next": "First pending title in games order; resolve followup_experiments before final completion; one release emulator at a time",
+  "next": "Bounded authorized workflow complete; future qualification requires separately scoped evidence work",
   "games": [
     {
       "id": "koji-personal-204",
@@ -520,18 +520,22 @@
   "followup_experiments": [
     {
       "id": "owned-barney-carnage-2-0-v1",
-      "status": "pending active-scene motion gate, then proposed25vs12 threealternatingpairs if comparable",
+      "status": "stopped atrequested12 readinessvisualdifference;1baseline only, sixruncomparisonincomplete; unchanged25/noacceptedsetting",
       "brief": "barney-carnage-2-0/browser-followup-brief.md",
       "sol_review": "barney-carnage-2-0/browser-followup-review.md",
-      "accepted_change": null
+      "accepted_change": null,
+      "motion_review": "barney-carnage-2-0/coordinator-motion-gate-review.md",
+      "report": "barney-carnage-2-0/coordinator-experiment.md",
+      "sol_final_review": "barney-carnage-2-0/final-experiment-review.md"
     },
     {
       "id": "owned-bikaka-1-4-v1",
-      "status": "Sol raw review parent verified; pending25vs12 threealternatingfreshpairs diagnostic; no setting accepted",
+      "status": "six diagnosticcaptures parent/Solreviewed; unmatchedhostandpiecesequences, no12adoption; boundedexperimentclosed",
       "accepted_change": null,
       "task_name": "/root/bikaka_browser_review",
       "brief": "bikaka-1-4/browser-followup-brief.md",
-      "sol_review": "bikaka-1-4/browser-followup-review.md"
+      "sol_review": "bikaka-1-4/browser-followup-review.md",
+      "report": "bikaka-1-4/final-experiment-review.md"
     },
     {
       "id": "owned-brickles-plus-3-0-v1",
@@ -555,5 +559,13 @@
   "mouse_target_rechecks": {
     "reason": "Displayed nativePNG650x657 isscaled fromlivewindow665x672; Tab.click usesCSS coordinates. Earlier small screenshot-coordinate clicks may miss. Corrected transform startsBrickoids. Recheckbeforeacceptingreadinesslimits.",
     "pending": []
+  },
+  "completion_scope": "69source/native firstpasses,61preparedroute browserfollowups; Clockplayableoneboardpilot+9comparison; no full-library fidelity claim",
+  "local_activation": {
+    "origin": "http://localhost:8087",
+    "directory": "D:/SystemlessBuild/private-library-20261107/dist-v2",
+    "normal_server_pid": 80088,
+    "test_origin": "http://localhost:55847 (stopped after verification)",
+    "saves": "Originalthree IDs/mappings preserved; no normal-origin originalgame boot/reset/import in finalactivation; pilot separatekey"
   }
 }

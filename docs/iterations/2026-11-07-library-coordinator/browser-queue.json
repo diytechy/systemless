@@ -92,12 +92,18 @@
     {
       "id": "owned-arashi-1-1-1-v1",
       "route": "/arashi-1-1-1/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/arashi.json",
+      "scene": "Selectedlevel9 tube/wireframe score1250; mouse tested before idle20s; capture evolves to highscore entry",
+      "accepted_change": null
     },
     {
       "id": "owned-bachman-2-0u-v1",
       "route": "/bachman-2-0u/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/bachman.json",
+      "scene": "Level1 score0, noinput20seconds leads toGameOver; Fastanimationdefault",
+      "accepted_change": null
     },
     {
       "id": "owned-balderdoush-1-04i-v1",

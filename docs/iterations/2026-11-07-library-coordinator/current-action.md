@@ -2,9 +2,9 @@
 
 All69 source/native first passes reviewed. Final playable ClockWerx pilot and9-run comparison reviewed/committed c339e9a7; no pacing accepted. Expanded61-entry release v2 compiled/verified on7170f7e7, WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f.
 
-Last completed release follow-up: owned-angband-v1; NewHumanMaleWarrior town, namedt, inventoryclosed, noinput20seconds; turnwaitingidle. Exact report release-browser-reviews/angband.json; checkpoint browser-queue.json.
+Last completed release follow-up: owned-bachman-2-0u-v1; Level1 score0, noinput20seconds leads toGameOver; Fastanimationdefault. Exact report release-browser-reviews/bachman.json; checkpoint browser-queue.json.
 
-Next: /arashi-1-1-1/ root-supported IAB release check, then remaining pending routes one emulator at a time. Current part may be active; inspect chat/agents/processes and browser tabs before launching. No performance capture overlaps another emulator/build/conversion. Source/native table final-game-table.md needs browser follow-up column integration.
+Next: /balderdoush-1-04i/ root-supported IAB release check, then remaining pending routes one emulator at a time. Current part may be active; inspect chat/agents/processes and browser tabs before launching. No performance capture overlaps another emulator/build/conversion. Source/native table final-game-table.md needs browser follow-up column integration.
 
 Test server http://localhost:55847 serves D:/SystemlessBuild/private-library-20261107/dist-v2; owned server188256 in server-test-owned-v2.json. Normal8087/real browser saves/launcher untouched, no activation pointer. Root IAB2, temporary viewport672x1000; never retry Windows URL policy block. Original disks/forks/Finder metadata/preferences retained; all assets private onD. User allows2runners but benchmarks/builds/conversions sequential. Existing restart automation remains until WHOLE task completes.
 

@@ -1,0 +1,28 @@
+{
+  "status": "bounded authorized workflow complete",
+  "completed_at": "2026-11-08T04:11:24.102716+00:00",
+  "main_review_commit": "c880a94e",
+  "source_native_titles": 69,
+  "prepared_browser_routes": 61,
+  "current_results": {
+    "unchanged_bounded_baselines": 45,
+    "gameplay_measurement_unresolved": 16,
+    "compatibility_blockers": 7,
+    "unsupported_requirement": 1
+  },
+  "accepted_pacing_changes": [],
+  "clockwerx": "playableMovementHTML5pilot/final9comparison reviewed",
+  "barney": "1baseline,0candidate captures; requested12visualdifference stop, sixrunplanincomplete",
+  "bikaka": "6completed diagnosticcaptures; host/piecesequenceconfounded, no12adoption",
+  "restart_automation": {
+    "id": "resume-systemless-game-coordinator",
+    "state": "deleted",
+    "app_tool_confirmation": "deleteStatus=deleted"
+  },
+  "local_delivery": "local-delivery.json",
+  "report": "final-report.md",
+  "per_game_table": "final-game-table.md",
+  "preservation": "final-preservation.json",
+  "git_boundary": "git-operation-audit.md",
+  "operations": "No coordinatorpush/privateupload/hostingdeployment; externalorigin/dev pushevents disclosed"
+}

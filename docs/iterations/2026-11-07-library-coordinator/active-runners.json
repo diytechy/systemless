@@ -3,11 +3,11 @@
   "performance_and_heavy_build_limit": 1,
   "max_diagnostic_runners": 2,
   "policy": "concurrency.md",
-  "updated_at": "2026-11-08T02:58:10.629070+00:00",
+  "updated_at": "2026-11-08T04:11:24.102716+00:00",
   "coordinator_workload": {
     "owner": "/root",
     "phase": "sequential root IAB prototype and release checks",
-    "status": "boundedworkflowcomplete; no controlledworkload; closingcommit/heartbeatremoval",
+    "status": "complete; noactivecontrolledworkload; restartheartbeatdeleted",
     "server_ownership": "D:/SystemlessBuild/private-library-20261107/server-test-owned-v2.json",
     "build_ownership": "D:/SystemlessBuild/private-library-20261107/build-owned-v2.json"
   },

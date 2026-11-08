@@ -1,0 +1,38 @@
+{
+  "id": "owned-bloodsuckers-v1",
+  "scene": "Animatedtitlemenu aftercorrectedPlayballandtextclicks; noarm/meters",
+  "observed_checks": "MeasuredDOM665x672window/canvas608x455.5; correctedContinueCSS317544works; correctedPlayballCSS447237 andtext384237 eachheld1000ms; handmovesbutmenuremains; PNGsaved; earlierapproximateclickattemptssuperseded",
+  "remaining_limits": "Playhit/readinessstillunresolvedaftermeasuredcoordinatecorrection; no gameplayperformance/candidate or diagnosedservicecause. Sound/saves/pause/hardware unqualified.",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {},
+  "geometry": {
+    "live_dom_canvas_css": [
+      608,
+      455.5
+    ],
+    "live_window_inner": [
+      665,
+      672
+    ],
+    "gui_png_dimensions": [
+      650,
+      657
+    ],
+    "backing": [
+      800,
+      600
+    ],
+    "play_ball_css": [
+      447,
+      237
+    ],
+    "play_text_css": [
+      384,
+      237
+    ]
+  }
+}

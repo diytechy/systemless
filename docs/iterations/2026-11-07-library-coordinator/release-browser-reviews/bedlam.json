@@ -1,0 +1,12 @@
+{
+  "id": "owned-bedlam-v1",
+  "scene": "Monochromemenu thenNewGame, Pluto informationbriefing; heldmousebutton advances to sparseblack/star transition, no cockpitbattle reached",
+  "observed_checks": "N starts; planetinfo appeared; mousehold2seconds dismisses briefing; copiedpref generates isolatedSavedFiles1; screenshot saved",
+  "remaining_limits": "Representativebattle not reached in boundedfollowup, no meaningful gameplaytiming/candidate. Movement/fireinbattle,pause,sound,saves,hardware,reference unqualified. Sparse transition has no diagnosedcause.",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {}
+}

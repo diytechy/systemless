@@ -1,0 +1,12 @@
+{
+  "id": "owned-battletanks-2-12-1-v1",
+  "scene": "Toolbar andflatgreenfield; CommandN two-player setup entered anddismissed, no tanksor terrain",
+  "observed_checks": "Title route loads; CommandN opens1to10playerdialog; typedtwo testnames, selected2players, Returndismisses; GameSpaceclicks didnotestablishmenu; screenshot saved",
+  "remaining_limits": "No representativebattle readiness, no gameplayperformance/candidate. Same native gap; specificcause unproven. Sound,saves,controllerhardware/fidelity unqualified.",
+  "accepted_change": null,
+  "settings": "unchanged default25 MHz,2 max ticks/paint,4 reset slack; reviewed depth/executable/SIZE preserved",
+  "evidence": "bounded release readiness check; no gameplay timing claim",
+  "build": "7170f7e7 / WASM af55e03d31219e324f8ad49e6af8877836f07591aaa8409a099967e0a9fc9a5f",
+  "origin": "http://localhost:55847; isolated from normal8087 saves",
+  "data": {}
+}

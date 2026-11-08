@@ -108,22 +108,34 @@
     {
       "id": "owned-balderdoush-1-04i-v1",
       "route": "/balderdoush-1-04i/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/balderdoush.json",
+      "scene": "Level01 score0 3men, initialtime150; noinput20seconds thenRight300ms; fieldremainsactive",
+      "accepted_change": null
     },
     {
       "id": "owned-barney-carnage-2-0-v1",
       "route": "/barney-carnage-2-0/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/barney.json",
+      "scene": "White field with smallmovingtarget nearupper/rightedge, noinput20seconds",
+      "accepted_change": null
     },
     {
       "id": "owned-battletanks-2-12-1-v1",
       "route": "/battletanks-2-12-1/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/battletanks.json",
+      "scene": "Toolbar andflatgreenfield; CommandN two-player setup entered anddismissed, no tanksor terrain",
+      "accepted_change": null
     },
     {
       "id": "owned-bedlam-v1",
       "route": "/bedlam/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/bedlam.json",
+      "scene": "Monochromemenu thenNewGame, Pluto informationbriefing; heldmousebutton advances to sparseblack/star transition, no cockpitbattle reached",
+      "accepted_change": null
     },
     {
       "id": "owned-bikaka-1-4-v1",

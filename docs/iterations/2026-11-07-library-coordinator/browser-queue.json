@@ -399,17 +399,26 @@
     {
       "id": "owned-pac-the-man-v1",
       "route": "/pac-the-man/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/pac-the-man.json",
+      "scene": "Level1 maze score5 afterRight600ms, lives3 initially, noinput20seconds withdeaths/respawns; postcapture score10/lives0",
+      "accepted_change": null
     },
     {
       "id": "owned-particleman-1-0-v1",
       "route": "/particleman-1-0/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/particleman.json",
+      "scene": "StartingScreen1 populated paths/items/centralcounter, noinput20seconds afterRight300ms, numericcounters change",
+      "accepted_change": null
     },
     {
       "id": "owned-polybrid-1-0-v1",
       "route": "/polybrid-1-0/",
-      "status": "pending"
+      "status": "reviewed release follow-up",
+      "report": "release-browser-reviews/polybrid.json",
+      "scene": "Populatedwell/preview score0, fallingpiece, Right300ms beforecapture; noinput20seconds endsactivepiece/score12",
+      "accepted_change": null
     },
     {
       "id": "owned-prince-of-persia-v1",

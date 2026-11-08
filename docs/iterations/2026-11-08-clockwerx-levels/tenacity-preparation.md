@@ -1,6 +1,6 @@
-# Tenacity14 preparation — not yet accepted
+# Tenacity14 preparation — historical pre-acceptance record
 
-The normal8087pilot remains validated through13Touchdown. Tenacity is an isolated candidate, not an accepted level. Work remains on the user's SVG-Port branch; original69-title tuning/frozen comparisons are complete and are not being repeated.
+This records the preparation state and rejected attempts before acceptance. The corrected original39transfer/three-GO/5000point route subsequently passed; see [current acceptance](tenacity-review.md). Work remains on the user's SVG-Port branch; original69-title tuning/frozen comparisons are complete and are not being repeated.
 
 ## Guarded rule changes
 

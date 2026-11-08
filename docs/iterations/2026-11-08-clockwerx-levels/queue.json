@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 14,
-  "currentAction": "Tenacity14: correct native reverse input after C/chord failures; browser39transfer/3GO goal and190onsets pass; original goal/return not yet accepted",
+  "currentOrdinal": 15,
+  "currentAction": "Ramble15: fresh native baseline from verified through14progress; composite red-blue ordinary/bonus art and counter-rotating programmed actors require review",
   "levels": [
     {
       "ordinal": 1,
@@ -967,16 +967,25 @@
       "menuTitle": "Tenacity",
       "resourceTitle": "Tenacity",
       "sha256": "818047bd9a042fea545759dcfcb4d7cf4e32f042a81ace0a5d2df1d702e2981f",
-      "status": "candidate-native-input-correction-pending",
-      "nativeEvidence": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "tenacity/native-goal-03/report.json",
+        "tenacity/native-goal-03/ten-after-route.png",
+        "tenacity/native-goal-03/next-after-tenacity.png"
+      ],
       "requirements": [
         "protected WY composition and saved-time semantics",
         "GO-only scope independent of BO; initial169 ignored",
         "class1 ordinary canonical wall response",
         "short vertical type0door native goal and return checks"
       ],
-      "svgStatus": "isolated39transfer/3GO/5000goal;190onsets and rootIAB verified; not locally activated",
-      "generationConstraints": [],
+      "svgStatus": "activated39transfer/threeGO/5000Childgoal;190onsets and rootIAB verified",
+      "generationConstraints": [
+        "switch-outline entry/occupancy and door phase are required state",
+        "saved checkpoint time differs from later live-time additions",
+        "GO-only effects do not advance bonus-dot progression",
+        "canonical ordinary wall reversal precedes switch/program hooks; no human trap guard"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 88,
@@ -1003,7 +1012,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1023,7 +1032,8 @@
       ],
       "candidateEvidence": [
         "progress-export/fresh-tenacity-02/report.json"
-      ]
+      ],
+      "acceptanceReview": "tenacity-review.md"
     },
     {
       "ordinal": 15,

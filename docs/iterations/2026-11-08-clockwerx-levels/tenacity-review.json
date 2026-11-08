@@ -1,0 +1,159 @@
+{
+  "status": "passed",
+  "runtimeTests": 187,
+  "focusedAfterGuardAssertions": 41,
+  "packagingTests": 13,
+  "priorRoutes": 13,
+  "goalOnsets": 190,
+  "nativeTransfers": 39,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 25406,
+    "guest_tick": 26006,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 5000,
+  "nativeNextLevel": "15:Ramble",
+  "browser": {
+    "valid": true,
+    "transfers": 39,
+    "goodies": 3,
+    "bonuses": 1,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 5000,
+      "totalCommitted": 0,
+      "nextDotAward": 2000,
+      "completed": true,
+      "overallEarned": 5000
+    },
+    "timer": {
+      "enabled": false,
+      "original": 120,
+      "current": 150,
+      "saved": 140
+    },
+    "resets": 0
+  },
+  "elevatedHumanFits": [
+    {
+      "transfer": 1,
+      "expectedPivot": "2,1",
+      "observedPivot": "2,1",
+      "match": true,
+      "sourceFrame": 35,
+      "meanAbsoluteChannelError": 13.457657657657657
+    },
+    {
+      "transfer": 15,
+      "expectedPivot": "5,6",
+      "observedPivot": "5,6",
+      "match": true,
+      "sourceFrame": 37,
+      "meanAbsoluteChannelError": 3.7753222836095763
+    }
+  ],
+  "clock": {
+    "boundary": "Independent original descriptor fits constrain 4/19 hero and canonical wall-reacting ordinary NPCs using original outlines. First4096frame aliases only; excludes hero-overdraw poses, does not fit pixels to expected positions or prove wall-clock pace.",
+    "firstGuestTick": 1864,
+    "heroPoses": 23,
+    "npcPoses": 66,
+    "phaseIntervals": [
+      [
+        72.26315789473684,
+        72.3157894736842
+      ],
+      [
+        3336.2631578947367,
+        3336.315789473684
+      ]
+    ],
+    "chosenPhase": 72.28947368421052,
+    "rejectedHeroPoseCount": 10
+  },
+  "background": {
+    "name": "tenacity-fresh-idle-01",
+    "meanAbsoluteChannelError": 0.5591904057220373,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "gateBoundary": "Full type0body bounds include phase9stub, walls/caps; all3original gates reach distinct10/open. Completion panel excluded by observed scene. Hero-overdraw rows retained.",
+  "gates": {
+    "0": {
+      "samples": 93,
+      "cleanBody": 91,
+      "cleanPhases": [
+        0,
+        1,
+        3,
+        5,
+        7,
+        8,
+        10
+      ],
+      "maxCleanBody": 0.5450980392156862
+    },
+    "1": {
+      "samples": 93,
+      "cleanBody": 92,
+      "cleanPhases": [
+        0,
+        1,
+        3,
+        5,
+        8,
+        10
+      ],
+      "maxCleanBody": 0.5441176470588235
+    },
+    "2": {
+      "samples": 93,
+      "cleanBody": 91,
+      "cleanPhases": [
+        0,
+        1,
+        3,
+        7,
+        10
+      ],
+      "maxCleanBody": 0.5526143790849674
+    }
+  },
+  "capOverdraw": {
+    "boundary": "Attribution only: original raw cap errors retained. Every >4channel cap mismatch tested against independently fitted blue-hand opaque source pixels; geometry/asset/mask not adjusted.",
+    "results": [
+      {
+        "checkpoint": "tenacity-fresh-idle-22",
+        "rawCapMAE": 2.7014388489208634,
+        "highErrorPixels": 6,
+        "pixelsUnderIndependentBlue": 6,
+        "maxBluePixelError": 1.0,
+        "retainedUnobscuredCapMAE": 0.7806372549019608
+      }
+    ]
+  },
+  "limits": [
+    "Child only",
+    "continuous human average and canonical NPC timing; no original hardware timing claim",
+    "exact forced short-door crushing unqualified",
+    "full pickup effects/audio/campaign/save/highscore/controller parity omitted or unqualified",
+    "expanded bundle has no fresh comparable resource benchmark"
+  ],
+  "schema": "clockwerx-accepted-level-v1",
+  "ordinal": 14,
+  "title": "Tenacity",
+  "scope": "Bounded39transfer Child goal with3GO/one of15bonus dots, source/native component checks; not full game",
+  "privateRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\tenacity",
+  "activation": {
+    "sourceBytes": 163579,
+    "assetBytes": 1793724,
+    "manifestBytes": 1153949,
+    "totalBytes": 3111252
+  }
+}

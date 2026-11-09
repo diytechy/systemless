@@ -19,9 +19,9 @@
   "priorDefinitionsAndAll100PayloadsUnchanged": true,
   "limits": [
     "Raw prior audit samples32of119sourceEX across43..48; unsampled anchors remain explicit",
-    "Cold normal/bonus native evidence; burnt bank is source/tests/model only, no new original runs",
     "138overdraw/ambiguous prior observations and21native49EX misses retained",
-    "SVG shading/antialias and previous timing/audio/controllers/nonChild/performance limitations remain"
+    "SVG shading/antialias and previous timing/audio/controllers/nonChild/performance limitations remain",
+    "Separate existing-PNG burned-bank color evidence now covers36clear observations; burn callback timing/wholejournal unchanged"
   ],
   "sourceRevision": "410f48efc8aabb6a052b33f7cc28cc93b6ba9400",
   "activeScenes": 48,
@@ -39,5 +39,31 @@
   "normalTab": 92,
   "normalPaused": true,
   "normalDeliverable": true,
-  "qaTab131Closed": true
+  "qaTab131Closed": true,
+  "additionalBurnExtensionReview": {
+    "status": "reviewed",
+    "newOriginalRuns": 0,
+    "coldObservations": 1056,
+    "coldUniqueClear": 918,
+    "coldOldWrong": 433,
+    "burnExtensionObservations": 132,
+    "burnExtensionUniqueClear": 114,
+    "burnExtensionOldWrong": 66,
+    "burnedBankUniqueClear": 36,
+    "burnedBankCorrectedFrame": 19,
+    "burnedBankOldFrame": 20,
+    "totalObservations": 1188,
+    "totalUniqueClear": 1032,
+    "totalOldWrong": 499,
+    "totalCorrectedWrong": 0,
+    "totalAmbiguousOrOverdraw": 156,
+    "coldHashesPreserved": true,
+    "allSixColdProofExamplesPhysicallyViewed": true,
+    "burnedProofPhysicallyViewed": true,
+    "combinedReceiptSha256": "30d19cc8586aec672a60add72a094f136ce71ee913936ceda77f35cae371080f",
+    "limits": [
+      "Native burned color/bank qualified at these fixed footprints; no new callback timing or wholejournal claim",
+      "87prior cold anchors unsampled;156ambiguous/overdraw retained"
+    ]
+  }
 }

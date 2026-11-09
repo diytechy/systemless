@@ -1,0 +1,39 @@
+{
+  "status": "provisional-cold-binding-source-review-pending-not-gameplay-acceptance",
+  "ordinal": 49,
+  "sourceProposalSha256": "a50fef11ab59a52f6bfda6c879c824291018f95d0051228562f44c0daf57ef7a",
+  "sourcePatchSha256": "5085dd9f03c4da5fccd59e14e6eeceeb77ca22cef57447ba0503b89988c099fc",
+  "rawFitsSha256": "4424c848155b9ad2f6adb7d1d24266c368083f1e581c1f66513a870fcd6d698d",
+  "rawDiagnosticV2ReceiptSha256": "eea137159e6a668586662850e733b02a2f4a61fe9b9259abbdfea91239461ad7",
+  "comparisonSha256": "2d3f9478af459353e4824025cad80ed6832f08f2f5e51624ed5ec1a4cfc99801",
+  "nativeClosed": true,
+  "nativeFrontend": 2224,
+  "nativeGuest": 2824,
+  "nativeBudgetExhausted": 0,
+  "all33ColdImagesPhysicallyViewed": true,
+  "sourceFittedEvenIdle": 696,
+  "equivalentHalfStepIdle": 697,
+  "prefixSearch": [
+    0,
+    3728
+  ],
+  "singleFreshIdleTrajectoryUpdates": 5648,
+  "clearActorPositionsAndPoses": 255,
+  "allPrimaryActorHypotheses": 264,
+  "clearHeroPoses": 26,
+  "old686Poses": 0,
+  "old700Poses": 140,
+  "HYFrameMatches": 16,
+  "HYClearNativeFrames": 264,
+  "faderPositionMatches": 3,
+  "faderExactFrames": 1,
+  "faderModelOneCallbackAhead": 2,
+  "noStatePhaseOrClockAssignments": true,
+  "limits": [
+    "49source peer review/root integration/tests, gameplay routes/original goal/death/SVG/activation not complete",
+    "255unique masked pose hypotheses under original overlap domain do not identify every logical actor independently",
+    "Nine low-confidence raw observations retained",
+    "HYstartupclockphase disagrees; no separate family phase fit applied",
+    "One of3sourcefaderframes exact,two model frames onecallbackahead; lifetime/reset visuals unqualified"
+  ]
+}

@@ -2,14 +2,21 @@
 // source bounds are mandatory; preparing this module does not enable a level.
 import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
 import {dotBodyFrame} from './dots.mjs';
+import {assertSlidingOilScope} from './sliding-oil.mjs';
 import {createPuddleState,triggerPuddle,observePuddle,createDropletState,
  dropletArrived,dropletHumanGrab,dropletDirection,advanceDroplet,oilOutline,
  findDormantPuddleContact,OIL_LIMITS} from './oil.mjs';
 
 export class OilRuntime {
- constructor(board,{outlines,dotOutlines,bounds}={}){
+ constructor(board,{outlines,dotOutlines,bounds,getHumanSliding,getMainDotSprite}={}){
   if(!outlines?.groups?.['1200']||!outlines.groups['2200']||!dotOutlines?.groups?.['300'])throw new Error('Original oil and dot outlines required');
   if(!bounds||!['left','top','right','bottom'].every(k=>Number.isInteger(bounds[k])))throw new Error('Qualified source universe bounds required');
+  if(board.slidingOilGoodieRingRules&&!board.slidingOilRules)throw new Error('Oil/GO/rings require EX/Oil core');
+  if(board.slidingOilRules)assertSlidingOilScope({...board,actors:[board.player,...(board.enemies||[])],rich:board.slidingOilGoodieRingRules===true,initial:true,activeSections:Object.fromEntries(['walls','doors','switches','elevators','bombs','teleports'].map(k=>[k,board[k]?.length??0]))});
+  if(board.slidingOilRules&&(typeof getHumanSliding!=='function'||getHumanSliding.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous human sliding accessor required');
+  if(board.slidingOilGoodieRingRules&&(typeof getMainDotSprite!=='function'||getMainDotSprite.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous main-dot sprite accessor required');
+  this.getHumanSliding=getHumanSliding;this.getMainDotSprite=getMainDotSprite;
+  if(board.slidingOilGoodieRingRules)for(const d of board.dots.filter(d=>d.ring))for(let f=23+7*d.color;f<=30+7*d.color;f++)if(!dotOutlines.groups[300].frames[f])throw new Error('Complete current ring collision profiles required');
   this.board=board;this.outlines=outlines;this.dotOutlines=dotOutlines;this.bounds={...bounds};
   this.dots=[...board.dots].sort((a,b)=>a.sourceIndex-b.sourceIndex);
   if(this.dots.some(d=>!Number.isInteger(d.sourceIndex)||d.sourceIndex<0||d.sourceIndex>87)||new Set(this.dots.map(d=>d.sourceIndex)).size!==this.dots.length)throw new Error('Unique source dot slots required');
@@ -30,12 +37,20 @@ export class OilRuntime {
   const dot=this.dots.find(dot=>{const p=this.pixel(dot.sourceIndex);return Math.abs(p.x-pixel.x)<=6&&Math.abs(p.y-pixel.y)<=6;});
   return dot&&this.canGrab(dot.sourceIndex,false)?{index:dot.sourceIndex,pixel:this.pixel(dot.sourceIndex)}:null;
  }
+ humanSliding(){if(!this.board.slidingOilRules)return false;const value=this.getHumanSliding();if(typeof value!=='boolean')throw new Error('Live human sliding must be boolean');return value;}
  collideDot(state){
   const shape=oilOutline(this.outlines.groups['2200'].frames[state.frame],state.base);
   for(const dot of this.dots){
-   if(!dot.sourceCollidable)continue;
-   const frame=dotBodyFrame(dot);
-   if(outlineCollision(shape,oilOutline(this.dotOutlines.groups['300'].frames[frame],this.pixel(dot.sourceIndex))))return dot.sourceIndex;
+   let frame,base;
+   if(this.board.slidingOilGoodieRingRules){
+    const main=this.getMainDotSprite(dot);
+    if(!main||typeof main.exists!=='boolean')throw new Error('Explicit current main-dot sprite state required');
+    if(!main.exists)continue;
+    if(typeof main.background!=='boolean'||typeof main.visible!=='boolean'||!Number.isInteger(main.frame)||!main.base||!Number.isInteger(main.base.x)||!Number.isInteger(main.base.y)||!this.dotOutlines.groups[300].frames[main.frame])throw new Error('Qualified current main-dot descriptor required');
+    if(!main.background&&!main.visible)continue;
+    frame=main.frame;base=main.base;
+   }else{if(!dot.sourceCollidable)continue;frame=dotBodyFrame(dot);base=this.pixel(dot.sourceIndex);}
+   if(outlineCollision(shape,oilOutline(this.dotOutlines.groups['300'].frames[frame],base)))return dot.sourceIndex;
   }
   return -1;
  }
@@ -68,7 +83,7 @@ export class OilRuntime {
   if(this.allocations>=OIL_LIMITS.droplets)return;
   this.allocations++;
   let state=createDropletState(index,this.pixel(index),{now:this.now,delay150:250,delay700:1166});
-  const arrival=dropletArrived(state,{humanCanGrab:this.canGrab(index,true),heroPivot:this.heroPivot,heroSliding:false});
+  const arrival=dropletArrived(state,{humanCanGrab:this.canGrab(index,true),heroPivot:this.heroPivot,heroSliding:this.humanSliding()});
   state=arrival.state;
   const entry={state,clockReference:this.counts.droplet};
   const slot=this.droplets.push(entry)-1;this.sprites.push({kind:'droplet',index:slot});
@@ -104,7 +119,7 @@ export class OilRuntime {
      entry.clockReference=this.counts.droplet;
      const result=advanceDroplet(entry.state,{now:this.now,delay150:250,delay700:1166,
       targetPixel:this.pixel(this.heroPivot),dotPixel:i=>this.pixel(i),collideDot:s=>this.collideDot(s),
-      humanCanGrab:i=>this.canGrab(i,true),heroPivot:this.heroPivot,heroSliding:false,bounds:this.bounds,
+      humanCanGrab:i=>this.canGrab(i,true),heroPivot:this.heroPivot,heroSliding:false,...(this.board.slidingOilRules?{getHumanSliding:()=>this.humanSliding()}:{}),bounds:this.bounds,
       onClone:event=>this.createDroplet(event.dotIndex,context,event.preferVertical)});
      entry.state=result.state;this.dispatch(result.events.filter(e=>e.type!=='clone'),context);
     }

@@ -118,7 +118,7 @@ export function dropletHumanGrab(s,dotIndex) {
  * snapshots its current MT count, preventing a same-count frame callback.
  */
 export function advanceDroplet(s,{now,delay150,delay700,targetPixel,dotPixel,
-  collideDot,humanCanGrab,heroPivot,heroSliding=false,bounds,onClone}) {
+  collideDot,humanCanGrab,heroPivot,heroSliding=false,getHumanSliding,bounds,onClone}) {
   integer(now);point(targetPixel);
   const n={...s,base:{...s.base}},events=[];
   if(!n.clockAttached)return {state:n,events};
@@ -140,7 +140,7 @@ export function advanceDroplet(s,{now,delay150,delay700,targetPixel,dotPixel,
   let phase=n.frame-n.travelBase;
   if(phase===0) {
     if(n.dotIndex<0)throw new RangeError('Arrival requires an acquired dot');
-    const arrived=dropletArrived(n,{humanCanGrab:humanCanGrab(n.dotIndex),heroPivot,heroSliding});
+    const arrived=dropletArrived(n,{humanCanGrab:humanCanGrab(n.dotIndex),heroPivot,heroSliding:getHumanSliding?getHumanSliding():heroSliding});
     Object.assign(n,arrived.state);events.push(...arrived.events);
     n.moveDeadline=deadline(now,delay150);n.base={...point(dotPixel(n.dotIndex))};
     n.min=0;n.max=0;n.frame=0;phase=0;

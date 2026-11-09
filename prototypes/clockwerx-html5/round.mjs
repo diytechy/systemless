@@ -7,6 +7,8 @@ import {createDeathClock} from './death.mjs';
 import {advanceWallContactGuard} from './walls.mjs';
 import {createDoorSystem,findDoorContact} from './doors.mjs';
 import {OilRuntime} from './oil-runtime.mjs';
+import {dotBodyFrame} from './dots.mjs';
+import {assertSlidingOilScope} from './sliding-oil.mjs';
 import {createActorClocks} from './actor-clocks.mjs';
 import {advanceBounceEnemy} from './programs.mjs';
 import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs';
@@ -42,14 +44,19 @@ export class SourceRound extends MovementGame {
    if(!board.elevatorRules||!board.goodieOnlyRules||!board.rotatingSpikeRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||board.elevatorGoodieRules||board.bombRules||board.canonicalOilRules||board.elevatorOilSpikeRules||board.bombOilElevatorRules||board.puddles?.length||board.walls?.length||board.doors?.length||board.switches?.length||!board.goodies?.length||!elevatorOutlines?.groups?.['3400']||[0,1,2].some(g=>!controls.some(c=>c.group===g)||!dots.some(d=>d.upDown.group===g))||controls.some(c=>![0,1,2].includes(c.group)||![1,2,3].includes(c.subcell))||dots.some(d=>![0,1,2].includes(d.upDown.group)||d.upDown.initialLowered!==false||d.color!==[4,2,1][d.upDown.group]||d.kind!=='dot')||board.dots.some(d=>d.ring||d.waystation||d.protected)||[this.player,...this.enemies].some(h=>board.dots.find(d=>d.id===h.pivot)?.upDown)||this.enemies.some(e=>e.speedClass!==1||e.checksWalls!==false||!([1,2,3].includes(e.sourceActorType)&&(e.program===null||/^[fns]+$/.test(e.program)&&e.sourcePC>=1)||e.sourceActorType===4&&e.program===null)))throw new Error('Separate source colored raised three-channel elevator/goodie Child scope required');
   }
   if(board.canonicalOilSpikeRules&&(!board.canonicalOilRules||!board.spikes?.length||board.puddles?.some(p=>p.kind!==2)||board.walls?.length||board.doors?.length||board.switches?.length||board.elevators?.length||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||e.speedClass!==1||e.checksWalls!==false)||board.dots.some(d=>d.ring||d.protected||d.waystation||d.motion!=='static')))throw new Error('Qualified kind2 Oil, static spikes and ordinary class1 Child scope required');
-  if(board.canonicalOilRules&&!board.bombOilElevatorRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.puddles?.length||board.bombRules||board.goodieOnlyRules||board.spikes?.length&&!board.canonicalOilSpikeRules&&!board.elevatorOilSpikeRules||board.doors?.length||board.switches?.length||this.enemies.some(e=>!([1,2,3].includes(e.sourceActorType)&&[1,3].includes(e.speedClass)&&e.checksWalls===false||board.staticEnemyWallRules&&e.sourceActorType===1&&e.speedClass===4&&e.program===null))||board.dots.some(d=>d.ring||d.protected||d.waystation&&d.color!==0)))throw new Error('Canonical Oil requires the qualified static Child ordinary-actor scope');
+  if(board.canonicalOilRules&&!board.bombOilElevatorRules&&!board.slidingOilRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.puddles?.length||board.bombRules||board.goodieOnlyRules||board.spikes?.length&&!board.canonicalOilSpikeRules&&!board.elevatorOilSpikeRules||board.doors?.length||board.switches?.length||this.enemies.some(e=>!([1,2,3].includes(e.sourceActorType)&&[1,3].includes(e.speedClass)&&e.checksWalls===false||board.staticEnemyWallRules&&e.sourceActorType===1&&e.speedClass===4&&e.program===null))||board.dots.some(d=>d.ring||d.protected||d.waystation&&d.color!==0)))throw new Error('Canonical Oil requires the qualified static Child ordinary-actor scope');
   if(board.bombOilElevatorRules){
    const controls=board.elevators||[],puddles=board.puddles||[],body=dotOutlines?.groups?.['300']?.frames;
    if(!board.elevatorRules||!board.canonicalOilRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.bombRules||!board.bombObjectInteractionRules||board.goodieOnlyRules||board.elevatorOilSpikeRules||board.canonicalOilSpikeRules||board.spikes?.length||board.doors?.length||board.switches?.length||!puddles.length||puddles.some(p=>![0,2].includes(p.kind))||!controls.some(c=>c.group===0)||!controls.some(c=>c.group===1)||controls.some(c=>!(c.group===0&&c.subcell===1||c.group===1&&c.subcell===3))||!elevatorOutlines?.groups?.['3400']?.frames?.[9]||Array.from({length:8},(_,i)=>body?.[92+i]).some(f=>!f)||!board.dots.some(d=>d.upDown)||board.dots.some(d=>d.ring||d.protected||d.waystation&&d.color!==0||d.upDown&&(![0,1].includes(d.upDown.group)||d.upDown.initialLowered||d.color!==0||d.kind!=='dot'))||this.enemies.some(e=>e.checksWalls!==false||!([1,2,3].includes(e.sourceActorType)&&[1,3].includes(e.speedClass)||e.sourceActorType===4&&[1,2,4].includes(e.speedClass)&&e.program===null)))throw new Error('Separate source bomb/Oil/group0+1 elevator scope and burnt outlines required');
   }
   if(board.slidingConnectorRules){validateConnectorBoard(board.connectors,board.dots);if(!board.combinedGoalBonusRules||!Array.isArray(board.slidingHumanStarts)||board.slidingHumanStarts.length!==2||board.slidingHumanStarts[0]!==board.player.pivot||board.slidingHumanStarts.some(id=>{const d=board.dots.find(d=>d.id===id);return !d||d.kind==='goal';}))throw new Error('EX requires goal/bonus composition and non-goal human starts');}
-  if(board.slidingConnectorRules&&!board.staticSlidingProgramRules&&!board.slidingGoodieRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.elevatorRules||board.difficulty!=='Child'||!board.connectors?.length||!elevatorOutlines?.groups?.['3400']||board.teleportRules||['puddles','bombs','goodies','spikes','doors','switches'].some(k=>board[k]?.length)||board.dots.some(d=>d.ring||d.teleport||d.motion!=='static'&&!(d.upDown&&d.upDown.group===0&&!d.upDown.initialLowered&&d.color===0&&d.kind==='dot')||d.protected&&d.color!==0)||board.elevators?.some(c=>c.group!==0||![2,3].includes(c.subcell))||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,2].includes(e.speedClass)||e.program!==null||e.checksWalls!==false)))throw new Error('Separate EX Child composition required');
+  if(board.slidingConnectorRules&&!board.staticSlidingProgramRules&&!board.slidingGoodieRules&&!board.slidingOilRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.elevatorRules||board.difficulty!=='Child'||!board.connectors?.length||!elevatorOutlines?.groups?.['3400']||board.teleportRules||['puddles','bombs','goodies','spikes','doors','switches'].some(k=>board[k]?.length)||board.dots.some(d=>d.ring||d.teleport||d.motion!=='static'&&!(d.upDown&&d.upDown.group===0&&!d.upDown.initialLowered&&d.color===0&&d.kind==='dot')||d.protected&&d.color!==0)||board.elevators?.some(c=>c.group!==0||![2,3].includes(c.subcell))||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,2].includes(e.speedClass)||e.program!==null||e.checksWalls!==false)))throw new Error('Separate EX Child composition required');
   if(board.staticSlidingProgramRules&&(!board.slidingConnectorRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||board.elevatorRules||board.teleportRules||['puddles','bombs','goodies','doors','switches','walls','elevators'].some(k=>board[k]?.length)||board.dots.some(d=>d.motion!=='static'||d.humanCanGrab!==true||d.nonhumanCanGrab!==true||d.ring||d.teleport||d.protected||d.waystation)||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,2,3].includes(e.speedClass)||e.checksWalls!==false||e.program!==null&&(!/^[fn]+$/.test(e.program)||e.sourcePC<1))))throw new Error('Separate static EX f/n Child scope required');
+  if(board.slidingOilGoodieRingRules&&!board.slidingOilRules)throw new Error('Oil/GO/rings require EX/Oil core');
+  if(board.slidingOilRules){
+   if(!board.slidingConnectorRules||!board.canonicalOilRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||board.staticSlidingProgramRules||board.slidingGoodieRules||board.bombRules||board.elevatorRules||board.teleportRules||board.canonicalOilSpikeRules||board.bombOilElevatorRules||board.goodieOnlyRules!==!!board.slidingOilGoodieRingRules||board.origin?.x!==(board.slidingOilGoodieRingRules?98:74)||board.origin?.y!==(board.slidingOilGoodieRingRules?96:72))throw new Error('Separate canonical Child EX/Oil composition required');
+   assertSlidingOilScope({...board,actors:[this.player,...this.enemies],rich:board.slidingOilGoodieRingRules===true,initial:true,activeSections:Object.fromEntries(['walls','doors','switches','elevators','bombs','teleports'].map(k=>[k,board[k]?.length??0]))});
+  }
   if(board.slidingGoodieProgramRules&&!board.slidingGoodieRules)throw new Error('Sliding goodie programs require sliding goodies');
   if(board.slidingGoodieRules&&(!board.goodies?.length||!board.slidingConnectorRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.goodieOnlyRules||board.staticSlidingProgramRules||board.bombRules||board.elevatorRules||board.teleportRules||['puddles','bombs','doors','switches','elevators'].some(k=>board[k]?.length)||board.dots.some(d=>d.motion!=='static'||d.humanCanGrab!==true||d.nonhumanCanGrab!==true||d.ring||d.teleport||d.protected||d.waystation)||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||e.speedClass!==1||e.checksWalls!==false||e.program!==null&&(!board.slidingGoodieProgramRules||!/^[bns]+$/.test(e.program)||e.sourcePC<1))))throw new Error('Separate static EX goodie/free or b/n/s class1 Child scope required');
   if(board.teleportRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.rotatingSpikeRules||board.difficulty!=='Child'||!board.teleports?.length||board.dots.some(d=>d.motion!=='static'||d.slideMask||d.protected||d.waystation)||['puddles','walls','doors','switches','elevators','bombs','goodies'].some(k=>board[k]?.length)||board.bombRules||board.goodieOnlyRules||this.enemies.some(e=>e.speedClass!==1||e.checksWalls!==false||!([1,2,3].includes(e.sourceActorType)&&e.program===null||e.sourceActorType===4&&(e.program===null||/^n+$/.test(e.program)&&e.sourcePC>=1)))))throw new Error('Qualified static Child teleport composition required');
@@ -62,7 +69,7 @@ export class SourceRound extends MovementGame {
   if(board.staticEnemyCallbacks&&!board.staticEnemyWallRules&&this.enemies.some(e=>e.checksWalls))throw new Error('Canonical enemy wall response requires qualification');
   if(this.enemies.some(e=>e.sourceActorType===4)&&(!board.rotatingSpikeRules||!board.staticEnemyCallbacks||!outlines.groups['3500']))throw new Error('Rotating spike rules, canonical clock and source outlines require qualification');
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
-  if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds});
+  if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds,...(board.slidingOilRules?{getHumanSliding:()=>this.player.sliding===true}:{}),...(board.slidingOilGoodieRingRules?{getMainDotSprite:dot=>this.mainDotSprite(dot)}:{})});
   if(board.elevatorRules){
    this.elevatorOutlines=elevatorOutlines;
    this.elevators=createElevatorSystem(board.elevators,board.dots.filter(d=>d.upDown).map(d=>({id:d.id,...d.upDown})),{origin:board.origin,clockCount:this.actorClasses.snapshot().classes[1].count,surfaceCount:this.elevatorSurfaceClock.advance(0).clientCount});
@@ -188,6 +195,12 @@ export class SourceRound extends MovementGame {
    if(reference!==state.reference){state.reference=reference;state.frame=(state.frame+1)%4;}
   }
  }
+ mainDotSprite(dot){
+  if(!this.board.slidingOilGoodieRingRules)throw new Error('Current main-dot accessor requires Oil/GO/ring scope');
+  const main=dot.ring?this.dotAnimations?.renderState(dot.id).main:null;
+  if(dot.ring&&(!main||!Number.isInteger(main.frame)||typeof main.visible!=='boolean'))throw new Error('Current ring animation required');
+  return {exists:true,frame:dot.ring?main.frame:dotBodyFrame(dot),base:{x:dot.x-16,y:dot.y-15},background:dot.sourceInBackground,visible:dot.ring?main.visible:dot.sourceCollidable};
+ }
  point(hand){const d=this.board.dots.find(d=>d.id===hand.pivot);return this.board.slidingConnectorRules?slidingPoint(hand,d):d;}
  collider(hand){return hand.visible===false?null:worldOutline(this.outlines,hand.group,hand.program||hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),this.point(hand));}
  spikeCollision(){
@@ -224,7 +237,7 @@ export class SourceRound extends MovementGame {
  }
  animateStaticEnemy(hand,delta,timing,upstream,dispatched){
   if(dispatched){
-   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowClass2RotatingSpikes:this.board.class2RotatingSpikeRules===true,allowClass3RotatingSpikes:this.board.class3RotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,allowTeleports:this.board.teleportRules===true,allowSliding:this.board.slidingConnectorRules===true,allowSlidingPrograms:this.board.staticSlidingProgramRules===true,allowSlidingGoodies:this.board.slidingGoodieRules===true,allowSlidingGoodiePrograms:this.board.slidingGoodieProgramRules===true,
+   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowClass2RotatingSpikes:this.board.class2RotatingSpikeRules===true,allowClass3RotatingSpikes:this.board.class3RotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,allowTeleports:this.board.teleportRules===true,allowSliding:this.board.slidingConnectorRules===true,allowSlidingPrograms:this.board.staticSlidingProgramRules===true,allowSlidingOil:this.board.slidingOilRules===true,allowSlidingOilGoodieRings:this.board.slidingOilGoodieRingRules===true,allowSlidingGoodies:this.board.slidingGoodieRules===true,allowSlidingGoodiePrograms:this.board.slidingGoodieProgramRules===true,
     afterAnimate:s=>{
      const wall=this.board.staticEnemyWallRules?this.wallCollision(s):null;
      if(wall){s.direction*=-1;this.event('enemy-wall-bounce',s,this.point(s));}
@@ -376,7 +389,7 @@ export class SourceRound extends MovementGame {
   // Existing scenes retain their qualified phase. BO scenes place layer2
   // after the upper fuse/GO/Oil layers, before appended explosion callbacks.
   if(!this.death&&this.teleports)this.teleports.observeHyperspace(teleportCounts.hyperspace);
-  if(!this.death&&!this.bombScene)this.advanceSpikes();
+  if(!this.death&&!this.bombScene&&!this.board.slidingOilRules)this.advanceSpikes();
   // Door callbacks observe one changed shared count, rather than catching up
   // every missed phase. Cross-layer source traversal phase remains approximate.
   if(!this.death)this.doorSystem.observeClock(doorCount);
@@ -384,7 +397,7 @@ export class SourceRound extends MovementGame {
   // Physical source layer11 (PU/DP) precedes enemy1, then human0. A droplet
   // arrival may latch death and freeze the remaining sprite callbacks.
   if(!this.death)this.oil?.processSprites({onDeath:reason=>this.beginDeath({reason:'oil',sourceReason:reason}),isFrozen:()=>!!this.death});
-  if(!this.death&&this.bombScene)this.advanceSpikes();
+  if(!this.death&&(this.bombScene||this.board.slidingOilRules))this.advanceSpikes();
   this.bombScene?.processExplosions();
   if(!this.death)for(const enemy of this.enemies){
    if(enemy.sourceActorType!==4)this.bombScene?.runtime.checkMatch(enemy);
@@ -406,7 +419,7 @@ export class SourceRound extends MovementGame {
    const spike=this.spikeCollision();
    if(spike)this.beginDeath(spike);
    this.bombScene?.runtime.checkGoodie(this.player);
-   if(!spike||this.bombScene){
+   if(!spike||this.bombScene||this.board.slidingOilRules){
     this.oil?.contactHuman(this.collider(this.player));
     this.bombScene?.runtime.checkMatch(this.player);
     this.bombScene?.runtime.checkSpark(this.player);

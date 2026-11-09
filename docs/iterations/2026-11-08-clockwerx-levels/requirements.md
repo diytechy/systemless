@@ -166,3 +166,10 @@ Cyclone composes class1/2/3 free hands with two fuse chains. Its selected20-tran
 A held Bounce can repeatedly reverse at neighboring facing dots while preserving the current pivot. Prosperity uses this to confine rotation to the lower half-turn during a travelling spark; simply waiting at the same safe-looking pivot fails. Space49 Reverse is separately verified alone and alongside heldCommand in the copied original settings. Preserve edge-triggered Reverse and continuous transfer/Bounce inputs independently.
 
 The31-transfer original/SVG goal earns14000 through three GO pickups, four increasing bonus awards and the Child goal. Four fuses ignite, three blasts complete, twelve dot cores become burnt and two original green hands disappear. Model removal of a third hand varies by tested onset. The pure64-frame hero/NPC period excludes GO/LI birth clocks, fuses and explosions; independently fitted GO animation rate does not establish the same absolute first frame. See [Prosperity](prosperity-review.md).
+
+
+## Enclosure timing preparation — acceptance pending
+
+Original player motion is callback-stepped. On each class0 callback, collision and consecutive-wall contact checks precede direction input; direction requests query the current cardinal source frame. Noncardinal callbacks clear the repeated-target guard. A successful action or collision consumes a queued Reverse request without a second reversal. A goal stops the source step before subsequent animation. Smooth SVG drawing must interpolate independently of those logical frames and collision outlines.
+
+This is prepared behind an explicit static Child scene flag; earlier accepted scenes retain their existing timing. The independent original schedule and81-image wall probe exposed the mismatch after18 transfers, although the old continuous model could report a complete route. Public callback code now reproduces105 retained schedule samples, with67 clean wall-pose fits and14 raw overdraw errors retained. Full Enclosure original/browser goals and expanded input checks remain pending; this preparation is not a scene acceptance.

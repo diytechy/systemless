@@ -155,3 +155,6 @@ Stutter36requires distinguishing currentlyallocated droplet slots from visible s
 
 
 Stutter36 sourcewall outline graph disconnects spawn from goal before destruction. A distance heuristic must account for destructible barriers and intermediate match activation; Manhattan distance repeatedly favored dead ends. This is planning evidence only. Every candidate branch must reconstruct fresh unmodified-map legal input and then pass native/visible goal checks. Blink/callback/surface-phase uncertainty remains explicit; no new-level generator is implemented.
+
+
+Stutter36 original human ignition/retreat/fuse/blast diagnostic now witnesses two removed barriersections andfour burntcornerdots. It earns no forwardprogress and has no fullgoal. A phase0 route can fail at another legal initialclock onset; fixed waits and topological detours alone do not certify safe traversal. Prefixsearch13 checks physically held inputs at two onsets before a complete finite-onset review. No state/clock injection or new generator.

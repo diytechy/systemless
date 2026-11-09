@@ -69,12 +69,19 @@
     "stutter/burnt-control-art-review.json",
     "stutter/mixed-tests-02.log",
     "stutter/mixed-tests-03.log",
-    "stutter/candidate-ignition-04.json"
+    "stutter/candidate-ignition-04.json",
+    "stutter/native-ignition-blast-01/report.json",
+    "stutter/native-ignition-blast-01-inputs.json",
+    "stutter/native-ignition-blast-comparison.json",
+    "stutter/native-blast-dot-fits.json",
+    "stutter/failed-window-wait-06a.json",
+    "stutter/failed-window-ignition-08.json",
+    "stutter/delayed-ignition-review-10.json",
+    "stutter/robust-ignition-review-12.json"
   ],
   "pending": [
-    "human-match ignition/barrier route",
-    "finite held-input checks",
-    "original physical goal and object witnesses",
+    "robust held-input prefix and full goal route",
+    "original physical full goal",
     "visible SVG goal/activation review"
   ],
   "limits": [
@@ -138,5 +145,33 @@
     "oilAllocations": 0,
     "normalizedSeconds": 37.733333333331835,
     "nativeWitness": false
+  },
+  "nativeIgnitionBlast": {
+    "status": "closed-passed-diagnostic-only",
+    "frontendTicks": 8725,
+    "guestTicks": 9325,
+    "budgetExhausted": 0,
+    "images": 28,
+    "saveExport": false,
+    "transfers": 12,
+    "bounces": 2,
+    "reverses": 1,
+    "bonus": 3000,
+    "finalPivot": "2,0",
+    "actualBlastViewed": true,
+    "wallSectionsRemoved": 2,
+    "burntDots": 4,
+    "handHypotheses": 208,
+    "clear": 173,
+    "positions": 172,
+    "poses": 161,
+    "transferHeroMatches": 12
+  },
+  "heldInputFailure": {
+    "firstPassedOnsets": 10,
+    "firstFailureOnset": 10,
+    "cause": "red enemy beside pivot1,3",
+    "result": "rejected as robust checked route",
+    "runtimeOrClockChanges": false
   }
 }

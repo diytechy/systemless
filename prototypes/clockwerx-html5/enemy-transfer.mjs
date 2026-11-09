@@ -1,3 +1,4 @@
+import {assertSlidingTeleportDots,assertSlidingTeleportActor} from './sliding-teleports.mjs';
 import {startSliding,animateSliding,stopSliding} from './sliding.mjs';
 import {stepSourceProgram} from './programs.mjs';
 
@@ -47,12 +48,17 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,onSourceEvent=()=>{}
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
   if(!Array.isArray(dots)||![adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab].every(f=>typeof f==='function'))
     throw new TypeError('Source dot and synchronous collision/grab adapters required');
+  if(allowSliding&&allowTeleports&&!allowSlidingTeleports)throw new Error('Separate HY/EX helper capability required');
+  if(allowSlidingTeleports){
+   if(!allowSliding||!allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingPrograms||allowSlidingGoodies||allowSlidingGoodiePrograms||allowSlidingOil||allowSlidingBombs||allowSlidingBombCheckpoints||typeof onSourceEvent!=='function')throw new Error('Separate static ordinary HY/EX helper scope required');
+   assertSlidingTeleportDots(dots);assertSlidingTeleportActor(state,{program});
+  }
   dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding));
   if(allowSlidingPrograms&&dots.some(d=>d.slideMask&&d.humanCanGrab!==true))throw new Error('Static EX programs require human-available endpoints');
   if(allowSlidingPrograms&&(!allowSliding||![1,2,3].includes(state.sourceActorType)||![1,2,3].includes(state.speedClass)||state.checksWalls!==false||program!==null&&(!/^[fn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1)))throw new Error('Separate ordinary wall-free f/n sliding program scope required');
@@ -62,6 +68,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   if(allowSlidingGoodiePrograms&&!allowSlidingGoodies)throw new Error('Sliding goodie programs require sliding goodies');
   if(allowSlidingGoodies&&(allowUpDownDots||allowTeleports||state.movingPivot||dots.some(d=>d.motion!=='static'||d.teleport!==false||d.ring||d.protected||d.waystation||d.transferDeath||d.slowdown||d.moving||d.movingProgram||d.upDown||d.sourceBombDynamic||d.burnt)||!allowSliding||allowSlidingPrograms||![1,2,3].includes(state.sourceActorType)||state.speedClass!==1||state.checksWalls!==false||program!==null&&(!allowSlidingGoodiePrograms||!/^[bns]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1)||dots.some(d=>d.slideMask&&(d.humanCanGrab!==true||d.nonhumanCanGrab!==true))))throw new Error('Separate ordinary free class1 sliding goodie scope required');
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
+  const record=e=>{events.push(e);if(allowSlidingTeleports){const v=onSourceEvent({...e},{...next});if(v&&typeof v.then==='function')throw new TypeError('Synchronous source diagnostics required');}};
   const validate=s=>validateState(s,allowRotatingSpikes,allowSliding);
   validate(next);
   if(next.sourceActorType===4&&(!(next.speedClass===1||allowFastRotatingSpikes&&next.speedClass===5||allowSlowRotatingSpikes&&next.speedClass===4||allowClass2RotatingSpikes&&next.speedClass===2||allowClass3RotatingSpikes&&next.speedClass===3)||next.checksWalls!==false||program!==null&&!isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers,allowRotatingSpikeBounces})))
@@ -79,10 +86,10 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     if(!allowSliding||!animateSliding(next)){next.unwrappedFrame+=next.direction;next.frame=next.unwrappedFrame&63;}
     // Source WACollide runs before stop-slide/direct-program/start-slide.
     afterAnimate(next,context);validate(next);
-    if(allowSliding){const e=stopSliding(next,dots,{release:(d,s)=>onDotRelease(s,d,context),grab:(d,s)=>{onDotGrabFirst(s,d,context);afterDotGrab(s,d,context);}});if(e)events.push(e);if(program!==null&&!allowSlidingPrograms&&!allowSlidingGoodiePrograms&&!allowSlidingOil&&!allowSlidingBombs)throw new Error('EX programmed actors unqualified');}
+    if(allowSliding){const e=stopSliding(next,dots,{currentPivot:allowSlidingTeleports,arrival:allowSlidingTeleports?e=>record({...e,step,frame:next.frame}):undefined,release:(d,s)=>onDotRelease(s,d,context),grab:(d,s)=>{onDotGrabFirst(s,d,context);if(allowSlidingTeleports&&!d.humanCanGrab&&markEnemyOrphaned(s,{guestTick,adjustPeriod}))record({type:'orphaned',step,deadline:s.orphanDeadline});afterDotGrab(s,d,context);}});if(e&&(!allowSlidingTeleports||e.type!=='slide-arrival'))record(e);if(program!==null&&!allowSlidingPrograms&&!allowSlidingGoodiePrograms&&!allowSlidingOil&&!allowSlidingBombs&&!allowSlidingTeleports)throw new Error('EX programmed actors unqualified');}
     try {
     if(program===null)continue;
-    const instruction=stepSourceProgram(program,next.sourcePC,{frame:next.frame,sliding:next.sliding});
+    const commandPC=next.sourcePC,instruction=stepSourceProgram(program,next.sourcePC,{frame:next.frame,sliding:next.sliding});
     next.sourcePC=instruction.sourcePC;
     if(!instruction.action)continue;
     const oldDot=dotAt(next.pivot),[dx,dy]=offsets[next.frame];
@@ -90,17 +97,17 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     // nonhuman permission. Rendering visibility and color are not filters.
     const target=dots.find(d=>d.present&&d.x===oldDot.x+48*dx&&d.y===oldDot.y+48*dy);
     const allowed=Boolean(target?.nonhumanCanGrab),action=instruction.action;
-    events.push({type:'program-command',step,frame:next.frame,allowed,action:{...action}});
+    record({type:'program-command',step,frame:next.frame,allowed,action:{...action},...(allowSlidingTeleports?{sourcePCBefore:commandPC,sourcePCAfter:next.sourcePC,sourceOpcode:program[commandPC-1]}:{})});
     if(!allowed)continue;
     if(action.grab!==action.reverse)next.direction*=-1;
     if(!action.grab)continue;
     onDotRelease(next,oldDot,context);validate(next);
     next.pivot=target.id;next.unwrappedFrame+=32;next.frame=next.unwrappedFrame&63;
-    events.push({type:'program-transfer',step,from:oldDot.id,to:target.id,frame:next.frame});
+    record({type:'program-transfer',step,from:oldDot.id,to:target.id,frame:next.frame});
     // DOGrabbed calls its DP hook before testing human availability.
     onDotGrabFirst(next,target,context);validate(next);
     if(!target.humanCanGrab&&markEnemyOrphaned(next,{guestTick,adjustPeriod}))
-      events.push({type:'orphaned',step,deadline:next.orphanDeadline});
+      record({type:'orphaned',step,deadline:next.orphanDeadline});
     // Child nonhumans do not collect bonuses or activate human WY/goal hooks.
     afterDotGrab(next,target,context);validate(next);
     } finally {if(allowSliding)startSliding(next,dotAt(next.pivot));}
@@ -111,9 +118,9 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     if(!integer(next.orphanDeadline))throw new Error('Orphan deadline required');
     if(guestTick>next.orphanDeadline) {
       next.visible=false;next.orphaned=false;next.hiddenUntil=0;
-      events.push({type:'orphan-expired'});
+      record({type:'orphan-expired'});
     } else {
-      next.visible=!next.visible;events.push({type:'orphan-flicker',visible:next.visible});
+      next.visible=!next.visible;record({type:'orphan-flicker',visible:next.visible});
     }
   }
   return {state:next,events};

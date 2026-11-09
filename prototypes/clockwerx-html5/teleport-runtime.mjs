@@ -1,3 +1,4 @@
+import {assertSlidingTeleportScope,assertSlidingTeleportActor} from './sliding-teleports.mjs';
 // Static Child HY sprites and ordinary WA one-shots. Private maps and atlas
 // descriptors are supplied externally. Presentation never chooses a collider.
 import {createSourceTimerChain} from './hazards.mjs';
@@ -13,9 +14,12 @@ export function actorFaderFrames(actor){
 }
 
 export class TeleportRuntime {
- constructor(endpoints,dots,{hyperspace:hyperspaceCount=0,fader:faderCount=0}={}){
+ constructor(endpoints,dots,{hyperspace:hyperspaceCount=0,fader:faderCount=0}={},scope={}){
   count(hyperspaceCount);count(faderCount);
   if(!Array.isArray(endpoints)||!endpoints.length||endpoints.length>22||!Array.isArray(dots))throw new TypeError('Bounded paired HY endpoints and source dots required');
+  if(dots.some(d=>d.slideMask)&&scope.allowSlidingTeleports!==true)throw new Error('Separate HY/EX runtime capability required');
+  if(scope.allowSlidingTeleports===true)assertSlidingTeleportScope({...scope,dots,teleports:endpoints});
+  this.slidingTeleportRules=scope.allowSlidingTeleports===true;
   this.dots=dots;
   this.endpoints=endpoints.map(e=>{
    if(!dots.some(d=>d.id===e.dot)||!endpoints.some(p=>p.dot===e.partner&&p.partner===e.dot)||!Number.isInteger(e.initialFrame)||e.initialFrame<e.firstFrame||e.initialFrame>e.lastFrame||e.lastFrame!==e.firstFrame+1)throw new Error('Qualified paired HY initial state required');
@@ -53,6 +57,7 @@ export class TeleportRuntime {
   this.faders.push(fader);return fader;
  }
  teleport(actor,grabbed,{sound,place,checkWalls,onWallDeath,suppressed=false}={}){
+  if(this.slidingTeleportRules)assertSlidingTeleportActor(actor,{program:actor?.program??null,human:[0,6].includes(actor?.sourceActorType)});
   const endpoint=this.endpoints.find(e=>e.dot===grabbed.id);if(!endpoint)return false;
   return teleportOrdinaryActor(actor,this.dot(endpoint.partner),{sound,startFader:a=>this.startFader(a,{suppressed}),place,checkWalls,onWallDeath});
  }

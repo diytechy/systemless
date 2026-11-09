@@ -27,13 +27,15 @@ export function animateSliding(actor){
  if(!actor.sliding)return false;
  actor.slideProgress+=actor.slideDelta;actor.slideX+=actor.slideVX;actor.slideY+=actor.slideVY;return true;
 }
-export function stopSliding(actor,dots,{release,grab}={}){
+export function stopSliding(actor,dots,{release,grab,currentPivot=false,arrival}={}){
  if(!actor.sliding)return null;
  if(actor.slideProgress>=16){
   const old=dots.find(d=>d.id===actor.pivot),[vx,vy]=vectors[actor.slideDirection],target=dots.find(d=>d.present&&d.row===old.row+vy/3&&d.column===old.column+vx/3);
   if(!target)throw new Error('Missing EX arrival dot');
-  release?.(old,actor);actor.pivot=target.id;grab?.(target,actor);
-  actor.slideX=target.x;actor.slideY=target.y;actor.sliding=false;return {type:'slide-arrival',from:old.id,to:target.id};
+  release?.(old,actor);actor.pivot=target.id;arrival?.({type:'slide-arrival',from:old.id,to:target.id},actor);grab?.(target,actor);
+  const placed=currentPivot?dots.find(d=>d.id===actor.pivot):target;
+  if(!placed)throw new Error('Missing current EX pivot after grab');
+  actor.slideX=placed.x;actor.slideY=placed.y;actor.sliding=false;return {type:'slide-arrival',from:old.id,to:target.id};
  }
  if(actor.slideDelta<0&&actor.slideProgress<=0){actor.sliding=false;return {type:'slide-backout',dot:actor.pivot};}
  return null;

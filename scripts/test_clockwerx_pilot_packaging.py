@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 import tempfile
 import unittest
@@ -86,6 +87,15 @@ class PilotPackagingTests(unittest.TestCase):
         self.assertTrue((self.dist/'clockwerx-html5/sparkles.mjs').is_file())
         self.assertTrue((self.dist/'clockwerx-html5/dots.mjs').is_file())
         self.assertEqual((self.dist/'clockwerx-html5/assets/hand.svg').read_bytes(),vector.read_bytes())
+
+    def test_packaged_runtime_has_every_relative_module_dependency(self):
+        package(self.dist,self.assets)
+        route=self.dist/'clockwerx-html5'
+        for module in route.glob('*.mjs'):
+            dependencies=re.findall(r'''(?:from|import)\s*['"](\./[^'"]+\.mjs)['"]''',module.read_text(encoding='utf-8'))
+            for dependency in dependencies:
+                with self.subTest(module=module.name,dependency=dependency):
+                    self.assertTrue((route/dependency).is_file(),'Missing runtime module '+dependency)
     def test_goal_art_must_be_verified(self):
         self.manifest['vectorAssets']=dict(dots=[],hands={},goal=dict(file='missing-goal.svg'))
         self.save_manifest()

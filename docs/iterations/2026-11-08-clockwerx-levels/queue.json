@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 33,
-  "currentAction": "Sinkers33 next: fresh native CLOSED/PASS2224/2824/0,p202000viewed. Sentry32accepted/active original+SVG16000/190onsets and separateOil death/reset; explicit pose/PUcallback limits. No active runner. NewactiveEL/up-down family gated; source/native investigation before implementation.",
+  "currentAction": "Sinkers33 unlinkedELprimitives:7new/231fulltests, nativecontrolprobeCLOSED/PASS2956/3556/0/121captures. Sourcegroup1/12phase/occupancy mapped; nativeleft/downcoremotion verified. Simplified initialgeometryproxy NOTacceptance witness. NoQA/integrationyet; live32. Nextphase/surface/rider/sourcequery integration.",
   "levels": [
     {
       "ordinal": 1,
@@ -2344,7 +2344,7 @@
       "menuTitle": "Sinkers",
       "resourceTitle": "Sinkers",
       "sha256": "81edccd4f42982baa7ce226395afd52a1e128d4ca57d5562a4333d294a351994",
-      "status": "source-preparation",
+      "status": "unlinked-primitives-native-discovery",
       "nativeEvidence": [
         "sinkers/native-initial-01/report.json"
       ],
@@ -2393,6 +2393,10 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "preparationEvidence": [
+        "sinkers-preparation.md",
+        "sinkers-preparation.json"
       ]
     },
     {

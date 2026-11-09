@@ -210,3 +210,8 @@ Canonical Oil and explicit static wall qualification jointly permit free class4 
 
 
 Sentry32 is accepted with original/SVG16,000points and190finite onsets; all23transfer hero poses match. Retain two cold/one physical human-frame differences and four PU callback differences. Separate original Oil death/reset and22approach poses pass; Tyro rank interstitial is omitted inHTML. See [review](sentry-review.md).
+
+
+## Sinkers preparation: shared up/down groups
+
+EL subcell and group are independent. Every entry toggles matching dots before old-control release; occupancy changes only the control artwork. Raised phase12 becomes unavailable to humans at the first lowering callback; phase0 kills/orphans attached occupants. Nonhuman presence permission remains. In-flight reversal and endpoint cancellation require distinct state. Native discovery confirms left/down core movement. Seven unlinked tests cover the primitives; no scene is enabled.

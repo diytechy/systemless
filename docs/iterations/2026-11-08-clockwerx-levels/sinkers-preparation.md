@@ -1,0 +1,11 @@
+# Sinkers preparation
+
+Sinkers33 remains unaccepted. Live stays at32 scenes through Sentry. See the [packet](sinkers-preparation.json).
+
+Two active EL controls share group1 and affect both active up/down dots. The EL subcell selects half-grid placement; its group is a separate word. A mask miss clears the dot's up/down property. Both active dots start raised. Every control entry toggles the group, even with another occupant present; occupancy only selects the pressed artwork. Release does not toggle. In-flight activation reverses direction, while a repeated activation at an endpoint can cancel the motion.
+
+Lowering has12source callbacks. New human grabs are denied at the first callback; original nonhuman permission remains present. At phase0, the source kills an attached human or orphans attached NPCs. Raising restores human availability only at phase12. Initial lowered flags and other groups remain outside the proposed first scene gate.
+
+A private original-game probe uses seven physical transfers and121captures. It passes2,956frontend/3,556guest/0budget. Its input proposal comes from an explicitly simplified initial-topology proxy, with EL/PU/up-down removed from a private copy. That proxy is discovery only and cannot be used for acceptance or checkedRoute. Neither guest state nor original media was changed. Original captures show button entries/releases, paired dot lowering/raising and left/down movement of visible dot cores. Control geometry was searched independently across all88grid positions/four subcells. The original offset hypothesis was wrong by two pixels; corrected source bases match both controls and all66cold glyph frames.
+
+Unlinked public primitives now cover record/mask/capacity checks, shared-group activation, occupancy, phase/reversal/availability and source glyph collisions. All seven new tests and231full runtime tests pass. They are not imported by the game or added to its bundle. Rider movement/death ordering, source +/-6 target queries, surface animation timing, collision-profile extraction and SVG artwork still require integration and original comparison. No QA33, real-map finite witness or original/SVG goal has been accepted. No new performance benchmark, push, upload or deployment.

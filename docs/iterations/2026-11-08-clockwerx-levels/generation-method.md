@@ -125,3 +125,6 @@ Sentry proposals expose timed occupancy: the shortest geometric path through a s
 
 
 Sentry32 now has original/SVG16,000goals and190finite onsets. The lower-room detour avoids the central slow hand; source wall reflection and clock phase are required state. A separate original Oil diagnostic confirms activation/death/reset but keeps four callback-frame discrepancies explicit. New-level generation remains unimplemented.
+
+
+Sinkers discovery adds shared-group control transitions,12-step availability/position state and attached-occupant loss. Geometric reachability must use source current-pixel +/-6 queries and actor-specific availability. A simplified initial-topology proxy can propose diagnostic inputs but must never certify a real map. The actual up/down simulation, witness and new-level generator remain pending.

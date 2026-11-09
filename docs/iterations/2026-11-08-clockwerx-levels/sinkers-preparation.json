@@ -1,0 +1,63 @@
+{
+  "status": "unlinked-primitives-source-discovery-not-accepted",
+  "ordinal": 33,
+  "title": "Sinkers",
+  "liveOrdinal": 32,
+  "resourceId": 5008,
+  "sourceSha256": "81edccd4f42982baa7ce226395afd52a1e128d4ca57d5562a4333d294a351994",
+  "newFamily": "EL/up-down group1",
+  "validation": {
+    "unlinkedNewUnitTests": 7,
+    "fullRuntimeTests": 231,
+    "integrated": false,
+    "packaged": false
+  },
+  "nativeCold": {
+    "status": "passed",
+    "frontendTicks": 2224,
+    "guestTicks": 2824,
+    "budgetExhausted": 0,
+    "images": 33,
+    "actualObserved": "33Sinkers/playerp/202000"
+  },
+  "nativeControlProbe": {
+    "status": "closed-passed",
+    "report": "native-control-01/report.json",
+    "frontendTicks": 2956,
+    "guestTicks": 3556,
+    "budgetExhausted": 0,
+    "physicalTransfers": 7,
+    "controlCaptures": 121,
+    "proposal": "initial-control-proposal.json",
+    "proposalQualification": "initial geometry proxy ONLY; EL/PU/up-down omitted, never an acceptance witness",
+    "newEvidence": [
+      "native-control-01-visual-fits.json"
+    ],
+    "cleanCoreOffsetX": [
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -1,
+      0
+    ],
+    "coreOffsetY": "negative ofX; native lowering movesleft/down",
+    "controlTransitions": [
+      27,
+      29,
+      78,
+      79,
+      103,
+      105,
+      116,
+      117
+    ]
+  },
+  "limits": [
+    "No QA33 or accepted real-map input witness",
+    "Proxy deletes unsupported properties only for initial geometry proposals; native guest/media unchanged",
+    "Position transition and visual clock/rider lifecycle still need integration and original comparison",
+    "No new cadence/resource claim"
+  ]
+}

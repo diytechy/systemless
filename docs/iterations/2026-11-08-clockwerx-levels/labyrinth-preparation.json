@@ -1,5 +1,5 @@
 {
-  "status": "guarded-source-preparation-only-original-and-svg-goals-pending",
+  "status": "superseded-by-accepted-scene-review",
   "ordinal": 30,
   "title": "Labyrinth",
   "liveOrdinal": 29,
@@ -73,5 +73,6 @@
     "One severely overdrawn orbital observation cannot establish a pose.19other raw observations match but retain errors above2.",
     "Live29package/source remains unchanged; new gates are used only in separateQA30.",
     "No new CPU/memory/cadence/audio/hardware/nonChild/save-compatibility qualification."
-  ]
+  ],
+  "review": "labyrinth-review.json"
 }

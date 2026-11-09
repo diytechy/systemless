@@ -1,0 +1,169 @@
+{
+  "status": "accepted-with-limits-and-locally-activated",
+  "ordinal": 30,
+  "title": "Labyrinth",
+  "liveOrdinal": 30,
+  "newCapabilities": [
+    "free class4 orbital with divisor8/multiplier1; programmed slow orbitals remain rejected",
+    "class1 n/b orbital program; bounce needs a present nonhuman-available neighbor; f and other unqualified commands stay rejected"
+  ],
+  "sourceFilesChanged": [
+    "app.mjs",
+    "enemy-transfer.mjs",
+    "level.mjs",
+    "round.mjs"
+  ],
+  "testsChanged": [
+    "enemy-transfer.test.mjs",
+    "level.test.mjs"
+  ],
+  "validation": {
+    "runtimeTests": 219,
+    "packagingTests": 14,
+    "priorDecodedBoardsIdentical": 28,
+    "priorFinalSnapshotsIdentical": 28,
+    "priorReplayUpdates": 256390
+  },
+  "nativeCold": {
+    "report": "labyrinth/native-initial-01/report.json",
+    "frontendTicks": 2224,
+    "guestTicks": 2824,
+    "budgetExhausted": 0,
+    "actualOrdinal": 30,
+    "actualPlayer": "p",
+    "actualTotal": 181000,
+    "images": 33,
+    "poseCandidates": 297,
+    "cleanFits": 277,
+    "cleanPositionsAndFramesMatched": 277,
+    "allPositionsAndFramesMatched": 296,
+    "rawOverdrawMatched": 19,
+    "unusableOverdraw": 1,
+    "legalIdleFixedUpdates": 682,
+    "normalReset": false,
+    "clockOrActorAssignments": false,
+    "sourcePoseReview": "labyrinth/native-source-pose-fits-disambiguated.json"
+  },
+  "nativeObjects": {
+    "doors": 8,
+    "doorSamples": 264,
+    "doorPhaseMatches": 264,
+    "maxDoorError": 0.6880222841225627,
+    "switches": 8,
+    "switchSamples": 264,
+    "switchFrameMatches": 264,
+    "maxSwitchError": 0.7113821138211383,
+    "bonusCoreSamples": 297,
+    "bonusCoresPreferred": 297,
+    "checkpointCoreSamples": 66,
+    "unlitPreferred": 66,
+    "backgroundBorderPixels": 73940,
+    "maxBackgroundChannelError": 0.6451897935262826
+  },
+  "qa": {
+    "scenes": 30,
+    "checkedRoute": true,
+    "priorDefinitionsIdentical": 29,
+    "payloadsUnchanged": 79,
+    "browserOpened": true
+  },
+  "limits": [
+    "190canonical and190earlyReverse(-4guesttick) cases pass. Late+4guesttick fails at onset12 after12passes; no symmetric tap/hardware qualification. The blue-entry Flip release is clipped before Reverse.",
+    "One orbital image in each cold/route review is too obscured to establish a pose. Other raw overdraw remains.",
+    "Five early red-door phases differ one callback; four spark fits differ one path pixel; exact absolute effect timing is not claimed.",
+    "Seven bonuses, four controls and completed terminal blast effects are not exercised by this route; all stored inventory is surveyed and rendered.",
+    "The original Stage3interstitial is replaced by the prototype completion overlay. Native score gain is observed from181000to185000; do not claim a native4000text summary was captured.",
+    "No new CPU/memory/cadence/audio/hardware/nonChild/fullsave-compatibility qualification."
+  ],
+  "sourceCodeCommit": "37967501",
+  "witness": {
+    "raw": "labyrinth/candidate-route-06.json",
+    "checked": "labyrinth/checked-route.json",
+    "transfers": 23,
+    "bonuses": 2,
+    "score": 4000,
+    "checkpointsVisited": 2,
+    "savedCheckpoint": "9,1",
+    "reverseEdges": 1,
+    "bounceInputs": 0,
+    "ignitions": 1,
+    "completedBlasts": 0,
+    "canonicalOnsetsPassed": 190,
+    "earlyReverseOnsetsPassed": 190,
+    "earlyReverseGuestTicks": -4,
+    "lateReverseGuestTicks": 4,
+    "lateOnsetsTested": 13,
+    "latePassed": 12,
+    "lateFirstFailure": 12
+  },
+  "nativeGoal": {
+    "report": "labyrinth/native-goal-01/report.json",
+    "status": "passed",
+    "frontend_ticks": 5926,
+    "guest_tick": 6526,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    },
+    "observedStageMessage": "STAGE 3 COMPLETE",
+    "observedIncomingTotal": 181000,
+    "observedNextTotal": 185000,
+    "observedScoreGain": 4000,
+    "observedNextOrdinal": 31,
+    "observedNextTitle": "Hallway",
+    "observedPlayer": "p",
+    "heroPoseMatches": 24,
+    "actorObservations": 216,
+    "actorPoseMatches": 215,
+    "actorClean": 210,
+    "actorCleanPoseMatches": 210,
+    "orbitalMatches": 47,
+    "orbitalObservations": 48,
+    "doorPhaseMatches": 187,
+    "doorObservations": 192,
+    "doorClean": 188,
+    "doorOneCallbackDifferences": 5,
+    "switchFrameMatches": 191,
+    "switchObservations": 192,
+    "switchClean": 189,
+    "sparkFits": 10,
+    "sparkClean": 10,
+    "sparkPointAndFrameExact": 5,
+    "sparkExactPoints": 6,
+    "sparkOnePixelDifferences": 4
+  },
+  "svg": {
+    "goalObserved": true,
+    "score": 4000,
+    "evidence": [
+      "labyrinth/qa-goal-page.png",
+      "labyrinth/qa-goal-ax.txt"
+    ],
+    "normalSmoke": "30selected/restarted/paused;normalIAB2tab92deliverable",
+    "qaTab": "110closed"
+  },
+  "activation": {
+    "backup": "labyrinth/previous-live-pilot",
+    "priorSceneDefinitionsIdentical": 29,
+    "payloadsUnchanged": 79,
+    "sourceFilesChanged": 4,
+    "protectedFilesUnchanged": 4,
+    "saveKeyUnchanged": true,
+    "sizes": {
+      "sourceBytes": 178658,
+      "assetBytes": 2694142,
+      "manifestBytes": 2761707,
+      "totalBytes": 5634507
+    }
+  },
+  "progressFixture": {
+    "sha256": "0cdb9ef62d32982c9a2826ac01ebc1da513cae0cbabd0fbde65a725d7eb4a4a2",
+    "filesVerified": 9,
+    "untouchedFiles": 7,
+    "relaunchVerified": true,
+    "observedOrdinal": 31,
+    "observedScore": 185000
+  }
+}

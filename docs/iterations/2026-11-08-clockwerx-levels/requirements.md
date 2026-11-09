@@ -187,3 +187,10 @@ A safe pivot does not imply a safe full rotation while a fuse travels. Crossing'
 Terminal BO kinds change artwork and fuse routing; explosion damage uses the stored terminal row and column. Five completed blasts remove nine stationary spikes while preserving the central one and all affected pivots. Twelve dot cores become burnt. Preserve this dynamic state when solving the rest of the board.
 
 Crossing is now accepted: original/SVG 7,000-point goals, all 190 finite onsets and 69 original physical-schedule hand poses pass. The five-blast topology and effect-phase limits above remain explicit. No source or payload changes were needed. See [Crossing](crossing-review.md).
+
+
+## Labyrinth: orbital capabilities and control occupancy
+
+A free class4 orbital uses divisor8/multiplier1; a separate class1 orbital executes n/b controls. Eligibility is explicit and independent. Slow programmed orbitals and unqualified orbital flip commands remain rejected. Independent cold and original physical-schedule poses qualify these two cases without changing shared timer constants.
+
+A control can remain occupied across a pivot transfer. The selected blue-gate Reverse must occur before that occupancy releases; a later reversal re-enters the control and toggles both blue gates again. Key release is part of the input policy: carrying Flip past Reverse can regrab the previous pivot. All 190 canonical and 190 early-tap cases pass, while late +4-tick onset12 fails and remains recorded. Source Stage 3 progression is represented by the HTML completion overlay. See [Labyrinth](labyrinth-review.md).

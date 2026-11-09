@@ -1,3 +1,5 @@
+Superseded by the [accepted review](labyrinth-review.md). The preparation history below retains its earlier pending checks.
+
 # Labyrinth preparation
 
 Live remains at 29 accepted Child scenes. Labyrinth 30 is source preparation only: no input witness or original/SVG goal has been accepted. See the [packet](labyrinth-preparation.json).

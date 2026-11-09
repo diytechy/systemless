@@ -134,3 +134,6 @@ The unmodified Sinkers candidate crosses both active up/down pivots and enters t
 
 
 Sinkers33 acceptance supports timed group1 reachability with controls and carried pivots. Track current positions, direction, phase, occupants, actor-specific grab eligibility and the separate surface clock. The no-death witness cannot certify death/restart timing;41postresetframe differences remain. Allfivebonus pickups and attached NPC lowering loss need further original witnesses. See [review](sinkers-review.md).
+
+
+Pigeonholes34 shows geometric proposals must use the union of allfour originalstaticspikecolliders when exact flicker phase is unqualified. Existing-map15transfer/threebonus/Oilbirth goal is witnessed natively; it does not certify allhazardtiming. Preserve color permissions separately from human availability, staticSPfromrotatingWA, and kind2PUtarget offsets from visualbases. A complete normal/bonus eight-color artwork inventory is needed before claiming rendered-map coverage.

@@ -221,3 +221,6 @@ Sinkers guarded integration uses the unmodified resource and source +/-6 current
 
 
 Sinkers33 is now accepted with original/SVG1000goals,12transferposes and190finite onsets. Controls242/surfaces188 match; fourcorecallback differences and all41postresetframe differences remain. Exact death/restart timing is unqualified. All165bonus cores match, pickups unvisited. See [review](sinkers-review.md).
+
+
+Pigeonholes34 preparation adds an explicit large/kind2Oil/static-spike/class1 composition gate;238runtime/15packaging checks and32prior-route regressions pass. Original7000/15transfers andall210positions match;21cold/sevengameplay oneframe differences remain. SevenSPIplacements match224clearfits, but only26phasesmatch: frequent spike-phase discrepancy remains unqualified. Correctedblue/greenbonusSVGfills final ordinarydotvariant. Visiblegoal/activation pending.

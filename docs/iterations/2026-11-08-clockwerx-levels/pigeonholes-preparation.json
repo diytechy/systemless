@@ -1,0 +1,74 @@
+{
+  "status": "guarded-preparation-original-goal-passed-svg-running",
+  "ordinal": 34,
+  "title": "Pigeonholes",
+  "resourceId": 188,
+  "sourceSha256": "3396d292744a6e107031e6ba822310f72bfdea3e706fd339f71d64182ff088fd",
+  "validation": {
+    "runtimeTests": 238,
+    "packagingTests": 15,
+    "priorDecodedBoards": 32,
+    "priorSnapshots": 32,
+    "priorUpdates": 284698
+  },
+  "cold": {
+    "positions": 231,
+    "positionMatches": 231,
+    "framesMatched": 210,
+    "oneFrameDifferences": 21,
+    "legalUpdates": 700,
+    "rawOverdrawFits": 6
+  },
+  "nativeGoal": {
+    "status": "closed-passed",
+    "frontendTicks": 4587,
+    "guestTicks": 5187,
+    "budgetExhausted": 0,
+    "transfers": 15,
+    "score": 7000,
+    "bonuses": 3,
+    "nextObserved": "35Hiccup/playerp/210000",
+    "positions": 210,
+    "positionMatches": 210,
+    "frameMatches": 203,
+    "transferHeroMatches": 15,
+    "clean": 203,
+    "cleanFrameMatches": 196
+  },
+  "finiteOnsets": 190,
+  "oil": {
+    "clearPuddlePoses": 9,
+    "baseMatches": 9,
+    "frameMatches": 8,
+    "oneCallbackDifferences": 1,
+    "clearDropletPoses": 5,
+    "dropletMatches": 5,
+    "frames": [
+      0,
+      60
+    ]
+  },
+  "staticSpikes": {
+    "samples": 231,
+    "clear": 224,
+    "phaseMatches": 26,
+    "phaseUnqualified": true
+  },
+  "bonusCoreSamples": 462,
+  "qa": {
+    "tab": 114,
+    "state": "corrected-checked-route-running",
+    "sources": 26,
+    "payloads": 84,
+    "oldDefinitions": 33,
+    "oldPayloads": 83,
+    "addedPayloadBytes": 1859
+  },
+  "limits": [
+    "Frequent spike phase mismatch:26of224clear phases exact; no correction adopted. Allfour source shapes constrain geometric route.",
+    "21cold/sevenphysical hand frames differ by one; allpositions/15transferhero poses match.",
+    "OneofnineclearPUframes differs onecallback; fiveDPposes only, no cloning/death/reset/fullpursuit scope in thisscene.",
+    "Threeof14bonuses collected;11pickups unvisited.",
+    "No new real-time cadence/resource/audio/controller/higherdifficulty/fullsave claim."
+  ]
+}

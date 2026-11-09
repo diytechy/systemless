@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 34,
-  "currentAction": "Pigeonholes34 fresh original cold capture CLOSED/PASS2224/2824/0, actual34/playerp/203000 viewed. Inventory active source composition and capability gates next; Sinkers33 accepted with timing limits and locally active. No active runner.",
+  "currentAction": "Pigeonholes34 guardedkind2Oil/staticSpike scope,238runtime/15packaging;32priorregressions284698updates. Original7000/15transfers/210points/203frames;190onsets passes. Spikephase26/224retainedunqualified. CorrectedQA114route/fresh35native65327running. Live33unchanged.",
   "levels": [
     {
       "ordinal": 1,
@@ -2428,7 +2428,7 @@
       "menuTitle": "Pigeonholes",
       "resourceTitle": "Pigeonholes",
       "sha256": "3396d292744a6e107031e6ba822310f72bfdea3e706fd339f71d64182ff088fd",
-      "status": "native-cold-passed-source-review-pending",
+      "status": "guarded-preparation-original-goal-passed-svg-running",
       "nativeEvidence": [
         "pigeonholes/native-initial-01/report.json"
       ],
@@ -2478,6 +2478,10 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "preparationEvidence": [
+        "pigeonholes-preparation.md",
+        "pigeonholes-preparation.json"
       ]
     },
     {

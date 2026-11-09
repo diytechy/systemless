@@ -42,6 +42,16 @@ test('a lowering pivot carries the human to death and a natural restart restores
  assert.equal(g.roundRestarts,1);assert.equal(g.player.pivot,'a');assert.equal(g.point(g.player).x,0);assert.equal(g.point(g.player).y,0);assert.equal(g.point(g.player).humanCanGrab,true);assert.equal(g.elevators.snapshot().controls[0].occupants,0);
 });
 
+test('qualified static spikes kill before an overlapping dormant Oil puddle wakes',()=>{
+ const {board,options}=canonicalOilFixture();board.puddles[0].kind=2;board.spikes=[{id:'spike',x:0,y:0,phase:0}];
+ assert.throws(()=>new SourceRound(board,options),/Canonical Oil requires/);
+ board.canonicalOilSpikeRules=true;
+ options.oilOutlines.groups['1200'].frames.forEach(f=>Object.assign(f,{left:-50,top:-50,right:50,bottom:50}));
+ const g=new SourceRound(board,options);for(let i=0;i<100&&!g.death;i++)g.update(1/120);
+ assert.equal(g.events.find(e=>e.type==='death').cause.reason,'spike');assert.equal(g.oil.puddles[0].triggered,false);
+ board.puddles[0].kind=1;assert.throws(()=>new SourceRound(board,options),/Qualified kind2 Oil/);
+});
+
 test('canonical Oil arrival death precedes goal and score effects',()=>{
  const {board,options}=canonicalOilFixture();board.dots[1].kind='goal';const g=new SourceRound(board,options);
  g.oil.createDroplet(1,{onDeath:()=>assert.fail('The initial human is on the other dot'),isFrozen:()=>false});

@@ -60,6 +60,19 @@ test('canonical Oil composition is explicit and retains its ordinary static Chil
  level.blocks.push({kind:'SP',count:1,records:[{rawWords:[0,0,0,2,0,15]}]});assert.ok(levelRequirements(level,{...options,allowCanonicalOil:true}).includes('canonical Oil with additional hazards is unqualified'));
 });
 
+test('static spikes with canonical Oil require a bounded kind2 composition opt-in',()=>{
+ const level=fixture();level.header.timeLimitRaw=150;level.blocks[0].records[2].version12ByteRaw=0;
+ level.blocks.push({kind:'PU',count:1,records:[{rawWords:[0,0,2,0,15]}]});
+ const options={angularSpeed:TAU,allowOil:true,allowCanonicalOil:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true};
+ assert.ok(levelRequirements(level,options).includes('canonical Oil with additional hazards is unqualified'));
+ const qualified={...options,allowCanonicalOilSpikes:true};
+ assert.equal(buildDecodedBoard(level,qualified).canonicalOilSpikeRules,true);
+ assert.ok(levelRequirements(level,{...qualified,allowCanonicalOil:false}).includes('Oil spikes require canonical Oil and large-display geometry'));
+ level.blocks.at(-1).records[0].rawWords[2]=1;assert.ok(levelRequirements(level,qualified).includes('Oil spikes require kind2 puddles and active static spikes'));level.blocks.at(-1).records[0].rawWords[2]=2;
+ level.blocks[0].records[2].rawWords[7]=3;assert.ok(levelRequirements(level,qualified).includes('Oil spikes require wall-free ordinary class1 enemies'));level.blocks[0].records[2].rawWords[7]=1;
+ level.blocks.push({kind:'WL',count:1,records:[]});assert.ok(levelRequirements(level,qualified).includes('Oil spikes require ordinary static dots without other objects'));
+});
+
 test('Oil with free slow red hands requires separate static wall qualification',()=>{
  const level=fixture();level.header.timeLimitRaw=90;level.blocks=level.blocks.filter(b=>b.kind!=='SP');level.blocks.push({kind:'PU',count:1,records:[{rawWords:[0,0,1,0,15]}]});
  const actor=level.blocks[0].records[2];Object.assign(actor,{actorTypeRaw:1,version12ByteRaw:1});actor.rawWords[2]=1;actor.rawWords[7]=4;

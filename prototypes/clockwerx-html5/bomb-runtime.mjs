@@ -43,10 +43,11 @@ export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSec
 
 /** GO callbacks compose with qualified static checkpoints/protection and doors.
  * The explicit static-EX variant also admits SP/WL; no fuse, blast, ring or Oil. */
-export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowElevatorGoodies=false,allowColoredElevatorGoodies=false,allowSlidingGoodies=false,connectors=[]}={}){
+export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowElevatorGoodies=false,allowColoredElevatorGoodies=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,connectors=[]}={}){
  if(mode!=='Child')throw new Error('Only Child goodie scope is supported');
  if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
- if(allowSlidingGoodies){if(allowElevatorGoodies||allowColoredElevatorGoodies||!(activeSections.GO>0)||activeSections.EX!==connectors.length||!connectors.length||dots.some(d=>d.motion!=='static'||d.protected||d.waystation||d.humanCanGrab!==true||d.nonhumanCanGrab!==true))throw new Error('Separate static EX goodie scope required');validateConnectorBoard(connectors,dots);if(actors.some(a=>!([0,6].includes(a.sourceActorType)||[1,2,3].includes(a.sourceActorType)&&a.speedClass===1&&a.program===null&&a.checksWalls===false)))throw new Error('Free ordinary class1 EX goodie actors required');}
+ if(allowSlidingGoodiePrograms&&!allowSlidingGoodies)throw new Error('Sliding goodie programs require sliding goodies');
+ if(allowSlidingGoodies){if(allowElevatorGoodies||allowColoredElevatorGoodies||!(activeSections.GO>0)||activeSections.EX!==connectors.length||!connectors.length||dots.some(d=>d.motion!=='static'||d.protected||d.waystation||d.humanCanGrab!==true||d.nonhumanCanGrab!==true))throw new Error('Separate static EX goodie scope required');validateConnectorBoard(connectors,dots);if(actors.some(a=>!([0,6].includes(a.sourceActorType)||[1,2,3].includes(a.sourceActorType)&&a.speedClass===1&&(a.program===null||allowSlidingGoodiePrograms&&/^[bns]+$/.test(a.program)&&Number.isInteger(a.sourcePC)&&a.sourcePC>=1)&&a.checksWalls===false)))throw new Error('Free ordinary class1 EX goodie actors required');}
  if((allowElevatorGoodies||allowColoredElevatorGoodies)&&(!(activeSections.EL>0)||!dots.some(d=>d.upDown)))throw new Error('Explicit active elevator/goodie composition required');
  for(const d of dots){
   grid(d);integer(d.color??0,0,7);

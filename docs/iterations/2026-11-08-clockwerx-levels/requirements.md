@@ -242,3 +242,6 @@ Stutter36unlinkedpreparation now includes a separate freeclass2orbital capabilit
 
 
 Stutter36 guarded mixedscope now dispatches movingDOT/DP/EL blasts and preserves backgroundpaint order; no live36opt-in. Inactivegroup2ordinarycores66/66, earlyclass2sixposes and35/38carriedposes match. Shared callback/blink edges and66group0surfacephase observations remain unqualified. Source/unit destruction contracts do not establish visited original gameplay behavior. See[preparation](stutter-preparation.md).
+
+
+Sourcequerycorrection: up/down motion is distinct fromordinarymovingType1. Admittedhuman/NPCstatic-updownqueries useexactcurrentpixels; six-pixel slack andcachedmidpoint belong to the otherfamily. A sinkingrider maymiss a staticneighbor even whilevisible. Correctednativefirst5poses match; oldStutterpermissive190modelwins werenot originalgoal evidence. See[queryreview](transfer-query-review.md).

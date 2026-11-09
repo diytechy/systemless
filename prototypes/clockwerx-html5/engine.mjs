@@ -21,11 +21,12 @@ export class MovementGame {
     let target=null,nearest=Infinity;
     const sourceQuery=Boolean(this.board.elevatorRules&&h===this.player&&h.canonicalFrame);
     if(action&&sourceQuery){
-      // Source DOFindGrabbable selects the first present current pixel inside
-      // a +/-6 rectangle, then tests human availability. A moving rider can
-      // therefore reach a target slightly away from an exact 48px distance.
+      // DOCanGrab applies its +/-6 branch only to ordinary moving-dot type1.
+      // Admitted static/up-down dots use exact current-pixel alignment, then
+      // test the first source match's permission. A sinking rider can be off
+      // the static grid even while its hand still draws above the surface.
       const x=pivot.x+Math.round(Math.cos(old)*radius),y=pivot.y+Math.round(Math.sin(old)*radius);
-      const first=this.board.dots.find(d=>d.present&&Math.abs(d.x-x)<=6&&Math.abs(d.y-y)<=6);
+      const first=this.board.dots.find(d=>d.present&&d.x===x&&d.y===y);
       if(first&&first.id!==pivot.id&&first.humanCanGrab&&h.blocked===null){target=first;nearest=0;}
     }else if(action)for(const d of this.board.dots){
       if(d.id===pivot.id)continue;

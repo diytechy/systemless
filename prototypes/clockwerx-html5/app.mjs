@@ -246,7 +246,7 @@ async function loadScene(scene){
   if(board.staticEnemyCallbacks)rules.push('Enemy hands rotate and follow their own timed patterns.');
   else if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
   if(board.rotatingSpikeRules)rules.push('Spiked orbs circle their pivots.');
-  if(board.elevatorRules)rules.push('Hands touching round controls raise or lower the marked dots. Leave a sinking dot before it disappears.');
+  if(board.elevatorRules)rules.push('Hands touching round controls raise or lower the marked dots. Leave a marked dot while it is still fully raised.');
   if(board.dots.some(d=>d.ring))rules.push('Rings disappear after you leave them and later return.');
   if(board.dots.some(d=>d.waystation))rules.push('Checkpoints store your return position and time.');
   if(board.dots.some(d=>d.protected))rules.push('Protected dots stop ordinary enemy contact; spikes remain lethal.');

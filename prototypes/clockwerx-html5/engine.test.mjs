@@ -2,12 +2,16 @@ import {MovementGame,TAU} from './engine.mjs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 function fixture(){return {radius:48,distanceTolerance:1,angularSpeed:TAU,dots:[{id:'a',x:0,y:0,group:'p'},{id:'b',x:48,y:0,group:'p',kind:'goal'}],player:{name:'player',pivot:'a',angle:-.1,direction:1},demos:[]};}
-test('elevator queries use current-pixel rectangles and preserve the cardinal transfer frame',()=>{
- const b=fixture();b.elevatorRules=true;b.sourceDotPermissions=true;Object.assign(b.player,{angle:0,canonicalFrame:true,frame:0});b.dots.forEach(d=>Object.assign(d,{present:true,humanCanGrab:true}));b.dots[1].y=5;
- const g=new MovementGame(b);g.update(0,{flip:true});assert.equal(g.player.pivot,'b');assert.equal(g.player.angle,Math.PI);
- b.dots[1].y=7;const outside=new MovementGame(b);outside.update(0,{flip:true});assert.equal(outside.player.pivot,'a');
- b.dots[1].y=5;b.dots[1].humanCanGrab=false;b.dots.push({id:'c',x:48,y:0,present:true,humanCanGrab:true});const first=new MovementGame(b);first.update(0,{flip:true});assert.equal(first.player.pivot,'a','first present source match denies the query before later overlaps');
+test('up/down queries require exact current pixels and preserve the cardinal transfer frame',()=>{
+ const b=fixture();b.elevatorRules=true;b.sourceDotPermissions=true;Object.assign(b.player,{angle:0,canonicalFrame:true,frame:0});b.dots.forEach(d=>Object.assign(d,{present:true,humanCanGrab:true}));
+ const aligned=new MovementGame(b);aligned.update(0,{flip:true});assert.equal(aligned.player.pivot,'b');assert.equal(aligned.player.angle,Math.PI);
+ // A rider has moved left/down with its dot. The old rectangular query
+ // falsely accepted this escape to a static neighbor; the original misses it.
+ Object.assign(b.dots[0],{x:-3,y:3,humanCanGrab:false});const rider=new MovementGame(b);rider.update(0,{swing:true});assert.equal(rider.player.pivot,'a');
+ Object.assign(b.dots[0],{x:0,y:0,humanCanGrab:true});b.dots[1].y=1;const offset=new MovementGame(b);offset.update(0,{flip:true});assert.equal(offset.player.pivot,'a');
+ b.dots[1].y=0;b.dots[1].humanCanGrab=false;b.dots.push({id:'c',x:48,y:0,present:true,humanCanGrab:true});const first=new MovementGame(b);first.update(0,{flip:true});assert.equal(first.player.pivot,'a','first exact source match denies the query before later overlaps');
 });
+
 for(const [action,expectedPivot,expectedDirection] of [['swing','b',-1],['flip','b',1],['bounce','a',-1]]){
  const g=new MovementGame(fixture());g.update(.02,{[action]:true});assert.equal(g.player.pivot,expectedPivot);assert.equal(g.player.direction,expectedDirection);assert.equal(g.complete,action!=='bounce');
 }

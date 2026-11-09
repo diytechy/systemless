@@ -1,7 +1,8 @@
 import {stepSourceProgram} from './programs.mjs';
 
 // Static WA callbacks. Qualified type4 clock and transfer capabilities are explicit; their nonordinary contact hooks belong to the caller.
-// True EX sliding, moving/up-down dots, teleports and type5 remain unsupported.
+// Ordinary moving dots, EX sliding, teleports and type5 remain unsupported.
+// Up/down dots have an explicit capability and exact current-pixel queries.
 const offsets={0:[1,0],16:[0,1],32:[-1,0],48:[0,-1]};
 const integer=n=>Number.isInteger(n);
 export function isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false}={}) {
@@ -76,7 +77,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     const oldDot=dotAt(next.pivot),[dx,dy]=offsets[next.frame];
     // Source selects the first present positional match, then checks its
     // nonhuman permission. Rendering visibility and color are not filters.
-    const target=dots.find(d=>d.present&&(allowUpDownDots?Math.abs(d.x-oldDot.x-48*dx)<=6&&Math.abs(d.y-oldDot.y-48*dy)<=6:d.x===oldDot.x+48*dx&&d.y===oldDot.y+48*dy));
+    const target=dots.find(d=>d.present&&d.x===oldDot.x+48*dx&&d.y===oldDot.y+48*dy);
     const allowed=Boolean(target?.nonhumanCanGrab),action=instruction.action;
     events.push({type:'program-command',step,frame:next.frame,allowed,action:{...action}});
     if(!allowed)continue;

@@ -13,11 +13,15 @@ test('a separately enabled free class2 orbital visits each multiplied canonical 
  assert.deepEqual(frames,[0,1,2]);assert.equal(result.state.frame,2);assert.equal(result.state.unwrappedFrame,66);assert.equal(result.state.pivot,'a');
  assert.throws(()=>advanceStaticEnemyCallback(spike,3,{...o,program:'nnnn',allowClass2RotatingSpikes:true}),/free clock/);
 });
-test('qualified up/down targets use their current pixel and orphan on human-unavailable arrival',()=>{
+test('up/down program queries require exact current pixels and orphan on unavailable arrival',()=>{
  const o=options({dots:[dot('a',0,0),dot('b',48,5,{motion:'up-down',humanCanGrab:false})]});
  assert.throws(()=>advanceStaticEnemyCallback(actor(),1,o),/Moving/);
- const r=advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true});assert.equal(r.state.pivot,'b');assert.equal(r.state.frame,32);assert.equal(r.state.orphaned,true);
- o.dots[1].y=7;assert.equal(advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true}).state.pivot,'a');
+ assert.equal(advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true}).state.pivot,'a');
+ o.dots[1].y=0;const aligned=advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true});assert.equal(aligned.state.pivot,'b');assert.equal(aligned.state.frame,32);assert.equal(aligned.state.orphaned,true);
+ // Two dots in the same lowering group retain exact relative alignment for
+ // nonhuman queries, even though the arriving actor becomes orphaned.
+ Object.assign(o.dots[0],{x:-3,y:3,motion:'up-down',humanCanGrab:false});Object.assign(o.dots[1],{x:45,y:3});assert.equal(advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true}).state.pivot,'b');
+ o.dots[1].x=46;assert.equal(advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true}).state.pivot,'a');
 });
 
 test('qualified rotating spike uses integer WA animation and n-only PC without transfers',()=>{

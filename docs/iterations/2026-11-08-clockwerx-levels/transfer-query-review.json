@@ -1,0 +1,41 @@
+{
+  "status": "validated-query-correction-not-Stutter-acceptance",
+  "nativeGoal": {
+    "passedActions": true,
+    "goal": false,
+    "stillOrdinal": 36,
+    "frontendTicks": 12987,
+    "guestTicks": 13587,
+    "budgetExhausted": 0,
+    "saveExportAcceptedForForwardProgress": false
+  },
+  "source": {
+    "forkSha256": "522b65b20f89eca12139d6d488c9636ce3138099379ef8b7a59734f563a828b3",
+    "CODE6Sha256": "d2384c535eaf50b5b87320fc60efeb461a0ea25721482e07b176b43b3c4c6783",
+    "contract": "ordinarymovingtype1slack; static/updownexact; separateOilquery unchanged"
+  },
+  "validation": {
+    "runtimeChecks": 252,
+    "packagingChecks": 15,
+    "earlierDecodedBoardsIdentical": 34,
+    "earlierSnapshotsIdentical": 34,
+    "earlierReplayUpdates": 295736,
+    "nativeFirstFiveTransferPosesMatch": 5,
+    "clear": 4,
+    "raw": 1,
+    "oldNativeBlastFinalSnapshotUnchanged": true
+  },
+  "sourceHashes": {
+    "prototypes\\clockwerx-html5\\engine.mjs": "2d1c37ff23fee8eec7efa49f2728626865af46d2833206fae325a0c74ce1cac5",
+    "prototypes\\clockwerx-html5\\engine.test.mjs": "1ed8e052581fece143ed4d4892c1844edb85015c69aa245085e10a13d922bfa2",
+    "prototypes\\clockwerx-html5\\enemy-transfer.mjs": "8eb777003000f7f97657c49eaed4395d5328a24b25766e57586da6d2e2e78986",
+    "prototypes\\clockwerx-html5\\enemy-transfer.test.mjs": "f4ce363ecf7b988fcaff2aa6a22cce48b36953c6132d02f4f213c5e836834ea9",
+    "prototypes\\clockwerx-html5\\app.mjs": "f2b76358092709fd264a6728070c890020f06b688c522f32262d7af529304a8e"
+  },
+  "limits": [
+    "No36acceptance or forwardfixture",
+    "Exact death/reset phase unqualified",
+    "Ordinary moving-dot family remains unimplemented/disabled",
+    "No new realtime/resource/audio/controller qualification"
+  ]
+}

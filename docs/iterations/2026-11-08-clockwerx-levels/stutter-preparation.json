@@ -1,5 +1,5 @@
 {
-  "status": "guarded-mixedscope-native-cold-preparation-not-accepted",
+  "status": "native-goal-failed-query-corrected-new-strict-route-required",
   "ordinal": 36,
   "title": "Stutter",
   "liveOrdinal": 35,
@@ -81,12 +81,18 @@
     "stutter/candidate-ignition-13.json",
     "stutter/checked-ignition-13.json",
     "stutter/candidate-wait-blast-14.json",
-    "stutter/checked-wait-14.json"
+    "stutter/checked-wait-14.json",
+    "stutter/native-goal-01/report.json",
+    "stutter/native-goal-comparison.json",
+    "stutter/native-first-divergence-exact-review.json",
+    "stutter/exact-query-source-contract.json",
+    "stutter/exact-query-tests-01.log"
   ],
   "pending": [
-    "robust held-input prefix and full goal route",
-    "original physical full goal",
-    "visible SVG goal/activation review"
+    "commit/local35runtimeupdate withvalidatedexactquery",
+    "newstrictignition/blast/fullgoalroute",
+    "repeatoriginal/visiblegoals",
+    "36activationreview"
   ],
   "limits": [
     "No36live manifest; candidate scope is not acceptance.",
@@ -187,6 +193,18 @@
     "retreatAndBlastOnsetsPassed": 190,
     "actualCraterNormalizedSeconds": 132.50000000004383,
     "nativeWitnessForThisPath": false,
-    "fullGoal": false
+    "fullGoal": false,
+    "status": "superseded-permissive-model-do-not-reuse"
+  },
+  "nativeFullGoal": {
+    "status": "actions-pass-goal-failed",
+    "frontendTicks": 12987,
+    "guestTicks": 13587,
+    "budgetExhausted": 0,
+    "firstDivergenceTransfer": 5,
+    "actualPivot": "2,6",
+    "actualDepth": 6,
+    "correctedFirstFivePosesMatch": true,
+    "forwardExportAccepted": false
   }
 }

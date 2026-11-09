@@ -91,6 +91,11 @@ class PilotPackagingTests(unittest.TestCase):
         self.save_manifest()
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
+    def test_connector_atlas_must_be_verified_before_copy(self):
+        self.manifest['vectorAssets']=dict(dots=[],hands={},connectors=dict(file='missing-connectors.svg'))
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
     def test_starburst_art_must_be_verified(self):
         self.manifest['vectorAssets']=dict(dots=[],hands={},starbursts=dict(file='missing-stars.svg'))
         self.save_manifest()

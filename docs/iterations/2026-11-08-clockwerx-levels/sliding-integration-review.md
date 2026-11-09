@@ -1,0 +1,11 @@
+# Sliding connector integration
+
+The default-off EX family now preserves three-pixel class steps, physical actor anchors, logical pivot identity and fixed angular pose during sliding. Endpoint arrival releases/grabs without the ordinary transfer's half-turn; Reverse can back out. Human and NPC callback order remains distinct. Source bonus propagation consumes the connected component for one initiating award. Static EX endpoints and the first bounded Child composition are guarded separately from older elevator/HY capabilities.
+
+Independent source review caught and resolved collision-versus-sliding input compensation, burnt-versus-protection artwork, target-ID caching, pending Reverse after actions, NPC initial sliding, both human start bounds and the remainder of an already dispatched lethal callback. Root verified the final private patch and frozen baseline against Git before integration. Synthetic boundary fixtures supplement the legal actual-map route; they are separate evidence.
+
+284 public runtime, eight private actual-map/boundary and17 packaging checks pass. All41 prior boards and snapshots are identical across363073updates. Root final-code replay of exactly the original physical keys completes for36000 with24transfers/oneReverse/no death-reset. All190held-input onsets pass. Five one-frame gameplay poses and two three-pixel callback-boundary samples in the focused idle/Reverse comparisons remain recorded. Actual death/recovery is unqualified despite source-focused fixtures.
+
+Source group3100 has54 descriptors using50images and six hidden sentinel slots. Analytic SVG rails/shadows preserve original anchors and source cross-section palette gradients; burnt stipple is simplified. No collision comes from SVG. All54 bounds/anchors/no-bleed checks pass. Source and original both establish raw base firstpivot−11/−9 plus the descriptor offset once. All222clear gameplay connector frames agree with the physical replay. Later colored/burnt gameplay combinations need separate qualification.
+
+Original and SVG Berserkeley goals were viewed at36000. The previous41 definitions/90payloads and save identity remain protected for guarded activation. Full audio, controller hardware, native death/reset, additional mechanics, non-Child modes and performance are outside this functional pass. No push, upload or deployment.

@@ -1,3 +1,4 @@
+import {startSliding,animateSliding,stopSliding} from './sliding.mjs';
 import {stepSourceProgram} from './programs.mjs';
 
 // Static WA callbacks. Qualified type4 clock and transfer capabilities are explicit; their nonordinary contact hooks belong to the caller.
@@ -9,19 +10,19 @@ export function isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers=f
  return typeof program==='string'&&program.length>0&&[...program].every(c=>c==='n'||c==='s'&&allowRotatingSpikeTransfers||c==='b'&&allowRotatingSpikeBounces);
 }
 
-function validateState(s,allowRotatingSpikes=false) {
+function validateState(s,allowRotatingSpikes=false,allowSliding=false) {
   if(!s||![1,2,3,...(allowRotatingSpikes?[4]:[])].includes(s.sourceActorType)||!integer(s.frame)||s.frame<0||s.frame>63||
      ![-1,1].includes(s.direction)||typeof s.visible!=='boolean'||typeof s.orphaned!=='boolean')
     throw new RangeError('Explicit ordinary canonical enemy state required');
-  if(s.sliding)throw new Error('True source sliding is not a static transfer');
+  if(s.sliding&&!allowSliding)throw new Error('True source sliding is not a static transfer');
   if(!integer(s.unwrappedFrame)||(s.unwrappedFrame&63)!==s.frame)
     throw new RangeError('Canonical/unwrapped frame mismatch');
 }
-function validateDot(d,allowUpDownDots=false,allowTeleports=false) {
+function validateDot(d,allowUpDownDots=false,allowTeleports=false,allowSliding=false) {
   if(!d||d.id===undefined||!integer(d.x)||!integer(d.y)||
      !['present','humanCanGrab','nonhumanCanGrab'].every(k=>typeof d[k]==='boolean'))
     throw new TypeError('Explicit static dot position and permissions required');
-  if(d.motion!=='static'&&!(allowUpDownDots&&d.motion==='up-down')||d.slideMask!==0||d.teleport!==false&&!(allowTeleports&&d.teleport===true))
+  if(d.motion!=='static'&&!(allowUpDownDots&&d.motion==='up-down')||d.slideMask!==0&&!allowSliding||d.teleport!==false&&!(allowTeleports&&d.teleport===true))
     throw new Error('Moving, EX sliding, up/down and teleport dots are unqualified');
 }
 
@@ -46,15 +47,15 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
   if(!Array.isArray(dots)||![adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab].every(f=>typeof f==='function'))
     throw new TypeError('Source dot and synchronous collision/grab adapters required');
-  dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports));
+  dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding));
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
-  const validate=s=>validateState(s,allowRotatingSpikes);
+  const validate=s=>validateState(s,allowRotatingSpikes,allowSliding);
   validate(next);
   if(next.sourceActorType===4&&(!(next.speedClass===1||allowFastRotatingSpikes&&next.speedClass===5||allowSlowRotatingSpikes&&next.speedClass===4||allowClass2RotatingSpikes&&next.speedClass===2||allowClass3RotatingSpikes&&next.speedClass===3)||next.checksWalls!==false||program!==null&&!isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers,allowRotatingSpikeBounces})))
     throw new Error('Qualified rotating spike requires an enabled clock, no walls and an enabled no-action/bounce/transfer program');
@@ -68,9 +69,10 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   dotAt(next.pivot);
   for(let step=0;step<classDelta;step++) {
     const context={human:false,step,guestTick};
-    next.unwrappedFrame+=next.direction;next.frame=next.unwrappedFrame&63;
+    if(!allowSliding||!animateSliding(next)){next.unwrappedFrame+=next.direction;next.frame=next.unwrappedFrame&63;}
     // Source WACollide runs before stop-slide/direct-program/start-slide.
     afterAnimate(next,context);validate(next);
+    if(allowSliding){const e=stopSliding(next,dots,{release:(d,s)=>onDotRelease(s,d,context),grab:(d,s)=>{onDotGrabFirst(s,d,context);afterDotGrab(s,d,context);}});if(e)events.push(e);if(program!==null)throw new Error('EX programmed actors unqualified');startSliding(next,dotAt(next.pivot));}
     if(program===null)continue;
     const instruction=stepSourceProgram(program,next.sourcePC,{frame:next.frame});
     next.sourcePC=instruction.sourcePC;

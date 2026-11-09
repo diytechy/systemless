@@ -13,7 +13,7 @@ from private_library_manifest import BUILTINS, sha256_file
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
-      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','elevators.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs','teleports.mjs','teleport-runtime.mjs')
+      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','elevators.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs','teleports.mjs','teleport-runtime.mjs','sliding.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -48,6 +48,7 @@ def package(dist,assets):
         if vector.get('goal'):references.add(vector['goal']['file'])
         if vector.get('starbursts'):references.add(vector['starbursts']['file'])
         if vector.get('rotatingSpikes'):references.add(vector['rotatingSpikes']['file'])
+        if vector.get('connectors'):references.add(vector['connectors']['file'])
         references.update(dot['file'] for dot in vector.get('dotVariants',{}).values())
         references.update(frame['file'] for frame in vector.get('spikes',{}).get('frames',[]))
         references.update(frame['file'] for frame in vector.get('walls',{}).get('frames',[]))

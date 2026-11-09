@@ -1,3 +1,4 @@
+import {connectorLook} from './sliding.mjs';
 import {MovementGame,TAU} from './engine.mjs';
 import {buildBoard} from './board.mjs';
 import {dotRenderSpec} from './dots.mjs';
@@ -57,7 +58,7 @@ function drawSparkles(){
 function sprite(gid,index,x,y){const g=manifest.groups[gid],f=g.frames[index%g.frames.length],im=images[g.images[f.image]];if(!im)return;ctx.save();ctx.translate(Math.round(x+f.x),Math.round(y+f.y));if(f.flipY){ctx.scale(1,-1);ctx.drawImage(im,0,-im.height)}else ctx.drawImage(im,0,0);ctx.restore();}
 function drawHand(h){
  if(h.visible===false)return;
- const p=game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(settings.black?'4300':'700'):String(h.group);
+ const p=game.point?game.point(h):game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(settings.black?'4300':'700'):String(h.group);
  if(h.sourceActorType===4&&manifest.vectorAssets){
   const asset=manifest.vectorAssets.rotatingSpikes;
   if(!asset)throw new Error('Qualified rotating spike artwork required');
@@ -91,6 +92,12 @@ function drawActorFaders(){
  if(!game.teleports)return;
  const atlas=manifest.vectorAssets?.teleports?.faders;
  for(const f of game.teleports.snapshot().faders)if(f.visible)drawTeleportAtlas(atlas,presentedFaderFrame(f,settings.black),f);
+}
+function drawConnectors(){
+ if(!game.board.slidingConnectorRules)return;
+ const spec=manifest.vectorAssets?.connectors,frames=spec?.frames;
+ if(!frames)throw new Error('Qualified connector artwork required');
+ for(const e of game.board.connectors){const d=game.board.dots.find(d=>d.id===e.first),i=connectorLook(e,game.board.dots),f=frames[i];if(!f)throw new Error('Missing source connector frame '+i);if(f.empty||!f.width||!f.height)continue;ctx.drawImage(images[spec.file],f.sx,f.sy,f.width,f.height,d.x-11+f.x,d.y-9+f.y,f.width,f.height);}
 }
 function drawWalls(){
  const spec=manifest.vectorAssets?.walls;if(!spec||!game.board.walls?.length)return;
@@ -210,7 +217,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  if(game.childScore){ctx.fillText('Round:',431,49);ctx.fillText('Total:',505,49);ctx.textAlign='right';ctx.fillText(game.childScore.roundBonus.toLocaleString(),477,62);ctx.fillText(game.childScore.totalCommitted.toLocaleString(),568,62);ctx.textAlign='left';}
  else{ctx.fillText('Pilot',441,50);ctx.fillText(game.bombScene?'Level Score:':'Total Score:',493,49);ctx.fillText(String(game.bombScene?.score??'—'),536,62);}
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
- drawBombs('background');drawWalls();for(const d of game.board.dots)drawDot(d);drawTeleports();
+ drawBombs('background');drawWalls();drawConnectors();for(const d of game.board.dots)drawDot(d);drawTeleports();
  drawDoors();
  drawElevators(game.board.bombOilElevatorRules?'glyphs':'all');
  drawBombs('upper');
@@ -252,7 +259,7 @@ async function loadScene(scene){
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
   const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile'),elevatorOutlines=await profile('elevatorOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowProtectedBonuses:reference.protectedBonusesQualified===true,allowInactiveProtectedWaypoints:reference.inactiveProtectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowClass3RotatingSpikes:reference.class3RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorGoodies:reference.elevatorGoodiesQualified===true,allowColoredElevatorGoodies:reference.coloredElevatorGoodiesQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowTeleports:reference.teleportsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowProtectedBonuses:reference.protectedBonusesQualified===true,allowInactiveProtectedWaypoints:reference.inactiveProtectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowClass3RotatingSpikes:reference.class3RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorGoodies:reference.elevatorGoodiesQualified===true,allowColoredElevatorGoodies:reference.coloredElevatorGoodiesQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowSlidingConnectors:reference.slidingConnectorsQualified===true,allowTeleports:reference.teleportsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
   if(board.teleportRules&&(!manifest.vectorAssets?.teleports?.symbols||!manifest.vectorAssets?.teleports?.faders))throw new Error('Qualified HY endpoint and actor-fader artwork required');
   board.player.group=settings.black?4300:700;
    game=new SourceRound(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
@@ -294,6 +301,7 @@ async function load(){
    ...(vector.goal?[vector.goal.file]:[]),...(vector.starbursts?[vector.starbursts.file]:[]),
    ...(vector.spikes?.frames||[]).map(f=>f.file),
    ...(vector.walls?.frames||[]).map(f=>f.file),
+   ...(vector.connectors?[vector.connectors.file]:[]),
    ...['leaves','caps','switches'].flatMap(key=>vector.doors?.[key]?[vector.doors[key].file]:[]),
    ...['controls','surfaces'].flatMap(key=>vector.elevators?.[key]?[vector.elevators[key].file]:[]),
    ...['symbols','faders'].flatMap(key=>vector.teleports?.[key]?[vector.teleports[key].file]:[]),

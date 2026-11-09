@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 47,
-  "currentAction": "Serial Focus47BO+EX privateimplementation againstc8e81881; independent Funhouse50frozencorelegal-inputprep; root47original/source/art/review.",
+  "currentOrdinal": 48,
+  "currentAction": "Thriller48 serial erased-wall source integration/qualification from earned47; root original48cold and source art; parallel Funhouse50 content rebase againstfrozen d626c50f.",
   "levels": [
     {
       "ordinal": 1,
@@ -3530,9 +3530,12 @@
       "menuTitle": "Focus",
       "resourceTitle": "Focus",
       "sha256": "f84c8384956025e1c308d29f0edc2cf31d591e46b1aee3cb5fb7311141d2a595",
-      "status": "serial-bomb-sliding-private-implementation",
+      "status": "bounded-bomb-sliding-accepted-with-limits",
       "nativeEvidence": [
-        "focus/native-initial-01/report.json"
+        "focus/native-goal-01/report.json",
+        "focus/native-death-01/report.json",
+        "focus/native-goal-01-comparison.json",
+        "focus-native-object-review/"
       ],
       "requirements": [
         "BombRuntime.actor and bombActors must support the qualified physical sliding actor state",
@@ -3540,7 +3543,7 @@
         "EX frame/background repaint and reset restoration after a blast; retain source traversal order",
         "SP and ring in the new BO+EX composition"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "root-goal-and-post-burn-reviewed-locally-active",
       "generationConstraints": [
         "Eight BO records: one bomb, six fuse records and one starter; starter flags0 means ordinary enemies cannot ignite it",
         "Twenty-two EX include16 initially bonus links;35 raw bonuses are already closed under EX initialization",
@@ -3574,7 +3577,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3587,11 +3590,9 @@
         6
       ],
       "generationRequirementsPending": [
-        "Initial human bonus attachment preserves the bonus; no initial award",
-        "Cold source initialization/reset of the three statically eligible NPC sliders",
-        "Ignite the sole human-only starter; observe travelling spark, bomb, EX unbonus/burnt appearance and actor hit checks at physical slide centers",
-        "One initiating EX bonus-component pickup awards once; preserve propagating changed-state/availability guards",
-        "Goal route and reset restoring line/dot bonus state, with unused routes/hazards bounded explicitly"
+        "White ring interaction and NPCignition unvisited; source-only broader contracts are not actual47witnesses",
+        "ExactLI/SP/SR/BObirth/client phases and particle/fade/reset timing remain uncertain",
+        "Fullaudio/controller/nonChild/wholejournal-pixel/save/performance and richer joins remain unqualified"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3611,7 +3612,9 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
-      }
+      },
+      "review": "focus-review.md",
+      "reviewPacket": "focus-review.json"
     },
     {
       "ordinal": 48,
@@ -3619,7 +3622,7 @@
       "menuTitle": "Thriller",
       "resourceTitle": "Thriller",
       "sha256": "fcdacc4af8bee6b08cb406469a122bfb451f0b15d731b45f75256a6b01b5df70",
-      "status": "source-prepared-awaiting-serial-composition",
+      "status": "serial-erased-wall-source-implementation-and-native-preparation",
       "nativeEvidence": [],
       "requirements": [
         "Same BO+EX physical actor and recursive unbonus/burnt/background support as47",
@@ -3795,7 +3798,7 @@
       "menuTitle": "Funhouse",
       "resourceTitle": "Funhouse",
       "sha256": "7967a01583339512db4aa3bd59c3c3d621cd7fc87656734c7910df53914fbc95",
-      "status": "parallel-frozen-core-legal-input-preparation",
+      "status": "parallel-frozen-core-content-rebase",
       "nativeEvidence": [],
       "requirements": [
         "Replace hardcoded heroSliding:false only through the qualified source arrival contract",
@@ -3871,6 +3874,13 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
+      },
+      "contentPreparation": {
+        "sourceOnly": true,
+        "c8Warm700Cases": 190,
+        "actualPrefix700PlusMinus38Cases": 77,
+        "nativeCalibrationPending": true,
+        "frozenSourceRebase": "d626c50f"
       }
     },
     {

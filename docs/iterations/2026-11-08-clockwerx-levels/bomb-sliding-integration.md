@@ -1,6 +1,6 @@
 # Bombs and sliding connectors
 
-This extension is one shared engine capability, used by decoded level data. It does not create a separate game for each map. Focus47 is the first original-game witness for this composition; its native input route reached Thriller48 with4,000additional points. Browser qualification and local activation remain separate acceptance steps.
+This extension is one shared engine capability, used by decoded level data. It does not create a separate game for each map. Focus47 is the first original-game witness for this composition; its native input route reached Thriller48 with4,000additional points. Root browser qualification reached the4,000goal and separately inspected the post-blast map;47is locally active with the limits in[the review](focus-review.md).
 
 Burning and collecting are graph operations. The initiating dot changes first; a changed dot visits its incident connectors in source order, and a changed connector visits both endpoints in order. The two change guards terminate cycles. A blast can burn an already collected component. It does not remove the links, sliding directions or grab permissions. Only the initiating bonus pickup awards points; propagation does not award each connected dot separately. White rings and protected waypoints retain distinct rules.
 

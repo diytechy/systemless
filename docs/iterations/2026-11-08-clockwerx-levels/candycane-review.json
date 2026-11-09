@@ -1,0 +1,269 @@
+{
+  "status": "passed",
+  "nativeTransfers": 20,
+  "goalOnsets": 190,
+  "sourceUnchanged": false,
+  "changedSourceFiles": [
+    "app.mjs",
+    "level.mjs",
+    "round.mjs",
+    "enemy-transfer.mjs"
+  ],
+  "runtimeChecks": 199,
+  "packagingChecks": 14,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 5493,
+    "guest_tick": 6093,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 4000,
+  "nativeNextLevel": "24: Forced Entry",
+  "nativeProfileTotal": 87000,
+  "nativeHandFits": {
+    "matches": 20,
+    "rawMaxError": 12.945898778359512,
+    "overdraw": [
+      {
+        "transfer": 1,
+        "expectedPivot": "1,6",
+        "observedPivot": "1,6",
+        "match": true,
+        "sourceFrame": 19,
+        "meanAbsoluteChannelError": 12.945898778359512
+      },
+      {
+        "transfer": 6,
+        "expectedPivot": "4,4",
+        "observedPivot": "4,4",
+        "match": true,
+        "sourceFrame": 35,
+        "meanAbsoluteChannelError": 2.7099099099099098
+      }
+    ],
+    "otherEighteenMaxError": 0.28136200716845877
+  },
+  "browser": {
+    "boundary": "Root supported IAB accessibility and full-page PNG observation, not a state/timing export.",
+    "goalVisible": true,
+    "title": "Candycane complete",
+    "roundPointsVisible": 4000,
+    "childCompletionPointsVisible": 1000,
+    "transferCount": "not independently exported from browser",
+    "cadenceQualified": false,
+    "inheritedLimitation": "Motion retained three catch-up-capped timing captures; no new capture/retry on23",
+    "image": "qa-goal-page.png"
+  },
+  "clock": {
+    "boundary": "Independent original-art fits over79present pivots constrain source upstream8/19ticks, class1floor(U/2),fast type4class5U and hero48+floor(U/2). Kernel includes actual original wall outlines before program commands; no pose/clock state patches. Finite first16384upstream counts, not absolute hardware timing.",
+    "firstGuestTick": 1864,
+    "heroPoses": 27,
+    "npcPoses": 425,
+    "upstreamPhaseIntervals": [
+      [
+        146.52631578947367,
+        146.57894736842104
+      ],
+      [
+        658.5263157894736,
+        658.578947368421
+      ],
+      [
+        1170.5263157894738,
+        1170.578947368421
+      ],
+      [
+        1682.5263157894738,
+        1682.578947368421
+      ],
+      [
+        2194.5263157894738,
+        2194.578947368421
+      ],
+      [
+        2706.5263157894738,
+        2706.578947368421
+      ],
+      [
+        3218.5263157894738,
+        3218.578947368421
+      ],
+      [
+        3730.5263157894738,
+        3730.578947368421
+      ],
+      [
+        4242.526315789473,
+        4242.578947368421
+      ],
+      [
+        4754.526315789473,
+        4754.578947368421
+      ],
+      [
+        5266.526315789473,
+        5266.578947368421
+      ],
+      [
+        5778.526315789473,
+        5778.578947368421
+      ],
+      [
+        6290.526315789473,
+        6290.578947368421
+      ],
+      [
+        6802.526315789473,
+        6802.578947368421
+      ],
+      [
+        7314.526315789473,
+        7314.578947368421
+      ],
+      [
+        7826.526315789473,
+        7826.578947368421
+      ],
+      [
+        8338.526315789473,
+        8338.578947368422
+      ],
+      [
+        8850.526315789473,
+        8850.578947368422
+      ],
+      [
+        9362.526315789473,
+        9362.578947368422
+      ],
+      [
+        9874.526315789473,
+        9874.578947368422
+      ],
+      [
+        10386.526315789473,
+        10386.578947368422
+      ],
+      [
+        10898.526315789473,
+        10898.578947368422
+      ],
+      [
+        11410.526315789473,
+        11410.578947368422
+      ],
+      [
+        11922.526315789473,
+        11922.578947368422
+      ],
+      [
+        12434.526315789473,
+        12434.578947368422
+      ],
+      [
+        12946.526315789473,
+        12946.578947368422
+      ],
+      [
+        13458.526315789473,
+        13458.578947368422
+      ],
+      [
+        13970.526315789473,
+        13970.578947368422
+      ],
+      [
+        14482.526315789473,
+        14482.578947368422
+      ],
+      [
+        14994.526315789473,
+        14994.578947368422
+      ],
+      [
+        15506.526315789473,
+        15506.578947368422
+      ],
+      [
+        16018.526315789473,
+        16018.578947368422
+      ]
+    ],
+    "chosenUpstreamPhase": 146.55263157894734,
+    "rejectedHeroCount": 6
+  },
+  "jointPeriod": {
+    "boundary": "Pure static class1/class5 NPC full state, class remainders and hero64 phase. No dynamic dot/time/audio/hardware claims.",
+    "jointUpstreamPeriod": 512,
+    "equivalentHeroFrames": 256,
+    "equivalentGuestTicks": 1216,
+    "equivalentFixedSteps": 2432
+  },
+  "heroDerivedCounterexampleIntervals": [],
+  "rotatingSpike": {
+    "poses": 33,
+    "cleanPoses": 33,
+    "maxError": 0.46405228758169936,
+    "sampledPivotChanges": 11
+  },
+  "inactiveDots": {
+    "baselineSamples": 66,
+    "goalRunSamples": 42,
+    "bestState": 9,
+    "baselineMaxError": 1.6465028355387523,
+    "goalRunMaxError": 10.19533711405167,
+    "nativeVisitedPivots": [
+      "10,1",
+      "9,0"
+    ],
+    "boundary": "Fixed full23x23 ROIs, all raw hero/star/actor overdraw retained; inactiveEL behavior source-gated only"
+  },
+  "priorScenes": {
+    "decodedBoards": 21,
+    "identicalFinalSnapshots": 21,
+    "steps": 135674
+  },
+  "background": {
+    "name": "candycane-fresh-idle-19",
+    "meanAbsoluteChannelError": 0.3814403748920952,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "fixture": {
+    "sha256": "79e3eb5e2844230ccb02d9cdc3221ecb23df26df42dde18566f2a504f61c4975",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true
+  },
+  "limits": [
+    "Browser cadence/smoothness unqualified from retained scheduling gaps; functional goal observed only",
+    "Other five bonuses unvisited",
+    "No forced contact with fast type4 on23;22 class1 contact separately qualified",
+    "Active EL/up-down and other type4 clocks/walls/programs remain gated",
+    "Fractional hero/canonical clocks, exact hardware/reveal/input cadence unqualified",
+    "No comparable resource benchmark"
+  ],
+  "activation": {
+    "scenes": 23,
+    "sources": 25,
+    "payloads": 75,
+    "sizes": {
+      "sourceBytes": 168874,
+      "assetBytes": 2687382,
+      "manifestBytes": 1854785,
+      "totalBytes": 4711041
+    },
+    "priorSceneDefinitionsUnchanged": 22,
+    "oldPayloadsUnchanged": 75,
+    "protectedFilesUnchanged": true,
+    "rollback": "candycane/previous-live-pilot"
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\candycane",
+  "review": "candycane-review.md"
+}

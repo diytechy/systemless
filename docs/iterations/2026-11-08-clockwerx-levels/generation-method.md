@@ -83,3 +83,6 @@ Doubleback makes availability a timed part of search state. Its first proposal r
 
 
 Motion requires explicit actor-type capabilities alongside class-clock state. A type4 orbital spike retains canonical WA animation without ordinary protection or match/switch hooks. Its n-only PC advances at cardinal poses; a length-byte PC could introduce an unintended command and is rejected in this bounded adapter. The native contact witness checks actual outline intersection, death and return independently of the goal witness. FullNPC/hero period12992 and190 onset samples are finite existing-map evidence. Browser scheduling invalidation must remain separate from functional proof; no general new-level generator has been implemented.
+
+
+Candycane separates optional-property activation from pivot presence. Its inactive up/down dots remain static vertices and its inactive EL control allocates nothing. Carry class5 upstream phase and transfer PC, and preserve orbital position continuity through the pivot shift/half-turn. A positional route with immediate regrabbing may require conflicting human holds; a small detour can make it robust. Removing one full leading wait is justified only after verifying the full NPC/class-remainder/hero period and replaying all finite input cases. This is existing-map solving and documentation; no new-level generator is implemented.

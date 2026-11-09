@@ -150,3 +150,6 @@ Doubleback crosses four disappearing rings in a fixed order. Original pixels sho
 
 
 Motion introduces type4 spiked orbs orbiting pivots. They share integer WA clocks but suppress ordinary match/switch effects and bypass ordinary protected-dot immunity. The source original64-pose collider stays independent from smooth orbital SVG art. The accepted native/SVG nine-transfer/two-bonus goal earns4000; a separate original seven-transfer contact route intersects the orb, explodes and returns. Later browser cadence captures are invalidated by scheduling gaps and supply no smoothness qualification. See [Motion](motion-review.md).
+
+
+Candycane adds fast class5 orbital transfers and inactive elevator/up/down properties. Mask misses preserve ordinary usable pivots. Native33clean orb poses show11sampled pivot changes; class5 must consume upstreamU rather than2*rounded human frames. The20-transfer/two-bonus goal visits both masked pivots and earns4000 in original/SVG. Immediate-backtracking input holds conflict in a rejected proposal; a detour gives190finite onset passes. See [Candycane](candycane-review.md).

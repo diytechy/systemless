@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 23,
-  "currentAction": "Candycane23: fresh through22 native baseline passed; qualify fast class5 rotating spike and inactive EL/up-down property handling",
+  "currentOrdinal": 24,
+  "currentAction": "Forced Entry24: fresh through23 native baseline passed; qualify combined goal/bonus callback ordering and bomb/wall/NPC composition",
   "levels": [
     {
       "ordinal": 1,
@@ -1607,11 +1607,26 @@
       "menuTitle": "Candycane",
       "resourceTitle": "Candycane",
       "sha256": "29c97f3abb5f860e03b70ef809ceeffa570630ff0311278dabaf765b2c542011",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal-browser-cadence-unqualified",
+      "nativeEvidence": [
+        "candycane/native-goal-01/report.json",
+        "candycane/native-goal-01/candycane-after-route.png",
+        "candycane/native-goal-01/next-after-candycane.png",
+        "candycane/native-spike-transfer-review.json",
+        "candycane/native-initial-01-inactive-dot-review.json"
+      ],
+      "requirements": [
+        "class5 type4 canonical n/s transfers",
+        "difficulty-mask misses preserve static pivots",
+        "inactive EL records do not allocate controls"
+      ],
+      "svgStatus": "activated20transfers/two bonuses/both masked pivots/4000Child goal; fast type4 transfers imaged; cadence unqualified",
+      "generationConstraints": [
+        "preserve odd upstream counts rather than derive fast clock from rounded hero count",
+        "validate robust action windows at immediate regrabs",
+        "retain optional-property masks independently of presence",
+        "full-period idle reduction needs full-state proof and replay"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 79,
@@ -1638,7 +1653,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [
         "EL"
@@ -1657,7 +1672,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "candycane-review.md"
     },
     {
       "ordinal": 24,

@@ -1,7 +1,7 @@
 # Progress checkpoint
 
-Twenty-two bounded Child scenes accepted and locally active through Motion;78 playable integrations remain. All100listed /120resources surveyed. Originallibrary/frozencomparisons complete. Continue Candycane23 from [current action](current-action.md).
+Twenty-three bounded Child scenes accepted and active through Candycane;77 integrations remain. All100listed/120resources surveyed. Originallibrary/frozencomparisons complete. Continue Forced Entry24 from [current action](current-action.md).
 
-Motion original/SVG nine-transfer/two-bonus/4000goal and native orbiting-spike contact/death/return reviewed.196runtime/14packagingchecks;20prior decodedboards/final snapshots identicalover132176steps;190finiteonsets. See [review](motion-review.md), [packet](motion-review.json), [source preparation](motion-preparation.md). Three later browser captures are invalid from scheduling gaps, retained; cadence/smoothness unqualified. No new performance claim.
+Candycane original20transfer/twobonus/both maskedpivots/4000goal, rootbrowservisible4000goal, fasttype4 transfers and inactiveproperties reviewed.199runtime/14packagingchecks;21prior decodedboards/fullsnapshots identicalover135674steps;190onsets. See [review](candycane-review.md) and [packet](candycane-review.json). Browsercadence remainsunqualified; no newtimingretries orperformanceclaim.
 
-Live22scene pilot paused after goal. Native2988/10847 andfresh23session82432 CLOSED/pass. FreshCandycane2224/2824/0, actual23/playerp/83000 reviewed, through22hash verified. Alljobs CLOSED. Candycane needs class5type4 and inactiveEL/up-down property gates, not activeEL support. Source27ea4aa8;22acceptance follows. No push/upload/deploy. Continue beyond23.
+AlljobsCLOSED. Native74440passes5493/6093/0; fresh24session72593passes2224/2824/0, actual24/playerp/87000reviewed. Through23fixturehash verified. Normal92live23PAUSEDaftergoal; QA102CLOSED. Sourceprep b47d6c2e; acceptance follows. Forced Entry needs combinedgoal/bonus order and bomb/wall composition qualification. No push/upload/deploy. Continue beyond24.

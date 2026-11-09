@@ -143,3 +143,6 @@ Pigeonholes34 bounded witness is now accepted/active; retain the union of allfou
 
 
 Hiccup35 exposes a temporal reachability requirement: a static proposal can disappear before arrival as grouped dots sink, or route through an adjacent rotating enemy. Read-only static paths are proposals only. A bounded candidate search reconstructs branches from fresh unmodified-map legal inputs and tests actual collisions, waiting, bounce and Reverse; its14transfer witness passes190onsets, but still needs original/SVGgoals. Do not certify a generated board from topological connectivity alone.
+
+
+Hiccup35 now has original/SVG goal and190onset witnesses for timed group crossings. Its bounded branch search used legal updates from fresh maps, not state injection. Keep surface/staticSP/death-reset uncertainty explicit and separate Oil birth/death evidence from unvisited movingDP/updown interaction. See[review](hiccup-review.md).

@@ -1,0 +1,162 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "nativeTransfers": 14,
+  "goalOnsets": 190,
+  "nativeGoalScore": 1000,
+  "qaGoalScore": 1000,
+  "sourceFilesChanged": [
+    "app.mjs",
+    "level.mjs",
+    "round.mjs"
+  ],
+  "runtimeChecks": 240,
+  "packagingChecks": 15,
+  "priorSceneDefinitionsIdentical": 34,
+  "payloadsUnchanged": 84,
+  "payloadsAdded": 1,
+  "sourceCodeCommit": "d5ffd964",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 5045,
+    "guest_tick": 5645,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeOilReport": {
+    "status": "passed",
+    "frontend_ticks": 4156,
+    "guest_tick": 4756,
+    "budget_exhausted_frames": 0
+  },
+  "physicalSchedulePoses": {
+    "total": 308,
+    "exact": 308,
+    "clear": 304,
+    "raw": 4,
+    "transfers": 14,
+    "bounces": 2,
+    "reverses": 5
+  },
+  "cold": {
+    "poses": 231,
+    "exact": 231,
+    "clear": 222,
+    "rawOverdraw": 9,
+    "legalUpdates": 696,
+    "controlStates": 33,
+    "controlMatches": 33,
+    "clearCores": 32,
+    "coreMatches": 32,
+    "clearSurfaces": 100,
+    "surfaceMatches": 100
+  },
+  "goalControl": {
+    "states": 22,
+    "matches": 22,
+    "clearCores": 36,
+    "coreMatches": 36,
+    "clearSurfaces": 72,
+    "surfaceMatches": 44,
+    "oneFrameDifferences": 28
+  },
+  "oil": {
+    "frontendTicks": 4156,
+    "guestTicks": 4756,
+    "transfers": 10,
+    "transferHeroMatches": 10,
+    "clearPuddlePoses": 14,
+    "baseMatches": 14,
+    "frameMatches": 12,
+    "oneCallbackDifferences": 2,
+    "originalAndModelBirthDeathAndReset": true,
+    "clearBeforeDeath": 226,
+    "beforePositions": 226,
+    "beforeFrames": 219,
+    "clearAfterReset": 21,
+    "afterPositions": 21,
+    "afterFrames": 0,
+    "exactDeathResetPhaseQualified": false,
+    "nativeStandingSlot": 85,
+    "birthOneCallbackDifference": true
+  },
+  "staticSpikes": {
+    "samples": 66,
+    "clear": 59,
+    "phaseMatches": 0,
+    "phaseQualified": false
+  },
+  "bonusCoreSamples": 429,
+  "limits": [
+    "StaticSPIphase0of59clear exact; no clock correction adopted.",
+    "28of72clear physical-route surfaceglints differ oneframe; cold100surfacesmatch separately.",
+    "Oil14clearPUposes/12frames, twoonecallback differences and oneearlystandingDPsample. All21postresetpoints match but0frames; exactdeath/resetphase unqualified, no timer/randomstream correction.",
+    "Main route avoidsOil/collectsnone; separateOilprobe collects2bonuses, no campaignadvance. Remaining11bonus pickups, movingDP/updowndot andcloning unvisited.",
+    "No new real-time cadence/resource/audio/controller/higherdifficulty/fullsave claim."
+  ],
+  "ordinal": 35,
+  "title": "Hiccup",
+  "acceptedScenes": 35,
+  "resourceId": 228,
+  "sourceSha256": "ce5cda4d71c4061cc32339044cb2cebdd8517c4f2722df58cde0514659895540",
+  "priorRegressions": {
+    "scenes": 33,
+    "updates": 289761
+  },
+  "artwork": {
+    "newSurfaceAtlasBytes": 7885,
+    "priorSurfaceSlicesIdentical": 24,
+    "controlAtlasUnchanged": true
+  },
+  "finitePolicy": {
+    "onsets": 190,
+    "transfers": 14,
+    "bounces": 2,
+    "reverses": 5,
+    "movingDotVisits": 2
+  },
+  "progressFixture": {
+    "status": "forks-and-represented-metadata-verified-native-relaunch-verified",
+    "destinationSha256": "8800640ebf5ff0c478d9b11286a3707715180bd7e7960ccff5f054db0016a078",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "metadataScope": "Both forks, file type/creator/flags/dates/raw16coordinates and represented folder dates. Folder Finder information is unexposed by machfs; original source image remains byte-identical. Raw aliases retained, resolution unqualified."
+  },
+  "activation": {
+    "sizes": {
+      "sourceBytes": 199639,
+      "assetBytes": 2964902,
+      "manifestBytes": 3125403,
+      "totalBytes": 6289944
+    },
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\hiccup\\previous-live-pilot",
+    "sourceFiles": 26,
+    "assets": 85
+  },
+  "browser": {
+    "normalTab": 92,
+    "normalScene": 35,
+    "paused": true,
+    "qaTab": 115,
+    "qaClosed": true
+  },
+  "evidence": [
+    "hiccup/native-goal-01/report.json",
+    "hiccup/native-goal-comparison.json",
+    "hiccup/native-cold-control-comparison.json",
+    "hiccup/native-goal-control-comparison.json",
+    "hiccup/native-oil-death-01/report.json",
+    "hiccup/native-oil-review.json",
+    "hiccup/native-oil-comparison.json",
+    "hiccup/native-spike-review.json",
+    "hiccup/native-dot-background-review.json",
+    "hiccup/checked-route.json",
+    "hiccup/atlas-slice-review.json",
+    "hiccup/qa-goal-page.png",
+    "hiccup/qa-goal-page.txt",
+    "hiccup/normal-paused-page.png"
+  ]
+}

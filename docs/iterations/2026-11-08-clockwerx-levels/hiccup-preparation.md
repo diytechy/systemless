@@ -1,3 +1,5 @@
+**Historical preparation; superseded by [accepted review](hiccup-review.md).**
+
 # Hiccup preparation
 
 **Guarded preparation; live34 remains unchanged.** Source228 SHAce5cda4d71c4061cc32339044cb2cebdd8517c4f2722df58cde0514659895540 is version12/large8/time270.56pivots/13bonuses/onegoal,2SP/3PU/6WP/12WA/1EL. Child activates two static spikes, one kind3Oil puddle, one group0/subcell2 control and four plain initiallyraised group0 up-down dots. Both human slots share the spawn. Six active ordinary class1, wall-free NPCs(twoeachred/green/blue) include four programmed and two free; four other NPCs are inactive. Two PUrecords are inactive. Private maps/programs remain onD:.

@@ -230,3 +230,6 @@ Pigeonholes34 is accepted with matching original/SVG7000goals/15transferhero pos
 
 
 Hiccup35 preparation separates group0/left-half controls with kind3Oil/staticSP from the earlier group1/no-hazard gate. Moving dot position/availability feeds Oil acquisition; no collider is inferred from SVG. Source/nativecold matches231handposes,33controlstates,32clearcorepositions and100clearsurfaceframes. Main timed14transfer candidate uses twobounces/fiveReverse and passes190onsets; original/SVGgoals and kind3Oil diagnostic pending.
+
+
+Hiccup35 is accepted: original/SVG1000,14transfers/twobounces/fiveReverse and190onsets pass; all308physical poses match. Exact staticSPphase,28surfaceglints and postdeath/reset phase remain unqualified. Separatekind3Oilbirth/death/reset original/model witness passes with stated callback limits. See[review](hiccup-review.md).

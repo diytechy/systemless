@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 45,
-  "currentAction": "Slide45 subordinate b/n/s GO+EX program scope; freshSol privateworker. Root independent cold/native/art/review. Live44accepted;56remain, no per-level stops.",
+  "currentOrdinal": 46,
+  "currentAction": "Serial Oil+EX/GO/ring46 private implementation against261dba7d; root independent cold/native/art review; all55remaining continue.",
   "levels": [
     {
       "ordinal": 1,
@@ -3342,16 +3342,19 @@
       "menuTitle": "Slide",
       "resourceTitle": "Slide",
       "sha256": "7f153518749ce2034fd88f83c4a118319b574370158204c74226ee84c316b557",
-      "status": "serial-bns-goodie-program-private-implementation",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [
-        "slide/native-initial-01/report.json"
+        "slide/native-initial-01/report.json",
+        "slide/native-goal-01/report.json",
+        "slide/native-goal-02/report.json",
+        "slide/native-goal-02-comparison.json"
       ],
       "requirements": [
         "Same GO+EX sliding-actor/physical-collision support as44",
         "b/n/s ordinary NPC program/slide ordering and source-bound PCs",
         "61 EX slots and mixed-color atlas coverage"
       ],
-      "svgStatus": "not admitted; privateprogramcapability only",
+      "svgStatus": "locally active; original/SVG2000goal; oneGO/12transfers/5Bounce/6Reverse/190onsets",
       "generationConstraints": [
         "Exactly61 EX records equals capacity; no difficulty filtering applies to EX",
         "Six programmed/two free ordinary class1 enemies; preserve b versus s input effects and PascalPC1",
@@ -3382,9 +3385,9 @@
           "GN": 0,
           "TR": 0
         },
-        "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+        "boundary": "Source inventory and bounded original/SVGgoal/oneGO witness; exactSPI/GOphase, bonuspickup and death/reset limits retained."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3397,10 +3400,11 @@
         6
       ],
       "generationRequirementsPending": [
-        "Human starts at an EX endpoint with a cardinal direction eligible for automatic sliding at the first source callback",
-        "Programmed bounce/swing and mid-slide reverse/backout with no forced pose",
-        "One bonus connector component consumes both marked endpoints for one initiating award",
-        "One GO pickup, source SP collision context, goal and finite windows under61-connector load"
+        "Exact SPI/GO startup/sprite/flourish phases unqualified: coldSPI0/66 GO13/32clear exact; no phase/count assignment",
+        "No DOT/EX bonus component visited; oneGOflat1k and1kChild completion only",
+        "Sixteen postgoalNPC hypotheses retained separately: HTML freezes them immediately; original continues before its results pane",
+        "Native death/reset, fullaudio/physicalcontrollers/nonChild/performance/broader compositions unqualified",
+        "Rejected61hold fails onset12;115hold/EXACT116hold each190pass; original01canonical61 remains bounded0diagnostic only"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3420,7 +3424,8 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
-      }
+      },
+      "review": "slide-review.md"
     },
     {
       "ordinal": 46,
@@ -3428,8 +3433,10 @@
       "menuTitle": "Prop Wash",
       "resourceTitle": "Prop Wash",
       "sha256": "61d2f46294895717658a278ffde4dd3c91831aca0bf336f8ae0441ad1d6c4cc0",
-      "status": "source-prepared-awaiting-serial-composition",
-      "nativeEvidence": [],
+      "status": "serial-oil-sliding-private-implementation",
+      "nativeEvidence": [
+        "propwash/native-initial-01/report.json"
+      ],
       "requirements": [
         "Real human sliding state at DPGrabbed/arrival; retain the distinct no-sliding-check DPWandGrabbed hook",
         "Oil main-dot collision adapter must select current ring phase, not dotBodyFrame normal9+color",
@@ -7598,8 +7605,8 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "slide_engine private45bnsGO+EX implementation/tests/one model",
-    "B": "root source/native/art/review; one original emulator/conversions serial",
-    "C": "Oil+EX46/50source plan complete/released;44source review complete/released"
+    "A": "propwash_engine private46Oil+EX/ring/GO implementation against261dba7d; one model/test/search",
+    "B": "root independent46cold/native/art/review; one original/conversion/build at a time",
+    "C": "mechanics_triage source-only71\u201380buster plan; squiggle_engine source-only81\u2013100slowdown plan"
   }
 }

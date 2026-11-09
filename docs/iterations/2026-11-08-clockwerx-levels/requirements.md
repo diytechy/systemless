@@ -265,3 +265,6 @@ Betwixt43 qualifies static EX/SP with ordinary free/fn programs on clockclasses1
 
 
 Weave44 qualifies GO+staticEX/SP/optionalWL with freeordinaryclass1 actors. Physical canonical collider precedes slide-stop/input; emptyLI/SR stages accept onlythisvalidatedscope. FlatGOawards/+10time/deferredhide remainseparatefromDOTcomponent bonuses. Actualnative/SVGall5GO/6000goal and190onsets pass. ExactSPI/GOstartup/sprite/flourishphases unqualified; twoNPCsamplesone3pxstepoff andsixposesoneframe remain. Distinct40/div5GOclient is sourcegraph, notprovenphasecorrection. Subordinateb/n/s45,Oil/HY/BO/moving joins remainserial.
+
+
+Slide45qualifies separate default-off GO+EXb/n/sordinaryclass1programs with helper-level static boundaries. Native/SVG2000, all190EXACT116holdonsets,359clearactorposes/positions/all12heroes/1603EXframesmatch. NPCstop/program/start/targetpermission-before-XOR/PCsuspension retained; no humancollisioncompensation. ExactSPI/GOphases, bonuscomponentpickup anddeath-reset remainlimited.

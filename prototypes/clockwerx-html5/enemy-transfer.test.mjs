@@ -5,6 +5,12 @@ import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs
 const dot=(id,x,y,extra={})=>({id,x,y,present:true,humanCanGrab:true,nonhumanCanGrab:true,motion:'static',slideMask:0,teleport:false,...extra});
 const actor=(extra={})=>({sourceActorType:2,pivot:'a',frame:63,direction:1,sourcePC:1,sliding:false,visible:true,orphaned:false,hiddenUntil:0,...extra});
 const options=(extra={})=>({program:'s',dots:[dot('a',0,0),dot('b',48,0)],guestTick:100,adjustPeriod:n=>Math.floor(n*100/60),afterAnimate:()=>{},onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{},...extra});
+test('qualified up/down targets use their current pixel and orphan on human-unavailable arrival',()=>{
+ const o=options({dots:[dot('a',0,0),dot('b',48,5,{motion:'up-down',humanCanGrab:false})]});
+ assert.throws(()=>advanceStaticEnemyCallback(actor(),1,o),/Moving/);
+ const r=advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true});assert.equal(r.state.pivot,'b');assert.equal(r.state.frame,32);assert.equal(r.state.orphaned,true);
+ o.dots[1].y=7;assert.equal(advanceStaticEnemyCallback(actor(),1,{...o,allowUpDownDots:true}).state.pivot,'a');
+});
 
 test('qualified rotating spike uses integer WA animation and n-only PC without transfers',()=>{
  const spike=actor({sourceActorType:4,speedClass:1,checksWalls:false}),o=options({allowRotatingSpikes:true,program:'nnnn'});

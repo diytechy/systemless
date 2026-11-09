@@ -13,7 +13,7 @@ from private_library_manifest import BUILTINS, sha256_file
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
-      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs')
+      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','elevators.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -52,6 +52,7 @@ def package(dist,assets):
         references.update(frame['file'] for frame in vector.get('spikes',{}).get('frames',[]))
         references.update(frame['file'] for frame in vector.get('walls',{}).get('frames',[]))
         references.update(vector['doors'][key]['file'] for key in ('leaves','caps','switches') if key in vector.get('doors',{}))
+        references.update(vector['elevators'][key]['file'] for key in ('controls','surfaces') if key in vector.get('elevators',{}))
         references.update(vector['oil'][key]['file'] for key in ('puddles','droplets') if key in vector.get('oil',{}))
         references.update(atlas['file'] for atlas in vector.get('specialDots',{}).values())
         references.update(atlas['file'] for atlas in vector.get('bombs',{}).values())
@@ -62,7 +63,7 @@ def package(dist,assets):
     for definition in definitions:
         if not definition:continue
         references.add(definition['outlinesFile'])
-        for key in ('doorOutlinesFile','oilOutlinesFile','dotOutlinesFile','bombOutlinesFile'):
+        for key in ('doorOutlinesFile','elevatorOutlinesFile','oilOutlinesFile','dotOutlinesFile','bombOutlinesFile'):
             if definition.get(key):references.add(definition[key])
     for name in references:filename(name)
     if not references<=files.keys():raise ValueError('Manifest references an unverified asset')

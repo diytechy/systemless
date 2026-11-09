@@ -19,7 +19,15 @@ export class MovementGame {
     const advance=this.board.angularSpeed*dt*h.direction*(h.speedScale??1),old=h.angle,next=old+advance;
     if(h.blocked!==null&&Math.abs(angleDelta(next,h.blocked))>0.22)h.blocked=null;
     let target=null,nearest=Infinity;
-    if(action)for(const d of this.board.dots){
+    const sourceQuery=Boolean(this.board.elevatorRules&&h===this.player&&h.canonicalFrame);
+    if(action&&sourceQuery){
+      // Source DOFindGrabbable selects the first present current pixel inside
+      // a +/-6 rectangle, then tests human availability. A moving rider can
+      // therefore reach a target slightly away from an exact 48px distance.
+      const x=pivot.x+Math.round(Math.cos(old)*radius),y=pivot.y+Math.round(Math.sin(old)*radius);
+      const first=this.board.dots.find(d=>d.present&&Math.abs(d.x-x)<=6&&Math.abs(d.y-y)<=6);
+      if(first&&first.id!==pivot.id&&first.humanCanGrab&&h.blocked===null){target=first;nearest=0;}
+    }else if(action)for(const d of this.board.dots){
       if(d.id===pivot.id)continue;
       // Movement's per-dot actor nibbles are inferred from original resource
       // flags and the observed red/green demonstration extents. Bouncing does
@@ -32,7 +40,7 @@ export class MovementGame {
     }
     h.angle=next;
     if(!target)return;
-    const hit=Math.atan2(target.y-pivot.y,target.x-pivot.x),remaining=Math.abs(advance)-nearest;
+    const hit=sourceQuery?old:Math.atan2(target.y-pivot.y,target.x-pivot.x),remaining=Math.abs(advance)-nearest;
     if(action==='bounce'){
       h.direction*=-1;h.angle=hit+remaining*h.direction;h.blocked=hit;this.event('bounce',h,target);return;
     }

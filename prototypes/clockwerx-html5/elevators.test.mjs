@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {decodeElevatorRecord,activeElevatorSpecs,elevatorGeometry,createUpDownState,activateUpDownState,advanceUpDownState,createElevatorSystem,findElevatorContact} from './elevators.mjs';
+import {decodeElevatorRecord,activeElevatorSpecs,elevatorGeometry,createUpDownState,activateUpDownState,advanceUpDownState,advanceUpDownSurface,upDownPlacement,createElevatorSystem,findElevatorContact} from './elevators.mjs';
 const record=(mask=15)=>({rawWords:[2,3,3,1,0,mask]});
 test('EL keeps subcell and group separate and filters activation before capacity',()=>{
  assert.deepEqual(decodeElevatorRecord(record()),{row:2,column:3,subcell:3,group:1,activationMask:15});
@@ -49,4 +49,17 @@ test('contact uses the small source glyph outline and first source slot rather t
  const f={left:33,top:32,right:37,bottom:36,rows:null,outlineIndex:3,flipY:false},profile={groups:{3400:{frames:Array.from({length:9},()=>f)}}},base=controls[0];
  assert.equal(findElevatorContact({left:base.x+34,top:base.y+33,right:base.x+35,bottom:base.y+34,rows:null},controls,profile),0);
  assert.equal(findElevatorContact({left:base.x+24,top:base.y+23,right:base.x+25,bottom:base.y+24,rows:null},controls,profile),-1);
+});
+test('lowering moves the dot and its riders left/down while nonhuman presence permission remains',()=>{
+ let s=activateUpDownState(createUpDownState({group:1}));s=advanceUpDownState(s,1).state;
+ assert.deepEqual(upDownPlacement(s,{x:100,y:80}),{x:99,y:81,humanCanGrab:false,nonhumanCanGrab:true,sourceCollidable:true,upDownPhase:11,upDownVisible:true});
+ for(let c=2;c<=12;c++)s=advanceUpDownState(s,c).state;
+ const final=upDownPlacement(s,{x:100,y:80});assert.equal(final.x,88);assert.equal(final.y,92);assert.equal(final.nonhumanCanGrab,true);assert.equal(final.sourceCollidable,false);
+});
+test('surface glints use their separate clock, freeze in transit and resume after raising',()=>{
+ let s=createUpDownState({group:1,surfaceCount:5});s=advanceUpDownSurface(s,6);assert.equal(s.surfaceFrame,137);assert.equal(advanceUpDownSurface(s,6).surfaceFrame,137);
+ s=advanceUpDownState(activateUpDownState(s),1).state;assert.equal(s.phase,11);assert.equal(s.surfaceFrame,135);s=advanceUpDownSurface(s,100);assert.equal(s.surfaceFrame,135);
+ s=advanceUpDownState(activateUpDownState(s),2).state;assert.equal(s.phase,12);assert.equal(advanceUpDownSurface(s,100).surfaceFrame,135);
+ s=advanceUpDownSurface(s,101);assert.equal(s.surfaceFrame,136);s=advanceUpDownSurface(s,110);assert.equal(s.surfaceFrame,137,'a changed source counter advances once, without catch-up');
+ assert.throws(()=>advanceUpDownSurface(s,109),/Monotonic/);
 });

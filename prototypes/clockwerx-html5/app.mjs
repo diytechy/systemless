@@ -109,6 +109,12 @@ function drawDoors(){
  }
  for(const [i,s] of (game.board.switches||[]).entries())if(s.visible!==false)draw('switches',state.switches[i].frame,s);
 }
+function drawElevators(){
+ if(!game.elevators)return;const spec=manifest.vectorAssets?.elevators;
+ if(!spec)throw new Error('Qualified elevator artwork required');
+ const atlas=spec.controls,draw=(frame,c)=>{const f=atlas.frames.find(f=>f.frame===frame);if(!f)throw new Error('Missing elevator artwork');if(!f.empty)ctx.drawImage(images[atlas.file],f.sx,f.sy,f.width,f.height,c.x+f.x,c.y+f.y,f.width,f.height);};
+ for(const c of game.elevators.snapshot().controls){draw(c.group,c);if(c.visible)draw(c.frame,c);}
+}
 function drawOil(){
  const spec=manifest.vectorAssets?.oil;if(!spec||!game.oil)return;
  const state=game.oil.snapshot();
@@ -131,6 +137,12 @@ function drawLevelText(){
  ctx.textBaseline='alphabetic';return true;
 }
 function drawDot(d){
+ if(d.upDown){
+  const state=game.elevators.snapshot().dots.find(s=>s.id===d.id),atlas=manifest.vectorAssets?.elevators?.surfaces;
+  if(!atlas)throw new Error('Qualified up/down surface artwork required');
+  const draw=frame=>{const f=atlas.frames.find(f=>f.frame===frame);if(!f)throw new Error('Missing up/down surface frame');if(!f.empty)ctx.drawImage(images[atlas.file],f.sx,f.sy,f.width,f.height,d.upDown.x-16+f.x,d.upDown.y-15+f.y,f.width,f.height);};
+  draw(state.surfaceFrame);if(state.phase<6)draw(158-state.phase);if(!state.mainVisible)return;
+ }
  const special=game.dotAnimations?.renderState(d.id),specialArt=manifest.vectorAssets?.specialDots;
  const drawSpecial=(group,frame)=>{
   const atlas=(d.burnt?manifest.vectorAssets?.bombDots?.[group]:null)||specialArt?.[group],f=atlas?.frames.find(f=>f.frame===frame);
@@ -149,7 +161,8 @@ function drawDot(d){
  if(vector?.dotVariants){spec=vector.dotVariants[state.assetKey];if(!spec)throw new Error('Unsupported private dot artwork: '+state.assetKey);im=images[spec.file];}
  else if(vector){const index=state.bonus?(state.color===0?1:state.color===4?5:state.color===2?3:2):(state.color===4?5:state.color===2?3:state.color===1?2:0);im=images[vector.dots[index]];spec={x:-im.width/2,y:-im.height/2,width:im.width,height:im.height};}
  else{const group=manifest.groups['300'],frame=group.frames.find(f=>f.id===state.sourceDescriptor);if(!frame)throw new Error('Missing original dot descriptor '+state.sourceDescriptor);im=images[group.images[frame.image]];spec={x:frame.x,y:frame.y,width:im.width,height:im.height};}
- ctx.fillStyle='rgba(0,0,0,.28)';ctx.beginPath();ctx.ellipse(d.x+8,d.y+9,5,4,0,0,TAU);ctx.fill();
+ const shadow=d.upDown?{x:d.upDown.x+8-2*(12-d.upDownPhase),y:d.upDown.y+9}:{x:d.x+8,y:d.y+9};
+ ctx.fillStyle='rgba(0,0,0,.28)';ctx.beginPath();ctx.ellipse(shadow.x,shadow.y,5,4,0,0,TAU);ctx.fill();
  if(goal){ctx.save();ctx.translate(d.x,d.y);const frame=atlasFrame(goal.animation,game.time);if(frame)ctx.drawImage(images[goal.file],frame.x,frame.y,frame.width,frame.height,goal.x,goal.y,goal.width,goal.height);else{if(goal.rotationSeconds>0)ctx.rotate(game.time/goal.rotationSeconds*TAU);ctx.drawImage(images[goal.file],goal.x,goal.y,goal.width,goal.height);}ctx.restore();}
  ctx.drawImage(im,Math.round(d.x+spec.x),Math.round(d.y+spec.y),spec.width,spec.height);
  if(special?.overlay)drawSpecial('300',special.overlay.frame);
@@ -179,6 +192,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
  drawBombs('background');drawWalls();for(const d of game.board.dots)drawDot(d);
  drawDoors();
+ drawElevators();
  drawBombs('upper');
  drawOil();
  drawSpikes();
@@ -216,10 +230,10 @@ async function loadScene(scene){
   let doorOutlines;
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
-  const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile'),elevatorOutlines=await profile('elevatorOutlinesFile');
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowElevators:reference.elevatorsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
   board.player.group=settings.black?4300:700;
-  game=new SourceRound(board,{outlines,doorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
+   game=new SourceRound(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
   $('presentation').textContent=board.canonicalPlayerRules?'Private SVG pilot · source map and callback-stepped Child movement with smooth SVG drawing.': 'Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
   const rules=[];
   if(board.puddles.length)rules.push('Touching sleeping oil wakes it. It pursues you across dots and can split. Avoid letting it grab your pivot.');
@@ -227,6 +241,7 @@ async function loadScene(scene){
   if(board.staticEnemyCallbacks)rules.push('Enemy hands rotate and follow their own timed patterns.');
   else if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
   if(board.rotatingSpikeRules)rules.push('Spiked orbs circle their pivots.');
+  if(board.elevatorRules)rules.push('Hands touching green controls raise or lower the marked dots. Leave a sinking dot before it disappears.');
   if(board.dots.some(d=>d.ring))rules.push('Rings disappear after you leave them and later return.');
   if(board.dots.some(d=>d.waystation))rules.push('Checkpoints store your return position and time.');
   if(board.dots.some(d=>d.protected))rules.push('Protected dots stop ordinary enemy contact; spikes remain lethal.');
@@ -257,6 +272,7 @@ async function load(){
    ...(vector.spikes?.frames||[]).map(f=>f.file),
    ...(vector.walls?.frames||[]).map(f=>f.file),
    ...['leaves','caps','switches'].flatMap(key=>vector.doors?.[key]?[vector.doors[key].file]:[]),
+   ...['controls','surfaces'].flatMap(key=>vector.elevators?.[key]?[vector.elevators[key].file]:[]),
    ...['puddles','droplets'].flatMap(key=>vector.oil?.[key]?[vector.oil[key].file]:[]),
    ...Object.values(vector.specialDots||{}).map(atlas=>atlas.file),
    ...Object.values(vector.bombs||{}).map(atlas=>atlas.file),...Object.values(vector.bombDots||{}).map(atlas=>atlas.file),

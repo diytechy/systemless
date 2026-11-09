@@ -27,7 +27,23 @@ test('canonical player decoding requires explicit static Child callback qualific
  const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowStaticEnemyWalls:true,allowCanonicalPlayer:true};
  assert.equal(buildDecodedBoard(level,options).canonicalPlayerRules,true);
  assert.equal(buildDecodedBoard(level,{angularSpeed:TAU}).canonicalPlayerRules,undefined);
+ assert.equal(buildDecodedBoard(level,{...options,allowOil:true}).puddles.length,0);
+ level.blocks.push({kind:'PU',count:1,records:[{rawWords:[0,0,1,0,15]}]});
  assert.ok(levelRequirements(level,{...options,allowOil:true}).some(s=>s.includes('without sliding')));
+});
+
+test('active elevators require the raised group1 scope and retain inactive source records',()=>{
+ const level=fixture();level.header.timeLimitRaw=120;level.blocks=level.blocks.filter(b=>b.kind!=='SP');
+ const npc=level.blocks[0].records[2];npc.actorTypeRaw=1;npc.rawWords[2]=1;npc.version12ByteRaw=0;
+ level.cells[0].flagsRaw=0x201;
+ level.blocks.push({kind:'EL',count:2,records:[{rawWords:[0,0,3,1,0,15]},{rawWords:[0,1,3,0,0,14]}]},{kind:'PU',count:1,records:[{rawWords:[0,0,0,0,12]}]});
+ const options={angularSpeed:TAU,allowElevators:true,allowOil:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true,allowInactiveUpDownDots:true};
+ const board=buildDecodedBoard(level,options);assert.equal(board.elevatorRules,true);assert.equal(board.elevators.length,1);assert.equal(board.elevators[0].group,1);assert.equal(board.puddles.length,0);assert.equal(board.dots[0].motion,'up-down');assert.equal(board.dots[0].sourceInBackground,false);assert.deepEqual(board.dots[0].upDown,{group:1,initialLowered:false,x:74,y:72});
+ assert.ok(levelRequirements(level,{...options,allowElevators:false}).includes('object class EL'));
+ for(const flags of [0x101,0x301,0x4201,0x203]){level.cells[0].flagsRaw=flags;assert.ok(levelRequirements(level,options).includes('only plain initially raised white group1 dots are qualified'));}level.cells[0].flagsRaw=0x201;
+ npc.rawWords[7]=4;assert.ok(levelRequirements(level,options).includes('elevators require wall-free ordinary class1 enemies'));npc.rawWords[7]=1;
+ level.blocks.at(-1).records[0].rawWords[4]=15;assert.ok(levelRequirements(level,options).includes('elevators with other hazards or special objects are unqualified'));level.blocks.at(-1).records[0].rawWords[4]=12;
+ level.cells[1].flagsRaw=0x101;level.cells[1].secondaryRaw=12;const inactive=buildDecodedBoard(level,options).dots[1];assert.equal(inactive.motion,'static');assert.equal(inactive.upDown,undefined);assert.equal(inactive.present,true);
 });
 
 test('canonical Oil composition is explicit and retains its ordinary static Child boundary',()=>{

@@ -16,11 +16,11 @@ function validateState(s,allowRotatingSpikes=false) {
   if(!integer(s.unwrappedFrame)||(s.unwrappedFrame&63)!==s.frame)
     throw new RangeError('Canonical/unwrapped frame mismatch');
 }
-function validateDot(d) {
+function validateDot(d,allowUpDownDots=false) {
   if(!d||d.id===undefined||!integer(d.x)||!integer(d.y)||
      !['present','humanCanGrab','nonhumanCanGrab'].every(k=>typeof d[k]==='boolean'))
     throw new TypeError('Explicit static dot position and permissions required');
-  if(d.motion!=='static'||d.slideMask!==0||d.teleport!==false)
+  if(d.motion!=='static'&&!(allowUpDownDots&&d.motion==='up-down')||d.slideMask!==0||d.teleport!==false)
     throw new Error('Moving, EX sliding, up/down and teleport dots are unqualified');
 }
 
@@ -45,13 +45,13 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
   if(!Array.isArray(dots)||![adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab].every(f=>typeof f==='function'))
     throw new TypeError('Source dot and synchronous collision/grab adapters required');
-  dots.forEach(validateDot);
+  dots.forEach(d=>validateDot(d,allowUpDownDots));
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
   const validate=s=>validateState(s,allowRotatingSpikes);
   validate(next);
@@ -75,7 +75,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     const oldDot=dotAt(next.pivot),[dx,dy]=offsets[next.frame];
     // Source selects the first present positional match, then checks its
     // nonhuman permission. Rendering visibility and color are not filters.
-    const target=dots.find(d=>d.present&&d.x===oldDot.x+48*dx&&d.y===oldDot.y+48*dy);
+    const target=dots.find(d=>d.present&&(allowUpDownDots?Math.abs(d.x-oldDot.x-48*dx)<=6&&Math.abs(d.y-oldDot.y-48*dy)<=6:d.x===oldDot.x+48*dx&&d.y===oldDot.y+48*dy));
     const allowed=Boolean(target?.nonhumanCanGrab),action=instruction.action;
     events.push({type:'program-command',step,frame:next.frame,allowed,action:{...action}});
     if(!allowed)continue;

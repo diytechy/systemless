@@ -215,3 +215,6 @@ Sentry32 is accepted with original/SVG16,000points and190finite onsets; all23tra
 ## Sinkers preparation: shared up/down groups
 
 EL subcell and group are independent. Every entry toggles matching dots before old-control release; occupancy changes only the control artwork. Raised phase12 becomes unavailable to humans at the first lowering callback; phase0 kills/orphans attached occupants. Nonhuman presence permission remains. In-flight reversal and endpoint cancellation require distinct state. Native discovery confirms left/down core movement. Seven unlinked tests cover the primitives; no scene is enabled.
+
+
+Sinkers guarded integration uses the unmodified resource and source +/-6 current-pixel queries.242control states and188clear160/1 surface frames match. The original1,000goal and190finite onsets pass. Eight cold/gameplay frame differences, four core callback differences and a post-death restart-phase difference remain explicit. Root visible SVG goal is pending; no scene acceptance yet.

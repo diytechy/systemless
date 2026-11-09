@@ -1,5 +1,5 @@
 {
-  "status": "unlinked-primitives-source-discovery-not-accepted",
+  "status": "guarded-integration-native-goal-passed-svg-running-not-accepted",
   "ordinal": 33,
   "title": "Sinkers",
   "liveOrdinal": 32,
@@ -7,10 +7,12 @@
   "sourceSha256": "81edccd4f42982baa7ce226395afd52a1e128d4ca57d5562a4333d294a351994",
   "newFamily": "EL/up-down group1",
   "validation": {
-    "unlinkedNewUnitTests": 7,
-    "fullRuntimeTests": 231,
-    "integrated": false,
-    "packaged": false
+    "runtimeTests": 236,
+    "packagingTests": 15,
+    "priorDecodedBoardsIdentical": 31,
+    "priorSnapshotsIdentical": 31,
+    "priorReplayUpdates": 279331,
+    "packagedSourceFiles": 26
   },
   "nativeCold": {
     "status": "passed",
@@ -55,9 +57,81 @@
     ]
   },
   "limits": [
-    "No QA33 or accepted real-map input witness",
-    "Proxy deletes unsupported properties only for initial geometry proposals; native guest/media unchanged",
-    "Position transition and visual clock/rider lifecycle still need integration and original comparison",
-    "No new cadence/resource claim"
-  ]
+    "Scene33notaccepted/activated; live32Sentrypaused",
+    "Eight cold and eight gameplay source-frame differences retained; allpositions match",
+    "Four clean core poses differ one callback; all188clean surfaceframes match",
+    "Post-death reset phase differs;41afterresetcleanframes do notmatch, allrespawnpositions match. Cause unconfirmed.",
+    "First QA asset-loader failure retained/corrected; visible SVG goal pending",
+    "No new resource/cadence/audio/controller/higherdifficulty/fullsave qualification"
+  ],
+  "coldHandPoses": {
+    "total": 132,
+    "positionsMatch": 132,
+    "framesMatch": 124,
+    "oneFrameDifferences": 8,
+    "legalFreshIdleUpdates": 706
+  },
+  "nativeControlComparison": {
+    "controlStates": 242,
+    "exactControlStates": 242,
+    "cleanCorePoses": 122,
+    "exactCorePoses": 118,
+    "oneCallbackCoreDifferences": 4,
+    "cleanSurfaceFrames": 188,
+    "exactSurfaceFrames": 188,
+    "surfaceClock": "source160/1"
+  },
+  "nativeRiderProbe": {
+    "status": "closed-passed",
+    "frontendTicks": 2490,
+    "guestTicks": 3090,
+    "budgetExhausted": 0,
+    "actualDeathAndOriginalSpawnResetViewed": true,
+    "independentHeroFits": 126,
+    "cleanFits": 87,
+    "beforeResetClean": 46,
+    "beforeResetPositionMatches": 45,
+    "beforeResetFrameMatches": 44,
+    "afterResetClean": 41,
+    "afterResetPositionMatches": 41,
+    "afterResetFrameMatches": 0,
+    "limit": "Post-reset hand phase differs from original. Exact death/restart timing is unqualified; no timer or random stream correction adopted."
+  },
+  "nativeGoal": {
+    "status": "closed-passed",
+    "frontendTicks": 4736,
+    "guestTicks": 5336,
+    "budgetExhausted": 0,
+    "transfers": 12,
+    "score": 1000,
+    "nextObserved": "34Pigeonholes/playerp/203000",
+    "poseSamples": 192,
+    "pointMatches": 192,
+    "frameMatches": 184,
+    "oneFrameDifferences": 8,
+    "cleanFits": 191,
+    "cleanFrameMatches": 183,
+    "transferHeroMatches": 12
+  },
+  "candidateRoute": {
+    "transfers": 12,
+    "score": 1000,
+    "playerControlEntries": 2,
+    "activeUpDownDotsVisited": 2,
+    "finiteOnsets": 190,
+    "rawNoOpFlipRequestsOmitted": 1,
+    "proxy": false
+  },
+  "qa": {
+    "tab": 113,
+    "url": "http://localhost:8091/sinkers/qa/dist/clockwerx-html5/",
+    "state": "corrected-visible-checked-route-running",
+    "sources": 26,
+    "payloads": 83,
+    "oldDefinitionsPreserved": 32,
+    "oldPayloadsPreserved": 80,
+    "newPayloadBytes": 178724,
+    "firstRenderFailure": "new atlas references omitted from app foreground load list; corrected and full initial scene viewed, failed screenshot retained"
+  },
+  "nextNative": "pigeonholes/native-initial-01 running; verify earned through33fixture4a672a1fd44938a105403dc17963146ba0dd266715ae651e06d217c62b2718d3"
 }

@@ -27,6 +27,20 @@ function canonicalOilFixture(){
  f.options.oilOutlines={groups:{1200:{frames:Array.from({length:52},()=>({...frame}))},2200:{frames:Array.from({length:107},()=>({...frame}))}}};
  f.options.dotOutlines={groups:{300:{frames:Array.from({length:17},()=>({...frame}))}}};f.options.oilBounds={left:-100,top:-100,right:500,bottom:500};return f;
 }
+function elevatorFixture(){
+ const f=canonicalFixture();Object.assign(f.board,{elevatorRules:true,specialDotRules:true,childScoreRules:true,difficulty:'Child',timeLimit:90,origin:{x:12,y:11},sourceDotPermissions:true,elevators:[{row:0,column:0,subcell:3,group:1}]});
+ f.board.dots.forEach((d,i)=>Object.assign(d,{sourceIndex:i,cell:1,flags:15,color:0,present:true,humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,motion:'static',slideMask:0,teleport:false,kind:'dot'}));
+ Object.assign(f.board.dots[0],{motion:'up-down',upDown:{group:1,initialLowered:false,x:0,y:0}});
+ const shape={left:-1,top:-1,right:1,bottom:1,rows:null,outlineIndex:0,flipY:false};f.options.elevatorOutlines={groups:{3400:{frames:Array.from({length:9},()=>shape)}}};return f;
+}
+
+test('a lowering pivot carries the human to death and a natural restart restores dot/control state',()=>{
+ const {board,options}=elevatorFixture(),g=new SourceRound(board,options);
+ for(let i=0;i<2000&&!g.death;i++)g.update(1/120);
+ assert.deepEqual(g.events.find(e=>e.type==='death').cause,{reason:'lowered-dot',sourceReason:38,object:'a'});assert.equal(g.point(g.player).x,-12);assert.equal(g.point(g.player).y,12);assert.equal(g.complete,false);
+ for(let i=0;i<1000&&!g.roundRestarts;i++)g.update(1/120);
+ assert.equal(g.roundRestarts,1);assert.equal(g.player.pivot,'a');assert.equal(g.point(g.player).x,0);assert.equal(g.point(g.player).y,0);assert.equal(g.point(g.player).humanCanGrab,true);assert.equal(g.elevators.snapshot().controls[0].occupants,0);
+});
 
 test('canonical Oil arrival death precedes goal and score effects',()=>{
  const {board,options}=canonicalOilFixture();board.dots[1].kind='goal';const g=new SourceRound(board,options);

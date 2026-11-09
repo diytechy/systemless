@@ -44,6 +44,17 @@ class PilotPackagingTests(unittest.TestCase):
         self.save_manifest()
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
 
+    def test_elevator_art_and_collision_profile_require_verified_payloads(self):
+        for field in ('controls','surfaces','elevatorOutlinesFile'):
+            with self.subTest(field=field):
+                self.manifest['vectorAssets']=dict(dots=[],hands={})
+                self.manifest['scenes']=[dict(title='Synthetic',levelDefinition=dict(outlinesFile='sample.png'))]
+                if field.endswith('File'):self.manifest['scenes'][0]['levelDefinition'][field]='missing.json'
+                else:self.manifest['vectorAssets']['elevators']={field:dict(file='missing.svg')}
+                self.save_manifest()
+                with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+
     def test_door_art_and_scene_collision_profiles_must_be_verified(self):
         for field in ('leaves','caps','switches','doorOutlinesFile'):
             with self.subTest(field=field):

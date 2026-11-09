@@ -12,6 +12,7 @@ import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs
 import {StaticDotRuntime} from './special-dot-runtime.mjs';
 import {BombScene} from './bomb-scene.mjs';
 import {ChildRoundScore} from './score.mjs';
+import {createElevatorSystem,createUpDownState,upDownPlacement,findElevatorContact} from './elevators.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -23,11 +24,12 @@ export function worldOutline(profile,group,frame,point){
 }
 
 export class SourceRound extends MovementGame {
- constructor(board,{outlines,doorOutlines,oilOutlines,dotOutlines,oilBounds,bombOutlines,bombRoutes,deathFactory,guestTicksPerSecond=60}={}){
+ constructor(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,oilBounds,bombOutlines,bombRoutes,deathFactory,guestTicksPerSecond=60}={}){
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
-  if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask||d.motion&&d.motion!=='static')))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
+  if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask||d.motion&&d.motion!=='static'&&!(board.elevatorRules&&d.motion==='up-down'))))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
+  if(board.elevatorRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.elevators?.length||!elevatorOutlines?.groups?.['3400']||board.elevators.some(s=>s.group!==1||s.subcell!==3)||board.puddles?.length||board.bombRules||board.goodieOnlyRules||board.spikes?.length||board.walls?.length||board.doors?.length||board.switches?.length||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||e.speedClass!==1||e.checksWalls!==false)||!board.dots.some(d=>d.upDown)||board.dots.some(d=>d.ring||d.protected||d.waystation||d.upDown&&(d.upDown.group!==1||d.upDown.initialLowered||d.color!==0||d.kind!=='dot'))))throw new Error('Qualified plain raised group1 Child elevator scope and source outlines required');
   if(board.canonicalOilRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.puddles?.length||board.bombRules||board.goodieOnlyRules||board.spikes?.length||board.doors?.length||board.switches?.length||this.enemies.some(e=>!([1,2,3].includes(e.sourceActorType)&&[1,3].includes(e.speedClass)&&e.checksWalls===false||board.staticEnemyWallRules&&e.sourceActorType===1&&e.speedClass===4&&e.program===null))||board.dots.some(d=>d.ring||d.protected||d.waystation&&d.color!==0)))throw new Error('Canonical Oil requires the qualified static Child ordinary-actor scope');
   if(board.goodieOnlyRules&&!board.specialDotRules)throw new Error('Goodie-only source timer state required');
   if(board.combinedGoalBonusRules&&!board.childScoreRules)throw new Error('Combined goal bonus requires Child score qualification');
@@ -35,6 +37,11 @@ export class SourceRound extends MovementGame {
   if(this.enemies.some(e=>e.sourceActorType===4)&&(!board.rotatingSpikeRules||!board.staticEnemyCallbacks||!outlines.groups['3500']))throw new Error('Rotating spike rules, canonical clock and source outlines require qualification');
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
   if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds});
+  if(board.elevatorRules){
+   this.elevatorOutlines=elevatorOutlines;
+   this.elevators=createElevatorSystem(board.elevators,board.dots.filter(d=>d.upDown).map(d=>({id:d.id,...d.upDown})),{origin:board.origin,clockCount:this.actorClasses.snapshot().classes[1].count,surfaceCount:this.elevatorSurfaceClock.advance(0).clientCount});
+   this.syncElevatorDots();
+  }
   if(board.specialDotRules){
    this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
    this.remainingTime=board.timeLimit;this.onHumanGrab(this.point(this.player));
@@ -52,6 +59,7 @@ export class SourceRound extends MovementGame {
   this.deathClock??=createDeathClock();
   this.actorClock??=createSourceTimerChain(38,1);
   this.actorClasses??=createActorClocks(this.actorClock.advance(0).clientCount);
+  if(this.board.elevatorRules)this.elevatorSurfaceClock??=createSourceTimerChain(160,1);
   const classes=this.actorClasses.snapshot().classes;
   for(const hand of [this.player,...this.enemies])hand.frameReference=classes[hand.speedClass??0].count;
   this.doorClock??=createSourceTimerChain(133,1);
@@ -71,6 +79,7 @@ export class SourceRound extends MovementGame {
    }
   }
   // PU/DP follows the restored WY spawn, rather than the original level start.
+  if(this.board.elevatorRules){this.elevators?.reset(this.actorClasses.snapshot().classes[1].count,this.elevatorSurfaceClock.advance(0).clientCount);this.syncElevatorDots();}
   this.oil?.reset(this.player.pivot);
   if(this.dotAnimations)this.onHumanGrab(this.point(this.player));
   if(this.board.canonicalPlayerRules){this.canonicalPlayerContact=false;this.player.frame=sourceFrame(this.player.angle);this.player.unwrappedFrame=this.player.frame;}
@@ -148,11 +157,12 @@ export class SourceRound extends MovementGame {
  }
  animateStaticEnemy(hand,delta,timing,upstream,dispatched){
   if(dispatched){
-   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,
+   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,
     afterAnimate:s=>{
      const wall=this.board.staticEnemyWallRules?this.wallCollision(s):null;
      if(wall){s.direction*=-1;this.event('enemy-wall-bounce',s,this.point(s));}
      this.contactSwitch(s);
+     this.contactElevators(s);
     },onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{}});
    Object.assign(hand,result.state);
    if(previousVisible!==hand.visible)this.contactSwitch(hand);
@@ -186,6 +196,20 @@ export class SourceRound extends MovementGame {
   const frames=this.doorSystem.snapshot().switches,actor=this.collider(hand);
   const index=this.board.switches.findIndex((s,i)=>s.visible!==false&&outlineCollision(actor,worldOutline(this.doorOutlines,1000,frames[i].frame,s)));
   for(const sound of this.doorSystem.contact(hand.name,index))this.event('door-toggle',hand,{id:sound.doorIndex});
+ }
+ syncElevatorDots(){
+  const states=this.elevators?.snapshot().dots;
+  for(const dot of this.board.dots)if(dot.upDown){
+   const state=states?.find(d=>d.id===dot.id)??createUpDownState(dot.upDown);
+   Object.assign(dot,upDownPlacement(state,dot.upDown));
+  }
+ }
+ contactElevators(hand){
+  if(!this.elevators)return;
+  const index=hand.visible===false?-1:findElevatorContact(this.collider(hand),this.elevators.snapshot().controls,this.elevatorOutlines);
+  for(const change of this.elevators.contact(hand.name,index)){
+   const event=this.event('elevator-'+change.type,hand,{id:change.dot??change.index});Object.assign(event,change,{type:'elevator-'+change.type});
+  }
  }
  bounceFromWall(hand,wall,type='wall-bounce'){
   // The source pose is an integer frame. Center the smooth interpolation in
@@ -238,6 +262,7 @@ export class SourceRound extends MovementGame {
   this.bombScene?.advanceClocks(elapsed);
   const doorCount=this.doorClock.advance(elapsed).clientCount;
   const actorTimer=this.actorClock.advance(elapsed),actorState=this.actorClasses.latch(actorTimer.clientCount),substeps=new Map();
+  const elevatorSurfaceCount=this.elevatorSurfaceClock?.advance(elapsed).clientCount;
   for(const hand of [this.player,...this.enemies]){
    const timer=actorState.classes[hand.speedClass??0];if(timer.count!==hand.frameReference)substeps.set(hand,timer.delta);
    hand.frameReference=timer.count;
@@ -245,6 +270,14 @@ export class SourceRound extends MovementGame {
   const actorSubstep=substeps.has(this.player);
   const dotCount=this.dotClock?.advance(elapsed).clientCount,overlayCount=this.protectionClock?.advance(elapsed).clientCount;
   if(this.dotAnimations&&!this.death)this.dotAnimations.observeClocks({dotCount,overlayCount,guestTick:this.guestTicks});
+  if(!this.death)this.elevators?.observeClock(actorState.classes[1].count,{
+   onPhase:()=>this.syncElevatorDots(),
+   onLowered:id=>{
+    if(this.player.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id});
+    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});
+   },isFrozen:()=>!!this.death
+  });
+  if(!this.death)this.elevators?.observeSurfaceClock(elevatorSurfaceCount);
   // Existing scenes retain their qualified phase. BO scenes place layer2
   // after the upper fuse/GO/Oil layers, before appended explosion callbacks.
   if(!this.death&&!this.bombScene)this.advanceSpikes();
@@ -286,6 +319,7 @@ export class SourceRound extends MovementGame {
      if(wall)this.bounceFromWall(this.player,wall);
      else if(door?.bounce)this.bounceFromWall(this.player,door,'door-bounce');
      this.contactSwitch(this.player);
+     this.contactElevators(this.player);
      if(guard.lethal)this.beginDeath({reason:wall?'trapped-wall':'trapped-door',object:wall?.id??door?.doorIndex});
      else if(!this.board.canonicalPlayerRules&&!wall&&!door&&this.pendingReverse){this.pendingReverse=false;this.player.direction*=-1;this.event('reverse',this.player);}
     }
@@ -303,6 +337,6 @@ export class SourceRound extends MovementGame {
    if(this.board.canonicalPlayerRules&&!this.death)this.presentCanonicalEnemy(this.player,actorState.classes[this.player.speedClass??0],actorTimer);
   }
  }
-  snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+  snapshot(){return {...super.snapshot(),...(this.elevators?{elevators:this.elevators.snapshot()}:{}),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

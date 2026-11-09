@@ -1,4 +1,4 @@
-// Unlinked source preparation. An active scene still requires independent
+// Gated source preparation. An active scene still requires independent
 // qualification of moving positions, riders, sprite order and presentation.
 import {outlineCollision} from './hazards.mjs';
 
@@ -23,12 +23,12 @@ export function elevatorGeometry(spec,origin={x:74,y:72}){
  // fixes this origin; the 23px background body is not the collision shape.
  return {x:origin.x+s.column*48-36+24*(s.subcell%2),y:origin.y+s.row*48-35+24*Math.floor(s.subcell/2)};
 }
-export function createUpDownState({group,initialLowered=false,clockCount=0}){
- if(!integer(group,0,2)||typeof initialLowered!=='boolean'||!integer(clockCount,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Explicit source up/down state required');
- return {group,phase:initialLowered?0:12,step:0,humanAvailable:!initialLowered,mainVisible:!initialLowered,clockReference:clockCount};
+export function createUpDownState({group,initialLowered=false,clockCount=0,surfaceCount=0}){
+ if(!integer(group,0,2)||typeof initialLowered!=='boolean'||!integer(clockCount,0,Number.MAX_SAFE_INTEGER)||!integer(surfaceCount,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Explicit source up/down state required');
+ return {group,phase:initialLowered?0:12,step:0,humanAvailable:!initialLowered,mainVisible:!initialLowered,clockReference:clockCount,surfaceFrame:126+9*group+(initialLowered?0:1),surfaceReference:surfaceCount};
 }
 function valid(s){
- if(!s||!integer(s.group,0,2)||!integer(s.phase,0,12)||![-1,0,1].includes(s.step)||typeof s.humanAvailable!=='boolean'||typeof s.mainVisible!=='boolean'||!integer(s.clockReference,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Bounded source up/down state required');
+ if(!s||!integer(s.group,0,2)||!integer(s.phase,0,12)||![-1,0,1].includes(s.step)||typeof s.humanAvailable!=='boolean'||typeof s.mainVisible!=='boolean'||!integer(s.clockReference,0,Number.MAX_SAFE_INTEGER)||!integer(s.surfaceReference,0,Number.MAX_SAFE_INTEGER)||!integer(s.surfaceFrame,126+9*s.group,134+9*s.group))throw new RangeError('Bounded source up/down state required');
 }
 export function activateUpDownState(state){
  valid(state);const s={...state};
@@ -46,15 +46,26 @@ export function advanceUpDownState(state,clockCount){
  if(s.phase===12){s.step=0;s.humanAvailable=true;}
  if(s.phase===0){s.step=0;events.push({type:'lowered'});}
  s.mainVisible=s.phase>=2;
+ if(s.phase<12)s.surfaceFrame=126+9*s.group;
  events.unshift({type:'phase',phase:s.phase});
  return {state:s,events};
 }
+export function advanceUpDownSurface(state,clockCount){
+ valid(state);if(!integer(clockCount,state.surfaceReference,Number.MAX_SAFE_INTEGER))throw new RangeError('Monotonic source surface count required');
+ const s={...state};if(clockCount===s.surfaceReference)return s;s.surfaceReference=clockCount;
+ const base=126+9*s.group;s.surfaceFrame=s.phase===12?(s.surfaceFrame>=base+8?base+1:s.surfaceFrame+1):base;return s;
+}
+export function upDownPlacement(state,origin){
+ valid(state);if(!Number.isInteger(origin?.x)||!Number.isInteger(origin?.y))throw new RangeError('Original integer dot position required');
+ const depth=12-state.phase;
+ return {x:origin.x-depth,y:origin.y+depth,humanCanGrab:state.humanAvailable,nonhumanCanGrab:true,sourceCollidable:state.mainVisible,upDownPhase:state.phase,upDownVisible:state.mainVisible};
+}
 
-export function createElevatorSystem(specs,dotSpecs,{origin={x:74,y:72},clockCount=0}={}){
+export function createElevatorSystem(specs,dotSpecs,{origin={x:74,y:72},clockCount=0,surfaceCount=0}={}){
  if(!Array.isArray(specs)||specs.length>12||!Array.isArray(dotSpecs)||dotSpecs.length>88)throw new RangeError('Source EL/dot capacities required');
  const ids=new Set();for(const d of dotSpecs){if(ids.has(d.id))throw new Error('Unique source dot identities required');ids.add(d.id);createUpDownState({...d,clockCount});}
  const controls=specs.map((spec,index)=>({...spec,...elevatorGeometry(spec,origin),index,visible:true,occupants:0,frame:3+2*spec.group})),contacts=new Map();let dots;
- const reset=count=>{if(!integer(count,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Source count required');contacts.clear();for(const c of controls){c.occupants=0;c.frame=3+2*c.group;c.visible=true;}dots=dotSpecs.map(d=>({id:d.id,...createUpDownState({...d,clockCount:count})}));};reset(clockCount);
+ const reset=(count,surface=0)=>{if(!integer(count,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Source count required');contacts.clear();for(const c of controls){c.occupants=0;c.frame=3+2*c.group;c.visible=true;}dots=dotSpecs.map(d=>({id:d.id,...createUpDownState({...d,clockCount:count,surfaceCount:surface})}));};reset(clockCount,surfaceCount);
  return {
   reset,
   contact(actor,nextIndex){
@@ -80,6 +91,7 @@ export function createElevatorSystem(specs,dotSpecs,{origin={x:74,y:72},clockCou
    }
    return events;
   },
+  observeSurfaceClock(count){dots=dots.map(d=>({id:d.id,...advanceUpDownSurface(d,count)}));},
   snapshot(){return {controls:controls.map(c=>({...c})),dots:dots.map(d=>({...d}))};}
  };
 }

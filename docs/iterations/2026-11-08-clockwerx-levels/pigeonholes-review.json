@@ -1,0 +1,126 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "nativeTransfers": 15,
+  "goalOnsets": 190,
+  "nativeGoalScore": 7000,
+  "qaGoalScore": 7000,
+  "sourceFilesChanged": [
+    "app.mjs",
+    "level.mjs",
+    "round.mjs"
+  ],
+  "runtimeChecks": 238,
+  "packagingChecks": 15,
+  "priorSceneDefinitionsIdentical": 33,
+  "payloadsUnchanged": 83,
+  "payloadsAdded": 1,
+  "sourceCodeCommit": "386629a4",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 4587,
+    "guest_tick": 5187,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "physicalSchedulePoses": {
+    "total": 210,
+    "positions": 210,
+    "frames": 203,
+    "oneFrameDifferences": 7,
+    "transferHero": 15,
+    "transferHeroMatches": 15
+  },
+  "staticSpikeEvidence": {
+    "total": 231,
+    "clear": 224,
+    "phaseMatches": 26,
+    "phaseQualified": false
+  },
+  "oilEvidence": {
+    "clearPuddlePoses": 9,
+    "bases": 9,
+    "frames": 8,
+    "clearDropletPoses": 5,
+    "dropletMatches": 5,
+    "dropletFrames": [
+      0,
+      60
+    ]
+  },
+  "bonusCoreSamples": 462,
+  "limits": [
+    "Frequent static spike phase differences:26of224clear phase fits match. Cause unconfirmed, no timer correction adopted. The proposal uses the union of allfour source spike colliders; bounded goal witness only.",
+    "All231coldpositions and210gameplaypositions match;21cold/sevenphysical frames differ by one. All15transferhero poses match.",
+    "Nineclear PUposes match allbases/eightframes, onecallback difference. FiveclearDPposes match, no clone/death/reset qualification in thisscene.",
+    "Threeof14bonuses collected;11pickups unvisited. Failedmissingbonus6render and rejected independentanchor probes retained.",
+    "No new real-time cadence/resource/audio/controller/higherdifficulty/fullsave qualification."
+  ],
+  "ordinal": 34,
+  "title": "Pigeonholes",
+  "acceptedScenes": 34,
+  "resourceId": 188,
+  "sourceSha256": "3396d292744a6e107031e6ba822310f72bfdea3e706fd339f71d64182ff088fd",
+  "cold": {
+    "poses": 231,
+    "positionsMatch": 231,
+    "framesMatch": 210,
+    "legalIdleUpdates": 700,
+    "rawOverdraw": 6
+  },
+  "priorRegressions": {
+    "scenes": 32,
+    "updates": 284698
+  },
+  "artwork": {
+    "ordinaryVariants": 16,
+    "added": "bonus:6",
+    "newBytes": 1859,
+    "sourceDescriptor": 307,
+    "sourceImage": 7
+  },
+  "progressFixture": {
+    "status": "forks-and-represented-metadata-verified-native-relaunch-verified",
+    "destinationSha256": "4e57f5344bbd0a6b7aaf4e1a58d9a14c7ea705dbce8fb66a5eca2c3e83efed38",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "metadataScope": "Both forks, file type/creator/flags/dates/raw16coordinates and represented folder dates. Folder Finder information is unexposed by machfs; original source image remains byte-identical. Raw aliases retained, resolution unqualified."
+  },
+  "activation": {
+    "sizes": {
+      "sourceBytes": 197867,
+      "assetBytes": 2957017,
+      "manifestBytes": 3051242,
+      "totalBytes": 6206126
+    },
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\pigeonholes\\previous-live-pilot",
+    "sourceFiles": 26,
+    "assets": 84
+  },
+  "browser": {
+    "normalTab": 92,
+    "normalScene": 34,
+    "paused": true,
+    "qaTab": 114,
+    "qaClosed": true
+  },
+  "evidence": [
+    "pigeonholes/native-goal-01/report.json",
+    "pigeonholes/native-goal-comparison.json",
+    "pigeonholes/native-source-pose-fits.json",
+    "pigeonholes/cold-real700-review.json",
+    "pigeonholes/native-oil-review.json",
+    "pigeonholes/native-droplet-review.json",
+    "pigeonholes/native-spike-review.json",
+    "pigeonholes/native-dot-background-review.json",
+    "pigeonholes/checked-route.json",
+    "pigeonholes/qa-goal-page.png",
+    "pigeonholes/qa-goal-page.txt",
+    "pigeonholes/qa-initial-corrected-page.png",
+    "pigeonholes/qa-failed-missing-bonus6.txt",
+    "pigeonholes/normal-paused-page.png"
+  ]
+}

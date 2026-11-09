@@ -1,3 +1,5 @@
+**Historical preparation; superseded by [bounded accepted review](pigeonholes-review.md).**
+
 # Pigeonholes preparation
 
 **Guarded preparation; 33-scene live pilot remains unchanged.** Resource188 SHA3396d292744a6e107031e6ba822310f72bfdea3e706fd339f71d64182ff088fd is version12/large8/time150. It has55pivots,14bonuses,onegoal,9SP/4PU/10WP/14WA. Child activates seven static spikes and one kind2 Oil puddle; two spikes/three puddles are inactive. Human slots0/6 share the spawn. Six active ordinary class1, wall-free enemies comprise two each red/green/blue, five programmed and one free; six other NPCs are inactive. Source map/programs stay private.

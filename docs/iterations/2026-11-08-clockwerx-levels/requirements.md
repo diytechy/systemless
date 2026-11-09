@@ -224,3 +224,6 @@ Sinkers33 is now accepted with original/SVG1000goals,12transferposes and190finit
 
 
 Pigeonholes34 preparation adds an explicit large/kind2Oil/static-spike/class1 composition gate;238runtime/15packaging checks and32prior-route regressions pass. Original7000/15transfers andall210positions match;21cold/sevengameplay oneframe differences remain. SevenSPIplacements match224clearfits, but only26phasesmatch: frequent spike-phase discrepancy remains unqualified. Correctedblue/greenbonusSVGfills final ordinarydotvariant. Visiblegoal/activation pending.
+
+
+Pigeonholes34 is accepted with matching original/SVG7000goals/15transferhero poses and190onsets. FrequentSPIphase disparity(26of224clear exact) stays explicit; allplacements/handpositions match. The final blue/greenbonus6 SVG completes16ordinaryvariants. See[review](pigeonholes-review.md).

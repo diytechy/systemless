@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 34,
-  "currentAction": "Pigeonholes34 guardedkind2Oil/staticSpike scope,238runtime/15packaging;32priorregressions284698updates. Original7000/15transfers/210points/203frames;190onsets passes. Spikephase26/224retainedunqualified. CorrectedQA114route/fresh35native65327running. Live33unchanged.",
+  "currentOrdinal": 35,
+  "currentAction": "Hiccup35 fresh original cold CLOSED/PASS2224/2824/0, actual35/playerp/210000 viewed. Inspect active source composition/capability gates next. Pigeonholes34 bounded goal accepted/active with frequent static spike phase mismatch explicit. No active runner.",
   "levels": [
     {
       "ordinal": 1,
@@ -2428,13 +2428,34 @@
       "menuTitle": "Pigeonholes",
       "resourceTitle": "Pigeonholes",
       "sha256": "3396d292744a6e107031e6ba822310f72bfdea3e706fd339f71d64182ff088fd",
-      "status": "guarded-preparation-original-goal-passed-svg-running",
+      "status": "accepted-with-limits-and-locally-active",
       "nativeEvidence": [
-        "pigeonholes/native-initial-01/report.json"
+        "pigeonholes/native-goal-01/report.json",
+        "pigeonholes/native-goal-comparison.json",
+        "pigeonholes/native-source-pose-fits.json",
+        "pigeonholes/cold-real700-review.json",
+        "pigeonholes/native-oil-review.json",
+        "pigeonholes/native-droplet-review.json",
+        "pigeonholes/native-spike-review.json",
+        "pigeonholes/native-dot-background-review.json",
+        "pigeonholes/checked-route.json",
+        "pigeonholes/qa-goal-page.png",
+        "pigeonholes/qa-goal-page.txt",
+        "pigeonholes/qa-initial-corrected-page.png",
+        "pigeonholes/qa-failed-missing-bonus6.txt",
+        "pigeonholes/normal-paused-page.png"
       ],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "requirements": [
+        "kind2Oil/staticSpike composition opt-in",
+        "all16ordinary normal/bonus color artwork variants",
+        "staticSPphase remains unqualified despite matching placements"
+      ],
+      "svgStatus": "corrected visible7000goal and local select/restart/pause verified; blue/green bonus6 added",
+      "generationConstraints": [
+        "union of allfourSPIcolliders until phase qualified",
+        "track colored permissions and Oil pursuit, bonusstate separately",
+        "do not infer fulltiming from successful physical route"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 55,
@@ -2461,7 +2482,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": "bounded Child goal; frequent static spike flicker phase mismatch and listed limits remain",
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2482,6 +2503,10 @@
       "preparationEvidence": [
         "pigeonholes-preparation.md",
         "pigeonholes-preparation.json"
+      ],
+      "reviewEvidence": [
+        "pigeonholes-review.md",
+        "pigeonholes-review.json"
       ]
     },
     {
@@ -2490,8 +2515,10 @@
       "menuTitle": "Hiccup",
       "resourceTitle": "Hiccup",
       "sha256": "ce5cda4d71c4061cc32339044cb2cebdd8517c4f2722df58cde0514659895540",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "native-cold-passed-source-review-pending",
+      "nativeEvidence": [
+        "hiccup/native-initial-01/report.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],

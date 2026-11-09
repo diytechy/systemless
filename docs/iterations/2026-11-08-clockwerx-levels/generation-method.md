@@ -137,3 +137,6 @@ Sinkers33 acceptance supports timed group1 reachability with controls and carrie
 
 
 Pigeonholes34 shows geometric proposals must use the union of allfour originalstaticspikecolliders when exact flicker phase is unqualified. Existing-map15transfer/threebonus/Oilbirth goal is witnessed natively; it does not certify allhazardtiming. Preserve color permissions separately from human availability, staticSPfromrotatingWA, and kind2PUtarget offsets from visualbases. A complete normal/bonus eight-color artwork inventory is needed before claiming rendered-map coverage.
+
+
+Pigeonholes34 bounded witness is now accepted/active; retain the union of allfourSPIcolliders because frequent phase mismatch remains. Existing-map route success is not new-level generation or exact hazardtiming qualification. See[review](pigeonholes-review.md).

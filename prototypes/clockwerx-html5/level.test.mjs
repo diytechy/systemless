@@ -124,6 +124,17 @@ test('free class2 orbitals require a separate capability and retain divisor8 mul
  actor.programReferenceRaw=-1;actor.actorTypeRaw=2;assert.ok(levelRequirements(level,qualified).includes('actor speed class 2'));
 });
 
+test('free class3 orbitals require a separate capability and retain divisor4 multiplier1',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];Object.assign(actor,{actorTypeRaw:4,version12ByteRaw:0});actor.rawWords[7]=3;
+ const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowRotatingSpikes:true};
+ assert.ok(levelRequirements(level,options).includes('rotating spike canonical clock without walls'));
+ const qualified={...options,allowClass3RotatingSpikes:true},board=buildDecodedBoard(level,qualified);
+ assert.equal(board.class3RotatingSpikeRules,true);assert.equal(board.enemies[0].divisor,4);assert.equal(board.enemies[0].multiplier,1);
+ actor.programReferenceRaw=0;level.blocks.push({kind:'WP',count:1,records:[{text:'nnnn'}]});assert.ok(levelRequirements(level,qualified).includes('class3 rotating spike requires a free clock'));
+ actor.programReferenceRaw=-1;actor.version12ByteRaw=1;assert.ok(levelRequirements(level,qualified).includes('rotating spike canonical clock without walls'));
+ actor.version12ByteRaw=0;actor.rawWords[7]=2;assert.ok(levelRequirements(level,qualified).includes('rotating spike canonical clock without walls'));
+});
+
 test('fast rotating-spike clocks and n/s transfers require independent capabilities',()=>{
  const level=fixture(),actor=level.blocks[0].records[2];Object.assign(actor,{actorTypeRaw:4,version12ByteRaw:0,programReferenceRaw:0});actor.rawWords[7]=5;
  level.blocks.push({kind:'WP',count:1,records:[{text:'nsns'}]});

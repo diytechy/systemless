@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 37,
-  "currentAction": "36Stutter accepted and locally active with limits. Successful02 original/SVG5000/28transfers; all190onsets. Through36 fixture verified and fresh37Quincunx viewed. Begin37 source/admission/cold review. No active runner or pending CUA part.",
+  "currentAction": "37Quincunx guarded class3/cold preparation validated:254runtime/15packaging/35priorregressions317481updates. Search10/session40131 and12/session29053 are the two functional runners. Original goal/SVG/activation pending; live36 unchanged.",
   "levels": [
     {
       "ordinal": 1,
@@ -2681,8 +2681,12 @@
       "menuTitle": "Quincunx",
       "resourceTitle": "Quincunx",
       "sha256": "b7d29423b2a8239963a4b6bb7ce26510d3969864733b61fc3ef059225c1943e4",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "guarded-source-cold-preparation-goal-searching",
+      "nativeEvidence": [
+        "quincunx/native-initial-01/report.json",
+        "quincunx/native-source-pose-fits.json",
+        "quincunx/cold-review.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],
@@ -2730,7 +2734,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "preparation": "quincunx-preparation.md"
     },
     {
       "ordinal": 38,

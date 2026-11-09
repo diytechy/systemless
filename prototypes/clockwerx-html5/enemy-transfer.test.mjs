@@ -13,6 +13,15 @@ test('a separately enabled free class2 orbital visits each multiplied canonical 
  assert.deepEqual(frames,[0,1,2]);assert.equal(result.state.frame,2);assert.equal(result.state.unwrappedFrame,66);assert.equal(result.state.pivot,'a');
  assert.throws(()=>advanceStaticEnemyCallback(spike,3,{...o,program:'nnnn',allowClass2RotatingSpikes:true}),/free clock/);
 });
+test('free class3 orbitals retain reverse direction across frame wrap without ordinary hooks',()=>{
+ const spike=actor({sourceActorType:4,speedClass:3,frame:1,direction:-1,checksWalls:false}),frames=[],o=options({allowRotatingSpikes:true,program:null,afterAnimate:s=>frames.push(s.frame),onDotRelease:()=>assert.fail('free orbital released a pivot'),onDotGrabFirst:()=>assert.fail('free orbital grabbed a pivot')});
+ assert.throws(()=>advanceStaticEnemyCallback(spike,2,o),/enabled clock/);
+ const enabled={...o,allowClass3RotatingSpikes:true},result=advanceStaticEnemyCallback(spike,2,enabled);
+ assert.deepEqual(frames,[0,63]);assert.equal(result.state.pivot,'a');assert.equal(result.state.direction,-1);
+ assert.throws(()=>advanceStaticEnemyCallback(spike,1,{...enabled,program:'nnnn'}),/free clock/);
+ assert.throws(()=>advanceStaticEnemyCallback({...spike,checksWalls:true},1,enabled),/no walls/);
+});
+
 test('up/down program queries require exact current pixels and orphan on unavailable arrival',()=>{
  const o=options({dots:[dot('a',0,0),dot('b',48,5,{motion:'up-down',humanCanGrab:false})]});
  assert.throws(()=>advanceStaticEnemyCallback(actor(),1,o),/Moving/);

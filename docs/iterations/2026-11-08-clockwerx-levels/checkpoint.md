@@ -1,6 +1,6 @@
 # Progress checkpoint
 
-Latest: [Stutter review](stutter-review.md)/[packet](stutter-review.json) accepts36 with explicit visual/timing limits. Original/SVG5,000;28 transfer poses match; all190 onsets. 252 runtime/15 packaging pass. Through36 fixture64e3190a verifies nine files/both forks/represented metadata/seven untouched; fresh37/playerp/216000 viewed. Normal92Stutter paused; QA117 closed; no active runner/pending CUA part. Continue37 source/admission/cold review.
+Latest: [Stutter review](stutter-review.md)/[packet](stutter-review.json) accepts36 with explicit visual/timing limits. Original/SVG5,000;28 transfer poses match; all190 onsets. 252 runtime/15 packaging pass. Through36 fixture64e3190a verifies nine files/both forks/represented metadata/seven untouched; fresh37/playerp/216000 viewed. Normal92Stutter paused; QA117 closed; no active runner/pending CUA part. Current37 source/admission/cold review is validated; goal searches10/session40131 and12/session29053 use both functional slots.254runtime/15packaging/35priorregressions317481updates pass; see current-action and quincunx-preparation. Live36 unchanged.
 
 **36 bounded Child scenes are accepted and locally active through Stutter;64 remain.** Original library/frozen comparisons complete. Continue37 Quincunx from [current action](current-action.md).
 

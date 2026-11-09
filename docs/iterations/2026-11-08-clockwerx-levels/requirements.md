@@ -247,3 +247,6 @@ Stutter36 guarded mixedscope now dispatches movingDOT/DP/EL blasts and preserves
 
 
 Sourcequerycorrection: up/down motion is distinct fromordinarymovingType1. Admittedhuman/NPCstatic-updownqueries useexactcurrentpixels; six-pixel slack andcachedmidpoint belong to the otherfamily. A sinkingrider maymiss a staticneighbor even whilevisible. Correctednativefirst5poses match; oldStutterpermissive190modelwins werenot originalgoal evidence. See[queryreview](transfer-query-review.md).
+
+
+Dodger39 validates a mixed-height elevator channel with GO/staticSP, including an empty channel control and inactive-property ordinary pivots. Model/native/SVG witness13transfers/all3GO/twoordinarybonuses/7000; exact SP/GO/surface phase and one042callback/core boundary remain limited. All actors start static; initial moving riders need separate qualification. See[dodger review](dodger-review.md).

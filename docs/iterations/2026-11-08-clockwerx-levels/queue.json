@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 39,
-  "currentAction": "39Dodger guarded elevatorGoodies/cold preparation validated:259runtime/15packaging/37prior334903updates. No active runner; plan3GO+goal legal inputs. Normal38 unchanged.",
+  "currentOrdinal": 40,
+  "currentAction": "39Dodger accepted/active original+SVG7000/13transfer/190onsets with recorded phase limits. Fresh40Hollow verified. Mechanics-first parallel source preparation; shared runtime/integration serial, max2functional runners.",
   "levels": [
     {
       "ordinal": 1,
@@ -2831,15 +2831,26 @@
       "menuTitle": "Dodger",
       "resourceTitle": "Dodger",
       "sha256": "735faf0ac77023f98de0658b5ba799f6d5845af9091161fb24c50a8354c71bfc",
-      "status": "guarded-source-cold-preparation-goal-route-next",
+      "status": "accepted-with-limits-and-locally-active",
       "nativeEvidence": [
-        "dodger/native-initial-01/report.json",
-        "dodger/cold-review.json",
-        "dodger/native-cold-elevator-comparison.json"
+        "dodger/native-goal-01/report.json",
+        "dodger/native-goal-01-comparison.json",
+        "dodger/native-goal-01-elevator-comparison.json",
+        "dodger/native-goal-01-spike-goodie-fits.json"
       ],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "requirements": [
+        "mixed individual initial heights within one elevator channel",
+        "inactive optional up/down property retains ordinary dot",
+        "GO deferred award/hide with staticSP and group1/2 elevators",
+        "empty control channel retains pressure/contact state"
+      ],
+      "svgStatus": "normal39active; original/SVG7000goal;13transfers/190onsets",
+      "generationConstraints": [
+        "solve temporal availability with exact current pixels",
+        "validate all planned GO pickups after deferred award/hide",
+        "retain source clock and SPI/GO outline phase uncertainty",
+        "route success does not prove unused bonus or death/reset behavior"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 60,
@@ -2866,7 +2877,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2884,7 +2895,14 @@
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
       ],
-      "preparation": "dodger-preparation.md"
+      "preparation": "dodger-preparation.md",
+      "review": "dodger-review.json",
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "admitted-existing-profile-not-gameplay-proven",
+        "newMechanicDependencies": [],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 40,
@@ -2892,8 +2910,10 @@
       "menuTitle": "Hollow",
       "resourceTitle": "Hollow",
       "sha256": "0982002b6c9141cd011910e6f5977332402c770dd1fc01880af37adb083b4032",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "native-cold-preparation-complete-source-scope-next",
+      "nativeEvidence": [
+        "hollow/native-initial-01/report.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],
@@ -2941,7 +2961,13 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "existing-mechanic-families-new-composition-or-import-variant",
+        "newMechanicDependencies": [],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 41,
@@ -2998,7 +3024,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "HY",
+            "label": "HY paired teleport",
+            "firstRepresentativeOrdinal": 41
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 42,
@@ -3057,7 +3095,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 43,
@@ -3113,7 +3163,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 44,
@@ -3170,7 +3232,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 45,
@@ -3227,7 +3301,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 46,
@@ -3283,7 +3369,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 47,
@@ -3340,7 +3438,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 48,
@@ -3397,7 +3507,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 49,
@@ -3454,7 +3576,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "HY",
+            "label": "HY paired teleport",
+            "firstRepresentativeOrdinal": 41
+          },
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 50,
@@ -3510,7 +3649,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 51,
@@ -3567,7 +3718,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 52,
@@ -3623,7 +3791,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "death",
+            "label": "marked-to-marked transfer death",
+            "firstRepresentativeOrdinal": 52
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 53,
@@ -3679,7 +3864,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 54,
@@ -3736,7 +3938,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 55,
@@ -3792,7 +4006,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "death",
+            "label": "marked-to-marked transfer death",
+            "firstRepresentativeOrdinal": 52
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 56,
@@ -3849,7 +4080,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 57,
@@ -3906,7 +4149,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "death",
+            "label": "marked-to-marked transfer death",
+            "firstRepresentativeOrdinal": 52
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 58,
@@ -3962,7 +4217,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "death",
+            "label": "marked-to-marked transfer death",
+            "firstRepresentativeOrdinal": 52
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 59,
@@ -4019,7 +4291,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 60,
@@ -4076,7 +4360,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 61,
@@ -4133,7 +4429,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 62,
@@ -4189,7 +4497,13 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "existing-mechanic-families-new-composition-or-import-variant",
+        "newMechanicDependencies": [],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 63,
@@ -4246,7 +4560,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 64,
@@ -4302,7 +4633,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 65,
@@ -4358,7 +4706,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 66,
@@ -4414,7 +4774,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 67,
@@ -4471,7 +4843,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "HY",
+            "label": "HY paired teleport",
+            "firstRepresentativeOrdinal": 41
+          },
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 68,
@@ -4527,7 +4916,29 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 69,
@@ -4584,7 +4995,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 70,
@@ -4640,7 +5063,29 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 71,
@@ -4698,7 +5143,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 72,
@@ -4755,7 +5212,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 73,
@@ -4812,7 +5286,29 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 74,
@@ -4869,7 +5365,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 75,
@@ -4925,7 +5433,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 76,
@@ -4981,7 +5506,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 77,
@@ -5038,7 +5575,29 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 78,
@@ -5093,7 +5652,29 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 79,
@@ -5151,7 +5732,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "HY",
+            "label": "HY paired teleport",
+            "firstRepresentativeOrdinal": 41
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 80,
@@ -5206,7 +5804,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 81,
@@ -5263,7 +5878,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "slowdown",
+            "label": "slowdown shared-clock transition",
+            "firstRepresentativeOrdinal": 81
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 82,
@@ -5320,7 +5947,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "slowdown",
+            "label": "slowdown shared-clock transition",
+            "firstRepresentativeOrdinal": 81
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 83,
@@ -5375,7 +6014,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 84,
@@ -5431,7 +6082,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "slowdown",
+            "label": "slowdown shared-clock transition",
+            "firstRepresentativeOrdinal": 81
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 85,
@@ -5488,7 +6151,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 86,
@@ -5544,7 +6219,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 87,
@@ -5600,7 +6292,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "slowdown",
+            "label": "slowdown shared-clock transition",
+            "firstRepresentativeOrdinal": 81
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 88,
@@ -5658,7 +6362,29 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          },
+          {
+            "id": "slowdown",
+            "label": "slowdown shared-clock transition",
+            "firstRepresentativeOrdinal": 81
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 89,
@@ -5716,7 +6442,34 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          },
+          {
+            "id": "slowdown",
+            "label": "slowdown shared-clock transition",
+            "firstRepresentativeOrdinal": 81
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 90,
@@ -5772,7 +6525,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 91,
@@ -5830,7 +6595,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          },
+          {
+            "id": "buster",
+            "label": "type5 buster",
+            "firstRepresentativeOrdinal": 71
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 92,
@@ -5886,7 +6668,29 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "HY",
+            "label": "HY paired teleport",
+            "firstRepresentativeOrdinal": 41
+          },
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 93,
@@ -5942,7 +6746,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 94,
@@ -5998,7 +6819,13 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "existing-mechanic-families-new-composition-or-import-variant",
+        "newMechanicDependencies": [],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 95,
@@ -6055,7 +6882,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "HY",
+            "label": "HY paired teleport",
+            "firstRepresentativeOrdinal": 41
+          },
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 96,
@@ -6111,7 +6955,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 97,
@@ -6167,7 +7028,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "moving",
+            "label": "inline moving-dot program",
+            "firstRepresentativeOrdinal": 51
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 98,
@@ -6221,7 +7094,24 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          },
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 99,
@@ -6277,7 +7167,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "GNTR",
+            "label": "gun/trigger/projectile",
+            "firstRepresentativeOrdinal": 61
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     },
     {
       "ordinal": 100,
@@ -6333,7 +7235,19 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "parallelTriage": {
+        "sourceOnly": true,
+        "classification": "requires-new-shared-mechanic",
+        "newMechanicDependencies": [
+          {
+            "id": "EX",
+            "label": "EX sliding connector",
+            "firstRepresentativeOrdinal": 42
+          }
+        ],
+        "gameplayAcceptedByTriage": false
+      }
     }
   ],
   "unlisted": [
@@ -6485,5 +7399,7 @@
     "follow-on-41-60-review.md",
     "follow-on-61-80-review.md",
     "follow-on-81-100-review.md"
-  ]
+  ],
+  "workflow": "parallel-workflow.md",
+  "maximumFunctionalRunners": 2
 }

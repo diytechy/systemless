@@ -167,3 +167,6 @@ Stutter36 original human ignition/retreat/fuse/blast diagnostic now witnesses tw
 
 
 Stutter36 demonstrates modelrisk:190successful onsets andavisibleSVGgoal stillfailedinoriginal becauseup/downqueryslack waswrong. Generationneedsverifiedtypedmovementcontracts andindependentoriginal replay. Forhuman routes requirealignedavailabletargets and enoughfullyraisedtime todepart; visibilityuntilphase0isnotasafeescape window. OrdinarymovingType1slack/cache is a separateunimplementedfamily. Existing35winningroutes areidentical aftertheexactqueryfix.
+
+
+Dodger39 requires per-dot initial height even within one channel, optional-property mask clearing without removing pivots, and delayed GO award/hide before counting collection complete. Temporal search must use exact current positions and control contact; static connectivity is insufficient. Preserve phase uncertainty for allfourSPI and allsixGO outline variants rather than deriving collisions from SVG. Original/SVG7000route/190onsets is one existing-map witness, not a generated-level proof. See[review](dodger-review.md) and[parallel workflow](parallel-workflow.md).

@@ -1,0 +1,84 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "0ac1ecda",
+  "ordinal": 39,
+  "title": "Dodger",
+  "nativeTransfers": 13,
+  "bounces": 6,
+  "reverses": 10,
+  "goalOnsets": 190,
+  "nativeGoalScore": 7000,
+  "qaGoalScore": 7000,
+  "runtimeChecks": 259,
+  "packagingChecks": 15,
+  "priorDefinitionsUnchanged": 38,
+  "priorPayloadsUnchanged": 86,
+  "priorDecodedBoards": 37,
+  "priorSnapshots": 37,
+  "priorUpdates": 334903,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext40Total226000Viewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "fresh40PhysicallyViewed": true,
+  "poseSummary": {
+    "all": 470,
+    "clear": 454,
+    "clearPositions": 454,
+    "clearPoses": 447,
+    "allPositions": 470,
+    "allPoses": 463,
+    "transferHero": 13,
+    "transferHeroMatches": 13
+  },
+  "elevatorSummary": {
+    "images": 47,
+    "controls": 470,
+    "controlMatches": 470,
+    "clearControls": 470,
+    "clearControlMatches": 470,
+    "clearCores": 624,
+    "clearCoreMatches": 619,
+    "inactiveClearCores": 282,
+    "inactiveClearCoreMatches": 282,
+    "clearSurfaces": 573,
+    "clearSurfaceMatches": 458,
+    "group2ClearSurfaces": 126,
+    "group2ClearSurfaceMatches": 99
+  },
+  "spikeGoodieSummary": {
+    "SP": {
+      "observations": 282,
+      "clearVisible": 268,
+      "clearVisibleMatches": 37
+    },
+    "GO": {
+      "observations": 141,
+      "clearVisible": 46,
+      "clearVisibleMatches": 10
+    }
+  },
+  "coldPoseSummary": {
+    "warm": 706,
+    "clear": 308,
+    "positions": 308,
+    "poses": 295,
+    "death": false,
+    "roundRestarts": 0
+  },
+  "fixtureSha256": "b7e88114f3c3a33052137f291de7c28e869845d72f7baf519dfb9f2b2dd08088",
+  "limits": [
+    "Seven one-frame actor poses and five one-pixel moving-core differences at object-time042; no phase correction",
+    "Surface exact phase458/573clear; SPI37/268clear; visible GO10/46clear. Rates, collision edges and hidden/overdraw remain bounded; no phase parity claim",
+    "Group2 surfaces and actor/GO/SP exact clocks remain unqualified beyond sampled route. No initial moving riders or other compositions",
+    "Only three GO, two ordinary bonuses and goal witnessed; other optional pickups, exact death/reset, audio/controllers, busy-scene cadence/resources, nonChild/fullsave unqualified"
+  ],
+  "liveSizes": {
+    "sourceBytes": 216985,
+    "assetBytes": 2967232,
+    "manifestBytes": 3619569,
+    "totalBytes": 6803786
+  },
+  "currentReceipt": "dodger/activation.json",
+  "normalTab92SelectRestartPauseViewed": true,
+  "qa121Closed": true
+}

@@ -1,12 +1,19 @@
 # Progress checkpoint
 
+2026-11-09: [Dodger39](dodger-review.md) accepted/locally active, original/SVG7000/13transfers/6bounces/10Reverse/threeGO/twoordinarybonuses/190onsets.259runtime/15packaging/37prior334903updates pass. All454clearpositions/447poses/13transferheroes,470controls and282inactivecores match; phase/core limits recorded. Through39fixtureb7e88114 verified;fresh40/playerp/226000 viewed2224/2824/0. Normal92Dodgerpaused,QA121closed; no active emulator/model. Currentreceipt dodger/activation.json/full38rollback.
+
+User authorizes [mechanics-first parallel workflow](parallel-workflow.md): at most two functional runners, shared mechanics/integration serial. Matrix identifies40/62/94existing-family compositions and58later-family maps. Original UI cannot jumparbitrarily; preserve earnedfixture chain, prepare source/model/SVGahead. Next40scope/coldreview plus independent94sourcepreparation; inspectagentstate/currentaction first.
+
+
+2026-11-09: user authorizes mechanics-first parallel level work, at most two functional runners; see [workflow](parallel-workflow.md) and [current action](current-action.md). Shared mechanics stay serial; covered-map preparation/validation may overlap. Independent static matrix39-100 is being reviewed. Dodger original and visible SVG goals7000 pass; original next40/226000 viewed. Final39 review/activation pending; fresh40 relaunch session30739 active. Live38 retained.
+
 Latest: [Tempest review](tempest-review.md)/[packet](tempest-review.json) accepts38 with explicit protection-overlay phase limits. Original/SVG2000/19transfers/oneReverse/190onsets; all439clear physical poses/19transferheroes match. Protected bonus/dwell original+SVG1000/15transfers/190onsets;452clear positions/438poses/15transferheroes, seven collected main bodies match.256runtime/15packaging/36prior329080updates pass. Through38 fixture9aa93ea4 verified and fresh39/playerp/219000 viewed. Normal92Tempestpaused; QA119/120closed; no active runner/pending CUA part. Continue39 source/admission/cold review.
 
 Latest: [Quincunx review](quincunx-review.md)/[packet](quincunx-review.json) accepts37 with explicit burned-background/raw-visibility limits. Original/SVG1000/15transfers/twobounces/190onsets; all551clear physical poses and15transferheroes match.254runtime/15packaging and35priorboard/snapshot317481updates pass. Through37 fixture97f2e2d0 verified and fresh38/playerp/217000 viewed. Normal92Quincunxpaused; QA118closed; no active runner/pending CUA part. Continue38.
 
 Latest: [Stutter review](stutter-review.md)/[packet](stutter-review.json) accepts36 with explicit visual/timing limits. Original/SVG5,000;28 transfer poses match; all190 onsets. 252 runtime/15 packaging pass. Through36 fixture64e3190a verifies nine files/both forks/represented metadata/seven untouched; fresh37/playerp/216000 viewed. Normal92Stutter paused; QA117 closed; no active runner/pending CUA part. Current37 source/admission/cold review is validated; goal searches10/session40131 and12/session29053 use both functional slots.254runtime/15packaging/35priorregressions317481updates pass; see current-action and quincunx-preparation. Live36 unchanged.
 
-**38 bounded Child scenes are accepted and locally active through Tempest;62 remain.** Original library/frozen comparisons complete. Continue39 Dodger from [current action](current-action.md).
+**39 bounded Child scenes are accepted and locally active through Dodger;61 remain.** Original library/frozen comparisons complete. Continue39 Dodger from [current action](current-action.md).
 
 Historical pre-acceptance entry: corrected route24 passes all190 held onsets, 28 transfers/four bounces/eleven reversals/5,000/one Oil. The two functional runners are native-goal-02/session78974 and root visible QA117, both using corrected source. Search22 was stopped after checking its owned PID;23 completed but its narrow rising-dot window required refinement24. Actual original/visible goals and independent pose/object review remain pending. No36 activation or through36 fixture yet. See current-action for the live35 receipt and original failure boundaries.
 

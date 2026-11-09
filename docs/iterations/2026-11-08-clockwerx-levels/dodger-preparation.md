@@ -1,3 +1,5 @@
+**Superseded by accepted39 [review](dodger-review.md). Preparation below is historical.**
+
 # Dodger preparation
 
 Dodger remains unaccepted; the normal pilot has 38 bounded scenes through Tempest. RND2_181 SHA256 `735faf0ac77023f98de0658b5ba799f6d5845af9091161fb24c50a8354c71bfc` is unchanged. All maps, art, programs, inputs and captures stay private on D:.

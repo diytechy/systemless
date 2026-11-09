@@ -159,3 +159,10 @@ Forced Entry combines a goal and bonus on one pivot. Source completion precedes 
 Tricolor preserves six inactive ring properties as ordinary pivots, with all198 native dot-core observations preferring plain art. Its fifteen red/green/blue hands share class1 clocks and f/n/s programs.231 composite-color cores independently fit original descriptors; four clean private SVG forms preserve distinct color sectors. The accepted9-transfer/two-bonus original/SVG goal earns4000 and visits one disabled ring. See [Tricolor](tricolor-review.md).
 
 Cyclone composes class1/2/3 free hands with two fuse chains. Its selected20-transfer/one-bonus native/SVG goal earns2000 after the barrel blast. Four original dot cores change to burnt92/96, three bonuses clear without removing pivots, and one blue hand remains absent in late native captures. No runtime or payload changes are needed. See [Cyclone](cyclone-review.md).
+
+
+## Prosperity: held input, clocks and blast rewards
+
+A held Bounce can repeatedly reverse at neighboring facing dots while preserving the current pivot. Prosperity uses this to confine rotation to the lower half-turn during a travelling spark; simply waiting at the same safe-looking pivot fails. Space49 Reverse is separately verified alone and alongside heldCommand in the copied original settings. Preserve edge-triggered Reverse and continuous transfer/Bounce inputs independently.
+
+The31-transfer original/SVG goal earns14000 through three GO pickups, four increasing bonus awards and the Child goal. Four fuses ignite, three blasts complete, twelve dot cores become burnt and two original green hands disappear. Model removal of a third hand varies by tested onset. The pure64-frame hero/NPC period excludes GO/LI birth clocks, fuses and explosions; independently fitted GO animation rate does not establish the same absolute first frame. See [Prosperity](prosperity-review.md).

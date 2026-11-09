@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 27,
-  "currentAction": "Prosperity27: fresh native launch from through26 passed; review56BO/five starters and full Child inventory before model preparation",
+  "currentOrdinal": 28,
+  "currentAction": "Enclosure28: fresh original baseline passed from earned through27 copy; inspect Child inventory, source clocks/programs/doors/bombs before QA preparation",
   "levels": [
     {
       "ordinal": 1,
@@ -1899,11 +1899,26 @@
       "menuTitle": "Prosperity",
       "resourceTitle": "Prosperity",
       "sha256": "51a79879ed5435c24fea57ea69bca0a256e9cbde8421e6136ec75d5a16b6dd2e",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-with-limits",
+      "nativeEvidence": [
+        "prosperity/native-goal-01/report.json",
+        "prosperity/native-goal-review.json",
+        "prosperity/native-held-pose-review.json",
+        "prosperity/native-blast-effects-review.json"
+      ],
+      "requirements": [
+        "four active GO with ignored out-of-range initial frame request",
+        "five ordered fuse chains, three terminal orientations present",
+        "physical Reverse and heldBounce safe waiting",
+        "Child capped bonus awards, GO points and blast-burnt bonuses"
+      ],
+      "svgStatus": "27-scene locally active; root visible14000 goal and normal bounded load/restart/pause smoke passed",
+      "generationConstraints": [
+        "carry angle/direction and spark trajectory through waiting states",
+        "continuous Bounce can confine a safe half-turn without grabbing the goal",
+        "require pickups/blasts explicitly in a finite witness",
+        "do not infer GO/LI birth phase from pure hero/NPC period"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 59,
@@ -1930,7 +1945,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1942,12 +1957,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
-      ]
+        "general new-level generator is not implemented",
+        "unvisited inventory and non-Child modes remain unqualified"
+      ],
+      "review": "prosperity-review.md"
     },
     {
       "ordinal": 28,
@@ -1956,7 +1969,9 @@
       "resourceTitle": "Enclosure",
       "sha256": "6acc7e4c95445522595981cb0f143522991615faa0c2c4e28dc5ec9d5dec5095",
       "status": "queued",
-      "nativeEvidence": [],
+      "nativeEvidence": [
+        "enclosure/native-initial-01/report.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],

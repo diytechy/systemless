@@ -1,0 +1,230 @@
+{
+  "status": "passed",
+  "nativeTransfers": 31,
+  "goalOnsets": 570,
+  "sourceUnchanged": true,
+  "changedSourceFiles": [],
+  "runtimeChecks": 204,
+  "packagingChecks": 14,
+  "checkBoundary": "Existing checks apply to identical runtime/packager source; actual packaging and source/payload/prior-scene guards rerun. No heavy build.",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 13686,
+    "guest_tick": 14286,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 14000,
+  "nativeNextLevel": "28: Enclosure",
+  "nativeProfileTotal": 128000,
+  "nativeHandFits": {
+    "matches": 31,
+    "maxError": 1.483065953654189
+  },
+  "nativeHeldPoses": {
+    "matches": 10,
+    "maxError": 0.2831541218637993,
+    "boundary": "One Reverse pose and nine continuousBounce samples; these are not additional transfers"
+  },
+  "sparks": {
+    "samples": 59,
+    "clean": 58,
+    "maxCleanError": 0.3783783783783784,
+    "retainedNonFits": [
+      {
+        "checkpoint": "prosperity-spark-2-d240",
+        "guestTick": 8672,
+        "frame": 9,
+        "error": 50.64646464646464,
+        "bombIndex": 44,
+        "pathIndex": 15,
+        "x": 236,
+        "y": 292,
+        "accepted": false
+      }
+    ]
+  },
+  "explosions": {
+    "samples": 24,
+    "clean": 15,
+    "maxCleanError": 0.7428571428571429,
+    "retainedNonFits": [
+      {
+        "checkpoint": "prosperity-blast-1-d100",
+        "guestTick": 5963,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 37,
+        "pathIndex": 0,
+        "x": 211,
+        "y": 354,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-1-d150",
+        "guestTick": 5993,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 37,
+        "pathIndex": 0,
+        "x": 211,
+        "y": 354,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-1-d210",
+        "guestTick": 6029,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 37,
+        "pathIndex": 0,
+        "x": 211,
+        "y": 354,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-2-d100",
+        "guestTick": 10219,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 27,
+        "pathIndex": 0,
+        "x": 403,
+        "y": 258,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-2-d150",
+        "guestTick": 10249,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 27,
+        "pathIndex": 0,
+        "x": 403,
+        "y": 258,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-2-d210",
+        "guestTick": 10285,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 27,
+        "pathIndex": 0,
+        "x": 403,
+        "y": 258,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-3-d100",
+        "guestTick": 12788,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 27,
+        "pathIndex": 0,
+        "x": 403,
+        "y": 258,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-3-d150",
+        "guestTick": 12818,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 27,
+        "pathIndex": 0,
+        "x": 403,
+        "y": 258,
+        "accepted": false
+      },
+      {
+        "checkpoint": "prosperity-blast-3-d210",
+        "guestTick": 12854,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 27,
+        "pathIndex": 0,
+        "x": 403,
+        "y": 258,
+        "accepted": false
+      }
+    ]
+  },
+  "browser": {
+    "goalVisible": true,
+    "roundPointsVisible": 14000,
+    "childCompletionPointsVisible": 1000,
+    "image": "qa-goal-page.png",
+    "cadenceQualified": false,
+    "transferCount": "Not independently exported from browser",
+    "boundary": "Root supported visible IAB goal and saved full-page PNG/AX, no state injection or timing claim"
+  },
+  "route": {
+    "transfers": 31,
+    "reverse": 1,
+    "bounces": 7,
+    "ignitions": [
+      28,
+      18,
+      38,
+      45
+    ],
+    "craters": [
+      {
+        "row": 6,
+        "column": 3
+      },
+      {
+        "row": 4,
+        "column": 7
+      },
+      {
+        "row": 4,
+        "column": 3
+      }
+    ],
+    "goodies": [
+      true,
+      true,
+      true,
+      false
+    ],
+    "hiddenCountRange": [
+      2,
+      3
+    ],
+    "seconds": 193.5499999999883,
+    "events": 57
+  },
+  "payloads": 79,
+  "priorScenesUnchanged": 26,
+  "activation": {
+    "sourceBytes": 170729,
+    "assetBytes": 2694142,
+    "manifestBytes": 2330390,
+    "totalBytes": 5195261
+  },
+  "through27": "25ce4fcddf9cf75818f4463858b2de43b1cc310dbe79eb94ee68958276f1c6eb",
+  "fresh28": {
+    "status": "passed",
+    "frontendTicks": 2224,
+    "guestTicks": 2824,
+    "budgetExhaustedFrames": 0,
+    "observedLevel": "28: Enclosure",
+    "observedPlayer": "p",
+    "observedTotal": 128000
+  },
+  "limits": [
+    "GO animation rate and positions verified; absolute birth phase remains approximate",
+    "Finite570 timing cases, not exhaustive generated-board safety",
+    "Two or three hidden NPCs across model cases; original selected witness removes two green hands",
+    "One uncollected hourglass, unlit first starter and incomplete fourth chain remain outside goal witness",
+    "Higher difficulties, full campaign persistence, physical controller, hardware latency and audio unqualified",
+    "Browser functional completion observed; inherited cadence limitation, no new CPU/memory/smoothness claim",
+    "Astra unavailable from saved usage-limit errors; independent root source/native review"
+  ]
+}

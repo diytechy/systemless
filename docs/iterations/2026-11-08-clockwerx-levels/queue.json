@@ -2693,11 +2693,11 @@
         "Inactive Child Oil and inactive NPC slots remain excluded",
         "Free class3 orbital divisor4/multiplier1 requires separate default-off capability",
         "Two ordinary hands may share one pivot",
-        "Travelling spark is lethal; bomb may temporarily hide/shift enemy phase"
+        "Travelling spark is lethal; bomb hides outline-hit enemies until round reset; deadline is metadata"
       ],
       "svgStatus": "normal37active; original/SVG1000/15transfers/twobounces/190onsets",
       "generationConstraints": [
-        "Timed route through actual fuse/blast/reappearance, not permanent removal of all NPCs",
+        "Timed route through actual fuse/blast and outline-specific actor hiding; no deadline-driven respawn",
         "Finite held checks and original goal remain independent gates",
         "Preserve source state separately from background artifact appearance"
       ],

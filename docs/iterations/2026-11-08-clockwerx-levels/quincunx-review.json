@@ -78,5 +78,16 @@
     "quincunx/activation.json",
     "tempest/native-initial-01/report.json"
   ],
-  "issuedPushUploadDeploy": false
+  "issuedPushUploadDeploy": false,
+  "enemyVisibilityCorrection": {
+    "sourceContract": "WABombed hides outline-hit actors; deadline metadata does not restore visibility. Round reset owns restoration; hidden callbacks may continue.",
+    "observedModelSnapshots": [
+      89,
+      94,
+      96.4
+    ],
+    "hitActorRemainsHidden": true,
+    "inputsMeasurementsUnchanged": true,
+    "superseded": "temporary hiding, phase shift and reappearance wording"
+  }
 }

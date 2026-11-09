@@ -1,6 +1,6 @@
 # Tempest preparation
 
-Tempest remains unaccepted; the normal pilot has 37 bounded scenes. RND2_220 SHA256 `8313aa4b29785471116eb57e8e53c91d4a876bbf16fe45f08e51e8a22961e6a3` is unchanged. Original maps, art, programs, inputs and captures stay private on D:.
+Tempest is now accepted with limits and locally active; see [review](tempest-review.md). The historical preparation below records the evidence and pending gates before acceptance. RND2_220 SHA256 `8313aa4b29785471116eb57e8e53c91d4a876bbf16fe45f08e51e8a22961e6a3` is unchanged. Original maps, art, programs, inputs and captures stay private on D:.
 
 The large board has 48 present pivots, twelve bonuses and one goal. Seven active protected dots include three protected bonuses and one protected checkpoint. A second checkpoint/protection property misses the Child mask but retains its ordinary pivot. There are thirteen active NPCs: four green hands (one with a static transfer program), five blue hands and four free orbitals. All use class 1 and do not check walls. Thirteen other NPC slots are inactive. Two WY/two WP records are retained; the active program references the second program. Starting half-indices include noncardinal 1/9/25 and must not be snapped to cardinal poses. Other object sections are empty.
 

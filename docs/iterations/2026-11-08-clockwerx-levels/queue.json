@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 38,
-  "currentAction": "38Tempest guarded dot gates/cold/main190 route validated; protected-diagnostic heldcheck45825 running.256runtime/15packaging/36prior329080updates pass. Native/visible goals pending; live37 unchanged.",
+  "currentOrdinal": 39,
+  "currentAction": "38Tempest accepted and locally active. Original/SVG2000/19transfers/190onsets; protected pickup/dwell original+SVG1000/15transfers/190onsets. Overlay phase unqualified. Through38 fixture9aa93ea4 verified and fresh39Dodger viewed. Begin39 active inventory/admission/cold review; no active runner/pending CUA.",
   "levels": [
     {
       "ordinal": 1,
@@ -2755,11 +2755,28 @@
       "menuTitle": "Tempest",
       "resourceTitle": "Tempest",
       "sha256": "8313aa4b29785471116eb57e8e53c91d4a876bbf16fe45f08e51e8a22961e6a3",
-      "status": "guarded-source-cold-preparation-native-goal-pending",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-with-limits-and-locally-active",
+      "nativeEvidence": [
+        "tempest/native-goal-01/report.json",
+        "tempest/native-protected-bonus-01/report.json",
+        "tempest/native-goal-01-comparison.json",
+        "tempest/native-protected-bonus-01-comparison.json",
+        "tempest/native-goal-01-dot-comparison.json",
+        "tempest/native-protected-bonus-01-dot-comparison.json"
+      ],
+      "requirements": [
+        "Separate protected-bonus pickup and immunity state",
+        "Inactive checkpoint/protection properties clear while original pivot/permissions remain",
+        "Preserve noncardinal starts and exact active second program",
+        "Ordinary protection does not grant orbital immunity",
+        "Protection overlay phase remains unqualified independently of main body/gameplay"
+      ],
+      "svgStatus": "normal38active; original/SVG2000goal and protected1000dwell;190onsets each",
+      "generationConstraints": [
+        "Model bonus/protection/checkpoint/mode as independent fields",
+        "Validate full timed inputs and original goal; finite onsets are bounded evidence",
+        "Retain ordinary pivot on inactive special-property mask miss"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 48,
@@ -2786,7 +2803,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2805,7 +2822,8 @@
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
       ],
-      "preparation": "tempest-preparation.md"
+      "preparation": "tempest-preparation.md",
+      "review": "tempest-review.json"
     },
     {
       "ordinal": 39,

@@ -1,0 +1,151 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "44f0eb34",
+  "ordinal": 38,
+  "title": "Tempest",
+  "nativeTransfers": 19,
+  "goalOnsets": 190,
+  "nativeGoalScore": 2000,
+  "qaGoalScore": 2000,
+  "runtimeChecks": 256,
+  "packagingChecks": 15,
+  "priorDefinitionsUnchanged": 37,
+  "priorPayloadsUnchanged": 86,
+  "priorDecodedBoards": 36,
+  "priorSnapshots": 36,
+  "priorUpdates": 329080,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext39Total219000Viewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "nativeProtected1000DwellPhysicallyViewed": true,
+  "poseSummary": {
+    "all": 448,
+    "clear": 439,
+    "clearPositions": 439,
+    "clearPoses": 439,
+    "allPositions": 448,
+    "allPoses": 448,
+    "transferHero": 19,
+    "transferHeroMatches": 19
+  },
+  "protectedPoseSummary": {
+    "all": 462,
+    "clear": 452,
+    "clearPositions": 452,
+    "clearPoses": 438,
+    "allPositions": 462,
+    "allPoses": 448,
+    "transferHero": 15,
+    "transferHeroMatches": 15
+  },
+  "coldSummary": {
+    "warm": 706,
+    "clear": 449,
+    "positions": 449,
+    "poses": 422,
+    "death": false,
+    "roundRestarts": 0
+  },
+  "dotSummaries": {
+    "cold": {
+      "observations": 264,
+      "mainMatches": 264,
+      "clearOverlays": 184,
+      "clearOverlayMatches": 15,
+      "inactiveMainMatches": 33,
+      "inactiveClearOverlays": 0
+    },
+    "goal": {
+      "observations": 256,
+      "clearMain": 256,
+      "mainMatches": 256,
+      "clearOverlays": 174,
+      "clearOverlayMatches": 17,
+      "inactiveMainMatches": 32,
+      "inactiveClearOverlays": 0,
+      "protectedPickupClearMainMatches": 0
+    },
+    "protectedDiagnostic": {
+      "observations": 264,
+      "clearMain": 262,
+      "mainMatches": 262,
+      "clearOverlays": 178,
+      "clearOverlayMatches": 11,
+      "inactiveMainMatches": 33,
+      "inactiveClearOverlays": 0,
+      "protectedPickupClearMainMatches": 7
+    }
+  },
+  "fixtureSha256": "9aa93ea46b67e7ab66619acbfe55f34423f1761ddc9bb7604d10ea85058173f1",
+  "limits": [
+    "Protection overlay phases cold15/184,goal17/174,diagnostic11/178 clear matches; no source clock/phase corrections",
+    "Cold27 and protected diagnostic14 clear one-frame pose differences; two protected main-body overdraw fits retained raw",
+    "All other optional bonuses, exact death/reset/checkpoint recovery, orbital contact while protected, nonChild/fullsave unqualified",
+    "No new audio/controller/cadence/resource qualification"
+  ],
+  "sourceSha256": "8313aa4b29785471116eb57e8e53c91d4a876bbf16fe45f08e51e8a22961e6a3",
+  "reports": {
+    "native-goal-01": {
+      "status": "passed",
+      "frontend_ticks": 5053,
+      "guest_tick": 5653,
+      "budget_exhausted_frames": 0,
+      "save_export": {
+        "directory": "save-files",
+        "changed_files": 2,
+        "deleted_files": 0
+      }
+    },
+    "native-protected-bonus-01": {
+      "status": "passed",
+      "frontend_ticks": 3611,
+      "guest_tick": 4211,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "activeInventory": {
+    "pivots": 48,
+    "bonuses": 12,
+    "goals": 1,
+    "ordinaryNpc": 9,
+    "orbitalNpc": 4,
+    "inactiveNpc": 13,
+    "activeProtectedDots": 7,
+    "protectedBonuses": 3,
+    "activeProtectedCheckpoint": 1,
+    "inactiveProtectedCheckpointProperty": 1
+  },
+  "payloadsAdded": 0,
+  "sizes": {
+    "sourceBytes": 211881,
+    "assetBytes": 2967232,
+    "manifestBytes": 3532933,
+    "totalBytes": 6712046
+  },
+  "normalTab": 92,
+  "normalPaused": true,
+  "qaTabsClosed": [
+    119,
+    120
+  ],
+  "fixtureFilesVerified": 9,
+  "fixtureUntouchedFilesVerified": 7,
+  "freshNative39Viewed": true,
+  "privateEvidence": [
+    "tempest/checked-route-01.json",
+    "tempest/checked-protected-02.json",
+    "tempest/native-goal-01/report.json",
+    "tempest/native-protected-bonus-01/report.json",
+    "tempest/native-goal-01-comparison.json",
+    "tempest/native-protected-bonus-01-comparison.json",
+    "tempest/native-goal-01-dot-comparison.json",
+    "tempest/native-protected-bonus-01-dot-comparison.json",
+    "tempest/qa-goal-page.png",
+    "tempest/qa-protected-dwell-page.png",
+    "tempest/normal38-ready-page.png",
+    "tempest/activation.json",
+    "dodger/native-initial-01/report.json"
+  ],
+  "issuedPushUploadDeploy": false,
+  "qaProtected1000AliveAtPivot8_3PhysicallyViewed": true
+}

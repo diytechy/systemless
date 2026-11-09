@@ -190,3 +190,6 @@ Slide45 preparation adds a search requirement: include hand orientation, directi
 
 
 Slide45isnow accepted: goalapproach frombelow, oneGO/2000, exact116hold guest endpoints and190finiteonsets passoriginal/SVGchecks. All359clearactors/all12heroes/1603EXframesmatch. The61hold failure atonset12 remains a timingcounterexample; widen/tune legalinputpolicy withoutchangingrules orclockstate. DOT/EXbonus route andbroaderfamilies remainunqualified; no generatorimplemented.
+
+
+PropWash46requires timed pursuit over logical versus physical EXstate, ring eligibility/current original outline,32lifetime clones and resetbarriers. The actualmap11000goal/190finiteonsets and originalOilarrivaldeathreset are boundedwitnesses. Neither safe samepivotslidingarrival nor restingDPrealgrab nor outline-sensitive ringcrossing was visited; unitfixtures do notclose those nativegaps. Preserve spriteoverdraw/callback/RNG/resetuncertainty and strictmode/display/source-slot gates when generating maps. ParallelFunhouse50uses frozenqualifiedcore, while newBO+EX47 remainsserial. No generatorimplemented.

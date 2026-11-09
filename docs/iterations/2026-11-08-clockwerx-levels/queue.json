@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 46,
-  "currentAction": "Serial Oil+EX/GO/ring46 private implementation against261dba7d; root independent cold/native/art review; all55remaining continue.",
+  "currentOrdinal": 47,
+  "currentAction": "Serial Focus47BO+EX privateimplementation againstc8e81881; independent Funhouse50frozencorelegal-inputprep; root47original/source/art/review.",
   "levels": [
     {
       "ordinal": 1,
@@ -3433,9 +3433,14 @@
       "menuTitle": "Prop Wash",
       "resourceTitle": "Prop Wash",
       "sha256": "61d2f46294895717658a278ffde4dd3c91831aca0bf336f8ae0441ad1d6c4cc0",
-      "status": "serial-oil-sliding-private-implementation",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [
-        "propwash/native-initial-01/report.json"
+        "propwash/native-initial-01/report.json",
+        "propwash/native-goal-01/report.json",
+        "propwash/native-death-01/report.json",
+        "propwash/native-goal-01-comparison.json",
+        "propwash/native-goal-01-object-comparison.json",
+        "propwash/native-goal-01-droplet-comparison.json"
       ],
       "requirements": [
         "Real human sliding state at DPGrabbed/arrival; retain the distinct no-sliding-check DPWandGrabbed hook",
@@ -3444,7 +3449,7 @@
         "Existing private blue-ring candidate frames51-57 in300/4100 must be reviewed/promoted; no new conversion by this task",
         "Sixteen property-mask-missing raw0x4009 entries must retain ordinary pivots/colors"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "locallyactive; original/SVG11000/17transfers/1Bounce/2Reverse/7GO/190onsets/Oil+ring/deathreset",
       "generationConstraints": [
         "Only one of eight PU records is Child-active; masks apply before PU allocation",
         "Three active rings use colors0/4; none is an EX endpoint in this map, but their DP collider phase still matters",
@@ -3476,9 +3481,9 @@
           "GN": 0,
           "TR": 0
         },
-        "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+        "boundary": "Source inventory and bounded original/SVGOil/ring/7GOgoal plus Oilarrivaldeath-reset; phase/overdraw/unvisitedlimits retained."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3490,10 +3495,13 @@
         6
       ],
       "generationRequirementsPending": [
-        "Wake the sole active kind1 puddle and show source DP pursuit/arrival while human slides",
-        "Ring collapse/return while a DP crosses the shrinking source outline; normal dot outline is insufficient",
-        "Representative GO pickup and dynamic interactions without changing clocks",
-        "Goal plus separate hazard/reset witness; all eight GO requests are frame0"
+        "SPI/GOexactstartup/sprite/flourish phases unqualified:58/514and14/227clearvisiblegameplay; no phase/countassignment",
+        "Twenty-one handpose differences inthreecallbackcaptures;fourpositionsone3pxstepahead.15transferheroesclear/all17rawbestfitsagree",
+        "Ring188/190visibleindexmatch;twoadjacentframeboundaries/onehiddenvisibilityboundary. PU14/14clearvisiblematch",
+        "DropletfullRGBA54/62/chromatic55/62; embeddedshadow/hand andparent-cloneoverdraw plusdeparturecallback; exactclonebirthunqualified",
+        "NativeOilarrivaldeath/resetviewed;modelreset3086, originalstillineffect3100/backspawnby3200; particle/RNG/resetphaseunqualified",
+        "GOindex3row3col1andwhite9,0ringunvisited; nooutline-sensitiveDP/ringcrossing,safesamepivotslidingarrivalorrestingDP realgrabnativewitness",
+        "Fullaudio/controllers/nonChild/performance/widerfamilies unqualified; SVGcompletionUI/postgoalNPCfreeze differ"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3513,7 +3521,8 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
-      }
+      },
+      "review": "propwash-review.md"
     },
     {
       "ordinal": 47,
@@ -3521,8 +3530,10 @@
       "menuTitle": "Focus",
       "resourceTitle": "Focus",
       "sha256": "f84c8384956025e1c308d29f0edc2cf31d591e46b1aee3cb5fb7311141d2a595",
-      "status": "source-prepared-awaiting-serial-composition",
-      "nativeEvidence": [],
+      "status": "serial-bomb-sliding-private-implementation",
+      "nativeEvidence": [
+        "focus/native-initial-01/report.json"
+      ],
       "requirements": [
         "BombRuntime.actor and bombActors must support the qualified physical sliding actor state",
         "Source DOUnbonus4944->EXUnbonus5efa propagation for pickup and burnt=True blast paths",
@@ -3784,7 +3795,7 @@
       "menuTitle": "Funhouse",
       "resourceTitle": "Funhouse",
       "sha256": "7967a01583339512db4aa3bd59c3c3d621cd7fc87656734c7910df53914fbc95",
-      "status": "source-prepared-awaiting-serial-composition",
+      "status": "parallel-frozen-core-legal-input-preparation",
       "nativeEvidence": [],
       "requirements": [
         "Replace hardcoded heroSliding:false only through the qualified source arrival contract",
@@ -7605,8 +7616,8 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "propwash_engine private46Oil+EX/ring/GO implementation against261dba7d; one model/test/search",
-    "B": "root independent46cold/native/art/review; one original/conversion/build at a time",
-    "C": "mechanics_triage source-only71\u201380buster plan; squiggle_engine source-only81\u2013100slowdown plan"
+    "A": "focus_engine privateBO+EX47implementation againstc8e81881; oneownedmodel/test/search",
+    "B": "root independent47source/native/art/review/integration; original/conversion/buildserial",
+    "C": "funhouse_validation private50content/legal-inputpreparation againstfrozenc8; no sourcechanges/no nativeaccessbeforeearned49"
   }
 }

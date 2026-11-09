@@ -1,0 +1,118 @@
+{
+  "status": "passed",
+  "sourceRevision": "c8e81881",
+  "ordinal": 46,
+  "title": "Prop Wash",
+  "nativeTransfers": 17,
+  "bounces": 1,
+  "reverses": 2,
+  "goodiesCollected": 7,
+  "goodiesTotal": 8,
+  "goalOnsets": 190,
+  "nativeGoalScore": 11000,
+  "qaGoalScore": 11000,
+  "runtimeChecks": 284,
+  "privateChecks": 14,
+  "packagingChecks": 17,
+  "priorDefinitionsUnchanged": 45,
+  "priorPayloadsUnchanged": 92,
+  "newArtPayloads": 4,
+  "priorBoards": 45,
+  "priorSnapshots": 45,
+  "priorUpdates": 392624,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext47Total297000Viewed": true,
+  "nativeOilDeathResetPhysicallyViewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "all77GoalAnd25DeathImagesViewed": true,
+  "fresh47PhysicallyViewed": true,
+  "sourceFittedIdleUpdates": 686,
+  "coldActorSummary": {
+    "clear": 247,
+    "positions": 245,
+    "poses": 232
+  },
+  "finalPhysicalCertificateSha256": "ac7d794ecfd4acc5192760cd4e94ba82278539ba6da4fbc9d1ac8d25212b7ed8",
+  "poseSummary": {
+    "all": 578,
+    "clear": 505,
+    "clearPositions": 501,
+    "clearPoses": 484,
+    "transferHero": 17,
+    "clearTransferHero": 15,
+    "transferHeroMatches": 17,
+    "postgoalNpcHypotheses": 14
+  },
+  "connectorSummary": {
+    "all": 592,
+    "clear": 256,
+    "clearMatches": 256
+  },
+  "objectSummary": {
+    "SP": {
+      "observations": 518,
+      "modelVisible": 518,
+      "clearVisible": 514,
+      "exactIndex": 58,
+      "modelAppearanceErrorBelow2": 58,
+      "hiddenModelWithClearRawFit": 0
+    },
+    "GO": {
+      "observations": 592,
+      "modelVisible": 313,
+      "clearVisible": 227,
+      "exactIndex": 14,
+      "modelAppearanceErrorBelow2": 14,
+      "hiddenModelWithClearRawFit": 0
+    },
+    "PU": {
+      "observations": 74,
+      "modelVisible": 21,
+      "clearVisible": 14,
+      "exactIndex": 14,
+      "modelAppearanceErrorBelow2": 14,
+      "hiddenModelWithClearRawFit": 0
+    },
+    "ring": {
+      "observations": 222,
+      "modelVisible": 199,
+      "clearVisible": 190,
+      "exactIndex": 188,
+      "modelAppearanceErrorBelow2": 188,
+      "hiddenModelWithClearRawFit": 1
+    }
+  },
+  "dropletSummary": {
+    "modelVisible": 62,
+    "modelAppearanceBelow2": 54,
+    "postgoal": 4,
+    "samples": 74
+  },
+  "chromaticDropletSummary": {
+    "modelVisible": 62,
+    "modelAppearanceBelow2": 55,
+    "postgoal": 4,
+    "samples": 74
+  },
+  "fixtureSha256": "9fe06fadad043d20121497e9d1540b3590c1a6a9baca8f5e9686a2fe7b0c16db",
+  "limits": [
+    "SPI/GOexactstartup/sprite/flourish phases unqualified:58/514and14/227clearvisiblegameplay; no phase/countassignment",
+    "Twenty-one handpose differences inthreecallbackcaptures;fourpositionsone3pxstepahead.15transferheroesclear/all17rawbestfitsagree",
+    "Ring188/190visibleindexmatch;twoadjacentframeboundaries/onehiddenvisibilityboundary. PU14/14clearvisiblematch",
+    "DropletfullRGBA54/62/chromatic55/62; embeddedshadow/hand andparent-cloneoverdraw plusdeparturecallback; exactclonebirthunqualified",
+    "NativeOilarrivaldeath/resetviewed;modelreset3086, originalstillineffect3100/backspawnby3200; particle/RNG/resetphaseunqualified",
+    "GOindex3row3col1andwhite9,0ringunvisited; nooutline-sensitiveDP/ringcrossing,safesamepivotslidingarrivalorrestingDP realgrabnativewitness",
+    "Fullaudio/controllers/nonChild/performance/widerfamilies unqualified; SVGcompletionUI/postgoalNPCfreeze differ"
+  ],
+  "privateEvidence": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/propwash",
+  "activationReceipt": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/propwash/activation.json",
+  "sizes": {
+    "sourceBytes": 273862,
+    "assetBytes": 3368765,
+    "manifestBytes": 4307235,
+    "totalBytes": 7949862
+  },
+  "saveKey": "systemless.clockwerx-html5.pilot.v1",
+  "sourcePatchSha256": "0feb4cb89a5c58ec869ddc8dd9c7d4b47a19ae09d59525531ba63aa91a20ad5a",
+  "rawSourceSha256": "61d2f46294895717658a278ffde4dd3c91831aca0bf336f8ae0441ad1d6c4cc0"
+}

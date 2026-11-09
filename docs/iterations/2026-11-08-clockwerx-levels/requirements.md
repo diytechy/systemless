@@ -268,3 +268,6 @@ Weave44 qualifies GO+staticEX/SP/optionalWL with freeordinaryclass1 actors. Phys
 
 
 Slide45qualifies separate default-off GO+EXb/n/sordinaryclass1programs with helper-level static boundaries. Native/SVG2000, all190EXACT116holdonsets,359clearactorposes/positions/all12heroes/1603EXframesmatch. NPCstop/program/start/targetpermission-before-XOR/PCsuspension retained; no humancollisioncompensation. ExactSPI/GOphases, bonuscomponentpickup anddeath-reset remainlimited.
+
+
+PropWash46qualifies separate default-off staticOil+EX core plusGO/white-blue-ring composition. Actual sliding is sampled atDPcreation/arrival; realgrab remains lethal. Currentmainring outline/visibility, cachedlogicaltarget/physicalPUwake, lateSPafterOil and dispatchedSP→GO/PU continuation retain sourceorder/lifetime/reset. Native/SVG11000/190onsets/Oilarrivaldeathreset pass; detailedphase/overdraw/unvisitedbranch limits inreview. Existing45profiles identical across392624updates.

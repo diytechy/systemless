@@ -56,6 +56,14 @@ test('inactive elevator controls and up/down properties preserve plain usable pi
  assert.ok(levelRequirements(level,options).some(x=>x.startsWith('special dot flags')));
  level.cells[1].secondaryRaw=8;level.cells[1].flagsRaw=0x103;assert.throws(()=>buildDecodedBoard(level,options),/Unsupported/);
 });
+
+test('combined bonus and goal requires explicit Child callback qualification',()=>{
+ const level=fixture();level.header.timeLimitRaw=150;level.cells[1].flagsRaw=7;
+ assert.ok(levelRequirements(level).includes('combined bonus/goal callback'));
+ assert.ok(levelRequirements(level,{allowCombinedGoalBonus:true}).includes('combined goal/bonus requires source Child scoring'));
+ const board=buildDecodedBoard(level,{angularSpeed:TAU,allowCombinedGoalBonus:true,allowChildScoring:true,allowSpecialDots:true});
+ assert.equal(board.combinedGoalBonusRules,true);assert.equal(board.dots[1].kind,'goal');assert.equal(board.dots[1].bonus,true);assert.equal(board.dots[1].cell,7);
+});
 test('source half-index selects actual 64-angle descriptor, including wrap',()=>{
  assert.equal(sourceInitialFrame(24),48);assert.equal(sourceInitialFrame(40),16);
  assert.equal(sourceInitialFrame(-1),62);assert.throws(()=>sourceInitialFrame(.5),TypeError);

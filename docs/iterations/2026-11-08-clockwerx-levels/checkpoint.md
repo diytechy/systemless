@@ -1,7 +1,7 @@
 # Progress checkpoint
 
-Twenty-three bounded Child scenes accepted and active through Candycane;77 integrations remain. All100listed/120resources surveyed. Originallibrary/frozencomparisons complete. Continue Forced Entry24 from [current action](current-action.md).
+Twenty-four bounded Child scenes accepted and active through Forced Entry;76 integrations remain. All100listed/120resources surveyed. Original library/frozen comparisons complete. Continue Tricolor25 from [current action](current-action.md).
 
-Candycane original20transfer/twobonus/both maskedpivots/4000goal, rootbrowservisible4000goal, fasttype4 transfers and inactiveproperties reviewed.199runtime/14packagingchecks;21prior decodedboards/fullsnapshots identicalover135674steps;190onsets. See [review](candycane-review.md) and [packet](candycane-review.json). Browsercadence remainsunqualified; no newtimingretries orperformanceclaim.
+Forced Entry original26transfer/sixbonus/twofuse/21000goal and root browser21000goal accepted. Both passages,29spark poses and explosion/cleanup are reviewed.203runtime/14packagingchecks;22previous decodedboards/fullsnapshots identicalover142545steps and actualMovement14400steps identical.190onsets. See [review](forced-entry-review.md) and [packet](forced-entry-review.json). Browser cadence remains unqualified; no timing retries or new performance claim.
 
-AlljobsCLOSED. Native74440passes5493/6093/0; fresh24session72593passes2224/2824/0, actual24/playerp/87000reviewed. Through23fixturehash verified. Normal92live23PAUSEDaftergoal; QA102CLOSED. Sourceprep b47d6c2e; acceptance follows. Forced Entry needs combinedgoal/bonus order and bomb/wall composition qualification. No push/upload/deploy. Continue beyond24.
+Native24goal and fresh25 jobs CLOSED. Successful through24 fixture f0aa6b74c0aecf3d81f358c9ea0cc729620ad89a6fad7a4a8e89e3de7f822742; nine files/forks/represented metadata and seven untouched files verified. Fresh25/playerp/108000 reviewed. Guarded24activation retains full23backup and protected shared files. No push/upload/deploy. Continue beyond25.

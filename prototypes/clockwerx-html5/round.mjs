@@ -28,6 +28,7 @@ export class SourceRound extends MovementGame {
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if(board.goodieOnlyRules&&!board.specialDotRules)throw new Error('Goodie-only source timer state required');
+  if(board.combinedGoalBonusRules&&!board.childScoreRules)throw new Error('Combined goal bonus requires Child score qualification');
   if(board.staticEnemyCallbacks&&!board.staticEnemyWallRules&&this.enemies.some(e=>e.checksWalls))throw new Error('Canonical enemy wall response requires qualification');
   if(this.enemies.some(e=>e.sourceActorType===4)&&(!board.rotatingSpikeRules||!board.staticEnemyCallbacks||!outlines.groups['3500']))throw new Error('Rotating spike rules, canonical clock and source outlines require qualification');
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
@@ -186,6 +187,7 @@ export class SourceRound extends MovementGame {
   }});
  }
  onBonus(){return this.childScore?.bonusDot();}
+ onGoalBonus(){return this.childScore.bonusDotAfterGoal();}
  onGoal(){this.childScore?.complete();this.bombScene?.finish();}
  restartAfterDeath(){
   const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,

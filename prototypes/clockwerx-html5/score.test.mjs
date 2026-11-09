@@ -8,6 +8,14 @@ test('flat goodies do not advance the next dot award and Child has a fixed compl
  const s=new ChildRoundScore();s.addFlatBonus(1000);assert.equal(s.bonusDot(),1000);assert.equal(s.complete(),1000);assert.equal(s.complete(),0);assert.equal(s.roundBonus,3000);assert.equal(s.nextDotAward,2000);
  assert.throws(()=>s.bonusDot(),/Post-goal/);
 });
+
+test('combined goal callback awards its dot after completion once, preserving progression',()=>{
+ const s=new ChildRoundScore();assert.throws(()=>s.bonusDotAfterGoal(),/same combined goal/);
+ s.bonusDot();s.bonusDot();s.complete();assert.equal(s.bonusDotAfterGoal(),3000);
+ assert.equal(s.roundBonus,7000);assert.equal(s.nextDotAward,4000);assert.equal(s.completed,true);
+ assert.throws(()=>s.bonusDotAfterGoal(),/same combined goal/);assert.throws(()=>s.addFlatBonus(1000),/Post-goal/);
+ s.startRound();s.complete();assert.equal(s.bonusDotAfterGoal(),1000);assert.equal(s.snapshot().overallEarned,9000);
+});
 test('round start commits earned points and resets dot progression without erasing the total',()=>{
  const s=new ChildRoundScore();s.bonusDot();s.bonusDot();s.startRound();assert.equal(s.roundBonus,0);assert.equal(s.totalCommitted,3000);assert.equal(s.bonusDot(),1000);assert.equal(s.snapshot().overallEarned,4000);
 });

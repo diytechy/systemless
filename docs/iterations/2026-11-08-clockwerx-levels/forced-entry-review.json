@@ -1,0 +1,241 @@
+{
+  "status": "passed",
+  "nativeTransfers": 26,
+  "goalOnsets": 190,
+  "sourceUnchanged": false,
+  "changedSourceFiles": [
+    "app.mjs",
+    "engine.mjs",
+    "level.mjs",
+    "round.mjs",
+    "score.mjs"
+  ],
+  "runtimeChecks": 203,
+  "packagingChecks": 14,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 11648,
+    "guest_tick": 12248,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 21000,
+  "nativeNextLevel": "25: Tricolor",
+  "nativeProfileTotal": 108000,
+  "nativeHandFits": {
+    "matches": 26,
+    "rawMaxError": 11.690740740740742,
+    "overdraw": [
+      {
+        "transfer": 1,
+        "expectedPivot": "1,2",
+        "observedPivot": "1,2",
+        "match": true,
+        "sourceFrame": 45,
+        "meanAbsoluteChannelError": 9.390924956369982
+      },
+      {
+        "transfer": 15,
+        "expectedPivot": "8,5",
+        "observedPivot": "8,5",
+        "match": true,
+        "sourceFrame": 36,
+        "meanAbsoluteChannelError": 5.125
+      },
+      {
+        "transfer": 16,
+        "expectedPivot": "8,6",
+        "observedPivot": "8,6",
+        "match": true,
+        "sourceFrame": 44,
+        "meanAbsoluteChannelError": 11.690740740740742
+      },
+      {
+        "transfer": 23,
+        "expectedPivot": "7,2",
+        "observedPivot": "7,2",
+        "match": true,
+        "sourceFrame": 12,
+        "meanAbsoluteChannelError": 2.2573402417962005
+      },
+      {
+        "transfer": 24,
+        "expectedPivot": "8,2",
+        "observedPivot": "8,2",
+        "match": true,
+        "sourceFrame": 36,
+        "meanAbsoluteChannelError": 8.251811594202898
+      },
+      {
+        "transfer": 25,
+        "expectedPivot": "8,1",
+        "observedPivot": "8,1",
+        "match": true,
+        "sourceFrame": 12,
+        "meanAbsoluteChannelError": 5.858376511226252
+      }
+    ],
+    "otherTwentyMaxError": 0.28136200716845877
+  },
+  "browser": {
+    "boundary": "Root supported IAB accessibility and full-page PNG observation; no state/timing export.",
+    "goalVisible": true,
+    "title": "Forced Entry complete",
+    "roundPointsVisible": 21000,
+    "childCompletionPointsVisible": 1000,
+    "transferCount": "not independently exported from browser",
+    "cadenceQualified": false,
+    "inheritedLimitation": "Motion retained three catch-up-capped timing captures; no24capture/retry",
+    "image": "qa-goal-page.png"
+  },
+  "clock": {
+    "heroPoses": 23,
+    "npcPoses": 99,
+    "heroPhaseInterval": [
+      72.26315789473684,
+      72.3157894736842
+    ],
+    "chosenHeroPhase": 72.28947368421052,
+    "phaseAliases": "320-frame aliases resolve full pureNPC/hero state; first8192tested",
+    "boundary": "Independent original-art phase constraints; excludes fuse/blast clocks and absolute reveal/hardware timing"
+  },
+  "jointPeriod": {
+    "boundary": "Pure static class1 NPC with source wall response full state including pivots/frame/direction/PC/visibility/orphan plus hero64. Not wall-time gameplay performance.",
+    "jointSourceFramePeriod": 320
+  },
+  "sparks": {
+    "samples": 29,
+    "accepted": 29,
+    "maxError": 1.6756756756756757
+  },
+  "explosions": {
+    "samples": 8,
+    "cleanVisibleFits": 4,
+    "maxCleanError": 0.7428571428571429,
+    "rawRejected": [
+      {
+        "checkpoint": "forced-entry-blast-1-dm50",
+        "guestTick": 5512,
+        "frame": 9,
+        "error": 48.523809523809526,
+        "bombIndex": 9,
+        "pathIndex": 0,
+        "x": 355,
+        "y": 306,
+        "accepted": false
+      },
+      {
+        "checkpoint": "forced-entry-blast-1-d210",
+        "guestTick": 5668,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 9,
+        "pathIndex": 0,
+        "x": 355,
+        "y": 306,
+        "accepted": false
+      },
+      {
+        "checkpoint": "forced-entry-blast-2-d110",
+        "guestTick": 10230,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 9,
+        "pathIndex": 0,
+        "x": 355,
+        "y": 306,
+        "accepted": false
+      },
+      {
+        "checkpoint": "forced-entry-blast-2-d210",
+        "guestTick": 10290,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 9,
+        "pathIndex": 0,
+        "x": 355,
+        "y": 306,
+        "accepted": false
+      }
+    ],
+    "visualReview": "First negative-offset sample is pre-blast dynamite; three later samples show cleared explosion and crater. Actual25/210shots from both chains and firstdm50/secondd110reviewed."
+  },
+  "combinedGoalBonus": {
+    "rawFlagsHex": "0x7",
+    "nativeBonusCoreSamples": 33,
+    "sourceOrder": "DOGrabbed latches ROWon before SCBonusDot; SCWon caches remaining time and award, not roundBonus",
+    "awards": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000,
+      5000
+    ],
+    "childGoal": 1000
+  },
+  "route": {
+    "transfers": 26,
+    "bonuses": 6,
+    "modelTimeSeconds": 159.35833333333335,
+    "wallTilesRemoved": 5,
+    "npcsHidden": 0,
+    "accepted": "candidate-two-fuses-07-wait3.json",
+    "rejected": "candidate-two-fuses-05.json passes181/190 only",
+    "boundary": "Physical input replay from reset; no actor, phase, collider or wall-state edits; two fuse chains and safe waiting"
+  },
+  "priorScenes": {
+    "decodedBoards": 22,
+    "identicalFinalSnapshots": 22,
+    "steps": 142545,
+    "movementCases": 4,
+    "movementSteps": 14400,
+    "movementIdenticalEveryStep": true
+  },
+  "fixture": {
+    "sha256": "f0aa6b74c0aecf3d81f358c9ea0cc729620ad89a6fad7a4a8e89e3de7f822742",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true,
+    "freshReport": {
+      "status": "passed",
+      "frontend_ticks": 2224,
+      "guest_tick": 2824,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "limits": [
+    "Eight other bonuses unvisited; finite190onsets are not exhaustive reachability proof",
+    "Browser cadence/smoothness unqualified; no comparable resource benchmark",
+    "Fractional hero/canonical clock alignment and absolute reveal/input latency remain approximate",
+    "Both-fuse composition goal checked; not all contact/death, sound, higher difficulty or campaign/save parity",
+    "Astra unavailable from retained usage-quota error; independent root source/native review only"
+  ],
+  "activation": {
+    "scenes": 24,
+    "sources": 25,
+    "payloads": 75,
+    "sizes": {
+      "sourceBytes": 170364,
+      "assetBytes": 2687382,
+      "manifestBytes": 1976100,
+      "totalBytes": 4833846
+    },
+    "priorSceneDefinitionsUnchanged": 23,
+    "oldPayloadsUnchanged": 75,
+    "protectedFilesUnchanged": true,
+    "rollback": "forced-entry/previous-live-pilot"
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\forced-entry",
+  "review": "forced-entry-review.md",
+  "normalBrowser": {
+    "loadRestartPauseSmoke": true,
+    "goalRepeated": false,
+    "boundary": "Normal route selected/restarted and paused; full goal independently observed on matching QA bundle; source/payload hashes identical",
+    "image": "normal-activated-page.png"
+  }
+}

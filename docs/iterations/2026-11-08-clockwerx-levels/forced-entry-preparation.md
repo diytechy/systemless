@@ -1,0 +1,11 @@
+# Forced Entry 24 — source preparation
+
+RND2_165 contains 54 pivots, 14 bonus properties, one goal, nine wall specifications, 17 fuse entries and three active Child red hands. Two hands rotate freely; one uses a class1 n/s program. All have wall checks disabled. There are no other active object families or text. Time150 remains source state; Child has no live countdown in this configuration.
+
+The goal also carries a bonus: raw flags0x7, rather than two mutually exclusive kinds. Source DOGrabbed calls ROWon before SCBonusDot after the fatal-grab guard. SCWon caches remaining time and the completion award, not the final round-bonus total. The same successful grab must therefore complete and collect its bonus. Independent original dot-core fits prefer the bonus descriptor in all33 baseline observations; the surrounding goal marker remains a separate layer.
+
+The opt-in combinedGoalBonusQualified manifest field enables a corresponding decoded-board flag. Ordinary Movement and earlier scenes retain their existing path. The new score method accepts exactly one same-grab bonus after completion, retaining ordinary rejection of arbitrary post-goal awards. Child scoring and special-dot qualification are required. Tests cover the default gate, source ordering, latched death, progression, idempotence and round reset.
+
+Both fuse starters and their ordered paths reuse the separately qualified Bombs adapter. Flags on BO entries are not difficulty masks. The new composition still requires native evidence: ignite the left chain, retreat, wait for the first passage, reach and ignite the right chain, retreat, wait for the second passage, then cross occupied pivots to the goal. All topology changes must arise from actual blast callbacks. No new art or collision outlines are needed.
+
+203 runtime and14 packaging checks pass. Actual22 prior decoded boards and full stored-route snapshots remain identical across142545 steps. The separate actual Movement board also gives identical old/new snapshots at every step in four3600-step action cases. All75 private payloads and23 previous scene definitions are retained unchanged. Private source, maps, programs, scenarios and raw evidence remain under D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/forced-entry. See the [acceptance review](forced-entry-review.md).

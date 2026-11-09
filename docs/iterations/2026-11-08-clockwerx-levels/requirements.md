@@ -153,3 +153,5 @@ Motion introduces type4 spiked orbs orbiting pivots. They share integer WA clock
 
 
 Candycane adds fast class5 orbital transfers and inactive elevator/up/down properties. Mask misses preserve ordinary usable pivots. Native33clean orb poses show11sampled pivot changes; class5 must consume upstreamU rather than2*rounded human frames. The20-transfer/two-bonus goal visits both masked pivots and earns4000 in original/SVG. Immediate-backtracking input holds conflict in a rejected proposal; a detour gives190finite onset passes. See [Candycane](candycane-review.md).
+
+Forced Entry combines a goal and bonus on one pivot. Source completion precedes the same-grab bonus and retains its final score. Both native and SVG earn21000 through26transfers/sixbonuses and two fuse-created wall passages. A safe wait of three human turns changes NPC phase; it is not a full-scene-period shortcut. Native29spark poses and both blast/cleanup sequences are reviewed. See [Forced Entry](forced-entry-review.md).

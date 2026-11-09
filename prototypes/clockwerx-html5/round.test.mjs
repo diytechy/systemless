@@ -48,6 +48,23 @@ test('rotating spike sprite processing cannot ignite ordinary matches',()=>{
  g.update(1/120);assert.deepEqual(seen,[]);
  g.enemies[0].sourceActorType=2;g.update(1/120);assert.deepEqual(seen,['enemy']);
 });
+
+test('qualified combined goal latches completion before the same grab bonus',()=>{
+ const {board,options}=fixture();board.spikes=[];board.enemies=[];board.childScoreRules=true;board.combinedGoalBonusRules=true;
+ Object.assign(board.dots[1],{kind:'goal',bonus:true});
+ const g=new SourceRound(board,options);g.update(1/120,{flip:true});
+ assert.equal(g.complete,true);assert.deepEqual(g.events.filter(e=>['goal','bonus'].includes(e.type)).map(e=>e.type),['goal','bonus']);
+ assert.equal(board.dots[1].collected,true);assert.equal(g.childScore.snapshot().overallEarned,2000);assert.equal(g.events.at(-1).points,1000);
+ assert.equal(g.childScore.nextDotAward,2000);g.update(1/120,{flip:true});assert.equal(g.childScore.snapshot().overallEarned,2000);
+});
+
+test('latched grab death blocks combined goal and bonus effects',()=>{
+ const {board,options}=fixture();board.spikes=[];board.enemies=[];board.childScoreRules=true;board.combinedGoalBonusRules=true;
+ Object.assign(board.dots[1],{kind:'goal',bonus:true});const g=new SourceRound(board,options);
+ g.onHumanGrab=()=>{g.beginDeath({reason:'fixture-grab-death'});return false;};g.update(1/120,{flip:true});
+ assert.equal(g.complete,false);assert.equal(g.childScore.snapshot().overallEarned,0);assert.equal(board.dots[1].collected,undefined);
+ assert.equal(g.events.some(e=>['goal','bonus'].includes(e.type)),false);
+});
 test('source frame lattice wraps negative and positive continuous angles',()=>{
  assert.equal(sourceFrame(0),0);assert.equal(sourceFrame(TAU),0);
  assert.equal(sourceFrame(-TAU/64),63);assert.equal(sourceFrame(TAU*.75),48);

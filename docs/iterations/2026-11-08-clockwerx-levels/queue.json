@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 24,
-  "currentAction": "Forced Entry24: fresh through23 native baseline passed; qualify combined goal/bonus callback ordering and bomb/wall/NPC composition",
+  "currentOrdinal": 25,
+  "currentAction": "Tricolor25: fresh native launch from through24 passed; review inactive rings, composite dot colors and fifteen ordinary NPCs",
   "levels": [
     {
       "ordinal": 1,
@@ -1681,11 +1681,26 @@
       "menuTitle": "Forced Entry",
       "resourceTitle": "Forced Entry",
       "sha256": "581ea30113b3ebf5f27814cb3c9517a6e65640df2d5f5ca3a999d051a5d2874e",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal-browser-cadence-unqualified",
+      "nativeEvidence": [
+        "forced-entry/native-goal-01/report.json",
+        "forced-entry/native-goal-review.json",
+        "forced-entry/native-spark-fits.json",
+        "forced-entry/native-explosion-fits.json",
+        "forced-entry/native-goal-01/next-after-forced-entry.png"
+      ],
+      "requirements": [
+        "independent combined goal/bonus properties and source callback ordering",
+        "two ordered physical fuse chains and blast-created passages",
+        "phase-aware retreat/wait and occupied-pivot traversal"
+      ],
+      "svgStatus": "activated26transfers/sixbonuses/twofuses/21000Child goal; cadence unqualified",
+      "generationConstraints": [
+        "carry dynamic topology and recompute after real blasts",
+        "find legal waits rather than patching clocks",
+        "certify input margins; reject181/190route",
+        "goal then same-grab bonus with Child progression"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 54,
@@ -1712,7 +1727,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1729,7 +1744,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "forced-entry-review.md"
     },
     {
       "ordinal": 25,

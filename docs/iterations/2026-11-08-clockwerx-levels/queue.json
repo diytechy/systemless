@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 26,
-  "currentAction": "Cyclone26: fresh native launch from through25 passed; qualify bomb/hourglass and noncardinal programmed-hand composition",
+  "currentOrdinal": 27,
+  "currentAction": "Prosperity27: fresh native launch from through26 passed; review56BO/five starters and full Child inventory before model preparation",
   "levels": [
     {
       "ordinal": 1,
@@ -1825,11 +1825,28 @@
       "menuTitle": "Cyclone",
       "resourceTitle": "Cyclone",
       "sha256": "645460c002f5168cd0ae331032a5355ac8d39464e81f7214ad87fe04d6977672",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal-browser-cadence-unqualified",
+      "nativeEvidence": [
+        "cyclone/native-goal-01/report.json",
+        "cyclone/native-goal-review.json",
+        "cyclone/native-spark-fits.json",
+        "cyclone/native-explosion-fits.json",
+        "cyclone/native-blast-effects-review.json",
+        "cyclone/native-goal-01/next-after-cyclone.png"
+      ],
+      "requirements": [
+        "class1/2/3 free clocks retain noncardinal phases",
+        "physical second-fuse/barrel3 blast with safe retreat",
+        "burnt dots retain pivots while bonuses clear",
+        "ordinary blast-hidden blue hand stays absent"
+      ],
+      "svgStatus": "activated20transfers/onebonus/2000Child goal; barrel blast/burnt cores/hiddenblue imaged; cadence unqualified",
+      "generationConstraints": [
+        "track reward loss from blasts independently of pivot presence",
+        "preserve ordinary hidden state after deadline",
+        "pure clock periods exclude blast/hidden state",
+        "retain legal retreat/wait and finite witness coverage"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 38,
@@ -1856,7 +1873,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1873,7 +1890,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "cyclone-review.md"
     },
     {
       "ordinal": 27,

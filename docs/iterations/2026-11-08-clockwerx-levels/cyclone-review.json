@@ -1,0 +1,224 @@
+{
+  "status": "passed",
+  "nativeTransfers": 20,
+  "goalOnsets": 190,
+  "sourceUnchanged": true,
+  "changedSourceFiles": [],
+  "sourcePreparationCommit": "41effa26",
+  "runtimeChecks": 204,
+  "packagingChecks": 14,
+  "checkBoundary": "Existing checks apply to identical runtime/packager source; actual packaging and source/payload hash guards rerun, no heavy build",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 8001,
+    "guest_tick": 8601,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 2000,
+  "nativeNextLevel": "27: Prosperity",
+  "nativeProfileTotal": 114000,
+  "nativeHandFits": {
+    "matches": 20,
+    "rawMaxError": 10.44620811287478,
+    "attentionOrScoreOverdraw": [
+      {
+        "transfer": 1,
+        "expectedPivot": "2,2",
+        "observedPivot": "2,2",
+        "match": true,
+        "sourceFrame": 13,
+        "meanAbsoluteChannelError": 10.44620811287478
+      },
+      {
+        "transfer": 16,
+        "expectedPivot": "8,3",
+        "observedPivot": "8,3",
+        "match": true,
+        "sourceFrame": 45,
+        "meanAbsoluteChannelError": 9.44502617801047
+      }
+    ],
+    "otherEighteenMaxError": 0.28708133971291866
+  },
+  "browser": {
+    "boundary": "Root supported IAB visual goal and full-page PNG; no independent browser state/timing export",
+    "goalVisible": true,
+    "title": "Cyclone complete",
+    "roundPointsVisible": 2000,
+    "childCompletionPointsVisible": 1000,
+    "transferCount": "not independently exported from browser",
+    "cadenceQualified": false,
+    "inheritedLimitation": "Motion three catch-up-capped timing captures; no26capture/retry",
+    "image": "qa-goal-page.png"
+  },
+  "clock": {
+    "boundary": "Independent original-art fits over38present pivots constrain source upstream8/19ticks, class1floor(U/2),class2floor(3U/8),class3floor(U/4) and hero48+floor(U/2). All six Child hands are free and have no wall checks; no pose/clock state patches. Finite first16384upstream counts, not absolute hardware timing.",
+    "firstGuestTick": 1864,
+    "heroPoses": 27,
+    "npcPoses": 196,
+    "chosenUpstreamPhase": 146.55263157894734,
+    "upstreamPhaseInterval": [
+      146.52631578947367,
+      146.57894736842104
+    ],
+    "aliases": "512 upstream counts within first16384 tested"
+  },
+  "jointPeriod": {
+    "boundary": "Pure static class1/class2/class3 NPC full state, class remainders and hero64 phase. No fuse, blast, dot, time, audio or hardware claims.",
+    "jointUpstreamPeriod": 512,
+    "equivalentHeroFrames": 256,
+    "equivalentGuestTicks": 1216,
+    "equivalentFixedSteps": 2432
+  },
+  "heroDerivedCounterexampleIntervals": [],
+  "bombArt": {
+    "samples": 693,
+    "clean": 513,
+    "barrelClean": 24,
+    "barrelMinError": 0.48072562358276644,
+    "barrelRawMaxError": 11.406462585034014,
+    "starterBackgrounds": "Animated LI overlays retain all raw errors; separate original LI fits"
+  },
+  "matches": {
+    "samples": 66,
+    "clean": 63,
+    "rawMaxError": 53.16203703703704,
+    "boundary": "All18original descriptors; three overdraw samples excluded, no colored-frame13 claim"
+  },
+  "sparks": {
+    "samples": 14,
+    "clean": 14,
+    "maxError": 0.36363636363636365
+  },
+  "explosions": {
+    "samples": 8,
+    "clean": 5,
+    "maxCleanError": 0.7428571428571429,
+    "retainedNonFits": [
+      {
+        "checkpoint": "cyclone-blast-1-dm50",
+        "guestTick": 5198,
+        "frame": 9,
+        "error": 49.333333333333336,
+        "bombIndex": 20,
+        "pathIndex": 0,
+        "x": 355,
+        "y": 162,
+        "accepted": false
+      },
+      {
+        "checkpoint": "cyclone-blast-1-d150",
+        "guestTick": 5318,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 20,
+        "pathIndex": 0,
+        "x": 355,
+        "y": 162,
+        "accepted": false
+      },
+      {
+        "checkpoint": "cyclone-blast-1-d210",
+        "guestTick": 5354,
+        "frame": 9,
+        "error": 44.647619047619045,
+        "bombIndex": 20,
+        "pathIndex": 0,
+        "x": 355,
+        "y": 162,
+        "accepted": false
+      }
+    ],
+    "visualReview": "Preblast barrel, visible blast and two later cleared craters independently viewed"
+  },
+  "blastEffects": {
+    "affectedCores": 4,
+    "postBlastSamples": 16,
+    "maxBurntError": 0.6856060606060606,
+    "sourceDescriptors": [
+      92,
+      96
+    ],
+    "bonusPropertiesCleared": 3,
+    "blueBeforeError": 0.26104417670682734,
+    "blueAbsentAfterBestError": 58.94343434343434,
+    "otherBlueLateError": 0.30246913580246915,
+    "confirmedAbsentGuestTicks": [
+      5318,
+      5354,
+      6851,
+      7459
+    ],
+    "lateConfirmedAbsenceAfterFirstClearGuestTicks": 2141,
+    "boundary": "All64original blue-hand poses at each fixed pivot; late absence is pixel evidence, normalized guest ticks, not wall-time/guest memory edits"
+  },
+  "route": {
+    "transfers": 20,
+    "bonuses": 1,
+    "score": 2000,
+    "timeSeconds": 98.8000000000247,
+    "warmSteps": 1524,
+    "trial": 19,
+    "fullEvents": 26,
+    "craters": 1,
+    "npcsHidden": 1,
+    "unlitStarterCount": 1,
+    "boundary": "Physical second-chain/barrel3 ignition, safe retreat and actual crater wait; no full-period idle reduction or state patches"
+  },
+  "background": {
+    "name": "cyclone-fresh-initial",
+    "meanAbsoluteChannelError": 0.3814403748920952,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "fixture": {
+    "sha256": "9926bbf788845bb6ac558b9d1edee56ee39b88cbeaa228b8a4bfe6fcd3b71390",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true,
+    "freshReport": {
+      "status": "passed",
+      "frontend_ticks": 2224,
+      "guest_tick": 2824,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "limits": [
+    "First fuse chain and eight other bonus pickups unvisited; blast removes three bonus properties",
+    "Finite190onsets not exhaustive reachability proof",
+    "Pure512upstream period excludes fuse/blast/hidden-state clocks",
+    "Current browser cadence/smoothness and comparable resource use unqualified; earlier comparisons frozen",
+    "Exact reveal/hardware/input cadence, audio, other difficulties, campaign/save parity and physical controllers unqualified",
+    "Astra unavailable from saved usage quota; root independent review only"
+  ],
+  "activation": {
+    "scenes": 26,
+    "sources": 25,
+    "payloads": 79,
+    "sizes": {
+      "sourceBytes": 170729,
+      "assetBytes": 2694142,
+      "manifestBytes": 2179040,
+      "totalBytes": 5043911
+    },
+    "priorSceneDefinitionsUnchanged": 25,
+    "oldPayloadsUnchanged": 79,
+    "protectedFilesUnchanged": true,
+    "rollback": "cyclone/previous-live-pilot"
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\cyclone",
+  "review": "cyclone-review.md",
+  "normalBrowser": {
+    "loadRestartPauseSmoke": true,
+    "goalRepeated": false,
+    "defaultViewportRestored": true,
+    "boundary": "Normal26 selected/restarted/paused; full goal on matching QA source/payload hashes",
+    "image": "normal-activated-page.png"
+  }
+}

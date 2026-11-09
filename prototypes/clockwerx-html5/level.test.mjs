@@ -14,6 +14,28 @@ function fixture(){
    {kind:'SP',count:2,records:[{rawWords:[0,0,0,2,0,15]},{rawWords:[0,0,2,0,0,15]}]}]};
 }
 
+test('protected bonuses require their independent canonical Child composition gate',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.cells[1].flagsRaw=0x4043;
+ const options={angularSpeed:TAU,allowSpecialDots:true,allowEnemyStaticPrograms:true,allowStaticEnemyWalls:true,allowCanonicalPlayer:true,allowChildScoring:true};
+ assert.ok(levelRequirements(level,options).includes('combined special dot properties'));
+ const enabled={...options,allowProtectedBonuses:true},board=buildDecodedBoard(level,enabled),dot=board.dots[1];
+ assert.equal(dot.protected,true);assert.equal(dot.bonus,true);assert.equal(dot.kind,'bonus');assert.equal(dot.sourceInBackground,false);
+ assert.ok(levelRequirements(level,{...enabled,allowChildScoring:false}).includes('protected bonuses require canonical Child dots and scoring'));
+ level.cells[1].flagsRaw=0x4053;assert.ok(levelRequirements(level,enabled).includes('combined special dot properties'));
+});
+
+test('inactive protected checkpoints clear their properties while preserving the ordinary pivot',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.cells[0].flagsRaw=0x4051;level.cells[0].secondaryRaw=8;
+ level.blocks.push({kind:'WY',count:1,records:[{rawWords:[0,0,24,65535,0,8]}]});
+ const options={angularSpeed:TAU,allowSpecialDots:true,allowProtectedWaypoints:true};
+ assert.ok(levelRequirements(level,options).includes('conditional dot activation'));
+ const enabled={...options,allowInactiveProtectedWaypoints:true},board=buildDecodedBoard(level,enabled),dot=board.dots[0];
+ assert.equal(board.dots.length,2);assert.equal(dot.present,true);assert.equal(dot.humanCanGrab,true);assert.equal(dot.nonhumanCanGrab,true);assert.equal(dot.cell,0x4001);assert.equal(dot.protected,false);assert.equal(dot.waystation,undefined);assert.equal(dot.sourceInBackground,true);
+ level.cells[0].secondaryRaw=15;level.blocks.at(-1).records[0].rawWords[5]=15;
+ const active=buildDecodedBoard(level,enabled).dots[0];assert.equal(active.protected,true);assert.deepEqual(active.waystation,{halfIndex:24,direction:-1});
+ level.cells[0].secondaryRaw=8;level.cells[0].flagsRaw=0x4053;assert.ok(levelRequirements(level,enabled).includes('conditional dot activation'));
+});
+
 test('bomb object interactions require an explicit compatible scene opt-in',()=>{
  const level=fixture();level.header.timeLimitRaw=90;
  assert.ok(levelRequirements(level,{allowBombObjectInteractions:true}).some(s=>s.includes('bomb object interactions')));

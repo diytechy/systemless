@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 38,
-  "currentAction": "37Quincunx accepted and locally active:original/SVG1000/15transfers/190held onsets;551clear poses match. Burned-background discrepancy explicit. Through37 fixture97f2e2d0 verified and fresh38Tempest viewed. Begin38 source/admission/cold review. No active runner or pending CUA part.",
+  "currentAction": "38Tempest guarded dot gates/cold/main190 route validated; protected-diagnostic heldcheck45825 running.256runtime/15packaging/36prior329080updates pass. Native/visible goals pending; live37 unchanged.",
   "levels": [
     {
       "ordinal": 1,
@@ -2755,7 +2755,7 @@
       "menuTitle": "Tempest",
       "resourceTitle": "Tempest",
       "sha256": "8313aa4b29785471116eb57e8e53c91d4a876bbf16fe45f08e51e8a22961e6a3",
-      "status": "queued",
+      "status": "guarded-source-cold-preparation-native-goal-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -2804,7 +2804,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "preparation": "tempest-preparation.md"
     },
     {
       "ordinal": 39,

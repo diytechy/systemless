@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "sourceRevision": "1b93502b000962f6e6f71f1c7a191767a42ebe5b",
+  "ordinal": 48,
+  "title": "Thriller",
+  "nativeTransfers": 28,
+  "goalOnsets": 190,
+  "nativeGoalScore": 1000,
+  "qaGoalScore": 1000,
+  "runtimeChecks": 294,
+  "privateChecks": 5,
+  "packagingChecks": 18,
+  "priorDefinitionsUnchanged": 47,
+  "priorPayloadsUnchanged": 98,
+  "newArtPayloads": 2,
+  "priorUpdates": 408308,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext49Total302000Viewed": true,
+  "nativeCheckpointDeathResetPhysicallyViewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "qaPostBurnPhysicallyViewed": true,
+  "qaCheckpointResetPhysicallyViewed": true,
+  "all243GoalMechanicDeathAnd33ColdImagesViewed": true,
+  "sourceFittedIdleUpdates": 686,
+  "finalPhysicalCertificateSha256": "2b3cad09786978d85a933dc937f5d8866f7295d6ba76d7dbf58d24aff47c1a1a",
+  "poseSummary": {
+    "all": 413,
+    "clear": 402,
+    "clearPositions": 398,
+    "clearPoses": 392,
+    "transferHero": 28,
+    "clearTransferHero": 28,
+    "transferHeroMatches": 28,
+    "postgoalNpcHypotheses": 12
+  },
+  "connectorSummary": {
+    "all": 680,
+    "clear": 129,
+    "clearMatches": 129
+  },
+  "deathSummary": {
+    "poses": {
+      "all": 430,
+      "clear": 376,
+      "clearPositions": 365,
+      "clearPoses": 357,
+      "transferHero": 15,
+      "clearTransferHero": 15,
+      "transferHeroMatches": 15,
+      "postgoalNpcHypotheses": 0
+    },
+    "connectors": {
+      "all": 688,
+      "clear": 113,
+      "clearMatches": 113
+    }
+  },
+  "fixtureSha256": "4c5bc40ced54c0632567158b952b2724a63bbb28af289165d3256a5fffacf431",
+  "wallReviewSha256": "347dbf3dc262dbb43afe34dea6c5d109323a7823e538b7d24e705a5f223514dc",
+  "limits": [
+    "Native timer/countdown not observed; header/model210 only; no native150 claim",
+    "Two optional bonuses uncollected; actual terminals cannot burn WY/EX; cross erase frame4 synthetic only",
+    "Native crater fit partial; exact erasure evidence359 fixed crater-free sourcepixels, not wholejournal",
+    "Native actor/EX boundary mismatches retained; death/fade/reset visual phase differs; no clock/state assignment",
+    "SVG shading/antialias/crater texture/complete overlay/postgoal NPCfreeze differ; fullaudio/controllers/nonChild/saves/performance unqualified"
+  ],
+  "activation": "thriller/activation.json",
+  "sourcePatchSha256": "79890e14bed4673c7f6c25c009e1897d8243a17ce6b687ea0cebd36fb340ef8e",
+  "independentSourceReviewSha256": "b9a4157a5ecbd54c9ed5e3f4b953edbc47ebce3c41795097d1b8a54f7f757826",
+  "sizes": {
+    "sourceBytes": 300582,
+    "assetBytes": 3432312,
+    "manifestBytes": 4581626,
+    "totalBytes": 8314520
+  },
+  "activeScenes": 48,
+  "remainingScenes": 52,
+  "normalTab": 92,
+  "normalPaused": true,
+  "normalDeliverable": true,
+  "qaTab130Closed": true,
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\thriller",
+  "svgPaintWitness": "checked-mechanics-prefix190.json; 37 complete116/10 windows cut12200 then idle15000; all190 safely settled12348; exploratory shorttap replay excluded"
+}

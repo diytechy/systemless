@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 48,
-  "currentAction": "Thriller48 serial erased-wall source integration/qualification from earned47; root original48cold and source art; parallel Funhouse50 content rebase againstfrozen d626c50f.",
+  "currentOrdinal": 49,
+  "currentAction": "Playground49 serial HY+EX ordinary-program source qualification; root original cold from earned48, private worker source candidate; frozen Funhouse50 content awaits49.",
   "levels": [
     {
       "ordinal": 1,
@@ -3622,14 +3622,14 @@
       "menuTitle": "Thriller",
       "resourceTitle": "Thriller",
       "sha256": "fcdacc4af8bee6b08cb406469a122bfb451f0b15d731b45f75256a6b01b5df70",
-      "status": "serial-erased-wall-source-implementation-and-native-preparation",
+      "status": "bounded-bomb-wall-checkpoint-accepted-with-limits",
       "nativeEvidence": [],
       "requirements": [
         "Same BO+EX physical actor and recursive unbonus/burnt/background support as47",
         "Protected checkpoint, wall blast/repaint and EX reset composition",
         "All four ordinary class1 b/f/n/s programs with EX physical movement"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "root-goal-reset-and-post-burn-reviewed-locally-active",
       "generationConstraints": [
         "Thirty BO records contain two bombs,26fuses and two starters; both starter flag bytes0",
         "One protected checkpoint uses independent WY spawn/time and protection state",
@@ -3663,7 +3663,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3676,10 +3676,11 @@
         6
       ],
       "generationRequirementsPending": [
-        "Checkpoint selection and a source death/reset while preserving underlying clocks and restoring its saved spawn",
-        "At least one human-only starter and representative blast effects on connected line/dot/wall appearance",
-        "Programmed NPC slide/transfer plus human wall/backout behavior",
-        "Goal, source score and finite input replay; label unvisited second-starter branches"
+        "Native timer/countdown not observed; header/model210 only; no native150 claim",
+        "Two optional bonuses uncollected; actual terminals cannot burn WY/EX; cross erase frame4 synthetic only",
+        "Native crater fit partial; exact erasure evidence359 fixed crater-free sourcepixels, not wholejournal",
+        "Native actor/EX boundary mismatches retained; death/fade/reset visual phase differs; no clock/state assignment",
+        "SVG shading/antialias/crater texture/complete overlay/postgoal NPCfreeze differ; fullaudio/controllers/nonChild/saves/performance unqualified"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3699,7 +3700,9 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
-      }
+      },
+      "review": "thriller-review.md",
+      "reviewPacket": "thriller-review.json"
     },
     {
       "ordinal": 49,
@@ -3707,7 +3710,7 @@
       "menuTitle": "Playground",
       "resourceTitle": "Playground",
       "sha256": "060d1a1dcfbf032500026e1db339056849e97b75a53f0c23c73f3179ad965e9b",
-      "status": "source-prepared-awaiting-serial-composition",
+      "status": "serial-hy-ex-ordinary-source-implementation-and-native-preparation",
       "nativeEvidence": [],
       "requirements": [
         "Separate HY+EX capability; existing41 HY composition explicitly forbids EX and programmed ordinary hands",

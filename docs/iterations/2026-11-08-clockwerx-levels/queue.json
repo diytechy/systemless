@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 40,
-  "currentAction": "39Dodger accepted/active original+SVG7000/13transfer/190onsets with recorded phase limits. Fresh40Hollow verified. Mechanics-first parallel source preparation; shared runtime/integration serial, max2functional runners.",
+  "currentOrdinal": 41,
+  "currentAction": "40Hollow accepted/active original+SVG8000/25transfer/190onsets, source-fitted700legalidle/phase limits retained. Next41HY shared mechanic;62rider and94import/blue-ring sourceprep complete. Max2functional runners; shared integration serial.",
   "levels": [
     {
       "ordinal": 1,
@@ -2910,13 +2910,24 @@
       "menuTitle": "Hollow",
       "resourceTitle": "Hollow",
       "sha256": "0982002b6c9141cd011910e6f5977332402c770dd1fc01880af37adb083b4032",
-      "status": "native-cold-preparation-complete-source-scope-next",
+      "status": "accepted-with-limits-and-locally-active",
       "nativeEvidence": [
-        "hollow/native-initial-01/report.json"
+        "hollow/native-goal-01/report.json",
+        "hollow/native-goal-01-comparison-cold700.json",
+        "hollow/native-goal-01-elevator-comparison-cold700.json"
       ],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "requirements": [
+        "raised colored three-channel up/down composition",
+        "all control placements with programmed ordinary actors/free orbital",
+        "retain inactive properties as ordinary pivots"
+      ],
+      "svgStatus": "normal40active; original/SVG8000/25transfers/190onsets/all4GO",
+      "generationConstraints": [
+        "temporal dot availability and source color permissions",
+        "GO delayed award/hide",
+        "per-level independently fitted initial idle epoch; no inherited clock assumption",
+        "exact phases/collision edges and red-channel human rider remain unqualified"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 78,
@@ -2943,7 +2954,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2967,7 +2978,9 @@
         "classification": "existing-mechanic-families-new-composition-or-import-variant",
         "newMechanicDependencies": [],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "preparation": "hollow-preparation.md",
+      "review": "hollow-review.json"
     },
     {
       "ordinal": 41,
@@ -2975,10 +2988,12 @@
       "menuTitle": "Squiggle",
       "resourceTitle": "Squiggle",
       "sha256": "e1f751f98478c4d722f186c8b124bcb65937ce0ea5ef06b19bf41d415b24c039",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "earned-native-cold-source-helper-preparation",
+      "nativeEvidence": [
+        "squiggle/native-initial-01/report.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "unlinked HY helper only; no41manifest",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -3036,7 +3051,8 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "preparation": "squiggle-preparation.md"
     },
     {
       "ordinal": 42,
@@ -4449,7 +4465,7 @@
       "menuTitle": "Seesaw",
       "resourceTitle": "Seesaw",
       "sha256": "1845697d974d6273585ed28e3ed45973ed157d4250e50b6c5ef74a8b8c7efe73",
-      "status": "queued",
+      "status": "source-prepared-rider-integration-required",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4503,7 +4519,8 @@
         "classification": "existing-mechanic-families-new-composition-or-import-variant",
         "newMechanicDependencies": [],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "preparation": "seesaw-preparation.md"
     },
     {
       "ordinal": 63,
@@ -6771,7 +6788,7 @@
       "menuTitle": "Fracas",
       "resourceTitle": "Fracas",
       "sha256": "a8087dbdbeb6ccec2d54f8445968a475659ba8edc54eb2763f23683484c8eee7",
-      "status": "queued",
+      "status": "source-prepared-import-and-blue-ring-assets-required",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -6825,7 +6842,8 @@
         "classification": "existing-mechanic-families-new-composition-or-import-variant",
         "newMechanicDependencies": [],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "preparation": "fracas-preparation.md"
     },
     {
       "ordinal": 95,

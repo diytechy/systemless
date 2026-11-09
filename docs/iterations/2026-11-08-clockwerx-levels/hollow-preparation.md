@@ -1,3 +1,5 @@
+**Accepted/locally active: see [review](hollow-review.md). Preparation below is historical.**
+
 # Hollow preparation
 
 Hollow40 has original and SVG goal evidence and is awaiting final packet/activation. The normal pilot remains39. This is the first level prepared by a separate content worker under the [parallel workflow](parallel-workflow.md). Private worker output is `hollow-parallel-validation/`; root review is `hollow/`, both on D:.

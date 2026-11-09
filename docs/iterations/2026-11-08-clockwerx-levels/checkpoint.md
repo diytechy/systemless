@@ -1,5 +1,10 @@
 # Progress checkpoint
 
+Hollow40accepted/locallyactive: original/SVG8000/25transfers/4bounces/6Reverse/all4GO/190onsets. Sourcee6f6f02c;267publicruntime/15packaging/4privatechecks/38prior342474updates pass.258clearpositions/244poses/25transferheroes; independentcold700legalidle,14oneframe/6corepixel andanimationphase limits retained. Through40fixture4a6a8422 verified;fresh41p234000viewed2224/2824/0. Currentreceipt hollow/activation.json/full39rollback;normal92Hollowpaused/QA122closed. Noactiverunner/pendingCUApart. See[currentaction](current-action.md).
+
+Mechanics-first parallelpreparation delivered40candidate+route/rootreview,94nullimport+missingblueart,62inactiveGN/TR+actualOilridergap; privateworkerreports reviewed. SharedHY41helpers unlinked/sixchecks/source-review complete; actualnormal41coldreference nowearned. ContinueHYintegration serially with independent94art/sourcework if useful, max2functionalrunners/conversionssequential. Allpriorworkersfinished; inspectstate beforedelegatingmore.
+
+
 2026-11-09: [Dodger39](dodger-review.md) accepted/locally active, original/SVG7000/13transfers/6bounces/10Reverse/threeGO/twoordinarybonuses/190onsets.259runtime/15packaging/37prior334903updates pass. All454clearpositions/447poses/13transferheroes,470controls and282inactivecores match; phase/core limits recorded. Through39fixtureb7e88114 verified;fresh40/playerp/226000 viewed2224/2824/0. Normal92Dodgerpaused,QA121closed; no active emulator/model. Currentreceipt dodger/activation.json/full38rollback.
 
 User authorizes [mechanics-first parallel workflow](parallel-workflow.md): at most two functional runners, shared mechanics/integration serial. Matrix identifies40/62/94existing-family compositions and58later-family maps. Original UI cannot jumparbitrarily; preserve earnedfixture chain, prepare source/model/SVGahead. Next40scope/coldreview plus independent94sourcepreparation; inspectagentstate/currentaction first.
@@ -13,7 +18,7 @@ Latest: [Quincunx review](quincunx-review.md)/[packet](quincunx-review.json) acc
 
 Latest: [Stutter review](stutter-review.md)/[packet](stutter-review.json) accepts36 with explicit visual/timing limits. Original/SVG5,000;28 transfer poses match; all190 onsets. 252 runtime/15 packaging pass. Through36 fixture64e3190a verifies nine files/both forks/represented metadata/seven untouched; fresh37/playerp/216000 viewed. Normal92Stutter paused; QA117 closed; no active runner/pending CUA part. Current37 source/admission/cold review is validated; goal searches10/session40131 and12/session29053 use both functional slots.254runtime/15packaging/35priorregressions317481updates pass; see current-action and quincunx-preparation. Live36 unchanged.
 
-**39 bounded Child scenes are accepted and locally active through Dodger;61 remain.** Original library/frozen comparisons complete. Continue39 Dodger from [current action](current-action.md).
+**40 bounded Child scenes are accepted and locally active through Hollow;60remain.** Original library/frozen comparisons complete. Continue39 Dodger from [current action](current-action.md).
 
 Historical pre-acceptance entry: corrected route24 passes all190 held onsets, 28 transfers/four bounces/eleven reversals/5,000/one Oil. The two functional runners are native-goal-02/session78974 and root visible QA117, both using corrected source. Search22 was stopped after checking its owned PID;23 completed but its narrow rising-dot window required refinement24. Actual original/visible goals and independent pose/object review remain pending. No36 activation or through36 fixture yet. See current-action for the live35 receipt and original failure boundaries.
 

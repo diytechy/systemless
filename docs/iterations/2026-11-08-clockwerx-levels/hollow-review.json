@@ -1,0 +1,78 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "e6f6f02c",
+  "ordinal": 40,
+  "title": "Hollow",
+  "nativeTransfers": 25,
+  "bounces": 4,
+  "reverses": 6,
+  "goalOnsets": 190,
+  "nativeGoalScore": 8000,
+  "qaGoalScore": 8000,
+  "runtimeChecks": 267,
+  "packagingChecks": 15,
+  "privateMapChecks": 4,
+  "priorDefinitionsUnchanged": 39,
+  "priorPayloadsUnchanged": 86,
+  "priorDecodedBoards": 38,
+  "priorSnapshots": 38,
+  "priorUpdates": 342474,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext41Total234000Viewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "fresh41PhysicallyViewed": true,
+  "sourceFittedIdleUpdates": 700,
+  "poseSummary": {
+    "all": 265,
+    "clear": 258,
+    "clearPositions": 258,
+    "clearPoses": 244,
+    "allPositions": 265,
+    "allPoses": 250,
+    "transferHero": 25,
+    "transferHeroMatches": 25
+  },
+  "elevatorSummary": {
+    "images": 53,
+    "controls": 636,
+    "controlMatches": 636,
+    "clearControls": 635,
+    "clearControlMatches": 635,
+    "clearCores": 908,
+    "clearCoreMatches": 902,
+    "inactiveClearCores": 424,
+    "inactiveClearCoreMatches": 424,
+    "clearSurfaces": 531,
+    "clearSurfaceMatches": 414,
+    "group2ClearSurfaces": 158,
+    "group2ClearSurfaceMatches": 143
+  },
+  "spikeGoodieSummary": {
+    "SP": {
+      "observations": 1696,
+      "clearVisible": 1499,
+      "clearVisibleMatches": 379
+    },
+    "GO": {
+      "observations": 212,
+      "clearVisible": 104,
+      "clearVisibleMatches": 0
+    }
+  },
+  "fixtureSha256": "4a6a842212ef98fe7c3cd17bec86045a75c99e8630dd42a29aff300a50b49abb",
+  "limits": [
+    "Retain inherited706 physical baseline and unrestricted orbital/SP alias fits;700legal idle was independently selected by cold images, not state/clock assignment",
+    "Fourteen frame differences and six clear moving-core pixel differences remain.635/635clearcontrols and424/424inactivecores match",
+    "Surface414/531,SP379/1499,visibleGO0/104strictphase matches: exact phases/collision edges unqualified",
+    "Humanblue0/green1riders witnessed; humancontrolcontact/red2rider/otherbonuses/death-reset/audio/controller/nonChild/fullsave/busy-scenecadence-resources unqualified"
+  ],
+  "liveSizes": {
+    "sourceBytes": 221868,
+    "assetBytes": 2967232,
+    "manifestBytes": 3718453,
+    "totalBytes": 6907553
+  },
+  "normalTab92SelectRestartPauseViewed": true,
+  "qa122Closed": true,
+  "currentReceipt": "hollow/activation.json"
+}

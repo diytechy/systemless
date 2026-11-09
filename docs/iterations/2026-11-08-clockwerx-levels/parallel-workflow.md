@@ -29,3 +29,6 @@ Of the 62 levels still unaccepted when this workflow began, Dodger39 has a prepa
 | 81 Flail | Slowdown |
 
 Start independent preparation with Fracas94 while the coordinator handles Hollow40 and the next new shared mechanic. Native out-of-order acceptance remains contingent on legitimate UI access or earned fixtures. As each new family is qualified, rerun the static admission matrix and release eligible levels for two-runner validation. Dependency eligibility and validation completion are separate queue states.
+
+
+The first parallel batch is reviewed: Hollow40 now has original/SVG8,000goals and is locally active; Fracas94source preparation found missingblue-ring artwork and an imported-program variant; Seesaw62found missingsharedOil-rider hooks. These are concrete preparation results, not later-level acceptance. Next serialHY41work can overlap independent private94art/source work.

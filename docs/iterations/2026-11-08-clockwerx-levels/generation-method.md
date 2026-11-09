@@ -170,3 +170,6 @@ Stutter36 demonstrates modelrisk:190successful onsets andavisibleSVGgoal stillfa
 
 
 Dodger39 requires per-dot initial height even within one channel, optional-property mask clearing without removing pivots, and delayed GO award/hide before counting collection complete. Temporal search must use exact current positions and control contact; static connectivity is insufficient. Preserve phase uncertainty for allfourSPI and allsixGO outline variants rather than deriving collisions from SVG. Original/SVG7000route/190onsets is one existing-map witness, not a generated-level proof. See[review](dodger-review.md) and[parallel workflow](parallel-workflow.md).
+
+
+Hollow40 demonstrates reusable content validation against a frozen sharedengine; it does not create another executable or prove generated levels. Initialclock calibration belongs to independently observed source initialization, not an inherited per-level constant or assigned clock state. Native/SVGgoal and all25transferheroes qualify one existing-map route; phase/unused-route limits remain. Seesaw62 requires source-ordered PU/DP riders on moving anchors and lower-endpoint detach, even with inactive guns/triggers. Imported invalid programrefs may need originalnullfallback, while generated definitions should remain strict. See[parallel workflow](parallel-workflow.md) and[review](hollow-review.md).

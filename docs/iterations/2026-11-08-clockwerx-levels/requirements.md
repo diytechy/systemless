@@ -250,3 +250,6 @@ Sourcequerycorrection: up/down motion is distinct fromordinarymovingType1. Admit
 
 
 Dodger39 validates a mixed-height elevator channel with GO/staticSP, including an empty channel control and inactive-property ordinary pivots. Model/native/SVG witness13transfers/all3GO/twoordinarybonuses/7000; exact SP/GO/surface phase and one042callback/core boundary remain limited. All actors start static; initial moving riders need separate qualification. See[dodger review](dodger-review.md).
+
+
+Hollow40 qualifies the guarded colored three-channel elevator/GO/SP/programmed-actor composition. Original/SVG8000and25transferheroes match with190onsets; independentcold700idle replaces inherited706comparison assumption. Red-channel human riders, humancontrolentry and exactsurface/GO/SPIphases remain limited. Seesaw62source review finds absentPU/DPupdownrider/lowerendpoint hooks; Fracas94needs null-import semantics and blue-ring51..58atlases. See[hollow review](hollow-review.md),[Seesaw prep](seesaw-preparation.md),[Fracas prep](fracas-preparation.md).

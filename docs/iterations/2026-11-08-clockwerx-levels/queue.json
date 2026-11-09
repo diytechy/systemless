@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 31,
-  "currentAction": "Hallway31 next: fresh native from earned through30 passes2224/2824/0,31p185000viewed. Labyrinth30accepted/active with explicit late-tap/UI/effect limits. No active runner. Inventory activeOil/static-NPC composition and extract original next-theme backdrop privately.",
+  "currentAction": "Hallway31 guarded preparation:222runtime/14packaging,29prior snapshots264113updates pass. QA31/80payloads and190-onset21transfer Oil+WY route prepared. Cold95/99 exact,fouroneframe limits. Native-goal-01 running/session86937; review report before duplicate. Live30; visible SVG31goal pending.",
   "levels": [
     {
       "ordinal": 1,
@@ -2195,7 +2195,7 @@
       "menuTitle": "Hallway",
       "resourceTitle": "Hallway",
       "sha256": "afab5fb07feaba4f154e2b44f6b17aab6107a22d11ad22a34e9932a905f00d97",
-      "status": "source-preparation",
+      "status": "guarded-preparation-native-replay-running",
       "nativeEvidence": [
         "hallway/native-initial-01/report.json"
       ],
@@ -2244,6 +2244,10 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "preparationEvidence": [
+        "hallway-preparation.md",
+        "hallway-preparation.json"
       ]
     },
     {

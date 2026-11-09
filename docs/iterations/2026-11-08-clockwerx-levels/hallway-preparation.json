@@ -1,0 +1,55 @@
+{
+  "status": "guarded-preparation-not-accepted",
+  "ordinal": 31,
+  "title": "Hallway",
+  "liveOrdinal": 30,
+  "sourceResourceId": 169,
+  "sourceSha256": "afab5fb07feaba4f154e2b44f6b17aab6107a22d11ad22a34e9932a905f00d97",
+  "validation": {
+    "runtimeTests": 222,
+    "packagingTests": 14,
+    "priorDecodedBoardsIdentical": 29,
+    "priorSnapshotsIdentical": 29,
+    "priorUpdates": 264113
+  },
+  "cold": {
+    "images": 33,
+    "poses": 99,
+    "matches": 95,
+    "oneFrameDifferences": 4,
+    "legalFreshIdleUpdates": 686,
+    "stateAssignments": false
+  },
+  "route": {
+    "candidate": "hallway/candidate-route-02.json",
+    "transfers": 21,
+    "score": 1000,
+    "checkpoint": "3,7",
+    "oilTriggered": true,
+    "dropletAllocations": 1,
+    "finiteOnsetsPassed": 190,
+    "native": "running-native-goal-01",
+    "rootVisibleGoal": "pending"
+  },
+  "newBackdrop": {
+    "originalResource": "PICT404",
+    "bytes": 82292,
+    "sha256": "887ccb465fea1b8d4adae7e0b717a71491da420823683ec4cf9385ff15ca4fa8",
+    "firstClearBorderPixels": 108120,
+    "mae": 0.2207978789,
+    "maxChannelDifference": 1
+  },
+  "qa": {
+    "payloads": 80,
+    "priorPayloadsPreserved": 79,
+    "priorScenesPreserved": 30,
+    "checkedRoute": true
+  },
+  "limits": [
+    "Scene is not accepted or activated",
+    "Cold four one-frame discrepancies retained",
+    "Oil NPC activation alternate mode unqualified",
+    "Full original and visible SVG route review pending",
+    "No new real-time/resource benchmark"
+  ]
+}

@@ -30,6 +30,20 @@ test('canonical player decoding requires explicit static Child callback qualific
  assert.ok(levelRequirements(level,{...options,allowOil:true}).some(s=>s.includes('without sliding')));
 });
 
+test('canonical Oil composition is explicit and retains its ordinary static Child boundary',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.blocks=level.blocks.filter(b=>b.kind!=='SP');level.blocks[0].records[2].version12ByteRaw=0;
+ level.blocks.push({kind:'PU',count:1,records:[{rawWords:[0,0,1,0,15]}]});
+ const options={angularSpeed:TAU,allowOil:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true,allowClass3Enemies:true};
+ assert.ok(levelRequirements(level,options).includes('static enemy transfer with active Oil'));
+ const board=buildDecodedBoard(level,{...options,allowCanonicalOil:true});assert.equal(board.canonicalOilRules,true);assert.equal(board.puddles.length,1);
+ assert.ok(levelRequirements(level,{...options,allowCanonicalOil:true,allowCanonicalPlayer:false}).some(x=>x.includes('canonical Oil requires Child movement')));
+ for(const flags of [0x4009,0x4041,7]){level.cells[1].flagsRaw=flags;assert.ok(levelRequirements(level,{...options,allowCanonicalOil:true}).includes('canonical Oil requires ordinary dots and uncolored static checkpoints'));}
+ level.cells[1].flagsRaw=0x4011;level.cells[1].secondaryRaw=31;assert.ok(levelRequirements(level,{...options,allowCanonicalOil:true}).includes('canonical Oil requires ordinary dots and uncolored static checkpoints'));level.cells[1].flagsRaw=3;level.cells[1].secondaryRaw=15;
+ level.blocks[0].records[2].rawWords[7]=4;assert.ok(levelRequirements(level,{...options,allowCanonicalOil:true}).includes('canonical Oil requires wall-free ordinary class1/3 enemies'));
+ level.blocks[0].records[2].rawWords[7]=3;assert.equal(buildDecodedBoard(level,{...options,allowCanonicalOil:true}).enemies[0].divisor,4);
+ level.blocks.push({kind:'SP',count:1,records:[{rawWords:[0,0,0,2,0,15]}]});assert.ok(levelRequirements(level,{...options,allowCanonicalOil:true}).includes('canonical Oil with additional hazards is unqualified'));
+});
+
 test('rotating spikes require their own bounded opt-in and preserve noncardinal pose',()=>{
  const level=fixture(),actor=level.blocks[0].records[2];actor.actorTypeRaw=4;actor.rawWords[2]=4;actor.version12ByteRaw=0;actor.initialFrameHalfIndexRaw=4;
  const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowRotatingSpikes:true};

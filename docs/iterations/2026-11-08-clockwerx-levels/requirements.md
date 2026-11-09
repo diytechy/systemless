@@ -194,3 +194,8 @@ Crossing is now accepted: original/SVG 7,000-point goals, all 190 finite onsets 
 A free class4 orbital uses divisor8/multiplier1; a separate class1 orbital executes n/b controls. Eligibility is explicit and independent. Slow programmed orbitals and unqualified orbital flip commands remain rejected. Independent cold and original physical-schedule poses qualify these two cases without changing shared timer constants.
 
 A control can remain occupied across a pivot transfer. The selected blue-gate Reverse must occur before that occupancy releases; a later reversal re-enters the control and toggles both blue gates again. Key release is part of the input policy: carrying Flip past Reverse can regrab the previous pivot. All 190 canonical and 190 early-tap cases pass, while late +4-tick onset12 fails and remains recorded. Source Stage 3 progression is represented by the HTML completion overlay. See [Labyrinth](labyrinth-review.md).
+
+
+## Hallway preparation: canonical Oil and checkpoint reset
+
+A narrowly gated static Child composition combines original-callback human/NPC movement with Oil. Oil creates pursuing/cloning droplets and keeps its own PU/DP clocks. It is distinct from EX sliding. Restore the saved WY before resetting Oil's hero target, and discard old droplets before processing arrival effects; otherwise a reset can target the original spawn or immediately kill the new life. Hallway's11uncolored WY collision frames equal ordinary white dot9; colored/protected/moving variants remain unqualified.222runtime tests and29prior-route regressions pass; original/SVG scene acceptance remains pending.

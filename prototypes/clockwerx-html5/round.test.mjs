@@ -20,6 +20,30 @@ function canonicalFixture(){
  const f=fixture();Object.assign(f.board,{canonicalPlayerRules:true,staticEnemyCallbacks:true,enemies:[],spikes:[]});
  Object.assign(f.board.player,{sourceActorType:0,speedClass:0});return f;
 }
+function canonicalOilFixture(){
+ const f=canonicalFixture();Object.assign(f.board,{canonicalOilRules:true,specialDotRules:true,childScoreRules:true,difficulty:'Child',timeLimit:90,origin:{x:0,y:0},sourceDotPermissions:true,puddles:[{row:0,column:0,kind:1}]});
+ f.board.dots.forEach((d,i)=>Object.assign(d,{sourceIndex:i,cell:1,flags:15,color:0,present:true,humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,motion:'static',slideMask:0,teleport:false}));
+ const frame={left:0,top:0,right:1,bottom:1,rows:null,outlineIndex:0,flipY:false};
+ f.options.oilOutlines={groups:{1200:{frames:Array.from({length:52},()=>({...frame}))},2200:{frames:Array.from({length:107},()=>({...frame}))}}};
+ f.options.dotOutlines={groups:{300:{frames:Array.from({length:17},()=>({...frame}))}}};f.options.oilBounds={left:-100,top:-100,right:500,bottom:500};return f;
+}
+
+test('canonical Oil arrival death precedes goal and score effects',()=>{
+ const {board,options}=canonicalOilFixture();board.dots[1].kind='goal';const g=new SourceRound(board,options);
+ g.oil.createDroplet(1,{onDeath:()=>assert.fail('The initial human is on the other dot'),isFrozen:()=>false});
+ for(let i=0;i<100&&!g.death;i++)g.update(1/120,{flip:true});
+ assert.equal(g.player.pivot,'b');assert.equal(g.player.transfers,1);assert.equal(g.complete,false);assert.equal(g.childScore.snapshot().overallEarned,0);
+ assert.deepEqual(g.events.find(e=>e.type==='death').cause,{reason:'oil',sourceReason:10,object:'b'});assert.equal(g.events.some(e=>['goal','bonus'].includes(e.type)),false);
+});
+
+test('Oil reset follows the restored checkpoint and explicit restart follows the original spawn',()=>{
+ const {board,options}=canonicalOilFixture();Object.assign(board.dots[1],{kind:'dot',cell:0x4011,waystation:{halfIndex:12,direction:-1}});const g=new SourceRound(board,options);
+ for(let i=0;i<100&&g.player.pivot!=='b';i++)g.update(1/120,{flip:true});assert.equal(g.player.pivot,'b');assert.equal(g.oil.heroPivot,1);const now=g.oil.now;
+ g.oil.createDroplet(1,{onDeath:()=>{},isFrozen:()=>false});assert.equal(g.oil.droplets.length,1);
+ g.reset({preserveCheckpoint:true});assert.equal(g.player.pivot,'b');assert.equal(g.player.frame,24);assert.equal(g.oil.heroPivot,1);assert.equal(g.oil.now,now);assert.equal(g.oil.droplets.length,0);assert.equal(g.death,null);
+ g.reset();assert.equal(g.player.pivot,'a');assert.equal(g.oil.heroPivot,0);assert.equal(g.oil.now,now);
+});
+
 test('canonical player waits for source callbacks and smooth drawing cannot choose its collision frame',()=>{
  const {board,options}=canonicalFixture(),g=new SourceRound(board,options);let fractional=false,callbacks=0;
  for(let i=0;i<240;i++){

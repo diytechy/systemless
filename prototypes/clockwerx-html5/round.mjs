@@ -27,7 +27,8 @@ export class SourceRound extends MovementGame {
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
-  if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length||board.dots.some(d=>d.slideMask||d.motion&&d.motion!=='static')))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
+  if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask||d.motion&&d.motion!=='static')))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
+  if(board.canonicalOilRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.puddles?.length||board.bombRules||board.goodieOnlyRules||board.spikes?.length||board.doors?.length||board.switches?.length||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,3].includes(e.speedClass)||e.checksWalls!==false)||board.dots.some(d=>d.ring||d.protected||d.waystation&&d.color!==0)))throw new Error('Canonical Oil requires the qualified static Child ordinary-actor scope');
   if(board.goodieOnlyRules&&!board.specialDotRules)throw new Error('Goodie-only source timer state required');
   if(board.combinedGoalBonusRules&&!board.childScoreRules)throw new Error('Combined goal bonus requires Child score qualification');
   if(board.staticEnemyCallbacks&&!board.staticEnemyWallRules&&this.enemies.some(e=>e.checksWalls))throw new Error('Canonical enemy wall response requires qualification');
@@ -58,7 +59,7 @@ export class SourceRound extends MovementGame {
   this.doorSystem.reset(this.doorClock.advance(0).clientCount);
   this.spikeStates=new Map((this.board.spikes||[]).map(s=>[s.id,{frame:s.phase,reference:Math.floor((this.spikeCount+s.phase)/4)}]));
   this.death=null;this.roundRestarts=0;this.elapsedTime=0;this.pendingReverse=false;
-  this.oil?.reset(this.player.pivot);
+
   this.bombScene?.reset({restartLevel:!preserveCheckpoint});
   this.guestTicks??=0;
   if(this.board.specialDotRules){
@@ -66,9 +67,12 @@ export class SourceRound extends MovementGame {
    if(this.dotAnimations){
     const reset=this.dotAnimations.reset({restartLevel:!preserveCheckpoint,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
     for(const key of ['pivot','angle','direction'])this.player[key]=reset.player[key];
-    this.remainingTime=reset.remainingTime;this.onHumanGrab(this.point(this.player));
+    this.remainingTime=reset.remainingTime;
    }
   }
+  // PU/DP follows the restored WY spawn, rather than the original level start.
+  this.oil?.reset(this.player.pivot);
+  if(this.dotAnimations)this.onHumanGrab(this.point(this.player));
   if(this.board.canonicalPlayerRules){this.canonicalPlayerContact=false;this.player.frame=sourceFrame(this.player.angle);this.player.unwrappedFrame=this.player.frame;}
  }
  makeHand(hand){

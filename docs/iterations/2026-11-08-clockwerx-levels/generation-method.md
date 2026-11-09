@@ -113,3 +113,6 @@ Crossing qualification is complete for the selected Child route: both original a
 
 
 Labyrinth requires a control-contact state machine across pivot transfers, including key-up times. Two controls of one color affect every gate of that color, with initially open gates moving oppositely to closed ones. A successful geometric path can still fail after an extra control entry. The selected23-transfer4,000-point original/SVG witness passes190canonical and190earlyReverse onsets; late+4ticks fails at onset12. Retain this asymmetric timing boundary rather than reporting a570-case certificate. The unused seven bonuses, four controls and unfinished terminal blast remain separate coverage requirements. This is an existing-map solver, not new-level generation.
+
+
+Hallway preparation adds a dynamic pursuit constraint: geometric reachability and a checkpoint are insufficient when Oil can reach a waiting pivot. One proposed bottom-row detour dies at5,7; the retained21transfer candidate leaves the hazard, selects WY3,7 and reaches the goal across190finite onsets. Native/visible acceptance is pending. A generator must model PU activation, DP arrival/wait/pursuit/cloning deadlines, current hero target and checkpoint restart state; it must keep EX sliding distinct and preserve source dot-permission/collision ordering.

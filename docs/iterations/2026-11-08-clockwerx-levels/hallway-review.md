@@ -1,0 +1,17 @@
+# Hallway: accepted with limits
+
+**31 bounded Child scenes are locally active.** Original and visible SVG complete Hallway for1,000points through21transfers, checkpoint3,7 and Oil activation/pursuit. All190finite source-clock onsets pass the retained61update Flip holds. The original advances from185,000to186,000and Sentry32. See the [review packet](hallway-review.json).
+
+The canonical Oil gate permits static Child ordinary dots/uncolored checkpoints and wall-free ordinary class1/3NPCs. It keeps other hazards, EXsliding, moving/ring/protected/colored variants and other actor clocks gated. Oil creates pursuing/cloning droplets; it does not change hand movement. Reset restores the checkpoint before selecting Oil's target and clears old droplets before arrival effects.222runtime/14packaging tests pass;29previous decoded boards and final route snapshots remain identical over264,113updates.
+
+Original cold95/99poses match after686legal idle updates. The four differences at two capture times are one frame. During the original physical key schedule, all21transfer hero poses match;167/171full hand observations match with four further oneframe differences. Exact cold/gameplay parity is not claimed and no actor/clock state is assigned.
+
+21clear original PU poses match the model frame/base, including the trigger transition.12independent standing-droplet sets match pursuit through three bottom-row pivots. A separate original detour dies near5,7 and restarts at the saved3,7checkpoint; the physical-schedule model likewise has one natural restart, no old droplets and the new hero target. Moving intermediate DP poses/cloning on this scene and all12bonus pickups remain unvisited; earlier Oil mechanics evidence is separate. All396bonus-core and33unlit-checkpoint cold samples match original art.
+
+Native goal01 is CLOSED/PASS5,658frontend/6,258guest/0budget, two changed save files/no deletions. Native death01 is CLOSED/PASS4,581/5,181/0. Earned through31fixture SHAfb2dfd78befe70f1be0404ca13b8ca5a7966b3e417b65706c14837b0f1a7e8d1verifies9files,bothforks,representedmetadata and7untouched files. Fresh32 Sentry/player p/186,000 is viewed at2,224/2,824/0. Original media remains byte-identical; raw aliases retained, unexposed folder Finder information/alias resolution remain outside the metadata claim.
+
+Original PICT404 was recovered read-only and locally decoded:82,292bytes, first clear108,120pixel border MAE.220798/max1channelunit. This adds one original bitmap; the enhanced map elements remain SVG. All11source uncolored checkpoint collision frames equal ordinary white dot9; colored/protected/moving variants remain unqualified.
+
+Activation preserves30earlier definitions/all79previous payloads, protected files/savekey and a full30scene rollback.80payloads now total;25packaged source files match2070f7e1. Source/assets/manifest total5,785,943uncompressed bytes, excluding receipt, not wire size or memory. Root QA111's1,000goalPNG/AX are saved;111closed. Normal IAB92is31paused after select/restart/pause smoke. No new CPU/memory/cadence/audio/controller/higherdifficulty/fullsave claim, push/upload/deployment.
+
+Generation must simulate Oil activation, arrival/wait/pursuit/cloning deadlines, dot permissions, hero targeting and checkpoint restart. The rejected detour is reachable geometrically yet lethal. This remains a solver for existing maps and documented generation requirements; new-level generation is not implemented.

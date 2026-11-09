@@ -1,3 +1,5 @@
+Superseded by the [accepted review](hallway-review.md). Preparation history below retains earlier pending checks.
+
 # Hallway preparation
 
 Live remains at30 accepted Child scenes. Hallway31 is gated preparation, not acceptance. See the [packet](hallway-preparation.json).

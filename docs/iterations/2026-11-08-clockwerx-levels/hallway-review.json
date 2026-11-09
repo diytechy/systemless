@@ -1,0 +1,113 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "nativeTransfers": 21,
+  "goalOnsets": 190,
+  "nativeGoalScore": 1000,
+  "qaGoalScore": 1000,
+  "sourceFilesChanged": [
+    "app.mjs",
+    "level.mjs",
+    "round.mjs"
+  ],
+  "runtimeChecks": 222,
+  "packagingChecks": 14,
+  "priorSceneDefinitionsIdentical": 30,
+  "priorPayloadsPreserved": 79,
+  "totalPayloads": 80,
+  "sourceCodeCommit": "2070f7e1",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 5658,
+    "guest_tick": 6258,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeDeathReport": {
+    "status": "passed",
+    "frontend_ticks": 4581,
+    "guest_tick": 5181,
+    "budget_exhausted_frames": 0
+  },
+  "nativePhysicalScheduleTransferPoseMatches": 21,
+  "physicalSchedulePoses": {
+    "total": 171,
+    "exact": 167,
+    "oneFrameDifferences": 4
+  },
+  "oilEvidence": {
+    "cleanPuddlePoses": 21,
+    "exactStandingDropletSets": 12
+  },
+  "limits": [
+    "Cold95/99 and gameplay167/171poses exact; four oneframe differences in each retained.",
+    "Moving Oil intermediate poses/cloning in this scene and all12bonus pickups unvisited; static PU/DP pursuit and checkpoint death/reset checked.",
+    "No new real-time cadence/resource/audio/controller/higherdifficulty/fullsave qualification."
+  ],
+  "ordinal": 31,
+  "title": "Hallway",
+  "acceptedScenes": 31,
+  "sourceResourceId": 169,
+  "sourceSha256": "afab5fb07feaba4f154e2b44f6b17aab6107a22d11ad22a34e9932a905f00d97",
+  "inventory": {
+    "pivots": 69,
+    "bonuses": 12,
+    "wallRecords": 5,
+    "checkpoints": 1,
+    "activeOil": 1,
+    "activeRedEnemies": 2,
+    "inactiveOilRecords": 1,
+    "inactiveNPCRecords": 3
+  },
+  "cold": {
+    "images": 33,
+    "poses": 99,
+    "exact": 95,
+    "oneFrameDifferences": 4,
+    "legalIdleUpdates": 686
+  },
+  "nativeVisual": {
+    "bonusCoreSamples": 396,
+    "bonusMatches": 396,
+    "unlitCheckpointSamples": 33,
+    "unlitCheckpointMatches": 33
+  },
+  "progressFixture": {
+    "status": "forks-and-represented-metadata-verified-native-relaunch-verified",
+    "destinationSha256": "fb2dfd78befe70f1be0404ca13b8ca5a7966b3e417b65706c14837b0f1a7e8d1",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "metadataScope": "Both forks, file type/creator/flags/dates/raw16coordinates and represented folder dates. Folder Finder information is unexposed by machfs; original source image remains byte-identical. Raw aliases retained, resolution unqualified."
+  },
+  "activation": {
+    "sizes": {
+      "sourceBytes": 180514,
+      "assetBytes": 2776434,
+      "manifestBytes": 2828995,
+      "totalBytes": 5785943
+    },
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\hallway\\previous-live-pilot",
+    "sourceFiles": 25,
+    "assets": 80
+  },
+  "evidence": [
+    "hallway/native-goal-01/report.json",
+    "hallway/native-death-01/report.json",
+    "hallway/native-physical-samples.json",
+    "hallway/native-oil-review.json",
+    "hallway/checked-route.json",
+    "hallway/qa-goal-page.png",
+    "hallway/qa-goal-ax.txt",
+    "hallway/prior-scenes-review.json"
+  ],
+  "browser": {
+    "normalTab": 92,
+    "normalScene": 31,
+    "paused": true,
+    "qaTab": 111,
+    "qaClosed": true
+  }
+}

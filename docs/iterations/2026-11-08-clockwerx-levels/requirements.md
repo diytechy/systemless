@@ -199,3 +199,6 @@ A control can remain occupied across a pivot transfer. The selected blue-gate Re
 ## Hallway preparation: canonical Oil and checkpoint reset
 
 A narrowly gated static Child composition combines original-callback human/NPC movement with Oil. Oil creates pursuing/cloning droplets and keeps its own PU/DP clocks. It is distinct from EX sliding. Restore the saved WY before resetting Oil's hero target, and discard old droplets before processing arrival effects; otherwise a reset can target the original spawn or immediately kill the new life. Hallway's11uncolored WY collision frames equal ordinary white dot9; colored/protected/moving variants remain unqualified.222runtime tests and29prior-route regressions pass; original/SVG scene acceptance remains pending.
+
+
+Hallway31 is now accepted with matching original/SVG1,000goals and190finite onsets.21transferhero poses exact;fouroneframe differences remain in wider cold/gameplay captures.21PUposes/12standingDPsets match; separate original/modelOil death andWYrespawn pass. MovingDPintermediates/cloning/all12bonus pickups remainunvisited. See[review](hallway-review.md).

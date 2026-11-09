@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 31,
-  "currentAction": "Hallway31 guarded preparation:222runtime/14packaging,29prior snapshots264113updates pass. QA31/80payloads and190-onset21transfer Oil+WY route prepared. Cold95/99 exact,fouroneframe limits. Native-goal-01 running/session86937; review report before duplicate. Live30; visible SVG31goal pending.",
+  "currentOrdinal": 32,
+  "currentAction": "Sentry32 next: fresh native CLOSED/PASS2224/2824/0,p186000viewed. Hallway31accepted/active original+SVG1000goals/190onsets,Oilpursuit/death/WYresetchecked; explicitfouroneframe pose limits. No active runner. Review class4red/wallchecking+Oil composition; no32source/QAyet.",
   "levels": [
     {
       "ordinal": 1,
@@ -2195,13 +2195,25 @@
       "menuTitle": "Hallway",
       "resourceTitle": "Hallway",
       "sha256": "afab5fb07feaba4f154e2b44f6b17aab6107a22d11ad22a34e9932a905f00d97",
-      "status": "guarded-preparation-native-replay-running",
+      "status": "accepted-with-limits",
       "nativeEvidence": [
-        "hallway/native-initial-01/report.json"
+        "hallway/native-goal-01/report.json",
+        "hallway/native-death-01/report.json",
+        "hallway/native-physical-samples.json",
+        "hallway/native-oil-review.json"
       ],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "requirements": [
+        "explicitcanonicalOilgate",
+        "savedWYbeforeOilreset",
+        "oldDropletsClearedBeforeArrival",
+        "sourcePU/DPorderingandtimers"
+      ],
+      "svgStatus": "31locallyactive;original/SVG1000goals",
+      "generationConstraints": [
+        "dynamicOilpursuitandarrivaldeadlines",
+        "checkpointtargetandresetstate",
+        "rejectgeometricallyreachablelethaldetour"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 69,
@@ -2228,7 +2240,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2248,6 +2260,10 @@
       "preparationEvidence": [
         "hallway-preparation.md",
         "hallway-preparation.json"
+      ],
+      "reviewEvidence": [
+        "hallway-review.md",
+        "hallway-review.json"
       ]
     },
     {
@@ -2256,8 +2272,10 @@
       "menuTitle": "Sentry",
       "resourceTitle": "Sentry",
       "sha256": "e74dd6076515b305b76a25183f501a2a273ee02b5d75dae4344f9eeca506fe6d",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "source-preparation",
+      "nativeEvidence": [
+        "sentry/native-initial-01/report.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],

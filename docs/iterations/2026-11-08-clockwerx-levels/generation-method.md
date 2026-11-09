@@ -116,3 +116,6 @@ Labyrinth requires a control-contact state machine across pivot transfers, inclu
 
 
 Hallway preparation adds a dynamic pursuit constraint: geometric reachability and a checkpoint are insufficient when Oil can reach a waiting pivot. One proposed bottom-row detour dies at5,7; the retained21transfer candidate leaves the hazard, selects WY3,7 and reaches the goal across190finite onsets. Native/visible acceptance is pending. A generator must model PU activation, DP arrival/wait/pursuit/cloning deadlines, current hero target and checkpoint restart state; it must keep EX sliding distinct and preserve source dot-permission/collision ordering.
+
+
+Hallway31 qualification confirms the dynamic pursuit constraint: original/SVG1,000goals and190onsets pass;the rejected detour dies and restoresWY in both original/model. Carry precise reset targeting and clear oldDroplets beforearrival. New-levelgeneration remainsunimplemented.

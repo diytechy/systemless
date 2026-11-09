@@ -18,7 +18,7 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowCombinedGoalBonus=false,allowChildScoring=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowCombinedGoalBonus=false,allowChildScoring=false}={}){
  const unsupported=[];
  if(allowCombinedGoalBonus&&(!allowChildScoring||!allowSpecialDots))unsupported.push('combined goal/bonus requires source Child scoring');
  if(allowBombs&&allowGoodies)unsupported.push('exclusive bomb or goodie-only scope required');
@@ -61,6 +61,7 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
  for(const cell of level.cells||[]){
   if(!cell.present)continue;
   const inactiveUpDown=allowInactiveUpDownDots&&[0x101,0x4101].includes(cell.flagsRaw)&&!(cell.secondaryRaw&activeMask);
+  const inactiveRing=allowInactiveRings&&[0x9,0x4009].includes(cell.flagsRaw)&&!(cell.secondaryRaw&activeMask);
   const allowed=(allowSpecialDots?0x405f:0x4007)|(inactiveUpDown?0x100:0);
   if(cell.flagsRaw&~allowed)unsupported.push('special dot flags 0x'+(cell.flagsRaw&~allowed).toString(16));
   if((cell.flagsRaw&6)===6&&!allowCombinedGoalBonus)unsupported.push('combined bonus/goal callback');
@@ -69,26 +70,27 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
   if(cell.secondaryRaw===null)unsupported.push('legacy dot permissions');
   // Mask matches need no property clearing. Plain mask misses retain their
   // pivots; optional properties on a mask miss still require qualification.
-  else if((cell.secondaryRaw&15)!==15&&!(allowActiveDotMasks&&(cell.secondaryRaw&activeMask))&&!(allowInactivePlainDotMasks&&!(cell.secondaryRaw&activeMask)&&!(cell.flagsRaw&~0x4001))&&!inactiveUpDown)unsupported.push('conditional dot activation');
+  else if((cell.secondaryRaw&15)!==15&&!(allowActiveDotMasks&&(cell.secondaryRaw&activeMask))&&!(allowInactivePlainDotMasks&&!(cell.secondaryRaw&activeMask)&&!(cell.flagsRaw&~0x4001))&&!inactiveUpDown&&!inactiveRing)unsupported.push('conditional dot activation');
  }
  if(allowEnemyStaticPrograms&&allowOil&&activePuddleSpecs(level.blocks?.find(b=>b.kind==='PU')?.records||[],activeMask).length)unsupported.push('static enemy transfer with active Oil');
  if(allowSpecialDots&&(!Number.isInteger(level.header?.timeLimitRaw)||level.header.timeLimitRaw<0))unsupported.push('source Child timer specification');
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowCombinedGoalBonus=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors,allowRotatingSpikes,allowFastRotatingSpikes,allowRotatingSpikeTransfers,allowInactiveElevators,allowInactiveUpDownDots,allowCombinedGoalBonus,allowChildScoring});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowCombinedGoalBonus=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors,allowRotatingSpikes,allowFastRotatingSpikes,allowRotatingSpikeTransfers,allowInactiveElevators,allowInactiveUpDownDots,allowInactiveRings,allowCombinedGoalBonus,allowChildScoring});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
  const dots=level.cells.filter(c=>c.present).map(c=>{
-  const cell=allowInactiveUpDownDots&&[0x101,0x4101].includes(c.flagsRaw)&&!(c.secondaryRaw&activeMask)?c.flagsRaw&~0x300:c.flagsRaw;
+  const rawCell=allowInactiveRings&&[0x9,0x4009].includes(c.flagsRaw)&&!(c.secondaryRaw&activeMask)?c.flagsRaw&~8:c.flagsRaw;
+  const cell=allowInactiveUpDownDots&&[0x101,0x4101].includes(c.flagsRaw)&&!(c.secondaryRaw&activeMask)?rawCell&~0x300:rawCell;
   const state=decodeDot(cell);
   return {id:`${c.column},${c.row}`,sourceIndex:c.row*11+c.column,row:c.row,column:c.column,x:origin.x+c.column*48,y:origin.y+c.row*48,
    humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,
    present:true,motion:'static',slideMask:0,teleport:false,color:dotColorOffset(c.secondaryRaw,0),
-   ring:allowSpecialDots&&!!(c.flagsRaw&8),protected:allowSpecialDots&&!!(c.flagsRaw&0x40),
-   bonus:state.bonus,sourceInBackground:!(c.flagsRaw&0x1e),
+   ring:allowSpecialDots&&!!(cell&8),protected:allowSpecialDots&&!!(c.flagsRaw&0x40),
+   bonus:state.bonus,sourceInBackground:!(cell&0x1e),
    cell,flags:c.secondaryRaw,kind:state.goal?'goal':state.bonus?'bonus':'dot'};
  });
  const records=kind=>level.blocks.find(b=>b.kind===kind)?.records||[];

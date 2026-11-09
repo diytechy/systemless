@@ -263,3 +263,16 @@ test('canonical wall response is qualified independently while programmed walls 
  assert.ok(levelRequirements(level,{...qualified,allowStaticEnemyWalls:false}).includes('programmed wall-reacting actor'));
  assert.ok(levelRequirements(level,{...qualified,allowEnemyStaticPrograms:false,allowEnemyBouncePrograms:true}).includes('programmed wall-reacting actor'));
 });
+
+
+test('inactive ring qualification preserves a plain pivot and permission color without enabling active rings',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.cells[1]={...level.cells[1],flagsRaw:0x4009,secondaryRaw:0xf00e};
+ const base={angularSpeed:TAU,allowSpecialDots:true};
+ assert.ok(levelRequirements(level,base).includes('conditional dot activation'));
+ const options={...base,allowInactiveRings:true},dot=buildDecodedBoard(level,options).dots[1];
+ assert.equal(dot.cell,0x4001);assert.equal(dot.ring,false);assert.equal(dot.sourceInBackground,true);
+ assert.equal(dot.flags,0xf00e);assert.equal(dot.color,4);assert.equal(dot.humanCanGrab,true);assert.equal(dot.nonhumanCanGrab,true);
+ level.cells[1].secondaryRaw=14;assert.equal(buildDecodedBoard(level,options).dots[1].color,0);
+ level.cells[1].secondaryRaw=1;assert.ok(levelRequirements(level,options).includes('conditional dot activation'),'inactive gate does not qualify a mask match');
+ level.cells[1].secondaryRaw=14;level.cells[1].flagsRaw=0x4019;assert.ok(levelRequirements(level,options).includes('combined special dot properties'),'other optional properties remain gated');
+});

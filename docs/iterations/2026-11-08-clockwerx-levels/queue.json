@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 32,
-  "currentAction": "Sentry32 guarded preparation224runtime/14packaging,30prior snapshots271304updates. Cold130/132,all99red exact; twohumanoneframe differences.23transfer16000modelgoal/190onsets. Native-goal-01 session87391 and visible QA112 running; separateOil diagnostic pending. Live31.",
+  "currentOrdinal": 33,
+  "currentAction": "Sinkers33 next: fresh native CLOSED/PASS2224/2824/0,p202000viewed. Sentry32accepted/active original+SVG16000/190onsets and separateOil death/reset; explicit pose/PUcallback limits. No active runner. NewactiveEL/up-down family gated; source/native investigation before implementation.",
   "levels": [
     {
       "ordinal": 1,
@@ -2272,13 +2272,20 @@
       "menuTitle": "Sentry",
       "resourceTitle": "Sentry",
       "sha256": "e74dd6076515b305b76a25183f501a2a273ee02b5d75dae4344f9eeca506fe6d",
-      "status": "guarded-preparation-native-and-svg-running",
+      "status": "accepted-with-limits",
       "nativeEvidence": [
-        "sentry/native-initial-01/report.json"
+        "sentry/native-goal-01/report.json",
+        "sentry/native-physical-samples.json",
+        "sentry/native-oil-death-01/report.json",
+        "sentry/native-oil-death-review.json"
       ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "svgStatus": "32locallyactive;original/SVG16000goals",
+      "generationConstraints": [
+        "slowenemyphaseandwallreflection",
+        "timedoccupancyatcentralpivot",
+        "separateOilactivation/deathscope"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 56,
@@ -2305,7 +2312,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2325,6 +2332,10 @@
       "preparationEvidence": [
         "sentry-preparation.md",
         "sentry-preparation.json"
+      ],
+      "reviewEvidence": [
+        "sentry-review.md",
+        "sentry-review.json"
       ]
     },
     {
@@ -2333,8 +2344,10 @@
       "menuTitle": "Sinkers",
       "resourceTitle": "Sinkers",
       "sha256": "81edccd4f42982baa7ce226395afd52a1e128d4ca57d5562a4333d294a351994",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "source-preparation",
+      "nativeEvidence": [
+        "sinkers/native-initial-01/report.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],

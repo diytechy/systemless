@@ -1,0 +1,107 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "nativeTransfers": 23,
+  "goalOnsets": 190,
+  "nativeGoalScore": 16000,
+  "qaGoalScore": 16000,
+  "sourceFilesChanged": [
+    "level.mjs",
+    "round.mjs"
+  ],
+  "runtimeChecks": 224,
+  "packagingChecks": 14,
+  "priorSceneDefinitionsIdentical": 31,
+  "payloadsUnchanged": 80,
+  "sourceCodeCommit": "54f60c53",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 6076,
+    "guest_tick": 6676,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeOilDeathReport": {
+    "status": "passed",
+    "frontend_ticks": 5841,
+    "guest_tick": 6441,
+    "budget_exhausted_frames": 0
+  },
+  "nativeTransferPoseMatches": 23,
+  "physicalSchedulePoses": {
+    "total": 180,
+    "exact": 179,
+    "oneFrameDifferences": 1
+  },
+  "oilEvidence": {
+    "originalApproachHeroPoses": 22,
+    "exactApproachHeroPoses": 22,
+    "clearPuddlePoses": 15,
+    "exactPuddleFrames": 11,
+    "oneCallbackFrameDifferences": 4,
+    "originalAndModelDeathAndReset": true
+  },
+  "limits": [
+    "Cold130/132 and physical gameplay179/180poses exact; two/one human oneframe differences retained.",
+    "PU15clear poses:11exactframes,4onecallback differences. No Oil clock correction adopted; moving DP/cloning unvisited in this scene.",
+    "Main route avoids Oil and collects5of16bonuses; separate Oil diagnostic collects7 and dies. Tyro ranking interstitial omitted; next original total proves16000gain, no score-summary capture claimed.",
+    "No new real-time cadence/resource/audio/controller/higherdifficulty/fullsave qualification."
+  ],
+  "ordinal": 32,
+  "title": "Sentry",
+  "acceptedScenes": 32,
+  "resourceId": 202,
+  "sourceSha256": "e74dd6076515b305b76a25183f501a2a273ee02b5d75dae4344f9eeca506fe6d",
+  "cold": {
+    "images": 33,
+    "poses": 132,
+    "exact": 130,
+    "redExact": 99,
+    "redTotal": 99,
+    "humanOneFrameDifferences": 2,
+    "legalIdleUpdates": 686
+  },
+  "visual": {
+    "bonusCoreSamples": 528,
+    "bonusMatches": 528
+  },
+  "progressFixture": {
+    "status": "forks-and-represented-metadata-verified-native-relaunch-verified",
+    "destinationSha256": "d0f917e709278db2ca1f586f2ae68a9484fad5df807ea2a9ea29c51ab6ecabb1",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "metadataScope": "Both forks, file type/creator/flags/dates/raw16coordinates and represented folder dates. Folder Finder information is unexposed by machfs; original source image remains byte-identical. Raw aliases retained, resolution unqualified."
+  },
+  "activation": {
+    "sizes": {
+      "sourceBytes": 180835,
+      "assetBytes": 2776434,
+      "manifestBytes": 2897721,
+      "totalBytes": 5854990
+    },
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\sentry\\previous-live-pilot",
+    "sourceFiles": 25,
+    "assets": 80
+  },
+  "browser": {
+    "normalTab": 92,
+    "normalScene": 32,
+    "paused": true,
+    "qaTab": 112,
+    "qaClosed": true
+  },
+  "evidence": [
+    "sentry/native-goal-01/report.json",
+    "sentry/native-physical-samples.json",
+    "sentry/native-oil-death-01/report.json",
+    "sentry/native-oil-death-model.json",
+    "sentry/native-oil-death-review.json",
+    "sentry/native-oil-death-transfer-review.json",
+    "sentry/checked-route.json",
+    "sentry/qa-goal-page.png",
+    "sentry/qa-goal-ax.txt"
+  ]
+}

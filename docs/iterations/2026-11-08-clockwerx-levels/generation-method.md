@@ -122,3 +122,6 @@ Hallway31 qualification confirms the dynamic pursuit constraint: original/SVG1,0
 
 
 Sentry proposals expose timed occupancy: the shortest geometric path through a slow red pivot dies. The retained candidate detours around the central hand through the lower room. It passes190finite onsets for16,000modelpoints; original/SVG confirmation and separate Oil qualification are pending. Keep enemy clock phase and wall-reflection direction in the solver state.
+
+
+Sentry32 now has original/SVG16,000goals and190finite onsets. The lower-room detour avoids the central slow hand; source wall reflection and clock phase are required state. A separate original Oil diagnostic confirms activation/death/reset but keeps four callback-frame discrepancies explicit. New-level generation remains unimplemented.

@@ -1,5 +1,5 @@
 {
-  "status": "guarded-preparation-not-accepted",
+  "status": "superseded-by-accepted-scene-review",
   "ordinal": 32,
   "title": "Sentry",
   "liveOrdinal": 31,
@@ -39,8 +39,14 @@
     "score": 16000,
     "finiteOnsetsPassed": 190,
     "oilTriggered": false,
-    "nativeReplay": "running-native-goal-01-session87391",
-    "rootVisibleReplay": "running-IAB112"
+    "nativeReplay": "closed-passed6076/6676/0-next33p202000",
+    "rootVisibleReplay": "running-IAB112",
+    "nativeTransferPoseMatches": 23,
+    "nativeFullPoses": {
+      "exact": 179,
+      "total": 180,
+      "heroOneFrameDifferences": 1
+    }
   },
   "qa": {
     "scenes": 32,
@@ -53,5 +59,10 @@
     "Separate actual-input Oil activation/failure/reset diagnostic",
     "Visible SVG goal",
     "Activation and earned-through32 fixture"
-  ]
+  ],
+  "oilDiagnostic": "running-native-oil-death-01-session24415",
+  "earnedThrough32Fixture": {
+    "sha256": "d0f917e709278db2ca1f586f2ae68a9484fad5df807ea2a9ea29c51ab6ecabb1",
+    "status": "forks-and-represented-metadata-verified-native-relaunch-pending"
+  }
 }

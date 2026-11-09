@@ -1,3 +1,5 @@
+Superseded by the [accepted review](sentry-review.md). Preparation history below retains earlier pending checks.
+
 # Sentry preparation
 
 Sentry32 is guarded preparation. Live remains at31 accepted scenes through Hallway. See the [packet](sentry-preparation.json).

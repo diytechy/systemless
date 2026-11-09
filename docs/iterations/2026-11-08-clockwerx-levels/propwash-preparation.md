@@ -1,0 +1,13 @@
+# Prop Wash46 preparation
+
+The new private Oil+EX core and separate GO/ring composition are under source review. No46scene is admitted or activated. Frozen accepted engine261dba7d and live45remain protected; root owns integration and original/browser acceptance.
+
+The actual selector7board has70present pivots, eight EX, seven spikes, eight goodies, one active kind1puddle, seven ordinary class1NPCs and three white/blue rings. Its origin is98,96; all88serialized source identities and the full clipping universe remain intact. Optional ring-mask misses retain ordinary colored pivots. The private source plan distinguishes actual sliding on droplet arrival from lethal real grabs, logical pursuit targets from physical puddle contact, current ring main colliders from shadow/permission state, and earlier Oil-layer death from continuation within a dispatched human callback.
+
+Fresh original46from earned45passed2224frontend/2824guest ticks with zero budget exhaustion. Root viewed all33cold captures. Independent all64source-pose/allstatic-pivot/all3pxEX fits produce264hypotheses/247clear. Candidate686/687legal idle matches245positions/232poses, including21of22clear hero poses. All fifteen pose differences lie in two captures; those source actors are one callback ahead, with the two red EXpositions three pixels ahead.700/701matches no poses and is rejected. The candidate remains unaccepted; no actor/clock/phase assignment corrects these observations.
+
+Independent fixed-source EXfits retain264observations/125clear. Additional raw fits retain231SPI(229clear),264GO(235clear),33PU(32clear, allframe0) and99rings(allclear:66white23/33blue51). Those are cold placements/appearance observations; they do not qualify exact animation phases, Oil wake/pursuit, ring shrink/return or gameplay.
+
+The initial private implementation reports284public/11focused checks and45prior boards/snapshots identical across392624updates. Its raw legal route reaches the goal, wakes Oil, releases a white ring and collects seven of eight goodies. Finite input and source/helper review remain separate gates; synthetic focused fixtures are not original gameplay witnesses. The existing207-frame live dot-outline profile has equal geometry and descriptor hashes to the fuller private source profile and can avoid another collision payload after final validation. Four reviewed blue-ring assets add174269raw bytes; no conversion or activation occurred.
+
+Private evidence: `D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/propwash/`, `propwash-parallel-engine/` and `oil-ex-preparation/`. Original/saves/forks/metadata remain preserved. No performance claim, Rust build, push, upload or deployment.

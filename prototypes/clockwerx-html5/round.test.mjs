@@ -438,3 +438,42 @@ test('GO time and flat score compose with a protected WY return while a fresh re
  const appearance=g.dotAnimations.renderState('b');assert.ok(appearance.main);assert.ok(appearance.overlay);
  g.reset();assert.equal(g.player.pivot,'a');assert.equal(g.remainingTime,90);assert.equal(g.childScore.totalCommitted,0);
 });
+
+
+function bombOilElevatorFixture(){
+ const f=canonicalOilFixture(),b=f.board;
+ Object.assign(b,{bombOilElevatorRules:true,bombRules:true,bombObjectInteractionRules:true,elevatorRules:true,
+  puddles:[{row:0,column:0,kind:0},{row:0,column:1,kind:2}],elevators:[{row:0,column:0,subcell:1,group:0},{row:0,column:0,subcell:3,group:1}],
+  walls:[],doors:[],switches:[],goodies:[],bombs:[{row:1,column:1,kind:10,flags:0},{row:1,column:2,kind:4},{row:1,column:3,kind:0}]});
+ b.dots.forEach((d,i)=>Object.assign(d,{row:0,column:i,ring:false,bonus:false,sourceInBackground:false,kind:'dot',motion:'up-down',upDown:{group:i,initialLowered:false,x:d.x,y:d.y}}));
+ Object.assign(b.player,{sourceSlot:0});
+ const shape={left:-1,top:-1,right:1,bottom:1,rows:null,outlineIndex:0,flipY:false};
+ f.options.dotOutlines.groups['300'].frames=Array.from({length:100},()=>({...shape}));
+ f.options.elevatorOutlines={groups:{3400:{frames:Array.from({length:10},()=>({...shape}))},300:f.options.dotOutlines.groups['300']}};
+ f.options.bombOutlines={groups:{1800:{frames:Array.from({length:11},()=>({...shape,left:-100,top:-100,right:100,bottom:100}))}}};
+ f.options.bombRoutes=[10,4,0].map(kind=>({kind,points:[[0,0],[1,2]],entryLeg:4,forwardExit:4,reverseExit:1,bomb:kind===0,flipVertical:false,flipHorizontal:false,swap:false}));
+ return f;
+}
+
+test('mixed blast dispatch skips stationary up/down dots, burns visible moving bodies and retains Oil allocations',()=>{
+ const {board,options}=bombOilElevatorFixture(),g=new SourceRound(board,options),scene=g.bombScene;
+ scene.effect({type:'stationary',target:'DO',grid:{row:0,column:0}});assert.equal(board.dots.some(d=>d.burnt),false);
+ scene.effect({type:'moving',target:'DO',grid:{row:0,column:0},descriptorFrame:3});assert.equal(board.dots.every(d=>d.burnt),true);assert.equal(board.dots.every(d=>d.motion==='up-down'),true);
+ g.oil.createDroplet(1,{onDeath:()=>assert.fail('not on human pivot'),isFrozen:()=>false});const allocations=g.oil.allocations;
+ scene.effect({type:'moving',target:'DP',grid:{row:0,column:0},descriptorFrame:3});assert.equal(g.oil.droplets[0].state.visible,false);assert.equal(g.oil.droplets[0].state.clockAttached,false);assert.equal(g.oil.allocations,allocations);assert.equal(g.oil.puddles.length,2);
+});
+
+test('mixed control burn stamps precede a later crater, retain contacts, and reset with the round',()=>{
+ const {board,options}=bombOilElevatorFixture(),g=new SourceRound(board,options),scene=g.bombScene;
+ g.elevators.contact('held',0);const before=g.elevators.snapshot();
+ scene.effect({type:'stationary',target:'EL',grid:{row:0,column:0}});scene.effect({type:'paint-crater',grid:{row:0,column:0}});
+ const after=g.elevators.snapshot();assert.equal(after.controls[0].occupants,1);assert.deepEqual(after.dots,before.dots);assert.equal(after.controls.every(c=>c.burnt&&!c.visible),true);
+ assert.deepEqual(scene.snapshot().backgroundPaints,[{kind:'EL',index:0,frame:9},{kind:'EL',index:1,frame:9},{kind:'crater',row:0,column:0}]);
+ g.reset();assert.deepEqual(scene.snapshot().backgroundPaints,[]);assert.equal(g.elevators.snapshot().controls.every(c=>c.visible&&!c.burnt&&c.occupants===0),true);
+});
+
+test('mixed bomb/Oil/elevator admission rejects missing burnt outlines and narrower flags cannot enable it',()=>{
+ for(const mutate of [f=>{f.board.bombOilElevatorRules=false;},f=>{f.options.dotOutlines.groups['300'].frames.length=17;},f=>{f.options.dotOutlines.groups['300'].frames[92]=null;},f=>{f.board.puddles[0].kind=3;},f=>{f.board.elevators[0].subcell=2;}]){
+  const f=bombOilElevatorFixture();mutate(f);assert.throws(()=>new SourceRound(f.board,f.options),/Qualified|Separate/);
+ }
+});

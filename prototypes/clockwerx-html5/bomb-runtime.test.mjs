@@ -227,3 +227,13 @@ test('freeze defers all callbacks and contact; thaw coalesces elapsed counts onc
  f.runtime.freeze(false);f.runtime.observeSpark(0,999);f.runtime.observeExplosion(0,999);
  assert.equal(f.runtime.snapshot().sparks[0].frame,4);assert.equal(f.runtime.snapshot().explosions[0].frame,1);
 });
+
+
+test('moving Oil/elevator scope is separate from legacy bomb object scope and rejects unrelated hazards',()=>{
+ const moving=dot('moving',1,1,{upDown:{group:0},motion:'up-down',sourceInBackground:false,sourceCollidable:true});
+ const scope={dots:[moving],actors:[hero()],activeSections:{PU:1,EL:2},allowObjectInteractions:true};
+ assert.throws(()=>assertBombRuntimeScope(scope),/dynamic/);assert.equal(assertBombRuntimeScope({...scope,allowMovingOilElevators:true}),true);
+ assert.throws(()=>assertBombRuntimeScope({...scope,allowMovingOilElevators:true,allowObjectInteractions:false}),/object interaction/);
+ for(const kind of ['SP','DR','DS','HY'])assert.throws(()=>assertBombRuntimeScope({...scope,allowMovingOilElevators:true,activeSections:{[kind]:1}}),/Unqualified/);
+ moving.upDown.group=2;assert.throws(()=>assertBombRuntimeScope({...scope,allowMovingOilElevators:true}),/plain up\/down/);
+});

@@ -1,5 +1,5 @@
 {
-  "status": "unlinked-blast-and-class2-preparation-not-accepted",
+  "status": "guarded-mixedscope-native-cold-preparation-not-accepted",
   "ordinal": 36,
   "title": "Stutter",
   "liveOrdinal": 35,
@@ -43,7 +43,7 @@
     "observed": "36Stutter/playerp/211000"
   },
   "validation": {
-    "runtimeChecks": 247,
+    "runtimeChecks": 252,
     "priorDecodedBoards": 34,
     "priorSnapshots": 34,
     "priorReplayUpdates": 295736,
@@ -59,18 +59,28 @@
     "stutter/class2-preparation-review.json",
     "stutter/native-source-pose-fits.json",
     "stutter/native-elevator-fits-offset36.json",
-    "stutter/runtime-tests-unlinked-02.log"
+    "stutter/runtime-tests-unlinked-02.log",
+    "stutter/cold-public-678.json",
+    "stutter/native-cold-control-comparison.json",
+    "stutter/native-early-01/report.json",
+    "stutter/early-public-38.json",
+    "stutter/native-carried-orbital-01/report.json",
+    "stutter/carried-public-438.json",
+    "stutter/burnt-control-art-review.json",
+    "stutter/mixed-tests-02.log",
+    "stutter/mixed-tests-03.log",
+    "stutter/candidate-ignition-04.json"
   ],
   "pending": [
-    "mixedBO/Oil/EL/WY/wall runtime scope andcallbackwiring",
-    "ELburntframe9backgroundstamp/crater ordering",
-    "coldclass2orbital/nativecoupledpose comparison",
-    "inactivegroup2dotpropertyclearing",
-    "extendedDOTbodyprofiles forburntOilcollider",
-    "candidate/original/SVGgoals"
+    "human-match ignition/barrier route",
+    "finite held-input checks",
+    "original physical goal and object witnesses",
+    "visible SVG goal/activation review"
   ],
   "limits": [
-    "New blasthelpers are unlinked; scene36 remainsgated/notplayable inSVG.",
+    "No36live manifest; candidate scope is not acceptance.",
+    "Group0 surface phase, shared callback edges and orbital blink boundaries remain unqualified.",
+    "ELburnt appearance and mixed blast object interactions have source/unit evidence but no original gameplay witness yet.",
     "No new real-time cadence/resource/audio/controller/save qualification."
   ],
   "nativeIndependentFits": {
@@ -82,11 +92,51 @@
     "controlImages": 33,
     "controlObservations": 66,
     "controlBases": 2,
-    "coupledModelComparison": false
+    "coupledModelComparison": true
   },
   "class2Preparation": {
     "sourceDivisor": 8,
     "sourceMultiplier": 3,
-    "scope": "explicit free-orbital only; no live manifest opt-in; native qualification pending"
+    "scope": "explicit free-orbital only; sixclear early poses match;35of38clear carried poses match with three callback/blink differences; no live opt-in"
+  },
+  "coldComparison": {
+    "legalWarmUpdates": 678,
+    "clear": 210,
+    "positions": 210,
+    "poses": 189,
+    "oneFrameDifferences": 21,
+    "controlGlyphs": 66,
+    "controlMatches": 66,
+    "clearCores": 249,
+    "coreMatches": 243,
+    "inactiveCoreMatches": 66,
+    "clearSurfaces": 397,
+    "surfaceMatches": 331
+  },
+  "earlyComparison": {
+    "hypotheses": 48,
+    "clear": 43,
+    "positions": 43,
+    "poses": 43,
+    "class2Clear": 6,
+    "class2Matches": 6
+  },
+  "carriedComparison": {
+    "hypotheses": 368,
+    "clear": 296,
+    "positions": 293,
+    "poses": 268,
+    "class2Clear": 38,
+    "class2Matches": 35,
+    "nativeFrontend": 1234,
+    "nativeGuest": 1834,
+    "budgetExhausted": 0
+  },
+  "candidateIgnition": {
+    "transfers": 10,
+    "bonus": 3000,
+    "oilAllocations": 0,
+    "normalizedSeconds": 37.733333333331835,
+    "nativeWitness": false
   }
 }

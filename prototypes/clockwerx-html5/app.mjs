@@ -109,11 +109,13 @@ function drawDoors(){
  }
  for(const [i,s] of (game.board.switches||[]).entries())if(s.visible!==false)draw('switches',state.switches[i].frame,s);
 }
-function drawElevators(){
+function drawElevators(stage='all',paint){
  if(!game.elevators)return;const spec=manifest.vectorAssets?.elevators;
  if(!spec)throw new Error('Qualified elevator artwork required');
  const atlas=spec.controls,draw=(frame,c)=>{const f=atlas.frames.find(f=>f.frame===frame);if(!f)throw new Error('Missing elevator artwork');if(!f.empty)ctx.drawImage(images[atlas.file],f.sx,f.sy,f.width,f.height,c.x+f.x,c.y+f.y,f.width,f.height);};
- for(const c of game.elevators.snapshot().controls){draw(c.group,c);if(c.visible)draw(c.frame,c);}
+ const controls=game.elevators.snapshot().controls;
+ if(paint){draw(paint.frame,controls[paint.index]);return;}
+ for(const c of controls){if(stage!=='glyphs')draw(c.group,c);if(stage!=='bodies'&&c.visible)draw(c.frame,c);}
 }
 function drawOil(){
  const spec=manifest.vectorAssets?.oil;if(!spec||!game.oil)return;
@@ -173,7 +175,10 @@ function drawBombs(stage){
  const grid=(g,x,y)=>scene.gridPixel(g,{x,y}),state=scene.snapshot();
  if(stage==='background'){
   for(const b of scene.runtime.bombs)draw('1400',b.kind,grid(b,6,6));
-  for(const g of state.craters)draw('1400',14,grid(g,6,6));
+  if(game.board.bombOilElevatorRules){
+   drawElevators('bodies');
+   for(const paint of state.backgroundPaints)if(paint.kind==='EL')drawElevators('paint',paint);else draw('1400',14,grid(paint,6,6));
+  }else for(const g of state.craters)draw('1400',14,grid(g,6,6));
  }
  if(stage==='upper'){
   for(const s of state.matches)if(s.visible)draw('1600',s.frame,grid(s.grid,31,31));
@@ -192,7 +197,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
  drawBombs('background');drawWalls();for(const d of game.board.dots)drawDot(d);
  drawDoors();
- drawElevators();
+ drawElevators(game.board.bombOilElevatorRules?'glyphs':'all');
  drawBombs('upper');
  drawOil();
  drawSpikes();
@@ -231,7 +236,7 @@ async function loadScene(scene){
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
   const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile'),elevatorOutlines=await profile('elevatorOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
   board.player.group=settings.black?4300:700;
    game=new SourceRound(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
   $('presentation').textContent=board.canonicalPlayerRules?'Private SVG pilot · source map and callback-stepped Child movement with smooth SVG drawing.': 'Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';

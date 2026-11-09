@@ -152,3 +152,6 @@ Stutter36 adds destructible-control liveness, burnt appearance, allocated-but-hi
 
 
 Stutter36requires distinguishing currentlyallocated droplet slots from visible sprites, movingmain-body outline from static grid membership, and class2multiplied callbacks from presentation smoothing. Independentnativefits are saved but not yet coupled-runtime witnesses. ELburnt-background/crater order andclass2orphan timing remain pending.
+
+
+Stutter36 sourcewall outline graph disconnects spawn from goal before destruction. A distance heuristic must account for destructible barriers and intermediate match activation; Manhattan distance repeatedly favored dead ends. This is planning evidence only. Every candidate branch must reconstruct fresh unmodified-map legal input and then pass native/visible goal checks. Blink/callback/surface-phase uncertainty remains explicit; no new-level generator is implemented.

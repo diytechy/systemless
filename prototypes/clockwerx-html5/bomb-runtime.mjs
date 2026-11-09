@@ -27,14 +27,15 @@ function staticDot(d,allowObjectInteractions=false){
 /** Call with the mode-filtered inventory before wiring a board. These are
  * normalized declarations, not a raw-level decoder. Empty absent sections
  * are permitted; future active combinations fail closed. */
-export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false}={}){
+export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false}={}){
  if(mode!=='Child')throw new Error('Only Child bomb scope is supported');
  if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
- for(const d of dots)staticDot(d,allowObjectInteractions);
+ if(allowMovingOilElevators&&!allowObjectInteractions)throw new Error('Moving Oil/elevator blasts require object interaction rules');
+ for(const d of dots)if(allowMovingOilElevators&&d.upDown)plainUpDownDot(d);else staticDot(d,allowObjectInteractions);
  for(const a of actors)actor(a,allowObjectInteractions);
  for(const [kind,n]of Object.entries(activeSections)){
   integer(n);
-  if(n&&!['SP','WL','BO','GO','WP','WA','TX',...(allowObjectInteractions?['DR','DS','WY']:[])].includes(kind))throw new Error(`Unqualified active bomb combination: ${kind}`);
+  if(n&&!(allowMovingOilElevators?['WL','BO','GO','WP','WA','TX','PU','EL','WY']:['SP','WL','BO','GO','WP','WA','TX',...(allowObjectInteractions?['DR','DS','WY']:[])]).includes(kind))throw new Error(`Unqualified active bomb combination: ${kind}`);
  }
  return true;
 }
@@ -77,15 +78,17 @@ function mutateBombDotHit(dot,onChange){
   burntFrame:dot.burnt&&!dot.waystation?92+(dot.color??0):null,sourceBomb:true});
  return changed;
 }
-// Unlinked moving-DO preparation. The live scene supplies current main-RO
-// visibility and outline collision; source scope still rejects dynamic maps.
+function plainUpDownDot(dot){
+ grid(dot);
+ if(dot.motion!=='up-down'||![0,1].includes(dot.upDown?.group)||dot.moving||dot.movingProgram||dot.ring||dot.protected||dot.waystation||dot.transferDeath||dot.slowdown||dot.connector||dot.sourceBombDynamic||dot.sourceInBackground!==false||typeof dot.sourceCollidable!=='boolean'||typeof dot.humanCanGrab!=='boolean'||typeof dot.bonus!=='boolean')throw new Error('Explicit plain up/down main-sprite state required');
+}
+// The live mixed scene supplies current main-RO visibility and outlines.
 export function bombMovingDots(dots,collides,onChange){
  if(!Array.isArray(dots))throw new TypeError('Source dot records required');
  fn(collides,'moving dot outline');fn(onChange,'dot appearance');const changed=[];
  for(const dot of dots){
   if(!dot.upDown)continue;
-  grid(dot);
-  if(dot.motion!=='up-down'||dot.moving||dot.movingProgram||dot.ring||dot.protected||dot.waystation||dot.transferDeath||dot.slowdown||dot.connector||dot.sourceBombDynamic||dot.sourceInBackground!==false||typeof dot.sourceCollidable!=='boolean'||typeof dot.humanCanGrab!=='boolean'||typeof dot.bonus!=='boolean')throw new Error('Explicit plain up/down main-sprite state required');
+  plainUpDownDot(dot);
   if(!dot.sourceCollidable||!sync(collides,dot))continue;
   if(mutateBombDotHit(dot,onChange))changed.push(dot.id);
  }
@@ -98,7 +101,7 @@ export function bombStationaryDots(dots,origin,onChange,options){
  const changed=[];
  for(const [dr,dc]of [[0,0],[1,0],[0,1],[1,1]]){
   const dot=dots.find(d=>d.row===origin.row+dr&&d.column===origin.column+dc);
-  if(dot&&applyBombDotHit(dot,onChange,options))changed.push(dot.id);
+  if(dot&&!dot.upDown&&applyBombDotHit(dot,onChange,options))changed.push(dot.id);
  }
  return changed;
 }
@@ -150,7 +153,7 @@ function routeMap(routes,bombs){
  * sprite's actual place in the caller's cached-next SU traversal. */
 export class BombRuntime {
  constructor({bombs=[],goodies=[],routes,mode='Child',unsupported=[],scope,scopeMode='bombs'},adapters){
-  if(mode!=='Child'||!Array.isArray(unsupported)||unsupported.length)throw new Error('Only bounded static Child bomb combinations are supported');
+  if(mode!=='Child'||!Array.isArray(unsupported)||unsupported.length)throw new Error('Only bounded Child bomb combinations are supported');
   if(!Array.isArray(bombs)||bombs.length>BOMB_LIMITS.fuses)throw new RangeError('BO capacity exceeded');
   if(scopeMode==='goodies'){
    if(!scope)throw new Error('Explicit goodie scope required');

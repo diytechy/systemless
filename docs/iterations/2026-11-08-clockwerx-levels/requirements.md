@@ -239,3 +239,6 @@ Stutter36sourcepreparation separates moving/stationary DOTblast dispatch, DPvisi
 
 
 Stutter36unlinkedpreparation now includes a separate freeclass2orbital capability(divisor8/multiplier3), per-multiplied-frame callbacks, movingDOoutline/visibility thenhumanavailability, and burnt main-body Oilcollision. Mixedscope remainsrejected; no nativeclass2qualification/liveopt-in.247runtime/15packaging/34priorregressions295736updates pass.
+
+
+Stutter36 guarded mixedscope now dispatches movingDOT/DP/EL blasts and preserves backgroundpaint order; no live36opt-in. Inactivegroup2ordinarycores66/66, earlyclass2sixposes and35/38carriedposes match. Shared callback/blink edges and66group0surfacephase observations remain unqualified. Source/unit destruction contracts do not establish visited original gameplay behavior. See[preparation](stutter-preparation.md).

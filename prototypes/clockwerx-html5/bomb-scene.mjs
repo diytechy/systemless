@@ -1,7 +1,8 @@
-// Static Child BO/GO scene adapter. Original paths and outlines are injected.
-import {BombRuntime,BOMB_CLOCKS,BOMB_SPRITES,bombStationaryDots,bombActors} from './bomb-runtime.mjs';
+// Gated Child BO/GO scene adapter. Original paths and outlines are injected.
+import {BombRuntime,BOMB_CLOCKS,BOMB_SPRITES,bombStationaryDots,bombMovingDots,bombActors} from './bomb-runtime.mjs';
 import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
 import {bombHitsStationarySpike,bombHitsSwitch} from './bombs.mjs';
+import {dotBodyFrame} from './dots.mjs';
 
 export class BombScene {
  constructor(round,{outlines,routes,worldOutline}){
@@ -17,8 +18,8 @@ export class BombScene {
   }
   this.original={walls:structuredClone(b.walls),spikes:structuredClone(b.spikes),switches:structuredClone(b.switches),dots:b.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind}))};
   this.clocks=Object.fromEntries(Object.entries(BOMB_CLOCKS).map(([k,v])=>[k,createSourceTimerChain(v.scaled?Math.floor(v.period*100/60):v.period,1)]));
-  this.flourishClock=createSourceTimerChain(40,1);this.scoreClock=createSourceTimerChain(80,1);this.effects=[];this.craters=[];this.score=0;this.layer3=[];this.layer2=[];
-  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{dots:b.dots,actors:[round.player,...round.enemies],allowObjectInteractions:b.bombObjectInteractionRules===true,activeSections:{SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length}}},{
+  this.flourishClock=createSourceTimerChain(40,1);this.scoreClock=createSourceTimerChain(80,1);this.effects=[];this.craters=[];this.backgroundPaints=[];this.score=0;this.layer3=[];this.layer2=[];
+  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{dots:b.dots,actors:[round.player,...round.enemies],allowObjectInteractions:b.bombObjectInteractionRules===true,allowMovingOilElevators:b.bombOilElevatorRules===true,activeSections:{SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length,EL:b.elevators?.length??0}}},{
    clock:k=>this.clocks[k].advance(0).clientCount,latchedTick:()=>round.guestTicks,freshTick:()=>round.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
    gridPixel:(g,o)=>this.gridPixel(g,o),effect:e=>this.effect(e),collides:(kind,s,a)=>outlineCollision(this.shape(kind,s),round.collider(a))});
   this.layer3.push(...this.runtime.matches.map((_,index)=>({kind:'LI',index})));
@@ -51,13 +52,19 @@ export class BombScene {
     for(const w of b.walls)if((w.frame>=4&&w.row===g.row&&w.column===g.column)||(w.frame===0&&w.column===g.column&&[g.row,g.row+1].includes(w.row))||(w.frame===1&&w.row===g.row&&[g.column,g.column+1].includes(w.column)))w.visible=false;
     b.wallRevision=(b.wallRevision??0)+1;
    }
+   if(e.target==='EL'&&b.bombOilElevatorRules)for(const change of r.elevators.bomb(g))this.backgroundPaints.push({kind:'EL',index:change.index,frame:change.backgroundFrame});
    if(e.target==='DO')bombStationaryDots(b.dots,g,(d,change)=>{if(!d.bonus&&d.kind==='bonus')d.kind='dot';if(b.bombObjectInteractionRules&&change.changed)r.dotAnimations?.bombLookChanged(d.id);},{allowObjectInteractions:b.bombObjectInteractionRules===true});
+  }
+  if(e.type==='moving'&&b.bombOilElevatorRules&&['DO','DP'].includes(e.target)){
+   const blast=this.shape('BO',{grid:e.grid},e.descriptorFrame);
+   if(e.target==='DP')for(const index of r.oil.bomb(blast))r.event('bomb-droplet-hidden',r.player,{id:index});
+   else bombMovingDots(b.dots,d=>outlineCollision(blast,this.worldOutline(r.elevatorOutlines,300,dotBodyFrame(d),{x:d.x-16,y:d.y-15})),(d,change)=>{if(!d.bonus&&d.kind==='bonus')d.kind='dot';if(change.changed)r.dotAnimations?.bombLookChanged(d.id);});
   }
   if(e.type==='moving'&&e.target==='WA'){
    const blast=this.shape('BO',{grid:e.grid},e.descriptorFrame);
    bombActors([r.player,...r.enemies],{guestTick:r.guestTicks,allowObjectInteractions:b.bombObjectInteractionRules===true,collides:a=>outlineCollision(blast,r.collider(a)),onDeath:()=>r.beginDeath({reason:'bomb',sourceReason:-1}),onHidden:a=>r.event('bomb-hidden',a)});
   }
-  if(e.type==='paint-crater')this.craters.push({...e.grid});
+  if(e.type==='paint-crater'){this.craters.push({...e.grid});if(b.bombOilElevatorRules)this.backgroundPaints.push({kind:'crater',...e.grid});}
   if(e.type==='death')r.beginDeath({reason:'spark',sourceReason:e.reason});
   if(e.type==='flourish'||e.type==='floating-score')this.effects.push({kind:e.type,point:this.gridPixel(e.grid,e.gridOffset),frame:0,visible:true,callbacks:0,count:(e.type==='flourish'?this.flourishClock:this.scoreClock).advance(0).clientCount,finish:e.finish});
   if(e.type==='add-time')r.remainingTime+=e.seconds;
@@ -69,7 +76,7 @@ export class BombScene {
   const r=this.round,b=r.board;b.walls=structuredClone(this.original.walls);b.spikes=structuredClone(this.original.spikes);b.wallRevision=(b.wallRevision??0)+1;
   for(const saved of this.original.dots){const d=b.dots.find(d=>d.id===saved.id);if(b.bombObjectInteractionRules&&d.burnt)r.dotAnimations?.bombLookChanged(d.id);Object.assign(d,saved);delete d.burnt;}
   for(let i=0;i<b.switches.length;i++){delete b.switches[i].visible;Object.assign(b.switches[i],this.original.switches[i]);}
-  this.craters=[];this.effects=[];this.runtime.reset();this.completed=false;if(restartLevel)this.score=0;
+  this.craters=[];this.backgroundPaints=[];this.effects=[];this.runtime.reset();this.completed=false;if(restartLevel)this.score=0;
  }
- snapshot(){return {...this.runtime.snapshot(),craters:structuredClone(this.craters),effects:this.effects.map(({finish,...e})=>({...e,point:{...e.point}})),score:this.score,completed:!!this.completed};}
+ snapshot(){return {...this.runtime.snapshot(),...(this.round.board.bombOilElevatorRules?{backgroundPaints:structuredClone(this.backgroundPaints)}:{}),craters:structuredClone(this.craters),effects:this.effects.map(({finish,...e})=>({...e,point:{...e.point}})),score:this.score,completed:!!this.completed};}
 }

@@ -390,3 +390,23 @@ test('inactive ring qualification preserves a plain pivot and permission color w
  level.cells[1].secondaryRaw=1;assert.ok(levelRequirements(level,options).includes('conditional dot activation'),'inactive gate does not qualify a mask match');
  level.cells[1].secondaryRaw=14;level.cells[1].flagsRaw=0x4019;assert.ok(levelRequirements(level,options).includes('combined special dot properties'),'other optional properties remain gated');
 });
+
+
+test('bomb/Oil/two-group elevators have an explicit gate and clear only qualified inactive properties',()=>{
+ const level=fixture();level.header.timeLimitRaw=270;level.blocks=level.blocks.filter(b=>b.kind!=='SP');
+ Object.assign(level.cells[0],{flagsRaw:0x101});Object.assign(level.cells[1],{flagsRaw:0x201});
+ level.cells.push({present:true,flagsRaw:0x301,secondaryRaw:8,row:1,column:0});
+ level.blocks[0].records[2].version12ByteRaw=0;
+ level.blocks.push({kind:'EL',count:2,records:[{rawWords:[0,0,1,0,0,15]},{rawWords:[0,1,3,1,0,15]}]},
+  {kind:'PU',count:2,records:[{rawWords:[0,0,0,0,15]},{rawWords:[0,1,2,0,15]}]},
+  {kind:'BO',count:1,records:[{rawWords:[0,0,0,0]}]});
+ const options={angularSpeed:TAU,allowElevators:true,allowOil:true,allowCanonicalOil:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true,allowBombs:true,allowBombObjectInteractions:true,allowInactiveUpDownDots:true};
+ assert.ok(levelRequirements(level,options).length>0);
+ const qualified={...options,allowBombOilElevators:true},board=buildDecodedBoard(level,qualified);
+ assert.equal(board.bombOilElevatorRules,true);assert.deepEqual(board.dots.slice(0,2).map(d=>d.upDown.group),[0,1]);
+ assert.equal(board.dots[2].cell,1);assert.equal(board.dots[2].motion,'static');assert.equal(board.dots[2].present,true);assert.equal(level.cells[2].flagsRaw,0x301);
+ assert.ok(levelRequirements(level,{...qualified,allowInactiveUpDownDots:false}).length>0);
+ level.cells[2].secondaryRaw=15;assert.ok(levelRequirements(level,qualified).includes('bomb/Oil/elevators require plain raised white group0/1 dots'));level.cells[2].secondaryRaw=8;
+ level.blocks.find(b=>b.kind==='PU').records[0].rawWords[2]=3;assert.ok(levelRequirements(level,qualified).includes('bomb/Oil/elevators require kind0/2 Oil and a bomb inventory'));level.blocks.find(b=>b.kind==='PU').records[0].rawWords[2]=0;
+ level.blocks.find(b=>b.kind==='EL').records[0].rawWords[2]=2;assert.ok(levelRequirements(level,qualified).includes('bomb/Oil/elevators require group0 upper and group1 center controls'));
+});

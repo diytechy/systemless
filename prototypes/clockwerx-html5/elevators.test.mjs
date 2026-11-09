@@ -1,7 +1,19 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {decodeElevatorRecord,activeElevatorSpecs,elevatorGeometry,createUpDownState,activateUpDownState,advanceUpDownState,advanceUpDownSurface,upDownPlacement,createElevatorSystem,findElevatorContact} from './elevators.mjs';
+import {decodeElevatorRecord,activeElevatorSpecs,elevatorGeometry,bombHitsElevatorControl,createUpDownState,activateUpDownState,advanceUpDownState,advanceUpDownSurface,upDownPlacement,createElevatorSystem,findElevatorContact} from './elevators.mjs';
 const record=(mask=15)=>({rawWords:[2,3,3,1,0,mask]});
+
+test('EL blasts use arm-specific grids, retain contacts and restore on round reset',()=>{
+ const spec={row:2,column:3,group:1},hit=(subcell,row,column)=>bombHitsElevatorControl({...spec,subcell},{row,column});
+ assert.equal(hit(1,1,3),true);assert.equal(hit(1,2,3),true);assert.equal(hit(1,0,3),false);assert.equal(hit(1,2,2),false);
+ assert.equal(hit(2,2,2),true);assert.equal(hit(2,2,3),true);assert.equal(hit(2,1,3),false);assert.equal(hit(2,2,1),false);
+ assert.equal(hit(3,2,3),true);assert.equal(hit(3,1,3),false);assert.throws(()=>hit(0,2,3),/subcell/);
+ const system=createElevatorSystem([{...spec,subcell:3}],[{id:'dot',group:1}]);system.contact('hero',0);const before=system.snapshot();
+ assert.deepEqual(system.bomb({row:2,column:3}),[{type:'bombed',index:0,backgroundFrame:9}]);const burnt=system.snapshot();
+ assert.deepEqual(burnt.dots,before.dots);assert.equal(burnt.controls[0].visible,false);assert.equal(burnt.controls[0].burnt,true);assert.equal(burnt.controls[0].occupants,1);
+ assert.deepEqual(system.contact('late arrival',0),[]);assert.deepEqual(system.contact('late arrival',-1),[]);system.contact('hero',-1);assert.equal(system.snapshot().controls[0].occupants,0);
+ system.reset(10,8);assert.equal(system.snapshot().controls[0].visible,true);assert.equal(system.snapshot().controls[0].burnt,undefined);assert.equal(system.snapshot().dots[0].phase,12);
+});
 test('EL keeps subcell and group separate and filters activation before capacity',()=>{
  assert.deepEqual(decodeElevatorRecord(record()),{row:2,column:3,subcell:3,group:1,activationMask:15});
  assert.equal(activeElevatorSpecs([record(14),record(15)]).length,1);

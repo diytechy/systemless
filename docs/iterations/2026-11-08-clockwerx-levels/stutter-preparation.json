@@ -1,0 +1,73 @@
+{
+  "status": "unlinked-blast-preparation-not-accepted",
+  "ordinal": 36,
+  "title": "Stutter",
+  "liveOrdinal": 35,
+  "resourceId": 142,
+  "sourceSha256": "904ba13112fa37c386d45651c3a0a06b69d0fe0e5846c3edaaa5884091af1b2a",
+  "activeInventory": {
+    "pivots": 81,
+    "bonuses": 10,
+    "goals": 1,
+    "wallRecords": 15,
+    "puddles": 2,
+    "puddleKinds": [
+      0,
+      2
+    ],
+    "bombRecords": 18,
+    "matches": 1,
+    "fuses": 16,
+    "terminalBombs": 1,
+    "goodies": 3,
+    "checkpoints": 1,
+    "controls": 2,
+    "activeUpDownGroup0": 6,
+    "activeUpDownGroup1": 7,
+    "inactiveGroup2DotProperties": 2,
+    "ordinaryNpc": 4,
+    "orbitalNpc": 3,
+    "orbitalSpeedClasses": [
+      1,
+      4,
+      2
+    ],
+    "inactiveNpc": 4
+  },
+  "nativeCold": {
+    "status": "closed-passed",
+    "frontendTicks": 2224,
+    "guestTicks": 2824,
+    "budgetExhausted": 0,
+    "images": 33,
+    "observed": "36Stutter/playerp/211000"
+  },
+  "validation": {
+    "runtimeChecks": 243,
+    "priorDecodedBoards": 34,
+    "priorSnapshots": 34,
+    "priorReplayUpdates": 295736
+  },
+  "privateEvidence": [
+    "stutter/source-inventory.json",
+    "stutter/source-hooks-discovery.json",
+    "stutter/source-behavior-notes.json",
+    "stutter/native-initial-01/report.json",
+    "stutter/runtime-tests-unlinked-01.log",
+    "stutter/prior-scenes-review.json"
+  ],
+  "pending": [
+    "movingDO blast dispatch andappearance",
+    "ELburntframe9backgroundstamp rendering/nativewitness",
+    "DPblastcallback wiring/nativewitness",
+    "explicitmixedBO/Oil/EL/WY/wall composition",
+    "class2freeorbital timerqualification",
+    "inactivegroup2dotpropertyclearing",
+    "coldposes/controlphase comparisons",
+    "candidate/original/SVGgoals"
+  ],
+  "limits": [
+    "New blasthelpers are unlinked; scene36 remainsgated/notplayable inSVG.",
+    "No new real-time cadence/resource/audio/controller/save qualification."
+  ]
+}

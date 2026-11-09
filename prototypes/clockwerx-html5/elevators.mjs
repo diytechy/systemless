@@ -23,6 +23,13 @@ export function elevatorGeometry(spec,origin={x:74,y:72}){
  // fixes this origin; the 23px background body is not the collision shape.
  return {x:origin.x+s.column*48-36+24*(s.subcell%2),y:origin.y+s.row*48-35+24*Math.floor(s.subcell/2)};
 }
+// ELBombed uses orientation-specific source grid bounds, independently of
+// the pressure glyph's collision outline or the round background body.
+export function bombHitsElevatorControl(control,grid){
+ if(!integer(control?.row,0,7)||!integer(control?.column,0,10)||!integer(control?.subcell,1,3)||!integer(grid?.row,0,6)||!integer(grid?.column,0,9))throw new RangeError('Qualified EL blast grid and subcell1..3 required');
+ const dr=control.row-grid.row,dc=control.column-grid.column;
+ return control.subcell===1?dc===0&&dr>=0&&dr<2:control.subcell===2?dr===0&&dc>=0&&dc<2:dr===0&&dc===0;
+}
 export function createUpDownState({group,initialLowered=false,clockCount=0,surfaceCount=0}){
  if(!integer(group,0,2)||typeof initialLowered!=='boolean'||!integer(clockCount,0,Number.MAX_SAFE_INTEGER)||!integer(surfaceCount,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Explicit source up/down state required');
  return {group,phase:initialLowered?0:12,step:0,humanAvailable:!initialLowered,mainVisible:!initialLowered,clockReference:clockCount,surfaceFrame:126+9*group+(initialLowered?0:1),surfaceReference:surfaceCount};
@@ -65,9 +72,14 @@ export function createElevatorSystem(specs,dotSpecs,{origin={x:74,y:72},clockCou
  if(!Array.isArray(specs)||specs.length>12||!Array.isArray(dotSpecs)||dotSpecs.length>88)throw new RangeError('Source EL/dot capacities required');
  const ids=new Set();for(const d of dotSpecs){if(ids.has(d.id))throw new Error('Unique source dot identities required');ids.add(d.id);createUpDownState({...d,clockCount});}
  const controls=specs.map((spec,index)=>({...spec,...elevatorGeometry(spec,origin),index,visible:true,occupants:0,frame:3+2*spec.group})),contacts=new Map();let dots;
- const reset=(count,surface=0)=>{if(!integer(count,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Source count required');contacts.clear();for(const c of controls){c.occupants=0;c.frame=3+2*c.group;c.visible=true;}dots=dotSpecs.map(d=>({id:d.id,...createUpDownState({...d,clockCount:count,surfaceCount:surface})}));};reset(clockCount,surfaceCount);
+ const reset=(count,surface=0)=>{if(!integer(count,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Source count required');contacts.clear();for(const c of controls){c.occupants=0;c.frame=3+2*c.group;c.visible=true;delete c.burnt;}dots=dotSpecs.map(d=>({id:d.id,...createUpDownState({...d,clockCount:count,surfaceCount:surface})}));};reset(clockCount,surfaceCount);
  return {
   reset,
+  // Unlinked blast preparation: the scene must also reproduce the source
+  // frame9 background stamp. Hiding retains contacts until the actor leaves.
+  bomb(grid){
+   return controls.filter(c=>bombHitsElevatorControl(c,grid)).map(c=>{c.visible=false;c.burnt=true;return {type:'bombed',index:c.index,backgroundFrame:9};});
+  },
   contact(actor,nextIndex){
    if(typeof actor!=='string'||!integer(nextIndex,-1,controls.length-1))throw new RangeError('Actor identity and first source contact required');
    const old=contacts.get(actor)??-1;if(old===nextIndex)return [];
@@ -80,7 +92,7 @@ export function createElevatorSystem(specs,dotSpecs,{origin={x:74,y:72},clockCou
     events.push({type:'enter',actor,index:nextIndex,occupants:next.occupants});
    }
    if(old>=0){const previous=controls[old];previous.occupants--;if(previous.occupants<0)throw new Error('Source control occupancy underflow');if(!previous.occupants)previous.frame=3+2*previous.group;events.push({type:'leave',actor,index:old,occupants:previous.occupants});}
-   contacts.set(actor,nextIndex);return events;
+   contacts.set(actor,next?.visible?nextIndex:-1);return events;
   },
   observeClock(count,{onPhase=()=>{},onLowered=()=>{},isFrozen=()=>false}={}){
    const events=[];

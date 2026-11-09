@@ -233,3 +233,6 @@ Hiccup35 preparation separates group0/left-half controls with kind3Oil/staticSP 
 
 
 Hiccup35 is accepted: original/SVG1000,14transfers/twobounces/fiveReverse and190onsets pass; all308physical poses match. Exact staticSPphase,28surfaceglints and postdeath/reset phase remain unqualified. Separatekind3Oilbirth/death/reset original/model witness passes with stated callback limits. See[review](hiccup-review.md).
+
+
+Stutter36sourcepreparation separates moving/stationary DOTblast dispatch, DPvisibility/clockdetach withoutslot reclamation, andELglyph hiding/burntbackground withoutcontact reset. Type4mustsuppressallordinarycontrolhooks. Mixedscene/class2orbital remainsgated; helpersareunlinked,243runtimechecks/34priorregressions295736updates pass. See[preparation](stutter-preparation.md).

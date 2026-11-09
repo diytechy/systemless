@@ -12,6 +12,17 @@ function fixture(){
 }
 const context=()=>({deaths:[],isFrozen:()=>false,onDeath(reason){this.deaths.push(reason);}});
 
+test('a blast hides only overlapping droplets without freeing slots or changing puddles',()=>{
+ const {board,options}=fixture(),oil=new OilRuntime(board,options),ctx=context();
+ oil.createDroplet(1,ctx);oil.createDroplet(12,ctx);const puddles=structuredClone(oil.puddles);
+ assert.deepEqual(oil.bomb({left:32,top:-15,right:33,bottom:-14,rows:null}),[0]);
+ assert.equal(oil.droplets[0].state.visible,false);assert.equal(oil.droplets[0].state.clockAttached,false);assert.equal(oil.droplets[1].state.visible,true);
+ assert.equal(oil.allocations,2);assert.deepEqual(oil.puddles,puddles);assert.deepEqual(oil.humanGrab('b'),[]);
+ assert.deepEqual(oil.bomb({left:32,top:-15,right:33,bottom:-14,rows:null}),[]);
+ oil.advanceClocks(10);oil.processSprites(ctx);assert.equal(oil.droplets[0].state.visible,false);
+ oil.reset('a');assert.equal(oil.allocations,0);assert.deepEqual(oil.droplets,[]);
+});
+
 test('oil acquisition selects source-slot order and does not search past a denied first match',()=>{
  const {board,options}=fixture();board.dots[1].x=4;board.dots[0].nonhumanCanGrab=false;board.dots.reverse();
  const oil=new OilRuntime(board,options);

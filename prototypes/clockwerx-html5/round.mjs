@@ -207,6 +207,7 @@ export class SourceRound extends MovementGame {
   }
  }
  contactElevators(hand){
+  if(hand.sourceActorType===4)return;
   if(!this.elevators)return;
   const index=hand.visible===false?-1:findElevatorContact(this.collider(hand),this.elevators.snapshot().controls,this.elevatorOutlines);
   for(const change of this.elevators.contact(hand.name,index)){

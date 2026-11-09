@@ -146,3 +146,6 @@ Hiccup35 exposes a temporal reachability requirement: a static proposal can disa
 
 
 Hiccup35 now has original/SVG goal and190onset witnesses for timed group crossings. Its bounded branch search used legal updates from fresh maps, not state injection. Keep surface/staticSP/death-reset uncertainty explicit and separate Oil birth/death evidence from unvisited movingDP/updown interaction. See[review](hiccup-review.md).
+
+
+Stutter36 adds destructible-control liveness, burnt appearance, allocated-but-hidden droplets, and independent moving-DOTblast overlap to the pending generationstate. Inactivegroup2properties retainordinary pivots. A type4occupant mustnotpresscontrols; class2clockqualification is separate fromnormal/sloworbitals. Theseare source-derived requirements, not a qualifiedmap or new generator.

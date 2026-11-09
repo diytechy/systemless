@@ -49,6 +49,17 @@ export class OilRuntime {
   const result=triggerPuddle(this.puddles[index],{now:this.now,clockCount:this.counts.puddle,delay150:250});
   this.puddles[index]=result.state;return result.events;
  }
+ // DPBombed hides colliding droplet sprites and detaches their frame clock.
+ // Allocation slots and dormant puddles survive until source round reset.
+ // This is unlinked preparation; a scene must explicitly qualify the mix.
+ bomb(blast){
+  const hidden=[];
+  for(const [index,entry]of this.droplets.entries()){
+   const s=entry.state;if(!s.visible||!outlineCollision(blast,oilOutline(this.outlines.groups['2200'].frames[s.frame],s.base)))continue;
+   s.visible=false;s.clockAttached=false;hidden.push(index);
+  }
+  return hidden;
+ }
  humanGrab(id){
   this.heroPivot=this.index(id);
   return this.droplets.flatMap(({state})=>dropletHumanGrab(state,this.heroPivot));

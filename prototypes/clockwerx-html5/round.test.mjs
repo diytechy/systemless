@@ -34,6 +34,12 @@ function elevatorFixture(){
  const shape={left:-1,top:-1,right:1,bottom:1,rows:null,outlineIndex:0,flipY:false};f.options.elevatorOutlines={groups:{3400:{frames:Array.from({length:9},()=>shape)}}};return f;
 }
 
+test('type4 orbital callbacks suppress elevator hooks before looking up their outlines',()=>{
+ const {board,options}=elevatorFixture(),g=new SourceRound(board,options);
+ assert.doesNotThrow(()=>g.contactElevators({name:'orbital',sourceActorType:4,visible:true,pivot:'a',group:3500,frame:0,canonicalFrame:true}));
+ assert.equal(g.elevators.snapshot().controls[0].occupants,0);assert.equal(g.events.some(e=>e.type==='elevator-enter'),false);
+});
+
 test('a lowering pivot carries the human to death and a natural restart restores dot/control state',()=>{
  const {board,options}=elevatorFixture(),g=new SourceRound(board,options);
  for(let i=0;i<2000&&!g.death;i++)g.update(1/120);

@@ -1,6 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {decodeBombRecord,createBombMatch,createExplosionPool,createBombGoodie} from './bombs.mjs';
+import {decodeBombRecord,createBombMatch,createExplosionPool,createBombGoodie,bombHitsStationarySpike,bombHitsSwitch} from './bombs.mjs';
+
+test('stationary spike destruction follows its arm topology across grid boundaries',()=>{
+ const cases=[[0,2,[-1,0]],[1,2,[-1,0]],[2,0,[0,-1]],[2,1,[0,-1]],[2,2,[0,0]],[2,3,[0,1]],[3,2,[1,0]]];
+ for(const [subrow,subcolumn,other]of cases)for(let row=3;row<=5;row++)for(let column=3;column<=5;column++){
+  const expected=row===4&&column===4||row===4+other[0]&&column===4+other[1];
+  assert.equal(bombHitsStationarySpike({row:4,column:4,subrow,subcolumn},{row,column}),expected);
+ }
+ assert.throws(()=>bombHitsStationarySpike({row:4,column:4,subrow:1,subcolumn:1},{row:4,column:4}),/topology/);
+});
+
+test('switch blast bounds are independent of visual flame overlap',()=>{
+ for(const [subcell,extra]of [[1,[1,0]],[2,[0,1]],[3,[0,0]]])for(let dr=-1;dr<=2;dr++)for(let dc=-1;dc<=2;dc++){
+  const expected=dr===0&&dc===0||dr===extra[0]&&dc===extra[1];
+  assert.equal(bombHitsSwitch({row:4+dr,column:4+dc,subcell},{row:4,column:4}),expected);
+ }
+ assert.throws(()=>bombHitsSwitch({row:4,column:4,subcell:0},{row:4,column:4}),/topology/);
+});
 
 test('BO flags are the high byte; ignored padding is not a difficulty mask',()=>{
   assert.deepEqual(decodeBombRecord({rawWords:[1,2,10,0x20e0]}),

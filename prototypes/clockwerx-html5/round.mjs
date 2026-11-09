@@ -154,7 +154,7 @@ export class SourceRound extends MovementGame {
   if(hand.sourceActorType===4)return;
   if(!this.board.switches?.length)return;
   const frames=this.doorSystem.snapshot().switches,actor=this.collider(hand);
-  const index=this.board.switches.findIndex((s,i)=>outlineCollision(actor,worldOutline(this.doorOutlines,1000,frames[i].frame,s)));
+  const index=this.board.switches.findIndex((s,i)=>s.visible!==false&&outlineCollision(actor,worldOutline(this.doorOutlines,1000,frames[i].frame,s)));
   for(const sound of this.doorSystem.contact(hand.name,index))this.event('door-toggle',hand,{id:sound.doorIndex});
  }
  bounceFromWall(hand,wall,type='wall-bounce'){

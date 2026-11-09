@@ -41,6 +41,7 @@ export class StaticDotRuntime {
   return {player:{...this.savedSpawn},remainingTime:this.savedTime};
  }
  dot(id){const dot=this.dots.find(d=>d.id===id);if(!dot)throw new Error('Unknown source dot');return dot;}
+ bombLookChanged(id){if(this.dot(id).waystation)this.special.get(id).lookChanged();}
  humanRelease(id,{releasingActor,orphanOccupants}={}){
   const dot=this.dot(id);if(!dot.ring)return {changed:false};
   if(typeof orphanOccupants!=='function')throw new TypeError('Synchronous ring occupant adapter required');

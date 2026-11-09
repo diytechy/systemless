@@ -1,0 +1,105 @@
+{
+  "status": "source-preparation-only-not-gameplay-accepted",
+  "ordinal": 28,
+  "title": "Enclosure",
+  "liveOrdinal": 27,
+  "sourceFilesChanged": [
+    "app.mjs",
+    "bomb-runtime.mjs",
+    "bomb-runtime.test.mjs",
+    "bomb-scene.mjs",
+    "bomb-scene.test.mjs",
+    "bombs.mjs",
+    "bombs.test.mjs",
+    "level.mjs",
+    "level.test.mjs",
+    "round.mjs",
+    "special-dot-runtime.mjs",
+    "special-dots.mjs",
+    "special-dots.test.mjs"
+  ],
+  "validation": {
+    "runtimeTests": 210,
+    "packagingTests": 14,
+    "priorDecodedBoardsIdentical": 26,
+    "priorFinalSnapshotsIdentical": 26,
+    "priorFixedSteps": 200370
+  },
+  "nativeBaseline": {
+    "status": "passed",
+    "frontendTicks": 2224,
+    "guestTicks": 2824,
+    "budgetExhausted": 0,
+    "observedPlayer": "p",
+    "observedTotal": 128000
+  },
+  "clock": {
+    "heroUsable": 26,
+    "heroRawOverdraw": 7,
+    "npcUsable": 165,
+    "upstreamPhaseInterval": [
+      142.52631578947367,
+      142.6315789473684
+    ],
+    "aliases": "5632 upstream counts within first16384 tested",
+    "omittedWallIntervals": 0
+  },
+  "purePeriod": {
+    "boundary": "Pure static class1/class4 NPC full state, class remainders and hero64 phase. No door, checkpoint, spike animation, match, fuse, blast, dot, time, audio or hardware claims.",
+    "jointUpstreamPeriod": 5632,
+    "equivalentHeroFrames": 2816,
+    "equivalentGuestTicks": 13376,
+    "equivalentFixedSteps": 26752
+  },
+  "staticObjects": {
+    "doorObservations": 99,
+    "doorPhases": [
+      0
+    ],
+    "maxDoorError": 0.68,
+    "switchObservations": 99,
+    "maxSwitchError": 0.7113821138211383,
+    "checkpointObservations": 33,
+    "checkpointFrame": 79,
+    "maxCheckpointError": 0.4318181818181818
+  },
+  "stationarySpike": {
+    "samples": 33,
+    "clean": 33,
+    "maxError": 0.45307443365695793
+  },
+  "identityAmbiguity": {
+    "rawRetained": true,
+    "checkpoints": [
+      "enclosure-fresh-idle-09",
+      "enclosure-fresh-idle-15",
+      "enclosure-fresh-idle-23"
+    ],
+    "rule": "Exclude orbital candidate18x18boxes within2pixels of the independently matched stationary spike bbox476,409; all remaining poses selected without timing filters. No original image pixels are discarded."
+  },
+  "bombArt": {
+    "samples": 594,
+    "clean": 544,
+    "terminalKind": 0,
+    "terminalClean": 29,
+    "terminalMinError": 0.44473455178416016
+  },
+  "matches": {
+    "samples": 33,
+    "clean": 33,
+    "maxError": 0.6271929824561403,
+    "frames": [
+      0,
+      1,
+      2
+    ]
+  },
+  "limitations": [
+    "Source-only opt-in: new bomb/object interactions have no native blast/goal proof yet",
+    "Route search01/session15623 in progress; no candidate accepted",
+    "No28browser opened or live activation",
+    "Special checkpoint blast look and hidden switch interactions have source/unit evidence, not a native28direct hit",
+    "Absolute sprite birth phases and browser scheduling remain separate",
+    "No new CPU/memory/rotation benchmark; no heavy build/push/upload/deploy"
+  ]
+}

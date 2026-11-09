@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 28,
-  "currentAction": "Enclosure28: fresh original baseline passed from earned through27 copy; inspect Child inventory, source clocks/programs/doors/bombs before QA preparation",
+  "currentAction": "Enclosure28: gated bomb-object source preparation210runtime/14packaging/prior26 replays pass; input-only staged route search01 running",
   "levels": [
     {
       "ordinal": 1,
@@ -1968,12 +1968,12 @@
       "menuTitle": "Enclosure",
       "resourceTitle": "Enclosure",
       "sha256": "6acc7e4c95445522595981cb0f143522991615faa0c2c4e28dc5ec9d5dec5095",
-      "status": "queued",
+      "status": "preparing",
       "nativeEvidence": [
         "enclosure/native-initial-01/report.json"
       ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "QA28 prepared, gated source only; no native/SVG goal or live activation",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {

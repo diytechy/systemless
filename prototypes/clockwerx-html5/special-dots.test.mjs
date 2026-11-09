@@ -2,6 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createStaticRingDot,createCheckpointDot,createProtectionOverlay} from './special-dots.mjs';
 
+test('checkpoint blast look reset preserves its attached clock and animation step',()=>{
+ const d=createCheckpointDot(2);d.activate(2);d.observeClock(3);d.observeClock(4);
+ assert.equal(d.snapshot().frame,81);d.lookChanged();
+ assert.deepEqual(d.snapshot(),{frame:79,step:1,attached:true,visible:true});
+ d.observeClock(4);assert.equal(d.snapshot().frame,79);
+ d.observeClock(5);assert.equal(d.snapshot().frame,80);
+ d.resetRound(6);d.lookChanged();assert.deepEqual(d.snapshot(),{frame:79,step:0,attached:false,visible:true});
+});
+
 test('human release immediately denies human grabs and orphans other occupants',()=>{
   const ring=createStaticRingDot({color:2,clockCount:20});
   assert.equal(ring.release({human:false}).changed,false);

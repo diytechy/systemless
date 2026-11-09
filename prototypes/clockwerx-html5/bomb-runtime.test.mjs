@@ -21,6 +21,22 @@ function startTravel(f,index=0){
  assert.equal(f.runtime.snapshot().sparks[index].travelling,true);
 }
 
+test('expanded static-object scope is explicit and still rejects dynamic dots and future actors',()=>{
+ const scope={dots:[dot('c',1,1,{waystation:{halfIndex:0,direction:1},protected:true})],actors:[hero(),{...enemy(2),sourceActorType:4}],activeSections:{DR:1,DS:1,WY:1}};
+ assert.throws(()=>assertBombRuntimeScope(scope),/special-dot/);
+ assert.equal(assertBombRuntimeScope({...scope,allowObjectInteractions:true}),true);
+ assert.throws(()=>assertBombRuntimeScope({...scope,allowObjectInteractions:true,actors:[{...enemy(2),sourceActorType:5}]}),/ordinary/);
+ assert.throws(()=>assertBombRuntimeScope({...scope,allowObjectInteractions:true,dots:[dot('m',1,1,{moving:true})]}),/dynamic/);
+ const changed=[],checkpoint=scope.dots[0];
+ assert.equal(applyBombDotHit(checkpoint,(d,e)=>changed.push(e),{allowObjectInteractions:true}),true);
+ assert.equal(checkpoint.burnt,true);assert.equal(checkpoint.protected,true);assert.ok(checkpoint.waystation);
+ assert.equal(changed[0].minimum,79);assert.equal(changed[0].maximum,89);
+ assert.equal(changed[0].burntFrame,null);
+ const orbital={...enemy(2),sourceActorType:4};
+ bombActors([orbital],{guestTick:8,allowObjectInteractions:true,collides:()=>true,onDeath:()=>assert.fail('orbital is not human'),onHidden:()=>{}});
+ assert.equal(orbital.visible,false);assert.equal(orbital.hiddenUntil,308);
+});
+
 test('bounded construction rejects unsupported modes, masks, chains and records',()=>{
  assert.throws(()=>fixture({mode:'Expert'}),/Child/);
  assert.throws(()=>fixture({unsupported:['moving dots']}),/Child/);

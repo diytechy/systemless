@@ -2,13 +2,30 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {BombScene} from './bomb-scene.mjs';
 
-function fixture(){
+function fixture(expanded=false){
  const dot=(r,c,extra={})=>({id:`${c},${r}`,row:r,column:c,color:0,humanCanGrab:true,nonhumanCanGrab:true,ring:false,bonus:false,sourceInBackground:true,kind:'dot',...extra});
  const player={name:'player',sourceSlot:0,sourceActorType:0,visible:true};
  const round={board:{origin:{x:74,y:72},bombs:[{rawWords:[1,1,10,0]},{rawWords:[1,2,0,0]}],goodies:[{row:0,column:0,initialFrame:59}],dots:[dot(1,2),dot(2,2,{ring:true,sourceInBackground:false}),dot(1,3,{bonus:true,kind:'bonus',sourceInBackground:false})],walls:[{row:1,column:2,frame:4},{row:2,column:2,frame:0},{row:1,column:3,frame:1},{row:4,column:4,frame:4}],spikes:[{id:0,row:1,column:2,subrow:2,subcolumn:0},{id:1,row:2,column:2,subrow:2,subcolumn:0}],doors:[],switches:[],puddles:[]},player,enemies:[],guestTicks:0,remainingTime:90,events:[],collider:a=>a.visible===false?null:{left:0,top:0,right:1,bottom:1,rows:null},event(type){this.events.push(type);},beginDeath(cause){this.death??={cause};}};
  const routes=[{kind:10,points:[[0,0],[0,1]],entryLeg:4,forwardExit:4,reverseExit:4,bomb:false,flipVertical:false,flipHorizontal:false,swap:false},{kind:0,points:[[0,0]],entryLeg:4,forwardExit:4,reverseExit:4,bomb:true,flipVertical:false,flipHorizontal:false,swap:false}];
+ if(expanded){
+  Object.assign(round.board,{bombObjectInteractionRules:true,switches:[{row:1,column:2,subcell:3,color:0},{row:2,column:2,subcell:1,color:1},{row:1,column:4,subcell:2,color:2}]});
+  Object.assign(round.board.dots[0],{waystation:{halfIndex:0,direction:1}});
+  round.board.spikes[0].subrow=1;round.board.spikes[0].subcolumn=2;
+  round.dotAnimations={changed:[],bombLookChanged(id){this.changed.push(id);}};
+  round.enemies.push({name:'orbital',sourceSlot:2,sourceActorType:4,visible:true});
+ }
  const scene=new BombScene(round,{outlines:{groups:{}},routes,worldOutline:()=>({left:0,top:0,right:1,bottom:1,rows:null})});return {round,scene};
 }
+
+test('qualified bomb objects preserve checkpoint semantics and restore hidden buttons after reset',()=>{
+ const {scene,round:r}=fixture(true),grid={row:1,column:2};
+ scene.effect({type:'stationary',target:'DS',grid});
+ assert.deepEqual(r.board.switches.map(s=>s.visible!==false),[false,false,true]);
+ scene.effect({type:'stationary',target:'DO',grid});
+ assert.equal(r.board.dots[0].burnt,true);assert.ok(r.board.dots[0].waystation);assert.ok(r.dotAnimations.changed.includes('2,1'));
+ scene.effect({type:'moving',target:'WA',grid,descriptorFrame:2});assert.equal(r.enemies[0].visible,false);
+ scene.reset();assert.ok(r.board.switches.every(s=>s.visible!==false));assert.equal(r.board.dots[0].burnt,undefined);assert.ok(r.board.dots[0].waystation);
+});
 test('RO coordinates use the independent grid anchor once for each sprite type',()=>{
  const {scene}=fixture();assert.deepEqual(scene.gridPixel({row:1,column:2},{x:6,y:6}),{x:164,y:115});
  assert.deepEqual(scene.gridPixel({row:0,column:0},{x:31,y:31}),{x:93,y:92});

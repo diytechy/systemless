@@ -11,30 +11,30 @@ const copy=x=>structuredClone(x);
 const sameGrid=(a,b)=>a.row===b.row&&a.column===b.column;
 const grid=g=>{integer(g?.row,0,7);integer(g?.column,0,10);};
 const human=a=>a.sourceActorType===0||a.sourceActorType===6;
-function actor(a){
- if(!a||![0,1,2,3,6].includes(a.sourceActorType))throw new Error('Only human and ordinary actors are supported');
+function actor(a,allowObjectInteractions=false){
+ if(!a||![0,1,2,3,6,...(allowObjectInteractions?[4]:[])].includes(a.sourceActorType))throw new Error('Only human, ordinary and explicitly qualified orbital actors are supported');
  integer(a.sourceSlot,0,31);
  if(human(a)!==(a.sourceSlot<2))throw new Error('Explicit source WA slot/type correspondence required');
  if(a.sliding||a.movingPivot)throw new Error('Dynamic actor combinations are unqualified');
  return a;
 }
-function staticDot(d){
+function staticDot(d,allowObjectInteractions=false){
  grid(d);integer(d.color??0,0,7);
- if(d.moving||d.movingProgram||d.upDown||d.protected||d.waystation||d.transferDeath||d.slowdown||d.connector||d.sourceBombDynamic)throw new Error('Unsupported bomb/dynamic or special-dot combination');
+ if(d.moving||d.movingProgram||d.upDown||(!allowObjectInteractions&&(d.protected||d.waystation))||d.transferDeath||d.slowdown||d.connector||d.sourceBombDynamic)throw new Error('Unsupported bomb/dynamic or special-dot combination');
  if(typeof d.humanCanGrab!=='boolean'||typeof d.sourceInBackground!=='boolean'||typeof d.ring!=='boolean'||typeof d.bonus!=='boolean')throw new TypeError('Explicit live dot permissions, source background +0x12, ring and bonus state required');
 }
 
 /** Call with the mode-filtered inventory before wiring a board. These are
  * normalized declarations, not a raw-level decoder. Empty absent sections
  * are permitted; future active combinations fail closed. */
-export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={}}={}){
+export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false}={}){
  if(mode!=='Child')throw new Error('Only Child bomb scope is supported');
  if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
- for(const d of dots)staticDot(d);
- for(const a of actors)actor(a);
+ for(const d of dots)staticDot(d,allowObjectInteractions);
+ for(const a of actors)actor(a,allowObjectInteractions);
  for(const [kind,n]of Object.entries(activeSections)){
   integer(n);
-  if(n&&!['SP','WL','BO','GO','WP','WA','TX'].includes(kind))throw new Error(`Unqualified active bomb combination: ${kind}`);
+  if(n&&!['SP','WL','BO','GO','WP','WA','TX',...(allowObjectInteractions?['DR','DS','WY']:[])].includes(kind))throw new Error(`Unqualified active bomb combination: ${kind}`);
  }
  return true;
 }
@@ -60,28 +60,28 @@ export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeS
 /** Mutates only transient burnt/bonus state. Never removes the pivot or changes
  * grab permissions. Caller owns DO redraw/background/secondary descriptors and
  * restores saved DO specifications on reset, alongside StaticDotRuntime. */
-export function applyBombDotHit(dot,onChange){
- staticDot(dot);fn(onChange,'dot appearance');
+export function applyBombDotHit(dot,onChange,{allowObjectInteractions=false}={}){
+ staticDot(dot,allowObjectInteractions);fn(onChange,'dot appearance');
  if(!dot.humanCanGrab)return false;
  let changed=false;
  if(!dot.ring&&!dot.burnt){dot.burnt=true;changed=true;}
  if(dot.bonus){dot.bonus=false;changed=true;}
  // DOInfo +0x12 uses the background repaint path even with no state change.
  // This restores dots over frame 4's freshly painted crater.
- const minimum=dot.ring?23+7*(dot.color??0):92+(dot.color??0);
+ const minimum=dot.waystation?79:dot.ring?23+7*(dot.color??0):92+(dot.color??0);
  if(changed||dot.sourceInBackground)sync(onChange,dot,{changed,paintBackground:dot.sourceInBackground,
-  updateSpriteRange:changed&&!dot.sourceInBackground,minimum,maximum:dot.ring?minimum+7:minimum,
-  burntFrame:dot.burnt?92+(dot.color??0):null,sourceBomb:true});
+  updateSpriteRange:changed&&!dot.sourceInBackground,minimum,maximum:dot.waystation?89:dot.ring?minimum+7:minimum,
+  burntFrame:dot.burnt&&!dot.waystation?92+(dot.color??0):null,sourceBomb:true});
  return changed;
 }
-export function bombStationaryDots(dots,origin,onChange){
+export function bombStationaryDots(dots,origin,onChange,options){
  grid(origin);integer(origin.row,0,6);integer(origin.column,0,9);fn(onChange,'dot appearance');
  if(!Array.isArray(dots))throw new TypeError('Source dot records required');
  // Source visits row+1 before column+1. Missing serialized cells are absent.
  const changed=[];
  for(const [dr,dc]of [[0,0],[1,0],[0,1],[1,1]]){
   const dot=dots.find(d=>d.row===origin.row+dr&&d.column===origin.column+dc);
-  if(dot&&applyBombDotHit(dot,onChange))changed.push(dot.id);
+  if(dot&&applyBombDotHit(dot,onChange,options))changed.push(dot.id);
  }
  return changed;
 }
@@ -89,10 +89,10 @@ export function bombStationaryDots(dots,origin,onChange){
 /** WABombed Child deadline is metadata for ordinary enemies, not a request to
  * resurrect them. Source WA reset owns restoring visibility. Death dispatch
  * does not stop the remaining source-slot scan. */
-export function bombActors(actors,{guestTick,collides,onDeath,onHidden}){
+export function bombActors(actors,{guestTick,collides,onDeath,onHidden,allowObjectInteractions=false}){
  integer(guestTick);fn(collides,'actor outline collision');fn(onDeath,'human death');fn(onHidden,'actor visibility');
  if(!Array.isArray(actors))throw new TypeError('Live source-slot actor array required');
- let previous=-1;for(const a of actors){actor(a);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
+ let previous=-1;for(const a of actors){actor(a,allowObjectInteractions);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
  const hits=[];
  for(const a of actors){
   if(a.visible===false||!sync(collides,a))continue;

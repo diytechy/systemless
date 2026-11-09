@@ -14,6 +14,14 @@ function fixture(){
    {kind:'SP',count:2,records:[{rawWords:[0,0,0,2,0,15]},{rawWords:[0,0,2,0,0,15]}]}]};
 }
 
+test('bomb object interactions require an explicit compatible scene opt-in',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;
+ assert.ok(levelRequirements(level,{allowBombObjectInteractions:true}).some(s=>s.includes('bomb object interactions')));
+ const board=buildDecodedBoard(level,{angularSpeed:TAU,allowBombs:true,allowSpecialDots:true,allowEnemyStaticPrograms:true,allowStaticEnemyWalls:true,allowBombObjectInteractions:true});
+ assert.equal(board.bombObjectInteractionRules,true);
+ assert.equal(buildDecodedBoard(level,{angularSpeed:TAU}).bombObjectInteractionRules,undefined);
+});
+
 test('rotating spikes require their own bounded opt-in and preserve noncardinal pose',()=>{
  const level=fixture(),actor=level.blocks[0].records[2];actor.actorTypeRaw=4;actor.rawWords[2]=4;actor.version12ByteRaw=0;actor.initialFrameHalfIndexRaw=4;
  const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowRotatingSpikes:true};

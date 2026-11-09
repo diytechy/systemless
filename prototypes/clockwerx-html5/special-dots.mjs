@@ -56,6 +56,9 @@ export function createCheckpointDot(clockCount=0){
  const reset=(currentCount=reference??clockCount)=>{count(currentCount);frame=79;step=0;attached=false;reference=currentCount;return snapshot();};
  reset(clockCount);
  return {snapshot,reset,
+  // DOUpdateLook selects the checkpoint range's first descriptor without
+  // changing its attached clock, reference or animation step.
+  lookChanged(){frame=79;return snapshot();},
   resetRound(currentCount=reference){count(currentCount);reference=currentCount;step=0;attached=false;return snapshot();},
   activate(currentCount=reference){count(currentCount);reference=currentCount;step=1;attached=true;return snapshot();},
   observeClock(currentCount){

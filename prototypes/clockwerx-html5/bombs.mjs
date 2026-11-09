@@ -1,6 +1,26 @@
 // Bounded bomb source contracts. The scene adapter owns the
 // persistent MT clock, sprite traversal, RAW outlines and synchronous effects.
 export const BOMB_LIMITS=Object.freeze({fuses:60,matches:5,sparks:17,explosions:6,goodies:15});
+// SPBombed uses the subcell's arm, not a circular blast radius. These seven
+// source placements can belong to either neighboring explosion grid.
+export function bombHitsStationarySpike(spike,grid) {
+ const {row,column,subrow:v,subcolumn:h}=spike;
+ if(!([0,1,2,3].includes(v)&&[0,1,2,3].includes(h))||v!==2&&h!==2)
+  throw new Error('Unqualified bomb/spike topology');
+ if(row===grid.row&&column===grid.column)return true;
+ if(h===2&&v!==2)return column===grid.column&&row===grid.row+(v<2?1:-1);
+ if(v===2&&h!==2)return row===grid.row&&column===grid.column+(h<2?1:-1);
+ return false;
+}
+
+// DSBombed tests orientation-specific grid bounds and hides the button only.
+// Doors and existing contacts are left to their own callbacks.
+export function bombHitsSwitch(button,grid) {
+ const dr=button.row-grid.row,dc=button.column-grid.column;
+ if(![1,2,3].includes(button.subcell))throw new Error('Unqualified bomb/switch topology');
+ return button.subcell===1?dc===0&&dr>=0&&dr<2:
+  button.subcell===2?dr===0&&dc>=0&&dc<2:dr===0&&dc===0;
+}
 function integer(n,min=0,max=0x7fffffff) {
   if(!Number.isInteger(n)||n<min||n>max) throw new RangeError('Invalid source integer');
   return n;

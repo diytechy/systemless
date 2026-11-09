@@ -1,6 +1,7 @@
 // Static Child BO/GO scene adapter. Original paths and outlines are injected.
 import {BombRuntime,BOMB_CLOCKS,BOMB_SPRITES,bombStationaryDots,bombActors} from './bomb-runtime.mjs';
 import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
+import {bombHitsStationarySpike,bombHitsSwitch} from './bombs.mjs';
 
 export class BombScene {
  constructor(round,{outlines,routes,worldOutline}){
@@ -8,11 +9,16 @@ export class BombScene {
   this.round=round;this.outlines=outlines;this.worldOutline=worldOutline;
   const b=round.board;
   if(b.goodieOnlyRules&&(b.bombs.length||routes?.length))throw new Error('Goodie-only scene cannot include fuses or routes');
-  if(!b.goodieOnlyRules&&b.spikes.some(s=>s.subrow!==2||s.subcolumn!==0))throw new Error('Unqualified bomb/spike topology');
-  this.original={walls:structuredClone(b.walls),spikes:structuredClone(b.spikes),dots:b.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind}))};
+  if(!b.goodieOnlyRules){
+   if(b.bombObjectInteractionRules){
+    for(const s of b.spikes)bombHitsStationarySpike(s,s);
+    for(const s of b.switches)bombHitsSwitch(s,s);
+   }else if(b.spikes.some(s=>s.subrow!==2||s.subcolumn!==0))throw new Error('Unqualified bomb/spike topology');
+  }
+  this.original={walls:structuredClone(b.walls),spikes:structuredClone(b.spikes),switches:structuredClone(b.switches),dots:b.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind}))};
   this.clocks=Object.fromEntries(Object.entries(BOMB_CLOCKS).map(([k,v])=>[k,createSourceTimerChain(v.scaled?Math.floor(v.period*100/60):v.period,1)]));
   this.flourishClock=createSourceTimerChain(40,1);this.scoreClock=createSourceTimerChain(80,1);this.effects=[];this.craters=[];this.score=0;this.layer3=[];this.layer2=[];
-  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{dots:b.dots,actors:[round.player,...round.enemies],activeSections:{SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length}}},{
+  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{dots:b.dots,actors:[round.player,...round.enemies],allowObjectInteractions:b.bombObjectInteractionRules===true,activeSections:{SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length}}},{
    clock:k=>this.clocks[k].advance(0).clientCount,latchedTick:()=>round.guestTicks,freshTick:()=>round.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
    gridPixel:(g,o)=>this.gridPixel(g,o),effect:e=>this.effect(e),collides:(kind,s,a)=>outlineCollision(this.shape(kind,s),round.collider(a))});
   this.layer3.push(...this.runtime.matches.map((_,index)=>({kind:'LI',index})));
@@ -39,16 +45,17 @@ export class BombScene {
   if(e.type==='append-sprite'){(e.layer===3?this.layer3:this.layer2).push({kind:e.layer===3?'SR':'BO',index:e.index});return;}
   if(e.type==='stationary'){
    const g=e.grid;
-   if(e.target==='SP')for(const s of b.spikes)if(s.row===g.row&&(s.column===g.column||s.column===g.column+1))s.visible=false;
+   if(e.target==='SP')for(const s of b.spikes)if(b.bombObjectInteractionRules?bombHitsStationarySpike(s,g):s.row===g.row&&(s.column===g.column||s.column===g.column+1))s.visible=false;
+   if(e.target==='DS'&&b.bombObjectInteractionRules)for(const s of b.switches)if(bombHitsSwitch(s,g))s.visible=false;
    if(e.target==='WL'){
     for(const w of b.walls)if((w.frame>=4&&w.row===g.row&&w.column===g.column)||(w.frame===0&&w.column===g.column&&[g.row,g.row+1].includes(w.row))||(w.frame===1&&w.row===g.row&&[g.column,g.column+1].includes(w.column)))w.visible=false;
     b.wallRevision=(b.wallRevision??0)+1;
    }
-   if(e.target==='DO')bombStationaryDots(b.dots,g,d=>{if(!d.bonus&&d.kind==='bonus')d.kind='dot';});
+   if(e.target==='DO')bombStationaryDots(b.dots,g,(d,change)=>{if(!d.bonus&&d.kind==='bonus')d.kind='dot';if(b.bombObjectInteractionRules&&change.changed)r.dotAnimations?.bombLookChanged(d.id);},{allowObjectInteractions:b.bombObjectInteractionRules===true});
   }
   if(e.type==='moving'&&e.target==='WA'){
    const blast=this.shape('BO',{grid:e.grid},e.descriptorFrame);
-   bombActors([r.player,...r.enemies],{guestTick:r.guestTicks,collides:a=>outlineCollision(blast,r.collider(a)),onDeath:()=>r.beginDeath({reason:'bomb',sourceReason:-1}),onHidden:a=>r.event('bomb-hidden',a)});
+   bombActors([r.player,...r.enemies],{guestTick:r.guestTicks,allowObjectInteractions:b.bombObjectInteractionRules===true,collides:a=>outlineCollision(blast,r.collider(a)),onDeath:()=>r.beginDeath({reason:'bomb',sourceReason:-1}),onHidden:a=>r.event('bomb-hidden',a)});
   }
   if(e.type==='paint-crater')this.craters.push({...e.grid});
   if(e.type==='death')r.beginDeath({reason:'spark',sourceReason:e.reason});
@@ -59,8 +66,9 @@ export class BombScene {
  }
  finish(){if(!this.completed){this.completed=true;this.score+=1000;this.round.event('completion-bonus',this.round.player);}}
  reset({restartLevel=false}={}){
-  const b=this.round.board;b.walls=structuredClone(this.original.walls);b.spikes=structuredClone(this.original.spikes);b.wallRevision=(b.wallRevision??0)+1;
-  for(const saved of this.original.dots){const d=b.dots.find(d=>d.id===saved.id);Object.assign(d,saved);delete d.burnt;}
+  const r=this.round,b=r.board;b.walls=structuredClone(this.original.walls);b.spikes=structuredClone(this.original.spikes);b.wallRevision=(b.wallRevision??0)+1;
+  for(const saved of this.original.dots){const d=b.dots.find(d=>d.id===saved.id);if(b.bombObjectInteractionRules&&d.burnt)r.dotAnimations?.bombLookChanged(d.id);Object.assign(d,saved);delete d.burnt;}
+  for(let i=0;i<b.switches.length;i++){delete b.switches[i].visible;Object.assign(b.switches[i],this.original.switches[i]);}
   this.craters=[];this.effects=[];this.runtime.reset();this.completed=false;if(restartLevel)this.score=0;
  }
  snapshot(){return {...this.runtime.snapshot(),craters:structuredClone(this.craters),effects:this.effects.map(({finish,...e})=>({...e,point:{...e.point}})),score:this.score,completed:!!this.completed};}

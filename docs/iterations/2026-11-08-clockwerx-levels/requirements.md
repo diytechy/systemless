@@ -227,3 +227,6 @@ Pigeonholes34 preparation adds an explicit large/kind2Oil/static-spike/class1 co
 
 
 Pigeonholes34 is accepted with matching original/SVG7000goals/15transferhero poses and190onsets. FrequentSPIphase disparity(26of224clear exact) stays explicit; allplacements/handpositions match. The final blue/greenbonus6 SVG completes16ordinaryvariants. See[review](pigeonholes-review.md).
+
+
+Hiccup35 preparation separates group0/left-half controls with kind3Oil/staticSP from the earlier group1/no-hazard gate. Moving dot position/availability feeds Oil acquisition; no collider is inferred from SVG. Source/nativecold matches231handposes,33controlstates,32clearcorepositions and100clearsurfaceframes. Main timed14transfer candidate uses twobounces/fiveReverse and passes190onsets; original/SVGgoals and kind3Oil diagnostic pending.

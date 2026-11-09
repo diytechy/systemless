@@ -46,6 +46,18 @@ test('active elevators require the raised group1 scope and retain inactive sourc
  level.cells[1].flagsRaw=0x101;level.cells[1].secondaryRaw=12;const inactive=buildDecodedBoard(level,options).dots[1];assert.equal(inactive.motion,'static');assert.equal(inactive.upDown,undefined);assert.equal(inactive.present,true);
 });
 
+test('group0 elevators with Oil and static spikes require a separate kind3 composition',()=>{
+ const level=fixture();level.header.timeLimitRaw=270;level.cells[0].flagsRaw=0x101;level.blocks[0].records[2].version12ByteRaw=0;
+ level.blocks.push({kind:'PU',count:1,records:[{rawWords:[0,0,3,0,15]}]},{kind:'EL',count:1,records:[{rawWords:[0,0,2,0,0,15]}]});
+ const options={angularSpeed:TAU,allowElevators:true,allowOil:true,allowCanonicalOil:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true};
+ assert.ok(levelRequirements(level,options).includes('elevators with other hazards or special objects are unqualified'));
+ const qualified={...options,allowElevatorOilSpikes:true},board=buildDecodedBoard(level,qualified);
+ assert.equal(board.elevatorOilSpikeRules,true);assert.equal(board.dots[0].upDown.group,0);assert.equal(board.puddles[0].kind,3);
+ assert.ok(levelRequirements(level,{...qualified,allowCanonicalOilSpikes:true}).includes('elevator Oil/spikes require the separate canonical group0 composition'));
+ level.blocks.at(-2).records[0].rawWords[2]=2;assert.ok(levelRequirements(level,qualified).includes('elevator Oil/spikes require kind3 puddles and active static spikes'));level.blocks.at(-2).records[0].rawWords[2]=3;
+ level.blocks.at(-1).records[0].rawWords[2]=3;assert.ok(levelRequirements(level,qualified).includes('only group0 left half-cell controls with Oil/spikes are qualified'));
+});
+
 test('canonical Oil composition is explicit and retains its ordinary static Child boundary',()=>{
  const level=fixture();level.header.timeLimitRaw=90;level.blocks=level.blocks.filter(b=>b.kind!=='SP');level.blocks[0].records[2].version12ByteRaw=0;
  level.blocks.push({kind:'PU',count:1,records:[{rawWords:[0,0,1,0,15]}]});

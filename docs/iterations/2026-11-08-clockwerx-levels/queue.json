@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 35,
-  "currentAction": "Hiccup35 fresh original cold CLOSED/PASS2224/2824/0, actual35/playerp/210000 viewed. Inspect active source composition/capability gates next. Pigeonholes34 bounded goal accepted/active with frequent static spike phase mismatch explicit. No active runner.",
+  "currentAction": "Hiccup35 original/SVG1000/14transfers/all308poses/190onsets pass.240runtime/15packaging/33priorregressions289761. Oilbirth/death/reset verified with timing limits; SPphase0of59/glint44of72/postreset0of21frames retained. Noactiverunner; QA115paused; finalguardedactivationpending. Live34.",
   "levels": [
     {
       "ordinal": 1,
@@ -2515,7 +2515,7 @@
       "menuTitle": "Hiccup",
       "resourceTitle": "Hiccup",
       "sha256": "ce5cda4d71c4061cc32339044cb2cebdd8517c4f2722df58cde0514659895540",
-      "status": "native-cold-passed-source-review-pending",
+      "status": "guarded-preparation-original-svg-goals-passed-not-active",
       "nativeEvidence": [
         "hiccup/native-initial-01/report.json"
       ],
@@ -2565,6 +2565,10 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "preparationEvidence": [
+        "hiccup-preparation.md",
+        "hiccup-preparation.json"
       ]
     },
     {

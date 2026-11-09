@@ -1,0 +1,100 @@
+{
+  "status": "guarded-preparation-all-required-witnesses-passed-not-active",
+  "ordinal": 35,
+  "title": "Hiccup",
+  "resourceId": 228,
+  "sourceSha256": "ce5cda4d71c4061cc32339044cb2cebdd8517c4f2722df58cde0514659895540",
+  "validation": {
+    "runtimeTests": 240,
+    "packagingTests": 15,
+    "priorDecodedBoards": 33,
+    "priorSnapshots": 33,
+    "priorUpdates": 289761
+  },
+  "cold": {
+    "poses": 231,
+    "exact": 231,
+    "clear": 222,
+    "rawOverdraw": 9,
+    "legalUpdates": 696,
+    "controlStates": 33,
+    "controlMatches": 33,
+    "clearCores": 32,
+    "coreMatches": 32,
+    "clearSurfaces": 100,
+    "surfaceMatches": 100
+  },
+  "nativeGoal": {
+    "status": "closed-passed",
+    "frontendTicks": 5045,
+    "guestTicks": 5645,
+    "budgetExhausted": 0,
+    "transfers": 14,
+    "score": 1000,
+    "bonuses": 0,
+    "bounces": 2,
+    "reverses": 5,
+    "nextObserved": "36Stutter/playerp/211000",
+    "physicalPoses": 308,
+    "exactPhysicalPoses": 308,
+    "transferHeroMatches": 14,
+    "bounceHeroMatches": 2,
+    "reverseHeroMatches": 5,
+    "clear": 304,
+    "raw": 4
+  },
+  "finiteOnsets": 190,
+  "goalControl": {
+    "states": 22,
+    "matches": 22,
+    "clearCores": 36,
+    "coreMatches": 36,
+    "clearSurfaces": 72,
+    "surfaceMatches": 44,
+    "oneFrameDifferences": 28
+  },
+  "oil": {
+    "frontendTicks": 4156,
+    "guestTicks": 4756,
+    "transfers": 10,
+    "transferHeroMatches": 10,
+    "clearPuddlePoses": 14,
+    "baseMatches": 14,
+    "frameMatches": 12,
+    "oneCallbackDifferences": 2,
+    "originalAndModelBirthDeathAndReset": true,
+    "clearBeforeDeath": 226,
+    "beforePositions": 226,
+    "beforeFrames": 219,
+    "clearAfterReset": 21,
+    "afterPositions": 21,
+    "afterFrames": 0,
+    "exactDeathResetPhaseQualified": false,
+    "nativeStandingSlot": 85,
+    "birthOneCallbackDifference": true
+  },
+  "staticSpikes": {
+    "samples": 66,
+    "clear": 59,
+    "phaseMatches": 0,
+    "phaseQualified": false
+  },
+  "bonusCoreSamples": 429,
+  "qa": {
+    "tab": 115,
+    "state": "visible-goal-saved-paused",
+    "sources": 26,
+    "payloads": 85,
+    "oldDefinitions": 34,
+    "oldPayloads": 84,
+    "addedPayloadBytes": 7885,
+    "priorSurfaceSlicesIdentical": 24
+  },
+  "limits": [
+    "StaticSPIphase0of59clear exact; no clock correction adopted.",
+    "28of72clear physical-route surfaceglints differ oneframe; cold100surfacesmatch separately.",
+    "Oil14clearPUposes/12frames, twoonecallback differences and oneearlystandingDPsample. All21postresetpoints match but0frames; exactdeath/resetphase unqualified, no timer/randomstream correction.",
+    "Main route avoidsOil/collectsnone; separateOilprobe collects2bonuses, no campaignadvance. Remaining11bonus pickups, movingDP/updowndot andcloning unvisited.",
+    "No new real-time cadence/resource/audio/controller/higherdifficulty/fullsave claim."
+  ]
+}

@@ -42,6 +42,18 @@ test('a lowering pivot carries the human to death and a natural restart restores
  assert.equal(g.roundRestarts,1);assert.equal(g.player.pivot,'a');assert.equal(g.point(g.player).x,0);assert.equal(g.point(g.player).y,0);assert.equal(g.point(g.player).humanCanGrab,true);assert.equal(g.elevators.snapshot().controls[0].occupants,0);
 });
 
+test('qualified group0 lowering updates Oil acquisition pixels and actor availability together',()=>{
+ const {board,options}=elevatorFixture(),oil=canonicalOilFixture();
+ Object.assign(board,{elevatorOilSpikeRules:true,canonicalOilRules:true,puddles:[{row:0,column:0,kind:3}],spikes:[{id:'far',x:200,y:200,phase:0}]});
+ Object.assign(options,{oilOutlines:oil.options.oilOutlines,dotOutlines:oil.options.dotOutlines,oilBounds:oil.options.oilBounds});
+ Object.assign(board.elevators[0],{group:0,subcell:2});board.dots[0].upDown.group=0;
+ const g=new SourceRound(board,options);g.elevators.contact('test actor',0);
+ for(let i=0;i<100&&g.board.dots[0].humanCanGrab;i++)g.update(1/120);
+ assert.equal(g.board.dots[0].humanCanGrab,false);assert.equal(g.board.dots[0].nonhumanCanGrab,true);assert.ok(g.board.dots[0].x<0);
+ const pixel=g.oil.pixel(0);assert.equal(g.oil.acquireDot(pixel).index,0);assert.deepEqual(g.oil.acquireDot(pixel).pixel,{x:g.board.dots[0].x-16,y:g.board.dots[0].y-15});
+ board.puddles[0].kind=2;assert.throws(()=>new SourceRound(board,options),/Separate group0 elevators/);
+});
+
 test('qualified static spikes kill before an overlapping dormant Oil puddle wakes',()=>{
  const {board,options}=canonicalOilFixture();board.puddles[0].kind=2;board.spikes=[{id:'spike',x:0,y:0,phase:0}];
  assert.throws(()=>new SourceRound(board,options),/Canonical Oil requires/);

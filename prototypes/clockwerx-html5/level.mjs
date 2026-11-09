@@ -20,24 +20,30 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowCombinedGoalBonus=false,allowChildScoring=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowElevatorOilSpikes=false,allowCombinedGoalBonus=false,allowChildScoring=false}={}){
  const unsupported=[];
  if(allowElevators){
+  const group=allowElevatorOilSpikes?0:1,plain=allowElevatorOilSpikes?0x101:0x201;
   if(level.header?.displaySizeRaw!==8)unsupported.push('only large-display elevator geometry is qualified');
   if(!allowCanonicalPlayer||!allowEnemyStaticPrograms||!allowSpecialDots||!allowChildScoring)unsupported.push('elevators require source Child player, static actors, dots and scoring');
-  if(level.blocks?.some(b=>b.count&&['SP','WL','DR','DS','BO','GO','WY','HY','EX','GN','TR'].includes(b.kind))||activePuddleSpecs(level.blocks?.find(b=>b.kind==='PU')?.records||[],activeMask).length)unsupported.push('elevators with other hazards or special objects are unqualified');
+  if(level.blocks?.some(b=>b.count&&[...(allowElevatorOilSpikes?[]:['SP']),'WL','DR','DS','BO','GO','WY','HY','EX','GN','TR'].includes(b.kind))||!allowElevatorOilSpikes&&activePuddleSpecs(level.blocks?.find(b=>b.kind==='PU')?.records||[],activeMask).length)unsupported.push('elevators with other hazards or special objects are unqualified');
   const controls=activeElevatorSpecs(level.blocks?.find(b=>b.kind==='EL')?.records||[],activeMask);
-  if(!controls.length||controls.some(s=>s.group!==1||s.subcell!==3))unsupported.push('only active group1 half-cell elevator controls are qualified');
+  if(!controls.length||controls.some(s=>s.group!==group||s.subcell!==(allowElevatorOilSpikes?2:3)))unsupported.push(allowElevatorOilSpikes?'only group0 left half-cell controls with Oil/spikes are qualified':'only active group1 half-cell elevator controls are qualified');
   const activeDots=level.cells?.filter(c=>c.present&&(c.flagsRaw&0x300)&&(c.secondaryRaw&activeMask))||[];
-  if(!activeDots.length||activeDots.some(c=>c.flagsRaw!==0x201||dotColorOffset(c.secondaryRaw)!==0))unsupported.push('only plain initially raised white group1 dots are qualified');
-  if(level.cells?.some(c=>c.present&&![1,3,5,0x4001,0x4003,0x4005].includes(c.flagsRaw)&&!((c.flagsRaw===0x201)&&(c.secondaryRaw&activeMask))&&!(allowInactiveUpDownDots&&[0x101,0x4101].includes(c.flagsRaw)&&!(c.secondaryRaw&activeMask))))unsupported.push('elevator dot composition is unqualified');
+  if(!activeDots.length||activeDots.some(c=>c.flagsRaw!==plain||dotColorOffset(c.secondaryRaw)!==0))unsupported.push(allowElevatorOilSpikes?'only plain initially raised white group0 dots with Oil/spikes are qualified':'only plain initially raised white group1 dots are qualified');
+  if(level.cells?.some(c=>c.present&&![1,3,5,0x4001,0x4003,0x4005].includes(c.flagsRaw)&&!((c.flagsRaw===plain)&&(c.secondaryRaw&activeMask))&&!(allowInactiveUpDownDots&&[0x101,0x4101].includes(c.flagsRaw)&&!(c.secondaryRaw&activeMask))))unsupported.push('elevator dot composition is unqualified');
   if(level.blocks?.find(b=>b.kind==='WA')?.records.some(a=>(a.activationMaskRaw&activeMask)&&![0,6].includes(a.actorTypeRaw)&&(![1,2,3].includes(a.actorTypeRaw)||a.rawWords?.[7]!==1||actorChecksWalls(a.version12ByteRaw??1))))unsupported.push('elevators require wall-free ordinary class1 enemies');
+ }
+ if(allowElevatorOilSpikes){
+  if(!allowElevators||!allowCanonicalOil||!allowOil||allowCanonicalOilSpikes)unsupported.push('elevator Oil/spikes require the separate canonical group0 composition');
+  const puddles=activePuddleSpecs(level.blocks?.find(b=>b.kind==='PU')?.records||[],activeMask);
+  if(!puddles.length||puddles.some(p=>p.kind!==3)||!level.blocks?.find(b=>b.kind==='SP')?.records.some(r=>(r.rawWords[4]*65536+r.rawWords[5])&activeMask))unsupported.push('elevator Oil/spikes require kind3 puddles and active static spikes');
  }
  if(allowCanonicalPlayer&&(!allowEnemyStaticPrograms||allowOil&&!allowCanonicalOil&&activePuddleSpecs(level.blocks?.find(b=>b.kind==='PU')?.records||[],activeMask).length))unsupported.push("canonical player requires static Child actor callbacks without sliding");
  if(allowCanonicalOil){
   if(!allowOil||!allowCanonicalPlayer||!allowEnemyStaticPrograms||!allowSpecialDots||!allowChildScoring)unsupported.push('canonical Oil requires Child movement, static actors, special dots and scoring');
-  if(level.blocks?.some(b=>b.count&&[...(allowCanonicalOilSpikes?[]:['SP']),'DR','DS','BO','GO'].includes(b.kind)))unsupported.push('canonical Oil with additional hazards is unqualified');
-  if(level.cells?.some(c=>c.present&&((c.flagsRaw&~0x4017)||(c.flagsRaw&6)===6||(c.flagsRaw&0x10)&&dotColorOffset(c.secondaryRaw)!==0)))unsupported.push('canonical Oil requires ordinary dots and uncolored static checkpoints');
+  if(level.blocks?.some(b=>b.count&&[...(allowCanonicalOilSpikes||allowElevatorOilSpikes?[]:['SP']),'DR','DS','BO','GO'].includes(b.kind)))unsupported.push('canonical Oil with additional hazards is unqualified');
+  if(level.cells?.some(c=>c.present&&((c.flagsRaw&~(allowElevatorOilSpikes?0x4117:0x4017))||(c.flagsRaw&6)===6||(c.flagsRaw&0x10)&&dotColorOffset(c.secondaryRaw)!==0)))unsupported.push('canonical Oil requires ordinary dots and uncolored static checkpoints');
   // The wall opt-in separately qualifies free slow red hands with Oil.
   // Other clocks, programmed slow hands and wall-reacting classes1/3 stay gated.
   if(level.blocks?.find(b=>b.kind==='WA')?.records.some(a=>(a.activationMaskRaw&activeMask)&&![0,6].includes(a.actorTypeRaw)&&!([1,2,3].includes(a.actorTypeRaw)&&[1,3].includes(a.rawWords?.[7])&&!actorChecksWalls(a.version12ByteRaw??1)||allowStaticEnemyWalls&&a.actorTypeRaw===1&&a.rawWords?.[7]===4&&a.programReferenceRaw<0)))unsupported.push('canonical Oil enemy composition is unqualified');
@@ -93,7 +99,7 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
   if(!cell.present)continue;
   const inactiveUpDown=allowInactiveUpDownDots&&[0x101,0x4101].includes(cell.flagsRaw)&&!(cell.secondaryRaw&activeMask);
   const inactiveRing=allowInactiveRings&&[0x9,0x4009].includes(cell.flagsRaw)&&!(cell.secondaryRaw&activeMask);
-  const allowed=(allowSpecialDots?0x405f:0x4007)|(inactiveUpDown?0x100:0)|(allowElevators&&cell.flagsRaw===0x201&&(cell.secondaryRaw&activeMask)?0x200:0);
+  const allowed=(allowSpecialDots?0x405f:0x4007)|(inactiveUpDown?0x100:0)|(allowElevators&&(cell.flagsRaw===0x201||allowElevatorOilSpikes&&cell.flagsRaw===0x101)&&(cell.secondaryRaw&activeMask)?cell.flagsRaw&0x300:0);
   if(cell.flagsRaw&~allowed)unsupported.push('special dot flags 0x'+(cell.flagsRaw&~allowed).toString(16));
   if((cell.flagsRaw&6)===6&&!allowCombinedGoalBonus)unsupported.push('combined bonus/goal callback');
   if(allowGoodies&&(cell.flagsRaw&8))unsupported.push('goodies with rings');
@@ -108,8 +114,8 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowCombinedGoalBonus=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors,allowRotatingSpikes,allowFastRotatingSpikes,allowSlowRotatingSpikes,allowRotatingSpikeTransfers,allowRotatingSpikeBounces,allowInactiveElevators,allowInactiveUpDownDots,allowInactiveRings,allowBombObjectInteractions,allowCanonicalPlayer,allowCanonicalOil,allowCanonicalOilSpikes,allowElevators,allowCombinedGoalBonus,allowChildScoring});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowElevatorOilSpikes=false,allowCombinedGoalBonus=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors,allowRotatingSpikes,allowFastRotatingSpikes,allowSlowRotatingSpikes,allowRotatingSpikeTransfers,allowRotatingSpikeBounces,allowInactiveElevators,allowInactiveUpDownDots,allowInactiveRings,allowBombObjectInteractions,allowCanonicalPlayer,allowCanonicalOil,allowCanonicalOilSpikes,allowElevators,allowElevatorOilSpikes,allowCombinedGoalBonus,allowChildScoring});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
@@ -117,7 +123,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
   const rawCell=allowInactiveRings&&[0x9,0x4009].includes(c.flagsRaw)&&!(c.secondaryRaw&activeMask)?c.flagsRaw&~8:c.flagsRaw;
   const cell=allowInactiveUpDownDots&&[0x101,0x4101].includes(c.flagsRaw)&&!(c.secondaryRaw&activeMask)?rawCell&~0x300:rawCell;
   const state=decodeDot(cell);
-  const upDown=allowElevators&&c.flagsRaw===0x201&&(c.secondaryRaw&activeMask)?{group:1,initialLowered:false,x:origin.x+c.column*48,y:origin.y+c.row*48}:null;
+  const upDown=allowElevators&&(c.flagsRaw===0x201||allowElevatorOilSpikes&&c.flagsRaw===0x101)&&(c.secondaryRaw&activeMask)?{group:((c.flagsRaw>>8)&3)-1,initialLowered:false,x:origin.x+c.column*48,y:origin.y+c.row*48}:null;
   return {id:`${c.column},${c.row}`,sourceIndex:c.row*11+c.column,row:c.row,column:c.column,x:origin.x+c.column*48,y:origin.y+c.row*48,
    humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,
    present:true,motion:upDown?'up-down':'static',...(upDown?{upDown}:{}),slideMask:0,teleport:false,color:dotColorOffset(c.secondaryRaw,0),
@@ -159,7 +165,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
  const doors=records('DR').map((r,id)=>{const spec=decodeDoorRecord(r);return {id,...spec,...doorGeometry(spec,origin,hasWallArm)};});
  const switches=records('DS').map((r,id)=>{const spec=decodeSwitchRecord(r);return {id,...spec,...switchGeometry(spec,origin)};});
  return {ordinal,title,resourceId:level.resourceId,origin,dots,radius:48,distanceTolerance:1,angularSpeed,handOffsetY:1,
-  ...(allowElevators?{elevatorRules:true,elevators:activeElevatorSpecs(records('EL'),activeMask)}:{}),
+  ...(allowElevatorOilSpikes?{elevatorOilSpikeRules:true}:{}),...(allowElevators?{elevatorRules:true,elevators:activeElevatorSpecs(records('EL'),activeMask)}:{}),
   player:hand(actors[0],0),demos:[],enemies:actors.slice(2).map((a,i)=>hand(a,i+2)),spikes,walls,doors,switches,
   puddles:allowOil?activePuddleSpecs(records('PU'),activeMask):[],
   ...(allowCanonicalPlayer?{canonicalPlayerRules:true}:{}),...(allowCanonicalOil?{canonicalOilRules:true}:{}),...(allowCanonicalOilSpikes?{canonicalOilSpikeRules:true}:{}),...(allowBombObjectInteractions?{bombObjectInteractionRules:true}:{}),...(allowCombinedGoalBonus?{combinedGoalBonusRules:true}:{}),...(allowRotatingSpikes?{rotatingSpikeRules:true,...(allowFastRotatingSpikes?{fastRotatingSpikeRules:true}:{}),...(allowSlowRotatingSpikes?{slowRotatingSpikeRules:true}:{}),...(allowRotatingSpikeTransfers?{rotatingSpikeTransferRules:true}:{}),...(allowRotatingSpikeBounces?{rotatingSpikeBounceRules:true}:{})}:{}),bombRules:allowBombs,goodieOnlyRules:allowGoodies,staticEnemyWallRules:allowStaticEnemyWalls,bombs:allowBombs?records('BO'):[],goodies:(allowBombs||allowGoodies)?records('GO').filter(r=>(r.rawWords[3]*65536+r.rawWords[4])&activeMask).map(r=>({row:r.rawWords[0],column:r.rawWords[1],initialFrame:r.rawWords[2]})):[],

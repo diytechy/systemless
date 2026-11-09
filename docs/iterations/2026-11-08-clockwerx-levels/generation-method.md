@@ -140,3 +140,6 @@ Pigeonholes34 shows geometric proposals must use the union of allfour originalst
 
 
 Pigeonholes34 bounded witness is now accepted/active; retain the union of allfourSPIcolliders because frequent phase mismatch remains. Existing-map route success is not new-level generation or exact hazardtiming qualification. See[review](pigeonholes-review.md).
+
+
+Hiccup35 exposes a temporal reachability requirement: a static proposal can disappear before arrival as grouped dots sink, or route through an adjacent rotating enemy. Read-only static paths are proposals only. A bounded candidate search reconstructs branches from fresh unmodified-map legal inputs and tests actual collisions, waiting, bounce and Reverse; its14transfer witness passes190onsets, but still needs original/SVGgoals. Do not certify a generated board from topological connectivity alone.

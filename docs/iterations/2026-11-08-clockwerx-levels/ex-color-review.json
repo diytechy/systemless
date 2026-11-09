@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "scope": "global EX appearance correction only; no new49 admission",
+  "runtimeChecks": 294,
+  "priorScenes": 48,
+  "priorUpdates": 424374,
+  "priorBoardsAndTimedEventsAndGameplayStateIdentical": true,
+  "sourceColorProjectedFrameFields": 49,
+  "nativeRawObservations": 1056,
+  "nativeUniqueClear": 918,
+  "nativeOldWrongClear": 433,
+  "nativeCorrectedWrongClear": 0,
+  "nativeAmbiguousOrOverdraw": 138,
+  "independentReviewSha256": "9ee92f40db8ff31f83c9dc2a0d907e4f12933b6c98df8431d11c6b24d4bb7724",
+  "sourcePatchSha256": "44cb2c19cc9ae5a1830aa9e4c65ec29732a93170b14a8e2a9e03eab1da2aecef",
+  "rawNativeComparisonSha256": "b929e7ebbf559d585f5618759bc347e45c771be5a68068b674e33d75908e8cff",
+  "qaPalettePhysicallyViewed": true,
+  "originalThrillerColdReViewed": true,
+  "priorDefinitionsAndAll100PayloadsUnchanged": true,
+  "limits": [
+    "Raw prior audit samples32of119sourceEX across43..48; unsampled anchors remain explicit",
+    "Cold normal/bonus native evidence; burnt bank is source/tests/model only, no new original runs",
+    "138overdraw/ambiguous prior observations and21native49EX misses retained",
+    "SVG shading/antialias and previous timing/audio/controllers/nonChild/performance limitations remain"
+  ],
+  "sourceRevision": "410f48efc8aabb6a052b33f7cc28cc93b6ba9400",
+  "activeScenes": 48,
+  "remainingScenes": 52,
+  "sourceFiles": 32,
+  "assetPayloads": 100,
+  "sizes": {
+    "sourceBytes": 300810,
+    "assetBytes": 3432312,
+    "manifestBytes": 4581626,
+    "totalBytes": 8314748
+  },
+  "activation": "ex-color-review/activation.json",
+  "rollback": "ex-color-review/previous-live-pilot",
+  "normalTab": 92,
+  "normalPaused": true,
+  "normalDeliverable": true,
+  "qaTab131Closed": true
+}

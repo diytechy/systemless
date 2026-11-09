@@ -15,3 +15,6 @@ Cold original actor matching is275/275clear poses/positions at696/697legal idle 
 Guarded activation preserves all44prior definitions,92payloads, four protected root files and `systemless.clockwerx-html5.pilot.v1`. Full44rollback is retained.29sources/92payloads/manifest total7669241raw bytes, excluding receipt; this is neither wire size nor RAM. No new art, conversion, heavy build, push, upload or deployment.
 
 Earned-through45fixture SHA25616583bda6e7995d7aba44ef666d8aebe5a2f1a7c96c4c51090bd926d728efb55verifies nine files/bothforks/represented metadata/seven untouched. Fresh46originalpassed2224frontend/2824guest/zero budget. Original source image remains byte-identical. Private evidence is `D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/slide/`; [packet](slide-review.json). Continue with46Oil+EX serial integration while independent source preparation proceeds.
+
+
+Subsequent[EX color review](ex-color-review.md) corrects the shared sliding-link artwork lookup. The earlier narrow clear-frame counts do not establish complete colored-link coverage. Source410f48ef changes appearance metadata only; all48boards/full gameplay traces/events/other state remain identical over424,374updates.

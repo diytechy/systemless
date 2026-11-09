@@ -200,3 +200,6 @@ Bomb/EX generation additionally preserves ordered component propagation without 
 ## Thriller48 wall/checkpoint requirement
 
 The accepted48composition adds source eraser frames2/3/4 and ordered persistent wall paint. Collision removal alone leaves old pixels: paint source masks synchronously before DO callbacks, retain immutable wall presence for repeat blasts, and reset both wall state and journal. Actual48uses two horizontal and two vertical openings; cross4/burned WY/EX remain synthetic contracts. Native359fixed crater-free pixels support erasure only, not wholejournal equivalence. A generated level still needs timed legal transfers, safe routes after mutable geometry, protected-checkpoint death/reset validation, and goal completion; coarse connectivity is insufficient. Two48bonuses remain optional/unvisited. See[review](thriller-review.md).
+
+
+EX appearance must keep normalized DO colors distinct from runtime EX flag bits. The first endpoint's normalized1/2/4 bits become EX4/2/1 before the original lookup; preserve ordinary/bonus/burnt bank and orientation independently. A narrow anticipated-frame matcher can exclude wrong colors as high-error observations; scan the complete source descriptor inventory before declaring visual coverage. The[global color review](ex-color-review.md) corrects44–48without changing their legal gameplay traces.

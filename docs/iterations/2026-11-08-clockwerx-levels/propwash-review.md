@@ -15,3 +15,6 @@ Droplet full-RGBA hypotheses agree54/62precompletion; chromatic body-only fits55
 Guarded activation preserves45prior definitions,92old payloads, four protected root files and browser save key. Four reviewed blue-ring payloads add174269raw bytes and preserve82old crops/metadata. The existing207-frame collider profile is reused, avoiding260575additional bytes.30source files/96payloads/manifest total7949862raw bytes excluding receipt; neither wire size nor RAM. Full45rollback retained. No heavybuild, push, upload or deployment.
 
 Earned-through46fixture SHA9fe06fadad043d20121497e9d1540b3590c1a6a9baca8f5e9686a2fe7b0c16dbverifies nine files/bothforks/representedmetadata/sevenuntouched. Fresh47passed2224frontend/2824guest/zero budget. Original source image remains byte-identical. Private evidence `D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/propwash/`; [packet](propwash-review.json). Continue Focus47shared BO+EX serially and Funhouse50existing-core preparation in parallel; no native50before earned49.
+
+
+Subsequent[EX color review](ex-color-review.md) corrects the shared sliding-link artwork lookup. The earlier narrow clear-frame counts do not establish complete colored-link coverage. Source410f48ef changes appearance metadata only; all48boards/full gameplay traces/events/other state remain identical over424,374updates.

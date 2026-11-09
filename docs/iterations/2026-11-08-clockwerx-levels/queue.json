@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 49,
-  "currentAction": "Playground49 serial HY+EX ordinary-program source qualification; root original cold from earned48, private worker source candidate; frozen Funhouse50 content awaits49.",
+  "currentAction": "Playground49 private source-v2 rebase against corrected410f48ef; independent native cold fits complete, root legal-idle calibration after source review; Funhouse50 revalidated48 but awaits49.",
   "levels": [
     {
       "ordinal": 1,
@@ -3334,7 +3334,8 @@
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
       },
-      "review": "weave-review.md"
+      "review": "weave-review.md",
+      "presentationCorrection": "ex-color-review.md"
     },
     {
       "ordinal": 45,
@@ -3425,7 +3426,8 @@
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
       },
-      "review": "slide-review.md"
+      "review": "slide-review.md",
+      "presentationCorrection": "ex-color-review.md"
     },
     {
       "ordinal": 46,
@@ -3522,7 +3524,8 @@
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
       },
-      "review": "propwash-review.md"
+      "review": "propwash-review.md",
+      "presentationCorrection": "ex-color-review.md"
     },
     {
       "ordinal": 47,
@@ -3614,7 +3617,8 @@
         "playabilityAccepted": false
       },
       "review": "focus-review.md",
-      "reviewPacket": "focus-review.json"
+      "reviewPacket": "focus-review.json",
+      "presentationCorrection": "ex-color-review.md"
     },
     {
       "ordinal": 48,
@@ -3702,7 +3706,8 @@
         "playabilityAccepted": false
       },
       "review": "thriller-review.md",
-      "reviewPacket": "thriller-review.json"
+      "reviewPacket": "thriller-review.json",
+      "presentationCorrection": "ex-color-review.md"
     },
     {
       "ordinal": 49,

@@ -21,3 +21,6 @@ SVG crater texture/shading/antialias, approximate prior goal cadence, completion
 Protected activation is thriller/activation.json; full47rollback thriller/previous-live-pilot. All47prior definitions/98payloads/four root files/save key remain intact.32sources/100payloads;8,314,520raw bytes including manifest/excluding receipt, neither wire size nor RAM. Earned48fixture4c5bc40c… verifies both forks/represented metadata for9files/seven untouched; original source image unchanged. Normal92is paused/playable/deliverable; QA130closed. Private maps/art/programs/disassembly remain onD:. No push/upload/deploy.
 
 Next Playground49requires a narrow HY+EX+programmed-ordinary scope and its own cold calibration. Preserve authoritative EX arrival frame before HY; capture original transfer/arrival targets before teleport; retain legacy41behavior and reject unsupported endpoint overlaps. Funhouse50frozen content awaits49source revalidation and earned49native fixture. See[generation requirements](generation-method.md).
+
+
+Subsequent[EX color review](ex-color-review.md) corrects the shared sliding-link artwork lookup. The earlier narrow clear-frame counts do not establish complete colored-link coverage. Source410f48ef changes appearance metadata only; all48boards/full gameplay traces/events/other state remain identical over424,374updates.

@@ -9,3 +9,6 @@ The independent raw audit reads33existing cold captures for each of43–48and sc
 Playground's separate blind scan finds native frames44for five links and37for the sixth, with177/198clear observations. The old predicted46/38scores are preserved as failures. Earlier narrow frame checks did not establish complete colored-link coverage; their clear-fit counts must not be read as validation of the full color inventory. This expanded source/raw review supersedes the earlier direct normalized-color table assumption.
 
 Root reviewed the corrected Thriller SVG preview against the original cold image. All100private payloads/48definitions/save identity remain unchanged. The prior native audit uses cold normal/bonus states; the burnt-bank correction has source, unit and model coverage, without a new native burned-color witness. Existing SVG shading/antialias, timing/effect, audio/controller, nonChild, save and performance limits remain. Private evidence stays in ex-color-review/, ex-color-native-review/ and playground-native-cold-review/ onD:. No upload, push or deployment.
+
+
+Source410f48ef is locally active with a full prior48rollback. Normal92is paused/playable/deliverable; QA131closed. Bundle32sources/100payloads/raw8,314,748bytes including manifest/excluding receipt, neither wire size nor RAM. Protected receipt: ex-color-review/activation.json.

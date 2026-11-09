@@ -15,3 +15,6 @@ Timing limits remain explicit: SR14/30clear frame+base matches (15physical), BO9
 Protected local activation: `focus/activation.json`, full46rollback `focus/previous-live-pilot`. All46prior definitions/96payloads/four root files/save identity remain intact.32sources/98payloads;8,161,342raw bytes including manifest, excluding receipt. This is neither wire size nor RAM. Earned47fixture SHA0a2284ce… preserves both forks/represented metadata of9files and seven untouched files; original source hash remains unchanged. Normal tab92Focuspaused/playable/deliverable; QA129closed. No push/upload/deploy.
 
 Private packets remain onD: `focus/`, `focus-parallel-engine/`, `focus-native-object-review/`; actual maps/art/programs/disassembly are not in Git. Next is Thriller48: ordered erased-wall paints/nonempty800:2/3art before qualification. Actual48terminals cannot burn WY/EX. Funhouse50has frozen content packets ready, while native50waits earned49and its own cold calibration. See[engine/generation requirements](bomb-sliding-integration.md).
+
+
+Subsequent[EX color review](ex-color-review.md) corrects the shared sliding-link artwork lookup. The earlier narrow clear-frame counts do not establish complete colored-link coverage. Source410f48ef changes appearance metadata only; all48boards/full gameplay traces/events/other state remain identical over424,374updates.

@@ -17,3 +17,6 @@ GO and SPI exact phases remain unqualified: cold26/196SPI and30/159GO; gameplay4
 Guarded activation preserves all43prior definitions/92payloads, four root files and save key, with full43rollback at `weave/previous-live-pilot`. Current protected baseline is `weave/activation.json`.29sources,92payloads and manifest total7554194raw bytes excluding receipt; no new art, wire or memory claim. Normal92passed44select/restart/pause and remains paused/playable.
 
 Only the successful original export supplies through44fixture SHA256 `3779e6a0f0db01253e61865e3cd86713a9ecfc534a98219cf2960acb12db5238`. Nine files, both forks, represented metadata and seven untouched files verify. Fresh45passed2224frontend/2824guest ticks, zero budget exhaustion; actual45/284000viewed. Original media remains byte-identical. No push/upload/deployment. Continue directly from [current action](current-action.md).
+
+
+Subsequent[EX color review](ex-color-review.md) corrects the shared sliding-link artwork lookup. The earlier narrow clear-frame counts do not establish complete colored-link coverage. Source410f48ef changes appearance metadata only; all48boards/full gameplay traces/events/other state remain identical over424,374updates.

@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 43,
-  "currentAction": "StaticEX/SP/programmedNPC43 serial composition; freshSol privateworker. Root independent source/native/visual review. Live42accepted;58remain; continue without per-level stops.",
+  "currentOrdinal": 44,
+  "currentAction": "GO+EX44 serial integration by freshSol weave_engine; root independent cold/native/visual review. Live43accepted;57remain, continue without per-level stops.",
   "levels": [
     {
       "ordinal": 1,
@@ -3161,22 +3161,24 @@
       "menuTitle": "Betwixt",
       "resourceTitle": "Betwixt",
       "sha256": "6d0c80cf900e65bef36051634b55e87806148ba337e44db4ea8ff3c4addbe29f",
-      "status": "serial-static-ex-private-implementation",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [
-        "betwixt/native-initial-01/report.json"
+        "betwixt/native-initial-01/report.json",
+        "betwixt/native-goal-01/report.json",
+        "betwixt/native-goal-01-comparison.json",
+        "betwixt/native-goal-01-object-comparison.json"
       ],
       "requirements": [
-        "Remove the mandatory-EL/WY assumption only under a separate static EX capability; preserve42's gate",
-        "Qualify ordinary n/f programs with EX stop/program/start ordering on clock classes1/2/3",
-        "Qualify current physical slide anchors for static SP and shared-hand contact",
-        "Supply colored EX frames0,3,36,39"
+        "NPC animate/collide/stop/program/start with sourcePC suspended while sliding or noncardinal",
+        "class1/2/3 ordinary actors retain exact free/f/n bindings and sourcephysicalqueries",
+        "available static EX endpoints; normalized andhelper permission invariants failclosed",
+        "one initiating award per recursively consumed colored bonuscomponent, escalatingChildscores"
       ],
-      "svgStatus": "not admitted; source/staticEX/SP/programmedNPC candidate only",
+      "svgStatus": "locally active; original/SVG7000goal;13transfers/2bounce/1Reverse/bothbonuscomponents/190onsets",
       "generationConstraints": [
-        "Retain independent class1 multiplier1/divisor2, class2 multiplier3/divisor8, class3 multiplier1/divisor4",
-        "Both EX are horizontal; source first-endpoint color controls line frame, either endpoint bonus controls component state",
-        "All actor references valid; eight free enemies stay free despite five stored WP strings",
-        "No Oil/BO/GO/HY/moving/up-down family is required"
+        "separate static EX/SP/fnprogram composition; do not widen42EL/WYprofile",
+        "validate all190held onsets with actual source clocks/programs and original/SVG goals",
+        "qualify permission-changing endpoints/b/sprograms and Oil/GO/BO/HY/moving combinations serially"
       ],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -3202,9 +3204,9 @@
           "GN": 0,
           "TR": 0
         },
-        "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+        "boundary": "Source inventory and bounded original/SVG goal with bothEXcomponents; explicit phase/hazard limits."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3216,10 +3218,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "Cold match all active ordinary actor clocks and the two source-bound n/f programs",
-        "Legal forward slide, midpoint transfer or backout, and a programmed NPC transfer/slide interaction",
-        "Collect each two-dot EX bonus component as one initiating award with recursive unbonus; initial bonus count is13",
-        "Goal route and finite input windows without substituting classes or programs"
+        "Ten clear gameplayposes differ byoneframe; cold341positions/322poses retain19discrepancies andrawcoloredconnector overdraw",
+        "Exact staticSPphases/collisionedges, native death/reset, fullaudio/controllers/nonChild/performance unqualified",
+        "Unavailableorpermissionchanging endpoints failclosed; b/sprograms and otherfamilies remainrejected",
+        "OriginalpostgoalNPCclocks unqualified andSVGcompletionUI differs; rejected02/03certificates never suppliedprogress"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3239,7 +3241,8 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
-      }
+      },
+      "review": "betwixt-review.md"
     },
     {
       "ordinal": 44,
@@ -3247,14 +3250,16 @@
       "menuTitle": "Weave",
       "resourceTitle": "Weave",
       "sha256": "f487d162c04059461fe579f6424318270616598b9df816eec134980784c2f5a0",
-      "status": "source-prepared-awaiting-serial-composition",
-      "nativeEvidence": [],
+      "status": "serial-go-ex-private-implementation",
+      "nativeEvidence": [
+        "weave/native-initial-01/report.json"
+      ],
       "requirements": [
         "Explicit GO+EX/sliding actor support in BombRuntime, replacing its current dynamic-actor rejection only in the qualified scope",
         "GO/SP/WL combination qualification with physical sliding anchors",
         "Colored horizontal/vertical EX atlas coverage"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "not admitted; privateGO+EXscope only",
       "generationConstraints": [
         "Seven ordinary class1 enemies have negative references; do not bind the unused stored program",
         "Eighteen connectors include both orientations and no initial connector bonuses",
@@ -7585,8 +7590,8 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "betwixt_engine private43implementation/tests/one model",
+    "A": "weave_engine private44GO+EX implementation/tests/one model",
     "B": "root source/native/art/review; one original emulator, conversions serial",
-    "C": "43-50 source prep and42independent review complete/released"
+    "C": "mechanics_triage source-onlyGO+EXplan finalizing; no functional workload"
   }
 }

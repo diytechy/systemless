@@ -1,0 +1,63 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "b34eb2bd",
+  "ordinal": 43,
+  "title": "Betwixt",
+  "nativeTransfers": 13,
+  "bounces": 2,
+  "reverses": 1,
+  "bonusAwards": 3,
+  "slideArrivals": 1,
+  "goalOnsets": 190,
+  "nativeGoalScore": 7000,
+  "qaGoalScore": 7000,
+  "runtimeChecks": 284,
+  "privateChecks": 6,
+  "packagingChecks": 17,
+  "priorDefinitionsUnchanged": 42,
+  "priorPayloadsUnchanged": 92,
+  "priorBoards": 42,
+  "priorSnapshots": 42,
+  "priorUpdates": 370112,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext44Total278000Viewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "fresh44PhysicallyViewed": true,
+  "sourceFittedIdleUpdates": 700,
+  "poseSummary": {
+    "all": 330,
+    "clear": 314,
+    "clearPositions": 314,
+    "clearPoses": 304,
+    "allPositions": 326,
+    "allPoses": 315,
+    "transferHero": 12,
+    "transferHeroMatches": 12
+  },
+  "connectorSummary": {
+    "observations": 60,
+    "clear": 47,
+    "clearMatches": 47,
+    "finalTransferHeroMatches": true,
+    "finalTransferHeroError": 0.28136200716845877,
+    "totalTransferHeroes": 13
+  },
+  "all13TransferHeroes": true,
+  "bothBonusComponentsConsumed": true,
+  "fixtureSha256": "6630be987c39b320de4aa5c9d2ab5aa6066c0a6dca756d08cd4e99a0506e5947",
+  "limits": [
+    "Ten clear gameplayposes differ byoneframe; cold341positions/322poses retain19discrepancies andrawcoloredconnector overdraw",
+    "Exact staticSPphases/collisionedges, native death/reset, fullaudio/controllers/nonChild/performance unqualified",
+    "Unavailableorpermissionchanging endpoints failclosed; b/sprograms and otherfamilies remainrejected",
+    "OriginalpostgoalNPCclocks unqualified andSVGcompletionUI differs; rejected02/03certificates never suppliedprogress"
+  ],
+  "liveSizes": {
+    "sourceBytes": 255895,
+    "assetBytes": 3194496,
+    "manifestBytes": 4007623,
+    "totalBytes": 7458014
+  },
+  "normalTab92SelectRestartPauseViewed": true,
+  "qa125Closed": true,
+  "currentReceipt": "betwixt/activation.json"
+}

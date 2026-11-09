@@ -179,3 +179,6 @@ HY generation now requires exactly two present endpoints per admitted channel af
 
 
 EX graph generation must preserve unmasked61capacity, source record order, two static adjacent endpoints and orientation0/1/byte2zero. Compute initial bonus closure across connected links; one initiating pickup clears that component and earns once. Keep logical pivot identity separate from the physical three-pixel slide anchor; include direction-dependent auto-slide, Reverse/backout and source callback ordering in timed search. EX42 is one qualified composition, not proof of mixed-family generated boards.
+
+
+Static EX/program generation must model NPC stop/program/start order, PC suspension during sliding, sourceclass clocks and exactphysical queries. A program can execute immediately after arrival/backout; do not advance PC during the slide. Betwixt43uses decoder-built available endpoints; generated normalized/helper inputs with unavailable endpoints now failclosed. Test component pickup scoring and every supported hold onset, then independent original/SVG playability; a structural map or model-only winner remains insufficient.

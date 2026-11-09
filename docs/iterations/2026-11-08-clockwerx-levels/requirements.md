@@ -259,3 +259,6 @@ Squiggle41 qualifies the bounded paired-HY static Child family, strict pairs, or
 
 
 EX42 now qualifies the first static connector/updown/WL/WY/freeactor Child composition. Source physical slide anchors, callback order, no-halfturn endpoint arrival, collision compensation, ID cache and recursive bonus component consumption are shared rules. Native/SVG36000 and all190onsets pass; focused callback-step, surfacephase, unvisited checkpoint/death/reset/audio limits remain explicit. Static/programmed/SP43 and later Oil/BO/GO/HY joins need separate serial qualification.
+
+
+Betwixt43 qualifies static EX/SP with ordinary free/fn programs on clockclasses1/2/3. NPC programs skip while sliding/noncardinal; stop precedes PC and every exit reaches start-slide. Both bonuscomponents consumed for one initiating escalating award each. Available endpoint permissions are explicit invariant; unavailable/burning/ring/otherfamily and b/sprogram joins remain serial work. Native/SVG7000/all190onsets/13hero poses pass, ten one-frame gameplay differences retained.

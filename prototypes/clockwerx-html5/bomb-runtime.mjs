@@ -62,6 +62,9 @@ export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeS
  * restores saved DO specifications on reset, alongside StaticDotRuntime. */
 export function applyBombDotHit(dot,onChange,{allowObjectInteractions=false}={}){
  staticDot(dot,allowObjectInteractions);fn(onChange,'dot appearance');
+ return mutateBombDotHit(dot,onChange);
+}
+function mutateBombDotHit(dot,onChange){
  if(!dot.humanCanGrab)return false;
  let changed=false;
  if(!dot.ring&&!dot.burnt){dot.burnt=true;changed=true;}
@@ -72,6 +75,20 @@ export function applyBombDotHit(dot,onChange,{allowObjectInteractions=false}={})
  if(changed||dot.sourceInBackground)sync(onChange,dot,{changed,paintBackground:dot.sourceInBackground,
   updateSpriteRange:changed&&!dot.sourceInBackground,minimum,maximum:dot.waystation?89:dot.ring?minimum+7:minimum,
   burntFrame:dot.burnt&&!dot.waystation?92+(dot.color??0):null,sourceBomb:true});
+ return changed;
+}
+// Unlinked moving-DO preparation. The live scene supplies current main-RO
+// visibility and outline collision; source scope still rejects dynamic maps.
+export function bombMovingDots(dots,collides,onChange){
+ if(!Array.isArray(dots))throw new TypeError('Source dot records required');
+ fn(collides,'moving dot outline');fn(onChange,'dot appearance');const changed=[];
+ for(const dot of dots){
+  if(!dot.upDown)continue;
+  grid(dot);
+  if(dot.motion!=='up-down'||dot.moving||dot.movingProgram||dot.ring||dot.protected||dot.waystation||dot.transferDeath||dot.slowdown||dot.connector||dot.sourceBombDynamic||dot.sourceInBackground!==false||typeof dot.sourceCollidable!=='boolean'||typeof dot.humanCanGrab!=='boolean'||typeof dot.bonus!=='boolean')throw new Error('Explicit plain up/down main-sprite state required');
+  if(!dot.sourceCollidable||!sync(collides,dot))continue;
+  if(mutateBombDotHit(dot,onChange))changed.push(dot.id);
+ }
  return changed;
 }
 export function bombStationaryDots(dots,origin,onChange,options){

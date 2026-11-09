@@ -1,5 +1,5 @@
 {
-  "status": "unlinked-blast-preparation-not-accepted",
+  "status": "unlinked-blast-and-class2-preparation-not-accepted",
   "ordinal": 36,
   "title": "Stutter",
   "liveOrdinal": 35,
@@ -43,10 +43,11 @@
     "observed": "36Stutter/playerp/211000"
   },
   "validation": {
-    "runtimeChecks": 243,
+    "runtimeChecks": 247,
     "priorDecodedBoards": 34,
     "priorSnapshots": 34,
-    "priorReplayUpdates": 295736
+    "priorReplayUpdates": 295736,
+    "packagingChecks": 15
   },
   "privateEvidence": [
     "stutter/source-inventory.json",
@@ -54,20 +55,38 @@
     "stutter/source-behavior-notes.json",
     "stutter/native-initial-01/report.json",
     "stutter/runtime-tests-unlinked-01.log",
-    "stutter/prior-scenes-review.json"
+    "stutter/prior-scenes-review.json",
+    "stutter/class2-preparation-review.json",
+    "stutter/native-source-pose-fits.json",
+    "stutter/native-elevator-fits-offset36.json",
+    "stutter/runtime-tests-unlinked-02.log"
   ],
   "pending": [
-    "movingDO blast dispatch andappearance",
-    "ELburntframe9backgroundstamp rendering/nativewitness",
-    "DPblastcallback wiring/nativewitness",
-    "explicitmixedBO/Oil/EL/WY/wall composition",
-    "class2freeorbital timerqualification",
+    "mixedBO/Oil/EL/WY/wall runtime scope andcallbackwiring",
+    "ELburntframe9backgroundstamp/crater ordering",
+    "coldclass2orbital/nativecoupledpose comparison",
     "inactivegroup2dotpropertyclearing",
-    "coldposes/controlphase comparisons",
+    "extendedDOTbodyprofiles forburntOilcollider",
     "candidate/original/SVGgoals"
   ],
   "limits": [
     "New blasthelpers are unlinked; scene36 remainsgated/notplayable inSVG.",
     "No new real-time cadence/resource/audio/controller/save qualification."
-  ]
+  ],
+  "nativeIndependentFits": {
+    "hypotheses": 264,
+    "clear": 210,
+    "raw": 54,
+    "presentPivotCandidates": 81,
+    "loweringCandidates": 156,
+    "controlImages": 33,
+    "controlObservations": 66,
+    "controlBases": 2,
+    "coupledModelComparison": false
+  },
+  "class2Preparation": {
+    "sourceDivisor": 8,
+    "sourceMultiplier": 3,
+    "scope": "explicit free-orbital only; no live manifest opt-in; native qualification pending"
+  }
 }

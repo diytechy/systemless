@@ -149,3 +149,6 @@ Hiccup35 now has original/SVG goal and190onset witnesses for timed group crossin
 
 
 Stutter36 adds destructible-control liveness, burnt appearance, allocated-but-hidden droplets, and independent moving-DOTblast overlap to the pending generationstate. Inactivegroup2properties retainordinary pivots. A type4occupant mustnotpresscontrols; class2clockqualification is separate fromnormal/sloworbitals. Theseare source-derived requirements, not a qualifiedmap or new generator.
+
+
+Stutter36requires distinguishing currentlyallocated droplet slots from visible sprites, movingmain-body outline from static grid membership, and class2multiplied callbacks from presentation smoothing. Independentnativefits are saved but not yet coupled-runtime witnesses. ELburnt-background/crater order andclass2orphan timing remain pending.

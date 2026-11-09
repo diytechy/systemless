@@ -1,7 +1,7 @@
 // Static-dot single-player Oil coordinator. Private outlines and qualified
 // source bounds are mandatory; preparing this module does not enable a level.
 import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
-import {dotRenderSpec} from './dots.mjs';
+import {dotBodyFrame} from './dots.mjs';
 import {createPuddleState,triggerPuddle,observePuddle,createDropletState,
  dropletArrived,dropletHumanGrab,dropletDirection,advanceDroplet,oilOutline,
  findDormantPuddleContact,OIL_LIMITS} from './oil.mjs';
@@ -34,7 +34,7 @@ export class OilRuntime {
   const shape=oilOutline(this.outlines.groups['2200'].frames[state.frame],state.base);
   for(const dot of this.dots){
    if(!dot.sourceCollidable)continue;
-   const frame=dotRenderSpec(dot).sourceDescriptor-300;
+   const frame=dotBodyFrame(dot);
    if(outlineCollision(shape,oilOutline(this.dotOutlines.groups['300'].frames[frame],this.pixel(dot.sourceIndex))))return dot.sourceIndex;
   }
   return -1;

@@ -19,3 +19,10 @@ export function dotRenderSpec(dot, colorMode=0) {
   return {present:state.present,bonus,color,assetKey:`${bonus?'bonus':'normal'}:${color}`,
     sourceDescriptor:(bonus?301:309)+color};
 }
+
+// Ordinary/bonus or burnt main body. Special animated forms have their own
+// runtimes; the qualified uncolored checkpoint outlines equal the plain body.
+export function dotBodyFrame(dot,colorMode=0){
+ const spec=dotRenderSpec(dot,colorMode);
+ return dot.burnt&&!dot.waystation?92+spec.color:spec.sourceDescriptor-300;
+}

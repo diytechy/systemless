@@ -236,3 +236,6 @@ Hiccup35 is accepted: original/SVG1000,14transfers/twobounces/fiveReverse and190
 
 
 Stutter36sourcepreparation separates moving/stationary DOTblast dispatch, DPvisibility/clockdetach withoutslot reclamation, andELglyph hiding/burntbackground withoutcontact reset. Type4mustsuppressallordinarycontrolhooks. Mixedscene/class2orbital remainsgated; helpersareunlinked,243runtimechecks/34priorregressions295736updates pass. See[preparation](stutter-preparation.md).
+
+
+Stutter36unlinkedpreparation now includes a separate freeclass2orbital capability(divisor8/multiplier3), per-multiplied-frame callbacks, movingDOoutline/visibility thenhumanavailability, and burnt main-body Oilcollision. Mixedscope remainsrejected; no nativeclass2qualification/liveopt-in.247runtime/15packaging/34priorregressions295736updates pass.

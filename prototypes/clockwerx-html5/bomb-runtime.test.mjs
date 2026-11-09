@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {BombRuntime,BOMB_CLOCKS,assertBombRuntimeScope,assertGoodieRuntimeScope,applyBombDotHit,bombStationaryDots,bombActors} from './bomb-runtime.mjs';
+import {BombRuntime,BOMB_CLOCKS,assertBombRuntimeScope,assertGoodieRuntimeScope,applyBombDotHit,bombStationaryDots,bombMovingDots,bombActors} from './bomb-runtime.mjs';
 
 // Invented two-point paths and tiny boards; no owned map or source samples.
 const routes=()=>[10,4,0].map(kind=>({kind,points:[[0,0],[1,2]],entryLeg:4,forwardExit:4,reverseExit:1,bomb:kind===0,flipVertical:false,flipHorizontal:false,swap:false}));
@@ -8,6 +8,16 @@ const bombs=()=>[{row:1,column:1,kind:10,flags:0},{row:1,column:2,kind:4},{row:1
 const hero=()=>({sourceSlot:0,sourceActorType:0,visible:true});
 const enemy=slot=>({sourceSlot:slot,sourceActorType:1,visible:true});
 const dot=(id,row,column,extra={})=>({id,row,column,color:2,ring:false,bonus:false,burnt:false,humanCanGrab:true,nonhumanCanGrab:true,sourceInBackground:true,...extra});
+
+test('moving-DO blasts use main visibility and outlines before the human-availability rule',()=>{
+ const moving=(id,extra={})=>dot(id,1,1,{upDown:{group:0},motion:'up-down',sourceInBackground:false,sourceCollidable:true,...extra});
+ const dots=[moving('raised'),moving('sinking',{humanCanGrab:false}),moving('hidden',{sourceCollidable:false}),dot('stationary',1,1)],tested=[],changed=[];
+ assert.throws(()=>assertBombRuntimeScope({dots,allowObjectInteractions:true}),/dynamic/);
+ assert.deepEqual(bombMovingDots(dots,d=>{tested.push(d.id);return true;},(d,change)=>changed.push([d.id,change])),['raised']);
+ assert.deepEqual(tested,['raised','sinking']);assert.equal(dots[0].burnt,true);assert.equal(dots[1].burnt,false);assert.equal(dots[2].burnt,false);assert.equal(dots[3].burnt,false);
+ assert.equal(changed[0][1].paintBackground,false);assert.equal(changed[0][1].updateSpriteRange,true);assert.equal(changed[0][1].minimum,94);
+ assert.equal(dots[0].motion,'up-down');assert.equal(dots[0].humanCanGrab,true);
+});
 function fixture(config={},overrides={}){
  const clocks={match:10,spark:20,explosion:30,goodie:40},time={latched:100,fresh:100},seen=[];
  const adapters={clock:k=>clocks[k],latchedTick:()=>time.latched,freshTick:()=>time.fresh,adjustPeriod:n=>n*2,

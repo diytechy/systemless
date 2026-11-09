@@ -12,6 +12,15 @@ function fixture(){
 }
 const context=()=>({deaths:[],isFrozen:()=>false,onDeath(reason){this.deaths.push(reason);}});
 
+test('Oil dot contact uses the current burnt body outline and skips an invisible main sprite',()=>{
+ const {board,options}=fixture(),shape=options.dotOutlines.groups['300'].frames[0];
+ options.dotOutlines.groups['300'].frames=Array.from({length:100},()=>({...shape,left:100,top:100,right:101,bottom:101}));
+ options.dotOutlines.groups['300'].frames[92]={...shape};
+ const oil=new OilRuntime(board,options),droplet={frame:0,base:{x:-16,y:-15}};
+ assert.equal(oil.collideDot(droplet),-1);board.dots[0].burnt=true;assert.equal(oil.collideDot(droplet),0);
+ board.dots[0].sourceCollidable=false;assert.equal(oil.collideDot(droplet),-1);
+});
+
 test('a blast hides only overlapping droplets without freeing slots or changing puddles',()=>{
  const {board,options}=fixture(),oil=new OilRuntime(board,options),ctx=context();
  oil.createDroplet(1,ctx);oil.createDroplet(12,ctx);const puddles=structuredClone(oil.puddles);

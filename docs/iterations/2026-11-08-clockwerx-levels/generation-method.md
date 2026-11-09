@@ -2,6 +2,8 @@
 
 The useful starting point is a small generator for the mechanics already validated in the pilot. A full original-game generator needs the remaining mechanic checks first. Inventorying all100catalog levels does not establish that their rules are implemented. The [queue](queue.json) records that distinction; [requirements](requirements.md) accumulates observed behavior.
 
+The36-scene review adds a concrete validation warning: Stutter's old model produced a winning route at190 initial onsets but the original missed a transfer from a sinking dot. Correct source query semantics were necessary before the finite check meant anything. Keep independent original-game replay as a release gate for original-compatible generated maps. In timed compositions, model fuse progress, destroyed geometry, up/down phase, actor visibility and legal held-input windows. Preserve failed candidates as counterexamples; do not move actors or alter clocks to make them solve. The currently accepted Stutter route survives190 tested onsets, which does not prove safety for all possible player timing. Unvisited mixed blast interactions remain outside a generator's validated mechanic set.
+
 ## Separate a board from its art
 
 The original RND2 resources serialize a header, fixed dot-grid attributes and typed object blocks. Dot fields encode presence, colors, bonuses, goal and other properties; separate records describe actor starts, programs, walls, switches, doors, hazards, tutorial text and later mechanics. A stored actor or program may be unused in Child mode. In particular, a dot-property mask miss can remove an optional feature without removing the pivot itself. The private decoder retains raw values alongside interpreted fields so this can be checked.

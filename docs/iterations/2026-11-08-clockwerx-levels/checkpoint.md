@@ -1,6 +1,10 @@
 # Progress checkpoint
 
-**35 bounded Child scenes are accepted and locally active through Hiccup;65remain.** Original library/frozen comparisons complete. Continue36 Stutter from [current action](current-action.md).
+Latest: [Stutter review](stutter-review.md)/[packet](stutter-review.json) accepts36 with explicit visual/timing limits. Original/SVG5,000;28 transfer poses match; all190 onsets. 252 runtime/15 packaging pass. Through36 fixture64e3190a verifies nine files/both forks/represented metadata/seven untouched; fresh37/playerp/216000 viewed. Normal92Stutter paused; QA117 closed; no active runner/pending CUA part. Continue37 source/admission/cold review.
+
+**36 bounded Child scenes are accepted and locally active through Stutter;64 remain.** Original library/frozen comparisons complete. Continue37 Quincunx from [current action](current-action.md).
+
+Historical pre-acceptance entry: corrected route24 passes all190 held onsets, 28 transfers/four bounces/eleven reversals/5,000/one Oil. The two functional runners are native-goal-02/session78974 and root visible QA117, both using corrected source. Search22 was stopped after checking its owned PID;23 completed but its narrow rising-dot window required refinement24. Actual original/visible goals and independent pose/object review remain pending. No36 activation or through36 fixture yet. See current-action for the live35 receipt and original failure boundaries.
 
 Hiccup original/SVG1,000/14transfers/twobounces/fiveReverse/two movingdot visits pass all190onsets. All308physical poses and231cold poses match. Controls/cores match; goal surface44of72 and staticSPphase0of59 retain limits. SeparateOil10approachposes match; original/model birth/death/reset viewed. PU12of14frames, sevenpredeathframe and all21postresetframe differences remain unqualified. See [review](hiccup-review.md)/[packet](hiccup-review.json).
 

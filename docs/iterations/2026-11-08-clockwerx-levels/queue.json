@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 36,
-  "currentAction": "Exactqueryfixlocallyactive through35; prior33/35onsets380pass. Corrected20/21prefixes190pass each; twofullgoalrunners22/23active. Nativefailed01notforward.",
+  "currentOrdinal": 37,
+  "currentAction": "36Stutter accepted and locally active with limits. Successful02 original/SVG5000/28transfers; all190onsets. Through36 fixture verified and fresh37Quincunx viewed. Begin37 source/admission/cold review. No active runner or pending CUA part.",
   "levels": [
     {
       "ordinal": 1,
@@ -2603,24 +2603,25 @@
       "menuTitle": "Stutter",
       "resourceTitle": "Stutter",
       "sha256": "904ba13112fa37c386d45651c3a0a06b69d0fe0e5846c3edaaa5884091af1b2a",
-      "status": "native-goal-failed-exact-query-corrected",
+      "status": "accepted-with-limits-and-locally-active",
       "nativeEvidence": [
-        "stutter/native-initial-01/report.json",
-        "stutter/native-early-01/report.json",
-        "stutter/native-carried-orbital-01/report.json",
-        "stutter/native-ignition-blast-01/report.json"
+        "stutter/native-goal-02/report.json",
+        "stutter/native-goal-02-comparison.json",
+        "stutter/native-goal-02-control-comparison.json",
+        "stutter/native-goal-02-blast-corner-fits.json"
       ],
       "requirements": [
-        "separate BO/Oil/EL/WY/walls composition",
-        "free class2 orbital callbacks",
-        "inactive group2 property clearing",
-        "moving-dot/droplet/control explosion hooks"
+        "Exact current-pixel transfer queries for static/up-down; ordinary moving runtime kind1 remains separate",
+        "Human match ignition, full source fuse/blast and destroyed barrier geometry",
+        "Active group0/group1 and inactive group2 property handling",
+        "Human hooks differ from free class1/2/4 orbital hooks",
+        "All190 finite held-input onsets plus actual original/SVG goal"
       ],
-      "svgStatus": "permissive-goal-rejected-native-divergence",
+      "svgStatus": "normal36locallyactive; original/SVG5000goal; all190heldonsets",
       "generationConstraints": [
-        "wall destruction is a required intermediate reachability state",
-        "a geometrically valid route can fail at another source clock onset",
-        "retain hidden allocated droplets and control contacts separately from visibility"
+        "Time-dependent solvability after actual fuse/blast, with legal held-input windows",
+        "Validate generated original-compatible maps in original; model success alone can be false-positive",
+        "Unvisited control/moving-DOT/droplet blast effects and later mechanic families remain gated"
       ],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -2648,7 +2649,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2671,7 +2672,8 @@
         "stutter-preparation.json",
         "transfer-query-review.md",
         "transfer-query-review.json"
-      ]
+      ],
+      "review": "stutter-review.json"
     },
     {
       "ordinal": 37,

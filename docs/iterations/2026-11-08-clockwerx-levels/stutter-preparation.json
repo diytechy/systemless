@@ -1,8 +1,8 @@
 {
-  "status": "native-goal-failed-query-corrected-new-strict-route-required",
+  "status": "accepted-see-stutter-review",
   "ordinal": 36,
   "title": "Stutter",
-  "liveOrdinal": 35,
+  "liveOrdinal": 36,
   "resourceId": 142,
   "sourceSha256": "904ba13112fa37c386d45651c3a0a06b69d0fe0e5846c3edaaa5884091af1b2a",
   "activeInventory": {
@@ -90,7 +90,12 @@
     "stutter/checked-ignition-20.json",
     "stutter/checked-wait-21.json",
     "stutter/old-elevator-onsets-exact-review.json",
-    "stutter/activation-exact-query35.json"
+    "stutter/activation-exact-query35.json",
+    "stutter/checked-route-24.json",
+    "stutter/goal-refinement-review-24.json",
+    "stutter/failed-window-route-23.json",
+    "stutter/native-goal-02.json",
+    "stutter/native-goal-02-inputs.json"
   ],
   "pending": [
     "fullstrict22/23goalroute and190check",
@@ -223,5 +228,17 @@
     "retreatOnsets": 190,
     "craterTime": 131.56666666671134,
     "originalFullGoal": false
-  }
+  },
+  "correctedGoal24": {
+    "onsets": 190,
+    "transfers": 28,
+    "bounces": 4,
+    "reverses": 11,
+    "score": 5000,
+    "oilAllocations": 1,
+    "safeReverseDelayUpdates": 12,
+    "actualOriginalGoalVerified": false,
+    "visibleSvgGoalVerified": false
+  },
+  "review": "stutter-review.json"
 }

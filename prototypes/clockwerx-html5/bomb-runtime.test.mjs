@@ -9,6 +9,15 @@ const hero=()=>({sourceSlot:0,sourceActorType:0,visible:true});
 const enemy=slot=>({sourceSlot:slot,sourceActorType:1,visible:true});
 const dot=(id,row,column,extra={})=>({id,row,column,color:2,ring:false,bonus:false,burnt:false,humanCanGrab:true,nonhumanCanGrab:true,sourceInBackground:true,...extra});
 
+test('colored elevator goodie scope retains source colors and excludes lowered and unrelated dynamic forms',()=>{
+ const dots=[4,2,1].map((color,group)=>dot(`channel-${group}`,1,group,{present:true,motion:'up-down',slideMask:0,teleport:false,color,sourceInBackground:false,upDown:{group,initialLowered:false}}));
+ const scope={dots,actors:[hero(),{sourceActorType:4,sourceSlot:2}],activeSections:{EL:3,SP:1},allowColoredElevatorGoodies:true};
+ assert.equal(assertGoodieRuntimeScope(scope),true);
+ assert.throws(()=>assertGoodieRuntimeScope({...scope,allowColoredElevatorGoodies:false,allowElevatorGoodies:true}),/dynamic/);
+ for(const change of [{color:0},{bonus:true},{upDown:{group:0,initialLowered:true}},{movingProgram:'n'},{teleport:true}])assert.throws(()=>assertGoodieRuntimeScope({...scope,dots:[{...dots[0],...change}]}),/dynamic/);
+ assert.throws(()=>assertGoodieRuntimeScope({...scope,activeSections:{EL:3,PU:1}}),/combination/);
+});
+
 test('goodies admit separately enabled plain elevator dots and spikes without any fuse path',()=>{
  const d=dot('lowered',1,1,{motion:'up-down',slideMask:0,teleport:false,present:true,color:0,sourceInBackground:false,sourceCollidable:false,humanCanGrab:false,upDown:{group:1,initialLowered:true}}),scope={dots:[d],actors:[hero(),enemy(2)],activeSections:{EL:2,SP:1}};
  assert.throws(()=>assertGoodieRuntimeScope(scope),/dynamic/);

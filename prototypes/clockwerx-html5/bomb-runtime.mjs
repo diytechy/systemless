@@ -42,20 +42,20 @@ export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSec
 
 /** GO callbacks compose with qualified static checkpoints/protection and doors.
  * No fuse, blast, ring, Oil or active spike path is admitted by this scope. */
-export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowElevatorGoodies=false}={}){
+export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowElevatorGoodies=false,allowColoredElevatorGoodies=false}={}){
  if(mode!=='Child')throw new Error('Only Child goodie scope is supported');
  if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
- if(allowElevatorGoodies&&(!(activeSections.EL>0)||!dots.some(d=>d.upDown)))throw new Error('Explicit active elevator/goodie composition required');
+ if((allowElevatorGoodies||allowColoredElevatorGoodies)&&(!(activeSections.EL>0)||!dots.some(d=>d.upDown)))throw new Error('Explicit active elevator/goodie composition required');
  for(const d of dots){
   grid(d);integer(d.color??0,0,7);
   if(d.motion==='up-down'&&!d.upDown||d.motion==='static'&&d.upDown)throw new Error('Explicit matching goodie motion/up-down state required');
-  if((d.motion!=='static'&&!(allowElevatorGoodies&&d.motion==='up-down'))||d.slideMask!==0||d.teleport!==false||d.ring||d.moving||d.movingProgram||d.upDown&&(!allowElevatorGoodies||![1,2].includes(d.upDown.group)||d.color!==0||d.bonus||d.protected||d.waystation||d.sourceInBackground!==false||typeof d.upDown.initialLowered!=='boolean'||d.upDown.group===2&&d.upDown.initialLowered)||d.transferDeath||d.slowdown||d.connector||d.sourceBombDynamic)throw new Error('Unsupported goodie/dynamic dot combination');
+  if((d.motion!=='static'&&!((allowElevatorGoodies||allowColoredElevatorGoodies)&&d.motion==='up-down'))||d.slideMask!==0||d.teleport!==false||d.ring||d.moving||d.movingProgram||d.upDown&&(allowColoredElevatorGoodies?(![0,1,2].includes(d.upDown.group)||d.color!==[4,2,1][d.upDown.group]||d.upDown.initialLowered!==false||d.bonus||d.protected||d.waystation||d.sourceInBackground!==false):(!allowElevatorGoodies||![1,2].includes(d.upDown.group)||d.color!==0||d.bonus||d.protected||d.waystation||d.sourceInBackground!==false||typeof d.upDown.initialLowered!=='boolean'||d.upDown.group===2&&d.upDown.initialLowered))||d.transferDeath||d.slowdown||d.connector||d.sourceBombDynamic)throw new Error('Unsupported goodie/dynamic dot combination');
   if(['present','humanCanGrab','nonhumanCanGrab','sourceInBackground','ring','bonus'].some(k=>typeof d[k]!=='boolean'))throw new TypeError('Explicit static goodie dot state required');
  }
- for(const a of actors)actor(a);
+ for(const a of actors)actor(a,allowColoredElevatorGoodies);
  for(const [kind,n]of Object.entries(activeSections)){
   integer(n);
-  if(n&&!(allowElevatorGoodies?['SP','EL','GO','WP','WA','TX']:['WL','DR','DS','WY','GO','WP','WA','TX']).includes(kind))throw new Error(`Unqualified active goodie combination: ${kind}`);
+  if(n&&!(allowElevatorGoodies||allowColoredElevatorGoodies?['SP','EL','GO','WP','WA','TX']:['WL','DR','DS','WY','GO','WP','WA','TX']).includes(kind))throw new Error(`Unqualified active goodie combination: ${kind}`);
  }
  return true;
 }

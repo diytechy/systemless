@@ -14,6 +14,21 @@ function fixture(){
    {kind:'SP',count:2,records:[{rawWords:[0,0,0,2,0,15]},{rawWords:[0,0,2,0,0,15]}]}]};
 }
 
+test('colored elevator composition preserves channel permissions and inactive pivots behind a separate gate',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.blocks[0].records[2].version12ByteRaw=0;
+ for(const [column,flagsRaw,secondaryRaw]of [[0,0x101,0xf00f],[1,0x201,0xf0f],[2,0x301,0xff],[3,0x201,0xf0e]])level.cells.push({present:true,row:1,column,flagsRaw,secondaryRaw});
+ level.blocks.push({kind:'EL',count:3,records:[{rawWords:[2,0,1,0,0,15]},{rawWords:[2,1,2,1,0,15]},{rawWords:[2,2,3,2,0,15]}]},{kind:'GO',count:1,records:[{rawWords:[2,0,169,0,15]}]});
+ const options={angularSpeed:TAU,allowElevators:true,allowGoodies:true,allowRotatingSpikes:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true,allowInactiveUpDownDots:true};
+ assert.ok(levelRequirements(level,options).length);
+ const enabled={...options,allowColoredElevatorGoodies:true},board=buildDecodedBoard(level,enabled);
+ assert.deepEqual(board.dots.filter(d=>d.upDown).map(d=>[d.upDown.group,d.color,d.upDown.initialLowered]),[[0,4,false],[1,2,false],[2,1,false]]);
+ const inactive=board.dots.find(d=>d.id==='3,1');assert.equal(inactive.motion,'static');assert.equal(inactive.color,2);assert.equal(inactive.present,true);assert.equal(inactive.cell,1);
+ assert.equal(board.coloredElevatorGoodieRules,true);assert.equal(board.elevatorGoodieRules,undefined);
+ assert.ok(levelRequirements(level,{...enabled,allowElevatorGoodies:true}).length,'separate compositions cannot be combined');
+ level.cells[2].secondaryRaw=15;assert.ok(levelRequirements(level,enabled).some(s=>s.includes('raised blue0')));
+ level.cells[2].secondaryRaw=0xf00f;level.cells[2].flagsRaw=0x4101;assert.ok(levelRequirements(level,enabled).some(s=>s.includes('raised blue0')));
+});
+
 test('elevator goodies preserve mixed initial heights, group2 and inactive ordinary pivots',()=>{
  const level=fixture();level.header.timeLimitRaw=90;level.blocks[0].records[2].version12ByteRaw=0;
  level.cells.push({present:true,flagsRaw:0x4201,secondaryRaw:15,row:1,column:0},{present:true,flagsRaw:0x301,secondaryRaw:15,row:1,column:1},{present:true,flagsRaw:0x301,secondaryRaw:14,row:1,column:2},{present:true,flagsRaw:0x101,secondaryRaw:12,row:1,column:3});

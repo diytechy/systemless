@@ -1,0 +1,13 @@
+# Slide45 preparation
+
+Slide combines static EX, static spikes and one goodie with six programmed ordinary class1 hands and two free hands. Its61source connectors reach the existing capacity exactly. The new subordinate capability admits only b/n/s programs under the already qualified GO+EX family; older free-only and f/n profiles retain their gates. Shared integration, a completed legal route, original goal and visible SVG acceptance are still pending.
+
+The reviewed candidate preserves source animate/collide/stop/program/start order. Sliding or noncardinal hands do not consume a program instruction. An eligible b reverses without grabbing; s reverses and grabs; n does neither. Target permission is checked before the action, and NPCs receive no human collision compensation. Ordinary grabs add32source frames; slide arrival/backout does not. The helper independently rejects moving pivots, up/down or HY capability stacking, and dynamic dot properties outside this static family.
+
+Worker284public/eight focused checks pass. All44previous decoded boards and final route snapshots remain identical across383278updates. A separate source reviewer verified the five-module frozen patch and closed its helper-boundary finding after correction. Patch SHA256:b4626349595bc9f88d8571a08a29e88aa09cced4d2f22cedc38801cb598a6d97; accepted source remains54a8be96.
+
+Root viewed all33cold original captures. An independent fit of all source poses/positions matches275/275clear actor positions and poses at696/697legal idle updates, including26hero observations. The idle prefix is real input history, with no clock, actor or phase assignment. Exact spike/goodie phases remain unqualified:0/66SPI and13/32GO clear observations match the current model. Source-anchored connector fits retain all2013observations,1228clear; overlaps and near aliases stay in the private raw evidence.
+
+Search has collected the goodie legally but has not yet completed a goal witness. A geographically adjacent8,5approach with the hand pointing upward fails; the absent7,6pivot and horizontal EX make direction, orientation and arrival mode essential. A discrete control graph ranks proposals only. Every search branch reconstructs fresh actual-map physics with original outlines and legal held inputs. No level45scene is admitted or activated from this preparation.
+
+Private evidence: `D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/slide/` and `slide-parallel-engine/`. Source resource SHA256:7f153518749ce2034fd88f83c4a118319b574370158204c74226ee84c316b557. Original media, earned-through44fixture, live44bundle, browser save key and preferences remain preserved. No conversion, heavy build, performance measurement, push, upload or deployment occurred.

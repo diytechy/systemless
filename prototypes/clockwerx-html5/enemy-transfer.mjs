@@ -47,7 +47,7 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
@@ -56,6 +56,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding));
   if(allowSlidingPrograms&&dots.some(d=>d.slideMask&&d.humanCanGrab!==true))throw new Error('Static EX programs require human-available endpoints');
   if(allowSlidingPrograms&&(!allowSliding||![1,2,3].includes(state.sourceActorType)||![1,2,3].includes(state.speedClass)||state.checksWalls!==false||program!==null&&(!/^[fn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1)))throw new Error('Separate ordinary wall-free f/n sliding program scope required');
+  if(allowSlidingBombs&&(!allowSliding||allowUpDownDots||allowTeleports||allowSlidingPrograms||allowSlidingGoodies||allowSlidingOil||state.movingPivot||![1,2,3].includes(state.sourceActorType)||state.speedClass!==1||state.checksWalls!==false||program!==null&&(!/^[bfns]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1)||dots.some(d=>d.motion!=='static'||d.teleport||d.upDown||d.moving||d.movingProgram||d.transferDeath||d.slowdown||d.sourceBombDynamic||d.ring&&(allowSlidingBombCheckpoints||d.slideMask||d.color!==0)||!allowSlidingBombCheckpoints&&(d.protected||d.waystation)||d.slideMask&&(d.ring||d.waystation||d.protected||d.kind==='goal'||d.humanCanGrab!==true||d.nonhumanCanGrab!==true))))throw new Error('Separate ordinary class1 BO/EX scope required');
   if(allowSlidingOilGoodieRings&&!allowSlidingOil)throw new Error('Oil/GO/ring helper requires EX/Oil core');
   if(allowSlidingOil&&(!allowSliding||allowUpDownDots||allowTeleports||allowSlidingPrograms||allowSlidingGoodies||state.movingPivot||![1,2,3].includes(state.sourceActorType)||state.speedClass!==1||state.checksWalls!==false||program!==null&&(!/^[fns]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1)||dots.some(d=>d.motion!=='static'||d.teleport||d.upDown||d.protected||d.waystation||d.moving||d.movingProgram||d.transferDeath||d.slowdown||d.sourceBombDynamic||d.burnt||d.ring&&(!allowSlidingOilGoodieRings||d.slideMask||![0,4].includes(d.color))||d.slideMask&&(d.humanCanGrab!==true||d.nonhumanCanGrab!==true))))throw new Error('Separate ordinary n/s/f EX/Oil scope required');
   if(allowSlidingGoodiePrograms&&!allowSlidingGoodies)throw new Error('Sliding goodie programs require sliding goodies');
@@ -78,7 +79,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     if(!allowSliding||!animateSliding(next)){next.unwrappedFrame+=next.direction;next.frame=next.unwrappedFrame&63;}
     // Source WACollide runs before stop-slide/direct-program/start-slide.
     afterAnimate(next,context);validate(next);
-    if(allowSliding){const e=stopSliding(next,dots,{release:(d,s)=>onDotRelease(s,d,context),grab:(d,s)=>{onDotGrabFirst(s,d,context);afterDotGrab(s,d,context);}});if(e)events.push(e);if(program!==null&&!allowSlidingPrograms&&!allowSlidingGoodiePrograms&&!allowSlidingOil)throw new Error('EX programmed actors unqualified');}
+    if(allowSliding){const e=stopSliding(next,dots,{release:(d,s)=>onDotRelease(s,d,context),grab:(d,s)=>{onDotGrabFirst(s,d,context);afterDotGrab(s,d,context);}});if(e)events.push(e);if(program!==null&&!allowSlidingPrograms&&!allowSlidingGoodiePrograms&&!allowSlidingOil&&!allowSlidingBombs)throw new Error('EX programmed actors unqualified');}
     try {
     if(program===null)continue;
     const instruction=stepSourceProgram(program,next.sourcePC,{frame:next.frame,sliding:next.sliding});

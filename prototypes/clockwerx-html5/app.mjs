@@ -1,4 +1,5 @@
 import {connectorLook} from './sliding.mjs';
+import {sourceDotPaint,sourceDotLook,sourceSparkEraseRect,clipSourceUniverse,createSourceBackground} from './sliding-bomb-paint.mjs';
 import {MovementGame,TAU} from './engine.mjs';
 import {buildBoard} from './board.mjs';
 import {dotRenderSpec} from './dots.mjs';
@@ -210,6 +211,59 @@ function drawBombs(stage){
  if(stage==='explosions')for(const s of state.explosions)if(s.visible)draw('1800',s.frame,grid(s.grid,5,5));
  if(stage==='effects')for(const e of state.effects)if(e.visible)draw(e.kind==='flourish'?'2400':'2500',e.frame,e.point);
 }
+// Scoped source painter: older scenes retain their existing drawing branch.
+function sourceSprite(target,asset,base){
+ if(asset.empty||!asset.width||!asset.height)return;
+ const image=images[asset.file];if(!image)throw new Error('Required source paint image is unavailable: '+asset.file);
+ if(asset.sx!==undefined)target.drawImage(image,asset.sx,asset.sy,asset.width,asset.height,base.x+asset.x,base.y+asset.y,asset.width,asset.height);
+ else target.drawImage(image,base.x+asset.x,base.y+asset.y,asset.width,asset.height);
+}
+function sourceDotPart(target,d,group,frame){sourceSprite(target,sourceDotPaint(manifest.vectorAssets,String(group),frame),{x:d.x-16,y:d.y-15});}
+function validateSourcePaintInventory(board){
+ for(const d of board.dots){
+  for(const group of ['300','4100']){sourceDotPaint(manifest.vectorAssets,group,9+d.color);if(d.bonus)sourceDotPaint(manifest.vectorAssets,group,1+d.color);if(!d.ring)sourceDotPaint(manifest.vectorAssets,group,92+d.color);}
+  if(d.waystation)for(let frame=79;frame<=89;frame++)for(const group of ['300','4100'])sourceDotPaint(manifest.vectorAssets,group,frame);
+  if(d.protected)for(let frame=117;frame<=124;frame++)sourceDotPaint(manifest.vectorAssets,'300',frame);
+ }
+}
+function sourceConnector(target,e,frame,round=game){
+ const atlas=manifest.vectorAssets.connectors,f=atlas?.frames.find(f=>f.frame===frame),d=round.board.dots.find(d=>d.id===e.first);
+ if(!f||!d)throw new Error('Required source connector paint is unavailable');
+ sourceSprite(target,{file:atlas.file,...f},{x:d.x-11,y:d.y-9});
+}
+function sourceWall(target,w,frame=w.frame){
+ const f=manifest.vectorAssets.walls?.frames.find(f=>f.frame===frame);if(!f)throw new Error('Required source wall paint is unavailable');sourceSprite(target,f,w);
+}
+function sourceBombBackground(target,round,grid,frame){
+ const atlas=manifest.vectorAssets.bombs?.['1400'],f=atlas?.frames.find(f=>f.frame===frame);if(!f)throw new Error('Required source bomb background paint is unavailable');
+ sourceSprite(target,{file:atlas.file,...f},round.bombScene.gridPixel(grid,{x:6,y:6}));
+}
+function seedSourceBackground(target,round){
+ const b=round.board,original=round.bombScene.original;
+ for(const saved of original.dots){const live=b.dots.find(d=>d.id===saved.id);if(!live.sourceInBackground)continue;const d={...live,...saved,burnt:false,collected:false},frame=sourceDotLook(d).frame;sourceDotPart(target,d,300,frame);sourceDotPart(target,d,4100,frame);}
+ for(const e of original.connectors)if(!e.sourceHasSprite)sourceConnector(target,e,connectorLook(e,b.dots),round);
+ for(const w of original.walls)if(w.visible!==false)sourceWall(target,w);
+ for(const fuse of round.bombScene.runtime.bombs)sourceBombBackground(target,round,fuse,fuse.kind);
+}
+function paintSourceBackground(target,paint,round,field){
+ if(paint.kind==='DO'){const d=round.board.dots.find(d=>d.id===paint.id);if(!d)throw new Error('Unknown source dot paint');sourceDotPart(target,d,300,paint.frame);sourceDotPart(target,d,4100,paint.frame);}
+ else if(paint.kind==='EX'){const e=round.board.connectors.find(e=>e.id===paint.id);if(!e)throw new Error('Unknown source connector paint');sourceConnector(target,e,paint.frame,round);}
+ else if(paint.kind==='crater')sourceBombBackground(target,round,paint,14);
+ else if(paint.kind==='erase-spark-background'){const rect=sourceSparkEraseRect(paint,manifest.vectorAssets.bombs['1500'].frames);target.fillStyle=field.color;target.fillRect(rect.x,rect.y,rect.width,rect.height);}
+ else throw new Error('Unknown source background operation '+paint.kind);
+}
+const sourceBackground=createSourceBackground({createCanvas:()=>document.createElement('canvas'),seed:seedSourceBackground,paint:paintSourceBackground});
+function drawSourceGoal(d){
+ const goal=manifest.vectorAssets.goal;if(!goal)return;ctx.save();ctx.translate(d.x,d.y);const frame=atlasFrame(goal.animation,game.time);
+ if(frame)ctx.drawImage(images[goal.file],frame.x,frame.y,frame.width,frame.height,goal.x,goal.y,goal.width,goal.height);
+ else{if(goal.rotationSeconds>0)ctx.rotate(game.time/goal.rotationSeconds*TAU);ctx.drawImage(images[goal.file],goal.x,goal.y,goal.width,goal.height);}ctx.restore();
+}
+function drawSourceForeground(){
+ const dots=game.board.dots.filter(d=>!d.sourceInBackground);
+ for(const d of dots){const special=game.dotAnimations?.renderState(d.id),look=sourceDotLook(d,special);if(look.visible)sourceDotPart(ctx,d,4100,look.frame);}
+ for(const d of dots){const special=game.dotAnimations?.renderState(d.id),look=sourceDotLook(d,special);if(look.visible){sourceDotPart(ctx,d,300,look.frame);if(d.kind==='goal')drawSourceGoal(d);}if(special?.overlay)sourceDotPart(ctx,d,300,special.overlay.frame);}
+ for(const e of game.board.connectors)if(e.sourceHasSprite)sourceConnector(ctx,e,connectorLook(e,game.board.dots));
+}
 function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixelRatio||1);ctx.setTransform(scale.scaleX,0,0,scale.scaleY,0,0);ctx.imageSmoothingEnabled=false;ctx.fillStyle='#909090';ctx.fillRect(0,0,640,480);if(!ready){ctx.fillStyle='white';ctx.font='16px sans-serif';ctx.fillText('Loading private original assets…',20,50);return;}
  ctx.drawImage(images[activeBackdrop||manifest.backdrop],0,0);ctx.imageSmoothingEnabled=!!manifest.vectorAssets;
  const field=activePlayfield||{x:68,y:69,width:504,height:360,color:'#808080'};
@@ -217,6 +271,9 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  if(game.childScore){ctx.fillText('Round:',431,49);ctx.fillText('Total:',505,49);ctx.textAlign='right';ctx.fillText(game.childScore.roundBonus.toLocaleString(),477,62);ctx.fillText(game.childScore.totalCommitted.toLocaleString(),568,62);ctx.textAlign='left';}
  else{ctx.fillText('Pilot',441,50);ctx.fillText(game.bombScene?'Level Score:':'Total Score:',493,49);ctx.fillText(String(game.bombScene?.score??'—'),536,62);}
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
+ const sourcePaint=game.board.slidingBombRules===true;
+ if(sourcePaint){ctx.save();clipSourceUniverse(ctx);ctx.drawImage(sourceBackground.draw(game,field,{width:canvas.width,height:canvas.height}),0,0,640,480);drawSourceForeground();drawSpikes();drawBombs('upper');drawBombs('explosions');}
+ else{
  drawBombs('background');drawWalls();drawConnectors();for(const d of game.board.dots)drawDot(d);drawTeleports();
  drawDoors();
  drawElevators(game.board.bombOilElevatorRules?'glyphs':'all');
@@ -224,6 +281,8 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  drawOil();
  drawSpikes();
  drawBombs('explosions');
+ }
+
  ctx.fillStyle='white';ctx.font='10px sans-serif';
  const lines=[['You are the spinning gold (or black) hand.',88,150],['Player 1: Use Space to “swing” onto the next dot.',88,162],['The red hand is “swinging”.',109,292],['The green hand is “flipping”.',109,388],['Use X to “flip” onto the next dot.',137,174],['Use C to “instantly reverse”.',137,186],['Use Z to “bounce” off the next dot.',137,198],['The object of the game is to grab onto the “goal” dot.',148,80],['Bonus Dot',487,237],['Goal Dot',534,333],['“Bouncing” blue',410,360]];
  if(!drawLevelText())for(const [t,x,y] of lines)ctx.fillText(t,x,y);
@@ -233,6 +292,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  drawDeath();
  drawBombs('effects');
  drawSparkles();
+ if(sourcePaint)ctx.restore();
  if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';const points=game.childScore?.roundBonus??game.bombScene?.score;if(points!==undefined)ctx.fillText(points.toLocaleString()+' points · Child completion bonus 1,000',320,239);ctx.fillText('Goal dot grabbed · Restart to play again',320,points!==undefined?268:250);ctx.textAlign='left';}
 }
 function workloadTime(){return game.elapsedTime??game.time;}
@@ -259,7 +319,8 @@ async function loadScene(scene){
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
   const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile'),elevatorOutlines=await profile('elevatorOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowProtectedBonuses:reference.protectedBonusesQualified===true,allowInactiveProtectedWaypoints:reference.inactiveProtectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowClass3RotatingSpikes:reference.class3RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorGoodies:reference.elevatorGoodiesQualified===true,allowColoredElevatorGoodies:reference.coloredElevatorGoodiesQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowSlidingConnectors:reference.slidingConnectorsQualified===true,allowSlidingOil:reference.slidingOilQualified===true,allowSlidingOilGoodieRings:reference.slidingOilGoodieRingsQualified===true,allowStaticSlidingPrograms:reference.staticSlidingProgramsQualified===true,allowSlidingGoodies:reference.slidingGoodiesQualified===true,allowSlidingGoodiePrograms:reference.slidingGoodieProgramsQualified===true,allowTeleports:reference.teleportsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowProtectedBonuses:reference.protectedBonusesQualified===true,allowInactiveProtectedWaypoints:reference.inactiveProtectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowClass3RotatingSpikes:reference.class3RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorGoodies:reference.elevatorGoodiesQualified===true,allowColoredElevatorGoodies:reference.coloredElevatorGoodiesQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowSlidingConnectors:reference.slidingConnectorsQualified===true,allowSlidingBombs:reference.slidingBombsQualified===true,allowSlidingBombCheckpoints:reference.slidingBombCheckpointsQualified===true,allowSlidingOil:reference.slidingOilQualified===true,allowSlidingOilGoodieRings:reference.slidingOilGoodieRingsQualified===true,allowStaticSlidingPrograms:reference.staticSlidingProgramsQualified===true,allowSlidingGoodies:reference.slidingGoodiesQualified===true,allowSlidingGoodiePrograms:reference.slidingGoodieProgramsQualified===true,allowTeleports:reference.teleportsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  if(board.slidingBombRules)validateSourcePaintInventory(board);
   if(board.teleportRules&&(!manifest.vectorAssets?.teleports?.symbols||!manifest.vectorAssets?.teleports?.faders))throw new Error('Qualified HY endpoint and actor-fader artwork required');
   board.player.group=settings.black?4300:700;
    game=new SourceRound(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
@@ -302,6 +363,7 @@ async function load(){
    ...(vector.spikes?.frames||[]).map(f=>f.file),
    ...(vector.walls?.frames||[]).map(f=>f.file),
    ...(vector.connectors?[vector.connectors.file]:[]),
+   ...(vector.sourceDotShadows?[vector.sourceDotShadows.file]:[]),
    ...['leaves','caps','switches'].flatMap(key=>vector.doors?.[key]?[vector.doors[key].file]:[]),
    ...['controls','surfaces'].flatMap(key=>vector.elevators?.[key]?[vector.elevators[key].file]:[]),
    ...['symbols','faders'].flatMap(key=>vector.teleports?.[key]?[vector.teleports[key].file]:[]),

@@ -13,7 +13,7 @@ from private_library_manifest import BUILTINS, sha256_file
 ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
-      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','elevators.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs','teleports.mjs','teleport-runtime.mjs','sliding.mjs','sliding-oil.mjs')
+      'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','elevators.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs','teleports.mjs','teleport-runtime.mjs','sliding.mjs','sliding-oil.mjs','sliding-bombs.mjs','sliding-bomb-paint.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -59,6 +59,7 @@ def package(dist,assets):
         references.update(atlas['file'] for atlas in vector.get('specialDots',{}).values())
         references.update(atlas['file'] for atlas in vector.get('bombs',{}).values())
         references.update(atlas['file'] for atlas in vector.get('bombDots',{}).values())
+        if vector.get('sourceDotShadows'):references.add(vector['sourceDotShadows']['file'])
         if vector.get('death',{}).get('file'):references.add(vector['death']['file'])
         else:references.update(frame['file'] for frame in vector.get('death',{}).get('frames',[]))
     definitions=[manifest.get('levelDefinition'),*(scene.get('levelDefinition') for scene in manifest.get('scenes',[]))]

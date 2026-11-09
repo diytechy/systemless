@@ -142,5 +142,11 @@ class PilotPackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
 
+    def test_source_dot_shadows_require_a_verified_payload(self):
+        self.manifest['vectorAssets']=dict(dots=[],hands={},sourceDotShadows=dict(file='missing-shadow.svg'))
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+
 
 if __name__=='__main__':unittest.main()

@@ -3,6 +3,7 @@ import {BombRuntime,BOMB_CLOCKS,BOMB_SPRITES,bombStationaryDots,bombMovingDots,b
 import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
 import {bombHitsStationarySpike,bombHitsSwitch} from './bombs.mjs';
 import {dotBodyFrame} from './dots.mjs';
+import {unbonusSlidingComponent} from './sliding-bombs.mjs';
 
 export class BombScene {
  constructor(round,{outlines,routes,worldOutline}){
@@ -11,19 +12,26 @@ export class BombScene {
   const b=round.board;
   if(b.goodieOnlyRules&&(b.bombs.length||routes?.length))throw new Error('Goodie-only scene cannot include fuses or routes');
   if(!b.goodieOnlyRules){
-   if(b.bombObjectInteractionRules){
+   if(b.bombObjectInteractionRules||b.slidingBombRules){
     for(const s of b.spikes)bombHitsStationarySpike(s,s);
     for(const s of b.switches)bombHitsSwitch(s,s);
-   }else if(b.spikes.some(s=>s.subrow!==2||s.subcolumn!==0))throw new Error('Unqualified bomb/spike topology');
+   }else if(!b.slidingBombRules&&b.spikes.some(s=>s.subrow!==2||s.subcolumn!==0))throw new Error('Unqualified bomb/spike topology');
   }
-  this.original={walls:structuredClone(b.walls),spikes:structuredClone(b.spikes),switches:structuredClone(b.switches),dots:b.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind}))};
+  this.original={walls:structuredClone(b.walls),spikes:structuredClone(b.spikes),switches:structuredClone(b.switches),dots:b.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind,...(b.slidingBombRules?{cell:d.cell}: {})})),...(b.slidingBombRules?{connectors:structuredClone(b.connectors)}:{})};
   this.clocks=Object.fromEntries(Object.entries(BOMB_CLOCKS).map(([k,v])=>[k,createSourceTimerChain(v.scaled?Math.floor(v.period*100/60):v.period,1)]));
+  if(b.slidingBombRules){this.clocks.match=createSourceTimerChain(50,2);this.clocks.explosion=createSourceTimerChain(50,3);}
   if(b.slidingGoodieRules||b.slidingOilGoodieRingRules)this.clocks.goodie=createSourceTimerChain(40,5);
   this.flourishClock=createSourceTimerChain(40,1);this.scoreClock=createSourceTimerChain(80,1);this.effects=[];this.craters=[];this.backgroundPaints=[];this.score=0;this.layer3=[];this.layer2=[];
-  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{allowSlidingOilGoodieRings:b.slidingOilGoodieRingRules===true,puddles:b.puddles,spikes:b.spikes,goodies:b.goodies,allowSlidingGoodiePrograms:b.slidingGoodieProgramRules===true,allowSlidingGoodies:b.slidingGoodieRules===true,connectors:b.connectors, dots:b.dots,actors:[round.player,...round.enemies],allowObjectInteractions:b.bombObjectInteractionRules===true,allowMovingOilElevators:b.bombOilElevatorRules===true,allowElevatorGoodies:b.elevatorGoodieRules===true,allowColoredElevatorGoodies:b.coloredElevatorGoodieRules===true,activeSections:{GO:b.goodies.length,EX:b.connectors?.length??0,SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length,EL:b.elevators?.length??0}}},{
+  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{allowSlidingBombs:b.slidingBombRules===true,allowSlidingBombCheckpoints:b.slidingBombCheckpointRules===true,allowSlidingOilGoodieRings:b.slidingOilGoodieRingRules===true,puddles:b.puddles,spikes:b.spikes,goodies:b.goodies,allowSlidingGoodiePrograms:b.slidingGoodieProgramRules===true,allowSlidingGoodies:b.slidingGoodieRules===true,connectors:b.connectors, dots:b.dots,actors:[round.player,...round.enemies],allowObjectInteractions:b.bombObjectInteractionRules===true,allowMovingOilElevators:b.bombOilElevatorRules===true,allowElevatorGoodies:b.elevatorGoodieRules===true,allowColoredElevatorGoodies:b.coloredElevatorGoodieRules===true,activeSections:{GO:b.goodies.length,EX:b.connectors?.length??0,SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length,EL:b.elevators?.length??0}}},{
    clock:k=>this.clocks[k].advance(0).clientCount,latchedTick:()=>round.guestTicks,freshTick:()=>round.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
    gridPixel:(g,o)=>this.gridPixel(g,o),effect:e=>this.effect(e),collides:(kind,s,a)=>outlineCollision(this.shape(kind,s),round.collider(a))});
   this.layer3.push(...this.runtime.matches.map((_,index)=>({kind:'LI',index})));
+ }
+ unbonus(dot,burnt){
+  const r=this.round;
+  return unbonusSlidingComponent(r.board.connectors,r.board.dots,dot.id,{burnt,
+   onDot:(d,change)=>{if(change.changed)r.dotAnimations?.bombLookChanged(d.id);if(change.paintBackground)this.backgroundPaints.push({kind:'DO',id:d.id,frame:dotBodyFrame(d),...change});},
+   onConnector:(e,change)=>{if(change.paintBackground)this.backgroundPaints.push({kind:'EX',id:e.id,...change});}});
  }
  gridPixel(g,o){const p=this.round.board.origin;return {x:p.x+48*g.column-12+o.x,y:p.y+48*g.row-11+o.y};}
  shape(kind,s,frame=s.frame){const spec=BOMB_SPRITES[{LI:'match',SR:'spark',GO:'goodie',BO:'explosion'}[kind]];return this.worldOutline(this.outlines,spec.group,frame,kind==='SR'?s.point:this.gridPixel(s.grid,spec.gridOffset));}
@@ -47,14 +55,15 @@ export class BombScene {
   if(e.type==='append-sprite'){(e.layer===3?this.layer3:this.layer2).push({kind:e.layer===3?'SR':'BO',index:e.index});return;}
   if(e.type==='stationary'){
    const g=e.grid;
-   if(e.target==='SP')for(const s of b.spikes)if(b.bombObjectInteractionRules?bombHitsStationarySpike(s,g):s.row===g.row&&(s.column===g.column||s.column===g.column+1))s.visible=false;
+   if(e.target==='SP')for(const s of b.spikes)if(b.bombObjectInteractionRules||b.slidingBombRules?bombHitsStationarySpike(s,g):s.row===g.row&&(s.column===g.column||s.column===g.column+1))s.visible=false;
    if(e.target==='DS'&&b.bombObjectInteractionRules)for(const s of b.switches)if(bombHitsSwitch(s,g))s.visible=false;
    if(e.target==='WL'){
     for(const w of b.walls)if((w.frame>=4&&w.row===g.row&&w.column===g.column)||(w.frame===0&&w.column===g.column&&[g.row,g.row+1].includes(w.row))||(w.frame===1&&w.row===g.row&&[g.column,g.column+1].includes(w.column)))w.visible=false;
     b.wallRevision=(b.wallRevision??0)+1;
    }
    if(e.target==='EL'&&b.bombOilElevatorRules)for(const change of r.elevators.bomb(g))this.backgroundPaints.push({kind:'EL',index:change.index,frame:change.backgroundFrame});
-   if(e.target==='DO')bombStationaryDots(b.dots,g,(d,change)=>{if(!d.bonus&&d.kind==='bonus')d.kind='dot';if(b.bombObjectInteractionRules&&change.changed)r.dotAnimations?.bombLookChanged(d.id);},{allowObjectInteractions:b.bombObjectInteractionRules===true});
+   if(e.target==='DO'&&b.slidingBombRules){for(const[dr,dc]of[[0,0],[1,0],[0,1],[1,1]]){const d=b.dots.find(d=>d.row===g.row+dr&&d.column===g.column+dc);if(d)this.unbonus(d,true);}}
+   if(e.target==='DO'&&!b.slidingBombRules)bombStationaryDots(b.dots,g,(d,change)=>{if(!d.bonus&&d.kind==='bonus')d.kind='dot';if(b.bombObjectInteractionRules&&change.changed)r.dotAnimations?.bombLookChanged(d.id);},{allowObjectInteractions:b.bombObjectInteractionRules===true});
   }
   if(e.type==='moving'&&b.bombOilElevatorRules&&['DO','DP'].includes(e.target)){
    const blast=this.shape('BO',{grid:e.grid},e.descriptorFrame);
@@ -63,9 +72,11 @@ export class BombScene {
   }
   if(e.type==='moving'&&e.target==='WA'){
    const blast=this.shape('BO',{grid:e.grid},e.descriptorFrame);
-   bombActors([r.player,...r.enemies],{guestTick:r.guestTicks,allowObjectInteractions:b.bombObjectInteractionRules===true,collides:a=>outlineCollision(blast,r.collider(a)),onDeath:()=>r.beginDeath({reason:'bomb',sourceReason:-1}),onHidden:a=>r.event('bomb-hidden',a)});
+   bombActors([r.player,...r.enemies],{guestTick:r.guestTicks,allowSlidingBombs:b.slidingBombRules===true,allowObjectInteractions:b.bombObjectInteractionRules===true,collides:a=>outlineCollision(blast,r.collider(a)),onDeath:()=>r.beginDeath({reason:'bomb',sourceReason:-1}),onHidden:a=>r.event('bomb-hidden',a)});
   }
-  if(e.type==='paint-crater'){this.craters.push({...e.grid});if(b.bombOilElevatorRules)this.backgroundPaints.push({kind:'crater',...e.grid});}
+  if(e.type==='paint-crater'){this.craters.push({...e.grid});if(b.bombOilElevatorRules||b.slidingBombRules)this.backgroundPaints.push({kind:'crater',...e.grid});}
+  if(e.type==='erase-spark-background'&&b.slidingBombRules)this.backgroundPaints.push({kind:'erase-spark-background',...structuredClone(e)});
+  if(e.type==='sound'&&b.slidingBombRules)r.event('bomb-sound',r.player).soundId=e.id;
   if(e.type==='death')r.beginDeath({reason:'spark',sourceReason:e.reason});
   if(e.type==='flourish'||e.type==='floating-score')this.effects.push({kind:e.type,point:this.gridPixel(e.grid,e.gridOffset),frame:0,visible:true,callbacks:0,count:(e.type==='flourish'?this.flourishClock:this.scoreClock).advance(0).clientCount,finish:e.finish});
   if(e.type==='add-time')r.remainingTime+=e.seconds;
@@ -77,7 +88,8 @@ export class BombScene {
   const r=this.round,b=r.board;b.walls=structuredClone(this.original.walls);b.spikes=structuredClone(this.original.spikes);b.wallRevision=(b.wallRevision??0)+1;
   for(const saved of this.original.dots){const d=b.dots.find(d=>d.id===saved.id);if(b.bombObjectInteractionRules&&d.burnt)r.dotAnimations?.bombLookChanged(d.id);Object.assign(d,saved);delete d.burnt;}
   for(let i=0;i<b.switches.length;i++){delete b.switches[i].visible;Object.assign(b.switches[i],this.original.switches[i]);}
+  if(b.slidingBombRules)for(let i=0;i<b.connectors.length;i++){for(const key of Object.keys(b.connectors[i]))delete b.connectors[i][key];Object.assign(b.connectors[i],structuredClone(this.original.connectors[i]));}
   this.craters=[];this.backgroundPaints=[];this.effects=[];this.runtime.reset();this.completed=false;if(restartLevel)this.score=0;
  }
- snapshot(){return {...this.runtime.snapshot(),...(this.round.board.bombOilElevatorRules?{backgroundPaints:structuredClone(this.backgroundPaints)}:{}),craters:structuredClone(this.craters),effects:this.effects.map(({finish,...e})=>({...e,point:{...e.point}})),score:this.score,completed:!!this.completed};}
+ snapshot(){return {...this.runtime.snapshot(),...(this.round.board.bombOilElevatorRules||this.round.board.slidingBombRules?{backgroundPaints:structuredClone(this.backgroundPaints)}:{}),craters:structuredClone(this.craters),effects:this.effects.map(({finish,...e})=>({...e,point:{...e.point}})),score:this.score,completed:!!this.completed};}
 }

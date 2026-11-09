@@ -24,7 +24,7 @@ For the first implementation, a constrained route builder plus bounded search is
 
 | Mechanic | State beyond dot adjacency |
 |---|---|
-| Human motion | Pivot, angle/direction, held action, queued reverse and source wall-contact count |
+| Human motion | Pivot, logical source frame(or explicitly qualified legacy angle), direction, held action, queued Reverse and wall-contact count |
 | Ordinary enemies | Pivot, canonical frame, direction, program PC, class count/remainder and wall permission |
 | Programs | Pascal PC semantics, cardinal callback order, successful and denied target queries; later transfer/orphan behavior requires separate qualification |
 | Spikes | Exact source outline phase and unscaled clock |
@@ -33,7 +33,7 @@ For the first implementation, a constrained route builder plus bounded search is
 | Death/reset | Frozen actors, continuing shared clocks and the state restored at round start; a reset does not imply all clock remainders become zero |
 | Bonuses/goal | Independent collected state and permission; a goal route need not collect every optional bonus |
 
-The later ring, checkpoint, shield, bomb, moving-dot and weapon systems add state. Their source reports are preparation, not current solver capability. Checkpoint time restoration and disappearing-ring availability are especially relevant: the same geometric board can have different future routes after a visit. The source's capacities and callback ordering also constrain generated candidates.
+Qualified static rings, checkpoints/protection, bombs/goodies and orbital enemies already add state in the bounded scenes. Moving dots, teleports/sliding and weapons remain gated; a source report alone does not enable a new combination. Checkpoint time restoration and disappearing-ring availability are especially relevant: the same geometric board can have different future routes after a visit. The source's capacities and callback ordering also constrain generated candidates.
 
 Source review confirms that Child disables the round countdown. Its initialized, current and saved integer time remain separate fields; simulation elapsed time must not become an invented deadline. Difficulty modes that enable the countdown require their own timing qualification. Guest-tick deadlines for Oil and disappearing rings remain active and are a different mechanism.
 
@@ -100,3 +100,6 @@ Prosperity requires a waiting-state policy, not just a safe vertex. Its fourth t
 Enclosure preparation exposes a limit of certifying against an approximate player model. The old continuous model could solve the board, yet the original diverged at transfer19. Its replacement separates the integer logical source frame from smooth SVG presentation and tests grabs only at the current cardinal callback. Preserve that rule version and opt-in flags in every generated-board certificate. The first18 original transfer poses and81 wall-probe frames independently check the replacement; a solver witness still needs an actual original/browser goal before treating a newly ported combination as qualified.
 
 A candidate waiting policy must also include switch-entry history. An early or late Reverse can release and re-enter the same button, closing a gate even though the hand remains on the same pivot. A source Bounce at a neighboring dot supplies a different legal turnaround; initial Enclosure boundary probes improve with that input change. This is input search, not a change to collision or gate rules. Retain the failed witnesses and tested timing margins rather than presenting the geometric route alone as a solution. Full Enclosure qualification is still pending.
+
+
+Enclosure qualification demonstrates why the solver must pin its rule version and retain counterexamples. Its continuous model could solve the map while the original failed at transfer19. Callback-stepped physics matches53original final-route poses exactly; the accepted49-transfer witness uses one Reverse/three Bounces and passes570finite cases before native/SVG46,000goals. Geometric reachability, a raw goal or initial boundary probes alone were insufficient. Gate occupancy and initial ignition can diverge after a small tap shift. This validates an existing-map witness under stated bounds; it does not implement a new-level generator or prove all inputs safe.

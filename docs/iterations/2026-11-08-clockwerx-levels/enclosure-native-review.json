@@ -1,5 +1,5 @@
 {
-  "status": "native-and-QA15-goals-reviewed-scene-acceptance-pending",
+  "status": "accepted-with-limits",
   "ordinal": 28,
   "title": "Enclosure",
   "native": {
@@ -55,11 +55,11 @@
     "files": 9,
     "untouchedFiles": 7,
     "originalHashVerified": true,
-    "nativeRelaunch": "pending"
+    "nativeRelaunch": "passed2224frontend/2824guest/0budget;29p174000"
   },
   "limits": [
     "Raw15 full1710case sweep failed at391; canonical190 and firstReverse-4guest190 pass, firstReverse+4guest/onset10 misses early ignition and dies to later spark.",
-    "Raw16 adds60legal post-ignition idle updates; its full certificate and native04 replay are in progress. No physics adjustment.",
+    "Raw16 and other rejected input witnesses are retained; final raw19 passes570cases and native05/rootQA19goals.",
     "Direct native blast hits on checkpoints or switches are not claimed; source/unit contracts admit them, but this blast does not reach those objects.",
     "Reconstructed SVG art and modern completion overlay differ from original pixels. Native imports/campaign save compatibility, physical controller, audio and higher difficulty remain unqualified.",
     "No new real-time CPU/memory/cadence benchmark. Existing frozen comparisons do not measure this expanded scene."
@@ -90,8 +90,34 @@
     "goalScore": 46000,
     "boundaryProbesPassed": 12,
     "fullFiniteCases": 570,
-    "certificate": "active-session47140",
-    "native05": "active-session15734",
-    "rootQA19": "pending"
+    "certificate": "570passed",
+    "native05": "passed",
+    "rootQA19": "passed",
+    "activation": "passed;previous27retained",
+    "nextOrdinal": 29
+  },
+  "native05": {
+    "frontendTicks": 16984,
+    "guestTicks": 17584,
+    "budgetExhausted": 0,
+    "goalScore": 46000,
+    "nextLevel": 29,
+    "nextTotal": 174000,
+    "targetPivotsMatched": 49,
+    "actionPosesMatched": 4,
+    "maxActionPoseMAE": 0.2760942760942761,
+    "exactNativePhysicalSchedulePositionsMatched": 53,
+    "exactNativePhysicalScheduleFramesMatched": 53,
+    "evidence": "enclosure/public-canonical-native-goal05-comparison.json",
+    "completionAndNextActuallyViewed": true
+  },
+  "acceptedReview": "enclosure-review.json",
+  "qaFinal19": {
+    "goalScore": 46000,
+    "pageScreenshot": "enclosure/qa-goal-route19-page.png",
+    "accessibility": "enclosure/qa-goal-route19-ax.txt",
+    "normalTab": 92,
+    "normalPaused": true,
+    "qa108Closed": true
   }
 }

@@ -1,0 +1,170 @@
+{
+  "status": "accepted-with-limits",
+  "ordinal": 28,
+  "title": "Enclosure",
+  "mode": "Child",
+  "sourceCodeCommit": "31726911",
+  "sourcePreparationCommit": "10a1bb5e",
+  "inventory": {
+    "pivots": 88,
+    "bonuses": 30,
+    "goal": [
+      10,
+      5
+    ],
+    "checkpoint": [
+      2,
+      4
+    ],
+    "bombRecords": 18,
+    "humanStarters": 1,
+    "stationarySpikes": 1,
+    "walls": 9,
+    "doors": 3,
+    "switches": 3,
+    "activeOrdinaryEnemies": 4,
+    "activeOrbitalEnemies": 1,
+    "inactiveNonhumanActors": 11
+  },
+  "route": {
+    "raw": "enclosure/candidate-route-19.json",
+    "checked": "enclosure/checked-route.json",
+    "transfers": 49,
+    "bonusesCollected": 11,
+    "goalScore": 46000,
+    "reverseEdges": 1,
+    "cardinalBounces": 3,
+    "ignitions": 1,
+    "craters": 1,
+    "finiteCases": 570,
+    "clockOnsets": 190,
+    "reverseGuestTickShifts": [
+      -4,
+      0,
+      4
+    ],
+    "zeroResets": true,
+    "boundary": "Finite starting onsets and tap shifts, not every input policy or hardware timing."
+  },
+  "validation": {
+    "status": "passed",
+    "nativeTransfers": 49,
+    "goalOnsets": 570,
+    "nativeGoalScore": 46000,
+    "qaGoalScore": 46000,
+    "sourceFilesChanged": [
+      "app.mjs",
+      "level.mjs",
+      "round.mjs",
+      "special-dots.mjs",
+      "special-dot-runtime.mjs",
+      "bombs.mjs",
+      "bomb-runtime.mjs",
+      "bomb-scene.mjs"
+    ],
+    "runtimeChecks": 216,
+    "packagingChecks": 14,
+    "priorDecodedBoardsIdentical": 26,
+    "priorReplaySteps": 200370,
+    "priorSceneDefinitionsIdentical": 27,
+    "payloadsUnchanged": 79,
+    "sourceCodeCommit": "31726911",
+    "nativeReport": {
+      "status": "passed",
+      "frontend_ticks": 16984,
+      "guest_tick": 17584,
+      "budget_exhausted_frames": 0,
+      "save_export": {
+        "directory": "save-files",
+        "changed_files": 2,
+        "deleted_files": 0
+      }
+    },
+    "nativePhysicalSchedulePoseMatches": 53,
+    "limits": [
+      "Finite190onsets by3Reverse shifts, not exhaustive hardware or every input policy.",
+      "No new real-time performance benchmark; audio, physical controller, higher difficulty and campaign save compatibility remain unqualified."
+    ]
+  },
+  "nativeEvidence": {
+    "report": "enclosure/native-goal-05/report.json",
+    "targetFits": "enclosure/native-goal-05-transfer-review.json",
+    "actionFits": "enclosure/native-goal-05-reverse-bounce-review.json",
+    "physicalScheduleComparison": "enclosure/public-canonical-native-goal05-comparison.json",
+    "objectFits": "enclosure/native-goal-05-objects-review.json",
+    "spikeFits": "enclosure/native-goal-05-spike-review.json",
+    "sparkFits": "enclosure/native-spark-fits-05.json",
+    "explosionFits": "enclosure/native-explosion-fits-05.json",
+    "blastEffects": "enclosure/native-goal-05-blast-effects-review.json",
+    "frontendTicks": 16984,
+    "guestTicks": 17584,
+    "budgetExhausted": 0,
+    "targetPivotsMatched": 49,
+    "physicalSchedulePositionsMatched": 53,
+    "physicalScheduleFramesMatched": 53,
+    "maxActionPoseMAE": 0.2760942760942761,
+    "nextLevel": 29,
+    "nextTotal": 174000
+  },
+  "visualEffects": {
+    "sparkSamples": 22,
+    "cleanSparkFits": 22,
+    "visibleExplosionFits": 5,
+    "laterClearCraterCaptures": 3,
+    "burntCores": 4,
+    "burntFrame": 92,
+    "orbitalSpikeRemoved": true,
+    "stationarySpikeRetained": true,
+    "cleanStationaryFits": 95,
+    "stationarySamples": 96,
+    "rawOverdrawRetained": true,
+    "doorsOpenAtGoal": 3,
+    "checkpointFinalFrame": 89
+  },
+  "browser": {
+    "qaGoalScore": 46000,
+    "qaScreenshot": "enclosure/qa-goal-route19-page.png",
+    "qaAccessibility": "enclosure/qa-goal-route19-ax.txt",
+    "normalTab": 92,
+    "normalUrl": "http://localhost:8087/clockwerx-html5/",
+    "normalSmoke": "selected28/restarted/paused; full goal reviewed in matching QA package",
+    "normalScreenshot": "enclosure/normal-paused-page.png",
+    "qaTab108": "closed after saved goal",
+    "viewport": "default/no override",
+    "cadence": "unqualified; no timing retry"
+  },
+  "activation": {
+    "evidence": "enclosure/activation.json",
+    "priorSceneDefinitionsPreserved": 27,
+    "assetPayloadsPreserved": 79,
+    "sourceFiles": 25,
+    "runtimePayloadBytes": {
+      "sourceBytes": 176935,
+      "assetBytes": 2694142,
+      "manifestBytes": 2468023,
+      "totalBytes": 5339100
+    },
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\enclosure\\previous-live-pilot",
+    "saveKeyPreserved": "systemless.clockwerx-html5.pilot.v1",
+    "protectedSharedFilesUnchanged": true
+  },
+  "progressFixture": {
+    "sha256": "81b401c5a04c65d2ca2cc3b577dc6b76c269e0ebea9273a45ee9a6d8fdd1f84a",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "nativeRelaunch": "crossing/native-initial-01/report.json",
+    "freshNextLevel": 29,
+    "freshNextTotal": 174000,
+    "frontendTicks": 2224,
+    "guestTicks": 2824,
+    "budgetExhausted": 0
+  },
+  "limits": [
+    "Original source collision poses are independent of enhanced SVG artwork; vector rendering is intentionally smoother and the completion UI differs.",
+    "Earlier27 scenes retain their qualified legacy timing; canonicalPlayerQualified is enabled only for28.",
+    "Direct native blast hits on checkpoints/switches were not exercised; source/unit contracts remain distinct from observed hits.",
+    "Child only; audio, physical controller, campaign save compatibility and every optional route/bonus are unqualified.",
+    "No new real-time CPU/memory/cadence comparison; old frozen benchmark scope remains unchanged.",
+    "New-level generation remains a documented proposal and existing-map input solver."
+  ]
+}

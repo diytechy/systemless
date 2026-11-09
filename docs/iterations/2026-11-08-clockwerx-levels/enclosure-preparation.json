@@ -1,5 +1,5 @@
 {
-  "status": "source-preparation-only-not-gameplay-accepted",
+  "status": "superseded-by-accepted-scene-review",
   "ordinal": 28,
   "title": "Enclosure",
   "liveOrdinal": 27,
@@ -103,7 +103,7 @@
     "No new CPU/memory/rotation benchmark; no heavy build/push/upload/deploy"
   ],
   "canonicalPlayerPreparation": {
-    "status": "opt-in-source-only-not-gameplay-accepted",
+    "status": "qualified-only-for-bounded-scene28",
     "flag": "canonicalPlayerQualified",
     "publicNativeScheduleSamplesMatched": 105,
     "originalTransferPosesMatched": 18,
@@ -116,8 +116,9 @@
       "enclosure/canonical-player-native-comparison.json",
       "enclosure/native-wall-probe-pose-review.json"
     ],
-    "nativeGameplayGoal": false,
-    "browserGameplayGoal": false,
-    "liveUnchanged": true
-  }
+    "nativeGameplayGoal": true,
+    "browserGameplayGoal": true,
+    "liveUnchanged": false
+  },
+  "acceptedReview": "enclosure-review.json"
 }

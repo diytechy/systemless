@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 28,
-  "currentAction": "Enclosure28: native03/04 and QA15 46000goals reviewed; native04 physical schedule matches53positions+frames. Raw19 oneReverse/threeBounce route passes12boundary probes. Full570certificate/session47140 and native05/session15734 active; exactly2runners. No scene acceptance/live activation.",
+  "currentOrdinal": 29,
+  "currentAction": "Crossing29 next: fresh native progress relaunch passed2224/2824/0 and29p174000 reviewed. Enclosure28 accepted/activated, no active runner. Prepare29 from source inventory and original cold captures; retain canonical timing gates and full qualification.",
   "levels": [
     {
       "ordinal": 1,
@@ -1968,13 +1968,26 @@
       "menuTitle": "Enclosure",
       "resourceTitle": "Enclosure",
       "sha256": "6acc7e4c95445522595981cb0f143522991615faa0c2c4e28dc5ec9d5dec5095",
-      "status": "preparing",
+      "status": "accepted-with-limits",
       "nativeEvidence": [
-        "enclosure/native-initial-01/report.json"
+        "enclosure/native-goal-05/report.json",
+        "enclosure/native-goal-05-transfer-review.json",
+        "enclosure/public-canonical-native-goal05-comparison.json",
+        "enclosure/native-goal-05-blast-effects-review.json"
       ],
-      "requirements": [],
-      "svgStatus": "QA28 prepared, gated source only; no native/SVG goal or live activation",
-      "generationConstraints": [],
+      "requirements": [
+        "callback-stepped Child player with independent smooth SVG drawing",
+        "three gates/buttons and static checkpoint",
+        "single ordered fuse and type4 blast hiding",
+        "stationary spike topology, class4 walls and two static enemy programs"
+      ],
+      "svgStatus": "28-scene locally active; root visible46000goal and normal bounded load/restart/pause smoke passed",
+      "generationConstraints": [
+        "certify logical callback frames rather than interpolated angles",
+        "retain switch occupancy, queued Reverse and held Bounce state",
+        "a raw model goal is insufficient without independent original gameplay",
+        "prefer robust legal turnarounds; retain rejected timing counterexamples"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 88,
@@ -2001,7 +2014,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2014,12 +2027,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
-      ]
+        "general new-level generator is not implemented",
+        "unvisited direct blast interactions and non-Child modes remain unqualified"
+      ],
+      "review": "enclosure-review.md"
     },
     {
       "ordinal": 29,

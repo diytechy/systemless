@@ -85,6 +85,11 @@ class PilotPackagingTests(unittest.TestCase):
         self.save_manifest()
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
+    def test_rotating_spike_art_must_be_verified_before_mutation(self):
+        self.manifest['vectorAssets']=dict(dots=[],hands={},rotatingSpikes=dict(file='missing-orb.svg'))
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
     def test_dot_variants_must_be_verified(self):
         self.manifest['vectorAssets']=dict(dots=[],hands={},dotVariants={'bonus:0':dict(file='missing-ring.svg')})
         self.save_manifest()

@@ -47,6 +47,7 @@ def package(dist,assets):
         references.update(hand['file'] for hand in vector['hands'].values())
         if vector.get('goal'):references.add(vector['goal']['file'])
         if vector.get('starbursts'):references.add(vector['starbursts']['file'])
+        if vector.get('rotatingSpikes'):references.add(vector['rotatingSpikes']['file'])
         references.update(dot['file'] for dot in vector.get('dotVariants',{}).values())
         references.update(frame['file'] for frame in vector.get('spikes',{}).get('frames',[]))
         references.update(frame['file'] for frame in vector.get('walls',{}).get('frames',[]))

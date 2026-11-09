@@ -13,6 +13,23 @@ function fixture(){
   blocks:[{kind:'WA',count:3,records:[actor(0,0),actor(6,0),actor(3,1,65535)]},
    {kind:'SP',count:2,records:[{rawWords:[0,0,0,2,0,15]},{rawWords:[0,0,2,0,0,15]}]}]};
 }
+
+test('rotating spikes require their own bounded opt-in and preserve noncardinal pose',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];actor.actorTypeRaw=4;actor.rawWords[2]=4;actor.version12ByteRaw=0;actor.initialFrameHalfIndexRaw=4;
+ const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowRotatingSpikes:true};
+ assert.ok(levelRequirements(level,{allowEnemyStaticPrograms:true}).includes('actor type 4'));
+ const board=buildDecodedBoard(level,options),spike=board.enemies[0];
+ assert.equal(board.rotatingSpikeRules,true);assert.equal(spike.group,3500);assert.equal(spike.frame,8);assert.equal(spike.canonicalFrame,true);
+ assert.equal(spike.direction,-1);assert.equal(spike.checksWalls,false);
+ actor.programReferenceRaw=0;level.blocks.push({kind:'WP',count:1,records:[{text:'nnnn'}]});
+ assert.equal(buildDecodedBoard(level,options).enemies[0].sourcePC,1);
+ actor.rawWords[6]=0;assert.ok(levelRequirements(level,options).includes('rotating spike program PC must skip length byte'));actor.rawWords[6]=1;
+ level.blocks.at(-1).records[0].text='s';assert.ok(levelRequirements(level,options).includes('rotating spike static no-action program'));
+ actor.programReferenceRaw=-1;actor.rawWords[7]=3;assert.ok(levelRequirements(level,options).includes('rotating spike canonical class1 without walls'));
+ actor.rawWords[7]=1;actor.version12ByteRaw=1;assert.ok(levelRequirements(level,options).includes('rotating spike canonical class1 without walls'));
+ actor.version12ByteRaw=0;assert.ok(levelRequirements(level,{allowRotatingSpikes:true}).includes('rotating spike canonical class1 without walls'));
+ actor.actorTypeRaw=5;assert.ok(levelRequirements(level,options).includes('actor type 5'));
+});
 test('source half-index selects actual 64-angle descriptor, including wrap',()=>{
  assert.equal(sourceInitialFrame(24),48);assert.equal(sourceInitialFrame(40),16);
  assert.equal(sourceInitialFrame(-1),62);assert.throws(()=>sourceInitialFrame(.5),TypeError);

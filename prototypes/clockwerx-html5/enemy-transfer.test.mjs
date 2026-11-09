@@ -6,6 +6,18 @@ const dot=(id,x,y,extra={})=>({id,x,y,present:true,humanCanGrab:true,nonhumanCan
 const actor=(extra={})=>({sourceActorType:2,pivot:'a',frame:63,direction:1,sourcePC:1,sliding:false,visible:true,orphaned:false,hiddenUntil:0,...extra});
 const options=(extra={})=>({program:'s',dots:[dot('a',0,0),dot('b',48,0)],guestTick:100,adjustPeriod:n=>Math.floor(n*100/60),afterAnimate:()=>{},onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{},...extra});
 
+test('qualified rotating spike uses integer WA animation and n-only PC without transfers',()=>{
+ const spike=actor({sourceActorType:4,speedClass:1,checksWalls:false}),o=options({allowRotatingSpikes:true,program:'nnnn'});
+ assert.throws(()=>advanceStaticEnemyCallback(spike,1,options()),/ordinary canonical/);
+ const result=advanceStaticEnemyCallback(spike,2,o);
+ assert.deepEqual([result.state.frame,result.state.pivot,result.state.sourcePC,result.state.direction],[1,'a',2,1]);
+ assert.equal(result.events.some(e=>e.type==='program-transfer'),false);
+ assert.throws(()=>advanceStaticEnemyCallback(spike,1,{...o,program:'f'}),/no-action/);
+ assert.throws(()=>advanceStaticEnemyCallback({...spike,sourcePC:0},1,{...o,program:'n'.repeat(115)}),/length byte/);
+ assert.throws(()=>advanceStaticEnemyCallback({...spike,checksWalls:true},1,o),/no walls/);
+ assert.throws(()=>advanceStaticEnemyCallback({...spike,sourceActorType:5},1,o),/ordinary canonical/);
+});
+
 test('s reverses before release, jumps pivot/frame, then runs ordered grab hooks',()=>{
   const seen=[];
   const hook=label=>(s,d,c)=>seen.push([label,s.pivot,s.frame,s.direction,d.id,c.human]);

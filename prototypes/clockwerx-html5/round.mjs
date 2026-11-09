@@ -29,6 +29,7 @@ export class SourceRound extends MovementGame {
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if(board.goodieOnlyRules&&!board.specialDotRules)throw new Error('Goodie-only source timer state required');
   if(board.staticEnemyCallbacks&&!board.staticEnemyWallRules&&this.enemies.some(e=>e.checksWalls))throw new Error('Canonical enemy wall response requires qualification');
+  if(this.enemies.some(e=>e.sourceActorType===4)&&(!board.rotatingSpikeRules||!board.staticEnemyCallbacks||!outlines.groups['3500']))throw new Error('Rotating spike rules, canonical clock and source outlines require qualification');
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
   if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds});
   if(board.specialDotRules){
@@ -91,7 +92,7 @@ export class SourceRound extends MovementGame {
  enemyCollision(){
   const hero=this.collider(this.player);
   for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
-   return {reason:'enemy',object:enemy.name};
+   return {reason:'enemy',object:enemy.name,...(enemy.sourceActorType===4?{sourceReason:0}:{})};
   return null;
  }
  collision(){return this.spikeCollision()||this.enemyCollision();}
@@ -116,7 +117,7 @@ export class SourceRound extends MovementGame {
  }
  animateStaticEnemy(hand,delta,timing,upstream,dispatched){
   if(dispatched){
-   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
+   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,
     afterAnimate:s=>{
      const wall=this.board.staticEnemyWallRules?this.wallCollision(s):null;
      if(wall){s.direction*=-1;this.event('enemy-wall-bounce',s,this.point(s));}
@@ -149,6 +150,7 @@ export class SourceRound extends MovementGame {
   return findDoorContact(shapes,this.collider(hand));
  }
  contactSwitch(hand){
+  if(hand.sourceActorType===4)return;
   if(!this.board.switches?.length)return;
   const frames=this.doorSystem.snapshot().switches,actor=this.collider(hand);
   const index=this.board.switches.findIndex((s,i)=>outlineCollision(actor,worldOutline(this.doorOutlines,1000,frames[i].frame,s)));
@@ -224,7 +226,7 @@ export class SourceRound extends MovementGame {
   if(!this.death&&this.bombScene)this.advanceSpikes();
   this.bombScene?.processExplosions();
   if(!this.death)for(const enemy of this.enemies){
-   this.bombScene?.runtime.checkMatch(enemy);
+   if(enemy.sourceActorType!==4)this.bombScene?.runtime.checkMatch(enemy);
    if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}
    if(enemy.program){this.animateProgramEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer);continue;}
    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);

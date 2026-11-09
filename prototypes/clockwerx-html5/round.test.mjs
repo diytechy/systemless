@@ -15,6 +15,39 @@ function fixture(){
  const deathFactory=()=>{let n=0;return {update(ticks){n+=ticks;},get complete(){return n>=6;},snapshot(){return []}}};
  return {board,options:{outlines,deathFactory}};
 }
+
+test('rotating spike contact bypasses ordinary protection with WA death reason0',()=>{
+ const {board,options}=fixture();board.spikes=[];board.rotatingSpikeRules=true;board.staticEnemyCallbacks=true;
+ board.dots[0].protected=true;
+ const enemy=board.enemies[0];Object.assign(enemy,{sourceActorType:4,group:3500,canonicalFrame:true,frame:8,unwrappedFrame:8,speedClass:1,checksWalls:false,program:null});
+ options.outlines.groups['3500']={frames:Array.from({length:64},()=>({left:-49,top:-1,right:-47,bottom:1,rows:null}))};
+ const g=new SourceRound(board,options);assert.deepEqual(g.enemyCollision(),{reason:'enemy',object:'enemy',sourceReason:0});
+ g.update(1/120);assert.equal(g.death!==null,true);assert.equal(g.events.at(-1).cause.sourceReason,0);
+ enemy.sourceActorType=2;enemy.group=4400;options.outlines.groups['4400']=options.outlines.groups['3500'];
+ assert.equal(new SourceRound(board,options).enemyCollision(),null);
+});
+
+test('rotating spikes suppress ordinary switch hooks and require qualified source outlines',()=>{
+ const {board,options}=fixture();board.spikes=[];board.rotatingSpikeRules=true;board.staticEnemyCallbacks=true;
+ Object.assign(board.enemies[0],{sourceActorType:4,group:3500,canonicalFrame:true,frame:8,unwrappedFrame:8,speedClass:1,checksWalls:false});
+ assert.throws(()=>new SourceRound(board,options),/Rotating spike/);
+ options.outlines.groups['3500']=options.outlines.groups['4400'];
+ const g=new SourceRound(board,options);let calls=0;
+ g.board.switches=[{x:48,y:0}];g.doorOutlines={groups:{1000:{frames:[{left:-1,top:-1,right:1,bottom:1,rows:null}]}}};
+ g.doorSystem={snapshot:()=>({switches:[{frame:0}]}),contact:()=>{calls++;return [];}};
+ g.contactSwitch(g.enemies[0]);assert.equal(calls,0);
+ g.enemies[0].sourceActorType=2;g.contactSwitch(g.enemies[0]);assert.equal(calls,1);
+});
+
+test('rotating spike sprite processing cannot ignite ordinary matches',()=>{
+ const {board,options}=fixture();board.spikes=[];board.rotatingSpikeRules=true;board.staticEnemyCallbacks=true;
+ Object.assign(board.enemies[0],{sourceActorType:4,group:3500,canonicalFrame:true,frame:8,unwrappedFrame:8,speedClass:1,checksWalls:false,program:null});
+ options.outlines.groups['3500']=options.outlines.groups['4400'];
+ const g=new SourceRound(board,options),seen=[];
+ g.bombScene={advanceClocks(){},processUpper(){},processExplosions(){},processEffects(){},runtime:{checkMatch(h){seen.push(h.name);},checkGoodie(){},checkSpark(){}}};
+ g.update(1/120);assert.deepEqual(seen,[]);
+ g.enemies[0].sourceActorType=2;g.update(1/120);assert.deepEqual(seen,['enemy']);
+});
 test('source frame lattice wraps negative and positive continuous angles',()=>{
  assert.equal(sourceFrame(0),0);assert.equal(sourceFrame(TAU),0);
  assert.equal(sourceFrame(-TAU/64),63);assert.equal(sourceFrame(TAU*.75),48);

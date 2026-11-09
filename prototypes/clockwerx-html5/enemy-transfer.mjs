@@ -1,11 +1,12 @@
 import {stepSourceProgram} from './programs.mjs';
 
-// FUTURE, UNLINKED: ordinary enemies on static dots only. True EX sliding,
-// moving/up-down dots, teleports and type4/5 actors require other adapters.
+// Static WA callbacks. Qualified type4 actors are bounded to class1 with
+// no transfer program; their nonordinary contact hooks belong to the caller.
+// True EX sliding, moving/up-down dots, teleports and type5 remain unsupported.
 const offsets={0:[1,0],16:[0,1],32:[-1,0],48:[0,-1]};
 const integer=n=>Number.isInteger(n);
-function validateState(s) {
-  if(!s||![1,2,3].includes(s.sourceActorType)||!integer(s.frame)||s.frame<0||s.frame>63||
+function validateState(s,allowRotatingSpikes=false) {
+  if(!s||![1,2,3,...(allowRotatingSpikes?[4]:[])].includes(s.sourceActorType)||!integer(s.frame)||s.frame<0||s.frame>63||
      ![-1,1].includes(s.direction)||typeof s.visible!=='boolean'||typeof s.orphaned!=='boolean')
     throw new RangeError('Explicit ordinary canonical enemy state required');
   if(s.sliding)throw new Error('True source sliding is not a static transfer');
@@ -41,7 +42,7 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
@@ -49,7 +50,12 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     throw new TypeError('Source dot and synchronous collision/grab adapters required');
   dots.forEach(validateDot);
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
-  validateState(next);
+  const validate=s=>validateState(s,allowRotatingSpikes);
+  validate(next);
+  if(next.sourceActorType===4&&(next.speedClass!==1||next.checksWalls!==false||program!==null&&!/^n+$/.test(program)))
+    throw new Error('Qualified rotating spike requires class1, no walls and a no-action program');
+  if(next.sourceActorType===4&&program!==null&&(!integer(next.sourcePC)||next.sourcePC<1||next.sourcePC>program.length))
+    throw new Error('Qualified rotating spike PC must skip the Pascal length byte');
   if(program!==null)stepSourceProgram(program,next.sourcePC,{frame:1}); // validate without consuming
   const dotAt=id=>{const d=dots.find(d=>d.id===id);if(!d)throw new Error('Unknown pivot');return d;};
   dotAt(next.pivot);
@@ -57,7 +63,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     const context={human:false,step,guestTick};
     next.unwrappedFrame+=next.direction;next.frame=next.unwrappedFrame&63;
     // Source WACollide runs before stop-slide/direct-program/start-slide.
-    afterAnimate(next,context);validateState(next);
+    afterAnimate(next,context);validate(next);
     if(program===null)continue;
     const instruction=stepSourceProgram(program,next.sourcePC,{frame:next.frame});
     next.sourcePC=instruction.sourcePC;
@@ -71,15 +77,15 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     if(!allowed)continue;
     if(action.grab!==action.reverse)next.direction*=-1;
     if(!action.grab)continue;
-    onDotRelease(next,oldDot,context);validateState(next);
+    onDotRelease(next,oldDot,context);validate(next);
     next.pivot=target.id;next.unwrappedFrame+=32;next.frame=next.unwrappedFrame&63;
     events.push({type:'program-transfer',step,from:oldDot.id,to:target.id,frame:next.frame});
     // DOGrabbed calls its DP hook before testing human availability.
-    onDotGrabFirst(next,target,context);validateState(next);
+    onDotGrabFirst(next,target,context);validate(next);
     if(!target.humanCanGrab&&markEnemyOrphaned(next,{guestTick,adjustPeriod}))
       events.push({type:'orphaned',step,deadline:next.orphanDeadline});
     // Child nonhumans do not collect bonuses or activate human WY/goal hooks.
-    afterDotGrab(next,target,context);validateState(next);
+    afterDotGrab(next,target,context);validate(next);
   }
   // WAEnemyFrameProc:da22 AFTER all inner steps, even if it already moved to
   // an available dot. Expiration hides; it does not detach the actor clock.

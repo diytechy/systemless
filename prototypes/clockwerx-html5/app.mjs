@@ -58,6 +58,15 @@ function sprite(gid,index,x,y){const g=manifest.groups[gid],f=g.frames[index%g.f
 function drawHand(h){
  if(h.visible===false)return;
  const p=game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(settings.black?'4300':'700'):String(h.group);
+ if(h.sourceActorType===4&&manifest.vectorAssets){
+  const asset=manifest.vectorAssets.rotatingSpikes;
+  if(!asset)throw new Error('Qualified rotating spike artwork required');
+  const angle=presentedAngle(h,renderPrevious?.[h.name],accumulator/STEP,true);
+  // This source sprite is a small spiked orb orbiting the pivot, with fixed
+  // screen-space lighting/shadow. It is not a rotating ordinary hand.
+  ctx.drawImage(images[asset.file],p.x+asset.radius*Math.cos(angle)+asset.x,p.y+(game.board.handOffsetY||0)+asset.radius*Math.sin(angle)+asset.y,asset.width,asset.height);
+  return;
+ }
  if(manifest.vectorAssets){
   const asset=manifest.vectorAssets.hands[gid],angle=presentedAngle(h,renderPrevious?.[h.name],accumulator/STEP,true);
   ctx.save();ctx.translate(p.x,p.y+(game.board.handOffsetY||0));ctx.rotate(angle);ctx.drawImage(images[asset.file],asset.x,asset.y,asset.width,asset.height);ctx.restore();
@@ -208,7 +217,7 @@ async function loadScene(scene){
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
   const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
   board.player.group=settings.black?4300:700;
   game=new SourceRound(board,{outlines,doorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
   $('presentation').textContent='Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
@@ -216,6 +225,7 @@ async function loadScene(scene){
   if(board.puddles.length)rules.push('Touching sleeping oil wakes it. It pursues you across dots and can split. Avoid letting it grab your pivot.');
   if(board.doors.length)rules.push('Switch entry toggles matching doors; release changes only the switch art.');
   if(board.staticEnemyCallbacks)rules.push('Enemy hands rotate and follow their own timed patterns.');
+  if(board.rotatingSpikeRules)rules.push('Spiked orbs circle their pivots.');
   else if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
   if(board.dots.some(d=>d.ring))rules.push('Rings disappear after you leave them and later return.');
   if(board.dots.some(d=>d.waystation))rules.push('Checkpoints store your return position and time.');
@@ -241,7 +251,7 @@ async function load(){
   manifest=await r.json();const vector=manifest.vectorAssets;
   if(!vector)$('presentation').textContent='Private HTML5 pilot using the original bitmap foreground and background. One tutorial board; reconstructed rules and timing.';
   const foreground=vector?[
-   ...Object.values(vector.hands).map(h=>h.file),...vector.dots,
+   ...Object.values(vector.hands).map(h=>h.file),...(vector.rotatingSpikes?[vector.rotatingSpikes.file]:[]),...vector.dots,
    ...Object.values(vector.dotVariants||{}).map(d=>d.file),
    ...(vector.goal?[vector.goal.file]:[]),...(vector.starbursts?[vector.starbursts.file]:[]),
    ...(vector.spikes?.frames||[]).map(f=>f.file),

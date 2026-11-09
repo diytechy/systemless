@@ -7,7 +7,7 @@ import {compileWallTiles,actorChecksWalls} from './walls.mjs';
 import {decodeDoorRecord,decodeSwitchRecord,doorGeometry,switchGeometry} from './doors.mjs';
 import {activePuddleSpecs} from './oil.mjs';
 
-const GROUPS={0:700,1:500,2:4400,3:4500,6:4300};
+const GROUPS={0:700,1:500,2:4400,3:4500,4:3500,6:4300};
 const signedWord=n=>n>32767?n-65536:n;
 
 export function decodedGridOrigin(header){
@@ -18,7 +18,7 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false}={}){
  const unsupported=[];
  if(allowBombs&&allowGoodies)unsupported.push('exclusive bomb or goodie-only scope required');
  if(allowGoodies&&!allowSpecialDots)unsupported.push('goodie-only source timer qualification');
@@ -36,12 +36,17 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
   }
   if(block.kind==='WA')for(const actor of block.records){
    if(!(actor.activationMaskRaw&activeMask))continue;
-   if(!(actor.actorTypeRaw in GROUPS))unsupported.push('actor type '+actor.actorTypeRaw);
+   if(!(actor.actorTypeRaw in GROUPS)||actor.actorTypeRaw===4&&!allowRotatingSpikes)unsupported.push('actor type '+actor.actorTypeRaw);
+   if(actor.actorTypeRaw===4&&allowRotatingSpikes){
+    if(!allowEnemyStaticPrograms||actor.rawWords?.[7]!==1||actorChecksWalls(actor.version12ByteRaw??1))unsupported.push('rotating spike canonical class1 without walls');
+    if(actor.programReferenceRaw>=0&&!/^n+$/.test(programs[actor.programReferenceRaw]||''))unsupported.push('rotating spike static no-action program');
+    if(actor.programReferenceRaw>=0&&actor.rawWords?.[6]<1)unsupported.push('rotating spike program PC must skip length byte');
+   }
    if(actor.programReferenceRaw>=0){
     const program=programs[actor.programReferenceRaw],pc=actor.rawWords?.[6];
     if(!allowEnemyBouncePrograms&&!allowEnemyStaticPrograms)unsupported.push('actor programs');
     else{
-     if(![1,2,3].includes(actor.actorTypeRaw)||typeof program!=='string'||!program.length||program.length>255||[...program].some(c=>!(allowEnemyStaticPrograms?'nsbf':'b').includes(c)))unsupported.push(allowEnemyStaticPrograms?'non-static actor program':'non-bounce actor program');
+     if(![1,2,3,...(allowRotatingSpikes?[4]:[])].includes(actor.actorTypeRaw)||typeof program!=='string'||!program.length||program.length>255||[...program].some(c=>!(allowEnemyStaticPrograms?'nsbf':'b').includes(c)))unsupported.push(allowEnemyStaticPrograms?'non-static actor program':'non-bounce actor program');
      if(!Number.isInteger(pc)||pc<0||pc>(program?.length??0))unsupported.push('source program PC');
      if(!allowEnemyStaticPrograms&&pc===0&&[102,115].includes(program?.length))unsupported.push('length-byte program transfer');
      if(actorChecksWalls(actor.version12ByteRaw??1)&&!(allowProgrammedEnemyWalls&&allowEnemyStaticPrograms&&allowStaticEnemyWalls))unsupported.push('programmed wall-reacting actor');
@@ -69,8 +74,8 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors,allowRotatingSpikes});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
@@ -119,7 +124,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
  return {ordinal,title,resourceId:level.resourceId,origin,dots,radius:48,distanceTolerance:1,angularSpeed,handOffsetY:1,
   player:hand(actors[0],0),demos:[],enemies:actors.slice(2).map((a,i)=>hand(a,i+2)),spikes,walls,doors,switches,
   puddles:allowOil?activePuddleSpecs(records('PU'),activeMask):[],
-  bombRules:allowBombs,goodieOnlyRules:allowGoodies,staticEnemyWallRules:allowStaticEnemyWalls,bombs:allowBombs?records('BO'):[],goodies:(allowBombs||allowGoodies)?records('GO').filter(r=>(r.rawWords[3]*65536+r.rawWords[4])&activeMask).map(r=>({row:r.rawWords[0],column:r.rawWords[1],initialFrame:r.rawWords[2]})):[],
+  ...(allowRotatingSpikes?{rotatingSpikeRules:true}:{}),bombRules:allowBombs,goodieOnlyRules:allowGoodies,staticEnemyWallRules:allowStaticEnemyWalls,bombs:allowBombs?records('BO'):[],goodies:(allowBombs||allowGoodies)?records('GO').filter(r=>(r.rawWords[3]*65536+r.rawWords[4])&activeMask).map(r=>({row:r.rawWords[0],column:r.rawWords[1],initialFrame:r.rawWords[2]})):[],
   activeMask,difficulty:'Child',childScoreRules:allowChildScoring,sourceDotPermissions:true,specialDotRules:allowSpecialDots,staticEnemyCallbacks:allowEnemyStaticPrograms,timeLimit:level.header.timeLimitRaw,
   inactiveActorCount:records('WA').length-actors.length,
   texts:records('TX').map(t=>({font:t.fontName,size:t.fontSize,face:t.fontFaceRaw,

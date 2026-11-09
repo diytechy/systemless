@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 44,
-  "currentAction": "GO+EX44source review/finalpacket; originalgoal01running ownedPID101440/session68286. Coldpositions249/252 andSPI/GOphase limits explicit. Live43/57remain.",
+  "currentOrdinal": 45,
+  "currentAction": "Slide45 subordinate b/n/s GO+EX program scope; freshSol privateworker. Root independent cold/native/art/review. Live44accepted;56remain, no per-level stops.",
   "levels": [
     {
       "ordinal": 1,
@@ -3250,21 +3250,25 @@
       "menuTitle": "Weave",
       "resourceTitle": "Weave",
       "sha256": "f487d162c04059461fe579f6424318270616598b9df816eec134980784c2f5a0",
-      "status": "serial-go-ex-private-implementation",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [
-        "weave/native-initial-01/report.json"
+        "weave/native-initial-01/report.json",
+        "weave/native-goal-01/report.json",
+        "weave/native-goal-01-comparison.json",
+        "weave/native-goal-01-object-comparison.json",
+        "weave/native-goal-01-spike-goodie-fits.json"
       ],
       "requirements": [
-        "Explicit GO+EX/sliding actor support in BombRuntime, replacing its current dynamic-actor rejection only in the qualified scope",
-        "GO/SP/WL combination qualification with physical sliding anchors",
-        "Colored horizontal/vertical EX atlas coverage"
+        "GOuses physicalcanonicalcollider beforestop/input; emptyLI/SRqueries permitonlyqualifiedslidingactor",
+        "validated GO-only/freeclass1/staticEX/SP/WL profile; movingpivots/bombs/otherfamilies rejected",
+        "flat1k/+10time anddeferredhide/resetgeneration remainseparatefromDOT/EXcomponentbonus",
+        "distinctregistered40/div5GOclient withownbirth/spritereference; phase remainsunqualified"
       ],
-      "svgStatus": "not admitted; privateGO+EXscope only",
+      "svgStatus": "locally active; original/SVG6000goal;all5GO/22transfers/5Bounce/190onsets",
       "generationConstraints": [
-        "Seven ordinary class1 enemies have negative references; do not bind the unused stored program",
-        "Eighteen connectors include both orientations and no initial connector bonuses",
-        "Preserve GO source order, source clock and deferred flourish award/hide",
-        "The single wall record expands to original source tiles, not a guessed rectangle"
+        "preserve initialNPCslide/sourceorder andstrictdeclaredGO/EXinventory",
+        "testactualphysicalslidingpickup versuslogicalpivot, fivecollectibles andall190inputonsets",
+        "b/sprogramjoin,Oil/HY/BO/moving andpermissionchangingendpoints requireseparate serialqualification"
       ],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -3290,9 +3294,9 @@
           "GN": 0,
           "TR": 0
         },
-        "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+        "boundary": "Source inventory and bounded original/SVGgoal/all5pickup witness; explicit phase/callback-step limits."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3305,10 +3309,11 @@
         6
       ],
       "generationRequirementsPending": [
-        "Cold source creation/reset starts for the two statically eligible NPC sliders",
-        "Goodie pickup during or adjacent to a slide using original GO/hand outlines",
-        "Slide reversal near the wall/SP, goal and replay after reset",
-        "All five GO requests are valid frame0, not a new out-of-range fallback"
+        "Two clear NPCpositions differ byone3pxstep inobject42; sixothergameplayposes differbyoneframe. Cold249/252positions244poses retainthreecallbackstepmisses",
+        "GO/SPIstartup/sprite/flourishphases unqualified: coldSPI26/196 GO30/159; gameplaySPI45/306 GO30/78visible. No phase/countassignment",
+        "Threephysicalslidepickups are source-model witnesses; exactnativepickupcallbacktiming unmeasured. All5nativepickups/hide/5kplus1kgoal viewed",
+        "NativeReverse/backout at44, death/reset, fullaudio/controllers/nonChild/performance/broaderfamilies unqualified",
+        "Originaladvanced45duringfinal240tickwaitwithoutnewscriptedinput; cause/prefs/queuedinputnotisolated. SVGcompletionUI/postgoalNPCclocks differ"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3328,7 +3333,8 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
-      }
+      },
+      "review": "weave-review.md"
     },
     {
       "ordinal": 45,
@@ -3336,14 +3342,16 @@
       "menuTitle": "Slide",
       "resourceTitle": "Slide",
       "sha256": "7f153518749ce2034fd88f83c4a118319b574370158204c74226ee84c316b557",
-      "status": "source-prepared-awaiting-serial-composition",
-      "nativeEvidence": [],
+      "status": "serial-bns-goodie-program-private-implementation",
+      "nativeEvidence": [
+        "slide/native-initial-01/report.json"
+      ],
       "requirements": [
         "Same GO+EX sliding-actor/physical-collision support as44",
         "b/n/s ordinary NPC program/slide ordering and source-bound PCs",
         "61 EX slots and mixed-color atlas coverage"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "not admitted; privateprogramcapability only",
       "generationConstraints": [
         "Exactly61 EX records equals capacity; no difficulty filtering applies to EX",
         "Six programmed/two free ordinary class1 enemies; preserve b versus s input effects and PascalPC1",
@@ -7590,8 +7598,8 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "weave_engine private44GO+EX implementation/tests/one model",
-    "B": "root source/native/art/review; one original emulator, conversions serial",
-    "C": "mechanics_triage sourceGO+EXprep complete/released; squiggle_engine source-only44review"
+    "A": "slide_engine private45bnsGO+EX implementation/tests/one model",
+    "B": "root source/native/art/review; one original emulator/conversions serial",
+    "C": "Oil+EX46/50source plan complete/released;44source review complete/released"
   }
 }

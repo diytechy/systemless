@@ -182,3 +182,6 @@ EX graph generation must preserve unmasked61capacity, source record order, two s
 
 
 Static EX/program generation must model NPC stop/program/start order, PC suspension during sliding, sourceclass clocks and exactphysical queries. A program can execute immediately after arrival/backout; do not advance PC during the slide. Betwixt43uses decoder-built available endpoints; generated normalized/helper inputs with unavailable endpoints now failclosed. Test component pickup scoring and every supported hold onset, then independent original/SVG playability; a structural map or model-only winner remains insufficient.
+
+
+GO+EX generation must check the physical sliding hand outline before stop/input and keep goodie flat awards distinctfromrecursiveDOT/EXbonus state. Preserve first-visible/collected blocking, deferredflourish hide andresetgeneration; useindependentclientbirth/references, never force sprite phases tofitcaptures. Weave44all5pickup/6000goal isboundedfunctional evidence withphase/callbacklimits, notexactfullgameparity. Oil+EX sourceplan addsdisplay7origin/all88slots, logicaltarget/physicalPUcontact andlayer11death/lateSPIordering constraints before46/50admission.

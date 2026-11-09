@@ -262,3 +262,6 @@ EX42 now qualifies the first static connector/updown/WL/WY/freeactor Child compo
 
 
 Betwixt43 qualifies static EX/SP with ordinary free/fn programs on clockclasses1/2/3. NPC programs skip while sliding/noncardinal; stop precedes PC and every exit reaches start-slide. Both bonuscomponents consumed for one initiating escalating award each. Available endpoint permissions are explicit invariant; unavailable/burning/ring/otherfamily and b/sprogram joins remain serial work. Native/SVG7000/all190onsets/13hero poses pass, ten one-frame gameplay differences retained.
+
+
+Weave44 qualifies GO+staticEX/SP/optionalWL with freeordinaryclass1 actors. Physical canonical collider precedes slide-stop/input; emptyLI/SR stages accept onlythisvalidatedscope. FlatGOawards/+10time/deferredhide remainseparatefromDOTcomponent bonuses. Actualnative/SVGall5GO/6000goal and190onsets pass. ExactSPI/GOstartup/sprite/flourishphases unqualified; twoNPCsamplesone3pxstepoff andsixposesoneframe remain. Distinct40/div5GOclient is sourcegraph, notprovenphasecorrection. Subordinateb/n/s45,Oil/HY/BO/moving joins remainserial.

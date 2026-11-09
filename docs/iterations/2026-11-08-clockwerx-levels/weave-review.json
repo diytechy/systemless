@@ -1,0 +1,76 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "54a8be96",
+  "ordinal": 44,
+  "title": "Weave",
+  "nativeTransfers": 22,
+  "bounces": 5,
+  "reverses": 0,
+  "goodiesCollected": 5,
+  "goalOnsets": 190,
+  "backoutModelOnsets": 190,
+  "nativeGoalScore": 6000,
+  "qaGoalScore": 6000,
+  "runtimeChecks": 284,
+  "privateChecks": 5,
+  "packagingChecks": 17,
+  "priorDefinitionsUnchanged": 43,
+  "priorPayloadsUnchanged": 92,
+  "priorBoards": 43,
+  "priorSnapshots": 43,
+  "priorUpdates": 374111,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext45Total284000Viewed": true,
+  "allFiveNativePickupsAndHideViewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "fresh45PhysicallyViewed": true,
+  "sourceFittedIdleUpdates": 692,
+  "poseSummary": {
+    "all": 408,
+    "clear": 397,
+    "clearPositions": 395,
+    "clearPoses": 389,
+    "allPositions": 406,
+    "allPoses": 400,
+    "transferHero": 21,
+    "transferHeroMatches": 21
+  },
+  "connectorSummary": {
+    "observations": 918,
+    "clear": 597,
+    "clearMatches": 597,
+    "finalTransferHeroMatches": true,
+    "finalTransferHeroError": 0.28136200716845877,
+    "totalTransferHeroes": 22
+  },
+  "all22TransferHeroes": true,
+  "spikeGoodiePhaseSummary": {
+    "SP": {
+      "observations": 306,
+      "clearVisible": 306,
+      "clearVisibleMatches": 45
+    },
+    "GO": {
+      "observations": 255,
+      "clearVisible": 78,
+      "clearVisibleMatches": 30
+    }
+  },
+  "fixtureSha256": "3779e6a0f0db01253e61865e3cd86713a9ecfc534a98219cf2960acb12db5238",
+  "limits": [
+    "Two clear NPCpositions differ byone3pxstep inobject42; sixothergameplayposes differbyoneframe. Cold249/252positions244poses retainthreecallbackstepmisses",
+    "GO/SPIstartup/sprite/flourishphases unqualified: coldSPI26/196 GO30/159; gameplaySPI45/306 GO30/78visible. No phase/countassignment",
+    "Threephysicalslidepickups are source-model witnesses; exactnativepickupcallbacktiming unmeasured. All5nativepickups/hide/5kplus1kgoal viewed",
+    "NativeReverse/backout at44, death/reset, fullaudio/controllers/nonChild/performance/broaderfamilies unqualified",
+    "Originaladvanced45duringfinal240tickwaitwithoutnewscriptedinput; cause/prefs/queuedinputnotisolated. SVGcompletionUI/postgoalNPCclocks differ"
+  ],
+  "liveSizes": {
+    "sourceBytes": 260483,
+    "assetBytes": 3194496,
+    "manifestBytes": 4099215,
+    "totalBytes": 7554194
+  },
+  "normalTab92SelectRestartPauseViewed": true,
+  "qa126Closed": true,
+  "currentReceipt": "weave/activation.json"
+}

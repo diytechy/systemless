@@ -123,6 +123,14 @@ class PilotPackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
 
+    def test_hy_symbols_and_actor_faders_require_verified_payloads(self):
+        for field in ('symbols','faders'):
+            with self.subTest(field=field):
+                self.manifest['vectorAssets']=dict(dots=[],hands={},teleports={field:dict(file='missing-hy.svg')})
+                self.save_manifest()
+                with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+                self.assertFalse((self.dist/'clockwerx-html5').exists())
+
     def test_scene_backdrop_requires_a_verified_payload(self):
         self.manifest['scenes']=[dict(title='Synthetic',backdrop='missing.png')]
         self.save_manifest()

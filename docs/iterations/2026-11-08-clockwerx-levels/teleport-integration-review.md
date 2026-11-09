@@ -1,0 +1,11 @@
+# Paired teleports and actor faders
+
+The default-off HY family now connects strict map admission, actor hooks, source-clocked animation and the SVG renderer. Both stored human starts must be ordinary non-HY, non-goal pivots. This closes the independent review finding about unqualified startup/reset ordering. Squiggle satisfies the guard. Other mechanic combinations remain rejected.
+
+Five-word records are masked before the22-endpoint capacity and require exactly two distinct present endpoints per channel. Initial frames are complementary. Human arrival follows checkpoint/protection, goal, bonus and HY order; the destination receives its separate source hook without recursive destination bonus/checkpoint/grab queries. Ordinary actors use WATeleport; orbitals do not. Destination wall bounce/reversal happens before death36. Faders retain the entry pose, animate on unscaled50/div2 callbacks and disappear after the third visible phase; HY frames use unscaled50/div10 callbacks. Faders render after NPCs and before the human.
+
+Root reviewed the final private worker patch, hashes, source contract and independent review.278 runtime and16 packaging checks pass. All40 prior boards and final snapshots remain identical across355122 legal-input updates. Source art is converted into pip symbols and symmetric vector hands with original anchors and palette phases; texture/dither simplification does not alter collision geometry. All111 new descriptors and prior payload preservation checks pass.
+
+Actual original and SVG Squiggle goals were viewed. The legal certificate covers six teleports and all190 held-input onsets, with18transfers,1000points and no death/reset. Independent original capture comparison matches all408 clearHYframes and all18transferheroes. Six actor poses differ by one frame; one of14 first-fader samples falls across a callback boundary. These differences are retained in private measurements rather than corrected by assigning game state or clock phase.
+
+Functional clocks do not measure wall-time responsiveness or CPU. Full audio, optional bonuses, death/reset, black/NPC fader appearance, unsupported combinations and non-Child modes remain unqualified. Activation and per-level acceptance are separate guarded steps. No push, upload or deployment.

@@ -58,10 +58,11 @@ export class MovementGame {
         // This opt-in keeps ordinary Movement and earlier scene paths intact.
         this.onGoal?.(target);this.complete=true;this.event('goal',h,target);
         if(!target.collected){target.collected=true;const points=this.onGoalBonus?.(target),event=this.event('bonus',h,target);if(points!==undefined)event.points=points;}
-        return;
+        this.onAfterHumanGrab?.(target);return;
       }
       if(target.kind==='bonus'&&!target.collected){target.collected=true;const points=this.onBonus?.(target),event=this.event('bonus',h,target);if(points!==undefined)event.points=points;}
       if(target.kind==='goal'){this.onGoal?.(target);this.complete=true;this.event('goal',h,target);}
+      this.onAfterHumanGrab?.(target);
     }
   }
   snapshot(){return {time:this.time,steps:this.steps,activeSteps:this.activeSteps,paused:this.paused,complete:this.complete,player:{...this.player},demos:this.demos.map(h=>({...h})),events:[...this.events]};}

@@ -33,7 +33,7 @@ Dots are present / Child bonus flags / Child goal flags. Enemy counts exclude th
 
 ## Level-specific gates
 
-- **41 Squiggle:** First active HY: six pairs, one ring, four rotating spikes and one programmed ordinary hand.
+- **41 Squiggle:** First active HY: six pairs, one ring, four n-only programmed rotating spikes and one free ordinary red hand. The ordinary hand's negative program reference must not be rebound to an unused stored program.
 - **42 Berserkeley:** First EX: five connectors, two protected checkpoints, two linked raised dots and two EL controls; both SP records inactive.
 - **43 Betwixt:** Two horizontal connectors with ten ordinary enemies across three clocks; n/f programs.
 - **44 Weave:** Eighteen connectors, one wall, six spikes and five goodies; enemies have no programs.

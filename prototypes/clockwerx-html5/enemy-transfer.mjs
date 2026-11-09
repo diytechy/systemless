@@ -17,11 +17,11 @@ function validateState(s,allowRotatingSpikes=false) {
   if(!integer(s.unwrappedFrame)||(s.unwrappedFrame&63)!==s.frame)
     throw new RangeError('Canonical/unwrapped frame mismatch');
 }
-function validateDot(d,allowUpDownDots=false) {
+function validateDot(d,allowUpDownDots=false,allowTeleports=false) {
   if(!d||d.id===undefined||!integer(d.x)||!integer(d.y)||
      !['present','humanCanGrab','nonhumanCanGrab'].every(k=>typeof d[k]==='boolean'))
     throw new TypeError('Explicit static dot position and permissions required');
-  if(d.motion!=='static'&&!(allowUpDownDots&&d.motion==='up-down')||d.slideMask!==0||d.teleport!==false)
+  if(d.motion!=='static'&&!(allowUpDownDots&&d.motion==='up-down')||d.slideMask!==0||d.teleport!==false&&!(allowTeleports&&d.teleport===true))
     throw new Error('Moving, EX sliding, up/down and teleport dots are unqualified');
 }
 
@@ -46,13 +46,13 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
   if(!Array.isArray(dots)||![adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab].every(f=>typeof f==='function'))
     throw new TypeError('Source dot and synchronous collision/grab adapters required');
-  dots.forEach(d=>validateDot(d,allowUpDownDots));
+  dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports));
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
   const validate=s=>validateState(s,allowRotatingSpikes);
   validate(next);

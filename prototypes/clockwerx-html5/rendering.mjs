@@ -13,6 +13,11 @@ export function presentedAngle(hand,previous,alpha,vector){
  const normalized=((hand.angle%TAU)+TAU)%TAU;
  return (Math.round(normalized/TAU*64)%64)*TAU/64;
 }
+// Presentation selection only. The stored actor type and canonical source
+// fader phase remain unchanged when the pilot selects black player artwork.
+export function presentedFaderFrame(fader,black=false){
+ return black&&fader.actor==='player'&&fader.frame>=0&&fader.frame<12?fader.frame+48:fader.frame;
+}
 
 // Presentation only: never blend between different pivots or across reversals.
 // The 120Hz simulation and its collision/transfer decisions stay authoritative.

@@ -6,7 +6,7 @@ import {SourceRound,sourceFrame} from './round.mjs';
 import {createDeathEffect} from './death.mjs';
 import {createInputReplay} from './replay.mjs';
 import {createSparkles} from './sparkles.mjs';
-import {handPoses,presentedAngle,resizeCanvas,atlasFrame} from './rendering.mjs';
+import {handPoses,presentedAngle,presentedFaderFrame,resizeCanvas,atlasFrame} from './rendering.mjs';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 const bootUtc=new Date().toISOString(),bootStart=performance.now(),KEY='systemless.clockwerx-html5.pilot.v1',STEP=1/120;
 let settings={black:false,sound:false,completed:0};try{settings={...settings,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{}
@@ -76,6 +76,21 @@ function drawSpikes(){
  const spec=manifest.vectorAssets?.spikes;
  if(!spec)return;
  for(const spike of game.board.spikes||[]){if(spike.visible===false)continue;const f=spec.frames[game.spikeFrame(spike)];ctx.drawImage(images[f.file],spike.x+f.x,spike.y+f.y,f.width,f.height);}
+}
+function drawTeleportAtlas(atlas,frame,base){
+ const f=atlas?.frames.find(f=>f.frame===frame);
+ if(!f)throw new Error('Required teleport artwork frame unavailable: '+frame);
+ if(!f.empty&&f.width&&f.height)ctx.drawImage(images[atlas.file],f.sx,f.sy,f.width,f.height,base.x+f.x,base.y+f.y,f.width,f.height);
+}
+function drawTeleports(){
+ if(!game.teleports)return;
+ const atlas=manifest.vectorAssets?.teleports?.symbols;
+ for(const e of game.teleports.snapshot().endpoints)drawTeleportAtlas(atlas,e.frame,e);
+}
+function drawActorFaders(){
+ if(!game.teleports)return;
+ const atlas=manifest.vectorAssets?.teleports?.faders;
+ for(const f of game.teleports.snapshot().faders)if(f.visible)drawTeleportAtlas(atlas,presentedFaderFrame(f,settings.black),f);
 }
 function drawWalls(){
  const spec=manifest.vectorAssets?.walls;if(!spec||!game.board.walls?.length)return;
@@ -195,7 +210,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  if(game.childScore){ctx.fillText('Round:',431,49);ctx.fillText('Total:',505,49);ctx.textAlign='right';ctx.fillText(game.childScore.roundBonus.toLocaleString(),477,62);ctx.fillText(game.childScore.totalCommitted.toLocaleString(),568,62);ctx.textAlign='left';}
  else{ctx.fillText('Pilot',441,50);ctx.fillText(game.bombScene?'Level Score:':'Total Score:',493,49);ctx.fillText(String(game.bombScene?.score??'—'),536,62);}
  if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
- drawBombs('background');drawWalls();for(const d of game.board.dots)drawDot(d);
+ drawBombs('background');drawWalls();for(const d of game.board.dots)drawDot(d);drawTeleports();
  drawDoors();
  drawElevators(game.board.bombOilElevatorRules?'glyphs':'all');
  drawBombs('upper');
@@ -206,6 +221,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  const lines=[['You are the spinning gold (or black) hand.',88,150],['Player 1: Use Space to “swing” onto the next dot.',88,162],['The red hand is “swinging”.',109,292],['The green hand is “flipping”.',109,388],['Use X to “flip” onto the next dot.',137,174],['Use C to “instantly reverse”.',137,186],['Use Z to “bounce” off the next dot.',137,198],['The object of the game is to grab onto the “goal” dot.',148,80],['Bonus Dot',487,237],['Goal Dot',534,333],['“Bouncing” blue',410,360]];
  if(!drawLevelText())for(const [t,x,y] of lines)ctx.fillText(t,x,y);
  for(const h of [...game.demos,...(game.enemies||[])])drawHand(h);
+ drawActorFaders();
  if(!game.death||game.death.heroVisible)drawHand(game.player);
  drawDeath();
  drawBombs('effects');
@@ -236,7 +252,8 @@ async function loadScene(scene){
   if(reference.doorOutlinesFile){const r=await fetch('./assets/'+reference.doorOutlinesFile);if(!r.ok)throw new Error('Door collision profile is unavailable');doorOutlines=await r.json();}
   const profile=async key=>{if(!reference[key])return undefined;const r=await fetch('./assets/'+reference[key]);if(!r.ok)throw new Error('Required source profile unavailable');return r.json();};
   const oilOutlines=await profile('oilOutlinesFile'),dotOutlines=await profile('dotOutlinesFile'),bombOutlines=await profile('bombOutlinesFile'),elevatorOutlines=await profile('elevatorOutlinesFile');
-  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowProtectedBonuses:reference.protectedBonusesQualified===true,allowInactiveProtectedWaypoints:reference.inactiveProtectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowClass3RotatingSpikes:reference.class3RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorGoodies:reference.elevatorGoodiesQualified===true,allowColoredElevatorGoodies:reference.coloredElevatorGoodiesQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowProtectedBonuses:reference.protectedBonusesQualified===true,allowInactiveProtectedWaypoints:reference.inactiveProtectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowClass3RotatingSpikes:reference.class3RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorGoodies:reference.elevatorGoodiesQualified===true,allowColoredElevatorGoodies:reference.coloredElevatorGoodiesQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowTeleports:reference.teleportsQualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
+  if(board.teleportRules&&(!manifest.vectorAssets?.teleports?.symbols||!manifest.vectorAssets?.teleports?.faders))throw new Error('Qualified HY endpoint and actor-fader artwork required');
   board.player.group=settings.black?4300:700;
    game=new SourceRound(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,bombOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
   $('presentation').textContent=board.canonicalPlayerRules?'Private SVG pilot · source map and callback-stepped Child movement with smooth SVG drawing.': 'Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
@@ -246,6 +263,7 @@ async function loadScene(scene){
   if(board.staticEnemyCallbacks)rules.push('Enemy hands rotate and follow their own timed patterns.');
   else if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
   if(board.rotatingSpikeRules)rules.push('Spiked orbs circle their pivots.');
+  if(board.teleportRules)rules.push('Paired dots teleport your hand while keeping its current direction.');
   if(board.elevatorRules)rules.push('Hands touching round controls raise or lower the marked dots. Leave a marked dot while it is still fully raised.');
   if(board.dots.some(d=>d.ring))rules.push('Rings disappear after you leave them and later return.');
   if(board.dots.some(d=>d.waystation))rules.push('Checkpoints store your return position and time.');
@@ -278,6 +296,7 @@ async function load(){
    ...(vector.walls?.frames||[]).map(f=>f.file),
    ...['leaves','caps','switches'].flatMap(key=>vector.doors?.[key]?[vector.doors[key].file]:[]),
    ...['controls','surfaces'].flatMap(key=>vector.elevators?.[key]?[vector.elevators[key].file]:[]),
+   ...['symbols','faders'].flatMap(key=>vector.teleports?.[key]?[vector.teleports[key].file]:[]),
    ...['puddles','droplets'].flatMap(key=>vector.oil?.[key]?[vector.oil[key].file]:[]),
    ...Object.values(vector.specialDots||{}).map(atlas=>atlas.file),
    ...Object.values(vector.bombs||{}).map(atlas=>atlas.file),...Object.values(vector.bombDots||{}).map(atlas=>atlas.file),

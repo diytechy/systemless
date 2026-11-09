@@ -1,0 +1,169 @@
+{
+  "status": "passed",
+  "nativeTransfers": 9,
+  "goalOnsets": 190,
+  "sourceUnchanged": false,
+  "changedSourceFiles": [
+    "app.mjs",
+    "level.mjs"
+  ],
+  "sourcePreparationCommit": "9364425b",
+  "runtimeChecks": 204,
+  "packagingChecks": 14,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 3821,
+    "guest_tick": 4421,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 4000,
+  "nativeNextLevel": "26: Cyclone",
+  "nativeProfileTotal": 112000,
+  "nativeHandFits": {
+    "matches": 9,
+    "rawMaxError": 8.835951134380453,
+    "attentionOrScoreOverdraw": [
+      {
+        "transfer": 1,
+        "expectedPivot": "4,0",
+        "observedPivot": "4,0",
+        "match": true,
+        "sourceFrame": 3,
+        "meanAbsoluteChannelError": 8.835951134380453
+      },
+      {
+        "transfer": 4,
+        "expectedPivot": "4,3",
+        "observedPivot": "4,3",
+        "match": true,
+        "sourceFrame": 51,
+        "meanAbsoluteChannelError": 1.9964726631393297
+      },
+      {
+        "transfer": 5,
+        "expectedPivot": "4,4",
+        "observedPivot": "4,4",
+        "match": true,
+        "sourceFrame": 45,
+        "meanAbsoluteChannelError": 6.005235602094241
+      }
+    ],
+    "otherSixMaxError": 0.28136200716845877
+  },
+  "browser": {
+    "boundary": "Root supported IAB visual goal and full-page PNG; no independent state/timing export",
+    "goalVisible": true,
+    "title": "Tricolor complete",
+    "roundPointsVisible": 4000,
+    "childCompletionPointsVisible": 1000,
+    "transferCount": "not independently exported from browser",
+    "cadenceQualified": false,
+    "inheritedLimitation": "Motion retained three catch-up-capped timing captures; no25capture/retry",
+    "image": "qa-goal-page.png"
+  },
+  "clock": {
+    "boundary": "Independent original descriptor fits constrain source4/19hero plus fifteen class1 red/green/blue actors with source f/n/s programs. Pure NPC kernel uses original static pivots/permissions/outlines with disabled NPC wall checks. Any raw fits>=2 are excluded. First8192hero-frame aliases only; not absolute reveal/hardware timing or gate proof.",
+    "firstGuestTick": 1864,
+    "heroPoses": 27,
+    "npcPoses": 495,
+    "chosenPhase": 73.28947368421052,
+    "phaseInterval": [
+      73.26315789473684,
+      73.3157894736842
+    ],
+    "phaseAliases": "192-frame aliases within first8192tested; not absolute phase"
+  },
+  "jointPeriod": {
+    "boundary": "Pure static class1 NPC with source wall response full state including pivots/frame/direction/PC/visibility/orphan plus hero64. Not wall-time gameplay performance.",
+    "jointSourceFramePeriod": 192
+  },
+  "inactiveRings": {
+    "samples": 198,
+    "plainPreferred": 198,
+    "maxError": 0.5606060606060606,
+    "nativeVisitedPivots": [
+      "4,6"
+    ]
+  },
+  "composites": {
+    "samples": 231,
+    "expectedPreferred": 231,
+    "maxError": 0.3939393939393939,
+    "svgCandidates": 4,
+    "geometry": "Established smooth sphere/ring shapes with blue/green halves and three120-degree color sectors; red/green bonus uses distinct halves",
+    "visualReview": "Root original/SVG side-by-side page and saved PNG; older unused blended red/green candidate not activated"
+  },
+  "route": {
+    "transfers": 9,
+    "bonuses": 2,
+    "modelTimeSeconds": 29.13333333333232,
+    "warmSteps": 737,
+    "searchTrial": 92,
+    "fullEvents": 53,
+    "firstSearchRawGoals": 0,
+    "firstSearchTrials": 600,
+    "score": 4000,
+    "resetCount": 0,
+    "boundary": "Alternate left approach with two physical pickups and one masked pivot; other routes retained as failures"
+  },
+  "priorScenes": {
+    "decodedBoards": 23,
+    "identicalFinalSnapshots": 23,
+    "steps": 161699
+  },
+  "background": {
+    "name": "tricolor-fresh-initial",
+    "meanAbsoluteChannelError": 0.3814403748920952,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "fixture": {
+    "sha256": "108d66cd8dd6dbae95f3891feec272f1f271ab42082d9e6e41b54995df87f640",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true,
+    "freshReport": {
+      "status": "passed",
+      "frontend_ticks": 2224,
+      "guest_tick": 2824,
+      "budget_exhausted_frames": 0
+    }
+  },
+  "limits": [
+    "Nine other bonuses and five other masked-pivot traversals unvisited",
+    "Composite ordinary/bonus art observed natively; composite bonus pickups unvisited by selected route",
+    "Finite190onsets are not exhaustive phase/reachability proof",
+    "Browser cadence/smoothness and comparable resource use unqualified; frozen comparisons unchanged",
+    "Absolute reveal/hardware/input cadence, audio, other difficulties, campaign/save parity and physical controllers unqualified",
+    "Astra unavailable from saved usage-quota error; independent root review only"
+  ],
+  "activation": {
+    "scenes": 25,
+    "sources": 25,
+    "payloads": 79,
+    "sizes": {
+      "sourceBytes": 170729,
+      "assetBytes": 2694142,
+      "manifestBytes": 2053376,
+      "totalBytes": 4918247
+    },
+    "priorSceneDefinitionsUnchanged": 24,
+    "oldPayloadsUnchanged": 75,
+    "protectedFilesUnchanged": true,
+    "rollback": "tricolor/previous-live-pilot"
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\tricolor",
+  "review": "tricolor-review.md",
+  "normalBrowser": {
+    "loadRestartPauseSmoke": true,
+    "goalRepeated": false,
+    "boundary": "Normal25 selected/restarted and paused; full goal on matching QA source/payload hashes",
+    "image": "normal-activated-page.png"
+  }
+}

@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 25,
-  "currentAction": "Tricolor25: fresh native launch from through24 passed; review inactive rings, composite dot colors and fifteen ordinary NPCs",
+  "currentOrdinal": 26,
+  "currentAction": "Cyclone26: fresh native launch from through25 passed; qualify bomb/hourglass and noncardinal programmed-hand composition",
   "levels": [
     {
       "ordinal": 1,
@@ -1753,11 +1753,25 @@
       "menuTitle": "Tricolor",
       "resourceTitle": "Tricolor",
       "sha256": "09a5a29e779dba786b42f407c999e69e87e814a8e575bf4d38d8bd03e4edee7f",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal-browser-cadence-unqualified",
+      "nativeEvidence": [
+        "tricolor/native-goal-01/report.json",
+        "tricolor/native-goal-review.json",
+        "tricolor/native-dot-review.json",
+        "tricolor/native-goal-01/next-after-tricolor.png"
+      ],
+      "requirements": [
+        "six inactive rings retain ordinary pivots and permissions",
+        "fifteen class1 ordinary NPCs with f/n/s programs",
+        "distinct composite SVG color sectors preserve original collision"
+      ],
+      "svgStatus": "activated9transfers/twobonuses/4000Child goal; one masked pivot visited, all six plain cores imaged; cadence unqualified",
+      "generationConstraints": [
+        "retain mask misses separately from absence",
+        "composite permissions independent of presentation",
+        "preserve same-pivot actor identities and programs",
+        "retain failed shortcuts and finite witness coverage"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 56,
@@ -1784,7 +1798,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1802,7 +1816,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "tricolor-review.md"
     },
     {
       "ordinal": 26,

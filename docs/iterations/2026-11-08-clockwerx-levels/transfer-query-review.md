@@ -11,3 +11,7 @@ The corrected human and program queries reproduce all five pre-death native tran
 The old permissive13/14/16/17/18route certificates are superseded as gameplay witnesses. Their190passes demonstrate behavior of the old incorrect model only. The unqualifiedSVGpreview was closed; originalmedia/forks/preferences and the through35fixture remain untouched. Full36goal/native/visible validation must be repeated with exact queries before adding36to the normal pilot. See[preparation](stutter-preparation.md).
 
 Private evidence:stutter/exact-query-source-contract.json, native-first-divergence-exact-review.json, native-goal-comparison.json, native-goal-01-exact-query-model.json, exact-query-tests-01.log andprior-scenes-review.json. Rawmaps/art/assembly remain onD:.
+
+## Local activation and broader onset check
+
+The validated correction is committedde4f96a4 andcopied to the existing35-scene normalpilot. All35definitions,85payloads,manifest,savekey andfourprotectedrootfiles areunchanged; the fullpre-fix35folder isretained. This doesnotadd36. Both affectedearlier elevatorroutes (33/35) also passall190legalonsets each, andthe normalbrowser reachedHiccup's1,000goal underthenewruntime. Proofisstutter/normal35-exact-goal-page.*. Rawsource/assets/manifesttotal6,300,320bytesexcludingreceipt; no wire/memory claim. Currentreceiptisstutter/activation-exact-query35.json.

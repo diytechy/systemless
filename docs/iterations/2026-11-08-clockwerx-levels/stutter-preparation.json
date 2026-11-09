@@ -86,12 +86,16 @@
     "stutter/native-goal-comparison.json",
     "stutter/native-first-divergence-exact-review.json",
     "stutter/exact-query-source-contract.json",
-    "stutter/exact-query-tests-01.log"
+    "stutter/exact-query-tests-01.log",
+    "stutter/checked-ignition-20.json",
+    "stutter/checked-wait-21.json",
+    "stutter/old-elevator-onsets-exact-review.json",
+    "stutter/activation-exact-query35.json"
   ],
   "pending": [
-    "commit/local35runtimeupdate withvalidatedexactquery",
-    "newstrictignition/blast/fullgoalroute",
-    "repeatoriginal/visiblegoals",
+    "fullstrict22/23goalroute and190check",
+    "neworiginalnativegoal02",
+    "freshcorrectedvisibleSVGgoal",
     "36activationreview"
   ],
   "limits": [
@@ -206,5 +210,18 @@
     "actualDepth": 6,
     "correctedFirstFivePosesMatch": true,
     "forwardExportAccepted": false
+  },
+  "strictPrefix": {
+    "query": "exact",
+    "ignitionCandidate": 20,
+    "ignitionTransfers": 11,
+    "ignitionBonus": 3000,
+    "ignitionOnsets": 190,
+    "retreatCandidate": 21,
+    "retreatTransfers": 14,
+    "retreatBonus": 3000,
+    "retreatOnsets": 190,
+    "craterTime": 131.56666666671134,
+    "originalFullGoal": false
   }
 }

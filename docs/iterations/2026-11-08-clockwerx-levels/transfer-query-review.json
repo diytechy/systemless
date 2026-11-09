@@ -23,7 +23,11 @@
     "nativeFirstFiveTransferPosesMatch": 5,
     "clear": 4,
     "raw": 1,
-    "oldNativeBlastFinalSnapshotUnchanged": true
+    "oldNativeBlastFinalSnapshotUnchanged": true,
+    "onsetsPerEarlierElevatorScene": {
+      "33": 190,
+      "35": 190
+    }
   },
   "sourceHashes": {
     "prototypes\\clockwerx-html5\\engine.mjs": "2d1c37ff23fee8eec7efa49f2728626865af46d2833206fae325a0c74ce1cac5",
@@ -37,5 +41,18 @@
     "Exact death/reset phase unqualified",
     "Ordinary moving-dot family remains unimplemented/disabled",
     "No new realtime/resource/audio/controller qualification"
-  ]
+  ],
+  "localActivation": {
+    "sceneCount": 35,
+    "sourceRevision": "de4f96a4",
+    "priorDefinitionsUnchanged": 35,
+    "priorPayloadsUnchanged": 85,
+    "protectedFilesUnchanged": 4,
+    "sourceFiles": 26,
+    "rawBytesExcludingReceipt": 6300320,
+    "saveKey": "systemless.clockwerx-html5.pilot.v1",
+    "retainedRollback": "stutter/previous-live-before-exact-query",
+    "receipt": "stutter/activation-exact-query35.json",
+    "visibleHiccupGoal": 1000
+  }
 }

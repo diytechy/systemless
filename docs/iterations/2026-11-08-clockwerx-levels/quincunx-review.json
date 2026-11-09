@@ -1,0 +1,82 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "7ad9e199",
+  "ordinal": 37,
+  "title": "Quincunx",
+  "nativeTransfers": 15,
+  "goalOnsets": 190,
+  "nativeGoalScore": 1000,
+  "qaGoalScore": 1000,
+  "runtimeChecks": 254,
+  "packagingChecks": 15,
+  "priorDefinitionsUnchanged": 36,
+  "priorPayloadsUnchanged": 86,
+  "priorDecodedBoards": 35,
+  "priorSnapshots": 35,
+  "priorUpdates": 317481,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext38Total217000Viewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "poseSummary": {
+    "all": 576,
+    "clear": 551,
+    "clearPositions": 551,
+    "clearPoses": 551,
+    "allPositions": 573,
+    "allPoses": 566,
+    "transferHero": 15,
+    "transferHeroMatches": 15
+  },
+  "coldSummary": {
+    "warm": 700,
+    "clear": 488,
+    "positions": 488,
+    "poses": 448,
+    "death": false,
+    "roundRestarts": 0
+  },
+  "fixtureSha256": "97f2e2d0f6268eb2fb6e8e7c0804c9ef329686a9e1a3d501785c7886fa8ed85d",
+  "limits": [
+    "Cold40 clear one-frame pose differences and one class3 frame boundary",
+    "Native4,2 remains normal-looking after blast while model marks it burnt; retained background/render discrepancy, no rule change based on pixels",
+    "Blast4,3 overdraw; colored goal frame aliases; raw25 hand hypotheses not evidence of absence",
+    "Lower match/fuse chain, all optional bonus pickups, exact death/reset and broad campaign save compatibility unqualified",
+    "No new audio/controller/cadence/resource qualification"
+  ],
+  "sourceSha256": "b7d29423b2a8239963a4b6bb7ce26510d3969864733b61fc3ef059225c1943e4",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 7936,
+    "guest_tick": 8536,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "payloadsAdded": 0,
+  "sizes": {
+    "sourceBytes": 210868,
+    "assetBytes": 2967232,
+    "manifestBytes": 3408005,
+    "totalBytes": 6586105
+  },
+  "normalTab": 92,
+  "normalPaused": true,
+  "qaTab118Closed": true,
+  "fixtureFilesVerified": 9,
+  "fixtureUntouchedFilesVerified": 7,
+  "freshNative38Viewed": true,
+  "privateEvidence": [
+    "quincunx/checked-route-10.json",
+    "quincunx/native-goal-01/report.json",
+    "quincunx/native-goal-comparison.json",
+    "quincunx/native-goal-01-blast-corner-fits.json",
+    "quincunx/qa-goal-page.png",
+    "quincunx/normal37-ready-page.png",
+    "quincunx/activation.json",
+    "tempest/native-initial-01/report.json"
+  ],
+  "issuedPushUploadDeploy": false
+}

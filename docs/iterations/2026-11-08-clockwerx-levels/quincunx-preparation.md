@@ -1,6 +1,6 @@
 # Quincunx preparation
 
-Quincunx remains unaccepted. The normal pilot contains 36 bounded scenes through Stutter. RND2_135 has source SHA256 `b7d29423b2a8239963a4b6bb7ce26510d3969864733b61fc3ef059225c1943e4`; its map, inputs, programs and captures remain private on D:.
+Quincunx is now accepted with limits and locally active; see [review](quincunx-review.md). The historical preparation below records the rejected hypotheses and evidence boundaries before acceptance. RND2_135 has source SHA256 `b7d29423b2a8239963a4b6bb7ce26510d3969864733b61fc3ef059225c1943e4`; its map, inputs, programs and captures remain private on D:.
 
 This is the small 10 by 7 display with serialized stride eleven, 63 present pivots, six bonuses and a goal at the central occupied pivot. Two puddle records are inactive in Child. There are 28 bomb/fuse/match records, 15 active NPCs and 14 inactive NPC slots, plus the alternate human starts. Four active red hands include two at the same pivot; two green hands, two blue hands and seven orbitals complete the active inventory. Ordinary clocks use classes 1/2 and orbitals use 1/2/3. All active NPCs are free and wall-free. No other object classes or actor programs are present.
 

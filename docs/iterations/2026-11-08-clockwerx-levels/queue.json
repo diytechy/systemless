@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 37,
-  "currentAction": "37Quincunx guarded class3/cold preparation validated:254runtime/15packaging/35priorregressions317481updates. Search10/session40131 and12/session29053 are the two functional runners. Original goal/SVG/activation pending; live36 unchanged.",
+  "currentOrdinal": 38,
+  "currentAction": "37Quincunx accepted and locally active:original/SVG1000/15transfers/190held onsets;551clear poses match. Burned-background discrepancy explicit. Through37 fixture97f2e2d0 verified and fresh38Tempest viewed. Begin38 source/admission/cold review. No active runner or pending CUA part.",
   "levels": [
     {
       "ordinal": 1,
@@ -2681,15 +2681,26 @@
       "menuTitle": "Quincunx",
       "resourceTitle": "Quincunx",
       "sha256": "b7d29423b2a8239963a4b6bb7ce26510d3969864733b61fc3ef059225c1943e4",
-      "status": "guarded-source-cold-preparation-goal-searching",
+      "status": "accepted-with-limits-and-locally-active",
       "nativeEvidence": [
-        "quincunx/native-initial-01/report.json",
-        "quincunx/native-source-pose-fits.json",
-        "quincunx/cold-review.json"
+        "quincunx/checked-route-10.json",
+        "quincunx/native-goal-01/report.json",
+        "quincunx/native-goal-comparison.json",
+        "quincunx/native-goal-01-blast-corner-fits.json"
       ],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "requirements": [
+        "Small10x7 display with serialized stride11",
+        "Inactive Child Oil and inactive NPC slots remain excluded",
+        "Free class3 orbital divisor4/multiplier1 requires separate default-off capability",
+        "Two ordinary hands may share one pivot",
+        "Travelling spark is lethal; bomb may temporarily hide/shift enemy phase"
+      ],
+      "svgStatus": "normal37active; original/SVG1000/15transfers/twobounces/190onsets",
+      "generationConstraints": [
+        "Timed route through actual fuse/blast/reappearance, not permanent removal of all NPCs",
+        "Finite held checks and original goal remain independent gates",
+        "Preserve source state separately from background artifact appearance"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 63,
@@ -2716,7 +2727,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2735,7 +2746,8 @@
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
       ],
-      "preparation": "quincunx-preparation.md"
+      "preparation": "quincunx-preparation.md",
+      "review": "quincunx-review.json"
     },
     {
       "ordinal": 38,

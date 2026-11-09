@@ -1,8 +1,10 @@
 # Progress checkpoint
 
+Latest: [Quincunx review](quincunx-review.md)/[packet](quincunx-review.json) accepts37 with explicit burned-background/raw-visibility limits. Original/SVG1000/15transfers/twobounces/190onsets; all551clear physical poses and15transferheroes match.254runtime/15packaging and35priorboard/snapshot317481updates pass. Through37 fixture97f2e2d0 verified and fresh38/playerp/217000 viewed. Normal92Quincunxpaused; QA118closed; no active runner/pending CUA part. Continue38.
+
 Latest: [Stutter review](stutter-review.md)/[packet](stutter-review.json) accepts36 with explicit visual/timing limits. Original/SVG5,000;28 transfer poses match; all190 onsets. 252 runtime/15 packaging pass. Through36 fixture64e3190a verifies nine files/both forks/represented metadata/seven untouched; fresh37/playerp/216000 viewed. Normal92Stutter paused; QA117 closed; no active runner/pending CUA part. Current37 source/admission/cold review is validated; goal searches10/session40131 and12/session29053 use both functional slots.254runtime/15packaging/35priorregressions317481updates pass; see current-action and quincunx-preparation. Live36 unchanged.
 
-**36 bounded Child scenes are accepted and locally active through Stutter;64 remain.** Original library/frozen comparisons complete. Continue37 Quincunx from [current action](current-action.md).
+**37 bounded Child scenes are accepted and locally active through Quincunx;63 remain.** Original library/frozen comparisons complete. Continue38 Tempest from [current action](current-action.md).
 
 Historical pre-acceptance entry: corrected route24 passes all190 held onsets, 28 transfers/four bounces/eleven reversals/5,000/one Oil. The two functional runners are native-goal-02/session78974 and root visible QA117, both using corrected source. Search22 was stopped after checking its owned PID;23 completed but its narrow rising-dot window required refinement24. Actual original/visible goals and independent pose/object review remain pending. No36 activation or through36 fixture yet. See current-action for the live35 receipt and original failure boundaries.
 

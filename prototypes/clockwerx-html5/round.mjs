@@ -27,6 +27,7 @@ export class SourceRound extends MovementGame {
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   super(board);this.outlines=outlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
+  if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length||board.dots.some(d=>d.slideMask||d.motion&&d.motion!=='static')))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
   if(board.goodieOnlyRules&&!board.specialDotRules)throw new Error('Goodie-only source timer state required');
   if(board.combinedGoalBonusRules&&!board.childScoreRules)throw new Error('Combined goal bonus requires Child score qualification');
   if(board.staticEnemyCallbacks&&!board.staticEnemyWallRules&&this.enemies.some(e=>e.checksWalls))throw new Error('Canonical enemy wall response requires qualification');
@@ -68,8 +69,33 @@ export class SourceRound extends MovementGame {
     this.remainingTime=reset.remainingTime;this.onHumanGrab(this.point(this.player));
    }
   }
+  if(this.board.canonicalPlayerRules){this.canonicalPlayerContact=false;this.player.frame=sourceFrame(this.player.angle);this.player.unwrappedFrame=this.player.frame;}
  }
- makeHand(hand){return {...super.makeHand(hand),wallContacts:0,...(hand.program||hand.canonicalFrame?{presentationPhase:0}:{})};}
+ makeHand(hand){
+  const result={...super.makeHand(hand),wallContacts:0,...(hand.program||hand.canonicalFrame?{presentationPhase:0}:{})};
+  if(this.board.canonicalPlayerRules&&[0,6].includes(hand.sourceActorType))Object.assign(result,{canonicalFrame:true,frame:sourceFrame(result.angle),unwrappedFrame:sourceFrame(result.angle),presentationPhase:0});
+  return result;
+ }
+ move(hand,dt,action){
+  if(hand!==this.player||!this.board.canonicalPlayerRules)return super.move(hand,dt,action);
+  const delta=this.actorClasses.snapshot().classes[hand.speedClass??0].delta;
+  if(delta>1)throw new Error('Canonical player requires at most one Child callback per fixed update');
+  if(!delta)return;
+  hand.angle=hand.unwrappedFrame*TAU/64;
+  if(hand.frame%16!==0)hand.blocked=null;
+  const sequence=this.eventSequence;
+  // WADirectHero only tests the current cardinal frame, then consumes Reverse.
+  // A zero-duration direction request separates the grab from WA animation.
+  super.move(hand,0,hand.frame%16===0?action:null);
+  if(this.pendingReverse){
+   this.pendingReverse=false;
+   if(!this.canonicalPlayerContact&&this.eventSequence===sequence&&!this.death){hand.direction*=-1;this.event('reverse',hand);}
+  }
+  hand.unwrappedFrame=Math.round(hand.angle*64/TAU);
+  if(!this.complete&&!this.death)hand.unwrappedFrame+=hand.direction;
+  hand.frame=hand.unwrappedFrame&63;
+  hand.angle=hand.unwrappedFrame*TAU/64;
+ }
  reverse(){if(!this.death&&!this.paused&&!this.complete)this.pendingReverse=true;}
  setPlayerGroup(group){
   if(![700,4300].includes(group)||!this.outlines.groups[String(group)])throw new Error('Unqualified player artwork group');
@@ -92,7 +118,7 @@ export class SourceRound extends MovementGame {
  }
  enemyCollision(){
   const hero=this.collider(this.player);
-  for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
+  for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,this.player.canonicalFrame?this.player.frame:sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
    return {reason:'enemy',object:enemy.name,...(enemy.sourceActorType===4?{sourceReason:0}:{})};
   return null;
  }
@@ -162,8 +188,8 @@ export class SourceRound extends MovementGame {
   // that same collision frame so a shorter next clock interval can retreat to
   // its neighbor, rather than spuriously testing the identical pose again.
   // This changes neither pivot nor current outline and adds no source step.
-  hand.angle=(sourceFrame(hand.angle)+.5)*TAU/64;
-  hand.direction*=-1;hand.blocked=null;if(hand===this.player)this.pendingReverse=false;
+  if(!this.board.canonicalPlayerRules||hand!==this.player)hand.angle=(sourceFrame(hand.angle)+.5)*TAU/64;
+  hand.direction*=-1;hand.blocked=null;if(hand===this.player&&!this.board.canonicalPlayerRules)this.pendingReverse=false;
   this.event(type,hand,this.point(hand));
  }
  beginDeath(cause){
@@ -236,8 +262,10 @@ export class SourceRound extends MovementGame {
   }
   // Human spike/wall tests precede input and animation. The contact guard is
   // evaluated at source-class clock changes, never on every 120Hz update.
-  // Continuous poses/input remain a disclosed approximation of WA callbacks.
+  // Earlier scenes retain continuous human timing; opted-in scenes use the
+  // same canonical callbacks and independent presentation as static enemies.
   if(!this.death&&actorSubstep){
+   if(this.board.canonicalPlayerRules)this.player.angle=this.player.unwrappedFrame*TAU/64;
    const spike=this.spikeCollision();
    if(spike)this.beginDeath(spike);
    this.bombScene?.runtime.checkGoodie(this.player);
@@ -246,6 +274,7 @@ export class SourceRound extends MovementGame {
     this.bombScene?.runtime.checkMatch(this.player);
     this.bombScene?.runtime.checkSpark(this.player);
     const wall=this.wallCollision(this.player),door=wall?null:this.doorCollision(this.player);
+    if(this.board.canonicalPlayerRules)this.canonicalPlayerContact=!!wall||!!door?.guardContact;
     if(door?.lethal)this.beginDeath({reason:'door',object:door.doorIndex});
     else{
      const guard=advanceWallContactGuard(this.player.wallContacts,!!wall||!!door?.guardContact);
@@ -254,7 +283,7 @@ export class SourceRound extends MovementGame {
      else if(door?.bounce)this.bounceFromWall(this.player,door,'door-bounce');
      this.contactSwitch(this.player);
      if(guard.lethal)this.beginDeath({reason:wall?'trapped-wall':'trapped-door',object:wall?.id??door?.doorIndex});
-     else if(!wall&&!door&&this.pendingReverse){this.pendingReverse=false;this.player.direction*=-1;this.event('reverse',this.player);}
+     else if(!this.board.canonicalPlayerRules&&!wall&&!door&&this.pendingReverse){this.pendingReverse=false;this.player.direction*=-1;this.event('reverse',this.player);}
     }
    }
   }
@@ -267,6 +296,7 @@ export class SourceRound extends MovementGame {
    super.update(dt,input);if(this.complete)return;
    // Hero/enemy overlaps are a separate periodic pass after sprite processing.
    if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
+   if(this.board.canonicalPlayerRules&&!this.death)this.presentCanonicalEnemy(this.player,actorState.classes[this.player.speedClass??0],actorTimer);
   }
  }
   snapshot(){return {...super.snapshot(),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,

@@ -19,7 +19,7 @@
     "special-dots.test.mjs"
   ],
   "validation": {
-    "runtimeTests": 210,
+    "runtimeTests": 216,
     "packagingTests": 14,
     "priorDecodedBoardsIdentical": 26,
     "priorFinalSnapshotsIdentical": 26,
@@ -101,5 +101,23 @@
     "Special checkpoint blast look and hidden switch interactions have source/unit evidence, not a native28direct hit",
     "Absolute sprite birth phases and browser scheduling remain separate",
     "No new CPU/memory/rotation benchmark; no heavy build/push/upload/deploy"
-  ]
+  ],
+  "canonicalPlayerPreparation": {
+    "status": "opt-in-source-only-not-gameplay-accepted",
+    "flag": "canonicalPlayerQualified",
+    "publicNativeScheduleSamplesMatched": 105,
+    "originalTransferPosesMatched": 18,
+    "originalWallFramesMatched": 81,
+    "cleanWallFits": 67,
+    "retainedOverdrawFits": 14,
+    "naturalColdIdleSteps": 682,
+    "evidence": [
+      "enclosure/public-canonical-native-review.json",
+      "enclosure/canonical-player-native-comparison.json",
+      "enclosure/native-wall-probe-pose-review.json"
+    ],
+    "nativeGameplayGoal": false,
+    "browserGameplayGoal": false,
+    "liveUnchanged": true
+  }
 }

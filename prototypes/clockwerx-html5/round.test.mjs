@@ -16,6 +16,47 @@ function fixture(){
  return {board,options:{outlines,deathFactory}};
 }
 
+function canonicalFixture(){
+ const f=fixture();Object.assign(f.board,{canonicalPlayerRules:true,staticEnemyCallbacks:true,enemies:[],spikes:[]});
+ Object.assign(f.board.player,{sourceActorType:0,speedClass:0});return f;
+}
+test('canonical player waits for source callbacks and smooth drawing cannot choose its collision frame',()=>{
+ const {board,options}=canonicalFixture(),g=new SourceRound(board,options);let fractional=false,callbacks=0;
+ for(let i=0;i<240;i++){
+  const previous=g.player.frame;g.update(1/120);
+  const delta=g.actorClasses.snapshot().classes[0].delta;callbacks+=delta;
+  assert.equal(g.player.frame,(previous+delta)&63);
+  fractional||=Math.abs(g.player.angle*64/TAU-g.player.unwrappedFrame)>1e-6;
+  assert.deepEqual(g.collider(g.player),worldOutline(options.outlines,700,g.player.frame,g.point(g.player)));
+ }
+ assert.ok(fractional);assert.ok(callbacks>0&&callbacks<240);
+});
+test('canonical grabs test the current cardinal frame and goal stops before animation',()=>{
+ const {board,options}=canonicalFixture();board.dots[1].kind='goal';const g=new SourceRound(board,options);
+ for(let i=0;i<100&&!g.complete;i++)g.update(1/120,{flip:true});
+ assert.equal(g.complete,true);assert.equal(g.player.transfers,1);assert.equal(g.player.pivot,'b');
+ assert.equal(g.player.frame,32);assert.equal(g.player.angle,Math.PI);
+ const stopped=g.snapshot();g.update(1/120,{flip:true});assert.deepEqual(g.player,stopped.player);
+});
+test('canonical Reverse is consumed after direction requests and a successful grab wins',()=>{
+ const {board,options}=canonicalFixture(),g=new SourceRound(board,options);
+ for(let i=0;i<100&&!g.player.transfers;i++)g.update(1/120,{flip:true,reverse:true});
+ assert.equal(g.player.transfers,1);assert.equal(g.player.direction,1);assert.equal(g.pendingReverse,false);
+ assert.equal(g.events.some(e=>e.type==='reverse'),false);assert.equal(g.player.frame,33);
+});
+test('canonical wall bounce retains the logical pose and drops a colliding Reverse request',()=>{
+ const {board,options}=canonicalFixture(),g=new SourceRound(board,options);g.wallCollision=()=>({id:0});
+ for(let i=0;i<100&&!g.events.some(e=>e.type==='wall-bounce');i++)g.update(1/120,{reverse:true});
+ assert.equal(g.player.direction,-1);assert.equal(g.player.frame,63);assert.equal(g.pendingReverse,false);
+ assert.equal(g.events.some(e=>e.type==='reverse'),false);
+});
+test('canonical fresh reset restores logical frames and rejects future sliding scope',()=>{
+ const {board,options}=canonicalFixture(),g=new SourceRound(board,options);
+ for(let i=0;i<120;i++)g.update(1/120);assert.notEqual(g.player.frame,0);g.reset();
+ assert.equal(g.player.frame,0);assert.equal(g.player.unwrappedFrame,0);assert.equal(g.player.presentationPhase,0);
+ board.dots[0].slideMask=1;assert.throws(()=>new SourceRound(board,options),/without sliding/);
+});
+
 test('rotating spike contact bypasses ordinary protection with WA death reason0',()=>{
  const {board,options}=fixture();board.spikes=[];board.rotatingSpikeRules=true;board.staticEnemyCallbacks=true;
  board.dots[0].protected=true;

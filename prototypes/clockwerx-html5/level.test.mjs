@@ -22,6 +22,14 @@ test('bomb object interactions require an explicit compatible scene opt-in',()=>
  assert.equal(buildDecodedBoard(level,{angularSpeed:TAU}).bombObjectInteractionRules,undefined);
 });
 
+test('canonical player decoding requires explicit static Child callback qualification',()=>{
+ const level=fixture();assert.ok(levelRequirements(level,{allowCanonicalPlayer:true}).some(s=>s.includes('canonical player')));
+ const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowStaticEnemyWalls:true,allowCanonicalPlayer:true};
+ assert.equal(buildDecodedBoard(level,options).canonicalPlayerRules,true);
+ assert.equal(buildDecodedBoard(level,{angularSpeed:TAU}).canonicalPlayerRules,undefined);
+ assert.ok(levelRequirements(level,{...options,allowOil:true}).some(s=>s.includes('without sliding')));
+});
+
 test('rotating spikes require their own bounded opt-in and preserve noncardinal pose',()=>{
  const level=fixture(),actor=level.blocks[0].records[2];actor.actorTypeRaw=4;actor.rawWords[2]=4;actor.version12ByteRaw=0;actor.initialFrameHalfIndexRaw=4;
  const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowRotatingSpikes:true};

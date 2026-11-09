@@ -1,3 +1,4 @@
+import {validateConnectorBoard} from './sliding.mjs';
 // Source-derived Child BO/LI/SR/GO coordinator. No art, paths,
 // map, timer implementation or sprite-list traversal is embedded here.
 import {BOMB_LIMITS,decodeBombRecord,createExplosionPool} from './bombs.mjs';
@@ -11,11 +12,11 @@ const copy=x=>structuredClone(x);
 const sameGrid=(a,b)=>a.row===b.row&&a.column===b.column;
 const grid=g=>{integer(g?.row,0,7);integer(g?.column,0,10);};
 const human=a=>a.sourceActorType===0||a.sourceActorType===6;
-function actor(a,allowObjectInteractions=false){
+function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false){
  if(!a||![0,1,2,3,6,...(allowObjectInteractions?[4]:[])].includes(a.sourceActorType))throw new Error('Only human, ordinary and explicitly qualified orbital actors are supported');
  integer(a.sourceSlot,0,31);
  if(human(a)!==(a.sourceSlot<2))throw new Error('Explicit source WA slot/type correspondence required');
- if(a.sliding||a.movingPivot)throw new Error('Dynamic actor combinations are unqualified');
+ if(a.movingPivot||a.sliding&&!allowSlidingGoodies)throw new Error('Dynamic actor combinations are unqualified');
  return a;
 }
 function staticDot(d,allowObjectInteractions=false){
@@ -41,21 +42,22 @@ export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSec
 }
 
 /** GO callbacks compose with qualified static checkpoints/protection and doors.
- * No fuse, blast, ring, Oil or active spike path is admitted by this scope. */
-export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowElevatorGoodies=false,allowColoredElevatorGoodies=false}={}){
+ * The explicit static-EX variant also admits SP/WL; no fuse, blast, ring or Oil. */
+export function assertGoodieRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowElevatorGoodies=false,allowColoredElevatorGoodies=false,allowSlidingGoodies=false,connectors=[]}={}){
  if(mode!=='Child')throw new Error('Only Child goodie scope is supported');
  if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
+ if(allowSlidingGoodies){if(allowElevatorGoodies||allowColoredElevatorGoodies||!(activeSections.GO>0)||activeSections.EX!==connectors.length||!connectors.length||dots.some(d=>d.motion!=='static'||d.protected||d.waystation||d.humanCanGrab!==true||d.nonhumanCanGrab!==true))throw new Error('Separate static EX goodie scope required');validateConnectorBoard(connectors,dots);if(actors.some(a=>!([0,6].includes(a.sourceActorType)||[1,2,3].includes(a.sourceActorType)&&a.speedClass===1&&a.program===null&&a.checksWalls===false)))throw new Error('Free ordinary class1 EX goodie actors required');}
  if((allowElevatorGoodies||allowColoredElevatorGoodies)&&(!(activeSections.EL>0)||!dots.some(d=>d.upDown)))throw new Error('Explicit active elevator/goodie composition required');
  for(const d of dots){
   grid(d);integer(d.color??0,0,7);
   if(d.motion==='up-down'&&!d.upDown||d.motion==='static'&&d.upDown)throw new Error('Explicit matching goodie motion/up-down state required');
-  if((d.motion!=='static'&&!((allowElevatorGoodies||allowColoredElevatorGoodies)&&d.motion==='up-down'))||d.slideMask!==0||d.teleport!==false||d.ring||d.moving||d.movingProgram||d.upDown&&(allowColoredElevatorGoodies?(![0,1,2].includes(d.upDown.group)||d.color!==[4,2,1][d.upDown.group]||d.upDown.initialLowered!==false||d.bonus||d.protected||d.waystation||d.sourceInBackground!==false):(!allowElevatorGoodies||![1,2].includes(d.upDown.group)||d.color!==0||d.bonus||d.protected||d.waystation||d.sourceInBackground!==false||typeof d.upDown.initialLowered!=='boolean'||d.upDown.group===2&&d.upDown.initialLowered))||d.transferDeath||d.slowdown||d.connector||d.sourceBombDynamic)throw new Error('Unsupported goodie/dynamic dot combination');
+  if((d.motion!=='static'&&!((allowElevatorGoodies||allowColoredElevatorGoodies)&&d.motion==='up-down'))||d.slideMask!==0&&!allowSlidingGoodies||d.teleport!==false||d.ring||d.moving||d.movingProgram||d.upDown&&(allowColoredElevatorGoodies?(![0,1,2].includes(d.upDown.group)||d.color!==[4,2,1][d.upDown.group]||d.upDown.initialLowered!==false||d.bonus||d.protected||d.waystation||d.sourceInBackground!==false):(!allowElevatorGoodies||![1,2].includes(d.upDown.group)||d.color!==0||d.bonus||d.protected||d.waystation||d.sourceInBackground!==false||typeof d.upDown.initialLowered!=='boolean'||d.upDown.group===2&&d.upDown.initialLowered))||d.transferDeath||d.slowdown||d.connector&&!allowSlidingGoodies||d.sourceBombDynamic)throw new Error('Unsupported goodie/dynamic dot combination');
   if(['present','humanCanGrab','nonhumanCanGrab','sourceInBackground','ring','bonus'].some(k=>typeof d[k]!=='boolean'))throw new TypeError('Explicit static goodie dot state required');
  }
- for(const a of actors)actor(a,allowColoredElevatorGoodies);
+ for(const a of actors)actor(a,allowColoredElevatorGoodies,allowSlidingGoodies);
  for(const [kind,n]of Object.entries(activeSections)){
   integer(n);
-  if(n&&!(allowElevatorGoodies||allowColoredElevatorGoodies?['SP','EL','GO','WP','WA','TX']:['WL','DR','DS','WY','GO','WP','WA','TX']).includes(kind))throw new Error(`Unqualified active goodie combination: ${kind}`);
+  if(n&&!(allowSlidingGoodies?['SP','WL','EX','GO','WP','WA','TX']:allowElevatorGoodies||allowColoredElevatorGoodies?['SP','EL','GO','WP','WA','TX']:['WL','DR','DS','WY','GO','WP','WA','TX']).includes(kind))throw new Error(`Unqualified active goodie combination: ${kind}`);
  }
  return true;
 }
@@ -161,10 +163,12 @@ export class BombRuntime {
    if(!scope)throw new Error('Explicit goodie scope required');
    if(bombs.length||(routes!==undefined&&(!Array.isArray(routes)||routes.length)))throw new Error('Goodie scope cannot include fuses or routes');
    assertGoodieRuntimeScope(scope);
+   if(scope.allowSlidingGoodies&&scope.activeSections?.GO!==goodies.length)throw new Error('Explicit matching GO inventory required');
   }else if(scopeMode==='bombs'){
    if(scope)assertBombRuntimeScope(scope);
   }else throw new Error('Unknown BO/GO scope');
   if(!Array.isArray(goodies)||goodies.length>BOMB_LIMITS.goodies)throw new RangeError('GO capacity exceeded after mode filtering');
+  this.slidingGoodies=scopeMode==='goodies'&&scope?.allowSlidingGoodies===true;
   this.adapters=adapters??{};
   for(const name of ['clock','latchedTick','freshTick','adjustPeriod','gridPixel','effect','collides'])fn(this.adapters[name],name);
   this.bombs=bombs.map(b=>{
@@ -281,24 +285,24 @@ export class BombRuntime {
   return events;
  }
  checkMatch(who){
-  actor(who);if(this.frozen)return [];
+  actor(who,false,this.slidingGoodies);if(this.frozen)return [];
   const s=this.matches.find(s=>s.visible&&sync(this.adapters.collides,'LI',s,who));
   return s?this.ignite(s.bombIndex,who):[];
  }
  checkSpark(who){
-  actor(who);if(this.frozen||!human(who))return [];
+  actor(who,false,this.slidingGoodies);if(this.frozen||!human(who))return [];
   const s=this.sparks.find(s=>s.visible&&s.travelling&&sync(this.adapters.collides,'SR',s,who)),events=[];
   if(s)this.emit(events,{type:'death',reason:15,actor:who,index:s.index});return events;
  }
  checkGoodie(who){
-  actor(who);if(this.frozen||!human(who))return [];
+  actor(who,false,this.slidingGoodies);if(this.frozen||!human(who))return [];
   // GO collision ignores collected latch: first still-visible collected GO
   // blocks later overlapped GO until its flourish callback hides it.
   const s=this.goodies.find(s=>s.visible&&sync(this.adapters.collides,'GO',s,who));
   return s?this.collectGoodie(s.index,who):[];
  }
  collectGoodie(index,who){
-  actor(who);const s=this.item(this.goodies,index),events=[];
+  actor(who,false,this.slidingGoodies);const s=this.item(this.goodies,index),events=[];
   if(this.frozen||!human(who)||s.collected)return events;
   const generation=this.generation;
   this.emit(events,{type:'sound',id:22});

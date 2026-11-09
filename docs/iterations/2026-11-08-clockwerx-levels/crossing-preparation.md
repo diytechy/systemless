@@ -1,3 +1,5 @@
+Superseded by the [accepted review](crossing-review.md). The preparation record below retains its earlier limits and pending checks.
+
 # Crossing preparation
 
 Live remains 28;29 is awaiting root visible SVG goal and guarded activation. No public source or payload change has been needed. See the [packet](crossing-preparation.json) for counts and remaining limits.

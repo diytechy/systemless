@@ -1,5 +1,5 @@
 {
-  "status": "original-and-finite-input-qualified-root-svg-goal-pending",
+  "status": "superseded-by-accepted-scene-review",
   "ordinal": 29,
   "title": "Crossing",
   "liveOrdinal": 28,
@@ -79,7 +79,11 @@
     "remainingSpikes": 1,
     "remainingSpikeMaxError": 0.45307443365695793,
     "removedSpikes": 9,
-    "removedSpikeMinTemplateError": 59.996763754045304
+    "removedSpikeMinTemplateError": 59.996763754045304,
+    "lateBlueCaptures": 22,
+    "cleanRemainingBlueMaxError": 0.2784313725490196,
+    "secondBlueCandidateMinError": 42.691823899371066,
+    "thirdBlueCandidateMinError": 50.39203354297694
   },
   "progressFixture": {
     "sha256": "fadd906017dd1c996d1d3008f519b75b580063db9fb39996bb5bacee6c348839",
@@ -93,5 +97,6 @@
     "Static BO individual masks retain overlapping fuse,match,dot and actor overdraw;754of1287under2is not a whole-composite parity claim.",
     "All12burnt cores prefer source burnt art;two have persistent raw overlap error above2. Crater14error2.523is retained.",
     "Browser goal and guarded29activation are pending."
-  ]
+  ],
+  "review": "crossing-review.json"
 }

@@ -1,0 +1,15 @@
+# Crossing: accepted with limits
+
+**29 bounded Child scenes are now locally active.** Original and root visible SVG both complete Crossing for 7,000 points through 56 transfers, three bonuses, five fuse chains/blasts and checkpoint 5,7. All 190 finite clock onsets pass. One sustained Bounce interval supplies 20 turnarounds during a blast; the original physical input schedule matches all 69 independently fitted transfer/Bounce poses. No public runtime source or art payload change was needed. See the [review packet](crossing-review.json).
+
+The source survey covers 62 pivots, 39 BO records, five human-only starters, five terminal kinds, ten active stationary spikes, one checkpoint and six active programmed ordinary hands. Two inactive rings remain plain usable pivots. All 231 cold original hand positions/frames match a legal idle/reset history that preserves shared clocks. Source animation and enhanced smooth SVG drawing remain separate.
+
+The selected route removes nine spikes and two blue hands, preserves the central spike and turns twelve cores into burnt art. All five raw-grid craters are reviewed. Original 70 spark fits follow the stored fuse paths. Absolute effect phase remains approximate: 28 best spark positions differ by one pixel; some blast samples differ by one source frame or become visible before model activation. Static art fits retain overlap errors. These limits are explicit in the packet; matching goals do not establish exact animation parity.
+
+Original native01 is CLOSED/PASS: 15,150 frontend ticks, 15,750 guest ticks, zero budget exhaustion, two changed save files and no deletions. Its actual next scene is Labyrinth/player p/181,000. The earned through29 fixture verifies nine files, both forks, represented metadata and seven untouched files; a fresh Labyrinth launch passes 2,224/2,824/0. Original media stays byte-identical.
+
+Root QA109's 7,000-point goal image and accessibility result are saved privately; that tab is closed. Normal IAB92 is Crossing paused after select/restart/pause smoke. Its complete input route was verified in matching QA. Slow in-app scheduling makes this a functional check; no new cadence, CPU, memory or responsiveness claim is made.
+
+Activation preserves all 28 earlier scene definitions, all 79 payloads, all 25 runtime files, protected shared library files and the save key. A complete 28-scene rollback is retained privately. The runtime source/assets/manifest sum is 5,490,797 uncompressed bytes, excluding the receipt; this is neither wire size nor memory. Earlier 216 runtime/14 packaging checks apply to identical source. No push, upload or deployment.
+
+Generation requirements now include clock-reference history, safe rotation sectors and hold edges, transient fuse state and recomputing topology after damage. The read-only 48-quarter-turn static-tail forecast is a proposal checked by actual input replay, followed by original/SVG goals. It is not a new-level generator. Non-Child modes, audio, physical controller, full save compatibility and unvisited alternatives remain outside this qualification.

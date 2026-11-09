@@ -176,3 +176,14 @@ This is prepared behind an explicit static Child scene flag; earlier accepted sc
 
 
 Enclosure is now accepted with original/SVG46,000goals and570finite input cases. Its final input schedule matches all53original hand positions and source frames, independently of vector presentation. One checkpoint Reverse and three cardinal Bounces avoid the fragile taps in rejected witnesses. Preserve source wall-contact guards, current-cardinal target queries, switch occupancy, fuse state and goal-before-animation order. Earlier scenes retain legacy timing until separately migrated. Original blast evidence shows four burnt bonus cores and persistent orbital removal; direct switch/checkpoint blast hits remain unexercised. See [Enclosure](enclosure-review.md).
+
+
+## Crossing preparation: shared references and confined waits
+
+The original's shared hand clocks can outlive a round reset. A legal sequence of idle updates and a normal reset reproduces all 231 cold hand poses without assigning clocks or actor state. Keep the initialization history with each witness. This does not align every independent animation clock: Crossing still has small absolute spark/blast phase differences, retained in its preparation report.
+
+A safe pivot does not imply a safe full rotation while a fuse travels. Crossing's input witness uses one sustained Bounce interval to confine the hand to a quarter-turn during the fourth blast. Start and release within the sector: cardinal-boundary edges can select the opposite sector at a neighboring clock onset. All 190 finite onsets pass for the chosen policy, followed by the original 7,000-point goal. Root SVG completion remains pending at this preparation checkpoint.
+
+Terminal BO kinds change artwork and fuse routing; explosion damage uses the stored terminal row and column. Five completed blasts remove nine stationary spikes while preserving the central one and all affected pivots. Twelve dot cores become burnt. Preserve this dynamic state when solving the rest of the board.
+
+Crossing is now accepted: original/SVG 7,000-point goals, all 190 finite onsets and 69 original physical-schedule hand poses pass. The five-blast topology and effect-phase limits above remain explicit. No source or payload changes were needed. See [Crossing](crossing-review.md).

@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 29,
-  "currentAction": "Crossing29 raw07goal7000/56transfers/5craters and190onsets pass; native01qualification running. Inspect current-action/active jobs; live28.",
+  "currentOrdinal": 30,
+  "currentAction": "Labyrinth30 next: earned through29/fresh30 verified.29Crossing accepted/locally activated; no functional runner active. Slow class4orbital needs source/native qualification; do not relax gates speculatively.",
   "levels": [
     {
       "ordinal": 1,
@@ -2038,11 +2038,28 @@
       "menuTitle": "Crossing",
       "resourceTitle": "Crossing",
       "sha256": "d031b60f874f50b97a948a708ffac9a7eb388b56dd7074d3c85c9360a3d6601d",
-      "status": "preparing-native-and-browser-qualification",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-with-limits",
+      "nativeEvidence": [
+        "crossing/native-goal-01/report.json",
+        "crossing/native-goal-01-transfer-review.json",
+        "crossing/native-physical-samples.json",
+        "crossing/native-final-effects-review.json",
+        "crossing/native-late-blue-pose-fits.json"
+      ],
+      "requirements": [
+        "callback-stepped Child movement with shared-clock reset history",
+        "five ordered fuse chains and raw terminal grid damage",
+        "held Bounce confines the wait to a safe quarter-turn",
+        "inactive rings,checkpoint and programmed NPCs"
+      ],
+      "svgStatus": "29-scene locally active;root visible7000goal and normal load/restart/pause smoke passed",
+      "generationConstraints": [
+        "record legal shared-clock references",
+        "safe vertex is insufficient without a safe waiting arc",
+        "hold edges near a cardinal boundary can change the safe sector",
+        "static-tail periodicity applies only after transient fuses expire",
+        "retain effect-phase and raw-overdraw uncertainty"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 62,
@@ -2069,7 +2086,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -2081,11 +2098,8 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "general new-level generator is not implemented",
+        "exact SR/BO absolute birth phase and real-time browser cadence remain unqualified"
       ],
       "preparationEvidence": [
         "crossing/source-inventory.json",
@@ -2093,7 +2107,8 @@
         "crossing/candidate-route-07.json",
         "crossing/checked-route.json",
         "crossing/native-goal-01.json"
-      ]
+      ],
+      "review": "crossing-review.md"
     },
     {
       "ordinal": 30,
@@ -2101,8 +2116,10 @@
       "menuTitle": "Labyrinth",
       "resourceTitle": "Labyrinth",
       "sha256": "90e80009d7d1ca3b2ed593500e74f857caa3d4901e4438103b77cdb9c0a9a4cd",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "source-preparation",
+      "nativeEvidence": [
+        "labyrinth/native-initial-01/report.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],
@@ -2150,6 +2167,10 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "preparationEvidence": [
+        "labyrinth/source-inventory.json",
+        "labyrinth/native-source-pose-fits.json"
       ]
     },
     {

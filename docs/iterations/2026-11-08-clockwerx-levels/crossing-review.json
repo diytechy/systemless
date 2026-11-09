@@ -1,0 +1,125 @@
+{
+  "status": "accepted-with-limits-and-locally-activated",
+  "ordinal": 29,
+  "title": "Crossing",
+  "liveOrdinal": 29,
+  "sourceFilesChanged": [],
+  "assetPayloadsChanged": 0,
+  "cold": {
+    "handPositions": 231,
+    "logicalFrames": 231,
+    "preIdleFixedUpdates": 28,
+    "normalReset": true,
+    "postResetIdleFixedUpdates": 692,
+    "nativeShiftGuestTicks": -346
+  },
+  "witness": {
+    "raw": "crossing/candidate-route-07.json",
+    "checked": "crossing/checked-route.json",
+    "onsets": 190,
+    "transfers": 56,
+    "bonuses": 3,
+    "score": 7000,
+    "ignitions": 5,
+    "craters": 5,
+    "checkpoint": "5,7",
+    "reverseEdges": 0,
+    "heldBounceIntervals": 1,
+    "bounceEvents": 20
+  },
+  "native": {
+    "report": "crossing/native-goal-01/report.json",
+    "status": "passed",
+    "frontend_ticks": 15150,
+    "guest_tick": 15750,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    },
+    "observedGoalScore": 7000,
+    "observedNextTitle": "Labyrinth",
+    "observedNextOrdinal": 30,
+    "observedTotal": 181000,
+    "poseFits": 69,
+    "pivotMatches": 69,
+    "frameMatches": 69,
+    "maxPoseError": 2.095959595959596
+  },
+  "objects": {
+    "coldSpikeSamples": 330,
+    "coldSpikeClean": 314,
+    "coldBonusCores": 99,
+    "bonusCoresPreferred": 99,
+    "inactiveRingCores": 66,
+    "inactiveRingPlainPreferred": 66,
+    "checkpointUnlit": 33,
+    "backgroundBorderPixels": 73940,
+    "backgroundMaxChannelError": 0.4397980344423406,
+    "staticBOFits": 1287,
+    "staticBOClean": 754,
+    "starterFits": 165,
+    "starterClean": 160,
+    "sparkPoses": 70,
+    "sparkClean": 70,
+    "sparkBestPointExact": 42,
+    "sparkBestPointOnePixelDifferent": 28,
+    "sparkBestPointAndFrameExact": 38,
+    "blastCaptures": 40,
+    "cleanVisibleBlastPoses": 25,
+    "blastExactFrameMatches": 12,
+    "blastOneFrameDifferences": 11,
+    "blastEarlierVisibleDifferences": 2,
+    "lateCaptures": 22,
+    "burntCores": 12,
+    "burntPreferredSamples": 264,
+    "cratersReviewed": 5,
+    "craterMinTemplateError": 2.5224123879380604,
+    "remainingSpikes": 1,
+    "remainingSpikeMaxError": 0.45307443365695793,
+    "removedSpikes": 9,
+    "removedSpikeMinTemplateError": 59.996763754045304,
+    "lateBlueCaptures": 22,
+    "cleanRemainingBlueMaxError": 0.2784313725490196,
+    "secondBlueCandidateMinError": 42.691823899371066,
+    "thirdBlueCandidateMinError": 50.39203354297694
+  },
+  "progressFixture": {
+    "sha256": "fadd906017dd1c996d1d3008f519b75b580063db9fb39996bb5bacee6c348839",
+    "filesVerified": 9,
+    "untouchedFiles": 7,
+    "relaunchVerified": true
+  },
+  "limits": [
+    "Child mode and selected route only; no new CPU/memory/cadence/hardware/audio measurement.",
+    "Shared hand reference is calibrated by legal history; independent SR/BO birth phase is not fully aligned.70clean spark fits include overlapping chains/joins;42best positions exact and28differ1pixel.12of25clean blast frames exact,11differ1frame,twoare visible before model activation. Preserve discrepancy rather than claim exact timing.",
+    "Static BO individual masks retain overlapping fuse,match,dot and actor overdraw;754of1287under2is not a whole-composite parity claim.",
+    "All12burnt cores prefer source burnt art;two have persistent raw overlap error above2. Crater14error2.523is retained.",
+    "Root SVG replay completed with slow IAB scheduling; it is functional evidence and supplies no cadence/smoothness/resource qualification."
+  ],
+  "svg": {
+    "goalObserved": true,
+    "goalScore": 7000,
+    "evidence": [
+      "crossing/qa-goal-page.png",
+      "crossing/qa-goal-ax.txt"
+    ],
+    "normalSmoke": "29selected/restarted/paused;normalIAB2tab92deliverable",
+    "qaTab": "109closed"
+  },
+  "activation": {
+    "backup": "crossing/previous-live-pilot",
+    "priorSceneDefinitionsIdentical": 28,
+    "sourceFilesUnchanged": 25,
+    "payloadsUnchanged": 79,
+    "protectedFilesUnchanged": 4,
+    "saveKeyUnchanged": true,
+    "sizes": {
+      "sourceBytes": 176935,
+      "assetBytes": 2694142,
+      "manifestBytes": 2619720,
+      "totalBytes": 5490797
+    }
+  }
+}

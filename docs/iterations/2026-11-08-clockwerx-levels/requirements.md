@@ -253,3 +253,6 @@ Dodger39 validates a mixed-height elevator channel with GO/staticSP, including a
 
 
 Hollow40 qualifies the guarded colored three-channel elevator/GO/SP/programmed-actor composition. Original/SVG8000and25transferheroes match with190onsets; independentcold700idle replaces inherited706comparison assumption. Red-channel human riders, humancontrolentry and exactsurface/GO/SPIphases remain limited. Seesaw62source review finds absentPU/DPupdownrider/lowerendpoint hooks; Fracas94needs null-import semantics and blue-ring51..58atlases. See[hollow review](hollow-review.md),[Seesaw prep](seesaw-preparation.md),[Fracas prep](fracas-preparation.md).
+
+
+Squiggle41 qualifies the bounded paired-HY static Child family, strict pairs, ordinary non-HY/non-goal human starts, source arrival ordering and entry-pose fader clocks. Original/SVG1000/18transfers/6HY/all190onsets; six one-frame pose differences and one fader callback boundary remain. Preserve free ref−1 NPC initial occupancy without synthetic teleport; optional bonuses, reset, black/NPC faders, audio and mixed families need separate evidence.

@@ -1,0 +1,57 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "0b3fc975",
+  "ordinal": 41,
+  "title": "Squiggle",
+  "nativeTransfers": 18,
+  "teleports": 6,
+  "bounces": 0,
+  "reverses": 0,
+  "goalOnsets": 190,
+  "nativeGoalScore": 1000,
+  "qaGoalScore": 1000,
+  "runtimeChecks": 278,
+  "packagingChecks": 16,
+  "priorDefinitionsUnchanged": 40,
+  "priorPayloadsUnchanged": 86,
+  "priorDecodedBoards": 40,
+  "priorSnapshots": 40,
+  "priorUpdates": 355122,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext42Total235000Viewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "fresh42PhysicallyViewed": true,
+  "sourceFittedIdleUpdates": 3134,
+  "poseSummary": {
+    "all": 204,
+    "clear": 202,
+    "clearPositions": 202,
+    "clearPoses": 196,
+    "allPositions": 204,
+    "allPoses": 197,
+    "transferHero": 18,
+    "transferHeroMatches": 18
+  },
+  "teleportSummary": {
+    "observations": 408,
+    "clear": 408,
+    "clearMatches": 408
+  },
+  "firstFaderClearSamples": 14,
+  "firstFaderMatches": 13,
+  "fixtureSha256": "21c925aaea9dcf77aa10136d7a3ccfb50d1d2ea801bac23fc013b7e485138fd2",
+  "limits": [
+    "Six one-frame actor pose differences and one first-fader callback-boundary sample remain; raw static-spike/orbital aliases retained",
+    "No optional bonus collected; ring visited/released but exact ring phase unqualified",
+    "Full audio, death/reset, black/NPC faders, controllers, non-Child modes, unsupported combinations and performance unqualified"
+  ],
+  "liveSizes": {
+    "sourceBytes": 237568,
+    "assetBytes": 3134620,
+    "manifestBytes": 3835287,
+    "totalBytes": 7207475
+  },
+  "normalTab92SelectRestartPauseViewed": true,
+  "qa123Closed": true,
+  "currentReceipt": "squiggle/activation.json"
+}

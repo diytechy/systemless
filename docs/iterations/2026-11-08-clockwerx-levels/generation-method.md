@@ -173,3 +173,6 @@ Dodger39 requires per-dot initial height even within one channel, optional-prope
 
 
 Hollow40 demonstrates reusable content validation against a frozen sharedengine; it does not create another executable or prove generated levels. Initialclock calibration belongs to independently observed source initialization, not an inherited per-level constant or assigned clock state. Native/SVGgoal and all25transferheroes qualify one existing-map route; phase/unused-route limits remain. Seesaw62 requires source-ordered PU/DP riders on moving anchors and lower-endpoint detach, even with inactive guns/triggers. Imported invalid programrefs may need originalnullfallback, while generated definitions should remain strict. See[parallel workflow](parallel-workflow.md) and[review](hollow-review.md).
+
+
+HY generation now requires exactly two present endpoints per admitted channel after activation masks, supported capacity, ordinary safe human starts, no recursive destination rewards, and a timed legal route through the source actor/callback model. Squiggle41 passes190held-input onsets and original/SVG goal review, but this is one qualified static Child composition. Do not infer feasibility from graph reachability alone or broaden to EX/moving/projectile combinations without serial qualification.

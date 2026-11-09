@@ -1,5 +1,12 @@
 # Progress checkpoint
 
+Current override:41Squiggle accepted/locallyactive;59remain. Source0b3fc975; current receipt squiggle/activation.json. SlotsA/B/C as current-action.md. Continue without per-level stops. Historical entries superseded.
+
+# Progress checkpoint
+
+Active continuation: user authorizes2ormore runners/no per-level stops. HY41privateengine slotA has190onset18transfer/6HY/1000/ring-release route awaitingrootnative/SVG. RootslotB firstHYnative CLOSED1594/2194/0/noexport, images/faderreviewnext; rootexclusiveHY/faderconversion. Fracas94privateimport/route slotC, blue-ring artcandidatecomplete/unactivated. Live40retained, alloriginalmedia/saveboundariesunchanged. See[currentaction](current-action.md) for exactactivepaths; do notduplicateworkers.
+
+
 Hollow40accepted/locallyactive: original/SVG8000/25transfers/4bounces/6Reverse/all4GO/190onsets. Sourcee6f6f02c;267publicruntime/15packaging/4privatechecks/38prior342474updates pass.258clearpositions/244poses/25transferheroes; independentcold700legalidle,14oneframe/6corepixel andanimationphase limits retained. Through40fixture4a6a8422 verified;fresh41p234000viewed2224/2824/0. Currentreceipt hollow/activation.json/full39rollback;normal92Hollowpaused/QA122closed. Noactiverunner/pendingCUApart. See[currentaction](current-action.md).
 
 Mechanics-first parallelpreparation delivered40candidate+route/rootreview,94nullimport+missingblueart,62inactiveGN/TR+actualOilridergap; privateworkerreports reviewed. SharedHY41helpers unlinked/sixchecks/source-review complete; actualnormal41coldreference nowearned. ContinueHYintegration serially with independent94art/sourcework if useful, max2functionalrunners/conversionssequential. Allpriorworkersfinished; inspectstate beforedelegatingmore.

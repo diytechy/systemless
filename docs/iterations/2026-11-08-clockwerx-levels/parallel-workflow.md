@@ -1,6 +1,6 @@
 # Mechanics-first level workflow
 
-The user's 2026-11-09 instruction permits parallel level work with up to two functional runners. This replaces strict ordinal processing of the remaining ClockWerx levels. The completed 69-title library workflow and frozen performance comparisons stay closed.
+The user's 2026-11-09 instruction permits two or more runners and asks to continue the remaining60levels without stopping after each level. Use two functional slots initially; the coordinator may assign additional isolated slots when useful. This replaces strict ordinal processing of the remaining ClockWerx levels. The completed69-title library workflow and frozen performance comparisons stay closed.
 
 There is one shared engine and separate level data, capability declarations and validation inputs. A successful decode or admission check does not establish playability. A level is accepted only after review of its legal-input gameplay, original evidence, visible SVG result and relevant mechanic checks, with discrepancies recorded.
 
@@ -8,7 +8,7 @@ There is one shared engine and separate level data, capability declarations and 
 
 - The coordinator owns shared runtime changes, review, queue updates, activation and commits. Implement and qualify a new mechanic once, in series, before admitting dependent levels.
 - Independent workers may inventory, prepare assets and inputs, and validate different levels against a frozen qualified engine. Use separate private directories and copied fixtures. Workers return evidence; they do not edit the live manifest, shared runtime, campaign preferences or browser save store.
-- Run at most two functional workloads across workers and coordinator. Keep benchmarks, conversions and heavy builds sequential. Root controls the supported browser. Keep native progress earned through gameplay; do not patch preferences to manufacture access to later levels.
+- Track functional slot assignments across workers and coordinator; start with two and explicitly record additional assignments. Keep benchmarks, conversions and heavy builds sequential. Root controls the supported browser. Keep native progress earned through gameplay; do not patch preferences to manufacture access to later levels.
 - An unfamiliar combination, unsupported flag or discrepancy returns to serial investigation. Do not relax rejection checks merely to increase the batch size. After an engine change, revalidate affected candidate evidence before acceptance.
 - Commit validated changes locally on SVG-Port; never push, deploy or upload private assets. Preserve media, both forks, represented metadata, preferences and browser save identity.
 

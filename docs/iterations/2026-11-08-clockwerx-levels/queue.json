@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 41,
-  "currentAction": "40Hollow accepted/active original+SVG8000/25transfer/190onsets, source-fitted700legalidle/phase limits retained. Next41HY shared mechanic;62rider and94import/blue-ring sourceprep complete. Max2functional runners; shared integration serial.",
+  "currentOrdinal": 42,
+  "currentAction": "EX42 serial shared-mechanic implementation and native/art review; parallel source preparation43-50. Live41accepted. Continue59remaining without per-level stops.",
   "levels": [
     {
       "ordinal": 1,
@@ -2988,13 +2988,25 @@
       "menuTitle": "Squiggle",
       "resourceTitle": "Squiggle",
       "sha256": "e1f751f98478c4d722f186c8b124bcb65937ce0ea5ef06b19bf41d415b24c039",
-      "status": "earned-native-cold-source-helper-preparation",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [
-        "squiggle/native-initial-01/report.json"
+        "squiggle/native-initial-01/report.json",
+        "squiggle/native-first-hy-01/report.json",
+        "squiggle/native-goal-01/report.json",
+        "squiggle/native-goal-01-comparison-fixed-orbitals.json",
+        "squiggle/native-goal-01-teleport-comparison.json"
       ],
-      "requirements": [],
-      "svgStatus": "unlinked HY helper only; no41manifest",
-      "generationConstraints": [],
+      "requirements": [
+        "paired HY endpoints masked before capacity; exact source arrival hook order",
+        "ordinary non-HY/non-goal human starts; no spawn teleport for ordinary NPC",
+        "HY and entry-pose fader source clocks; orbitals excluded from WATeleport"
+      ],
+      "svgStatus": "locally active; original/SVG1000goal;18transfers/6HY; ring visit-release; all190onsets",
+      "generationConstraints": [
+        "strict two-endpoint channel pairing and qualified static Child composition",
+        "validate legal timed route and all supported hold onsets; no teleport destination recursion",
+        "optional bonuses and reset/other combinations require additional validation"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 50,
@@ -3019,9 +3031,9 @@
           "GN": 0,
           "TR": 0
         },
-        "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+        "boundary": "Source inventory plus bounded original/SVG goal witness; limits in review."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [
         "HY"
@@ -3034,11 +3046,9 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Six one-frame actor pose differences and one first-fader callback-boundary sample remain; raw static-spike/orbital aliases retained",
+        "No optional bonus collected; ring visited/released but exact ring phase unqualified",
+        "Full audio, death/reset, black/NPC faders, controllers, non-Child modes, unsupported combinations and performance unqualified"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3052,7 +3062,8 @@
         ],
         "gameplayAcceptedByTriage": false
       },
-      "preparation": "squiggle-preparation.md"
+      "preparation": "squiggle-preparation.md",
+      "review": "squiggle-review.md"
     },
     {
       "ordinal": 42,
@@ -3060,10 +3071,12 @@
       "menuTitle": "Berserkeley",
       "resourceTitle": "Berserkeley",
       "sha256": "80e86cfe875020407fb93e553cb90c556886d12f1b02e520e7cb2161c0dc9c41",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "serial-new-mechanic-private-implementation",
+      "nativeEvidence": [
+        "berserkeley/native-initial-01/report.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "not admitted; source/EX candidate work only",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7419,5 +7432,11 @@
     "follow-on-81-100-review.md"
   ],
   "workflow": "parallel-workflow.md",
-  "maximumFunctionalRunners": 2
+  "maximumFunctionalRunners": 3,
+  "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
+  "activeSlots": {
+    "A": "berserkeley_engine private EX42 implementation/tests/one model",
+    "B": "root source/native/art/review; one original emulator, conversions serial",
+    "C": "mechanics_triage source-only43-50"
+  }
 }

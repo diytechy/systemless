@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 42,
-  "currentAction": "EX42 serial shared-mechanic implementation and native/art review; parallel source preparation43-50. Live41accepted. Continue59remaining without per-level stops.",
+  "currentAction": "EX42 original36000goal/next43 viewed; final source review and SVG acceptance pending. Root fresh43 original prep from earned42.59remain; live41.",
   "levels": [
     {
       "ordinal": 1,
@@ -3144,11 +3144,21 @@
       "menuTitle": "Betwixt",
       "resourceTitle": "Betwixt",
       "sha256": "6d0c80cf900e65bef36051634b55e87806148ba337e44db4ea8ff3c4addbe29f",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "Remove the mandatory-EL/WY assumption only under a separate static EX capability; preserve42's gate",
+        "Qualify ordinary n/f programs with EX stop/program/start ordering on clock classes1/2/3",
+        "Qualify current physical slide anchors for static SP and shared-hand contact",
+        "Supply colored EX frames0,3,36,39"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Retain independent class1 multiplier1/divisor2, class2 multiplier3/divisor8, class3 multiplier1/divisor4",
+        "Both EX are horizontal; source first-endpoint color controls line frame, either endpoint bonus controls component state",
+        "All actor references valid; eight free enemies stay free despite five stored WP strings",
+        "No Oil/BO/GO/HY/moving/up-down family is required"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 55,
@@ -3187,11 +3197,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Cold match all active ordinary actor clocks and the two source-bound n/f programs",
+        "Legal forward slide, midpoint transfer or backout, and a programmed NPC transfer/slide interaction",
+        "Collect each two-dot EX bonus component as one initiating award with recursive unbonus; initial bonus count is13",
+        "Goal route and finite input windows without substituting classes or programs"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3204,6 +3213,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -3212,11 +3228,20 @@
       "menuTitle": "Weave",
       "resourceTitle": "Weave",
       "sha256": "f487d162c04059461fe579f6424318270616598b9df816eec134980784c2f5a0",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "Explicit GO+EX/sliding actor support in BombRuntime, replacing its current dynamic-actor rejection only in the qualified scope",
+        "GO/SP/WL combination qualification with physical sliding anchors",
+        "Colored horizontal/vertical EX atlas coverage"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Seven ordinary class1 enemies have negative references; do not bind the unused stored program",
+        "Eighteen connectors include both orientations and no initial connector bonuses",
+        "Preserve GO source order, source clock and deferred flourish award/hide",
+        "The single wall record expands to original source tiles, not a guessed rectangle"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 58,
@@ -3256,11 +3281,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Cold source creation/reset starts for the two statically eligible NPC sliders",
+        "Goodie pickup during or adjacent to a slide using original GO/hand outlines",
+        "Slide reversal near the wall/SP, goal and replay after reset",
+        "All five GO requests are valid frame0, not a new out-of-range fallback"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3273,6 +3297,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -3281,11 +3312,20 @@
       "menuTitle": "Slide",
       "resourceTitle": "Slide",
       "sha256": "7f153518749ce2034fd88f83c4a118319b574370158204c74226ee84c316b557",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "Same GO+EX sliding-actor/physical-collision support as44",
+        "b/n/s ordinary NPC program/slide ordering and source-bound PCs",
+        "61 EX slots and mixed-color atlas coverage"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Exactly61 EX records equals capacity; no difficulty filtering applies to EX",
+        "Six programmed/two free ordinary class1 enemies; preserve b versus s input effects and PascalPC1",
+        "Mixed dot colors include5/6/7; preserve full color attributes and first-endpoint EX color",
+        "All61 connectors are horizontal; do not infer later vertical capacity/parity from this map"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 87,
@@ -3325,11 +3365,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Human starts at an EX endpoint with a cardinal direction eligible for automatic sliding at the first source callback",
+        "Programmed bounce/swing and mid-slide reverse/backout with no forced pose",
+        "One bonus connector component consumes both marked endpoints for one initiating award",
+        "One GO pickup, source SP collision context, goal and finite windows under61-connector load"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3342,6 +3381,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -3350,11 +3396,23 @@
       "menuTitle": "Prop Wash",
       "resourceTitle": "Prop Wash",
       "sha256": "61d2f46294895717658a278ffde4dd3c91831aca0bf336f8ae0441ad1d6c4cc0",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "Real human sliding state at DPGrabbed/arrival; retain the distinct no-sliding-check DPWandGrabbed hook",
+        "Oil main-dot collision adapter must select current ring phase, not dotBodyFrame normal9+color",
+        "GO+Oil+SP+EX/ring composition and source layer ordering",
+        "Existing private blue-ring candidate frames51-57 in300/4100 must be reviewed/promoted; no new conversion by this task",
+        "Sixteen property-mask-missing raw0x4009 entries must retain ordinary pivots/colors"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Only one of eight PU records is Child-active; masks apply before PU allocation",
+        "Three active rings use colors0/4; none is an EX endpoint in this map, but their DP collider phase still matters",
+        "Five programmed/two free ordinary class1 enemies; preserve f/n/s bindings and the first active PU source order",
+        "Cached human Oil target remains source pivot until a source grab updates it; do not target interpolated slide center",
+        "All eight EX start unbonused; initial bonus count8 does not imply bonus EX links"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 70,
@@ -3393,11 +3451,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Wake the sole active kind1 puddle and show source DP pursuit/arrival while human slides",
+        "Ring collapse/return while a DP crosses the shrinking source outline; normal dot outline is insufficient",
+        "Representative GO pickup and dynamic interactions without changing clocks",
+        "Goal plus separate hazard/reset witness; all eight GO requests are frame0"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3410,6 +3467,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -3418,11 +3482,22 @@
       "menuTitle": "Focus",
       "resourceTitle": "Focus",
       "sha256": "f84c8384956025e1c308d29f0edc2cf31d591e46b1aee3cb5fb7311141d2a595",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "BombRuntime.actor and bombActors must support the qualified physical sliding actor state",
+        "Source DOUnbonus4944->EXUnbonus5efa propagation for pickup and burnt=True blast paths",
+        "EX frame/background repaint and reset restoration after a blast; retain source traversal order",
+        "SP and ring in the new BO+EX composition"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Eight BO records: one bomb, six fuse records and one starter; starter flags0 means ordinary enemies cannot ignite it",
+        "Twenty-two EX include16 initially bonus links;35 raw bonuses are already closed under EX initialization",
+        "Four of seven SP instantiate in Child; preserve disabled records without pretending they collide",
+        "One white ring is not an EX endpoint; never infer full ring/EX overlap behavior from this scene",
+        "Ordinary blast-hidden enemies do not auto-respawn from their stored deadlines; round reset restores them"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 76,
@@ -3462,11 +3537,11 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Initial human bonus attachment preserves the bonus; no initial award",
+        "Cold source initialization/reset of the three statically eligible NPC sliders",
+        "Ignite the sole human-only starter; observe travelling spark, bomb, EX unbonus/burnt appearance and actor hit checks at physical slide centers",
+        "One initiating EX bonus-component pickup awards once; preserve propagating changed-state/availability guards",
+        "Goal route and reset restoring line/dot bonus state, with unused routes/hazards bounded explicitly"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3479,6 +3554,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -3487,11 +3569,21 @@
       "menuTitle": "Thriller",
       "resourceTitle": "Thriller",
       "sha256": "fcdacc4af8bee6b08cb406469a122bfb451f0b15d731b45f75256a6b01b5df70",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "Same BO+EX physical actor and recursive unbonus/burnt/background support as47",
+        "Protected checkpoint, wall blast/repaint and EX reset composition",
+        "All four ordinary class1 b/f/n/s programs with EX physical movement"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Thirty BO records contain two bombs,26fuses and two starters; both starter flag bytes0",
+        "One protected checkpoint uses independent WY spawn/time and protection state",
+        "Eight EX begin ordinary/unbonused, with no direct goal or ring endpoint",
+        "Six wall records are source tile unions; preserve blast scan/paint order rather than deleting rectangular regions",
+        "All four active enemies are programmed; stored WP count7 does not change their exact references"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 70,
@@ -3531,11 +3623,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Checkpoint selection and a source death/reset while preserving underlying clocks and restoring its saved spawn",
+        "At least one human-only starter and representative blast effects on connected line/dot/wall appearance",
+        "Programmed NPC slide/transfer plus human wall/backout behavior",
+        "Goal, source score and finite input replay; label unvisited second-starter branches"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3548,6 +3639,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -3556,11 +3654,22 @@
       "menuTitle": "Playground",
       "resourceTitle": "Playground",
       "sha256": "060d1a1dcfbf032500026e1db339056849e97b75a53f0c23c73f3179ad965e9b",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "Separate HY+EX capability; existing41 HY composition explicitly forbids EX and programmed ordinary hands",
+        "Carry source DOGrabbed ordering through ordinary transfer and slide completion, with retained frame rather than an extra32 on slide stop",
+        "Ordinary NPC teleports and faders on their own program callbacks; no synthetic NPC initial grabs",
+        "Ring and source current-pivot collision behavior in the combined scene"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Four HY pairs use channels5/6/7/8 and frames11-18; eight endpoints remain below22 capacity",
+        "HY endpoints and EX endpoints are disjoint in this map; direct endpoint overlap remains unqualified",
+        "Two white rings also have no EX endpoint overlap",
+        "All seven ordinary class1 enemies are programmed b/f/n/s; no n-only-orbital stand-in is permitted",
+        "Zero bonus dots is intentional; do not manufacture a bonus objective"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 54,
@@ -3600,11 +3709,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Human slide/transfer into HY context, retained direction and phase, destination permission/bonus/goal hooks not recursively run",
+        "At least one source-programmed ordinary NPC teleport and source-ordered fader",
+        "Ring release/return and a complete zero-dot-bonus goal route",
+        "Death/reset HY phase persistence and one-shot disposal; retain known41 phase limits"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3622,6 +3730,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -3630,11 +3745,21 @@
       "menuTitle": "Funhouse",
       "resourceTitle": "Funhouse",
       "sha256": "7967a01583339512db4aa3bd59c3c3d621cd7fc87656734c7910df53914fbc95",
-      "status": "queued",
+      "status": "source-prepared-awaiting-serial-composition",
       "nativeEvidence": [],
-      "requirements": [],
+      "requirements": [
+        "Replace hardcoded heroSliding:false only through the qualified source arrival contract",
+        "PU human outline checks use current physical slide pose; DP target remains cached source pivot",
+        "Oil+SP+EX scope, ordinary n/s programs, bonus-component propagation and reset"
+      ],
       "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "generationConstraints": [
+        "Only two of seven PU records instantiate; both are kind0 and acquire static non-EX-endpoint targets",
+        "Twenty connectors include12 initial bonus links;33 raw bonus vertices already encode EX bonus closure",
+        "Three programmed/four free ordinary class1 enemies; preserve initial negative human direction",
+        "No ring, GO, BO or HY is active; these omissions make it a cleaner Oil+EX case than46",
+        "Preserve32 lifetime DP allocations, synchronous clone/arrival order, original outlines and universe clipping"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 63,
@@ -3673,11 +3798,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Wake each active kind0 puddle and pursue while the human slides, including arrival exemption versus successful-grab reason10",
+        "Representative n/s NPC program/slide transitions and mid-slide input",
+        "Collect a bonus chain for one initiating award; do not count every recursively cleared vertex as a pickup",
+        "Goal and hazard/reset with legal held-input variations"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3690,6 +3814,13 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "preparation": "ex-follow-on-preparation.md",
+      "sourcePreparation": {
+        "sourceOnly": true,
+        "frozenEngine": "0b3fc975",
+        "independentSourceReviewComplete": true,
+        "playabilityAccepted": false
       }
     },
     {
@@ -7437,6 +7568,7 @@
   "activeSlots": {
     "A": "berserkeley_engine private EX42 implementation/tests/one model",
     "B": "root source/native/art/review; one original emulator, conversions serial",
-    "C": "mechanics_triage source-only43-50"
+    "C": "mechanics_triage43-50 source prep completed; slot released",
+    "review": "squiggle_engine EX42 source-only independent review"
   }
 }

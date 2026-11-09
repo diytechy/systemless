@@ -1,5 +1,9 @@
 # Progress checkpoint
 
+Current override: live41 retained/59remaining. EX42 original36000goal/next43total271000 viewed, native5720/6320/0/export2-0; final source-review fixes/tests/SVG still pending, no42acceptance. Root earned-through42fixture8b95e626 verified; fresh43native initial running, inspectprocess/report before duplication. SlotA EX42 privatefinal; rootB source/native/art; source43-50triage complete/released; squiggle_engine independent source-only review. Exact action/current agents in current-action.md; historical entries superseded.
+
+# Progress checkpoint
+
 Current override:41Squiggle accepted/locallyactive;59remain. Source0b3fc975; current receipt squiggle/activation.json. SlotsA/B/C as current-action.md. Continue without per-level stops. Historical entries superseded.
 
 # Progress checkpoint

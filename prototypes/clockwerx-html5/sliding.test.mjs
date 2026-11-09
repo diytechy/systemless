@@ -30,8 +30,9 @@ test('source EX bonus closure and recursive one-pickup chain consumption',()=>{
  dots[0].collected=true;assert.deepEqual(consumeConnectorBonus(cs,dots,'a'),['a','b','c']);assert.ok(dots.every(d=>d.collected));assert.ok(cs.every(e=>!e.bonus));assert.equal(connectorLook(cs[1],dots),40);
  for(const d of dots)delete d.collected;initializeConnectorBonuses(cs,dots);assert.ok(cs.every(e=>e.bonus));
 });
-test('all eight source color offsets/protected look are retained',()=>{
- for(const [color,offset]of [0,2,3,10,1,9,8,11].entries()){
+test('EX look uses runtime color bits rather than normalized DO color order',()=>{
+ // Independent source EX table after DO normalized bit1/bit4 reversal.
+ for(const [color,offset]of [0,1,3,8,2,9,10,11].entries()){
   const dots=[{id:'a',color,protected:false}];assert.equal(connectorLook({first:'a',vertical:true,bonus:false},dots),40+offset);
   dots[0].protected=true;assert.equal(connectorLook({first:'a',vertical:false,bonus:true},dots),offset);assert.equal(connectorLook({first:'a',vertical:false,bonus:true,burnt:true},dots),18+offset);
  }

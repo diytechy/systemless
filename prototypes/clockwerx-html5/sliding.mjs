@@ -57,7 +57,10 @@ export function consumeConnectorBonus(connectors,dots,id){
 export function connectorLook(connector,dots){
  const first=dots.find(d=>d.id===connector.first);
  if(!first||!Number.isInteger(first.color)||first.color<0||first.color>7)throw new Error('Source connector look required');
- return (connector.burnt?18:connector.bonus?0:36)+(connector.vertical?4:0)+[0,2,3,10,1,9,8,11][first.color];
+ // DOGetColorOffset normalizes runtime bits4000/2000/1000 to1/2/4.
+ // EXGetLook indexes its DATA table directly with runtime bits1000/2000/4000.
+ const sourceColor=((first.color&1)<<2)|(first.color&2)|((first.color&4)>>2);
+ return (connector.burnt?18:connector.bonus?0:36)+(connector.vertical?4:0)+[0,2,3,10,1,9,8,11][sourceColor];
 }
 export function validateConnectorBoard(connectors,dots){
  if(!Array.isArray(connectors)||!connectors.length||connectors.length>61)throw new Error('Bounded EX connector board required');

@@ -1,0 +1,90 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "sourceRevision": "5ef43192",
+  "ordinal": 42,
+  "title": "Berserkeley",
+  "nativeTransfers": 24,
+  "reverse": 1,
+  "slideArrivals": 3,
+  "slideBackout": 1,
+  "goalOnsets": 190,
+  "nativeGoalScore": 36000,
+  "qaGoalScore": 36000,
+  "runtimeChecks": 284,
+  "privateChecks": 8,
+  "packagingChecks": 17,
+  "priorDefinitionsUnchanged": 41,
+  "priorPayloadsUnchanged": 90,
+  "priorDecodedBoards": 41,
+  "priorSnapshots": 41,
+  "priorUpdates": 363073,
+  "nativeGoalPhysicallyViewed": true,
+  "nativeNext43Total271000Viewed": true,
+  "qaGoalPhysicallyViewed": true,
+  "fresh43PhysicallyViewed": true,
+  "sourceFittedIdleUpdates": 692,
+  "poseSummary": {
+    "all": 315,
+    "clear": 298,
+    "clearPositions": 298,
+    "clearPoses": 293,
+    "allPositions": 315,
+    "allPoses": 309,
+    "transferHero": 23,
+    "transferHeroMatches": 23
+  },
+  "connectorSummary": {
+    "observations": 225,
+    "clear": 222,
+    "clearMatches": 222,
+    "finalTransferHeroMatches": true,
+    "finalTransferHeroError": 4.342902711323764,
+    "totalTransferHeroes": 24
+  },
+  "elevatorSummary": {
+    "images": 45,
+    "controls": 90,
+    "controlMatches": 90,
+    "clearControls": 90,
+    "clearControlMatches": 90,
+    "clearCores": 88,
+    "clearCoreMatches": 88,
+    "inactiveClearCores": 0,
+    "inactiveClearCoreMatches": 0,
+    "clearSurfaces": 73,
+    "clearSurfaceMatches": 44,
+    "group2ClearSurfaces": 0,
+    "group2ClearSurfaceMatches": 0
+  },
+  "focusedSlideSummary": [
+    {
+      "all": 34,
+      "clear": 30,
+      "positions": 29,
+      "poses": 28
+    },
+    {
+      "all": 40,
+      "clear": 36,
+      "positions": 34,
+      "poses": 34
+    }
+  ],
+  "fixtureSha256": "8b95e626363a996792fb261453cbb30e3d6af128f105c1575f85feb835837431",
+  "limits": [
+    "Five one-frame gameplay poses differ; final24thgoalhero matches rawpose but is overdrawn/error4.343 above strictclear2",
+    "Focused idle/reverse66clear samples:63positions/62poses; three observations differ by one3pxclassstep across two probes. No phase adjustment",
+    "Movingcores88/88 andcontrols90/90 match; surfacephases44/73remainunqualified",
+    "OnlyrightELcontrol contacted; protectedWYcheckpoint/recovery not visited. Native death/reset/fullaudio/controller/nonChild/latercombinations/burning/performance unqualified",
+    "OriginalpostgoalNPCclock phases unqualified; SVGcompletion overlay/UI differs. OnlyEOFLFtrimming differsfrom finalworker code; source semantics unchanged"
+  ],
+  "liveSizes": {
+    "sourceBytes": 252522,
+    "assetBytes": 3194496,
+    "manifestBytes": 3931802,
+    "totalBytes": 7378820
+  },
+  "normalTab92SelectRestartPauseViewed": true,
+  "qa124Closed": true,
+  "currentReceipt": "berserkeley/activation.json"
+}

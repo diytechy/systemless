@@ -256,3 +256,6 @@ Hollow40 qualifies the guarded colored three-channel elevator/GO/SP/programmed-a
 
 
 Squiggle41 qualifies the bounded paired-HY static Child family, strict pairs, ordinary non-HY/non-goal human starts, source arrival ordering and entry-pose fader clocks. Original/SVG1000/18transfers/6HY/all190onsets; six one-frame pose differences and one fader callback boundary remain. Preserve free ref−1 NPC initial occupancy without synthetic teleport; optional bonuses, reset, black/NPC faders, audio and mixed families need separate evidence.
+
+
+EX42 now qualifies the first static connector/updown/WL/WY/freeactor Child composition. Source physical slide anchors, callback order, no-halfturn endpoint arrival, collision compensation, ID cache and recursive bonus component consumption are shared rules. Native/SVG36000 and all190onsets pass; focused callback-step, surfacephase, unvisited checkpoint/death/reset/audio limits remain explicit. Static/programmed/SP43 and later Oil/BO/GO/HY joins need separate serial qualification.

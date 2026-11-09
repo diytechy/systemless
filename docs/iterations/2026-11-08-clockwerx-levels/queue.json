@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 42,
-  "currentAction": "EX42 original36000goal/next43 viewed; final source review and SVG acceptance pending. Root fresh43 original prep from earned42.59remain; live41.",
+  "currentOrdinal": 43,
+  "currentAction": "StaticEX/SP/programmedNPC43 serial composition; freshSol privateworker. Root independent source/native/visual review. Live42accepted;58remain; continue without per-level stops.",
   "levels": [
     {
       "ordinal": 1,
@@ -3071,13 +3071,29 @@
       "menuTitle": "Berserkeley",
       "resourceTitle": "Berserkeley",
       "sha256": "80e86cfe875020407fb93e553cb90c556886d12f1b02e520e7cb2161c0dc9c41",
-      "status": "serial-new-mechanic-private-implementation",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [
-        "berserkeley/native-initial-01/report.json"
+        "berserkeley/native-initial-01/report.json",
+        "berserkeley/native-slide-idle-01/report.json",
+        "berserkeley/native-slide-reverse-01/report.json",
+        "berserkeley/native-goal-01/report.json",
+        "berserkeley/native-goal-01-comparison.json",
+        "berserkeley/native-goal-01-object-comparison.json",
+        "berserkeley/native-goal-01-elevator-comparison.json"
       ],
-      "requirements": [],
-      "svgStatus": "not admitted; source/EX candidate work only",
-      "generationConstraints": [],
+      "requirements": [
+        "static EX source order/capacity61, exactphysical slide anchor distinct from logicalpivot",
+        "human collision/stop/input/start/animation versus NPC animate/collide/stop/program/start",
+        "recursive component bonus consumption awards once; source IDcache and collision compensation",
+        "separate burnt/protection state and source54descriptor atlas with6hidden slots"
+      ],
+      "svgStatus": "locally active; original/SVG36000goal;24transfers/1Reverse/3slidearrivals/backout/all190onsets",
+      "generationConstraints": [
+        "strict static EX/raisedwhitegroup0/WL/WY/freeordinaryclock1/2 Child composition",
+        "retain initial NPC slide start and non-goal human declarations",
+        "validate timed legal route across all190held onsets and independent original/SVG goal",
+        "additional programs/SP/Oil/GO/BO/HY/moving families require serial qualification"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 71,
@@ -3102,9 +3118,9 @@
           "GN": 0,
           "TR": 0
         },
-        "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+        "boundary": "Source inventory plus bounded original/SVG goal and sourceclocked motion; explicit limits in review."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [
         "EX"
@@ -3119,11 +3135,11 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Five one-frame gameplay poses differ; final24thgoalhero matches rawpose but is overdrawn/error4.343 above strictclear2",
+        "Focused idle/reverse66clear samples:63positions/62poses; three observations differ by one3pxclassstep across two probes. No phase adjustment",
+        "Movingcores88/88 andcontrols90/90 match; surfacephases44/73remainunqualified",
+        "OnlyrightELcontrol contacted; protectedWYcheckpoint/recovery not visited. Native death/reset/fullaudio/controller/nonChild/latercombinations/burning/performance unqualified",
+        "OriginalpostgoalNPCclock phases unqualified; SVGcompletion overlay/UI differs. OnlyEOFLFtrimming differsfrom finalworker code; source semantics unchanged"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3136,7 +3152,8 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "review": "berserkeley-review.md"
     },
     {
       "ordinal": 43,
@@ -3144,15 +3161,17 @@
       "menuTitle": "Betwixt",
       "resourceTitle": "Betwixt",
       "sha256": "6d0c80cf900e65bef36051634b55e87806148ba337e44db4ea8ff3c4addbe29f",
-      "status": "source-prepared-awaiting-serial-composition",
-      "nativeEvidence": [],
+      "status": "serial-static-ex-private-implementation",
+      "nativeEvidence": [
+        "betwixt/native-initial-01/report.json"
+      ],
       "requirements": [
         "Remove the mandatory-EL/WY assumption only under a separate static EX capability; preserve42's gate",
         "Qualify ordinary n/f programs with EX stop/program/start ordering on clock classes1/2/3",
         "Qualify current physical slide anchors for static SP and shared-hand contact",
         "Supply colored EX frames0,3,36,39"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "not admitted; source/staticEX/SP/programmedNPC candidate only",
       "generationConstraints": [
         "Retain independent class1 multiplier1/divisor2, class2 multiplier3/divisor8, class3 multiplier1/divisor4",
         "Both EX are horizontal; source first-endpoint color controls line frame, either endpoint bonus controls component state",
@@ -7566,9 +7585,8 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "berserkeley_engine private EX42 implementation/tests/one model",
+    "A": "betwixt_engine private43implementation/tests/one model",
     "B": "root source/native/art/review; one original emulator, conversions serial",
-    "C": "mechanics_triage43-50 source prep completed; slot released",
-    "review": "squiggle_engine EX42 source-only independent review"
+    "C": "43-50 source prep and42independent review complete/released"
   }
 }

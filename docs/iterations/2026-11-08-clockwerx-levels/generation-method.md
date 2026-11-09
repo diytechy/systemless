@@ -176,3 +176,6 @@ Hollow40 demonstrates reusable content validation against a frozen sharedengine;
 
 
 HY generation now requires exactly two present endpoints per admitted channel after activation masks, supported capacity, ordinary safe human starts, no recursive destination rewards, and a timed legal route through the source actor/callback model. Squiggle41 passes190held-input onsets and original/SVG goal review, but this is one qualified static Child composition. Do not infer feasibility from graph reachability alone or broaden to EX/moving/projectile combinations without serial qualification.
+
+
+EX graph generation must preserve unmasked61capacity, source record order, two static adjacent endpoints and orientation0/1/byte2zero. Compute initial bonus closure across connected links; one initiating pickup clears that component and earns once. Keep logical pivot identity separate from the physical three-pixel slide anchor; include direction-dependent auto-slide, Reverse/backout and source callback ordering in timed search. EX42 is one qualified composition, not proof of mixed-family generated boards.

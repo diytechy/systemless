@@ -1,0 +1,13 @@
+# Weave44 / Slide45 GO+EX preparation
+
+This source-only plan follows the accepted EX42 engine and uses the now-accepted Betwixt43 programmed static EX qualification (source `b34eb2bd`, level acceptance `4ed12335`) as its next API baseline. It adds no code, admission, runner or gameplay acceptance.
+
+Weave44 uses18connectors, six spikes, one wall and five goodies with seven free class1 enemies. Slide45 uses the61connector capacity, two spikes, one goodie and six b/n/s programmed plus two free class1 enemies. Every goodie in both maps starts at valid source frame0. Neither needs bombs, Oil, HY, moving dots, elevators or rings.
+
+The new composition needs a separate default-off capability. Existing BombRuntime rejects sliding actors; changing only checkGoodie is insufficient because the round also invokes empty match/spark stages. Permit qualified static-EX sliding only in a validated GO-only instance, keep moving-pivot programs and all bomb/blast paths rejected, and use the existing physical SourceRound collider before slide-stop/input. Preserve original GO source order, first-visible collision behavior, deferred hide, +10time and flat1000 award. GO collection must not consume a DOT/EX bonus component or advance its escalating DOT award.
+
+A source clock distinction also needs explicit treatment: GO and SP request unscaled200 from registered base40/divisor5, while current GO modeling uses200/divisor1. Sustained rates agree; startup phases differ. GO and SP are separate timer clients with their own birth and sprite references; sharing the upstream base does not prove equal client counts. A new-scope adapter must preserve that distinction and receive an independent native44 cold-phase check while leaving old profiles unchanged. No phase was changed or fitted by this preparation.
+
+Slide45's b/s programs require focused checks beyond43f/n. NPC callback order is animate/collide/stop/program/start; no PC is consumed while sliding. Actions reverse on grab XOR reverse, with no human collision compensation applied to NPC flags. DOT unbonus propagates through source connector hooks, awards once per initiating grab and restores on reset.
+
+With43 accepted, implement/review the common narrow GO+EX adapter serially, freeze it, then prepare44/45 content validation independently. Native44 waits for earned43 and must show actual physical-slide GO pickup, deferred hide/flat score and goal;45 separately needs program/bonus-component/capacity evidence. `plan.md` records source addresses, proposed API boundaries, focused check contracts and provenance. No tests, model, emulator, browser, conversion, heavy build, shared edit or commit occurred.

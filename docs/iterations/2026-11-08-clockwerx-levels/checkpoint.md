@@ -1,7 +1,9 @@
 # Progress checkpoint
 
-43Betwixt accepted/locally active;57remain. Sourceb34eb2bd, protected receipt `betwixt/activation.json`, full42rollback. Normal92paused/deliverable;QA125closed. Original/SVG7000/13transfers/2Bounce/oneReverse/bothEXbonuscomponents/all190onsets;284public/6private/17packaging/all42prior370112updates pass. Raw pose/phase limits in review.
+Live43Betwixt accepted;57remain. Sourceb34eb2bd/acceptance4ed12335; protected receipt betwixt/activation.json. Normal92paused/deliverable,QA125closed. No sharedruntime edits pending.
 
-Fresh44original initial CLOSED2224frontend/2824guest/zero budget, actual44/278000viewed. Earned-through43fixture6630be987c... verifies nine files/seven untouched/both forks/represented metadata. No emulator/model/converter/build active at assignment. Fresh `weave_engine` slotA implements private GO+EX44 againstb34eb2bd; rootB independent source/native/art/review. `mechanics_triage` source-only GO+EXplan finalizing. Continue57remaining without per-level stops; exact next action in current-action.md/queue.json.
+Current44: weave_engine privateGO+EX/FREEclass1 candidate and source-only independentreview.284public and43prior374111worker checks pass; root integration stillpending. Legal checked-goodies-02(all5GO/6000/22transfers/5Bounce/692prefix) passes190; backout01separately190. Root original44native-goal-01 RUNNING under session68286/PID101440/start2026-11-09T13:28:37.666591-06:00/planned6800frontend/wallbound300. Read ownedprocess/report/log before duplicate. No44goal claim/exportpromotion yet.
 
-Private data stays onD:, original media/saveidentity preserved. No push/upload/deploy. Prior checkpoints remain in local Git history.
+Root viewed33cold44originalimages. Independent252clear actor hypotheses match249positions/244poses at692/693; three missesoneclassstep atsamecapture. SPI196clear26exact,GO159clear30exact withnew40/div5client; phase remainsunqualified, no assignment adopted. Sourceplan/provenance complete; rootfiles/private rawdetails in current-action.md.
+
+Preserve originals/forks/metadata/preferences/saveidentity, privateDonly, no push/upload/deploy. Continue withoutperlevelstops. Prior checkpoints in localGit history.

@@ -22,6 +22,16 @@ test('EL keeps subcell and group separate and filters activation before capacity
  assert.throws(()=>decodeElevatorRecord({rawWords:[2,3,4,1,0,15]}),/subcell/);
  assert.deepEqual(elevatorGeometry(decodeElevatorRecord(record())),{x:206,y:157});
 });
+test('one channel preserves opposite initial heights and reset restores each dot independently',()=>{
+ const controls=[decodeElevatorRecord({rawWords:[2,3,3,1,0,15]}),decodeElevatorRecord({rawWords:[2,4,1,0,0,15]}),decodeElevatorRecord({rawWords:[2,5,3,2,0,15]})],g=createElevatorSystem(controls,[{id:'raised',group:1},{id:'lowered',group:1,initialLowered:true},{id:'other',group:2}]);
+ assert.deepEqual(g.snapshot().dots.map(d=>d.phase),[12,0,12]);g.contact('human',0);g.observeClock(1);
+ assert.deepEqual(g.snapshot().dots.map(d=>[d.phase,d.step,d.humanAvailable]),[[11,-1,false],[1,1,false],[12,0,true]]);
+ for(let c=2;c<=12;c++)g.observeClock(c);assert.deepEqual(g.snapshot().dots.map(d=>[d.phase,d.humanAvailable]),[[0,false],[12,true],[12,true]]);
+ const before=g.snapshot().dots;assert.deepEqual(g.contact('human',1).map(e=>e.type),['enter','leave']);assert.deepEqual(g.snapshot().dots,before,'an empty channel control changes occupancy but no dot phase');
+ g.contact('enemy',2);g.observeClock(13);assert.equal(g.snapshot().dots[2].phase,11);
+ g.reset(50);assert.deepEqual(g.snapshot().dots.map(d=>d.phase),[12,0,12]);assert.equal(g.snapshot().controls[2].occupants,0);
+});
+
 test('a raised dot denies human grabs on the first lowering callback and sinks in twelve callbacks',()=>{
  let s=activateUpDownState(createUpDownState({group:1,clockCount:7}));
  assert.equal(s.humanAvailable,true);assert.equal(s.phase,12);

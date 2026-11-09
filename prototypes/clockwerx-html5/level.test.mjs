@@ -14,6 +14,21 @@ function fixture(){
    {kind:'SP',count:2,records:[{rawWords:[0,0,0,2,0,15]},{rawWords:[0,0,2,0,0,15]}]}]};
 }
 
+test('elevator goodies preserve mixed initial heights, group2 and inactive ordinary pivots',()=>{
+ const level=fixture();level.header.timeLimitRaw=90;level.blocks[0].records[2].version12ByteRaw=0;
+ level.cells.push({present:true,flagsRaw:0x4201,secondaryRaw:15,row:1,column:0},{present:true,flagsRaw:0x301,secondaryRaw:15,row:1,column:1},{present:true,flagsRaw:0x301,secondaryRaw:14,row:1,column:2},{present:true,flagsRaw:0x101,secondaryRaw:12,row:1,column:3});
+ level.blocks.push({kind:'EL',count:3,records:[{rawWords:[2,2,1,0,0,15]},{rawWords:[2,3,1,1,0,15]},{rawWords:[2,4,3,2,0,15]}]},{kind:'GO',count:1,records:[{rawWords:[2,2,169,0,15]}]},{kind:'PU',count:1,records:[{rawWords:[0,0,0,0,12]}]});
+ const options={angularSpeed:TAU,allowElevators:true,allowGoodies:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true,allowInactiveUpDownDots:true,allowOil:true};
+ assert.ok(levelRequirements(level,options).some(s=>s.includes('unqualified')||s.includes('qualified')));
+ const enabled={...options,allowElevatorGoodies:true},board=buildDecodedBoard(level,enabled);
+ assert.equal(board.elevatorGoodieRules,true);assert.equal(board.goodieOnlyRules,true);assert.equal(board.bombRules,false);assert.equal(board.puddles.length,0);
+ assert.equal(board.elevators.length,3);assert.deepEqual(board.dots.find(d=>d.id==='0,1').upDown,{group:1,initialLowered:true,x:74,y:120});assert.equal(board.dots.find(d=>d.id==='1,1').upDown.group,2);
+ for(const id of ['2,1','3,1']){const d=board.dots.find(d=>d.id===id);assert.equal(d.upDown,undefined);assert.equal(d.cell,1);assert.equal(d.present,true);}
+ level.cells[2].flagsRaw=0x4301;assert.ok(levelRequirements(level,enabled).includes('elevator goodies require raised/lowered white group1 and raised group2 dots'));level.cells[2].flagsRaw=0x4201;
+ level.blocks.at(-1).records[0].rawWords[4]=15;assert.ok(levelRequirements(level,enabled).includes('elevator goodies require active GO and no active Oil'));level.blocks.at(-1).records[0].rawWords[4]=12;
+ const npc=level.blocks[0].records[2];npc.gridPosition={row:1,column:0};assert.ok(levelRequirements(level,enabled).includes('elevator goodies require static actor starting pivots'));
+});
+
 test('protected bonuses require their independent canonical Child composition gate',()=>{
  const level=fixture();level.header.timeLimitRaw=90;level.cells[1].flagsRaw=0x4043;
  const options={angularSpeed:TAU,allowSpecialDots:true,allowEnemyStaticPrograms:true,allowStaticEnemyWalls:true,allowCanonicalPlayer:true,allowChildScoring:true};

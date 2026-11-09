@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 39,
-  "currentAction": "38Tempest accepted and locally active. Original/SVG2000/19transfers/190onsets; protected pickup/dwell original+SVG1000/15transfers/190onsets. Overlay phase unqualified. Through38 fixture9aa93ea4 verified and fresh39Dodger viewed. Begin39 active inventory/admission/cold review; no active runner/pending CUA.",
+  "currentAction": "39Dodger guarded elevatorGoodies/cold preparation validated:259runtime/15packaging/37prior334903updates. No active runner; plan3GO+goal legal inputs. Normal38 unchanged.",
   "levels": [
     {
       "ordinal": 1,
@@ -2831,8 +2831,12 @@
       "menuTitle": "Dodger",
       "resourceTitle": "Dodger",
       "sha256": "735faf0ac77023f98de0658b5ba799f6d5845af9091161fb24c50a8354c71bfc",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "guarded-source-cold-preparation-goal-route-next",
+      "nativeEvidence": [
+        "dodger/native-initial-01/report.json",
+        "dodger/cold-review.json",
+        "dodger/native-cold-elevator-comparison.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],
@@ -2879,7 +2883,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "preparation": "dodger-preparation.md"
     },
     {
       "ordinal": 40,

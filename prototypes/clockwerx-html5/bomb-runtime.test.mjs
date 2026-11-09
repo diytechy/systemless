@@ -9,6 +9,17 @@ const hero=()=>({sourceSlot:0,sourceActorType:0,visible:true});
 const enemy=slot=>({sourceSlot:slot,sourceActorType:1,visible:true});
 const dot=(id,row,column,extra={})=>({id,row,column,color:2,ring:false,bonus:false,burnt:false,humanCanGrab:true,nonhumanCanGrab:true,sourceInBackground:true,...extra});
 
+test('goodies admit separately enabled plain elevator dots and spikes without any fuse path',()=>{
+ const d=dot('lowered',1,1,{motion:'up-down',slideMask:0,teleport:false,present:true,color:0,sourceInBackground:false,sourceCollidable:false,humanCanGrab:false,upDown:{group:1,initialLowered:true}}),scope={dots:[d],actors:[hero(),enemy(2)],activeSections:{EL:2,SP:1}};
+ assert.throws(()=>assertGoodieRuntimeScope(scope),/dynamic/);
+ const enabled={...scope,allowElevatorGoodies:true};assert.equal(assertGoodieRuntimeScope(enabled),true);
+ assert.throws(()=>assertGoodieRuntimeScope({...enabled,activeSections:{SP:1}}),/active elevator/);
+ for(const change of [{bonus:true},{protected:true},{upDown:{group:2,initialLowered:true}},{motion:'static'},{upDown:null},{movingProgram:'n'}])assert.throws(()=>assertGoodieRuntimeScope({...enabled,dots:[{...d,...change}]}),/goodie/);
+ assert.throws(()=>assertGoodieRuntimeScope({...enabled,activeSections:{EL:2,BO:1}}),/combination/);
+ assert.throws(()=>fixture({scopeMode:'goodies',scope:enabled,goodies:[{row:1,column:1}]}),/fuses or routes/);
+ const f=fixture({scopeMode:'goodies',scope:enabled,bombs:[],routes:[],goodies:[{row:1,column:1,initialFrame:169}]});assert.equal(f.runtime.snapshot().goodies[0].frame,0);assert.equal(f.runtime.snapshot().matches.length,0);
+});
+
 test('moving-DO blasts use main visibility and outlines before the human-availability rule',()=>{
  const moving=(id,extra={})=>dot(id,1,1,{upDown:{group:0},motion:'up-down',sourceInBackground:false,sourceCollidable:true,...extra});
  const dots=[moving('raised'),moving('sinking',{humanCanGrab:false}),moving('hidden',{sourceCollidable:false}),dot('stationary',1,1)],tested=[],changed=[];

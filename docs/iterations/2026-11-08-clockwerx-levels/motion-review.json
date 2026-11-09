@@ -1,0 +1,238 @@
+{
+  "status": "passed",
+  "nativeTransfers": 9,
+  "goalOnsets": 190,
+  "sourceUnchanged": false,
+  "changedSourceFiles": [
+    "app.mjs",
+    "level.mjs",
+    "round.mjs",
+    "enemy-transfer.mjs"
+  ],
+  "runtimeChecks": 196,
+  "packagingChecks": 14,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 3809,
+    "guest_tick": 4409,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 4000,
+  "nativeNextLevel": "23: Candycane",
+  "nativeProfileTotal": 83000,
+  "nativeHandFits": {
+    "matches": 9,
+    "rawMaxError": 9.22882882882883,
+    "overdraw": [
+      {
+        "transfer": 1,
+        "expectedPivot": "6,3",
+        "observedPivot": "6,3",
+        "match": true,
+        "sourceFrame": 29,
+        "meanAbsoluteChannelError": 9.22882882882883
+      },
+      {
+        "transfer": 7,
+        "expectedPivot": "8,3",
+        "observedPivot": "8,3",
+        "match": true,
+        "sourceFrame": 12,
+        "meanAbsoluteChannelError": 1.0069084628670122
+      },
+      {
+        "transfer": 8,
+        "expectedPivot": "8,2",
+        "observedPivot": "8,2",
+        "match": true,
+        "sourceFrame": 12,
+        "meanAbsoluteChannelError": 2.2573402417962005
+      }
+    ],
+    "otherSixMaxError": 0.28708133971291866
+  },
+  "browser": {
+    "functionalGoalObserved": true,
+    "cadenceCaptureValid": false,
+    "invalidReasons": [
+      "simulation catch-up capped"
+    ],
+    "invalidCaptureFiles": [
+      "qa-final-goal-invalid-gap.json",
+      "qa-final-goal-invalid-gap-02.json",
+      "qa-foreground-invalid-gap-03.json"
+    ],
+    "earlierValidGoalCapture": "qa-goal-valid-idle.json",
+    "transfers": 9,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 4000,
+      "totalCommitted": 0,
+      "nextDotAward": 3000,
+      "completed": true,
+      "overallEarned": 4000
+    },
+    "timer": {
+      "enabled": false,
+      "original": 90,
+      "current": 90,
+      "saved": 90
+    },
+    "resets": 0
+  },
+  "clock": {
+    "boundary": "Independent original descriptor fits constrain source4/19hero plus six class1 WA actors, including two type4 rotating spikes. Pure NPC kernel uses original static pivots/permissions/outlines and actual green wall reversals. Coincident/overdrawn second-pivot fits are excluded. First8192hero-frame aliases only; not absolute reveal/hardware timing or gate proof.",
+    "firstGuestTick": 1864,
+    "heroPoses": 24,
+    "npcPoses": 198,
+    "phaseIntervals": [
+      [
+        72.73684210526315,
+        72.78947368421052
+      ]
+    ],
+    "chosenPhase": 72.76315789473684,
+    "rejectedHeroCount": 9
+  },
+  "jointPeriod": {
+    "boundary": "Pure static class1 NPC with source wall response full state including pivots/frame/direction/PC/visibility/orphan plus hero64. Not wall-time gameplay performance.",
+    "jointSourceFramePeriod": 12992
+  },
+  "omittedWallCounterexampleIntervals": [],
+  "rotatingSpikePoses": {
+    "count": 66,
+    "minError": 0.42857142857142855,
+    "maxError": 0.46405228758169936
+  },
+  "contact": {
+    "report": {
+      "status": "passed",
+      "frontend_ticks": 3194,
+      "guest_tick": 3794,
+      "budget_exhausted_frames": 0
+    },
+    "transfers": 7,
+    "originalOutlineIntersections": [
+      {
+        "name": "motion-contact-dp05",
+        "guestTick": 3148,
+        "hero": {
+          "frame": 5,
+          "error": 0.2596491228070175
+        },
+        "orb": {
+          "frame": 31,
+          "error": 5.550161812297735
+        },
+        "sourceOutlinesIntersect": true,
+        "nextBestHero": [
+          {
+            "frame": 6,
+            "error": 57.82838283828383
+          },
+          {
+            "frame": 4,
+            "error": 61.878787878787875
+          }
+        ],
+        "nextBestOrb": [
+          {
+            "frame": 32,
+            "error": 59.52750809061489
+          },
+          {
+            "frame": 33,
+            "error": 66.7378640776699
+          }
+        ]
+      },
+      {
+        "name": "motion-contact-dp06",
+        "guestTick": 3149,
+        "hero": {
+          "frame": 5,
+          "error": 0.2596491228070175
+        },
+        "orb": {
+          "frame": 31,
+          "error": 5.550161812297735
+        },
+        "sourceOutlinesIntersect": true,
+        "nextBestHero": [
+          {
+            "frame": 6,
+            "error": 57.82838283828383
+          },
+          {
+            "frame": 4,
+            "error": 61.878787878787875
+          }
+        ],
+        "nextBestOrb": [
+          {
+            "frame": 32,
+            "error": 59.52750809061489
+          },
+          {
+            "frame": 33,
+            "error": 66.7378640776699
+          }
+        ]
+      }
+    ],
+    "modelProposedGuest": 3143,
+    "firstObservedIntersectionGuest": 3148,
+    "effectImage": "native-contact-01/motion-contact-effect.png",
+    "returnImage": "native-contact-01/motion-contact-return.png",
+    "limits": "Reason0 from source/model; no native protected-dot immunity witness; proposed time differs five ticks"
+  },
+  "priorScenes": {
+    "decodedBoards": 20,
+    "identicalFinalSnapshots": 20,
+    "steps": 132176
+  },
+  "background": {
+    "name": "motion-fresh-initial",
+    "meanAbsoluteChannelError": 0.3814403748920952,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "fixture": {
+    "sha256": "e43236649cee81e7a9516a88300270535355ec0fcd11dd790a0510c1392a3b58",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true
+  },
+  "limits": [
+    "Final browser cadence captures have scheduling gaps; goal state corroborated but cadence/smoothness unqualified",
+    "Other five bonuses unvisited",
+    "Type4 only class1/no walls/n-only program PC>=1; other variants separately gated",
+    "Protection bypass from source and runtime checks; no protected dot in22",
+    "Fractional hero/canonical clocks, exact hardware/reveal/input cadence unqualified",
+    "Current/saved90timer source/browser only, hidden in native Child HUD",
+    "No comparable resource benchmark"
+  ],
+  "activation": {
+    "scenes": 22,
+    "sources": 25,
+    "payloads": 75,
+    "sizes": {
+      "sourceBytes": 167125,
+      "assetBytes": 2687382,
+      "manifestBytes": 1771519,
+      "totalBytes": 4626026
+    },
+    "priorSceneDefinitionsUnchanged": 21,
+    "oldPayloadsUnchanged": 73,
+    "protectedFilesUnchanged": true,
+    "rollback": "motion/previous-live-pilot"
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\motion",
+  "review": "motion-review.md"
+}

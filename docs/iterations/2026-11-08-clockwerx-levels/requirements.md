@@ -147,3 +147,6 @@ Balance demonstrates a stricter cap constraint: two individually safe edge angle
 
 
 Doubleback crosses four disappearing rings in a fixed order. Original pixels show collapse, full disappearance and restoration at each ring; the browser separately confirms hidden rings deny humans and later regain availability. A recently released pivot can remain present and nonhuman-available while a human cannot grab it. Source-backed lunar PICT403 is separate from map topology. The 22-transfer/two-bonus native/SVG witness earns 4000 points and passes 190 finite onsets. See [Doubleback](doubleback-review.md).
+
+
+Motion introduces type4 spiked orbs orbiting pivots. They share integer WA clocks but suppress ordinary match/switch effects and bypass ordinary protected-dot immunity. The source original64-pose collider stays independent from smooth orbital SVG art. The accepted native/SVG nine-transfer/two-bonus goal earns4000; a separate original seven-transfer contact route intersects the orb, explodes and returns. Later browser cadence captures are invalidated by scheduling gaps and supply no smoothness qualification. See [Motion](motion-review.md).

@@ -225,8 +225,8 @@ async function loadScene(scene){
   if(board.puddles.length)rules.push('Touching sleeping oil wakes it. It pursues you across dots and can split. Avoid letting it grab your pivot.');
   if(board.doors.length)rules.push('Switch entry toggles matching doors; release changes only the switch art.');
   if(board.staticEnemyCallbacks)rules.push('Enemy hands rotate and follow their own timed patterns.');
-  if(board.rotatingSpikeRules)rules.push('Spiked orbs circle their pivots.');
   else if(board.enemies.some(h=>h.program))rules.push('Programmed hands reverse when facing an available neighboring dot.');
+  if(board.rotatingSpikeRules)rules.push('Spiked orbs circle their pivots.');
   if(board.dots.some(d=>d.ring))rules.push('Rings disappear after you leave them and later return.');
   if(board.dots.some(d=>d.waystation))rules.push('Checkpoints store your return position and time.');
   if(board.dots.some(d=>d.protected))rules.push('Protected dots stop ordinary enemy contact; spikes remain lethal.');

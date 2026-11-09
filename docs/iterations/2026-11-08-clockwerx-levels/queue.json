@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 22,
-  "currentAction": "Motion22: fresh through21 baseline passed; qualify type4 rotating-spike art/outlines/dispatch and nonordinary hooks before a goal witness",
+  "currentOrdinal": 23,
+  "currentAction": "Candycane23: fresh through22 native baseline passed; qualify fast class5 rotating spike and inactive EL/up-down property handling",
   "levels": [
     {
       "ordinal": 1,
@@ -1533,11 +1533,27 @@
       "menuTitle": "Motion",
       "resourceTitle": "Motion",
       "sha256": "437104d4e3c41981feb6d997de23a6ed9187d024cc6b6191c0b9db3393d1654a",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal-browser-cadence-unqualified",
+      "nativeEvidence": [
+        "motion/native-goal-01/report.json",
+        "motion/native-goal-01/motion-after-route.png",
+        "motion/native-goal-01/next-after-motion.png",
+        "motion/native-contact-review.json",
+        "motion/native-contact-01/motion-contact-effect.png",
+        "motion/native-contact-01/motion-contact-return.png"
+      ],
+      "requirements": [
+        "distinct type4 orbital art and64source collision poses",
+        "bounded class1/n-only nonordinary callback policy",
+        "protection bypass and ordinary match/switch suppression"
+      ],
+      "svgStatus": "activated nine transfers / two bonuses / 4000 Child goal; native type4 contact/death/return; later browser cadence captures invalid",
+      "generationConstraints": [
+        "actor type controls contact hooks independently of its clock",
+        "n-only program PC must skip Pascal length byte",
+        "orbit interpolation does not alter original collision lattice",
+        "browser scheduling evidence remains separate from native functional qualification"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 87,
@@ -1564,7 +1580,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1582,7 +1598,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "motion-review.md"
     },
     {
       "ordinal": 23,

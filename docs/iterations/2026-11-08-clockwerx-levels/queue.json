@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 29,
-  "currentAction": "Crossing29 next: fresh native progress relaunch passed2224/2824/0 and29p174000 reviewed. Enclosure28 accepted/activated, no active runner. Prepare29 from source inventory and original cold captures; retain canonical timing gates and full qualification.",
+  "currentAction": "Crossing29 raw07goal7000/56transfers/5craters and190onsets pass; native01qualification running. Inspect current-action/active jobs; live28.",
   "levels": [
     {
       "ordinal": 1,
@@ -2038,7 +2038,7 @@
       "menuTitle": "Crossing",
       "resourceTitle": "Crossing",
       "sha256": "d031b60f874f50b97a948a708ffac9a7eb388b56dd7074d3c85c9360a3d6601d",
-      "status": "queued",
+      "status": "preparing-native-and-browser-qualification",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -2086,6 +2086,13 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "preparationEvidence": [
+        "crossing/source-inventory.json",
+        "crossing/cold-reset-reference-review.json",
+        "crossing/candidate-route-07.json",
+        "crossing/checked-route.json",
+        "crossing/native-goal-01.json"
       ]
     },
     {

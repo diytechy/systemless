@@ -1,0 +1,57 @@
+{
+  "status": "guarded-preparation-not-accepted",
+  "ordinal": 32,
+  "title": "Sentry",
+  "liveOrdinal": 31,
+  "sourceResourceId": 202,
+  "sourceSha256": "e74dd6076515b305b76a25183f501a2a273ee02b5d75dae4344f9eeca506fe6d",
+  "scope": "canonicalOil plus explicit staticEnemyWalls admits free class4 red hands only; other slow/programmed or wall-reacting classes remain gated",
+  "validation": {
+    "runtimeTests": 224,
+    "packagingTests": 14,
+    "priorDecodedBoardsIdentical": 30,
+    "priorSnapshotsIdentical": 30,
+    "priorReplayUpdates": 271304
+  },
+  "nativeCold": {
+    "images": 33,
+    "poses": 132,
+    "exact": 130,
+    "redExact": 99,
+    "redTotal": 99,
+    "heroOneFrameDifferences": 2,
+    "legalIdleUpdates": 686,
+    "stateAssignments": false
+  },
+  "inventory": {
+    "pivots": 56,
+    "bonuses": 16,
+    "walls": 6,
+    "activeOil": 1,
+    "inactiveOil": 5,
+    "activeRedHands": 3,
+    "inactiveNPCs": 2,
+    "activeWallCheckingHands": 1
+  },
+  "candidateRoute": {
+    "transfers": 23,
+    "bonusPickups": 5,
+    "score": 16000,
+    "finiteOnsetsPassed": 190,
+    "oilTriggered": false,
+    "nativeReplay": "running-native-goal-01-session87391",
+    "rootVisibleReplay": "running-IAB112"
+  },
+  "qa": {
+    "scenes": 32,
+    "payloads": 80,
+    "previousScenesUnchanged": 31,
+    "newPayloads": 0
+  },
+  "pending": [
+    "Original goal/next and hand-pose review",
+    "Separate actual-input Oil activation/failure/reset diagnostic",
+    "Visible SVG goal",
+    "Activation and earned-through32 fixture"
+  ]
+}

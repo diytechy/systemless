@@ -202,3 +202,8 @@ A narrowly gated static Child composition combines original-callback human/NPC m
 
 
 Hallway31 is now accepted with matching original/SVG1,000goals and190finite onsets.21transferhero poses exact;fouroneframe differences remain in wider cold/gameplay captures.21PUposes/12standingDPsets match; separate original/modelOil death andWYrespawn pass. MovingDPintermediates/cloning/all12bonus pickups remainunvisited. See[review](hallway-review.md).
+
+
+## Sentry preparation: slow red hands with Oil
+
+Canonical Oil and explicit static wall qualification jointly permit free class4 red hands, including wall-checking hands. Programmed slow hands, other slow colors and wall-reacting classes1/3 remain gated. All99cold red poses match existing callback clocks and wall reflection. The16,000candidate avoids Oil; separate activation/failure/reset and original/SVG goals remain pending.

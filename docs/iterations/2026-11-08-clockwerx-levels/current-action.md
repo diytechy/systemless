@@ -4,11 +4,15 @@ Continue all remaining ClockWerx SVG levels on **SVG-Port**. **31 bounded Child 
 
 ## Exact next action: Sentry32
 
-No active functional/native/model/build/benchmark process remains. Sentry native-initial-01 is CLOSED/PASS: 2,224 frontend ticks, 2,824 guest ticks, zero budget exhaustion, 33 cold captures. Actual32 Sentry/player p/186,000 is viewed. Earned through31 fixture is verified with a native relaunch. Options already select32; do not append another p.
+Sentry native-initial-01 is CLOSED/PASS:2,224frontend/2,824guest/0budget,33cold captures. Actual32Sentry/playerp/186,000 is viewed; earned through31 fixture is verified. Options already select32; do not append anotherp.
 
-Source RND2_202 SHAe74dd6076515b305b76a25183f501a2a273ee02b5d75dae4344f9eeca506fe6d: version12, large display8, time150Child, 56pivots, 16bonuses, goal10,1, six WL, six PU/one active kind1, one WP, seven WA/three active ordinary red class4 hands (one wall-checking). No SP, doors, BO/GO, WY, EX/EL or weapons. Exact source stays private.
+Guarded preparation now exists: see [preparation](sentry-preparation.md)/[packet](sentry-preparation.json). Source RND2_202 has56pivots,16bonuses,goal10,1,sixwalls,one active type1Oil/five inactive PU and three free class4 red hands(one wall-checking)/two inactive NPCs. No doors, BO/GO, WY, SP, EX/EL or weapons. Exact data stays private.
 
-Hallway's canonicalOil gate intentionally rejects Sentry's class4/wall-checking NPC composition. Review existing static-enemy wall/clock code, independently fit native cold poses and derive a legal idle history before introducing a separate narrow eligibility gate. Reuse the stage4 original backdrop. Prepare separate QA32, solve through actual inputs and require a finite certificate, original goal/next and root visible SVG goal before acceptance. Astra remains quota-blocked untilNov 13; do not retry/bypass. No level-32 source change or QA32 exists yet.
+canonicalOil plus staticEnemyWalls explicitly admits free class4 red hands; programmed slow hands, other slow colors and wall-reacting class1/3 Oil compositions remain gated. No clock/wall constants change.224runtime/14packaging tests pass;30prior boards/final route snapshots are identical over271,304updates. Fresh686legal idle updates match130/132cold poses, all99red poses exact, two human one-frame differences retained. No state assignments.
+
+Candidate04 completes23transfers/fivebonuses/16,000points, all190finite onsets pass. It avoids Oil; separate actual-input Oil activation/death/reset qualification is pending. Native-goal-01 is RUNNING(session87391); visible QA32 route is RUNNING in root IAB112(binding sentryTab), http://localhost:8091/sentry/qa/dist/clockwerx-html5/. Check report/process before duplicating. Save root goalPNG/AX before Pause; CUA part is ongoing, no summary yet. QA32 preserves31prior definitions/all80payloads, no new assets. Live remains31paused in tab92. Do not activate32 until original goal/next, hand poses, separate Oil diagnostic and visible SVG goal are reviewed. Then earn through32 and continue33.
+
+Astra quota-blocked untilNov13; no retry/bypass. Two functional runners maximum; no active heavy build/benchmark. Original/forks/saves preserved. Source changes are preparation, not acceptance.
 
 ## Latest accepted: Hallway31
 
@@ -24,7 +28,7 @@ Through31 fixture SHAfb2dfd78befe70f1be0404ca13b8ca5a7966b3e417b65706c14837b0f1a
 
 ## Browser and tools
 
-Only normal **IAB2/tab92**, binding foregroundTab, remains: http://localhost:8087/clockwerx-html5/,31 Hallway PAUSED after select/restart/pause smoke. Mark deliverable each turn. QA111 goal PNG/AX are saved at hallway/qa-goal-page.png and hallway/qa-goal-ax.txt;111is CLOSED, do not reuse hallwayTab. Last CUA summary: Activated the thirty-one-level ClockWerx pilot. No pending CUA part. Browser levelReviewBrowser is ID2, visible/default viewport; file handle svgFs. First CUA after compaction must be exactly await cua.rewriteDocumentation();. Open QA32 on the existing browser when ready. Root supported visible IAB only; never retry the Windows/Edge URL-policy failure or bypass a browser stop. Save goal PNG before Pause. Browser cadence remains unqualified; no new resource benchmark.
+Normal **IAB2/tab92**, binding foregroundTab, remains: http://localhost:8087/clockwerx-html5/,31 Hallway PAUSED after select/restart/pause smoke. Mark deliverable each turn. QA111 goal PNG/AX are saved at hallway/qa-goal-page.png and hallway/qa-goal-ax.txt;111is CLOSED, do not reuse hallwayTab. Last CUA summary: Activated the thirty-one-level ClockWerx pilot. QA112 is currently running; its CUA part is ongoing. Browser levelReviewBrowser is ID2, visible/default viewport; file handle svgFs. First CUA after compaction must be exactly await cua.rewriteDocumentation();. Reuse sentryTab112 for the current QA32 route. Root supported visible IAB only; never retry the Windows/Edge URL-policy failure or bypass a browser stop. Save goal PNG before Pause. Browser cadence remains unqualified; no new resource benchmark.
 
 Private root: D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels. Live: D:/SystemlessBuild/private-library-20261107/dist-v2/clockwerx-html5. Owned servers8087live,8091QA(preview-owned.json),8092isolated(native-server-owned.json). Keep live playable.
 

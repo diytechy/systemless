@@ -44,6 +44,16 @@ test('Oil reset follows the restored checkpoint and explicit restart follows the
  g.reset();assert.equal(g.player.pivot,'a');assert.equal(g.oil.heroPivot,0);assert.equal(g.oil.now,now);
 });
 
+test('a separately qualified slow red hand bounces from a wall without activating Oil',()=>{
+ const {board,options}=canonicalOilFixture();
+ board.enemies=[{name:'red',pivot:'b',angle:0,direction:1,sourceActorType:1,speedClass:4,group:500,program:null,canonicalFrame:true,frame:0,unwrappedFrame:0,checksWalls:true,visible:true,orphaned:false}];
+ const near={left:-1,top:-1,right:1,bottom:1,rows:null},far={left:20,top:-1,right:22,bottom:1,rows:null};
+ options.outlines.groups['500']={frames:Array.from({length:64},(_,i)=>({...((i===1)?near:far)}))};options.outlines.groups['800']={frames:[near]};board.walls=[{id:'w',x:48,y:0,frame:0}];
+ assert.throws(()=>new SourceRound(board,options),/qualified static Child/);board.staticEnemyWallRules=true;
+ const g=new SourceRound(board,options),enemy=g.enemies[0];g.animateStaticEnemy(enemy,3,{remainder:0,multiplier:1,divisor:8},{remaining:38,clientRemainder:0},true);
+ assert.equal(enemy.frame,63);assert.equal(enemy.direction,-1);assert.equal(g.oil.puddles[0].triggered,false);assert.equal(g.oil.heroPivot,0);assert.equal(g.death,null);assert.equal(g.events.filter(e=>e.type==='enemy-wall-bounce').length,1);
+});
+
 test('canonical player waits for source callbacks and smooth drawing cannot choose its collision frame',()=>{
  const {board,options}=canonicalFixture(),g=new SourceRound(board,options);let fractional=false,callbacks=0;
  for(let i=0;i<240;i++){

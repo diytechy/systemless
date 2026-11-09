@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 32,
-  "currentAction": "Sentry32 next: fresh native CLOSED/PASS2224/2824/0,p186000viewed. Hallway31accepted/active original+SVG1000goals/190onsets,Oilpursuit/death/WYresetchecked; explicitfouroneframe pose limits. No active runner. Review class4red/wallchecking+Oil composition; no32source/QAyet.",
+  "currentAction": "Sentry32 guarded preparation224runtime/14packaging,30prior snapshots271304updates. Cold130/132,all99red exact; twohumanoneframe differences.23transfer16000modelgoal/190onsets. Native-goal-01 session87391 and visible QA112 running; separateOil diagnostic pending. Live31.",
   "levels": [
     {
       "ordinal": 1,
@@ -2272,7 +2272,7 @@
       "menuTitle": "Sentry",
       "resourceTitle": "Sentry",
       "sha256": "e74dd6076515b305b76a25183f501a2a273ee02b5d75dae4344f9eeca506fe6d",
-      "status": "source-preparation",
+      "status": "guarded-preparation-native-and-svg-running",
       "nativeEvidence": [
         "sentry/native-initial-01/report.json"
       ],
@@ -2321,6 +2321,10 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
+      ],
+      "preparationEvidence": [
+        "sentry-preparation.md",
+        "sentry-preparation.json"
       ]
     },
     {

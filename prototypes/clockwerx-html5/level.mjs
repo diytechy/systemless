@@ -26,7 +26,9 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
   if(!allowOil||!allowCanonicalPlayer||!allowEnemyStaticPrograms||!allowSpecialDots||!allowChildScoring)unsupported.push('canonical Oil requires Child movement, static actors, special dots and scoring');
   if(level.blocks?.some(b=>b.count&&['SP','DR','DS','BO','GO'].includes(b.kind)))unsupported.push('canonical Oil with additional hazards is unqualified');
   if(level.cells?.some(c=>c.present&&((c.flagsRaw&~0x4017)||(c.flagsRaw&6)===6||(c.flagsRaw&0x10)&&dotColorOffset(c.secondaryRaw)!==0)))unsupported.push('canonical Oil requires ordinary dots and uncolored static checkpoints');
-  if(level.blocks?.find(b=>b.kind==='WA')?.records.some(a=>(a.activationMaskRaw&activeMask)&&![0,6].includes(a.actorTypeRaw)&&(![1,2,3].includes(a.actorTypeRaw)||![1,3].includes(a.rawWords?.[7])||actorChecksWalls(a.version12ByteRaw??1))))unsupported.push('canonical Oil requires wall-free ordinary class1/3 enemies');
+  // The wall opt-in separately qualifies free slow red hands with Oil.
+  // Other clocks, programmed slow hands and wall-reacting classes1/3 stay gated.
+  if(level.blocks?.find(b=>b.kind==='WA')?.records.some(a=>(a.activationMaskRaw&activeMask)&&![0,6].includes(a.actorTypeRaw)&&!([1,2,3].includes(a.actorTypeRaw)&&[1,3].includes(a.rawWords?.[7])&&!actorChecksWalls(a.version12ByteRaw??1)||allowStaticEnemyWalls&&a.actorTypeRaw===1&&a.rawWords?.[7]===4&&a.programReferenceRaw<0)))unsupported.push('canonical Oil enemy composition is unqualified');
  }
  if(allowCombinedGoalBonus&&(!allowChildScoring||!allowSpecialDots))unsupported.push('combined goal/bonus requires source Child scoring');
  if(allowBombs&&allowGoodies)unsupported.push('exclusive bomb or goodie-only scope required');

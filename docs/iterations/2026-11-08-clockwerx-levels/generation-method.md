@@ -119,3 +119,6 @@ Hallway preparation adds a dynamic pursuit constraint: geometric reachability an
 
 
 Hallway31 qualification confirms the dynamic pursuit constraint: original/SVG1,000goals and190onsets pass;the rejected detour dies and restoresWY in both original/model. Carry precise reset targeting and clear oldDroplets beforearrival. New-levelgeneration remainsunimplemented.
+
+
+Sentry proposals expose timed occupancy: the shortest geometric path through a slow red pivot dies. The retained candidate detours around the central hand through the lower room. It passes190finite onsets for16,000modelpoints; original/SVG confirmation and separate Oil qualification are pending. Keep enemy clock phase and wall-reflection direction in the solver state.

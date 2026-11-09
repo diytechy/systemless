@@ -1,0 +1,125 @@
+{
+  "status": "accepted-with-limits-and-locally-active",
+  "nativeTransfers": 12,
+  "goalOnsets": 190,
+  "nativeGoalScore": 1000,
+  "qaGoalScore": 1000,
+  "sourceFilesChanged": [
+    "app.mjs",
+    "engine.mjs",
+    "level.mjs",
+    "round.mjs",
+    "elevators.mjs",
+    "enemy-transfer.mjs"
+  ],
+  "runtimeChecks": 236,
+  "packagingChecks": 15,
+  "priorSceneDefinitionsIdentical": 32,
+  "payloadsUnchanged": 80,
+  "payloadsAdded": 3,
+  "sourceCodeCommit": "b509a063",
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 4736,
+    "guest_tick": 5336,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeRiderReport": {
+    "status": "passed",
+    "frontend_ticks": 2490,
+    "guest_tick": 3090,
+    "budget_exhausted_frames": 0
+  },
+  "nativeTransferPoseMatches": 12,
+  "physicalSchedulePoses": {
+    "total": 192,
+    "positions": 192,
+    "frames": 184,
+    "oneFrameDifferences": 8
+  },
+  "controlEvidence": {
+    "states": 242,
+    "statesMatched": 242,
+    "cleanSurfaceFrames": 188,
+    "cleanSurfaceFramesMatched": 188,
+    "cleanCorePoses": 122,
+    "cleanCoreMatched": 118
+  },
+  "bonusCoreSamples": 165,
+  "limits": [
+    "Eight cold and eight gameplay frame differences retained; positions match. Four clean core poses differ one callback.",
+    "Rider before reset45/46clean points and44/46frames match; after reset41/41points but0/41frames match. Exact death/restart timing unqualified; cause unconfirmed, no timer/randomstream correction adopted.",
+    "Main route visits both active up/down dots and two controls, collects no bonuses. All five bonus cores observed, pickups unvisited. Attached NPC loss at full lowering is source/unit evidence only.",
+    "Gate limited to large/group1/subcell3/plain initially raised dots/wall-free ordinary NPCs/no other active hazards. Original glyph collision remains separate from smoothed art.",
+    "No new real-time cadence/resource/audio/controller/higherdifficulty/fullsave qualification."
+  ],
+  "ordinal": 33,
+  "title": "Sinkers",
+  "acceptedScenes": 33,
+  "resourceId": 5008,
+  "sourceSha256": "81edccd4f42982baa7ce226395afd52a1e128d4ca57d5562a4333d294a351994",
+  "cold": {
+    "images": 33,
+    "poses": 132,
+    "positionsMatch": 132,
+    "framesMatch": 124,
+    "legalIdleUpdates": 706
+  },
+  "priorRegressions": {
+    "scenes": 31,
+    "updates": 279331
+  },
+  "riderTiming": {
+    "beforeClean": 46,
+    "beforePositionMatches": 45,
+    "beforeFrameMatches": 44,
+    "afterClean": 41,
+    "afterPositionMatches": 41,
+    "afterFrameMatches": 0,
+    "exactTimingQualified": false
+  },
+  "progressFixture": {
+    "status": "forks-and-represented-metadata-verified-native-relaunch-verified",
+    "destinationSha256": "4a672a1fd44938a105403dc17963146ba0dd266715ae651e06d217c62b2718d3",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "metadataScope": "Both forks, file type/creator/flags/dates/raw16coordinates and represented folder dates. Folder Finder information is unexposed by machfs; original source image remains byte-identical. Raw aliases retained, resolution unqualified."
+  },
+  "activation": {
+    "sizes": {
+      "sourceBytes": 196044,
+      "assetBytes": 2955158,
+      "manifestBytes": 2971995,
+      "totalBytes": 6123197
+    },
+    "retainedPrevious": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\sinkers\\previous-live-pilot",
+    "sourceFiles": 26,
+    "assets": 83
+  },
+  "browser": {
+    "normalTab": 92,
+    "normalScene": 33,
+    "paused": true,
+    "qaTab": 113,
+    "qaClosed": true
+  },
+  "evidence": [
+    "sinkers/native-goal-01/report.json",
+    "sinkers/native-goal-comparison.json",
+    "sinkers/native-control-01/report.json",
+    "sinkers/real-control-probe-review.json",
+    "sinkers/native-surface-after-main-review.json",
+    "sinkers/native-rider-01/report.json",
+    "sinkers/native-rider-hero-comparison.json",
+    "sinkers/native-dot-background-review.json",
+    "sinkers/checked-route.json",
+    "sinkers/qa-goal-page.png",
+    "sinkers/qa-goal-page.txt",
+    "sinkers/normal-paused-page.png"
+  ]
+}

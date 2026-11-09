@@ -1,3 +1,5 @@
+**Historical preparation; superseded by [accepted review](sinkers-review.md).**
+
 # Sinkers guarded integration
 
 Sinkers33 remains unaccepted; live stays at32 scenes through Sentry. See the [packet](sinkers-preparation.json).

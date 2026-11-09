@@ -218,3 +218,6 @@ EL subcell and group are independent. Every entry toggles matching dots before o
 
 
 Sinkers guarded integration uses the unmodified resource and source +/-6 current-pixel queries.242control states and188clear160/1 surface frames match. The original1,000goal and190finite onsets pass. Eight cold/gameplay frame differences, four core callback differences and a post-death restart-phase difference remain explicit. Root visible SVG goal is pending; no scene acceptance yet.
+
+
+Sinkers33 is now accepted with original/SVG1000goals,12transferposes and190finite onsets. Controls242/surfaces188 match; fourcorecallback differences and all41postresetframe differences remain. Exact death/restart timing is unqualified. All165bonus cores match, pickups unvisited. See [review](sinkers-review.md).

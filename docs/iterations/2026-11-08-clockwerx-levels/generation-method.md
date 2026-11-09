@@ -131,3 +131,6 @@ Sinkers discovery adds shared-group control transitions,12-step availability/pos
 
 
 The unmodified Sinkers candidate crosses both active up/down pivots and enters two controls;190finite onsets and the original1,000goal pass. One unsuccessful raw Flip request is omitted and the held-input policy independently replayed. Carried positions and occupant death are modeled; exact post-death timing is still unqualified. This actual-map witness supersedes the simplified diagnostic proxy for planning evidence; new-level generation remains unimplemented.
+
+
+Sinkers33 acceptance supports timed group1 reachability with controls and carried pivots. Track current positions, direction, phase, occupants, actor-specific grab eligibility and the separate surface clock. The no-death witness cannot certify death/restart timing;41postresetframe differences remain. Allfivebonus pickups and attached NPC lowering loss need further original witnesses. See [review](sinkers-review.md).

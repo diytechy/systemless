@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 33,
-  "currentAction": "Sinkers33 guardedintegration236tests/15packaging/31priorregressions279331updates. Original1000/12transfers/190onsets passes;192points/184frames. QA113correctedroute+fresh34native running. Riderpostreset41frames differ, timingunqualified. Live32.",
+  "currentOrdinal": 34,
+  "currentAction": "Pigeonholes34 fresh original cold capture CLOSED/PASS2224/2824/0, actual34/playerp/203000 viewed. Inventory active source composition and capability gates next; Sinkers33 accepted with timing limits and locally active. No active runner.",
   "levels": [
     {
       "ordinal": 1,
@@ -2344,13 +2344,32 @@
       "menuTitle": "Sinkers",
       "resourceTitle": "Sinkers",
       "sha256": "81edccd4f42982baa7ce226395afd52a1e128d4ca57d5562a4333d294a351994",
-      "status": "guarded-integration-original-goal-passed-svg-running",
+      "status": "accepted-with-limits-and-locally-active",
       "nativeEvidence": [
-        "sinkers/native-initial-01/report.json"
+        "sinkers/native-goal-01/report.json",
+        "sinkers/native-goal-comparison.json",
+        "sinkers/native-control-01/report.json",
+        "sinkers/real-control-probe-review.json",
+        "sinkers/native-surface-after-main-review.json",
+        "sinkers/native-rider-01/report.json",
+        "sinkers/native-rider-hero-comparison.json",
+        "sinkers/native-dot-background-review.json",
+        "sinkers/checked-route.json",
+        "sinkers/qa-goal-page.png",
+        "sinkers/qa-goal-page.txt",
+        "sinkers/normal-paused-page.png"
       ],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "requirements": [
+        "group1 controls toggle on new entry, occupied controls still toggle",
+        "source +/-6 moving-pixel query then actor permission",
+        "carried hands, loss at phase0, distinct surface160/1 clock"
+      ],
+      "svgStatus": "visible goal and local select/restart/pause verified; smooth controls/surfaces and original collision separated",
+      "generationConstraints": [
+        "track group phase/direction, occupants and human/NPC eligibility",
+        "include control occupancy across transfers and moving target coordinates",
+        "do not certify death timing from geometric reachability"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 63,
@@ -2377,7 +2396,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": "bounded Child goal; death/restart phase and listed limits remain",
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x200",
@@ -2397,6 +2416,10 @@
       "preparationEvidence": [
         "sinkers-preparation.md",
         "sinkers-preparation.json"
+      ],
+      "reviewEvidence": [
+        "sinkers-review.md",
+        "sinkers-review.json"
       ]
     },
     {
@@ -2405,8 +2428,10 @@
       "menuTitle": "Pigeonholes",
       "resourceTitle": "Pigeonholes",
       "sha256": "3396d292744a6e107031e6ba822310f72bfdea3e706fd339f71d64182ff088fd",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "native-cold-passed-source-review-pending",
+      "nativeEvidence": [
+        "pigeonholes/native-initial-01/report.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],

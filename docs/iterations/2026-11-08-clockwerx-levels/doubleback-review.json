@@ -1,0 +1,576 @@
+{
+  "status": "passed",
+  "nativeTransfers": 22,
+  "goalOnsets": 190,
+  "sourceUnchanged": true,
+  "changedSourceFiles": [],
+  "inheritedRuntimeChecks": 191,
+  "inheritedPackagingChecks": 13,
+  "nativeReport": {
+    "status": "passed",
+    "frontend_ticks": 6479,
+    "guest_tick": 7079,
+    "budget_exhausted_frames": 0,
+    "save_export": {
+      "directory": "save-files",
+      "changed_files": 2,
+      "deleted_files": 0
+    }
+  },
+  "nativeLevelScore": 4000,
+  "nativeNextLevel": "22: Motion",
+  "nativeProfileTotal": 79000,
+  "nativeHandFits": {
+    "matches": 22,
+    "rawMaxError": 10.12565445026178,
+    "overdraw": [
+      {
+        "transfer": 1,
+        "expectedPivot": "1,2",
+        "observedPivot": "1,2",
+        "match": true,
+        "sourceFrame": 45,
+        "meanAbsoluteChannelError": 10.12565445026178
+      },
+      {
+        "transfer": 7,
+        "expectedPivot": "4,5",
+        "observedPivot": "4,5",
+        "match": true,
+        "sourceFrame": 35,
+        "meanAbsoluteChannelError": 2.7099099099099098
+      },
+      {
+        "transfer": 16,
+        "expectedPivot": "7,1",
+        "observedPivot": "7,1",
+        "match": true,
+        "sourceFrame": 35,
+        "meanAbsoluteChannelError": 2.7099099099099098
+      }
+    ],
+    "otherNineteenMaxError": 0.28708133971291866
+  },
+  "browser": {
+    "valid": true,
+    "transfers": 22,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 4000,
+      "totalCommitted": 0,
+      "nextDotAward": 3000,
+      "completed": true,
+      "overallEarned": 4000
+    },
+    "resets": 0,
+    "midCapture": {
+      "startTime": 47.59166666666461,
+      "endTime": 67.59999999999987,
+      "hiddenAtStart": [
+        "6,3"
+      ],
+      "allRestoredAtEnd": true
+    }
+  },
+  "clock": {
+    "boundary": "Independent original descriptor fits constrain source4/19hero plus two canonical class1 red n/s transfer enemies. Pure NPC kernel uses original static pivots/permissions; NPC wall checks are false; idle rings do not modify their trajectories. Coincident/overdrawn second-pivot fits are excluded. First8192hero-frame aliases only; not absolute reveal/hardware timing or gate proof.",
+    "firstGuestTick": 1864,
+    "heroPoses": 27,
+    "npcPoses": 66,
+    "phaseIntervals": [
+      [
+        73.73684210526315,
+        73.78947368421052
+      ],
+      [
+        457.7368421052632,
+        457.7894736842105
+      ],
+      [
+        841.7368421052631,
+        841.7894736842105
+      ],
+      [
+        1225.7368421052631,
+        1225.7894736842104
+      ],
+      [
+        1609.7368421052631,
+        1609.7894736842104
+      ],
+      [
+        1993.7368421052631,
+        1993.7894736842104
+      ],
+      [
+        2377.7368421052633,
+        2377.7894736842104
+      ],
+      [
+        2761.7368421052633,
+        2761.7894736842104
+      ],
+      [
+        3145.7368421052633,
+        3145.7894736842104
+      ],
+      [
+        3529.7368421052633,
+        3529.7894736842104
+      ],
+      [
+        3913.7368421052633,
+        3913.7894736842104
+      ],
+      [
+        4297.736842105263,
+        4297.789473684211
+      ],
+      [
+        4681.736842105263,
+        4681.789473684211
+      ],
+      [
+        5065.736842105263,
+        5065.789473684211
+      ],
+      [
+        5449.736842105263,
+        5449.789473684211
+      ],
+      [
+        5833.736842105263,
+        5833.789473684211
+      ],
+      [
+        6217.736842105263,
+        6217.789473684211
+      ],
+      [
+        6601.736842105263,
+        6601.789473684211
+      ],
+      [
+        6985.736842105263,
+        6985.789473684211
+      ],
+      [
+        7369.736842105263,
+        7369.789473684211
+      ],
+      [
+        7753.736842105263,
+        7753.789473684211
+      ],
+      [
+        8137.736842105263,
+        8137.789473684211
+      ]
+    ],
+    "chosenPhase": 73.76315789473684,
+    "rejectedHeroCount": 6
+  },
+  "jointPeriod": {
+    "boundary": "Pure static class1 NPC full state including pivots/frame/direction/PC/visibility/orphan plus hero64. Not wall-time gameplay performance.",
+    "jointSourceFramePeriod": 384
+  },
+  "nativeRingObservations": [
+    {
+      "pivot": "5,4",
+      "name": "doubleback-ring-01-d025",
+      "guestTick": 3733,
+      "proposedDelay": 0.25,
+      "main": {
+        "state": 26,
+        "error": 0.013888888888888888
+      },
+      "secondary": {
+        "state": 26,
+        "error": 7.048611111111111
+      },
+      "joint": {
+        "state": 26,
+        "error": 2.2457466918714557
+      }
+    },
+    {
+      "pivot": "5,4",
+      "name": "doubleback-ring-01-d075",
+      "guestTick": 3763,
+      "proposedDelay": 0.75,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "5,4",
+      "name": "doubleback-ring-01-d300",
+      "guestTick": 3898,
+      "proposedDelay": 3,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "5,4",
+      "name": "doubleback-ring-01-d560",
+      "guestTick": 4054,
+      "proposedDelay": 5.6,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "5,4",
+      "name": "doubleback-ring-01-d630",
+      "guestTick": 4096,
+      "proposedDelay": 6.3,
+      "main": {
+        "state": 23,
+        "error": 0.09027777777777778
+      },
+      "secondary": {
+        "state": 23,
+        "error": 0.3888888888888889
+      },
+      "joint": {
+        "state": 23,
+        "error": 0.1285444234404537
+      }
+    },
+    {
+      "pivot": "6,4",
+      "name": "doubleback-ring-02-d025",
+      "guestTick": 3961,
+      "proposedDelay": 0.25,
+      "main": {
+        "state": 26,
+        "error": 0.013888888888888888
+      },
+      "secondary": {
+        "state": 26,
+        "error": 0.08333333333333333
+      },
+      "joint": {
+        "state": 26,
+        "error": 0.19155639571518587
+      }
+    },
+    {
+      "pivot": "6,4",
+      "name": "doubleback-ring-02-d075",
+      "guestTick": 3991,
+      "proposedDelay": 0.75,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "6,4",
+      "name": "doubleback-ring-02-d300",
+      "guestTick": 4126,
+      "proposedDelay": 3,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "6,4",
+      "name": "doubleback-ring-02-d560",
+      "guestTick": 4282,
+      "proposedDelay": 5.6,
+      "main": {
+        "state": 29,
+        "error": 0.0
+      },
+      "secondary": {
+        "state": 29,
+        "error": 0.027777777777777776
+      },
+      "joint": {
+        "state": 29,
+        "error": 0.007561436672967864
+      }
+    },
+    {
+      "pivot": "6,4",
+      "name": "doubleback-ring-02-d630",
+      "guestTick": 4324,
+      "proposedDelay": 6.3,
+      "main": {
+        "state": 23,
+        "error": 0.09027777777777778
+      },
+      "secondary": {
+        "state": 23,
+        "error": 0.3888888888888889
+      },
+      "joint": {
+        "state": 23,
+        "error": 0.1285444234404537
+      }
+    },
+    {
+      "pivot": "6,3",
+      "name": "doubleback-ring-03-d025",
+      "guestTick": 4189,
+      "proposedDelay": 0.25,
+      "main": {
+        "state": 26,
+        "error": 0.013888888888888888
+      },
+      "secondary": {
+        "state": 26,
+        "error": 0.08333333333333333
+      },
+      "joint": {
+        "state": 26,
+        "error": 0.1720226843100189
+      }
+    },
+    {
+      "pivot": "6,3",
+      "name": "doubleback-ring-03-d075",
+      "guestTick": 4219,
+      "proposedDelay": 0.75,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "6,3",
+      "name": "doubleback-ring-03-d300",
+      "guestTick": 4354,
+      "proposedDelay": 3,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "6,3",
+      "name": "doubleback-ring-03-d560",
+      "guestTick": 4510,
+      "proposedDelay": 5.6,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "6,3",
+      "name": "doubleback-ring-03-d630",
+      "guestTick": 4552,
+      "proposedDelay": 6.3,
+      "main": {
+        "state": 23,
+        "error": 0.09027777777777778
+      },
+      "secondary": {
+        "state": 23,
+        "error": 0.3888888888888889
+      },
+      "joint": {
+        "state": 23,
+        "error": 0.1285444234404537
+      }
+    },
+    {
+      "pivot": "5,3",
+      "name": "doubleback-ring-04-d025",
+      "guestTick": 4417,
+      "proposedDelay": 0.25,
+      "main": {
+        "state": 26,
+        "error": 0.013888888888888888
+      },
+      "secondary": {
+        "state": 26,
+        "error": 0.08333333333333333
+      },
+      "joint": {
+        "state": 26,
+        "error": 0.026465028355387523
+      }
+    },
+    {
+      "pivot": "5,3",
+      "name": "doubleback-ring-04-d075",
+      "guestTick": 4447,
+      "proposedDelay": 0.75,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "5,3",
+      "name": "doubleback-ring-04-d300",
+      "guestTick": 4582,
+      "proposedDelay": 3,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "5,3",
+      "name": "doubleback-ring-04-d560",
+      "guestTick": 4738,
+      "proposedDelay": 5.6,
+      "main": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "secondary": {
+        "state": "hidden",
+        "error": 0.0
+      },
+      "joint": {
+        "state": "hidden",
+        "error": 0.0
+      }
+    },
+    {
+      "pivot": "5,3",
+      "name": "doubleback-ring-04-d630",
+      "guestTick": 4780,
+      "proposedDelay": 6.3,
+      "main": {
+        "state": 23,
+        "error": 0.09027777777777778
+      },
+      "secondary": {
+        "state": 23,
+        "error": 0.3888888888888889
+      },
+      "joint": {
+        "state": 23,
+        "error": 0.1285444234404537
+      }
+    }
+  ],
+  "background": {
+    "name": "doubleback-fresh-initial",
+    "meanAbsoluteChannelError": 0.3814403748920952,
+    "maxChannelError": 4.0,
+    "highErrorPixels": 0,
+    "highErrorBounds": null
+  },
+  "fixture": {
+    "sha256": "e50e45fb2ba6a58d1e6d960f92fb2baecc5226ee2ae8d53e4918de0b8bbf9545",
+    "filesVerified": 9,
+    "untouchedFilesVerified": 7,
+    "freshNextLevelRelaunch": true
+  },
+  "limits": [
+    "Other two bonuses not collected",
+    "No forced ring regrab, orphaning or death witness on21",
+    "Ring observation delays are relative to proposed input release, not exact native release time",
+    "Phase and pureNPC/hero period exclude ring clocks and absolute hardware cadence",
+    "No comparable resource benchmark"
+  ],
+  "activation": {
+    "scenes": 21,
+    "sources": 25,
+    "payloads": 73,
+    "sizes": {
+      "sourceBytes": 164575,
+      "assetBytes": 1881529,
+      "manifestBytes": 1642477,
+      "totalBytes": 3688581
+    },
+    "priorSceneDefinitionsUnchanged": 20,
+    "oldPayloadsUnchanged": 72,
+    "protectedFilesUnchanged": true,
+    "rollback": "doubleback/previous-live-pilot"
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\doubleback",
+  "review": "doubleback-review.md"
+}

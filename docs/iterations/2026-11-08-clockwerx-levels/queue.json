@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 21,
-  "currentAction": "Doubleback21: fresh through20 baseline; prepare original PICT403 lunar backdrop and qualify four white rings/two red programs",
+  "currentOrdinal": 22,
+  "currentAction": "Motion22: fresh through21 baseline passed; qualify type4 rotating-spike art/outlines/dispatch and nonordinary hooks before a goal witness",
   "levels": [
     {
       "ordinal": 1,
@@ -1465,11 +1465,23 @@
       "menuTitle": "Doubleback",
       "resourceTitle": "Doubleback",
       "sha256": "924cd8e6bdf2234125a020feb7763b0a0821175e633cd1b2e42ecbbe6e552f01",
-      "status": "queued",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "accepted-bounded-child-goal",
+      "nativeEvidence": [
+        "doubleback/native-goal-01/report.json",
+        "doubleback/native-goal-01/doubleback-after-route.png",
+        "doubleback/native-goal-01/next-after-doubleback.png",
+        "doubleback/native-own-ring-review.json"
+      ],
+      "requirements": [
+        "four disappearing rings with separate human availability and restoration clock",
+        "two class1 n/s programs and source-backed lunar backdrop"
+      ],
+      "svgStatus": "activated 22 transfers / four rings / two bonuses / 4000 Child goal; 190 onsets and original ring/pose checks",
+      "generationConstraints": [
+        "ring order and restoration time constrain reuse",
+        "pivot presence, human and nonhuman permissions remain separate",
+        "NPC-only period excludes ring clock"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 69,
@@ -1496,7 +1508,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -1512,7 +1524,8 @@
         "check program semantics and timing",
         "prove reachable goal and safe initial state",
         "native/rendered behavior comparison"
-      ]
+      ],
+      "acceptanceReview": "doubleback-review.md"
     },
     {
       "ordinal": 22,

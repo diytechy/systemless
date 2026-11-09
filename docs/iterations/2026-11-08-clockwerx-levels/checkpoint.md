@@ -1,9 +1,7 @@
 # Progress checkpoint
 
-Twenty bounded Child scenes accepted and active through Balance;80playable integrations remain. All100listed levels/120resources surveyed. Original69-title/frozen comparisons complete; do not restart. Doubleback21 is next.
+Twenty-one bounded Child scenes accepted and locally active through Doubleback; 79 playable integrations remain. All 100 listed levels / 120 resources surveyed. Original library and frozen comparisons complete. Continue Motion 22; read [current action](current-action.md).
 
-Balance original/SVG10transfer/onebonus/2000goal matches, native advances21Doubleback/75000.190onsets,22hero/99NPCposes, six SPI/four phases and four linked gates reviewed. Private planner now tracks incoming angular components around fixed caps. No runtime/art changes; inherited191runtime/13packaging plus actual20native/model/browser/hash/package checks. See [review](balance-review.md) and [packet](balance-review.json).
+Doubleback original/SVG 22-transfer/four-ring/two-bonus/4000 goals agree. All four original rings show disappearance and return, and a valid browser capture separately shows human availability returning. 190 finite onset cases pass. See [review](doubleback-review.md) and [packet](doubleback-review.json). New source-backed lunar PICT403 only; previous sources, 72 payloads and 20 scenes unchanged. Live 21-scene pilot is paused after its verified goal; QA99 closed.
 
-Live8087has20scenes/25sources/72payloads/3543011uncompressed bytes; full19backup and protected hashes in balance/activation.json. Normal92live20goal verified, PAUSED; QA98 CLOSED. Last CUA summary Activated the twenty-scene ClockWerx pilot; no pending part. All jobs CLOSED. Fresh21baseline26677 passed2224/2824/0, actual Doubleback/playerp/75000image reviewed, through20fixture unchanged. New PICT403lunar background must be source-extracted; conversion not started. Read [current action](current-action.md).
-
-19acceptance1ff003b9;20evidence commit follows. Requirements/generation notes include14through20. No push/upload/deploy, expensive build or new comparable resource benchmark. Continue beyond21.
+Fresh Motion native baseline session30195 passed 2224 / 2824 ticks with no budget exhaustion; actual Motion / player p / 79000 reviewed. Through21 fixture hash verified. All native/model/build/conversion/benchmark jobs closed. Type4 rotating spikes need new group3500 vector/outlines and nonordinary policy; they remain gated. Astra quota is unavailable; root source/image checks continue. No push/upload/deployment. Continue beyond22.

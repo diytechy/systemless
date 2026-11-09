@@ -24,11 +24,37 @@ test('rotating spikes require their own bounded opt-in and preserve noncardinal 
  actor.programReferenceRaw=0;level.blocks.push({kind:'WP',count:1,records:[{text:'nnnn'}]});
  assert.equal(buildDecodedBoard(level,options).enemies[0].sourcePC,1);
  actor.rawWords[6]=0;assert.ok(levelRequirements(level,options).includes('rotating spike program PC must skip length byte'));actor.rawWords[6]=1;
- level.blocks.at(-1).records[0].text='s';assert.ok(levelRequirements(level,options).includes('rotating spike static no-action program'));
- actor.programReferenceRaw=-1;actor.rawWords[7]=3;assert.ok(levelRequirements(level,options).includes('rotating spike canonical class1 without walls'));
- actor.rawWords[7]=1;actor.version12ByteRaw=1;assert.ok(levelRequirements(level,options).includes('rotating spike canonical class1 without walls'));
- actor.version12ByteRaw=0;assert.ok(levelRequirements(level,{allowRotatingSpikes:true}).includes('rotating spike canonical class1 without walls'));
+ level.blocks.at(-1).records[0].text='s';assert.ok(levelRequirements(level,options).includes('rotating spike program capability'));
+ actor.programReferenceRaw=-1;actor.rawWords[7]=3;assert.ok(levelRequirements(level,options).includes('rotating spike canonical clock without walls'));
+ actor.rawWords[7]=1;actor.version12ByteRaw=1;assert.ok(levelRequirements(level,options).includes('rotating spike canonical clock without walls'));
+ actor.version12ByteRaw=0;assert.ok(levelRequirements(level,{allowRotatingSpikes:true}).includes('rotating spike canonical clock without walls'));
  actor.actorTypeRaw=5;assert.ok(levelRequirements(level,options).includes('actor type 5'));
+});
+
+test('fast rotating-spike clocks and n/s transfers require independent capabilities',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];Object.assign(actor,{actorTypeRaw:4,version12ByteRaw:0,programReferenceRaw:0});actor.rawWords[7]=5;
+ level.blocks.push({kind:'WP',count:1,records:[{text:'nsns'}]});
+ const options={angularSpeed:TAU,allowRotatingSpikes:true,allowEnemyStaticPrograms:true,allowExtendedEnemyClocks:true};
+ assert.ok(levelRequirements(level,options).includes('rotating spike canonical clock without walls'));
+ assert.ok(levelRequirements(level,options).includes('rotating spike program capability'));
+ options.allowFastRotatingSpikes=true;assert.ok(levelRequirements(level,options).includes('rotating spike program capability'));
+ options.allowRotatingSpikeTransfers=true;const board=buildDecodedBoard(level,options);
+ assert.equal(board.enemies[0].divisor,1);assert.equal(board.enemies[0].speedClass,5);assert.equal(board.fastRotatingSpikeRules,true);assert.equal(board.rotatingSpikeTransferRules,true);
+ level.blocks.at(-1).records[0].text='f';assert.ok(levelRequirements(level,options).includes('rotating spike program capability'));
+ level.blocks.at(-1).records[0].text='ns';delete options.allowExtendedEnemyClocks;assert.ok(levelRequirements(level,options).includes('actor speed class 5'));
+});
+
+test('inactive elevator controls and up/down properties preserve plain usable pivots',()=>{
+ const level=fixture();level.cells[1].flagsRaw=0x101;level.cells[1].secondaryRaw=8;
+ level.blocks.push({kind:'EL',count:1,records:[{rawWords:[0,1,3,0,0,8]}]});
+ assert.ok(levelRequirements(level).includes('object class EL'));
+ assert.throws(()=>buildDecodedBoard(level,{angularSpeed:TAU}),/Unsupported/);
+ const options={angularSpeed:TAU,allowInactiveElevators:true,allowInactiveUpDownDots:true};
+ const dot=buildDecodedBoard(level,options).dots[1];assert.equal(dot.cell,1);assert.equal(dot.present,true);assert.equal(dot.motion,'static');assert.equal(dot.humanCanGrab,true);assert.equal(dot.nonhumanCanGrab,true);assert.equal(dot.kind,'dot');
+ level.blocks.at(-1).records[0].rawWords[5]=1;assert.ok(levelRequirements(level,options).includes('object class EL'));
+ level.blocks.at(-1).records[0].rawWords[5]=8;level.cells[1].secondaryRaw=15;
+ assert.ok(levelRequirements(level,options).some(x=>x.startsWith('special dot flags')));
+ level.cells[1].secondaryRaw=8;level.cells[1].flagsRaw=0x103;assert.throws(()=>buildDecodedBoard(level,options),/Unsupported/);
 });
 test('source half-index selects actual 64-angle descriptor, including wrap',()=>{
  assert.equal(sourceInitialFrame(24),48);assert.equal(sourceInitialFrame(40),16);

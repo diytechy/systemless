@@ -1,7 +1,6 @@
 import {stepSourceProgram} from './programs.mjs';
 
-// Static WA callbacks. Qualified type4 actors are bounded to class1 with
-// no transfer program; their nonordinary contact hooks belong to the caller.
+// Static WA callbacks. Qualified type4 clock and transfer capabilities are explicit; their nonordinary contact hooks belong to the caller.
 // True EX sliding, moving/up-down dots, teleports and type5 remain unsupported.
 const offsets={0:[1,0],16:[0,1],32:[-1,0],48:[0,-1]};
 const integer=n=>Number.isInteger(n);
@@ -42,7 +41,7 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
@@ -52,8 +51,8 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
   const validate=s=>validateState(s,allowRotatingSpikes);
   validate(next);
-  if(next.sourceActorType===4&&(next.speedClass!==1||next.checksWalls!==false||program!==null&&!/^n+$/.test(program)))
-    throw new Error('Qualified rotating spike requires class1, no walls and a no-action program');
+  if(next.sourceActorType===4&&(!(next.speedClass===1||allowFastRotatingSpikes&&next.speedClass===5)||next.checksWalls!==false||program!==null&&!(allowRotatingSpikeTransfers?/^[ns]+$/:/^n+$/).test(program)))
+    throw new Error('Qualified rotating spike requires an enabled clock, no walls and an enabled no-action/transfer program');
   if(next.sourceActorType===4&&program!==null&&(!integer(next.sourcePC)||next.sourcePC<1||next.sourcePC>program.length))
     throw new Error('Qualified rotating spike PC must skip the Pascal length byte');
   if(program!==null)stepSourceProgram(program,next.sourcePC,{frame:1}); // validate without consuming

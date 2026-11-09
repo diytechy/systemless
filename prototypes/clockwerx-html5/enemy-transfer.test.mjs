@@ -18,6 +18,18 @@ test('qualified rotating spike uses integer WA animation and n-only PC without t
  assert.throws(()=>advanceStaticEnemyCallback({...spike,sourceActorType:5},1,o),/ordinary canonical/);
 });
 
+test('fast orbital transfer reverses around the new pivot with continuous orb position',()=>{
+ const spike=actor({sourceActorType:4,speedClass:5,checksWalls:false}),o=options({program:'s',allowRotatingSpikes:true});
+ assert.throws(()=>advanceStaticEnemyCallback(spike,1,o),/enabled clock/);
+ assert.throws(()=>advanceStaticEnemyCallback(spike,1,{...o,allowFastRotatingSpikes:true}),/program/);
+ const r=advanceStaticEnemyCallback(spike,2,{...o,allowFastRotatingSpikes:true,allowRotatingSpikeTransfers:true});
+ assert.deepEqual([r.state.pivot,r.state.frame,r.state.direction,r.state.sourcePC],['b',31,-1,1]);
+ assert.equal(r.events.filter(e=>e.type==='program-transfer').length,1);
+ // At the cardinal transfer instant, radius24 and a48-pixel pivot shift
+ // leave the source orb at the same world coordinate after the half-turn.
+ assert.equal(0+24,48+24*Math.cos(Math.PI));
+});
+
 test('s reverses before release, jumps pivot/frame, then runs ordered grab hooks',()=>{
   const seen=[];
   const hook=label=>(s,d,c)=>seen.push([label,s.pivot,s.frame,s.direction,d.id,c.human]);

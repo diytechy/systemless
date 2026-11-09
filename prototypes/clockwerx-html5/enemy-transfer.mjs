@@ -4,6 +4,10 @@ import {stepSourceProgram} from './programs.mjs';
 // True EX sliding, moving/up-down dots, teleports and type5 remain unsupported.
 const offsets={0:[1,0],16:[0,1],32:[-1,0],48:[0,-1]};
 const integer=n=>Number.isInteger(n);
+export function isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false}={}) {
+ return typeof program==='string'&&program.length>0&&[...program].every(c=>c==='n'||c==='s'&&allowRotatingSpikeTransfers||c==='b'&&allowRotatingSpikeBounces);
+}
+
 function validateState(s,allowRotatingSpikes=false) {
   if(!s||![1,2,3,...(allowRotatingSpikes?[4]:[])].includes(s.sourceActorType)||!integer(s.frame)||s.frame<0||s.frame>63||
      ![-1,1].includes(s.direction)||typeof s.visible!=='boolean'||typeof s.orphaned!=='boolean')
@@ -41,7 +45,7 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
@@ -51,8 +55,9 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
   const validate=s=>validateState(s,allowRotatingSpikes);
   validate(next);
-  if(next.sourceActorType===4&&(!(next.speedClass===1||allowFastRotatingSpikes&&next.speedClass===5)||next.checksWalls!==false||program!==null&&!(allowRotatingSpikeTransfers?/^[ns]+$/:/^n+$/).test(program)))
-    throw new Error('Qualified rotating spike requires an enabled clock, no walls and an enabled no-action/transfer program');
+  if(next.sourceActorType===4&&(!(next.speedClass===1||allowFastRotatingSpikes&&next.speedClass===5||allowSlowRotatingSpikes&&next.speedClass===4)||next.checksWalls!==false||program!==null&&!isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers,allowRotatingSpikeBounces})))
+    throw new Error('Qualified rotating spike requires an enabled clock, no walls and an enabled no-action/bounce/transfer program');
+  if(next.sourceActorType===4&&next.speedClass===4&&program!==null)throw new Error('Qualified slow rotating spike requires a free clock');
   if(next.sourceActorType===4&&program!==null&&(!integer(next.sourcePC)||next.sourcePC<1||next.sourcePC>program.length))
     throw new Error('Qualified rotating spike PC must skip the Pascal length byte');
   if(program!==null)stepSourceProgram(program,next.sourcePC,{frame:1}); // validate without consuming

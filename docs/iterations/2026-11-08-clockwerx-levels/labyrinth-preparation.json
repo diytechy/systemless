@@ -1,0 +1,77 @@
+{
+  "status": "guarded-source-preparation-only-original-and-svg-goals-pending",
+  "ordinal": 30,
+  "title": "Labyrinth",
+  "liveOrdinal": 29,
+  "newCapabilities": [
+    "free class4 orbital with divisor8/multiplier1; programmed slow orbitals remain rejected",
+    "class1 n/b orbital program; bounce needs a present nonhuman-available neighbor; f and other unqualified commands stay rejected"
+  ],
+  "sourceFilesChanged": [
+    "app.mjs",
+    "enemy-transfer.mjs",
+    "level.mjs",
+    "round.mjs"
+  ],
+  "testsChanged": [
+    "enemy-transfer.test.mjs",
+    "level.test.mjs"
+  ],
+  "validation": {
+    "runtimeTests": 219,
+    "packagingTests": 14,
+    "priorDecodedBoardsIdentical": 28,
+    "priorFinalSnapshotsIdentical": 28,
+    "priorReplayUpdates": 256390
+  },
+  "nativeCold": {
+    "report": "labyrinth/native-initial-01/report.json",
+    "frontendTicks": 2224,
+    "guestTicks": 2824,
+    "budgetExhausted": 0,
+    "actualOrdinal": 30,
+    "actualPlayer": "p",
+    "actualTotal": 181000,
+    "images": 33,
+    "poseCandidates": 297,
+    "cleanFits": 277,
+    "cleanPositionsAndFramesMatched": 277,
+    "allPositionsAndFramesMatched": 296,
+    "rawOverdrawMatched": 19,
+    "unusableOverdraw": 1,
+    "legalIdleFixedUpdates": 682,
+    "normalReset": false,
+    "clockOrActorAssignments": false,
+    "sourcePoseReview": "labyrinth/native-source-pose-fits-disambiguated.json"
+  },
+  "nativeObjects": {
+    "doors": 8,
+    "doorSamples": 264,
+    "doorPhaseMatches": 264,
+    "maxDoorError": 0.6880222841225627,
+    "switches": 8,
+    "switchSamples": 264,
+    "switchFrameMatches": 264,
+    "maxSwitchError": 0.7113821138211383,
+    "bonusCoreSamples": 297,
+    "bonusCoresPreferred": 297,
+    "checkpointCoreSamples": 66,
+    "unlitPreferred": 66,
+    "backgroundBorderPixels": 73940,
+    "maxBackgroundChannelError": 0.6451897935262826
+  },
+  "qa": {
+    "scenes": 30,
+    "checkedRoute": false,
+    "priorDefinitionsIdentical": 29,
+    "payloadsUnchanged": 79,
+    "browserOpened": false
+  },
+  "limits": [
+    "Cold source/model comparison calibrates the reference; independent gameplay goals and finite input witness remain pending.",
+    "Raw unrestricted3500fits are preserved. Disambiguated review excludes only17/18px sprite rectangles within2px of independently stored stationary SPI source rectangles; no expected phase filtering.",
+    "One severely overdrawn orbital observation cannot establish a pose.19other raw observations match but retain errors above2.",
+    "Live29package/source remains unchanged; new gates are used only in separateQA30.",
+    "No new CPU/memory/cadence/audio/hardware/nonChild/save-compatibility qualification."
+  ]
+}

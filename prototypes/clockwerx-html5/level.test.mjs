@@ -60,6 +60,27 @@ test('fast rotating-spike clocks and n/s transfers require independent capabilit
  level.blocks.at(-1).records[0].text='ns';delete options.allowExtendedEnemyClocks;assert.ok(levelRequirements(level,options).includes('actor speed class 5'));
 });
 
+test('orbital bounces require separate program qualification from transfers',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];Object.assign(actor,{actorTypeRaw:4,version12ByteRaw:0,programReferenceRaw:0});actor.rawWords[2]=4;
+ level.blocks.push({kind:'WP',count:1,records:[{text:'nnnb'}]});
+ const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowRotatingSpikes:true,allowRotatingSpikeTransfers:true};
+ assert.ok(levelRequirements(level,options).includes('rotating spike program capability'));
+ const board=buildDecodedBoard(level,{...options,allowRotatingSpikeBounces:true});assert.equal(board.rotatingSpikeBounceRules,true);assert.equal(board.enemies[0].program,'nnnb');
+ level.blocks.at(-1).records[0].text='f';assert.ok(levelRequirements(level,{...options,allowRotatingSpikeBounces:true}).includes('rotating spike program capability'));
+});
+
+test('slow class4 orbitals require their own capability without widening other clocks or walls',()=>{
+ const level=fixture(),actor=level.blocks[0].records[2];Object.assign(actor,{actorTypeRaw:4,version12ByteRaw:0});actor.rawWords[2]=4;actor.rawWords[7]=4;
+ const options={angularSpeed:TAU,allowEnemyStaticPrograms:true,allowRotatingSpikes:true};
+ assert.ok(levelRequirements(level,options).includes('rotating spike canonical clock without walls'));
+ assert.ok(levelRequirements(level,{...options,allowFastRotatingSpikes:true}).includes('rotating spike canonical clock without walls'));
+ const board=buildDecodedBoard(level,{...options,allowSlowRotatingSpikes:true});
+ assert.equal(board.slowRotatingSpikeRules,true);assert.equal(board.enemies[0].speedClass,4);assert.equal(board.enemies[0].divisor,8);assert.equal(board.enemies[0].multiplier,1);assert.equal(board.enemies[0].canonicalFrame,true);
+ actor.programReferenceRaw=0;level.blocks.push({kind:'WP',count:1,records:[{text:'n'}]});assert.ok(levelRequirements(level,{...options,allowSlowRotatingSpikes:true}).includes('slow rotating spike requires a free clock'));actor.programReferenceRaw=-1;
+ for(const speedClass of [2,3,5]){actor.rawWords[7]=speedClass;assert.ok(levelRequirements(level,{...options,allowSlowRotatingSpikes:true}).includes('rotating spike canonical clock without walls'));}
+ actor.rawWords[7]=4;actor.version12ByteRaw=1;assert.ok(levelRequirements(level,{...options,allowSlowRotatingSpikes:true}).includes('rotating spike canonical clock without walls'));
+});
+
 test('inactive elevator controls and up/down properties preserve plain usable pivots',()=>{
  const level=fixture();level.cells[1].flagsRaw=0x101;level.cells[1].secondaryRaw=8;
  level.blocks.push({kind:'EL',count:1,records:[{rawWords:[0,1,3,0,0,8]}]});

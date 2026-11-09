@@ -1,6 +1,7 @@
 // Adapter for source-decoded private round data. No original map/text/art lives
 // here. Successful structural decoding alone never enables unsupported rules.
 import {TAU} from './engine.mjs';
+import {isQualifiedOrbitalProgram} from './enemy-transfer.mjs';
 import {decodeDot,dotColorOffset} from './dots.mjs';
 import {spikeGridPoint,actorInitialFrame,actorTiming} from './hazards.mjs';
 import {compileWallTiles,actorChecksWalls} from './walls.mjs';
@@ -18,7 +19,7 @@ export function decodedGridOrigin(header){
 
 export const sourceInitialFrame=actorInitialFrame;
 
-export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCombinedGoalBonus=false,allowChildScoring=false}={}){
+export function levelRequirements(level,{activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCombinedGoalBonus=false,allowChildScoring=false}={}){
  const unsupported=[];
  if(allowCanonicalPlayer&&(!allowEnemyStaticPrograms||allowOil))unsupported.push("canonical player requires static Child actor callbacks without sliding");
  if(allowCombinedGoalBonus&&(!allowChildScoring||!allowSpecialDots))unsupported.push('combined goal/bonus requires source Child scoring');
@@ -41,8 +42,9 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
    if(!(actor.activationMaskRaw&activeMask))continue;
    if(!(actor.actorTypeRaw in GROUPS)||actor.actorTypeRaw===4&&!allowRotatingSpikes)unsupported.push('actor type '+actor.actorTypeRaw);
    if(actor.actorTypeRaw===4&&allowRotatingSpikes){
-    if(!allowEnemyStaticPrograms||!(actor.rawWords?.[7]===1||allowFastRotatingSpikes&&actor.rawWords?.[7]===5)||actorChecksWalls(actor.version12ByteRaw??1))unsupported.push('rotating spike canonical clock without walls');
-    if(actor.programReferenceRaw>=0&&!(allowRotatingSpikeTransfers?/^[ns]+$/:/^n+$/).test(programs[actor.programReferenceRaw]||''))unsupported.push('rotating spike program capability');
+    if(!allowEnemyStaticPrograms||!(actor.rawWords?.[7]===1||allowFastRotatingSpikes&&actor.rawWords?.[7]===5||allowSlowRotatingSpikes&&actor.rawWords?.[7]===4)||actorChecksWalls(actor.version12ByteRaw??1))unsupported.push('rotating spike canonical clock without walls');
+    if(actor.rawWords?.[7]===4&&actor.programReferenceRaw>=0)unsupported.push('slow rotating spike requires a free clock');
+    if(actor.programReferenceRaw>=0&&!isQualifiedOrbitalProgram(programs[actor.programReferenceRaw],{allowRotatingSpikeTransfers,allowRotatingSpikeBounces}))unsupported.push('rotating spike program capability');
     if(actor.programReferenceRaw>=0&&actor.rawWords?.[6]<1)unsupported.push('rotating spike program PC must skip length byte');
    }
    if(actor.programReferenceRaw>=0){
@@ -79,8 +81,8 @@ export function levelRequirements(level,{activeMask=1,allowOil=false,allowInacti
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCombinedGoalBonus=false}={}){
- const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors,allowRotatingSpikes,allowFastRotatingSpikes,allowRotatingSpikeTransfers,allowInactiveElevators,allowInactiveUpDownDots,allowInactiveRings,allowBombObjectInteractions,allowCanonicalPlayer,allowCombinedGoalBonus,allowChildScoring});
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCombinedGoalBonus=false}={}){
+ const unsupported=levelRequirements(level,{activeMask,allowOil,allowInactiveSpikes,allowEnemyBouncePrograms,allowEnemyStaticPrograms,allowSpecialDots,allowBombs,allowClass3Enemies,allowActiveDotMasks,allowInactivePlainDotMasks,allowProtectedWaypoints,allowGoodies,allowStaticEnemyWalls,allowExtendedEnemyClocks,allowProgrammedEnemyWalls,allowInitiallyOpenDoors,allowRotatingSpikes,allowFastRotatingSpikes,allowSlowRotatingSpikes,allowRotatingSpikeTransfers,allowRotatingSpikeBounces,allowInactiveElevators,allowInactiveUpDownDots,allowInactiveRings,allowBombObjectInteractions,allowCanonicalPlayer,allowCombinedGoalBonus,allowChildScoring});
  if(unsupported.length)throw new Error('Unsupported level requirements: '+unsupported.join(', '));
  if(!(angularSpeed>0))throw new RangeError('Explicit qualified or disclosed angular speed required');
  const origin=decodedGridOrigin(level.header);
@@ -131,7 +133,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
  return {ordinal,title,resourceId:level.resourceId,origin,dots,radius:48,distanceTolerance:1,angularSpeed,handOffsetY:1,
   player:hand(actors[0],0),demos:[],enemies:actors.slice(2).map((a,i)=>hand(a,i+2)),spikes,walls,doors,switches,
   puddles:allowOil?activePuddleSpecs(records('PU'),activeMask):[],
-  ...(allowCanonicalPlayer?{canonicalPlayerRules:true}:{}),...(allowBombObjectInteractions?{bombObjectInteractionRules:true}:{}),...(allowCombinedGoalBonus?{combinedGoalBonusRules:true}:{}),...(allowRotatingSpikes?{rotatingSpikeRules:true,...(allowFastRotatingSpikes?{fastRotatingSpikeRules:true}:{}),...(allowRotatingSpikeTransfers?{rotatingSpikeTransferRules:true}:{})}:{}),bombRules:allowBombs,goodieOnlyRules:allowGoodies,staticEnemyWallRules:allowStaticEnemyWalls,bombs:allowBombs?records('BO'):[],goodies:(allowBombs||allowGoodies)?records('GO').filter(r=>(r.rawWords[3]*65536+r.rawWords[4])&activeMask).map(r=>({row:r.rawWords[0],column:r.rawWords[1],initialFrame:r.rawWords[2]})):[],
+  ...(allowCanonicalPlayer?{canonicalPlayerRules:true}:{}),...(allowBombObjectInteractions?{bombObjectInteractionRules:true}:{}),...(allowCombinedGoalBonus?{combinedGoalBonusRules:true}:{}),...(allowRotatingSpikes?{rotatingSpikeRules:true,...(allowFastRotatingSpikes?{fastRotatingSpikeRules:true}:{}),...(allowSlowRotatingSpikes?{slowRotatingSpikeRules:true}:{}),...(allowRotatingSpikeTransfers?{rotatingSpikeTransferRules:true}:{}),...(allowRotatingSpikeBounces?{rotatingSpikeBounceRules:true}:{})}:{}),bombRules:allowBombs,goodieOnlyRules:allowGoodies,staticEnemyWallRules:allowStaticEnemyWalls,bombs:allowBombs?records('BO'):[],goodies:(allowBombs||allowGoodies)?records('GO').filter(r=>(r.rawWords[3]*65536+r.rawWords[4])&activeMask).map(r=>({row:r.rawWords[0],column:r.rawWords[1],initialFrame:r.rawWords[2]})):[],
   activeMask,difficulty:'Child',childScoreRules:allowChildScoring,sourceDotPermissions:true,specialDotRules:allowSpecialDots,staticEnemyCallbacks:allowEnemyStaticPrograms,timeLimit:level.header.timeLimitRaw,
   inactiveActorCount:records('WA').length-actors.length,
   texts:records('TX').map(t=>({font:t.fontName,size:t.fontSize,face:t.fontFaceRaw,

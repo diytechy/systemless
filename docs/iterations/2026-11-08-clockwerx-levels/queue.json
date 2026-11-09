@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 30,
-  "currentAction": "Labyrinth30 next: earned through29/fresh30 verified.29Crossing accepted/locally activated; no functional runner active. Slow class4orbital needs source/native qualification; do not relax gates speculatively.",
+  "currentAction": "Labyrinth30 guarded slow/free and normal bouncing orbital preparation;219runtime/14packaging/28prior-regression checks pass. Cold277clean+19rawposes match; one unusable. No active runner; next actual-input route, native and SVG goals. Live29unchanged.",
   "levels": [
     {
       "ordinal": 1,
@@ -2116,7 +2116,7 @@
       "menuTitle": "Labyrinth",
       "resourceTitle": "Labyrinth",
       "sha256": "90e80009d7d1ca3b2ed593500e74f857caa3d4901e4438103b77cdb9c0a9a4cd",
-      "status": "source-preparation",
+      "status": "guarded-source-preparation",
       "nativeEvidence": [
         "labyrinth/native-initial-01/report.json"
       ],
@@ -2170,8 +2170,13 @@
       ],
       "preparationEvidence": [
         "labyrinth/source-inventory.json",
-        "labyrinth/native-source-pose-fits.json"
-      ]
+        "labyrinth/native-source-pose-fits.json",
+        "labyrinth/native-source-pose-fits-disambiguated.json",
+        "labyrinth/cold-model682-review.json",
+        "labyrinth/cold-door-phase-review.json",
+        "labyrinth/prior-scenes-review.json"
+      ],
+      "review": "labyrinth-preparation.md"
     },
     {
       "ordinal": 31,

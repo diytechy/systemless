@@ -30,6 +30,19 @@ test('fast orbital transfer reverses around the new pivot with continuous orb po
  assert.equal(0+24,48+24*Math.cos(Math.PI));
 });
 
+test('free slow orbital qualification and normal orbital bounce permissions stay independent',()=>{
+ const spike=actor({sourceActorType:4,speedClass:1,checksWalls:false}),seen=[],o=options({program:'b',allowRotatingSpikes:true,afterAnimate:s=>seen.push(['animate',s.frame]),onDotRelease:()=>seen.push(['release'])});
+ assert.throws(()=>advanceStaticEnemyCallback(spike,1,o),/program/);
+ const enabled={...o,allowRotatingSpikeBounces:true};
+ const result=advanceStaticEnemyCallback(spike,1,enabled);assert.deepEqual([result.state.pivot,result.state.frame,result.state.direction],['a',0,-1]);assert.deepEqual(seen,[['animate',0]]);
+ const blocked=advanceStaticEnemyCallback(spike,1,{...enabled,dots:[dot('a',0,0),dot('b',48,0,{nonhumanCanGrab:false})]});assert.equal(blocked.state.direction,1);
+ assert.throws(()=>advanceStaticEnemyCallback(spike,1,{...enabled,program:'f'}),/program/);
+ const slow={...spike,speedClass:4};assert.throws(()=>advanceStaticEnemyCallback(slow,1,{...o,program:null}),/enabled clock/);
+ const free=advanceStaticEnemyCallback(slow,2,{...o,program:null,allowSlowRotatingSpikes:true});assert.deepEqual([free.state.pivot,free.state.frame,free.state.direction],['a',1,1]);
+ assert.throws(()=>advanceStaticEnemyCallback(slow,1,{...enabled,allowSlowRotatingSpikes:true}),/free clock/);
+ assert.throws(()=>advanceStaticEnemyCallback({...spike,speedClass:5},1,{...enabled,allowSlowRotatingSpikes:true}),/enabled clock/);
+});
+
 test('s reverses before release, jumps pivot/frame, then runs ordered grab hooks',()=>{
   const seen=[];
   const hook=label=>(s,d,c)=>seen.push([label,s.pivot,s.frame,s.direction,d.id,c.human]);

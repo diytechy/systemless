@@ -9,3 +9,5 @@ Guarded activation preserves28prior definitions,79payloads,25runtime files,prote
 Through29fixturefadd906017dd1c996d1d3008f519b75b580063db9fb39996bb5bacee6c348839verifies9files/bothforks/representedmetadata/7untouched. Fresh30Labyrinth/playerp181000is viewed at2224frontend/2824guest/0budget. Source-only30inventory and raw cold pose fits are private. New slow class4orbital needs an explicit gate/native qualification; raw3500fits currently alias stationary spikes. Resolve that identity ambiguity before phase fitting.
 
 Existing216runtime/14packaging checks apply to identical source. Audio,physicalcontroller,higherdifficulty,fullsavecompatibility and browsercadence remain unqualified. Continue beyond30; no new-level generator is implemented.
+
+Labyrinth guarded preparation now passes219runtime/14packaging checks and28prior board/snapshot regressions over256390updates. All277clean cold poses and19raw ones match fresh682idleupdates; oneoverdrawnorbitalfit is unusable.264doors/264controls/297bonuscores/66checkpointcores reviewed. Separate QA30only; live29unchanged, no active runner. See labyrinth-preparation.

@@ -77,7 +77,11 @@
     "stutter/failed-window-wait-06a.json",
     "stutter/failed-window-ignition-08.json",
     "stutter/delayed-ignition-review-10.json",
-    "stutter/robust-ignition-review-12.json"
+    "stutter/robust-ignition-review-12.json",
+    "stutter/candidate-ignition-13.json",
+    "stutter/checked-ignition-13.json",
+    "stutter/candidate-wait-blast-14.json",
+    "stutter/checked-wait-14.json"
   ],
   "pending": [
     "robust held-input prefix and full goal route",
@@ -173,5 +177,16 @@
     "cause": "red enemy beside pivot1,3",
     "result": "rejected as robust checked route",
     "runtimeOrClockChanges": false
+  },
+  "robustPrefix": {
+    "ignitionTransfers": 11,
+    "ignitionBonus": 1000,
+    "ignitionOnsetsPassed": 190,
+    "retreatAndBlastTransfers": 14,
+    "retreatAndBlastBonus": 1000,
+    "retreatAndBlastOnsetsPassed": 190,
+    "actualCraterNormalizedSeconds": 132.50000000004383,
+    "nativeWitnessForThisPath": false,
+    "fullGoal": false
   }
 }

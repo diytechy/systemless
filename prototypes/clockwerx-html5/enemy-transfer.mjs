@@ -2,7 +2,7 @@ import {startSliding,animateSliding,stopSliding} from './sliding.mjs';
 import {stepSourceProgram} from './programs.mjs';
 
 // Static WA callbacks. Qualified type4 clock and transfer capabilities are explicit; their nonordinary contact hooks belong to the caller.
-// Ordinary moving dots, EX sliding, teleports and type5 remain unsupported.
+// Ordinary moving dots and type5 remain unsupported; EX and teleports have explicit gates.
 // Up/down dots have an explicit capability and exact current-pixel queries.
 const offsets={0:[1,0],16:[0,1],32:[-1,0],48:[0,-1]};
 const integer=n=>Number.isInteger(n);
@@ -47,13 +47,15 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
   if(!Array.isArray(dots)||![adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab].every(f=>typeof f==='function'))
     throw new TypeError('Source dot and synchronous collision/grab adapters required');
   dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding));
+  if(allowSlidingPrograms&&dots.some(d=>d.slideMask&&d.humanCanGrab!==true))throw new Error('Static EX programs require human-available endpoints');
+  if(allowSlidingPrograms&&(!allowSliding||![1,2,3].includes(state.sourceActorType)||![1,2,3].includes(state.speedClass)||state.checksWalls!==false||program!==null&&(!/^[fn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1)))throw new Error('Separate ordinary wall-free f/n sliding program scope required');
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
   const validate=s=>validateState(s,allowRotatingSpikes,allowSliding);
   validate(next);
@@ -72,9 +74,10 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     if(!allowSliding||!animateSliding(next)){next.unwrappedFrame+=next.direction;next.frame=next.unwrappedFrame&63;}
     // Source WACollide runs before stop-slide/direct-program/start-slide.
     afterAnimate(next,context);validate(next);
-    if(allowSliding){const e=stopSliding(next,dots,{release:(d,s)=>onDotRelease(s,d,context),grab:(d,s)=>{onDotGrabFirst(s,d,context);afterDotGrab(s,d,context);}});if(e)events.push(e);if(program!==null)throw new Error('EX programmed actors unqualified');startSliding(next,dotAt(next.pivot));}
+    if(allowSliding){const e=stopSliding(next,dots,{release:(d,s)=>onDotRelease(s,d,context),grab:(d,s)=>{onDotGrabFirst(s,d,context);afterDotGrab(s,d,context);}});if(e)events.push(e);if(program!==null&&!allowSlidingPrograms)throw new Error('EX programmed actors unqualified');}
+    try {
     if(program===null)continue;
-    const instruction=stepSourceProgram(program,next.sourcePC,{frame:next.frame});
+    const instruction=stepSourceProgram(program,next.sourcePC,{frame:next.frame,sliding:next.sliding});
     next.sourcePC=instruction.sourcePC;
     if(!instruction.action)continue;
     const oldDot=dotAt(next.pivot),[dx,dy]=offsets[next.frame];
@@ -95,6 +98,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
       events.push({type:'orphaned',step,deadline:next.orphanDeadline});
     // Child nonhumans do not collect bonuses or activate human WY/goal hooks.
     afterDotGrab(next,target,context);validate(next);
+    } finally {if(allowSliding)startSliding(next,dotAt(next.pivot));}
   }
   // WAEnemyFrameProc:da22 AFTER all inner steps, even if it already moved to
   // an available dot. Expiration hides; it does not detach the actor clock.

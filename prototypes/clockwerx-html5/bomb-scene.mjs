@@ -3,6 +3,7 @@ import {BombRuntime,BOMB_CLOCKS,BOMB_SPRITES,bombStationaryDots,bombMovingDots,b
 import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
 import {bombHitsStationarySpike,bombHitsSwitch} from './bombs.mjs';
 import {dotBodyFrame} from './dots.mjs';
+import {bombStationaryWalls} from './walls.mjs';
 import {unbonusSlidingComponent} from './sliding-bombs.mjs';
 
 export class BombScene {
@@ -22,7 +23,7 @@ export class BombScene {
   if(b.slidingBombRules){this.clocks.match=createSourceTimerChain(50,2);this.clocks.explosion=createSourceTimerChain(50,3);}
   if(b.slidingGoodieRules||b.slidingOilGoodieRingRules)this.clocks.goodie=createSourceTimerChain(40,5);
   this.flourishClock=createSourceTimerChain(40,1);this.scoreClock=createSourceTimerChain(80,1);this.effects=[];this.craters=[];this.backgroundPaints=[];this.score=0;this.layer3=[];this.layer2=[];
-  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{allowSlidingBombs:b.slidingBombRules===true,allowSlidingBombCheckpoints:b.slidingBombCheckpointRules===true,allowSlidingOilGoodieRings:b.slidingOilGoodieRingRules===true,puddles:b.puddles,spikes:b.spikes,goodies:b.goodies,allowSlidingGoodiePrograms:b.slidingGoodieProgramRules===true,allowSlidingGoodies:b.slidingGoodieRules===true,connectors:b.connectors, dots:b.dots,actors:[round.player,...round.enemies],allowObjectInteractions:b.bombObjectInteractionRules===true,allowMovingOilElevators:b.bombOilElevatorRules===true,allowElevatorGoodies:b.elevatorGoodieRules===true,allowColoredElevatorGoodies:b.coloredElevatorGoodieRules===true,activeSections:{GO:b.goodies.length,EX:b.connectors?.length??0,SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length,EL:b.elevators?.length??0}}},{
+  this.runtime=new BombRuntime({bombs:b.bombs,goodies:b.goodies,routes,scopeMode:b.goodieOnlyRules?'goodies':'bombs',scope:{walls:b.walls,allowSlidingBombs:b.slidingBombRules===true,allowSlidingBombCheckpoints:b.slidingBombCheckpointRules===true,allowSlidingOilGoodieRings:b.slidingOilGoodieRingRules===true,puddles:b.puddles,spikes:b.spikes,goodies:b.goodies,allowSlidingGoodiePrograms:b.slidingGoodieProgramRules===true,allowSlidingGoodies:b.slidingGoodieRules===true,connectors:b.connectors, dots:b.dots,actors:[round.player,...round.enemies],allowObjectInteractions:b.bombObjectInteractionRules===true,allowMovingOilElevators:b.bombOilElevatorRules===true,allowElevatorGoodies:b.elevatorGoodieRules===true,allowColoredElevatorGoodies:b.coloredElevatorGoodieRules===true,activeSections:{GO:b.goodies.length,EX:b.connectors?.length??0,SP:b.spikes.length,WL:b.walls.length,DR:b.doors.length,DS:b.switches.length,PU:b.puddles.length,EL:b.elevators?.length??0}}},{
    clock:k=>this.clocks[k].advance(0).clientCount,latchedTick:()=>round.guestTicks,freshTick:()=>round.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),
    gridPixel:(g,o)=>this.gridPixel(g,o),effect:e=>this.effect(e),collides:(kind,s,a)=>outlineCollision(this.shape(kind,s),round.collider(a))});
   this.layer3.push(...this.runtime.matches.map((_,index)=>({kind:'LI',index})));
@@ -58,7 +59,8 @@ export class BombScene {
    if(e.target==='SP')for(const s of b.spikes)if(b.bombObjectInteractionRules||b.slidingBombRules?bombHitsStationarySpike(s,g):s.row===g.row&&(s.column===g.column||s.column===g.column+1))s.visible=false;
    if(e.target==='DS'&&b.bombObjectInteractionRules)for(const s of b.switches)if(bombHitsSwitch(s,g))s.visible=false;
    if(e.target==='WL'){
-    for(const w of b.walls)if((w.frame>=4&&w.row===g.row&&w.column===g.column)||(w.frame===0&&w.column===g.column&&[g.row,g.row+1].includes(w.row))||(w.frame===1&&w.row===g.row&&[g.column,g.column+1].includes(w.column)))w.visible=false;
+    if(b.slidingBombRules&&b.slidingBombCheckpointRules&&b.bombObjectInteractionRules)bombStationaryWalls(b.walls,g,paint=>this.backgroundPaints.push(paint));
+    else for(const w of b.walls)if((w.frame>=4&&w.row===g.row&&w.column===g.column)||(w.frame===0&&w.column===g.column&&[g.row,g.row+1].includes(w.row))||(w.frame===1&&w.row===g.row&&[g.column,g.column+1].includes(w.column)))w.visible=false;
     b.wallRevision=(b.wallRevision??0)+1;
    }
    if(e.target==='EL'&&b.bombOilElevatorRules)for(const change of r.elevators.bomb(g))this.backgroundPaints.push({kind:'EL',index:change.index,frame:change.backgroundFrame});

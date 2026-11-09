@@ -31,11 +31,11 @@ function staticDot(d,allowObjectInteractions=false){
 /** Call with the mode-filtered inventory before wiring a board. These are
  * normalized declarations, not a raw-level decoder. Empty absent sections
  * are permitted; future active combinations fail closed. */
-export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[]}={}){
+export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[],walls=[]}={}){
  if(mode!=='Child')throw new Error('Only Child bomb scope is supported');
  if(allowSlidingBombCheckpoints&&!allowSlidingBombs)throw new Error('EX bomb checkpoints require EX bomb core');
  if(allowSlidingBombCheckpoints&&!allowObjectInteractions)throw new Error('EX bomb checkpoints require existing bomb object interactions');
- if(allowSlidingBombs)return assertSlidingBombScope({dots,actors,connectors,bombs,activeSections,checkpoints:allowSlidingBombCheckpoints});
+ if(allowSlidingBombs)return assertSlidingBombScope({dots,actors,connectors,bombs,walls,activeSections,checkpoints:allowSlidingBombCheckpoints});
  if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
  if(allowMovingOilElevators&&!allowObjectInteractions)throw new Error('Moving Oil/elevator blasts require object interaction rules');
  for(const d of dots)if(allowMovingOilElevators&&d.upDown)plainUpDownDot(d);else staticDot(d,allowObjectInteractions);

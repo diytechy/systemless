@@ -220,6 +220,7 @@ function sourceSprite(target,asset,base){
 }
 function sourceDotPart(target,d,group,frame){sourceSprite(target,sourceDotPaint(manifest.vectorAssets,String(group),frame),{x:d.x-16,y:d.y-15});}
 function validateSourcePaintInventory(board){
+ if(board.slidingBombCheckpointRules)for(const frame of [2,3,4])if(!manifest.vectorAssets.walls?.frames.some(f=>f.frame===frame))throw new Error('Required source wall-erasure artwork is unavailable');
  for(const d of board.dots){
   for(const group of ['300','4100']){sourceDotPaint(manifest.vectorAssets,group,9+d.color);if(d.bonus)sourceDotPaint(manifest.vectorAssets,group,1+d.color);if(!d.ring)sourceDotPaint(manifest.vectorAssets,group,92+d.color);}
   if(d.waystation)for(let frame=79;frame<=89;frame++)for(const group of ['300','4100'])sourceDotPaint(manifest.vectorAssets,group,frame);
@@ -248,6 +249,7 @@ function seedSourceBackground(target,round){
 function paintSourceBackground(target,paint,round,field){
  if(paint.kind==='DO'){const d=round.board.dots.find(d=>d.id===paint.id);if(!d)throw new Error('Unknown source dot paint');sourceDotPart(target,d,300,paint.frame);sourceDotPart(target,d,4100,paint.frame);}
  else if(paint.kind==='EX'){const e=round.board.connectors.find(e=>e.id===paint.id);if(!e)throw new Error('Unknown source connector paint');sourceConnector(target,e,paint.frame,round);}
+ else if(paint.kind==='WL'){if(!round.board.slidingBombCheckpointRules)throw new Error('Unqualified source wall-erasure paint');sourceWall(target,paint,paint.frame);}
  else if(paint.kind==='crater')sourceBombBackground(target,round,paint,14);
  else if(paint.kind==='erase-spark-background'){const rect=sourceSparkEraseRect(paint,manifest.vectorAssets.bombs['1500'].frames);target.fillStyle=field.color;target.fillRect(rect.x,rect.y,rect.width,rect.height);}
  else throw new Error('Unknown source background operation '+paint.kind);

@@ -1,10 +1,12 @@
 import {validateConnectorBoard,connectorLook} from './sliding.mjs';
+import {validateBombWallTiles} from './walls.mjs';
 
 // Separate BO/static EX capability. Current starter permission is human-only;
 // class2/3, GO, moving pivots and richer object joins require their own scope.
-export function assertSlidingBombScope({dots=[],actors=[],connectors=[],bombs=[],activeSections={},initial=false,checkpoints=false}={}){
+export function assertSlidingBombScope({dots=[],actors=[],connectors=[],bombs=[],walls=[],activeSections={},initial=false,checkpoints=false}={}){
  if(!Array.isArray(dots)||!Array.isArray(actors)||!Array.isArray(bombs)||!bombs.length)throw new Error('Explicit BO/static EX inventory required');
  validateConnectorBoard(connectors,dots);
+ if(checkpoints){if(!walls.length||!dots.some(d=>d.waystation&&d.protected)||activeSections.SP>0)throw new Error('Separate BO/EX/protected WY/wall composition without SP required');validateBombWallTiles(walls);}
  for(const e of connectors)if(typeof e.sourceInitialBonus!=='boolean'||typeof e.sourceHasSprite!=='boolean'||typeof e.burnt!=='boolean'||typeof e.bonus!=='boolean'||e.sourceHasSprite!==e.sourceInitialBonus||initial&&(e.sourceInitialBonus!==e.bonus||e.burnt))throw new Error('BO/EX requires immutable source initial bonus/optimized identity and clean initial links');
  for(const[k,n]of Object.entries(activeSections))if(!Number.isInteger(n)||n<0||n&&!['BO','EX','SP','WP','WA','TX',...(checkpoints?['WY','WL']:[])].includes(k))throw new Error('Unqualified BO/EX section '+k);
  if(activeSections.BO!==undefined&&activeSections.BO!==bombs.length||activeSections.EX!==undefined&&activeSections.EX!==connectors.length)throw new Error('Matching BO/EX inventory required');

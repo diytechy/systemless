@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 58,
-  "currentAction": "Actual58goal+separatefreshliteral4486d4dc VERIFIED5164each/16transfers/2000points/fullstreams identical. Oldtimeout+partialpreserved; actualrange49139..49267/conservative49267. Rootreviewdone; saved-only51capture nativebuilder/isolatedQA prep. Native/SVGgoals/acceptance pending;normal57unchanged.",
+  "currentOrdinal": 59,
+  "currentAction": "58 bounded playable scenes accepted and locally active, source42. Normal Death ready/paused, complete57 rollback retained. Earnedthrough58 fixture679cd062 created/metadata verified, native59 relaunch pending; integrate59 serially using reviewed43-file candidate and focused tests/regressions. Actual59 imports/constructors/resets/updates0 until Root admission.",
   "levels": [
     {
       "ordinal": 1,
@@ -4598,11 +4598,16 @@
       "menuTitle": "Death",
       "resourceTitle": "Death",
       "sha256": "c0bb84c537c05baa13c4c919b09eb00f2a6303f015ca857f8dcd29d2a2118a80",
-      "status": "functional-goal-and-fresh-proof-native-svg-pending",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [
         "death58/native-initial-01/report.json",
         "death58/root-cold-visible-review.json",
-        "death58-native-cold-review/saved-recovery01/audit01/receipt.json"
+        "death58-native-cold-review/saved-recovery01/audit01/receipt.json",
+        "death58/native-goal-01/report.json",
+        "death58/native-goal-02/report.json",
+        "death58/native-goal-comparison02/receipt.json",
+        "death58-native-goal02-review/audit02/receipt.json",
+        "death58/root-bounded-acceptance.json"
       ],
       "requirements": [
         "current moving-dot source identity and first-match queries",
@@ -4610,7 +4615,7 @@
         "ordinary NPC source programs and initial moving riders",
         "independent optional bonus and static goal"
       ],
-      "svgStatus": "initial-qa-viewed-paused-no-goal",
+      "svgStatus": "goal2000-viewed-accepted-installed-normal-ready-paused",
       "generationConstraints": [
         "certify timed legal inputs with moving source identities",
         "retain aliases and property-mask misses",
@@ -4640,7 +4645,7 @@
           "GN": 0,
           "TR": 0
         },
-        "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
+        "boundary": "Bounded existing-map goal accepted with native/visible evidence; source callback sampling residuals and unvisited behavior retained."
       },
       "gameplayQualified": false,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
@@ -4654,11 +4659,10 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "native reset and input-margin qualification",
+        "remaining seven optional bonuses",
+        "arbitrary-input and full phase fidelity",
+        "audio, physical controller and save compatibility"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -4685,12 +4689,22 @@
       "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942",
       "functionalUpdatesSpent": 49267,
       "functionalUpdateBudget": 250000,
-      "functionalUpdatesSpentRange": [49139, 49267],
+      "functionalUpdatesSpentRange": [
+        49139,
+        49267
+      ],
       "functionalGoalUpdatesPerRun": 5164,
       "functionalGoalScore": 2000,
       "functionalHumanTransfers": 16,
       "functionalGoalProofReceiptSHA256": "4486d4dc575e834802ca7c4d670707752ea71e1e66e13473bbf02b8bf91d63e5",
-      "functionalOriginalTimeoutPreserved": true
+      "functionalOriginalTimeoutPreserved": true,
+      "rootGameplayAcceptanceSHA256": "cae3db119d255fd1f4c2a8b1b0e1083fef910263538e079a1bada118921e6457",
+      "nativeGoalComparisonSHA256": "2b9925095aa9eb6e80e0245ba61aafba88045688318ebd52ef4792ad1abbd4e0",
+      "nativeGoalIndependentAuditSHA256": "f9d20ca0b197d8640c591bd0f14eca90a3fbd449747b04e718ac2a54215291d2",
+      "localInstallationReviewSHA256": "fa512a472d036c78235fbd52b35dd5c7699ad0bc876492cc0879ba86411f53e5",
+      "earnedProgressFixtureSHA256": "679cd062c33ead2675c1b8fd170a2c3fa185f7ea2f63a5526a24932a1a7f5d5c",
+      "earnedFixtureReviewSHA256": "9f34c14b697e97ebcd47af422448c213cf0fcfd882f2da660ce0ad57c3f5cb3e",
+      "boundedChildQualified": true
     },
     {
       "ordinal": 59,
@@ -7868,10 +7882,10 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root review/queue/native/browser/activation; no concurrent model workload",
-    "B": "compact_observer: Rootreviewgate5e553842 authorizes saved-only58nativebuilder v2 andisolatedQA prep; no native/fitter/browser",
-    "C": "death58_continuation: CLOSED4486d4dc actualgoal+freshliteral/fullsavedpairaudit; no active model lease",
-    "D": "review59: private nestedreadonly observercandidate source-only/portabletests; no models/benchmark andpublic595unchanged"
+    "A": "Root serial59 integration/queue/browser; normal58 source42 active, no model lane active",
+    "B": "compact_observer: original-only59 fit/source-bank preparation; no native or fit run",
+    "C": "death58_continuation: writes bounded58 review/generation documentation only",
+    "D": "review59: source-only serial integration package; actual59 imports/constructors/resets/updates0"
   },
   "handoff": "session-handoff-2026-11-10.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",

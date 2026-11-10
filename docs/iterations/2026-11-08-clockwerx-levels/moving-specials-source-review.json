@@ -1,0 +1,23 @@
+{
+  "status": "ROOT_APPROVED_SOURCE_INTEGRATION_CHECKS_PASS_NOT54_55_GAMEPLAY",
+  "baseline": "01d72c3b039463d997534b731b826c4e2587a8fa",
+  "proposalSHA256": "1ea2755993cdca4788a13528ca8aeb3aae18fdcdfd7f566dd8f8d9b346a963f2",
+  "peerSHA256": "3ce7a92aa9f2332c20d957cb941075f243c5916df0016596fc77fe743118e544",
+  "integrationSHA256": "14bdc59195f9fa53ec7835e1a6ec23056c92363b10159b2358c3fc884e1dbc90",
+  "checks": {
+    "public": 375,
+    "actualSource": 8,
+    "packaging": 21,
+    "prior53Updates": 6534,
+    "prior53Fields": 22,
+    "prior53TimedCoreEvents": 174,
+    "runtimeFiles": 39
+  },
+  "normal53Unchanged": true,
+  "gameplayAdmitted": false,
+  "limits": [
+    "Source admissions only; actual54/55 constructors, reset/palette API and original outlines tested without model updates.",
+    "Gameplay, callback binding, native/source-phase confidence, SVG comparison, optional interactions and original saves remain separate.",
+    "V1 normalized guard holes and first root actual-test setup failure remain preserved; no failed result is accepted."
+  ]
+}

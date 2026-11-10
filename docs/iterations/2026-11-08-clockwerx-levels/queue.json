@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 54,
-  "currentAction": "53active;54coldoriginal+rawCLOSED192clear andRootvisualpass;54/55privatev1HOLDnormalizedguardholes/v2authorized;55rawprepared;59source-onlyprepactive.",
+  "currentAction": "53live38protected; shared39sourceapproved/root375+8+21/prior53all22exact, commit/handoff thenFocus54coldcalibration +parallelSQ55provisionaldiscovery.54rawclosed192clear;55rawprepared;59sourceprepready.",
   "levels": [
     {
       "ordinal": 1,
@@ -4223,7 +4223,14 @@
       "sourceDomainPeerStatus": "bounded-cold-approved",
       "sourceDomainPeerSHA256": "57a6ad565ec0e8369170a7fcb42d8837bfe24fa5f1f6bf8c12faa6d56a8e0017",
       "sourceHumanWallMetadataErratumPending": false,
-      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f"
+      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f",
+      "sourceCompositionStatus": "v2approved-rootvalidated-not-gameplay",
+      "sourceCompositionPeerSHA256": "3ce7a92aa9f2332c20d957cb941075f243c5916df0016596fc77fe743118e544",
+      "sourceCompositionIntegrationSHA256": "14bdc59195f9fa53ec7835e1a6ec23056c92363b10159b2358c3fc884e1dbc90",
+      "sourceReview": [
+        "moving-specials-source-review.md",
+        "moving-specials-source-review.json"
+      ]
     },
     {
       "ordinal": 55,
@@ -4301,7 +4308,14 @@
       "sourceDomainPeerStatus": "bounded-cold-approved",
       "sourceDomainPeerSHA256": "a803b3391dfbc75238020f30572d38281852567e38852d1639520c97611d4e31",
       "sourceHumanWallMetadataErratumPending": false,
-      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f"
+      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f",
+      "sourceCompositionStatus": "v2approved-rootvalidated-not-gameplay",
+      "sourceCompositionPeerSHA256": "3ce7a92aa9f2332c20d957cb941075f243c5916df0016596fc77fe743118e544",
+      "sourceCompositionIntegrationSHA256": "14bdc59195f9fa53ec7835e1a6ec23056c92363b10159b2358c3fc884e1dbc90",
+      "sourceReview": [
+        "moving-specials-source-review.md",
+        "moving-specials-source-review.json"
+      ]
     },
     {
       "ordinal": 56,
@@ -4594,7 +4608,10 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceDomainPreparationSHA256": "e14a283d691566f270d2756e72abe3d469fc78296300252cd0a8f6863a39ee5c",
+      "sourceDomainPeerStatus": "pending",
+      "sourceDomainClippingStatus": "10WLhypotheses60lost-universepixels;retainPRIMARY-full;conditional344attacheddomain"
     },
     {
       "ordinal": 60,

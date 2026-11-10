@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 56,
-  "currentAction": "55accepted;56native+oldSVG4000, correctedgenericReverse387tests+twofreshliteralgoals/exact54-55; correctedSVG replaypending.57cold+rawreviewcomplete/source41candidatependingserialintegration; zero57updates.",
+  "currentOrdinal": 57,
+  "currentAction": "56boundedaccepted/normal56ready-paused; source41validated.57modelgoal3512freshliteralexact; original/SVGgoalnext.58privatecandidate+peerapproved,serialintegrationpending57.",
   "levels": [
     {
       "ordinal": 1,
@@ -4394,10 +4394,10 @@
       "menuTitle": "Headache",
       "resourceTitle": "Headache",
       "sha256": "fc20fa6f176d6a6a35f5fc2da836e2be6d802a09150386c0589747877e423952",
-      "status": "original-goal-verified-svg-and-raw-review-pending",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "corrected4000goalverified; normal56readypaused",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4466,7 +4466,7 @@
       "sourceResetPeerStatus": "v2-bounded-approved-private-candidate-authorized",
       "sourceResetPeerSHA256": "80046c3df2c42a28f29166376a24e5427e207038126a6b8c0717ec29c3b29e08",
       "syntheticUnitUpdateCap": 10000,
-      "boundedChildQualified": false,
+      "boundedChildQualified": true,
       "sourceIntegrationReceiptSHA256": "8cacc2bcb5882a0c688e141d7150ccd2c67848b2b26baa2db3ca241aff3fc9c1",
       "actualGameplayUpdates": 5648,
       "nativeColdReportSHA256": "69d4f0d5da67f6d670a5cb5d8f8650002f4e8f90ecbccf099bc5459baf734eac",
@@ -4499,7 +4499,8 @@
       "nativeObservedScore": 4000,
       "nativeObservedNextLevel": 57,
       "pendingReverseCorrected": true,
-      "correctedSvgStatus": "replaying"
+      "correctedSvgStatus": "replaying",
+      "review": "headache-review.md"
     },
     {
       "ordinal": 57,
@@ -4507,7 +4508,7 @@
       "menuTitle": "Mortality",
       "resourceTitle": "Mortality",
       "sha256": "ffbaeea3c7d018026fac518a30f357b3d8dfaf4471d35199861a818050f0baf5",
-      "status": "original-cold-reviewed-source-admission-pending",
+      "status": "model-goal-verified-original-and-svg-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4574,7 +4575,16 @@
       "sourceDomainPeerSHA256": "4400897098be67db4c8e508cdfb2102459b3c98a4ba1059c9ae0a5043b771620",
       "sourceHumanWallMetadataErratumSHA256": "e3b0a075d1fbc9f142f70a5b715c3c19de418769008875f050939e735cbeeb2c",
       "sourceAdmissionPlanReceiptSHA256": "dc9d720b773392a354ecf660e8450d892c6180c5990c3245eaebddec38c9de6c",
-      "actualModelUpdates": 0
+      "actualModelUpdates": 0,
+      "modelBudget": {
+        "spent": 17002,
+        "cap": 250000,
+        "remaining": 232998
+      },
+      "modelGoalUpdates": 3512,
+      "modelHumanTransfers": 8,
+      "calibrationPrefix": 700,
+      "phaseQualified": false
     },
     {
       "ordinal": 58,

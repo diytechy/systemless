@@ -12,7 +12,7 @@ The original replay independently shows Headache completed4,000 (3,000 collected
 
 Original SPI startup depends on application-lifetime state. The pilot's level-local initialization does not reproduce its exact observed phase. A bounded read-only trace ended without the needed SPI observations; no phase offset was inserted. The route's clearance against every collider frame supports this bounded witness, not arbitrary hazard timing parity.
 
-The old SVG build visibly completed4,000 and its evidence is saved. The corrected SVG replay is pending; Headache is not yet added to the normal55-scene bundle. No new CPU, memory, frame-rate, latency, audio, controller or save-compatibility claim follows from these functional checks.
+Both old and corrected SVG builds visibly completed4,000; their separate evidence is saved. Headache is now added to the normal56-scene bundle and verified ready/paused. No new CPU, memory, frame-rate, latency, audio, controller or save-compatibility claim follows from these functional checks.
 
 For level generation, certify timed held-input windows and callback slack in addition to spatial reachability. Keep source object identity separate from coordinates shared by moving carriers. Preserve the source input queue, clocks, cached queries and reset assumptions. A phase-independent safe path is useful evidence, but cannot certify encounters that rely on an unqualified hazard phase.
 

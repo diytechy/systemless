@@ -1,0 +1,26 @@
+{
+  "status": "ACCEPTED_BOUNDED_SOURCE_COMPOSITION_ACTUAL57_GAMEPLAY_PENDING",
+  "UTC": "2026-11-10T13:01:00.719886+00:00",
+  "sourceAccepted": true,
+  "sourceFreezeSHA256": "42bcac72b007be8b81d85a7f347f56f456773f509380aefaf202614562ed142a",
+  "runtimeFiles": 41,
+  "pendingReverseFixPreserved": true,
+  "publicTests": 396,
+  "packagingTests": 21,
+  "actual57ZeroProbe": {
+    "constructors": 1,
+    "resetsIncludingConstructor": 2,
+    "updates": 0
+  },
+  "priorRegression": {
+    "receiptSHA256": "ae08924e784f5684f746c236fe7a1f8002b2908a0b2de16f84916162e82c82d2",
+    "updates": 24462,
+    "constructors": 3,
+    "allDeclaredFieldsAndWholeLineagesExact": true
+  },
+  "directRegressionArtifactsRehashed": 81,
+  "actual57ColdCalibrationPending": true,
+  "privateSourceAndAssetsUnchanged": true,
+  "normalStill55": true,
+  "privateReviewSHA256": "c9833bfc820988b957a6c30d17adcbdb455e2ab6fae542edc60309e2b3397484"
+}

@@ -1,3 +1,36 @@
+# Latest checkpoint — 2026-11-10T13:23:11.702127+00:00
+
+# Current coordinator action
+
+Continue through100 on SVG-Port without per-level stops.56 bounded Child scenes are accepted and locally active;44 remain. One shared engine loads level data. User permits two or more runners. New mechanic qualifications are serial; isolated source preparation and frozen-engine functional work may overlap. Native emulators, fitters, conversions, benchmarks and heavy builds stay sequential. Preserve original media/forks/Finder metadata/preferences/browser saves; private assets/maps/disassembly/scenarios/saves stay on D:. No push, upload or deployment.
+
+## Exact next action
+
+Mortality57 functional discovery01 finished: goalcase04 and freshliteral both3512updates/8Swingtransfers, all full observation/semantic query-hook-collider lineages match. Receipt0e19d86800327a354ea70df3719094a99d20f313267a0b9ba11a19e7633e3cf4. Literal attempt01/winning-literal.json78ebe9174987f54d2512baf94b0d3968f5ab786ce0516ce1a141a415d47f43ff includes700prefix inside firstidle1070; total3512. Three failed paths/deaths retained1516/1516/1298 with90RNGdraws, none in successful proofs. Actual batch11354/5constructors; aggregate17002/250000,232998remaining. No further57model lease now. Root must independently rehash/review saved goal report/score/lineages before original/SVG acceptance.
+
+headache_native_builder is preparing SAVEDONLY mortality/native-goal-builder script: retaincoldprefix1264front/1864guest, stripONLY700legalwarm, exact16inputruns/eightSwing55char0holds, noReverse. Goalendfront2670guest3270, then120resultwait/Space49ch32down2up/900next =>3692front/max3992/export_saves. Derive score and expectednext58total fromactualproof. Rootreviewscript/allwindows/evencheckpointstates beforeoneoriginalrun inexclusive lane. Earnedthrough56fixtureaca8c62f unchanged. No57GOALnativeyet. mortality_cold_raw_prepare is preparing original-onlyGOALfitter fromsame64centers/5x64actor/all207DOT/6archives16pairs; blind to model/routes/engine/SVG. RootPREPNG+CLOSEDactualscope+freshheavyguard beforeone180sfit; neverrefit.
+
+QA57 ready http://localhost:8091/mortality/qa/dist/clockwerx-html5/, receipt d38cba3d428b3968a610a15ec0fad2270e332ed46c7632603937f0d257f725f3.41source/104samepayloads/57defs/all56prior defs unchanged. NOcheckedRouteyet: installexactliteral afterRootreview, counting700once, map{}toidle/null andswing. ThenRootonlyIAB139(hokeyPokeyTab)reusefor57; current139stillcorrected56complete4000paused. Both native+SVG goal required before57normalactivation. No needuserinput. User confirmed foregroundpreview and askedRoottohandleit; selectedtab139 isalreadycorrectQA, keepCodex+replaytabvisible. Foreground92normal56paused isseparate. Browsermetadata readdocument.hasFocus unavailable inread-onlyscope; do notretry/bypasspolicystops.
+
+## Accepted56 and active source
+
+Normal http://localhost:8087/clockwerx-html5/ serves56/41runtimefiles/104payloads/9,239,123rawB excludingreceipt. Headache original/correctedSVG4000, originalnext57Mortality368000. Root normal56ready/pausedobserved/markedDeliverable inbrowser2/tab92(foregroundTab); savedheadache/normal-ui-verification.json. Full55rollbackheadache/previous-live-pilot. All55prior defs/104payloads/libraryrootfiles/savekey systemless.clockwerx-html5.pilot.v1 preserved. QA139corrected56complete/paused/markedHandoff; goalscreenssavedqa-corrected/goal-page.png/txtandgoal-paused. LastCUApartfinalized Installed and verified Headache locally. FirstCUAaftercompaction exactly await cua.rewriteDocumentation(); reusebrowser2/handles.
+
+Read headache-review.md/json,pending-reverse-review.md and static-marked-orbitals-source-review.md/json. Source41freeze42bcac72b007be8b81d85a7f347f56f456773f509380aefaf202614562ed142a; privateimmutablepath57-static-marked-orbitals-root-integration/source41. RootsourceReviewc9833bfc;396public/21packaging/actual57zeroProbe1ctor2resets0updates +prior54/55/56full24462updates3ctors exactallfields/wholelineages. Root independently rehashed81regressionartifacts. Newstaticmarked/orbitalflagdefaultsofffor56; pendingReversetogglefixpreserved. Source41isappliedbutpendingcommitwith56acceptancedocs; inspectGitbeforeediting. Do notoverwriteunrelatedchanges. Currentlastcommitted9d7489f3 pendingReversefix afterf45b46b4.
+
+56correctedpair12346updates each/4000at12328/full-lineage44d7e288/all2594actualSPIpollsall4framesclear; total56functional74696/250000,175304remaining. Fixed706224/227points209/227poses,18pose residuals in3captures/3also3px; nooffsetfit. SPIapplifetimeinitialphaseUNQUALIFIED, failedboundedread-onlytracepreserved. OriginalGOAL42PNGsafterPREPNG c6e58827/report0c2ef252; solefit58.594s/7archives16pairs/rawfinal74884053. Allfailures retained. No new performance/audio/controller/save claims.
+
+## Mortality baseline and preparation ahead
+
+Original57COLD CLOSED156844exit0/report458250fb/2224front2824guest/35zero; Rootviewedall35 onlyafterPREPNG ca2b6996. Solefit66980CLOSED0/10s/6archives16pairs; rawfinale2756732 verifies455rows/416of429boardclear+13misses/26menumisses. Rootcalibrationfinal17b9af5b one5648noinput/1ctor1reset0explicit/RNG0, model71116CLOSED0/.814s/analyzer95996CLOSED0/31.305s. Root independently recomputedALL3729rankingsandvectors: positions416/416,poses379/416,bestdeficits0/37,ties700/701, earliest700provisional, NOexactphaseclaim. Rootcoldselectionc57704162193a005a49d95bbf268740a6496afc303580b4881ae69053bdf6ffb. Prepare01dt1/960 HELD; usefixedprepare02only,allties/misses/identitypossibilities retained.
+
+58Death candidate PRIVATEready,notintegrated:58-moving-marks-candidate/v1receipt4bb7e142e1a47764d105cdb025f885ebd079473caa2cde9cab17c50047fa7f6b,freeze4b42bbebaa8cf3b3c69dc861ad6f731229b3709f1355d29de4f07da9e62cf34b.42runtime/37unchanged; newordinarymovingmarkcompositionandconditionalenemy-transferadmissionoption,callbackbodyunchanged,Roottogglepreserved.13syntheticgroups/213stepsinclfailures+3portabletests; actual58initbudgetEXHAUSTED2ctors4resets0updates. Peer5809f4a161a64a5957ca50d37dcb2fdf66415a4eb3bb601c9365290ee0a3944c APPROVEboundedcompositiononly,23code/107rawspans,13groups56steps/34negativecontrols/zeroactual58. Rootmustread/rehashexactcode+peer beforeintegrationAFTER57gameplayreview. No58discovery/native. Existing59–100/gun/buster/slowdown preps available; do notduplicatecensus.
+
+Original69-titlelibrary/default-tuned-prototypecomparison COMPLETE; heartbeatdeleted, neverrestartthatqueue/createjobtrackingautomation. Astra unavailableuntilNov13 2:43PM,no retries. RootONLYsupportedIAB; neverretryknownWindows/EdgeURLpolicystop/bypass. Continue through100; do notendwithprogress-onlyfinal after56/57.
+
+
+Earlier entries are historical.
+
 # Latest checkpoint — 2026-11-10T12:51:19.568192+00:00
 
 ## Exact next action

@@ -1,3 +1,4 @@
+import {assertStaticMarkedOrbitalScope,assertStaticMarkedOrbitalPhysics,staticMarkedHumanQuery,grabStaticMarkedHuman,advanceStaticMarkedOrbitalCallback} from './static-marked-orbitals.mjs';
 import {assertMovingSpikeScope,assertMovingSpikePhysics,createMovingSpikeLifecycle} from './moving-spikes.mjs';
 import {assertMovingSpecialScope} from './moving-specials.mjs';
 import {assertMovingElevatorScope,PilotAbsentSlideContinuation} from './moving-elevators.mjs';
@@ -47,6 +48,7 @@ export class SourceRound extends MovementGame {
   if(board.movingBombRules)assertMovingBombScope({...board,actors:[board.player,...(board.enemies??[])],initial:true,humanStarts:board.movingHumanStarts,allowImportedGoodie169:board.importedGoodie169Rules===true,activeSections:{SP:board.spikes?.length??0,BO:board.bombs?.length??0,GO:board.goodies?.length??0,EX:board.connectors?.length??0}});
   if(board.movingCheckpointRingRules||board.movingMarkedBonusRules)assertMovingSpecialScope({...board,composition:board.movingCheckpointRingRules?'checkpoint-rings':'marked-bonuses',actors:[board.player,...(board.enemies??[])],initial:true,humanStarts:board.movingHumanStarts});
   if(board.movingSpikeRules){assertMovingSpikeScope(board,{initial:true});assertMovingSpikePhysics(board,outlines,dotOutlines);}
+  if(board.staticMarkedOrbitalRules)assertStaticMarkedOrbitalPhysics(board,outlines,dotOutlines);
   super(board);this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask&&!board.slidingConnectorRules||d.motion&&d.motion!=='static'&&!(board.elevatorRules&&d.motion==='up-down')&&!(board.movingDotRules&&d.motion==='moving-program'))))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
   if(board.elevatorOilSpikeRules&&(!board.elevatorRules||!board.canonicalOilRules||board.canonicalOilSpikeRules||!board.puddles?.length||board.puddles.some(p=>p.kind!==3)||!board.spikes?.length))throw new Error('Separate group0 elevators, kind3 Oil and static spike scope required');
@@ -69,7 +71,7 @@ export class SourceRound extends MovementGame {
   if(board.slidingConnectorRules&&!board.staticSlidingProgramRules&&!board.slidingGoodieRules&&!board.slidingOilRules&&!board.slidingBombRules&&!board.slidingTeleportRules&&!board.movingBombRules&&!board.movingElevatorRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.elevatorRules||board.difficulty!=='Child'||!board.connectors?.length||!elevatorOutlines?.groups?.['3400']||board.teleportRules||['puddles','bombs','goodies','spikes','doors','switches'].some(k=>board[k]?.length)||board.dots.some(d=>d.ring||d.teleport||d.motion!=='static'&&!(d.upDown&&d.upDown.group===0&&!d.upDown.initialLowered&&d.color===0&&d.kind==='dot')||d.protected&&d.color!==0)||board.elevators?.some(c=>c.group!==0||![2,3].includes(c.subcell))||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,2].includes(e.speedClass)||e.program!==null||e.checksWalls!==false)))throw new Error('Separate EX Child composition required');
   if(board.staticSlidingProgramRules&&(!board.slidingConnectorRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||board.elevatorRules||board.teleportRules||['puddles','bombs','goodies','doors','switches','walls','elevators'].some(k=>board[k]?.length)||board.dots.some(d=>d.motion!=='static'||d.humanCanGrab!==true||d.nonhumanCanGrab!==true||d.ring||d.teleport||d.protected||d.waystation)||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,2,3].includes(e.speedClass)||e.checksWalls!==false||e.program!==null&&(!/^[fn]+$/.test(e.program)||e.sourcePC<1))))throw new Error('Separate static EX f/n Child scope required');
   if(board.movingDotRules&&!board.movingSpikeRules&&!board.movingBombRules&&!board.movingMarkedGoalRules&&!board.movingElevatorRules&&!board.movingCheckpointRingRules&&!board.movingMarkedBonusRules||board.importedGoodie169Rules&&!board.movingBombRules)throw new Error('Moving core/imported GO require separate qualified composition');
-  if(board.markedTransferRules&&!board.movingMarkedGoalRules&&!board.movingMarkedBonusRules)throw new Error('Marked core requires separate moving/goal composition');
+  if(board.markedTransferRules&&!board.movingMarkedGoalRules&&!board.movingMarkedBonusRules&&!board.staticMarkedOrbitalRules)throw new Error('Marked core requires separate moving/goal composition');
   if(board.pilotAbsentSlideRecoveryRules&&!board.movingElevatorRules)throw new Error('Pilot absent-slide recovery requires its separate moving/up-down join');
   if(board.movingCheckpointRingRules||board.movingMarkedBonusRules){
    if(board.movingCheckpointRingRules&&board.movingMarkedBonusRules||!board.movingDotRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||board.markedTransferRules!==!!board.movingMarkedBonusRules||board.movingBombRules||board.movingMarkedGoalRules||board.movingElevatorRules||board.pilotAbsentSlideRecoveryRules||board.bombRules||board.goodieOnlyRules||board.slidingConnectorRules||board.elevatorRules||board.teleportRules||board.canonicalOilRules||board.rotatingSpikeRules||board.staticEnemyWallRules||!dotOutlines?.groups?.['300'])throw new Error('Separate canonical moving special sibling composition required');
@@ -122,16 +124,21 @@ export class SourceRound extends MovementGame {
    this.syncElevatorDots();
   }
   if(board.specialDotRules){
-   this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount,...(board.movingSpikeRules||board.movingMarkedGoalRules||board.movingElevatorRules||board.movingCheckpointRingRules||board.movingMarkedBonusRules?{allowGoalMisc:true}:{})});
+   this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount,...(board.staticMarkedOrbitalRules||board.movingSpikeRules||board.movingMarkedGoalRules||board.movingElevatorRules||board.movingCheckpointRingRules||board.movingMarkedBonusRules?{allowGoalMisc:true}:{})});
    this.remainingTime=board.timeLimit;this.onHumanGrab(this.point(this.player));
   }
   if(board.teleportRules){this.teleports=new TeleportRuntime(board.teleports,board.dots,this.teleportClocks.advance(0),board.slidingTeleportRules?{allowSlidingTeleports:true,connectors:board.connectors,actors:[this.player,...this.enemies]}:{});this.onAfterHumanGrab(this.point(this.player));}
   if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
  }
  reset({preserveCheckpoint=false}={}){
+  if(this.board.staticMarkedOrbitalRules){
+   if(this.staticMarkedInitialDots)for(const saved of this.staticMarkedInitialDots){const d=this.board.dots.find(d=>d.id===saved.id);Object.assign(d,saved);delete d.collected;}
+   assertStaticMarkedOrbitalScope(this.board,{initial:true});
+   this.staticMarkedInitialDots??=this.board.dots.map(d=>({id:d.id,cell:d.cell,kind:d.kind,bonus:d.bonus}));
+  }
   if(this.board.movingSpikeRules){assertMovingSpikeScope(this.board);if(this.movingSpikes)this.movingSpikes.reset(this.board.spikes);else this.movingSpikes=createMovingSpikeLifecycle(this.board.spikes,{allowMovingSpikes:true,sourceScope:this.board});}
   if(this.board.movingDotRules&&this.movingDots){for(const saved of this.movingInitialDots){const d=this.board.dots.find(d=>d.id===saved.id);Object.assign(d,saved);delete d.burnt;delete d.collected;}for(const runtime of this.movingDots.values())runtime.reset(this.actorClasses.snapshot().classes[1].count);}
-  if(this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){this.sourcePaint??={original:{dots:this.board.dots.map(d=>({id:d.id,cell:d.cell,kind:d.kind,bonus:d.bonus,sourceInBackground:d.sourceInBackground})),...(this.board.movingElevatorRules?{connectors:this.board.connectors.map(e=>({...e})),walls:this.board.walls.map(w=>({...w})),elevators:this.board.elevators.map(e=>({...e}))}:{})}};this.sourcePaint.backgroundPaints=[];if(this.board.movingElevatorRules&&!preserveCheckpoint){this.pilotRecoveries=0;this.pilotInputLatch=false;}}
+  if(this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){this.sourcePaint??={original:{dots:this.board.dots.map(d=>({id:d.id,cell:d.cell,kind:d.kind,bonus:d.bonus,sourceInBackground:d.sourceInBackground})),...(this.board.movingElevatorRules?{connectors:this.board.connectors.map(e=>({...e})),walls:this.board.walls.map(w=>({...w})),elevators:this.board.elevators.map(e=>({...e}))}:{})}};this.sourcePaint.backgroundPaints=[];if(this.board.movingElevatorRules&&!preserveCheckpoint){this.pilotRecoveries=0;this.pilotInputLatch=false;}}
   super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
   if(this.board.childScoreRules){
    if(!this.childScore)this.childScore=new ChildRoundScore();
@@ -180,6 +187,7 @@ export class SourceRound extends MovementGame {
  }
  move(hand,dt,action){
   if(hand!==this.player||!this.board.canonicalPlayerRules)return super.move(hand,dt,action);
+  if(this.board.staticMarkedOrbitalRules)return this.moveStaticMarkedHuman(hand,action);
   if(this.board.movingDotRules)return this.moveMovingHuman(hand,action);
   if(this.board.slidingConnectorRules)return this.moveSlidingHuman(hand,action);
   const delta=this.actorClasses.snapshot().classes[hand.speedClass??0].delta;
@@ -199,6 +207,26 @@ export class SourceRound extends MovementGame {
   if(!this.complete&&!this.death)hand.unwrappedFrame+=hand.direction;
   hand.frame=hand.unwrappedFrame&63;
   hand.angle=hand.unwrappedFrame*TAU/64;
+ }
+ moveStaticMarkedHuman(hand,action){
+  if(this.death||this.complete)return;
+  const delta=this.actorClasses.snapshot().classes[0].delta;if(delta>1)throw new Error('Static marked human single callback required');if(!delta)return;
+  assertStaticMarkedOrbitalScope(this.board,{actors:[hand]});
+  hand.angle=hand.unwrappedFrame*TAU/64;let consumed=false;
+  if(hand.frame%16)hand.sourceBlockedTarget=null;
+  if(hand.frame%16===0&&action){
+   const query=staticMarkedHumanQuery(this.board,hand,{allowStaticMarkedOrbitals:true}),target=query.result.grab&&this.board.dots.find(d=>d.id===query.result.grab.dot);
+   if(query.result.allowed&&target.id!==hand.sourceBlockedTarget){
+    if((action!=='flip')!==!!this.canonicalPlayerContact)hand.direction*=-1;
+    if(action==='bounce'){this.event('bounce',hand,target);consumed=true;}
+    else{const old=hand.pivot;hand.sourceBlockedTarget=old;hand.transfers++;
+     grabStaticMarkedHuman(this.board,hand,query,{physicalPoint:this.point(hand),release:(d,a)=>this.onHumanRelease(d,a),place:a=>{a.angle=a.unwrappedFrame*TAU/64;},grab:()=>this.slideGrabHuman(target,hand),onTransfer:receipt=>Object.assign(this.event(action,hand,target),receipt,{type:action}),onMarkedDeath:cause=>this.beginDeath(cause)},{allowStaticMarkedOrbitals:true});
+    }
+   }
+  }
+  if(this.pendingReverse){this.pendingReverse=false;if(!this.canonicalPlayerContact&&!consumed&&!this.death){hand.direction*=-1;this.event('reverse',hand);}}
+  if(!this.death&&!this.complete)hand.unwrappedFrame+=hand.direction;
+  hand.frame=hand.unwrappedFrame&63;hand.angle=hand.unwrappedFrame*TAU/64;
  }
  slideGrabHuman(target,hand){
   if(this.onHumanGrab?.(target)===false)return;
@@ -332,7 +360,7 @@ export class SourceRound extends MovementGame {
  }
  animateStaticEnemy(hand,delta,timing,upstream,dispatched){
   if(dispatched){
-   const previousVisible=hand.visible,result=advanceStaticEnemyCallback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowClass2RotatingSpikes:this.board.class2RotatingSpikeRules===true,allowClass3RotatingSpikes:this.board.class3RotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,allowMovingDots:this.board.movingDotRules===true,allowMovingSpikes:this.board.movingSpikeRules===true,movingSpikeScope:this.board,allowMovingBombs:this.board.movingBombRules===true,allowMovingMarkedGoals:this.board.movingMarkedGoalRules===true,allowMovingCheckpointRings:this.board.movingCheckpointRingRules===true,allowMovingMarkedBonuses:this.board.movingMarkedBonusRules===true,movingSpecialScope:this.board,allowMovingElevators:this.board.movingElevatorRules===true,movingElevatorScope:this.board,onMissingSlideTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a),sourceQuery:(a)=>this.sourceGrabQuery(a,false),allowTeleports:this.board.teleportRules===true,allowSlidingTeleports:this.board.slidingTeleportRules===true,onSourceEvent:(event,s)=>this.sourceActorEvent(event,s),allowSliding:this.board.slidingConnectorRules===true,allowSlidingPrograms:this.board.staticSlidingProgramRules===true,allowSlidingBombs:this.board.slidingBombRules===true,allowSlidingBombCheckpoints:this.board.slidingBombCheckpointRules===true,allowSlidingOil:this.board.slidingOilRules===true,allowSlidingOilGoodieRings:this.board.slidingOilGoodieRingRules===true,allowSlidingGoodies:this.board.slidingGoodieRules===true,allowSlidingGoodiePrograms:this.board.slidingGoodieProgramRules===true,
+   const previousVisible=hand.visible,callback=this.board.staticMarkedOrbitalRules?(state,count,options)=>advanceStaticMarkedOrbitalCallback(this.board,state,count,options,{allowStaticMarkedOrbitals:true}):advanceStaticEnemyCallback,result=callback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowClass2RotatingSpikes:this.board.class2RotatingSpikeRules===true,allowClass3RotatingSpikes:this.board.class3RotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,allowMovingDots:this.board.movingDotRules===true,allowMovingSpikes:this.board.movingSpikeRules===true,movingSpikeScope:this.board,allowMovingBombs:this.board.movingBombRules===true,allowMovingMarkedGoals:this.board.movingMarkedGoalRules===true,allowMovingCheckpointRings:this.board.movingCheckpointRingRules===true,allowMovingMarkedBonuses:this.board.movingMarkedBonusRules===true,movingSpecialScope:this.board,allowMovingElevators:this.board.movingElevatorRules===true,movingElevatorScope:this.board,onMissingSlideTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a),sourceQuery:(a)=>this.sourceGrabQuery(a,false),allowTeleports:this.board.teleportRules===true,allowSlidingTeleports:this.board.slidingTeleportRules===true,onSourceEvent:(event,s)=>this.sourceActorEvent(event,s),allowSliding:this.board.slidingConnectorRules===true,allowSlidingPrograms:this.board.staticSlidingProgramRules===true,allowSlidingBombs:this.board.slidingBombRules===true,allowSlidingBombCheckpoints:this.board.slidingBombCheckpointRules===true,allowSlidingOil:this.board.slidingOilRules===true,allowSlidingOilGoodieRings:this.board.slidingOilGoodieRingRules===true,allowSlidingGoodies:this.board.slidingGoodieRules===true,allowSlidingGoodiePrograms:this.board.slidingGoodieProgramRules===true,
     afterAnimate:s=>{
      const wall=this.board.staticEnemyWallRules?this.wallCollision(s):null;
      if(wall){s.direction*=-1;this.event('enemy-wall-bounce',s,this.point(s));}
@@ -451,7 +479,7 @@ export class SourceRound extends MovementGame {
    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});
   }});
  }
- onBonus(dot){if(this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){dot.bonus=false;dot.cell&=~2;if(dot.kind==='bonus')dot.kind='dot';}if(this.board.slidingBombRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore?.bonusDot();}
+ onBonus(dot){if(this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){dot.bonus=false;dot.cell&=~2;if(dot.kind==='bonus')dot.kind='dot';}if(this.board.slidingBombRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore?.bonusDot();}
  onGoalBonus(dot){if(this.board.slidingBombRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore.bonusDotAfterGoal();}
  onGoal(){this.childScore?.complete();this.bombScene?.finish();}
  restartAfterDeath(){

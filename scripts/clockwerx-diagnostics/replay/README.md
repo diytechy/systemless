@@ -62,7 +62,8 @@ SHA256 `595f3ac1461b0d2a048df3970366db115e394a5af2502a401941abe313c32403`.
 
 The private config pins `decoded`, `options`, each entry of `profiles`, and an
 optional `bombRoutes` file. Supported profiles are `outlines`, `dotOutlines`,
-`bombOutlines`, `doorOutlines`, `oilOutlines`, and `elevatorOutlines`. Include an
+`bombOutlines`, `doorOutlines`, `oilOutlines`, `elevatorOutlines`, and
+`gunOutlines`. Include an
 explicit `rngProvenance` string matching the baseline adapter.
 The optional `bombRoutes` JSON must be the routes array itself: its parsed value
 is passed directly as the constructor's `profiles.bombRoutes`, without unwrapping
@@ -112,3 +113,21 @@ node scripts/clockwerx-diagnostics/replay/test-fake.mjs "<new-temporary-output-d
 The check uses six fake constructors and eighteen fake
 updates. Copying these tools into the repository does not add a new game run,
 performance result, or native/visible acceptance claim.
+
+## Retained route regression sweep
+
+Run this after changes to shared mechanics and before installing a new pilot.
+Use the current accepted local bundle as the baseline and a frozen candidate
+runtime. Both runs use the same accepted scene definitions and route inputs.
+
+```powershell
+node scripts/clockwerx-diagnostics/replay/sweep-retained.mjs "<baseline-pilot>" "<candidate-runtime>" "<new-private-result.json>" "<baseline-manifest-sha256>"
+```
+
+The sweep pairs goal/death flags, event counts and draw counts at every update.
+It compares complete snapshots and live dots at initialization, event updates,
+every 128 updates and at the end. If a route uses randomness, both sides
+consume the same draws for this regression check. A scene without a retained
+route gets a construction check. Inspect the per-scene outcomes: matching an
+early death or an input end is not the same as reaching the goal. This check
+does not replace a new scene's full proof, original replay, or visible check.

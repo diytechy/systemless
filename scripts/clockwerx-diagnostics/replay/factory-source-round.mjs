@@ -7,7 +7,7 @@ export async function sourceRoundFactory(sourcePath,config){
  const [{buildDecodedBoard},{SourceRound,sourceFrame},{createDeathEffect},{dotBodyFrame}]=await Promise.all([imp('level'),imp('round'),imp('death'),imp('dots')]);
  const read=f=>JSON.parse(fs.readFileSync(f.path,'utf8'));
  const decoded=read(config.decoded),options=read(config.options),profiles=Object.fromEntries(Object.entries(config.profiles).map(([name,pin])=>[name,read(pin)]));
- if(Object.keys(profiles).some(k=>!['outlines','dotOutlines','bombOutlines','doorOutlines','oilOutlines','elevatorOutlines'].includes(k)))throw Error('Unknown source profile key');
+ if(Object.keys(profiles).some(k=>!['outlines','dotOutlines','bombOutlines','doorOutlines','oilOutlines','elevatorOutlines','gunOutlines'].includes(k)))throw Error('Unknown source profile key');
  if(config.bombRoutes)profiles.bombRoutes=read(config.bombRoutes);
  const reset=SourceRound.prototype.reset;let constructing=false,installed=false;
  const factory=controls=>{

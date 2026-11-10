@@ -14,7 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
       'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','elevators.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs','teleports.mjs','teleport-runtime.mjs','sliding.mjs','sliding-oil.mjs','sliding-bombs.mjs','sliding-bomb-paint.mjs','sliding-teleports.mjs',
-      'moving-dots.mjs','source-grab.mjs','moving-bombs.mjs','marked-transfers.mjs','moving-elevators.mjs','moving-specials.mjs','moving-spikes.mjs','static-marked-orbitals.mjs','moving-marked-ordinary.mjs','static-sliding-bomb-goodies.mjs','moving-bomb-spike-waystation.mjs')
+      'moving-dots.mjs','source-grab.mjs','moving-bombs.mjs','marked-transfers.mjs','moving-elevators.mjs','moving-specials.mjs','moving-spikes.mjs','static-marked-orbitals.mjs','moving-marked-ordinary.mjs','static-sliding-bomb-goodies.mjs','moving-bomb-spike-waystation.mjs','gun-triggers.mjs','gun-trigger-child.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 
@@ -60,6 +60,7 @@ def package(dist,assets):
         references.update(atlas['file'] for atlas in vector.get('specialDots',{}).values())
         references.update(atlas['file'] for atlas in vector.get('bombs',{}).values())
         references.update(atlas['file'] for atlas in vector.get('bombDots',{}).values())
+        references.update(frame['file'] for group in vector.get('gunTriggers',{}).values() for frame in group['frames'])
         if vector.get('sourceDotShadows'):references.add(vector['sourceDotShadows']['file'])
         references.update(atlas['file'] for atlas in vector.get('sourceMarkedDots',{}).values())
         if vector.get('sourceGoalMisc'):references.add(vector['sourceGoalMisc']['file'])
@@ -69,7 +70,7 @@ def package(dist,assets):
     for definition in definitions:
         if not definition:continue
         references.add(definition['outlinesFile'])
-        for key in ('doorOutlinesFile','elevatorOutlinesFile','oilOutlinesFile','dotOutlinesFile','bombOutlinesFile'):
+        for key in ('doorOutlinesFile','elevatorOutlinesFile','oilOutlinesFile','dotOutlinesFile','bombOutlinesFile','gunOutlinesFile'):
             if definition.get(key):references.add(definition[key])
     for name in references:filename(name)
     if not references<=files.keys():raise ValueError('Manifest references an unverified asset')

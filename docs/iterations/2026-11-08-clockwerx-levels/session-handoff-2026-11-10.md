@@ -1,9 +1,7 @@
-# ClockWerx continuation handoff — through 60
+# ClockWerx continuation handoff — through 61
 
-Resume the authorized through100 local task on `SVG-Port` using the [current action](current-action.md) and [queue](queue.json). Hitchhiker60 is accepted and locally installed;40 levels remain. Next is Diagonals61 and its first active gun/trigger/projectile composition. Continue locally; parallel workers reported account usage limits.
+Resume the authorized through100 local task on `SVG-Port` from the [current action](current-action.md) and [queue](queue.json). The [Diagonals review](diagonals-review.md) records bounded original and SVG completion, exact port proofs, installation, the original save export and the first full retained-route sweep. Source45 is live at localhost:8087 and includes 61 levels. Normal IAB2/tab5 is paused on Diagonals. A previous build and all original media/saves are preserved.
 
-The [Hitchhiker review](hitchhiker-review.md) records the successful 16-hold route, original/SVG 2,000 points, original advance to Diagonals at 375,000, separate byte-exact witness/fresh proof, retained original failure and timing differences. Through60 fixture eff5412b verifies both forks and represented metadata. No dedicated native61 run yet. All actual and exclusive workloads are closed. Normal8087 is Source44v2 with complete59 rollback and stable save identity. Normal IAB2/tab5 is paused, QA tab4 paused at goal.
+Continue Seesaw62 using [its preparation](seesaw-preparation.md), earned-through61 fixture c5e9b1cc and [faster validation](faster-validation-workflow.md). The dedicated native62 cold capture is `seesaw62-native-cold01`. Independently freeze the original-only fit method before opening dedicated captures. The next work is the separate Oil/elevator rider composition, not a GN/TR runtime expansion. Continue locally without push, upload or deployment.
 
-Reuse the existing `gun-follow-on-preparation` and [61–80 source review](follow-on-61-80-review.md), then the [faster validation workflow](faster-validation-workflow.md) and shared replay tool. Keep private data on D:, preserve original disks and saves, and don't push, upload or deploy. Read AGENTS.md and the modernization/headless skills as needed. First CUA after compaction exactly `await cua.rewriteDocumentation();`.
-
-[Earlier handoff through59](session-handoff-2026-11-10-through59.md) and [preacceptance60 history](current-action-history-2026-11-10-before60-acceptance.md) are retained for evidence.
+[Through60 handoff](session-handoff-2026-11-10-through60.md) and [through59 handoff](session-handoff-2026-11-10-through59.md) remain available for historical evidence.

@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 58,
-  "currentAction": "User-requested handoff/runtime audit complete;57 accepted/live,58 source42 committed and cold calibrated706, four route deaths saved/no goal. All workers/runs closed. Implement/measure compact search observer before focused58 continuation.",
+  "currentAction": "Recorder0b691440 PASS.58continuation03 CLOSED fourdeaths/noGoal16360updates; saved1.622GB verified. Global58spent35355/250000. Savedcold timeline audit and temporalplanner preparation only; no current model lease. Normal57 unchanged;59source reviewed only.",
   "levels": [
     {
       "ordinal": 1,
@@ -4682,7 +4682,7 @@
       "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38",
       "sourceFreezeSHA256": "44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9",
       "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942",
-      "functionalUpdatesSpent": 15788,
+      "functionalUpdatesSpent": 35355,
       "functionalUpdateBudget": 250000
     },
     {
@@ -7861,10 +7861,10 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root55localacceptance/checkpoint/commit; next review56SPI source startup",
-    "B": "headache_spi_startup source-only original globaltimer/ROStart investigation; zero newruns",
-    "C": "headache_functional completed5648coldcalibration; no discovery/model lease",
-    "D": "mortality_admission completed private57source plan; no implementation/admission/models"
+    "A": "Root review/queue/native/browser/activation; no concurrent model workload",
+    "B": "compact_observer: saved-only58cold-v-divergent timeline audit/cache, no new simulation",
+    "C": "death58_continuation:03CLOSED4deaths16360updates; temporalplanner preparation only, no execution lease",
+    "D": "review59: CLOSED source/mask review and observer peer PASS; zero actual59imports/constructors/resets/updates"
   },
   "handoff": "session-handoff-2026-11-10.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",

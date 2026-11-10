@@ -1,3 +1,4 @@
+import {assertMovingBombSpikeWaystationScope,assertMovingBombSpikeWaystationActor} from './moving-bomb-spike-waystation.mjs';
 import {effectiveMovingCell,movingProgramCell,assertClosedMovingProgram} from './moving-dots.mjs';
 import {dotColorOffset} from './dots.mjs';
 import {actorChecksWalls} from './walls.mjs';
@@ -10,7 +11,7 @@ const hex=a=>a.map(v=>v.toString(16).padStart(4,'0')).join('');
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const signed=n=>n>32767?n-65536:n;
 const freeze=o=>{if(o&&typeof o==='object'){for(const v of Object.values(o))freeze(v);Object.freeze(o);}return o;};
-const excluded=['movingCheckpointRingRules','movingMarkedBonusRules','movingMarkedGoalRules','movingElevatorRules','movingBombRules','markedTransferRules','pilotAbsentSlideRecoveryRules','bombRules','goodieOnlyRules','bombObjectInteractionRules','importedGoodie169Rules','combinedGoalBonusRules','slidingConnectorRules','slidingBombRules','slidingBombCheckpointRules','slidingTeleportRules','staticSlidingProgramRules','slidingGoodieRules','slidingGoodieProgramRules','slidingOilRules','slidingOilGoodieRingRules','elevatorRules','teleportRules','canonicalOilRules','canonicalOilSpikeRules','elevatorOilSpikeRules','bombOilElevatorRules','elevatorGoodieRules','coloredElevatorGoodieRules','rotatingSpikeRules','staticEnemyWallRules'];
+const excluded=['movingBombSpikeWaystationRules','movingCheckpointRingRules','movingMarkedBonusRules','movingMarkedGoalRules','movingElevatorRules','movingBombRules','markedTransferRules','pilotAbsentSlideRecoveryRules','bombRules','goodieOnlyRules','bombObjectInteractionRules','importedGoodie169Rules','combinedGoalBonusRules','slidingConnectorRules','slidingBombRules','slidingBombCheckpointRules','slidingTeleportRules','staticSlidingProgramRules','slidingGoodieRules','slidingGoodieProgramRules','slidingOilRules','slidingOilGoodieRingRules','elevatorRules','teleportRules','canonicalOilRules','canonicalOilSpikeRules','elevatorOilSpikeRules','bombOilElevatorRules','elevatorGoodieRules','coloredElevatorGoodieRules','rotatingSpikeRules','staticEnemyWallRules'];
 
 function envelope(s){
  if(s?.activeMask!==1||s.difficulty!=='Child'||s.origin?.x!==74||s.origin?.y!==72||s.sourceGrid?.version!==12||s.sourceGrid.displaySizeRaw!==8||s.sourceGrid.rows!==8||s.sourceGrid.columns!==11)throw new Error('Explicit Child1/version12/large moving SPI source envelope required');
@@ -134,11 +135,11 @@ const identity=s=>[s.id,s.row,s.column,s.subrow,s.subcolumn,s.x,s.y,s.phase,s.ac
 // remainder helper58c with divisor4 for SUSetFrameIndex. The later &3 selects
 // a phase-bank POINTER independently; its VALUE initializes the reference.
 export function sourceSpikeInitialFrame(createdOrdinal){if(!int(createdOrdinal,0,31))throw new Error('Allocated source SPI ordinal0..31 required');return createdOrdinal%4;}
-export function createMovingSpikeLifecycle(spikes,{allowMovingSpikes=false,sourceScope}={}){
- if(allowMovingSpikes!==true||sourceScope?.spikes!==spikes)throw new Error('Explicit moving SPI lifecycle capability and source inventory required');
- assertMovingSpikeScope(sourceScope);
+export function createMovingSpikeLifecycle(spikes,{allowMovingSpikes=false,allowMovingBombSpikeWaystation=false,sourceScope}={}){
+ if(typeof allowMovingBombSpikeWaystation!=='boolean'||allowMovingBombSpikeWaystation&&allowMovingSpikes||!allowMovingBombSpikeWaystation&&allowMovingSpikes!==true||sourceScope?.spikes!==spikes)throw new Error('Explicit separate SPI lifecycle capability and source inventory required');
+ if(allowMovingBombSpikeWaystation)assertMovingBombSpikeWaystationScope(sourceScope);else assertMovingSpikeScope(sourceScope);
  let bank=[0,0,0,0],shared=0; // Fresh constructed source clock graph/DATA bank.
- const objects=[...spikes],stamp=()=>{const s=sourceScope.movingSpikeSource;return JSON.stringify([s.sha256,s.byteLength,s.resourceId,s.spikes]);},sourceStamp=stamp();
+ const objects=[...spikes],stamp=()=>{const s=allowMovingBombSpikeWaystation?sourceScope.movingBombSpikeWaystationSource:sourceScope.movingSpikeSource;return JSON.stringify([s.sha256,s.byteLength,s.resourceId,s.spikes]);},sourceStamp=stamp();
  const original=freeze(spikes.map(identity)),states=new Map(spikes.map(s=>[s.id,{frame:sourceSpikeInitialFrame(s.id),reference:bank[s.phase]}]));
  const check=ss=>{if(ss!==spikes||sourceScope.spikes!==spikes||stamp()!==sourceStamp||ss.some((s,i)=>s!==objects[i])||!same(ss.map(identity),original))throw new Error('Existing SPI source/instance identity/inventory changed across reset');};
  return {

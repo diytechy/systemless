@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 60,
-  "currentAction": "59boundedChildscenes/source43 locallyaccepted/active. Nasty13tap source/fresh/native/visiblegoals2000; old63nativefailureandresidualsretained. NormalNastyready/paused, complete58rollback/104payloads/id/keyunchanged. Earnedthrough59fixture44af8bb8. NextRootadmit60source44tests/regressions/init; original-only60compiler/sourcepeer preparing, noactual60runtimeyet. Actual59spent26460; allactual/exclusivelanesclosed.",
+  "currentAction": "59accepted/source43normalactive. Source44v2bfe8 integrated419runtime/21unchangedpackagingPASS;59full2600 and paired51/56/58 SEARCH39880PASS onv1, sole siblingvalidatorcorrectionreviewed. Actual60init02PASS1ctor2resets0updates;init01prectorfailurekept. Originalrawcompile138centers770descriptorsCLOSED;independentarrayauditor/fitterpreparing. Original60coldCLOSEDall35captures/noPNGview,viewgatepending. Allactual/exclusivelanesclosed.",
   "levels": [
     {
       "ordinal": 1,
@@ -3985,7 +3985,8 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "source44PairedRegressionUpdates": 4896
     },
     {
       "ordinal": 52,
@@ -4491,16 +4492,17 @@
       "spikeClearFrameMatches": 0,
       "spikeClearFrameMismatches": 51,
       "modelBudget": {
-        "spent": 74696,
+        "spent": 99352,
         "cap": 250000,
-        "remaining": 175304
+        "remaining": 150648
       },
       "nativeGoalReportSha256": "0c2ef252ef2d9caeee22b59d6e81bf5e887414520b7c58d9794b967c1558434c",
       "nativeObservedScore": 4000,
       "nativeObservedNextLevel": 57,
       "pendingReverseCorrected": true,
       "correctedSvgStatus": "replaying",
-      "review": "headache-review.md"
+      "review": "headache-review.md",
+      "source44PairedRegressionUpdates": 24656
     },
     {
       "ordinal": 57,
@@ -4688,11 +4690,11 @@
       "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38",
       "sourceFreezeSHA256": "44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9",
       "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942",
-      "functionalUpdatesSpent": 64759,
+      "functionalUpdatesSpent": 75087,
       "functionalUpdateBudget": 250000,
       "functionalUpdatesSpentRange": [
-        64631,
-        64759
+        74959,
+        75087
       ],
       "functionalGoalUpdatesPerRun": 5164,
       "functionalGoalScore": 2000,
@@ -4710,7 +4712,8 @@
       "goldVisibleSupplementSHA256": "01242f38f6586a7870b5ae0ec778e41c1cc8a5f6a1a039b840bc0ebd3a93f228",
       "privateReadonlyObserverQualificationUpdates": 5164,
       "privateReadonlyObserverQualificationResultSHA256": "f61167193bde8c39887982d3d70d538dfbc3cc0349fc66e3f7ebd5c41fbdcd12",
-      "privateReadonlyObserverFinalReceiptSHA256": "38e5ac8d5f02751fff332e9e0b7cbdb6d5b38a4c5dd4e19c03f1eba4c73f691e"
+      "privateReadonlyObserverFinalReceiptSHA256": "38e5ac8d5f02751fff332e9e0b7cbdb6d5b38a4c5dd4e19c03f1eba4c73f691e",
+      "source44PairedRegressionUpdates": 10328
     },
     {
       "ordinal": 59,
@@ -4790,7 +4793,7 @@
       "sourceDomainClippingStatus": "10WLhypotheses60lost-universepixels;retainPRIMARY-full;conditional344attacheddomain",
       "sourceDomainPeerSHA256": "f883585466cdff9709ab442fd152026b6b5606bc38863313269ab6ea74e03834",
       "sourceFreezeSHA256": "e857c97ceecbb96a1192294c71e4468027754b7dbc8020d540cbae0dc36cd9b1",
-      "functionalUpdatesSpent": 26460,
+      "functionalUpdatesSpent": 29060,
       "functionalUpdateBudget": 250000,
       "actualInitConstructors": 1,
       "actualConstructorResets": 1,
@@ -4815,11 +4818,12 @@
       "coldClearPositionsAndPosesExact": 254,
       "coldAllRawMissesRetained": 26,
       "initialSVGReviewSHA256": "17aa1fac7407e507584ce58d6fca82c0a1868c230196fb1513cb8a7885096c28",
-      "functionalUpdatesRemaining": 223540,
+      "functionalUpdatesRemaining": 220940,
       "functionalGoalStatus": "13tap witness/fresh/native/visible acceptedwithlimits; old63nativefailure retained",
       "functionalGoalEvidence": "nasty59/content/replay-proof-receipt.json",
       "nativeGoalStatus": "Native02 original13tap route goal2000,next60campaign373000; late6px/2frame/pretransferresidualsretained",
-      "boundedAccepted": true
+      "boundedAccepted": true,
+      "source44RegressionUpdates": 2600
     },
     {
       "ordinal": 60,
@@ -4892,7 +4896,41 @@
       "sourceInventoryStatus": "source-only-inventory-frozen-with-portability-and-SP-field-errata",
       "sourceInventorySHA256": "4471a288a4c14fc35d39932b7dcca8dc1fc68ac204cb3c142a813c698bc32e4f",
       "privateSourceCompositionPreparation": "SPI retained identity reset join candidate in preparation; actual60work0",
-      "originalFitPreparationGapReceiptSHA256": "9412d6f8dfb4d577e6fe63206c7e68e084cd4af153720538152728938b73ede7"
+      "originalFitPreparationGapReceiptSHA256": "9412d6f8dfb4d577e6fe63206c7e68e084cd4af153720538152728938b73ede7",
+      "initializationAttempts": [
+        {
+          "receipt": "hitchhiker-actual60-init01/result.json",
+          "status": "failed-source-validation-before-constructor",
+          "constructors": 0,
+          "updates": 0,
+          "decodedReads": 1,
+          "explicitResets": 0,
+          "attempt": 1
+        },
+        {
+          "attempt": 2,
+          "status": "passed-init-two-resets-zero-updates",
+          "decodedReads": 1,
+          "constructors": 1,
+          "constructorResets": 1,
+          "explicitResets": 2,
+          "updates": 0,
+          "receipt": "hitchhiker-actual60-init02/result.json",
+          "rootReviewSHA256": "63c896b9e2c16278d72a87858003d96d8d720d5cde724f9db233866cb7de9446"
+        }
+      ],
+      "sourceRuntimeFreezeSHA256": "bfe8ddc23c70622541a1a685e8e8c1bedf12d8c357c685c145e5562960f27067",
+      "runtimeTestCount": 419,
+      "actual60Updates": 0,
+      "dedicatedNativeCold": {
+        "status": "closed-actions-captures-not-yet-viewed",
+        "PID": 142956,
+        "captures": 35,
+        "frontendTicks": 2224,
+        "guestTicks": 2824,
+        "captureFreezeSHA256": "06bd20481467c2953bfd6f34bdefbb13e1fe2fded4f94e2f7b498888aa483b63",
+        "reportSHA256": "0e9ac65d846ecd9383462a676a88fc5d94e303fea4737884cab62cc70ba7f1a8"
+      }
     },
     {
       "ordinal": 61,

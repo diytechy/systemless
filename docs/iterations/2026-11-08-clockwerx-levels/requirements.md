@@ -287,3 +287,6 @@ Slide45qualifies separate default-off GO+EXb/n/sordinaryclass1programs with help
 
 
 PropWash46qualifies separate default-off staticOil+EX core plusGO/white-blue-ring composition. Actual sliding is sampled atDPcreation/arrival; realgrab remains lethal. Currentmainring outline/visibility, cachedlogicaltarget/physicalPUwake, lateSPafterOil and dispatchedSP→GO/PU continuation retain sourceorder/lifetime/reset. Native/SVG11000/190onsets/Oilarrivaldeathreset pass; detailedphase/overdraw/unvisitedbranch limits inreview. Existing45profiles identical across392624updates.
+
+
+Square Dance54 composes ordinary moving bonus dots, static white goal, rings, protected waypoint and callback clocks under explicit default-off capabilities. Preserve source initial bonus, sprite/background identity and consumed foreground lifetime; moving carrier identity/current coordinates, same-update grab/query order and ring release/regrowth remain separate. Original/SVG4000 and eight model cases establish one bounded playable route, with51 timed capture residuals retained. Do not extrapolate unvisited optional interactions, decorative phase, native reset or arbitrary route parity. See[square-dance-review](square-dance-review.md).

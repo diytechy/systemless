@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 54,
-  "currentAction": "54original+SVG4000 observed, raw52d72c13 frozen, static51residuals reviewed next;55actualcoldactive session9722;56source reset-tail graph serial;53normalprotected.",
+  "currentOrdinal": 55,
+  "currentAction": "54bounded accepted/live54;55cold/raw reviewed, provisional706 selected, refine preparation thenRoot finite execute lease;56source reset peer serial; keepgoingthrough100.",
   "levels": [
     {
       "ordinal": 1,
@@ -4157,14 +4157,13 @@
       "menuTitle": "Square Dance",
       "resourceTitle": "Square Dance",
       "sha256": "4f0ca0e73693c858a5c6d0c9de59fcfc12bf032f36d439277369ed5500037514",
-      "status": "goal-observed-fidelity-review-pending",
+      "status": "bounded-moving-special-composition-accepted-with-timing-limits",
       "nativeEvidence": [
-        "cold100fb84f",
-        "goal543bdf27",
-        "raw52d72c13"
+        "square-dance-review.md",
+        "square-dance-review.json"
       ],
       "requirements": [],
-      "svgStatus": "goal4000-root-viewed-paused",
+      "svgStatus": "root-goal4000-reviewed-locally-active",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4237,7 +4236,14 @@
       ],
       "sourceCommit": "9d06c648e5696ed495c6845e0c260aee67e4626f",
       "comparisonStatus": "148/178clearpositions-127/178clearposes-51residuals-static-investigation",
-      "focusedGoalChecks": 8
+      "focusedGoalChecks": 8,
+      "boundedChildQualified": true,
+      "sourceRevision": "9d06c648e5696ed495c6845e0c260aee67e4626f",
+      "provisionalColdPrefix": 700,
+      "modelGoalCases": 8,
+      "modelGoalSuccessfulCases": 8,
+      "nativeGoalScore": 4000,
+      "nativeNextOrdinal": 55
     },
     {
       "ordinal": 55,
@@ -4245,8 +4251,11 @@
       "menuTitle": "Hokey Pokey",
       "resourceTitle": "Hokey Pokey",
       "sha256": "cd9721e7d81edfcb5a2d26f284d1d4ab416306a29b742aed0a357558ef4c5add",
-      "status": "native-cold-active",
-      "nativeEvidence": [],
+      "status": "native-cold-reviewed-functional-refinement-preparation",
+      "nativeEvidence": [
+        "cold34bc7fe7",
+        "raw12822c9a"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],
@@ -4324,10 +4333,14 @@
         "moving-specials-source-review.json"
       ],
       "sourceCommit": "9d06c648e5696ed495c6845e0c260aee67e4626f",
-      "functionalUpdatesSpent": 249734,
-      "functionalUpdatesRemaining": 350266,
+      "functionalUpdatesSpent": 255382,
+      "functionalUpdatesRemaining": 344618,
       "discoveryStatus": "bounded-no-goal-refinement-awaits-actual-cold",
-      "nativeSession": 9722
+      "nativeSession": 9722,
+      "provisionalColdPrefix": 706,
+      "sourcePoseStrictColdMatches": 180,
+      "sourcePhysicalColdMatches": 192,
+      "sourceColdClear": 192
     },
     {
       "ordinal": 56,
@@ -7729,9 +7742,9 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "square_dance_comparison static54 residual/qualification audit, zero new updates",
-    "B": "Root55nativecold/UI54/evidence review/checkpoint; heavy sequential",
-    "C": "squiggle_engine56source-only reset-tail graph;55functional paused",
-    "D": "hokey_pokey_cold_raw original-only prep then one fit after Root lease"
+    "A": "hokey_pokey_functional55refinement preparation;344618updates remain, execution not yet authorized",
+    "B": "Root reviewed54activation/checkpoint/55binding; heavy lane sequential",
+    "C": "headache_source_peer independent56source reset graph/admission plan",
+    "D": "squiggle_engine available for private56implementation after source peer; no shared changes"
   }
 }

@@ -1,0 +1,66 @@
+{
+  "status": "accepted-bounded-playable-with-timing-differences",
+  "ordinal": 54,
+  "title": "Square Dance",
+  "sourceCommit": "9d06c648e5696ed495c6845e0c260aee67e4626f",
+  "originalGoalScore": 4000,
+  "svgGoalScore": 4000,
+  "nextNativeLevel": 55,
+  "nextNativeTotal": 338000,
+  "checkedRouteSteps": 4938,
+  "focusedModelGoals": 8,
+  "focusedUpdates": 42902,
+  "publicTests": 375,
+  "actualSourceContracts": 8,
+  "packagingTests": 21,
+  "prior53ProofFieldsExact": 22,
+  "prior53ReplaySteps": 6534,
+  "exactComparison": {
+    "captures": 30,
+    "selected": 180,
+    "clear": 178,
+    "physicalPoints": 148,
+    "canonicalPointAndPose": 127,
+    "residuals": 51,
+    "humanMisses": 2
+  },
+  "rawAllCohorts": {
+    "selected": 204,
+    "clear": 180,
+    "misses": 24
+  },
+  "bindings": {
+    "native-goal-01/report.json": "543bdf272eb0e5eb77580c37aa625fa18115ad6d8c8bec8d0b2e7ce256b33b03",
+    "root-native-goal-01-model-evidence.json": "836349a1201e2537357df3bf08260168bed31712f88412a96f8c6bb7c60a61b6",
+    "content/verified-goal-primary01.json": "1e6a65843033f7567886c4c81527ada23f81c1ff2a0733179f8bddc7e2f18f6e",
+    "content/goal-checkedRoute-primary01.json": "1116a035f5eb6aeb0abc2e551783df5572d457eb0fe7c7a9ceb0eb24c5d746d5",
+    "content/focused-qualification01/receipt.json": "1223ab379f2d631cd17833b4c2fe7c465212f20d3187563547894374130f6b6a",
+    "content/focused-qualification02/receipt.json": "3e4f6648cac4fd9c3c8e97ceef32ad84c2f307b9dce09c7aa0bb2bb21c27ea14",
+    "../square-dance-native-goal-review/final-receipt.json": "52d72c13bd564a607551ee8b47807e895975f68803a317cd672c0546a8fe4cd5",
+    "../square-dance-native-goal-comparison/receipt.json": "321bdb720fd8654cdf20b992d808b921c8292f83712170aabe3fa301ea3890b2",
+    "../square-dance-residual-diagnostics/receipt.json": "0316416816dd89ad545433b5b3c97e762ae05e04887ceb7e872642d99c55c147"
+  },
+  "rawArtifactHashesRootVerified": 48,
+  "qaGoalViewed": true,
+  "qaPaused": true,
+  "independentGameplayReview": true,
+  "limits": [
+    "Native capture/poll/render boundary unresolved; fixed comparison retains51 clear residuals and2 human misses.",
+    "All51 residual components equal saved+2 observations, but full simultaneous completed enemy arrays are absent; no whole-state+2 certificate or offset correction.",
+    "Cold prefix700 provisional; ties, alternatives and14 cold residuals retained.",
+    "DO/ring/WY/protection/misc phase and absence confidence unassigned; other ring/WY/protection unvisited.",
+    "Eight model goal checks are bounded; semantic reset path equality is not exact timed history/state equality; age1 reset is API-only.",
+    "No arbitrary route/lifetime, native reset/death, audio, original-save compatibility, physical controller or new resource-performance qualification.",
+    "First normal and isolated QA loads hit transient Image.decode failure; unchanged-asset reloads worked, cause unresolved."
+  ],
+  "activation": "private-atomic-local-install-then-normal-UI-verification",
+  "normalUIVerified": true,
+  "normalUIReceiptSHA256": "0b3e756ff6853e619ad2d0dcc577e6fcfe7f5746be2e334cf116ea876b30d18f",
+  "activationSHA256": "b0b2df574df7a6209069034fc3340e07217085365cd96ff66d74a49cb19795a3",
+  "bundleSizes": {
+    "sourceBytes": 414078,
+    "assetBytes": 3531553,
+    "manifestBytes": 4930917,
+    "totalBytes": 8876548
+  }
+}

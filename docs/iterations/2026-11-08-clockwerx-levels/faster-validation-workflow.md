@@ -1,6 +1,6 @@
 # Faster ClockWerx validation workflow
 
-Apply this continuation procedure after the2026-11-10 runtime audit. It changes the diagnostic workflow, not game behavior or existing fidelity claims. Implement the compact observer before another broad58 search; no speed improvement has yet been measured.
+Apply this continuation procedure after the2026-11-10 runtime audit. It changes the diagnostic workflow, not game behavior or existing fidelity claims. The [compact observer check](compact-observer-validation.md) now measures and verifies the exercised accepted57 prefix. Reuse its frozen recorder for focused58 trials, preserving the untested death/goal/RNG/moving-human scope and requiring a chosen witness/fresh proof.
 
 ## Evidence tiers
 

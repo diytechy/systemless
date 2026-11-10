@@ -1,0 +1,19 @@
+# Pending Reverse input correction
+
+Two separate Reverse taps before the next human movement callback now cancel each other, matching the original Boolean toggle. Previously the pilot kept one reversal pending. Holding one key still requests one reversal, and the existing collision/action suppression order is unchanged. This is a shared rule, with no level-specific input rewriting.
+
+The original CODE6 input handler, rising-edge gate and consumer were independently byte-bound. The first Headache native replay exposed the difference: the original continued forward after two short input windows, while the old model reversed. Both reached4,000, so goal completion alone would have missed the discrepancy. The exact original inputs, failed startup trace and old-engine proofs remain preserved privately.
+
+Validation:387 runtime tests pass, including one/two/three taps before a callback and existing held-input, wall and action suppression checks. Full Square Dance54 and Hokey Pokey55 replays preserve all28/25 declared fields and whole lineages across12,116 updates. A source-clock inventory covers all55 scenes,54 checked routes and92 Reverse edges: at most one edge occurs per human consumer interval. Under those fresh-route assumptions the previous rule and corrected rule are equivalent. This does not cover arbitrary taps, all earlier onset trials or clock-retaining restarts.
+
+The corrected Headache proof runs the unchanged12,346-update literal input sequence twice, with the same706-update legal idle prefix. Both reach4,000 at update12,328 and have identical whole observational lineages. Each makes1,297 actual original SPI collision polls; every poll and sampled human pose is clear for all four original SPI collider frames. No animation phase was fitted or collision bypassed.
+
+The original replay independently shows Headache completed4,000 (3,000 collected plus1,000 Child completion), then level57 Mortality with campaign total368,000. Its42 captures were scored once after a method freeze. Seven raw archives and16 primary/full pairs, including NaNs, pass independent saved-data review. At the unchanged706 binding,224/227 clear actor positions and209/227 canonical poses match the corrected proof. The18 remaining pose differences occur in three captures, each one callback frame across six actors; three also differ by the carrier's3-pixel step. These remain explicit timing limits.
+
+Original SPI startup depends on application-lifetime state. The pilot's level-local initialization does not reproduce its exact observed phase. A bounded read-only trace ended without the needed SPI observations; no phase offset was inserted. The route's clearance against every collider frame supports this bounded witness, not arbitrary hazard timing parity.
+
+The old SVG build visibly completed4,000 and its evidence is saved. The corrected SVG replay is pending; Headache is not yet added to the normal55-scene bundle. No new CPU, memory, frame-rate, latency, audio, controller or save-compatibility claim follows from these functional checks.
+
+For level generation, certify timed held-input windows and callback slack in addition to spatial reachability. Keep source object identity separate from coordinates shared by moving carriers. Preserve the source input queue, clocks, cached queries and reset assumptions. A phase-independent safe path is useful evidence, but cannot certify encounters that rely on an unqualified hazard phase.
+
+Private evidence root: D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/headache/. Corrected final receipt a8bb6e698dd20b151cee8b3b46379455680726099615c3ac46f481b7fc5475e6; frozen40 source2b9a54f5462e67ad55c93f9cfd0a4a9028f36da4bc45021f232db60a89a7ff58; Root reviewed124 direct identities and the original instruction spans. Functional56 budget74,696/250,000, remaining175,304; prior-route regression cost is separate.

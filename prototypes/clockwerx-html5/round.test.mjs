@@ -396,6 +396,22 @@ test('replayed reverse queues one source-clock action per rising edge, including
  assert.equal(g.events.filter(e=>e.type==='reverse').length,2);assert.equal(g.player.direction,1);
 });
 
+test('distinct reverse taps cancel in pairs before the next source callback',()=>{
+ for(const taps of [1,2,3]){
+  const {board,options}=canonicalFixture(),g=new SourceRound(board,options);
+  // A short input interval can contain several edges before class0 advances.
+  const initial=g.player.frame;
+  for(let i=0;i<taps;i++){
+   g.update(1/10000,{reverse:true});g.update(1/10000,{});
+  }
+  assert.equal(g.player.frame,initial);assert.equal(g.player.direction,1);
+  assert.equal(g.pendingReverse,taps%2===1);
+  for(let i=0;i<20;i++)g.update(1/120);
+  assert.equal(g.events.filter(e=>e.type==='reverse').length,taps%2);
+  assert.equal(g.player.direction,taps%2?-1:1);assert.equal(g.pendingReverse,false);
+ }
+});
+
 test('canonical ordinary wall response reverses each actual source pose without a human trap guard',()=>{
  const {board,options}=specialFixture({enemy:true});board.dots[0].ring=false;
  Object.assign(board.enemies[0],{pivot:'b',frame:0,unwrappedFrame:0,angle:3,direction:1,checksWalls:true});

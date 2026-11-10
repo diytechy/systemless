@@ -277,7 +277,7 @@ export class SourceRound extends MovementGame {
   if(!animateSliding(hand)&&!this.complete&&!this.death)hand.unwrappedFrame+=hand.direction;
   hand.frame=hand.unwrappedFrame&63;hand.angle=hand.unwrappedFrame*TAU/64;
  }
- reverse(){if(!this.death&&!this.paused&&!this.complete)this.pendingReverse=true;}
+ reverse(){if(!this.death&&!this.paused&&!this.complete)this.pendingReverse=!this.pendingReverse;}
  setPlayerGroup(group){
   if(![700,4300].includes(group)||!this.outlines.groups[String(group)])throw new Error('Unqualified player artwork group');
   this.player.group=group;this.board.player.group=group;

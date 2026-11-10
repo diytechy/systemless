@@ -1,3 +1,49 @@
+# Latest checkpoint — 2026-11-10T12:51:19.568192+00:00
+
+## Exact next action
+
+56 original and old SVG both visibly4000. Shared pending Reverse input was wrong: original Boolean toggles cancel two short taps; old model setTRUE. Root applied generic one-line correction plus public test,387runtime tests pass. Root independently rehashed124 direct identities and original byte spans (headache/root-corrected-proof-review.json). Read pending-reverse-review.md. Corrected exact56 literalpair CLOSED2creates/24692updates, both4000at12328, identical lineage44d7e288; all2594originalSPIpolls all4framesclear. No input/epoch changes. Source40 freeze2b9a54f5; corrected finalreceipta8bb6e69. Actual56budget74696/250000,175304remaining. Prior54/55fullroutes12116updates/2creates exactall28/25fields/wholelineages; prior55sourceedgeaudit55scenes54routes92edges max1perconsumerinterval, conditional equivalence only.
+
+Corrected SVG QA is REPLAYING at http://localhost:8091/headache/qa-corrected/dist/clockwerx-html5/ tab139(hokeyPokeyTab);40frozen source/104payloads/56defs, same12346literalinputs. Wait actual4000goal, saveAX/screenshot, nexttoolCUAcompletion_summaryONLY, thenpause/mark separately. It may take wallminutes due uncontrolledrAF; no performance capture. Old SVG56goalproof headache/qa/old-engine-goal-page.png/txt is saved; oldQA preserved. Normal8087still55paused. DO NOTaccept56orreplace normal before correctedSVG goal review.
+
+Native56GOAL CLOSED137524exit0/report0c2ef252/8106front8706guest/42zero. PREPNGfreeze c6e58827 precedes actualPNGreads. Solegoalfit58.594s/CLOSED91916exit0; rawfinal74884053 independently verifies7archives16pairs/all42cohorts/252rows/allmisses/sourcealiases. Corrected comparison fixed706:224/227clearpoints209/227poses,18pose residuals in3captures(all6actors onecallbackframe),3also3px; nooffsetfit. OriginalSPIapp-lifetime startup remainsUNQUALIFIED; all4colliderclearance supports this route only. Failedstartuptrace/log retained; no retries.
+
+Earnedthrough56fixture aca8c62f5cefc55aaecc1414dcbb4780a63062d5cee7c58bd430a3e4cbf9dcc6 now verifies9files/7untouched/bothforks/representedmetadata. Original03f7f09e unchanged. Mortality57COLD is DONE,CLOSED156844exit0/report458250fb/2224front2824guest/35zero, native script ee3fc017. Root viewedall35 AFTER PREPNG ca2b6996:correct57/368000/noDY/reset/bonus. SolefitCLOSED66980exit0/10s/6archives16pairs. Independent original-only rawfinal e2756732 validates455selections,416/429boardclear/13misses plus26menumisses; pending-scope archived separately. NO57actualmodelupdates. Original-only rawprofiles/sourcegroups stay immutable.
+
+57sourcecandidate/peer/public synthetic test are READY butPRIVATE/unintegrated. Root reviewed code/plan/peer; independently rehash candidate+peer+publictest then serialintegrationpreservingcurrentpendingtoggle. Copy onlyportable publictest b254f68b (9groups) and runtimecode, neverprivate loader/assets. Add41stmoduleto packager, runfocusedpublic/packaging +prior54/55/56wholelineages andactual57zeroctor/reset beforefreeze/commit. Preparationfactory mortality/content/prepare01 dormant; v1dt1/960 proposal HELD, revise to fixed1/120 one5648noinput/all3729prefixes/all33offsets/nohealthfilter/allties beforeRootlease. No57discoveryyet.58sourceplan5cb9d36f SOURCEONLY: ordinary moving marks+ordinaryclass1NPC, noOil/type4; noimplementation/execution. Existing59–100preps available.
+
+First CUA aftercompaction exactly await cua.rewriteDocumentation(); reuse browser2/tab92and139. Current corrected56 browser part active, nofinaloutcomeyet. RootONLY IAB; never retry/bypass Windows/Edgepolicy stop. No requireduserinput. Continuethrough100withoutprogress-onlyfinal.
+
+
+Earlier entries are historical.
+
+# Latest checkpoint — 2026-11-10T12:35:39.742824+00:00
+
+# Current coordinator action
+
+Continue through100 on SVG-Port without per-level stops.55 bounded Child scenes are accepted and locally active;45 remain. One shared engine loads data-driven levels. User permits two or more runners. New mechanics qualify in series; frozen-engine/source/functional preparation may overlap. Native emulators, fitters, conversions, benchmarks and heavy builds stay sequential. No push, upload or deployment. Preserve original media/forks/represented Finder metadata/preferences/browser save identities. Private maps/art/disassembly/scenarios/saves remain on D:.
+
+## Exact next action
+
+Headache56 original GOAL is visibly verified4000, then57Mortality368000. Root reviewed all42 original captures only after PREPNGfreeze c6e588272d1668dd517bd93f59dd51737e0b68b77c9517a22b8c84dcde9e4523. Native PID137524 CLOSEDexit0/report0c2ef252ef2d9caeee22b59d6e81bf5e887414520b7c58d9794b967c1558434c/8106front8706guest/zero-budget; exactscript336c7419. Original-only goal fitter PID91916 CLOSEDexit0/58.594s/180sbound;7archives16PRIMARY-fullpairs. Independent saved raw audit and fixed706 model/native comparisons are in progress. No refit or phase selection. Native run and fitter have ended; verify OS before next exclusive workload.
+
+56 discovery04 reached4000 twice at12346updates with identical whole observational lineages3f549507, finalreceipt0c6514fa. Each proof1299 original SPI polls and all four collider frames clear; total56functional50004/250000,199996remain. Prior failed policies/trace remain immutable. A read-only startup trace hit180swallbound with noSPIreads; exact original app-lifetime SPI startup phase is UNQUALIFIED. Do not insert independent phase offsets. Two rapid Reverse windows are preserved exactly; compare actual original observations, never silently edit inputs or physics.
+
+QA56 isolated package is ready at http://localhost:8091/headache/qa/dist/clockwerx-html5/ (receipt68ab0a2d/manifest3f63de2f),40Rootsourcefiles/104unchangedpayloads/56defs,all55prior defs preserved. Root selected56 in tab139(hokeyPokeyTab); wait assetsready then Replay checked route, observeactual4000 goal, saveAX/screenshot. It may take severalwallminutes due uncontrolled IABrAF; this is no performance benchmark. No actualSVG56goal yet. Root ONLY IAB. First call aftercompaction exactly await cua.rewriteDocumentation(); reuse browser2/tab92and139. Last completed CUA part was normal55 paused; current56 browser check remains active. After observing56goal nexttoolmustCUAcompletion_summaryONLY, then pause/mark/save separately.
+
+After original raw/model/SVG review, install56 preserving55rollback, existing payloads/defs/rootfiles and savekey systemless.clockwerx-html5.pilot.v1; commit validated source/docs locally. Build earnedthrough56fixture from ACTUAL original56 save export (native-goal-01/save-files), verifyforks/metadata/sourcehash. Originalsource03f7f09e unchanged. Mortality cold script/wrapper are prepared in mortality/ (scenarioee3fc017, wrapper178ed8f4),35captures2224front/max2500, through56fixture pending. Do not duplicate56native/fit.
+
+## Source and preparation
+
+Current Root commitf45b46b4281f1d35d0dc5c8089dd4377aaabfb81,40runtimefiles; normal8087serves55/104assets/9,150,455rawB excludingreceipt. Root app fresh checked replay fix is validated/committed; Restart retains clocks. Normaltab92foregroundTab paused;55QAproofsaved. Full54rollbackhokey-pokey/previous-live-pilot. Engine source40 frozen moving-spikes-frozen-source, sourcefreeze6e8564ce; Root app fix only difference. Prior54/55fullroutes12116updates exact. Original69-title library/default-tuned-prototype comparison COMPLETE, heartbeatdeleted; never restart that queue.
+
+57 static-marked/orbital candidate is PRIVATE, unintegrated: candidate receipt afb0978252b48cf3f02c0f7d839c86e0396c54e752a19f9434cebe8405ed75f8, sourcefreezece52491b/41runtimefiles/37unchangedbaselinefiles,20syntheticgroups1484updates,actual57zero updates. Independent peer6bdce254043bb57072a6203d63f5cf5a0302649d5dca0d2d4149f8a4f50d172b APPROVE bounded source composition only,8groups374syntheticsteps. Root read peerreport; must independently rehash/read candidate+changedcode before serial integration after56review. New generic default-off staticMarkedOrbitalRules preserves raw property masks, human fatal37-before-release continuation, type4 ordinary-hook suppression. Existing source3500all64 and merged5878b957 reused; no newSVGcolliders or extra radius. No57trajectory/native/earnedfixture yet.
+
+Existing57–60 and61–100/gun/buster/slowdown source preparation available; do not duplicate census. Astra unavailable untilNov13 2:43PM; no retries. Do not retry/bypass Windows/EdgeURLpolicy stop. No required user input now. Continue through100; do not end with a progress-only final after56.
+
+
+Earlier entries are historical.
+
 # Latest checkpoint — 2026-11-10 11:34 UTC
 
 

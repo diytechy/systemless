@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 56,
-  "currentAction": "55boundedaccepted/normal55ready-paused; fresh checked-replay adapter validated.56actor cold provisional706/707185points173poses; SPI0of51clearframesmatch, source startup investigation before discovery.57admission sourceplan ready; no newmodel/native leases.",
+  "currentAction": "55accepted;56native+oldSVG4000, correctedgenericReverse387tests+twofreshliteralgoals/exact54-55; correctedSVG replaypending.57cold+rawreviewcomplete/source41candidatependingserialintegration; zero57updates.",
   "levels": [
     {
       "ordinal": 1,
@@ -4394,7 +4394,7 @@
       "menuTitle": "Headache",
       "resourceTitle": "Headache",
       "sha256": "fc20fa6f176d6a6a35f5fc2da836e2be6d802a09150386c0589747877e423952",
-      "status": "actor-cold-provisional-spi-startup-discrepancy-source-review",
+      "status": "original-goal-verified-svg-and-raw-review-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4489,7 +4489,17 @@
       },
       "spikeNativePhaseQualified": false,
       "spikeClearFrameMatches": 0,
-      "spikeClearFrameMismatches": 51
+      "spikeClearFrameMismatches": 51,
+      "modelBudget": {
+        "spent": 74696,
+        "cap": 250000,
+        "remaining": 175304
+      },
+      "nativeGoalReportSha256": "0c2ef252ef2d9caeee22b59d6e81bf5e887414520b7c58d9794b967c1558434c",
+      "nativeObservedScore": 4000,
+      "nativeObservedNextLevel": 57,
+      "pendingReverseCorrected": true,
+      "correctedSvgStatus": "replaying"
     },
     {
       "ordinal": 57,
@@ -4497,7 +4507,7 @@
       "menuTitle": "Mortality",
       "resourceTitle": "Mortality",
       "sha256": "ffbaeea3c7d018026fac518a30f357b3d8dfaf4471d35199861a818050f0baf5",
-      "status": "queued",
+      "status": "original-cold-reviewed-source-admission-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4563,7 +4573,8 @@
       "sourceDomainPeerStatus": "bounded-cold-approved-with-required-metadata-erratum",
       "sourceDomainPeerSHA256": "4400897098be67db4c8e508cdfb2102459b3c98a4ba1059c9ae0a5043b771620",
       "sourceHumanWallMetadataErratumSHA256": "e3b0a075d1fbc9f142f70a5b715c3c19de418769008875f050939e735cbeeb2c",
-      "sourceAdmissionPlanReceiptSHA256": "dc9d720b773392a354ecf660e8450d892c6180c5990c3245eaebddec38c9de6c"
+      "sourceAdmissionPlanReceiptSHA256": "dc9d720b773392a354ecf660e8450d892c6180c5990c3245eaebddec38c9de6c",
+      "actualModelUpdates": 0
     },
     {
       "ordinal": 58,

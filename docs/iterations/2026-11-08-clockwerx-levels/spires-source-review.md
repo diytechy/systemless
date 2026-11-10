@@ -1,6 +1,6 @@
 # Spires source integration
 
-The independently reviewed source adds a separate composition for moving carriers, static marked dots and a moving goal. Level 52 gameplay acceptance is pending; the normal local delivery remains the accepted first 51 scenes. All new capabilities require explicit flags. The common moving engine and clock rates are reused.
+The independently reviewed source adds a separate composition for moving carriers, static marked dots and a moving goal. This document records source integration and initial calibration. Subsequent [gameplay review](spires-review.md) accepted the bounded level52 slice with explicit fidelity limits and activated it locally. All new capabilities require explicit flags. The common moving engine and clock rates are reused.
 
 A fatal marked transfer requires a real human grab with both endpoints marked. Death begins at the old physical pose before release; the transfer still finishes its placement and grab callback while the latched death suppresses scoring. A single marked endpoint, NPC movement, Bounce and connector specifications do not trigger this predicate. Terminal direction zero stays confined to the dying continuation. The original control dispatcher makes one action/grab call, so simultaneous held controls cannot issue a second grab after the fatal transition.
 

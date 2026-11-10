@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 58,
-  "currentAction": "57boundedaccepted/normal57readypaused;58originalcoldactive orclosedinspect93832/owner, freeze605originalmethodbeforePNGs; private42candidate+peerapproved awaitingRootintegration.59privateprep.",
+  "currentAction": "57 bounded scenes locally active;58 source42 validated, original cold recovered/audited after sole fitter timeout; fixed1/120 calibration preparing, no trajectory yet.59 private peer approved.",
   "levels": [
     {
       "ordinal": 1,
@@ -4597,11 +4597,24 @@
       "menuTitle": "Death",
       "resourceTitle": "Death",
       "sha256": "c0bb84c537c05baa13c4c919b09eb00f2a6303f015ca857f8dcd29d2a2118a80",
-      "status": "source-candidate-peer-approved-original-cold-pending-review",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "source-integrated-original-cold-audited-calibration-preparing",
+      "nativeEvidence": [
+        "death58/native-initial-01/report.json",
+        "death58/root-cold-visible-review.json",
+        "death58-native-cold-review/saved-recovery01/audit01/receipt.json"
+      ],
+      "requirements": [
+        "current moving-dot source identity and first-match queries",
+        "human marked-to-marked reason37 continuation and terminal controls",
+        "ordinary NPC source programs and initial moving riders",
+        "independent optional bonus and static goal"
+      ],
+      "svgStatus": "source42-init-reset-pass-gameplay-pending",
+      "generationConstraints": [
+        "certify timed legal inputs with moving source identities",
+        "retain aliases and property-mask misses",
+        "avoid fatal marked pairs or designate intentional failure"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 65,
@@ -4666,7 +4679,9 @@
       "sourceDomainPreparationSHA256": "342d7d448a1c3bab5462a7d78cc475ad082e8f6e54ade01c2f0ea2d295aa22ab",
       "sourceDomainPeerStatus": "bounded-cold-approved-with-required-metadata-erratum",
       "sourceDomainPeerSHA256": "5285382f180655960e51eb908bad2b687c54f248ea2a9c2161d75c13409deeb2",
-      "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38"
+      "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38",
+      "sourceFreezeSHA256": "44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9",
+      "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942"
     },
     {
       "ordinal": 59,

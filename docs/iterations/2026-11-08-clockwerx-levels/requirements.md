@@ -103,7 +103,7 @@ Waking Oil does not immediately kill the human. It adds wake/acquisition/approac
 
 The current Oil solution has13transfers,2bonuses and passes166clock-onset samples plus original/browser goal checks. A second original path confirms cloned droplets diverge along both axes; a separate original/browser wait case confirms pursuit/death/full reset. This provides reusable modeled behavior, not an exhaustive Oil solver. The full generator still requires independent IDs, seed/trace retention, legal input replay and unsupported-mechanic rejection. Combo adds kind0 Oil, walls and a red enemy; More Spikes adds an active conditional enemy program; More Doors adds long-horizontal doors and paired switches. See [follow-on requirements](follow-on-6-8-review.md).
 
-Protection correction scope: accepted catalog1–5 contain neither raw0x40 nor raw0x2000; their runtime gate still rejects both. The helper correction is source preparation, not acceptance of special-dot levels.
+Protection correction scope: accepted catalog1â€“5 contain neither raw0x40 nor raw0x2000; their runtime gate still rejects both. The helper correction is source preparation, not acceptance of special-dot levels.
 
 ## Combo and robust action windows
 
@@ -186,7 +186,7 @@ A held Bounce can repeatedly reverse at neighboring facing dots while preserving
 The31-transfer original/SVG goal earns14000 through three GO pickups, four increasing bonus awards and the Child goal. Four fuses ignite, three blasts complete, twelve dot cores become burnt and two original green hands disappear. Model removal of a third hand varies by tested onset. The pure64-frame hero/NPC period excludes GO/LI birth clocks, fuses and explosions; independently fitted GO animation rate does not establish the same absolute first frame. See [Prosperity](prosperity-review.md).
 
 
-## Enclosure timing preparation — acceptance pending
+## Enclosure timing preparation â€” acceptance pending
 
 Original player motion is callback-stepped. On each class0 callback, collision and consecutive-wall contact checks precede direction input; direction requests query the current cardinal source frame. Noncardinal callbacks clear the repeated-target guard. A successful action or collision consumes a queued Reverse request without a second reversal. A goal stops the source step before subsequent animation. Smooth SVG drawing must interpolate independently of those logical frames and collision outlines.
 
@@ -271,7 +271,7 @@ Dodger39 validates a mixed-height elevator channel with GO/staticSP, including a
 Hollow40 qualifies the guarded colored three-channel elevator/GO/SP/programmed-actor composition. Original/SVG8000and25transferheroes match with190onsets; independentcold700idle replaces inherited706comparison assumption. Red-channel human riders, humancontrolentry and exactsurface/GO/SPIphases remain limited. Seesaw62source review finds absentPU/DPupdownrider/lowerendpoint hooks; Fracas94needs null-import semantics and blue-ring51..58atlases. See[hollow review](hollow-review.md),[Seesaw prep](seesaw-preparation.md),[Fracas prep](fracas-preparation.md).
 
 
-Squiggle41 qualifies the bounded paired-HY static Child family, strict pairs, ordinary non-HY/non-goal human starts, source arrival ordering and entry-pose fader clocks. Original/SVG1000/18transfers/6HY/all190onsets; six one-frame pose differences and one fader callback boundary remain. Preserve free ref−1 NPC initial occupancy without synthetic teleport; optional bonuses, reset, black/NPC faders, audio and mixed families need separate evidence.
+Squiggle41 qualifies the bounded paired-HY static Child family, strict pairs, ordinary non-HY/non-goal human starts, source arrival ordering and entry-pose fader clocks. Original/SVG1000/18transfers/6HY/all190onsets; six one-frame pose differences and one fader callback boundary remain. Preserve free refâˆ’1 NPC initial occupancy without synthetic teleport; optional bonuses, reset, black/NPC faders, audio and mixed families need separate evidence.
 
 
 EX42 now qualifies the first static connector/updown/WL/WY/freeactor Child composition. Source physical slide anchors, callback order, no-halfturn endpoint arrival, collision compensation, ID cache and recursive bonus component consumption are shared rules. Native/SVG36000 and all190onsets pass; focused callback-step, surfacephase, unvisited checkpoint/death/reset/audio limits remain explicit. Static/programmed/SP43 and later Oil/BO/GO/HY joins need separate serial qualification.
@@ -286,7 +286,7 @@ Weave44 qualifies GO+staticEX/SP/optionalWL with freeordinaryclass1 actors. Phys
 Slide45qualifies separate default-off GO+EXb/n/sordinaryclass1programs with helper-level static boundaries. Native/SVG2000, all190EXACT116holdonsets,359clearactorposes/positions/all12heroes/1603EXframesmatch. NPCstop/program/start/targetpermission-before-XOR/PCsuspension retained; no humancollisioncompensation. ExactSPI/GOphases, bonuscomponentpickup anddeath-reset remainlimited.
 
 
-PropWash46qualifies separate default-off staticOil+EX core plusGO/white-blue-ring composition. Actual sliding is sampled atDPcreation/arrival; realgrab remains lethal. Currentmainring outline/visibility, cachedlogicaltarget/physicalPUwake, lateSPafterOil and dispatchedSP→GO/PU continuation retain sourceorder/lifetime/reset. Native/SVG11000/190onsets/Oilarrivaldeathreset pass; detailedphase/overdraw/unvisitedbranch limits inreview. Existing45profiles identical across392624updates.
+PropWash46qualifies separate default-off staticOil+EX core plusGO/white-blue-ring composition. Actual sliding is sampled atDPcreation/arrival; realgrab remains lethal. Currentmainring outline/visibility, cachedlogicaltarget/physicalPUwake, lateSPafterOil and dispatchedSPâ†’GO/PU continuation retain sourceorder/lifetime/reset. Native/SVG11000/190onsets/Oilarrivaldeathreset pass; detailedphase/overdraw/unvisitedbranch limits inreview. Existing45profiles identical across392624updates.
 
 
 Square Dance54 composes ordinary moving bonus dots, static white goal, rings, protected waypoint and callback clocks under explicit default-off capabilities. Preserve source initial bonus, sprite/background identity and consumed foreground lifetime; moving carrier identity/current coordinates, same-update grab/query order and ring release/regrowth remain separate. Original/SVG4000 and eight model cases establish one bounded playable route, with51 timed capture residuals retained. Do not extrapolate unvisited optional interactions, decorative phase, native reset or arbitrary route parity. See[square-dance-review](square-dance-review.md).
@@ -308,3 +308,6 @@ Headache56 is bounded-playable with original/correctedSVG4000. Input pending fla
 
 
 Mortality57 is bounded-playable with original/SVG1,000 goals. All post-transfer pose samples match; pre-transfer sample timing remains inexact. A generator must certify held-input intervals, not just cardinal waypoints: +2/+4 and wider model windows work, while early/trimmed windows make no transfers. Model reset retains source clock objects rather than zeroing them; native reset remains unqualified. Keep source identity/program binding separate from visually matching positions, and treat bonus collection as a distinct objective from reaching a goal. See[Mortality review](mortality-review.md).
+
+
+Moving marked ordinary source42 composes existing mover, marked-grab and ordinary NPC primitives under a default-off semantic recipe. Preserve raw actor/source slot/program identity and current mover coordinates, including overlapping-path aliases. Fatal human grabs die37 before release then continue target placement; suppress subsequent controls after death. Ordinary NPCs and Bounce keep their separate semantics. Initialization/reset and prior56/57 regressions pass;58 gameplay remains pending. See[moving marked source review](moving-marked-ordinary-source-review.md).

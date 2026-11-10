@@ -1,3 +1,4 @@
+import {assertMovingMarkedOrdinaryScope} from './moving-marked-ordinary.mjs';
 import {assertMovingSpikeScope,assertMovingSpikeActor} from './moving-spikes.mjs';
 import {assertMovingSpecialScope,assertMovingSpecialActor} from './moving-specials.mjs';
 import {assertMovingElevatorScope,assertMovingElevatorActor} from './moving-elevators.mjs';
@@ -52,10 +53,14 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingSpikes=false,movingSpikeScope,allowMovingBombs=false,allowMovingMarkedGoals=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,movingSpecialScope,allowMovingElevators=false,movingElevatorScope,onMissingSlideTarget,sourceQuery,onSourceEvent=()=>{}
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingMarkedOrdinary=false,movingMarkedOrdinaryScope,allowMovingSpikes=false,movingSpikeScope,allowMovingBombs=false,allowMovingMarkedGoals=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,movingSpecialScope,allowMovingElevators=false,movingElevatorScope,onMissingSlideTarget,sourceQuery,onSourceEvent=()=>{}
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
+  if(allowMovingMarkedOrdinary){
+   if(allowMovingMarkedOrdinary!==true||!allowMovingDots||allowMovingSpikes||allowMovingMarkedGoals||allowMovingCheckpointRings||allowMovingMarkedBonuses||allowMovingElevators||allowMovingBombs||allowSliding||allowTeleports||allowUpDownDots||allowRotatingSpikes||movingMarkedOrdinaryScope?.dots!==dots||typeof sourceQuery!=='function'||sourceQuery.constructor?.name==='AsyncFunction'||program!==state.program)throw new Error('Separate synchronous moving marked ordinary helper required');
+   assertMovingMarkedOrdinaryScope(movingMarkedOrdinaryScope,{actors:[state]});
+  }
   if(typeof allowMovingSpikes!=='boolean')throw new Error('Explicit moving SPI helper boolean required');
   if(!Array.isArray(dots)||![adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab].every(f=>typeof f==='function'))
     throw new TypeError('Source dot and synchronous collision/grab adapters required');
@@ -74,7 +79,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   }
   if(allowMovingMarkedGoals){if(!allowMovingDots||allowMovingBombs||allowSliding||allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingBombs||allowSlidingGoodies||allowSlidingOil||typeof sourceQuery!=='function')throw new Error('Separate moving marked helper capability required');assertMovingMarkedDots(dots);assertMovingMarkedActor(state,{program,dots});}
   if(allowMovingElevators){if(!allowMovingDots||!allowSliding||!allowUpDownDots||allowMovingBombs||allowMovingMarkedGoals||allowTeleports||allowRotatingSpikes||allowSlidingPrograms||allowSlidingBombs||allowSlidingBombCheckpoints||allowSlidingGoodies||allowSlidingGoodiePrograms||allowSlidingOil||allowSlidingOilGoodieRings||allowSlidingTeleports||typeof sourceQuery!=='function'||sourceQuery.constructor?.name==='AsyncFunction'||typeof onMissingSlideTarget!=='function'||onMissingSlideTarget.constructor?.name==='AsyncFunction'||movingElevatorScope?.dots!==dots)throw new Error('Separate moving/TYPE2/EX source helper and PILOT recovery adapters required');assertMovingElevatorScope({...movingElevatorScope,actors:[state],initial:false});assertMovingElevatorActor(state,{program,dots});}
-  if(allowMovingDots&&!allowMovingSpikes&&!allowMovingMarkedGoals&&!allowMovingElevators&&!allowMovingCheckpointRings&&!allowMovingMarkedBonuses){
+  if(allowMovingDots&&!allowMovingMarkedOrdinary&&!allowMovingSpikes&&!allowMovingMarkedGoals&&!allowMovingElevators&&!allowMovingCheckpointRings&&!allowMovingMarkedBonuses){
    if(!allowMovingBombs||!allowSliding||allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingBombs||allowSlidingPrograms||allowSlidingGoodies||allowSlidingOil||allowSlidingTeleports||typeof sourceQuery!=='function'||![1,2].includes(state.sourceActorType)||state.speedClass!==1||state.checksWalls!==false||program!==null&&(!/^[bfn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1||state.sourcePC>program.length)||dots.some(d=>!['static','moving-program'].includes(d.motion)||d.teleport||d.ring||d.waystation||d.upDown||d.transferDeath||d.slowdown||d.motion==='moving-program'&&(d.slideMask||d.bonus||d.kind!=='dot')))throw new Error('Separate moving BO ordinary class1 b/f/n helper scope required');
   }else if(allowMovingBombs&&!allowMovingDots)throw new Error('Moving BO helper requires moving-dot core');
   dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding,allowMovingDots));
@@ -113,7 +118,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     const oldDot=dotAt(next.pivot),[dx,dy]=offsets[next.frame];
     // Source selects the first present positional match, then checks its
     // nonhuman permission. Rendering visibility and color are not filters.
-    const query=allowMovingDots?sourceQuery(next):null;if((allowMovingSpikes||allowMovingElevators||allowMovingCheckpointRings||allowMovingMarkedBonuses)&&query&&typeof query.then==='function')throw new TypeError('Synchronous joined source query required');if(allowMovingDots&&query?.allowed&&query.grab?.realDot!==true)throw new Error('NPC moving query must return a real source dot');
+    const query=allowMovingDots?sourceQuery(next):null;if((allowMovingMarkedOrdinary||allowMovingSpikes||allowMovingElevators||allowMovingCheckpointRings||allowMovingMarkedBonuses)&&query&&typeof query.then==='function')throw new TypeError('Synchronous joined source query required');if(allowMovingDots&&query?.allowed&&query.grab?.realDot!==true)throw new Error('NPC moving query must return a real source dot');
     const target=allowMovingDots?(query?.allowed?dots.find(d=>d.id===query.grab.dot&&d.sourceIndex===query.grab.sourceIndex):null):dots.find(d=>d.present&&d.x===oldDot.x+48*dx&&d.y===oldDot.y+48*dy);
     const allowed=Boolean(target?.nonhumanCanGrab),action=instruction.action;
     record({type:'program-command',step,frame:next.frame,allowed,action:{...action},...((allowSlidingTeleports||allowMovingDots)?{sourcePCBefore:commandPC,sourcePCAfter:next.sourcePC,sourceOpcode:program[commandPC-1]}:{})});

@@ -1,0 +1,16 @@
+{
+  "status": "source-composition-accepted-gameplay-unqualified",
+  "sourceFreezeSHA256": "44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9",
+  "rootReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942",
+  "runtimeFiles": 42,
+  "unchangedBaselineFiles": 37,
+  "publicTests": 402,
+  "packagingTests": 21,
+  "regressionUpdates": 15858,
+  "regressionConstructors": 2,
+  "rootInitializationConstructorsIncludingFailures": 3,
+  "rootInitializationResetsIncludingFailures": 4,
+  "rootInitializationUpdates": 0,
+  "lastInitializationPass": true,
+  "gameplayQualified": false
+}

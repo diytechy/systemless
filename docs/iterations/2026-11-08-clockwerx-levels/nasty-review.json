@@ -1,0 +1,231 @@
+{
+  "schema": "clockwerx-nasty-functional-review-v1",
+  "status": "functional-and-visible-goal-pass-original63tap-route-failed-not-accepted",
+  "date": "2026-11-10",
+  "level": 59,
+  "title": "Nasty",
+  "mode": "Child",
+  "runtimeFiles": 43,
+  "sourceFreezeSHA256": "e857c97ceecbb96a1192294c71e4468027754b7dbc8020d540cbae0dc36cd9b1",
+  "observerSHA256": "595f3ac1461b0d2a048df3970366db115e394a5af2502a401941abe313c32403",
+  "functional": {
+    "updates": 2600,
+    "dt": 0.008333333333333333,
+    "goal": true,
+    "death": false,
+    "score": {
+      "mode": "Child",
+      "roundBonus": 2000,
+      "totalCommitted": 0,
+      "nextDotAward": 2000,
+      "completed": true,
+      "overallEarned": 2000
+    },
+    "playerTransfers": 8,
+    "RNGDraws": 0,
+    "inputTaps": {
+      "reverse": 5,
+      "flip": 2,
+      "swing": 56,
+      "total": 63
+    },
+    "acceptedActionEvents": {
+      "reverse": 5,
+      "flip": 2,
+      "swing": 6,
+      "total": 13
+    },
+    "eventCounts": {
+      "program-transfer": 29,
+      "slide-arrival": 41,
+      "reverse": 5,
+      "flip": 2,
+      "swing": 6,
+      "spark-activated": 1,
+      "bomb-sound": 1,
+      "bonus": 1,
+      "slide-backout": 1,
+      "completion-bonus": 1,
+      "goal": 1
+    },
+    "allInputRunEndpointsEven": true,
+    "allNonemptyInputRunsTwoUpdates": true,
+    "literalSHA256": "df4e881d95946eae264dece907a34f457f929324809126ab348a59811ff09913",
+    "provisionalColdPrefixIncludedOnce": 682,
+    "coldPrefixTieRetained": 683,
+    "exactNativePhaseClaim": false,
+    "additionalLegalIdleIncludedOnce": 128,
+    "initialIdleUpdates": 812,
+    "nativePrefixToStripOnly": 682,
+    "remainingNativeUpdates": 1918,
+    "witness": {
+      "lineageComparisons": 2601,
+      "hookMetadataComparisons": 89534,
+      "ledger": {
+        "constructorsAttempted": 1,
+        "constructorsCompleted": 1,
+        "constructorResetsAttempted": 1,
+        "constructorResetsCompleted": 1,
+        "explicitResetAttempts": 0,
+        "explicitResetsCompleted": 0,
+        "attemptedUpdates": 2600,
+        "completedUpdates": 2600,
+        "RNGDraws": 0,
+        "reservedUpperUpdates": 2600
+      },
+      "comparison": {
+        "lineageEqual": true,
+        "hookMetadataEqual": true,
+        "inventoryEqual": true,
+        "terminalEqual": true,
+        "RNGEqual": true,
+        "RNGDrawCountEqual": true,
+        "finalStateEqual": true,
+        "hookStatesEqual": null
+      },
+      "exitCode": 0,
+      "timedOut": false
+    },
+    "freshProof": {
+      "lineageComparisons": 2601,
+      "hookMetadataComparisons": 89534,
+      "ledger": {
+        "constructorsAttempted": 1,
+        "constructorsCompleted": 1,
+        "constructorResetsAttempted": 1,
+        "constructorResetsCompleted": 1,
+        "explicitResetAttempts": 0,
+        "explicitResetsCompleted": 0,
+        "attemptedUpdates": 2600,
+        "completedUpdates": 2600,
+        "RNGDraws": 0,
+        "reservedUpperUpdates": 2600
+      },
+      "comparison": {
+        "lineageEqual": true,
+        "hookMetadataEqual": true,
+        "inventoryEqual": true,
+        "terminalEqual": true,
+        "RNGEqual": true,
+        "RNGDrawCountEqual": true,
+        "finalStateEqual": true,
+        "hookStatesEqual": true
+      },
+      "exitCode": 0,
+      "timedOut": false
+    },
+    "rootVerifiedAllFiveEncodedSourceStreamsEqual": true
+  },
+  "retainedFailures": [
+    {
+      "policy": "goal-with-fuse-unblock",
+      "updates": 1696,
+      "enemy": "enemy-2",
+      "transfers": 6,
+      "score": 1000,
+      "RNGDraws": 30
+    },
+    {
+      "policy": "checkpoint-then-fuse",
+      "updates": 1820,
+      "enemy": "enemy-3",
+      "transfers": 4,
+      "score": 0,
+      "RNGDraws": 30
+    },
+    {
+      "policy": "goodies-and-shelter",
+      "updates": 1696,
+      "enemy": "enemy-8",
+      "transfers": 5,
+      "score": 2000,
+      "RNGDraws": 30
+    }
+  ],
+  "budget": {
+    "coldUpdates": 5648,
+    "failedDiscoveryUpdates": 5212,
+    "successfulSearchUpdates": 2600,
+    "witnessUpdates": 2600,
+    "freshProofUpdates": 2600,
+    "actual59Updates": 18660,
+    "limit": 250000,
+    "remaining": 231340,
+    "retainedDiscoveryRNGDraws": 90
+  },
+  "privateReceipts": {
+    "savedSearchAuditSHA256": "4f80ff5dd204714f4730b179d73e0c728a266bf8545bd70f2879f67326dcb2cf",
+    "coldSelectionSHA256": "5d77bd1fb3f18836efc6469b48a831f0bc22cbed1bd4a44fd7e064dd2c389073",
+    "actualProofReceiptSHA256": "fe239750219157c8acf441f6e25788f55cb820c54e8c88c22e96b92d8239adac",
+    "rootActualProofReviewSHA256": "354c223331d7aa2c753c5d27f523ef26bc1fa11e7263d3d12b76c917ae51d7c2",
+    "witnessResultSHA256": "35193cac5813c80c6c2d744f9ac068ba0b20f8b3e7ca08f6a5bf4740065ec5c4",
+    "freshProofResultSHA256": "4fc3e5bede49211f2bdb443bd13dae952cf05cb5e09c9b54c230a115b2fa7162"
+  },
+  "pending": [
+    "New13-effective-tap literal trial and separate proof if successful",
+    "Original goal and fixed comparison",
+    "Visible replay of any revised literal",
+    "Scene acceptance and activation"
+  ],
+  "limits": [
+    "No full game parity claim",
+    "No optional GO pickup on this route",
+    "Unexercised blast/interaction outcomes remain unqualified",
+    "No native input/reset margin qualification",
+    "No comprehensive audio, physical controller, save compatibility, or browser scheduling qualification",
+    "No performance improvement claim",
+    "No owned assets, literals, traces, or program bytes included",
+    "No successful route embedded in runtime logic",
+    "No upload or deployment",
+    "Original63-tap route diverges during EX traversal; input-handling cause unresolved"
+  ],
+  "visibleSVG": {
+    "goalScore": 2000,
+    "gold": true,
+    "paused": true,
+    "receipt": {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59\\root-visible-goal-review.json",
+      "sha256": "8b1672fc374474cbda6766de5520ab1e9907a3594874befb3504bb22b791bc6a"
+    }
+  },
+  "nativeAttempt01": {
+    "goal": false,
+    "accepted": false,
+    "PID": 285804,
+    "scriptActionsPassed": true,
+    "campaignScoreObserved": 371000,
+    "stillLevel": 59,
+    "captures": 34,
+    "allCapturesAfterPREPNG": true,
+    "report": {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59\\native-goal-01\\report.json",
+      "sha256": "c4733daacd5b5f16ba81fed053354c230c9a2b9a3bef35438fb07b00543a987f"
+    },
+    "fitterFreeze": {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59-native-goal-review\\fitter-freeze.json",
+      "sha256": "dd640d64c1a645aadb3d980bd0884ddb00c4e29619922f953797637665e32d40"
+    },
+    "audit": {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59-native-goal-review\\audit01\\receipt.json",
+      "sha256": "8930e7eefdf3773ee02ca3c8dce02181ced3b55481bcdf8d8aff269a122b5eeb"
+    },
+    "comparison": {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59\\native-goal-comparison01\\execution01\\receipt.json",
+      "sha256": "a422e495fb4f67fce98e841a8ae48a0f3bebb1903544275fad25df90d82172b9"
+    },
+    "firstClearHumanMismatch": {
+      "modelUpdate": 1762,
+      "nativePoint": [
+        266,
+        168
+      ],
+      "modelPoint": [
+        314,
+        168
+      ],
+      "bothFrames": 48
+    },
+    "allRawMissesRetained": 28,
+    "clockPhaseIdentityHealthFit": false
+  }
+}

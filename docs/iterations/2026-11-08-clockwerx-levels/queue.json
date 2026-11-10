@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 59,
-  "currentAction": "58 scenes/source42 locally active; source43 committedbf9e99bf. Nasty59cold5648 complete, original/audit PASS, Root recomputed3729prefixes:682/683tied,682provisional,254/254clear point+pose exact/all26missesretained. Isolated59initialgoldrender viewed/paused, no goal. Review3policy compact functional package next; no activeactualruntime lane.",
+  "currentAction": "58accepted/source42live. Nasty59 source43 actual+fresh+visible63tapgoals2600/2000 exist; native01 FAILEDgoal, all34/audit/comparisonretained. Humanexactthroughsixactions thenEXdivergenceat1762; no phasefit. New13-effective-tap legal literal trial beingprepared, no newactuallease. Actual59spent18660/250000. Hold59activation/progress/60integration.",
   "levels": [
     {
       "ordinal": 1,
@@ -4791,7 +4791,7 @@
       "sourceDomainClippingStatus": "10WLhypotheses60lost-universepixels;retainPRIMARY-full;conditional344attacheddomain",
       "sourceDomainPeerSHA256": "f883585466cdff9709ab442fd152026b6b5606bc38863313269ab6ea74e03834",
       "sourceFreezeSHA256": "e857c97ceecbb96a1192294c71e4468027754b7dbc8020d540cbae0dc36cd9b1",
-      "functionalUpdatesSpent": 5648,
+      "functionalUpdatesSpent": 18660,
       "functionalUpdateBudget": 250000,
       "actualInitConstructors": 1,
       "actualConstructorResets": 1,
@@ -4815,7 +4815,11 @@
       "rootColdSelectionSHA256": "5d77bd1fb3f18836efc6469b48a831f0bc22cbed1bd4a44fd7e064dd2c389073",
       "coldClearPositionsAndPosesExact": 254,
       "coldAllRawMissesRetained": 26,
-      "initialSVGReviewSHA256": "17aa1fac7407e507584ce58d6fca82c0a1868c230196fb1513cb8a7885096c28"
+      "initialSVGReviewSHA256": "17aa1fac7407e507584ce58d6fca82c0a1868c230196fb1513cb8a7885096c28",
+      "functionalUpdatesRemaining": 231340,
+      "functionalGoalStatus": "63tap source+visible goal PASS; native route FAILED, not accepted; revised13taptrial preparation",
+      "functionalGoalEvidence": "nasty59/content/replay-proof-receipt.json",
+      "nativeGoalStatus": "FAILED native01 retained, firstclearhumanmismatchupdate1762"
     },
     {
       "ordinal": 60,

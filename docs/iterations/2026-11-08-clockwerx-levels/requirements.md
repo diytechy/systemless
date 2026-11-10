@@ -293,3 +293,6 @@ Square Dance54 composes ordinary moving bonus dots, static white goal, rings, pr
 
 
 Headache56 source lifecycle review (implementation pending): existing static SPI instances retain frame and observed client reference across ordinary death/restart, while visibility is restored. New level construction creates fresh instances. Global timer progress and the derived SPI bank have separate update sites; a changed bank at a legal poll advances one frame, unchanged bank none. Do not infer immediate animation from elapsed time or reseed references on reset. Original four collider frames and descriptor offsets remain independent of SVG. New composition stays default off until focused boundary/lifecycle/asset and regression checks plus native gameplay review.
+
+
+Moving SPI composition source40 now passes guarded import/lifecycle/asset checks and prior54/55 full regressions; actual56 gameplay and native phase remain unqualified. See [moving-spikes source review](moving-spikes-source-review.md). Hokey Pokey55 original replay01 failed after an incorrect native Reverse binding; retain failure and correct transport before any gameplay acceptance. Prior dense consumed-query counts03/04/05/06 are corrected to2/4/5/8 in the immutable erratum; no inputs/events/lineages change. See [replay progress](hokey-pokey-replay-progress.md).

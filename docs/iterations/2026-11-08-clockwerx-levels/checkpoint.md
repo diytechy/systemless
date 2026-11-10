@@ -1,3 +1,22 @@
+# Latest checkpoint — 2026-11-10 10:55 UTC
+
+
+
+Level55 model goal is complete:7178 updates, seven moving bonuses,26000 points and19 guarded human transfers. Original attempt01 closed normally but failed gameplay. Root viewed all46 captures: death, no results panel and no next56. The inherited native Reverse binding56 was wrong: the existing source audit maps it to Flip. Independent saved-data comparison matches the first four transfers and diverges after that Reverse interval. Correct only route Reverse windows to fixture-observed Space49/ch32, retain timing/warm706/other controls and all failed evidence, review the exact diff, then run one corrected original attempt in the exclusive lane. Do not alter physics or select a new epoch to make the replay pass. No Headache fixture is earned yet.
+
+Worker hokey_pokey_divergence is preparing that correction with zero new model updates. Read hokey-pokey-replay-progress.md for model/native budgets, raw-fit evidence, failures and consumed-query erratum. Native01 report75c3e8c; original-only raw final252cf268, one28.016-second fit, six archives/13 pairs exact. Never infer an outcome from a screenshot filename. Root must view actual results/next after corrected run.
+
+## Shared source and delivery
+
+The default-off moving-spike composition is now reviewed and applied to the actual checkout.40 runtime files are privately frozen in moving-spikes-frozen-source/;386 public tests,21 packaging checks and zero-update Headache constructor/reset/palette checks pass. Prior54/55 full routes preserve all declared fields and whole lineages across12116 updates. Read moving-spikes-source-review.md/json and private integration receipt8cacc2bc.35 unchanged modules are byte-exact; five CRLF-only differences from the candidate have actual hashes and an explicit failed-byte-gate erratum. Commit these validated changes locally before further engine edits. Actual56 gameplay remains zero; SPI native startup phase unqualified.
+
+Normal localhost8087/clockwerx-html5/ remains Square Dance54, source39/104payloads/54definitions. It is paused in supported IAB browser2/tab92 (foregroundTab), marked deliverable this turn. Full53 rollback remains square-dance/previous-live-pilot; protected root files/savekey systemless.clockwerx-html5.pilot.v1 unchanged. Private QA55/source39 has the checked route installed at localhost8091/hokey-pokey/qa/dist/clockwerx-html5/, tab139 (hokeyPokeyTab). Its SVG replay is underway; no visible goal has yet been observed. Never replace normal54 before original and SVG review. Prior intermittent Image.decode load failures remain documented; unchanged assets/reload succeeded, no loader fix.
+
+First CUA call after compaction must be exactly await cua.rewriteDocumentation(); reuse browser2/handles. Observe visible route goal, save proof, then make the next tool call a CUA completion_summary. Pause and mark the QA tab for handoff afterward. Root alone uses supported IAB. Never retry or bypass the known Windows/Edge URL-policy stop. Do not assume passing headless scripts or model tests establish gameplay, original timing, audio or physical controller fidelity.
+
+
+Historical entries below are superseded by current-action.md.
+
 # Progress checkpoint
 
 ## Exact next action (latest)

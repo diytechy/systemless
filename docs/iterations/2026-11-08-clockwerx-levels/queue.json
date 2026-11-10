@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 55,
-  "currentAction": "54normalprotected;55goal06closed-no-goal/best4,4bonus6000/597628spent202372remain800k; saved-query analysis next;56privatecandidate focusedunits;55goalrawprepared33049.",
+  "currentAction": "55 model goal complete; original01 failed due wrong Reverse key56; correct transport49 and rerun without rule/epoch changes. Source40 moving-spike composition reviewed and frozen, not active; live54 unchanged.",
   "levels": [
     {
       "ordinal": 1,
@@ -4251,7 +4251,7 @@
       "menuTitle": "Hokey Pokey",
       "resourceTitle": "Hokey Pokey",
       "sha256": "cd9721e7d81edfcb5a2d26f284d1d4ab416306a29b742aed0a357558ef4c5add",
-      "status": "three-carrier6000-witness-source-analysis-after-goal06-no-goal",
+      "status": "model-goal-original-replay-transport-correction-pending",
       "nativeEvidence": [
         "cold34bc7fe7",
         "raw12822c9a"
@@ -4347,7 +4347,28 @@
       "functionalMarkReturnWitness": true,
       "functionalMovingBonusWitness": true,
       "functionalRiderWitness": true,
-      "functionalGoalObserved": false
+      "functionalGoalObserved": false,
+      "boundedChildQualified": false,
+      "modelGoal": {
+        "updates": 7178,
+        "score": 26000,
+        "movingBonuses": 7,
+        "humanTransfers": 19,
+        "receiptSHA256": "ecf88c0c530e499c825500e42e0595cf6b7884bff88fde64dad71d34b0729f84"
+      },
+      "originalAttempt01": {
+        "status": "closed-gameplay-failed-not-next56",
+        "reportSHA256": "75c3e8c914c1cc4a0dff81c0fa2a547d91c4755ab4cf02b61e2c58a56a6ee12b",
+        "rawReceiptSHA256": "252cf26801b7befd5fdaf30de128e3f4ae4195f22c7e3429953e44eb75f28066",
+        "cause": "Native Reverse key56 is ordinary Flip; fixture-specific Space49 correction pending.",
+        "nextFixtureEarned": false
+      },
+      "functionalBudget": {
+        "spent": 625408,
+        "ceiling": 800000,
+        "remaining": 174592,
+        "noNewSearchLeased": true
+      }
     },
     {
       "ordinal": 56,
@@ -4355,7 +4376,7 @@
       "menuTitle": "Headache",
       "resourceTitle": "Headache",
       "sha256": "fc20fa6f176d6a6a35f5fc2da836e2be6d802a09150386c0589747877e423952",
-      "status": "queued",
+      "status": "source40-implemented-reviewed-default-off-gameplay-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4426,7 +4447,10 @@
       "sourceCompositionPlanSHA256": "388b53a37a116cdb681e71872cbd1a4f6d0edc2b3d116e71add11f689b18cc75",
       "sourceResetPeerStatus": "v2-bounded-approved-private-candidate-authorized",
       "sourceResetPeerSHA256": "80046c3df2c42a28f29166376a24e5427e207038126a6b8c0717ec29c3b29e08",
-      "syntheticUnitUpdateCap": 10000
+      "syntheticUnitUpdateCap": 10000,
+      "boundedChildQualified": false,
+      "sourceIntegrationReceiptSHA256": "8cacc2bcb5882a0c688e141d7150ccd2c67848b2b26baa2db3ca241aff3fc9c1",
+      "actualGameplayUpdates": 0
     },
     {
       "ordinal": 57,
@@ -7754,9 +7778,9 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "hokey_pokey_functional55goal06source/codeprep only;562106spent/800000cap237894remain, no goal06execution lease yet",
-    "B": "Root receipts/QA/checkpoints/later55native literal goal, exclusive heavy lane",
-    "C": "squiggle_engine56private moving-spike-candidate/v1 source+focusedunits<=10000syntheticupdates, noactual56trajectory/integration",
-    "D": "headache_source_peer available for independent56candidate review after author done;60inventoryworker complete"
+    "A": "Root original/SVG55 transport correction, review and sequential heavy lane",
+    "B": "hokey_pokey_divergence saved-data/source review and corrected native script only",
+    "C": "Source40 reviewed/frozen; no actual56 gameplay or native yet",
+    "D": "Available for independent preparation; no duplicate workload"
   }
 }

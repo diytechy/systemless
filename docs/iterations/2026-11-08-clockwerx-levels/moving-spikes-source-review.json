@@ -1,0 +1,30 @@
+{
+  "status": "SOURCE_IMPLEMENTED_REVIEWED_DEFAULT_OFF_NOT_HEADACHE_GAMEPLAY",
+  "modules": 40,
+  "publicTests": 386,
+  "packagingTests": 21,
+  "actual56GameplayUpdates": 0,
+  "prior54RegressionUpdates": 4938,
+  "prior55RegressionUpdates": 7178,
+  "prior54ExactFields": 28,
+  "prior55ExactFields": 25,
+  "wholeLineagesExact": true,
+  "prior55PhaseExact": true,
+  "unchangedModulesByteExact": 35,
+  "changedModulesCRLFOnlyVersusCandidate": 5,
+  "privateReceipts": [
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\56-moving-spike-root-integration\\receipt.json",
+      "sha256": "8cacc2bcb5882a0c688e141d7150ccd2c67848b2b26baa2db3ca241aff3fc9c1",
+      "directArtifactsVerified": 24
+    },
+    {
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\hokey-pokey-native-goal-review\\final-receipt.json",
+      "sha256": "252cf26801b7befd5fdaf30de128e3f4ae4195f22c7e3429953e44eb75f28066",
+      "directArtifactsVerified": 3
+    }
+  ],
+  "freezeSHA256": "6e8564ce623738e33275018e994ee4d6912be26a7caffe151fcf3312382efcbb",
+  "liveAcceptedScenes": 54,
+  "noPushUploadDeployment": true
+}

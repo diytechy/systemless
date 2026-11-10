@@ -1,66 +1,42 @@
-# Nasty (59): functional proof
+# Nasty (59): bounded Child route accepted
 
-The frozen 43-file runtime has a reviewed functional goal witness and a separate
-fresh literal proof for Nasty in Child mode. Both reach the actual goal after
-2,600 updates with 2,000 earned points, eight player transfers, no death, and no
-RNG draw. The visible gold-hand SVG replay also completed with 2,000 points.
-The first original Macintosh route diverged and did not complete;
-this record does not accept or install the scene.
+Nasty is installed in the normal local pilot with a verified 13-tap route. Separate source witness and fresh proof, original Macintosh play and visible gold-hand SVG play each reach the goal for 2,000 points. Normal59/source43 is ready and paused. The complete58 rollback, all58 prior definitions,104 owned payloads,19 library root files, pilot ID and save key are preserved. This accepts the recorded Child route with the limits below.
 
-The successful search uses the provisional 682-update cold prefix followed by
-128 additional legal idle updates. Both are already included once in the
-literal; the first idle run totals 812 updates including two controller idle
-updates. The alternative cold prefix 683 remains tied, with no exact phase
-claim. All input-run endpoints are even and nonempty runs last two updates.
-There are 63 input taps (Reverse 5, Flip 2, Swing 56), producing 13 accepted
-action events (Reverse 5, Flip 2, Swing 6). Ineffective taps remain in the proof.
-Native conversion must strip only the 682-update prefix, retaining 1,918 updates
-including the extra 128. The successful trace is private diagnostic data and
-does not drive ordinary play.
+## Functional route
 
-The score comprises one 1,000-point DOT bonus and a 1,000-point completion bonus.
-No GO pickup occurs. The path also records one spark activation, one bomb sound,
-and one slide backout. Optional GO collection and unexercised blast/interaction
-outcomes are outside this route's evidence.
+The accepted literal contains five Reverse, two Flip and six Swing taps, each lasting two fixed1/120 updates. It reaches the goal after2,600 updates, eight player transfers and no RNG draw. One1,000-point DOT bonus and1,000 completion bonus produce the score. No GO pickup occurs. A spark activation, bomb sound and slide backout are recorded; optional GO collection and unexercised blast outcomes remain unqualified.
 
-The chosen witness compares 2,601 complete initial/per-update samples and 89,534
-ordered consumed hook metadata rows with the closed search baseline. Inventory,
-terminal, RNG absence/count, and final serialized state also match. Search
-omits intermediate full hook states, so those cannot be compared with search.
-The independent fresh proof additionally matches the witness's complete full
-hook-state digest. Root verified identical encoded files for all five source
-streams: inventory, lineage, hook metadata, full hooks, and terminal. Each replay
-used one fresh constructor, one constructor reset, zero explicit resets, and
-exactly 2,600 attempted/completed updates. Both owned processes closed exit zero
-without timeout. These run durations are diagnostic observations, not a
-performance comparison.
+The provisional682-update cold prefix and128 additional legal idle updates are already included once. The first idle run is812 updates, including two controller idle updates. Prefix683 remains tied; no exact native phase is claimed. Native conversion removes only682, retaining1,918 updates and all13 taps.
 
-Three discovery failures remain retained: enemy-2 death at update 1,696 after
-six transfers/1,000 points; enemy-3 death at 1,820 after four transfers/zero
-points; enemy-8 death at 1,696 after five transfers/2,000 points. Each consumed
-30 recorded RNG adapter draws. Saved-only auditing verified all complete state,
-input, event/score, instrumented metadata, counter, terminal, and failure-window
-streams. The extra-idle batch stopped on its first actual goal; its other two
-cases did not run. No NPC predictor was used to produce the successful route.
+The earlier63-tap literal also reached source and visible SVG goals, but its original Macintosh replay diverged after the first six matching actions and later collided. That failed native01 run and every original capture remain retained. The revised literal replaces only50 model-ineffective Swing taps with idle, preserving all update times. A new actual trial independently matches every complete state, dot state and physical actor sample against the untouched old witness; exactly100 input samples intentionally differ. It does not alter or project the old baseline.
 
-Actual model work totals 18,660 of the 250,000-update budget: cold calibration
-5,648, retained discovery failures 5,212, successful search 2,600, chosen witness
-2,600, and fresh proof 2,600. The earlier zero-update initialization/reset check
-and accepted-route regression work are separately documented in the
-[source review](static-sliding-bomb-goodies-source-review.md). Frozen source
-semantics, original collision/query bodies, all ten clipped WL PRIMARY/full
-mask distinctions, and the unchanged public observer remain authoritative.
+The separate revised witness compares2,601 complete samples and89,534 ordered consumed hook metadata rows with that new actual trial. Inventory, terminal, RNG absence/count and final state match. The separate fresh proof also matches every full intermediate hook-state digest. Root verified all five encoded source streams byte-for-byte. Each proof uses one constructor/reset, zero explicit resets and2,600 updates, closing without timeout. Input-inclusive lineage remains specific to the revised literal.
 
-The [detailed record](nasty-review.json) binds the private receipts. It contains
-no owned map, program bytes, artwork, literal, or trace. Full parity, native
-goal fidelity, input/reset margins, optional pickups, comprehensive audio,
-physical controller behavior, save compatibility, and browser scheduling remain
-unqualified here. No push, upload, deployment, or scene activation is claimed.
+## Original and visible comparison
 
-## Retained original route divergence
+Native02 closed PID174792, exit0, in83.145s:34 captures,3,245 frontend and3,845 guest ticks. Root froze all34 images and the unchanged original-only method under PREPNGf4c7d455 before viewing them. The original results show Nasty completed for2,000, followed by60Hitchhiker at373,000 campaign total. The earlier failed native01 is preserved.
 
-Original run01 closed exit zero in82.493s with34 captures and3245 frontend/3845 guest ticks; this verifies scripted actions only. It remained Nasty at campaign371000 and later collided, so59 is not accepted or installed. Root froze all34 capture hashes and the unchanged original-only method before viewing them. The single fit and saved audit passed for all34 captures,14 archives/32 PRIMARY-full pairs/476 saved slices, retaining244 clear selections and28 misses. All ten clipped wall alternatives remain distinct.
+The sole original-only fit closed222924/exit0 in18.750s. Its independent saved audit closed166788/exit0 in7.078s:14 archives,32 PRIMARY/full pairs,476 saved slices,239 clear selections and33 retained misses. All ten wall masks losing60 pixels retain distinct clipped/full hypotheses; no global no-clipping assertion is made.
 
-At fixed682, initial state and the first six human actions agree. The first sampled clear human mismatch is pulse22-before/modelupdate1762: native x266,y168 versus model x314,y168, both canonicalframe48. NPC clear geometry first differs at pulse63-before/update2598, after the human route has diverged. The full30-board-capture comparison retains13/25 clear human point+pose matches and193/205 NPC point,187/205 NPC pose matches; all4 noncomparable captures and28 total misses remain. These counts are not an acceptance result.
+At fixed682 with683 retained, the comparison includes all30 mapped board captures and four explicit noncomparable bootstrap/results/next-level captures:
 
-A new route trial is being prepared to replace50 model-ineffective Swing taps with idle while preserving all update times and the13 effective action taps. It has not run. This tests an input-handling hypothesis; buffering or another cause is not established, and no clock offset, actor identity or health filter is fitted. The old63-tap proof, visible result and failed native run remain immutable.
+| Clear board observations | Exact agreement |
+| --- | ---: |
+| Human position |24/28|
+| Human position and canonical pose |22/28|
+| NPC position |208/208|
+| NPC position and canonical pose |208/208|
+
+A late Reverse endpoint differs6px; subsequent Swing samples retain up-to-two-frame and pre-transfer pose differences. The original goal is observed in the later results image. The model-goal input endpoint image is not described as an instantaneous native goal. All raw alternatives, misses, aliases and residuals remain, without phase, actor identity, health fitting or a cutoff.
+
+Root separately selected gold and observed the revised visible13-tap goal for2,000, saved its completion image before pausing, then verified the installed normal Nasty ready/paused UI. Acceptance023d2050, visible13 review9a2225e5, normal UI reviewdc54059a, original audit e6baff59 and comparison b0b1f164 bind the closure in the [detailed record](nasty-review.json).
+
+## Input and qualification limits
+
+Original sliding actions query the live in-flight Point, agreeing with the model. Static exact-coordinate lookup and normal human order also agree: collision, stop slide, input, start slide, animation. A proposed logical-owner-dot query change was rejected by source evidence.
+
+The original ordinary G/B/frame input buffer is absent from the model. Periodic capture depends on a live setting, live keys take priority, and the record clears before an eligible action attempt, even a failed target. The fixture's live setting and actual use were not observed. Native13 success therefore does not prove buffering caused native01's divergence. No engine, clock or input-buffer implementation changed. Exact input/frame fidelity, arbitrary-input behavior, native reset/input margins, comprehensive audio, physical controller and original-save compatibility remain unqualified.
+
+Three earlier discovery deaths at1,696/1,820/1,696 updates and30 RNG draws each remain retained. No NPC predictor produced the successful route. Actual59 model work totals26,460/250,000 before the next engine regression: cold5,648; discovery5,212; old search/witness/fresh proof2,600 each; cleanup trial/new witness/new fresh proof2,600 each. The remaining budget is223,540. Initialization and prior-title regression work are separately recorded in the [source review](static-sliding-bomb-goodies-source-review.md).
+
+A separate earned-through59 HFS fixture44af8bb8 applies only native02's two preference exports. Both forks and represented metadata verify across nine files, seven untouched. Original media and all prior fixtures are unchanged; native relaunch remains pending. No owned map, art, program bytes, literal or trace is included here. Diagnostic durations are not performance comparisons. No push, upload or deployment occurred.

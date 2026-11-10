@@ -1,6 +1,6 @@
 {
   "schema": "clockwerx-nasty-functional-review-v1",
-  "status": "functional-and-visible-goal-pass-original63tap-route-failed-not-accepted",
+  "status": "bounded-child-route-accepted-and-installed-with-limits",
   "date": "2026-11-10",
   "level": 59,
   "title": "Nasty",
@@ -114,7 +114,8 @@
       "exitCode": 0,
       "timedOut": false
     },
-    "rootVerifiedAllFiveEncodedSourceStreamsEqual": true
+    "rootVerifiedAllFiveEncodedSourceStreamsEqual": true,
+    "evidenceLabel": "retained-original63tap-functional-proof"
   },
   "retainedFailures": [
     {
@@ -148,10 +149,15 @@
     "successfulSearchUpdates": 2600,
     "witnessUpdates": 2600,
     "freshProofUpdates": 2600,
-    "actual59Updates": 18660,
+    "actual59Updates": 26460,
     "limit": 250000,
-    "remaining": 231340,
-    "retainedDiscoveryRNGDraws": 90
+    "remaining": 223540,
+    "retainedDiscoveryRNGDraws": 90,
+    "cleanupTrialUpdates": 2600,
+    "witness13Updates": 2600,
+    "freshProof13Updates": 2600,
+    "allListedRunsClosed": true,
+    "inProgressReservedUpdates": 0
   },
   "privateReceipts": {
     "savedSearchAuditSHA256": "4f80ff5dd204714f4730b179d73e0c728a266bf8545bd70f2879f67326dcb2cf",
@@ -159,13 +165,18 @@
     "actualProofReceiptSHA256": "fe239750219157c8acf441f6e25788f55cb820c54e8c88c22e96b92d8239adac",
     "rootActualProofReviewSHA256": "354c223331d7aa2c753c5d27f523ef26bc1fa11e7263d3d12b76c917ae51d7c2",
     "witnessResultSHA256": "35193cac5813c80c6c2d744f9ac068ba0b20f8b3e7ca08f6a5bf4740065ec5c4",
-    "freshProofResultSHA256": "4fc3e5bede49211f2bdb443bd13dae952cf05cb5e09c9b54c230a115b2fa7162"
+    "freshProofResultSHA256": "4fc3e5bede49211f2bdb443bd13dae952cf05cb5e09c9b54c230a115b2fa7162",
+    "cleanupSavedAuditSHA256": "6c89c62450a7359d2cce4e0f294a897697832853810d4212e28206207e6e0883",
+    "cleanupTrialResultSHA256": "0677ce75bef2f2f57d6eae9adcff9aa812ad62cbe4c5ce869b9d332e95ca4bd4",
+    "witness13ResultSHA256": "e3b1fc776b3cd131937cb679b31e5355aa1ccf3b1d0087b0ed83ba0b00b0bbf9",
+    "freshProof13ResultSHA256": "eb783ff9d4896b9dc3abaeac3ec75e82257e2c437a4b4083abdd96e8758889f7",
+    "actualProof13ReceiptSHA256": "fd841f488fde0b5859ed0c275bf4de204460b5f001148ecbc32519fbd08dbfe7",
+    "rootActualProof13ReviewSHA256": "539a7ba0f7cf6eeaae59077c14e684175b808b6a476343f0726f0f026603a784",
+    "humanEXInputSourceAuditSHA256": "09e31fb4fb9054016d26ef88aba78db66112afd15eeda8a9aec3f7f0dd49530b"
   },
   "pending": [
-    "New13-effective-tap literal trial and separate proof if successful",
-    "Original goal and fixed comparison",
-    "Visible replay of any revised literal",
-    "Scene acceptance and activation"
+    "Continue60 on earned progress; new moving BO/SPI/WY composition held until focused integration checks",
+    "Comprehensive arbitrary-input/buffer/reset/margin/audio/controller/save parity remains unqualified"
   ],
   "limits": [
     "No full game parity claim",
@@ -177,7 +188,14 @@
     "No owned assets, literals, traces, or program bytes included",
     "No successful route embedded in runtime logic",
     "No upload or deployment",
-    "Original63-tap route diverges during EX traversal; input-handling cause unresolved"
+    "Original63tap native failure remains retained",
+    "13tap functional equality does not prove the native divergence cause",
+    "Original ordinary-action buffering differs from model; live enable/use remains unproven",
+    "Bounded Child 13-tap route only; original63-tap route diverged and failed, retained without a health or phase cutoff.",
+    "Native late Reverse capture differs6px; following two Swing windows retain up-to2-frame and pre-transfer pose differences at fixed682/tie683. Original goal is observed in the later results capture, not inferred from the model-goal endpoint image.",
+    "All34 captures/33 raw misses/32 PRIMARY-full pairs and ten clipped WL masks retained. Board human24/28 clear points,22/28 clear poses; NPC208/208 clear points and poses. No offset, identity or health fit.",
+    "Original ordinary G/B/frame input buffer is absent from the model; its live fixture setting/use and exact role in native01 failure remain unproven.",
+    "No arbitrary-input, native input/reset margin, optional GO pickup, complete audio, physical controller, original-save compatibility or full-game parity qualification."
   ],
   "visibleSVG": {
     "goalScore": 2000,
@@ -186,7 +204,10 @@
     "receipt": {
       "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59\\root-visible-goal-review.json",
       "sha256": "8b1672fc374474cbda6766de5520ab1e9907a3594874befb3504bb22b791bc6a"
-    }
+    },
+    "evidenceLabel": "retained-original63tap-visible-goal",
+    "literalSHA256": "df4e881d95946eae264dece907a34f457f929324809126ab348a59811ff09913",
+    "inputTapCount": 63
   },
   "nativeAttempt01": {
     "goal": false,
@@ -226,6 +247,223 @@
       "bothFrames": 48
     },
     "allRawMissesRetained": 28,
-    "clockPhaseIdentityHealthFit": false
+    "clockPhaseIdentityHealthFit": false,
+    "evidenceLabel": "retained-original63tap-native-failure",
+    "literalSHA256": "df4e881d95946eae264dece907a34f457f929324809126ab348a59811ff09913",
+    "inputTapCount": 63,
+    "formalFixedComparison": {
+      "allCaptureCount": 34,
+      "boardCaptureCount": 30,
+      "noncomparableCapturesRetained": 4,
+      "allRawMissesRetained": 28,
+      "clearHumanPointAndPoseExact": 13,
+      "clearHumanCount": 25,
+      "NPCPointExact": 193,
+      "NPCPoseExact": 187,
+      "clearNPCCount": 205,
+      "firstClearNPCMismatchUpdate": 2598,
+      "initialAndFirstSixHumanActionsExact": true,
+      "sourceClipDistinctionsRetained": 10,
+      "phaseOffsetRefit": false
+    }
+  },
+  "cleanup13": {
+    "status": "actual-trial-and-separate-witness-fresh-proof-pass-native-visible-pending",
+    "literalSHA256": "ce927b79e2d929e0e1b1d0a516ce8a35d983cddbd984f9bc8374f3d99920e555",
+    "inputTaps": {
+      "reverse": 5,
+      "flip": 2,
+      "swing": 6,
+      "total": 13
+    },
+    "removedSwingTapRuns": 50,
+    "changedAtomicInputRows": 100,
+    "updates": 2600,
+    "dt": 0.008333333333333333,
+    "provisionalColdPrefixIncludedOnce": 682,
+    "coldPrefixTieRetained": 683,
+    "additionalLegalIdleIncludedOnce": 128,
+    "initialIdleUpdates": 812,
+    "nativePrefixToStripOnly": 682,
+    "remainingNativeUpdates": 1918,
+    "allInputRunEndpointsEven": true,
+    "allNonemptyRunsTwoUpdates": true,
+    "actualScore": {
+      "mode": "Child",
+      "roundBonus": 2000,
+      "totalCommitted": 0,
+      "nextDotAward": 2000,
+      "completed": true,
+      "overallEarned": 2000
+    },
+    "playerTransfers": 8,
+    "RNGDraws": 0,
+    "trial": {
+      "closedActualGoal": true,
+      "PID": 190536,
+      "exitCode": 0,
+      "timedOut": false,
+      "completeSourceComparisons": 2601,
+      "intentionalInputChangedRows": 100,
+      "comparisonFields": [
+        "complete serialized state",
+        "complete dots",
+        "complete physicalActors"
+      ],
+      "baseline": "Untouched retained63tap actual witness at identical updates",
+      "inputEqualityClaim": false,
+      "genericWitnessAccepted": false,
+      "metadataInventoryTerminalEventsEqualRetained63": true,
+      "savedAuditReceiptSHA256": "6c89c62450a7359d2cce4e0f294a897697832853810d4212e28206207e6e0883"
+    },
+    "witness": {
+      "status": "CLOSED_PASS",
+      "PID": 243376,
+      "lineageComparisons": 2601,
+      "hookMetadataComparisons": 89534,
+      "ledger": {
+        "constructorsAttempted": 1,
+        "constructorsCompleted": 1,
+        "constructorResetsAttempted": 1,
+        "constructorResetsCompleted": 1,
+        "explicitResetAttempts": 0,
+        "explicitResetsCompleted": 0,
+        "attemptedUpdates": 2600,
+        "completedUpdates": 2600,
+        "RNGDraws": 0,
+        "reservedUpperUpdates": 2600
+      },
+      "comparison": {
+        "lineageEqual": true,
+        "hookMetadataEqual": true,
+        "inventoryEqual": true,
+        "terminalEqual": true,
+        "RNGEqual": true,
+        "RNGDrawCountEqual": true,
+        "finalStateEqual": true,
+        "hookStatesEqual": null
+      },
+      "exitCode": 0,
+      "timedOut": false
+    },
+    "freshProof": {
+      "status": "CLOSED_PASS_ROOT_REVIEWED",
+      "PID": 224640,
+      "lineageComparisons": 2601,
+      "hookMetadataComparisons": 89534,
+      "ledger": {
+        "constructorsAttempted": 1,
+        "constructorsCompleted": 1,
+        "constructorResetsAttempted": 1,
+        "constructorResetsCompleted": 1,
+        "explicitResetAttempts": 0,
+        "explicitResetsCompleted": 0,
+        "attemptedUpdates": 2600,
+        "completedUpdates": 2600,
+        "RNGDraws": 0,
+        "reservedUpperUpdates": 2600
+      },
+      "comparison": {
+        "lineageEqual": true,
+        "hookMetadataEqual": true,
+        "inventoryEqual": true,
+        "terminalEqual": true,
+        "RNGEqual": true,
+        "RNGDrawCountEqual": true,
+        "finalStateEqual": true,
+        "hookStatesEqual": true
+      },
+      "exitCode": 0,
+      "timedOut": false
+    },
+    "rootVerifiedAllFiveEncodedSourceStreamsEqual": true,
+    "fullHookStateDigestMatchesRetained63Witness": true,
+    "lineageDigest": "adca60feef4ca26abf33fe2575951c0443f785a123bae45fb7384d7736af2766",
+    "fullHookStateDigest": "aa8aa81d07ddf548219d86948732bddfb7c1c77251c61f895196680d0e5a0f46",
+    "ordinaryBufferCauseEstablished": false,
+    "native02Status": "PENDING",
+    "visible13Status": "PENDING",
+    "sceneAccepted": false
+  },
+  "humanEXInputSourceAudit": {
+    "status": "SOURCE_ONLY_AUDIT_CLOSED_NO_QUERY_OR_LOCAL_ORDER_FIX_BUFFERING_POSSIBLE_UNPROVEN",
+    "receiptSHA256": "09e31fb4fb9054016d26ef88aba78db66112afd15eeda8a9aec3f7f0dd49530b",
+    "reportSHA256": "b90d990548db3872435cccd76767d81cae9e94666662dd1ebb4c2807da0217c7",
+    "slidingQueryUsesLivePoint": true,
+    "currentModelQueryOriginAgrees": true,
+    "staticFirstPresentExactLookupAndPermissionAgree": true,
+    "normalSingleHumanSubstepOrderAgrees": true,
+    "ordinaryGBFrameBufferExistsInOriginal": true,
+    "ordinaryGBFrameBufferPresentInModel": false,
+    "liveFixtureBufferEnable": "UNPROVEN_NOT_READ",
+    "bufferUseAtNativeDivergence": "UNPROVEN_NOT_OBSERVED",
+    "pendingClearsBeforeEligibleActionEvenFailedTarget": true,
+    "causeProvenBy13TapTest": false,
+    "logicalPivotQueryFixSupported": false,
+    "engineFixImplemented": false,
+    "clockOrPhaseRefit": false,
+    "globalLethalOrLowerEffectOrderNewlyQualified": false
+  },
+  "boundedAccepted": true,
+  "gameplayQualified": false,
+  "acceptanceSHA256": "023d205024385aa941d20ad06203d1f62eee875915cda14c974f684a974179d2",
+  "normalUIReviewSHA256": "dc54059aab14c933ac487b720a8210ae6f616a0999330e76de6d48872626c55d",
+  "nativeAccepted13TapRoute": {
+    "goalScore": 2000,
+    "bonusScore": 1000,
+    "completionBonus": 1000,
+    "nextOrdinal": 60,
+    "nextTitle": "Hitchhiker",
+    "campaignScore": 373000,
+    "reverseTransport": "Verified earned fixture Space49/ch32",
+    "old63TapFailurePreserved": true,
+    "reportSHA256": "a68057f417f8028072b21d564ecd265ac76952d2ca0c0d0705fb7a938d62a2d2",
+    "PREPNGFreezeSHA256": "f4c7d45524184967f6fc67a5d6409755fd3e8e48e75b31312ff7d7453f746a45",
+    "originalAuditSHA256": "e6baff595dcd9645796abaaeb6f487412c49d684abcfa32dcea3ea57a1569b8a",
+    "fixedComparisonSHA256": "b0b1f16491b7aab67d29e007490fe9cb1749761e9c2003418181ef774b2a01b8",
+    "all34CapturesRetained": true,
+    "rawMissesRetained": 33,
+    "humanClearPointMatches": [
+      24,
+      28
+    ],
+    "humanClearPoseMatches": [
+      22,
+      28
+    ],
+    "NPCClearPointAndPoseMatches": [
+      208,
+      208
+    ],
+    "lateReverseResidualPixels": 6,
+    "followingFrameResidualUpTo": 2,
+    "endpointMayPrecedeNativeTransfer": true,
+    "noPhaseIdentityHealthFit": true
+  },
+  "visibleAccepted13TapRoute": {
+    "score": 2000,
+    "gold": true,
+    "paused": true,
+    "receiptSHA256": "9a2225e5e7dbaa4dad966b69b513f0fa26601c3c28ad01915e4ec31c818e3c52"
+  },
+  "installed": {
+    "normalURL": "http://localhost:8087/clockwerx-html5/",
+    "sourceRuntimeFiles": 43,
+    "scenes": 59,
+    "files": 149,
+    "complete58Rollback": true,
+    "prior58Definitions": true,
+    "ownedPayloads": 104,
+    "libraryRootFilesUnchanged": 19,
+    "samePilotIdSaveKey": true
+  },
+  "earnedThrough59Fixture": {
+    "imageSHA256": "44af8bb84f16596434144b41eede5d89f7501bcfe0c2c6c254a41fb49d0403fa",
+    "reviewSHA256": "fd0d807b077c9cb4e45fb1352c3f387051819237b37b14b51c2f616ced4f3378",
+    "filesVerified": 9,
+    "untouched": 7,
+    "bothForksAndRepresentedMetadataVerified": true,
+    "priorFixturesAndOriginalMediaUnchanged": true,
+    "nativeRelaunchPending": true
   }
 }

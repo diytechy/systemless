@@ -160,7 +160,12 @@
     "screenshotPath": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/death58/qa-goal/root-visible-goal.jpg",
     "screenshotSHA256": "2af2f89a7e751fd188ad9af161a39bed622cef18cd27e24eec6cd2cbe91a35f0",
     "performanceBenchmark": false,
-    "installedNormalRouteVerification": false
+    "installedNormalRouteVerification": false,
+    "firstPassHandGroup": 4300,
+    "goldHandGroup700SeparateGoalVerified": true,
+    "goldSupplementPath": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\death58\\root-gold-visible-supplement.json",
+    "goldSupplementSHA256": "01242f38f6586a7870b5ae0ec778e41c1cc8a5f6a1a039b840bc0ebd3a93f228",
+    "goldGoalScreenshotSHA256": "eb9d02ab863455707d7e92ad69561837cd08aa1c116fe846636f3a69bf7cae6e"
   },
   "RootReview": {
     "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/death58/root-bounded-acceptance.json",
@@ -198,5 +203,17 @@
     "receiptSHA256": "b3aec89355e2821af865e110f70e0281157f98bdfd3468a6b220e0232238a8e2",
     "RootInstallReviewPath": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/death58/root-normal-install-review.json",
     "RootInstallReviewSHA256": "fa512a472d036c78235fbd52b35dd5c7699ad0bc876492cc0879ba86411f53e5"
+  },
+  "subsequentSource43Regression": {
+    "level58Constructors": 2,
+    "updates": 10328,
+    "RNGDraws": 0,
+    "status": "Exact complete per-update source and consumed hook metadata equality at5164 goal on each engine",
+    "resultSHA256": "f0378a40de78bdd6908d67ba7805aab61f2f9752e7f661ae5ab824dc0756891b",
+    "conservativeGlobal58After": 59595,
+    "global58RangeAfter": [
+      59467,
+      59595
+    ]
   }
 }

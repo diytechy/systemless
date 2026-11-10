@@ -24,6 +24,8 @@ The first check was manually stopped after77.596s because forcing a physical dis
 
 Corrected counters append synchronously each update and flush physically at constructor, every128 completed updates and terminal. Terminal flushes every stream; counter hashes now cover actual journal bytes. Aggregate harness accounting, including the failure: four constructors/constructor resets,4,397 updates, zero explicit resets/RNG. These used the accepted57 fixture and are separate from Death58's15,788 updates spent before continuation.
 
+The4,397 harness updates are also charged to Mortality57's existing functional budget:48,866 +4,397 =53,263/250,000 spent,196,737 remaining. This accounting does not add gameplay, reset or native qualification.
+
 Compact files use exact JSON-text deltas and periodic complete checkpoints. Search retains full per-update source/dot/actor state and ordered original calls/results, with a128-update terminal window; it omits intermediate callback-state snapshots. Witness mode retains those snapshots losslessly. Buffer limits and peaks are per-stream/aggregate output buffers, not total-process memory; previous strings, current snapshots and the failure window also occupy memory. JSON-level losslessness preserves the legacy serialization's omissions and does not extend it to JavaScript identity or undefined fields.
 
 ## Next authorized work

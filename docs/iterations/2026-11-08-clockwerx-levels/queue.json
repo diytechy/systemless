@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 58,
-  "currentAction": "Recorder0b691440 PASS.58continuation03 CLOSED fourdeaths/noGoal16360updates; saved1.622GB verified. Global58spent35355/250000. Savedcold timeline audit and temporalplanner preparation only; no current model lease. Normal57 unchanged;59source reviewed only.",
+  "currentAction": "Actual58goal+separatefreshliteral4486d4dc VERIFIED5164each/16transfers/2000points/fullstreams identical. Oldtimeout+partialpreserved; actualrange49139..49267/conservative49267. Rootreviewdone; saved-only51capture nativebuilder/isolatedQA prep. Native/SVGgoals/acceptance pending;normal57unchanged.",
   "levels": [
     {
       "ordinal": 1,
@@ -4577,10 +4577,11 @@
       "sourceAdmissionPlanReceiptSHA256": "dc9d720b773392a354ecf660e8450d892c6180c5990c3245eaebddec38c9de6c",
       "actualModelUpdates": 0,
       "modelBudget": {
-        "spent": 48866,
+        "spent": 53263,
         "cap": 250000,
-        "remaining": 201134
+        "remaining": 196737
       },
+      "observerValidationUpdates": 4397,
       "modelGoalUpdates": 3512,
       "modelHumanTransfers": 8,
       "calibrationPrefix": 700,
@@ -4597,7 +4598,7 @@
       "menuTitle": "Death",
       "resourceTitle": "Death",
       "sha256": "c0bb84c537c05baa13c4c919b09eb00f2a6303f015ca857f8dcd29d2a2118a80",
-      "status": "source-integrated-cold-calibrated-functional-discovery",
+      "status": "functional-goal-and-fresh-proof-native-svg-pending",
       "nativeEvidence": [
         "death58/native-initial-01/report.json",
         "death58/root-cold-visible-review.json",
@@ -4682,8 +4683,14 @@
       "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38",
       "sourceFreezeSHA256": "44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9",
       "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942",
-      "functionalUpdatesSpent": 35355,
-      "functionalUpdateBudget": 250000
+      "functionalUpdatesSpent": 49267,
+      "functionalUpdateBudget": 250000,
+      "functionalUpdatesSpentRange": [49139, 49267],
+      "functionalGoalUpdatesPerRun": 5164,
+      "functionalGoalScore": 2000,
+      "functionalHumanTransfers": 16,
+      "functionalGoalProofReceiptSHA256": "4486d4dc575e834802ca7c4d670707752ea71e1e66e13473bbf02b8bf91d63e5",
+      "functionalOriginalTimeoutPreserved": true
     },
     {
       "ordinal": 59,
@@ -7862,9 +7869,9 @@
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
     "A": "Root review/queue/native/browser/activation; no concurrent model workload",
-    "B": "compact_observer: saved-only58cold-v-divergent timeline audit/cache, no new simulation",
-    "C": "death58_continuation:03CLOSED4deaths16360updates; temporalplanner preparation only, no execution lease",
-    "D": "review59: CLOSED source/mask review and observer peer PASS; zero actual59imports/constructors/resets/updates"
+    "B": "compact_observer: Rootreviewgate5e553842 authorizes saved-only58nativebuilder v2 andisolatedQA prep; no native/fitter/browser",
+    "C": "death58_continuation: CLOSED4486d4dc actualgoal+freshliteral/fullsavedpairaudit; no active model lease",
+    "D": "review59: private nestedreadonly observercandidate source-only/portabletests; no models/benchmark andpublic595unchanged"
   },
   "handoff": "session-handoff-2026-11-10.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",

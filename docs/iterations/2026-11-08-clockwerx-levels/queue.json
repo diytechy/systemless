@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 60,
-  "currentAction": "59accepted/source43normalactive. 60source44v2/initchecksPASS;originalcoldraw+savedmatrixauditsPASS;686provisional/tie687 all3729ranksRootverified,4point13poseresidualsretained. Cold5648 +functional3deaths7266=12914/250000,237086remain/RNG90. Allfreshprefixstate+metadataPASS. Saveddependencycacheworldmatches7266nonterminalrows;temporalhumanpredictorproposalpreparing/noqualificationorsearchyet. Sharedreplayblankpacketready. Allactual/exclusivelanesCLOSED.",
+  "currentOrdinal": 61,
+  "currentAction": "60 Hitchhiker bounded Child accepted and active on Source44v2. Original02 and visible SVG complete 2000; original advanced to Diagonals at 375000. Earned-through60 fixture verified. Continue Diagonals61 source-first GN/TR/PR composition; all actual lanes closed.",
   "levels": [
     {
       "ordinal": 1,
@@ -4831,10 +4831,10 @@
       "menuTitle": "Hitchhiker",
       "resourceTitle": "Hitchhiker",
       "sha256": "76cc2dec24cf66dd3f6483cb750be16268215e1543182d0d9dd9abd5d51baf48",
-      "status": "functional-goal-proved-native-visible-pending",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": ["hitchhiker60-native-goal02/root-original-goal-review.json", "hitchhiker60-native-goal02/root-native-comparison.json"],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and local installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4862,7 +4862,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -4921,7 +4921,7 @@
       ],
       "sourceRuntimeFreezeSHA256": "bfe8ddc23c70622541a1a685e8e8c1bedf12d8c357c685c145e5562960f27067",
       "runtimeTestCount": 419,
-      "actual60Updates": 43764,
+      "actual60Updates": 64446,
       "dedicatedNativeCold": {
         "status": "all35-viewed-after-source-method-freeze-original60-confirmed",
         "PID": 142956,
@@ -4931,9 +4931,9 @@
         "captureFreezeSHA256": "06bd20481467c2953bfd6f34bdefbb13e1fe2fded4f94e2f7b498888aa483b63",
         "reportSHA256": "0e9ac65d846ecd9383462a676a88fc5d94e303fea4737884cab62cc70ba7f1a8"
       },
-      "functionalUpdatesSpent": 43764,
+      "functionalUpdatesSpent": 64446,
       "functionalUpdateBudget": 250000,
-      "functionalUpdatesRemaining": 206236,
+      "functionalUpdatesRemaining": 185554,
       "coldModelUpdates": 5648,
       "coldModelStatus": "complete-5648-no-terminal-prefix-unselected",
       "originalSavedFitAuditSHA256": "ddc6c2b62fc09d45e7484281ce9c7eaa457317ee820223b59a73adb427ae3149",
@@ -4961,6 +4961,28 @@
         "closure": "hitchhiker-functional01-owned-process/closure.json"
       },
       "timelineAuditSHA256": "466840401b367beb84d403c4fb2ca45c00f616e05aafc1331a36d7fb6e8d27bd",
+      "deliveryAcceptance": {
+        "boundedAccepted": true,
+        "actualProofReviewSHA256": "993f304e889465521fc5585ae30eb984dc87a3a51ae1d17fcb4caf56658e0946",
+        "rootAcceptanceSHA256": "8f4c74d3e5b34588e63dd1e3caf3f6f75c9c4cf83e6cb3215fe50ef3d22d6c15",
+        "activationSHA256": "712e2331b6cc855d97a7b6c6715a3f0936cacaf4f21b82a9f3829f5c50d58292",
+        "normalUIReviewSHA256": "631cc5cea6e9210a593d602e20b0134323fa4836dff76db4a7e5fc6c88b46042",
+        "earnedThrough60FixtureSHA256": "eff5412b3e781ddf422a78116f461df226bf70e8831c4c0ca155ba2a3f75b7aa",
+        "earnedThrough60ReviewSHA256": "affc2775fa9cacc4153e3cd91f974797fd006105cadd5a5126e4794e6f61c071"
+      },
+      "wideRoute": {
+        "status": "closed-original-and-visible-completion-wide-proof-pass",
+        "original01Failed": true,
+        "original02Score": 2000,
+        "nextOrdinal": 61,
+        "campaignScore": 375000,
+        "updatesPerPortRun": 6894,
+        "portHolds": 16,
+        "nativeFinalHoldMarginFrontendTicks": 14,
+        "actualCandidateAuditSHA256": "334758e9c86d1c7c95a74f49a07fcf9d83fea62589322635a4ab6cb3faf8d86d",
+        "originalOutcomeReviewSHA256": "0b11fba3877cff5a4bf465592ee00cb81eece9b743d7a257bd6f7f9512de5a86",
+        "originalFitComparisonSHA256": "bff6d84f3f50ac7ede1c44f8e52d84370cc04f5bf7223fc5894700390193b1be"
+      },
       "functionalGoalProof": {
         "status": "candidate-witness-fresh-proof-closed-native-and-visible-pending",
         "updatesPerRun": 6950,

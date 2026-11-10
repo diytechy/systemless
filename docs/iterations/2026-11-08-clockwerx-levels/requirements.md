@@ -1,5 +1,9 @@
 # ClockWerx behavior and generation requirements
 
+## Connector reverse boundary under investigation
+
+Exile source review found a possible interior connector entry followed by Reverse that reaches an absent logical destination. Its original current-point storage is not proven initialized from the round data. No native route from level start has yet demonstrated this continuation. The bounded pilot will use a narrow recovery guard before reading that unknown position, retain the diagnostic facts and restart safely. This is an intentional approximation, with source review and integration still pending. It does not qualify the original continuation or justify inventing coordinates, death effects or timing. Defined present-target behavior and earlier scenes must remain unchanged.
+
 ## Moving goals and marked transfers
 
 Spires52 source review adds a distinct real-grab rule: transferring directly between two marked dots is fatal for the human. A single marked endpoint, NPC travel, Bounce and connector specifications are excluded. The original begins death at the old physical pose before release, then continues the transfer and grab callback with scoring suppressed. Keep that ordering and the terminal zero direction through the dying continuation. The separate original/SVG completion and marked-death recovery witnesses are recorded under Spires; bounded acceptance passed with explicit post-death timing limits; see [review](spires-review.md).

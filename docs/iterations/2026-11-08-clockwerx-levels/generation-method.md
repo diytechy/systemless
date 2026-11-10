@@ -1,5 +1,9 @@
 # A practical level-generation method
 
+## Direction state and undefined destinations
+
+A connector solver must track its fixed entry direction separately from its current travel vector and progress. The original Reverse operation changes travel without necessarily changing the stored direction later used to choose a logical destination. Exile source analysis found a possible absent destination whose current point depends on memory outside the round resource. A graph of rail coordinates alone misses this boundary. An original-compatible generator must exclude or resolve such continuations across its claimed input policy. The pilot's planned safe-restart guard is an explicit approximation and supplies no evidence of original solvability. The source-defined finite subset and the unresolved branch must remain separate in fitting and certificates.
+
 ## Marked edges and moving goals
 
 For marked dots, a generator must model actions on edges as well as properties on vertices. Entering one marked pivot can be safe; a real human grab from one marked pivot to another is fatal. Preserve the source continuation after death and exclude terminal dying state from solver expansion. Do not apply the predicate to NPCs, Bounce or connectors. A graph that treats every marked vertex as lethal would reject valid routes.

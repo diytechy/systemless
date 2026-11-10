@@ -18,4 +18,3 @@ export function fixture({mover=74,program='pewp',color=2,maskMiss=true}={}){
 export const tiny={left:-1,right:1,top:-1,bottom:1,rows:[[0,1],[0,1]],flipY:false,outlineIndex:0};
 export function profiles(){const frames=n=>Array.from({length:n},()=>structuredClone(tiny));return{outlines:{groups:Object.fromEntries([700,4300,500,4400,3500,200,800].map(g=>[g,{frames:frames(g===200?4:g===800?24:64)}]))},dotOutlines:{groups:{300:{frames:frames(207)}}},bombOutlines:{groups:Object.fromEntries([[1600,18],[1500,12],[1800,10],[1900,17]].map(([g,n])=>[g,{frames:frames(n)}]))}};}
 export const routes=[10,1].map(kind=>({kind,points:[[0,0],[1,1]],entryLeg:4,forwardExit:8,reverseExit:2,bomb:kind<4,flipVertical:false,flipHorizontal:false,swap:false}));
-

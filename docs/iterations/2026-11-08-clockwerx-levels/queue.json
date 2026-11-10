@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 53,
-  "currentAction": "53original+SVG7000 viewed,190goal+ELreuse complete; rawclosed296/310; comparison/peer pending before53activation;54/55source admission preparation parallel.",
+  "currentOrdinal": 54,
+  "currentAction": "53accepted/active original+SVG7000;54/55 sibling source proposal serial then two functional runners; root54cold prepared fromearned53fixture, rawadapterpreparing.",
   "levels": [
     {
       "ordinal": 1,
@@ -4068,10 +4068,13 @@
       "menuTitle": "Exile",
       "resourceTitle": "Exile",
       "sha256": "1a40f564dfb31af523b44e6d7f89455fc8f05c2034e1e1782ae979f501184f69",
-      "status": "bounded-source-approved-original-and-SVG-goal-review-pending",
-      "nativeEvidence": [],
+      "status": "bounded-moving-elevator-composition-accepted-with-limits",
+      "nativeEvidence": [
+        "exile-review.md",
+        "exile-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "isolated-actual-checked-goal7000-viewed-and-paused",
+      "svgStatus": "root-checked-goal7000-reviewed-locally-active",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4111,11 +4114,9 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "Attached rider during TYPE2 movement and canonical reset/death native checks",
+        "Object/misc phase confidence, epoch and one-frame residuals",
+        "Absent38 connector continuation; audio/controllers/nonChild/original save compatibility"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -4147,7 +4148,8 @@
       "nativeGoalScore": 7000,
       "nativeNextOrdinal": 54,
       "sourcePoseStrictCases": 2,
-      "ELPrefixReuseCases": 190
+      "ELPrefixReuseCases": 190,
+      "boundedChildQualified": true
     },
     {
       "ordinal": 54,
@@ -4219,7 +4221,8 @@
       },
       "sourceDomainPreparationSHA256": "7b38b02637774708707ea709bec91af76d3f008851465daffeb32df31d7b3491",
       "sourceDomainPeerStatus": "bounded-cold-approved",
-      "sourceDomainPeerSHA256": "57a6ad565ec0e8369170a7fcb42d8837bfe24fa5f1f6bf8c12faa6d56a8e0017"
+      "sourceDomainPeerSHA256": "57a6ad565ec0e8369170a7fcb42d8837bfe24fa5f1f6bf8c12faa6d56a8e0017",
+      "sourceHumanWallMetadataErratumPending": true
     },
     {
       "ordinal": 55,
@@ -4295,7 +4298,8 @@
       },
       "sourceDomainPreparationSHA256": "55531d3f34da22b03182c3deeb29ffa07dd63737c9b70d927e92b9b41907ac3b",
       "sourceDomainPeerStatus": "bounded-cold-approved",
-      "sourceDomainPeerSHA256": "a803b3391dfbc75238020f30572d38281852567e38852d1639520c97611d4e31"
+      "sourceDomainPeerSHA256": "a803b3391dfbc75238020f30572d38281852567e38852d1639520c97611d4e31",
+      "sourceHumanWallMetadataErratumPending": true
     },
     {
       "ordinal": 56,

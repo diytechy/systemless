@@ -1,0 +1,185 @@
+{
+  "status": "bounded-Child-slice-accepted-with-explicit-limits",
+  "ordinal": 53,
+  "title": "Exile",
+  "sourceRevision": "01d72c3b039463d997534b731b826c4e2587a8fa",
+  "sourceChecks": {
+    "public": 362,
+    "actual53": 10,
+    "packaging": 21
+  },
+  "originalAndSVGGoal": 7000,
+  "nativeNextOrdinal": 54,
+  "nativeCumulativeScore": 334000,
+  "nativeCapturesViewed": 66,
+  "goalModelCases": 190,
+  "successfulActionTargetPaths": 190,
+  "strictFullPhysicalPoseCases": 2,
+  "ELPrefixReuse": {
+    "cases": 190,
+    "canonicalProjections": 150,
+    "phaseVariants": 40,
+    "additionalModelUpdates": 0,
+    "perCaseLiteral5536Snapshot": false
+  },
+  "goalSummary": {
+    "allCaptures": 66,
+    "boardCaptures": 62,
+    "separateCaptures": 4,
+    "actors": {
+      "selected": 310,
+      "clear": 296,
+      "clearPositions": 296,
+      "clearPoses": 291,
+      "rawMisses": 14,
+      "clearPositionMismatches": 0,
+      "clearPoseMismatches": 5
+    },
+    "groups": {
+      "500": {
+        "selected": 124,
+        "clear": 115,
+        "clearPositions": 115,
+        "clearPoses": 113,
+        "rawMisses": 9,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 2
+      },
+      "700": {
+        "selected": 62,
+        "clear": 57,
+        "clearPositions": 57,
+        "clearPoses": 56,
+        "rawMisses": 5,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 1
+      },
+      "4500": {
+        "selected": 124,
+        "clear": 124,
+        "clearPositions": 124,
+        "clearPoses": 122,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 2
+      }
+    },
+    "modelPhases": {
+      "before-model-goal": {
+        "selected": 305,
+        "clear": 291,
+        "clearPositions": 291,
+        "clearPoses": 286,
+        "rawMisses": 14,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 5
+      },
+      "at-model-goal": {
+        "selected": 0,
+        "clear": 0,
+        "clearPositions": 0,
+        "clearPoses": 0,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0
+      },
+      "after-model-goal": {
+        "selected": 5,
+        "clear": 5,
+        "clearPositions": 5,
+        "clearPoses": 5,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0
+      }
+    },
+    "throughAndAtModelGoal": {
+      "selected": 305,
+      "clear": 291,
+      "clearPositions": 291,
+      "clearPoses": 286,
+      "rawMisses": 14,
+      "clearPositionMismatches": 0,
+      "clearPoseMismatches": 5
+    },
+    "afterModelGoal": {
+      "selected": 5,
+      "clear": 5,
+      "clearPositions": 5,
+      "clearPoses": 5,
+      "rawMisses": 0,
+      "clearPositionMismatches": 0,
+      "clearPoseMismatches": 0
+    },
+    "nativeVisualCohorts": {
+      "exile53-playfield": {
+        "selected": 310,
+        "clear": 296,
+        "clearPositions": 296,
+        "clearPoses": 291,
+        "rawMisses": 14,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 5
+      }
+    },
+    "sourceFieldsExistingReplayExact": 22,
+    "coreEvents": 174,
+    "hooks": 48,
+    "queries": 94,
+    "directELPrefixCoreEvents": 152,
+    "directEL5536StateHashVerified": true,
+    "savedActualPointChecks": 310,
+    "newModelReplays": 0,
+    "newUpdates": 0
+  },
+  "normalUIDelivery": {
+    "normalURL": "http://localhost:8087/clockwerx-html5/",
+    "tab": 92,
+    "ready53RootViewed": true,
+    "paused": true,
+    "markedDeliverable": true,
+    "qa136Closed": true,
+    "originalBrowserIDsBootedResetImported": false,
+    "artifacts": {
+      "normal-ready-page.txt": "af9bcf20c9de6e17811c09c616f4c63edf8036c475940f97502ae3fc3a37e732",
+      "normal-ready-viewport.png": "2dfb3825566cbeb88b199a89540f82e79bb972509be07d729ad7c16c6147cb2f",
+      "normal-paused-page.txt": "97f6f6c72caebca5fe1f385db5ef52019cd0c4e26d190c6eecef0ae227814d51"
+    },
+    "note": "Full-page screenshot API failed; documented viewport screenshot succeeded and was viewed. No browser stop/policy failure was bypassed."
+  },
+  "priorDefinitionsUnchanged": 52,
+  "priorPayloadsUnchanged": 104,
+  "newRuntimeArt": 0,
+  "saveKey": "systemless.clockwerx-html5.pilot.v1",
+  "runtimeFiles": 38,
+  "runtimePayloads": 104,
+  "definitions": 53,
+  "sizes": {
+    "sourceBytes": 394141,
+    "assetBytes": 3531553,
+    "manifestBytes": 4860745,
+    "totalBytes": 8786439
+  },
+  "sizeCaveat": "Raw size includes manifest line endings: prior52 CRLF174787, new53 LF. Normalized-LF manifest grows66010 bytes; reduction in raw total is formatting, not an asset or performance saving.",
+  "earned53FixtureSHA256": "3882b7757e1e02b5d6cf6c5fe402b6f32d376538f6ffdaeb4383cc25a5107e86",
+  "limits": [
+    "Five one-frame original/model pose residuals in one gameplay capture, and five cold residuals in another; provisional tied cold prefix692.",
+    "14 gameplay actor fits and11 cold actor fits are retained misses. All object/misc phase and source state confidence remain unassigned.",
+    "No attached moving TYPE2 rider or canonical death/reset native witness; no native black-palette fidelity/audio/physical-controller/performance claim.",
+    "Source possible absent38 connector destination remains unqualified. PILOT recovery is an explicit approximation; successful witnesses use zero recoveries and no EX travel.",
+    "190 model cases share successful semantic/action-target paths; only2 whole physical/pose paths exactly match canonical,150 EL projections canonical and40 phase variants retained.",
+    "All claims apply to bounded Child scenes; no full campaign/save compatibility or generator implementation."
+  ],
+  "evidence": {
+    "pre-activation-validation.json": "dcb8d03e7922d19a53913aa849d56721986c1580a398ce5e1d6455a5a7561215",
+    "activation.json": "efb2cd18e6408fe1b1d550cd8f0ea96197f0743d52aa3a70d1419d5e29f4ebee",
+    "root-source-integration.json": "bc20da0a0921d1631cd08da5e0e333990f9365bdd55116801e880719496bee59",
+    "root-native-goal-visual-review.json": "8e031971638aa93b183aceb398a28caceb147dbe36c2fb0747afd7960aa5d77f",
+    "root-ui-goal-review.json": "7cb2e597ca6adfb695901faf94d38d935460ac0bb55013e94f690cb4c5f59967",
+    "normal-ui-review.json": "76b74cab4e91ec9a560214e40f8623ca174622d7c88391e9df9a678027975038",
+    "native-goal-model-comparison-receipt.json": "7d8382377b3b68a8ac36f7196251f7962b8555bf647189192303b9fe6f6ef10e",
+    "goal-content/goal-final-receipt01.json": "09918aa59e7ad0c5f235309eb9f2e701921c7188adab0d14f0addce6ad7c2731",
+    "EL-content/goal190-EL-reuse-receipt.json": "ad878a073fd736f251fccb8eced666c6410b2506689cb2f6ecd7101e19dafcdf",
+    "../exile-gameplay-independent-review/receipt.json": "954763841c88f59ad866bfc9052063bc7e235aded891fc48f990a96a32f0e737"
+  }
+}

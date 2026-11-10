@@ -2,7 +2,13 @@
 
 ## Direction state and undefined destinations
 
-A connector solver must track its fixed entry direction separately from its current travel vector and progress. The original Reverse operation changes travel without necessarily changing the stored direction later used to choose a logical destination. Exile source analysis found a possible absent destination whose current point depends on memory outside the round resource. A graph of rail coordinates alone misses this boundary. An original-compatible generator must exclude or resolve such continuations across its claimed input policy. The pilot's planned safe-restart guard is an explicit approximation and supplies no evidence of original solvability. The source-defined finite subset and the unresolved branch must remain separate in fitting and certificates.
+A connector solver must track its fixed entry direction separately from its current travel vector and progress. The original Reverse operation changes travel without necessarily changing the stored direction later used to choose a logical destination. Exile source analysis found a possible absent destination whose current point depends on memory outside the round resource. A graph of rail coordinates alone misses this boundary. An original-compatible generator must exclude or resolve such continuations across its claimed input policy. The pilot's reviewed safe-restart guard is an explicit approximation and supplies no evidence of original solvability. The source-defined finite subset and the unresolved branch must remain separate in fitting and certificates.
+
+## Reuse mechanics, validate compositions
+
+A new level should be data for one shared engine. Admit a combination only after checking its typed objects, mode masks, actor programs, color permissions and relevant helper assumptions. Reuse established mechanic proofs and test the new interactions; a new map does not automatically require repeating every engine experiment. Still retain a legal input witness and an original-game comparison for each accepted original-compatible map. A decoded or admitted map alone is not a solvability certificate.
+
+For moving-dot and elevator combinations, solver state needs stable dot identities, actual current positions, the permitted query cache, motion program counters, control occupancy and persistent clock state. Exile's 190 successful model timing cases share an action-target path but vary in exact poses and elevator phase. Preserve those variants rather than using a successful score as evidence of identical timing. Shared input prefixes can reuse saved evidence when identity and coverage are checked; whole-route hashes must not be relabeled as prefix hashes. Its native and SVG goal witnesses support the tested route, while unvisited rider/reset branches and the unresolved connector destination remain outside the claim. No automatic generator is implemented.
 
 ## Marked edges and moving goals
 

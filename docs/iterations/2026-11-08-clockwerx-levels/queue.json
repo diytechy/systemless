@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 49,
-  "currentAction": "Playground49 shared9436/source-v4 approved; original1000goal\u219250/303000 and ringreturn/reset observed, raw model comparisons/SVG diagnostics/guarded49activation pending.50source compatibility ready, no50native yet.",
+  "currentOrdinal": 50,
+  "currentAction": "Funhouse50 known-content: fresh original cold from earned49, independent raw fit before phase/model;51moving source-only private preparation overlaps against approved9436.",
   "levels": [
     {
       "ordinal": 1,
@@ -3715,7 +3715,7 @@
       "menuTitle": "Playground",
       "resourceTitle": "Playground",
       "sha256": "060d1a1dcfbf032500026e1db339056849e97b75a53f0c23c73f3179ad965e9b",
-      "status": "native-goal-ring-reset-reviewed-raw-and-svg-qualification-in-progress",
+      "status": "bounded-hy-ex-ordinary-programs-accepted-with-limits",
       "nativeEvidence": [],
       "requirements": [
         "Separate HY+EX capability; existing41 HY composition explicitly forbids EX and programmed ordinary hands",
@@ -3723,7 +3723,7 @@
         "Ordinary NPC teleports and faders on their own program callbacks; no synthetic NPC initial grabs",
         "Ring and source current-pivot collision behavior in the combined scene"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "root-goal-ring-return-and-reset-reviewed-locally-active",
       "generationConstraints": [
         "Four HY pairs use channels5/6/7/8 and frames11-18; eight endpoints remain below22 capacity",
         "HY endpoints and EX endpoints are disjoint in this map; direct endpoint overlap remains unqualified",
@@ -3757,7 +3757,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3770,10 +3770,13 @@
         6
       ],
       "generationRequirementsPending": [
-        "Human slide/transfer into HY context, retained direction and phase, destination permission/bonus/goal hooks not recursively run",
-        "At least one source-programmed ordinary NPC teleport and source-ordered fader",
-        "Ring release/return and a complete zero-dot-bonus goal route",
-        "Death/reset HY phase persistence and one-shot disposal; retain known41 phase limits"
+        "HY animation client registration/startup phase remains uncertain: cold16/264, goal8/888, ring16/672, death8/432 matching frames; no independent phase assignment.",
+        "Ring compound frame68/84 and visibility82/84 at fixed binding; two boundary visibility mismatches retained; source phase not forced.",
+        "Goal faders73 nonoverlap hypotheses all positions supported/58 exact/73 within1callback;5 actor-overlap flagged separate. Candidate support is not identity or absence proof.",
+        "Death/reset phase differs: restored78clear actor hypotheses yield45 positions/0 poses; all8 clear restored humans correct pivot, no matching frame. Original particles/RNG/fade not forced into deterministic model duration.",
+        "Goal Reverse first-pose variation46/190 strict; all190 control paths and39 age goals pass. Ring8age tails gain7NPC commands;31/39 fullpaths exact.",
+        "Actual HY/EX/ring/goal endpoints are disjoint; overlapping joins, moving/orbital actors, other object mixes and nonChild gameplay unqualified.",
+        "Header150 is a source field, not observed native countdown. Audio, physical controllers, save compatibility and CPU/FPS/latency not qualified by these functional ticks."
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3798,7 +3801,9 @@
         "frozenEngine": "0b3fc975",
         "independentSourceReviewComplete": true,
         "playabilityAccepted": false
-      }
+      },
+      "review": "playground-review.md",
+      "reviewPacket": "playground-review.json"
     },
     {
       "ordinal": 50,
@@ -3806,7 +3811,7 @@
       "menuTitle": "Funhouse",
       "resourceTitle": "Funhouse",
       "sha256": "7967a01583339512db4aa3bd59c3c3d621cd7fc87656734c7910df53914fbc95",
-      "status": "parallel-frozen-core-content-rebase",
+      "status": "known-content-original-cold-calibration-next",
       "nativeEvidence": [],
       "requirements": [
         "Replace hardcoded heroSliding:false only through the qualified source arrival contract",

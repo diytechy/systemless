@@ -1,0 +1,509 @@
+{
+  "status": "passed-with-explicit-fidelity-limits",
+  "ordinal": 49,
+  "title": "Playground",
+  "sourceRevision": "9436e3de03b4e03478eb434084e1881c9c47565a",
+  "sourceChecks": {
+    "status": "source-integration-validated-level49-gameplay-not-yet-accepted",
+    "sourcePatchSha256": "81ff95cbe3f175d96e58003c94a2a4a996d0ef26ac0699c23a12d76903a68607",
+    "sourceReceiptSha256": "93dbd0f5d03863a03aae5a3ce64a4086c1c458caadb5ae974012f7a41b7056c3",
+    "sourceReviewSha256": "4247f91cb0ec129f79920071655172ccb526be63681a3c5e2fa42c41371c61b1",
+    "runtimeTests": 302,
+    "privateContracts": 9,
+    "packagingTests": 19,
+    "packagedRuntimeFiles": 33,
+    "allRuntimeFilesNormalizedEqualFrozenCandidate": true,
+    "priorBoardsAndFullRouteSnapshotsUnchanged": 48,
+    "priorUpdates": 424374,
+    "acceptedLegalColdIdleUpdates": 696,
+    "equivalentHalfStepIdleUpdates": 697,
+    "nativeColdGuestTick": 1864,
+    "nativeMapping": "nativeGuestTick = 1864 + (sourceModelStep - 696) / 2",
+    "clearNativeActorPositionsAndPoses": 255,
+    "clearHeroPoses": 26,
+    "HYFramesMatching": 16,
+    "HYClearObservations": 264,
+    "allOldRawMeasurementsUnchanged": true,
+    "limits": [
+      "HYstartup/faderclientbirth phase remains uncertain; no separate phase fit",
+      "49actualinput/goal/death/reset/SVG/activation pending",
+      "DirectHY-on-EX/ring/goal and other object/moving/orbital scopes rejected; source-only synthetic primitive checks do not admit them"
+    ],
+    "sourceRevision": "9436e3de03b4e03478eb434084e1881c9c47565a",
+    "fullUntruncatedPriorEventsIdentical": 5048,
+    "fullUntruncatedPriorEventReviewSha256": "5aba73f7d78f900b62f079bf453435501073e530fa794eecca19e8c7020ac476"
+  },
+  "nativeGoalScore": 1000,
+  "svgGoalScore": 1000,
+  "nativeTransfers": 16,
+  "goalOnsets": 190,
+  "ringOnsets": 190,
+  "deathOnsets": 190,
+  "priorFullEventCount": 5048,
+  "priorUpdates": 424374,
+  "originalReports": {
+    "initial": "6b837c40373a8b718d54f94fc24a28fdee654312d14ac2351d9aa440200f50b5",
+    "goal": "a851ec8b90b9e8a01f2a887781ad9c2b8329ff23219935097ffbe93346cfddb1",
+    "ring": "498ff1ee1bab0ec63d26f931547af2d172bbc59226c140035b04dd53c8332bab",
+    "death": "13e240906b2b507bb283618278e5301c8e4c08d741ad4a33707b24b69145e95f"
+  },
+  "rootOriginalVisualReviewSha256": "099811530c235874d554c4a2e24e8c0a1923f2e7b787094b4342fc0f4975febd",
+  "goalComparisonSha256": "31e2d10df4492c7b99142dd96c42b08ff2cf696e2d20a681d97dc048a9eeb456",
+  "diagnosticComparisonSha256": "5232a7eefe1874dbde081e71c73b93a853d8057dbfffe77cfff05cc155156338",
+  "goalSummary": {
+    "allActors": {
+      "all": 888,
+      "clear": 870,
+      "clearPositions": 870,
+      "clearPoses": 870,
+      "transferHeroes": 16,
+      "transferBestPoseMatches": 16,
+      "clearTransferHeroes": 16,
+      "clearTransferPoseMatches": 16
+    },
+    "throughModelGoal": {
+      "all": 872,
+      "clear": 854,
+      "clearPositions": 854,
+      "clearPoses": 854,
+      "transferHeroes": 16,
+      "transferBestPoseMatches": 16,
+      "clearTransferHeroes": 16,
+      "clearTransferPoseMatches": 16
+    },
+    "afterModelGoal": {
+      "all": 16,
+      "clear": 16,
+      "clearPositions": 16,
+      "clearPoses": 16,
+      "transferHeroes": 0,
+      "transferBestPoseMatches": 0,
+      "clearTransferHeroes": 0,
+      "clearTransferPoseMatches": 0
+    },
+    "HY": {
+      "clear": 888,
+      "matches": 8
+    },
+    "EX": {
+      "clear": 595,
+      "matches": 595
+    },
+    "faderHypotheses": {
+      "all": 78,
+      "modelPositionSupported": 78,
+      "modelExactFrameSupported": 63,
+      "withinOneCallbackSupported": 78
+    },
+    "separateResults": 1
+  },
+  "diagnosticSummaries": {
+    "ring": {
+      "legalUpdateCalls": 4998,
+      "captures": 84,
+      "strictSourceFinalSnapshot": true,
+      "strictAfterTailSnapshot": true,
+      "strictCoreEvents": true,
+      "events": 394,
+      "sourceFinalSnapshotSHA256": "362203e18eca3e3034e6b4c480f1e07fefb96bc6e5076650fa5d4a2e7dd41708",
+      "afterTailSnapshotSHA256": "362203e18eca3e3034e6b4c480f1e07fefb96bc6e5076650fa5d4a2e7dd41708",
+      "coreEventsSHA256": "d1a9c71ec4a3481a8ada2e139a2a3b1cf420a494218db34cf462365d9d75fa7f",
+      "actors": {
+        "all": 672,
+        "clear": 669,
+        "clearUnique": 669,
+        "clearPositions": 669,
+        "clearPoses": 669,
+        "clearPositionMisses": 0,
+        "clearPoseMisses": 0
+      },
+      "HY": {
+        "all": 672,
+        "clear": 672,
+        "matches": 16
+      },
+      "EX": {
+        "all": 504,
+        "clear": 402,
+        "matches": 402
+      },
+      "ring": {
+        "all": 84,
+        "clear": 84,
+        "matches": 68
+      },
+      "fadersNonActorOverlap": {
+        "all": 31,
+        "modelPositionSupported": 31,
+        "exactFrameSupported": 25,
+        "withinOneCallbackSupported": 31
+      },
+      "fadersActorOverlapFlagged": {
+        "all": 0,
+        "modelPositionSupported": 0,
+        "exactFrameSupported": 0,
+        "withinOneCallbackSupported": 0
+      },
+      "byCohort": {
+        "ordinary-board": {
+          "captures": 84,
+          "actors": {
+            "all": 672,
+            "clear": 669,
+            "clearUnique": 669,
+            "clearPositions": 669,
+            "clearPoses": 669,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 0
+          },
+          "humans": {
+            "all": 84,
+            "clear": 84,
+            "clearUnique": 84,
+            "clearPositions": 84,
+            "clearPoses": 84,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 0
+          },
+          "HY": {
+            "all": 672,
+            "clear": 672,
+            "matches": 16
+          },
+          "EX": {
+            "all": 504,
+            "clear": 402,
+            "matches": 402
+          },
+          "ring": {
+            "all": 84,
+            "clear": 84,
+            "matches": 68
+          },
+          "ringVisibility": {
+            "clear": 84,
+            "matches": 82
+          },
+          "fadersNonActorOverlap": {
+            "all": 31,
+            "modelPositionSupported": 31,
+            "exactFrameSupported": 25,
+            "withinOneCallbackSupported": 31
+          },
+          "fadersActorOverlapFlagged": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          }
+        }
+      }
+    },
+    "death": {
+      "legalUpdateCalls": 5340,
+      "captures": 58,
+      "strictSourceFinalSnapshot": true,
+      "strictAfterTailSnapshot": true,
+      "strictCoreEvents": true,
+      "events": 408,
+      "sourceFinalSnapshotSHA256": "3fd6f99cf14c5fd808699cf3776a8382be3bf6169b2a90c575e04f1639454ef6",
+      "afterTailSnapshotSHA256": "ad7ef4bd89e95f8cdff3b96ecc6371fa3708528ee7200d57694bfab2194b9f15",
+      "coreEventsSHA256": "1acefd475ddfaafa1ae23c67168d5a397c111d73f22a23a6fa632c632a260dd7",
+      "actors": {
+        "all": 464,
+        "clear": 414,
+        "clearUnique": 414,
+        "clearPositions": 373,
+        "clearPoses": 322,
+        "clearPositionMisses": 41,
+        "clearPoseMisses": 92
+      },
+      "HY": {
+        "all": 464,
+        "clear": 432,
+        "matches": 8
+      },
+      "EX": {
+        "all": 348,
+        "clear": 303,
+        "matches": 303
+      },
+      "ring": {
+        "all": 58,
+        "clear": 54,
+        "matches": 54
+      },
+      "fadersNonActorOverlap": {
+        "all": 6,
+        "modelPositionSupported": 6,
+        "exactFrameSupported": 5,
+        "withinOneCallbackSupported": 6
+      },
+      "fadersActorOverlapFlagged": {
+        "all": 0,
+        "modelPositionSupported": 0,
+        "exactFrameSupported": 0,
+        "withinOneCallbackSupported": 0
+      },
+      "byCohort": {
+        "ordinary-board": {
+          "captures": 35,
+          "actors": {
+            "all": 280,
+            "clear": 277,
+            "clearUnique": 277,
+            "clearPositions": 277,
+            "clearPoses": 277,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 0
+          },
+          "humans": {
+            "all": 35,
+            "clear": 35,
+            "clearUnique": 35,
+            "clearPositions": 35,
+            "clearPoses": 35,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 0
+          },
+          "HY": {
+            "all": 280,
+            "clear": 280,
+            "matches": 0
+          },
+          "EX": {
+            "all": 210,
+            "clear": 193,
+            "matches": 193
+          },
+          "ring": {
+            "all": 35,
+            "clear": 35,
+            "matches": 35
+          },
+          "ringVisibility": {
+            "clear": 35,
+            "matches": 35
+          },
+          "fadersNonActorOverlap": {
+            "all": 6,
+            "modelPositionSupported": 6,
+            "exactFrameSupported": 5,
+            "withinOneCallbackSupported": 6
+          },
+          "fadersActorOverlapFlagged": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          }
+        },
+        "visible-death-particles-or-player-unobserved": {
+          "captures": 9,
+          "actors": {
+            "all": 72,
+            "clear": 59,
+            "clearUnique": 59,
+            "clearPositions": 51,
+            "clearPoses": 45,
+            "clearPositionMisses": 8,
+            "clearPoseMisses": 14
+          },
+          "humans": {
+            "all": 9,
+            "clear": 0,
+            "clearUnique": 0,
+            "clearPositions": 0,
+            "clearPoses": 0,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 0
+          },
+          "HY": {
+            "all": 72,
+            "clear": 72,
+            "matches": 8
+          },
+          "EX": {
+            "all": 54,
+            "clear": 52,
+            "matches": 52
+          },
+          "ring": {
+            "all": 9,
+            "clear": 9,
+            "matches": 9
+          },
+          "ringVisibility": {
+            "clear": 9,
+            "matches": 9
+          },
+          "fadersNonActorOverlap": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          },
+          "fadersActorOverlapFlagged": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          }
+        },
+        "visible-fade-or-black": {
+          "captures": 4,
+          "actors": {
+            "all": 32,
+            "clear": 0,
+            "clearUnique": 0,
+            "clearPositions": 0,
+            "clearPoses": 0,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 0
+          },
+          "humans": {
+            "all": 4,
+            "clear": 0,
+            "clearUnique": 0,
+            "clearPositions": 0,
+            "clearPoses": 0,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 0
+          },
+          "HY": {
+            "all": 32,
+            "clear": 0,
+            "matches": 0
+          },
+          "EX": {
+            "all": 24,
+            "clear": 0,
+            "matches": 0
+          },
+          "ring": {
+            "all": 4,
+            "clear": 0,
+            "matches": 0
+          },
+          "ringVisibility": {
+            "clear": 0,
+            "matches": 0
+          },
+          "fadersNonActorOverlap": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          },
+          "fadersActorOverlapFlagged": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          }
+        },
+        "visibly-restored-board": {
+          "captures": 10,
+          "actors": {
+            "all": 80,
+            "clear": 78,
+            "clearUnique": 78,
+            "clearPositions": 45,
+            "clearPoses": 0,
+            "clearPositionMisses": 33,
+            "clearPoseMisses": 78
+          },
+          "humans": {
+            "all": 10,
+            "clear": 8,
+            "clearUnique": 8,
+            "clearPositions": 8,
+            "clearPoses": 0,
+            "clearPositionMisses": 0,
+            "clearPoseMisses": 8
+          },
+          "HY": {
+            "all": 80,
+            "clear": 80,
+            "matches": 0
+          },
+          "EX": {
+            "all": 60,
+            "clear": 58,
+            "matches": 58
+          },
+          "ring": {
+            "all": 10,
+            "clear": 10,
+            "matches": 10
+          },
+          "ringVisibility": {
+            "clear": 10,
+            "matches": 10
+          },
+          "fadersNonActorOverlap": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          },
+          "fadersActorOverlapFlagged": {
+            "all": 0,
+            "modelPositionSupported": 0,
+            "exactFrameSupported": 0,
+            "withinOneCallbackSupported": 0
+          }
+        }
+      }
+    }
+  },
+  "goalFaderSplit": {
+    "sourceComparisonSHA256": "31e2d10df4492c7b99142dd96c42b08ff2cf696e2d20a681d97dc048a9eeb456",
+    "rawFitsSHA256": "15218093fc4fb454290ec7a99aacd31905cad2c769a466a3382ae6422b2c6eeb",
+    "nonActorOverlap": {
+      "all": 73,
+      "modelPositionSupported": 73,
+      "exactFrameSupported": 58,
+      "withinOneCallbackSupported": 73
+    },
+    "actorOverlapFlagged": {
+      "all": 5,
+      "modelPositionSupported": 5,
+      "exactFrameSupported": 5,
+      "withinOneCallbackSupported": 5
+    },
+    "note": "Reads existing goal comparison only; goal script and JSON were not edited. Candidate support is descriptive, not unique presence/absence proof."
+  },
+  "routeReceiptSha256": "a9a00c4cddf2a7124fe35ba57ca1d3d7e6d2eb1a4c7a1082a7ad0988e00bbfda",
+  "independentRouteReviewSha256": "71876d5872d33307c167b0c61247836d26bcaae46d76c68563f4604c9ebb5c24",
+  "fixtureSha256": "53eaf871d90ada38d9731cbe2d6fe4796317992fb810b0312d751c8028d9941e",
+  "qaGoalRingResetViewed": true,
+  "finalGoalRouteRestored": true,
+  "limits": [
+    "HY animation client registration/startup phase remains uncertain: cold16/264, goal8/888, ring16/672, death8/432 matching frames; no independent phase assignment.",
+    "Ring compound frame68/84 and visibility82/84 at fixed binding; two boundary visibility mismatches retained; source phase not forced.",
+    "Goal faders73 nonoverlap hypotheses all positions supported/58 exact/73 within1callback;5 actor-overlap flagged separate. Candidate support is not identity or absence proof.",
+    "Death/reset phase differs: restored78clear actor hypotheses yield45 positions/0 poses; all8 clear restored humans correct pivot, no matching frame. Original particles/RNG/fade not forced into deterministic model duration.",
+    "Goal Reverse first-pose variation46/190 strict; all190 control paths and39 age goals pass. Ring8age tails gain7NPC commands;31/39 fullpaths exact.",
+    "Actual HY/EX/ring/goal endpoints are disjoint; overlapping joins, moving/orbital actors, other object mixes and nonChild gameplay unqualified.",
+    "Header150 is a source field, not observed native countdown. Audio, physical controllers, save compatibility and CPU/FPS/latency not qualified by these functional ticks."
+  ],
+  "activation": "playground/activation.json",
+  "activeScenes": 49,
+  "remainingScenes": 51,
+  "priorDefinitionsUnchanged": 48,
+  "priorPayloadsUnchanged": 100,
+  "newArtPayloads": 0,
+  "sizes": {
+    "sourceBytes": 312278,
+    "assetBytes": 3432312,
+    "manifestBytes": 4661860,
+    "totalBytes": 8406450
+  },
+  "normalTab": 92,
+  "normalPaused": true,
+  "normalDeliverable": true,
+  "qaTab132Closed": true,
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\playground",
+  "diagnosticIndependentReviewSha256": "eb2b4c1e6b6faeddc4080da379b4ccbc3871babb2992b502db4a7a1476fe0978"
+}

@@ -203,3 +203,8 @@ The accepted48composition adds source eraser frames2/3/4 and ordered persistent 
 
 
 EX appearance must keep normalized DO colors distinct from runtime EX flag bits. The first endpoint's normalized1/2/4 bits become EX4/2/1 before the original lookup; preserve ordinary/bonus/burnt bank and orientation independently. A narrow anticipated-frame matcher can exclude wrong colors as high-error observations; scan the complete source descriptor inventory before declaring visual coverage. The[global color review](ex-color-review.md) corrects44–48without changing their legal gameplay traces.
+
+
+## Playground49 composed HY/EX requirement
+
+A generated board using static EX links and ordinary programmed hands may reuse the accepted49scope only when HY, EX endpoints, rings and goal are disjoint and every raw program/actor identity validates. Preserve normal-grab frame changes and EX canonical arrival before teleport, capture diagnostic targets before movement, apply release/arrival/program hooks once, and keep fader birth clocks independent. Validate a timed input witness through every intended HY channel, EX arrival/backout, ring release/restoration and enemy death/reset; graph connectivity alone is insufficient. Source timer registration phase, ring callback boundaries and death/RNG/fade remain explicit fidelity limits. No state assignment/phase correction may silently turn them into evidence. This board has no bonuses. See[review](playground-review.md).

@@ -1,0 +1,265 @@
+{
+  "status": "passed-with-explicit-fidelity-limits",
+  "ordinal": 50,
+  "title": "Funhouse",
+  "sourceRevision": "9436e3de03b4e03478eb434084e1881c9c47565a",
+  "sourceUnchangedFromPrior49": true,
+  "reusedSourceChecks": {
+    "public": 302,
+    "private": 9,
+    "packaging": 19,
+    "receiptSha256": "a213d5a752bfbc44cfab69e2e63c7b0571048646d0851ae4560a11892ba6b988"
+  },
+  "nativeGoalScore": 16000,
+  "svgGoalScore": 16000,
+  "nativeTransfers": 7,
+  "preservedGoalOnsets": 190,
+  "preservedActualGoalPrefixCases": 77,
+  "hazardActualPrefixes": 39,
+  "priorScenesUnaffectedBySourceChanges": 49,
+  "priorDefinitionsUnchanged": 49,
+  "priorPayloadsUnchanged": 100,
+  "newArtPayloads": 0,
+  "rawReceiptSha256": "94bbaa3ce9abd29a96ad11c9437feeec50e8af6c84185ec4b422db160ff275af",
+  "rawReportSha256": "318aa4762a4a634b0c2f214d21871dc56b98d5192844c869c83df6ca858da33b",
+  "sourcePacketSha256": "67b4906e451d70a4f549b02433fc05a42a050e387904c015712447f8f6ffd384",
+  "rootComparisonSha256": "46f760853fe2ba58b4c20b724b18b8818f2bf0d5da182028f7dc500be4b57812",
+  "cohortComparisonSha256": "accb899870e61f5f628590e3d8d7d166200f6c4fb77cf927a41d740fd4185d34",
+  "comparisonPeerReviewSha256": "a27e4b447d3cebc258a0a9ab7f6c2355ca26a9441ff268df2d0d9b87f1952a3c",
+  "comparisonPeerReportSha256": "f8a91307f9520eee995c969730a7b8447b3afb23defe031dbe9045037f3d8603",
+  "goalSummary": {
+    "shots": 113,
+    "actors": {
+      "all": 904,
+      "clear": 893,
+      "clearPositions": 887,
+      "clearPoses": 869,
+      "clearTransferHeroes": 5,
+      "clearTransferHeroPoses": 5
+    },
+    "throughModelGoal": {
+      "all": 880,
+      "clear": 869,
+      "clearPositions": 863,
+      "clearPoses": 845,
+      "clearTransferHeroes": 5,
+      "clearTransferHeroPoses": 5
+    },
+    "afterModelGoal": {
+      "all": 24,
+      "clear": 24,
+      "clearPositions": 24,
+      "clearPoses": 24,
+      "clearTransferHeroes": 0,
+      "clearTransferHeroPoses": 0
+    },
+    "EX": {
+      "all": 2260,
+      "clear": 2014,
+      "matches": 2014
+    },
+    "beforeModelReset": {
+      "all": 904,
+      "clear": 893,
+      "clearPositions": 887,
+      "clearPoses": 869,
+      "clearTransferHeroes": 5,
+      "clearTransferHeroPoses": 5
+    },
+    "afterModelReset": {
+      "all": 0,
+      "clear": 0,
+      "clearPositions": 0,
+      "clearPoses": 0,
+      "clearTransferHeroes": 0,
+      "clearTransferHeroPoses": 0
+    },
+    "strictPhysicalSourceFinalSnapshot": true,
+    "strictPhysicalAfterTailSnapshot": true,
+    "strictPhysicalTimedEvents": true,
+    "physicalTimedEvents": 118,
+    "separateResults": 1
+  },
+  "deathSummary": {
+    "shots": 52,
+    "actors": {
+      "all": 416,
+      "clear": 351,
+      "clearPositions": 308,
+      "clearPoses": 253,
+      "clearTransferHeroes": 2,
+      "clearTransferHeroPoses": 2
+    },
+    "throughModelGoal": {
+      "all": 416,
+      "clear": 351,
+      "clearPositions": 308,
+      "clearPoses": 253,
+      "clearTransferHeroes": 2,
+      "clearTransferHeroPoses": 2
+    },
+    "afterModelGoal": {
+      "all": 0,
+      "clear": 0,
+      "clearPositions": 0,
+      "clearPoses": 0,
+      "clearTransferHeroes": 0,
+      "clearTransferHeroPoses": 0
+    },
+    "EX": {
+      "all": 1040,
+      "clear": 881,
+      "matches": 866
+    },
+    "beforeModelReset": {
+      "all": 272,
+      "clear": 261,
+      "clearPositions": 259,
+      "clearPoses": 253,
+      "clearTransferHeroes": 2,
+      "clearTransferHeroPoses": 2
+    },
+    "afterModelReset": {
+      "all": 144,
+      "clear": 90,
+      "clearPositions": 49,
+      "clearPoses": 0,
+      "clearTransferHeroes": 0,
+      "clearTransferHeroPoses": 0
+    },
+    "strictPhysicalSourceFinalSnapshot": true,
+    "strictPhysicalAfterTailSnapshot": true,
+    "strictPhysicalTimedEvents": true,
+    "physicalTimedEvents": 71,
+    "separateResults": 0
+  },
+  "cohortSummaries": {
+    "goal": {
+      "visualCohortsSha256": "ce636f266c38c03171a786d78e5468e90d98e235b7be945daff1a03291e11933",
+      "byCohort": {
+        "ordinary-board": {
+          "captures": 113,
+          "allActors": 904,
+          "clearActors": 893,
+          "positions": 887,
+          "poses": 869,
+          "clearHumans": 108,
+          "humanPositions": 107,
+          "humanPoses": 105,
+          "EXAll": 2260,
+          "EXClear": 2014,
+          "EXMatches": 2014
+        },
+        "post-goal-results": {
+          "captures": 1,
+          "allActors": 0,
+          "clearActors": 0,
+          "positions": 0,
+          "poses": 0,
+          "clearHumans": 0,
+          "humanPositions": 0,
+          "humanPoses": 0,
+          "EXAll": 0,
+          "EXClear": 0,
+          "EXMatches": 0
+        }
+      }
+    },
+    "death": {
+      "visualCohortsSha256": "a7f78835ae638da801f3ffcb61efb4b1f6db45b786f155e3a30e183ab80715ad",
+      "byCohort": {
+        "ordinary-board": {
+          "captures": 27,
+          "allActors": 216,
+          "clearActors": 212,
+          "positions": 210,
+          "poses": 204,
+          "clearHumans": 25,
+          "humanPositions": 25,
+          "humanPoses": 24,
+          "EXAll": 540,
+          "EXClear": 507,
+          "EXMatches": 507
+        },
+        "death-particles-or-player-unobserved": {
+          "captures": 10,
+          "allActors": 80,
+          "clearActors": 70,
+          "positions": 55,
+          "poses": 49,
+          "clearHumans": 0,
+          "humanPositions": 0,
+          "humanPoses": 0,
+          "EXAll": 200,
+          "EXClear": 198,
+          "EXMatches": 183
+        },
+        "visible-fade-out": {
+          "captures": 5,
+          "allActors": 40,
+          "clearActors": 0,
+          "positions": 0,
+          "poses": 0,
+          "clearHumans": 0,
+          "humanPositions": 0,
+          "humanPoses": 0,
+          "EXAll": 100,
+          "EXClear": 4,
+          "EXMatches": 4
+        },
+        "restored-board-partially-faded-in": {
+          "captures": 1,
+          "allActors": 8,
+          "clearActors": 0,
+          "positions": 0,
+          "poses": 0,
+          "clearHumans": 0,
+          "humanPositions": 0,
+          "humanPoses": 0,
+          "EXAll": 20,
+          "EXClear": 0,
+          "EXMatches": 0
+        },
+        "visibly-restored-board": {
+          "captures": 9,
+          "allActors": 72,
+          "clearActors": 69,
+          "positions": 43,
+          "poses": 0,
+          "clearHumans": 6,
+          "humanPositions": 6,
+          "humanPoses": 0,
+          "EXAll": 180,
+          "EXClear": 172,
+          "EXMatches": 172
+        }
+      }
+    }
+  },
+  "rootOriginalVisualReviewSha256": "52dc8cfc82af034453a46bd07fc9ff8fcd6f41463715827057ff8afdbf0d7e30",
+  "fixtureSha256": "6120eef80c3e38d590d0207c453bbc1d9aaa46a45a9146bb4b05c6ec23bb5f62",
+  "qaGoalAndResetViewed": true,
+  "finalGoalRouteRestored": true,
+  "limits": [
+    "Cold692/693 is best provisional, not perfect:253clear/250positions245poses; all8mismatchesnative2404 remain. No per-capture correction or Oil/SP phase fit.",
+    "Goal893clear/887positions869poses; all24pose mismatches at3nativecaptures2765/3164/4076. Seven central transfer best hypotheses match,5clear/2misses remain.",
+    "Death model3132/reset3246 differs from observed original alive3148/burst3164/fade3252..3278/partialrestoration3310/full3312; no causal timing or RNG equivalence.",
+    "During model-early-reset particles15EX differences remain; partialfade4lowerrorEX are not game-state proof; restored6clearhumanpivots correct/0posematches, finalhumanframe60 remains raw miss.",
+    "18of33optional bonuses not collected; no clones/restingDPgrab/sliding-safe same-pivot DParrival/birth/sliding-onlyPUwake witness.",
+    "Source header150 is not native countdown measurement. Oil/SP phase, audio, physical controllers, nonChild rules, saves and performance unqualified by functional ticks."
+  ],
+  "activation": "funhouse/activation.json",
+  "activeScenes": 50,
+  "remainingScenes": 50,
+  "sizes": {
+    "sourceBytes": 312278,
+    "assetBytes": 3432312,
+    "manifestBytes": 4748959,
+    "totalBytes": 8493549
+  },
+  "normalTab": 92,
+  "normalPaused": true,
+  "normalDeliverable": true,
+  "qaTab133Closed": true,
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\funhouse"
+}

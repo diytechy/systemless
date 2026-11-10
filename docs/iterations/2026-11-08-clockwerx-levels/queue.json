@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 50,
-  "currentAction": "Funhouse50 actual original/SVG16000 and originalnext51/319000 observed; original+SVG oildeath/reset observed, alloriginalsclosed. Await source-blindrawgameplay reviews/modelcomparison, then guarded50activation; moving51private source prep overlaps.",
+  "currentOrdinal": 51,
+  "currentAction": "Bourbon51 new moving-dot composition: root original cold from earned50, independent raw937-center prep ready; private engine rich proposal in progress against9436.50accepted/active, do not stop.",
   "levels": [
     {
       "ordinal": 1,
@@ -3811,14 +3811,14 @@
       "menuTitle": "Funhouse",
       "resourceTitle": "Funhouse",
       "sha256": "7967a01583339512db4aa3bd59c3c3d621cd7fc87656734c7910df53914fbc95",
-      "status": "known-content-original-cold-calibration-next",
+      "status": "bounded-sliding-oil-known-content-accepted-with-limits",
       "nativeEvidence": [],
       "requirements": [
         "Replace hardcoded heroSliding:false only through the qualified source arrival contract",
         "PU human outline checks use current physical slide pose; DP target remains cached source pivot",
         "Oil+SP+EX scope, ordinary n/s programs, bonus-component propagation and reset"
       ],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "root-goal-and-oil-contact-reset-reviewed-locally-active",
       "generationConstraints": [
         "Only two of seven PU records instantiate; both are kind0 and acquire static non-EX-endpoint targets",
         "Twenty connectors include12 initial bonus links;33 raw bonus vertices already encode EX bonus closure",
@@ -3852,7 +3852,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -3864,10 +3864,12 @@
         6
       ],
       "generationRequirementsPending": [
-        "Wake each active kind0 puddle and pursue while the human slides, including arrival exemption versus successful-grab reason10",
-        "Representative n/s NPC program/slide transitions and mid-slide input",
-        "Collect a bonus chain for one initiating award; do not count every recursively cleared vertex as a pickup",
-        "Goal and hazard/reset with legal held-input variations"
+        "Cold692/693 is best provisional, not perfect:253clear/250positions245poses; all8mismatchesnative2404 remain. No per-capture correction or Oil/SP phase fit.",
+        "Goal893clear/887positions869poses; all24pose mismatches at3nativecaptures2765/3164/4076. Seven central transfer best hypotheses match,5clear/2misses remain.",
+        "Death model3132/reset3246 differs from observed original alive3148/burst3164/fade3252..3278/partialrestoration3310/full3312; no causal timing or RNG equivalence.",
+        "During model-early-reset particles15EX differences remain; partialfade4lowerrorEX are not game-state proof; restored6clearhumanpivots correct/0posematches, finalhumanframe60 remains raw miss.",
+        "18of33optional bonuses not collected; no clones/restingDPgrab/sliding-safe same-pivot DParrival/birth/sliding-onlyPUwake witness.",
+        "Source header150 is not native countdown measurement. Oil/SP phase, audio, physical controllers, nonChild rules, saves and performance unqualified by functional ticks."
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -3894,7 +3896,9 @@
         "actualPrefix700PlusMinus38Cases": 77,
         "nativeCalibrationPending": true,
         "frozenSourceRebase": "d626c50f"
-      }
+      },
+      "review": "funhouse-review.md",
+      "reviewPacket": "funhouse-review.json"
     },
     {
       "ordinal": 51,
@@ -3902,7 +3906,7 @@
       "menuTitle": "Bourbon",
       "resourceTitle": "Bourbon",
       "sha256": "b8743bc0a3bca902bf9406215ba0bfc88418d4804b9335754b203e91020e27e8",
-      "status": "queued",
+      "status": "serial-moving-dot-rich-source-and-native-cold-next",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",

@@ -100,5 +100,3 @@ test('original-profile dependency contract rejects incomplete metadata and wrong
  const b=board(),p=profiles();assertStaticMarkedOrbitalPhysics(b,p.outlines,p.dotOutlines);
  for(const mutate of [p=>delete p.outlines.groups[3500],p=>delete p.outlines.groups[4300],p=>delete p.outlines.groups[3500].frames[63].descriptorRaw,p=>p.outlines.groups[3500].frames[31].left++,p=>delete p.dotOutlines.groups[300].frames[108]]){const bad=profiles();mutate(bad);assert.throws(()=>assertStaticMarkedOrbitalPhysics(b,bad.outlines,bad.dotOutlines));}
 });
-
-

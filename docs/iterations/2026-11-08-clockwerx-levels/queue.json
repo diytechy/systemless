@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 57,
-  "currentAction": "56boundedaccepted/normal56ready-paused; source41validated.57modelgoal3512freshliteralexact; original/SVGgoalnext.58privatecandidate+peerapproved,serialintegrationpending57.",
+  "currentOrdinal": 58,
+  "currentAction": "57boundedaccepted/normal57readypaused;58originalcoldactive orclosedinspect93832/owner, freeze605originalmethodbeforePNGs; private42candidate+peerapproved awaitingRootintegration.59privateprep.",
   "levels": [
     {
       "ordinal": 1,
@@ -4508,10 +4508,10 @@
       "menuTitle": "Mortality",
       "resourceTitle": "Mortality",
       "sha256": "ffbaeea3c7d018026fac518a30f357b3d8dfaf4471d35199861a818050f0baf5",
-      "status": "model-goal-verified-original-and-svg-pending",
+      "status": "bounded-playable-increment-accepted",
       "nativeEvidence": [],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "1000goalverified;normal57readypaused",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4577,14 +4577,19 @@
       "sourceAdmissionPlanReceiptSHA256": "dc9d720b773392a354ecf660e8450d892c6180c5990c3245eaebddec38c9de6c",
       "actualModelUpdates": 0,
       "modelBudget": {
-        "spent": 17002,
+        "spent": 48866,
         "cap": 250000,
-        "remaining": 232998
+        "remaining": 201134
       },
       "modelGoalUpdates": 3512,
       "modelHumanTransfers": 8,
       "calibrationPrefix": 700,
-      "phaseQualified": false
+      "phaseQualified": false,
+      "boundedChildQualified": true,
+      "review": "mortality-review.md",
+      "nativeGoalScore": 1000,
+      "nextNativeOrdinal": 58,
+      "nextNativeTotal": 369000
     },
     {
       "ordinal": 58,
@@ -4592,7 +4597,7 @@
       "menuTitle": "Death",
       "resourceTitle": "Death",
       "sha256": "c0bb84c537c05baa13c4c919b09eb00f2a6303f015ca857f8dcd29d2a2118a80",
-      "status": "queued",
+      "status": "source-candidate-peer-approved-original-cold-pending-review",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",

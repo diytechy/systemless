@@ -72,6 +72,11 @@ export class StaticDotRuntime {
   }
   for(const animation of this.overlays.values())animation.observeClock(overlayCount);
  }
+ observeDotClocks(id,{dotCount,overlayCount,guestTick,freshGuestTick=guestTick}){
+  count(dotCount);count(overlayCount);count(guestTick);count(freshGuestTick);this.dotCount=dotCount;this.overlayCount=overlayCount;
+  const animation=this.special.get(id),dot=this.dot(id);if(animation){const state=animation.observeClock(dotCount,guestTick,freshGuestTick);if(dot.ring){dot.humanCanGrab=state.humanAvailable;dot.nonhumanCanGrab=state.nonhumanAvailable;dot.sourceCollidable=state.visible;}}
+  this.overlays.get(id)?.observeClock(overlayCount);
+ }
  renderState(id){return {main:this.special.get(id)?.snapshot()??null,overlay:this.overlays.get(id)?.snapshot()??null};}
  snapshot(){return {selectedCheckpoint:this.selectedCheckpoint,savedSpawn:{...this.savedSpawn},originalTime:this.originalTime,savedTime:this.savedTime,
   dotCount:this.dotCount,overlayCount:this.overlayCount,dots:[...new Set([...this.special.keys(),...this.overlays.keys()])].map(id=>({id,...this.renderState(id)}))};}

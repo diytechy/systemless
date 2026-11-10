@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 55,
-  "currentAction": "54bounded accepted/live54;55cold/raw reviewed, provisional706 selected, refine preparation thenRoot finite execute lease;56source reset peer serial; keepgoingthrough100.",
+  "currentAction": "54normalprotected;55goal06closed-no-goal/best4,4bonus6000/597628spent202372remain800k; saved-query analysis next;56privatecandidate focusedunits;55goalrawprepared33049.",
   "levels": [
     {
       "ordinal": 1,
@@ -4251,13 +4251,13 @@
       "menuTitle": "Hokey Pokey",
       "resourceTitle": "Hokey Pokey",
       "sha256": "cd9721e7d81edfcb5a2d26f284d1d4ab416306a29b742aed0a357558ef4c5add",
-      "status": "native-cold-reviewed-functional-refinement-preparation",
+      "status": "three-carrier6000-witness-source-analysis-after-goal06-no-goal",
       "nativeEvidence": [
         "cold34bc7fe7",
         "raw12822c9a"
       ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "isolated55-root-initial-viewed-paused-not-goal",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4333,14 +4333,21 @@
         "moving-specials-source-review.json"
       ],
       "sourceCommit": "9d06c648e5696ed495c6845e0c260aee67e4626f",
-      "functionalUpdatesSpent": 255382,
-      "functionalUpdatesRemaining": 344618,
+      "functionalUpdatesSpent": 597628,
+      "functionalUpdatesRemaining": 202372,
       "discoveryStatus": "bounded-no-goal-refinement-awaits-actual-cold",
       "nativeSession": 9722,
       "provisionalColdPrefix": 706,
       "sourcePoseStrictColdMatches": 180,
       "sourcePhysicalColdMatches": 192,
-      "sourceColdClear": 192
+      "sourceColdClear": 192,
+      "latestFunctionalReceiptSHA256": "2f2c316aac013960ab3b1a9adfe4333aed62ba1b1196e0fee27154d5b8b0e10f",
+      "focusedTrialStatus": "goal06-preparation-not-executed",
+      "functionalAggregateCap": 800000,
+      "functionalMarkReturnWitness": true,
+      "functionalMovingBonusWitness": true,
+      "functionalRiderWitness": true,
+      "functionalGoalObserved": false
     },
     {
       "ordinal": 56,
@@ -4415,8 +4422,11 @@
       "sourceDomainPeerSHA256": "070da09c92551412b3c99c9b1064f1a0023e8463729201f6907e105e3fe79b5f",
       "sourceHumanWallMetadataErratumPending": false,
       "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f",
-      "sourceCompositionStatus": "plan-only-reset-lifecycle-graph-pending",
-      "sourceCompositionPlanSHA256": "388b53a37a116cdb681e71872cbd1a4f6d0edc2b3d116e71add11f689b18cc75"
+      "sourceCompositionStatus": "private56candidate-v1-in-progress-no-integration",
+      "sourceCompositionPlanSHA256": "388b53a37a116cdb681e71872cbd1a4f6d0edc2b3d116e71add11f689b18cc75",
+      "sourceResetPeerStatus": "v2-bounded-approved-private-candidate-authorized",
+      "sourceResetPeerSHA256": "80046c3df2c42a28f29166376a24e5427e207038126a6b8c0717ec29c3b29e08",
+      "syntheticUnitUpdateCap": 10000
     },
     {
       "ordinal": 57,
@@ -4708,7 +4718,9 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceInventoryStatus": "source-only-inventory-frozen-with-portability-and-SP-field-errata",
+      "sourceInventorySHA256": "4471a288a4c14fc35d39932b7dcca8dc1fc68ac204cb3c142a813c698bc32e4f"
     },
     {
       "ordinal": 61,
@@ -7742,9 +7754,9 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "hokey_pokey_functional55refinement preparation;344618updates remain, execution not yet authorized",
-    "B": "Root reviewed54activation/checkpoint/55binding; heavy lane sequential",
-    "C": "headache_source_peer independent56source reset graph/admission plan",
-    "D": "squiggle_engine available for private56implementation after source peer; no shared changes"
+    "A": "hokey_pokey_functional55goal06source/codeprep only;562106spent/800000cap237894remain, no goal06execution lease yet",
+    "B": "Root receipts/QA/checkpoints/later55native literal goal, exclusive heavy lane",
+    "C": "squiggle_engine56private moving-spike-candidate/v1 source+focusedunits<=10000syntheticupdates, noactual56trajectory/integration",
+    "D": "headache_source_peer available for independent56candidate review after author done;60inventoryworker complete"
   }
 }

@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 53,
-  "currentAction": "52Spires accepted/locally active with explicit death/reset timing limits;53Exile serial private source implementation on immutable71dedb39; independent source raw53 domain approved, gated original cold prepared;54source-onlydomain frozen.",
+  "currentAction": "53approved core38 committed01d72c3b; provisional692 cold binding reviewed; model goal7000/shared humanEL prefix proven; goal190 ongoing and one combined native builder preparing; normal52 remains active.",
   "levels": [
     {
       "ordinal": 1,
@@ -4068,10 +4068,10 @@
       "menuTitle": "Exile",
       "resourceTitle": "Exile",
       "sha256": "1a40f564dfb31af523b44e6d7f89455fc8f05c2034e1e1782ae979f501184f69",
-      "status": "serial-source-implementation-active",
+      "status": "bounded-source-approved-model-goal-and-EL-native-pending",
       "nativeEvidence": [],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "isolated-preview-and-saved-palette-reload-pass; goal-pending",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4134,7 +4134,14 @@
         ],
         "gameplayAcceptedByTriage": false
       },
-      "sourceDomainPeerSHA256": "0ccccd720c15b7c5ceb32b8e5c15af3b83d5dc63bb2b7127aef4611abf942a02"
+      "sourceDomainPeerSHA256": "0ccccd720c15b7c5ceb32b8e5c15af3b83d5dc63bb2b7127aef4611abf942a02",
+      "sourceRevision": "01d72c3b039463d997534b731b826c4e2587a8fa",
+      "sourcePeerSHA256": "8226c9230c76ceecb34f3d606122b33703effdda6faebe8ff02ca6a3c39634dd",
+      "sourceReview": [
+        "exile-source-review.md",
+        "exile-source-review.json"
+      ],
+      "provisionalColdPrefix": 692
     },
     {
       "ordinal": 54,
@@ -4204,7 +4211,9 @@
         ],
         "gameplayAcceptedByTriage": false
       },
-      "sourceDomainPreparationSHA256": "7b38b02637774708707ea709bec91af76d3f008851465daffeb32df31d7b3491"
+      "sourceDomainPreparationSHA256": "7b38b02637774708707ea709bec91af76d3f008851465daffeb32df31d7b3491",
+      "sourceDomainPeerStatus": "bounded-cold-approved",
+      "sourceDomainPeerSHA256": "57a6ad565ec0e8369170a7fcb42d8837bfe24fa5f1f6bf8c12faa6d56a8e0017"
     },
     {
       "ordinal": 55,
@@ -4277,7 +4286,10 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceDomainPreparationSHA256": "55531d3f34da22b03182c3deeb29ffa07dd63737c9b70d927e92b9b41907ac3b",
+      "sourceDomainPeerStatus": "bounded-cold-approved",
+      "sourceDomainPeerSHA256": "a803b3391dfbc75238020f30572d38281852567e38852d1639520c97611d4e31"
     },
     {
       "ordinal": 56,
@@ -4346,7 +4358,10 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceDomainPreparationSHA256": "afaa81e9724f6616fcfbf3908f6869396b0a56d61c219f5e83864719f1c0e2b7",
+      "sourceDomainPeerStatus": "bounded-cold-approved",
+      "sourceDomainPeerSHA256": "070da09c92551412b3c99c9b1064f1a0023e8463729201f6907e105e3fe79b5f"
     },
     {
       "ordinal": 57,
@@ -4415,7 +4430,9 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceDomainPreparationSHA256": "1a9deab01a0657c91da559f74c0591e6906fbdd5d3d6fde98a576153fff73d43",
+      "sourceDomainPeerStatus": "pending"
     },
     {
       "ordinal": 58,
@@ -4488,7 +4505,9 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceDomainPreparationSHA256": "342d7d448a1c3bab5462a7d78cc475ad082e8f6e54ade01c2f0ea2d295aa22ab",
+      "sourceDomainPeerStatus": "pending"
     },
     {
       "ordinal": 59,

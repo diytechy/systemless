@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 54,
-  "currentAction": "53live38protected; shared39sourceapproved/root375+8+21/prior53all22exact, commit/handoff thenFocus54coldcalibration +parallelSQ55provisionaldiscovery.54rawclosed192clear;55rawprepared;59sourceprepready.",
+  "currentAction": "54original+SVG4000 observed, raw52d72c13 frozen, static51residuals reviewed next;55actualcoldactive session9722;56source reset-tail graph serial;53normalprotected.",
   "levels": [
     {
       "ordinal": 1,
@@ -4157,10 +4157,14 @@
       "menuTitle": "Square Dance",
       "resourceTitle": "Square Dance",
       "sha256": "4f0ca0e73693c858a5c6d0c9de59fcfc12bf032f36d439277369ed5500037514",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "goal-observed-fidelity-review-pending",
+      "nativeEvidence": [
+        "cold100fb84f",
+        "goal543bdf27",
+        "raw52d72c13"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "goal4000-root-viewed-paused",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4230,7 +4234,10 @@
       "sourceReview": [
         "moving-specials-source-review.md",
         "moving-specials-source-review.json"
-      ]
+      ],
+      "sourceCommit": "9d06c648e5696ed495c6845e0c260aee67e4626f",
+      "comparisonStatus": "148/178clearpositions-127/178clearposes-51residuals-static-investigation",
+      "focusedGoalChecks": 8
     },
     {
       "ordinal": 55,
@@ -4238,7 +4245,7 @@
       "menuTitle": "Hokey Pokey",
       "resourceTitle": "Hokey Pokey",
       "sha256": "cd9721e7d81edfcb5a2d26f284d1d4ab416306a29b742aed0a357558ef4c5add",
-      "status": "queued",
+      "status": "native-cold-active",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4315,7 +4322,12 @@
       "sourceReview": [
         "moving-specials-source-review.md",
         "moving-specials-source-review.json"
-      ]
+      ],
+      "sourceCommit": "9d06c648e5696ed495c6845e0c260aee67e4626f",
+      "functionalUpdatesSpent": 249734,
+      "functionalUpdatesRemaining": 350266,
+      "discoveryStatus": "bounded-no-goal-refinement-awaits-actual-cold",
+      "nativeSession": 9722
     },
     {
       "ordinal": 56,
@@ -4389,7 +4401,9 @@
       "sourceDomainPeerStatus": "bounded-cold-approved",
       "sourceDomainPeerSHA256": "070da09c92551412b3c99c9b1064f1a0023e8463729201f6907e105e3fe79b5f",
       "sourceHumanWallMetadataErratumPending": false,
-      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f"
+      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f",
+      "sourceCompositionStatus": "plan-only-reset-lifecycle-graph-pending",
+      "sourceCompositionPlanSHA256": "388b53a37a116cdb681e71872cbd1a4f6d0edc2b3d116e71add11f689b18cc75"
     },
     {
       "ordinal": 57,
@@ -4610,8 +4624,9 @@
         "gameplayAcceptedByTriage": false
       },
       "sourceDomainPreparationSHA256": "e14a283d691566f270d2756e72abe3d469fc78296300252cd0a8f6863a39ee5c",
-      "sourceDomainPeerStatus": "pending",
-      "sourceDomainClippingStatus": "10WLhypotheses60lost-universepixels;retainPRIMARY-full;conditional344attacheddomain"
+      "sourceDomainPeerStatus": "bounded-source-preparation-approved-no-admission",
+      "sourceDomainClippingStatus": "10WLhypotheses60lost-universepixels;retainPRIMARY-full;conditional344attacheddomain",
+      "sourceDomainPeerSHA256": "f883585466cdff9709ab442fd152026b6b5606bc38863313269ab6ea74e03834"
     },
     {
       "ordinal": 60,
@@ -7714,8 +7729,9 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "focus_engine privateBO+EX47implementation againstc8e81881; oneownedmodel/test/search",
-    "B": "root independent47source/native/art/review/integration; original/conversion/buildserial",
-    "C": "funhouse_validation private50content/legal-inputpreparation againstfrozenc8; no sourcechanges/no nativeaccessbeforeearned49"
+    "A": "square_dance_comparison static54 residual/qualification audit, zero new updates",
+    "B": "Root55nativecold/UI54/evidence review/checkpoint; heavy sequential",
+    "C": "squiggle_engine56source-only reset-tail graph;55functional paused",
+    "D": "hokey_pokey_cold_raw original-only prep then one fit after Root lease"
   }
 }

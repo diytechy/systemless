@@ -21,10 +21,12 @@ def main():
  try:
   assert sha(auth_path)==expected,'Authorization hash mismatch'
   auth=json.loads(auth_path.read_text(encoding='utf-8'));out=pathlib.Path(auth['outputPath'])
-  assert auth['executionApproved'] is True and auth['authority']=='Root' and auth['schema']=='clockwerx-single-replay-authorization-v1' and auth['purpose']=='clockwerx-generic-chosen-replay-v1'
-  assert auth['mode'] in ['witness','fresh-proof'] and auth['invocationID']
+  candidate=auth['mode']=='candidate';purpose='clockwerx-generic-candidate-replay-v1' if candidate else 'clockwerx-generic-chosen-replay-v1'
+  assert auth['executionApproved'] is True and auth['authority']=='Root' and auth['schema']=='clockwerx-single-replay-authorization-v1' and auth['purpose']==purpose
+  assert auth['mode'] in ['candidate','witness','fresh-proof'] and auth['invocationID']
   assert auth['maxConstructors']==1 and auth['maxConstructorResets']==1 and auth['maxExplicitResets']==0 and type(auth['maxUpdates']) is int and 1<=auth['maxUpdates']<=16000 and auth['wallBoundSeconds']==360
-  assert auth['gates']['closedGoalLiteralReviewed'] is True and auth['gates']['baselineReviewed'] is True
+  if candidate:assert auth['gates']['candidateLiteralReviewed'] is True
+  else:assert auth['gates']['closedGoalLiteralReviewed'] is True and auth['gates']['baselineReviewed'] is True
   if auth['mode']=='fresh-proof':assert auth['gates']['completedWitnessReviewed'] is True
   own=pathlib.Path(__file__).resolve().parent
   for name in ['supervise.py','run-replay.mjs','core.mjs','stream.mjs','factory-source-round.mjs']:

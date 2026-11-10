@@ -1,6 +1,6 @@
-# Bounded chosen-literal replay
+# Bounded literal replay
 
-These tools replay one reviewed goal literal against a closed saved baseline.
+These tools try one reviewed candidate literal or replay a goal literal against a closed saved baseline.
 They contain no level, route, expected score, private fixture, or asset. Keep all
 real configurations, authorizations, literals, decoded data, profiles, traces,
 and results outside Git. Native replay and visible gameplay acceptance are
@@ -18,10 +18,11 @@ authoritative. A natural or explicit reset is stopped before its original body.
 
 | Invocation | Required closed baseline | Required equality |
 | --- | --- | --- |
+| `candidate` | None | Exact-length goal without death or reset; records a search baseline for review |
 | `witness` | Reviewed `search` goal | Complete per-update lineage, ordered consumed hook metadata, inventory, terminal, RNG lineage/count, and final state |
 | `fresh-proof` | Separately reviewed completed `witness` | All witness comparisons plus the complete intermediate full hook-state digest |
 
-Both invocations record full witness evidence with the sibling public observer.
+Witness and fresh proof record full witness evidence with the sibling public observer.
 Search omits intermediate hook states, so its reduced `hooks` digest cannot be
 compared with a witness's full `hooks` digest. Planning-only rows do not enter
 consumed engine metadata. Every initial and post-update sample is compared as
@@ -46,9 +47,14 @@ authority `Root`, purpose `clockwerx-generic-chosen-replay-v1`, a unique
 `invocationID`, `executionApproved: true`, the mode/bounds above, and review gates
 `closedGoalLiteralReviewed` and `baselineReviewed`. Fresh proof additionally
 requires `completedWitnessReviewed`.
+Candidate uses purpose `clockwerx-generic-candidate-replay-v1` and gate
+`candidateLiteralReviewed`, with no `baseline` field required. A successful
+candidate records `candidateGoal: true` and `accepted: false`; review its actual
+result before using it as the witness baseline.
 
 Supply `{path, sha256}` pins for each of the five tools in `code`, plus
-`sourceFreeze`, `config`, `literal`, `observer`, and `baseline.caseResult`.
+`sourceFreeze`, `config`, `literal`, `observer`, and, for comparison modes,
+`baseline.caseResult`.
 `sourcePath` identifies the immutable source directory; the freeze contains a
 nonempty `files` array of unique basename/sha256 records. The observer must have
 SHA256 `595f3ac1461b0d2a048df3970366db115e394a5af2502a401941abe313c32403`.
@@ -94,7 +100,7 @@ pins before using the evidence.
 
 ## Portable fake check
 
-`test-fake.mjs` uses invented engine/data objects. It checks witness projection,
+`test-fake.mjs` uses invented engine/data objects. It checks candidate goal/death, witness projection,
 fresh full-hook equality, JSON undefined omission, planning-row exclusion,
 first-death mismatch retention, literal guards, and journal bounds. It imports
 no real engine or private fixture. Run only when this workload is authorized:
@@ -103,6 +109,6 @@ no real engine or private fixture. Run only when this workload is authorized:
 node scripts/clockwerx-diagnostics/replay/test-fake.mjs "<new-temporary-output-directory>" scripts/clockwerx-diagnostics/observer.mjs
 ```
 
-The existing qualification used four fake constructors and thirteen fake
+The check uses six fake constructors and eighteen fake
 updates. Copying these tools into the repository does not add a new game run,
 performance result, or native/visible acceptance claim.

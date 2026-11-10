@@ -4831,7 +4831,7 @@
       "menuTitle": "Hitchhiker",
       "resourceTitle": "Hitchhiker",
       "sha256": "76cc2dec24cf66dd3f6483cb750be16268215e1543182d0d9dd9abd5d51baf48",
-      "status": "queued",
+      "status": "functional-goal-proved-native-visible-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4921,7 +4921,7 @@
       ],
       "sourceRuntimeFreezeSHA256": "bfe8ddc23c70622541a1a685e8e8c1bedf12d8c357c685c145e5562960f27067",
       "runtimeTestCount": 419,
-      "actual60Updates": 12914,
+      "actual60Updates": 43764,
       "dedicatedNativeCold": {
         "status": "all35-viewed-after-source-method-freeze-original60-confirmed",
         "PID": 142956,
@@ -4931,9 +4931,9 @@
         "captureFreezeSHA256": "06bd20481467c2953bfd6f34bdefbb13e1fe2fded4f94e2f7b498888aa483b63",
         "reportSHA256": "0e9ac65d846ecd9383462a676a88fc5d94e303fea4737884cab62cc70ba7f1a8"
       },
-      "functionalUpdatesSpent": 12914,
+      "functionalUpdatesSpent": 43764,
       "functionalUpdateBudget": 250000,
-      "functionalUpdatesRemaining": 237086,
+      "functionalUpdatesRemaining": 206236,
       "coldModelUpdates": 5648,
       "coldModelStatus": "complete-5648-no-terminal-prefix-unselected",
       "originalSavedFitAuditSHA256": "ddc6c2b62fc09d45e7484281ce9c7eaa457317ee820223b59a73adb427ae3149",
@@ -4960,7 +4960,18 @@
         "prefixSampleAndMetadataExact": true,
         "closure": "hitchhiker-functional01-owned-process/closure.json"
       },
-      "timelineAuditSHA256": "466840401b367beb84d403c4fb2ca45c00f616e05aafc1331a36d7fb6e8d27bd"
+      "timelineAuditSHA256": "466840401b367beb84d403c4fb2ca45c00f616e05aafc1331a36d7fb6e8d27bd",
+      "functionalGoalProof": {
+        "status": "candidate-witness-fresh-proof-closed-native-and-visible-pending",
+        "updatesPerRun": 6950,
+        "score": 2000,
+        "transfers": 13,
+        "all45InputHoldsPreserved": true,
+        "witnessFreshEncodedStreamsExact": 5,
+        "rootProofReviewSHA256": "0f7e969213b23fb031640047df2eda9ed318db142318d1eff277ab72c2f9f956",
+        "nativeGoalScenarioSHA256": "b644c5479acd10d064e8b4b8f3d228a4866f07d45efabfc0440d4f5eefdf4741",
+        "qaReceiptSHA256": "a737a76597c1e6e8aa300e9369c3276681e9399c0d11adb34aa0b2d1618d84a8"
+      }
     },
     {
       "ordinal": 61,

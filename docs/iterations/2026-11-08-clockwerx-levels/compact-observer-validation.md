@@ -33,3 +33,22 @@ Compact files use exact JSON-text deltas and periodic complete checkpoints. Sear
 Root reviewed the observer, independent peer and the complete focused58 runner/controller/supervisor. One new package, `death58/content/continuation-prepare02/root-focused-authorization.json`, SHA256 `43d54d11711d59e139c949bd88536706faee060c61a1371c274dc6959958b1ff`, authorizes four alternatives after a fresh exact replay through saved case04 step3207, stopping on first goal. Bounds include witness/proof: six constructors,48,000 updates, zero explicit resets,120s external wall limit. It preserves cold706 and707 tie/residuals. Source42 and original collisions remain authoritative. Search/witness per-update and ordered callback metadata must match before fresh full proof. One-step alternative inputs still need native-window qualification before original replay. No scene58 acceptance or activation follows from this observer check.
 
 That one package subsequently closed exit1 at the prerequisite3207, before any alternative input, in10.031s. It retained one constructor/reset,3,207 attempted/completed updates and RNG0. The serialized state/dot/physical records matched the historical row; a raw-object assertion rejected own undefined fields omitted by the established JSON contract. This was a harness comparison error, not an observed gameplay divergence. The failed run remains in `death58/content/continuation02/`; its consumed authorization cannot be retried. Death58 spending becomes18,995/250,000. Any corrected continuation needs a separately frozen runner and new bounded package.
+
+## Later full-witness check on accepted Death
+
+The private default-off nested read-only candidate `4b744131229797e7e99416295880d9fc0551ed3d4d0e1e1a7cc1bb290c546a4d` passed one complete gold-hand Death literal on immutable source42. PID240260 closed exit0 in103.391 seconds: one constructor,5164 updates, no explicit resets or RNG draws,2000 points and16 transfers. It checks the six captured built-in query/collider methods, ordinary data and snapshot factories, excludes active death, and clears each cache scope on exit. There were6397 cached scopes,101503 reused hook states and zero scope violations.
+
+All complete legacy source/input/hook/query/collider/inventory/terminal/final digests match. A separate saved-only audit read the eight encoded streams once against the completed legacy proof:3,165,587,498 bytes per set,6,331,174,996 bytes for the pair, byte-identical including checked counter sequences. Receipt: `observer-readonly-check01/final-receipt.json`, SHA256 `38e5ac8d5f02751fff332e9e0b7cbdb6d5b38a4c5dd4e19c03f1eba4c73f691e`. No new model ran for that audit.
+
+| Diagnostic work | Historical legacy | Private candidate |
+|---|---:|---:|
+| Whole process |110.641s|103.391s|
+| Snapshot construction |32.660s|21.191s|
+| Serialization |32.603s|21.346s|
+| Delta encoding |25.239s|39.219s|
+| Output |6.988s|5.994s|
+| Hashing |6.088s|6.692s|
+
+The observed whole-process reduction is7.250 seconds in one historical diagnostic pair. Host/cache conditions and guard overhead may differ. Snapshot and serialization costs fell while encoding rose; this is a modest observed gain, not native/browser performance or isolated simulation speed. The public observer remains unchanged at595f3ac1. Private caching is qualified only for the exercised source42 gold Death recipe and literal; source43, active death, reset and other families need their own evidence before use. Search continues to use595f3ac1.
+
+The additional5164 updates and the later10328 changed-engine Death regression updates bring conservative level58 accounting to64759, with the retained64631–64759 range. Detailed gameplay acceptance and the corrected gold/black visible checks are in [Death review](death58-review.md).

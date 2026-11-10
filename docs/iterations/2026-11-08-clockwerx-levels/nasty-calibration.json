@@ -1,0 +1,175 @@
+{
+  "schema": "clockwerx-nasty-cold-calibration-v1",
+  "status": "cold-comparison-qualified-provisional-prefix-gameplay-pending",
+  "level": 59,
+  "name": "Nasty",
+  "runtimeFiles": 43,
+  "normalDeliverable": {
+    "level": 58,
+    "runtimeFiles": 42,
+    "unchanged": true
+  },
+  "calibration": {
+    "dt": "1/120",
+    "candidatePrefixes": 3729,
+    "prefixRangeInclusive": [
+      0,
+      3728
+    ],
+    "bestLexicographicCost": [
+      0,
+      0
+    ],
+    "allTiedPrefixes": [
+      682,
+      683
+    ],
+    "provisionalSelectedPrefix": 682,
+    "reason": "Earliest tied prefix; even update permits native frontend conversion.",
+    "futureLiteralMustIncludeLegalIdlePrefixExactlyOnce": true,
+    "clockOrTrajectoryStateAssigned": false,
+    "nativePhaseClaim": false,
+    "timelineIndependenceClaim": false,
+    "actorIdentityFit": false,
+    "healthFiltering": false,
+    "phaseNormalization": false,
+    "pixelRescoring": false
+  },
+  "nativeCold": {
+    "pid": 246376,
+    "exitCode": 0,
+    "elapsedSeconds": 59.2,
+    "captures": 35,
+    "bootstrapCaptures": 2,
+    "boardCaptures": 33,
+    "rootViewedAllImagesAfterPREPNGFreeze": true,
+    "freshInitialFullResolutionViewed": true,
+    "observedHuman": "gold",
+    "roundScore": 0,
+    "campaignScore": 371000
+  },
+  "originalOnlyFit": {
+    "pid": 33496,
+    "exitCode": 0,
+    "elapsedSeconds": 25.235,
+    "independentSavedAudit": "pass",
+    "rawArchives": 14,
+    "primaryFullPairs": 32,
+    "savedSlices": 490,
+    "distinctClippedWallMasks": 10,
+    "globalUnclippedMaskClaim": false,
+    "selectedActors": 280,
+    "clearUniqueActors": 254,
+    "meanErrorMissesRetained": 26,
+    "lowErrorAmbiguousRetained": 0
+  },
+  "coldModel": {
+    "pid": 104244,
+    "exitCode": 0,
+    "elapsedSeconds": 18.44,
+    "constructors": 1,
+    "constructorResets": 1,
+    "explicitResets": 0,
+    "attemptedUpdates": 5648,
+    "completedUpdates": 5648,
+    "RNGDraws": 0,
+    "inputs": "Empty input objects only; no clock, state, or RNG injection.",
+    "terminal": "none",
+    "savedRowsIncludingInitial": 5649,
+    "rootVerifiedVisibleActorRows": 45192,
+    "functionalBudget": 250000,
+    "functionalUpdatesSpent": 5648,
+    "remainingFunctionalUpdates": 244352
+  },
+  "savedComparison": {
+    "pid": 240172,
+    "exitCode": 0,
+    "elapsedSeconds": 6.866,
+    "engineImports": 0,
+    "constructors": 0,
+    "updates": 0,
+    "rootRecomputedRankings": 3729,
+    "rootRecomputedCaptureBankVectors": 492228,
+    "clearBoardPositionsAndPosesExact": 254,
+    "boardMissesRetained": 10,
+    "bootstrapMissesRetained": 16,
+    "matching": "Unlabelled same-group geometry; all raw misses and aliases retained."
+  },
+  "preservedSavedReaderFailure": {
+    "status": "ERR_UNSUPPORTED_ESM_URL_SCHEME-before-engine-or-data-read",
+    "record": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/content/root-saved-audit-load-failure01.json",
+    "originalScript": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/content/root-verify-cold-v1-failed-import.mjs",
+    "originalScriptSHA256": "0c514404a438abc4b3357995c0a598131852a129250f812ff3acddfc78c67dbe",
+    "correction": "File-URL import in saved reader; no model rerun.",
+    "engineImports": 0,
+    "constructors": 0,
+    "updates": 0
+  },
+  "evidence": [
+    {
+      "role": "source-freeze",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/source-freeze.json",
+      "sha256": "e857c97ceecbb96a1192294c71e4468027754b7dbc8020d540cbae0dc36cd9b1"
+    },
+    {
+      "role": "native-report",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/native-initial-01/report.json",
+      "sha256": "16bf03146a6c43ab3e7f70176b059c6c47cef6e8c4fc8187cab4edee5298e28b"
+    },
+    {
+      "role": "PREPNG-freeze",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59-native-cold-review/fitter-freeze.json",
+      "sha256": "a0b627c0697142fce7eb18db58cfd7781b52235d074fdbd23b7bd93825b7527f"
+    },
+    {
+      "role": "independent-original-only-audit",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59-native-cold-review/audit01/receipt.json",
+      "sha256": "3722b281cf4ce3c6fb8e1414785d983204ab7a926f6fb7de235e5bc92a57f56c"
+    },
+    {
+      "role": "cold-model-result",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/content/cold01/result.json",
+      "sha256": "8a9e40b816fd4534073a7b71c26081ca32162168d20e1ed998ddd8d3cc63b9c2"
+    },
+    {
+      "role": "saved-comparison",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/content/cold-comparison01/comparison-receipt.json",
+      "sha256": "e10ebe25eb617524eaa6a154069b4277469f100a4cccca32424f7c2193aa9c41"
+    },
+    {
+      "role": "root-lineage-verification",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/content/root-cold-lineage-verification.json",
+      "sha256": "5cde3b66e37a7681d81ee834065fab3639a74d57386bcd8cf4ce1a8e043b27b5"
+    },
+    {
+      "role": "root-selection",
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/root-cold-selection.json",
+      "sha256": "5d77bd1fb3f18836efc6469b48a831f0bc22cbed1bd4a44fd7e064dd2c389073"
+    },
+    {
+      "role": "later-initial-render-review",
+      "path": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59\\qa-initial\\root-initial-render-review.json",
+      "sha256": "17aa1fac7407e507584ce58d6fca82c0a1868c230196fb1513cb8a7885096c28"
+    }
+  ],
+  "notQualifiedByCold": [
+    "Actor input branches",
+    "Bomb ignition, fuse, and blast",
+    "Goodies and protected checkpoint lifecycle joins",
+    "Goal play",
+    "Native action replay",
+    "Input and reset margins",
+    "SVG presentation",
+    "Full parity"
+  ],
+  "diagnosticDurationsAreGameplayBenchmarks": false,
+  "privateOwnedContentIncluded": false,
+  "documentationPassNewModelsNativeFitsBrowsersTestsBenchmarksCensuses": 0,
+  "laterInitialRender": {
+    "status": "Root viewed gold initial render and paused; no goal",
+    "rootReviewPath": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\nasty59\\qa-initial\\root-initial-render-review.json",
+    "rootReviewSHA256": "17aa1fac7407e507584ce58d6fca82c0a1868c230196fb1513cb8a7885096c28",
+    "qaPreparationSHA256": "ca65b7dafd54193309aed09ce6f059ba5d791a0b616563866c1c65f2fb111586",
+    "normal58Unchanged": true
+  }
+}

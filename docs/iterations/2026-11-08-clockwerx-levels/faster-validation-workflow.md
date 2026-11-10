@@ -2,6 +2,8 @@
 
 Apply this continuation procedure after the2026-11-10 runtime audit. It changes the diagnostic workflow, not game behavior or existing fidelity claims. The [compact observer check](compact-observer-validation.md) now measures and verifies the exercised accepted57 prefix. Reuse its frozen recorder for focused58 trials, preserving the untested death/goal/RNG/moving-human scope and requiring a chosen witness/fresh proof.
 
+Later accepted58 evidence includes a complete private nested-readonly witness comparison and byte audit; see the [later qualification](compact-observer-validation.md#later-full-witness-check-on-accepted-death). Its modest historical timing gain does not broaden its exercised scope. Public recorder595f3ac1 remains unchanged and is used for source43/Nasty search; do not enable caching for that recipe from the58 result alone.
+
 ## Evidence tiers
 
 **Search trials:** keep exact immutable source/profile/input identities, aggregate constructor/reset/update/RNG accounting, compressed legal input runs, per-update player/NPC canonical frames and physical centers, relevant mover/program/mark/bonus state changes, semantic events, original collision outcomes and terminal snapshots. Every failure remains indexed. Use periodic complete checkpoints and a bounded detailed pre-failure window. Do not write a complete growing game snapshot before and after every collider in every failed trial.

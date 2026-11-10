@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 54,
-  "currentAction": "53accepted/active original+SVG7000;54/55 sibling source proposal serial then two functional runners; root54cold prepared fromearned53fixture, rawadapterpreparing.",
+  "currentAction": "53active;54coldoriginal+rawCLOSED192clear andRootvisualpass;54/55privatev1HOLDnormalizedguardholes/v2authorized;55rawprepared;59source-onlyprepactive.",
   "levels": [
     {
       "ordinal": 1,
@@ -4222,7 +4222,8 @@
       "sourceDomainPreparationSHA256": "7b38b02637774708707ea709bec91af76d3f008851465daffeb32df31d7b3491",
       "sourceDomainPeerStatus": "bounded-cold-approved",
       "sourceDomainPeerSHA256": "57a6ad565ec0e8369170a7fcb42d8837bfe24fa5f1f6bf8c12faa6d56a8e0017",
-      "sourceHumanWallMetadataErratumPending": true
+      "sourceHumanWallMetadataErratumPending": false,
+      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f"
     },
     {
       "ordinal": 55,
@@ -4299,7 +4300,8 @@
       "sourceDomainPreparationSHA256": "55531d3f34da22b03182c3deeb29ffa07dd63737c9b70d927e92b9b41907ac3b",
       "sourceDomainPeerStatus": "bounded-cold-approved",
       "sourceDomainPeerSHA256": "a803b3391dfbc75238020f30572d38281852567e38852d1639520c97611d4e31",
-      "sourceHumanWallMetadataErratumPending": true
+      "sourceHumanWallMetadataErratumPending": false,
+      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f"
     },
     {
       "ordinal": 56,
@@ -4371,7 +4373,9 @@
       },
       "sourceDomainPreparationSHA256": "afaa81e9724f6616fcfbf3908f6869396b0a56d61c219f5e83864719f1c0e2b7",
       "sourceDomainPeerStatus": "bounded-cold-approved",
-      "sourceDomainPeerSHA256": "070da09c92551412b3c99c9b1064f1a0023e8463729201f6907e105e3fe79b5f"
+      "sourceDomainPeerSHA256": "070da09c92551412b3c99c9b1064f1a0023e8463729201f6907e105e3fe79b5f",
+      "sourceHumanWallMetadataErratumPending": false,
+      "sourceHumanWallMetadataErratumSHA256": "58cd441f7edabb82a6f054564a26d2d81d32f378f3de9af6699bc9d2bd12809f"
     },
     {
       "ordinal": 57,
@@ -4442,7 +4446,9 @@
         "gameplayAcceptedByTriage": false
       },
       "sourceDomainPreparationSHA256": "1a9deab01a0657c91da559f74c0591e6906fbdd5d3d6fde98a576153fff73d43",
-      "sourceDomainPeerStatus": "pending"
+      "sourceDomainPeerStatus": "bounded-cold-approved-with-required-metadata-erratum",
+      "sourceDomainPeerSHA256": "4400897098be67db4c8e508cdfb2102459b3c98a4ba1059c9ae0a5043b771620",
+      "sourceHumanWallMetadataErratumSHA256": "e3b0a075d1fbc9f142f70a5b715c3c19de418769008875f050939e735cbeeb2c"
     },
     {
       "ordinal": 58,
@@ -4517,7 +4523,9 @@
         "gameplayAcceptedByTriage": false
       },
       "sourceDomainPreparationSHA256": "342d7d448a1c3bab5462a7d78cc475ad082e8f6e54ade01c2f0ea2d295aa22ab",
-      "sourceDomainPeerStatus": "pending"
+      "sourceDomainPeerStatus": "bounded-cold-approved-with-required-metadata-erratum",
+      "sourceDomainPeerSHA256": "5285382f180655960e51eb908bad2b687c54f248ea2a9c2161d75c13409deeb2",
+      "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38"
     },
     {
       "ordinal": 59,

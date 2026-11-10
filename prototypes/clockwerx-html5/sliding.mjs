@@ -27,11 +27,18 @@ export function animateSliding(actor){
  if(!actor.sliding)return false;
  actor.slideProgress+=actor.slideDelta;actor.slideX+=actor.slideVX;actor.slideY+=actor.slideVY;return true;
 }
-export function stopSliding(actor,dots,{release,grab,currentPivot=false,arrival}={}){
+export function stopSliding(actor,dots,{release,grab,currentPivot=false,arrival,onMissingTarget}={}){
  if(!actor.sliding)return null;
  if(actor.slideProgress>=16){
   const old=dots.find(d=>d.id===actor.pivot),[vx,vy]=vectors[actor.slideDirection],target=dots.find(d=>d.present&&d.row===old.row+vy/3&&d.column===old.column+vx/3);
-  if(!target)throw new Error('Missing EX arrival dot');
+  if(!target){
+   if(onMissingTarget){
+    const row=old.row+vy/3,column=old.column+vx/3;
+    onMissingTarget({from:old.id,targetSourceIndex:row*11+column,targetGrid:{row,column},fixedSlideDirection:actor.slideDirection,slideProgress:actor.slideProgress,slideDelta:actor.slideDelta,slideVector:{x:actor.slideVX,y:actor.slideVY}},actor);
+    throw new Error('Missing-target recovery adapter must abort the unknown continuation');
+   }
+   throw new Error('Missing EX arrival dot');
+  }
   release?.(old,actor);actor.pivot=target.id;arrival?.({type:'slide-arrival',from:old.id,to:target.id},actor);grab?.(target,actor);
   const placed=currentPivot?dots.find(d=>d.id===actor.pivot):target;
   if(!placed)throw new Error('Missing current EX pivot after grab');

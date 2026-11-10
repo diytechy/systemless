@@ -35,10 +35,11 @@ export function assertClosedMovingProgram(program,origin){
 }
 
 export const MOVING_RIDER_ORDER=Object.freeze(['WA','HY','DO','DP','PU','DE']);
-export function positionMovingRiders(handlers,sourceIndex,currentPixel){
+export function positionMovingRiders(handlers,sourceIndex,currentPixel,{skipSpecialMisc=false}={}){
  if(!integer(sourceIndex,0,87))throw new RangeError('Serialized source dot index0..87 required');
+ if(typeof skipSpecialMisc!=='boolean')throw new TypeError('Explicit source rider skip flag required');
  const p=pixel(currentPixel);for(const key of MOVING_RIDER_ORDER)callback(handlers?.[key]);
- for(const key of MOVING_RIDER_ORDER)invoke(handlers[key],sourceIndex,{...p},{skipSpecialMisc:false});
+ for(const key of MOVING_RIDER_ORDER)invoke(handlers[key],sourceIndex,{...p},{skipSpecialMisc});
 }
 
 export function createMovingDot(spec,{allowMovingDots=false,classCount=0,onRiders}={}){

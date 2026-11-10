@@ -1,0 +1,23 @@
+{
+  "status": "root-source-and-package-checks-pass-not-gameplay",
+  "public": 362,
+  "actual53": 10,
+  "packaging": 21,
+  "runtimeFiles": 38,
+  "sourceIntegrationSHA256": "bc20da0a0921d1631cd08da5e0e333990f9365bdd55116801e880719496bee59",
+  "logs": {
+    "root-public-tests.log": "8aea4f6a0758828a2d0c175357d3eb28c18aa9d66ad61396fe805f56a42b977f",
+    "root-actual53-tests.log": "75297f5c2dcb1dff8c9a01d16487127d1fafe9e61518bda077f635c89349e937",
+    "root-packaging-tests.log": "1ec976d523aa729784eebb1dc635dcd1dbb61c66bd721e90c48f4b833b60eab5"
+  },
+  "setupFailuresPreserved": [
+    "root-public-tests-preparation-failure01.log",
+    "root-packaging-tests-discovery-failure01.log"
+  ],
+  "normal52Unchanged": true,
+  "sourceReceiptSHA256": "0f8cce0bd9c688923f9f5c4a5dff7d71b58a759256fd7bce228910804e3d922f",
+  "peerSHA256": "8226c9230c76ceecb34f3d606122b33703effdda6faebe8ff02ca6a3c39634dd",
+  "prior52UpdatesExact": 8764,
+  "prior52TimedEventsExact": 532,
+  "explicitPilotBoundaryRecovery": true
+}

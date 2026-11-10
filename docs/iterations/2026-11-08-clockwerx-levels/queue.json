@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 59,
-  "currentAction": "58 bounded playable scenes accepted and locally active, source42. Normal Death ready/paused, complete57 rollback retained. Earnedthrough58 fixture679cd062 created/metadata verified, native59 relaunch pending; integrate59 serially using reviewed43-file candidate and focused tests/regressions. Actual59 imports/constructors/resets/updates0 until Root admission.",
+  "currentAction": "58 scenes/source42 locally active. Source43 qualified410runtime/21packaging/60856 prior-route updates, actual59init/reset0updates PASS. Native59cold and independent14archive32pair audit PASS. Private observer58 equivalence CLOSED PASS5164updates; public595unchanged. Next bounded59cold trajectory then all3729-prefix comparison; no chosenprefix or goal.",
   "levels": [
     {
       "ordinal": 1,
@@ -4607,7 +4607,8 @@
         "death58/native-goal-02/report.json",
         "death58/native-goal-comparison02/receipt.json",
         "death58-native-goal02-review/audit02/receipt.json",
-        "death58/root-bounded-acceptance.json"
+        "death58/root-bounded-acceptance.json",
+        "death58/root-gold-visible-supplement.json"
       ],
       "requirements": [
         "current moving-dot source identity and first-match queries",
@@ -4687,11 +4688,11 @@
       "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38",
       "sourceFreezeSHA256": "44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9",
       "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942",
-      "functionalUpdatesSpent": 49267,
+      "functionalUpdatesSpent": 64759,
       "functionalUpdateBudget": 250000,
       "functionalUpdatesSpentRange": [
-        49139,
-        49267
+        64631,
+        64759
       ],
       "functionalGoalUpdatesPerRun": 5164,
       "functionalGoalScore": 2000,
@@ -4704,7 +4705,11 @@
       "localInstallationReviewSHA256": "fa512a472d036c78235fbd52b35dd5c7699ad0bc876492cc0879ba86411f53e5",
       "earnedProgressFixtureSHA256": "679cd062c33ead2675c1b8fd170a2c3fa185f7ea2f63a5526a24932a1a7f5d5c",
       "earnedFixtureReviewSHA256": "9f34c14b697e97ebcd47af422448c213cf0fcfd882f2da660ce0ad57c3f5cb3e",
-      "boundedChildQualified": true
+      "boundedChildQualified": true,
+      "source43RegressionUpdates": 10328,
+      "goldVisibleSupplementSHA256": "01242f38f6586a7870b5ae0ec778e41c1cc8a5f6a1a039b840bc0ebd3a93f228",
+      "privateReadonlyObserverQualificationUpdates": 5164,
+      "privateReadonlyObserverQualificationResultSHA256": "f61167193bde8c39887982d3d70d538dfbc3cc0349fc66e3f7ebd5c41fbdcd12"
     },
     {
       "ordinal": 59,
@@ -4712,10 +4717,16 @@
       "menuTitle": "Nasty",
       "resourceTitle": "Nasty",
       "sha256": "def03ab12ce0e4461f6195a3c88c1b7cf2071853a39bb1edc4aa261ce8ca9699",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "source43-init-reset-and-native-cold-audited-goal-pending",
+      "nativeEvidence": [
+        "nasty59/native-initial-01/report.json",
+        "nasty59/root-cold-visible-review.json",
+        "nasty59-native-cold-review/fitter-freeze.json",
+        "nasty59-native-cold-review/audit01/receipt.json",
+        "nasty59/root-release-cold-fits.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "not-previewed",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4777,7 +4788,18 @@
       "sourceDomainPreparationSHA256": "e14a283d691566f270d2756e72abe3d469fc78296300252cd0a8f6863a39ee5c",
       "sourceDomainPeerStatus": "bounded-source-preparation-approved-no-admission",
       "sourceDomainClippingStatus": "10WLhypotheses60lost-universepixels;retainPRIMARY-full;conditional344attacheddomain",
-      "sourceDomainPeerSHA256": "f883585466cdff9709ab442fd152026b6b5606bc38863313269ab6ea74e03834"
+      "sourceDomainPeerSHA256": "f883585466cdff9709ab442fd152026b6b5606bc38863313269ab6ea74e03834",
+      "sourceFreezeSHA256": "e857c97ceecbb96a1192294c71e4468027754b7dbc8020d540cbae0dc36cd9b1",
+      "functionalUpdatesSpent": 0,
+      "functionalUpdateBudget": 250000,
+      "actualInitConstructors": 1,
+      "actualConstructorResets": 1,
+      "actualExplicitResets": 2,
+      "sourcePublicTestsPassed": 410,
+      "sourcePackagingTestsPassed": 21,
+      "affectedRouteRegressionUpdates": 60856,
+      "nativeColdIndependentAuditSHA256": "3722b281cf4ce3c6fb8e1414785d983204ab7a926f6fb7de235e5bc92a57f56c",
+      "rootReleasedColdFitsSHA256": "0110bdc7cc0885ac92887cbae2a935ca23a06be53e08fbea3e66c496b605de1b"
     },
     {
       "ordinal": 60,
@@ -7882,10 +7904,10 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root serial59 integration/queue/browser; normal58 source42 active, no model lane active",
-    "B": "compact_observer: original-only59 fit/source-bank preparation; no native or fit run",
-    "C": "death58_continuation: writes bounded58 review/generation documentation only",
-    "D": "review59: source-only serial integration package; actual59 imports/constructors/resets/updates0"
+    "A": "Root: review/admit59cold package; allactual/exclusive lanes closed",
+    "B": "compact_observer:60 source-only contract; foundSPIidentity/BombScene.reset body-level join gap, noimplementation/actual60work",
+    "C": "death58_continuation: saved-only observer exactbyte/digest/counter audit; no model",
+    "D": "review59: actual59 cold/analyzer package preparation only; no execution"
   },
   "handoff": "session-handoff-2026-11-10.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",

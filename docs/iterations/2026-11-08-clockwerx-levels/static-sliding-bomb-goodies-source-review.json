@@ -1,0 +1,212 @@
+{
+  "schema": "clockwerx-static-sliding-bomb-goodies-source-review-v1",
+  "status": "source43-integrated-regressions-and-initial-admission-pass-gameplay-pending",
+  "runtimeFiles": 43,
+  "sourceFreezeSHA256": "e857c97ceecbb96a1192294c71e4468027754b7dbc8020d540cbae0dc36cd9b1",
+  "sourceFreezePath": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/source-freeze.json",
+  "integrationPackageSHA256": "84aa13c17f25cec6de39f55fa86bd2d3de39673c36707c95be6e6a306f80543a",
+  "runtimeBaselineFilesUnchanged": 36,
+  "modifiedRuntimeModules": [
+    "app.mjs",
+    "bomb-runtime.mjs",
+    "bomb-scene.mjs",
+    "enemy-transfer.mjs",
+    "level.mjs",
+    "round.mjs"
+  ],
+  "newRuntimeModule": "static-sliding-bomb-goodies.mjs",
+  "portableTestsUseInventedData": true,
+  "publicOwnedMapsIncluded": false,
+  "packagerRuntimeCODEAdditions": 1,
+  "capability": {
+    "defaultOff": true,
+    "manifestFlag": "staticSlidingBombGoodiesQualified",
+    "decoderOption": "allowStaticSlidingBombGoodies",
+    "runtimeFlag": "staticSlidingBombGoodieRules",
+    "mode": "Child",
+    "families": [
+      "Static sliding connectors",
+      "Bombs",
+      "Goodies",
+      "Protected checkpoints",
+      "Walls",
+      "Ordinary programmed actors and clock classes 1 through 3"
+    ],
+    "excludedFamilies": [
+      "Moving carriers",
+      "Teleports",
+      "Oil",
+      "Elevators",
+      "Rotating spikes",
+      "Guns/triggers/projectiles",
+      "Other unqualified joins"
+    ],
+    "privateClippedWallPrimaryFullDistinctions": 10
+  },
+  "checks": {
+    "publicRuntimeTestsPassed": 410,
+    "packagingTestsPassed": 21,
+    "firstPackagingInvocationFailure": "ModuleNotFoundError: package_clockwerx_pilot",
+    "firstPackagingFailureRetained": true,
+    "correctedPackagingPassed": true,
+    "engineFailureClaim": false,
+    "syntheticResetCases": 5,
+    "syntheticResetScopes": [
+      "EX progression",
+      "Human-only fuse activation and rearming",
+      "Blast/EX/WL restoration and effect cleanup",
+      "GO hide, retained animation phase and stale flourish rejection",
+      "Checkpoint-preserving reset versus level restart"
+    ]
+  },
+  "regression": {
+    "status": "PASS_AFFECTED_FULL_ROUTE_STATE_AND_CONSUMED_HOOK_METADATA",
+    "PID": 302284,
+    "exitCode": 0,
+    "wallSeconds": 223.368,
+    "constructors": 6,
+    "constructorResets": 6,
+    "explicitResets": 0,
+    "attemptedUpdates": 60856,
+    "completedUpdates": 60856,
+    "RNGDraws": 0,
+    "pairedSources": [
+      42,
+      43
+    ],
+    "routes": [
+      {
+        "ordinal": 45,
+        "title": "Slide",
+        "updatesEach": 9288,
+        "scoreEach": 2000
+      },
+      {
+        "ordinal": 48,
+        "title": "Thriller",
+        "updatesEach": 15976,
+        "scoreEach": 1000
+      },
+      {
+        "ordinal": 58,
+        "title": "Death",
+        "updatesEach": 5164,
+        "scoreEach": 2000
+      }
+    ],
+    "exactFields": [
+      "Per-update state",
+      "Inputs",
+      "Dots",
+      "Physical actors",
+      "Consumed hook metadata",
+      "Consumed queries/colliders",
+      "Initial inventory",
+      "Terminal/final state",
+      "RNG records"
+    ],
+    "intermediateFullHookStateTested": false,
+    "arbitraryInputEquivalenceClaim": false,
+    "resultPath": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/regressions01/result.json",
+    "resultSHA256": "f0378a40de78bdd6908d67ba7805aab61f2f9752e7f661ae5ab824dc0756891b"
+  },
+  "actual59": {
+    "title": "Nasty",
+    "status": "INITIALIZATION_AND_TWO_RESETS_ONLY",
+    "PID": 154020,
+    "exitCode": 0,
+    "wallSeconds": 0.776,
+    "constructors": 1,
+    "constructorResets": 1,
+    "explicitResets": 2,
+    "updates": 0,
+    "RNGDraws": 0,
+    "dots": 69,
+    "NPCs": 7,
+    "joinedLifecycleQualified": false,
+    "goalQualified": false,
+    "timingMarginsQualified": false,
+    "resultPath": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/actual59-init01/result.json",
+    "resultSHA256": "05c616e2ffe0ca760893a1293c2ecf7d45784345453f2d7f46f02503b6ebd93d"
+  },
+  "native59Cold": {
+    "status": "CLOSED_COLD_ONLY_ROOT_VIEWED",
+    "PID": 246376,
+    "exitCode": 0,
+    "wallSeconds": 59.2,
+    "captures": 35,
+    "allPNGsRootViewedAfterMethodFreeze": true,
+    "prePNGFreezeSHA256": "a0b627c0697142fce7eb18db58cfd7781b52235d074fdbd23b7bd93825b7527f",
+    "observedLevel": 59,
+    "observedTitle": "Nasty",
+    "roundScore": 0,
+    "campaignScore": 371000,
+    "observedHuman": "gold",
+    "reportSHA256": "16bf03146a6c43ab3e7f70176b059c6c47cef6e8c4fc8187cab4edee5298e28b",
+    "goalEvidence": false,
+    "fitAndSavedAuditClosedPassReportedByRoot": true,
+    "fitResultsOrCalibrationAcceptedByThisReview": false
+  },
+  "delivery": {
+    "normalScenes": 58,
+    "normalRuntimeFiles": 42,
+    "changedByThisReview": false,
+    "source43Installed": false,
+    "source43ActivationAuthorizedByThisReview": false
+  },
+  "limits": [
+    "No actual level 59 movement or joined lifecycle from zero-update admission",
+    "No actual level 59 goal or margin qualification",
+    "Synthetic reset arrangements do not qualify native reset timing",
+    "Intermediate full hook-state equality not tested by the paired regression tier",
+    "No complete audio, physical controller, save compatibility or full parity claim",
+    "Cold fitting is independent observation, not solvability",
+    "No new models/tests/native/fit/benchmark run by this documentation task"
+  ],
+  "evidence": [
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-serial-integration-prepare01/receipt.json",
+      "sha256": "84aa13c17f25cec6de39f55fa86bd2d3de39673c36707c95be6e6a306f80543a"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/source-freeze.json",
+      "sha256": "e857c97ceecbb96a1192294c71e4468027754b7dbc8020d540cbae0dc36cd9b1"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/public-tests.log",
+      "sha256": "b0e8d9924a5eeeadf481577ad95dc4e9f096e8f9a6cd2d21f3584606a875f468"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/packaging-tests.log",
+      "sha256": "4134fbf33bdd9f72c098ac4d9849b8d5db574a97e23c24710113826fd7692640"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/packaging-tests02.log",
+      "sha256": "ade73a4c3672d6811344cdc800c05c51f36d2d713828fc0d1af8588f4f8d33c5"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/regressions01/result.json",
+      "sha256": "f0378a40de78bdd6908d67ba7805aab61f2f9752e7f661ae5ab824dc0756891b"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/regressions01-owned-process/closure.json",
+      "sha256": "64269d9c0481469a20f0c68a53c7be8b4343a47e79cab63739e182881482635c"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/actual59-init01/result.json",
+      "sha256": "05c616e2ffe0ca760893a1293c2ecf7d45784345453f2d7f46f02503b6ebd93d"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/59-static-sliding-bomb-goodies-root-integration/actual59-init01-owned-process/closure.json",
+      "sha256": "79f3b09d8b26eafeb8db47e644f9fc5e03682a67c4c8c02d38c4d3f175c84b0b"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/native-initial-01/report.json",
+      "sha256": "16bf03146a6c43ab3e7f70176b059c6c47cef6e8c4fc8187cab4edee5298e28b"
+    },
+    {
+      "path": "D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels/nasty59/root-cold-visible-review.json",
+      "sha256": "9be996babd49be5965db76e5ce92f7c5c49d3cb2d2302e99a9969308025ac9b0"
+    }
+  ]
+}

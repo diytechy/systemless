@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 58,
-  "currentAction": "57 bounded scenes locally active;58 source42 validated, original cold recovered/audited after sole fitter timeout; fixed1/120 calibration preparing, no trajectory yet.59 private peer approved.",
+  "currentAction": "User-requested handoff/runtime audit complete;57 accepted/live,58 source42 committed and cold calibrated706, four route deaths saved/no goal. All workers/runs closed. Implement/measure compact search observer before focused58 continuation.",
   "levels": [
     {
       "ordinal": 1,
@@ -4597,7 +4597,7 @@
       "menuTitle": "Death",
       "resourceTitle": "Death",
       "sha256": "c0bb84c537c05baa13c4c919b09eb00f2a6303f015ca857f8dcd29d2a2118a80",
-      "status": "source-integrated-original-cold-audited-calibration-preparing",
+      "status": "source-integrated-cold-calibrated-functional-discovery",
       "nativeEvidence": [
         "death58/native-initial-01/report.json",
         "death58/root-cold-visible-review.json",
@@ -4609,7 +4609,7 @@
         "ordinary NPC source programs and initial moving riders",
         "independent optional bonus and static goal"
       ],
-      "svgStatus": "source42-init-reset-pass-gameplay-pending",
+      "svgStatus": "initial-qa-viewed-paused-no-goal",
       "generationConstraints": [
         "certify timed legal inputs with moving source identities",
         "retain aliases and property-mask misses",
@@ -4681,7 +4681,9 @@
       "sourceDomainPeerSHA256": "5285382f180655960e51eb908bad2b687c54f248ea2a9c2161d75c13409deeb2",
       "sourceHumanWallMetadataErratumSHA256": "3f2abda1bbb01541b93fe643f8e3acfe3bd9a6421e4e90b025321656a9f69c38",
       "sourceFreezeSHA256": "44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9",
-      "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942"
+      "rootSourceReviewSHA256": "2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942",
+      "functionalUpdatesSpent": 15788,
+      "functionalUpdateBudget": 250000
     },
     {
       "ordinal": 59,
@@ -7863,5 +7865,8 @@
     "B": "headache_spi_startup source-only original globaltimer/ROStart investigation; zero newruns",
     "C": "headache_functional completed5648coldcalibration; no discovery/model lease",
     "D": "mortality_admission completed private57source plan; no implementation/admission/models"
-  }
+  },
+  "handoff": "session-handoff-2026-11-10.md",
+  "workflowRuntimeAudit": "workflow-runtime-audit.md",
+  "fasterValidationWorkflow": "faster-validation-workflow.md"
 }

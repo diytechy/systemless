@@ -1,18 +1,30 @@
-# Latest checkpoint — 2026-11-10T14:31:32.617444+00:00
+# Latest checkpoint — 2026-11-10T14:50:50.627745+00:00
 
 # Current coordinator action
 
 Continue through100 on SVG-Port without per-level stops.57 bounded Child scenes are accepted and locally active;43 remain. One shared engine loads level data. User permits two or more runners. Qualify new mechanics in series; isolated source preparation and frozen-engine functional work may overlap. Native emulators, fitters, conversions, benchmarks and heavy builds remain sequential. Preserve original media, forks, represented Finder metadata, preferences and browser save identities. Private maps/art/disassembly/scenarios/saves stay on D:. No push, upload or deployment.
 
-## Exact next action
+## User-requested handoff and runtime audit
+
+The latest user request is to build a handoff and identify runtime costs before continuing. That work is complete; all workers and exclusive workloads are closed. Read [session handoff](session-handoff-2026-11-10.md), [runtime audit](workflow-runtime-audit.md) and [faster workflow](faster-validation-workflow.md) before the next gameplay run. Do not repeat the four58 policies or start another exhaustive trace batch. No new user approval is needed for authorized continuation; the next coordinator should first implement/measure compact search recording and then review a focused58 continuation.
+
+Source42 is committedc3dc2b7f. Normal remains57accepted/41runtime; isolated58preview in tab139 is visible/paused/unqualified. First58 batch and saved verifier are CLOSED, finalreceipt891141c0ec36989a2fc6905f8f42e507da1fed4180047332c1fb32afaa586c79. Global58spending15788/250000, remaining234212; prior execution authorizations consumed. All four deaths and16.21GB raw evidence preserved. No goal/literal/nativegoal/58acceptance occurred. Private audit root-audit.json and peer/report.md live under workflow-runtime-audit-2026-11-10/. No extra model, benchmark, conversion, native, fitter or heavy build ran for this audit.
+
+## Saved gameplay action and evidence
 
 Death58 source42 is integrated and Root-reviewed for bounded calibration, not gameplay: freeze44d21a1bfba79358673aa3642e331ea185ddb7ed6fe4d069a04c81a7fc2056a9, Root review2b03cc2591bb954c06e4dff8fdcf42f103972fb612722a7346fc8282ef6a7942.402 public/21 packaging tests pass; prior56/57 exact full lineages pass15,858 updates/two constructors. Root streamed all107 bound artifacts/6,286,560,592 bytes and verified actual42 bytes.37 baseline modules unchanged. Final actual58 initialization/reset passed1constructor/2resets/0updates; two earlier observer-only failures retained. Root aggregate3constructors/4resets/0updates; separate candidate2constructors/4resets/0updates. Pending Reverse toggle preserved. See moving-marked-ordinary-source-review.md/json.
 
 Original58 COLD is CLOSED: PID238708 exit0, reportc0a87d7480b75b934a9ed44c9644d5046ec42c93d3595337637c724db8e91fc9,35captures/2224frontend/2824guest. Earnedthrough57fixture db7607f20346594c6ee7b359ed6b7bee3ac32fc3a79e8c50c05557dc5c655529; original03f7f09e unchanged. PREPNG method freezee1d9c7189a7645a3d1babef9f6bd915d1ca00f59765859d88d916b169031ae7f preceded Root viewing all35 dedicated captures; contact and review receipts in death58/. Visible58Death/round0/campaign369000. No native goal/death/reset yet.
 
-The sole original-only fitter PID192700 FAILED at180.062s after saving all35 slices of all6 matrices and15 PRIMARY/full pairs. Preserve this failure; do not refit. Saved-only recovery proposal0ef47ff8661c76510b24bba11f0a1583f6710cc58aff9a0e2db0de6b87385e47 was Root-reviewed and executed ONCE: exit0/10.797s, no PNG/report reads or rescoring. Independent audit8eb43d860b97f3b135c7c92c373ea33e04a5859f334f05d871c1345c3d87eef0 verifies315 actor selections (289 clear/unique,26 misses),34,125 DO rows,35 misc references, all15 pairs and55 input bindings. Recovered selections8abdd1eff240054c0d7df90c06448ab68744e1c6c3e823d99e090542bb0672db. All aliases/NaNs/alternatives remain; no individual identity, phase, occupancy or absence claim. Audit code execution provenance supplement pending; Root must review it without rerunning.
+The sole original-only fitter PID192700 FAILED at180.062s after saving all35 slices of all6 matrices and15 PRIMARY/full pairs. Preserve this failure; do not refit. Saved-only recovery proposal0ef47ff8661c76510b24bba11f0a1583f6710cc58aff9a0e2db0de6b87385e47 was Root-reviewed and executed ONCE: exit0/10.797s, no PNG/report reads or rescoring. Independent audit8eb43d860b97f3b135c7c92c373ea33e04a5859f334f05d871c1345c3d87eef0 verifies315 actor selections (289 clear/unique,26 misses),34,125 DO rows,35 misc references, all15 pairs and55 input bindings. Recovered selections8abdd1eff240054c0d7df90c06448ab68744e1c6c3e823d99e090542bb0672db. All aliases/NaNs/alternatives remain; no individual identity, phase, occupancy or absence claim. Root reviewed posthoc auditor source/provenance supplement b55b5211cfa7a41089f3d1f2a8a97151897a40b542b6c62f4f230f2da9a06d85. Limitation: inline auditor code was saved after execution, with no pre-execution hash/PID/UTC; no rerun.
 
-Agent death58_root_integrate is PREPARING ONLY death58/content/prepare01: one fixed1/120 no-input trajectory <=5648 updates, all3729 prefixes/all33 board samples/all banks/ties/misses, moving actor physical positions included, no health filtering or fitted bindings. Root must read runner/analyzer/proposal and hashes before execution. No actual58 trajectory or discovery lease yet. Native conversion/fitter/heavy workload is currently closed; inspect OS before new exclusive work. Continue independently; no user input required.
+Source42 committed c3dc2b7f. Fixed1/120 cold calibration is CLOSED: PID225004 exit0/5.163s,1constructor/1constructor reset/5648updates/0explicit resets/RNG0. Saved analyzer PID224696 CLOSED0, all3729 prefixes and33 board samples. Root independently recomputed every ranking and all132 per-capture/bank vectors exactly; selected706 provisionally, tie707 retained,289clear board samples with288position/271pose matches,8misses retained.18pose residuals at idle07/26, one also3px. root-cold-selection-v2.json93ea48456a0e804d027a950e2de93d84653c99b4e9931dfc7b6e72f59c0533bf; v1 partial JSON serialization failure retained, no model rerun. No health, phase or binding optimization.
+
+First58 functional batch CLOSED: PID87868 exit0/174.342s. Four transparent current-geometry policies all died at2732/1506/2666/3236updates;10140attempted=completed/4constructors/4constructor resets/0explicit resets/RNG120. No goal or literal proof. Sole reviewed authorization discovery-prepare01/root-discovery-authorization.json a0d29a29f613ce7600ed2617bf76717e4afb6fe8448002914a83437af90ca83c was consumed once; no retry/new model lease. Saved-only verifier PID121640 CLOSED exit0/12.103s; all four death causes and aggregate counters pass. Agent wrote handoff.md and saved-divergence-opportunities.json, then stopped for the user-requested handoff. No continuation policy/proposal/model was implemented. Total58functional spending=15788/250000;234212 remain. Full failed traces/inputs/counters retained. Native goal has not run.
+
+Original-only58 goal fitter is prepared dormant: death58-native-goal-review/prepared-receipt.json d8c9b73db4176d448918aab736f46feea2c113aa856361a83f34028631f2930a. Exact frozen scoring/source605domain unchanged; only stable top-N list materialization stops afterN per proved equivalence. Dynamic actual scope <=64, external180s, sixarchives/15pairs. Root read method/diff; actual CLOSED scope/PREPNG freeze/fresh exclusive guard still required before one goal fit. Worker remains blind to models/prefix/routes/engine. Do not refit failed cold data.
+
+Isolated58 QA initial is Root-viewed and paused in existing browser2/tab139(hokeyPokeyTab), at http://localhost:8091/death58/qa-initial/dist/clockwerx-html5/. Source42/58definitions/all57 prior unchanged/104payloads preserved, no checked route or gameplay acceptance. Root verified all148QA files and147live files; preparation4e46309c797d9591a4ccb5cab3dafa9e7ee991f7b9b032beef9fdade1ac6710b, manifest7d6f2639feaf55b53c0a402332466fc681adf1a9253f4c5ac305338dd3385890. initial-ready.png/initial-paused.txt saved; Death board, ordinary hands, moving marks, bonuses and goal presentation visible. This is initial render evidence only. LastCUApart finalized Loaded and paused Death preview. Browser is selected and visible; no different app preview needed. FirstCUA after compaction exactly await cua.rewriteDocumentation(); no policy bypass. Normal57 unchanged/paused in tab92.
 
 59 candidate is PRIVATE and source-peer approved only:59-static-sliding-bomb-goodie-candidate/v1 receipt51225a7766abaa3e04eafc0764d3abac09a16c7f66befb8e420fffea449a9f9f, freeze da6162f177d6660bd3e5b3c895c26bf955afeee40ea3456c25f76e6abcca5cf4; independent peer597b5ec2e077652b01ac3cfeeb8f798d3fd0abd0593b5e24d918137e188b1e15.43runtime/36baseline unchanged/6modified/1new; author437 synthetic steps incl failures; peer8 steps/6groups. Actual59 imports/constructors/resets/updates allZERO. Root has not reviewed final peer report or integrated; do that serially after58 gameplay. Preserve ten clipped WL PRIMARY/full distinctions. No new59 primitive justified by source plan; no actual59 gameplay lease.
 
@@ -20,7 +32,7 @@ Agent death58_root_integrate is PREPARING ONLY death58/content/prepare01: one fi
 
 Normal http://localhost:8087/clockwerx-html5/ serves57 scenes,41runtime files,104payloads,9,317,679rawB excludingreceipt. Mortality original/SVG both1,000, no optional bonuses; original next58Death at369,000 campaign total. Root normal57ready/paused/markedDeliverable in browser2/tab92(foregroundTab); QA139(hokeyPokeyTab) completed1,000/paused/markedHandoff. User confirmed selected QA preview visible; Root confirmed selectedtab139 and reuses it for subsequent checks. No other preview app is needed. Keep replaytab and Codex visible; do not ask foreground again without new evidence. LastCUApart finalized Installed and verified Mortality locally. FirstCUAaftercompaction exactly await cua.rewriteDocumentation(); reuse browser2/handles. read-only document.hasFocus was unavailable; do not retry it or bypass policy stops.
 
-Full56 rollback mortality/previous-live-pilot; all56prior definitions/104payloads/19library root files/savekey systemless.clockwerx-html5.pilot.v1 preserved. Source41 immutable path57-static-marked-orbitals-root-integration/source41, freeze42bcac72b007be8b81d85a7f347f56f456773f509380aefaf202614562ed142a; source41 commit ecc2d2dd.396public/21packaging/Rootactual57zero1ctor2reset0updates and prior54/55/56 full24462updates/3constructors exact. Root byte-review c9833bfc. Mortality acceptance/EOF cleanup committed85c72d04. Source42 integration is separate from the live source41 bundle; inspect Git before editing.
+Full56 rollback mortality/previous-live-pilot; all56prior definitions/104payloads/19library root files/savekey systemless.clockwerx-html5.pilot.v1 preserved. Source41 immutable path57-static-marked-orbitals-root-integration/source41, freeze42bcac72b007be8b81d85a7f347f56f456773f509380aefaf202614562ed142a; source41 commit ecc2d2dd.396public/21packaging/Rootactual57zero1ctor2reset0updates and prior54/55/56 full24462updates/3constructors exact. Root byte-review c9833bfc. Mortality acceptance/EOF cleanup committed85c72d04; source42 committedc3dc2b7f and remains distinct from the live source41 bundle. Inspect Git before editing.
 
 Read mortality-review.md/json and private delivery-preparation/root-review.json. Root corrected worker draft units:26784 was native PID, not update count;369000 is campaign total, not a resourceID. Native57 reporta0449b6d/3692front4292guest/37zero; all37PNGs Root-viewed afterPREPNG97ef12e0. Solefit270060CLOSED0/11.109s; rawfinal02a98cdd8d739809740faea4715dc6704761f92df49e43e521c3248bde9c2776 verifies6archives16pairs/all481rows/425clear board+4misses. Comparisonb2d0b7a8a1d75911b36d8ed190584fb2e558241533e341960191d7f797897793: base13/13 and all16post captures206/206 position+pose exact. All16before labels have191/206points,0/206poses;15 already show destinations. Overall410/425points219/425poses, allmisses/aliases retained. Sampling/callback instant remains unqualified; no alternate phase or actor binding was fit.
 
@@ -30,14 +42,14 @@ Read mortality-review.md/json and private delivery-preparation/root-review.json.
 
 ## Preparation ahead and boundaries
 
-59-source-admission-plan receipt8339023113b06b775c8761dfd66a3f4a6c7d40b76afccbaadcd5c95346ca39ba: staticEX+BO+GO+protectedWY+WL with ordinary class1/2/3, no new primitive justified yet;344conservative attached centers and ten clipped WL hypotheses need distinctPRIMARY/full masks. nasty59_admission_prepare is preparing PRIVATE candidate from58's frozen42, synthetic<=10000steps/120sprocess, actual59imports/constructors/resets/updatesZERO. It may add minimal conditional membership guards in level/round/enemy-transfer/BombScene/BombRuntime/app while preserving primitive bodies; independent peer before any integration after58gameplay. Existing60â€“100/gun/buster/slowdown preparation available; don't duplicate census.
+59 private candidate and independent peer are complete; see exact action above. Ten clipped WL hypotheses retain distinct PRIMARY/full masks. Existing60–100/gun/buster/slowdown preparation is available; do not duplicate census.
 
 Original69-title library/default-tuned-prototype comparison COMPLETE; heartbeat deleted. Never restart that queue or create job-tracking automation. Astra unavailable untilNov13 2:43PM; no retries. RootONLY supportedIAB; never retry knownWindows/EdgeURLpolicy stop or bypass a browser stop. Keep heavy work sequential and private data out ofGit. Continue through100 without a progress-only final after57/58.
 
 
 Earlier entries below are historical; current-action.md is authoritative.
 
-# Latest checkpoint â€” 2026-11-10T14:08:55.451697+00:00
+# Latest checkpoint — 2026-11-10T14:08:55.451697+00:00
 
 # Current coordinator action
 
@@ -67,14 +79,14 @@ Read mortality-review.md/json and private delivery-preparation/root-review.json.
 
 ## Preparation ahead and boundaries
 
-59-source-admission-plan receipt8339023113b06b775c8761dfd66a3f4a6c7d40b76afccbaadcd5c95346ca39ba: staticEX+BO+GO+protectedWY+WL with ordinary class1/2/3, no new primitive justified yet;344conservative attached centers and ten clipped WL hypotheses need distinctPRIMARY/full masks. nasty59_admission_prepare is preparing PRIVATE candidate from58's frozen42, synthetic<=10000steps/120sprocess, actual59imports/constructors/resets/updatesZERO. It may add minimal conditional membership guards in level/round/enemy-transfer/BombScene/BombRuntime/app while preserving primitive bodies; independent peer before any integration after58gameplay. Existing60â€“100/gun/buster/slowdown preparation available; don't duplicate census.
+59-source-admission-plan receipt8339023113b06b775c8761dfd66a3f4a6c7d40b76afccbaadcd5c95346ca39ba: staticEX+BO+GO+protectedWY+WL with ordinary class1/2/3, no new primitive justified yet;344conservative attached centers and ten clipped WL hypotheses need distinctPRIMARY/full masks. nasty59_admission_prepare is preparing PRIVATE candidate from58's frozen42, synthetic<=10000steps/120sprocess, actual59imports/constructors/resets/updatesZERO. It may add minimal conditional membership guards in level/round/enemy-transfer/BombScene/BombRuntime/app while preserving primitive bodies; independent peer before any integration after58gameplay. Existing60–100/gun/buster/slowdown preparation available; don't duplicate census.
 
 Original69-title library/default-tuned-prototype comparison COMPLETE; heartbeat deleted. Never restart that queue or create job-tracking automation. Astra unavailable untilNov13 2:43PM; no retries. RootONLY supportedIAB; never retry knownWindows/EdgeURLpolicy stop or bypass a browser stop. Keep heavy work sequential and private data out ofGit. Continue through100 without a progress-only final after57/58.
 
 
 Earlier entries are historical.
 
-# Latest checkpoint â€” 2026-11-10T13:23:11.702127+00:00
+# Latest checkpoint — 2026-11-10T13:23:11.702127+00:00
 
 # Current coordinator action
 
@@ -100,14 +112,14 @@ Read headache-review.md/json,pending-reverse-review.md and static-marked-orbital
 
 Original57COLD CLOSED156844exit0/report458250fb/2224front2824guest/35zero; Rootviewedall35 onlyafterPREPNG ca2b6996. Solefit66980CLOSED0/10s/6archives16pairs; rawfinale2756732 verifies455rows/416of429boardclear+13misses/26menumisses. Rootcalibrationfinal17b9af5b one5648noinput/1ctor1reset0explicit/RNG0, model71116CLOSED0/.814s/analyzer95996CLOSED0/31.305s. Root independently recomputedALL3729rankingsandvectors: positions416/416,poses379/416,bestdeficits0/37,ties700/701, earliest700provisional, NOexactphaseclaim. Rootcoldselectionc57704162193a005a49d95bbf268740a6496afc303580b4881ae69053bdf6ffb. Prepare01dt1/960 HELD; usefixedprepare02only,allties/misses/identitypossibilities retained.
 
-58Death candidate PRIVATEready,notintegrated:58-moving-marks-candidate/v1receipt4bb7e142e1a47764d105cdb025f885ebd079473caa2cde9cab17c50047fa7f6b,freeze4b42bbebaa8cf3b3c69dc861ad6f731229b3709f1355d29de4f07da9e62cf34b.42runtime/37unchanged; newordinarymovingmarkcompositionandconditionalenemy-transferadmissionoption,callbackbodyunchanged,Roottogglepreserved.13syntheticgroups/213stepsinclfailures+3portabletests; actual58initbudgetEXHAUSTED2ctors4resets0updates. Peer5809f4a161a64a5957ca50d37dcb2fdf66415a4eb3bb601c9365290ee0a3944c APPROVEboundedcompositiononly,23code/107rawspans,13groups56steps/34negativecontrols/zeroactual58. Rootmustread/rehashexactcode+peer beforeintegrationAFTER57gameplayreview. No58discovery/native. Existing59â€“100/gun/buster/slowdown preps available; do notduplicatecensus.
+58Death candidate PRIVATEready,notintegrated:58-moving-marks-candidate/v1receipt4bb7e142e1a47764d105cdb025f885ebd079473caa2cde9cab17c50047fa7f6b,freeze4b42bbebaa8cf3b3c69dc861ad6f731229b3709f1355d29de4f07da9e62cf34b.42runtime/37unchanged; newordinarymovingmarkcompositionandconditionalenemy-transferadmissionoption,callbackbodyunchanged,Roottogglepreserved.13syntheticgroups/213stepsinclfailures+3portabletests; actual58initbudgetEXHAUSTED2ctors4resets0updates. Peer5809f4a161a64a5957ca50d37dcb2fdf66415a4eb3bb601c9365290ee0a3944c APPROVEboundedcompositiononly,23code/107rawspans,13groups56steps/34negativecontrols/zeroactual58. Rootmustread/rehashexactcode+peer beforeintegrationAFTER57gameplayreview. No58discovery/native. Existing59–100/gun/buster/slowdown preps available; do notduplicatecensus.
 
 Original69-titlelibrary/default-tuned-prototypecomparison COMPLETE; heartbeatdeleted, neverrestartthatqueue/createjobtrackingautomation. Astra unavailableuntilNov13 2:43PM,no retries. RootONLYsupportedIAB; neverretryknownWindows/EdgeURLpolicystop/bypass. Continue through100; do notendwithprogress-onlyfinal after56/57.
 
 
 Earlier entries are historical.
 
-# Latest checkpoint â€” 2026-11-10T12:51:19.568192+00:00
+# Latest checkpoint — 2026-11-10T12:51:19.568192+00:00
 
 ## Exact next action
 
@@ -119,14 +131,14 @@ Native56GOAL CLOSED137524exit0/report0c2ef252/8106front8706guest/42zero. PREPNGf
 
 Earnedthrough56fixture aca8c62f5cefc55aaecc1414dcbb4780a63062d5cee7c58bd430a3e4cbf9dcc6 now verifies9files/7untouched/bothforks/representedmetadata. Original03f7f09e unchanged. Mortality57COLD is DONE,CLOSED156844exit0/report458250fb/2224front2824guest/35zero, native script ee3fc017. Root viewedall35 AFTER PREPNG ca2b6996:correct57/368000/noDY/reset/bonus. SolefitCLOSED66980exit0/10s/6archives16pairs. Independent original-only rawfinal e2756732 validates455selections,416/429boardclear/13misses plus26menumisses; pending-scope archived separately. NO57actualmodelupdates. Original-only rawprofiles/sourcegroups stay immutable.
 
-57sourcecandidate/peer/public synthetic test are READY butPRIVATE/unintegrated. Root reviewed code/plan/peer; independently rehash candidate+peer+publictest then serialintegrationpreservingcurrentpendingtoggle. Copy onlyportable publictest b254f68b (9groups) and runtimecode, neverprivate loader/assets. Add41stmoduleto packager, runfocusedpublic/packaging +prior54/55/56wholelineages andactual57zeroctor/reset beforefreeze/commit. Preparationfactory mortality/content/prepare01 dormant; v1dt1/960 proposal HELD, revise to fixed1/120 one5648noinput/all3729prefixes/all33offsets/nohealthfilter/allties beforeRootlease. No57discoveryyet.58sourceplan5cb9d36f SOURCEONLY: ordinary moving marks+ordinaryclass1NPC, noOil/type4; noimplementation/execution. Existing59â€“100preps available.
+57sourcecandidate/peer/public synthetic test are READY butPRIVATE/unintegrated. Root reviewed code/plan/peer; independently rehash candidate+peer+publictest then serialintegrationpreservingcurrentpendingtoggle. Copy onlyportable publictest b254f68b (9groups) and runtimecode, neverprivate loader/assets. Add41stmoduleto packager, runfocusedpublic/packaging +prior54/55/56wholelineages andactual57zeroctor/reset beforefreeze/commit. Preparationfactory mortality/content/prepare01 dormant; v1dt1/960 proposal HELD, revise to fixed1/120 one5648noinput/all3729prefixes/all33offsets/nohealthfilter/allties beforeRootlease. No57discoveryyet.58sourceplan5cb9d36f SOURCEONLY: ordinary moving marks+ordinaryclass1NPC, noOil/type4; noimplementation/execution. Existing59–100preps available.
 
 First CUA aftercompaction exactly await cua.rewriteDocumentation(); reuse browser2/tab92and139. Current corrected56 browser part active, nofinaloutcomeyet. RootONLY IAB; never retry/bypass Windows/Edgepolicy stop. No requireduserinput. Continuethrough100withoutprogress-onlyfinal.
 
 
 Earlier entries are historical.
 
-# Latest checkpoint â€” 2026-11-10T12:35:39.742824+00:00
+# Latest checkpoint — 2026-11-10T12:35:39.742824+00:00
 
 # Current coordinator action
 
@@ -148,12 +160,12 @@ Current Root commitf45b46b4281f1d35d0dc5c8089dd4377aaabfb81,40runtimefiles; norm
 
 57 static-marked/orbital candidate is PRIVATE, unintegrated: candidate receipt afb0978252b48cf3f02c0f7d839c86e0396c54e752a19f9434cebe8405ed75f8, sourcefreezece52491b/41runtimefiles/37unchangedbaselinefiles,20syntheticgroups1484updates,actual57zero updates. Independent peer6bdce254043bb57072a6203d63f5cf5a0302649d5dca0d2d4149f8a4f50d172b APPROVE bounded source composition only,8groups374syntheticsteps. Root read peerreport; must independently rehash/read candidate+changedcode before serial integration after56review. New generic default-off staticMarkedOrbitalRules preserves raw property masks, human fatal37-before-release continuation, type4 ordinary-hook suppression. Existing source3500all64 and merged5878b957 reused; no newSVGcolliders or extra radius. No57trajectory/native/earnedfixture yet.
 
-Existing57â€“60 and61â€“100/gun/buster/slowdown source preparation available; do not duplicate census. Astra unavailable untilNov13 2:43PM; no retries. Do not retry/bypass Windows/EdgeURLpolicy stop. No required user input now. Continue through100; do not end with a progress-only final after56.
+Existing57–60 and61–100/gun/buster/slowdown source preparation available; do not duplicate census. Astra unavailable untilNov13 2:43PM; no retries. Do not retry/bypass Windows/EdgeURLpolicy stop. No required user input now. Continue through100; do not end with a progress-only final after56.
 
 
 Earlier entries are historical.
 
-# Latest checkpoint â€” 2026-11-10 11:34 UTC
+# Latest checkpoint — 2026-11-10 11:34 UTC
 
 
 
@@ -174,7 +186,7 @@ Checked replay previously called Restart, which retains clocks. An invalid timin
 
 Earlier entries are historical; current-action.md is authoritative.
 
-# Latest checkpoint â€” 2026-11-10 11:12 UTC
+# Latest checkpoint — 2026-11-10 11:12 UTC
 
 
 Original55 is now VERIFIED for the bounded checked route. Corrected native02 CLOSED PID23848/exit0/absent11:00:01.575Z,5522front/6122guest/zero/46images. Root and independent raw reviewer saw26000 results andnext56Headache364000. All243 clear paired actor positions+canonical frames match at unchanged706; three rawhumanmisses remain. Read hokey-pokey-replay-progress.md and private root-goal02-review.json. Original01 wrong-key failure remains immutable. No source/rule/epoch change was needed.
@@ -190,7 +202,7 @@ headache_functional prepared zero-execution factory/observer c1bb8a06 against im
 
 Earlier entries are historical; current-action.md is authoritative.
 
-# Latest checkpoint â€” 2026-11-10 10:55 UTC
+# Latest checkpoint — 2026-11-10 10:55 UTC
 
 
 
@@ -243,7 +255,7 @@ All55 costs retained: originalprefix0discovery249262+observedbest472+cold5648+re
 
 Focused05 receipt785479245296511fb2de44fc3c4cd59634f1d3854d14fe9057df8ae43261b3ee/coverageda96ab3c has TWO successful firstcarrier approaches, each2448updates plus onefresh2448denseprimary, total7344/3creates/PID10818009:48:03.995Z..09:48:05.843Zexit0/absent. Literalprimary [[706,null],[374,swing],[598,null],[10,swing],[10,reverse],[454,null],[10,swing],[286,null]]. Markentry1080/safeexit1688/Reverse1696/moving2,3grab+human1000bonus2162/actualsamepivot3pxrider2448 observed. NoDY/reset/goal. Full2449snapshots+paint/7core22hooks7consumedfullprefixqueries; snapshotlineage024985d2/geometry08098d4a. All39source+7local unchanged. Trialdiagnosticqueries POST-ANCHORonly; chosendense fullprefix. Mark3,2spatialdeadend is atemporal safehaven; unchangedreturn wouldhitNPCat1820before south1830, legalreversalshiftsafeactualgrabwindow. Savedoutlineprojections were hypotheses, actualwitnessesareseparate.
 
-Root explicitlyEXTENDED55functional aggregate ceiling600000â†’800000 afteractualcarrier/temporal-haven evidence, no reset ofspent562106;237894remain. Old600kcap was coordinatorbudget, notuserlimit. hokey_pokey_functional PREPARINGONLY goal06 undernewcap: ONE<=60000process,â‰¤4constructivequery-guidedcontrollerpolicies/â‰¤5freshcreates,â‰¤10000totalupdatesincludingFULLobserved2448prefixeach, plusonefreshâ‰¤10000densegoalorbest-failure;â‰¤270internal300external. Actualcardinal/sourcecurrent-cachequeries plusoriginalcollidableoutlinepredictors mayselectlegalSwing/Flip/Reverse/bounce, neverassignstate/clock/pose/RNG/filterdeath. Diagnosticqueryseparatefromconsumed; finalfreshliteralinputreplay mustreproduceexactwholetrajectory/phase/untruncatedcorehooksconsumedqueries/paint+snapshotgeometrylineages. No repeatidenticalbeam/noexhaustivenessclaim/noauto190. Rootneedsreviewproposal/code/hashes then explicitexecutelease; NOgoal06executionyet andno55nativegoal yet.
+Root explicitlyEXTENDED55functional aggregate ceiling600000→800000 afteractualcarrier/temporal-haven evidence, no reset ofspent562106;237894remain. Old600kcap was coordinatorbudget, notuserlimit. hokey_pokey_functional PREPARINGONLY goal06 undernewcap: ONE<=60000process,≤4constructivequery-guidedcontrollerpolicies/≤5freshcreates,≤10000totalupdatesincludingFULLobserved2448prefixeach, plusonefresh≤10000densegoalorbest-failure;≤270internal300external. Actualcardinal/sourcecurrent-cachequeries plusoriginalcollidableoutlinepredictors mayselectlegalSwing/Flip/Reverse/bounce, neverassignstate/clock/pose/RNG/filterdeath. Diagnosticqueryseparatefromconsumed; finalfreshliteralinputreplay mustreproduceexactwholetrajectory/phase/untruncatedcorehooksconsumedqueries/paint+snapshotgeometrylineages. No repeatidenticalbeam/noexhaustivenessclaim/noauto190. Rootneedsreviewproposal/code/hashes then explicitexecutelease; NOgoal06executionyet andno55nativegoal yet.
 
 Isolated QA tab139 hokeyPokeyTab at localhost8091/hokey-pokey/qa/dist/clockwerx-html5/:55initialready Rootviewed/paused/markedHandoff, source39/104payloads/55definitions, prior54andnormal54unchanged/no checkedroute/noacceptance. Manifestb92a7080; qa-initial-page.png/txt/qa-paused-page.txt. Initialvisibleload succeeded; normal92stays54paused/deliverable. Do notreplace normal54 until reviewed55goal+nativecomparison.
 
@@ -251,9 +263,9 @@ Isolated QA tab139 hokeyPokeyTab at localhost8091/hokey-pokey/qa/dist/clockwerx-
 
 56plan388b53a3, sourcev2 reset supplement09f7765d, independentpeer/v2 APPROVED80046c3df2c42a28f29166376a24e5427e207038126a6b8c0717ec29c3b29e08 after3281checks. PriorHOLD7455febd andallv1/v2 packets immutable. Fullentry-aligned112functions/109debugboundaries/735calls/766branches/2switchtables/22resetbodies/39sourceentries verified againstoriginalCODE/XREF/A5. ExistingSPIidentity/frame+reference survive ordinarydeath/restart;ROStartnewconstruction allocatesfresh. GlobalMTandderivedSPIbankupdatedifferently: changedpointedbankatLEGALresumedpoll advancesatmostone, unchangedzero; no guaranteedimmediate step/catchup/refreseeding.
 
-Rootread/rehashedpeer4artifactsandAUTHORIZED SQprivate56-moving-spike-candidate/v1/ startingexactfrozen39, noRootshared/livechanges. GenericexplicitdefaultoffallowMovingSpikes/movingSpikeRules, notordinal/sourcehash/cellcountallowlist. Actual56fixtureprivate9static+2movingbonus/color5/class1bfns/FREEclass3REDstatic-only/staticwhitegoal/activeSPI14filteredthen15/15ordinal0/1. Originalgroup200all4frames/full207DOT/actor2f;26sourceartrequests mandatory. SPIhelperalreadybakesâˆ’8,âˆ’7 inoriginalbounds, nohotspotshift. HumanSPIcheckbeforeinput, noNPCorplacementpoll. Raw/normalized/constructor/directhelperdelta0/rendererassetphysicsboundaryguards andnew-onlySPidentity/frame/ref/visibilityresetretention, oldkeys/defaultsoffexact. Clockchainvsbanklatchmustfollowprovedsourceupdate-sites; noblindupstreampause/droppedtime.
+Rootread/rehashedpeer4artifactsandAUTHORIZED SQprivate56-moving-spike-candidate/v1/ startingexactfrozen39, noRootshared/livechanges. GenericexplicitdefaultoffallowMovingSpikes/movingSpikeRules, notordinal/sourcehash/cellcountallowlist. Actual56fixtureprivate9static+2movingbonus/color5/class1bfns/FREEclass3REDstatic-only/staticwhitegoal/activeSPI14filteredthen15/15ordinal0/1. Originalgroup200all4frames/full207DOT/actor2f;26sourceartrequests mandatory. SPIhelperalreadybakes−8,−7 inoriginalbounds, nohotspotshift. HumanSPIcheckbeforeinput, noNPCorplacementpoll. Raw/normalized/constructor/directhelperdelta0/rendererassetphysicsboundaryguards andnew-onlySPidentity/frame/ref/visibilityresetretention, oldkeys/defaultsoffexact. Clockchainvsbanklatchmustfollowprovedsourceupdate-sites; noblindupstreampause/droppedtime.
 
-Privateimplementation+focusedmeaningfulsyntheticunitchecks allowedâ‰¤10000syntheticupdates aggregate withactualcounts, actual56zero-updateconstructor/reset/paletteoriginalphysicscontractchecks allowed; ZEROactual56gameplaytrajectory/search/native/fit/conversion/heavybuild. Frozen39/55lane/live54 bytesunchanged. Reuseeightqualifiedprimitivesbyteexact; sourceassetmetadata fromnormal54assets manifest available. Delivercandidatepatch/frozen40files/tests/proposal forindependentpeer BEFOREintegration. LaterRootaffectedregressions/sourcefreeze/earned55â†’56native remainseparate. Noautomatic190.
+Privateimplementation+focusedmeaningfulsyntheticunitchecks allowed≤10000syntheticupdates aggregate withactualcounts, actual56zero-updateconstructor/reset/paletteoriginalphysicscontractchecks allowed; ZEROactual56gameplaytrajectory/search/native/fit/conversion/heavybuild. Frozen39/55lane/live54 bytesunchanged. Reuseeightqualifiedprimitivesbyteexact; sourceassetmetadata fromnormal54assets manifest available. Delivercandidatepatch/frozen40files/tests/proposal forindependentpeer BEFOREintegration. LaterRootaffectedregressions/sourcefreeze/earned55→56native remainseparate. Noautomatic190.
 
 ## Source preparation ahead
 

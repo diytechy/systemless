@@ -1,0 +1,40 @@
+{
+  "status": "HANDOFF_RUNTIME_AUDIT_COMPLETE_NO_NEW_GAMEPLAY_EXECUTION",
+  "createdUTC": "2026-11-10T14:50:50.318485+00:00",
+  "acceptedScenes": 57,
+  "currentOrdinal": 58,
+  "engineCommit": "c3dc2b7f",
+  "branch": "SVG-Port",
+  "allWorkersClosed": true,
+  "noExclusiveWorkload": true,
+  "discovery": {
+    "status": "CLOSED",
+    "pid": 87868,
+    "exitCode": 0,
+    "elapsedSeconds": 174.34216237068176
+  },
+  "savedVerifier": {
+    "status": "CLOSED",
+    "pid": 121640,
+    "exitCode": 0,
+    "elapsedSeconds": 12.102914810180664
+  },
+  "discoveryUpdates": 10140,
+  "rawTraceBytes": 16214590902,
+  "hookBytes": 15402467581,
+  "hookRows": 394344,
+  "lineageRows": 10144,
+  "wholeSnapshots": 404488,
+  "source": "Existing closed receipts and saved audit; no large trace rescans or new benchmarks",
+  "coldCalibrationSeconds": 5.16262149810791,
+  "coldCalibrationUpdates": 5648,
+  "publicTests": 402,
+  "publicTestMilliseconds": 758.5464,
+  "originalFitterTimeoutSeconds": 180.062,
+  "recoverySeconds": 10.797,
+  "independentAuditSeconds": 71.078,
+  "phaseTimingUnavailable": true,
+  "noIsolatedSimulationSpeedupClaim": true,
+  "privatePeerReportSHA256": "f1a9a8912eb6c33bbcd99b41cc8ed9a694bdc5315a5589e65b503b6e4c9e77b8",
+  "finalFunctionalReceiptSHA256": "891141c0ec36989a2fc6905f8f42e507da1fed4180047332c1fb32afaa586c79"
+}

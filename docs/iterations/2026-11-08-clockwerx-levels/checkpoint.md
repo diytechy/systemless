@@ -1,3 +1,40 @@
+# Latest checkpoint — 2026-11-10 11:34 UTC
+
+
+
+Review headache_spi_startup's original-source finding before new56 model discovery. Headache actor cold calibration provisionally selects706 with707 tied:185/185 clear physical points,173 exact canonical poses,12 one-frame residuals atidle07/26 (all6actors),13rawmisses. One legal no-input trajectory5648updates/1constructor, all5649states/all3729prefixes retained, nohealthfilter. V1 ranking HOLD preserved because it included unclear rows; correctedv2 uses all185 clear+unique observations and retains13misses diagnostically. Root ranv2 once, PID236372closedexit0/no timeout/26.312s; exec44395 complete. Final saved review4cfff8e6, lineage d2d59f5c.56 budget5648/250000,244352remaining; NOdiscovery lease yet.
+
+At fixed actor706, source-fresh SPI predicts no clear frame in66 appearances: all51 raw-clear frames mismatch,15rawmisses retained. No separate SPI phase/epoch was fit. Initial sourceSPIshared28/bank[7,7,7,7]/frames[2,0]/refs[6,7], originalclearframes[0,1]. Source reviewer already found SPStart clears object count only; SPInit allocates MTAddClient200,false, GPInit earlier has unscaled40 timer, and SPI bank can persist through title/options. SourceRound fresh DATA-bank/clock0 may be a lifecycle simplification. Await exact original startup/poll ordering or a minimal supported read-only native measurement contract; do not insert fitted offsets. No source change/native run/model is authorized by the preliminary finding. Existing source40/frozen40 stays unchanged. Correct this new-mechanic issue in series; no56acceptance yet.
+
+## Delivery and accepted55
+
+Normal http://localhost:8087/clockwerx-html5/ now serves55scenes/40sourcefiles/104payloads/9,150,455 rawB excluding receipt. Root viewed55HokeyPokey ready, paused and marked deliverable in supported IAB browser2/tab92 (foregroundTab). Full54 rollback is hokey-pokey/previous-live-pilot. Four library root files,54prior definitions,all104payloads, original gameIDs and pilot savekey systemless.clockwerx-html5.pilot.v1 preserved. Original normal-origin games were notbooted/reset/imported. QA139(hokeyPokeyTab) source39+sameapp-replayfix is paused/markedHandoff;26000goal proof saved. No user foreground action needed; that request was withdrawn after diagnostic clarification.
+
+Read hokey-pokey-review.md/json, replay-progress.md and private normal-ui-verification/activation.json. Original02 and visible SVG both26000, originalnext56Headache364000. All243clear paired hand positions+canonicalframes exact at fixed706;3humanmisses retained,19clear before endpoints/16clear after/twoactual3pxriders. Model7178updates/28core92hooks19guardedqueries/all26literalJSONfields/wholelineages exact. Original01 failure from wrong native Reverse56 remains immutable; corrected onlyroutekeydown/up36/40 to fixture-observedSpace49/ch32. Static/default GKAllTest chord discrepancy remains unresolved, no new default claim.
+
+Checked replay previously called Restart, which retains clocks. An invalid timing diagnostic showed replay7178done/no-goal3,2 rather than still-running route. The app-only fix reconstructs the current scene before replay, verified26000 inQA; normal Restart retains source clocks. Node app syntax and21packaging tests pass. Failed0-test pattern and Python3.8 installer newline setup error were corrected; no game source/assets changed from failed installer. Source40engine compatibility was already386public+21packaging and full54/55 routes12116updates, exact fields/wholelineages. New app fix is pending local commit togetherwith55 acceptance docs; engine modules are unchanged.
+
+55 is bounded, not comprehensive gameplay parity. Focused09 got0/4 model goals:minus2onset dies;plus2 andAPIresetages120/121 stopalive5,5/10000. All reset clocks exact, includinghalfguest0.5; two conditionalfreshverifications skipped. Functional55 total648397/800000,151603remaining; NOnew55search. Separate nativebuilder14356 andRootpriorregression12116 kept distinct. Cold12pose residuals, unvisited5staticbonuses, mostcarrier-ridingcontinuations, native reset/death/black/audio/controllers/originalsaves/arbitraryinput andfullcampaign remainlimited. No new valid CPU/memory/FPS/latency benchmark: uncontrolled26rAF/20.306s capture INVALID/catchupcapped, measuredwork3.544ms/callback doesnotassigncause.
+
+
+Earlier entries are historical; current-action.md is authoritative.
+
+# Latest checkpoint — 2026-11-10 11:12 UTC
+
+
+Original55 is now VERIFIED for the bounded checked route. Corrected native02 CLOSED PID23848/exit0/absent11:00:01.575Z,5522front/6122guest/zero/46images. Root and independent raw reviewer saw26000 results andnext56Headache364000. All243 clear paired actor positions+canonical frames match at unchanged706; three rawhumanmisses remain. Read hokey-pokey-replay-progress.md and private root-goal02-review.json. Original01 wrong-key failure remains immutable. No source/rule/epoch change was needed.
+
+55 SVG visible goal is PENDING. QA tab139 is still replaying slowly in supported IAB. Root requested user foreground confirmation asynchronously; no reply yet. Do not claim a final SVG goal or promote normal54. Current browser part has not reached its outcome: after observing goal, next tool must be CUA completion_summary, then pause/mark/saveproof in a separate part. Continue independent preparation meanwhile; a UI limitation does not stop native/source work.
+
+Focused09 model qualification CLOSED22989updates/4creates/0of4goals. Minus2onset dies; plus2onset and APIresetages120/121 stopalive5,5/10000. All reset clock states retained exactly. Two conditional fresh verifications skipped because there was no successfulcase. Receipt1cb6caab; functional cumulative648397/800000,remaining151603. Exact08goal remains valid, onset/reset robustness unqualified. No new55search leased.
+
+Headache56 original COLD CLOSED PID122448/exit0/absent11:07:00.522Z,35captures/2224front2824guest/zero. Root viewed all35 onlyafter PREPNG freezea441aa9e:correct56/0/364000, no visibledeath/reset. Source-only independent fitter prepared ddcbc5f6, sole fit CLOSED PID62696/exit0/46.766s; report69d4f0d5. SevenNPZ/16PRIMARY-full pairs proposed, final independentrawaudit in progress (headache_cold_raw). No refit or phase assignment. Native earned55 fixtureef36c764 has9files/7untouched forkmetadata checks. No new native/build/fitter while inspecting active lanes.
+
+headache_functional prepared zero-execution factory/observer c1bb8a06 against immutable40. It is now PREPARINGONLY one cold-calibration proposal: one noinput5648update trajectory, all3729prefixes0..3728/all33boardcapture offsets, all rawclear/misses/capacitysets and ties retained, no healthfilter or separateSPIrephase. Root accepts new56aggregate250000; no actual56update has run yet. Need review private code/hash and finalrawreceipt before explicit calibration lease. Ordinary discovery remains gated on cold binding. No new gameplay search yet.
+
+
+Earlier entries are historical; current-action.md is authoritative.
+
 # Latest checkpoint — 2026-11-10 10:55 UTC
 
 

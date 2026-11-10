@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 55,
-  "currentAction": "55 model goal complete; original01 failed due wrong Reverse key56; correct transport49 and rerun without rule/epoch changes. Source40 moving-spike composition reviewed and frozen, not active; live54 unchanged.",
+  "currentOrdinal": 56,
+  "currentAction": "55boundedaccepted/normal55ready-paused; fresh checked-replay adapter validated.56actor cold provisional706/707185points173poses; SPI0of51clearframesmatch, source startup investigation before discovery.57admission sourceplan ready; no newmodel/native leases.",
   "levels": [
     {
       "ordinal": 1,
@@ -4251,13 +4251,13 @@
       "menuTitle": "Hokey Pokey",
       "resourceTitle": "Hokey Pokey",
       "sha256": "cd9721e7d81edfcb5a2d26f284d1d4ab416306a29b742aed0a357558ef4c5add",
-      "status": "model-goal-original-replay-transport-correction-pending",
+      "status": "accepted-bounded-playable-with-limits",
       "nativeEvidence": [
         "cold34bc7fe7",
         "raw12822c9a"
       ],
       "requirements": [],
-      "svgStatus": "isolated55-root-initial-viewed-paused-not-goal",
+      "svgStatus": "26000goal-root-viewed-after-fresh-scene-replay-fix",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4348,7 +4348,7 @@
       "functionalMovingBonusWitness": true,
       "functionalRiderWitness": true,
       "functionalGoalObserved": false,
-      "boundedChildQualified": false,
+      "boundedChildQualified": true,
       "modelGoal": {
         "updates": 7178,
         "score": 26000,
@@ -4364,11 +4364,29 @@
         "nextFixtureEarned": false
       },
       "functionalBudget": {
-        "spent": 625408,
+        "spent": 648397,
         "ceiling": 800000,
-        "remaining": 174592,
+        "remaining": 151603,
         "noNewSearchLeased": true
-      }
+      },
+      "originalAttempt02": {
+        "status": "verified26000goal-and-next56",
+        "reportSHA256": "2d1679adfa13a112d4f446fa895a62292cb999c5066383dbe25bb27c84dbdc20",
+        "rawReceiptSHA256": "6f6987f542716a69e3154d7cb50f4e524368212ca0eb0c1b6ef12818abb20e5f",
+        "comparisonReceiptSHA256": "564066045fa296123a624a4d9011a4e151ff43799218e73a33f74c938c9c5f0a",
+        "clearExact": 243,
+        "misses": 3,
+        "nextFixtureEarned": true
+      },
+      "focusedQualification": {
+        "goals": 0,
+        "cases": 4,
+        "receiptSHA256": "1cb6caabb5da8cdf88f07dc4ebf338f274b6f6e530b1914bdb637e9b533a5e05",
+        "onsetResetRobustness": false
+      },
+      "normalLive": true,
+      "review": "hokey-pokey-review.json",
+      "normalUIReceiptSHA256": "1ab47e220103ccdd9c60248bc8d6af1d937fe3ff7f4a6b2ac9513e917b6036b1"
     },
     {
       "ordinal": 56,
@@ -4376,7 +4394,7 @@
       "menuTitle": "Headache",
       "resourceTitle": "Headache",
       "sha256": "fc20fa6f176d6a6a35f5fc2da836e2be6d802a09150386c0589747877e423952",
-      "status": "source40-implemented-reviewed-default-off-gameplay-pending",
+      "status": "actor-cold-provisional-spi-startup-discrepancy-source-review",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4450,7 +4468,28 @@
       "syntheticUnitUpdateCap": 10000,
       "boundedChildQualified": false,
       "sourceIntegrationReceiptSHA256": "8cacc2bcb5882a0c688e141d7150ccd2c67848b2b26baa2db3ca241aff3fc9c1",
-      "actualGameplayUpdates": 0
+      "actualGameplayUpdates": 5648,
+      "nativeColdReportSHA256": "69d4f0d5da67f6d670a5cb5d8f8650002f4e8f90ecbccf099bc5459baf734eac",
+      "coldFitFreezeSHA256": "a441aa9ea4b75fac4742a7578e6f0b50c12e2a54b5fc856f9e727c75bed3ae09",
+      "functionalPreparedReceiptSHA256": "c1bb8a06965721fd6f64b66601701b5d4e4ca7f55153765f8746ce23f1a8f80e",
+      "aggregateUpdateCap": 250000,
+      "functionalRemainingUpdates": 244352,
+      "calibrationReceiptSHA256": "4cfff8e6f4b99234d1f29d21ea8c4370fed1e16027ef4998ac86d3371823c413",
+      "actorCold": {
+        "prefix": 706,
+        "ties": [
+          706,
+          707
+        ],
+        "clear": 185,
+        "exactPoints": 185,
+        "exactPoses": 173,
+        "poseResiduals": 12,
+        "rawMisses": 13
+      },
+      "spikeNativePhaseQualified": false,
+      "spikeClearFrameMatches": 0,
+      "spikeClearFrameMismatches": 51
     },
     {
       "ordinal": 57,
@@ -4523,7 +4562,8 @@
       "sourceDomainPreparationSHA256": "1a9deab01a0657c91da559f74c0591e6906fbdd5d3d6fde98a576153fff73d43",
       "sourceDomainPeerStatus": "bounded-cold-approved-with-required-metadata-erratum",
       "sourceDomainPeerSHA256": "4400897098be67db4c8e508cdfb2102459b3c98a4ba1059c9ae0a5043b771620",
-      "sourceHumanWallMetadataErratumSHA256": "e3b0a075d1fbc9f142f70a5b715c3c19de418769008875f050939e735cbeeb2c"
+      "sourceHumanWallMetadataErratumSHA256": "e3b0a075d1fbc9f142f70a5b715c3c19de418769008875f050939e735cbeeb2c",
+      "sourceAdmissionPlanReceiptSHA256": "dc9d720b773392a354ecf660e8450d892c6180c5990c3245eaebddec38c9de6c"
     },
     {
       "ordinal": 58,
@@ -7778,9 +7818,9 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root original/SVG55 transport correction, review and sequential heavy lane",
-    "B": "hokey_pokey_divergence saved-data/source review and corrected native script only",
-    "C": "Source40 reviewed/frozen; no actual56 gameplay or native yet",
-    "D": "Available for independent preparation; no duplicate workload"
+    "A": "Root55localacceptance/checkpoint/commit; next review56SPI source startup",
+    "B": "headache_spi_startup source-only original globaltimer/ROStart investigation; zero newruns",
+    "C": "headache_functional completed5648coldcalibration; no discovery/model lease",
+    "D": "mortality_admission completed private57source plan; no implementation/admission/models"
   }
 }

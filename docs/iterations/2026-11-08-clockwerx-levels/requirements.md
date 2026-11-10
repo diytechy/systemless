@@ -296,3 +296,9 @@ Headache56 source lifecycle review (implementation pending): existing static SPI
 
 
 Moving SPI composition source40 now passes guarded import/lifecycle/asset checks and prior54/55 full regressions; actual56 gameplay and native phase remain unqualified. See [moving-spikes source review](moving-spikes-source-review.md). Hokey Pokey55 original replay01 failed after an incorrect native Reverse binding; retain failure and correct transport before any gameplay acceptance. Prior dense consumed-query counts03/04/05/06 are corrected to2/4/5/8 in the immutable erratum; no inputs/events/lineages change. See [replay progress](hokey-pokey-replay-progress.md).
+
+
+Hokey Pokey55 original corrected transport reaches26000 and next56;243 clear paired actor observations match at fixed706, three human fits remain unclear. Its exact route is sensitive to onset and retained reset clocks:0/4 nearby/API-reset model goals, with failures retained. A future level generator must certify callback/input-hold slack and state its clock/reset assumptions, rather than treating one path or spatial connectivity as sufficient. Moving-bonus escalation caps at5000; seven awards total25000 before the Child goal1000. Native arbitrary-input/reset/full timing parity remains unqualified. SVG final goal remains pending browser foreground verification.
+
+
+Hokey Pokey55 is now bounded-playable and locally active after original/SVG26000 verification. Checked input replays must construct their declared initial scene rather than reuse clock-retaining Restart; restart semantics and route initial conditions are separate requirements. Headache56 preserves185clear cold positions at provisional706 but all51clear SPIframes disagree with fresh level-local clock assumptions. Preserve app/session timer initialization versus level/reset lifetime; do not fit an independent decorative phase and assume its colliders are thereby qualified.

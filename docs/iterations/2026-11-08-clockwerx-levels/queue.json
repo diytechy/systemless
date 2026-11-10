@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 52,
-  "currentAction": "51Bourbon accepted/locally active with reset-phase limits;52Spires new moving-goal/marked-transfer core inprivate serialimplementation; source-only raw domain andmarkedartpreviewparallel. Root original52cold fromearned51 nextafterconversionlaneclosed.",
+  "currentOrdinal": 53,
+  "currentAction": "52Spires accepted/locally active with explicit death/reset timing limits;53Exile serial private source implementation on immutable71dedb39; independent source raw53 domain approved, gated original cold prepared;54source-onlydomain frozen.",
   "levels": [
     {
       "ordinal": 1,
@@ -3993,10 +3993,13 @@
       "menuTitle": "Spires",
       "resourceTitle": "Spires",
       "sha256": "49e950ac288a53abb47b4d53acdafd5969245527be7941ed9c12424e70063b53",
-      "status": "serial-moving-goal-and-static-mark-source-implementation",
-      "nativeEvidence": [],
+      "status": "bounded-moving-goal-marked-transfer-accepted-with-limits",
+      "nativeEvidence": [
+        "spires-review.md",
+        "spires-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "root-goal-and-marked-death-reset-reviewed-locally-active",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -4036,11 +4039,9 @@
         6
       ],
       "generationRequirementsPending": [
-        "qualify all used source object classes",
-        "resolve special dot flags and activation conditions",
-        "check program semantics and timing",
-        "prove reachable goal and safe initial state",
-        "native/rendered behavior comparison"
+        "All optional bonuses/marked edges/carrier rides",
+        "Exact post-death clock/pose/particle/fade timing",
+        "Audio/controllers/nonChild/original save compatibility"
       ],
       "parallelTriage": {
         "sourceOnly": true,
@@ -4058,7 +4059,8 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "boundedChildQualified": true
     },
     {
       "ordinal": 53,
@@ -4066,7 +4068,7 @@
       "menuTitle": "Exile",
       "resourceTitle": "Exile",
       "sha256": "1a40f564dfb31af523b44e6d7f89455fc8f05c2034e1e1782ae979f501184f69",
-      "status": "queued",
+      "status": "serial-source-implementation-active",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -4131,7 +4133,8 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceDomainPeerSHA256": "0ccccd720c15b7c5ceb32b8e5c15af3b83d5dc63bb2b7127aef4611abf942a02"
     },
     {
       "ordinal": 54,
@@ -4200,7 +4203,8 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "sourceDomainPreparationSHA256": "7b38b02637774708707ea709bec91af76d3f008851465daffeb32df31d7b3491"
     },
     {
       "ordinal": 55,

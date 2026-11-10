@@ -1,0 +1,390 @@
+{
+  "status": "bounded-Child-slice-accepted-with-explicit-limits",
+  "ordinal": 52,
+  "title": "Spires",
+  "sourceRevision": "71dedb3937a38e1d511c330a8a841bd69be32843",
+  "sourceChecks": {
+    "public": 345,
+    "actual52": 9,
+    "prior51": 9,
+    "packaging": 21
+  },
+  "qaGoalAndResetViewed": true,
+  "finalGoalRouteRestored": true,
+  "priorDefinitionsUnchanged": 51,
+  "priorPayloadsUnchanged": 101,
+  "newRuntimeSVGs": 3,
+  "goalSummary": {
+    "gameplayShots": 45,
+    "separateShots": 4,
+    "actors": {
+      "selected": 450,
+      "clear": 447,
+      "clearPositions": 447,
+      "clearPoses": 447,
+      "rawMisses": 3,
+      "clearPositionMismatches": 0,
+      "clearPoseMismatches": 0,
+      "clearHypotheticalBodyPositions": 447,
+      "clearHypotheticalBodyPoses": 447
+    },
+    "groups": {
+      "500": {
+        "selected": 180,
+        "clear": 180,
+        "clearPositions": 180,
+        "clearPoses": 180,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 180,
+        "clearHypotheticalBodyPoses": 180
+      },
+      "700": {
+        "selected": 45,
+        "clear": 42,
+        "clearPositions": 42,
+        "clearPoses": 42,
+        "rawMisses": 3,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 42,
+        "clearHypotheticalBodyPoses": 42
+      },
+      "4400": {
+        "selected": 90,
+        "clear": 90,
+        "clearPositions": 90,
+        "clearPoses": 90,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 90,
+        "clearHypotheticalBodyPoses": 90
+      },
+      "4500": {
+        "selected": 135,
+        "clear": 135,
+        "clearPositions": 135,
+        "clearPoses": 135,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 135,
+        "clearHypotheticalBodyPoses": 135
+      }
+    },
+    "modelPhases": {
+      "through-before-model-goal": {
+        "selected": 410,
+        "clear": 407,
+        "clearPositions": 407,
+        "clearPoses": 407,
+        "rawMisses": 3,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 407,
+        "clearHypotheticalBodyPoses": 407
+      },
+      "at-model-goal": {
+        "selected": 10,
+        "clear": 10,
+        "clearPositions": 10,
+        "clearPoses": 10,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 10,
+        "clearHypotheticalBodyPoses": 10
+      },
+      "after-model-goal": {
+        "selected": 30,
+        "clear": 30,
+        "clearPositions": 30,
+        "clearPoses": 30,
+        "rawMisses": 0,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 30,
+        "clearHypotheticalBodyPoses": 30
+      }
+    },
+    "throughAndAtModelGoal": {
+      "selected": 420,
+      "clear": 417,
+      "clearPositions": 417,
+      "clearPoses": 417,
+      "rawMisses": 3,
+      "clearPositionMismatches": 0,
+      "clearPoseMismatches": 0,
+      "clearHypotheticalBodyPositions": 417,
+      "clearHypotheticalBodyPoses": 417
+    },
+    "afterModelGoal": {
+      "selected": 30,
+      "clear": 30,
+      "clearPositions": 30,
+      "clearPoses": 30,
+      "rawMisses": 0,
+      "clearPositionMismatches": 0,
+      "clearPoseMismatches": 0,
+      "clearHypotheticalBodyPositions": 30,
+      "clearHypotheticalBodyPoses": 30
+    },
+    "allTimedCoreEventsExact": true,
+    "coreEvents": 307,
+    "allHooksExact": true,
+    "hooks": 28,
+    "effectFrames": 0,
+    "allFinalStateExact": true
+  },
+  "deathSummary": {
+    "gameplayShots": 55,
+    "separateShots": 2,
+    "actors": {
+      "selected": 550,
+      "clear": 459,
+      "clearPositions": 437,
+      "clearPoses": 403,
+      "rawMisses": 91,
+      "clearPositionMismatches": 22,
+      "clearPoseMismatches": 56,
+      "clearHypotheticalBodyPositions": 437,
+      "clearHypotheticalBodyPoses": 403
+    },
+    "groups": {
+      "500": {
+        "selected": 220,
+        "clear": 181,
+        "clearPositions": 176,
+        "clearPoses": 159,
+        "rawMisses": 39,
+        "clearPositionMismatches": 5,
+        "clearPoseMismatches": 22,
+        "clearHypotheticalBodyPositions": 176,
+        "clearHypotheticalBodyPoses": 159
+      },
+      "700": {
+        "selected": 55,
+        "clear": 33,
+        "clearPositions": 33,
+        "clearPoses": 29,
+        "rawMisses": 22,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 4,
+        "clearHypotheticalBodyPositions": 33,
+        "clearHypotheticalBodyPoses": 29
+      },
+      "4400": {
+        "selected": 110,
+        "clear": 100,
+        "clearPositions": 93,
+        "clearPoses": 88,
+        "rawMisses": 10,
+        "clearPositionMismatches": 7,
+        "clearPoseMismatches": 12,
+        "clearHypotheticalBodyPositions": 93,
+        "clearHypotheticalBodyPoses": 88
+      },
+      "4500": {
+        "selected": 165,
+        "clear": 145,
+        "clearPositions": 135,
+        "clearPoses": 127,
+        "rawMisses": 20,
+        "clearPositionMismatches": 10,
+        "clearPoseMismatches": 18,
+        "clearHypotheticalBodyPositions": 135,
+        "clearHypotheticalBodyPoses": 127
+      }
+    },
+    "modelPhases": {
+      "before-model-death": {
+        "selected": 280,
+        "clear": 276,
+        "clearPositions": 276,
+        "clearPoses": 276,
+        "rawMisses": 4,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 276,
+        "clearHypotheticalBodyPoses": 276
+      },
+      "model-death-awaiting-visible-particles": {
+        "selected": 100,
+        "clear": 82,
+        "clearPositions": 82,
+        "clearPoses": 82,
+        "rawMisses": 18,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 82,
+        "clearHypotheticalBodyPoses": 82
+      },
+      "model-burst-body-visible": {
+        "selected": 60,
+        "clear": 45,
+        "clearPositions": 45,
+        "clearPoses": 45,
+        "rawMisses": 15,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 45,
+        "clearHypotheticalBodyPoses": 45
+      },
+      "after-model-reset": {
+        "selected": 110,
+        "clear": 56,
+        "clearPositions": 34,
+        "clearPoses": 0,
+        "rawMisses": 54,
+        "clearPositionMismatches": 22,
+        "clearPoseMismatches": 56,
+        "clearHypotheticalBodyPositions": 34,
+        "clearHypotheticalBodyPoses": 0
+      }
+    },
+    "nativeVisualCohorts": {
+      "ordinary-visible-gold-hand": {
+        "selected": 320,
+        "clear": 312,
+        "clearPositions": 312,
+        "clearPoses": 312,
+        "rawMisses": 8,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 312,
+        "clearHypotheticalBodyPoses": 312
+      },
+      "visible-burst-or-residue": {
+        "selected": 110,
+        "clear": 83,
+        "clearPositions": 83,
+        "clearPoses": 83,
+        "rawMisses": 27,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 83,
+        "clearHypotheticalBodyPoses": 83
+      },
+      "postburst-no-clearly-visible-gold-hand": {
+        "selected": 30,
+        "clear": 24,
+        "clearPositions": 16,
+        "clearPoses": 8,
+        "rawMisses": 6,
+        "clearPositionMismatches": 8,
+        "clearPoseMismatches": 16,
+        "clearHypotheticalBodyPositions": 16,
+        "clearHypotheticalBodyPoses": 8
+      },
+      "fade-or-partial-restoration": {
+        "selected": 50,
+        "clear": 0,
+        "clearPositions": 0,
+        "clearPoses": 0,
+        "rawMisses": 50,
+        "clearPositionMismatches": 0,
+        "clearPoseMismatches": 0,
+        "clearHypotheticalBodyPositions": 0,
+        "clearHypotheticalBodyPoses": 0
+      },
+      "restored-visible-gold-hand": {
+        "selected": 40,
+        "clear": 40,
+        "clearPositions": 26,
+        "clearPoses": 0,
+        "rawMisses": 0,
+        "clearPositionMismatches": 14,
+        "clearPoseMismatches": 40,
+        "clearHypotheticalBodyPositions": 26,
+        "clearHypotheticalBodyPoses": 0
+      }
+    },
+    "ordinaryPlusRestored": {
+      "selected": 360,
+      "clear": 352,
+      "clearPositions": 338,
+      "clearPoses": 312,
+      "rawMisses": 8,
+      "clearPositionMismatches": 14,
+      "clearPoseMismatches": 40,
+      "clearHypotheticalBodyPositions": 338,
+      "clearHypotheticalBodyPoses": 312
+    },
+    "throughAndAtModelGoal": {
+      "selected": 550,
+      "clear": 459,
+      "clearPositions": 437,
+      "clearPoses": 403,
+      "rawMisses": 91,
+      "clearPositionMismatches": 22,
+      "clearPoseMismatches": 56,
+      "clearHypotheticalBodyPositions": 437,
+      "clearHypotheticalBodyPoses": 403
+    },
+    "afterModelGoal": {
+      "selected": 0,
+      "clear": 0,
+      "clearPositions": 0,
+      "clearPoses": 0,
+      "rawMisses": 0,
+      "clearPositionMismatches": 0,
+      "clearPoseMismatches": 0,
+      "clearHypotheticalBodyPositions": 0,
+      "clearHypotheticalBodyPoses": 0
+    },
+    "allTimedCoreEventsExact": true,
+    "coreEvents": 225,
+    "allHooksExact": true,
+    "hooks": 43,
+    "effectFrames": 226,
+    "allFinalStateExact": true
+  },
+  "sourceGoalOnsets": 190,
+  "sourceGoalActualPrefixes": 39,
+  "sourceDeathOnsets": 190,
+  "nativeGoalScore": 2000,
+  "svgGoalScore": 2000,
+  "earned52FixtureSHA256": "0577a3bccaed01a24459e2763f61e66ab71ab66f3f9383a6ae52ba6016b80de6",
+  "peerReviewSHA256": "4ad3a1620cca6e237976dfb575af0bd36ff7cbc22723d95622412372bef2fab6",
+  "limits": [
+    "Restored40clear appearances give26matchingpositions and0poses; fourhumanpositionsmatch but11/12frameposeoffset remains",
+    "No native causal callback/reset epoch or particle RNG equivalence",
+    "Cold706binding provisional; two capture-wide one-frame residuals",
+    "No goal-misc parent/frame/phase or unrestricted DO confidence assignment",
+    "Optional bonuses/unvisitedmarkededges/allcarrierrides/audio/controllers/nonChild/originalsavecompatibility/performance unqualified"
+  ],
+  "locallyActiveScenes": 52,
+  "remainingScenes": 48,
+  "activationSHA256": "f2423143cc4584778a6093639916d6346cbc287fdd0989c520e8235b84caf1b6",
+  "normalBrowser": {
+    "tab": 92,
+    "url": "http://localhost:8087/clockwerx-html5/",
+    "readyBoardViewed": true,
+    "paused": true,
+    "deliverable": true
+  },
+  "temporaryQA": {
+    "tab": 135,
+    "closed": true
+  },
+  "preservedRollback": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spires\\previous-live-pilot",
+  "deliverySizes": {
+    "sourceBytes": 368572,
+    "assetBytes": 3531553,
+    "manifestBytes": 4969522,
+    "totalBytes": 8869647
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels",
+  "rootFilesPreserved": 4,
+  "saveKey": "systemless.clockwerx-html5.pilot.v1",
+  "evidenceHashes": {
+    "root-ui-review.json": "74b4d75152938a5b28223e980940fd6ca38a7a2edcd0df2c1da6e45f121d07e0",
+    "root-death-visual-review.json": "837aa4343ab666b1693a0a75401a60c778ab4253b35a55c98a6febb4c95b887e",
+    "root-death-cohort-clarification.json": "b6e926c0360a5d7134a9e284012221fbe30e593859b04f6f7bc08ed3eb3ce171",
+    "native-goal-model-comparison-receipt.json": "440a85f9506992da99fdf7d613e6568b96ab1b427bdcd475d44ed4dd2e5c9b8f",
+    "native-death-model-comparison-receipt.json": "f99b98fd3300ad20feb4018f5a0558542bcc0d80a9a94f905321991949a239c1",
+    "native-gameplay-visual-cohorts-supplement-receipt.json": "062ef415d3fb31f2749df031736e28b5411d997b49e6c2baba78babf1722420b"
+  }
+}

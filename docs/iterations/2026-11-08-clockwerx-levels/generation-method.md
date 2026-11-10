@@ -1,5 +1,11 @@
 # A practical level-generation method
 
+## Marked edges and moving goals
+
+For marked dots, a generator must model actions on edges as well as properties on vertices. Entering one marked pivot can be safe; a real human grab from one marked pivot to another is fatal. Preserve the source continuation after death and exclude terminal dying state from solver expansion. Do not apply the predicate to NPCs, Bounce or connectors. A graph that treats every marked vertex as lethal would reject valid routes.
+
+For moving goals, solve for the goal's stable identity and actual current pixels, including the source query tolerance and cached-position ordering. A query point may differ slightly from the carrier's actual center; retain both in evidence instead of rounding them into agreement. Test legal input windows and safe waiting while the carrier approaches. Keep independent goal decoration clocks out of collision and reachability state. Resetting a carrier and retaining its decoration clock are separate requirements; original post-death timing still needs its own witness. No generator is implemented.
+
 The useful starting point is a small generator for the mechanics already validated in the pilot. A full original-game generator needs the remaining mechanic checks first. Inventorying all100catalog levels does not establish that their rules are implemented. The [queue](queue.json) records that distinction; [requirements](requirements.md) accumulates observed behavior.
 
 The36-scene review adds a concrete validation warning: Stutter's old model produced a winning route at190 initial onsets but the original missed a transfer from a sinking dot. Correct source query semantics were necessary before the finite check meant anything. Keep independent original-game replay as a release gate for original-compatible generated maps. In timed compositions, model fuse progress, destroyed geometry, up/down phase, actor visibility and legal held-input windows. Preserve failed candidates as counterexamples; do not move actors or alter clocks to make them solve. The currently accepted Stutter route survives190 tested onsets, which does not prove safety for all possible player timing. Unvisited mixed blast interactions remain outside a generator's validated mechanic set.

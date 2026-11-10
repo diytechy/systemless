@@ -1,0 +1,33 @@
+{
+  "status": "source-integrated-not52gameplayaccepted",
+  "sourceReceiptSHA256": "ea6b7e6cd5caaf16d7411ed780425e723903707f5755d05ea5fb9bd04fe52991",
+  "peerReceiptSHA256": "fa79e473ed24f86cca01dcd664ef0a8ac52afae06341c91ee249d241d867e8c8",
+  "runtimeFiles": 37,
+  "checks": {
+    "public": 345,
+    "privateActual52": 9,
+    "privatePrior51": 9,
+    "packaging": 21
+  },
+  "priorScenes": 51,
+  "priorUpdates": 438742,
+  "priorSnapshots": 438793,
+  "priorTimedEvents": 5733,
+  "normal51Unchanged": true,
+  "rawColdSHA256": "bb3efcb24713d601bd4c6f744451f00a9143fe9ec3d7e72cdedbbae048311128",
+  "coldScanSHA256": "cf9b6c93a8d46d2c2dd1011914b2622666f233534ccda3ba97404e3ea7be4c48",
+  "coldSelectionSHA256": "55f9a601b4fcb716e2a5447ff1d1509dba54248627d6f5610ed0ec44fb070ee0",
+  "cold": {
+    "prefix": 706,
+    "tie": 707,
+    "clear": 322,
+    "positions": 322,
+    "poses": 302,
+    "mismatchCaptureTicks": [
+      2074,
+      2644
+    ],
+    "noStateClockPhaseAssignment": true
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\spires"
+}

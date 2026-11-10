@@ -87,3 +87,14 @@ export function createProtectionOverlay(clockCount=0){
   }
  };
 }
+
+// DOmisc TYPE1, group30017..22, shares unscaled50 with TYPE2 protection.
+// Source DOReset does not recreate/rephase this separate goal sprite.
+export function createGoalMisc({clockCount=0,rawBase,allowGoalMisc=false}={}){
+ if(allowGoalMisc!==true)throw new Error('Separate source goal misc capability required');
+ const count=n=>{if(!Number.isInteger(n)||n<0)throw new RangeError('Nonnegative source count required');};
+ const point=p=>{if(!p||!Number.isInteger(p.x)||!Number.isInteger(p.y))throw new TypeError('Source goal raw base required');return {...p};};
+ count(clockCount);let frame=17,reference=clockCount,base=point(rawBase);
+ const snapshot=()=>({group:300,frame,first:17,last:22,step:1,visible:true,layer:4,reference,rawBase:{...base}});
+ return {snapshot,position(p){base=point(p);return snapshot();},observeClock(n){count(n);if(n<reference)throw new RangeError('Persistent goal clock cannot rewind');if(n!==reference){reference=n;frame=frame===22?17:frame+1;}return snapshot();}};
+}

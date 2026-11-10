@@ -4,7 +4,7 @@ const frameIn=(atlas,frame)=>atlas?.frames?.find(f=>f.frame===frame);
 
 // Select by requested frame availability, never solely by live burnt state.
 export function sourceDotPaint(vector,group,frame){
- for(const atlas of [String(group)==='4100'?vector.sourceDotShadows:undefined,vector.bombDots?.[group],vector.specialDots?.[group]]){const f=frameIn(atlas,frame);if(f)return {file:atlas.file,...f};}
+ for(const atlas of [String(group)==='4100'?vector.sourceDotShadows:undefined,vector.sourceMarkedDots?.[group],vector.bombDots?.[group],vector.specialDots?.[group]]){const f=frameIn(atlas,frame);if(f)return {file:atlas.file,...f};}
  if(String(group)==='4100'&&frame>=9&&frame<=16){
   const atlas=vector.specialDots?.['4100'],f=frameIn(atlas,79);
   // Raw4100:9..16 and79 share image0 and identical placement. Bonus1..8 do not.
@@ -19,7 +19,15 @@ export function sourceDotPaint(vector,group,frame){
 
 export function sourceDotLook(dot,special){
  if(special?.main)return {frame:special.main.frame,visible:special.main.visible};
- return {frame:dot.burnt?92+dot.color:(dot.bonus&&!dot.collected?1:9)+dot.color,visible:dot.sourceCollidable!==false};
+ return {frame:dot.burnt?92+dot.color:dot.transferDeath?108+dot.color:(dot.bonus&&!dot.collected?1:9)+dot.color,visible:dot.sourceCollidable!==false};
+}
+
+// Separate source DOmisc TYPE1 atlas. Legacy time-based goal assets are not
+// silently reinterpreted as variable original frame rectangles.
+export function sourceGoalPaint(vector,frame){
+ const size={17:18,18:18,19:16,20:14,21:16,22:18}[frame],atlas=vector.sourceGoalMisc,f=frameIn(atlas,frame),offset=size===18?7:size===16?8:9;
+ if(!size||!f||f.sourceFrame!==undefined&&f.sourceFrame!==frame||f.sourceGroup!==undefined&&f.sourceGroup!==300||f.x!==offset||f.y!==offset||f.width!==size||f.height!==size)throw new Error('Required original goal misc17..22 DTO unavailable');
+ return {file:atlas.file,...f};
 }
 
 export function sourceSparkEraseRect(event,frames){
@@ -38,7 +46,8 @@ export function createSourceBackground({createCanvas,seed,paint}){
  return {
   draw(round,field,{width=640,height=480}={}){
    if(!Number.isInteger(width)||!Number.isInteger(height)||width<1||height<1)throw new Error('Finite source background canvas size required');
-   const ops=round.bombScene.backgroundPaints,key=JSON.stringify([field,width,height]);
+   const ops=round.bombScene?.backgroundPaints??round.sourcePaint?.backgroundPaints,key=JSON.stringify([field,width,height]);
+   if(!Array.isArray(ops))throw new Error('Explicit source background journal required');
    if(!layer){layer=createCanvas();context=layer.getContext('2d');}
    if(board!==round.board||journal!==ops||fieldKey!==key||ops.length<applied){
     board=round.board;journal=ops;fieldKey=key;applied=0;layer.width=width;layer.height=height;context.setTransform(1,0,0,1,0,0);context.clearRect(0,0,width,height);context.setTransform(width/640,0,0,height/480,0,0);context.imageSmoothingEnabled=true;

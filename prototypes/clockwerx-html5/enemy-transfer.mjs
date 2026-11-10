@@ -1,3 +1,4 @@
+import {assertMovingMarkedDots,assertMovingMarkedActor} from './marked-transfers.mjs';
 import {assertSlidingTeleportDots,assertSlidingTeleportActor} from './sliding-teleports.mjs';
 import {startSliding,animateSliding,stopSliding} from './sliding.mjs';
 import {stepSourceProgram} from './programs.mjs';
@@ -48,7 +49,7 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingBombs=false,sourceQuery,onSourceEvent=()=>{}
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingBombs=false,allowMovingMarkedGoals=false,sourceQuery,onSourceEvent=()=>{}
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
@@ -59,9 +60,10 @@ export function advanceStaticEnemyCallback(state,classDelta,{
    if(!allowSliding||!allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingPrograms||allowSlidingGoodies||allowSlidingGoodiePrograms||allowSlidingOil||allowSlidingBombs||allowSlidingBombCheckpoints||typeof onSourceEvent!=='function')throw new Error('Separate static ordinary HY/EX helper scope required');
    assertSlidingTeleportDots(dots);assertSlidingTeleportActor(state,{program});
   }
-  if(allowMovingDots){
+  if(allowMovingMarkedGoals){if(!allowMovingDots||allowMovingBombs||allowSliding||allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingBombs||allowSlidingGoodies||allowSlidingOil||typeof sourceQuery!=='function')throw new Error('Separate moving marked helper capability required');assertMovingMarkedDots(dots);assertMovingMarkedActor(state,{program,dots});}
+  if(allowMovingDots&&!allowMovingMarkedGoals){
    if(!allowMovingBombs||!allowSliding||allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingBombs||allowSlidingPrograms||allowSlidingGoodies||allowSlidingOil||allowSlidingTeleports||typeof sourceQuery!=='function'||![1,2].includes(state.sourceActorType)||state.speedClass!==1||state.checksWalls!==false||program!==null&&(!/^[bfn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1||state.sourcePC>program.length)||dots.some(d=>!['static','moving-program'].includes(d.motion)||d.teleport||d.ring||d.waystation||d.upDown||d.transferDeath||d.slowdown||d.motion==='moving-program'&&(d.slideMask||d.bonus||d.kind!=='dot')))throw new Error('Separate moving BO ordinary class1 b/f/n helper scope required');
-  }else if(allowMovingBombs)throw new Error('Moving BO helper requires moving-dot core');
+  }else if(allowMovingBombs&&!allowMovingDots)throw new Error('Moving BO helper requires moving-dot core');
   dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding,allowMovingDots));
   if(allowSlidingPrograms&&dots.some(d=>d.slideMask&&d.humanCanGrab!==true))throw new Error('Static EX programs require human-available endpoints');
   if(allowSlidingPrograms&&(!allowSliding||![1,2,3].includes(state.sourceActorType)||![1,2,3].includes(state.speedClass)||state.checksWalls!==false||program!==null&&(!/^[fn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1)))throw new Error('Separate ordinary wall-free f/n sliding program scope required');

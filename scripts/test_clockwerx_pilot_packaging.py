@@ -101,6 +101,22 @@ class PilotPackagingTests(unittest.TestCase):
         self.save_manifest()
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
+    def test_moving_goal_and_marked_atlases_require_verified_payloads(self):
+        for family in ('sourceGoalMisc','sourceMarkedDots'):
+            with self.subTest(family=family):
+                value=dict(file='missing.svg')
+                self.manifest['vectorAssets']=dict(dots=[],hands={},**{family:value if family=='sourceGoalMisc' else {'300':value}})
+                self.save_manifest()
+                with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+    def test_moving_goal_and_marked_atlas_names_cannot_escape_asset_directory(self):
+        for family in ('sourceGoalMisc','sourceMarkedDots'):
+            with self.subTest(family=family):
+                value=dict(file='../outside.svg')
+                self.manifest['vectorAssets']=dict(dots=[],hands={},**{family:value if family=='sourceGoalMisc' else {'4100':value}})
+                self.save_manifest()
+                with self.assertRaisesRegex(ValueError,'Invalid private asset filename'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
     def test_connector_atlas_must_be_verified_before_copy(self):
         self.manifest['vectorAssets']=dict(dots=[],hands={},connectors=dict(file='missing-connectors.svg'))
         self.save_manifest()

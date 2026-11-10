@@ -1,3 +1,4 @@
+import {markedGrabPrelude} from './marked-transfers.mjs';
 // DOFindGrabbable / indexed DOCanGrab and WAGrab source primitives. The
 // caller owns scene admission, controller dispatch and effect/PC adapters.
 const integer=(n,a,b)=>Number.isInteger(n)&&n>=a&&n<=b;
@@ -47,14 +48,15 @@ export function queryIndexedSourceGrab(dots,{originIndex,offset,human,connectors
 // fabricated at the requested point. Logical DO centers are raw DO+(16,15);
 // logical WA pivots are raw WA+(44,43). Each source comparison uses two pixels
 // of the same family, so these fixed translations cancel in signed differences.
-export function grabSourceActor(actor,result,{dots,connectors=[],physicalPoint,release,place,grab,onTransfer=()=>{},allowMovingQueries=false}={}){
+export function grabSourceActor(actor,result,{dots,connectors=[],physicalPoint,release,place,grab,onTransfer=()=>{},allowMovingQueries=false,allowMarkedTransfers=false,onMarkedDeath}={}){
  qualified(allowMovingQueries);inventory(dots);
  const human=[0,6].includes(actor?.sourceActorType),old=dots.find(d=>d.id===actor?.pivot),g=result?.grab,target=dots.find(d=>d.id===g?.dot);
- if(!actor||![0,1,2,3,6].includes(actor.sourceActorType)||!integer(actor.sourceSlot,0,30)||human!==(actor.sourceSlot<2)||(human?actor.speedClass!==0:actor.speedClass!==1||actor.checksWalls!==false)||!integer(actor.frame,0,63)||!Number.isInteger(actor.unwrappedFrame)||(actor.unwrappedFrame&63)!==actor.frame||![-1,1].includes(actor.direction)||!old||!target||result.allowed!==true||typeof g.realDot!=='boolean'||g.sourceIndex!==target.sourceIndex||old.transferDeath||target.transferDeath)throw new Error('Qualified canonical ordinary source grab and explicit typed result required');
+ if(!actor||![0,1,2,3,6].includes(actor.sourceActorType)||!integer(actor.sourceSlot,0,30)||human!==(actor.sourceSlot<2)||(human?actor.speedClass!==0:actor.speedClass!==1||actor.checksWalls!==false)||!integer(actor.frame,0,63)||!Number.isInteger(actor.unwrappedFrame)||(actor.unwrappedFrame&63)!==actor.frame||![-1,1].includes(actor.direction)||!old||!target||result.allowed!==true||typeof g.realDot!=='boolean'||g.sourceIndex!==target.sourceIndex||!allowMarkedTransfers&&(old.transferDeath||target.transferDeath))throw new Error('Qualified canonical ordinary source grab and explicit typed result required');
  for(const fn of [release,place,grab,onTransfer])if(typeof fn!=='function'||fn.constructor?.name==='AsyncFunction')throw new TypeError('Complete synchronous WAGrab adapters required');
  const sync=(fn,...a)=>{const v=fn(...a);if(v&&typeof v.then==='function')throw new TypeError('WAGrab adapter returned a Promise');};
  const before=point(physicalPoint),from=actor.pivot;let connector;
  if(!g.realDot){connector=connectors.find(e=>e.id===g.connector);if(!human||!connector||connector.first!==target.id)throw new Error('Moving-human source rail specification required');connectorRect(connector,dots);}
+ if(allowMarkedTransfers)markedGrabPrelude(actor,old,target,g,{allowMarkedTransfers,onDeath:onMarkedDeath});
  sync(release,old,actor);actor.pivot=target.id;actor.unwrappedFrame+=32;actor.frame=actor.unwrappedFrame&63;
  let placed;
  if(g.realDot){actor.sliding=false;delete actor.sourceRailSpritePoint;placed={...target.currentPixel};}

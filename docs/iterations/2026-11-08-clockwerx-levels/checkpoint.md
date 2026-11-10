@@ -1,6 +1,6 @@
 # Progress checkpoint
 
-Latest workload correction: the first53cold launch was deferred before starting an emulator because unrelated release builds/tests began again. `exile/launch-deferred-01.json` records the guard. No original53output exists yet. Root must recheck the heavy-work lane and resume the already prepared owned runner once clear; independent53source and54domain-peer work continue. Do not kill unowned processes.
+Latest workload: original53cold is CLOSED, exec46726/ownedPID255272 observedexit0 and absent,2224frontend/2824guest/zero/35PNGs. Report7b5460c9a5f6724ff530453d1fa7184deabcc798a1a43c75d2baeb436930bea5. Root viewed all35images, correct53Exile/327000/score0/no visible death; exile/initial-review.json and native-cold-closure.json preserve provenance. Fixture0577a3bc/original03f7unchanged. SQispreparing source-blind53fitter; do not duplicate original. Earlier release-build deferral remains in exile/launch-deferred-01.json. Source53implementation and54sourcepeer continue independently.
 
 52 bounded Child scenes are accepted and locally active through Spires; 48 remain. Continue on SVG-Port through level100 without per-level stops. Two or more runners are authorized. New shared mechanics qualify in series; independent source, raw and frozen-core content work may overlap. Original emulators, conversions, fitters, benchmarks and heavy builds stay sequential. No push/upload/deployment or task-tracking automation. Do not restart the completed69-title library workflow. Private media/maps/art/programs/preferences/disassembly stay on D:.
 

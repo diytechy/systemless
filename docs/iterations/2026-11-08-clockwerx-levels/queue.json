@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 60,
-  "currentAction": "59accepted/source43normalactive. Source44v2bfe8 integrated419runtime/21unchangedpackagingPASS;59full2600 and paired51/56/58 SEARCH39880PASS onv1, sole siblingvalidatorcorrectionreviewed. Actual60init02PASS1ctor2resets0updates;init01prectorfailurekept. Originalrawcompile138centers770descriptorsCLOSED;independentarrayauditor/fitterpreparing. Original60coldCLOSEDall35captures/noPNGview,viewgatepending. Allactual/exclusivelanesclosed.",
+  "currentAction": "59accepted/source43normalactive. 60source44v2/initchecksPASS;originalcoldraw+savedmatrixauditsPASS;686provisional/tie687 all3729ranksRootverified,4point13poseresidualsretained. Cold5648 +functional3deaths7266=12914/250000,237086remain/RNG90. Allfreshprefixstate+metadataPASS. Saveddependencycacheworldmatches7266nonterminalrows;temporalhumanpredictorproposalpreparing/noqualificationorsearchyet. Sharedreplayblankpacketready. Allactual/exclusivelanesCLOSED.",
   "levels": [
     {
       "ordinal": 1,
@@ -4921,16 +4921,46 @@
       ],
       "sourceRuntimeFreezeSHA256": "bfe8ddc23c70622541a1a685e8e8c1bedf12d8c357c685c145e5562960f27067",
       "runtimeTestCount": 419,
-      "actual60Updates": 0,
+      "actual60Updates": 12914,
       "dedicatedNativeCold": {
-        "status": "closed-actions-captures-not-yet-viewed",
+        "status": "all35-viewed-after-source-method-freeze-original60-confirmed",
         "PID": 142956,
         "captures": 35,
         "frontendTicks": 2224,
         "guestTicks": 2824,
         "captureFreezeSHA256": "06bd20481467c2953bfd6f34bdefbb13e1fe2fded4f94e2f7b498888aa483b63",
         "reportSHA256": "0e9ac65d846ecd9383462a676a88fc5d94e303fea4737884cab62cc70ba7f1a8"
-      }
+      },
+      "functionalUpdatesSpent": 12914,
+      "functionalUpdateBudget": 250000,
+      "functionalUpdatesRemaining": 237086,
+      "coldModelUpdates": 5648,
+      "coldModelStatus": "complete-5648-no-terminal-prefix-unselected",
+      "originalSavedFitAuditSHA256": "ddc6c2b62fc09d45e7484281ce9c7eaa457317ee820223b59a73adb427ae3149",
+      "rootColdFitReleaseSHA256": "945610cbc4eac0b9fbe43b181661cf61967354f8b149eb3a221a26fe541932b0",
+      "coldPrefixSelected": 686,
+      "coldPrefixTies": [
+        686,
+        687
+      ],
+      "coldRepresentativePositionMatches": 178,
+      "coldRepresentativePoseMatches": 169,
+      "coldClearBoardObservations": 182,
+      "coldRankingReviewSHA256": "232a2c6e201b63c7016fa278b24a6a422bfdc8ac58ddb337b0752de94c1d55f0",
+      "functionalDiscovery01": {
+        "status": "three-original-physics-deaths-no-goal",
+        "updates": 7266,
+        "constructors": 3,
+        "RNGDraws": 90,
+        "steps": [
+          2646,
+          1678,
+          2942
+        ],
+        "prefixSampleAndMetadataExact": true,
+        "closure": "hitchhiker-functional01-owned-process/closure.json"
+      },
+      "timelineAuditSHA256": "466840401b367beb84d403c4fb2ca45c00f616e05aafc1331a36d7fb6e8d27bd"
     },
     {
       "ordinal": 61,

@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 51,
-  "currentAction": "51Bourbon shared moving source independently approved/integrated; strict goal/native/BOdeath/UI qualification pending.50accepted; keep going.",
+  "currentOrdinal": 52,
+  "currentAction": "51Bourbon accepted/locally active with reset-phase limits;52Spires new moving-goal/marked-transfer core inprivate serialimplementation; source-only raw domain andmarkedartpreviewparallel. Root original52cold fromearned51 nextafterconversionlaneclosed.",
   "levels": [
     {
       "ordinal": 1,
@@ -3906,11 +3906,24 @@
       "menuTitle": "Bourbon",
       "resourceTitle": "Bourbon",
       "sha256": "b8743bc0a3bca902bf9406215ba0bfc88418d4804b9335754b203e91020e27e8",
-      "status": "serial-moving-dot-rich-source-and-native-cold-next",
-      "nativeEvidence": [],
-      "requirements": [],
-      "svgStatus": "not-reviewed",
-      "generationConstraints": [],
+      "status": "bounded-moving-rich-composition-accepted-with-limits",
+      "nativeEvidence": [
+        "bourbon-review.md",
+        "bourbon-review.json"
+      ],
+      "requirements": [
+        "Preserve serialized identity/current+cached moving centers/source-slot query precedence",
+        "Three-pixel inner callbacks and sixteen-callback program instructions with persistent clocks",
+        "Ordered current-position rider dispatch and separate fixed bomb geometry",
+        "Imported169 request retains effective original loader frame0; original outlines independent of SVG"
+      ],
+      "svgStatus": "root-goal-and-spark-contact-reset-reviewed-locally-active",
+      "generationConstraints": [
+        "Timed safe carrier boarding/leaving and goal identity acquisition, not coarse connectivity",
+        "Explicit capability composition guards; moving goal, marks, up/down and other joins require separate qualification",
+        "Four clear restored native human positions differ from model moving-carrier phase after death; no original-equivalent restart schedule claimed",
+        "Typed rail entry and moving-dot blast damage remain synthetic-contract-only"
+      ],
       "structuralStatus": "complete",
       "mechanicInventory": {
         "presentDots": 47,
@@ -3980,7 +3993,7 @@
       "menuTitle": "Spires",
       "resourceTitle": "Spires",
       "sha256": "49e950ac288a53abb47b4d53acdafd5969245527be7941ed9c12424e70063b53",
-      "status": "queued",
+      "status": "serial-moving-goal-and-static-mark-source-implementation",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",

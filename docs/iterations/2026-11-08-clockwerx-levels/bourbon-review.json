@@ -1,0 +1,203 @@
+{
+  "status": "passed-with-explicit-fidelity-limits",
+  "ordinal": 51,
+  "title": "Bourbon",
+  "sourceRevision": "47b1d6ee9f36d99c72f49e2df57fc11430067ade",
+  "sourceChecks": {
+    "public": 328,
+    "privateActual": 9,
+    "packaging": 19
+  },
+  "qaGoalAndResetViewed": true,
+  "finalGoalRouteRestored": true,
+  "priorDefinitionsUnchanged": 50,
+  "priorPayloadsUnchanged": 100,
+  "newBackdropPayloads": 1,
+  "goalSummary": {
+    "shots": 46,
+    "actors": {
+      "all": 276,
+      "clear": 269,
+      "clearPositions": 269,
+      "clearPoses": 269
+    },
+    "throughModelGoal": {
+      "all": 258,
+      "clear": 251,
+      "clearPositions": 251,
+      "clearPoses": 251
+    },
+    "afterModelGoal": {
+      "all": 18,
+      "clear": 18,
+      "clearPositions": 18,
+      "clearPoses": 18
+    },
+    "EX": {
+      "all": 184,
+      "clear": 168,
+      "matches": 168
+    },
+    "beforeModelReset": {
+      "all": 276,
+      "clear": 269,
+      "clearPositions": 269,
+      "clearPoses": 269
+    },
+    "afterModelReset": {
+      "all": 0,
+      "clear": 0,
+      "clearPositions": 0,
+      "clearPoses": 0
+    },
+    "strictPhysicalFinalState": true,
+    "strictPhysicalTimedCoreEvents": true,
+    "coreEvents": 62
+  },
+  "deathSummary": {
+    "shots": 53,
+    "actors": {
+      "all": 318,
+      "clear": 277,
+      "clearPositions": 268,
+      "clearPoses": 227
+    },
+    "throughModelGoal": {
+      "all": 318,
+      "clear": 277,
+      "clearPositions": 268,
+      "clearPoses": 227
+    },
+    "afterModelGoal": {
+      "all": 0,
+      "clear": 0,
+      "clearPositions": 0,
+      "clearPoses": 0
+    },
+    "EX": {
+      "all": 212,
+      "clear": 184,
+      "matches": 184
+    },
+    "beforeModelReset": {
+      "all": 246,
+      "clear": 233,
+      "clearPositions": 233,
+      "clearPoses": 227
+    },
+    "afterModelReset": {
+      "all": 72,
+      "clear": 44,
+      "clearPositions": 35,
+      "clearPoses": 0
+    },
+    "strictPhysicalFinalState": true,
+    "strictPhysicalTimedCoreEvents": true,
+    "coreEvents": 76
+  },
+  "deathCohortSummaries": {
+    "explosion-burst-human-not-qualified": {
+      "captures": 9,
+      "actorAll": 54,
+      "actorClear": 45,
+      "actorPositions": 45,
+      "actorPoses": 45,
+      "humanClear": 0,
+      "humanPositions": 0,
+      "humanPoses": 0,
+      "EXClear": 36,
+      "EXMatches": 36
+    },
+    "fade-out": {
+      "captures": 3,
+      "actorAll": 18,
+      "actorClear": 0,
+      "actorPositions": 0,
+      "actorPoses": 0,
+      "humanClear": 0,
+      "humanPositions": 0,
+      "humanPoses": 0,
+      "EXClear": 0,
+      "EXMatches": 0
+    },
+    "ordinary-human-glyph-visible": {
+      "captures": 31,
+      "actorAll": 186,
+      "actorClear": 183,
+      "actorPositions": 183,
+      "actorPoses": 177,
+      "humanClear": 28,
+      "humanPositions": 28,
+      "humanPoses": 27,
+      "EXClear": 113,
+      "EXMatches": 113
+    },
+    "partial-fade-in-restored-layout": {
+      "captures": 1,
+      "actorAll": 6,
+      "actorClear": 0,
+      "actorPositions": 0,
+      "actorPoses": 0,
+      "humanClear": 0,
+      "humanPositions": 0,
+      "humanPoses": 0,
+      "EXClear": 0,
+      "EXMatches": 0
+    },
+    "postburst-gold-hand-not-visible": {
+      "captures": 4,
+      "actorAll": 24,
+      "actorClear": 20,
+      "actorPositions": 20,
+      "actorPoses": 5,
+      "humanClear": 0,
+      "humanPositions": 0,
+      "humanPoses": 0,
+      "EXClear": 16,
+      "EXMatches": 16
+    },
+    "restored-human-glyph-visible": {
+      "captures": 5,
+      "actorAll": 30,
+      "actorClear": 29,
+      "actorPositions": 20,
+      "actorPoses": 0,
+      "humanClear": 4,
+      "humanPositions": 0,
+      "humanPoses": 0,
+      "EXClear": 19,
+      "EXMatches": 19
+    }
+  },
+  "sourceGoalOnsets": 190,
+  "sourceDeathOnsets": 190,
+  "sourceDeathActualPrefixes": 39,
+  "rawGoalReceiptSHA256": "74bec0cfe4684206317b43670e1f694c64b0dda7db1c76d79dcbf88e0cab91ce",
+  "rawDeathReceiptSHA256": "e5584cfbf60181aac5ae3b21885f988b8283b0f6994e5f3c83bbe6d53c52acf5",
+  "rootVisualReviewSHA256": "51abf8db2755495f60b0a589ba057e484a573dd77d09c86235e6933639040d5d",
+  "rootVisualInterpretationErratumSHA256": "ecc2d4afe4e974a1c8c68d1c9758dc007fa1a1e8f7f05475ac1e000742cde974",
+  "peerReviewSHA256": "574c28131ba79d8f3721202c21d2fbad3d725fafdd1e83d253a425a7400392d4",
+  "nativeGoalScore": 6000,
+  "svgGoalScore": 6000,
+  "earned51FixtureSHA256": "844b465a36b089b5e7e23cb25209f024c8b6e68c3937a36e0f28e38eea68d231",
+  "limits": [
+    "BEST cold692/693 is provisional, one2404capture residual; no independent GO/DO epoch.",
+    "Death/reset presentation differs; four clear restored human physical positions all differ on moving carrier. No causal collision-lag or native reset callback time inferred from visible glyphs.",
+    "Actual typed-rail entry, moving-dot blast damage, all optional bonuses/starters/cache reset, audio/controllers/nonChild/saves/performance unqualified."
+  ],
+  "locallyActiveScenes": 51,
+  "remainingScenes": 49,
+  "activationSHA256": "382c9d5bed49ae2c7825dde4349b8b6ae2e3086c063b466e9950f11e3807e185",
+  "normalBrowser": "92 paused/playable/deliverable, normal8087",
+  "temporaryQA": "134 closed",
+  "preservedRollback": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bourbon\\previous-live-pilot",
+  "deliverySizes": {
+    "sourceBytes": 351955,
+    "assetBytes": 3512098,
+    "manifestBytes": 4883987,
+    "totalBytes": 8748040
+  },
+  "privateEvidenceRoot": "D:\\SystemlessBuild\\diagnostics\\2026-11-08-clockwerx-levels\\bourbon",
+  "rootFilesPreserved": 4,
+  "saveKey": "systemless.clockwerx-html5.pilot.v1"
+}

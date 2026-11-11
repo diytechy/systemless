@@ -1,8 +1,8 @@
 """Source-only angular exclusion for free class1 busters at fixed pivots."""
 
 
-def free_buster_packs(level, *, allow_joined_board=False, allow_wrapped_phases=False):
-    if type(allow_joined_board) is not bool or type(allow_wrapped_phases) is not bool:
+def free_buster_packs(level, *, allow_joined_board=False, allow_wrapped_phases=False, allow_class3=False):
+    if type(allow_joined_board) is not bool or type(allow_wrapped_phases) is not bool or type(allow_class3) is not bool:
         raise ValueError("Literal joined-board pack capability required")
     if level.get("structuralStatus") != "complete" or level.get("header", {}).get("version") != 12:
         raise ValueError("Complete version12 source required for free buster packs")
@@ -33,7 +33,7 @@ def free_buster_packs(level, *, allow_joined_board=False, allow_wrapped_phases=F
             if key in endpoints or len(pivot) != 1 or not pivot[0]["present"] or \
                     pivot[0]["flagsRaw"] & 0x380 or pivot[0].get("inlineProgram"):
                 raise ValueError("Joined-board buster packs require fixed non-connector pivots")
-        if len(w) < 8 or w[7] != 1 or a["programReferenceRaw"] != -1 or \
+        if len(w) < 8 or w[7] not in ((1, 3) if allow_class3 else (1,)) or a["programReferenceRaw"] != -1 or \
                 w[4] not in (1, 65535) or not 0 <= w[3] < (64 if allow_wrapped_phases else 32) or a["initialFrameHalfIndexRaw"] != w[3]:
             raise ValueError("Unprogrammed class1 buster source declarations required")
         key = str(position["column"]) + "," + str(position["row"])
@@ -43,6 +43,8 @@ def free_buster_packs(level, *, allow_joined_board=False, allow_wrapped_phases=F
         if allow_wrapped_phases:
             pack.setdefault("rawHalfIndices", []).append(w[3])
         pack["directions"].append(1 if w[4] == 1 else -1)
+        if allow_class3:
+            pack.setdefault("speedClasses", []).append(w[7])
     if not packs:
         raise ValueError("No active source buster pack")
     for pack in packs.values():
@@ -53,7 +55,10 @@ def free_buster_packs(level, *, allow_joined_board=False, allow_wrapped_phases=F
         gap = min(gaps)
         if gap < 4:
             raise ValueError("Dense/overlapping source pack remains unqualified")
-        pack.update(maxActors=len(frames), minimumFrameSeparation=gap, speedClass=1,
+        if allow_class3 and len(set(pack["speedClasses"])) != 1:
+            raise ValueError("One clock class per fixed source pack required")
+        speed = pack.pop("speedClasses")[0] if allow_class3 else 1
+        pack.update(maxActors=len(frames), minimumFrameSeparation=gap, speedClass=speed,
                     direction=pack.pop("directions")[0])
     return packs
 

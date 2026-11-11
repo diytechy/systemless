@@ -13,6 +13,21 @@ def fixture():
 
 
 class SourcePackTests(unittest.TestCase):
+    def test_class3_is_explicit_and_clock_classes_cannot_mix_at_one_pivot(self):
+        level = fixture()
+        for a in level['blocks'][0]['records']:
+            a['rawWords'][7] = 3
+        with self.assertRaises(ValueError):
+            free_buster_packs(level)
+        pack = free_buster_packs(level, allow_class3=True)['2,1']
+        self.assertEqual(pack['speedClass'], 3)
+        self.assertEqual(pack['minimumFrameSeparation'], 6)
+        level['blocks'][0]['records'][0]['rawWords'][7] = 1
+        with self.assertRaisesRegex(ValueError, 'One clock class'):
+            free_buster_packs(level, allow_class3=True)
+        with self.assertRaises(ValueError):
+            free_buster_packs(fixture(), allow_class3=1)
+
     def test_wrapped_raw_half_indices_are_explicit_and_separation_uses_canonical_frames(self):
         level = fixture()
         for a, half in zip(level['blocks'][0]['records'], [35, 33, 31]):

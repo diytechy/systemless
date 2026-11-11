@@ -46,6 +46,8 @@ def main():
                         help="Normalize source half-indices0..63 after doubling, retaining the raw words")
     parser.add_argument("--allow-moving-programmed-buster-proposals", action="store_true",
                         help="Source-only union proposals; dense busters remain excluded from clear-fit counts")
+    parser.add_argument("--allow-class3-free-buster-packs", action="store_true",
+                        help="Explicitly admit class3 alongside class1, with one source clock per fixed pack")
     a = parser.parse_args()
     if not 1 <= a.max_seconds <= 180 or a.output.exists():
         parser.error("Expected a fresh output and a 1–180 second fit limit")
@@ -63,19 +65,20 @@ def main():
     packs = {}
     buster_union = None
     if a.allow_moving_programmed_buster_proposals:
-        if a.allow_free_buster_packs or a.allow_fixed_buster_joined_board or a.allow_wrapped_buster_phases:
+        if a.allow_free_buster_packs or a.allow_fixed_buster_joined_board or a.allow_wrapped_buster_phases or a.allow_class3_free_buster_packs:
             parser.error("Proposal-only buster union cannot be combined with fixed pack fitting")
         try:
             buster_union = buster_union_inventory(level)
         except ValueError as error:
             parser.error(str(error))
         groups[5] = "3900"
-    if (a.allow_fixed_buster_joined_board or a.allow_wrapped_buster_phases) and not a.allow_free_buster_packs:
+    if (a.allow_fixed_buster_joined_board or a.allow_wrapped_buster_phases or a.allow_class3_free_buster_packs) and not a.allow_free_buster_packs:
         parser.error("Joined-board fitting requires free-buster pack qualification")
     if a.allow_free_buster_packs:
         try:
             packs = free_buster_packs(level, allow_joined_board=a.allow_fixed_buster_joined_board,
-                                      allow_wrapped_phases=a.allow_wrapped_buster_phases)
+                                      allow_wrapped_phases=a.allow_wrapped_buster_phases,
+                                      allow_class3=a.allow_class3_free_buster_packs)
         except ValueError as error:
             parser.error(str(error))
         groups[5] = "3900"
@@ -150,6 +153,8 @@ def main():
             method["fixedBusterJoinedBoard"] = True
         if a.allow_wrapped_buster_phases:
             method["wrappedBusterHalfIndices"] = True
+        if a.allow_class3_free_buster_packs:
+            method["class3FreeBusterPacks"] = True
     if buster_union:
         method.update(movingProgrammedBusterProposals=buster_union,
                       busterUnionCode=pin(Path(__file__).with_name("source_actor_busters.py")))

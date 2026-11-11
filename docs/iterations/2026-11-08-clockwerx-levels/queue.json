@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 69,
-  "currentAction": "68 Jumble accepted and active on Source52. Both engines complete for16000; 66 prior retained routes match. Continue Mishmash69 from earned-through68 at424000.",
+  "currentOrdinal": 70,
+  "currentAction": "69 Mishmash accepted and active on Source53v2. Both engines complete for1000;67 prior retained routes match. Continue Descent70 from earned-through69 at425000.",
   "levels": [
     {
       "ordinal": 1,
@@ -5810,10 +5810,15 @@
       "menuTitle": "Mishmash",
       "resourceTitle": "Mishmash",
       "sha256": "6085670a0d7fdb57e7baea2876a532016962021e38050fac1ceea31aad1c5d98",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "mishmash69-native-cold01/root-original-entry-review.json",
+        "mishmash69-native-goal01/root-original-goal-review.json",
+        "mishmash69-native-goal01/root-native-comparison.json",
+        "mishmash69-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5841,7 +5846,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -5871,7 +5876,31 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "review": "mishmash-review.md",
+      "functionalUpdatesUsed": 32400,
+      "functionalUpdatesRemaining": 217600,
+      "sourceTests": 438,
+      "retainedSweep": {
+        "matchedGoals": 67,
+        "constructionOnly": 1,
+        "pairedUpdates": 530484,
+        "checkpoints": 8128,
+        "seconds": 71.8027804,
+        "sha256": "f09f366510e0e8c3945c18f9ecce638bd1a5cd3e637fda6a71b013c83be35028"
+      },
+      "deliveryAcceptance": {
+        "score": 1000,
+        "updates": 4880,
+        "transfers": 17,
+        "nextOrdinal": 70,
+        "nativeCampaignTotal": 425000,
+        "rootAcceptanceSHA256": "9ad4f8dace9cc1f84bf57969de5142ececb7817519bc2ba609b5923a0e1edef8",
+        "activationSHA256": "218c35c3d60ce08cc4e6d20f276e3582c5963b1c08dbe896daae1f103e8be192",
+        "rootProofSHA256": "521006e8cd60216b5165aff91ed0d5c1af23bdaa333a70029865db47268f7521",
+        "earnedThrough69FixtureSHA256": "9abd23c7eec000e150415ba24801d9799d17598527b9d7c0d8fdc30da0ea86d6"
+      },
+      "coldComparisonBoundary": "Fixed686:187/192 positions and181/192 poses match;2/33 images are one common callback ahead. All108 clear chosen original-route observations match."
     },
     {
       "ordinal": 70,

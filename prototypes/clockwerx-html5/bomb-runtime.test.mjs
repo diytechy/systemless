@@ -2,6 +2,14 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {BombRuntime,BOMB_CLOCKS,assertBombRuntimeScope,assertGoodieRuntimeScope,applyBombDotHit,bombStationaryDots,bombMovingDots,bombActors} from './bomb-runtime.mjs';
 
+test('explicit BO/EX blast hides a sliding free orbital in source slot order',()=>{
+ const a={sourceSlot:2,sourceActorType:4,speedClass:1,checksWalls:false,program:null,sliding:true,visible:true},hidden=[];
+ const o={guestTick:90,allowObjectInteractions:true,allowSlidingBombs:true,collides:()=>true,onDeath:()=>assert.fail('orbital death is not human'),onHidden:a=>hidden.push(a.sourceSlot)};
+ assert.throws(()=>bombActors([a],o),/ordinary class1/);
+ assert.deepEqual(bombActors([a],{...o,allowSlidingBombOrbitals:true}),[2]);
+ assert.deepEqual(hidden,[2]);assert.equal(a.visible,false);assert.equal(a.hiddenUntil,390);
+});
+
 // Invented two-point paths and tiny boards; no owned map or source samples.
 const routes=()=>[10,4,0].map(kind=>({kind,points:[[0,0],[1,2]],entryLeg:4,forwardExit:4,reverseExit:1,bomb:kind===0,flipVertical:false,flipHorizontal:false,swap:false}));
 const bombs=()=>[{row:1,column:1,kind:10,flags:0},{row:1,column:2,kind:4},{row:1,column:3,kind:0}];

@@ -7,6 +7,17 @@ const dot=(id,x,y,extra={})=>({id,x,y,present:true,humanCanGrab:true,nonhumanCan
 const actor=(extra={})=>({sourceActorType:2,pivot:'a',frame:63,direction:1,sourcePC:1,sliding:false,visible:true,orphaned:false,hiddenUntil:0,...extra});
 const options=(extra={})=>({program:'s',dots:[dot('a',0,0),dot('b',48,0)],guestTick:100,adjustPeriod:n=>Math.floor(n*100/60),afterAnimate:()=>{},onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{},...extra});
 
+test('free BO/EX orbital arrives without rotating or consuming a program',()=>{
+ const dots=[dot('a',0,0,{row:0,column:0,slideMask:1}),dot('b',48,0,{row:0,column:1,slideMask:4})],calls=[];
+ const state=actor({sourceActorType:4,speedClass:1,checksWalls:false,frame:48,unwrappedFrame:48,sliding:true,slideProgress:15,slideDelta:1,slideDirection:0,slideVX:3,slideVY:0,slideX:45,slideY:0});
+ const o=options({program:null,dots,allowSliding:true,allowSlidingBombs:true,allowSlidingBombCheckpoints:true,allowRotatingSpikes:true,afterAnimate:s=>calls.push(['animate',s.slideX,s.frame]),onDotRelease:(s,d)=>calls.push(['release',d.id]),onDotGrabFirst:(s,d)=>calls.push(['grab',d.id])});
+ assert.throws(()=>advanceStaticEnemyCallback(state,1,o),/ordinary class1/);
+ const r=advanceStaticEnemyCallback(state,1,{...o,allowSlidingBombOrbitals:true});
+ assert.deepEqual(calls,[['animate',48,48],['release','a'],['grab','b']]);
+ assert.equal(r.state.pivot,'b');assert.equal(r.state.frame,48);assert.equal(r.state.sliding,false);
+ assert.throws(()=>advanceStaticEnemyCallback(state,1,{...o,allowSlidingBombOrbitals:true,program:'n'}),/ordinary class1/);
+});
+
 test('programmed EX callback contacts the gun trigger at the slide point before arrival',()=>{
  const dots=[dot('a',0,0,{row:0,column:0,slideMask:1}),dot('b',48,0,{row:0,column:1,slideMask:4})];
  const state=actor({speedClass:1,checksWalls:false,sourceSlot:2,frame:48,sliding:true,

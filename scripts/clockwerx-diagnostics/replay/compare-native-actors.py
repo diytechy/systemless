@@ -1,11 +1,11 @@
 """Compare saved original actor observations with a closed literal's source lineage."""
 
 import argparse
-import itertools
 import json
 from pathlib import Path
 
 from supervise import sha
+from actor_assignment import assign_poses
 
 
 def read(path):
@@ -59,17 +59,18 @@ def main():
                          if actor["group"] == int(group)]
             if len(clear) > len(available):
                 raise ValueError("More original observations than actors in this group")
-            choices = []
-            for match in itertools.permutations(available, len(clear)):
-                comparisons = []
-                for native, actual in zip(clear, match):
-                    point = actual["physical"]
-                    pos = (native["x"], native["y"]) == (point["x"], point["y"])
-                    pose = pos and native["frame"] == actual["canonicalFrame"]
-                    comparisons.append(dict(original=native, actual=actual, samePosition=pos, samePose=pose))
-                choices.append((sum(not x["samePosition"] for x in comparisons),
-                                sum(not x["samePose"] for x in comparisons), comparisons))
-            missed_pos, missed_pose, chosen = min(choices, key=lambda x: x[:2])
+            indices = assign_poses([(d["x"], d["y"], d["frame"]) for d in clear],
+                                   [(h["physical"]["x"], h["physical"]["y"], h["canonicalFrame"])
+                                    for h in available])
+            chosen = []
+            for native, index in zip(clear, indices):
+                actual = available[index]
+                point = actual["physical"]
+                pos = (native["x"], native["y"]) == (point["x"], point["y"])
+                chosen.append(dict(original=native, actual=actual, samePosition=pos,
+                                   samePose=pos and native["frame"] == actual["canonicalFrame"]))
+            missed_pos = sum(not x["samePosition"] for x in chosen)
+            missed_pose = sum(not x["samePose"] for x in chosen)
             counter = counts.setdefault(group, dict(clear=0, positions=0, poses=0))
             counter["clear"] += len(clear)
             counter["positions"] += len(clear) - missed_pos

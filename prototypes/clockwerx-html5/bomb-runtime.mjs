@@ -18,7 +18,7 @@ const sameGrid=(a,b)=>a.row===b.row&&a.column===b.column;
 const sameCompositionInventory=(b,s)=>['connectors','bombs','walls','goodies'].every(k=>b?.[k]===s[k]);
 const grid=g=>{integer(g?.row,0,7);integer(g?.column,0,10);};
 const human=a=>a.sourceActorType===0||a.sourceActorType===6;
-function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false){
+function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false){
  if(typeof allowMovingBombSpikeWaystation!=='boolean')throw new Error('Literal moving BO/SPI/WY actor capability required');
  if(allowMovingBombSpikeWaystation)assertMovingBombSpikeWaystationActor(a);
  if(typeof allowStaticSlidingBombGoodies!=='boolean')throw new Error('Literal static EX/BO/GO actor capability required');
@@ -27,7 +27,7 @@ function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false,allowSl
  integer(a.sourceSlot,0,31);
  if(human(a)!==(a.sourceSlot<2))throw new Error('Explicit source WA slot/type correspondence required');
  if(a.movingPivot&&!allowMovingBombs&&!allowMovingBombSpikeWaystation||a.sliding&&!allowSlidingGoodies&&!allowMovingBombs&&!allowStaticSlidingBombGoodies)throw new Error('Dynamic actor combinations are unqualified');
- if(allowSlidingBombs&&(a.sourceSlot>30||(human(a)?a.speedClass!==0:![1,2,3].includes(a.sourceActorType)||a.speedClass!==1||a.checksWalls!==false||a.program!==null&&(!/^[bfns]+$/.test(a.program)||!Number.isInteger(a.sourcePC)||a.sourcePC<1||a.sourcePC>a.program.length))))throw new Error('BO/EX requires source slots0..30 and wall-free ordinary class1 actors');
+ if(allowSlidingBombs&&(a.sourceSlot>30||(human(a)?a.speedClass!==0:![1,2,3,...(allowSlidingBombOrbitals?[4]:[])].includes(a.sourceActorType)||a.sourceActorType===4&&a.program!==null||a.speedClass!==1||a.checksWalls!==false||a.program!==null&&(!/^[bfns]+$/.test(a.program)||!Number.isInteger(a.sourcePC)||a.sourcePC<1||a.sourcePC>a.program.length))))throw new Error('BO/EX requires source slots0..30 and wall-free ordinary class1 actors');
  if(allowMovingBombs&&(a.sourceSlot>30||(human(a)?a.speedClass!==0:![1,2].includes(a.sourceActorType)||a.speedClass!==1||a.checksWalls!==false||a.program!==null&&(!/^[bfn]+$/.test(a.program)||!Number.isInteger(a.sourcePC)||a.sourcePC<1||a.sourcePC>a.program.length))))throw new Error('Moving BO requires class0 humans and ordinary class1 kinds1/2 b/f/n actors');
  return a;
 }
@@ -40,7 +40,7 @@ function staticDot(d,allowObjectInteractions=false){
 /** Call with the mode-filtered inventory before wiring a board. These are
  * normalized declarations, not a raw-level decoder. Empty absent sections
  * are permitted; future active combinations fail closed. */
-export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[],walls=[],allowMovingBombs=false,goodies=[],spikes=[],origin,sourceProvenance,allowImportedGoodie169=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope}={}){
+export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[],walls=[],allowMovingBombs=false,goodies=[],spikes=[],origin,sourceProvenance,allowImportedGoodie169=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope}={}){
  if(mode!=='Child')throw new Error('Only Child bomb scope is supported');
  if(allowMovingBombSpikeWaystation){if(allowMovingBombSpikeWaystation!==true||allowMovingBombs||allowStaticSlidingBombGoodies||allowSlidingBombs||allowSlidingBombCheckpoints||allowMovingOilElevators||!allowObjectInteractions||movingBombSpikeWaystationScope?.dots!==dots||!['bombs','goodies','spikes','walls','connectors'].every(k=>movingBombSpikeWaystationScope[k]===({bombs,goodies,spikes,walls,connectors})[k]))throw new Error('Separate moving BO/SPI/WY runtime inventory required');return assertMovingBombSpikeWaystationScope(movingBombSpikeWaystationScope,{actors});}
  if(allowStaticSlidingBombGoodies){if(allowStaticSlidingBombGoodies!==true||allowSlidingBombs||allowSlidingBombCheckpoints||allowMovingBombs||allowMovingOilElevators||!allowObjectInteractions||staticSlidingBombGoodieScope?.dots!==dots||!sameCompositionInventory(staticSlidingBombGoodieScope,{connectors,bombs,walls,goodies}))throw new Error('Separate static EX/BO/GO runtime inventory required');return assertStaticSlidingBombGoodieScope(staticSlidingBombGoodieScope,{actors});}
@@ -48,7 +48,7 @@ export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSec
  if(allowMovingBombs){if(!allowObjectInteractions||allowSlidingBombs||allowSlidingBombCheckpoints||allowMovingOilElevators)throw new Error('Separate moving BO object composition required');return assertMovingBombScope({origin,dots,actors,connectors,bombs,goodies,spikes,activeSections,sourceProvenance,allowImportedGoodie169});}
  if(allowSlidingBombCheckpoints&&!allowSlidingBombs)throw new Error('EX bomb checkpoints require EX bomb core');
  if(allowSlidingBombCheckpoints&&!allowObjectInteractions)throw new Error('EX bomb checkpoints require existing bomb object interactions');
- if(allowSlidingBombs)return assertSlidingBombScope({dots,actors,connectors,bombs,walls,activeSections,checkpoints:allowSlidingBombCheckpoints});
+ if(allowSlidingBombs)return assertSlidingBombScope({dots,actors,connectors,bombs,walls,activeSections,checkpoints:allowSlidingBombCheckpoints,orbitals:allowSlidingBombOrbitals});
  if(!Array.isArray(dots)||!Array.isArray(actors))throw new TypeError('Normalized dots and actors required');
  if(allowMovingOilElevators&&!allowObjectInteractions)throw new Error('Moving Oil/elevator blasts require object interaction rules');
  for(const d of dots)if(allowMovingOilElevators&&d.upDown)plainUpDownDot(d);else staticDot(d,allowObjectInteractions);
@@ -137,10 +137,10 @@ export function bombStationaryDots(dots,origin,onChange,options){
 /** WABombed Child deadline is metadata for ordinary enemies, not a request to
  * resurrect them. Source WA reset owns restoring visibility. Death dispatch
  * does not stop the remaining source-slot scan. */
-export function bombActors(actors,{guestTick,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false}){
+export function bombActors(actors,{guestTick,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false}){
  integer(guestTick);fn(collides,'actor outline collision');fn(onDeath,'human death');fn(onHidden,'actor visibility');
  if(!Array.isArray(actors))throw new TypeError('Live source-slot actor array required');
- let previous=-1;for(const a of actors){actor(a,allowObjectInteractions,allowSlidingBombs,allowSlidingBombs,allowMovingBombs,allowStaticSlidingBombGoodies,allowMovingBombSpikeWaystation);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
+ let previous=-1;for(const a of actors){actor(a,allowObjectInteractions,allowSlidingBombs,allowSlidingBombs,allowMovingBombs,allowStaticSlidingBombGoodies,allowMovingBombSpikeWaystation,allowSlidingBombOrbitals);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
  const hits=[];
  for(const a of actors){
   if(a.visible===false||!sync(collides,a))continue;

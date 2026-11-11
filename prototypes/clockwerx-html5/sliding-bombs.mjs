@@ -3,10 +3,12 @@ import {validateBombWallTiles} from './walls.mjs';
 
 // Separate BO/static EX capability. Current starter permission is human-only;
 // class2/3, GO, moving pivots and richer object joins require their own scope.
-export function assertSlidingBombScope({dots=[],actors=[],connectors=[],bombs=[],walls=[],activeSections={},initial=false,checkpoints=false}={}){
+export function assertSlidingBombScope({dots=[],actors=[],connectors=[],bombs=[],walls=[],activeSections={},initial=false,checkpoints=false,orbitals=false}={}){
+ if(typeof orbitals!=='boolean')throw new TypeError('Literal BO/EX orbital capability required');
+ if(orbitals&&(!checkpoints||walls.length||!activeSections.SP))throw new Error('Separate wall-free BO/EX/SP/protected WY orbital composition required');
  if(!Array.isArray(dots)||!Array.isArray(actors)||!Array.isArray(bombs)||!bombs.length)throw new Error('Explicit BO/static EX inventory required');
  validateConnectorBoard(connectors,dots);
- if(checkpoints){if(!walls.length||!dots.some(d=>d.waystation&&d.protected)||activeSections.SP>0)throw new Error('Separate BO/EX/protected WY/wall composition without SP required');validateBombWallTiles(walls);}
+ if(checkpoints){if((!orbitals&&(!walls.length||activeSections.SP>0))||!dots.some(d=>d.waystation&&d.protected))throw new Error('Separate BO/EX/protected WY/wall composition without SP required');validateBombWallTiles(walls);}
  for(const e of connectors)if(typeof e.sourceInitialBonus!=='boolean'||typeof e.sourceHasSprite!=='boolean'||typeof e.burnt!=='boolean'||typeof e.bonus!=='boolean'||e.sourceHasSprite!==e.sourceInitialBonus||initial&&(e.sourceInitialBonus!==e.bonus||e.burnt))throw new Error('BO/EX requires immutable source initial bonus/optimized identity and clean initial links');
  for(const[k,n]of Object.entries(activeSections))if(!Number.isInteger(n)||n<0||n&&!['BO','EX','SP','WP','WA','TX',...(checkpoints?['WY','WL']:[])].includes(k))throw new Error('Unqualified BO/EX section '+k);
  if(activeSections.BO!==undefined&&activeSections.BO!==bombs.length||activeSections.EX!==undefined&&activeSections.EX!==connectors.length)throw new Error('Matching BO/EX inventory required');
@@ -15,7 +17,7 @@ export function assertSlidingBombScope({dots=[],actors=[],connectors=[],bombs=[]
   if(d.motion!=='static'||d.moving||d.movingProgram||d.upDown||d.teleport!==false||d.transferDeath||d.slowdown||d.sourceBombDynamic||d.connector||d.present!==true||d.burnt!==undefined&&typeof d.burnt!=='boolean'||initial&&d.burnt||['present','humanCanGrab','nonhumanCanGrab','sourceInBackground','ring','bonus'].some(k=>typeof d[k]!=='boolean')||!Number.isInteger(d.color)||d.color<0||d.color>7||!d.ring&&d.humanCanGrab!==true||d.nonhumanCanGrab!==true||initial&&d.humanCanGrab!==true||!checkpoints&&(d.protected||d.waystation)||d.ring&&(checkpoints||d.color!==0||d.slideMask||d.bonus||d.kind!=='dot')||d.protected&&(!d.waystation||d.color!==0)||d.waystation&&(!checkpoints||!d.protected||d.color!==0)||d.slideMask&&(d.ring||d.protected||d.waystation||d.kind==='goal'||d.humanCanGrab!==true||d.nonhumanCanGrab!==true))throw new Error('BO/EX static ordinary endpoints and disjoint white ring or protected WY required');
  }
  let previous=-1;
- for(const a of actors){const human=[0,6].includes(a.sourceActorType);if(a.movingPivot||![0,1,2,3,6].includes(a.sourceActorType)||!Number.isInteger(a.sourceSlot)||a.sourceSlot<0||a.sourceSlot>30||a.sourceSlot<=previous||human!==(a.sourceSlot<2)||(human?a.speedClass!==0:a.speedClass!==1||a.checksWalls!==false||a.program!==null&&(!/^[bfns]+$/.test(a.program)||!Number.isInteger(a.sourcePC)||a.sourcePC<1||a.sourcePC>a.program.length)))throw new Error('BO/EX ordinary wall-free class1 b/f/n/s actors and source slots0..30 required');previous=a.sourceSlot;}
+ for(const a of actors){const human=[0,6].includes(a.sourceActorType),orbital=a.sourceActorType===4;if(a.movingPivot||![0,1,2,3,6,...(orbitals?[4]:[])].includes(a.sourceActorType)||!Number.isInteger(a.sourceSlot)||a.sourceSlot<0||a.sourceSlot>30||a.sourceSlot<=previous||human!==(a.sourceSlot<2)||(human?a.speedClass!==0:a.speedClass!==1||a.checksWalls!==false||a.program!==null&&(orbital||!/^[bfns]+$/.test(a.program)||!Number.isInteger(a.sourcePC)||a.sourcePC<1||a.sourcePC>a.program.length)))throw new Error('BO/EX ordinary wall-free class1 b/f/n/s actors and free orbital source slots0..30 required');previous=a.sourceSlot;}
  return true;
 }
 

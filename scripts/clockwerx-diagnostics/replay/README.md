@@ -202,3 +202,23 @@ pins `freeze`, `config`, and `literal`, and supplies a `scene` with `id`,
 payloads with `addAssets` (each row is a pin with `name`); use
 `profileNames` to map renamed profiles to bundle filenames. The helper
 preserves the installed scene definitions and never replaces live assets.
+
+## Saved original actor comparison
+
+`rank-native-cold-phase.py FITS_JSON ACTUAL_IDLE_DIRECTORY NEW_REPORT_JSON`
+ranks one fixed idle prefix for every original capture (default frontend
+origin1264, prefixes0..1600). It reads saved fits and a completed contiguous
+idle lineage; it imports no engine and performs no updates. It preserves
+position/pose errors explicitly. A best ranking with errors is not an exact
+timing match. Use `--frontend-origin` and `--max-prefix` for other reviewed
+bounds. The directory must contain `result.json` and plain `lineage.jsonl`.
+
+Both it and `compare-native-actors.py` use `actor_assignment.py`: rectangular
+integer Hungarian assignment minimizes position errors, then pose errors,
+then the lexicographically first actor-index permutation. This preserves the
+earlier exhaustive matcher, including ties, without factorial growth on
+crowded boards. At most31 actors are admitted per artwork group. Neither
+tool infers actor identity or adjusts an individual capture's clock.
+
+Run the invented matching checks with
+`python scripts/clockwerx-diagnostics/replay/test_actor_assignment.py`.

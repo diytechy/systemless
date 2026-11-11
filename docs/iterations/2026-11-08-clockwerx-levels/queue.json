@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 86,
-  "currentAction": "Through85 Orbit accepted/locally installed; continue through100 without per-level stops. Passage86 original cold authorized; inspect closure then standard original-only fitter before dedicated PNGviews. Moving-protected-passage sourceguard45d74679/threeinvented checks unlinked; no86actualmodel.",
+  "currentOrdinal": 87,
+  "currentAction": "Through86 Passage accepted/locally installed; continue through100 without per-level stops. Gearshift87 original cold authorized; inspect closure then original-only actor and Slow fitters before dedicatedPNGviews. Slowdown-waystation source/boardguardf7a82367/fourinventedchecks unlinked; no87actualmodel.",
   "levels": [
     {
       "ordinal": 1,
@@ -7599,10 +7599,15 @@
       "menuTitle": "Passage",
       "resourceTitle": "Passage",
       "sha256": "d198897ab6b381eec38b775f019e92757935bec1d89e6c3f145ff007bc3e7f92",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "passage86-native-goal01/root-original-goal-review.json",
+        "passage86-native-goal-fit01/actor-comparison01.json",
+        "passage86-native-goal-door-fit01/model-comparison01.json",
+        "passage86-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7630,7 +7635,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7664,7 +7669,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "089e65ab",
+      "sourceFreezeSHA256": "22ec40861ce7d66b3b34436137dea081ac3eac3e1ea2a356522e2f396b188ee4",
+      "sourceTests": 545,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 31168,
+      "actualConstructors": 5,
+      "functionalUpdatesUsed": 31168,
+      "functionalUpdatesRemaining": 218832,
+      "nativeColdClosed": true,
+      "review": "passage-review.md",
+      "retainedSweep": {
+        "matchedGoals": 84,
+        "constructionOnly": 1,
+        "pairedUpdates": 648790,
+        "sha256": "5d8a4c73a6b4f8bd7bca9de6ace09fab2faf231618ff895b0cd425a52497a960"
+      },
+      "deliveryAcceptance": {
+        "score": 1000,
+        "updates": 5792,
+        "transfers": 5,
+        "nextOrdinal": 87,
+        "nativeCampaignTotal": 540000,
+        "rootAcceptanceSHA256": "5b738c07342a7f108d2a9bc9f0afaa96523556b7f55ec337bf3cb62860d6c163",
+        "rootProofSHA256": "9eee20585acc70c4e879f3f3e71336aa2ad5d5b4d6821d0797691a08ec752e74",
+        "earnedThrough86FixtureSHA256": "cd049852c34a6279273877e5f22a00352f523c15697e11db9ababe6eb9cd702e"
+      },
+      "qualificationBoundary": "Original results1000 and earned87Gearshift/540000 visually verified after standard original-only497actor-anchor and independent source-door-composite fitters/viewgate. All42clear actorpositions/poses exact across6joins atfixed686:human6/blue18/red12/green6. All12clear in-range doorphases exact(two doors, observedphases1and10);14clear/22raw doorobservations retainunclear/overdraw/ties. WholeROI source1300leaf+2900bluecap composites,gamma0.7,sourceanchors/sourceWL capattachment and per-image universebackgroundmode; no port phase/data or per-image temporal fitting. Intermediatephase census unqualified. Cold219clear retains6position11pose residuals at686/687. Firstlegalroute5792updates/5transfers/4Flip/1Swing/38NPCdoor-toggles/twohumanEXslidearrivals, zeroRNG/death/reset. Protectedstart ->0,1 ->emptycarrier4,6 ->rideleftgate/belowwalls ->9,6(EX9,5/9,6roundtrip) ->10,6 ->goal10,7. Currentaxis/cardinalinputs only; no Reverse, state/clock/phase/RNG assignments. Ring1,2avoided; release/orphan/reset andprotectiondamagecontracts synthetic, sourcecold staticring/protectedstart visiblychecked. Declared20frontend finalholdmargin. Arbitrarycontrols/audio/controllers/pacing/fullpixel andactoridentitycensus separate."
     },
     {
       "ordinal": 87,

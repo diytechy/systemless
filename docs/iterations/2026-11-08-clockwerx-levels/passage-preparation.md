@@ -1,3 +1,5 @@
+**Superseded by accepted86 [review](passage-review.md). Preparation below is historical.**
+
 # Passage86 source preparation
 
 Unlinked preparation while Orbit85 completes acceptance. Continue through100 without per-level stops. RND2_200 has60dots/23bonuses and six movers whose raw0x4089 ring properties are inactive for Child. Their motion remains active. White static ring1,2 and protected human start0,0 are active; goal10,7 is static. EX4/WL4 and four active spikes out of six coexist with two initially open long horizontal blue doors and two blue switches. Six free ordinary NPCs use types1/2/3 on class1, plus one blue class4. All NPC programs are null and wall checks are false. No Slow, Oil, WY, bombs, goodies, teleports or guns are active.

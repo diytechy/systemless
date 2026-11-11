@@ -1,3 +1,5 @@
+**Superseded by accepted82 [review](clutch-review.md). Preparation below is historical.**
+
 # Clutch82 preparation
 
 Continue through100 without per-level stops. Through81 Flail remains accepted/installed. Clutch82/RND2_129 original cold closes35captures/2224frontend ticks/58.36seconds from earned through81 save. Standard independent source-only fitter freezes79anchors before dedicated PNG reads. Prior81after-results82 exposure disclosed; dedicated82Clutch/526000 confirmed.

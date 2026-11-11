@@ -1,6 +1,6 @@
 # Next session: Macintosh library tuning and one HTML5 pilot
 
-**Current follow-up,2026-11-11:**81 bounded Child scenes accepted/installed through Flail/Source66 on SVG-Port; Clutch82 original cold authorized. Continue locally through100 without per-level stops. Read [handoff](../2026-11-08-clockwerx-levels/session-handoff-2026-11-11.md), [review](../2026-11-08-clockwerx-levels/flail-review.md), [queue](../2026-11-08-clockwerx-levels/queue.json). No Rust rebuild/push/upload/deployment/library-queue restart.
+**Current follow-up,2026-11-11:**82 bounded Child scenes accepted/installed through Clutch/Source67v2 on SVG-Port; SwingOut83 original cold authorized. Continue locally through100 without per-level stops. Read [handoff](../2026-11-08-clockwerx-levels/session-handoff-2026-11-11.md), [review](../2026-11-08-clockwerx-levels/clutch-review.md), [queue](../2026-11-08-clockwerx-levels/queue.json). No Rust rebuild/push/upload/deployment/library-queue restart.
 
 Updated 2026-11-07 for the user's chosen workflow: a Sol coordinator, a separate GPT-6.1 Sol subagent per game, sequential tuning/evaluation, then a ClockWerx HTML5 pilot. Use the [complete coordinator prompt](coordinator-prompt.md) and [per-game worker brief](game-agent-brief.md). No tuning agents or port implementation have been started by preparing this handoff; HomeHub deployment remains separate.
 

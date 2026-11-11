@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 82,
-  "currentAction": "Through81 Flail accepted/locally installed; continue through100 without per-level stops. Clutch82 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Slowdown wall admission9bf5b03f unlinked; no82 model.",
+  "currentOrdinal": 83,
+  "currentAction": "Through82 Clutch accepted/locally installed; continue through100 without per-level stops. SwingOut83 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Moving-waystation source admission52061a0d unlinked; no83 model.",
   "levels": [
     {
       "ordinal": 1,
@@ -7192,10 +7192,15 @@
       "menuTitle": "Clutch",
       "resourceTitle": "Clutch",
       "sha256": "3f5fb605812b1a2458897500e4e8f6eb6363b8b8cb0b2180afdb8ed15379658a",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "clutch82-native-goal01/root-original-goal-review.json",
+        "clutch82-native-goal-fit01/actor-comparison01.json",
+        "clutch82-native-goal-slow-fit01/model-comparison01.json",
+        "clutch82-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7223,7 +7228,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7253,7 +7258,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "1f03e397",
+      "sourceFreezeSHA256": "2177b5428ebe6cb0eb92d3cebd6afced627e764e061e591e56b73d24f27d449d",
+      "sourceTests": 515,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 33166,
+      "actualConstructors": 8,
+      "functionalUpdatesUsed": 33166,
+      "functionalUpdatesRemaining": 216834,
+      "nativeColdClosed": true,
+      "review": "clutch-review.md",
+      "retainedSweep": {
+        "matchedGoals": 80,
+        "constructionOnly": 1,
+        "pairedUpdates": 619620,
+        "sha256": "1678880eae2781ad21d9bd496ee266eee1c899383a4e310d99c6e1a235ecfa72"
+      },
+      "deliveryAcceptance": {
+        "score": 4000,
+        "updates": 4728,
+        "transfers": 13,
+        "nextOrdinal": 83,
+        "nativeCampaignTotal": 530000,
+        "rootAcceptanceSHA256": "9b3689a3412da1cef279590deb766a984fb6bde4ce14f4643b6982d4ba0ebc78",
+        "rootProofSHA256": "c86f3544d7e2e88c3c415d971db0664e155daba1adbc09a565edeca1f67585c0",
+        "earnedThrough82FixtureSHA256": "fdd4f22dfb062ab36b481be17349a7e7e18f337f5f3730168a6fdf2b005dab39"
+      },
+      "qualificationBoundary": "Original results4000 and earned83SwingOut/530000 visually verified after actor+Slow original-only fitter/viewgate. All178clear actor positions/poses exact across20joins at fixed700. All780clear main300Slow appearances exact including six occupied frames; independent39fixedSlow source hypotheses819clear/975raw. Cold280positions exact26pose residuals retained, ties700..703. Winning port13transfers/10Flip/3Swing/6Reverse/two bonuses/12Slowtransitions and source24/25sound requests, zero winning RNG/death/reset. Winning route avoids intentional wall contact; compensation/default-preservation/reset/death boundaries synthetic. Arbitrary controls/audio/controllers/pacing/fullpixel or actor-identity census separate."
     },
     {
       "ordinal": 83,

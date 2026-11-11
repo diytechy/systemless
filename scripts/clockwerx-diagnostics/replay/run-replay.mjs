@@ -20,7 +20,7 @@ try{
  const own=['run-replay.mjs','core.mjs','stream.mjs','factory-source-round.mjs','supervise.py'];
  for(const name of own){const p=auth.code.find(p=>path.resolve(p.path)===path.resolve(folder,name));if(!p)throw Error('Unpinned replay code: '+name);pin(p);}
  for(const p of [auth.sourceFreeze,auth.config,auth.literal,auth.observer,...(candidate?[]:[auth.baseline.caseResult])])pin(p);
- if(auth.observer.sha256!=='595f3ac1461b0d2a048df3970366db115e394a5af2502a401941abe313c32403')throw Error('Only public 595 observer is permitted');
+ if(!['595f3ac1461b0d2a048df3970366db115e394a5af2502a401941abe313c32403','3995261bad511a709ec784ef0e1f255ea8761e419f74349b57702883836891f7'].includes(auth.observer.sha256))throw Error('Only frozen lossless observers are permitted');
  const frozen=read(auth.sourceFreeze.path).files;if(!Array.isArray(frozen)||!frozen.length)throw Error('Nonempty immutable source manifest required');const sourceNames=new Set();
  for(const p of frozen){const name=p.name??path.basename(p.path);if(name!==path.basename(name)||sourceNames.has(name))throw Error('Invalid or duplicate frozen source name');sourceNames.add(name);pin({path:path.join(auth.sourcePath,name),sha256:p.sha256});}
  for(const name of ['level.mjs','round.mjs','death.mjs','dots.mjs'])if(!sourceNames.has(name))throw Error('Required engine module missing from freeze: '+name);

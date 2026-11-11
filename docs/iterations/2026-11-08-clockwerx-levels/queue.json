@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 71,
-  "currentAction": "70 Descent accepted and installed on Source54v2. Original/browser9000;68 prior goal routes match. Continue Saga71 from earned-through70 at434000. Codec optimization is saved-data-only so far.",
+  "currentAction": "70 Descent accepted/installed. Lossless fast-delta observer qualified; use explicit flag for remaining diagnostics. Continue Saga71 from earned-through70 at434000.",
   "levels": [
     {
       "ordinal": 1,
@@ -5986,8 +5986,8 @@
         "gameplayAcceptedByTriage": false
       },
       "review": "descent-review.md",
-      "functionalUpdatesUsed": 110310,
-      "functionalUpdatesRemaining": 139690,
+      "functionalUpdatesUsed": 125972,
+      "functionalUpdatesRemaining": 124028,
       "sourceTests": 440,
       "retainedSweep": {
         "matchedGoals": 68,
@@ -6008,7 +6008,17 @@
         "rootProofSHA256": "e3ffd27066d29fd4609cb460cb366bdf9d224bc6af2ad58a744c7f8f14e0348b",
         "earnedThrough70FixtureSHA256": "79f4aa3c9566f0526503233eb98a46a7b780a6f822b762f71f8e559a0024bf28"
       },
-      "coldComparisonBoundary": "Fixed686 ties687:all120 positions/118 poses;2 pose offsets retained. All84 clear selected-route actors match, repeated27 PNGs and original-only observations identical."
+      "coldComparisonBoundary": "Fixed686 ties687:all120 positions/118 poses;2 pose offsets retained. All84 clear selected-route actors match, repeated27 PNGs and original-only observations identical.",
+      "observerQualification": {
+        "observerSHA256": "3995261bad511a709ec784ef0e1f255ea8761e419f74349b57702883836891f7",
+        "additionalUpdates": 15662,
+        "constructors": 1,
+        "allFiveStreamsByteIdentical": true,
+        "allLogicalDigestsIncludingCountersEqual": true,
+        "oldSeconds": 239.71799999999348,
+        "newSeconds": 197.21899999998277,
+        "qualification": "codec-optimization/root-qualification.json"
+      }
     },
     {
       "ordinal": 71,

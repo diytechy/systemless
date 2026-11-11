@@ -243,3 +243,19 @@ Space acknowledgement, including a stage welcome. Its additional capture is
 `after-promotion`. Keep the intermediate overlay and verify the actual next
 board before applying exported preferences to the next earned fixture. A round
 completion screen alone does not establish that the saved next level advanced.
+
+
+## Optional faster lossless encoding
+
+Replay preparation accepts `--observer fast-delta` to choose frozen observer
+3995261b; the default remains legacy595f3ac1. Only the maximal-prefix/suffix
+string encoder differs. Snapshot construction, serialization, hook metadata,
+RNG, journals and output/hashing contracts remain. The runner rejects other
+observer hashes. Keep both recorder artifacts frozen and run their outside-
+encoder identity test when maintaining them.
+
+[Qualification](../../../docs/iterations/2026-11-08-clockwerx-levels/trace-codec-validation.md)
+checks all3.74GB of five saved streams and a full actual Descent replay with
+identical logical/encoded digests. The observed whole-process saving is17.73%
+in one diagnostic pair. This does not broaden gameplay or native acceptance.
+Run codec checks with `node --test scripts/clockwerx-diagnostics/observer*.test.mjs`.

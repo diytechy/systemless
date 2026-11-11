@@ -122,6 +122,8 @@ class OtterTubeBundleTests(unittest.TestCase):
         self.assertIn('<meta name="systemless-ottertube-hosts" content="https://ottertube.example http://127.0.0.1:8098">',html)
         self.assertLess(html.index('/ottertube-addon.js'),html.index('/ottertube-link.js'))
         self.assertTrue((self.dist/'ottertube-addon.js').is_file() and (self.dist/'ottertube-link.js').is_file())
+        self.assertTrue((self.dist/'ottertube-kiosk.css').is_file())
+        self.assertEqual(html.count('href="/ottertube-kiosk.css"'),1)
         routes,policy=bundle_policy(self.dist)
         self.assertEqual(routes,{'/clockwerx','/delirium','/blobbo'})
         self.assertEqual(policy,'frame-ancestors https://ottertube.example http://127.0.0.1:8098')

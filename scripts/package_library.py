@@ -103,17 +103,14 @@ def package(dist, additions=None, media_directory=None, ottertube_hosts=None):
         # The page reads the origins from this tag; a static server sends the same list as frame-ancestors.
         shutil.copy2(ROOT/'www/vendor/ottertube-addon.js',dist/'ottertube-addon.js')
         shutil.copy2(ROOT/'www/src/ottertube-link.js',dist/'ottertube-link.js')
+        shutil.copy2(ROOT/'www/src/ottertube-kiosk.css',dist/'ottertube-kiosk.css')
         tags=('<meta name="systemless-ottertube-hosts" content="'+' '.join(ottertube_hosts)+'">'
               '<script src="/ottertube-addon.js"></script><script src="/ottertube-link.js"></script>')
         html=html.replace('<!-- private-library -->','<!-- private-library -->'+tags,1)
         html=html.replace('<title>Macintosh Arcade</title>','<title>Macintosh game</title>')
+        # After the site's own styles, so the one-game touch layout wins.
         html=html.replace('</style><!-- /private-library -->',
-            '.ottertube-plain{max-width:34rem;margin:15vh auto;padding:0 1.5rem;font:18px/1.5 system-ui,sans-serif;text-align:center}'
-            '.ottertube-plain__reason{font-size:13px;opacity:.6}'
-            '.app--ottertube .game-page{max-width:none;margin:0;padding:8px}'
-            '.ottertube-saving{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;'
-            'background:rgba(0,0,0,.72);color:#fff;font:600 40px/1.2 system-ui,sans-serif;touch-action:none}'
-            '</style><!-- /private-library -->',1)
+            '</style><link rel="stylesheet" href="/ottertube-kiosk.css"><!-- /private-library -->',1)
         (dist/'ottertube-link.json').write_text(json.dumps({'schema_version':1,'hosts':ottertube_hosts,
             'frame_ancestors':"frame-ancestors "+' '.join(ottertube_hosts)},indent=2)+'\n',encoding='utf-8')
     index.write_text(html,encoding='utf-8')

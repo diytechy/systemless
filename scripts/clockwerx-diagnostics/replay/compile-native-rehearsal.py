@@ -51,6 +51,8 @@ def build(entry, literal, entry_actions, prefix, max_ticks, final_margin, promot
     holds = literal["holds"]
     if not holds or holds[-1]["end"] > literal["updates"]:
         raise ValueError("Literal needs holds within its update limit")
+    literal_end = frame(literal["updates"])
+    ends_held = holds[-1]["end"] == literal["updates"]
     for i, hold in enumerate(holds, 1):
         kind = hold["k"]
         start, end, nominal = (frame(hold[k]) for k in ("start", "end", "nominal"))
@@ -60,9 +62,13 @@ def build(entry, literal, entry_actions, prefix, max_ticks, final_margin, promot
         key(True, kind)
         run(nominal + 1)
         capture(f"input-{i:02d}-{kind}-nominal")
-        run(end + (final_margin if i == len(holds) else 0))
+        run(end + (final_margin if i == len(holds) and ends_held else 0))
         key(False, kind)
 
+    if not ends_held:
+        # Preserve every trailing idle tick. Extending the last button here
+        # would change the checked literal before it reaches its goal.
+        run(literal_end + final_margin)
     capture("goal-after-hold")
     run(tick + 120)
     capture("results")
@@ -98,8 +104,8 @@ def main():
     p.add_argument("--advance-promotion", action="store_true",
                    help="Add one advance for an independently expected rank overlay")
     a = p.parse_args()
-    if a.prefix < 0 or a.entry_actions < 1 or a.final_margin < 0 or not 1 <= a.max_ticks <= 6800:
-        p.error("Expected nonnegative prefix/margin, positive entry actions and a 1–6800 tick cap")
+    if a.prefix < 0 or a.entry_actions < 1 or a.final_margin < 0 or not 1 <= a.max_ticks <= 10000:
+        p.error("Expected nonnegative prefix/margin, positive entry actions and a 1–10000 tick cap")
     literal = read(a.literal)
     scenario, captures, origin, ticks = build(read(a.entry), literal, a.entry_actions, a.prefix,
                                              a.max_ticks, a.final_margin, a.advance_promotion)
@@ -108,6 +114,9 @@ def main():
                    literalSHA256=hashlib.sha256(a.literal.read_bytes()).hexdigest(),
                    prefix=a.prefix, frontendOrigin=origin, nativeOnlyFinalHoldTicks=a.final_margin,
                    holds=literal["holds"], plannedTicks=ticks)
+    if literal["holds"][-1]["end"] < literal["updates"]:
+        sidecar["nativeOnlyFinalHoldTicks"] = 0
+        sidecar["nativeOnlyFinalIdleTicks"] = a.final_margin
     for name, value in (("native-goal.json", scenario), ("capture-plan.json", dict(captures=captures)),
                         ("input-sidecar.json", sidecar), ("view-gate-draft.json", dict(executionApproved=False))):
         with (a.output / name).open("x", encoding="utf-8") as f:

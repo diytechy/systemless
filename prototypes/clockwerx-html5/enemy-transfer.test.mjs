@@ -7,6 +7,18 @@ const dot=(id,x,y,extra={})=>({id,x,y,present:true,humanCanGrab:true,nonhumanCan
 const actor=(extra={})=>({sourceActorType:2,pivot:'a',frame:63,direction:1,sourcePC:1,sliding:false,visible:true,orphaned:false,hiddenUntil:0,...extra});
 const options=(extra={})=>({program:'s',dots:[dot('a',0,0),dot('b',48,0)],guestTick:100,adjustPeriod:n=>Math.floor(n*100/60),afterAnimate:()=>{},onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{},...extra});
 
+test('class3 goodie composition uses the current real moving pivot for f transfer',()=>{
+ const dots=[dot('a',0,0,{sourceIndex:0}),dot('b',48,0,{sourceIndex:1,motion:'moving-program',movingProgram:'ns'})],calls=[];
+ const state=actor({sourceActorType:2,speedClass:3,checksWalls:false}),o=options({program:'f',dots,allowMovingDots:true,allowSliding:true,
+  sourceQuery:s=>{calls.push(['query',s.frame]);return{allowed:true,grab:{realDot:true,dot:'b',sourceIndex:1}};},
+  onDotRelease:(s,d)=>calls.push(['release',d.id]),onDotGrabFirst:(s,d)=>calls.push(['grab',d.id])});
+ assert.throws(()=>advanceStaticEnemyCallback(state,1,o),/Separate moving BO/);
+ const r=advanceStaticEnemyCallback(state,1,{...o,allowMovingDoorGoodies:true});
+ assert.deepEqual(calls,[['query',0],['release','a'],['grab','b']]);assert.equal(r.state.pivot,'b');
+ assert.throws(()=>advanceStaticEnemyCallback(state,1,{...o,allowMovingDoorGoodies:true,sourceQuery:async()=>({})}),/helper scope/);
+ assert.throws(()=>advanceStaticEnemyCallback(state,1,{...o,allowMovingDoorGoodies:true,sourceQuery:()=>Promise.resolve({})}),/Synchronous joined/);
+});
+
 test('free BO/EX orbital arrives without rotating or consuming a program',()=>{
  const dots=[dot('a',0,0,{row:0,column:0,slideMask:1}),dot('b',48,0,{row:0,column:1,slideMask:4})],calls=[];
  const state=actor({sourceActorType:4,speedClass:1,checksWalls:false,frame:48,unwrappedFrame:48,sliding:true,slideProgress:15,slideDelta:1,slideDirection:0,slideVX:3,slideVY:0,slideX:45,slideY:0});

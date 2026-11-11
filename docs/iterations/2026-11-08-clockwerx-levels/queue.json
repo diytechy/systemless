@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 70,
-  "currentAction": "69 Mishmash accepted and active on Source53v2. Both engines complete for1000;67 prior retained routes match. Continue Descent70 from earned-through69 at425000.",
+  "currentOrdinal": 71,
+  "currentAction": "70 Descent accepted and installed on Source54v2. Original/browser9000;68 prior goal routes match. Continue Saga71 from earned-through70 at434000. Codec optimization is saved-data-only so far.",
   "levels": [
     {
       "ordinal": 1,
@@ -5908,10 +5908,16 @@
       "menuTitle": "Descent",
       "resourceTitle": "Descent",
       "sha256": "06f3b13ebe081c8bb0dede8ef6be0db542112ca348c0c8d6a94a78c232a1f686",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "descent70-native-cold01/closure.json",
+        "descent70-native-goal01/root-original-goal-review.json",
+        "descent70-native-goal01/root-native-comparison.json",
+        "descent70-native-goal02/root-original-goal-review.json",
+        "descent70-native-goal02/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5939,7 +5945,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -5978,7 +5984,31 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "review": "descent-review.md",
+      "functionalUpdatesUsed": 110310,
+      "functionalUpdatesRemaining": 139690,
+      "sourceTests": 440,
+      "retainedSweep": {
+        "matchedGoals": 68,
+        "constructionOnly": 1,
+        "pairedUpdates": 535364,
+        "checkpoints": 8207,
+        "seconds": 76.668038,
+        "sha256": "0cbc8216ae18dcce6120439f2eacfe28b18fa915ea77d655c21a778ccbd58572"
+      },
+      "deliveryAcceptance": {
+        "score": 9000,
+        "updates": 15662,
+        "transfers": 21,
+        "nextOrdinal": 71,
+        "nativeCampaignTotal": 434000,
+        "rootAcceptanceSHA256": "1ddd1b07def0d2f991cd88b74daeff83b036dae9c1dd81471efbd9b98c02b30c",
+        "activationSHA256": "cc4a497c7e01472952bd3a5d4ef6752a8622bba8a80bdcb1e23bd4a65f9a44ae",
+        "rootProofSHA256": "e3ffd27066d29fd4609cb460cb366bdf9d224bc6af2ad58a744c7f8f14e0348b",
+        "earnedThrough70FixtureSHA256": "79f4aa3c9566f0526503233eb98a46a7b780a6f822b762f71f8e559a0024bf28"
+      },
+      "coldComparisonBoundary": "Fixed686 ties687:all120 positions/118 poses;2 pose offsets retained. All84 clear selected-route actors match, repeated27 PNGs and original-only observations identical."
     },
     {
       "ordinal": 71,

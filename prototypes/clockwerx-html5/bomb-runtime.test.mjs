@@ -59,6 +59,21 @@ function startTravel(f,index=0){
  assert.equal(f.runtime.snapshot().sparks[index].travelling,true);
 }
 
+test('moving/EX goodie join keeps class3 NPCs noncollecting and awards the sliding human once',()=>{
+ const dots=[dot('a',1,1,{x:48,y:48,motion:'static',present:true,slideMask:1,teleport:false}),dot('b',1,2,{x:96,y:48,motion:'static',present:true,slideMask:4,teleport:false})],connectors=[{id:0,first:'a',second:'b',vertical:false}],goodies=Array.from({length:8},(_,i)=>({row:0,column:i,initialFrame:0}));
+ const human={...hero(),program:null,speedClass:0,movingPivot:true,sliding:true},npc={...enemy(2),program:'fn',sourcePC:1,speedClass:3,checksWalls:false,movingPivot:true};
+ const board={movingDoorGoodieRules:true,movingDotRules:true,goodieOnlyRules:true,bombRules:false,dots,connectors,goodies},scope={dots,actors:[human,npc],connectors,goodies,activeSections:{GO:8,EX:1,GN:1},allowMovingDoorGoodies:true,movingDoorGoodieScope:board};
+ assert.throws(()=>assertGoodieRuntimeScope({...scope,allowMovingDoorGoodies:false}),/dynamic|Unsupported/);
+ assert.throws(()=>assertGoodieRuntimeScope({...scope,goodies:goodies.slice()}),/composition/);
+ const f=fixture({bombs:[],routes:[],scopeMode:'goodies',goodies,scope});
+ assert.deepEqual(f.runtime.checkGoodie(npc),[]);
+ const events=f.runtime.checkGoodie(human);assert.equal(events.length,5);
+ assert.equal(events.find(e=>e.type==='add-bonus').points,1000);
+ assert.equal(events.find(e=>e.type==='add-time').seconds,10);
+ assert.deepEqual(f.runtime.checkGoodie(human),[]);assert.equal(f.runtime.goodies.filter(g=>g.collected).length,1);
+ assert.throws(()=>f.runtime.checkGoodie({...npc,speedClass:1}),/composition/);
+});
+
 test('expanded static-object scope is explicit and still rejects dynamic dots and future actors',()=>{
  const scope={dots:[dot('c',1,1,{waystation:{halfIndex:0,direction:1},protected:true})],actors:[hero(),{...enemy(2),sourceActorType:4}],activeSections:{DR:1,DS:1,WY:1}};
  assert.throws(()=>assertBombRuntimeScope(scope),/special-dot/);

@@ -222,3 +222,24 @@ tool infers actor identity or adjusts an individual capture's clock.
 
 Run the invented matching checks with
 `python scripts/clockwerx-diagnostics/replay/test_actor_assignment.py`.
+
+
+## Original rehearsal transport
+
+`compile-native-rehearsal.py` translates an already checked literal and earned
+entry script. Its default cap remains6800 frontend ticks; an explicit
+`--max-ticks` may raise the bound to10000. The native supervisor requires the
+same pinned cap and keeps its600-second maximum wall bound,64-capture limit,
+one process owner and no automatic retry. Input preparation launches no emulator.
+
+The compiler preserves trailing idle input through `literal.updates`. Its final
+native-only margin extends the last button only when that hold ends at the
+literal end; otherwise the margin is idle and the sidecar distinguishes it.
+Existing terminal-held routes retain identical prepared bytes. Run the invented
+transport checks with `python scripts/clockwerx-diagnostics/replay/test_native_rehearsal.py`.
+
+Use `--advance-promotion` for an already known results overlay needing an extra
+Space acknowledgement, including a stage welcome. Its additional capture is
+`after-promotion`. Keep the intermediate overlay and verify the actual next
+board before applying exported preferences to the next earned fixture. A round
+completion screen alone does not establish that the saved next level advanced.

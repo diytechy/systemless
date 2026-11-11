@@ -31,6 +31,13 @@ export function gunPaintFrames(gun){
  if(!integer(gun?.color,0,2)||!integer(gun.directions,1,15)||typeof gun.enabled!=='boolean')throw new TypeError('Source GN paint state required');
  return gun.enabled?[gun.color,...table.filter(d=>gun.directions&d.bit).map(d=>d.barrel)]:[7];
 }
+// GNBombed/TRBombed share this placement footprint. Hidden triggers retain
+// cached contacts/occupancy until normal actor exit callbacks or reset.
+export function gunTriggerBombHit(object,grid){
+ if(!integer(object?.row,0,7)||!integer(object.column,0,10)||!integer(object.placement,1,3)||!integer(grid?.row,0,6)||!integer(grid.column,0,9))throw new TypeError('Source GN/TR placement and explosion grid required');
+ const dr=object.row-grid.row,dc=object.column-grid.column;
+ return object.placement===1?dc===0&&dr>=0&&dr<2:object.placement===2?dr===0&&dc>=0&&dc<2:dr===0&&dc===0;
+}
 
 export class GunTriggerRuntime {
  constructor({guns,triggers,rawBounds,frameOrigin,templateReference}){
@@ -46,6 +53,15 @@ export class GunTriggerRuntime {
   this.slots=Array(32).fill(null);this.insertionOrder=[];this.contacts=new Map();
  }
  pointFor(raw){return {x:raw.x+this.frameOrigin.x,y:raw.y+this.frameOrigin.y};}
+ bomb(target,grid){
+  if(!['GN','TR'].includes(target))throw new TypeError('Explicit gun/trigger bomb target required');
+  const events=[];
+  for(const o of target==='GN'?this.guns:this.triggers)if(gunTriggerBombHit(o,grid)){
+   if(target==='GN')o.enabled=false;else o.visible=false;
+   events.push({type:target==='GN'?'gun-bombed':'trigger-bombed',id:o.id});
+  }
+  return events;
+ }
  launchBuster(actor,point,velocity){
   if(actor?.sourceActorType!==5||!integer(actor.frame,0,63)||!integer(actor.speedClass,1,5)||!count(actor.frameReference)||!point||!integer(point.x,-32768,32767)||!integer(point.y,-32768,32767)||!velocity||!integer(velocity.x,-6,6)||!integer(velocity.y,-6,6))throw new TypeError('Source buster clone state required');
   const slot=this.slots.indexOf(null);

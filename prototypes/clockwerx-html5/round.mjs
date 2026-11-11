@@ -1,3 +1,4 @@
+import {assertGunBusterBoard} from './gun-busters.mjs';
 import {assertFreeBusterBoard,advanceFreeBuster,busterVelocity,shatterFreeBusterWall,advanceBusterWallEffects} from './free-busters.mjs';
 import {assertMovingBombSpikeWaystationScope,assertMovingBombSpikeWaystationPhysics} from './moving-bomb-spike-waystation.mjs';
 import {assertStaticSlidingBombGoodiePhysics,assertStaticSlidingBombGoodieScope} from './static-sliding-bomb-goodies.mjs';
@@ -67,13 +68,14 @@ export class SourceRound extends MovementGame {
   if(board.elevatorOilRiderRules)assertElevatorOilRiderBoard(board,elevatorOutlines);
   if(board.movingDoorCheckpointRules)assertMovingDoorCheckpointBoard(board,doorOutlines);
   if(board.movingTubesRules)assertMovingTubesBoard(board);
-  if(board.movingDoorGoodieRules)assertMovingDoorGoodieBoard(board,{gunOutlines,doorOutlines,dotOutlines});
+  if(board.gunBusterRules)assertGunBusterBoard(board,{outlines,gunOutlines});
+  else if(board.movingDoorGoodieRules)assertMovingDoorGoodieBoard(board,{gunOutlines,doorOutlines,dotOutlines});
   else if(board.movingDoorOilRules)assertMovingDoorOilBoard(board,{gunOutlines,doorOutlines,oilOutlines,dotOutlines});
   else if(board.gunTriggerTeleportRules)assertGunTriggerTeleportBoard(board,gunOutlines);
   else if(board.gunTriggerWallRules)assertGunTriggerWallBoard(board,gunOutlines);
   else if(board.gunTriggerSlidingRules)assertGunTriggerSlidingBoard(board,gunOutlines,elevatorOutlines);
   else if(board.gunTriggerProjectileRules)assertGunTriggerChildBoard(board,gunOutlines,elevatorOutlines);
-  if(board.freeBusterRules)assertFreeBusterBoard(board,outlines);
+  if(board.freeBusterRules&&!board.gunBusterRules)assertFreeBusterBoard(board,outlines);
   super(board);this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask&&!board.slidingConnectorRules||d.motion&&d.motion!=='static'&&!(board.elevatorRules&&d.motion==='up-down')&&!(board.movingDotRules&&d.motion==='moving-program'))))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
   if(board.elevatorOilSpikeRules&&(!board.elevatorRules||!board.canonicalOilRules||board.canonicalOilSpikeRules||!board.puddles?.length||board.puddles.some(p=>p.kind!==3)||!board.spikes?.length))throw new Error('Separate group0 elevators, kind3 Oil and static spike scope required');
@@ -156,7 +158,7 @@ export class SourceRound extends MovementGame {
   if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
   // PR stores universe-local sprite bases. frameOrigin is added only for
   // canonical collision/render coordinates, never to the raw clipping bounds.
-  if(board.freeBusterRules)this.gunTriggers=new GunTriggerRuntime({guns:[],triggers:[],rawBounds:{left:0,top:0,right:584,bottom:424},frameOrigin:{x:28,y:28},templateReference:this.actorClasses.snapshot().classes[0].count});
+  if(board.freeBusterRules&&!board.gunBusterRules)this.gunTriggers=new GunTriggerRuntime({guns:[],triggers:[],rawBounds:{left:0,top:0,right:584,bottom:424},frameOrigin:{x:28,y:28},templateReference:this.actorClasses.snapshot().classes[0].count});
   if(board.gunTriggerProjectileRules){
    this.gunOutlines=gunOutlines;
    this.gunTriggers=new GunTriggerRuntime({...board.gunTriggerChild,templateReference:this.actorClasses.snapshot().classes[0].count});
@@ -386,7 +388,7 @@ export class SourceRound extends MovementGame {
  }
  contactGunTrigger(hand){
   const actor=this.collider(hand),g=this.gunTriggers;
-  if(hand.sourceActorType===5||this.board.freeBusterRules)return;
+  if(hand.sourceActorType===5||this.board.freeBusterRules&&!this.board.gunBusterRules)return;
   this.emitGunTriggerEvents(g.contact(hand,t=>outlineCollision(actor,worldOutline(this.gunOutlines,3300,t.frame,g.pointFor(t.rawBase)))),hand);
  }
  projectileHitsWall(p){
@@ -414,7 +416,7 @@ export class SourceRound extends MovementGame {
   this.board.wallRevision=(this.board.wallRevision??0)+1;this.event('buster-wall-shatter',this.player,{id:w.id});
  }
  projectileCollision(){
-  if(this.board.freeBusterRules)return null;
+  if(this.board.freeBusterRules&&!this.board.gunBusterRules)return null;
   const actor=this.collider(this.player),g=this.gunTriggers;
   return g.humanHit(this.player,p=>outlineCollision(actor,worldOutline(this.gunOutlines,4200,p.frame,g.pointFor(p.rawBase))));
  }
@@ -641,7 +643,7 @@ export class SourceRound extends MovementGame {
   this.bombScene?.processExplosions();
   // The original logical PR9 layer precedes both WA layers in the universe
   // list. WA entrants append later, after this traversal has passed PR9.
-  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.freeBusterRules?{classes:actorState.classes,busterWall:p=>this.busterHitsWall(p),busterDoor:p=>this.busterHitsDoor(p),shatter:(w,p)=>this.shatterBusterWall(w,p)}:(this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:this.board.gunTriggerWallRules?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
+  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.freeBusterRules?{...(this.board.gunBusterRules?{wall:p=>this.projectileHitsWall(p)}:{}),classes:actorState.classes,busterWall:p=>this.busterHitsWall(p),busterDoor:p=>this.busterHitsDoor(p),shatter:(w,p)=>this.shatterBusterWall(w,p)}:(this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:this.board.gunTriggerWallRules?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
   if(!this.death)for(const enemy of this.enemies){
    if(![4,5].includes(enemy.sourceActorType)&&!this.board.movingBombSpikeWaystationRules&&!this.board.slidingBombRules&&!this.board.staticSlidingBombGoodieRules&&!this.board.movingBombRules)this.bombScene?.runtime.checkMatch(enemy);
    if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}

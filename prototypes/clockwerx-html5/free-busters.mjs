@@ -2,9 +2,14 @@
 // need a separate admission. PR clones keep the source clock and frozen art.
 const int=(n,a,b)=>Number.isInteger(n)&&n>=a&&n<=b;
 const fail=()=>{throw Error('Separate static Child free-buster composition required');};
-export function assertFreeBusterActor(a){
+export function assertFreeBusterActor(a,gunBusters=false){
+ if(typeof gunBusters!=='boolean')fail();
  if(!a||!int(a.sourceSlot,0,30)||a.sliding||a.movingPivot||![0,1,2,3,5,6].includes(a.sourceActorType))fail();
  const human=[0,6].includes(a.sourceActorType);
+ if(gunBusters&&!human){
+  if(a.checksWalls!==false||!(a.sourceActorType===5&&a.speedClass===1&&a.program===null||a.sourceActorType===1&&a.speedClass===1&&typeof a.program==='string'&&/^[fn]+$/.test(a.program)||a.sourceActorType===3&&a.speedClass===5&&typeof a.program==='string'&&/^[ns]+$/.test(a.program))||a.program!==null&&!int(a.sourcePC,1,a.program.length))fail();
+  return true;
+ }
  if(human?(a.speedClass!==0||a.program!==null):a.speedClass!==1||a.checksWalls!==false||a.program!==null&&(![1,2,3].includes(a.sourceActorType)||!/^[fn]+$/.test(a.program)||!int(a.sourcePC,1,a.program.length)))fail();
  return true;
 }

@@ -1,3 +1,4 @@
+import {assertGunSlidingBusterBoard,assertGunSlidingBusterActor} from './gun-sliding-busters.mjs';
 // Child fixed-pivot, unprogrammed class1 busters. Moving/programmed busters
 // need a separate admission. PR clones keep the source clock and frozen art.
 const int=(n,a,b)=>Number.isInteger(n)&&n>=a&&n<=b;
@@ -44,8 +45,9 @@ export function busterVelocity(frame,direction){
  const theta=frame*Math.PI/32;
  return {x:Math.trunc(-6*Math.sin(theta))*direction||0,y:Math.trunc(6*Math.cos(theta))*direction||0};
 }
-export function advanceFreeBuster(a,delta,guestTick){
- assertFreeBusterActor(a);
+export function advanceFreeBuster(a,delta,guestTick,{allowGunSlidingBusters=false,scope}={}){
+ if(typeof allowGunSlidingBusters!=='boolean')fail();
+ if(allowGunSlidingBusters){assertGunSlidingBusterBoard(scope);assertGunSlidingBusterActor(a);}else assertFreeBusterActor(a);
  if(a.sourceActorType!==5||!int(delta,0,1)||!int(guestTick,0,Number.MAX_SAFE_INTEGER)||!int(a.frame,0,63)||!Number.isInteger(a.unwrappedFrame)||![-1,1].includes(a.direction))fail();
  const events=[];
  if(delta){

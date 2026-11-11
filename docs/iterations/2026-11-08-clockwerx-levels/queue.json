@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 65,
-  "currentAction": "64 Tubes bounded Child accepted and active on Source48v2. Revised route completes in original and SVG for 11000. All 62 earlier retained routes match. Continue Slipstream65 from verified earned-through64 fixture.",
+  "currentOrdinal": 66,
+  "currentAction": "65 Slipstream bounded Child accepted and active on Source49. Both engines complete the aligned route for 1000. All 63 earlier retained goals match. Continue Gunrunner66 from earned-through65 at 406000.",
   "levels": [
     {
       "ordinal": 1,
@@ -5385,11 +5385,12 @@
         "transfers": 8,
         "nextOrdinal": 65,
         "nativeCampaignTotal": 405000,
-        "nextEvidence": "original save export; clean relaunch separate",
+        "nextEvidence": "original promotion dismissed; corrected fixture independently reopened Slipstream65",
         "rootAcceptanceSHA256": "443948733cdd3df15aa946d179956c163db6db4596acd25630acd715c6b0629a",
         "activationSHA256": "c5f9985d7763ca409384665d197bbcdc5bd7b40a18d2227cf70603fbc83eecf7",
         "rootProofSHA256": "04190c234f10df6c519d43942c5e63a0e0823944ff7062b5aa9e98d92bdc4a37",
-        "earnedThrough64FixtureSHA256": "ec070225aa80a797123887be11afc6fd5554150bec747e56c61582a2cc273660"
+        "earnedThrough64FixtureSHA256": "34de1c62a76f189b6381a0319fb2244bd99823835c7dad1208c6aa69295831b1",
+        "earlierFixtureReopenedTubesSHA256": "ec070225aa80a797123887be11afc6fd5554150bec747e56c61582a2cc273660"
       }
     },
     {
@@ -5398,12 +5399,48 @@
       "menuTitle": "Slipstream",
       "resourceTitle": "Slipstream",
       "sha256": "515eaca9d334779740a803d80f0d8f98a381876c072f5d1f103c27a2660b03e4",
-      "status": "queued",
+      "status": "bounded-child-goal-accepted",
       "nativeEvidence": [
-        "slipstream65-native-cold01/closure.json"
+        "slipstream65-native-cold02/root-original-entry-review.json",
+        "slipstream65-native-goal01/root-original-goal-review.json",
+        "slipstream65-native-goal02/root-original-goal-review.json",
+        "slipstream65-native-goal02/root-native-comparison.json",
+        "slipstream65-native-goal02/root-saved-progress-review.json"
       ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
+      "candidate": {
+        "sourceFreezeSHA256": "d6f78fcf440b2c0338dc19a415f8dcc9cb370bc06d9474149f5a0bc309f48e3f",
+        "prefixUpdates": 686,
+        "candidateUpdates": 5202,
+        "score": 1000,
+        "doorToggles": 2,
+        "originalEntryScore": 405000,
+        "closure": "slipstream65-wide-candidate02/invocation-result.json"
+      },
+      "review": "slipstream-review.md",
+      "functionalUpdatesUsed": 47150,
+      "functionalUpdatesRemaining": 202850,
+      "sourceTests": 431,
+      "retainedSweep": {
+        "matchedGoals": 63,
+        "constructionOnly": 1,
+        "pairedUpdates": 510908,
+        "checkpoints": 7763,
+        "seconds": 67.38,
+        "sha256": "77a7d4b8cd79a9c18ddf1215d633350ed01e9fab0063cd25acacab2e2d1e86c0"
+      },
+      "deliveryAcceptance": {
+        "score": 1000,
+        "updates": 5202,
+        "transfers": 9,
+        "nextOrdinal": 66,
+        "nativeCampaignTotal": 406000,
+        "rootAcceptanceSHA256": "e71e5dad8abf1508fb0f6df04645c895e165347a0d9e4029714f3c2f663be0cf",
+        "activationSHA256": "c4f31ab79b933712e0cf06cf4d7d5b763c882ded25099eaf59ccbb30132e5b15",
+        "rootProofSHA256": "b2aab48e19b6238965d8e78b51fe62506c4ba4a65c5661007e385535fa16a495",
+        "earnedThrough65FixtureSHA256": "dd92d25e1f9f5e9878f7d8a766ea52903e90e5f4d35424d82ef80f8165f677af"
+      },
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5431,7 +5468,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -8147,7 +8184,7 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root: Slipstream65 original cold and source composition",
+    "A": "Root: Gunrunner66 original cold and source composition",
     "B": "closed",
     "C": "closed",
     "D": "closed"

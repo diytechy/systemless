@@ -43,6 +43,20 @@ test('source3px velocities,16-callback p wait, immediate first planning and one-
  assert.deepEqual(log[16],[0,{x:48,y:0},16,2],'last moving callback positions riders before planning the next byte');
 });
 
+test('literal l/r opt-in preserves both full stationary segments and rejects other unknown bytes',()=>{
+ const base={allowMovingDots:true,allowStationaryLR:true,onRiders:()=>{}};
+ assert.throws(()=>make('lrew'),/bounded/);
+ assert.throws(()=>createMovingDot(spec('l?ew'),base),/bounded/);
+ assert.equal(assertClosedMovingProgram('lrew',{x:0,y:0},base),true);
+ const m=createMovingDot(spec('lrew'),base);
+ assert.equal(m.snapshot().opcode,'l');
+ for(let i=1;i<=16;i++)m.dispatch(i,1);
+ assert.equal(m.snapshot().opcode,'r');assert.deepEqual(m.snapshot().mainPixel,{x:0,y:0});
+ for(let i=17;i<=32;i++)m.dispatch(i,1);
+ assert.equal(m.snapshot().opcode,'e');assert.deepEqual(m.snapshot().mainPixel,{x:0,y:0});
+ m.dispatch(33,1);assert.deepEqual(m.snapshot().mainPixel,{x:3,y:0});
+});
+
 test('dispatched delta0/1 use one callback, delta2/255 use exactly two with the intermediate cache',()=>{
  const m=make('ew');assert.equal(m.dispatch(0,255).callbacks,0);
  assert.equal(m.dispatch(1,0).callbacks,1);assert.equal(m.snapshot().mainPixel.x,3);

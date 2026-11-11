@@ -86,6 +86,29 @@ From the repository root, with placeholders replaced by reviewed private paths:
 python scripts/clockwerx-diagnostics/replay/supervise.py "<private-authorization.json>" "<authorization-sha256>" "<node-executable>"
 ```
 
+Use `prepare-replay.py` to generate the pins and bounds from a reviewed literal
+instead of copying an earlier authorization. It writes the new authorization,
+prints its SHA256 and does not run the engine. For witness and fresh proof,
+also provide `--baseline <closed-run>` and `--original-review <review.json>`.
+Review the current literal, source and applicable baseline before calling it.
+
+```sh
+python scripts/clockwerx-diagnostics/replay/prepare-replay.py candidate "<freeze-directory>" "<literal.json>" "<new-result-directory>" "<new-authorization.json>" --review "<completed review>"
+```
+
+After the actual candidate closes, `compile-native-rehearsal.py` maps its
+checked holds to the original game's key actions and writes the input sidecar
+and capture plan. Supply the number of entry actions to copy and the selected
+model prefix at the end of those actions. The model uses two updates per
+original frontend tick. The default 20 additional final hold ticks are
+recorded separately. Use `--advance-promotion` only when a rank overlay is
+expected. Check which level is visible and whether Settings actually advanced
+before building the next earned fixture.
+
+```sh
+python scripts/clockwerx-diagnostics/replay/compile-native-rehearsal.py "<entry.json>" "<literal.json>" "<new-plan-directory>" --entry-actions 14 --prefix 686
+```
+
 The supervisor pins the tools, creates the output, records its hidden owned
 child, and terminates only that child on timeout. The runner validates remaining
 pins before importing the engine. Baseline streams use 64 KiB reads and a 16 MiB

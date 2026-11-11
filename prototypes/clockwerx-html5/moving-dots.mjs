@@ -10,9 +10,12 @@ export function effectiveMovingCell(raw,permissions,activeMask=1){
  return permissions&activeMask?raw:raw&~(0x2000|0x40|0x20|0x8|0x4|0x2|0x300);
 }
 
-export function movingProgramCell(cell){
+const boundedOpcodes=(text,allowStationaryLR)=>typeof text==='string'&&
+ (allowStationaryLR===true?/^[npswelr]+$/:/^[npswe]+$/).test(text);
+
+export function movingProgramCell(cell,{allowStationaryLR=false}={}){
  const p=cell?.inlineProgram,text=p?.text;
- if(!(cell?.flagsRaw&0x80)||typeof text!=='string'||!text.length||text.length>127||!/^[npswe]+$/.test(text)||!Number.isInteger(cell.offset)||p.offset!==cell.offset+4||typeof p.rawHex!=='string'||!/^(?:[0-9a-f]{2})+$/.test(p.rawHex))throw new Error('Original inline moving Pascal program and byte offsets required');
+ if(!(cell?.flagsRaw&0x80)||!boundedOpcodes(text,allowStationaryLR)||!text.length||text.length>127||!Number.isInteger(cell.offset)||p.offset!==cell.offset+4||typeof p.rawHex!=='string'||!/^(?:[0-9a-f]{2})+$/.test(p.rawHex))throw new Error('Original inline moving Pascal program and byte offsets required');
  const expected=text.length.toString(16).padStart(2,'0')+[...text].map(c=>c.charCodeAt(0).toString(16).padStart(2,'0')).join(''),padding=(1+text.length)%2;
  if(typeof p.paddingHex!=='string'||p.paddingHex.length!==2*padding||padding&&!/^[0-9a-f]{2}$/.test(p.paddingHex)||p.rawHex!==expected+p.paddingHex||cell.byteLength!==4+p.rawHex.length/2||cell.rawHex!==cell.flagsRaw.toString(16).padStart(4,'0')+cell.secondaryRaw.toString(16).padStart(4,'0')+p.rawHex)throw new Error('Moving Pascal bytes/text/padding/source cell mismatch');
  return {text,offset:p.offset,rawHex:p.rawHex,paddingHex:p.paddingHex};
@@ -28,8 +31,8 @@ export function movingInstruction(opcode){
 
 // Admission bound for the first rich composition, not a source opcode rule.
 // Closing the finite cycle keeps its whole repeated trajectory in word range.
-export function assertClosedMovingProgram(program,origin){
- const p=pixel(origin);if(typeof program!=='string'||!program.length||program.length>127||!/^[npswe]+$/.test(program))throw new Error('Bounded ordinary moving program required');
+export function assertClosedMovingProgram(program,origin,{allowStationaryLR=false}={}){
+ const p=pixel(origin);if(!boundedOpcodes(program,allowStationaryLR)||!program.length||program.length>127)throw new Error('Bounded ordinary moving program required');
  let x=p.x,y=p.y;for(const c of program){const {velocity:v}=movingInstruction(c);x+=16*v.x;y+=16*v.y;pixel({x,y});}
  if(x!==p.x||y!==p.y)throw new Error('First moving composition requires a closed bounded program cycle');return true;
 }
@@ -42,9 +45,9 @@ export function positionMovingRiders(handlers,sourceIndex,currentPixel,{skipSpec
  for(const key of MOVING_RIDER_ORDER)invoke(handlers[key],sourceIndex,{...p},{skipSpecialMisc});
 }
 
-export function createMovingDot(spec,{allowMovingDots=false,classCount=0,onRiders}={}){
+export function createMovingDot(spec,{allowMovingDots=false,allowStationaryLR=false,classCount=0,onRiders}={}){
  if(allowMovingDots!==true)throw new Error('Separate moving-dot primitive capability required');
- if(!spec||spec.id===undefined||!integer(spec.sourceIndex,0,87)||!integer(spec.row,0,7)||!integer(spec.column,0,10)||spec.sourceIndex!==spec.row*11+spec.column||typeof spec.program!=='string'||!spec.program.length||spec.program.length>127||!/^[npswe]+$/.test(spec.program))throw new Error('Explicit source slot, original grid and bounded n/p/s/w/e program required');
+ if(!spec||spec.id===undefined||!integer(spec.sourceIndex,0,87)||!integer(spec.row,0,7)||!integer(spec.column,0,10)||spec.sourceIndex!==spec.row*11+spec.column||!boundedOpcodes(spec.program,allowStationaryLR)||!spec.program.length||spec.program.length>127)throw new Error('Explicit source slot, original grid and bounded n/p/s/w/e program required');
  count(classCount);callback(onRiders);
  const originalPixel=pixel(spec.originalPixel),identity=Object.freeze({id:spec.id,sourceIndex:spec.sourceIndex,row:spec.row,column:spec.column,program:spec.program});
  let state={...identity,originalPixel,mainPixel:{...originalPixel},shadowPixel:{...originalPixel},motionType:1,sourcePC:1,progress:0,duration:16,clockReference:classCount,intermediate:{valid:false,moving:false,pixel:null}};

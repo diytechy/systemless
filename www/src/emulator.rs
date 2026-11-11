@@ -444,7 +444,8 @@ impl Machine {
         }
         // A seed for a fresh player (none unless a build sets one): it becomes
         // part of the mounted files, so it is not itself a change to save.
-        for patch in save_store::take_boot_patches() {
+        let boot_patches = save_store::take_boot_patches();
+        for patch in &boot_patches {
             if let Some(mut file) = runner.vfs_file_snapshot(&patch.path) {
                 if let Some(data_fork) = patch.apply(&file.data_fork) {
                     file.data_fork = data_fork;
@@ -468,6 +469,18 @@ impl Machine {
             .collect::<HashSet<_>>();
         for file in &restored_saves {
             runner.import_vfs_file(file);
+        }
+        // An enforced patch goes over the saved file as well, where it changes
+        // anything: a setting the build does not let a player change back.
+        for patch in boot_patches.iter().filter(|patch| patch.enforce) {
+            if let Some(mut file) = runner.vfs_file_snapshot(&patch.path) {
+                if let Some(data_fork) = patch.apply(&file.data_fork) {
+                    if data_fork != file.data_fork {
+                        file.data_fork = data_fork;
+                        runner.import_vfs_file(&file);
+                    }
+                }
+            }
         }
         // Modifier-only launch conditions are polled through GetKeys/KeyMap.
         // Inject them before init_app republishes the current key state into

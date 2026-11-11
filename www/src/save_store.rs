@@ -24,11 +24,17 @@ thread_local! {
 /// Bytes written over part of one mounted file before the game starts: a
 /// fresh player's seed (a neutral name in a settings file, say). The file must
 /// exist and be long enough; a patch that does not fit is skipped.
+///
+/// A patch goes in before the saved files are put over the mounted ones, so a
+/// save's own bytes win. One that is `enforce`d goes in after them as well:
+/// the saved file gets it on every boot.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BootPatch {
     pub path: String,
     pub offset: usize,
     pub bytes: Vec<u8>,
+    #[serde(default)]
+    pub enforce: bool,
 }
 
 impl BootPatch {
@@ -902,7 +908,16 @@ mod tests {
             path: "Volume/Settings".into(),
             offset: 2,
             bytes: vec![6, b'P', b'l'],
+            enforce: false,
         };
+        let from_page: BootPatch = serde_json::from_str(
+            r#"{"path": "Volume/Settings", "offset": 2, "bytes": [6, 80, 108]}"#,
+        )
+        .unwrap();
+        assert_eq!(
+            from_page, patch,
+            "a patch is not enforced unless it says so"
+        );
         assert_eq!(
             patch.apply(&[9, 9, 9, 9, 9, 9]),
             Some(vec![9, 9, 6, b'P', b'l', 9])

@@ -476,6 +476,7 @@ mod link {
                 path: patch.path.clone(),
                 offset: patch.offset,
                 bytes: patch.bytes.clone(),
+                enforce: patch.enforce,
             })
             .collect()
     }

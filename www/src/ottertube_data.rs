@@ -28,7 +28,8 @@ pub struct GameData {
     /// How to play, a few plain lines; and the same for a game controller.
     pub help: Vec<String>,
     pub pad_help: Vec<String>,
-    /// Bytes written into the game's own files on every boot, under the save.
+    /// Bytes written into the game's own files on every boot: under the save,
+    /// or over it when `enforce` is set.
     pub seed: Vec<Seed>,
     /// Added to where a finger (or a script's tap) is, `[right, down]`, for a
     /// game that draws its own pointer away from the system's.
@@ -65,6 +66,11 @@ pub struct Seed {
     pub path: String,
     pub offset: usize,
     pub bytes: Vec<u8>,
+    /// Written after the saved files are in place too, on every boot: for a
+    /// setting the page does not let a player change back (a control the page
+    /// blocks). Without it a save's own bytes win.
+    #[serde(default)]
+    pub enforce: bool,
 }
 
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq)]

@@ -1,0 +1,15 @@
+# Frustration 78 qualification in progress
+
+Continue locally through 100 without per-level stops. Contraction 77 remains the installed acceptance. No push, upload or deployment.
+
+Frustration/RND2_172 uses a new default-off static guns/triggers, EX, wall, spike and white-ring join, with one ordinary class1 b/f/n actor and fixed free buster packs on classes1 and3. Class3 runs at half class1 rate. No bomb, elevator or moving-dot capability is borrowed. Both clocks retain strict return deadlines, the shared PR pool and source wall erasure. Public commits e2569451 and87a02997; 481 runtime tests and21 packaging tests pass.
+
+Private evidence root: `D:/SystemlessBuild/diagnostics/2026-11-08-clockwerx-levels`. Source63 freeze `0d41584a3fa74da22fdd4e4ca79a505c04c888692ee0b172bc25cb793bfac659`,60 runtime files. Source62 and62v2 failures remain intact. A legitimate last-arm cross shatter exposed a frame4 guard rejection; Source63 admits that hidden cross sentinel and restores wall visibility on reset. Invented tests cover this contract separately from actual gameplay.
+
+Original cold closed35captures/141 source-only anchors, explicit fixed free-pack/class3 fitter7f9c2dd9. Source63 cold8000updates/no RNG/death/reset; fixed phase686/687 yields438 clear positions exact,22 pose residuals retained. No per-capture phase adjustment or native actor-identity/visibility census claim. Source62v2 retained77 sweep matched592520 paired updates; Source63 sweep02 is active and must close before acceptance.
+
+Route27 reaches21000 points in10598updates/20transfers/no winning RNG/death/reset. It uses55 even input holds, including legal Reverse oscillations to pass gunfire and aim busters at the final enclosure. Literal SHA `04eb43a15b79332fc2bab42958c25d33ac66a1f4015ab50b9e41cfa88a0bbb93`. Candidate01 closed exact goal. Current controlled ledger171254 attempted updates/30 constructors/570 failed-death RNG;Remaining budget78746 of250000; witness and fresh each reserve10598. Native/browser runs are counted separately.
+
+Original goal01 is active under consumed authorization `e00fd13d8923d75ad854946d5dba8bb64b78bbf2d2ac06c53a7eeaee16b9d70b`:61 captures,6882 planned frontend ticks, explicit7400 cap/600sec. Inspect closure and never rerun consumed authorization. Freeze the original-only fitter using all three fixed-pack flags before viewing goal pixels; compare all clear actors at prefix686 with the actual candidate. Then review goal/results/after-results, earned save and next level before witness/fresh. Both forks and metadata of the original preserved image remain untouched.
+
+Next: close native capture and Source63 retained sweep, original-only fit/view gate/comparison, original visible goal, witness/fresh with all five encoded and logical streams exact, isolated browser QA and shared PR-renderer smoke on77, atomic append78 with full77 rollback, earned through78 fixture, normal paused install check, docs, then79. QA copy `frustration78-qa-goal01/dist/clockwerx-html5` is staged; QA server/browser are not yet started. Normal8087 remains77 paused. Audio, physical controller, arbitrary input and pacing qualification remain separate.

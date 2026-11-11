@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 79,
-  "currentAction": "Through78 Frustration accepted/locally installed. Continue through100 without per-level stops; Hypertension79 original cold authorized, inspect its closure before source-only fitter.",
+  "currentOrdinal": 80,
+  "currentAction": "Through79 Hypertension accepted/locally installed; continue through100 without per-level stops. Flywheels80 original cold authorized; inspect closure then standard source-only fitter, no buster flags.",
   "levels": [
     {
       "ordinal": 1,
@@ -6876,10 +6876,14 @@
       "menuTitle": "Hypertension",
       "resourceTitle": "Hypertension",
       "sha256": "a7c751cd783f13722bfb3f4ff22edd49637a3c6528760a5f56c1f0a3f7febf8e",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "hypertension79-native-goal01/root-original-goal-review.json",
+        "hypertension79-native-goal-fit01/actor-comparison01.json",
+        "hypertension79-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -6907,7 +6911,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -6943,7 +6947,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "83feb1d3",
+      "sourceFreezeSHA256": "536e1f4c42a483611b4c5a50f759bcd580c1fbcca2c8f3c5083df75f911aca51",
+      "sourceTests": 491,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 93982,
+      "actualConstructors": 14,
+      "functionalUpdatesUsed": 93982,
+      "functionalUpdatesRemaining": 156018,
+      "nativeColdClosed": true,
+      "review": "hypertension-review.md",
+      "retainedSweep": {
+        "matchedGoals": 77,
+        "constructionOnly": 1,
+        "pairedUpdates": 603118,
+        "sha256": "e8ca0b5a81d70bd1f193d4c30f8a586d7f40f4c58514afb1674af9057bf8e7fc"
+      },
+      "deliveryAcceptance": {
+        "score": 21000,
+        "updates": 5982,
+        "transfers": 18,
+        "nextOrdinal": 80,
+        "nativeCampaignTotal": 511000,
+        "rootAcceptanceSHA256": "78291ea51a46d17167c39ac3641fea0678527fae2eda1320b4afba0f51f9ab47",
+        "rootProofSHA256": "b6925a18d5a30c8960d4e6f5ba8d45ea972e01513c9010a1ecd030892020fe14",
+        "earnedThrough79FixtureSHA256": "97aace806fc86eed230d8ce670a0fea75f8a039b6c2bd16b689bc2b26a9ba032"
+      },
+      "qualificationBoundary": "Bounded Child route.145clear ordinary positions/poses exact across49joins; ALL3900 buster proposals excluded from clear counts, no native type5 temporal identity/visibility/pose census. Cold88ordinary positions exact5pose residuals retained. Wider death36/reset/blast/orphan contracts synthetic. Arbitrary inputs/audio/controllers/pacing separate."
     },
     {
       "ordinal": 80,

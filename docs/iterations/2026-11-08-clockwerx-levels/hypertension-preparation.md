@@ -1,3 +1,5 @@
+**Superseded by accepted79 [review](hypertension-review.md). Preparation below is historical.**
+
 # Hypertension 79 qualification in progress
 
 Continue locally through100 without per-level stops.78 Frustration remains accepted and installed;22remain. See [accepted78 review](frustration-review.md). Normal browser2/tab2 is paused on78, QA8091 closed. No push/upload/deployment or Rust rebuild.

@@ -1,18 +1,38 @@
 """Source-only angular exclusion for free class1 busters at fixed pivots."""
 
 
-def free_buster_packs(level):
+def free_buster_packs(level, *, allow_joined_board=False):
+    if type(allow_joined_board) is not bool:
+        raise ValueError("Literal joined-board pack capability required")
     if level.get("structuralStatus") != "complete" or level.get("header", {}).get("version") != 12:
         raise ValueError("Complete version12 source required for free buster packs")
     blocks = {b["kind"]: b["records"] for b in level["blocks"]}
-    if any(blocks.get(k) for k in ("EX", "EL", "HY")) or any(
-            c["present"] and c["flagsRaw"] & 0x380 for c in level["cells"]):
+    if any(blocks.get(k) for k in ("EL", "HY")) or not allow_joined_board and (
+            blocks.get("EX") or any(c["present"] and c["flagsRaw"] & 0x380 for c in level["cells"])):
         raise ValueError("Free buster packs require fixed pivots without EX/EL/HY")
+    endpoints = set()
+    if allow_joined_board:
+        for r in blocks.get("EX", []):
+            w = r.get("rawWords")
+            if not isinstance(w, list) or len(w) != 3 or any(type(n) is not int for n in w) or \
+                    not 0 <= w[0] <= 7 or not 0 <= w[1] <= 10 or w[2] not in (0, 256):
+                raise ValueError("Explicit source connector geometry required")
+            row, col, orientation = w
+            other = (row + 1, col) if orientation else (row, col + 1)
+            if other[0] > 7 or other[1] > 10:
+                raise ValueError("Source connector leaves the large grid")
+            endpoints.update(((row, col), other))
     packs = {}
     for index, a in enumerate(blocks.get("WA", [])):
         if not a["activationMaskRaw"] & 1 or a["actorTypeRaw"] != 5:
             continue
         w, position = a["rawWords"], a["gridPosition"]
+        if allow_joined_board:
+            key = (position["row"], position["column"])
+            pivot = [c for c in level["cells"] if (c.get("row"), c.get("column")) == key]
+            if key in endpoints or len(pivot) != 1 or not pivot[0]["present"] or \
+                    pivot[0]["flagsRaw"] & 0x380 or pivot[0].get("inlineProgram"):
+                raise ValueError("Joined-board buster packs require fixed non-connector pivots")
         if len(w) < 8 or w[7] != 1 or a["programReferenceRaw"] != -1 or \
                 w[4] not in (1, 65535) or not 0 <= w[3] < 32 or a["initialFrameHalfIndexRaw"] != w[3]:
             raise ValueError("Unprogrammed class1 buster source declarations required")

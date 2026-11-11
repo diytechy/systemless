@@ -39,6 +39,8 @@ def main():
                         help="Disclose an earlier view of this board in another original run")
     parser.add_argument("--allow-free-buster-packs", action="store_true",
                         help="Source3900 art and separated fixed free class1 angular packs")
+    parser.add_argument("--allow-fixed-buster-joined-board", action="store_true",
+                        help="Allow movers/connectors elsewhere, with fixed non-connector buster pivots")
     a = parser.parse_args()
     if not 1 <= a.max_seconds <= 180 or a.output.exists():
         parser.error("Expected a fresh output and a 1–180 second fit limit")
@@ -54,9 +56,11 @@ def main():
     groups = {0: "700", 1: "500", 2: "4400", 3: "4500", 4: "3500"}
     blocks = {b["kind"]: b["records"] for b in level["blocks"]}
     packs = {}
+    if a.allow_fixed_buster_joined_board and not a.allow_free_buster_packs:
+        parser.error("Joined-board fitting requires free-buster pack qualification")
     if a.allow_free_buster_packs:
         try:
-            packs = free_buster_packs(level)
+            packs = free_buster_packs(level, allow_joined_board=a.allow_fixed_buster_joined_board)
         except ValueError as error:
             parser.error(str(error))
         groups[5] = "3900"
@@ -126,6 +130,8 @@ def main():
     if packs:
         method.update(freeBusterPacks=packs, packCode=pin(Path(__file__).with_name("source_actor_packs.py")),
                       packBoundary="Nominal source WA footprints; independent clones/overdraw can be ambiguous. No actor-identity or visibility census claim.")
+        if a.allow_fixed_buster_joined_board:
+            method["fixedBusterJoinedBoard"] = True
     a.output.mkdir()
     save(a.output / "root-original-method.json", method)
     templates, images = {}, {}

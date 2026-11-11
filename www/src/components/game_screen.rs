@@ -476,7 +476,7 @@ fn GameRuntime(
                 );
                 return;
             }
-            if let Err(error) = save_store::flush_pending_saves(game.id).await {
+            if let Err(error) = save_store::flush_pending_saves(&save_scope(game).id).await {
                 set_status(
                     status,
                     format!("Previous game could not finish saving: {error}"),

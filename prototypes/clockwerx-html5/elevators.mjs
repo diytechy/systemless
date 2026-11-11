@@ -72,14 +72,15 @@ export function upDownPlacement(state,origin){
 // DOFrameProc262e runs once, then once more for delta>1. Only TYPE1 writes
 // its intermediate cache. DOInitUpDownInfo332e leaves sprite clock refs and
 // TYPE3 frame/step untouched on an ordinary raised reset.
-export function createSourceUpDownDot(spec,{allowMovingElevators=false,classCount=0,surfaceCount=0,onRiders,onLowered=()=>{}}={}){
+export function createSourceUpDownDot(spec,{allowMovingElevators=false,allowLoweredCheckpointControls=false,classCount=0,surfaceCount=0,onRiders,onLowered=()=>{}}={}){
  if(allowMovingElevators!==true)throw new Error('Separate moving/up-down capability required');
  const sync=f=>{if(typeof f!=='function'||f.constructor?.name==='AsyncFunction')throw new TypeError('Synchronous TYPE2 rider/lowered adapters required');};
  const invoke=(f,...args)=>{const v=f(...args);if(v&&typeof v.then==='function')throw new TypeError('TYPE2 adapter returned a Promise');};
- if(!spec||spec.id===undefined||!integer(spec.sourceIndex,0,87)||!integer(spec.row,0,7)||!integer(spec.column,0,10)||spec.sourceIndex!==spec.row*11+spec.column||spec.group!==0||spec.initialLowered!==false||spec.originalPixel?.x!==74+48*spec.column||spec.originalPixel?.y!==72+48*spec.row)throw new Error('Raised channel0 TYPE2 source grid declaration required');
+ if(typeof allowLoweredCheckpointControls!=='boolean'||!spec||spec.id===undefined||!integer(spec.sourceIndex,0,87)||!integer(spec.row,0,7)||!integer(spec.column,0,10)||spec.sourceIndex!==spec.row*11+spec.column||(allowLoweredCheckpointControls?spec.group!==1||spec.initialLowered!==true:spec.group!==0||spec.initialLowered!==false)||spec.originalPixel?.x!==74+48*spec.column||spec.originalPixel?.y!==72+48*spec.row)throw new Error('Qualified TYPE2 channel and initial height required');
  sync(onRiders);sync(onLowered);const base={...spec.originalPixel};
- let s={id:spec.id,sourceIndex:spec.sourceIndex,row:spec.row,column:spec.column,...createUpDownState({group:0,initialLowered:false,clockCount:classCount,surfaceCount}),motionType:2,mainPixel:{...base},shadowPixel:{...base},surfaceStep:1,capFrame:158,capVisible:false};
- const snapshot=()=>structuredClone({...s,originalPixel:base,currentPixel:s.mainPixel,intermediate:{valid:false,moving:false,pixel:null},misc3:{group:300,frame:s.surfaceFrame,first:127,last:134,step:s.surfaceStep,reference:s.surfaceReference,visible:true,layer:5,rawBase:{x:base.x-16,y:base.y-15}},misc4:{group:300,frame:s.capFrame,visible:s.capVisible,layer:4,rawBase:{x:base.x-16,y:base.y-15}}});
+ const surfaceBase=126+9*spec.group,lowered=spec.initialLowered;
+ let s={id:spec.id,sourceIndex:spec.sourceIndex,row:spec.row,column:spec.column,...createUpDownState({group:spec.group,initialLowered:lowered,clockCount:classCount,surfaceCount}),motionType:2,mainPixel:{x:base.x-(lowered?12:0),y:base.y+(lowered?12:0)},shadowPixel:{x:base.x-(lowered?24:0),y:base.y},surfaceStep:lowered?0:1,capFrame:158,capVisible:lowered,...(lowered?{humanAvailable:true}:{})};
+ const snapshot=()=>structuredClone({...s,originalPixel:base,currentPixel:s.mainPixel,intermediate:{valid:false,moving:false,pixel:null},misc3:{group:300,frame:s.surfaceFrame,first:surfaceBase+1,last:surfaceBase+8,step:s.surfaceStep,reference:s.surfaceReference,visible:true,layer:5,rawBase:{x:base.x-16,y:base.y-15}},misc4:{group:300,frame:s.capFrame,visible:s.capVisible,layer:4,rawBase:{x:base.x-16,y:base.y-15}}});
  const one=()=>{
   if(!s.step)return;
   const step=s.step;if(step<0&&s.phase===12)s.humanAvailable=false;
@@ -89,7 +90,7 @@ export function createSourceUpDownDot(spec,{allowMovingElevators=false,classCoun
   if(s.phase===12){s.step=0;s.humanAvailable=true;}
   if(s.phase===0){s.step=0;invoke(onLowered,s.id,snapshot());}
   s.mainVisible=s.phase>=2;s.capVisible=s.phase<6;if(s.capVisible)s.capFrame=158-s.phase;
-  if(s.phase<12){s.surfaceFrame=126;s.surfaceStep=0;}else s.surfaceStep=1;
+  if(s.phase<12){s.surfaceFrame=surfaceBase;s.surfaceStep=0;}else s.surfaceStep=1;
  };
  return {snapshot,
   activate(){const a=activateUpDownState(s);s.step=a.step;return snapshot();},
@@ -100,17 +101,17 @@ export function createSourceUpDownDot(spec,{allowMovingElevators=false,classCoun
   },
   observeSurface(currentCount){
    if(!integer(currentCount,s.surfaceReference,Number.MAX_SAFE_INTEGER))throw new RangeError('Persistent TYPE3 count required');
-   if(currentCount!==s.surfaceReference){s.surfaceReference=currentCount;s.surfaceFrame+=s.surfaceStep;if(s.surfaceFrame>134)s.surfaceFrame=127;}return snapshot();
+   if(currentCount!==s.surfaceReference){s.surfaceReference=currentCount;s.surfaceFrame+=s.surfaceStep;if(s.surfaceFrame>surfaceBase+8)s.surfaceFrame=surfaceBase+1;}return snapshot();
   },
-  reset(){s.mainPixel={...base};s.shadowPixel={...base};s.phase=12;s.step=0;s.humanAvailable=true;s.mainVisible=true;s.capVisible=false;return snapshot();}
+  reset(){s.mainPixel={x:base.x-(lowered?12:0),y:base.y+(lowered?12:0)};s.shadowPixel={x:base.x-(lowered?24:0),y:base.y};s.phase=lowered?0:12;s.step=0;s.humanAvailable=true;s.mainVisible=!lowered;s.capVisible=lowered;if(lowered){s.capFrame=158;s.surfaceFrame=surfaceBase;s.surfaceStep=0;}return snapshot();}
  };
 }
 
-export function createElevatorSystem(specs,dotSpecs,{origin={x:74,y:72},clockCount=0,surfaceCount=0,allowSourceDotDispatch=false,onRiders,onLowered}={}){
+export function createElevatorSystem(specs,dotSpecs,{origin={x:74,y:72},clockCount=0,surfaceCount=0,allowSourceDotDispatch=false,allowLoweredCheckpointControls=false,onRiders,onLowered}={}){
  if(!Array.isArray(specs)||specs.length>12||!Array.isArray(dotSpecs)||dotSpecs.length>88)throw new RangeError('Source EL/dot capacities required');
  const ids=new Set();for(const d of dotSpecs){if(ids.has(d.id))throw new Error('Unique source dot identities required');ids.add(d.id);createUpDownState({...d,clockCount});}
- if(allowSourceDotDispatch&&(!dotSpecs.length||origin.x!==74||origin.y!==72||specs.some(s=>s.group!==0||![1,2,3].includes(s.subcell))))throw new Error('Separate channel0 source TYPE2 dispatcher required');
- const sourceDots=allowSourceDotDispatch?dotSpecs.map(d=>createSourceUpDownDot(d,{allowMovingElevators:true,classCount:clockCount,surfaceCount,onRiders,onLowered})):null;
+ if(typeof allowLoweredCheckpointControls!=='boolean'||allowLoweredCheckpointControls&&!allowSourceDotDispatch||allowSourceDotDispatch&&(!dotSpecs.length||origin.x!==74||origin.y!==72||specs.some(s=>s.group!==(allowLoweredCheckpointControls?1:0)||!(allowLoweredCheckpointControls?[3]:[1,2,3]).includes(s.subcell))))throw new Error('Separate qualified source TYPE2 dispatcher required');
+ const sourceDots=allowSourceDotDispatch?dotSpecs.map(d=>createSourceUpDownDot(d,{allowMovingElevators:true,allowLoweredCheckpointControls,classCount:clockCount,surfaceCount,onRiders,onLowered})):null;
  const controls=specs.map((spec,index)=>({...spec,...elevatorGeometry(spec,origin),index,visible:true,occupants:0,frame:3+2*spec.group})),contacts=new Map();let dots;
  const currentDots=()=>sourceDots?sourceDots.map(d=>d.snapshot()):dots;
  const reset=(count,surface=0)=>{if(!integer(count,0,Number.MAX_SAFE_INTEGER))throw new RangeError('Source count required');contacts.clear();for(const c of controls){c.occupants=0;c.frame=3+2*c.group;c.visible=true;delete c.burnt;}if(sourceDots)sourceDots.forEach(d=>d.reset());else dots=dotSpecs.map(d=>({id:d.id,...createUpDownState({...d,clockCount:count,surfaceCount:surface})}));};reset(clockCount,surfaceCount);

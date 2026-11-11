@@ -23,6 +23,9 @@ test('joined ordinary checkpoint saves spawn and time then death reset reevaluat
 test('joined explicit level restart restores original spawn and timer after checkpoint selection',()=>{
  const g=round(),wy=g.board.dots.find(d=>d.waystation);g.remainingTime=71;g.onHumanGrab(wy);g.reset();assert.equal(g.player.pivot,'0,0');assert.equal(g.remainingTime,120);assert.equal(g.dotAnimations.savedSpawn.pivot,'0,0');assert.equal(g.board.slowdownWallRules,true);assert.equal(g.board.slowdownWaystationRules,true);assert.equal(g.board.slowdownClass4Rules,undefined);
 });
+test('joined Slow walls seed the retained source background and survive round reset',()=>{
+ const g=round(),walls=structuredClone(g.board.walls);assert.deepEqual(g.sourcePaint.original.walls,walls);g.reset();assert.deepEqual(g.sourcePaint.original.walls,walls);assert.deepEqual(g.board.walls,walls);
+});
 test('slowdown checkpoint source preserves white WY, colored goal and programmed ordinary clocks',()=>{
  assert.equal(assertSlowdownWaystationSource(fixture()),true);for(const change of[s=>s.cells[24].secondaryRaw=4111,s=>s.blocks[0].records[2].rawWords[7]=1,s=>s.blocks[0].records[4].programReferenceRaw=-1,s=>s.blocks[3].records[0].rawWords[5]=8,s=>s.cells[56].flagsRaw=0x4031]){const s=fixture();change(s);assert.throws(()=>assertSlowdownWaystationSource(s));}
 });

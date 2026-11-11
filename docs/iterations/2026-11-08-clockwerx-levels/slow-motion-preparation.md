@@ -1,0 +1,9 @@
+# Slow Motion84 preparation
+
+Source-only preparation while Swing Out83 acceptance finishes. Continue through100 without per-level stops. No84 actual model or original cold has run yet. Source RND2_201 contains72dots/15bonuses/20Slow colors0/1/4, six walls, seven static spikes and six free ordinary red/blue class4 NPCs. Both human starts are ordinary3,2/class0; NPC wall checks are false and programs are null. Three PU records carry Child-inactive mask8; no Oil capability is required. Goal7,2 lies across the central wall.
+
+New default-off class4 source/normalized-board guard a4e8ac75 has four invented checks passing. It preserves raw masks, inactive PU, actor class/type, source joins and actual live wall collision frames; old profile and packager remain unchanged. Shared StaticSlowdownRuntime already preserves clock count/remainders when class4 divisor8 changes to16; human class0 stays unchanged. An explicit separate integration is prepared privately, not applied. Avoid borrowing class1 admission from Clutch82.
+
+Existing source images/descriptors supply blue193/202 main/shadow Slow glyphs. Private SVG e9e320da is exact visibleRGBA at source gamma0.7 and descriptor anchors; collision remains the independent original300 outline bank. This is source rendering evidence only. New blue atlas fallback/preload and source-bound capability forwarding remain to be wired and checked.
+
+After83 installation, launch one newly authorized earned-through83 original cold, standard original-only actor and Slow appearance fitters before dedicated84 PNG reads, inspect scene, implement/invented checks, freeze, one actual empty-input trajectory and shared cold rank. Then legal route/candidate, original rehearsal, witness/fresh/visible/earned85/retained83 sweep/atomic installation. Preserve failed attempts and actual update ledger, and continue through100. No Rust rebuild, push, upload or deployment.

@@ -1,3 +1,5 @@
+**Superseded by accepted83 [review](swing-out-review.md). Preparation below is historical.**
+
 # Swing Out83 preparation
 
 **Latest83 update:** Original rehearsal01 closed160.53seconds/47captures but did not complete:1000round points, still83 after advance. WYactivation is visible in input34F. Fixed706 comparison168clear/151positions/119poses; firstpose mismatch2646, then hero phase differs1–2frames after repeatedReverse and later transfers miss. Retain original/candidate/literal01; no earned84 or acceptance. Legal policy03 holds each Reverse at least six updates until its pending request is consumed, requires six released updates between pulses and follows through each successful F/S transfer for24updates. No source/state/clock assignments. It still wins8508/4000/15transfers, now91even holds/74acceptedReverse. Fresh candidate02 is running; literal02 preserved separately. Native plan02 retains all input/idle edges and samples only Reverse screenshots:5827frontend/47captures. Controlled45438updates/sixconstructors/30failedRNG after candidate02 if it closes normally; witness/fresh still required. Source68 remains unchanged.

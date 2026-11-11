@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 83,
-  "currentAction": "Through82 Clutch accepted/locally installed; continue through100 without per-level stops. SwingOut83 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Moving-waystation source admission52061a0d unlinked; no83 model.",
+  "currentOrdinal": 84,
+  "currentAction": "Through83 Swing Out accepted/locally installed; continue through100 without per-level stops. SlowMotion84 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Class4Slow/WL/SP source/board guard a4e8ac75 unlinked; no84 actual model.",
   "levels": [
     {
       "ordinal": 1,
@@ -7295,10 +7295,14 @@
       "menuTitle": "Swing Out",
       "resourceTitle": "Swing Out",
       "sha256": "29ec025361a5b0b7d96d16eb2563867fc321c27bd252946e334d731433d5dab4",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "swing-out83-native-goal04/root-original-goal-review.json",
+        "swing-out83-native-goal-fit04/actor-comparison01.json",
+        "swing-out83-native-goal04/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7326,7 +7330,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7354,7 +7358,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "c9f71fca",
+      "sourceFreezeSHA256": "0797be05cde082901bb66bdca2ce9c2cae9c2b8961ddb52c6d63c1e893af6cc7",
+      "sourceTests": 523,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 109475,
+      "actualConstructors": 13,
+      "functionalUpdatesUsed": 109475,
+      "functionalUpdatesRemaining": 140525,
+      "nativeColdClosed": true,
+      "review": "swing-out-review.md",
+      "retainedSweep": {
+        "matchedGoals": 81,
+        "constructionOnly": 1,
+        "pairedUpdates": 624348,
+        "sha256": "71292dee7d0d1d6eb6f937a84b922bad91898475939f7f3851086eef134c26aa"
+      },
+      "deliveryAcceptance": {
+        "score": 4000,
+        "updates": 8508,
+        "transfers": 15,
+        "nextOrdinal": 84,
+        "nativeCampaignTotal": 534000,
+        "rootAcceptanceSHA256": "6eac29304793aa9a90fd705416f755ec86a239929153f4b856af38235611ba45",
+        "rootProofSHA256": "8bdb23a2f5874eb397c3bd59fd77d569f5d49809761918d091862f8a56e07c22",
+        "earnedThrough83FixtureSHA256": "aa7d91eb88a240bc5f010e36e393147c544db5aca8c890676582e1c0c1020620"
+      },
+      "qualificationBoundary": "Original results4000 and earned84SlowMotion/534000 visually verified after standard original-only410anchor fitter/viewgate. At fixed706,157/168clear actorpositions and115/168poses exact across42joins;11position and53pose residuals retained. Human42/42positions,13/42poses; red115/126positions,102/126poses. No original phase fitting after cold; cold3position8pose residuals retained at706/707. Original input34F visibly occupies activatedWY1,5; checkpoint death/reset source contract tested on invented fixture, not original winning route. Threefailed original rehearsals and one legal route-to-bonus stall retained. Widened final Flip12frames early completes; all early inputs unchanged. Winning15transfers/9Flip/6Swing/76Reverse/onecheckpoint/twobonus, zeroRNG/death/reset. Evidence establishes bounded goal/route with disclosed temporal residuals, not fullpose or pixel equivalence. Arbitrary controls/audio/controllers/pacing and actor-identity census separate."
     },
     {
       "ordinal": 84,

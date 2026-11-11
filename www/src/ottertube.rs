@@ -253,135 +253,6 @@ pub fn extra_save_paths(game_id: &str) -> &'static [&'static str] {
     &[]
 }
 
-/// The name a seeded game starts with, so a child is never asked to type one.
-#[cfg_attr(not(test), allow(dead_code))]
-pub const NEUTRAL_PLAYER_NAME: &str = "Player";
-
-/// A big button that presses keys once: `keys` are browser key names joined by
-/// `+`, pressed in order and released in reverse (`Meta+n` is Command-N). A
-/// comma separates presses made one after another, a little over a second apart.
-#[derive(Clone, Copy, Debug)]
-pub struct KioskAction {
-    pub label: &'static str,
-    pub keys: &'static str,
-}
-
-/// Bytes written into one of the game's own files for a player with no save.
-#[derive(Clone, Copy, Debug)]
-pub struct SeedPatch {
-    pub path: &'static str,
-    pub offset: usize,
-    pub bytes: &'static [u8],
-}
-
-/// What the add-on page shows around one game besides its held controls (the
-/// stick and buttons, which are the entry's `controls.mobile`): tap actions
-/// that get a child into play and out of a lost game without a keyboard or a
-/// menu, a few lines of help, and the seed for a new player.
-#[derive(Clone, Copy, Debug)]
-pub struct KioskGame {
-    pub actions: &'static [KioskAction],
-    pub help: &'static [&'static str],
-    pub seed: &'static [SeedPatch],
-}
-
-pub fn kiosk_game(game_id: &str) -> KioskGame {
-    match game_id {
-        "clockwerx-personal-10" => KioskGame {
-            actions: &[
-                KioskAction {
-                    label: "New game",
-                    keys: "Meta+n",
-                },
-                KioskAction {
-                    label: "Try again",
-                    keys: "Meta+r",
-                },
-                KioskAction {
-                    label: "Pause",
-                    keys: "Meta+p",
-                },
-                // End Game: the scores, then OK, then the level list again.
-                KioskAction {
-                    label: "Stop",
-                    keys: "Meta+e",
-                },
-            ],
-            help: &[
-                "Tap New game, pick a level, then tap the red Play button.",
-                "Your hand spins round a dot. Get to the goal dot.",
-                "Hold Swing to hop to the next dot as you pass it.",
-                "Bounce turns you back. Flip jumps across. Reverse spins the other way.",
-                "Stuck? Tap Try again. To pick another level tap Stop, then OK.",
-            ],
-            seed: CLOCKWERX_SEED,
-        },
-        "delirium-personal-11" => KioskGame {
-            actions: &[
-                // Space begins a game from the title. After a game has ended the
-                // first press only clears the scores, so Start presses it twice;
-                // in a game Space is Thrust, so the second press does no harm.
-                KioskAction {
-                    label: "Start",
-                    keys: "Space,Space",
-                },
-                KioskAction {
-                    label: "Stop",
-                    keys: "Escape",
-                },
-            ],
-            help: &[
-                "Tap Start to begin.",
-                "Push the stick to fly. Fire shoots. Bomb clears the screen.",
-                "Thrust speeds you up. Turn makes you face the other way.",
-                "Save the little people and shoot the aliens.",
-                "Stop ends the game you are playing.",
-            ],
-            seed: &[],
-        },
-        "blobbo-full-personal-101" => KioskGame {
-            actions: &[
-                KioskAction {
-                    label: "Start again",
-                    keys: "Meta+a",
-                },
-                KioskAction {
-                    label: "Save",
-                    keys: "Meta+s",
-                },
-                KioskAction {
-                    label: "Load",
-                    keys: "Meta+r",
-                },
-            ],
-            help: &[
-                "Tap the Blobbo button to begin.",
-                "Tap beside Blobbo to send him that way, or push the stick.",
-                "Push the boxes, collect the toys, find the way out.",
-                "Stuck? Tap Start again.",
-                "Save keeps where you are: tap Save, then the Save button.",
-            ],
-            seed: &[],
-        },
-        _ => KioskGame {
-            actions: &[],
-            help: &[],
-            seed: &[],
-        },
-    }
-}
-
-/// ClockWerx keeps the player's name in its Settings file as a Pascal string
-/// (a length byte, then the characters) at offset 532. Observed 2026-11-11: a
-/// name typed on the Options screen changed exactly those bytes, and the
-/// Options screen shows what they hold. A new player's score record is keyed
-/// by the same name, so one neutral name keeps typed names out of the save.
-const CLOCKWERX_SEED: &[SeedPatch] = &[SeedPatch {
-    path: "ClockWerx/System Folder/Preferences/ClockWerx Settings",
-    offset: 532,
-    bytes: b"\x06Player",
-}];
-
 /// One number for a set of files: equal sets, in any order, give equal numbers.
 pub fn files_fingerprint(files: &[VfsFileSnapshot]) -> u64 {
     fn mix(hash: &mut u64, bytes: &[u8]) {
@@ -451,8 +322,10 @@ mod link {
         fn link_exit() -> Result<(), JsValue>;
         #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = wait, catch)]
         fn link_wait(ms: f64) -> Result<js_sys::Promise, JsValue>;
-        #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = onKeys, catch)]
-        fn link_on_keys(callback: &js_sys::Function) -> Result<(), JsValue>;
+        #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = onInput, catch)]
+        fn link_on_input(callback: &js_sys::Function) -> Result<(), JsValue>;
+        #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = setPad, catch)]
+        fn link_set_pad(json: &str) -> Result<(), JsValue>;
     }
 
     const OVERSIZE_KEY: &str = "systemless.ottertube.oversize:";
@@ -499,16 +372,17 @@ mod link {
     /// yet, or it did not answer in time.
     pub type SaveScanner =
         Rc<dyn Fn(f64) -> Pin<Box<dyn Future<Output = Option<Vec<DownloadableSaveFile>>>>>>;
-    /// Presses or releases guest keys for a tap action, through the same
-    /// ownership count as the held controls.
-    pub type TapKeys = Rc<dyn Fn(Vec<String>, bool)>;
+    pub use crate::ottertube_play::{
+        busy as script_running, game_unmounted, guest_point, on_takeover, screen_reply,
+        set_guest_pointer, set_screen_reader, set_tap_keys, stick_is_stepped, stick_steps,
+        swallows_touch, KeyOwner, ScreenRequest,
+    };
 
     thread_local! {
         static SESSION: RefCell<Option<Session>> = const { RefCell::new(None) };
         static NEXT_WRITE: RefCell<Option<LocalWrite>> = const { RefCell::new(None) };
         static WRITING: Cell<bool> = const { Cell::new(false) };
         static SCANNER: RefCell<Option<SaveScanner>> = const { RefCell::new(None) };
-        static TAP_KEYS: RefCell<Option<TapKeys>> = const { RefCell::new(None) };
         static LEAVING: Cell<Option<RwSignal<bool>>> = const { Cell::new(None) };
         static HALTED: Cell<bool> = const { Cell::new(false) };
     }
@@ -566,11 +440,6 @@ mod link {
         SCANNER.with(|slot| *slot.borrow_mut() = scanner);
     }
 
-    /// The game screen hands over how a tap action presses guest keys.
-    pub fn set_tap_keys(keys: Option<TapKeys>) {
-        TAP_KEYS.with(|slot| *slot.borrow_mut() = keys);
-    }
-
     /// A browser check's request in the page address: `paused` stops the
     /// machine's periodic save scan, `paused-slow` also makes an explicit scan
     /// answer late. Nothing in OtterTube sets it.
@@ -599,16 +468,47 @@ mod link {
         }
     }
 
-    fn seed_patches(game_id: &str) -> Vec<save_store::BootPatch> {
-        kiosk_game(game_id)
+    fn seed_patches(_game_id: &str) -> Vec<save_store::BootPatch> {
+        crate::ottertube_play::game()
             .seed
             .iter()
             .map(|patch| save_store::BootPatch {
-                path: patch.path.to_string(),
+                path: patch.path.clone(),
                 offset: patch.offset,
-                bytes: patch.bytes.to_vec(),
+                bytes: patch.bytes.clone(),
             })
             .collect()
+    }
+
+    /// The game's data: what is compiled in. On a loopback host a file beside
+    /// the page, `/ottertube-games.dev.json`, is used instead when it is there
+    /// and passes the same checks: for whoever is working out a game's screens
+    /// and scripts. A bundle served from a real name never looks for it.
+    async fn game_data(game_id: &str) -> crate::ottertube_data::GameData {
+        let mut games = crate::ottertube_data::embedded();
+        let loopback = web_sys::window()
+            .and_then(|window| window.location().hostname().ok())
+            .is_some_and(|host| matches!(host.as_str(), "127.0.0.1" | "localhost" | "[::1]"));
+        if loopback {
+            if let Ok(response) = gloo_net::http::Request::get("/ottertube-games.dev.json")
+                .send()
+                .await
+            {
+                if response.ok() {
+                    match response.text().await.map_err(|error| error.to_string()) {
+                        Ok(text) => match crate::ottertube_data::parse(&text) {
+                            Ok(dev) => {
+                                warn("using /ottertube-games.dev.json");
+                                games = dev;
+                            }
+                            Err(error) => warn(&format!("/ottertube-games.dev.json: {error}")),
+                        },
+                        Err(error) => warn(&format!("/ottertube-games.dev.json: {error}")),
+                    }
+                }
+            }
+        }
+        games.remove(game_id).unwrap_or_default()
     }
 
     fn warn(message: &str) {
@@ -796,15 +696,14 @@ mod link {
         if link_on_leave(on_leave.as_ref().unchecked_ref()).is_ok() {
             on_leave.forget();
         }
-        let on_keys =
-            Closure::<dyn FnMut(js_sys::Array, bool)>::new(|names: js_sys::Array, down: bool| {
+        let on_input = Closure::<dyn FnMut(String, js_sys::Array, bool)>::new(
+            |kind: String, names: js_sys::Array, down: bool| {
                 let names: Vec<String> = names.iter().filter_map(|name| name.as_string()).collect();
-                if let Some(keys) = TAP_KEYS.with(|slot| slot.borrow().clone()) {
-                    keys(names, down);
-                }
-            });
-        if link_on_keys(on_keys.as_ref().unchecked_ref()).is_ok() {
-            on_keys.forget();
+                crate::ottertube_play::input(&kind, names, down);
+            },
+        );
+        if link_on_input(on_input.as_ref().unchecked_ref()).is_ok() {
+            on_input.forget();
         }
     }
 
@@ -991,6 +890,8 @@ mod link {
             return;
         }
         signal.set(true);
+        // A script that is running stops here: its keys and pointer are let go.
+        crate::ottertube_play::cancel_script("leaving");
         // One deadline for the scan, the local commit and OtterTube's answer.
         let deadline = js_sys::Date::now() + LEAVE_WAIT_MS;
         if let Some(scanner) = SCANNER.with(|slot| slot.borrow().clone()) {
@@ -1041,7 +942,12 @@ mod link {
         let leaving = RwSignal::new(false);
         LEAVING.with(|slot| slot.set(Some(leaving)));
         let help_open = RwSignal::new(false);
-        let kiosk = game.map(|game| kiosk_game(game.id));
+        let signals = crate::ottertube_play::Signals {
+            busy: RwSignal::new(None),
+            screens: RwSignal::new(Vec::new()),
+            pad: RwSignal::new(false),
+            starting: RwSignal::new(false),
+        };
         let has_stick = game.is_some_and(|game| {
             let stick = game.settings.mobile_controls.joystick;
             game.settings.mobile_controls.enabled
@@ -1051,6 +957,12 @@ mod link {
         });
         match game {
             Some(game) => spawn_local(async move {
+                // The game's data first: its seed goes into the boot, and the
+                // controller adapter reads its buttons.
+                crate::ottertube_play::set_game(game_data(game.id).await, signals);
+                let pad =
+                    serde_json::to_string(&crate::ottertube_play::game().pad).unwrap_or_default();
+                let _ = link_set_pad(&pad);
                 state.set(match begin(game).await {
                     Ok(()) => LinkState::Ready,
                     Err(reason) => LinkState::Absent(reason),
@@ -1071,39 +983,68 @@ mod link {
                     LinkState::Absent(_) => "absent",
                 }>
                 {move || match (state.get(), game) {
-                    (LinkState::Ready, Some(game)) => view! {
-                        <main class="app__main">
-                            <div class="game-page">
-                                <div class="game-screen-wrap"><GameScreen game=game/></div>
-                            </div>
-                        </main>
-                        // Everything a child needs besides the picture: leave, help, and the
-                        // game's own start/pause actions as big buttons. No link anywhere.
-                        <div class="kiosk-chrome kiosk-chrome--system">
-                            <button type="button" class="kiosk-button kiosk-button--exit" data-kiosk-exit="true"
-                                on:click=move |_| spawn_local(leave())>"Exit"</button>
-                            <button type="button" class="kiosk-button kiosk-button--help" data-kiosk-help="true"
-                                on:click=move |_| help_open.set(true)>"How to play"</button>
-                        </div>
-                        <div class="kiosk-chrome kiosk-chrome--actions">
-                            {kiosk.map(|kiosk| kiosk.actions.iter().map(|action| view! {
-                                <button type="button" class="kiosk-button kiosk-button--action"
-                                    data-kiosk-keys=action.keys>{action.label}</button>
-                            }).collect_view())}
-                        </div>
-                        <Show when=move || help_open.get()>
-                            <div class="kiosk-help" role="dialog" aria-label="How to play">
-                                <div class="kiosk-help__card">
-                                    <h2>{game.title}</h2>
-                                    <ul>
-                                        {kiosk.map(|kiosk| kiosk.help.iter().map(|line| view! { <li>{*line}</li> }).collect_view())}
-                                    </ul>
-                                    <button type="button" class="kiosk-button kiosk-button--close" data-kiosk-help-close="true"
-                                        on:click=move |_| help_open.set(false)>"OK"</button>
+                    (LinkState::Ready, Some(game)) => {
+                        let data = crate::ottertube_play::game();
+                        let (help_lines, pad_lines) = (data.help.clone(), data.pad_help.clone());
+                        view! {
+                            <main class="app__main">
+                                <div class="game-page">
+                                    <div class="game-screen-wrap"><GameScreen game=game/></div>
                                 </div>
+                            </main>
+                            // Everything a child needs besides the picture: leave, help, and the
+                            // game's own actions as big buttons. No link anywhere.
+                            <div class="kiosk-chrome kiosk-chrome--system">
+                                <button type="button" class="kiosk-button kiosk-button--exit" data-kiosk-exit="true"
+                                    on:click=move |_| spawn_local(leave())>"Exit"</button>
+                                <button type="button" class="kiosk-button kiosk-button--help" data-kiosk-help="true"
+                                    on:click=move |_| help_open.set(true)>"How to play"</button>
                             </div>
-                        </Show>
-                    }.into_any(),
+                            <div class="kiosk-chrome kiosk-chrome--actions">
+                                {data.actions.iter().cloned().map(|action| {
+                                    // A button shows on the screens it is for, once the game has been started.
+                                    let (when, unless) = (action.when.clone(), action.unless.clone());
+                                    let shown = move || {
+                                        let screens = signals.screens.get();
+                                        !signals.starting.get()
+                                            && (when.is_empty() || when.iter().any(|name| screens.contains(name)))
+                                            && !unless.iter().any(|name| screens.contains(name))
+                                    };
+                                    view! {
+                                        <button type="button" class="kiosk-button kiosk-button--action"
+                                            data-kiosk-keys=action.keys.clone()
+                                            data-kiosk-script=action.script.clone()
+                                            style:display=move || if shown() { "" } else { "none" }
+                                        >{action.label.clone()}</button>
+                                    }
+                                }).collect_view()}
+                            </div>
+                            // The game is being started, or a script is driving it: say so, and take no touch but Exit.
+                            <Show when=move || signals.starting.get() || signals.busy.get().is_some()>
+                                <div class="kiosk-busy" role="status"><span>"One moment\u{2026}"</span></div>
+                            </Show>
+                            <Show when=move || help_open.get()>
+                                <div class="kiosk-help" role="dialog" aria-label="How to play">
+                                    <div class="kiosk-help__card">
+                                        <h2>{game.title}</h2>
+                                        <ul>
+                                            {
+                                                // With a controller connected, its buttons.
+                                                let lines = if signals.pad.get_untracked() && !pad_lines.is_empty() {
+                                                    pad_lines.clone()
+                                                } else {
+                                                    help_lines.clone()
+                                                };
+                                                lines.into_iter().map(|line| view! { <li>{line}</li> }).collect_view()
+                                            }
+                                        </ul>
+                                        <button type="button" class="kiosk-button kiosk-button--close" data-kiosk-help-close="true"
+                                            on:click=move |_| help_open.set(false)>"OK"</button>
+                                    </div>
+                                </div>
+                            </Show>
+                        }.into_any()
+                    }
                     (LinkState::Absent(reason), _) => view! {
                         <main class="ottertube-plain">
                             <h1>"This game opens inside OtterTube"</h1>
@@ -1446,63 +1387,6 @@ mod tests {
         assert_eq!(snapshot.finder_flags, original.finder_flags);
         assert_eq!(snapshot.created_date, original.created_date);
         assert_eq!(snapshot.modified_date, original.modified_date);
-    }
-
-    #[test]
-    fn kiosk_data_is_plain_words_and_keys_the_page_can_press() {
-        for id in [
-            "clockwerx-personal-10",
-            "delirium-personal-11",
-            "blobbo-full-personal-101",
-        ] {
-            let kiosk = kiosk_game(id);
-            assert!(!kiosk.help.is_empty(), "{id} has help");
-            assert!(kiosk.help.len() <= 6, "{id}: a few lines, not a manual");
-            for line in kiosk.help {
-                assert!(line.len() <= 90, "{id}: {line}");
-                assert!(
-                    !line.contains("http") && !line.contains('<'),
-                    "{id}: {line}"
-                );
-                for key_name in ["Command", "Option", "Control", "Cmd", "\u{2318}"] {
-                    assert!(!line.contains(key_name), "{id}: no Mac key names: {line}");
-                }
-            }
-            for action in kiosk.actions {
-                assert!(
-                    !action.label.is_empty() && action.label.len() <= 12,
-                    "{id}: {}",
-                    action.label
-                );
-                for key in action.keys.split([',', '+']) {
-                    assert!(
-                        matches!(
-                            key,
-                            "Meta" | "Shift" | "Alt" | "Control" | "Escape" | "Enter" | "Space"
-                        ) || (key.len() == 1 && key.chars().all(|c| c.is_ascii_alphanumeric())),
-                        "{id}: {} presses {key:?}",
-                        action.label
-                    );
-                }
-            }
-            for patch in kiosk.seed {
-                assert!(is_plain_guest_path(patch.path), "{id}: {}", patch.path);
-                assert!(!patch.bytes.is_empty());
-            }
-        }
-        let other = kiosk_game("anything-else");
-        assert!(other.actions.is_empty() && other.seed.is_empty());
-    }
-
-    #[test]
-    fn the_clockwerx_seed_is_a_neutral_name_that_fits_its_field() {
-        let seed = kiosk_game("clockwerx-personal-10").seed;
-        for patch in seed {
-            // A Pascal string: its length, then the characters, then zero padding.
-            let length = patch.bytes[0] as usize;
-            assert_eq!(&patch.bytes[1..=length], NEUTRAL_PLAYER_NAME.as_bytes());
-            assert!(patch.bytes[length + 1..].iter().all(|byte| *byte == 0));
-        }
     }
 
     #[test]

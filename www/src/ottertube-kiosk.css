@@ -50,6 +50,14 @@ html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
   background: rgba(0, 0, 0, .72); color: #fff; font: 600 40px/1.2 system-ui, sans-serif; touch-action: none;
 }
 
+/* A script is driving the game: a small notice, and no touch reaches the game or its controls.
+   Exit and How to play stay above it. */
+.kiosk-busy {
+  position: fixed; inset: 0; z-index: 35; display: flex; align-items: flex-end; justify-content: center;
+  padding-bottom: 4vh; touch-action: none; background: transparent;
+}
+.kiosk-busy span { padding: 14px 28px; border-radius: 999px; background: rgba(0, 0, 0, .78); color: #fff; font: 600 28px/1.2 system-ui, sans-serif; }
+
 /* Tap buttons: Exit, How to play, and the game's own actions. */
 .kiosk-chrome {
   position: fixed;

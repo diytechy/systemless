@@ -13,7 +13,8 @@
   var connection = null;
   var pageHide = null;
   var leave = null;
-  var pressKeys = null;
+  var inputSink = null;
+  var padMap = null;
   var settled = false;
   /** Checkpoint answers, newest last, for tests and for a parent-side page later. */
   var log = [];
@@ -60,6 +61,20 @@
     var code = name === 'Space' ? 'Space' : name.length === 1 ? (/[0-9]/.test(name) ? 'Digit' + name : 'Key' + name.toUpperCase()) : name;
     return new KeyboardEvent(type, { key: key, code: code, bubbles: true, cancelable: true });
   }
+  // What the page (and the controller adapter) hand to the game: `tap` keys pressed or released,
+  // a `script` to run, the `pad`'s held keys, the `direction` it pushes, `pad-connected`.
+  function input(kind, names, down) {
+    if (typeof inputSink !== 'function') return false;
+    inputSink(kind, names || [], Boolean(down));
+    return true;
+  }
+  // A tap button that runs one of the game's scripts: data-kiosk-script="new-game".
+  root.document.addEventListener('pointerdown', function (event) {
+    var button = event.target && event.target.closest ? event.target.closest('[data-kiosk-script]') : null;
+    if (!button) return;
+    event.preventDefault();
+    input('script', [String(button.dataset.kioskScript)], true);
+  });
   root.document.addEventListener('pointerdown', function (event) {
     var button = event.target && event.target.closest ? event.target.closest('[data-kiosk-keys]') : null;
     if (!button || button.dataset.kioskBusy === 'true') return;
@@ -74,8 +89,7 @@
     // here cannot lift a key a finger is still holding. Without that count (the game has no held
     // controls) the keys go to the canvas as keyboard events.
     function send(names, down) {
-      if (typeof pressKeys === 'function') pressKeys(names, down);
-      else names.forEach(function (name) { canvas.dispatchEvent(keyEvent(down ? 'keydown' : 'keyup', name)); });
+      if (!input('tap', names, down)) names.forEach(function (name) { canvas.dispatchEvent(keyEvent(down ? 'keydown' : 'keyup', name)); });
     }
     (function press(index) {
       var names = steps[index].split('+').filter(Boolean);
@@ -116,8 +130,12 @@
     },
     /** One function, called when the page is hidden for good (a child leaving, a user switch). */
     onPageHide: function (callback) { pageHide = callback; },
-    /** One function (names, down) that presses or releases guest keys for a tap action. */
-    onKeys: function (callback) { pressKeys = callback; },
+    /** One function (kind, names, down) that takes what `input` is given. */
+    onInput: function (callback) { inputSink = callback; },
+    input: input,
+    /** The game's controller mapping, as JSON; the adapter in game-controls.mjs reads `pad`. */
+    setPad: function (json) { try { padMap = JSON.parse(json); } catch (_) { padMap = null; } },
+    get pad() { return padMap; },
     /** One function that leaves properly: it saves what is pending, then calls `exit`. */
     onLeave: function (callback) { leave = callback; },
     /**

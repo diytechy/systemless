@@ -19,6 +19,8 @@ mod indexed_frame;
 mod ottertube;
 #[cfg(any(feature = "ottertube", test))]
 mod ottertube_data;
+#[cfg(feature = "ottertube")]
+mod ottertube_play;
 mod paths;
 mod presentation;
 mod renderer_bridge;

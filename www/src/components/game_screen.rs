@@ -453,7 +453,39 @@ fn GameRuntime(
             Box::pin(scan_save_files(handle, save_files, deadline_ms))
         });
         crate::ottertube::set_save_scanner(Some(scanner));
-        on_cleanup(|| crate::ottertube::set_save_scanner(None));
+        // The page's scripts read the game's screen and move its pointer
+        // through whichever machine is running.
+        let screen_handle = machine_handle.clone();
+        crate::ottertube::set_screen_reader(Some(Rc::new(
+            move |regions: &[[u16; 4]], probe_id: u32| match screen_handle.borrow().clone() {
+                Some(RuntimeHandle::Local(machine)) => crate::ottertube::ScreenRequest::Ready(
+                    machine.borrow_mut().region_hashes(regions),
+                ),
+                Some(RuntimeHandle::Worker(runtime)) => {
+                    let message = Object::new();
+                    set_js_property(&message, "type", &JsValue::from_str("screenHashes"));
+                    set_js_property(&message, "probeId", &JsValue::from_f64(f64::from(probe_id)));
+                    let flat = Array::new();
+                    for value in regions.iter().flatten() {
+                        flat.push(&JsValue::from_f64(f64::from(*value)));
+                    }
+                    set_js_property(&message, "regions", flat.as_ref());
+                    if runtime.post(&message).is_ok() {
+                        crate::ottertube::ScreenRequest::Posted
+                    } else {
+                        crate::ottertube::ScreenRequest::Unavailable
+                    }
+                }
+                None => crate::ottertube::ScreenRequest::Unavailable,
+            },
+        )));
+        let pointer_handle = machine_handle.clone();
+        crate::ottertube::set_guest_pointer(Some(Rc::new(move |kind: &str, v: i16, h: i16| {
+            if let Some(handle) = pointer_handle.borrow().as_ref() {
+                handle.mouse(kind, v, h);
+            }
+        })));
+        on_cleanup(|| crate::ottertube::game_unmounted());
     }
 
     let machine_handle_for_effect = machine_handle.clone();
@@ -2850,6 +2882,11 @@ async fn boot_catalogue_worker(
             }
             return;
         }
+        #[cfg(feature = "ottertube")]
+        if js_string_property(&data, "type").as_deref() == Some("screenHashes") {
+            crate::ottertube::screen_reply(&data);
+            return;
+        }
         if js_string_property(&data, "type").as_deref() == Some("saveFiles") {
             if let Some(version) = js_string_property(&data, "saveFilesVersion")
                 .and_then(|version| version.parse::<u64>().ok())
@@ -3622,6 +3659,31 @@ fn attach_pointer_input(
         }
     });
 
+    #[cfg(feature = "ottertube")]
+    {
+        // A script takes the picture over: a finger the child has on it is let
+        // go of first, and counts for nothing until it is put down again.
+        let takeover_canvas = canvas.clone();
+        let takeover_machine = machine.clone();
+        let takeover_alive = alive.clone();
+        let takeover_active = active_pointer_id.clone();
+        let takeover_coords = last_coords.clone();
+        crate::ottertube::on_takeover(Rc::new(move |running: bool| {
+            if let (true, Some(pointer_id)) = (running, takeover_active.get()) {
+                release_pointer_mouse_up_after(
+                    takeover_canvas.clone(),
+                    takeover_machine.clone(),
+                    takeover_alive.clone(),
+                    takeover_active.clone(),
+                    takeover_coords.clone(),
+                    pointer_id,
+                    takeover_coords.get(),
+                    0.0,
+                );
+            }
+        }));
+    }
+
     // Pointer events give touch, pen, and mouse a single path and let us capture
     // the active touch, so a game redraw or finger drift does not lose mouseUp.
     let canvas_el = canvas.clone();
@@ -3638,6 +3700,21 @@ fn attach_pointer_input(
             || active_pd.get().is_some()
         {
             return;
+        }
+        #[cfg(feature = "ottertube")]
+        {
+            // Where the finger is, before any offset: the menu bar, a blocked
+            // control, or anywhere while a script is running takes no touch.
+            let precise = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
+            let finger = canvas_coords_from_client(
+                &canvas_el,
+                precise.client_x_f64(),
+                precise.client_y_f64(),
+            );
+            if finger.is_some_and(|(v, h)| crate::ottertube::swallows_touch(v, h)) {
+                ev.prevent_default();
+                return;
+            }
         }
         focus_canvas(&canvas_el);
         ev.prevent_default();
@@ -3668,6 +3745,11 @@ fn attach_pointer_input(
     let last_pm = last_coords.clone();
     let on_pointer_move = Closure::wrap(Box::new(move |ev: PointerEvent| {
         if !alive_pm.load(Ordering::Relaxed) || !primary_pointer_event(&ev) {
+            return;
+        }
+        // A mouse moving over the picture does not move a script's pointer.
+        #[cfg(feature = "ottertube")]
+        if crate::ottertube::script_running() {
             return;
         }
         let active = active_pm.get();
@@ -4040,19 +4122,47 @@ fn attach_mobile_controls(
         let tap_state = state.clone();
         let tap_machine = machine.clone();
         let tap_alive = alive.clone();
-        crate::ottertube::set_tap_keys(Some(Rc::new(move |names: Vec<String>, down: bool| {
-            if !tap_alive.load(Ordering::Relaxed) {
-                return;
-            }
-            let mut state = tap_state.borrow_mut();
-            for key in names.into_iter().filter_map(mobile_control_key_name) {
-                if down {
-                    state.press_tap_key(&tap_machine, key);
-                } else {
-                    state.release_tap_key(&tap_machine, key);
+        crate::ottertube::set_tap_keys(Some(Rc::new(
+            move |owner: crate::ottertube::KeyOwner, names: Vec<String>, down: bool| {
+                if !tap_alive.load(Ordering::Relaxed) {
+                    return;
                 }
+                let mut state = tap_state.borrow_mut();
+                let keys = names.into_iter().filter_map(mobile_control_key_name);
+                match owner {
+                    // Everything the controller holds now, as one set.
+                    crate::ottertube::KeyOwner::Pad => {
+                        state.set_pad_keys(&tap_machine, keys.collect())
+                    }
+                    // One press or release, counted.
+                    crate::ottertube::KeyOwner::Tap => {
+                        for key in keys {
+                            if down {
+                                state.press_tap_key(&tap_machine, key);
+                            } else {
+                                state.release_tap_key(&tap_machine, key);
+                            }
+                        }
+                    }
+                    crate::ottertube::KeyOwner::Script => {
+                        for key in keys {
+                            state.script_key(&tap_machine, key, down);
+                        }
+                    }
+                }
+            },
+        )));
+        // While a script runs its keys are the only ones down.
+        let takeover_state = state.clone();
+        let takeover_machine = machine.clone();
+        let takeover_alive = alive.clone();
+        crate::ottertube::on_takeover(Rc::new(move |running: bool| {
+            if takeover_alive.load(Ordering::Relaxed) {
+                takeover_state
+                    .borrow_mut()
+                    .set_scripted(&takeover_machine, running);
             }
-        })));
+        }));
     }
     attach_mobile_gesture_guard(controls, alive.clone(), listeners);
     attach_mobile_joystick(
@@ -4454,6 +4564,15 @@ fn update_mobile_joystick(
     } else if ny > dead_zone {
         keys.push(settings.joystick.down);
     }
+    #[cfg(feature = "ottertube")]
+    if keys.len() == 2 && crate::ottertube::stick_is_stepped() {
+        // A game played a cell at a time takes the stronger of two directions.
+        if nx.abs() >= ny.abs() {
+            keys.truncate(1);
+        } else {
+            keys.remove(0);
+        }
+    }
     state.borrow_mut().set_joystick_keys(machine, &keys);
 }
 
@@ -4550,6 +4669,13 @@ struct MobileInputState {
     /// Keys a tap action is pressing right now, once per action that holds
     /// one. Only the OtterTube page has tap actions.
     tap_keys: Vec<&'static str>,
+    /// Keys a game controller is holding (the OtterTube page's adapter).
+    pad_keys: Vec<&'static str>,
+    /// `Some` while a script of the OtterTube page runs: the keys it presses,
+    /// once per press. They are then the only keys down in the guest; what
+    /// the child holds comes back when the script ends.
+    #[cfg(feature = "ottertube")]
+    script_keys: Option<Vec<&'static str>>,
     sent_keys: Vec<&'static str>,
     /// Where the keys held down in the guest are shown (`data-held-keys`).
     #[cfg(feature = "ottertube")]
@@ -4562,7 +4688,21 @@ impl MobileInputState {
     }
 
     fn set_joystick_keys(&mut self, machine: &RuntimeHandle, keys: &[&'static str]) {
+        // A game set to step (one move per push) has its stick pulsed by the
+        // OtterTube page instead of held here.
+        #[cfg(feature = "ottertube")]
+        let keys: &[&'static str] = if crate::ottertube::stick_steps("stick", keys) {
+            &[]
+        } else {
+            keys
+        };
         self.joystick_keys = dedup_mobile_keys(keys);
+        self.flush(machine);
+    }
+
+    #[cfg(feature = "ottertube")]
+    fn set_pad_keys(&mut self, machine: &RuntimeHandle, keys: Vec<&'static str>) {
+        self.pad_keys = keys;
         self.flush(machine);
     }
 
@@ -4594,12 +4734,40 @@ impl MobileInputState {
         self.flush(machine);
     }
 
+    /// A script takes the keys over, or gives them back.
+    #[cfg(feature = "ottertube")]
+    fn set_scripted(&mut self, machine: &RuntimeHandle, running: bool) {
+        self.script_keys = running.then(Vec::new);
+        self.flush(machine);
+    }
+
+    #[cfg(feature = "ottertube")]
+    fn script_key(&mut self, machine: &RuntimeHandle, key: &'static str, down: bool) {
+        if let Some(keys) = self.script_keys.as_mut() {
+            if down {
+                keys.push(key);
+            } else if let Some(index) = keys.iter().position(|held| *held == key) {
+                keys.remove(index);
+            }
+        }
+        self.flush(machine);
+    }
+
     fn flush(&mut self, machine: &RuntimeHandle) {
         let mut next = self.joystick_keys.clone();
-        for key in self.button_keys.iter().chain(&self.tap_keys) {
+        for key in self
+            .button_keys
+            .iter()
+            .chain(&self.tap_keys)
+            .chain(&self.pad_keys)
+        {
             if !next.contains(key) {
                 next.push(key);
             }
+        }
+        #[cfg(feature = "ottertube")]
+        if let Some(script) = &self.script_keys {
+            next = dedup_mobile_keys(script);
         }
 
         for key in self.sent_keys.iter().copied() {
@@ -4771,7 +4939,11 @@ fn mobile_control_pointer(pointer_type: &str, is_primary: bool) -> bool {
 
 fn pointer_coords(canvas: &HtmlCanvasElement, ev: &PointerEvent) -> Option<(i16, i16)> {
     let ev = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
-    canvas_coords_from_client(canvas, ev.client_x_f64(), ev.client_y_f64())
+    let coords = canvas_coords_from_client(canvas, ev.client_x_f64(), ev.client_y_f64());
+    // A game that draws its own pointer away from the finger has an offset.
+    #[cfg(feature = "ottertube")]
+    let coords = coords.map(|(v, h)| crate::ottertube::guest_point(v, h));
+    coords
 }
 
 fn touch_coords(canvas: &HtmlCanvasElement, touch: &Touch) -> Option<(i16, i16)> {

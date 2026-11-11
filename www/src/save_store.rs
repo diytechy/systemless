@@ -16,6 +16,46 @@ const STORE_NAME: &str = "files";
 thread_local! {
     static PENDING_SAVES: std::cell::RefCell<std::collections::BTreeMap<String, usize>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
     static LAST_SAVE_ERRORS: std::cell::RefCell<std::collections::BTreeMap<String, String>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
+    static SAVE_POLICY: std::cell::RefCell<SavePolicy> = const { std::cell::RefCell::new(SavePolicy { memory_only: false, extra_paths: Vec::new() }) };
+}
+
+/// Per-thread save rules. The default (nothing kept in memory only, no extra
+/// paths) is the behavior of every build that never calls `set_save_policy`.
+struct SavePolicy {
+    memory_only: bool,
+    /// Lower-case guest paths saved although `is_user_save_path` excludes them.
+    extra_paths: Vec<String>,
+}
+
+/// Set the rules for the machine about to start on this thread (the worker's
+/// own thread in worker mode). `memory_only` keeps nothing: no file is read
+/// from or written to IndexedDB. `extra_paths` are exact guest paths, compared
+/// without case, that are saved in addition to the ordinary save paths.
+pub fn set_save_policy(memory_only: bool, extra_paths: &[String]) {
+    SAVE_POLICY.with(|policy| {
+        let mut policy = policy.borrow_mut();
+        policy.memory_only = memory_only;
+        policy.extra_paths = extra_paths
+            .iter()
+            .map(|path| path.trim_matches('/').to_ascii_lowercase())
+            .filter(|path| !path.is_empty())
+            .collect();
+    });
+}
+
+pub fn is_extra_save_path(path: &str) -> bool {
+    SAVE_POLICY.with(|policy| {
+        let policy = policy.borrow();
+        if policy.extra_paths.is_empty() {
+            return false;
+        }
+        let path = path.trim_matches('/').to_ascii_lowercase();
+        policy.extra_paths.iter().any(|extra| *extra == path)
+    })
+}
+
+fn memory_only() -> bool {
+    SAVE_POLICY.with(|policy| policy.borrow().memory_only)
 }
 
 struct PendingSave(String);
@@ -130,6 +170,9 @@ impl StoredSaveFile {
 }
 
 pub async fn load_saved_files(game_id: &str) -> Result<Vec<VfsFileSnapshot>, String> {
+    if memory_only() {
+        return Ok(Vec::new());
+    }
     // IndexedDB open requests cannot be aborted. Let this one read complete even
     // if navigation cancels startup, so its callbacks and database are released.
     // The result has no effect on guest state until the caller consumes it.
@@ -172,6 +215,9 @@ async fn load_saved_files_inner(game_id: &str) -> Result<Vec<VfsFileSnapshot>, S
 }
 
 pub fn persist_save_file(game_id: String, file: VfsFileSnapshot) {
+    if memory_only() {
+        return;
+    }
     let pending = PendingSave::new(&game_id);
     spawn_local(async move {
         let _pending = pending;
@@ -185,6 +231,9 @@ pub fn persist_save_file(game_id: String, file: VfsFileSnapshot) {
 }
 
 pub fn delete_save_file(game_id: String, path: String) {
+    if memory_only() {
+        return;
+    }
     let pending = PendingSave::new(&game_id);
     spawn_local(async move {
         let _pending = pending;
@@ -218,6 +267,36 @@ async fn delete_save_file_inner(game_id: &str, path: &str) -> Result<(), String>
         .delete(&JsValue::from_str(&record_key(game_id, path)))
         .map_err(js_error_string)?;
     await_idb_request(&request).await?;
+    completion.wait().await
+}
+
+/// Replace every stored file of `game_id` with `files`, in one transaction, so
+/// the next boot under that id loads exactly these. Other ids are untouched.
+#[cfg(feature = "ottertube")]
+pub async fn replace_saved_files(game_id: &str, files: &[VfsFileSnapshot]) -> Result<(), String> {
+    let db = open_db().await?;
+    let store = object_store(&db, IdbTransactionMode::Readwrite)?;
+    let completion = TransactionCompletion::new(store.transaction());
+    let keys = await_idb_request(&store.get_all_keys().map_err(js_error_string)?).await?;
+    let keys: Array = keys
+        .dyn_into()
+        .map_err(|_| "IndexedDB getAllKeys did not return an array".to_string())?;
+    let prefix = record_key(game_id, "");
+    for key in keys.iter() {
+        if key.as_string().is_some_and(|key| key.starts_with(&prefix)) {
+            store.delete(&key).map_err(js_error_string)?;
+        }
+    }
+    for file in files {
+        let record = StoredSaveFile::from_snapshot(game_id, file);
+        let json = serde_json::to_string(&record).map_err(|err| err.to_string())?;
+        store
+            .put_with_key(
+                &JsValue::from_str(&json),
+                &JsValue::from_str(&record_key(game_id, &file.path)),
+            )
+            .map_err(js_error_string)?;
+    }
     completion.wait().await
 }
 
@@ -673,6 +752,34 @@ mod tests {
     }
 
     use super::*;
+
+    #[test]
+    fn save_policy_defaults_to_no_extra_paths_and_matches_exact_paths_without_case() {
+        assert!(!is_extra_save_path("System Folder/Preferences/Game Prefs"));
+        assert!(!memory_only());
+        set_save_policy(true, &["System Folder/Preferences/Game Prefs".to_string()]);
+        assert!(memory_only());
+        assert!(is_extra_save_path("system folder/preferences/game prefs"));
+        assert!(is_extra_save_path("/System Folder/Preferences/Game Prefs"));
+        assert!(!is_extra_save_path("System Folder/Preferences/Other"));
+        assert!(!is_extra_save_path(
+            "System Folder/Preferences/Game Prefs/Inner"
+        ));
+        set_save_policy(false, &[]);
+        assert!(!is_extra_save_path("System Folder/Preferences/Game Prefs"));
+        assert!(!memory_only());
+    }
+
+    #[test]
+    fn subject_namespaced_ids_keep_separate_record_keys() {
+        assert_eq!(record_key("game", "A/B"), "game\u{0}A/B");
+        let first = record_key("game@00000000000000000000000000000001", "A/B");
+        let second = record_key("game@00000000000000000000000000000002", "A/B");
+        assert_ne!(first, second);
+        // The id ends at the NUL, so one prefix never matches the records of another id.
+        assert!(!second.starts_with(&record_key("game@0000000000000000000000000000000", "")));
+        assert!(!first.starts_with(&record_key("game", "")));
+    }
 
     #[test]
     fn macbinary_download_preserves_fork_lengths_and_metadata() {

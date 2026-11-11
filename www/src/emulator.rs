@@ -287,6 +287,7 @@ pub struct Machine {
     save_files: Vec<DownloadableSaveFile>,
     save_files_version: u64,
     save_scan_frame: u8,
+    halted_save_scan_done: bool,
     pending_launch_modifiers: Vec<LaunchModifier>,
     launch_modifiers_release_tick: Option<u32>,
 }
@@ -536,6 +537,7 @@ impl Machine {
             save_files: Vec::new(),
             save_files_version: 0,
             save_scan_frame: 0,
+            halted_save_scan_done: false,
             pending_launch_modifiers: launch_modifiers.to_vec(),
             launch_modifiers_release_tick,
         };
@@ -1284,6 +1286,15 @@ impl Machine {
 
     fn sync_save_files(&mut self) {
         self.save_scan_frame = self.save_scan_frame.wrapping_add(1);
+        // A game that writes its settings or scores as it quits stops inside
+        // the scan interval, and nothing unmounts an add-on page to flush it.
+        // Scan once more when the guest halts. Add-on build only for now, so
+        // other builds keep their exact scan timing.
+        if cfg!(feature = "ottertube") && !self.halted_save_scan_done && self.runner.is_halted() {
+            self.halted_save_scan_done = true;
+            self.sync_save_files_now();
+            return;
+        }
         if self.save_scan_frame % SAVE_SCAN_FRAME_INTERVAL != 0 {
             return;
         }
@@ -1291,7 +1302,7 @@ impl Machine {
     }
 
     fn sync_save_files_now(&mut self) {
-        let stats = self.runner.vfs_file_stats_where(is_user_save_path);
+        let stats = self.runner.vfs_file_stats_where(is_saved_path);
         let mut current_fingerprints = HashMap::new();
         let previous_fingerprints = self.last_vfs_fingerprints.clone();
         let previous_persisted_paths = self.persisted_save_paths.clone();
@@ -1490,6 +1501,12 @@ fn remove_save_from_local_state(
     persisted_save_paths.remove(path);
     last_vfs_fingerprints.remove(path);
     save_files.retain(|file| file.path != path);
+}
+
+/// A path the save scan keeps: an ordinary save path, or one of the entry's
+/// extra paths (none unless a build sets a save policy).
+fn is_saved_path(path: &str) -> bool {
+    is_user_save_path(path) || save_store::is_extra_save_path(path)
 }
 
 fn is_user_save_path(path: &str) -> bool {

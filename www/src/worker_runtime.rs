@@ -26,6 +26,12 @@ struct BootConfig {
     arrows_as_numpad: bool,
     #[serde(default)]
     plugins: Vec<PluginMetadata>,
+    /// Keep no save at all (an OtterTube Guest). Absent in every other build.
+    #[serde(default)]
+    save_memory_only: bool,
+    /// Extra saved guest paths for this entry. Absent in every other build.
+    #[serde(default)]
+    extra_save_paths: Vec<String>,
 }
 
 // Fork bytes travel separately in transfer lists. Keep every Finder field and
@@ -120,6 +126,9 @@ impl WorkerMachine {
             })
             .collect();
         let bytes = game_bytes.to_vec();
+        if config.save_memory_only || !config.extra_save_paths.is_empty() {
+            crate::save_store::set_save_policy(config.save_memory_only, &config.extra_save_paths);
+        }
         let paths: Vec<&str> = config.remove_paths.iter().map(String::as_str).collect();
         let mappings: Vec<(&str, &str)> = config
             .file_mappings

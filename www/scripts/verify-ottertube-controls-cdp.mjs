@@ -307,6 +307,15 @@ try {
     check("clockwerx: New game is one press from inside a game, and ends on the level list",
       newGame === "done" && (await shows(browser, "options")), { newGame, screens: (await browser.kiosk()).screens });
     await browser.picture("clockwerx-7-level-list-again.png");
+    // And from a game that is paused.
+    await browser.scriptRun("play", () => browser.press(scriptButton("play")));
+    await waitFor("the hand", async () => onHome(await hand(browser)), 20_000, 300);
+    await browser.press(keysButton("Meta+p"));
+    await sleep(1500);
+    const pausedFirst = (await hand(browser)) === null;
+    const fromPause = await browser.scriptRun("new-game", () => browser.press(scriptButton("new-game")));
+    check("clockwerx: New game is one press from a paused game too",
+      pausedFirst && fromPause === "done" && (await shows(browser, "options")), { pausedFirst, fromPause, screens: (await browser.kiosk()).screens });
 
     const gone = await leave(browser, who, () => browser.press("[data-kiosk-exit]"));
     check("clockwerx: Exit asks OtterTube to leave, with the settings and the scores held",
@@ -446,10 +455,14 @@ try {
     const turned = await ship(browser);
     check("delirium: Turn sends the ship to face the other way", !!facing && !!turned && Math.abs(turned.h - facing.h) > 100, { facing, turned });
     // Thrust moves the ship over the land: the ground scrolls while it is held.
-    await sleep(800);
-    const rest0 = await skyline(browser);
-    await sleep(700);
-    const rest1 = await skyline(browser);
+    // (The turn pans the view: wait for the land to stand still first.)
+    let rest0 = await skyline(browser), rest1 = null;
+    for (let tries = 0; tries < 20; tries++) {
+      await sleep(700);
+      rest1 = await skyline(browser);
+      if (shifted(rest0, rest1) < 0.1) break;
+      rest0 = rest1;
+    }
     const thrust = await browser.middle(heldButton("Thrust"));
     await browser.touch("touchStart", [thrust]);
     await sleep(900);
@@ -478,7 +491,8 @@ try {
     await browser.waitScreen("game-over", 20_000);
     await browser.tap([320, 250]);
     await browser.waitScreen("menu", 15_000);
-    const gone = await leave(browser, who, () => browser.tap([72, 414]));
+    await sleep(600);
+    const gone = await leave(browser, who, () => browser.tap([72, 414], 250));
     check("delirium: the game's own Quit asks OtterTube to leave (no dead screen)", gone.left, gone);
   });
 

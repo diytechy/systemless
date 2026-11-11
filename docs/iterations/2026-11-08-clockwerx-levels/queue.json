@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 84,
-  "currentAction": "Through83 Swing Out accepted/locally installed; continue through100 without per-level stops. SlowMotion84 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Class4Slow/WL/SP source/board guard a4e8ac75 unlinked; no84 actual model.",
+  "currentOrdinal": 85,
+  "currentAction": "Through84 Slow Motion accepted/locally installed; continue through100 without per-level stops. Orbit85 original cold authorized; inspect closure then standard original-only fitter before dedicated PNGviews. Moving-goal ordinary source/boardguard47c983e5/fourinvented checks unlinked; no85actualmodel.",
   "levels": [
     {
       "ordinal": 1,
@@ -7395,10 +7395,15 @@
       "menuTitle": "Slow Motion",
       "resourceTitle": "Slow Motion",
       "sha256": "36e97d678316d011fca126196f35a6f99cd6699eff0928561804aa5777c01332",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "slow-motion84-native-goal03/root-original-goal-review.json",
+        "slow-motion84-native-goal-fit03/actor-comparison01.json",
+        "slow-motion84-native-goal-slow-fit03/model-comparison01.json",
+        "slow-motion84-native-goal03/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7426,7 +7431,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7455,7 +7460,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "5982cf7e",
+      "sourceFreezeSHA256": "ce2ad4d31f0854a151aff5a851ba6a5ce7b26bb1a893be39f2048c0762e13439",
+      "sourceTests": 530,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 114529,
+      "actualConstructors": 13,
+      "functionalUpdatesUsed": 114529,
+      "functionalUpdatesRemaining": 135471,
+      "nativeColdClosed": true,
+      "review": "slow-motion-review.md",
+      "retainedSweep": {
+        "matchedGoals": 82,
+        "constructionOnly": 1,
+        "pairedUpdates": 632856,
+        "sha256": "43d0466336fda8eecb15d13ebcf5e6eb1570231f1b3c83112bdc80ec230dbf34"
+      },
+      "deliveryAcceptance": {
+        "score": 4000,
+        "updates": 10294,
+        "transfers": 22,
+        "nextOrdinal": 85,
+        "nativeCampaignTotal": 538000,
+        "rootAcceptanceSHA256": "4278c13fc00d8aaabb96ba42df4fe5b7681b4499b6197bc19cd85bdc8a387287",
+        "rootProofSHA256": "19aac9c851425aa866bc54b6ff1bdcb5abd97cc93e30f2bbb455f0077de023d7",
+        "earnedThrough84FixtureSHA256": "c1c2a53a5c6b02c17821579673f158fc385bca4448bc0ee29fadc01f808bd632"
+      },
+      "qualificationBoundary": "Original results4000 and earned85Orbit/538000 visually verified after standard original-onlyactor72anchor and20Slow-anchor fitters/viewgate. Fixed702:182/183clear actorpositions and181/183poses exact across28joins. Human25/26positions,24/26poses; all157NPCpositions/poses exact. Residuals: initialReverse sample native57 versusmodel56; finalinput27F native remains8,2/frame32 whilemodelalready7,2/goal. Original completes within declared20frontend finalholdmargin. Samefinalcapture retains occupiedSlow8,2 frame198 instead of modelreleased189:559/560clearSlow appearances exact including15occupied, allhypotheses retained; no per-image/actor phase fitting. Cold213positions exact3pose residuals at702/703. BlueSlow idle193 directly observed; blueoccupied202 sourceRGBA/syntheticarrival tested, winningroute avoidsblueoccupiedpivots. Nativegoal02 failed afterRpark and retained; winningheldBouncepark avoidsRchatter. Winning22transfers/17Flip/5Swing/3Reverse/22Bounce/8Slowtransitions/twobonuses and logicalsounds24/25, zeroRNG/death/reset. Boundedgoal/route evidence; arbitrarycontrols/audio/controllers/pacing/fullpixel/actoridentitycensus separate."
     },
     {
       "ordinal": 85,

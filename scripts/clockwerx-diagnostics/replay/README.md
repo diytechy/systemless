@@ -129,6 +129,21 @@ each artwork group; it does not infer actor identity or native cadence.
 python scripts/clockwerx-diagnostics/replay/compare-native-actors.py "<fits.json>" "<candidate/case>" "<new-comparison.json>" --prefix 696
 ```
 
+`fit-original-actors.py` prepares the original-only actor method from the
+decoded source and owned artwork bank. It derives counts, groups and possible
+anchors from source actors, static dots, closed mover programs and connectors;
+it imports no port or route. It writes the method and input hashes before
+reading dedicated captures, retaining every score array and unclear detection.
+Types0–4 are supported; other artwork mappings require separate qualification.
+Use `--prior-scene-viewed` when a previous run already showed the board, and
+`--prior-captures-viewed` when validating against previously viewed captures.
+The Chatter equivalence check matched every saved score array, anchor group
+and observation from the preceding dedicated fitter.
+
+```sh
+python scripts/clockwerx-diagnostics/replay/fit-original-actors.py "<decoded.json>" "<closed-native-directory>" "<owned-source-bank>" "<new-fit-directory>" --prior-scene-viewed
+```
+
 The supervisor pins the tools, creates the output, records its hidden owned
 child, and terminates only that child on timeout. The runner validates remaining
 pins before importing the engine. Baseline streams use 64 KiB reads and a 16 MiB

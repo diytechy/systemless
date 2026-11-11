@@ -35,7 +35,7 @@ import {assertMovingDoorCheckpointBoard} from './moving-door-checkpoint.mjs';
 import {assertMovingTubesBoard} from './moving-tubes.mjs';
 import {assertGunTriggerSlidingBoard} from './gun-trigger-sliding.mjs';
 import {GunTriggerRuntime} from './gun-triggers.mjs';
-import {assertGunTriggerChildBoard,assertGunTriggerWallBoard} from './gun-trigger-child.mjs';
+import {assertGunTriggerChildBoard,assertGunTriggerWallBoard,assertGunTriggerTeleportBoard} from './gun-trigger-child.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -64,7 +64,8 @@ export class SourceRound extends MovementGame {
   if(board.elevatorOilRiderRules)assertElevatorOilRiderBoard(board,elevatorOutlines);
   if(board.movingDoorCheckpointRules)assertMovingDoorCheckpointBoard(board,doorOutlines);
   if(board.movingTubesRules)assertMovingTubesBoard(board);
-  if(board.gunTriggerWallRules)assertGunTriggerWallBoard(board,gunOutlines);
+  if(board.gunTriggerTeleportRules)assertGunTriggerTeleportBoard(board,gunOutlines);
+  else if(board.gunTriggerWallRules)assertGunTriggerWallBoard(board,gunOutlines);
   else if(board.gunTriggerSlidingRules)assertGunTriggerSlidingBoard(board,gunOutlines,elevatorOutlines);
   else if(board.gunTriggerProjectileRules)assertGunTriggerChildBoard(board,gunOutlines,elevatorOutlines);
   super(board);this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
@@ -120,7 +121,7 @@ export class SourceRound extends MovementGame {
   }
   if(board.slidingGoodieProgramRules&&!board.slidingGoodieRules)throw new Error('Sliding goodie programs require sliding goodies');
   if(board.slidingGoodieRules&&(!board.goodies?.length||!board.slidingConnectorRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.goodieOnlyRules||board.staticSlidingProgramRules||board.bombRules||board.elevatorRules||board.teleportRules||['puddles','bombs','doors','switches','elevators'].some(k=>board[k]?.length)||board.dots.some(d=>d.motion!=='static'||d.humanCanGrab!==true||d.nonhumanCanGrab!==true||d.ring||d.teleport||d.protected||d.waystation)||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||e.speedClass!==1||e.checksWalls!==false||e.program!==null&&(!board.slidingGoodieProgramRules||!/^[bns]+$/.test(e.program)||e.sourcePC<1))))throw new Error('Separate static EX goodie/free or b/n/s class1 Child scope required');
-  if(board.teleportRules&&!board.slidingTeleportRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.rotatingSpikeRules||board.difficulty!=='Child'||!board.teleports?.length||board.dots.some(d=>d.motion!=='static'||d.slideMask||d.protected||d.waystation)||['puddles','walls','doors','switches','elevators','bombs','goodies'].some(k=>board[k]?.length)||board.bombRules||board.goodieOnlyRules||this.enemies.some(e=>e.speedClass!==1||e.checksWalls!==false||!([1,2,3].includes(e.sourceActorType)&&e.program===null||e.sourceActorType===4&&(e.program===null||/^n+$/.test(e.program)&&e.sourcePC>=1)))))throw new Error('Qualified static Child teleport composition required');
+  if(board.teleportRules&&!board.slidingTeleportRules&&!board.gunTriggerTeleportRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.rotatingSpikeRules||board.difficulty!=='Child'||!board.teleports?.length||board.dots.some(d=>d.motion!=='static'||d.slideMask||d.protected||d.waystation)||['puddles','walls','doors','switches','elevators','bombs','goodies'].some(k=>board[k]?.length)||board.bombRules||board.goodieOnlyRules||this.enemies.some(e=>e.speedClass!==1||e.checksWalls!==false||!([1,2,3].includes(e.sourceActorType)&&e.program===null||e.sourceActorType===4&&(e.program===null||/^n+$/.test(e.program)&&e.sourcePC>=1)))))throw new Error('Qualified static Child teleport composition required');
   if(board.slidingTeleportRules){
    if(!board.slidingConnectorRules||!board.teleportRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.combinedGoalBonusRules||board.difficulty!=='Child'||board.staticSlidingProgramRules||board.slidingGoodieRules||board.slidingOilRules||board.slidingBombRules||board.slidingBombCheckpointRules||board.bombRules||board.goodieOnlyRules||board.elevatorRules||board.rotatingSpikeRules||board.canonicalOilRules||board.staticEnemyWallRules)throw new Error('Separate canonical Child HY/EX composition required');
    assertSlidingTeleportScope({...board,actors:[this.player,...this.enemies],initial:true,activeSections:Object.fromEntries(['spikes','walls','doors','switches','puddles','bombs','goodies','elevators'].map(k=>[k,board[k]?.length??0]))});

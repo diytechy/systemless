@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 67,
-  "currentAction": "66 Gunrunner accepted and active on Source50. Both engines complete for 1000; 64 earlier retained routes match. Continue Chatter67 from earned-through66 at 407000.",
+  "currentOrdinal": 68,
+  "currentAction": "67 Chatter accepted and active on Source51. Both engines complete the 12-hold route for 1000. All 65 prior retained routes match. Continue Jumble68 from earned-through67 at 408000.",
   "levels": [
     {
       "ordinal": 1,
@@ -5601,10 +5601,16 @@
       "menuTitle": "Chatter",
       "resourceTitle": "Chatter",
       "sha256": "8276368d223363705b5d955a6553206e118b3d0611fdd95ad89779629836c0e4",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "chatter67-native-cold01/root-original-entry-review.json",
+        "chatter67-native-goal01/root-original-goal-review.json",
+        "chatter67-native-goal02/root-original-goal-review.json",
+        "chatter67-native-goal02/root-native-comparison.json",
+        "chatter67-native-goal02/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5632,7 +5638,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -5667,6 +5673,29 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "review": "chatter-review.md",
+      "functionalUpdatesUsed": 30336,
+      "functionalUpdatesRemaining": 219664,
+      "sourceTests": 433,
+      "retainedSweep": {
+        "matchedGoals": 65,
+        "constructionOnly": 1,
+        "pairedUpdates": 523118,
+        "checkpoints": 7967,
+        "seconds": 142.3685068,
+        "sha256": "43ec08ec911744c584e7fe90bd8c25303ce26809a0beb2d34b27bbc8107465fc"
+      },
+      "deliveryAcceptance": {
+        "score": 1000,
+        "updates": 3056,
+        "transfers": 12,
+        "nextOrdinal": 68,
+        "nativeCampaignTotal": 408000,
+        "rootAcceptanceSHA256": "f485b62e81cac55e2efa4294ca53310c3bf170144d1d0bb607e69d8495a610bc",
+        "activationSHA256": "a3b03451fcbab68fd65265fd5f7250163f67252af91713fd9baea61b117334a8",
+        "rootProofSHA256": "0571108806e1e1145a5a1209ce57ba39b54914b7e1f0be9da9e2b565c371c7cd",
+        "earnedThrough67FixtureSHA256": "e4e28f3b106fe4bf611a066d981f1a95d279422c00bb123accd3d0201c92459d"
       }
     },
     {
@@ -8212,7 +8241,7 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root: Chatter67 original cold and source composition",
+    "A": "Root: Jumble68 source composition and original cold; optimized native executable comparison pending",
     "B": "closed",
     "C": "closed",
     "D": "closed"

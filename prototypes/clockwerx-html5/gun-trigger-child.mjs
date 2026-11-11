@@ -4,6 +4,7 @@ import {activeGunTriggerSpecs} from './gun-triggers.mjs';
 import {activeElevatorSpecs} from './elevators.mjs';
 import {dotColorOffset} from './dots.mjs';
 import {activePuddleSpecs} from './oil.mjs';
+import {activeTeleportSpecs,pairTeleportSpecs} from './teleports.mjs';
 
 const frameOrigin=Object.freeze({x:28,y:28});
 const sourceRawBounds=Object.freeze({left:28,top:28,right:612,bottom:452});
@@ -90,5 +91,48 @@ export function assertGunTriggerWallBoard(b,gunOutlines){
     b.player.speedClass!==0||b.player.checksWalls!==true||
     !wallActorsOK((b.enemies??[]).map(a=>({type:a.sourceActorType,speed:a.speedClass,walls:a.checksWalls,program:a.program,pc:a.sourcePC})))||
     dots.filter(d=>d.kind==='goal').length!==1||dots.some(d=>d.motion!=='static'||d.waystation||d.protected||d.ring))failWalls();
+ assertGunTriggerOutlines(gunOutlines);
+}
+
+const failTeleports=()=>{throw Error('Separate Child multi-color guns and paired teleport composition required');};
+const teleportGunsOK=(g,t)=>g.length===3&&g.every((x,i)=>x.placement===3&&x.color===[1,0,0][i]&&x.directions===[4,8,2][i])&&
+ t.length===2&&t.every((x,i)=>x.placement===3&&x.color===i);
+const teleportActorsOK=a=>a.length===5&&a.every(x=>[1,3].includes(x.type)&&[1,2].includes(x.speed)&&!x.walls&&
+ (x.program===null||/^[bfns]+$/.test(x.program)&&Number.isInteger(x.pc)&&x.pc>=1&&x.pc<=x.program.length))&&
+ a.filter(x=>x.speed===2&&x.program===null).length===1&&a.filter(x=>x.speed===2).length===1;
+
+export function gunTriggerTeleportSource(level,origin,mask){
+ if(mask!==1||level.structuralStatus!=='complete'||level.header?.version!==12||level.header?.displaySizeRaw!==8||
+    origin?.x!==74||origin?.y!==72||!Array.isArray(level.blocks)||!Array.isArray(level.cells))failTeleports();
+ const allowed=new Set(['GN','TR','HY','SP','WP','WA','TX']),records=k=>level.blocks.find(b=>b.kind===k)?.records??[];
+ if(level.blocks.some(b=>b.count&&!allowed.has(b.kind)))failTeleports();
+ const geo={gridOrigin:origin,frameOrigin,activeMask:mask};
+ const guns=activeGunTriggerSpecs(records('GN'),{kind:'GN',...geo}),triggers=activeGunTriggerSpecs(records('TR'),{kind:'TR',...geo});
+ if(!teleportGunsOK(guns,triggers))failTeleports();
+ const dots=level.cells.filter(c=>c.present),hy=activeTeleportSpecs(records('HY'),mask);
+ if(dots.some(c=>!staticWords.has(c.flagsRaw)||c.inlineProgram||!(c.secondaryRaw&mask))||dots.filter(c=>c.flagsRaw===5).length!==1||
+    hy.length!==22||records('SP').filter(r=>(r.rawWords[4]*65536+r.rawWords[5])&mask).length!==2)failTeleports();
+ const pairs=pairTeleportSpecs(hy,dots.map(c=>({...c,id:c.column+','+c.row})));
+ if(new Set(pairs.map(x=>x.channel)).size!==11)failTeleports();
+ const programs=records('WP'),actors=records('WA').filter(a=>a.activationMaskRaw&mask);
+ if(actors[0]?.actorTypeRaw!==0||actors[1]?.actorTypeRaw!==6||
+    actors.some(a=>!dots.some(c=>c.column===a.gridPosition?.column&&c.row===a.gridPosition?.row&&c.flagsRaw!==5))||
+    actors.slice(0,2).some(a=>a.rawWords?.[7]!==0||a.programReferenceRaw!==-1||hy.some(h=>h.row===a.gridPosition.row&&h.column===a.gridPosition.column))||
+    !teleportActorsOK(actors.slice(2).map(a=>({type:a.actorTypeRaw,speed:a.rawWords?.[7],walls:a.version12ByteRaw!==0,
+      program:a.programReferenceRaw<0?null:programs[a.programReferenceRaw]?.text,pc:a.rawWords?.[6]}))))failTeleports();
+ return {guns,triggers,frameOrigin:{...frameOrigin},rawBounds:{...sourceRawBounds}};
+}
+
+export function assertGunTriggerTeleportBoard(b,gunOutlines){
+ const c=b.gunTriggerChild,dots=b.dots??[];
+ if(!b.gunTriggerProjectileRules||!b.gunTriggerTeleportRules||!b.teleportRules||b.difficulty!=='Child'||b.activeMask!==1||
+    !b.canonicalPlayerRules||!b.staticEnemyCallbacks||!b.specialDotRules||!b.childScoreRules||
+    b.gunTriggerWallRules||b.gunTriggerSlidingRules||b.slidingTeleportRules||b.slidingConnectorRules||b.movingDotRules||b.elevatorRules||
+    b.bombRules||b.goodieOnlyRules||b.rotatingSpikeRules||['walls','doors','switches','puddles','bombs','goodies'].some(k=>b[k]?.length)||
+    !c||!teleportGunsOK(c.guns,c.triggers)||b.teleports?.length!==22||b.spikes?.length!==2||
+    Object.keys(frameOrigin).some(k=>c.frameOrigin?.[k]!==frameOrigin[k])||Object.keys(sourceRawBounds).some(k=>c.rawBounds?.[k]!==sourceRawBounds[k])||
+    dots.some(d=>d.motion!=='static'||d.waystation||d.protected||d.ring)||dots.filter(d=>d.kind==='goal').length!==1||
+    b.player?.sourceActorType!==0||b.player.speedClass!==0||b.player.checksWalls!==true||
+    !teleportActorsOK((b.enemies??[]).map(a=>({type:a.sourceActorType,speed:a.speedClass,walls:a.checksWalls,program:a.program,pc:a.sourcePC}))))failTeleports();
  assertGunTriggerOutlines(gunOutlines);
 }

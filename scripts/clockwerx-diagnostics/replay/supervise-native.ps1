@@ -52,7 +52,7 @@ try {
     $taskScenario = Get-Content -LiteralPath $taskAuth.scenario.path -Raw | ConvertFrom-Json
     $taskPlan = Get-Content -LiteralPath $taskAuth.capturePlan.path -Raw | ConvertFrom-Json
     $taskViewDraft = Get-Content -LiteralPath $taskAuth.viewGateDraft.path -Raw | ConvertFrom-Json
-    if ($taskViewDraft.executionApproved -ne $false -or $taskScenario.version -ne 1 -or $taskScenario.clock -cne 'frontend_ticks' -or $taskScenario.application_partition_size -ne 4096000 -or $taskScenario.max_ticks -ne $taskAuth.maxFrontendTicks -or -not $taskScenario.export_save_files) { throw 'Scenario or separate view gate mismatch' }
+    if ($taskViewDraft.executionApproved -ne $false -or $taskScenario.version -ne 1 -or $taskScenario.clock -cne 'frontend_ticks' -or $taskScenario.application_partition_size -ne 4096000 -or $taskScenario.max_ticks -ne $taskAuth.maxFrontendTicks -or ($taskAuth.mode -ceq 'rehearsal' -and -not $taskScenario.export_save_files)) { throw 'Scenario or separate view gate mismatch' }
     $taskTicks = 0
     $taskCaptureNames = @()
     foreach ($taskAction in $taskScenario.actions) {

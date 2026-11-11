@@ -77,3 +77,34 @@ test('multi-gun wall scope clips a translated bullet against a placed wall outli
  assert.ok(game.events.some(e=>e.type==='gun-sound'&&e.gunTrigger.id===31));
  assert.equal(game.gunTriggers.slots.filter(Boolean).length,2);
 });
+
+test('paired high-channel teleports defer arrival-trigger contact to the next actor callback',()=>{
+ const level=fixture(),hy=Array.from({length:11},(_,column)=>[
+  [1,column,13+column,0,15],[2,column,13+column,0,15]]).flat();
+ const actor=(row,column,type,clock,program=-1)=>({gridPosition:{row,column},actorTypeRaw:type,activationMaskRaw:15,
+  initialFrameHalfIndexRaw:0,programReferenceRaw:program,version12ByteRaw:clock?0:1,
+  rawWords:[row,column,type,0,1,program<0?65535:program,1,clock,0,15,clock?0:256]});
+ level.cells=[cell(0,0),cell(6,10,5),...hy.map(w=>cell(w[0],w[1])),...Array.from({length:4},(_,i)=>cell(7,i))];
+ level.blocks=[
+  wordBlock('GN',[[0,8,3,1,4,0,15],[3,9,3,0,8,0,15],[2,0,3,0,2,0,15]]),
+  wordBlock('TR',[[2,4,3,0,0,15],[5,4,3,1,0,15]]),wordBlock('HY',hy),
+  wordBlock('SP',[[7,9,2,0,0,15],[7,10,2,0,0,15]]),
+  {kind:'WP',count:1,records:[{text:'n'}]},
+  {kind:'WA',count:7,records:[actor(0,0,0,0),actor(0,0,6,0),actor(1,4,1,1,0),
+   actor(7,0,1,2),actor(7,1,1,1),actor(7,2,1,1),actor(7,3,3,1)]},
+ ];
+ const opts={...recipe,allowElevators:false,allowTeleports:true,allowGunTriggerTeleports:true,allowExtendedEnemyClocks:true};
+ const board=buildDecodedBoard(level,opts);
+ const game=new SourceRound(board,{...profiles,outlines:{groups:{...profiles.outlines.groups,
+  4500:frames(64,rectangle(0,0)),200:frames(4,{...rectangle(0,0),collidable:false})}},
+  gunOutlines:{groups:{...profiles.gunOutlines.groups,3300:frames(6,rectangle(11,9))}}});
+ assert.equal(board.teleports.length,22);
+ assert.equal(Math.max(...board.teleports.map(x=>x.channel)),23);
+ const hand=game.enemies[0];
+ game.afterActorDotGrab(hand,game.point(hand));
+ assert.equal(hand.pivot,'4,2');
+ assert.equal(game.gunTriggers.slots.filter(Boolean).length,0);
+ for(let i=0;i<30&&!game.gunTriggers.slots.some(Boolean);i++)game.update(1/120,{});
+ assert.equal(game.gunTriggers.slots.filter(Boolean).length,2);
+ assert.equal(game.gunTriggers.triggers[0].occupancy,1);
+});

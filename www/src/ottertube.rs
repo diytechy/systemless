@@ -451,6 +451,8 @@ mod link {
         fn link_exit() -> Result<(), JsValue>;
         #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = wait, catch)]
         fn link_wait(ms: f64) -> Result<js_sys::Promise, JsValue>;
+        #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = onKeys, catch)]
+        fn link_on_keys(callback: &js_sys::Function) -> Result<(), JsValue>;
     }
 
     const OVERSIZE_KEY: &str = "systemless.ottertube.oversize:";
@@ -481,20 +483,32 @@ mod link {
         stored: u64,
         retries: u32,
         retry_waiting: bool,
-        /// No local copy and no usable held save: the game's seed applies.
-        fresh: bool,
+        /// How many files the local copy held when the session began.
+        local_files: usize,
+        /// The held save could not be used. Nothing is sent and nothing is
+        /// written to the scope either, as for Guest: the next visit must find
+        /// the same local copy beside the same held save, not a newer local
+        /// one that would then be uploaded over it.
+        frozen: bool,
     }
 
     /// One local write: the scope, its files and the counter they belong to.
     type LocalWrite = (String, Vec<VfsFileSnapshot>, u64);
-    /// Asks the running machine for a save scan now and returns its files.
-    pub type SaveScanner = Rc<dyn Fn() -> Pin<Box<dyn Future<Output = Vec<DownloadableSaveFile>>>>>;
+    /// Asks the running machine for a save scan now, to be answered before the
+    /// given `Date.now()` time. `None` is "not scanned": no machine is running
+    /// yet, or it did not answer in time.
+    pub type SaveScanner =
+        Rc<dyn Fn(f64) -> Pin<Box<dyn Future<Output = Option<Vec<DownloadableSaveFile>>>>>>;
+    /// Presses or releases guest keys for a tap action, through the same
+    /// ownership count as the held controls.
+    pub type TapKeys = Rc<dyn Fn(Vec<String>, bool)>;
 
     thread_local! {
         static SESSION: RefCell<Option<Session>> = const { RefCell::new(None) };
         static NEXT_WRITE: RefCell<Option<LocalWrite>> = const { RefCell::new(None) };
         static WRITING: Cell<bool> = const { Cell::new(false) };
         static SCANNER: RefCell<Option<SaveScanner>> = const { RefCell::new(None) };
+        static TAP_KEYS: RefCell<Option<TapKeys>> = const { RefCell::new(None) };
         static LEAVING: Cell<Option<RwSignal<bool>>> = const { Cell::new(None) };
         static HALTED: Cell<bool> = const { Cell::new(false) };
     }
@@ -508,8 +522,12 @@ mod link {
         /// writes it instead, files and counter in one transaction.
         pub load_only: bool,
         pub extra_paths: Vec<String>,
-        /// The game's seed, for a player with no save anywhere.
+        /// The game's seed. It is written into the mounted files on every
+        /// boot, before the saved files are put over them, so a real save
+        /// always wins and a save that lacks the seeded file still gets it.
         pub boot_patches: Vec<save_store::BootPatch>,
+        /// Tests only (`?systemless-test-scan=paused`): explicit scans only.
+        pub scan_paused: bool,
     }
 
     /// The scope for the machine about to boot. Without a session (which cannot
@@ -519,29 +537,26 @@ mod link {
             .iter()
             .map(|path| path.to_string())
             .collect();
+        let boot_patches = seed_patches(game_id);
+        let scan_paused = test_scan_mode().is_some();
         SESSION.with(|session| match session.borrow().as_ref() {
             Some(Session {
-                scope: Some(scope),
-                fresh,
-                ..
+                scope: Some(scope), ..
             }) => SaveScope {
                 id: scope.clone(),
                 memory_only: false,
                 load_only: true,
                 extra_paths,
-                boot_patches: if *fresh {
-                    seed_patches(game_id)
-                } else {
-                    Vec::new()
-                },
+                boot_patches,
+                scan_paused,
             },
-            // Guest starts fresh every time, so is seeded every time.
             _ => SaveScope {
                 id: format!("{game_id}@guest"),
                 memory_only: true,
                 load_only: false,
                 extra_paths,
-                boot_patches: seed_patches(game_id),
+                boot_patches,
+                scan_paused,
             },
         })
     }
@@ -549,6 +564,31 @@ mod link {
     /// The game screen hands over a way to scan the running machine's saves now.
     pub fn set_save_scanner(scanner: Option<SaveScanner>) {
         SCANNER.with(|slot| *slot.borrow_mut() = scanner);
+    }
+
+    /// The game screen hands over how a tap action presses guest keys.
+    pub fn set_tap_keys(keys: Option<TapKeys>) {
+        TAP_KEYS.with(|slot| *slot.borrow_mut() = keys);
+    }
+
+    /// A browser check's request in the page address: `paused` stops the
+    /// machine's periodic save scan, `paused-slow` also makes an explicit scan
+    /// answer late. Nothing in OtterTube sets it.
+    fn test_scan_mode() -> Option<String> {
+        let search = web_sys::window()?.location().search().ok()?;
+        let value = search
+            .trim_start_matches('?')
+            .split('&')
+            .find_map(|pair| pair.strip_prefix("systemless-test-scan="))?;
+        matches!(value, "paused" | "paused-slow").then(|| value.to_string())
+    }
+
+    pub fn test_scan_delay_ms() -> f64 {
+        if test_scan_mode().as_deref() == Some("paused-slow") {
+            1200.0
+        } else {
+            0.0
+        }
     }
 
     fn seed_patches(game_id: &str) -> Vec<save_store::BootPatch> {
@@ -638,7 +678,8 @@ mod link {
             stored: 0,
             retries: 0,
             retry_waiting: false,
-            fresh: false,
+            local_files: 0,
+            frozen: false,
         }
     }
 
@@ -668,13 +709,15 @@ mod link {
 
         // The local copy counts only with its counter, which is committed in
         // the same transaction as the files it belongs to.
-        let local = match save_store::read_scope_counter(&scope).await {
-            Ok(counter) => counter,
+        let local_state = match save_store::read_scope_state(&scope).await {
+            Ok(state) => state,
             Err(error) => {
                 warn(&format!("the local copy could not be read ({error})"));
                 None
             }
         };
+        let local = local_state.map(|(counter, _)| counter);
+        session.local_files = local_state.map_or(0, |(_, files)| files);
         // A save is held but this build cannot use it: play on from the local
         // copy and send nothing, so what OtterTube holds stays as it is.
         let mut unusable = None;
@@ -721,14 +764,14 @@ mod link {
         }
         if let Some(reason) = &unusable {
             warn(&format!(
-                "{reason}; nothing will be sent to OtterTube this time"
+                "{reason}; nothing will be sent to OtterTube or stored this time"
             ));
             session.host_saves = false;
+            session.frozen = true;
         }
         note(BLOCKED_KEY, &scope, unusable.as_deref());
         // A fresh start has no files; anything the game then writes is a change.
         session.baseline = (resume == Resume::Fresh).then(|| files_fingerprint(&[]));
-        session.fresh = resume == Resume::Fresh;
         session.resend_first = resume == Resume::KeepLocal;
         session.scope = Some(scope);
         SESSION.with(|slot| *slot.borrow_mut() = Some(session));
@@ -745,6 +788,16 @@ mod link {
         if link_on_leave(on_leave.as_ref().unchecked_ref()).is_ok() {
             on_leave.forget();
         }
+        let on_keys =
+            Closure::<dyn FnMut(js_sys::Array, bool)>::new(|names: js_sys::Array, down: bool| {
+                let names: Vec<String> = names.iter().filter_map(|name| name.as_string()).collect();
+                if let Some(keys) = TAP_KEYS.with(|slot| slot.borrow().clone()) {
+                    keys(names, down);
+                }
+            });
+        if link_on_keys(on_keys.as_ref().unchecked_ref()).is_ok() {
+            on_keys.forget();
+        }
     }
 
     /// The running machine's changed files, each time the set changes. The
@@ -754,6 +807,10 @@ mod link {
             let mut session = session.borrow_mut();
             let session = session.as_mut()?;
             let scope = session.scope.clone()?;
+            if session.frozen {
+                // Played in memory only: see `Session::frozen`.
+                return None;
+            }
             let snapshots: Vec<VfsFileSnapshot> = files
                 .iter()
                 .filter_map(|file| match snapshot_from_download(file) {
@@ -769,6 +826,11 @@ mod link {
                 .collect();
             let fingerprint = files_fingerprint(&snapshots);
             let first = session.baseline.is_none();
+            if first && snapshots.is_empty() && session.resend_first && session.local_files > 0 {
+                // Not what a machine that loaded the local copy reports. An
+                // empty list here must never become the save that is sent.
+                return None;
+            }
             if session.baseline == Some(fingerprint) {
                 return None;
             }
@@ -921,10 +983,14 @@ mod link {
             return;
         }
         signal.set(true);
+        // One deadline for the scan, the local commit and OtterTube's answer.
         let deadline = js_sys::Date::now() + LEAVE_WAIT_MS;
         if let Some(scanner) = SCANNER.with(|slot| slot.borrow().clone()) {
-            let files = scanner().await;
-            on_save_files(&files);
+            // No machine yet, or no answer in time: nothing new is known, and
+            // the list the page already has is not sent in its place.
+            if let Some(files) = scanner(deadline).await {
+                on_save_files(&files);
+            }
         }
         loop {
             let settled = SESSION.with(|session| {

@@ -1308,6 +1308,10 @@ impl Machine {
         if self.save_scan_frame % SAVE_SCAN_FRAME_INTERVAL != 0 {
             return;
         }
+        if cfg!(feature = "ottertube") && save_store::periodic_scan_paused() {
+            // A browser check asked for explicit scans only.
+            return;
+        }
         self.sync_save_files_now();
     }
 

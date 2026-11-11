@@ -38,6 +38,9 @@ struct BootConfig {
     /// A fresh player's seed, applied to the mounted files. Absent in every other build.
     #[serde(default)]
     boot_patches: Vec<crate::save_store::BootPatch>,
+    /// Tests only: no periodic save scan. Absent in every other build.
+    #[serde(default)]
+    save_scan_paused: bool,
 }
 
 // Fork bytes travel separately in transfer lists. Keep every Finder field and
@@ -138,6 +141,9 @@ impl WorkerMachine {
                 config.save_load_only,
                 &config.extra_save_paths,
             );
+        }
+        if config.save_scan_paused {
+            crate::save_store::set_periodic_scan_paused(true);
         }
         if !config.boot_patches.is_empty() {
             crate::save_store::set_boot_patches(config.boot_patches);

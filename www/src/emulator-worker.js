@@ -259,6 +259,8 @@ self.onmessage = async (event) => {
       publishSaveFiles("saveFiles", message.requestId);
     } else if (message.type === "scanSaves") {
       // Asked for by a page that is about to leave; no catalogue page sends it.
+      // delayMs is a browser check's way to make this answer late.
+      if (message.delayMs > 0) await new Promise((done) => setTimeout(done, message.delayMs));
       machine.scanSaves();
       publishSaveFiles("saveFiles", message.requestId);
     }

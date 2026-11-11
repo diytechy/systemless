@@ -299,6 +299,8 @@ struct SaveScope {
     load_only: bool,
     extra_paths: Vec<String>,
     boot_patches: Vec<save_store::BootPatch>,
+    /// Tests only: the machine scans for save changes only when asked.
+    scan_paused: bool,
 }
 
 impl SaveScope {
@@ -318,6 +320,7 @@ fn save_scope(game: &Game) -> SaveScope {
             load_only: scope.load_only,
             extra_paths: scope.extra_paths,
             boot_patches: scope.boot_patches,
+            scan_paused: scope.scan_paused,
         }
     }
     #[cfg(not(feature = "ottertube"))]
@@ -327,39 +330,48 @@ fn save_scope(game: &Game) -> SaveScope {
         load_only: false,
         extra_paths: Vec::new(),
         boot_patches: Vec::new(),
+        scan_paused: false,
     }
 }
 
 /// Scan the running machine's save files now and return the current set.
 #[cfg(feature = "ottertube")]
+/// `None` means not scanned: there is no running machine yet, or the worker
+/// did not answer before `deadline_ms` (a `Date.now()` time). The caller must
+/// not take the list it already has for a scan result.
 async fn scan_save_files(
     handle: Option<RuntimeHandle>,
     save_files: RwSignal<Vec<DownloadableSaveFile>>,
-) -> Vec<DownloadableSaveFile> {
-    match handle {
-        Some(RuntimeHandle::Local(machine)) => {
+    deadline_ms: f64,
+) -> Option<Vec<DownloadableSaveFile>> {
+    match handle? {
+        RuntimeHandle::Local(machine) => {
             let mut machine = machine.borrow_mut();
             machine.flush_save_files();
-            machine.save_files().to_vec()
+            Some(machine.save_files().to_vec())
         }
-        Some(RuntimeHandle::Worker(runtime)) => {
+        RuntimeHandle::Worker(runtime) => {
             let message = Object::new();
             set_js_property(&message, "type", &JsValue::from_str("scanSaves"));
-            if let Ok(request) = runtime.begin_save_request(&message) {
-                if runtime.post(&message).is_ok() {
-                    // The reply updates `save_files` and clears the request.
-                    for _ in 0..40 {
-                        if !runtime.pending_save_requests.borrow().contains(&request) {
-                            break;
-                        }
-                        crate::ottertube::wait_ms(15.0).await;
-                    }
-                }
-                runtime.pending_save_requests.borrow_mut().remove(&request);
+            let delay = crate::ottertube::test_scan_delay_ms();
+            if delay > 0.0 {
+                set_js_property(&message, "delayMs", &JsValue::from_f64(delay));
             }
-            save_files.get_untracked()
+            let request = runtime.begin_save_request(&message).ok()?;
+            if runtime.post(&message).is_err() {
+                runtime.pending_save_requests.borrow_mut().remove(&request);
+                return None;
+            }
+            // The reply updates `save_files` and clears the request.
+            while runtime.pending_save_requests.borrow().contains(&request) {
+                if js_sys::Date::now() >= deadline_ms {
+                    runtime.pending_save_requests.borrow_mut().remove(&request);
+                    return None;
+                }
+                crate::ottertube::wait_ms(15.0).await;
+            }
+            Some(save_files.get_untracked())
         }
-        None => save_files.get_untracked(),
     }
 }
 
@@ -436,9 +448,9 @@ fn GameRuntime(
         // Leaving asks the machine for a save scan first, so a change made in
         // the last half second is not left behind.
         let scan_handle = machine_handle.clone();
-        let scanner: crate::ottertube::SaveScanner = Rc::new(move || {
+        let scanner: crate::ottertube::SaveScanner = Rc::new(move |deadline_ms| {
             let handle = scan_handle.borrow().clone();
-            Box::pin(scan_save_files(handle, save_files))
+            Box::pin(scan_save_files(handle, save_files, deadline_ms))
         });
         crate::ottertube::set_save_scanner(Some(scanner));
         on_cleanup(|| crate::ottertube::set_save_scanner(None));
@@ -632,6 +644,9 @@ fn GameRuntime(
             }
             if !scope.boot_patches.is_empty() {
                 save_store::set_boot_patches(scope.boot_patches.clone());
+            }
+            if scope.scan_paused {
+                save_store::set_periodic_scan_paused(true);
             }
             let mut machine = match Machine::new_with_progress(
                 &scope.id,
@@ -2677,6 +2692,7 @@ async fn boot_catalogue_worker(
         config["save_memory_only"] = scope.memory_only.into();
         config["save_load_only"] = scope.load_only.into();
         config["boot_patches"] = serde_json::to_value(&scope.boot_patches).unwrap_or_default();
+        config["save_scan_paused"] = scope.scan_paused.into();
         config["extra_save_paths"] = scope.extra_paths.into();
     }
     set_js_property(&message, "config", &JsValue::from_str(&config.to_string()));
@@ -4016,6 +4032,28 @@ fn attach_mobile_controls(
     listeners: &InputListeners,
 ) {
     let state = Rc::new(RefCell::new(MobileInputState::new()));
+    #[cfg(feature = "ottertube")]
+    {
+        // The page's tap actions press their keys through the same state as
+        // the held controls, so a tap never releases a key a finger still holds.
+        state.borrow_mut().shown_on = Some(controls.clone());
+        let tap_state = state.clone();
+        let tap_machine = machine.clone();
+        let tap_alive = alive.clone();
+        crate::ottertube::set_tap_keys(Some(Rc::new(move |names: Vec<String>, down: bool| {
+            if !tap_alive.load(Ordering::Relaxed) {
+                return;
+            }
+            let mut state = tap_state.borrow_mut();
+            for key in names.into_iter().filter_map(mobile_control_key_name) {
+                if down {
+                    state.press_tap_key(&tap_machine, key);
+                } else {
+                    state.release_tap_key(&tap_machine, key);
+                }
+            }
+        })));
+    }
     attach_mobile_gesture_guard(controls, alive.clone(), listeners);
     attach_mobile_joystick(
         joystick,
@@ -4509,7 +4547,13 @@ fn take_active_mobile_button(
 struct MobileInputState {
     joystick_keys: Vec<&'static str>,
     button_keys: Vec<&'static str>,
+    /// Keys a tap action is pressing right now, once per action that holds
+    /// one. Only the OtterTube page has tap actions.
+    tap_keys: Vec<&'static str>,
     sent_keys: Vec<&'static str>,
+    /// Where the keys held down in the guest are shown (`data-held-keys`).
+    #[cfg(feature = "ottertube")]
+    shown_on: Option<HtmlElement>,
 }
 
 impl MobileInputState {
@@ -4534,9 +4578,25 @@ impl MobileInputState {
         self.flush(machine);
     }
 
+    /// A tap action presses `key`. It stays down in the guest until every
+    /// owner (this action, a held button, the stick) has let go of it.
+    #[cfg(feature = "ottertube")]
+    fn press_tap_key(&mut self, machine: &RuntimeHandle, key: &'static str) {
+        self.tap_keys.push(key);
+        self.flush(machine);
+    }
+
+    #[cfg(feature = "ottertube")]
+    fn release_tap_key(&mut self, machine: &RuntimeHandle, key: &'static str) {
+        if let Some(index) = self.tap_keys.iter().position(|held| *held == key) {
+            self.tap_keys.remove(index);
+        }
+        self.flush(machine);
+    }
+
     fn flush(&mut self, machine: &RuntimeHandle) {
         let mut next = self.joystick_keys.clone();
-        for key in &self.button_keys {
+        for key in self.button_keys.iter().chain(&self.tap_keys) {
             if !next.contains(key) {
                 next.push(key);
             }
@@ -4557,6 +4617,10 @@ impl MobileInputState {
             }
         }
         self.sent_keys = next;
+        #[cfg(feature = "ottertube")]
+        if let Some(element) = &self.shown_on {
+            let _ = element.set_attribute("data-held-keys", &self.sent_keys.join(" "));
+        }
     }
 }
 

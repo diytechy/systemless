@@ -17,6 +17,7 @@ thread_local! {
     static PENDING_SAVES: std::cell::RefCell<std::collections::BTreeMap<String, usize>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
     static LAST_SAVE_ERRORS: std::cell::RefCell<std::collections::BTreeMap<String, String>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
     static BOOT_PATCHES: std::cell::RefCell<Vec<BootPatch>> = const { std::cell::RefCell::new(Vec::new()) };
+    static PERIODIC_SCAN_PAUSED: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
     static SAVE_POLICY: std::cell::RefCell<SavePolicy> = const { std::cell::RefCell::new(SavePolicy { memory_only: false, load_only: false, extra_paths: Vec::new() }) };
 }
 
@@ -52,6 +53,17 @@ pub fn set_boot_patches(patches: Vec<BootPatch>) {
 /// The patches set for this boot, once.
 pub fn take_boot_patches() -> Vec<BootPatch> {
     BOOT_PATCHES.with(|slot| std::mem::take(&mut *slot.borrow_mut()))
+}
+
+/// Tests only: stop the machine on this thread from looking for changed save
+/// files on its own, so a test can show that a change reached the page through
+/// an explicit scan. Never set outside the add-on build's browser checks.
+pub fn set_periodic_scan_paused(paused: bool) {
+    PERIODIC_SCAN_PAUSED.with(|slot| slot.set(paused));
+}
+
+pub fn periodic_scan_paused() -> bool {
+    PERIODIC_SCAN_PAUSED.with(|slot| slot.get())
 }
 
 /// Per-thread save rules. The default (nothing kept in memory only, no extra
@@ -360,17 +372,29 @@ pub async fn write_scope(
     completion.wait().await
 }
 
-/// The counter committed with the files of `game_id`, or `None` when that id
-/// has no committed copy.
+/// The counter committed with the files of `game_id` and how many files that
+/// is, or `None` when that id has no committed copy.
 #[cfg(feature = "ottertube")]
-pub async fn read_scope_counter(game_id: &str) -> Result<Option<u64>, String> {
+pub async fn read_scope_state(game_id: &str) -> Result<Option<(u64, usize)>, String> {
     let db = open_db().await?;
     let store = object_store(&db, IdbTransactionMode::Readonly)?;
     let request = store
         .get(&JsValue::from_str(&scope_counter_key(game_id)))
         .map_err(js_error_string)?;
     let value = await_idb_request(&request).await?;
-    Ok(value.as_string().as_deref().and_then(parse_scope_counter))
+    let Some(counter) = value.as_string().as_deref().and_then(parse_scope_counter) else {
+        return Ok(None);
+    };
+    let keys = await_idb_request(&store.get_all_keys().map_err(js_error_string)?).await?;
+    let keys: Array = keys
+        .dyn_into()
+        .map_err(|_| "IndexedDB getAllKeys did not return an array".to_string())?;
+    let prefix = record_key(game_id, "");
+    let files = keys
+        .iter()
+        .filter(|key| key.as_string().is_some_and(|key| key.starts_with(&prefix)))
+        .count();
+    Ok(Some((counter, files)))
 }
 
 /// The key is outside every `{game_id}` NUL `{path}` range, and the value is

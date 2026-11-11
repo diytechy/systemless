@@ -13,6 +13,7 @@
   var connection = null;
   var pageHide = null;
   var leave = null;
+  var pressKeys = null;
   var settled = false;
   /** Checkpoint answers, newest last, for tests and for a parent-side page later. */
   var log = [];
@@ -69,11 +70,18 @@
     button.dataset.kioskBusy = 'true';
     button.classList.add('is-active');
     try { canvas.focus({ preventScroll: true }); } catch (_) { /* focus is a nicety */ }
+    // The page counts who holds each key (the stick, a held button, a tap action), so the release
+    // here cannot lift a key a finger is still holding. Without that count (the game has no held
+    // controls) the keys go to the canvas as keyboard events.
+    function send(names, down) {
+      if (typeof pressKeys === 'function') pressKeys(names, down);
+      else names.forEach(function (name) { canvas.dispatchEvent(keyEvent(down ? 'keydown' : 'keyup', name)); });
+    }
     (function press(index) {
       var names = steps[index].split('+').filter(Boolean);
-      names.forEach(function (name) { canvas.dispatchEvent(keyEvent('keydown', name)); });
+      send(names, true);
       root.setTimeout(function () {
-        names.slice().reverse().forEach(function (name) { canvas.dispatchEvent(keyEvent('keyup', name)); });
+        send(names.slice().reverse(), false);
         if (index + 1 < steps.length) { root.setTimeout(function () { press(index + 1); }, KEY_STEP_MS); return; }
         button.classList.remove('is-active');
         delete button.dataset.kioskBusy;
@@ -108,6 +116,8 @@
     },
     /** One function, called when the page is hidden for good (a child leaving, a user switch). */
     onPageHide: function (callback) { pageHide = callback; },
+    /** One function (names, down) that presses or releases guest keys for a tap action. */
+    onKeys: function (callback) { pressKeys = callback; },
     /** One function that leaves properly: it saves what is pending, then calls `exit`. */
     onLeave: function (callback) { leave = callback; },
     /**

@@ -60,11 +60,12 @@ export function validateBombWallTiles(walls){
 /** CODE6:b91c WLBombed: paint cross4, vertical2 by row, horizontal3 by column,
  * before clearing each collision byte. Presence is not the active byte, so an
  * already-hidden tile still repaints on a later blast. No visibility filter. */
-export function bombStationaryWalls(walls,grid,onPaint){
- validateBombWallTiles(walls);
+export function bombStationaryWalls(walls,grid,onPaint,{allowShatteredCrossFrames=false}={}){
+ if(typeof allowShatteredCrossFrames!=='boolean')throw new Error('Literal shattered-cross blast capability required');
+ validateBombWallTiles(allowShatteredCrossFrames?walls.map(w=>w.frame===4&&w.visible===false?{...w,frame:5}:w):walls);
  if(!Number.isInteger(grid?.row)||!Number.isInteger(grid?.column)||grid.row<0||grid.row>6||grid.column<0||grid.column>9||typeof onPaint!=='function')throw new Error('Static source blast grid and synchronous wall paint required');
  const result=[],hit=(row,column,kind,frame)=>{
-  const w=walls.find(w=>w.row===row&&w.column===column&&(kind==='cross'?w.frame>=5:w.frame===kind));if(!w)return;
+  const w=walls.find(w=>w.row===row&&w.column===column&&(kind==='cross'?w.frame>=5||allowShatteredCrossFrames&&w.frame===4&&w.visible===false:w.frame===kind));if(!w)return;
   const rawBase={x:w.x-6,y:w.y-5},paint={kind:'WL',id:w.id,frame,row,column,x:w.x,y:w.y,rawBase,invalidation:{...rawBase,width:48,height:48}};
   const value=onPaint(paint,w);if(value&&typeof value.then==='function')throw new TypeError('Synchronous source wall painter required');
   w.visible=false;result.push(paint);

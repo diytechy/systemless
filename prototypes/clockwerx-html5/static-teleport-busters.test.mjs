@@ -3,6 +3,7 @@ import {assertStaticTeleportBusterRecipe,assertStaticTeleportBusterActor,assertS
 import {buildDecodedBoard} from './level.mjs';import {SourceRound} from './round.mjs';
 import {advanceStaticEnemyCallback} from './enemy-transfer.mjs';
 import {bombActors} from './bomb-runtime.mjs';
+import {shatterFreeBusterWall} from './free-busters.mjs';import {bombStationaryWalls} from './walls.mjs';
 const recipe={allowStaticTeleportBusters:true,...Object.fromEntries(['FreeBusters','Teleports','Bombs','BombObjectInteractions','CanonicalPlayer','EnemyStaticPrograms','SpecialDots','ChildScoring','CombinedGoalBonus','InactiveSpikes'].map(k=>['allow'+k,true]))};
 const block=(kind,rows)=>({kind,count:rows.length,records:rows.map(rawWords=>({rawWords}))});
 function fixture(){
@@ -13,6 +14,9 @@ const shape={left:0,top:0,right:1,bottom:1,rows:[],collidable:false,flipY:false}
 const route=kind=>({kind,points:[[0,0]],entryLeg:4,forwardExit:4,reverseExit:4,bomb:kind<4,flipVertical:false,flipHorizontal:false,swap:false});
 const profiles={outlines:{groups:Object.fromEntries([200,700,4300,3900,4400,4500,800].map(g=>[g,frames(64)]))},dotOutlines:{groups:{300:frames(207)}},bombOutlines:{groups:{1600:frames(18),1500:frames(12),1800:frames(10),1900:frames(17)}},bombRoutes:[route(10),route(0)],deathFactory:()=>({update(){},snapshot(){return[];}})};
 const round=()=>new SourceRound(buildDecodedBoard(fixture(),{...recipe,angularSpeed:1}),profiles);
+test('an explosion repaints a previously shattered cross only in the explicit new family',()=>{
+ const g=round(),w=g.board.walls.find(w=>w.frame>=5);shatterFreeBusterWall(w,()=>true);assert.equal(w.frame,4);assert.equal(w.visible,false);const grid={row:w.row,column:w.column};assert.throws(()=>bombStationaryWalls(g.board.walls,grid,()=>{}));g.bombScene.effect({type:'stationary',target:'WL',grid});assert.ok(g.bombScene.backgroundPaints.some(p=>p.kind==='WL'&&p.id===w.id&&p.frame===4));assert.throws(()=>bombStationaryWalls([{...w,visible:true}],grid,()=>{},{allowShatteredCrossFrames:true}));
+});
 function callback(g,state,tick,extra={}){const noop=()=>{};return advanceStaticEnemyCallback(state,1,{program:state.program,dots:g.board.dots,guestTick:tick,adjustPeriod:n=>n,afterAnimate:noop,onDotRelease:noop,onDotGrabFirst:noop,afterDotGrab:noop,allowTeleports:true,allowStaticTeleportBusters:true,staticTeleportBusterScope:g.board,...extra});}
 test('hidden n/b buster returns strictly after deadline; orphan expiry cancels later return',()=>{
  const g=round(),b=g.enemies[1];let s={...b,visible:false,hiddenUntil:100};assert.equal(callback(g,s,100).state.visible,false);const returned=callback(g,s,101);assert.equal(returned.state.visible,true);assert.ok(returned.events.some(e=>e.type==='buster-return'));

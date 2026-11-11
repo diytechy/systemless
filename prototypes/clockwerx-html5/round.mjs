@@ -1,3 +1,4 @@
+import {assertFreeBusterBoard,advanceFreeBuster,busterVelocity} from './free-busters.mjs';
 import {assertMovingBombSpikeWaystationScope,assertMovingBombSpikeWaystationPhysics} from './moving-bomb-spike-waystation.mjs';
 import {assertStaticSlidingBombGoodiePhysics,assertStaticSlidingBombGoodieScope} from './static-sliding-bomb-goodies.mjs';
 import {assertMovingMarkedOrdinaryScope,assertMovingMarkedOrdinaryPhysics} from './moving-marked-ordinary.mjs';
@@ -72,6 +73,7 @@ export class SourceRound extends MovementGame {
   else if(board.gunTriggerWallRules)assertGunTriggerWallBoard(board,gunOutlines);
   else if(board.gunTriggerSlidingRules)assertGunTriggerSlidingBoard(board,gunOutlines,elevatorOutlines);
   else if(board.gunTriggerProjectileRules)assertGunTriggerChildBoard(board,gunOutlines,elevatorOutlines);
+  if(board.freeBusterRules)assertFreeBusterBoard(board,outlines);
   super(board);this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask&&!board.slidingConnectorRules||d.motion&&d.motion!=='static'&&!(board.elevatorRules&&d.motion==='up-down')&&!(board.movingDotRules&&d.motion==='moving-program'))))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
   if(board.elevatorOilSpikeRules&&(!board.elevatorRules||!board.canonicalOilRules||board.canonicalOilSpikeRules||!board.puddles?.length||board.puddles.some(p=>p.kind!==3)||!board.spikes?.length))throw new Error('Separate group0 elevators, kind3 Oil and static spike scope required');
@@ -93,7 +95,7 @@ export class SourceRound extends MovementGame {
   if(board.slidingConnectorRules){validateConnectorBoard(board.connectors,board.dots);if(!board.combinedGoalBonusRules&&!board.staticSlidingBombGoodieRules||!Array.isArray(board.slidingHumanStarts)||board.slidingHumanStarts.length!==2||board.slidingHumanStarts[0]!==board.player.pivot||board.slidingHumanStarts.some(id=>{const d=board.dots.find(d=>d.id===id);return !d||d.kind==='goal';}))throw new Error('EX requires goal/bonus composition and non-goal human starts');}
   if(board.slidingConnectorRules&&!board.movingDoorGoodieRules&&!board.movingDoorOilRules&&!board.movingTubesRules&&!board.gunTriggerSlidingRules&&!board.staticSlidingBombGoodieRules&&!board.staticSlidingProgramRules&&!board.slidingGoodieRules&&!board.slidingOilRules&&!board.slidingBombRules&&!board.slidingTeleportRules&&!board.movingBombRules&&!board.movingElevatorRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||!board.elevatorRules||board.difficulty!=='Child'||!board.connectors?.length||!elevatorOutlines?.groups?.['3400']||board.teleportRules||['puddles','bombs','goodies','spikes','doors','switches'].some(k=>board[k]?.length)||board.dots.some(d=>d.ring||d.teleport||d.motion!=='static'&&!(d.upDown&&d.upDown.group===0&&!d.upDown.initialLowered&&d.color===0&&d.kind==='dot')||d.protected&&d.color!==0)||board.elevators?.some(c=>c.group!==0||![2,3].includes(c.subcell))||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,2].includes(e.speedClass)||e.program!==null||e.checksWalls!==false)))throw new Error('Separate EX Child composition required');
   if(board.staticSlidingProgramRules&&(!board.slidingConnectorRules||!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||board.elevatorRules||board.teleportRules||['puddles','bombs','goodies','doors','switches','walls','elevators'].some(k=>board[k]?.length)||board.dots.some(d=>d.motion!=='static'||d.humanCanGrab!==true||d.nonhumanCanGrab!==true||d.ring||d.teleport||d.protected||d.waystation)||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||![1,2,3].includes(e.speedClass)||e.checksWalls!==false||e.program!==null&&(!/^[fn]+$/.test(e.program)||e.sourcePC<1))))throw new Error('Separate static EX f/n Child scope required');
-  if(board.movingDotRules&&!board.movingDoorGoodieRules&&!board.movingDoorOilRules&&!board.movingDoorCheckpointRules&&!board.movingTubesRules&&!board.movingBombSpikeWaystationRules&&!board.movingMarkedOrdinaryRules&&!board.movingSpikeRules&&!board.movingBombRules&&!board.movingMarkedGoalRules&&!board.movingElevatorRules&&!board.movingCheckpointRingRules&&!board.movingMarkedBonusRules||board.importedGoodie169Rules&&!board.movingBombRules&&!board.movingBombSpikeWaystationRules)throw new Error('Moving core/imported GO require separate qualified composition');
+  if(board.movingDotRules&&!board.movingDoorGoodieRules&&!board.movingDoorOilRules&&!board.movingDoorCheckpointRules&&!board.movingTubesRules&&!board.movingBombSpikeWaystationRules&&!board.movingMarkedOrdinaryRules&&!board.movingSpikeRules&&!board.movingBombRules&&!board.movingMarkedGoalRules&&!board.movingElevatorRules&&!board.movingCheckpointRingRules&&!board.movingMarkedBonusRules||board.importedGoodie169Rules&&!board.freeBusterRules&&!board.movingBombRules&&!board.movingBombSpikeWaystationRules)throw new Error('Moving core/imported GO require separate qualified composition');
   if(board.markedTransferRules&&!board.movingMarkedOrdinaryRules&&!board.movingMarkedGoalRules&&!board.movingMarkedBonusRules&&!board.staticMarkedOrbitalRules)throw new Error('Marked core requires separate moving/goal composition');
   if(board.pilotAbsentSlideRecoveryRules&&!board.movingElevatorRules)throw new Error('Pilot absent-slide recovery requires its separate moving/up-down join');
   if(board.movingCheckpointRingRules||board.movingMarkedBonusRules){
@@ -152,6 +154,7 @@ export class SourceRound extends MovementGame {
   }
   if(board.teleportRules){this.teleports=new TeleportRuntime(board.teleports,board.dots,this.teleportClocks.advance(0),board.slidingTeleportRules?{allowSlidingTeleports:true,connectors:board.connectors,actors:[this.player,...this.enemies]}:{});this.onAfterHumanGrab(this.point(this.player));}
   if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
+  if(board.freeBusterRules)this.gunTriggers=new GunTriggerRuntime({guns:[],triggers:[],rawBounds:{left:28,top:28,right:612,bottom:452},frameOrigin:{x:28,y:28},templateReference:this.actorClasses.snapshot().classes[0].count});
   if(board.gunTriggerProjectileRules){
    this.gunOutlines=gunOutlines;
    this.gunTriggers=new GunTriggerRuntime({...board.gunTriggerChild,templateReference:this.actorClasses.snapshot().classes[0].count});
@@ -365,8 +368,13 @@ export class SourceRound extends MovementGame {
  }
  enemyCollision(){
   const hero=this.collider(this.player);
-  for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,this.player.canonicalFrame?this.player.frame:sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy)))
+  for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,this.player.canonicalFrame?this.player.frame:sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy))){
+   if(this.board.freeBusterRules&&enemy.sourceActorType===5){
+    this.emitGunTriggerEvents([{type:'sound',id:41},...this.gunTriggers.launchBuster(enemy,this.point(enemy),busterVelocity(this.player.frame,this.player.direction))],this.player);
+    enemy.visible=false;enemy.hiddenUntil=this.guestTicks+300;this.event('buster-hidden',enemy);continue;
+   }
    return {reason:'enemy',object:enemy.name,...(enemy.sourceActorType===4?{sourceReason:0}:{})};
+  }
   return null;
  }
  collision(){return this.spikeCollision()||this.enemyCollision();}
@@ -375,6 +383,7 @@ export class SourceRound extends MovementGame {
  }
  contactGunTrigger(hand){
   const actor=this.collider(hand),g=this.gunTriggers;
+  if(hand.sourceActorType===5||this.board.freeBusterRules)return;
   this.emitGunTriggerEvents(g.contact(hand,t=>outlineCollision(actor,worldOutline(this.gunOutlines,3300,t.frame,g.pointFor(t.rawBase)))),hand);
  }
  projectileHitsWall(p){
@@ -389,7 +398,19 @@ export class SourceRound extends MovementGame {
   }));
   return findDoorContact(doors,shape,{checkLethal:false})!==null;
  }
+ busterOutline(p){return worldOutline(this.outlines,3900,p.frame,this.gunTriggers.pointFor({x:p.rawBase.x+44,y:p.rawBase.y+43}));}
+ busterHitsWall(p){const shape=this.busterOutline(p);return this.board.walls.find(w=>w.visible!==false&&outlineCollision(shape,worldOutline(this.outlines,800,w.frame,w)))||null;}
+ busterHitsDoor(p){
+  const state=this.doorSystem.snapshot(),shape=this.busterOutline(p);
+  const doors=this.board.doors.map((d,i)=>({leaves:[state.doors[i].frame,state.doors[i].secondFrame].map(f=>worldOutline(this.doorOutlines,1300,f,d.base)),caps:d.caps.map(c=>worldOutline(this.doorOutlines,2900,c.frame,c))}));
+  const hit=findDoorContact(doors,shape,{checkLethal:false});return hit?this.board.doors[hit.doorIndex]:null;
+ }
+ shatterBusterWall(w,p){
+  if(w.frame>=5){const shape=this.busterOutline(p);let mask=w.frame-4;for(const [bit,frame] of [[4,22],[1,20],[8,23],[2,21]])if(mask&bit&&outlineCollision(shape,worldOutline(this.outlines,800,frame,w)))mask&=~bit;if(mask)w.frame=mask+4;else w.visible=false;}else w.visible=false;
+  this.board.wallRevision=(this.board.wallRevision??0)+1;this.event('buster-wall-shatter',this.player,{id:w.id});
+ }
  projectileCollision(){
+  if(this.board.freeBusterRules)return null;
   const actor=this.collider(this.player),g=this.gunTriggers;
   return g.humanHit(this.player,p=>outlineCollision(actor,worldOutline(this.gunOutlines,4200,p.frame,g.pointFor(p.rawBase))));
  }
@@ -413,6 +434,7 @@ export class SourceRound extends MovementGame {
   this.presentCanonicalEnemy(hand,timing,upstream);
  }
  animateStaticEnemy(hand,delta,timing,upstream,dispatched){
+  if(this.board.freeBusterRules&&hand.sourceActorType===5){for(const e of advanceFreeBuster(hand,dispatched?delta:0,this.guestTicks))this.event(e.type,hand);this.presentCanonicalEnemy(hand,timing,upstream);return;}
   if(dispatched){
    const previousVisible=hand.visible,callback=this.board.staticMarkedOrbitalRules?(state,count,options)=>advanceStaticMarkedOrbitalCallback(this.board,state,count,options,{allowStaticMarkedOrbitals:true}):advanceStaticEnemyCallback,result=callback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowClass2RotatingSpikes:this.board.class2RotatingSpikeRules===true,allowClass3RotatingSpikes:this.board.class3RotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,allowMovingDots:this.board.movingDotRules===true,allowMovingTubes:this.board.movingTubesRules===true,allowMovingDoorCheckpoint:this.board.movingDoorCheckpointRules===true,allowMovingDoorGoodies:this.board.movingDoorGoodieRules===true,allowMovingDoorOil:this.board.movingDoorOilRules===true,allowMovingMarkedOrdinary:this.board.movingMarkedOrdinaryRules===true,movingMarkedOrdinaryScope:this.board,allowMovingBombSpikeWaystation:this.board.movingBombSpikeWaystationRules===true,movingBombSpikeWaystationScope:this.board,allowMovingSpikes:this.board.movingSpikeRules===true,movingSpikeScope:this.board,allowMovingBombs:this.board.movingBombRules===true,allowMovingMarkedGoals:this.board.movingMarkedGoalRules===true,allowMovingCheckpointRings:this.board.movingCheckpointRingRules===true,allowMovingMarkedBonuses:this.board.movingMarkedBonusRules===true,movingSpecialScope:this.board,allowMovingElevators:this.board.movingElevatorRules===true,movingElevatorScope:this.board,onMissingSlideTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a),sourceQuery:(a)=>this.sourceGrabQuery(a,false),allowTeleports:this.board.teleportRules===true,allowSlidingTeleports:this.board.slidingTeleportRules===true,onSourceEvent:(event,s)=>this.sourceActorEvent(event,s),allowSliding:this.board.slidingConnectorRules===true,allowSlidingPrograms:this.board.staticSlidingProgramRules===true,allowGunTriggerSliding:this.board.gunTriggerSlidingRules===true,allowStaticSlidingBombGoodies:this.board.staticSlidingBombGoodieRules===true,staticSlidingBombGoodieScope:this.board,allowSlidingBombs:this.board.slidingBombRules===true,allowSlidingBombOrbitals:this.board.slidingBombOrbitalRules===true,allowSlidingBombCheckpoints:this.board.slidingBombCheckpointRules===true,allowSlidingOil:this.board.slidingOilRules===true,allowSlidingOilGoodieRings:this.board.slidingOilGoodieRingRules===true,allowSlidingGoodies:this.board.slidingGoodieRules===true,allowSlidingGoodiePrograms:this.board.slidingGoodieProgramRules===true,
     afterAnimate:s=>{
@@ -459,7 +481,7 @@ export class SourceRound extends MovementGame {
   return findDoorContact(shapes,this.collider(hand));
  }
  contactSwitch(hand){
-  if(hand.sourceActorType===4)return;
+  if([4,5].includes(hand.sourceActorType))return;
   if(!this.board.switches?.length)return;
   const frames=this.doorSystem.snapshot().switches,actor=this.collider(hand);
   const index=this.board.switches.findIndex((s,i)=>s.visible!==false&&outlineCollision(actor,worldOutline(this.doorOutlines,1000,frames[i].frame,s)));
@@ -473,7 +495,7 @@ export class SourceRound extends MovementGame {
   }
  }
  contactElevators(hand){
-  if(hand.sourceActorType===4)return;
+  if([4,5].includes(hand.sourceActorType))return;
   if(!this.elevators)return;
   const index=hand.visible===false?-1:findElevatorContact(this.collider(hand),this.elevators.snapshot().controls,this.elevatorOutlines);
   for(const change of this.elevators.contact(hand.name,index)){
@@ -613,9 +635,9 @@ export class SourceRound extends MovementGame {
   this.bombScene?.processExplosions();
   // The original logical PR9 layer precedes both WA layers in the universe
   // list. WA entrants append later, after this traversal has passed PR9.
-  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,(this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:this.board.gunTriggerWallRules?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
+  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.freeBusterRules?{classes:actorState.classes,busterWall:p=>this.busterHitsWall(p),busterDoor:p=>this.busterHitsDoor(p),shatter:(w,p)=>this.shatterBusterWall(w,p)}:(this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:this.board.gunTriggerWallRules?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
   if(!this.death)for(const enemy of this.enemies){
-   if(enemy.sourceActorType!==4&&!this.board.movingBombSpikeWaystationRules&&!this.board.slidingBombRules&&!this.board.staticSlidingBombGoodieRules&&!this.board.movingBombRules)this.bombScene?.runtime.checkMatch(enemy);
+   if(![4,5].includes(enemy.sourceActorType)&&!this.board.movingBombSpikeWaystationRules&&!this.board.slidingBombRules&&!this.board.staticSlidingBombGoodieRules&&!this.board.movingBombRules)this.bombScene?.runtime.checkMatch(enemy);
    if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}
    if(enemy.program){this.animateProgramEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer);continue;}
    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);

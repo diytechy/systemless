@@ -8,6 +8,7 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image
+from source_actor_packs import angular_exclusion, free_buster_packs
 
 
 def read(path):
@@ -36,6 +37,8 @@ def main():
                         help="Disclose earlier pixel exposure when checking a new fitter on old evidence")
     parser.add_argument("--prior-scene-viewed", action="store_true",
                         help="Disclose an earlier view of this board in another original run")
+    parser.add_argument("--allow-free-buster-packs", action="store_true",
+                        help="Source3900 art and separated fixed free class1 angular packs")
     a = parser.parse_args()
     if not 1 <= a.max_seconds <= 180 or a.output.exists():
         parser.error("Expected a fresh output and a 1–180 second fit limit")
@@ -50,6 +53,13 @@ def main():
     cells = {(c["column"], c["row"]): c for c in level["cells"] if c["present"]}
     groups = {0: "700", 1: "500", 2: "4400", 3: "4500", 4: "3500"}
     blocks = {b["kind"]: b["records"] for b in level["blocks"]}
+    packs = {}
+    if a.allow_free_buster_packs:
+        try:
+            packs = free_buster_packs(level)
+        except ValueError as error:
+            parser.error(str(error))
+        groups[5] = "3900"
     actors = [x for x in blocks.get("WA", []) if x["activationMaskRaw"] & 1 and x["actorTypeRaw"] != 6]
     if any(x["actorTypeRaw"] not in groups for x in actors):
         parser.error("This fitter has no qualified source artwork mapping for that actor type")
@@ -113,6 +123,9 @@ def main():
                   images={name: pin(a.source / "source" / name) for name in filenames},
                   anchorGroups=anchors, groups=counts, origin=[74, 72], actorAnchorBias=[-44, -43],
                   clip=[28, 28, 612, 452], gamma=.7, modelInputs=0)
+    if packs:
+        method.update(freeBusterPacks=packs, packCode=pin(Path(__file__).with_name("source_actor_packs.py")),
+                      packBoundary="Nominal source WA footprints; independent clones/overdraw can be ambiguous. No actor-identity or visibility census claim.")
     a.output.mkdir()
     save(a.output / "root-original-method.json", method)
     templates, images = {}, {}
@@ -156,11 +169,19 @@ def main():
                     delta, n = np.abs(rgb[y, x] - color).sum(axis=2), mask.sum(axis=1)
                     banks[g][i, f] = np.divide((delta * mask).sum(axis=1), 3 * n,
                                               out=np.full(len(n), np.inf, np.float32), where=n != 0)
-                scores, chosen = banks[g][i].copy(), []
+                scores, chosen, pack_counts = banks[g][i].copy(), [], {}
                 for _ in range(counts[g]):
                     frame, position = np.unravel_index(scores.argmin(), scores.shape)
                     mean = float(scores[frame, position])
-                    scores[:, position] = np.inf
+                    if g == "3900" and packs:
+                        x, y = anchors[g][position]
+                        pack = packs[str((x - 74) // 48) + "," + str((y - 72) // 48)]
+                        pack_counts[position] = pack_counts.get(position, 0) + 1
+                        scores[angular_exclusion(int(frame), pack["minimumFrameSeparation"]), position] = np.inf
+                        if pack_counts[position] >= pack["maxActors"]:
+                            scores[:, position] = np.inf
+                    else:
+                        scores[:, position] = np.inf
                     if not np.isfinite(mean):
                         break
                     x, y = anchors[g][position]

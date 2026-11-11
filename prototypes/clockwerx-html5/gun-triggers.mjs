@@ -46,6 +46,14 @@ export class GunTriggerRuntime {
   this.slots=Array(32).fill(null);this.insertionOrder=[];this.contacts=new Map();
  }
  pointFor(raw){return {x:raw.x+this.frameOrigin.x,y:raw.y+this.frameOrigin.y};}
+ launchBuster(actor,point,velocity){
+  if(actor?.sourceActorType!==5||!integer(actor.frame,0,63)||!integer(actor.speedClass,1,5)||!count(actor.frameReference)||!point||!integer(point.x,-32768,32767)||!integer(point.y,-32768,32767)||!velocity||!integer(velocity.x,-6,6)||!integer(velocity.y,-6,6))throw new TypeError('Source buster clone state required');
+  const slot=this.slots.indexOf(null);
+  if(slot<0)return [{type:'projectile-pool-full',projectileType:1,actor:actor.sourceSlot}];
+  const p={slot,projectileType:1,actor:actor.sourceSlot,group:3900,frame:actor.frame,speedClass:actor.speedClass,reference:actor.frameReference,rawBase:{x:point.x-44-this.frameOrigin.x,y:point.y-43-this.frameOrigin.y},velocity:{...velocity}};
+  this.slots[slot]=p;this.insertionOrder.push(p);
+  return [{type:'projectile-launch',slot,projectileType:1,actor:actor.sourceSlot,frame:p.frame,rawBase:{...p.rawBase},velocity:{...velocity}}];
+ }
  activateColor(color){
   if(!integer(color,0,2))throw new RangeError('Source GN color required');
   const events=[];
@@ -83,13 +91,28 @@ export class GunTriggerRuntime {
   }
   events.push({type:'trigger-contact',actor:actor.sourceSlot,from:old,to:next});return events;
  }
- advance(countNow,{wall=()=>false,door=()=>false}={}){
+ advance(countNow,{wall=()=>false,door=()=>false,classes,busterWall=()=>false,busterDoor=()=>null,shatter=()=>{}}={}){
   if(!count(countNow)||countNow<this.classCount||typeof wall!=='function'||typeof door!=='function')throw new RangeError('Monotonic source class0 count and collision adapters required');
   this.classCount=countNow;
   const events=[],b=this.rawBounds;
   // This is the layer's entry inventory. Call before WA callbacks; their new
   // projectiles become visible immediately and first dispatch next traversal.
   for(const p of [...this.insertionOrder]){
+   if(p.projectileType===1){
+    const count=classes?.[p.speedClass]?.count;
+    if(!Number.isSafeInteger(count))throw new TypeError('Inherited source buster clock required');
+    if(p.reference===count)continue;p.reference=count;p.rawBase.x+=p.velocity.x;p.rawBase.y+=p.velocity.y;
+    const {x,y}=p.rawBase,out=x<b.left||x>b.right||y<b.top||y>b.bottom,w=out?null:busterWall(p);
+    if(out||w){
+     this.slots[p.slot]=null;this.insertionOrder.splice(this.insertionOrder.indexOf(p),1);
+     if(w){events.push({type:'sound',id:33,slot:p.slot});shatter(w,p);}
+     events.push({type:'projectile-dispose',projectileType:1,slot:p.slot,reason:out?'bounds':'wall',rawBase:{...p.rawBase}});
+    }else{
+     const d=busterDoor(p);
+     if(d){if(typeof d.vertical!=='boolean')throw new TypeError('Source door orientation required');p.velocity[d.vertical?'x':'y']*=-1;events.push({type:'sound',id:34,slot:p.slot},{type:'projectile-reflect',slot:p.slot,velocity:{...p.velocity}});}
+    }
+    continue;
+   }
    if(p.reference===countNow)continue;
    p.reference=countNow;p.rawBase.x+=p.velocity.x;p.rawBase.y+=p.velocity.y;
    const {x,y}=p.rawBase;
@@ -105,7 +128,7 @@ export class GunTriggerRuntime {
  humanHit(actor,overlaps){
   if(!actor||![0,6].includes(actor.sourceActorType)||typeof overlaps!=='function')throw new TypeError('Source human projectile collision required');
   if(actor.visible===false)return null;
-  const p=this.slots.find(p=>p&&overlaps(p,actor)===true);
+  const p=this.slots.find(p=>p&&p.projectileType!==1&&overlaps(p,actor)===true);
   return p?{reason:'projectile',sourceReason:16,object:p.slot}:null;
  }
  snapshot(){return structuredClone({guns:this.guns,triggers:this.triggers,slots:this.slots,insertionOrder:this.insertionOrder.map(p=>p.slot),contacts:[...this.contacts],templateReference:this.templateReference,classCount:this.classCount});}

@@ -1,3 +1,4 @@
+import {assertFreeBusterActor,assertFreeBusterBoard} from './free-busters.mjs';
 import {assertMovingDoorGoodieRuntime,assertMovingDoorGoodieActor} from './moving-door-goodies.mjs';
 import {assertMovingBombSpikeWaystationScope,assertMovingBombSpikeWaystationActor} from './moving-bomb-spike-waystation.mjs';
 import {assertStaticSlidingBombGoodieScope,assertStaticSlidingBombGoodieActor} from './static-sliding-bomb-goodies.mjs';
@@ -19,7 +20,8 @@ const sameGrid=(a,b)=>a.row===b.row&&a.column===b.column;
 const sameCompositionInventory=(b,s)=>['connectors','bombs','walls','goodies'].every(k=>b?.[k]===s[k]);
 const grid=g=>{integer(g?.row,0,7);integer(g?.column,0,10);};
 const human=a=>a.sourceActorType===0||a.sourceActorType===6;
-function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowMovingDoorGoodies=false){
+function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowMovingDoorGoodies=false,allowFreeBusters=false){
+ if(allowFreeBusters){assertFreeBusterActor(a);return a;}
  if(allowMovingDoorGoodies)assertMovingDoorGoodieActor(a);
  if(typeof allowMovingBombSpikeWaystation!=='boolean')throw new Error('Literal moving BO/SPI/WY actor capability required');
  if(allowMovingBombSpikeWaystation)assertMovingBombSpikeWaystationActor(a);
@@ -42,8 +44,9 @@ function staticDot(d,allowObjectInteractions=false){
 /** Call with the mode-filtered inventory before wiring a board. These are
  * normalized declarations, not a raw-level decoder. Empty absent sections
  * are permitted; future active combinations fail closed. */
-export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[],walls=[],allowMovingBombs=false,goodies=[],spikes=[],origin,sourceProvenance,allowImportedGoodie169=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope}={}){
+export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[],walls=[],allowMovingBombs=false,goodies=[],spikes=[],origin,sourceProvenance,allowImportedGoodie169=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope,allowFreeBusters=false,freeBusterScope}={}){
  if(mode!=='Child')throw new Error('Only Child bomb scope is supported');
+ if(allowFreeBusters){if(freeBusterScope?.dots!==dots||freeBusterScope.bombs!==bombs||freeBusterScope.goodies!==goodies)throw Error('Matching free-buster inventory required');return assertFreeBusterBoard(freeBusterScope);}
  if(allowMovingBombSpikeWaystation){if(allowMovingBombSpikeWaystation!==true||allowMovingBombs||allowStaticSlidingBombGoodies||allowSlidingBombs||allowSlidingBombCheckpoints||allowMovingOilElevators||!allowObjectInteractions||movingBombSpikeWaystationScope?.dots!==dots||!['bombs','goodies','spikes','walls','connectors'].every(k=>movingBombSpikeWaystationScope[k]===({bombs,goodies,spikes,walls,connectors})[k]))throw new Error('Separate moving BO/SPI/WY runtime inventory required');return assertMovingBombSpikeWaystationScope(movingBombSpikeWaystationScope,{actors});}
  if(allowStaticSlidingBombGoodies){if(allowStaticSlidingBombGoodies!==true||allowSlidingBombs||allowSlidingBombCheckpoints||allowMovingBombs||allowMovingOilElevators||!allowObjectInteractions||staticSlidingBombGoodieScope?.dots!==dots||!sameCompositionInventory(staticSlidingBombGoodieScope,{connectors,bombs,walls,goodies}))throw new Error('Separate static EX/BO/GO runtime inventory required');return assertStaticSlidingBombGoodieScope(staticSlidingBombGoodieScope,{actors});}
 
@@ -141,10 +144,10 @@ export function bombStationaryDots(dots,origin,onChange,options){
 /** WABombed Child deadline is metadata for ordinary enemies, not a request to
  * resurrect them. Source WA reset owns restoring visibility. Death dispatch
  * does not stop the remaining source-slot scan. */
-export function bombActors(actors,{guestTick,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false}){
+export function bombActors(actors,{guestTick,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowFreeBusters=false}){
  integer(guestTick);fn(collides,'actor outline collision');fn(onDeath,'human death');fn(onHidden,'actor visibility');
  if(!Array.isArray(actors))throw new TypeError('Live source-slot actor array required');
- let previous=-1;for(const a of actors){actor(a,allowObjectInteractions,allowSlidingBombs,allowSlidingBombs,allowMovingBombs,allowStaticSlidingBombGoodies,allowMovingBombSpikeWaystation,allowSlidingBombOrbitals);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
+ let previous=-1;for(const a of actors){actor(a,allowObjectInteractions,allowSlidingBombs,allowSlidingBombs,allowMovingBombs,allowStaticSlidingBombGoodies,allowMovingBombSpikeWaystation,allowSlidingBombOrbitals,false,allowFreeBusters);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
  const hits=[];
  for(const a of actors){
   if(a.visible===false||!sync(collides,a))continue;
@@ -195,12 +198,13 @@ export class BombRuntime {
    if((scope.allowSlidingGoodies||scope.allowSlidingOilGoodieRings)&&scope.activeSections?.GO!==goodies.length)throw new Error('Explicit matching GO inventory required');
   }else if(scopeMode==='bombs'){
    if(scope?.allowSlidingBombs&&goodies.length)throw new Error('BO/static EX core does not admit GO');
-   if(scope)assertBombRuntimeScope({...scope,bombs,...((scope.allowMovingBombs||scope.allowStaticSlidingBombGoodies)?{goodies}:{})});
+   if(scope)assertBombRuntimeScope({...scope,bombs,...((scope.allowFreeBusters||scope.allowMovingBombs||scope.allowStaticSlidingBombGoodies)?{goodies}:{})});
   }else throw new Error('Unknown BO/GO scope');
   if(!Array.isArray(goodies)||goodies.length>BOMB_LIMITS.goodies)throw new RangeError('GO capacity exceeded after mode filtering');
   this.movingBombSpikeWaystation=scopeMode==='bombs'&&scope?.allowMovingBombSpikeWaystation===true;
   this.staticSlidingBombGoodies=scopeMode==='bombs'&&scope?.allowStaticSlidingBombGoodies===true;
   this.movingBombs=scopeMode==='bombs'&&scope?.allowMovingBombs===true;
+  this.freeBusters=scopeMode==='bombs'&&scope?.allowFreeBusters===true;
   this.movingDoorGoodies=scopeMode==='goodies'&&scope?.allowMovingDoorGoodies===true;
   this.slidingBombs=scopeMode==='bombs'&&scope?.allowSlidingBombs===true;
   this.slidingGoodies=scopeMode==='goodies'&&(scope?.allowSlidingGoodies===true||scope?.allowSlidingOilGoodieRings===true);
@@ -220,10 +224,13 @@ export class BombRuntime {
    return {index,bombIndex:b.index,grid:{row:b.row,column:b.column},frame:first,first,last:first+2,visible:true,count:this.clock('match'),group:1600,layer:3};
   });
   this.goodies=goodies.map((g,index)=>{
-   grid(g);integer(g.initialFrame??0,0,65535);
+   if(this.freeBusters){
+    const raw=g.sourceImport?.rawHex,w=typeof raw==='string'&&/^[0-9a-f]{20}$/.test(raw)?Array.from({length:5},(_,i)=>parseInt(raw.slice(4*i,4*i+4),16)):null;
+    if(!w||g.row!==w[0]||g.column!==w[1]||w[2]!==169||g.sourceInitialFrameRequest!==169||g.sourceInitialFrameIgnored!==true||g.initialFrame!==0)throw Error('Original off-board GO169 declaration required');
+   }else grid(g);integer(g.initialFrame??0,0,65535);
    if(g.activationMask!==undefined&&!(integer(g.activationMask,0,0xffffffff)&1))throw new Error('Filter GO mode masks before constructing this runtime');
    // SUSetFrameIndex ignores invalid requests, leaving the clone's frame 0.
-   return {index,...((this.movingBombs||this.movingBombSpikeWaystation)&&g.sourceInitialFrameRequest!==undefined?{sourceInitialFrameRequest:g.sourceInitialFrameRequest,sourceInitialFrameIgnored:g.sourceInitialFrameIgnored,sourceImport:copy(g.sourceImport),createdFrame:g.initialFrame}:{}),grid:{row:g.row,column:g.column},frame:(g.initialFrame??0)<17?(g.initialFrame??0):0,visible:true,collected:false,count:this.clock('goodie'),group:1900,layer:15};
+   return {index,...((this.freeBusters||this.movingBombs||this.movingBombSpikeWaystation)&&g.sourceInitialFrameRequest!==undefined?{sourceInitialFrameRequest:g.sourceInitialFrameRequest,sourceInitialFrameIgnored:g.sourceInitialFrameIgnored,sourceImport:copy(g.sourceImport),createdFrame:g.initialFrame}:{}),grid:{row:g.row,column:g.column},frame:(g.initialFrame??0)<17?(g.initialFrame??0):0,visible:true,collected:false,count:this.clock('goodie'),group:1900,layer:15};
   });
   this.sparks=Array.from({length:17},(_,index)=>({index,visible:false,inserted:false,clockAttached:false,frame:0,group:1500,layer:3}));
   this.explosions=createExplosionPool();this.generation=0;this.frozen=false;
@@ -250,7 +257,7 @@ export class BombRuntime {
   const events=[];this.emit(events,{type:'frame',target,index,frame:s.frame});return events;
  }
  ignite(bombIndex,who){
-  actor(who,false,this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies);const b=this.item(this.bombs,bombIndex),events=[];
+  actor(who,false,this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters);const b=this.item(this.bombs,bombIndex),events=[];
   if(this.frozen||b.role!=='match'||!this.armed[bombIndex]||(!human(who)&&!b.flags))return events;
   this.activateSpark(bombIndex,[4,8,1,2][b.kind-10],events);
   for(const s of this.matches)if(sameGrid(s.grid,b)){s.visible=false;this.emit(events,{type:'hide',target:'LI',index:s.index});}
@@ -320,24 +327,24 @@ export class BombRuntime {
   return events;
  }
  checkMatch(who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies);if(this.frozen)return [];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters);if(this.frozen)return [];
   const s=this.matches.find(s=>s.visible&&sync(this.adapters.collides,'LI',s,who));
   return s?this.ignite(s.bombIndex,who):[];
  }
  checkSpark(who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies);if(this.frozen||!human(who))return [];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters);if(this.frozen||!human(who))return [];
   const s=this.sparks.find(s=>s.visible&&s.travelling&&sync(this.adapters.collides,'SR',s,who)),events=[];
   if(s)this.emit(events,{type:'death',reason:15,actor:who,index:s.index});return events;
  }
  checkGoodie(who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies);if(this.frozen||!human(who))return [];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters);if(this.frozen||!human(who))return [];
   // GO collision ignores collected latch: first still-visible collected GO
   // blocks later overlapped GO until its flourish callback hides it.
   const s=this.goodies.find(s=>s.visible&&sync(this.adapters.collides,'GO',s,who));
   return s?this.collectGoodie(s.index,who):[];
  }
  collectGoodie(index,who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies);const s=this.item(this.goodies,index),events=[];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters);const s=this.item(this.goodies,index),events=[];
   if(this.frozen||!human(who)||s.collected)return events;
   const generation=this.generation;
   this.emit(events,{type:'sound',id:22});

@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 71,
-  "currentAction": "70 Descent accepted/installed. Lossless fast-delta observer qualified; use explicit flag for remaining diagnostics. Continue Saga71 from earned-through70 at434000.",
+  "currentAction": "Stopped for user computer restart. Through70 Descent installed; Saga71 provisional source55v2/native cold closed, not accepted. Resume restart-checkpoint-2026-11-10.md.",
   "levels": [
     {
       "ordinal": 1,
@@ -6026,7 +6026,7 @@
       "menuTitle": "Saga",
       "resourceTitle": "Saga",
       "sha256": "bc2a6d0f711e1807992b16b482f13dc22fcd5dcff334027146ac02dbaffcbbf1",
-      "status": "queued",
+      "status": "provisional-source-original-cold-only-not-accepted",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -6088,7 +6088,14 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "restartCheckpoint": "restart-checkpoint-2026-11-10.md",
+      "sourceCommit": "aaaebdd0",
+      "sourceFreezeSHA256": "73881071887817d9fe66ee3dee36729bab11b28b1d27daf122b157113c36eeca",
+      "actualUpdates": 8000,
+      "actualConstructors": 2,
+      "nativeColdClosed": true,
+      "installed": false
     },
     {
       "ordinal": 72,
@@ -8338,12 +8345,14 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root: Mishmash69 original cold and BO/EX/checkpoint/orbital source composition",
+    "A": "closed",
     "B": "closed",
     "C": "closed",
     "D": "closed"
   },
   "handoff": "session-handoff-2026-11-10.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",
-  "fasterValidationWorkflow": "faster-validation-workflow.md"
+  "fasterValidationWorkflow": "faster-validation-workflow.md",
+  "sessionState": "stopped-for-user-computer-restart",
+  "restartCheckpoint": "restart-checkpoint-2026-11-10.md"
 }

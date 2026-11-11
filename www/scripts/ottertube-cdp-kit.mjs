@@ -85,10 +85,28 @@ export function locate(image, test, least = 12) {
 }
 
 /**
+ * A standard game controller behind navigator.getGamepads, for a check to press: its state is read
+ * from <html data-test-pad='{"b":[0,12],"a":[0,0,0,0]}'> (pressed button indexes, axes). No
+ * attribute, no controller. "refused" is a frame its parent has not allowed the gamepad feature.
+ */
+export const PAD_STUB = `navigator.getGamepads = () => {
+  const raw = document.documentElement.dataset.testPad;
+  if (!raw) return [];
+  let state; try { state = JSON.parse(raw); } catch { return []; }
+  if (state === "refused") throw new DOMException("Access to the feature \\"gamepad\\" is disallowed by permissions policy.", "SecurityError");
+  const pressed = (index) => (state.b || []).includes(index);
+  return [{ id: "Test pad (STANDARD GAMEPAD)", index: 0, connected: true, mapping: "standard", timestamp: performance.now(),
+    buttons: Array.from({ length: 17 }, (_, index) => ({ pressed: pressed(index), touched: pressed(index), value: pressed(index) ? 1 : 0 })),
+    axes: state.a || [0, 0, 0, 0] }];
+};`;
+
+/**
  * Start the bundle server and the fake host, and return what a check needs.
  * env: OTTERTUBE_LINK_DIST, OTTERTUBE_LINK_OUT, CHROME_BIN, OTTERTUBE_LINK_GAME_PORT, OTTERTUBE_LINK_HOST_PORT, PYTHON.
  */
 export async function startStage({ serverArgs = [] } = {}) {
+  // A games file to use in place of the bundle's own (the page takes it on a loopback host).
+  if (process.env.OTTERTUBE_LINK_DEV_GAMES) serverArgs = [...serverArgs, "--dev-games", process.env.OTTERTUBE_LINK_DEV_GAMES];
   const dist = process.env.OTTERTUBE_LINK_DIST;
   const outDir = process.env.OTTERTUBE_LINK_OUT;
   if (!dist || !outDir) throw new Error("Set OTTERTUBE_LINK_DIST and OTTERTUBE_LINK_OUT");
@@ -143,6 +161,7 @@ export async function startStage({ serverArgs = [] } = {}) {
     const page = connect(target.webSocketDebuggerUrl);
     await page.ready;
     await page.send("Page.enable");
+    await page.send("Page.addScriptToEvaluateOnNewDocument", { source: PAD_STUB });
     let guest = [640, 480];
 
     async function evalIn(contextId, expression) {
@@ -216,6 +235,31 @@ export async function startStage({ serverArgs = [] } = {}) {
     const held = (subject) => host(`fakeHost.held(${JSON.stringify(subject)})`);
     const saveState = () => game(`(() => { const d = document.querySelector(".app--ottertube").dataset;
       return { counter: Number(d.saveCounter), stored: Number(d.saveStored), acknowledged: Number(d.saveAcknowledged), host: d.saveHost }; })()`);
+    /** What the page says of itself: the screens it recognises, the script running, the last one's outcome, the keys held down. */
+    const kiosk = () => game(`(() => { const d = document.querySelector(".app--ottertube")?.dataset ?? {};
+      return { screens: (d.kioskScreen ?? "").split(" ").filter(Boolean), busy: d.kioskBusy ?? null, script: d.kioskScript ?? null, pad: d.kioskPad ?? null,
+        held: document.querySelector(".mobile-controls")?.dataset.heldKeys ?? "",
+        actions: [...document.querySelectorAll(".kiosk-button--action")].filter((e) => getComputedStyle(e).display !== "none").map((e) => e.textContent.trim()) }; })()`);
+    /** Wait until the page recognises a screen (or, with `holds` false, no longer does). */
+    const waitScreen = (name, timeoutMs = 30_000, holds = true) =>
+      waitFor(`screen ${holds ? "" : "not "}${name}`, async () => (await kiosk()).screens.includes(name) === holds, timeoutMs, 100);
+    /** Do something that runs a script, and wait for the script to end: its outcome, such as "done". */
+    async function scriptRun(name, trigger, timeoutMs = 40_000) {
+      await game(`document.querySelector(".app--ottertube").removeAttribute("data-kiosk-script")`);
+      await trigger();
+      const outcome = await waitFor(`script ${name}`, async () => { const k = await kiosk(); return k.busy === null && k.script && k.script.startsWith(name + ":") ? k.script : null; }, timeoutMs, 100);
+      return outcome.slice(name.length + 1);
+    }
+    /** The controller's state: pressed button indexes and axes; null unplugs it. */
+    const pad = (state) => game(state === null ? `delete document.documentElement.dataset.testPad`
+      : `document.documentElement.dataset.testPad = ${JSON.stringify(JSON.stringify(state))}`);
+    /** Press and let go of controller buttons. */
+    async function padPress(buttons, holdMs = 200, axes) {
+      await pad({ b: buttons, a: axes ?? [0, 0, 0, 0] });
+      await sleep(holdMs);
+      await pad({ b: [], a: [0, 0, 0, 0] });
+      await sleep(120);
+    }
 
     /** Open a game for a subject in the fake host, filling the window, and wait until it runs. */
     async function open(route, gameId, subject, { query = "", prepare, screen = [640, 480] } = {}) {
@@ -231,6 +275,7 @@ export async function startStage({ serverArgs = [] } = {}) {
 
     return {
       page, host, game, rect, middle, touch, tap, drag, press, picture, screenshot, events, held, saveState, open,
+      kiosk, waitScreen, scriptRun, pad, padPress,
       /** Touch events from here on, as a touch screen sends them. */
       touchOn: () => page.send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 }),
       /** Back to a plain desktop with a mouse (which is what the media queries then report). */

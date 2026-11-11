@@ -33,6 +33,13 @@ class Handler(LibraryHandler):
         super().end_headers()
 
     def do_GET(self):
+        if urlsplit(self.path).path == '/ottertube-games.dev.json' and self.server.dev_games:
+            # Tests only: the page takes this in place of its compiled-in game data on a loopback host.
+            body = Path(self.server.dev_games).read_bytes()
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-Length', str(len(body)))
+            self.end_headers(); self.wfile.write(body); return
         if urlsplit(self.path).path == '/_macgames/health':
             body = json.dumps({'app': 'systemless-ottertube-link', 'pid': os.getpid(),
                                'directory': str(Path(self.directory).resolve())}).encode()
@@ -53,6 +60,9 @@ if __name__ == '__main__':
     parser.add_argument('--port', type=int, default=8097)
     parser.add_argument('--bind', default='127.0.0.1')
     parser.add_argument('--verbose', action='store_true')
+    parser.add_argument('--dev-games', type=Path, metavar='JSON',
+        help='Tests only: serve this file as /ottertube-games.dev.json, which the page uses on a loopback host '
+             'in place of the game data it was built with')
     parser.add_argument('--also-frame-ancestor', action='append', default=[], metavar='ORIGIN',
         help='Tests only: let this origin frame the pages too, although the bundle does not list it, '
              'to show that the page ignores a parent that is not OtterTube')
@@ -63,6 +73,7 @@ if __name__ == '__main__':
     server.library_routes = routes
     server.frame_policy = ' '.join([policy, *args.also_frame_ancestor])
     server.verbose = args.verbose
+    server.dev_games = args.dev_games
     print(f'OtterTube add-on bundle at http://{args.bind}:{server.server_address[1]}/ ({policy})', flush=True)
     try:
         server.serve_forever()

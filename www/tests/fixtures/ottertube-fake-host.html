@@ -15,6 +15,7 @@
   Optional: mode=host|self|none (default host), autostart=0 (frame nothing until fakeHost.open()),
   silent=1 (never answer `ready`, as when the page is framed by something that is not OtterTube),
   refuse=rate:2 (answer the first 2 checkpoints that would be taken with `failed: rate`; any reason),
+  keep=1 (note an `exit` but leave the frame up, so a test can look at the page after it asked to leave),
   fill=1 (no header or log: the frame is the whole window, as an add-on is in OtterTube),
   unsolicited=1 (post a well-formed `init` at the frame without being asked, several times: what a
   parent that is not on the page's list of origins could do).
@@ -146,7 +147,7 @@
     }
     if (m.type === 'exit' && keysAre(m, [])) {
       note({ dir: 'in ', type: 'exit' });
-      leave('the add-on asked to exit');
+      if (params.get('keep') !== '1') leave('the add-on asked to exit');
       return;
     }
     if (m.type === 'checkpoint') {

@@ -109,10 +109,10 @@ before building the next earned fixture.
 python scripts/clockwerx-diagnostics/replay/compile-native-rehearsal.py "<entry.json>" "<literal.json>" "<new-plan-directory>" --entry-actions 14 --prefix 686
 ```
 
-`supervise-native.ps1` owns one original emulator process for either a cold
-capture or a checked-route rehearsal. Its private authorization uses
+`supervise-native.ps1` owns one original emulator process for a cold capture,
+contact diagnostic, or checked-route rehearsal. Its private authorization uses
 `clockwerx-original-native-authorization-v1`, purpose
-`clockwerx-bounded-original-capture-v1`, and mode `cold` or `rehearsal`.
+`clockwerx-bounded-original-capture-v1`, and mode `cold`, `diagnostic`, or `rehearsal`.
 It pins the executable, preserved image, earned fixture and fixture review,
 scenario, entry source and capture plan, then verifies closure, exact capture
 names, unchanged images and the frontend tick budget. Rehearsal also requires

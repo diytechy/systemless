@@ -1,5 +1,7 @@
 # ClockWerx restart handoff - through70, Saga in progress
 
+**Continued2026-11-11:** Saga71 is now accepted/installed. Use the [new handoff](session-handoff-2026-11-11.md); the restart state below is historical.
+
 Stopped cleanly at the user's request for a computer restart on2026-11-10. Resume from [current action](current-action.md), [restart checkpoint](restart-checkpoint-2026-11-10.md) and [queue](queue.json), branch `SVG-Port`. Continue the authorized local through100 conversion without per-level permission. No push/upload/deployment.
 
 Descent70 remains accepted and installed. Saga71 is NOT installed or accepted. Descent original/browser goal9,000,84 exact clear route actor observations, exact witness/fresh streams, earned-through70 fixture79f4aa3c and full rollback are preserved. Fast-delta3995261b is qualified and should be explicitly selected for remaining diagnostics; legacy595 stays unchanged/default.

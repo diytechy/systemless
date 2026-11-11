@@ -1,3 +1,4 @@
+import {assertSlowdownWaystationBoard} from './slowdown-waystation.mjs';
 import {assertMovingProtectedPassageBoard} from './moving-protected-passage.mjs';
 import {assertMovingGoalOrdinaryBoard} from './moving-goal-ordinary.mjs';
 import {assertSlowdownClass4Board} from './slowdown-class4.mjs';
@@ -84,7 +85,7 @@ export class SourceRound extends MovementGame {
   if(board.movingTubesRules)assertMovingTubesBoard(board);
   if(board.movingProgrammedBusterRules)assertMovingProgrammedBusterBoard(board,{outlines,dotOutlines,bombOutlines,elevatorOutlines});
   if(board.movingCheckpointControlRules)assertMovingCheckpointControlBoard(board,{outlines,dotOutlines,elevatorOutlines});
-  if(board.staticSlowdownRules)(board.slowdownClass4Rules?assertSlowdownClass4Board:board.slowdownWallRules?assertSlowdownWallBoard:assertStaticSlowdownBoard)(board,{outlines,dotOutlines});
+  if(board.staticSlowdownRules)(board.slowdownWaystationRules?assertSlowdownWaystationBoard:board.slowdownClass4Rules?assertSlowdownClass4Board:board.slowdownWallRules?assertSlowdownWallBoard:assertStaticSlowdownBoard)(board,{outlines,dotOutlines});
   if(board.movingProtectedPassageRules)assertMovingProtectedPassageBoard(board,{outlines,dotOutlines,doorOutlines});
   if(board.movingGoalOrdinaryRules)assertMovingGoalOrdinaryBoard(board,{outlines,dotOutlines});
   if(board.movingWaystationRules)assertMovingWaystationBoard(board,{outlines,dotOutlines});

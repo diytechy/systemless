@@ -48,3 +48,32 @@ test('WA trigger birth follows PR layer; a later bullet callback can kill, and r
  assert.equal(game.gunTriggers.classCount,observed);assert.equal(game.gunTriggers.templateReference,0);
  assert.equal(game.gunTriggers.slots.filter(Boolean).length,0);assert.equal(game.gunTriggers.triggers[0].occupancy,0);assert.equal(game.gunTriggers.contacts.size,0);
 });
+
+test('multi-gun wall scope clips a translated bullet against a placed wall outline',()=>{
+ const level=fixture();
+ const actor=(column,type,clock=0)=>({gridPosition:{row:0,column},actorTypeRaw:type,activationMaskRaw:15,
+  initialFrameHalfIndexRaw:0,programReferenceRaw:clock?0:-1,version12ByteRaw:clock?0:1,
+  rawWords:[0,column,type,0,1,clock?0:65535,1,clock,0,15,clock?0:256]});
+ level.cells=[...Array.from({length:6},(_,i)=>cell(0,i)),cell(1,6,5)];
+ level.blocks=[
+  wordBlock('GN',[[2,3,3,0,8,0,15],[4,4,3,0,1,0,15],[6,8,3,0,8,0,15]]),
+  wordBlock('TR',[[6,3,1,0,0,15]]),wordBlock('WL',[[256,3,2,0,2,0]]),
+  wordBlock('SP',[[7,1,0,2,0,15],[7,2,0,2,0,15]]),
+  {kind:'PU',count:1,records:[{byteLength:10,rawWords:[1,1,2,0,12]}]},
+  {kind:'WP',count:1,records:[{text:'n'}]},
+  {kind:'WA',count:7,records:[actor(0,0),actor(0,6),...Array.from({length:5},(_,i)=>actor(i+1,1,i?1:3))]},
+ ];
+ const opts={...recipe,allowElevators:false,allowGunTriggerWalls:true,allowClass3Enemies:true,allowInactiveSpikes:true};
+ assert.throws(()=>buildDecodedBoard(level,{...opts,allowGunTriggerWalls:false}),/GN\/TR/);
+ const board=buildDecodedBoard(level,opts);
+ const game=new SourceRound(board,{...profiles,outlines:{groups:{...profiles.outlines.groups,
+  800:frames(1,rectangle(-10,13)),200:frames(4,{...rectangle(0,0),collidable:false})}},
+  gunOutlines:{groups:{...profiles.gunOutlines.groups,4200:frames(3,rectangle(0,0))}}});
+ const births=game.gunTriggers.activateColor(0).filter(e=>e.type==='projectile-launch');
+ assert.deepEqual(births.map(e=>e.bit),[8,1,8]);
+ assert.equal(game.projectileHitsWall(game.gunTriggers.slots[0]),false);
+ for(let i=0;i<30&&game.gunTriggers.slots[0];i++)game.update(1/120,{});
+ assert.deepEqual(game.events.filter(e=>e.type==='projectile-dispose').map(e=>e.gunTrigger.reason),['wall']);
+ assert.ok(game.events.some(e=>e.type==='gun-sound'&&e.gunTrigger.id===31));
+ assert.equal(game.gunTriggers.slots.filter(Boolean).length,2);
+});

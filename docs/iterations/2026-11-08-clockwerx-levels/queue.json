@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 66,
-  "currentAction": "65 Slipstream bounded Child accepted and active on Source49. Both engines complete the aligned route for 1000. All 63 earlier retained goals match. Continue Gunrunner66 from earned-through65 at 406000.",
+  "currentOrdinal": 67,
+  "currentAction": "66 Gunrunner accepted and active on Source50. Both engines complete for 1000; 64 earlier retained routes match. Continue Chatter67 from earned-through66 at 407000.",
   "levels": [
     {
       "ordinal": 1,
@@ -5505,10 +5505,15 @@
       "menuTitle": "Gunrunner",
       "resourceTitle": "Gunrunner",
       "sha256": "b07d131108dfdcc27b55e51aa2f6f6cd2a8d2bb525bd1f840538af1867c745a6",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "gunrunner66-native-cold01/closure.json",
+        "gunrunner66-native-goal01/root-original-goal-review.json",
+        "gunrunner66-native-goal01/root-native-comparison.json",
+        "gunrunner66-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5536,7 +5541,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -5565,6 +5570,29 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "review": "gunrunner-review.md",
+      "functionalUpdatesUsed": 43040,
+      "functionalUpdatesRemaining": 206960,
+      "sourceTests": 432,
+      "retainedSweep": {
+        "matchedGoals": 64,
+        "constructionOnly": 1,
+        "pairedUpdates": 516110,
+        "checkpoints": 7817,
+        "seconds": 86.28,
+        "sha256": "6c0b72d8566bf37b29ce3a860a83faec5b80d5f20e6f6881d1f3ed89cdf7042b"
+      },
+      "deliveryAcceptance": {
+        "score": 1000,
+        "updates": 7008,
+        "transfers": 29,
+        "nextOrdinal": 67,
+        "nativeCampaignTotal": 407000,
+        "rootAcceptanceSHA256": "28e1d1e238dabc1dbd85922731e84abab6649416ae03ffbd6d8de2e7e72c53fc",
+        "activationSHA256": "792147f55c1b247632c3cbb59438c0657b2ca9e0f543b5d23b81da442103bcdc",
+        "rootProofSHA256": "9b27a6ee399ebea4a6c6758b8b6eab45a8a87dbc0fb708875de31b071550ea47",
+        "earnedThrough66FixtureSHA256": "42abacb8f34af4d86a7d22c910fd8a87fbefd2d4faeeb1aa9d7fd6f594857614"
       }
     },
     {
@@ -8184,7 +8212,7 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root: Gunrunner66 original cold and source composition",
+    "A": "Root: Chatter67 original cold and source composition",
     "B": "closed",
     "C": "closed",
     "D": "closed"

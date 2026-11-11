@@ -109,6 +109,26 @@ before building the next earned fixture.
 python scripts/clockwerx-diagnostics/replay/compile-native-rehearsal.py "<entry.json>" "<literal.json>" "<new-plan-directory>" --entry-actions 14 --prefix 686
 ```
 
+`supervise-native.ps1` owns one original emulator process for either a cold
+capture or a checked-route rehearsal. Its private authorization uses
+`clockwerx-original-native-authorization-v1`, purpose
+`clockwerx-bounded-original-capture-v1`, and mode `cold` or `rehearsal`.
+It pins the executable, preserved image, earned fixture and fixture review,
+scenario, entry source and capture plan, then verifies closure, exact capture
+names, unchanged images and the frontend tick budget. Rehearsal also requires
+a closed actual candidate and input sidecar. It does not view captures or
+retry. `-ValidateOnly` checks the prepared pins and scenario without launching
+a process. Keep the source-only original fitter frozen before pixel reads.
+
+`compare-native-actors.py` joins the independently saved original fits to a
+closed candidate's source lineage at a declared fixed prefix. It retains
+unclear observations and chooses the minimum mismatch among assignments within
+each artwork group; it does not infer actor identity or native cadence.
+
+```sh
+python scripts/clockwerx-diagnostics/replay/compare-native-actors.py "<fits.json>" "<candidate/case>" "<new-comparison.json>" --prefix 696
+```
+
 The supervisor pins the tools, creates the output, records its hidden owned
 child, and terminates only that child on timeout. The runner validates remaining
 pins before importing the engine. Baseline streams use 64 KiB reads and a 16 MiB

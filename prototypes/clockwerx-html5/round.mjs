@@ -35,7 +35,7 @@ import {assertMovingDoorCheckpointBoard} from './moving-door-checkpoint.mjs';
 import {assertMovingTubesBoard} from './moving-tubes.mjs';
 import {assertGunTriggerSlidingBoard} from './gun-trigger-sliding.mjs';
 import {GunTriggerRuntime} from './gun-triggers.mjs';
-import {assertGunTriggerChildBoard} from './gun-trigger-child.mjs';
+import {assertGunTriggerChildBoard,assertGunTriggerWallBoard} from './gun-trigger-child.mjs';
 
 export const sourceFrame=angle=>Math.floor(angle/TAU*64+1e-9)&63;
 
@@ -64,7 +64,8 @@ export class SourceRound extends MovementGame {
   if(board.elevatorOilRiderRules)assertElevatorOilRiderBoard(board,elevatorOutlines);
   if(board.movingDoorCheckpointRules)assertMovingDoorCheckpointBoard(board,doorOutlines);
   if(board.movingTubesRules)assertMovingTubesBoard(board);
-  if(board.gunTriggerSlidingRules)assertGunTriggerSlidingBoard(board,gunOutlines,elevatorOutlines);
+  if(board.gunTriggerWallRules)assertGunTriggerWallBoard(board,gunOutlines);
+  else if(board.gunTriggerSlidingRules)assertGunTriggerSlidingBoard(board,gunOutlines,elevatorOutlines);
   else if(board.gunTriggerProjectileRules)assertGunTriggerChildBoard(board,gunOutlines,elevatorOutlines);
   super(board);this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask&&!board.slidingConnectorRules||d.motion&&d.motion!=='static'&&!(board.elevatorRules&&d.motion==='up-down')&&!(board.movingDotRules&&d.motion==='moving-program'))))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
@@ -371,6 +372,10 @@ export class SourceRound extends MovementGame {
   const actor=this.collider(hand),g=this.gunTriggers;
   this.emitGunTriggerEvents(g.contact(hand,t=>outlineCollision(actor,worldOutline(this.gunOutlines,3300,t.frame,g.pointFor(t.rawBase)))),hand);
  }
+ projectileHitsWall(p){
+  const shape=worldOutline(this.gunOutlines,4200,p.frame,this.gunTriggers.pointFor(p.rawBase));
+  return this.board.walls.some(w=>w.visible!==false&&outlineCollision(shape,worldOutline(this.outlines,800,w.frame,w)));
+ }
  projectileCollision(){
   const actor=this.collider(this.player),g=this.gunTriggers;
   return g.humanHit(this.player,p=>outlineCollision(actor,worldOutline(this.gunOutlines,4200,p.frame,g.pointFor(p.rawBase))));
@@ -595,7 +600,7 @@ export class SourceRound extends MovementGame {
   this.bombScene?.processExplosions();
   // The original logical PR9 layer precedes both WA layers in the universe
   // list. WA entrants append later, after this traversal has passed PR9.
-  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count),this.player);
+  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.gunTriggerWallRules?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
   if(!this.death)for(const enemy of this.enemies){
    if(enemy.sourceActorType!==4&&!this.board.movingBombSpikeWaystationRules&&!this.board.slidingBombRules&&!this.board.staticSlidingBombGoodieRules&&!this.board.movingBombRules)this.bombScene?.runtime.checkMatch(enemy);
    if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}

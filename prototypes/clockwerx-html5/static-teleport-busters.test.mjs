@@ -39,7 +39,7 @@ test('static teleport buster recipe is explicit and excludes borrowed moving/EX/
  assert.equal(assertStaticTeleportBusterRecipe(recipe),true);for(const k of Object.keys(recipe))assert.throws(()=>assertStaticTeleportBusterRecipe({...recipe,[k]:false}));for(const k of ['allowMovingDots','allowSlidingConnectors','allowGunsTriggers','allowElevators'])assert.throws(()=>assertStaticTeleportBusterRecipe({...recipe,[k]:true}));
 });
 test('static source admits free and bounce packs, paired HY and an active ordinary WY',()=>{
- assert.equal(assertStaticTeleportBusterSource(fixture()),true);const mutators=[s=>s.blocks[1].records[0].text='ns',s=>s.blocks[0].records[3].rawWords[7]=3,s=>s.cells[0].flagsRaw=0x101,s=>s.blocks.find(b=>b.kind==='HY').records[1].rawWords[2]=2,s=>s.blocks.find(b=>b.kind==='WY').records[0].rawWords[5]=14,s=>s.blocks.find(b=>b.kind==='BO').records[0].rawWords[3]=256];
+ assert.equal(assertStaticTeleportBusterSource(fixture()),true);const inactive=fixture();inactive.blocks.find(b=>b.kind==='SP').records[0].rawWords[5]=12;const b=buildDecodedBoard(inactive,{...recipe,angularSpeed:1});assert.equal(b.spikes.length,0);assert.ok(new SourceRound(b,profiles));const mutators=[s=>s.blocks[1].records[0].text='ns',s=>s.blocks[0].records[3].rawWords[7]=3,s=>s.cells[0].flagsRaw=0x101,s=>s.blocks.find(b=>b.kind==='HY').records[1].rawWords[2]=2,s=>s.blocks.find(b=>b.kind==='WY').records[0].rawWords[5]=14,s=>s.blocks.find(b=>b.kind==='BO').records[0].rawWords[3]=256];
  for(const change of mutators){const s=fixture();change(s);assert.throws(()=>assertStaticTeleportBusterSource(s));}
 });
 test('programmed type5 admission requires fixed wall-free class1 n/b with a valid source PC',()=>{

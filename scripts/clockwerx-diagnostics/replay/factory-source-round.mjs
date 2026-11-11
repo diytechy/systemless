@@ -9,6 +9,11 @@ export async function sourceRoundFactory(sourcePath,config){
  const decoded=read(config.decoded),options=read(config.options),profiles=Object.fromEntries(Object.entries(config.profiles).map(([name,pin])=>[name,read(pin)]));
  if(Object.keys(profiles).some(k=>!['outlines','dotOutlines','bombOutlines','doorOutlines','oilOutlines','elevatorOutlines','gunOutlines'].includes(k)))throw Error('Unknown source profile key');
  if(config.bombRoutes)profiles.bombRoutes=read(config.bombRoutes);
+ if(config.oilBounds!==undefined){
+  const b=config.oilBounds;
+  if(!b||Object.keys(b).length!==4||!['left','top','right','bottom'].every(k=>Number.isInteger(b[k]))||b.left>=b.right||b.top>=b.bottom)throw Error('Explicit source Oil bounds required');
+  profiles.oilBounds={...b};
+ }
  const reset=SourceRound.prototype.reset;let constructing=false,installed=false;
  const factory=controls=>{
   if(installed)throw Error('Factory may construct once only');installed=true;

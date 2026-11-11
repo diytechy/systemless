@@ -4,7 +4,7 @@ import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
 import {dotBodyFrame} from './dots.mjs';
 import {assertSlidingOilScope} from './sliding-oil.mjs';
 import {createPuddleState,triggerPuddle,observePuddle,createDropletState,
- dropletArrived,dropletHumanGrab,dropletDirection,advanceDroplet,oilOutline,
+ dropletArrived,dropletHumanGrab,dropletDirection,advanceDroplet,oilOutline,puddleRiderBase,dropletRiderBase,
  findDormantPuddleContact,OIL_LIMITS} from './oil.mjs';
 
 export class OilRuntime {
@@ -31,6 +31,16 @@ export class OilRuntime {
  index(id){const dot=this.dots.find(d=>d.id===id);if(!dot)throw new Error('Source dot slot required');return dot.sourceIndex;}
  dot(index){const dot=this.dots.find(d=>d.sourceIndex===index);if(!dot)throw new Error('Absent source dot '+index);return dot;}
  pixel(index){const dot=this.dot(index);return {x:dot.x-16,y:dot.y-15};}
+ positionElevatorRiders(index){
+  if(!this.board.elevatorOilRiderRules)throw Error('Oil elevator rider composition required');
+  const pixel=this.pixel(index);
+  for(const {state:s} of this.droplets)if(s.dotIndex===index)s.base=dropletRiderBase(s,pixel);
+  for(const s of this.puddles)if(s.targetDot===index)s.base=puddleRiderBase(s.kind,pixel);
+ }
+ orphanElevatorDroplets(index){
+  if(!this.board.elevatorOilRiderRules)throw Error('Oil elevator rider composition required');
+  for(const {state:s} of this.droplets)if(s.dotIndex===index){s.visible=false;s.clockAttached=false;}
+ }
  canGrab(index,human){const dot=this.dot(index),value=human?dot.humanCanGrab:dot.nonhumanCanGrab;if(typeof value!=='boolean')throw new Error('Source dot permissions required');return value;}
  acquireDot(pixel){
   // First source slot wins, even when its permission denies the query.

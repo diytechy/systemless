@@ -1,5 +1,7 @@
 # Seesaw source preparation
 
+This is the original preparation record. See the [Seesaw review](seesaw-review.md) for the completed implementation and bounded acceptance.
+
 Seesaw62 remains unaccepted and disabled. A parallel source-only worker verified resource141 SHA256 against the raw resource, queue, decoded artifact and mechanics matrix. The report, inventory, source/byte checks, asset dependencies and standalone patch/test sketches are private under `seesaw-parallel-preparation/` on D:.
 
 Child has58pivots, threebonuses,11raised white up/down dots on groups0and2, two upper controls, three static spikes, two Oil records (kinds1and3), three walls and five ordinary programmed enemies on clocks1/3. All five GN records and both TR records are inactive in Child. Original GN/TR mask checks precede count, capacity and allocation. An explicit verified-import policy could omit these entirely inactive families while keeping active, malformed and default/generated cases rejected. The proposed patch is import-only and intentionally leaves Seesaw's composition gated.

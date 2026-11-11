@@ -45,6 +45,15 @@ export function createPuddleState(spec,origin) {
     min:0,max:0,triggered:false,visible:true,clockAttached:false,clockReference:0,
     wakeDeadline:0,targetDot:-1,endFrame:0};
 }
+export function puddleRiderBase(kind,pixel) {
+  const [x,y]=riderOffsets[integer(kind,0,3)];
+  return plus(point(pixel),x,y);
+}
+export function dropletRiderBase(state,pixel) {
+  // Source keeps the grab displacement until arrival clears both words.
+  // Travelling droplets have no acquired dot and never call this helper.
+  return plus(point(pixel),state.moveDeadline===0&&state.dx>0?-48:0,state.moveDeadline===0&&state.dy>0?-48:0);
+}
 /** PUActivate: first eligible outline match only; one activation for each reset.
  * now is a fresh TickCount sample; delay150 is MTAdjustPeriod(150), in ticks. */
 export function triggerPuddle(s,{now,clockCount,delay150}) {
@@ -66,8 +75,8 @@ export function observePuddle(s,{now,clockCount,acquireDot}) {
     const dot=acquireDot({...n.targetPixel});
     if(!dot)return {state:n,events};
     integer(dot.index,0,87);point(dot.pixel);
-    const [x,y]=riderOffsets[n.kind],start=8+11*n.kind;
-    Object.assign(n,{targetDot:dot.index,base:plus(dot.pixel,x,y),min:start,max:start+11,
+    const start=8+11*n.kind;
+    Object.assign(n,{targetDot:dot.index,base:puddleRiderBase(n.kind,dot.pixel),min:start,max:start+11,
       frame:start,endFrame:start+11,wakeDeadline:0});
   } else if(n.frame>=n.endFrame) {
     n.visible=false;n.clockAttached=false;

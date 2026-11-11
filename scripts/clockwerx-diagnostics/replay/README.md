@@ -65,6 +65,8 @@ optional `bombRoutes` file. Supported profiles are `outlines`, `dotOutlines`,
 `bombOutlines`, `doorOutlines`, `oilOutlines`, `elevatorOutlines`, and
 `gunOutlines`. Include an
 explicit `rngProvenance` string matching the baseline adapter.
+Oil scenes also require an inline `oilBounds` rectangle with integer
+`left`, `top`, `right`, and `bottom` edges, taken from their source profile.
 The optional `bombRoutes` JSON must be the routes array itself: its parsed value
 is passed directly as the constructor's `profiles.bombRoutes`, without unwrapping
 an object such as `{ "routes": [...] }`.

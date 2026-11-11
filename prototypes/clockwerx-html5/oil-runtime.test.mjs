@@ -39,6 +39,26 @@ test('oil acquisition selects source-slot order and does not search past a denie
  board.dots.find(d=>d.id==='a').nonhumanCanGrab=true;
  assert.equal(oil.acquireDot({x:-14,y:-15}).index,0);
 });
+test('an elevator moves attached oil by the stored offsets and detaches only its own droplets at the bottom',()=>{
+ const {board,options}=fixture();board.elevatorOilRiderRules=true;
+ const oil=new OilRuntime(board,options),ctx=context();
+ oil.createDroplet(1,ctx);oil.createDroplet(1,ctx);oil.createDroplet(12,ctx);oil.createDroplet(1,ctx);
+ const [resting,approaching,elsewhere,travelling]=oil.droplets.map(x=>x.state);
+ Object.assign(approaching,{moveDeadline:0,dx:1,dy:0,frame:61});
+ Object.assign(travelling,{dotIndex:-1,previousDot:1,moveDeadline:0,dx:1,dy:0});
+ Object.assign(oil.puddles[0],{targetDot:1,triggered:true,frame:22});
+ Object.assign(board.dots[1],{x:36,y:12,upDownPhase:0,humanCanGrab:false});
+ const stay=structuredClone([elsewhere,travelling]);
+ oil.positionElevatorRiders(1);
+ assert.deepEqual([resting.base,approaching.base,oil.puddles[0].base],[{x:20,y:-3},{x:-28,y:-3},{x:11,y:-3}]);
+ assert.deepEqual([elsewhere,travelling],stay);
+ oil.orphanElevatorDroplets(1);
+ assert.equal(oil.allocations,4);assert.equal(oil.faders.length,0);
+ assert.deepEqual([resting,approaching].map(s=>[s.dotIndex,s.visible,s.clockAttached]),[[1,false,false],[1,false,false]]);
+ assert.deepEqual([elsewhere,travelling],stay);
+ assert.equal(oil.puddles[0].visible,true);assert.equal(approaching.frame,61);
+ oil.reset('a');assert.equal(oil.allocations,0);assert.equal(oil.puddles[0].targetDot,-1);
+});
 test('waking is harmless; delayed acquisition and eleven approach callbacks create one waiting droplet',()=>{
  const {board,options}=fixture(),oil=new OilRuntime(board,options),ctx=context();
  assert.deepEqual(oil.contactHuman({left:23,top:-15,right:24,bottom:-14,rows:null}),[{type:'sound',argument:29}]);

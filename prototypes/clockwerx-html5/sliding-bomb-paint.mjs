@@ -4,7 +4,8 @@ const frameIn=(atlas,frame)=>atlas?.frames?.find(f=>f.frame===frame);
 
 // Select by requested frame availability, never solely by live burnt state.
 export function sourceDotPaint(vector,group,frame){
- for(const atlas of [String(group)==='4100'?vector.sourceDotShadows:undefined,vector.sourceMarkedDots?.[group],vector.bombDots?.[group],vector.specialDots?.[group]]){const f=frameIn(atlas,frame);if(f)return {file:atlas.file,...f};}
+ for(const atlas of [vector.slowDots,vector.slowWallDots,vector.slowClass4Dots]){const f=atlas?.frames?.find(f=>String(f.group)===String(group)&&f.frame===frame);if(f)return{file:atlas.file,...f};}
+ for(const atlas of [String(group)==='4100'?vector.sourceDotShadows:undefined,vector.sourceRingDots?.[group],vector.sourceMarkedDots?.[group],vector.bombDots?.[group],vector.specialDots?.[group]]){const f=frameIn(atlas,frame);if(f)return {file:atlas.file,...f};}
  if(String(group)==='4100'&&frame>=9&&frame<=16){
   const atlas=vector.specialDots?.['4100'],f=frameIn(atlas,79);
   // Raw4100:9..16 and79 share image0 and identical placement. Bonus1..8 do not.
@@ -19,6 +20,7 @@ export function sourceDotPaint(vector,group,frame){
 
 export function sourceDotLook(dot,special){
  if(special?.main)return {frame:special.main.frame,visible:special.main.visible};
+ if(dot.slowdown)return {frame:dot.sourceSlowFrame??189+dot.color,visible:dot.sourceCollidable!==false};
  return {frame:dot.burnt?92+dot.color:dot.transferDeath?108+dot.color:(dot.bonus&&!dot.collected?1:9)+dot.color,visible:dot.sourceCollidable!==false};
 }
 

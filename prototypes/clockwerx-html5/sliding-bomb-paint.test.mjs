@@ -15,6 +15,13 @@ test('ordinary main variants normalize logical anchor into raw descriptor anchor
  const p=sourceDotPaint({dotVariants:{'normal:3':{file:'n.svg',sourceFrame:12,x:-5,y:-4,width:10,height:10}}},'300',12);assert.equal(p.x,11);assert.equal(p.y,11);
  assert.throws(()=>sourceDotPaint({dotVariants:{'normal:3':{file:'wrong.svg',sourceFrame:13,x:-5,y:-4}}},'300',12),/identity/);
 });
+test('source Slow foreground uses idle and occupied glyphs before burnt appearance',()=>{
+ assert.deepEqual(sourceDotLook({slowdown:true,color:1,burnt:true}),{frame:190,visible:true});assert.deepEqual(sourceDotLook({slowdown:true,color:1,sourceSlowFrame:199,sourceCollidable:false}),{frame:199,visible:false});
+ const atlas={file:'slow.svg',frames:[{group:300,frame:190,x:11},{group:4100,frame:190,x:20},{group:300,frame:199,x:11}]},v={slowWallDots:atlas};assert.equal(sourceDotPaint(v,'300',190).x,11);assert.equal(sourceDotPaint(v,'4100',190).x,20);assert.equal(sourceDotPaint(v,'300',199).file,'slow.svg');assert.throws(()=>sourceDotPaint(v,'4100',199),/Missing/);
+});
+test('additional colored ring frames preserve existing atlas frame choices',()=>{
+ const v={sourceRingDots:{300:{file:'yellow.svg',frames:[{frame:45}]}},specialDots:{300:{file:'retained.svg',frames:[{frame:44},{frame:51}]}}};assert.equal(sourceDotPaint(v,'300',45).file,'yellow.svg');for(const f of[44,51])assert.equal(sourceDotPaint(v,'300',f).file,'retained.svg');assert.throws(()=>sourceDotPaint(v,'300',46),/Missing/);
+});
 test('SR erase uses original bounds, signed integer centering and a6x6 destructive fill rectangle',()=>{
  const frames=[{frame:8,x:3,y:2,width:8,height:9},{frame:9,x:2,y:2,width:8,height:9},{frame:10,x:1,y:2,width:8,height:9},{frame:11,x:2,y:2,width:8,height:9}];
  for(let i=0;i<4;i++)assert.deepEqual(sourceSparkEraseRect({descriptorFrame:8+i,rawBase:{x:100,y:200},width:6,height:6},frames),{x:100+[4,3,2,3][i],y:203,width:6,height:6});

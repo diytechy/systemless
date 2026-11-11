@@ -15,6 +15,7 @@
   Optional: mode=host|self|none (default host), autostart=0 (frame nothing until fakeHost.open()),
   silent=1 (never answer `ready`, as when the page is framed by something that is not OtterTube),
   refuse=rate:2 (answer the first 2 checkpoints that would be taken with `failed: rate`; any reason),
+  fill=1 (no header or log: the frame is the whole window, as an add-on is in OtterTube),
   unsolicited=1 (post a well-formed `init` at the frame without being asked, several times: what a
   parent that is not on the page's list of origins could do).
   Tests drive it through window.fakeHost.
@@ -26,6 +27,8 @@
   #who { font-weight: 600; }
   #frame-box { width: 1000px; height: 760px; background: #000; }
   iframe { width: 1000px; height: 760px; border: 0; display: block; }
+  body.fill header, body.fill #log { display: none; }
+  body.fill #frame-box, body.fill iframe { position: fixed; inset: 0; width: 100vw; height: 100vh; }
   #log { margin: 0; padding: 8px 12px; max-height: 220px; overflow: auto; font: 12px/1.4 ui-monospace, monospace; white-space: pre-wrap; }
 </style>
 </head>
@@ -51,6 +54,7 @@
   var SUBJECTS = { a: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', b: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', guest: null };
 
   var params = new URLSearchParams(location.search);
+  if (params.get('fill') === '1') document.body.classList.add('fill');
   var gameUrl = params.get('game') || '';
   var mode = params.get('mode') || 'host';
   var subjectName = params.get('subject') || 'a';

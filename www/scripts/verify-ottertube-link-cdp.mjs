@@ -266,7 +266,7 @@ try {
   const initA = await first.play("a");
   check("A: init carries the subject and no save", initA.subject === SUBJECT.a && initA.savedSeq === null, initA);
   const kiosk = await first.game(`({
-    exit: !!document.querySelector(".koji-toolbar [data-exit]"),
+    exit: !!document.querySelector("[data-kiosk-exit]"),
     allGames: document.querySelectorAll('a[href="/"]').length,
     anyLink: document.querySelectorAll("a[href]").length,
     fullscreen: document.querySelectorAll("[data-fullscreen], .koji-exit-fullscreen").length,
@@ -406,7 +406,7 @@ try {
       return state.acknowledged > 0 && state.counter > state.acknowledged ? state : null;
     }, 20_000, 30);
     const clicked = Date.now();
-    await first.game(`document.querySelector(".koji-toolbar [data-exit]").click()`);
+    await first.game(`document.querySelector("[data-kiosk-exit]").click()`);
     const saving = await first.game(`document.querySelector(".ottertube-saving")?.innerText ?? null`).catch(() => null);
     const left = await waitFor("exit", async () => (await first.events()).find((event) => event.type === "exit"), 8000, 50).catch(() => null);
     const events = await first.events();
@@ -457,7 +457,7 @@ try {
   });
 
   // ---------- kiosk: Exit, and a page that is not inside OtterTube ----------
-  await first.game(`document.querySelector(".koji-toolbar [data-exit]").click()`);
+  await first.game(`document.querySelector("[data-kiosk-exit]").click()`);
   const left = await waitFor("exit", async () => (await first.events()).find((event) => event.type === "exit"), 5000).catch(() => null);
   check("kiosk: Exit sends the add-on exit, and the host takes the page away",
     !!left && (await first.host(`document.querySelector("iframe") === null`)));

@@ -54,12 +54,15 @@ pub fn GameScreen(game: &'static Game) -> impl IntoView {
     });
 
     view! {
-        <a class="game-download"
-            href=move || asset_path(game.assets.archive_for(selected_architecture.get()).0)
-            target="_blank" rel="noopener noreferrer"
-            download=move || game.assets.archive_for(selected_architecture.get()).1
-            aria-label=move || format!("Download {} for {}", game.title, selected_architecture.get().label())
-        >"Download game"</a>
+        // The OtterTube add-on page has no link out, not even a hidden one.
+        {(!cfg!(feature = "ottertube")).then(|| view! {
+            <a class="game-download"
+                href=move || asset_path(game.assets.archive_for(selected_architecture.get()).0)
+                target="_blank" rel="noopener noreferrer"
+                download=move || game.assets.archive_for(selected_architecture.get()).1
+                aria-label=move || format!("Download {} for {}", game.title, selected_architecture.get().label())
+            >"Download game"</a>
+        })}
         {if game.architectures.len() > 1 {
             view! {
                 <div class="game-architecture" role="group" aria-label="Choose game architecture">
@@ -287,6 +290,33 @@ impl RuntimeHandle {
     }
 }
 
+/// Where this game's files are kept: the id they are stored under, whether
+/// nothing is kept at all, and extra saved guest paths. Every build but the
+/// OtterTube add-on build uses the game's own id and the ordinary rules.
+struct SaveScope {
+    id: String,
+    memory_only: bool,
+    extra_paths: Vec<String>,
+}
+
+fn save_scope(game: &Game) -> SaveScope {
+    #[cfg(feature = "ottertube")]
+    {
+        let scope = crate::ottertube::save_scope(game.id);
+        SaveScope {
+            id: scope.id,
+            memory_only: scope.memory_only,
+            extra_paths: scope.extra_paths,
+        }
+    }
+    #[cfg(not(feature = "ottertube"))]
+    SaveScope {
+        id: game.id.to_string(),
+        memory_only: false,
+        extra_paths: Vec::new(),
+    }
+}
+
 #[component]
 fn GameRuntime(
     game: &'static Game,
@@ -347,6 +377,14 @@ fn GameRuntime(
             }
             None => {}
         });
+    });
+
+    #[cfg(feature = "ottertube")]
+    Effect::new(move |_| {
+        // Before the machine is ready the list is only the empty placeholder.
+        if machine_ready.get() {
+            save_files.with(|files| crate::ottertube::on_save_files(files));
+        }
     });
 
     let machine_handle_for_effect = machine_handle.clone();
@@ -531,8 +569,12 @@ fn GameRuntime(
             if !alive.load(Ordering::Relaxed) {
                 return;
             }
+            let scope = save_scope(game);
+            if scope.memory_only || !scope.extra_paths.is_empty() {
+                save_store::set_save_policy(scope.memory_only, &scope.extra_paths);
+            }
             let mut machine = match Machine::new_with_progress(
-                game.id,
+                &scope.id,
                 &bytes,
                 &plugin_files,
                 architecture,
@@ -649,14 +691,16 @@ fn GameRuntime(
             </div>
             {controls_view}
         </div>
-        <GameFilesDialog
-            game=game
-            selected_plugin_ids=selected_plugin_ids_for_shelf
-            selected_plugins_signal=selected_plugins_signal
-            files=save_files
-            machine=machine_handle
-            machine_ready=machine_ready
-        />
+        {(!cfg!(feature = "ottertube")).then(move || view! {
+            <GameFilesDialog
+                game=game
+                selected_plugin_ids=selected_plugin_ids_for_shelf
+                selected_plugins_signal=selected_plugins_signal
+                files=save_files
+                machine=machine_handle
+                machine_ready=machine_ready
+            />
+        })}
     }
 }
 
@@ -2551,8 +2595,9 @@ async fn boot_catalogue_worker(
     set_js_property(&message, "moduleUrl", &JsValue::from_str(&module_url));
     set_js_property(&message, "wasmUrl", &JsValue::from_str(&wasm_url));
     set_js_property(&message, "gameBytes", bytes.buffer().as_ref());
-    let config = serde_json::json!({
-        "id": game.id, "architecture": architecture.key(),
+    let scope = save_scope(game);
+    let mut config = serde_json::json!({
+        "id": scope.id, "architecture": architecture.key(),
         "launch_modifiers": game.settings.launch_modifiers,
         "show_menu_bar": game.settings.show_menu_bar,
         "screen_depth": game.settings.screen_depth,
@@ -2566,6 +2611,10 @@ async fn boot_catalogue_worker(
         "arrows_as_numpad": game.settings.arrows_as_numpad,
         "plugins": plugin_files.iter().map(crate::worker_runtime::PluginMetadata::from).collect::<Vec<_>>(),
     });
+    if scope.memory_only || !scope.extra_paths.is_empty() {
+        config["save_memory_only"] = scope.memory_only.into();
+        config["extra_save_paths"] = scope.extra_paths.into();
+    }
     set_js_property(&message, "config", &JsValue::from_str(&config.to_string()));
     let transfer = Array::new();
     transfer.push(bytes.buffer().as_ref());

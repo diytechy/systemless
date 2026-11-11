@@ -1,4 +1,6 @@
 mod adaptive_clock;
+// The slim OtterTube add-on build mounts its own one-game page instead.
+#[cfg_attr(feature = "ottertube", allow(dead_code))]
 mod app;
 mod bench;
 mod browser_bridge;
@@ -13,6 +15,8 @@ mod gpu_proxy;
 mod gpu_wire;
 mod host_cursor;
 mod indexed_frame;
+#[cfg(any(feature = "ottertube", test))]
+mod ottertube;
 mod paths;
 mod presentation;
 mod renderer_bridge;
@@ -33,11 +37,15 @@ fn main() {
     }
     // Calibrate saved page zoom while navigating the catalogue or booting a game.
     browser_bridge::systemless_cursor_zoom();
+    #[cfg(not(feature = "ottertube"))]
+    use app::App as Page;
+    #[cfg(feature = "ottertube")]
+    use ottertube::KioskApp as Page;
     if let Some(root) = root_element() {
         root.set_inner_html("");
-        mount_to(root, app::App).forget();
+        mount_to(root, Page).forget();
     } else {
-        mount_to_body(app::App);
+        mount_to_body(Page);
     }
 }
 

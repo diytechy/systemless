@@ -86,21 +86,26 @@ if (typeof document !== 'undefined') {
     canvas = next;
     if (!canvas) return;
     canvas.addEventListener('blur', release);
+    // The OtterTube add-on bundle is one game in OtterTube's own window: no way to the other
+    // games, no fullscreen (OtterTube owns the window), and Exit asks OtterTube to leave.
+    const kiosk = Boolean(document.querySelector('meta[name="systemless-ottertube-hosts"]'));
     const wrap = canvas.closest('.game-canvas-wrap');
-    const exit = document.createElement('button');
-    exit.type = 'button';
-    exit.className = 'koji-exit-fullscreen';
-    exit.textContent = 'Exit fullscreen';
-    exit.onclick = async () => {
-      try { await document.exitFullscreen(); canvas.focus({preventScroll:true}); } catch {}
-    };
-    wrap.append(exit);
+    if (!kiosk) {
+      const exit = document.createElement('button');
+      exit.type = 'button';
+      exit.className = 'koji-exit-fullscreen';
+      exit.textContent = 'Exit fullscreen';
+      exit.onclick = async () => {
+        try { await document.exitFullscreen(); canvas.focus({preventScroll:true}); } catch {}
+      };
+      wrap.append(exit);
+    }
     const bar = document.createElement('div');
     bar.className = 'koji-toolbar';
-    bar.innerHTML = `<a href="/">All games</a><button type="button" data-focus>Focus game</button>
+    bar.innerHTML = `${kiosk ? '<button type="button" data-exit>Exit</button>' : '<a href="/">All games</a>'}<button type="button" data-focus>Focus game</button>
       <button type="button" data-new-game hidden>New game</button>
       <button type="button" data-pause>Pause / resume</button>
-      <button type="button" data-fullscreen>Fullscreen</button>
+      ${kiosk ? '' : '<button type="button" data-fullscreen>Fullscreen</button>'}
       <label>Picture <select aria-label="Picture scaling"><option value="pixelated">Crisp pixels</option><option value="auto">Smooth scaling</option></select></label>
       <span role="status" aria-live="polite">Connect a controller and press a button</span>`;
     status = bar.querySelector('[role=status]');
@@ -111,7 +116,8 @@ if (typeof document !== 'undefined') {
     bar.querySelector('[data-pause]').hidden = !hasControllerProfile(canvas.dataset.gameId);
     bar.querySelector('[data-pause]').onclick = () => chord(
       canvas.dataset.gameId === 'clockwerx-personal-10' ? ['Meta', 'p'] : ['p']);
-    bar.querySelector('[data-fullscreen]').onclick = async () => {
+    if (kiosk) bar.querySelector('[data-exit]').onclick = () => window.systemlessOtterTube?.exit();
+    else bar.querySelector('[data-fullscreen]').onclick = async () => {
       const target = canvas.closest('.game-canvas-wrap') || canvas;
       try { await target.requestFullscreen(); canvas.focus({preventScroll:true}); }
       catch { status.textContent = 'Fullscreen unavailable in this browser'; }

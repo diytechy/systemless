@@ -1,4 +1,10 @@
+**Superseded by accepted85 [review](orbit-review.md). Preparation below is historical.**
+
 # Orbit85 source preparation
+
+**Current85:** Through84 accepted/installed. Originalcold35captures/2224frontend/56.915seconds closes; standard original-only591source-anchor fitter/viewgate before dedicated PNGs. Source70/f3b06d36 integrates the separate moving-goal ordinary/SP join;537runtime/21packaging checks pass. Freeze1c400546/67runtimefiles. Actual empty-input cold8000updates/noRNG/death/reset; shared706 (tie707) matches all384clear positions with24pose residuals retained. Retained84 sweep643150paired updates matches83goals plus Movement construction.
+
+First legal route/current-state F/S/R/B reaches1000points/5640updates/6transfers/5Flip/1Swing/1Reverse/11Bounce, zeroRNG/death/reset. Path4,3/3,3/2,3/2,2, then safe heldBounce righthemisphere at2,2. A legal Reverse feedback aligns the controller's angular approach with class1 count; no engine/clock state is assigned. Current goal74,72 and hero48 release the wait to2,1; final current-axis Flip reaches the movinggoal5,0. Closedcold independently contains goallefttopN560; its40instruction loop retains16callback opcodes/pauses. Candidate01 closes exact goal. Nativegoal01 active4393frontend/15captures, authb0be3236; standard original-onlyfitter before dedicatedgoalPNGs, then results/earned86Passage/539000 review. Actual85controlled19280updates/threeconstructors/zeroRNG,230720remaining of250000. No85acceptance, witness/fresh or earned86fixture yet. Continue through100.
 
 Unlinked preparation while Slow Motion84 completes visible acceptance. Continue through100 without per-level stops. RND2_218 has53dots, six moving pivots with closed40instruction e/n/s/w/p loops, including one white goal and one bonus; two active static spikes. Eleven ordinary Child NPCs use types1/2/3: two free red class3 and remaining class1 free/f/n/s, all without wall checks. Both human starts are ordinary5,3/class0. No EX, WL, WY, Oil, GO, BO, HY or doors are active.
 

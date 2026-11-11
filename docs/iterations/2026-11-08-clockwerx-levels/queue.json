@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 85,
-  "currentAction": "Through84 Slow Motion accepted/locally installed; continue through100 without per-level stops. Orbit85 original cold authorized; inspect closure then standard original-only fitter before dedicated PNGviews. Moving-goal ordinary source/boardguard47c983e5/fourinvented checks unlinked; no85actualmodel.",
+  "currentOrdinal": 86,
+  "currentAction": "Through85 Orbit accepted/locally installed; continue through100 without per-level stops. Passage86 original cold authorized; inspect closure then standard original-only fitter before dedicated PNGviews. Moving-protected-passage sourceguard45d74679/threeinvented checks unlinked; no86actualmodel.",
   "levels": [
     {
       "ordinal": 1,
@@ -7497,10 +7497,14 @@
       "menuTitle": "Orbit",
       "resourceTitle": "Orbit",
       "sha256": "3bc7b3ae2a6b8611fb4302cc6545615778bd44918073e831adac162332597a3f",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "orbit85-native-goal01/root-original-goal-review.json",
+        "orbit85-native-goal-fit01/actor-comparison01.json",
+        "orbit85-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7528,7 +7532,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7558,7 +7562,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "f3b06d36",
+      "sourceFreezeSHA256": "1c40054668f678ae69b818406778780c53c40a9d5a70e5ce1991ec96fbd42409",
+      "sourceTests": 537,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 30560,
+      "actualConstructors": 5,
+      "functionalUpdatesUsed": 30560,
+      "functionalUpdatesRemaining": 219440,
+      "nativeColdClosed": true,
+      "review": "orbit-review.md",
+      "retainedSweep": {
+        "matchedGoals": 83,
+        "constructionOnly": 1,
+        "pairedUpdates": 643150,
+        "sha256": "652790a79368c58d0bda8f5a8ca1682fe0633e0966a76885f7c98621eb0a1398"
+      },
+      "deliveryAcceptance": {
+        "score": 1000,
+        "updates": 5640,
+        "transfers": 6,
+        "nextOrdinal": 86,
+        "nativeCampaignTotal": 539000,
+        "rootAcceptanceSHA256": "43af2d57f9ba45654c46ade49d1bca0af53cee87879177cddcb14f5eadac4750",
+        "rootProofSHA256": "bc8437a1a45e6fb72113e71925ff4b24d611aabc9d1c472f5ed2df5ca1de5080",
+        "earnedThrough85FixtureSHA256": "9311b3224f79ce5112230e0bd560428833c480d45e8eb35883dcca54e65d01b1"
+      },
+      "qualificationBoundary": "Original results1000 and earned86Passage/539000 visually verified after standard original-only591source-anchor fitter/viewgate. All119clear actor positions/poses exact across10joins at fixed706:human9,red60,green10,blue40. Cold384positions exact24pose residuals retained at706/707. Firstlegalroute succeeds5640updates/6transfers/5Flip/1Swing/1Reverse/11Bounce, zeroRNG/death/reset. SafeBouncewait andonelegalReversefeedback align currenthuman approach with observedmovinggoalposition; no state/clock/count/phase/RNG assignment or per-image/actorphase fitting. Source goalmovesonclosed40instruction pause-preservingloop, currentgoal/rider/completion/reset reuse priorqualified core; newcomposition contracts invented. Originalgoal1000/nobonus, declared20frontend finalholdmargin. Arbitrarycontrols/audio/controllers/pacing/fullpixel andactoridentitycensus separate."
     },
     {
       "ordinal": 86,

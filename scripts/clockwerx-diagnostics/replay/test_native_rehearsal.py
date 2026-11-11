@@ -39,6 +39,18 @@ class NativeRehearsalTests(unittest.TestCase):
         self.assertEqual(next(c["frontend"] for c in captures
                               if c["name"] == "goal-after-hold"), 31)
 
+    def test_bounce_uses_option_modifier_and_preserves_hold_and_release(self):
+        literal = dict(updates=8, holds=[dict(k="B", start=0, end=6, nominal=4)])
+        scenario, captures, _, _ = compiler.build(self.entry, literal, 1, 0, 1000, 20, False)
+        tick, edges = 0, []
+        for action in scenario["actions"]:
+            tick += action.get("ticks", 0)
+            if action["type"] in ("key_down", "key_up") and action["key"] == 58:
+                edges.append((action["type"], tick, action["ch"]))
+        self.assertEqual(edges, [("key_down", 10, 0), ("key_up", 13, 0)])
+        self.assertEqual(next(c["frontend"] for c in captures
+                              if c["name"] == "input-01-B-nominal"), 13)
+
 
 if __name__ == "__main__":
     unittest.main()

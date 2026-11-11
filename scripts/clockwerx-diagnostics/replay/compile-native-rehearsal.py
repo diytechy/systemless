@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 
-KEYS = {"R": (49, 32), "S": (55, 0), "F": (59, 0)}
+KEYS = {"R": (49, 32), "S": (55, 0), "F": (59, 0), "B": (58, 0)}
 
 
 def read(path):

@@ -4731,6 +4731,7 @@ dependencies = [
  "image",
  "js-sys",
  "leptos",
+ "miniz_oxide",
  "serde",
  "serde_json",
  "systemless",

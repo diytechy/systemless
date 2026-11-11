@@ -1,0 +1,12 @@
+ottertube-addon.js is vendored, unmodified, from the OtterTube repository:
+
+  path    tools/addons/ottertube-addon.js
+  commit  158cf952c1e1edf026561cddeb9ed71cb4e6cb91 (the last commit that changed the file;
+          the repository was at d62c09ecd72ac85704f7ade37765a92a666b1755 when it was copied, 2026-11-11)
+  sha256  c201fcae2437671456a4969ff2737fc5d2f39a531e61cbca2b4165cd6e268cf7 (the git blob, LF line endings)
+  licence MIT, Copyright (c) 2026 OtterTube contributors
+
+It is OtterTube's add-on client, protocol version 1 (OtterTube docs/ADDONS.md, sections 6 and 7).
+Systemless is GPL-3.0-or-later; this one file keeps its own header and its MIT licence.
+Only the slim add-on build (Cargo feature `ottertube`) ships it; scripts/package_library.py copies it
+into that bundle. To update it, copy the file again from OtterTube and change the commit and hash here.

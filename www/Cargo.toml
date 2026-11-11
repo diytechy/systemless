@@ -13,12 +13,18 @@ default-run = "systemless-org"
 name = "systemless-org"
 path = "src/main.rs"
 
+[features]
+# Slim three-game add-on build for OtterTube (docs/iterations/2026-11-11-ottertube-link).
+# Off by default: the catalogue and private library builds are unchanged without it.
+ottertube = ["dep:miniz_oxide"]
+
 [dependencies]
 base64 = "0.22"
 gloo-net = { version = "0.6", features = ["http"] }
 image = { version = "0.25", default-features = false, features = ["png"] }
 js-sys = "0.3"
 leptos = { version = "0.8", features = ["csr"] }
+miniz_oxide = { version = "0.8", optional = true }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 systemless = { path = "..", default-features = false }
@@ -97,6 +103,10 @@ web-sys = { version = "0.3", features = [
     "IdbVersionChangeEvent",
     "Url",
 ] }
+
+[dev-dependencies]
+# The save text is unit-tested without the `ottertube` feature.
+miniz_oxide = "0.8"
 
 [build-dependencies]
 systemless-catalogue-tools = { path = "tools/catalogue" }

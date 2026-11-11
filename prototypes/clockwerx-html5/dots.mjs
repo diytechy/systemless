@@ -24,5 +24,6 @@ export function dotRenderSpec(dot, colorMode=0) {
 // runtimes; the qualified uncolored checkpoint outlines equal the plain body.
 export function dotBodyFrame(dot,colorMode=0){
  const spec=dotRenderSpec(dot,colorMode);
+ if(dot.slowdown)return dot.sourceSlowFrame??189+spec.color;
  return dot.burnt&&!dot.waystation?92+spec.color:dot.transferDeath?108+spec.color:spec.sourceDescriptor-300;
 }

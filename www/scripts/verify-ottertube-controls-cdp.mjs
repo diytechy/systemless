@@ -278,6 +278,28 @@ try {
     const resumed = await waitFor("the board back", async () => !!(await hand(browser)), 8000, 300).catch(() => false);
     check("clockwerx: Pause hides the board, and pressing it again brings it back", paused === null && resumed === true, { paused });
 
+    // A real keyboard. Command-P is the menu bar's Pause: it is dropped, with the Command key
+    // itself and with Space, which this page gives the game as Command (its Swing). A plain
+    // game key still plays: C is Reverse.
+    await browser.keyboard([["Meta", "MetaLeft"], ["p", "KeyP"]]);
+    await sleep(1200);
+    const afterCommandP = (await hand(browser)) !== null;
+    await browser.keyboard([[" ", "Space"], ["p", "KeyP"]]);
+    await sleep(1200);
+    const afterSpaceP = (await hand(browser)) !== null;
+    await browser.press(keysButton("Meta+r"));
+    await waitFor("the level to start again", async () => onHome(await hand(browser)), 20_000, 300);
+    await sleep(1200);
+    const wayBefore = await turning(browser);
+    await browser.keyboard([["c", "KeyC"]], 250);
+    await sleep(300);
+    const wayAfter = await turning(browser);
+    check("clockwerx: from a real keyboard Command-P does nothing (the menu bar's shortcut), and a plain game key still plays",
+      afterCommandP && afterSpaceP && wayBefore !== 0 && wayBefore !== null && wayAfter === -wayBefore, { afterCommandP, afterSpaceP, wayBefore, wayAfter });
+    await browser.press(keysButton("Meta+r"));
+    await waitFor("the level to start again", async () => onHome(await hand(browser)), 20_000, 300);
+    await sleep(800);
+
     // One finger holds Swing (Command); a second taps Try again (Command-R).
     const tryAgain = await browser.middle(keysButton("Meta+r"));
     await browser.touch("touchStart", [{ ...swing, id: 1 }]);
@@ -631,6 +653,26 @@ try {
     await sleep(2500);
     const restarted = await where(browser, "blobbo-9-start-again.png");
     check("blobbo: Start again puts Blobbo back at the start of the level", !!restarted && Math.abs(restarted.v - startAt.v) < 4 && Math.abs(restarted.h - startAt.h) < 4, { startAt, restarted });
+
+    // The stick is held still while another finger taps Save: when the script ends he steps on.
+    const stickMiddle = await browser.middle(".mobile-joystick"), stickDown = await browser.middle(".mobile-joystick", 0, 0.8);
+    const saveButton = await browser.middle(scriptButton("save"));
+    await browser.touch("touchStart", [{ ...stickMiddle, id: 1 }]);
+    await browser.touch("touchMove", [{ ...stickDown, id: 1 }]);
+    await sleep(250);
+    await browser.game(`document.querySelector(".app--ottertube").removeAttribute("data-kiosk-script")`);
+    await browser.touch("touchStart", [{ ...stickDown, id: 1 }, { ...saveButton, id: 2 }]);
+    await browser.touch("touchEnd", [{ ...saveButton, id: 2 }]);
+    const heldSave = await waitFor("the save script", async () => { const k = await browser.kiosk(); return k.busy === null && k.script ? k.script : null; }, 40_000, 50).catch(() => null);
+    const whenSaved = await where(browser);
+    await sleep(1500);
+    const steppedOn = await where(browser);
+    await browser.touch("touchEnd", []);
+    await sleep(900);
+    check("blobbo: a stick held still while Save runs steps on when the script has ended", heldSave === "save:done" && !!whenSaved && !!steppedOn && steppedOn.v >= whenSaved.v + CELL - 2,
+      { heldSave, whenSaved, steppedOn });
+    // That Save is now the newest: it was made where he stood when the script began.
+    if (whenSaved) savedAt = whenSaved;
 
     const gone = await leave(browser, whoB, () => browser.press("[data-kiosk-exit]"));
     blobboHeld = await browser.held(whoB);

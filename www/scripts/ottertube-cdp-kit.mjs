@@ -170,6 +170,19 @@ export async function startStage({ serverArgs = [] } = {}) {
       return result.result.value;
     }
     const host = (expression) => evalIn(undefined, expression);
+    // The framed page's own JavaScript world, by frame: for a check that calls a hook the page
+    // keeps for checks (it acts on a loopback host only).
+    const ownWorlds = new Map();
+    page.on("Runtime.executionContextCreated", ({ context }) => { if (context.auxData?.isDefault) ownWorlds.set(context.auxData.frameId, context.id); });
+    page.on("Runtime.executionContextDestroyed", ({ executionContextId }) => { for (const [frame, id] of ownWorlds) if (id === executionContextId) ownWorlds.delete(frame); });
+    page.on("Runtime.executionContextsCleared", () => ownWorlds.clear());
+    await page.send("Runtime.enable");
+    async function gameOwn(expression) {
+      const tree = await page.send("Page.getFrameTree");
+      const child = tree.frameTree.childFrames?.[0]?.frame;
+      if (!child || !ownWorlds.has(child.id)) throw new Error("the framed page's own world is not known");
+      return evalIn(ownWorlds.get(child.id), expression);
+    }
     // The framed game page, through an isolated world: its DOM and its origin's storage.
     async function game(expression) {
       const tree = await page.send("Page.getFrameTree");
@@ -254,6 +267,26 @@ export async function startStage({ serverArgs = [] } = {}) {
     const pad = (state) => game(state === null ? `delete document.documentElement.dataset.testPad`
       : `document.documentElement.dataset.testPad = ${JSON.stringify(JSON.stringify(state))}`);
     /** Press and let go of controller buttons. */
+    /** Keys of a real keyboard, pressed together in this order and let go in reverse: [["Meta", "MetaLeft"], ["p", "KeyP"]]. */
+    async function keyboard(chord, holdMs = 200) {
+      // The picture has to hold the keyboard focus, as it does once it has been touched.
+      await host(`document.querySelector("iframe").focus()`);
+      await game(`document.querySelector("canvas.game-canvas").focus({ preventScroll: true })`);
+      const bit = { Alt: 1, Control: 2, Meta: 4, Shift: 8 };
+      const virtual = (key) => ({ Meta: 91, Alt: 18, Control: 17, Shift: 16, " ": 32, ArrowDown: 40, ArrowUp: 38 })[key] ?? key.toUpperCase().charCodeAt(0);
+      let modifiers = 0;
+      for (const [key, code] of chord) {
+        modifiers |= bit[key] ?? 0;
+        await page.send("Input.dispatchKeyEvent", { type: "rawKeyDown", key, code, modifiers, windowsVirtualKeyCode: virtual(key) });
+        await sleep(40);
+      }
+      await sleep(holdMs);
+      for (const [key, code] of [...chord].reverse()) {
+        modifiers &= ~(bit[key] ?? 0);
+        await page.send("Input.dispatchKeyEvent", { type: "keyUp", key, code, modifiers, windowsVirtualKeyCode: virtual(key) });
+        await sleep(40);
+      }
+    }
     async function padPress(buttons, holdMs = 200, axes) {
       await pad({ b: buttons, a: axes ?? [0, 0, 0, 0] });
       await sleep(holdMs);
@@ -275,7 +308,7 @@ export async function startStage({ serverArgs = [] } = {}) {
 
     return {
       page, host, game, rect, middle, touch, tap, drag, press, picture, screenshot, events, held, saveState, open,
-      kiosk, waitScreen, scriptRun, pad, padPress,
+      kiosk, waitScreen, scriptRun, pad, padPress, keyboard, gameOwn,
       /** Touch events from here on, as a touch screen sends them. */
       touchOn: () => page.send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 }),
       /** Back to a plain desktop with a mouse (which is what the media queries then report). */

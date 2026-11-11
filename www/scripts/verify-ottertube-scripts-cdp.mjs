@@ -11,6 +11,20 @@
 //               lowest score in the game's own table is seeded to nothing for a child with no
 //               save, so that any score makes the table and the game asks for a name
 //
+//   ClockWerx   also: a script whose only step is one look at the screen ("late-test"), and the
+//               Keyboard or Mouse switch left open, to show that its block is what stops it and
+//               that a save left in Mouse control comes back in Keyboard control
+//
+// Two switches in the page address, which the page honours on a loopback host only, are used:
+// systemless-test-screens=slow (every look at the screen starts 600 ms late) and
+// systemless-test-scan=paused-slow (the last save scan answers 1.2 s late). One hook of the page's
+// own is called, `test-cancel` (stop the running script without leaving), also loopback only.
+//
+// Also checked: once Exit is pressed nothing starts and nothing reaches the game, during its wait
+// and after; Exit before the game is up means its launch script never runs; a cancelled script's
+// late look at the screen does not end the script that followed; a control blocked on a screen
+// takes no touch from the moment the screen comes up.
+//
 // What is checked: Exit, and the game quitting, stop a running script at once, let go of what it
 // holds, and its later steps never run; while a script runs the child's input goes nowhere, a key
 // the child holds is up and comes back afterwards, and a tap action caught half way leaves no key
@@ -29,13 +43,20 @@ import { decodeSaveText, repoRoot, sleep, startStage, waitFor } from "./ottertub
 const outDir = process.env.OTTERTUBE_LINK_OUT;
 if (!outDir) throw new Error("Set OTTERTUBE_LINK_DIST and OTTERTUBE_LINK_OUT");
 mkdirSync(outDir, { recursive: true });
-const CLOCKWERX = "clockwerx-personal-10", DELIRIUM = "delirium-personal-11";
+const CLOCKWERX = "clockwerx-personal-10", DELIRIUM = "delirium-personal-11", BLOBBO = "blobbo-full-personal-101";
 const games = JSON.parse(readFileSync(join(repoRoot, "www", "src", "ottertube-games.json"), "utf8"));
 const HOLD_FRAMES = 360, AFTER_FRAMES = 180;
 games[CLOCKWERX].scripts["hold-test"] = [{ hold: "Meta" }, { wait: HOLD_FRAMES }, { hold: "Alt" }, { wait: AFTER_FRAMES }, { release: "Alt" }, { release: "Meta" }];
 games[CLOCKWERX].actions.push({ label: "Hold test", script: "hold-test" });
 games[CLOCKWERX].scripts["short-test"] = [{ hold: "Meta" }, { wait: 90 }, { release: "Meta" }];
 games[CLOCKWERX].actions.push({ label: "Short test", script: "short-test" });
+games[CLOCKWERX].scripts["late-test"] = [{ hold: "Alt" }, { stop_unless: "title" }];
+const mouseSwitch = games[CLOCKWERX].blocks.filter((block) => /Keyboard or Mouse/.test(block.what));
+if (mouseSwitch.length !== 1) throw new Error("ClockWerx's Keyboard or Mouse block was not found");
+games[CLOCKWERX].blocks = games[CLOCKWERX].blocks.filter((block) => block !== mouseSwitch[0]);
+// Blobbo: a Save in which a stray letter lands in the dialog's name before the script confirms it.
+games[BLOBBO].scripts["spoiled-save"] = [{ stop_unless: "board" }, { press: "Meta+s" }, { until: { screen: "save-dialog", timeout: 300 } }, { wait: 30 },
+  { press: "s" }, { wait: 20 }, { run: "save-confirm" }, { until: { screen: "board", timeout: 600 } }];
 games[DELIRIUM].scripts["quit-test"] = [{ hold: "Shift" }, { tap: [72, 414] }, { wait: 600 }];
 games[DELIRIUM].actions.push({ label: "Quit test", script: "quit-test", when: ["menu"] });
 const openPreferences = games[DELIRIUM].blocks.filter((block) => block.screen);
@@ -110,6 +131,18 @@ async function lastRow(browser, who) {
   return file ? { name: file.data.subarray(LAST_ROW, LAST_ROW + 10).toString("latin1"), score: file.data.readUInt32BE(LAST_ROW + 10),
     bytes: file.data.subarray(LAST_ROW, LAST_ROW + 16).toString("hex") } : null;
 }
+
+/** Where Blobbo is on his board. */
+const blobboYellow = (r, g, b) => r > 245 && g >= 205 && g <= 230 && b < 20;
+async function whereBlobbo(browser) {
+  const found = (await browser.picture(null)).find(blobboYellow);
+  return found && { h: Math.round(found.h), v: Math.round(found.v) };
+}
+/** Run one of the page's scripts, or its check-only hook, from the page's own world. */
+const pageInput = (browser, kind, names = []) => browser.gameOwn(`window.systemlessOtterTube.input(${JSON.stringify(kind)}, ${JSON.stringify(names)}, true)`);
+// Where Delirium's "Please hit a key" box comes up over its Preferences when Set Keys is pressed.
+const KEY_PROMPT = { x: 230, y: 215, w: 180, h: 50 };
+let preferencesAsOpened = null;
 
 let browser;
 try {
@@ -230,6 +263,7 @@ try {
     await still(browser, left);
     const before = await look();
     await browser.picture("preferences-1-open.png");
+    preferencesAsOpened = (await browser.picture(null, KEY_PROMPT)).hash;
     const results = [];
     for (const { what, at } of insidePreferences) {
       await browser.tap(at);
@@ -273,8 +307,10 @@ try {
     await browser.tap([320, 250]);
     const asked = await browser.waitScreen("name-entry", 15_000).then(() => true, () => false);
     await sleep(500);
-    await browser.tap([25, 333]);
-    await sleep(600);
+    // (The letter C lies where Deregister is blocked while Preferences shows: on this screen a
+    // touch there is held for a fresh look at the screen, and then made.)
+    await browser.tap([123, 333]);
+    await sleep(900);
     await browser.picture("name-1-one-letter.png");
     // A controller has no pointer for the letter keys: A gets past the screen, keeping the letter.
     const past = await scriptSeen(browser, "start", () => browser.padPress([0]));
@@ -282,7 +318,144 @@ try {
     check("on the screen that asks for a name, the controller's A goes on into a new game", asked && past.outcome === "start:done" && playing, { asked, ...past });
     await browser.pad(null);
     const row = await lastRow(browser, who);
-    check("the letter the child tapped is the name in the table (the script did not write over it)", !!row && row.name === "a         " && row.score > 0, row && { kept: row.name === "a         ", score: row.score, bytes: row.bytes });
+    check("the letter the child tapped is the name in the table (the script did not write over it)", !!row && row.name === "c         " && row.score > 0, row && { kept: row.name === "c         ", score: row.score, bytes: row.bytes });
+  });
+
+  await part("after Exit", async () => {
+    const who = subject(7);
+    await launch(browser, "/blobbo/?systemless-test-scan=paused-slow", BLOBBO, who, "board");
+    await browser.pad({ b: [] });
+    await waitFor("the controller to be seen", async () => (await browser.kiosk()).pad === "on", 5000, 100);
+    const at0 = await whereBlobbo(browser);
+    const before = await browser.kiosk();
+    await browser.press("[data-kiosk-exit]");
+    // The page now waits for its last scan (which answers 1.2 s late in this check). Meanwhile
+    // the controller's left shoulder button, which is Save: a script that would change the disk.
+    await browser.padPress([4], 150);
+    const during = await browser.kiosk();
+    const waiting = !(await browser.events()).some((event) => event.type === "exit");
+    // And the rest of what a child could still do: a direction, a tap on the board, the Save
+    // button, a key of a real keyboard.
+    await browser.pad({ b: [13] });
+    await sleep(250);
+    await browser.pad({ b: [] });
+    await browser.tap([at0.h, at0.v + 40]);
+    await browser.press(scriptButton("save"));
+    await browser.keyboard([["2", "Numpad2"]]);
+    const left = await exited(browser);
+    await sleep(1500);
+    const after = await browser.kiosk();
+    // (The page's "Saving" notice lies over the picture from Exit on: take it away to look under it.)
+    await browser.game(`document.querySelectorAll(".ottertube-saving, .kiosk-busy").forEach((notice) => { notice.style.display = "none"; })`);
+    await sleep(200);
+    const at1 = await whereBlobbo(browser);
+    const closing = await browser.game(`document.querySelector(".app--ottertube").dataset.kioskClosing ?? null`);
+    check("once Exit is pressed no script starts, during its wait or after: not from the controller, not from a button",
+      waiting && during.busy === null && during.script === before.script && after.busy === null && after.script === before.script && !!left && closing === "leaving",
+      { waiting, during, after, closing });
+    check("and nothing reaches the game: Blobbo has not moved, and no key is down", !!at0 && !!at1 && at1.h === at0.h && at1.v === at0.v && during.held === "" && after.held === "", { at0, at1 });
+  });
+
+  await part("a letter in the name", async () => {
+    // The letter S is Blobbo's Drop key. Let go of at the moment Save is pressed, it has been seen
+    // to land in the Save dialog's name, and the game was then saved where Load does not look.
+    const who = "b".repeat(32);
+    await launch(browser, "/blobbo/", BLOBBO, who, "board");
+    const spoiled = await scriptSeen(browser, "spoiled-save", () => pageInput(browser, "script", ["spoiled-save"]));
+    const held = await waitFor("the saved game", () => browser.held(who), 20_000).catch(() => null);
+    const names = held ? decodeSaveText(held.data).files.map((file) => file.path.split("/").pop()) : [];
+    check("Blobbo's Save, finding a letter typed over the name it is about to save under, starts the dialog again and saves under the name Load looks for",
+      spoiled.outcome === "spoiled-save:done" && names.length === 1 && names[0] === "Untitled", { outcome: spoiled.outcome, names });
+  });
+
+  await part("exit before the game is up", async () => {
+    const url = `${stage.hostOrigin}/?fill=1&keep=1&game=${encodeURIComponent(`${stage.gameOrigin}/clockwerx/`)}&subject=${"a".repeat(32)}`;
+    await browser.page.send("Page.navigate", { url });
+    const pressed = await waitFor("the Exit button", () => browser.game(`(() => {
+      const exit = document.querySelector("[data-kiosk-exit]");
+      if (!exit) return null;
+      const up = document.querySelector(".app--ottertube").dataset.kioskMachine === "running";
+      exit.click();
+      return { up };
+    })()`), 20_000, 15);
+    const left = await exited(browser);
+    // Long enough for the game to come up and show its title, where the launch script would act.
+    await sleep(14_000);
+    const later = await browser.kiosk();
+    const machine = await browser.game(`document.querySelector(".app--ottertube").dataset.kioskMachine ?? null`);
+    check("Exit pressed before the game is up: the game comes up, and its launch script never starts",
+      pressed.up === false && !!left && machine === "running" && later.script === null && later.busy === null && !later.screens.includes("options"), { pressed, machine, later });
+  });
+
+  await part("late answer", async () => {
+    await launch(browser, "/clockwerx/?systemless-test-screens=slow", CLOCKWERX, subject(0), "options");
+    await browser.game(`document.querySelector(".app--ottertube").removeAttribute("data-kiosk-script")`);
+    // A script that holds a key and then looks at the screen: the look takes 600 ms here.
+    await pageInput(browser, "script", ["late-test"]);
+    const first = await waitFor("the first script", async () => { const k = await browser.kiosk(); return k.busy === "late-test" && k.held === "Alt" ? k : null; }, 3000, 30).catch(() => null);
+    // It is cancelled while the look is under way, and another script is started.
+    await pageInput(browser, "test-cancel");
+    const cancelled = await browser.kiosk();
+    await pageInput(browser, "script", ["short-test"]);
+    await sleep(1000);
+    // The first script's look has been answered by now (the screen is not the one it asked for).
+    const during = await browser.kiosk();
+    const ended = await waitFor("the second script to end", async () => { const k = await browser.kiosk(); return k.busy === null && k.script === "short-test:done"; }, 10_000, 50).catch(() => false);
+    check("a script cancelled while it waited for a look at the screen does not end the script started after it",
+      !!first && cancelled.script === "late-test:cancelled:test" && cancelled.held === "" && during.busy === "short-test" && during.held === "Meta" && ended,
+      { first: !!first, cancelled: cancelled.script, during: { busy: during.busy, held: during.held, script: during.script }, ended });
+  });
+
+  await part("mouse control", async () => {
+    const who = subject(8);
+    // The word Keyboard, which is lit while Keyboard is the control (the arrow that a touch moves stays off it).
+    const KEYBOARD = { x: 284, y: 127, w: 54, h: 21 };
+    const control = async () => {
+      const held = await browser.held(who);
+      const file = held && decodeSaveText(held.data).files.find((entry) => entry.path.endsWith("ClockWerx Settings"));
+      return file ? { value: file.data[608] } : null;
+    };
+    await launch(browser, "/clockwerx/", CLOCKWERX, who, "options");
+    const keyboardLit = await still(browser, KEYBOARD);
+    await browser.tap([380, 137]);
+    await sleep(1200);
+    const afterTouch = (await browser.picture("mouse-1-chosen.png", KEYBOARD)).hash;
+    check("with its block taken away for this check, ClockWerx's Keyboard or Mouse switch reacts to a touch (the block is what stops it)",
+      afterTouch !== keyboardLit, { keyboardLit, afterTouch });
+    await scriptSeen(browser, "play", () => browser.press(scriptButton("play")));
+    const saved = await waitFor("the settings in the save", control, 30_000).catch(() => null);
+    check("and Mouse control is then what the child's save holds", saved?.value === 0, saved);
+    // The next visit: Keyboard is written over the saved settings before the game starts.
+    await launch(browser, "/clockwerx/", CLOCKWERX, who, "options");
+    const again = await still(browser, KEYBOARD);
+    // The save itself keeps what the game last wrote until the game writes its settings again
+    // with something changed: choose Easy, so that it does.
+    await browser.tap([243, 307]);
+    await sleep(1200);
+    await scriptSeen(browser, "play", () => browser.press(scriptButton("play")));
+    const back = await waitFor("Keyboard in the save", async () => (await control())?.value === 1, 30_000).then(() => true, () => false);
+    check("a save left in Mouse control comes back in Keyboard control on the next visit, and is saved so when the game next writes its settings",
+      again === keyboardLit && back, { litAgain: again === keyboardLit, back });
+  });
+
+  await part("a screen that has just come up", async () => {
+    if (!preferencesAsOpened) throw new Error("no picture of Preferences to compare with (the earlier part failed)");
+    await launch(browser, "/delirium/?systemless-test-screens=slow", DELIRIUM, subject(9), "title");
+    await browser.tap([320, 250]);
+    await browser.waitScreen("menu", 20_000);
+    await sleep(1500);
+    // Preferences (its own block is taken away in this check), and at once Set Keys under it,
+    // over and over, for longer than the page takes here to recognise the new screen.
+    await browser.tap([237, 414], 60);
+    const until = Date.now() + 4000;
+    let taps = 0;
+    while (Date.now() < until) { await browser.tap([447, 364], 40); taps += 1; await sleep(30); }
+    const opened = await browser.waitScreen("prefs", 10_000).then(() => true, () => false);
+    await sleep(1500);
+    const after = (await browser.picture("fresh-1-after-taps.png", KEY_PROMPT)).hash;
+    await browser.picture("fresh-2-whole.png");
+    check("a control that is blocked on a screen takes no touch from the moment the screen comes up, before the page has recognised it",
+      opened && after === preferencesAsOpened, { opened, taps, same: after === preferencesAsOpened });
   });
 } catch (error) {
   check("the run completed", false, String(error?.stack ?? error));

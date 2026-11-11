@@ -442,6 +442,16 @@ impl Machine {
         for plugin in plugin_files {
             runner.import_vfs_file_relative_to_launched_app(&plugin.mount_path, &plugin.file)?;
         }
+        // A seed for a fresh player (none unless a build sets one): it becomes
+        // part of the mounted files, so it is not itself a change to save.
+        for patch in save_store::take_boot_patches() {
+            if let Some(mut file) = runner.vfs_file_snapshot(&patch.path) {
+                if let Some(data_fork) = patch.apply(&file.data_fork) {
+                    file.data_fork = data_fork;
+                    runner.import_vfs_file(&file);
+                }
+            }
+        }
         let archive_vfs_stats = vfs_stats(&mut runner);
         let restored_saves = save_store::load_saved_files(game_id)
             .await

@@ -35,6 +35,9 @@ struct BootConfig {
     /// Extra saved guest paths for this entry. Absent in every other build.
     #[serde(default)]
     extra_save_paths: Vec<String>,
+    /// A fresh player's seed, applied to the mounted files. Absent in every other build.
+    #[serde(default)]
+    boot_patches: Vec<crate::save_store::BootPatch>,
 }
 
 // Fork bytes travel separately in transfer lists. Keep every Finder field and
@@ -135,6 +138,9 @@ impl WorkerMachine {
                 config.save_load_only,
                 &config.extra_save_paths,
             );
+        }
+        if !config.boot_patches.is_empty() {
+            crate::save_store::set_boot_patches(config.boot_patches);
         }
         let paths: Vec<&str> = config.remove_paths.iter().map(String::as_str).collect();
         let mappings: Vec<(&str, &str)> = config

@@ -16,7 +16,42 @@ const STORE_NAME: &str = "files";
 thread_local! {
     static PENDING_SAVES: std::cell::RefCell<std::collections::BTreeMap<String, usize>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
     static LAST_SAVE_ERRORS: std::cell::RefCell<std::collections::BTreeMap<String, String>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
+    static BOOT_PATCHES: std::cell::RefCell<Vec<BootPatch>> = const { std::cell::RefCell::new(Vec::new()) };
     static SAVE_POLICY: std::cell::RefCell<SavePolicy> = const { std::cell::RefCell::new(SavePolicy { memory_only: false, load_only: false, extra_paths: Vec::new() }) };
+}
+
+/// Bytes written over part of one mounted file before the game starts: a
+/// fresh player's seed (a neutral name in a settings file, say). The file must
+/// exist and be long enough; a patch that does not fit is skipped.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct BootPatch {
+    pub path: String,
+    pub offset: usize,
+    pub bytes: Vec<u8>,
+}
+
+impl BootPatch {
+    /// The data fork with the patch applied, or `None` when it does not fit.
+    pub fn apply(&self, data_fork: &[u8]) -> Option<Vec<u8>> {
+        let end = self.offset.checked_add(self.bytes.len())?;
+        if end > data_fork.len() {
+            return None;
+        }
+        let mut patched = data_fork.to_vec();
+        patched[self.offset..end].copy_from_slice(&self.bytes);
+        Some(patched)
+    }
+}
+
+/// Patches for the machine about to start on this thread. None in any build
+/// that does not call this.
+pub fn set_boot_patches(patches: Vec<BootPatch>) {
+    BOOT_PATCHES.with(|slot| *slot.borrow_mut() = patches);
+}
+
+/// The patches set for this boot, once.
+pub fn take_boot_patches() -> Vec<BootPatch> {
+    BOOT_PATCHES.with(|slot| std::mem::take(&mut *slot.borrow_mut()))
 }
 
 /// Per-thread save rules. The default (nothing kept in memory only, no extra
@@ -835,6 +870,36 @@ mod tests {
         assert!(!writes_nothing());
         assert!(!is_extra_save_path("System Folder/Preferences/Game Prefs"));
         assert!(!memory_only());
+    }
+
+    #[test]
+    fn a_boot_patch_overwrites_in_place_and_only_when_it_fits() {
+        let patch = BootPatch {
+            path: "Volume/Settings".into(),
+            offset: 2,
+            bytes: vec![6, b'P', b'l'],
+        };
+        assert_eq!(
+            patch.apply(&[9, 9, 9, 9, 9, 9]),
+            Some(vec![9, 9, 6, b'P', b'l', 9])
+        );
+        assert_eq!(
+            patch.apply(&[9, 9, 9, 9, 9]),
+            Some(vec![9, 9, 6, b'P', b'l'])
+        );
+        assert_eq!(patch.apply(&[9, 9, 9, 9]), None, "never grows the file");
+        assert_eq!(
+            BootPatch {
+                offset: usize::MAX,
+                ..patch.clone()
+            }
+            .apply(&[1, 2, 3]),
+            None
+        );
+        assert!(take_boot_patches().is_empty());
+        set_boot_patches(vec![patch.clone()]);
+        assert_eq!(take_boot_patches(), vec![patch]);
+        assert!(take_boot_patches().is_empty(), "taken once");
     }
 
     #[test]

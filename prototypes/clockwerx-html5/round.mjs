@@ -1,3 +1,4 @@
+import {assertSlowdownClass4Board} from './slowdown-class4.mjs';
 import {assertMovingWaystationBoard} from './moving-waystation.mjs';
 import {assertSlowdownWallBoard} from './slowdown-walls.mjs';
 import {assertStaticSlowdownBoard,StaticSlowdownRuntime} from './static-slowdown.mjs';
@@ -81,7 +82,7 @@ export class SourceRound extends MovementGame {
   if(board.movingTubesRules)assertMovingTubesBoard(board);
   if(board.movingProgrammedBusterRules)assertMovingProgrammedBusterBoard(board,{outlines,dotOutlines,bombOutlines,elevatorOutlines});
   if(board.movingCheckpointControlRules)assertMovingCheckpointControlBoard(board,{outlines,dotOutlines,elevatorOutlines});
-  if(board.staticSlowdownRules)(board.slowdownWallRules?assertSlowdownWallBoard:assertStaticSlowdownBoard)(board,{outlines,dotOutlines});
+  if(board.staticSlowdownRules)(board.slowdownClass4Rules?assertSlowdownClass4Board:board.slowdownWallRules?assertSlowdownWallBoard:assertStaticSlowdownBoard)(board,{outlines,dotOutlines});
   if(board.movingWaystationRules)assertMovingWaystationBoard(board,{outlines,dotOutlines});
   if(board.movingGoalGoodieRules)assertMovingGoalGoodieBoard(board,{outlines,dotOutlines});
   if(board.staticTeleportBusterRules)assertStaticTeleportBusterBoard(board,{outlines,dotOutlines});

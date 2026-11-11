@@ -575,7 +575,15 @@ mod link {
     /// machine's periodic save scan, `paused-slow` also makes an explicit scan
     /// answer late. Nothing in OtterTube sets it.
     fn test_scan_mode() -> Option<String> {
-        let search = web_sys::window()?.location().search().ok()?;
+        let location = web_sys::window()?.location();
+        // Loopback only: a bundle served from a real name never acts on it.
+        if !matches!(
+            location.hostname().ok()?.as_str(),
+            "127.0.0.1" | "localhost" | "[::1]"
+        ) {
+            return None;
+        }
+        let search = location.search().ok()?;
         let value = search
             .trim_start_matches('?')
             .split('&')

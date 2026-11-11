@@ -34,7 +34,7 @@ try {
     if ($AuthorizationSHA256 -cnotmatch '^[0-9a-f]{64}$' -or (Get-FileHash -LiteralPath $AuthorizationPath -Algorithm SHA256).Hash.ToLowerInvariant() -cne $AuthorizationSHA256) { throw 'Authorization hash mismatch' }
     $taskAuth = Get-Content -LiteralPath $AuthorizationPath -Raw | ConvertFrom-Json
     if ($taskAuth.schema -cne 'clockwerx-original-native-authorization-v1' -or $taskAuth.authority -cne 'Root' -or $taskAuth.executionApproved -isnot [bool] -or -not $taskAuth.executionApproved -or -not $taskAuth.invocationID) { throw 'Fresh explicit Root native authorization required' }
-    if ($taskAuth.purpose -cne 'clockwerx-bounded-original-capture-v1' -or $taskAuth.mode -cnotin @('cold','rehearsal') -or $taskAuth.wallBoundSeconds -lt 1 -or $taskAuth.wallBoundSeconds -gt 600 -or $taskAuth.maxFrontendTicks -lt 1 -or $taskAuth.maxFrontendTicks -gt 10000 -or $taskAuth.plannedFrontendTicks -gt $taskAuth.maxFrontendTicks -or $taskAuth.captureCount -lt 1 -or $taskAuth.captureCount -gt 64 -or $taskAuth.captureViewingAuthorized -ne $false) { throw 'Native capture/view bounds mismatch' }
+    if ($taskAuth.purpose -cne 'clockwerx-bounded-original-capture-v1' -or $taskAuth.mode -cnotin @('cold','diagnostic','rehearsal') -or $taskAuth.wallBoundSeconds -lt 1 -or $taskAuth.wallBoundSeconds -gt 600 -or $taskAuth.maxFrontendTicks -lt 1 -or $taskAuth.maxFrontendTicks -gt 10000 -or $taskAuth.plannedFrontendTicks -gt $taskAuth.maxFrontendTicks -or $taskAuth.captureCount -lt 1 -or $taskAuth.captureCount -gt 64 -or $taskAuth.captureViewingAuthorized -ne $false) { throw 'Native capture/view bounds mismatch' }
     foreach ($taskGate in @('earnedFixtureReviewed','entryAndCapturePlanReviewed','noDedicatedPNGViewed','sourceFitterGateRequiredBeforePNGView')) {
         if ($taskAuth.gates.$taskGate -isnot [bool] -or -not $taskAuth.gates.$taskGate) { throw "Root gate incomplete: $taskGate" }
     }
@@ -45,6 +45,12 @@ try {
         if ($taskAuth.gates.closedActualCandidateReviewed -ne $true) { throw 'Closed actual candidate review required' }
         $taskCandidate = Get-Content -LiteralPath $taskAuth.actualCandidateReview.path -Raw | ConvertFrom-Json
         if ($taskCandidate.status -cne 'CLOSED_CANDIDATE_GOAL' -or $taskCandidate.mode -cne 'candidate') { throw 'Original rehearsal needs a closed actual goal' }
+    }
+    if ($taskAuth.mode -ceq 'diagnostic') {
+        Assert-TaskPin $taskAuth.actualDiagnosticReview
+        Assert-TaskPin $taskAuth.inputSidecar
+        $taskDiagnostic = Get-Content -LiteralPath $taskAuth.actualDiagnosticReview.path -Raw | ConvertFrom-Json
+        if ($taskAuth.gates.closedActualDiagnosticReviewed -ne $true -or $taskDiagnostic.status -cne 'CLOSED_CONTACT_DIAGNOSTIC' -or $taskDiagnostic.accepted -ne $false) { throw 'Original diagnostic needs a reviewed actual contact run; no acceptance claim' }
     }
     $taskFixtureReview = Get-Content -LiteralPath $taskAuth.fixtureReview.path -Raw | ConvertFrom-Json
     if ($taskFixtureReview.destinationSha256 -cne $taskAuth.fixture.sha256) { throw 'Earned fixture review does not describe the pinned image' }

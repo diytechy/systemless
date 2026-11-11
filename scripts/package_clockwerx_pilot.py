@@ -49,6 +49,7 @@ def package(dist,assets):
         if vector.get('goal'):references.add(vector['goal']['file'])
         if vector.get('starbursts'):references.add(vector['starbursts']['file'])
         if vector.get('busters'):references.add(vector['busters']['file'])
+        if vector.get('wallBursts'):references.add(vector['wallBursts']['file'])
         if vector.get('rotatingSpikes'):references.add(vector['rotatingSpikes']['file'])
         if vector.get('connectors'):references.add(vector['connectors']['file'])
         references.update(dot['file'] for dot in vector.get('dotVariants',{}).values())

@@ -32,12 +32,12 @@ export function assertFreeBusterBoard(b,outlines){
  if(outlines)for(let i=0;i<64;i++){const f=outlines.groups?.[3900]?.frames?.[i];if(!f||!Array.isArray(f.rows)||!['left','top','right','bottom'].every(k=>Number.isInteger(f[k])))fail();}
  return true;
 }
-// SANE computes 6*cos(theta), -6*sin(theta), rounds to integer, then applies
-// the human angular sign. No sample is a half integer on the 64-angle lattice.
+// WAHitEnemy applies SANE FTTI ($16), then converts to a word ($2810),
+// before applying the human angular sign. Components truncate toward zero.
 export function busterVelocity(frame,direction){
  if(!int(frame,0,63)||![-1,1].includes(direction))fail();
- const theta=frame*Math.PI/32,round=n=>Math.round(Math.abs(n))*Math.sign(n);
- return {x:round(-6*Math.sin(theta))*direction||0,y:round(6*Math.cos(theta))*direction||0};
+ const theta=frame*Math.PI/32;
+ return {x:Math.trunc(-6*Math.sin(theta))*direction||0,y:Math.trunc(6*Math.cos(theta))*direction||0};
 }
 export function advanceFreeBuster(a,delta,guestTick){
  assertFreeBusterActor(a);
@@ -52,4 +52,23 @@ export function advanceFreeBuster(a,delta,guestTick){
   }
  }
  return events;
+}
+// WLShatterSeg: one transient clone per wall hit. Segment collision probes
+// run in source order against the unchanged incoming projectile shape.
+export function shatterFreeBusterWall(w,overlaps){
+ if(!w||![0,1,...Array.from({length:15},(_,i)=>i+5)].includes(w.frame)||typeof overlaps!=='function')fail();
+ const cross=w.frame>=5;let removed=0;
+ if(cross){
+  const mask=w.frame-4;
+  for(const [bit,frame]of [[4,22],[1,20],[8,23],[2,21]])if(mask&bit&&overlaps(frame))removed|=bit;
+  const remaining=mask&~removed;w.frame=remaining+4;if(!remaining)w.visible=false;
+ }else w.visible=false;
+ const start=cross?(removed&5?0:9):(w.frame===0?27:18);
+ return {group:cross?3700:3600,frame:start,last:start+8,reference:null,
+  point:{x:w.x-11+(cross&&removed&1?19:0),y:w.y-9+(cross&&removed&2?19:0)},removed};
+}
+export function advanceBusterWallEffects(effects,count){
+ if(!Array.isArray(effects)||!int(count,0,Number.MAX_SAFE_INTEGER))fail();
+ for(const e of effects)if(e.reference!==count){e.reference=count;e.frame++;}
+ return effects.filter(e=>e.frame<=e.last);
 }

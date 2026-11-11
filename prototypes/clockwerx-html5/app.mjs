@@ -116,6 +116,14 @@ function drawWalls(){
  }
  ctx.drawImage(wallLayer,0,0,640,480);
 }
+function drawBusterWallEffects(){
+ if(!game.busterWallEffects?.length)return;
+ const a=manifest.vectorAssets?.wallBursts;if(!a)throw Error('Wall burst artwork required');
+ for(const e of game.busterWallEffects){
+  const f=a.groups[e.group]?.[e.frame];if(!f)throw Error('Missing wall burst frame');
+  ctx.drawImage(images[a.file],f.sx,f.sy,f.width,f.height,e.point.x+f.x,e.point.y+f.y,f.width,f.height);
+ }
+}
 function drawDeath(){
  const spec=manifest.vectorAssets?.death;if(!spec||!game.death)return;
  for(const particle of game.death.snapshot()){
@@ -305,7 +313,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  const sourcePaint=game.board.movingDoorCheckpointRules===true||game.board.movingTubesRules===true||game.board.movingBombSpikeWaystationRules===true||game.board.movingSpikeRules===true||game.board.slidingBombRules===true||game.board.movingBombRules===true||game.board.movingMarkedGoalRules===true||game.board.movingElevatorRules===true||game.board.movingCheckpointRingRules===true||game.board.movingMarkedBonusRules===true||game.board.staticMarkedOrbitalRules===true||game.board.movingMarkedOrdinaryRules===true||game.board.staticSlidingBombGoodieRules===true;
  if(sourcePaint){ctx.save();clipSourceUniverse(ctx);ctx.drawImage(sourceBackground.draw(game,field,{width:canvas.width,height:canvas.height}),0,0,640,480);drawSourceForeground();if(game.board.movingDoorCheckpointRules)drawDoors();drawSpikes();drawBombs('upper');drawBombs('explosions');}
  else{
- drawBombs('background');drawGunTriggerLayer(true);drawWalls();drawConnectors();for(const d of game.board.dots)drawDot(d);drawTeleports();
+ drawBombs('background');drawGunTriggerLayer(true);drawWalls();drawBusterWallEffects();drawConnectors();for(const d of game.board.dots)drawDot(d);drawTeleports();
  drawDoors();
  drawElevators(game.board.bombOilElevatorRules?'glyphs':'all');
  drawGunTriggerLayer(false);
@@ -407,7 +415,7 @@ async function load(){
    ...['symbols','faders'].flatMap(key=>vector.teleports?.[key]?[vector.teleports[key].file]:[]),
    ...['puddles','droplets'].flatMap(key=>vector.oil?.[key]?[vector.oil[key].file]:[]),
    ...Object.values(vector.specialDots||{}).map(atlas=>atlas.file),
-   ...(vector.busters?[vector.busters.file]:[]),
+   ...(vector.busters?[vector.busters.file]:[]),...(vector.wallBursts?[vector.wallBursts.file]:[]),
    ...Object.values(vector.gunTriggers||{}).flatMap(g=>g.frames.map(f=>f.file)),
    ...Object.values(vector.bombs||{}).map(atlas=>atlas.file),...Object.values(vector.bombDots||{}).map(atlas=>atlas.file),
    ...(vector.death?.file?[vector.death.file]:(vector.death?.frames||[]).map(f=>f.file))

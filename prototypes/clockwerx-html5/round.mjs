@@ -1,4 +1,4 @@
-import {assertFreeBusterBoard,advanceFreeBuster,busterVelocity} from './free-busters.mjs';
+import {assertFreeBusterBoard,advanceFreeBuster,busterVelocity,shatterFreeBusterWall,advanceBusterWallEffects} from './free-busters.mjs';
 import {assertMovingBombSpikeWaystationScope,assertMovingBombSpikeWaystationPhysics} from './moving-bomb-spike-waystation.mjs';
 import {assertStaticSlidingBombGoodiePhysics,assertStaticSlidingBombGoodieScope} from './static-sliding-bomb-goodies.mjs';
 import {assertMovingMarkedOrdinaryScope,assertMovingMarkedOrdinaryPhysics} from './moving-marked-ordinary.mjs';
@@ -154,7 +154,9 @@ export class SourceRound extends MovementGame {
   }
   if(board.teleportRules){this.teleports=new TeleportRuntime(board.teleports,board.dots,this.teleportClocks.advance(0),board.slidingTeleportRules?{allowSlidingTeleports:true,connectors:board.connectors,actors:[this.player,...this.enemies]}:{});this.onAfterHumanGrab(this.point(this.player));}
   if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
-  if(board.freeBusterRules)this.gunTriggers=new GunTriggerRuntime({guns:[],triggers:[],rawBounds:{left:28,top:28,right:612,bottom:452},frameOrigin:{x:28,y:28},templateReference:this.actorClasses.snapshot().classes[0].count});
+  // PR stores universe-local sprite bases. frameOrigin is added only for
+  // canonical collision/render coordinates, never to the raw clipping bounds.
+  if(board.freeBusterRules)this.gunTriggers=new GunTriggerRuntime({guns:[],triggers:[],rawBounds:{left:0,top:0,right:584,bottom:424},frameOrigin:{x:28,y:28},templateReference:this.actorClasses.snapshot().classes[0].count});
   if(board.gunTriggerProjectileRules){
    this.gunOutlines=gunOutlines;
    this.gunTriggers=new GunTriggerRuntime({...board.gunTriggerChild,templateReference:this.actorClasses.snapshot().classes[0].count});
@@ -195,6 +197,7 @@ export class SourceRound extends MovementGame {
 
   this.bombScene?.reset({restartLevel:!preserveCheckpoint});
   this.gunTriggers?.reset();
+  if(this.board.freeBusterRules){this.busterWallClock??=createSourceTimerChain(250,1);this.busterWallEffects=[];}
   this.guestTicks??=0;
   if(this.board.specialDotRules){
    this.dotClock??=createSourceTimerChain(40,2);this.protectionClock??=createSourceTimerChain(50,1);
@@ -406,7 +409,8 @@ export class SourceRound extends MovementGame {
   const hit=findDoorContact(doors,shape,{checkLethal:false});return hit?this.board.doors[hit.doorIndex]:null;
  }
  shatterBusterWall(w,p){
-  if(w.frame>=5){const shape=this.busterOutline(p);let mask=w.frame-4;for(const [bit,frame] of [[4,22],[1,20],[8,23],[2,21]])if(mask&bit&&outlineCollision(shape,worldOutline(this.outlines,800,frame,w)))mask&=~bit;if(mask)w.frame=mask+4;else w.visible=false;}else w.visible=false;
+  const shape=this.busterOutline(p),effect=shatterFreeBusterWall(w,frame=>outlineCollision(shape,worldOutline(this.outlines,800,frame,w)));
+  effect.reference=this.busterWallClock.advance(0).clientCount;this.busterWallEffects.push(effect);
   this.board.wallRevision=(this.board.wallRevision??0)+1;this.event('buster-wall-shatter',this.player,{id:w.id});
  }
  projectileCollision(){
@@ -595,6 +599,7 @@ export class SourceRound extends MovementGame {
   this.deathClock.advance(elapsed);
   this.oil?.advanceClocks(elapsed);
   this.bombScene?.advanceClocks(elapsed);
+  const wallEffectCount=this.busterWallClock?.advance(elapsed).clientCount;
   const teleportCounts=this.teleportClocks?.advance(elapsed);
   if(this.teleports)this.teleports.latchClocks(teleportCounts);
   const doorCount=this.doorClock.advance(elapsed).clientCount;
@@ -627,6 +632,7 @@ export class SourceRound extends MovementGame {
   // Door callbacks observe one changed shared count, rather than catching up
   // every missed phase. Cross-layer source traversal phase remains approximate.
   if(!this.death)this.doorSystem.observeClock(doorCount);
+  if(!this.death&&this.busterWallEffects)this.busterWallEffects=advanceBusterWallEffects(this.busterWallEffects,wallEffectCount);
   this.bombScene?.processUpper();
   // Physical source layer11 (PU/DP) precedes enemy1, then human0. A droplet
   // arrival may latch death and freeze the remaining sprite callbacks.
@@ -691,6 +697,6 @@ export class SourceRound extends MovementGame {
   }  // RO periodic SPI bank follows universe processing; upstream MT keeps running.
   if(latchMovingSpikeBank)this.movingSpikes.latchBank(this.spikeCount);
  }
-  snapshot(){return {...super.snapshot(),...((this.board.movingSpikeRules||this.board.movingBombSpikeWaystationRules)?{movingSpikes:this.movingSpikes.snapshot()}:{}),...(this.movingDots?{movingDots:[...this.movingDots.values()].map(r=>r.snapshot())}:{}),...(this.board.slidingConnectorRules?{connectors:this.board.connectors.map(e=>({...e,frame:connectorLook(e,this.board.dots)}))}:{}),...(this.teleports?{teleports:this.teleports.snapshot(),teleportClocks:this.teleportClocks.snapshot()}:{}),...(this.elevators?{elevators:this.elevators.snapshot()}:{}),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),...(this.gunTriggers?{gunTriggers:this.gunTriggers.snapshot()}:{}),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+  snapshot(){return {...super.snapshot(),...(this.busterWallEffects?{busterWalls:{effects:structuredClone(this.busterWallEffects),clock:this.busterWallClock.advance(0)}}:{}),...((this.board.movingSpikeRules||this.board.movingBombSpikeWaystationRules)?{movingSpikes:this.movingSpikes.snapshot()}:{}),...(this.movingDots?{movingDots:[...this.movingDots.values()].map(r=>r.snapshot())}:{}),...(this.board.slidingConnectorRules?{connectors:this.board.connectors.map(e=>({...e,frame:connectorLook(e,this.board.dots)}))}:{}),...(this.teleports?{teleports:this.teleports.snapshot(),teleportClocks:this.teleportClocks.snapshot()}:{}),...(this.elevators?{elevators:this.elevators.snapshot()}:{}),enemies:this.enemies.map(h=>({...h})),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),...(this.gunTriggers?{gunTriggers:this.gunTriggers.snapshot()}:{}),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   ...(this.board.movingElevatorRules?{pilotRecoveries:this.pilotRecoveries??0,pilotInputLatch:this.pilotInputLatch===true}:{}),dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

@@ -97,6 +97,12 @@ def stage(recipe):
         raise ValueError("QA additions cannot replace or duplicate assets")
     for row in additions.values():
         checked(row)
+    vector_additions = recipe.get("vectorAssets", {})
+    if not isinstance(vector_additions, dict) or vector_additions.keys() & manifest.get("vectorAssets", {}).keys():
+        raise ValueError("QA vector additions cannot replace existing artwork definitions")
+    for definition in vector_additions.values():
+        if not isinstance(definition, dict) or definition.get("file") not in additions:
+            raise ValueError("New vector artwork must name a verified added asset")
     if scene.get("backdrop") and scene["backdrop"] not in (assets.keys() | additions.keys()):
         raise ValueError("Backdrop is not in the QA inventory")
     definition = {"ordinal": ordinal, "title": scene["title"], "data": data}
@@ -127,6 +133,8 @@ def stage(recipe):
         shutil.copy2(Path(row["path"]), dst)
         manifest["files"].append({"name": name, "sha256": sha(dst), "bytes": dst.stat().st_size})
     scenes.append(scene)
+    if vector_additions:
+        manifest.setdefault("vectorAssets", {}).update(vector_additions)
     mp = out / "assets/manifest.json"
     write(mp, manifest)
     for k in ("functional_goal_verified", "actual_proof_receipt_sha256", "last_bounded_acceptance", "root_actual_proof_review_sha256"):

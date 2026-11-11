@@ -120,6 +120,13 @@ a closed actual candidate and input sidecar. It does not view captures or
 retry. `-ValidateOnly` checks the prepared pins and scenario without launching
 a process. Keep the source-only original fitter frozen before pixel reads.
 
+For focused contact evidence before a goal exists, explicit `diagnostic` mode
+requires pinned `actualDiagnosticReview` and `inputSidecar` files, the
+`closedActualDiagnosticReviewed` gate, and review status
+`CLOSED_CONTACT_DIAGNOSTIC` with `accepted: false`. It retains the same capture,
+fixture, source-fitter, ownership and timeout gates. This does not admit a
+diagnostic as a completed goal or replace the rehearsal requirement.
+
 `compare-native-actors.py` joins the independently saved original fits to a
 closed candidate's source lineage at a declared fixed prefix. It retains
 unclear observations and chooses the minimum mismatch among assignments within
@@ -202,6 +209,10 @@ pins `freeze`, `config`, and `literal`, and supplies a `scene` with `id`,
 payloads with `addAssets` (each row is a pin with `name`); use
 `profileNames` to map renamed profiles to bundle filenames. The helper
 preserves the installed scene definitions and never replaces live assets.
+
+Optional `vectorAssets` entries may add new artwork definitions whose `file`
+names are verified `addAssets` entries. Existing artwork definitions cannot be
+replaced by this append helper.
 
 ## Saved original actor comparison
 

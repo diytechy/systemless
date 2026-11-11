@@ -440,6 +440,22 @@ impl WorkerMachine {
         self.machine.flush_save_files();
     }
 
+    /// Hashes of screen regions given as x, y, width, height four at a time,
+    /// each as 16 hex digits. Only the OtterTube page asks.
+    #[cfg(feature = "ottertube")]
+    #[wasm_bindgen(js_name = regionHashes)]
+    pub fn region_hashes(&mut self, regions: Vec<u16>) -> Array {
+        let regions: Vec<[u16; 4]> = regions
+            .chunks_exact(4)
+            .map(|region| [region[0], region[1], region[2], region[3]])
+            .collect();
+        let hashes = Array::new();
+        for hash in self.machine.region_hashes(&regions) {
+            hashes.push(&JsValue::from_str(&format!("{hash:016x}")));
+        }
+        hashes
+    }
+
     #[wasm_bindgen(js_name = saveFilesVersion)]
     pub fn save_files_version(&self) -> String {
         self.machine.save_files_version().to_string()

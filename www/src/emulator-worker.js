@@ -257,6 +257,9 @@ self.onmessage = async (event) => {
     } else if (message.type === "deleteSave") {
       machine.deleteSave(message.path);
       publishSaveFiles("saveFiles", message.requestId);
+    } else if (message.type === "screenHashes") {
+      // The OtterTube page's scripts ask what is on the game's screen; no catalogue page sends it.
+      reply({ type: "screenHashes", probeId: message.probeId, hashes: machine.regionHashes(new Uint16Array(message.regions)) });
     } else if (message.type === "scanSaves") {
       // Asked for by a page that is about to leave; no catalogue page sends it.
       // delayMs is a browser check's way to make this answer late.
@@ -265,7 +268,7 @@ self.onmessage = async (event) => {
       publishSaveFiles("saveFiles", message.requestId);
     }
   } catch (error) {
-    const fatal = !["importSave", "deleteSave", "scanSaves"].includes(message.type);
+    const fatal = !["importSave", "deleteSave", "scanSaves", "screenHashes"].includes(message.type);
     failed ||= fatal;
     if (fatal) { disconnectRenderer(); stopGpuCompute(); }
     reply({

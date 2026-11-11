@@ -887,6 +887,49 @@ impl Machine {
         }
     }
 
+    /// One hash for each `[x, y, width, height]` region of the guest's own
+    /// screen, in guest pixels and without the pointer: what a script in the
+    /// OtterTube page tells one screen of a game from another by. A region
+    /// that leaves the screen is clipped; one wholly outside hashes as empty.
+    #[cfg(feature = "ottertube")]
+    pub fn region_hashes(&mut self, regions: &[[u16; 4]]) -> Vec<u64> {
+        let (screen_mode, clut) = {
+            let dispatcher = self.runner.dispatcher();
+            (dispatcher.screen_mode, *dispatcher.device_clut)
+        };
+        let palette = display::rgba_palette_from_clut(&clut);
+        let mut rgba = Vec::new();
+        display::render_screen_with_rgba_palette_into(
+            self.runner.bus(),
+            screen_mode,
+            &palette,
+            &mut rgba,
+        );
+        let width = usize::from(screen_mode.2);
+        let height = usize::from(screen_mode.3);
+        if width == 0 || rgba.len() < width * height * 4 {
+            return vec![0; regions.len()];
+        }
+        regions
+            .iter()
+            .map(|&[x, y, w, h]| {
+                let (x, y) = (usize::from(x).min(width), usize::from(y).min(height));
+                let (right, bottom) = (
+                    (x + usize::from(w)).min(width),
+                    (y + usize::from(h)).min(height),
+                );
+                let mut hash = 0xcbf2_9ce4_8422_2325u64;
+                for row in y..bottom {
+                    for &byte in &rgba[(row * width + x) * 4..(row * width + right) * 4] {
+                        hash ^= u64::from(byte);
+                        hash = hash.wrapping_mul(0x0000_0100_0000_01b3);
+                    }
+                }
+                hash
+            })
+            .collect()
+    }
+
     pub fn save_files(&self) -> &[DownloadableSaveFile] {
         &self.save_files
     }

@@ -45,11 +45,10 @@ if (!link.hosts.includes(hostOrigin)) {
 const GAME_ID = "clockwerx-personal-10";
 const SUBJECT = { a: "a".repeat(32), b: "b".repeat(32), c: "c".repeat(32), d: "d".repeat(32), e: "e".repeat(32) };
 const scopeOf = (subject) => `${GAME_ID}@${subject}`;
-// ClockWerx's 640x480 screen. The New game screen follows the title once it is clicked.
+// ClockWerx's 640x480 screen. The New game screen follows the title by itself (the launch script).
 const AWAY = [30, 300];
 const EASY = [243, 307];
 const MEDIUM = [311, 307];
-const NAME_FIELD = [210, 137];
 const PLAY = [318, 402];
 const DIFFICULTY_ROW = { x: 144, y: 297, w: 269, h: 22 };
 const NAME_BOX = { x: 150, y: 128, w: 125, h: 20 };
@@ -179,15 +178,6 @@ async function openBrowser(label) {
     await sleep(250);
     await event("mouseReleased", 0);
   }
-  async function type(text) {
-    for (const key of text) {
-      const code = `Key${key.toUpperCase()}`;
-      await page.send("Input.dispatchKeyEvent", { type: "keyDown", key, code, text: key });
-      await sleep(140);
-      await page.send("Input.dispatchKeyEvent", { type: "keyUp", key, code });
-      await sleep(140);
-    }
-  }
   // A piece of the game's screen as PNG bytes (base64). Static parts compare equal between runs.
   async function clip(rect, file) {
     const box = await canvasBox();
@@ -233,14 +223,22 @@ async function openBrowser(label) {
     if (prepare) { await prepare(); await host(`fakeHost.open()`); }
     const init = await waitFor("init", async () => (await events()).find((event) => event.type === "init"), 20_000);
     await waitFor("the game to run", () => game(`document.querySelector("canvas.game-canvas")?.dataset.runtimeGameId === ${JSON.stringify(GAME_ID)}`), 120_000);
-    await sleep(8000); // the title sequence
-    await click(AWAY); // any click leaves the title for the New game screen
-    await sleep(3000);
+    // The game's launch script leaves the title for the New game screen by itself.
+    await waitFor("the New game screen", () => game(`(() => { const d = document.querySelector(".app--ottertube").dataset;
+      return (d.kioskScreen ?? "").split(" ").includes("options") && !d.kioskBusy; })()`), 60_000, 100);
+    // The screen fades in: wait until it has stopped changing.
+    let last = null, same = 0;
+    await waitFor("the New game screen to settle", async () => {
+      const now = await clip(DIFFICULTY_ROW);
+      same = now === last ? same + 1 : 0;
+      last = now;
+      return same >= 2;
+    }, 20_000, 350);
     return init;
   }
 
   return {
-    page, host, game, otherSiteFrame, click, type, clip, events, storedKeys, storedRecord, storedCounter, saveState, held, play,
+    page, host, game, otherSiteFrame, click, clip, events, storedKeys, storedRecord, storedCounter, saveState, held, play,
     async close() {
       try { page.close(); } catch { /* closing */ }
       chrome.kill();
@@ -287,10 +285,6 @@ try {
   await sleep(600);
   const easyRow = await first.clip(DIFFICULTY_ROW, "a-2-easy-row.png");
   check("A: choosing Easy changes the Difficulty row on screen", easyRow !== defaultRow);
-  await first.click(NAME_FIELD);
-  await sleep(500);
-  await first.type("Pilot");
-  await sleep(600);
   await first.clip(null, "a-2-new-game-changed.png");
   const beforePlay = Date.now();
   await first.click(PLAY);
@@ -345,10 +339,6 @@ try {
   check("Guest: the game shows the defaults", rowGuest === defaultRow && nameGuest === defaultName);
   await first.click(EASY);
   await sleep(1200);
-  await first.click(NAME_FIELD);
-  await sleep(500);
-  await first.type("Guest");
-  await sleep(600);
   await first.click(PLAY);
   await sleep(9000);
   await first.clip(null, "guest-2-after-play.png");
@@ -371,10 +361,6 @@ try {
     await first.play(SUBJECT.b, { query: "&refuse=rate:2" });
     await first.click(EASY);
     await sleep(1000);
-    await first.click(NAME_FIELD);
-    await sleep(500);
-    await first.type("Bee");
-    await sleep(500);
     await first.click(PLAY);
     const kept = await waitFor("a checkpoint kept after the refusals", async () => (await first.events()).find((event) => event.type === "checkpoint" && !event.reason), 30_000).catch(() => null);
     const all = (await first.events()).filter((event) => event.type === "checkpoint");
@@ -395,10 +381,6 @@ try {
     await first.play(SUBJECT.c);
     await first.click(EASY);
     await sleep(1000);
-    await first.click(NAME_FIELD);
-    await sleep(500);
-    await first.type("Bee");
-    await sleep(500);
     await first.click(PLAY);
     // Settings is written, then Scores: the second text waits in the client for the 2-second limit.
     const pending = await waitFor("a change that is not acknowledged yet", async () => {
@@ -590,7 +572,7 @@ try {
   const nameFresh = await second.clip(NAME_BOX, "fresh-a-name.png");
   await second.clip(null, "fresh-a-new-game.png");
   check("fresh profile: A's Easy is restored on screen", rowFresh === easyRow, { rowFresh, easyRow, defaultRow });
-  check("fresh profile: the name box is not the empty default", nameFresh !== defaultName, { nameFresh, defaultName });
+  check("fresh profile: the name box shows the same player name as a first visit (nobody types one)", nameFresh === defaultName, { nameFresh, defaultName });
   const keysFresh = await second.storedKeys();
   check("fresh profile: the restored files are stored under A's scope", same(keysFresh, keysOf(SUBJECT.a)), keysFresh);
   let sameBytes = true;

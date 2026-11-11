@@ -48,6 +48,8 @@ def main():
                         help="Source-only union proposals; dense busters remain excluded from clear-fit counts")
     parser.add_argument("--allow-class3-free-buster-packs", action="store_true",
                         help="Explicitly admit class3 alongside class1, with one source clock per fixed pack")
+    parser.add_argument("--allow-static-teleport-buster-proposals", action="store_true",
+                        help="Separate static HY/BO/WY wall-free class1 free or n/b buster union; never clear fits")
     a = parser.parse_args()
     if not 1 <= a.max_seconds <= 180 or a.output.exists():
         parser.error("Expected a fresh output and a 1–180 second fit limit")
@@ -64,11 +66,13 @@ def main():
     blocks = {b["kind"]: b["records"] for b in level["blocks"]}
     packs = {}
     buster_union = None
-    if a.allow_moving_programmed_buster_proposals:
+    if a.allow_moving_programmed_buster_proposals or a.allow_static_teleport_buster_proposals:
+        if a.allow_moving_programmed_buster_proposals and a.allow_static_teleport_buster_proposals:
+            parser.error("Choose one explicit buster proposal family")
         if a.allow_free_buster_packs or a.allow_fixed_buster_joined_board or a.allow_wrapped_buster_phases or a.allow_class3_free_buster_packs:
             parser.error("Proposal-only buster union cannot be combined with fixed pack fitting")
         try:
-            buster_union = buster_union_inventory(level)
+            buster_union = buster_union_inventory(level, allow_static_teleport_busters=a.allow_static_teleport_buster_proposals)
         except ValueError as error:
             parser.error(str(error))
         groups[5] = "3900"
@@ -156,8 +160,8 @@ def main():
         if a.allow_class3_free_buster_packs:
             method["class3FreeBusterPacks"] = True
     if buster_union:
-        method.update(movingProgrammedBusterProposals=buster_union,
-                      busterUnionCode=pin(Path(__file__).with_name("source_actor_busters.py")))
+        method["staticTeleportBusterProposals" if a.allow_static_teleport_buster_proposals else "movingProgrammedBusterProposals"] = buster_union
+        method["busterUnionCode"] = pin(Path(__file__).with_name("source_actor_busters.py"))
     a.output.mkdir()
     save(a.output / "root-original-method.json", method)
     templates, images = {}, {}

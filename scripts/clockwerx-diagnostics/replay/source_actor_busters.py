@@ -5,15 +5,21 @@ Dense or overlapping proposals are deliberately excluded from clear-fit counts.
 """
 
 
-def buster_union_inventory(level):
+def buster_union_inventory(level, *, allow_static_teleport_busters=False):
+    if type(allow_static_teleport_busters) is not bool:
+        raise ValueError("Literal static teleport proposal capability required")
     if level.get("structuralStatus") != "complete" or level.get("header", {}).get("version") != 12 or \
             level["header"].get("displaySizeRaw") != 8 or len(level.get("cells", [])) != 88:
         raise ValueError("Complete large version12 source required")
     blocks = {b["kind"]: b["records"] for b in level["blocks"]}
     if len(blocks) != len(level["blocks"]) or any(b["count"] != len(b["records"]) for b in level["blocks"]):
         raise ValueError("Unique complete source sections required")
-    if any(blocks.get(k) for k in ("HY", "GN", "TR", "PU", "GO", "DR", "DS")):
+    excluded = ("EX", "EL", "GN", "TR", "PU", "GO", "DR", "DS") if allow_static_teleport_busters else ("HY", "GN", "TR", "PU", "GO", "DR", "DS")
+    if any(blocks.get(k) for k in excluded):
         raise ValueError("Separate moving-buster proposal family required")
+    if allow_static_teleport_busters and (not 2 <= len(blocks.get("HY", [])) <= 18 or
+            any(c["present"] and (c["flagsRaw"] & 0x380 or c.get("inlineProgram")) for c in level["cells"])):
+        raise ValueError("Static paired teleport proposal board required")
     cells = {(c["row"], c["column"]): c for c in level["cells"] if c["present"]}
     programs = blocks.get("WP", [])
     actors = []
@@ -27,7 +33,7 @@ def buster_union_inventory(level):
         if cell is None or len(words) < 8 or words[7] != 1 or actor["version12ByteRaw"] != 0 or \
                 words[4] not in (1, 65535) or type(words[3]) is not int or not 0 <= words[3] < 64 or \
                 actor["initialFrameHalfIndexRaw"] != words[3] or program is not None and (
-                    not isinstance(program, str) or not program or set(program) - set("ns") or
+                    not isinstance(program, str) or not program or set(program) - set("nb" if allow_static_teleport_busters else "ns") or
                     not 1 <= words[6] <= len(program)):
             raise ValueError("Explicit class1 wall-free n/s or free source buster required")
         actors.append(dict(sourceRawRecord=index, rawHalfIndex=words[3],

@@ -14,6 +14,25 @@ def fixture():
 
 
 class ProposalAdmission(unittest.TestCase):
+    def test_static_teleport_bounce_proposals_are_separate_and_never_clear(self):
+        source = fixture()
+        source["cells"][24]["flagsRaw"] = 1
+        source["blocks"][1]["records"][0]["text"] = "nbnb"
+        source["blocks"].append(dict(kind="HY", count=2, records=[dict(rawWords=[1,1,1,0,15]),dict(rawWords=[4,4,1,0,15])]))
+        with self.assertRaises(ValueError):
+            buster_union_inventory(source)
+        result = buster_union_inventory(source, allow_static_teleport_busters=True)
+        self.assertFalse(result["clearFitEligible"])
+        self.assertFalse(result["temporalStateUsed"])
+        for change in (lambda s: s["cells"][24].update(flagsRaw=0x81),
+                       lambda s: s["blocks"][1]["records"][0].update(text="ns"),
+                       lambda s: s["blocks"][0]["records"][0].update(version12ByteRaw=1),
+                       lambda s: s["blocks"][0]["records"][0]["rawWords"].__setitem__(7,3)):
+            altered = copy.deepcopy(source)
+            change(altered)
+            with self.assertRaises(ValueError):
+                buster_union_inventory(altered, allow_static_teleport_busters=True)
+
     def test_source_union_is_explicitly_not_a_clear_or_temporal_fit(self):
         result = buster_union_inventory(fixture())
         self.assertFalse(result["temporalStateUsed"])

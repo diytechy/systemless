@@ -213,3 +213,31 @@ Codex Sol and Opus (medium), all findings fixed or declined (IPv6 origin spellin
   ClockWerx restart is Stop, OK, Play; Blobbo's stick moves several cells per push;
   Mac file dialogs and menus are small and all reachable by a child.
 - Next: step 4 (LAN https name, signed home list, trial in OtterTube desktop).
+
+## Status, 2026-11-11 (after step 6: scripts, stripped menus, controller)
+
+Built on `research/ottertube-saves` through `2797be55`, two review rounds (Codex Sol
+and Opus, medium), all findings fixed except the one below.
+
+- Per-game data: `www/src/ottertube-games.json` (screens as region hashes, scripts,
+  blocked controls and menu bar, tap offset, stick steps, controller mapping, boot
+  patches), checked by `ottertube_data.rs`, run by `ottertube_play.rs`.
+- Proof, headless Chrome against the fake host with a stubbed controller: controls
+  78/78 (`verify-r7-controls`), scripts 26/26 (`verify-r7-scripts`), saves 72/72
+  (`verify-r7-saves`).
+- Open, deferred to the next builder round (Sol, recheck): a touch held back for a
+  fresh screen look has no identity, so a cancelled touch still clicks and an older
+  tap's timer can release a newer tap early (`ottertube_play.rs` ~527). Low: it only
+  affects spots blocked on some other screen, and the result is a short click.
+- Open, the Owner's call: Delirium writes its score table only on its own Quit; a new
+  score is lost on Exit, Back or Home. Offered: Exit quits first (5 to 7 s) only when
+  a score was entered that session.
+- Blobbo Save once stored the game as "s" (a stray Drop key in the dialog); guarded
+  by a name check and retry, root cause in the emulator's key handling not found.
+- OtterTube, read from code only: Start and Guide go Home at once with an add-on up
+  (no wait for a last save); the browser add-on frame's `allow` lacks `gamepad`.
+- NOT proven: real OtterTube, a real controller, real fingers, sound.
+- Hosting for the trial: the Owner offered this dev PC. An At home list needs a real
+  certificate and a name resolving only to a private address (hosts file is
+  honoured; loopback refused). Waiting on the Owner: use of the Cloudflare DNS token
+  for the certificate, and one elevated hosts line.

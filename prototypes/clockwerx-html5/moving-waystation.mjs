@@ -35,3 +35,19 @@ export function assertMovingWaystationSource(s){
  }
  return true;
 }
+export function assertMovingWaystationBoard(b,{outlines,dotOutlines,initial=true,actors=[b?.player,...(b?.enemies??[])]}={}){
+ if(b?.movingWaystationRules!==true||b.activeMask!==1||b.difficulty!=='Child'||b.origin?.x!==74||b.origin.y!==72||!['movingDotRules','canonicalPlayerRules','staticEnemyCallbacks','specialDotRules','childScoreRules'].every(k=>b[k]===true)||['slidingConnectorRules','teleportRules','bombRules','goodieOnlyRules','canonicalOilRules','elevatorRules','markedTransferRules','staticEnemyWallRules','rotatingSpikeRules','staticSlowdownRules'].some(k=>b[k]))fail();
+ for(const k of['walls','spikes','doors','switches','puddles','bombs','goodies','connectors','elevators','teleports','guns','triggers'])if(b[k]?.length)fail();
+ const s=b.movingWaystationSource;assertMovingWaystationSource(s);const rows=k=>s.blocks.find(b=>b.kind===k)?.records??[],cells=s.cells.filter(c=>c.present),raw=rows('WA'),active=raw.filter(a=>a.activationMaskRaw&1);
+ if(b.dots?.length!==cells.length||initial&&actors.length!==active.length-1)fail();
+ for(const[i,d]of b.dots.entries()){
+  const c=cells[i],e=c.flagsRaw,moving=!!(e&128),bonus=!!(e&2),wy=rows('WY').find(r=>r.rawWords[0]===c.row&&r.rawWords[1]===c.column);
+  if(d.id!==`${c.column},${c.row}`||d.sourceIndex!==c.index||d.row!==c.row||d.column!==c.column||!Number.isInteger(d.x)||!Number.isInteger(d.y)||initial&&(d.x!==74+c.column*48||d.y!==72+c.row*48)||d.motion!==(moving?'moving-program':'static')||d.sourceInitialPosition?.x!==74+c.column*48||d.sourceInitialPosition?.y!==72+c.row*48||d.color!==dotColorOffset(c.secondaryRaw)||d.ring||d.protected||d.teleport||d.slideMask||d.upDown||d.transferDeath||d.burnt||d.slowdown||d.sourceInitialBonus!==bonus||d.cell!==(initial||d.bonus?e:e&~2)||d.bonus!==!!(d.cell&2)||d.kind!==(e&4?'goal':d.bonus?'bonus':'dot')||d.movingProgram!==(moving?c.inlineProgram.text:undefined)||!!d.waystation!==!!wy)fail();
+  if(wy&&(d.waystation.halfIndex!==wy.rawWords[2]||d.waystation.direction!==(wy.rawWords[3]===65535?-1:1)))fail();
+ }
+ const slots=new Set();for(const a of actors){
+  assertMovingWaystationActor(a);const r=active[a.sourceSlot];if(!r||a.sourceSlot===1||slots.has(a.sourceSlot)||a.sourceRawRecord!==raw.indexOf(r)||a.sourceActorType!==r.actorTypeRaw||a.speedClass!==r.rawWords[7]||!b.dots.some(d=>d.id===a.pivot)||initial&&a.pivot!==`${r.gridPosition.column},${r.gridPosition.row}`)fail();slots.add(a.sourceSlot);
+ }
+ if(outlines)for(const g of[700,4300,500])for(let f=0;f<64;f++)if(!Array.isArray(outlines.groups?.[g]?.frames?.[f]?.rows))fail();
+ if(dotOutlines)for(const d of b.dots)for(const f of[1+d.color,9+d.color])if(!Array.isArray(dotOutlines.groups?.[300]?.frames?.[f]?.rows))fail();return true;
+}

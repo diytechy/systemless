@@ -17,6 +17,8 @@ mod host_cursor;
 mod indexed_frame;
 #[cfg(any(feature = "ottertube", test))]
 mod ottertube;
+#[cfg(any(feature = "ottertube", test))]
+mod ottertube_data;
 mod paths;
 mod presentation;
 mod renderer_bridge;

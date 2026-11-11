@@ -43,7 +43,7 @@ if (!link.hosts.includes(hostOrigin)) {
 }
 
 const GAME_ID = "clockwerx-personal-10";
-const SUBJECT = { a: "a".repeat(32), b: "b".repeat(32), c: "c".repeat(32), d: "d".repeat(32) };
+const SUBJECT = { a: "a".repeat(32), b: "b".repeat(32), c: "c".repeat(32), d: "d".repeat(32), e: "e".repeat(32) };
 const scopeOf = (subject) => `${GAME_ID}@${subject}`;
 // ClockWerx's 640x480 screen. The New game screen follows the title once it is clicked.
 const AWAY = [30, 300];
@@ -225,9 +225,9 @@ async function openBrowser(label) {
   const held = (subject) => host(`fakeHost.held(${JSON.stringify(subject)})`);
 
   /** Open the host page for a subject and wait until the game is on its New game screen. */
-  async function play(subject, { query = "", prepare } = {}) {
+  async function play(subject, { query = "", prepare, gameQuery = "" } = {}) {
     const name = subject === SUBJECT.a ? "a" : subject === SUBJECT.b ? "b" : subject;
-    const url = `${hostOrigin}/?game=${encodeURIComponent(`${gameOrigin}/clockwerx/`)}&subject=${name}${query}`;
+    const url = `${hostOrigin}/?game=${encodeURIComponent(`${gameOrigin}/clockwerx/${gameQuery}`)}&subject=${name}${query}`;
     await page.send("Page.navigate", { url: prepare ? `${url}&autostart=0` : url });
     await waitFor("the host page", () => host(`typeof fakeHost === "object"`), 15_000);
     if (prepare) { await prepare(); await host(`fakeHost.open()`); }
@@ -433,14 +433,33 @@ try {
     await sleep(600);
     mediumRow = await first.clip(DIFFICULTY_ROW, "a-4-medium-row.png");
     await first.click(PLAY);
-    const stored = await waitFor("the change stored locally", async () => {
-      const state = await first.saveState();
-      return state.counter > saveA.counter && state.stored === state.counter ? state : null;
-    }, 20_000).catch(() => null);
-    await sleep(6000);
-    check("unreadable: the change is kept locally", !!stored && (await first.storedCounter(scopeOf(SUBJECT.a))) > saveA.counter, stored);
+    await sleep(9000);
+    // Nothing is written to the scope either: a local copy made now would be newer than the held
+    // save by its counter and would be uploaded over it on the next visit.
+    let untouched = (await first.storedCounter(scopeOf(SUBJECT.a))) === saveA.counter;
+    for (const file of saveA.files) {
+      const record = JSON.parse(await first.storedRecord(`${scopeOf(SUBJECT.a)}|${file.path}`));
+      untouched &&= sha(record.data_fork_b64 + "|" + record.resource_fork_b64) === file.forks;
+    }
+    check("unreadable: the scope's stored files and counter are unchanged after playing", untouched,
+      { stored: await first.storedCounter(scopeOf(SUBJECT.a)), before: saveA.counter });
     check("unreadable: no checkpoint is sent at all", noCheckpoint(await first.events()), (await first.events()).map((event) => event.type));
     check("unreadable: what OtterTube holds is untouched", (await first.held(SUBJECT.a))?.data === future);
+  });
+
+  // ---------- A plays on normally: the local copy and the held save both move to Medium ----------
+  await part("progress", async () => {
+    await first.play(SUBJECT.a, { prepare: () => first.host(`fakeHost.importSave(${JSON.stringify(SUBJECT.a)}, ${JSON.stringify(heldA.data)})`) });
+    await first.click(MEDIUM);
+    await sleep(1000);
+    await first.click(PLAY);
+    const moved = await waitFor("the Medium save", async () => {
+      const held = await first.held(SUBJECT.a);
+      const state = await first.saveState();
+      return held && decodeSaveText(held.data).counter > saveA.counter && state.acknowledged === state.counter && state.stored === state.counter ? held : null;
+    }, 30_000).catch(() => null);
+    await sleep(3000);
+    check("progress: a later change is stored and held under a newer counter", !!moved);
   });
 
   // ---------- the local copy is newer than the held save ----------
@@ -456,7 +475,71 @@ try {
     check("local newer: the local copy is sent again without any change, and OtterTube then holds it", !!heldM, { localCounter });
   });
 
+  // ---------- Exit pressed before the game is running, with a newer local copy ----------
+  await part("early exit", async () => {
+    const localCounter = await first.storedCounter(scopeOf(SUBJECT.a));
+    const url = `${hostOrigin}/?game=${encodeURIComponent(`${gameOrigin}/clockwerx/`)}&subject=a&autostart=0`;
+    await first.page.send("Page.navigate", { url });
+    await waitFor("the host page", () => first.host(`typeof fakeHost === "object"`), 15_000);
+    await first.host(`fakeHost.importSave(${JSON.stringify(SUBJECT.a)}, ${JSON.stringify(heldA.data)})`);
+    await first.host(`fakeHost.open()`);
+    // Press Exit the moment the page offers it: the machine has not booted yet.
+    const pressed = await waitFor("the Exit button", () => first.game(`(() => {
+      const exit = document.querySelector("[data-kiosk-exit]");
+      if (!exit) return null;
+      const running = !!document.querySelector("canvas.game-canvas")?.dataset.runtimeGameId;
+      exit.click();
+      return { running };
+    })()`), 20_000, 15);
+    const left = await waitFor("exit", async () => (await first.events()).find((event) => event.type === "exit"), 8000, 50).catch(() => null);
+    const held = await first.held(SUBJECT.a);
+    const heldFiles = held ? decodeSaveText(held.data).files.map((file) => file.path) : null;
+    report.earlyExit = { pressed, heldFiles, heldCounter: held && decodeSaveText(held.data).counter, localCounter, checkpoints: (await first.events()).filter((event) => event.type === "checkpoint").length };
+    check("early exit: Exit was pressed before the game was running, and the page left", pressed.running === false && !!left, report.earlyExit);
+    check("early exit: the held save still has its files (no empty save was sent)", same(heldFiles, EXPECTED_PATHS), report.earlyExit);
+    // The next visit finds the local copy whole and sends it, as it would have.
+    await first.play(SUBJECT.a);
+    const keys = (await first.storedKeys()).filter((key) => key.includes(SUBJECT.a));
+    check("early exit: the newer local files and their counter survive", same(keys, keysOf(SUBJECT.a)) && (await first.storedCounter(scopeOf(SUBJECT.a))) === localCounter, { keys });
+    const caughtUp = await waitFor("the local copy held", async () => {
+      const now = await first.held(SUBJECT.a);
+      return now && decodeSaveText(now.data).counter === localCounter && decodeSaveText(now.data).files.length === 2;
+    }, 15_000).catch(() => false);
+    check("early exit: the next visit sends the local copy, files and all", caughtUp);
+  });
+
+  // ---------- Exit with a change the page has not seen: only a scan asked for at Exit can find it ----------
+  for (const [name, who, mode] of [["exit scan", SUBJECT.d, "paused"], ["exit slow scan", SUBJECT.e, "paused-slow"]]) {
+    await part(name, async () => {
+      // The check's own switch: the machine does not scan by itself, and for the slow one its
+      // answer to a scan comes 1,200 ms late.
+      await first.play(who, { gameQuery: `?systemless-test-scan=${mode}` });
+      await first.click(EASY);
+      await sleep(1000);
+      await first.click(PLAY);
+      await sleep(4000);
+      const before = await first.saveState();
+      const unseen = before.counter === 0 && noCheckpoint(await first.events()) && (await first.held(who)) === null;
+      const clicked = Date.now();
+      await first.game(`document.querySelector("[data-kiosk-exit]").click()`);
+      const saving = await first.game(`document.querySelector(".ottertube-saving")?.innerText ?? null`).catch(() => null);
+      const left = await waitFor("exit", async () => (await first.events()).find((event) => event.type === "exit"), 8000, 50).catch(() => null);
+      const held = await first.held(who);
+      const settings = held && decodeSaveText(held.data).files.find((file) => file.path.endsWith("ClockWerx Settings"));
+      const order = (await first.events()).filter((event) => ["checkpoint", "exit"].includes(event.type)).map((event) => event.type);
+      report[name] = { before, waitedMs: left ? left.at - clicked : null, order, heldCounter: held && decodeSaveText(held.data).counter,
+        settingsBytes: settings ? Buffer.from(settings.data_fork, "base64").length : null };
+      check(`${name}: the change was written by the game but not seen by the page before Exit`, unseen, before);
+      check(`${name}: the child is told it is saving`, /Saving/.test(saving ?? ""), saving);
+      check(`${name}: the held save has the Settings file the game wrote, under a counter made at Exit`,
+        !!settings && report[name].settingsBytes === 5632 && report[name].heldCounter >= clicked, report[name]);
+      check(`${name}: exit follows the checkpoint, inside the 3 s limit${mode === "paused-slow" ? ", after waiting for the late answer" : ""}`,
+        !!left && same(order, ["checkpoint", "exit"]) && report[name].waitedMs < 3600 && (mode !== "paused-slow" || report[name].waitedMs >= 1200), report[name]);
+    });
+  }
+
   // ---------- kiosk: Exit, and a page that is not inside OtterTube ----------
+  await first.play(SUBJECT.a);
   await first.game(`document.querySelector("[data-kiosk-exit]").click()`);
   const left = await waitFor("exit", async () => (await first.events()).find((event) => event.type === "exit"), 5000).catch(() => null);
   check("kiosk: Exit sends the add-on exit, and the host takes the page away",

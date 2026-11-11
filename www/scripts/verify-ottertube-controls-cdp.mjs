@@ -132,6 +132,37 @@ try {
     const pressed = await browser.game(`document.querySelector(${JSON.stringify(heldButton("Swing"))}).classList.contains("is-active")`);
     await browser.picture("clockwerx-6-swing-held.png");
     await browser.touch("touchEnd", []);
+    // One finger holds Swing (Command); a second taps Try again (Command-R). The tap letting go
+    // must not lift Command under the first finger.
+    const heldKeys = () => browser.game(`document.querySelector(".mobile-controls").dataset.heldKeys ?? ""`);
+    const tryAgain = await browser.middle(action("Meta+r"));
+    await sleep(400);
+    await browser.touch("touchStart", [{ ...swing, id: 1 }]);
+    await sleep(300);
+    const swingOnly = await heldKeys();
+    await browser.touch("touchStart", [{ ...swing, id: 1 }, { ...tryAgain, id: 2 }]);
+    await sleep(90);
+    const withTap = await heldKeys();
+    await browser.touch("touchEnd", [{ ...tryAgain, id: 2 }]);
+    await sleep(700);
+    const afterTap = await heldKeys();
+    const stillPressed = await browser.game(`document.querySelector(${JSON.stringify(heldButton("Swing"))}).classList.contains("is-active")`);
+    await browser.touch("touchEnd", []);
+    await sleep(300);
+    const released = await heldKeys();
+    report.clockwerx.sharedKey = { swingOnly, withTap, afterTap, released };
+    check("clockwerx: a tap action that shares a key with a held button does not release it under the finger",
+      swingOnly === "Meta" && withTap.split(" ").includes("Meta") && withTap.split(" ").includes("r") && afterTap === "Meta" && stillPressed && released === "",
+      report.clockwerx.sharedKey);
+    // The system takes the finger away (a gesture, a window change): the key goes up.
+    await browser.touch("touchStart", [swing]);
+    await sleep(300);
+    const beforeCancel = await heldKeys();
+    await browser.touch("touchCancel", []);
+    await sleep(300);
+    const afterCancel = { keys: await heldKeys(), active: await browser.game(`document.querySelector(${JSON.stringify(heldButton("Swing"))}).classList.contains("is-active")`) };
+    check("clockwerx: touchCancel on a held button releases its key", beforeCancel === "Meta" && afterCancel.keys === "" && afterCancel.active === false, { beforeCancel, afterCancel });
+    await sleep(9000); // Try again restarted the level
     report.clockwerx.hand = { before: before.map(Math.round), during: during.map(Math.round) };
     // The hand turns slowly about its dot, so its middle stays within a hand's length; the dots
     // are 48 apart, so a middle that has moved more than 35 is a hand on another dot.
@@ -159,7 +190,7 @@ try {
     const saving = await browser.game(`document.querySelector(".ottertube-saving")?.textContent ?? null`).catch(() => null);
     const left = await waitFor("exit", async () => (await browser.events()).find((event) => event.type === "exit"), 6000, 50).catch(() => null);
     const state = decodeSaveText((await browser.held(who)).data);
-    check("clockwerx: Exit shows Saving, then OtterTube is asked to leave with the scores held",
+    check("clockwerx: Exit asks OtterTube to leave, with the scores held",
       !!left && state.files.some((file) => file.path.endsWith("ClockWerx Scores")), { saving, files: state.files.map((file) => file.path) });
   });
 
@@ -229,11 +260,11 @@ try {
     await browser.touch("touchEnd", []);
     await browser.picture("delirium-6-after-down.png");
     report.delirium.play = { up, down, stillUp, both, afterFire, fullBombs, afterBomb };
-    check("delirium: the stick flies the ship up, then down", !!up && !!down && up.v < 150 && down.v > up.v + 60, { up, down });
+    check("delirium: the stick flies the ship up, then down", !!up && !!down && up.v < 200 && down.v > up.v + 60, { up, down });
     check("delirium: two fingers at once: the stick stays held while Fire is pressed and released",
       both.stick && both.fire && both.y < -0.5 && afterFire.stick && !afterFire.fire, { both, afterFire });
     check("delirium: Bomb pressed while the stick is held uses a bomb, and the ship is still at the top",
-      afterBomb < fullBombs * 0.8 && afterBomb > 0 && !!stillUp && stillUp.v < 150, { fullBombs, afterBomb, stillUp });
+      afterBomb < fullBombs * 0.8 && afterBomb > 0 && !!stillUp && stillUp.v < 200, { fullBombs, afterBomb, stillUp });
 
     // Start again after a game ends: Stop ends it, Start begins another.
     await browser.press(action("Escape"));

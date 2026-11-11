@@ -146,9 +146,24 @@ class OtterTubeBundleTests(unittest.TestCase):
         self.assertFalse((self.dist/'private').exists())
 
     def test_hosts_must_be_full_origins(self):
-        for hosts in ([],['*'],['https://ottertube.example/'],['https://ottertube.example/app'],['ottertube.example'],['https://*.example']):
+        for hosts in ([],['*'],['https://ottertube.example/'],['https://ottertube.example/app'],['ottertube.example'],
+                      ['https://*.example'],['ftp://ottertube.example'],['https://ottertube.example:0'],
+                      ['https://ottertube.example:70000'],['https://user@ottertube.example'],['https://otter tube.example'],[None]):
             with self.assertRaisesRegex(ValueError,'origins in full'):
                 package(self.dist,self.manifest,self.media,hosts)
+
+    def test_hosts_are_written_as_a_browser_reports_an_origin(self):
+        from package_library import normalise_origin
+        self.assertEqual(normalise_origin('HTTPS://OtterTube.Example:443'),'https://ottertube.example')
+        self.assertEqual(normalise_origin('http://127.0.0.1:80'),'http://127.0.0.1')
+        self.assertEqual(normalise_origin(' https://ottertube.example:8443 '),'https://ottertube.example:8443')
+        self.assertEqual(normalise_origin('http://ottertube.example:443'),'http://ottertube.example:443')
+        self.assertEqual(normalise_origin('https://[FD00::1]:08443'),'https://[fd00::1]:8443')
+        package(self.dist,self.manifest,self.media,['HTTPS://OtterTube.Example:443','https://ottertube.example','http://127.0.0.1:8098'])
+        html=(self.dist/'index.html').read_text(encoding='utf-8')
+        self.assertIn('content="https://ottertube.example http://127.0.0.1:8098"',html)
+        link=json.loads((self.dist/'ottertube-link.json').read_text())
+        self.assertEqual(link['hosts'],['https://ottertube.example','http://127.0.0.1:8098'])
 
     def test_the_full_library_is_not_served_as_the_add_on_bundle(self):
         from serve_ottertube_link import bundle_policy

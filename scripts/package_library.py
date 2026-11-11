@@ -10,7 +10,26 @@ ROOT=Path(__file__).resolve().parents[1]
 GAMES=('koji','clockwerx','delirium')
 # The OtterTube add-on bundle (Cargo feature `ottertube`): these three and no others.
 OTTERTUBE_SLUGS=('clockwerx','delirium','blobbo')
-ORIGIN=re.compile(r'https?://[A-Za-z0-9.\-\[\]:]+\Z')
+ORIGIN=re.compile(r'(https?)://([a-z0-9.\-]+|\[[0-9a-f:]+\])(?::([0-9]{1,5}))?\Z')
+
+def normalise_origin(origin):
+    """An origin as a browser reports it, or ValueError.
+
+    A browser's `event.origin` is lower-case and leaves the default port out, and the add-on
+    client compares the listed origins to it exactly. `HTTPS://Host:443` would be listed and
+    never matched, so it is rewritten; anything that is not an origin is refused.
+    """
+    if not isinstance(origin, str):
+        raise ValueError('Name OtterTube origins in full: https://host[:port], no path or wildcard')
+    match = ORIGIN.match(origin.strip().lower())
+    if not match:
+        raise ValueError('Name OtterTube origins in full: https://host[:port], no path or wildcard: '+repr(origin))
+    scheme, host, port = match.groups()
+    if port is not None and not 0 < int(port) < 65536:
+        raise ValueError('Name OtterTube origins in full: the port is out of range: '+repr(origin))
+    if port is None or int(port) == (443 if scheme == 'https' else 80):
+        return scheme+'://'+host
+    return scheme+'://'+host+':'+str(int(port))
 
 def package(dist, additions=None, media_directory=None, ottertube_hosts=None):
     dist=dist.resolve(strict=True)
@@ -19,9 +38,9 @@ def package(dist, additions=None, media_directory=None, ottertube_hosts=None):
     slim = ottertube_hosts is not None
     builtins = [row for row in BUILTINS if not slim or row[0] in OTTERTUBE_SLUGS]
     if slim:
-        ottertube_hosts = list(ottertube_hosts)
-        if not ottertube_hosts or not all(isinstance(host, str) and ORIGIN.match(host) for host in ottertube_hosts):
+        if not ottertube_hosts:
             raise ValueError('Name OtterTube origins in full: https://host[:port], no path or wildcard')
+        ottertube_hosts = list(dict.fromkeys(normalise_origin(host) for host in ottertube_hosts))
         if sorted([row[0] for row in builtins]+[row['slug'] for row in rows]) != sorted(OTTERTUBE_SLUGS):
             raise ValueError('The OtterTube bundle holds exactly: '+', '.join(OTTERTUBE_SLUGS))
     index=dist/'index.html'
@@ -92,6 +111,8 @@ def package(dist, additions=None, media_directory=None, ottertube_hosts=None):
             '.ottertube-plain{max-width:34rem;margin:15vh auto;padding:0 1.5rem;font:18px/1.5 system-ui,sans-serif;text-align:center}'
             '.ottertube-plain__reason{font-size:13px;opacity:.6}'
             '.app--ottertube .game-page{max-width:none;margin:0;padding:8px}'
+            '.ottertube-saving{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;'
+            'background:rgba(0,0,0,.72);color:#fff;font:600 40px/1.2 system-ui,sans-serif;touch-action:none}'
             '</style><!-- /private-library -->',1)
         (dist/'ottertube-link.json').write_text(json.dumps({'schema_version':1,'hosts':ottertube_hosts,
             'frame_ancestors':"frame-ancestors "+' '.join(ottertube_hosts)},indent=2)+'\n',encoding='utf-8')

@@ -20,7 +20,9 @@ pub const CHECKPOINT_BODY_MAX: usize = 256 * 1024;
 /// The bytes `{"data":""}` adds around the text. The text is ASCII with nothing
 /// JSON escapes, so its body is exactly this much longer than the text.
 const CHECKPOINT_BODY_OVERHEAD: usize = 11;
-/// No honest save inflates past this; a text that does is refused unread.
+/// No honest save unpacks past this. A reader refuses a text that does, so
+/// the writer refuses to make one: zeros deflate well enough to pass the
+/// checkpoint limit while being far larger than this.
 const INFLATE_LIMIT: usize = 16 * 1024 * 1024;
 
 /// One user's files for one game, with the counter that orders two copies.
@@ -36,6 +38,9 @@ pub struct SaveBundle {
 pub enum SaveTextError {
     /// The text would not fit a checkpoint. `body_bytes` is what it would be.
     TooLarge { body_bytes: usize },
+    /// The files are more than any reader will unpack. `bytes` is their size
+    /// as the payload, before deflate.
+    TooLargeUnpacked { bytes: usize },
     /// Not a Systemless save text at all.
     NotSaveText,
     /// A save text of a version this build does not read.
@@ -50,6 +55,10 @@ impl std::fmt::Display for SaveTextError {
             Self::TooLarge { body_bytes } => write!(
                 f,
                 "save is {body_bytes} bytes, over the {CHECKPOINT_BODY_MAX} byte limit"
+            ),
+            Self::TooLargeUnpacked { bytes } => write!(
+                f,
+                "save unpacks to {bytes} bytes, over the {INFLATE_LIMIT} byte limit"
             ),
             Self::NotSaveText => write!(f, "not a Systemless save text"),
             Self::UnsupportedVersion(version) => {
@@ -106,6 +115,9 @@ pub fn encode_save_text(bundle: &SaveBundle) -> Result<String, SaveTextError> {
     };
     let json =
         serde_json::to_vec(&payload).map_err(|error| SaveTextError::Corrupt(error.to_string()))?;
+    if json.len() > INFLATE_LIMIT {
+        return Err(SaveTextError::TooLargeUnpacked { bytes: json.len() });
+    }
     let deflated = miniz_oxide::deflate::compress_to_vec(&json, 9);
     let text = format!(
         "{SAVE_TEXT_PREFIX}{SAVE_TEXT_VERSION}:{}",
@@ -820,6 +832,24 @@ mod tests {
             }
             other => panic!("expected a size refusal, got {other:?}"),
         }
+    }
+
+    #[test]
+    fn a_save_no_reader_would_unpack_is_refused_when_written() {
+        // Zeros deflate to almost nothing: under the checkpoint limit as text,
+        // over the unpack limit as files.
+        let over = bundle(1, vec![file("A/Zeros", &vec![0; 13 * 1024 * 1024], b"")]);
+        match encode_save_text(&over) {
+            Err(SaveTextError::TooLargeUnpacked { bytes }) => assert!(bytes > INFLATE_LIMIT),
+            other => panic!("expected an unpack-size refusal, got {other:?}"),
+        }
+        // Just under the limit both directions agree.
+        let under = bundle(1, vec![file("A/Zeros", &vec![0; 11 * 1024 * 1024], b"")]);
+        let text = encode_save_text(&under).unwrap();
+        assert_eq!(
+            decode_save_text(&text).unwrap().files[0].data_fork.len(),
+            11 * 1024 * 1024
+        );
     }
 
     #[test]

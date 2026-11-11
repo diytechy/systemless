@@ -31,5 +31,5 @@ test('normalized Slow walls are bound to source wall tiles and actor inventories
  const b=buildDecodedBoard(fixture(),{...recipe,angularSpeed:1});b.walls[0].frame++;assert.throws(()=>new SourceRound(b,profiles));const a=buildDecodedBoard(fixture(),{...recipe,angularSpeed:1});a.enemies[0].speedClass=5;assert.throws(()=>new SourceRound(a,profiles));
 });
 test('unused shattered wall sentinels do not require live collision rows',()=>{
- const p=structuredClone(profiles);for(const i of[2,3,4])p.outlines.groups[800].frames[i].rows=null;assert.doesNotThrow(()=>new SourceRound(buildDecodedBoard(fixture(),{...recipe,angularSpeed:1}),p));const q=structuredClone(profiles);q.outlines.groups[800].frames[0].rows=null;assert.throws(()=>new SourceRound(buildDecodedBoard(fixture(),{...recipe,angularSpeed:1}),q));
+ const p={...profiles,outlines:structuredClone(profiles.outlines)};for(const i of[2,3,4])p.outlines.groups[800].frames[i].rows=null;assert.doesNotThrow(()=>new SourceRound(buildDecodedBoard(fixture(),{...recipe,angularSpeed:1}),p));const q={...profiles,outlines:structuredClone(profiles.outlines)};q.outlines.groups[800].frames[0].rows=null;assert.throws(()=>new SourceRound(buildDecodedBoard(fixture(),{...recipe,angularSpeed:1}),q));
 });

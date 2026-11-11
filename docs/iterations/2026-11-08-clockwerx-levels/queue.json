@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 73,
-  "currentAction": "Through72 Firing Line accepted/locally installed. Continue through100 without per-level checkpoints. Quest73 original cold closed; source-only fitter rejected global EX exclusion before pixel reads. Qualify static buster packs on joined boards. No73 actual model yet.",
+  "currentOrdinal": 74,
+  "currentAction": "Through73 Quest accepted/locally installed; continue through100 without per-level checkpoints. Release74 dedicated native cold active, no74 actual model yet. Separate Oil3/SPI/free-buster/programmed-wall join needed.",
   "levels": [
     {
       "ordinal": 1,
@@ -6238,10 +6238,14 @@
       "menuTitle": "Quest",
       "resourceTitle": "Quest",
       "sha256": "88c170283e239e1667389f18a9f32e10eb32c7e4e73d6e2d9dc012bb91b86461",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "quest73-native-goal01/root-original-goal-review.json",
+        "quest73-native-goal-fit01/actor-comparison01.json",
+        "quest73-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -6269,7 +6273,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -6309,7 +6313,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "4980df6c",
+      "sourceFreezeSHA256": "aaa1629d08f546107d7c89afaabd061f755e676f5a5c32e1938c90caf7ec3619",
+      "actualUpdates": 67516,
+      "actualConstructors": 12,
+      "functionalUpdatesUsed": 67516,
+      "functionalUpdatesRemaining": 182484,
+      "nativeColdClosed": true,
+      "sourceTests": 457,
+      "review": "quest-review.md",
+      "retainedSweep": {
+        "matchedGoals": 71,
+        "constructionOnly": 1,
+        "pairedUpdates": 569032,
+        "sha256": "cc8ea0e56098d5a9784e8673c724bebac9711516b13b845d98060bd820604421",
+        "rendererOnlyDeltaReviewSHA256": "6aad4a7b6c06700f27c16714abc743b73a8f9c0602013969b596e01c6d5b281a"
+      },
+      "deliveryAcceptance": {
+        "score": 2000,
+        "updates": 5792,
+        "transfers": 9,
+        "nextOrdinal": 74,
+        "nativeCampaignTotal": 448000,
+        "rootAcceptanceSHA256": "17bd5b307a14dcf6dd17e51e2e9c05aae3d56b912003c8c4b88fb8efde73ab97",
+        "activationSHA256": "78a1dcf50c70ac87940382272d324e0210a45566e6750691bd5900c33f75b030",
+        "rootProofSHA256": "e096f256c67c9a73127e7d7e48b7a64b41615e8995eecca75666355845954059",
+        "earnedThrough73FixtureSHA256": "236ae67828193ac898fbd43ff4fe6a6cbf3cdafedf65478d598c573a12c789fd"
+      },
+      "qualificationBoundary": "Bounded Child route,9 action transfers/2 rail arrivals,3 throws/returns,1 moving bonus.153 clear native poses exact; cold1 position/23 pose residuals and overdraw retained. Child marks inactive; blast/marked source+invented evidence separate. Arbitrary input/reset/audio/hardware unqualified."
     },
     {
       "ordinal": 74,

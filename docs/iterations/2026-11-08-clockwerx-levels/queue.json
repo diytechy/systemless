@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 80,
-  "currentAction": "Through79 Hypertension accepted/locally installed; continue through100 without per-level stops. Flywheels80 original cold authorized; inspect closure then standard source-only fitter, no buster flags.",
+  "currentOrdinal": 81,
+  "currentAction": "Through80 Flywheels accepted/locally installed; continue through100 without per-level stops. Flail81 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Static slowdown admission8a7c0b33 unlinked; no81 model.",
   "levels": [
     {
       "ordinal": 1,
@@ -6984,10 +6984,14 @@
       "menuTitle": "Flywheels",
       "resourceTitle": "Flywheels",
       "sha256": "22572783cc88e9458f19532a001e0f84ead7519320af24ebc699a75f830cd0ce",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "flywheels80-native-goal01/root-original-goal-review.json",
+        "flywheels80-native-goal-fit01/actor-comparison01.json",
+        "flywheels80-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7015,7 +7019,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7048,7 +7052,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "4cddd41f",
+      "sourceFreezeSHA256": "a8fb23d29cb59c8b84870c3c71e378cf2c4022e29a307b3db4f3c681da267a81",
+      "sourceTests": 500,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 33920,
+      "actualConstructors": 6,
+      "functionalUpdatesUsed": 33920,
+      "functionalUpdatesRemaining": 216080,
+      "nativeColdClosed": true,
+      "review": "flywheels-review.md",
+      "retainedSweep": {
+        "matchedGoals": 78,
+        "constructionOnly": 1,
+        "pairedUpdates": 609100,
+        "sha256": "c855b24d9c053407185114b8da583885c1b6a0293384e7a82c9138471839fb6c"
+      },
+      "deliveryAcceptance": {
+        "score": 4000,
+        "updates": 5184,
+        "transfers": 8,
+        "nextOrdinal": 81,
+        "nativeCampaignTotal": 515000,
+        "rootAcceptanceSHA256": "2b57586bdb0cf7a944a8a32f82889b2b874a3cf3fe01f7c862ff92e7f74f2343",
+        "rootProofSHA256": "4f9aae515abeaa9bc7dd7c383ef2073d166a62c6b10bb20b9603e4e140aadb47",
+        "earnedThrough80FixtureSHA256": "b5d4a53dbf83b3c16549b480b18ce1d7c81ad5c038c3d684af28006eabeb9115"
+      },
+      "qualificationBoundary": "Original results4000 and Stage9VORTEX promotion followed by earned81Flail/515000 visually verified after original-only fitter/view gate. One fixed700 prefix from independent cold; all95clear actor positions/poses exact across48joins. Cold60clear positions exact6pose residuals retained. Independent GOcold152/264frames exact112residual retained, no separate phase or clock adjustment. Winning port8transfers/6railarrivals/52Reverse/2bonuses, no winning RNG/death/reset. Arbitrary controls/audio/controllers/pacing and full pixel census remain separate."
     },
     {
       "ordinal": 81,

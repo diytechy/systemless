@@ -1,3 +1,4 @@
+import {assertMovingProgrammedBusterBoard,assertMovingProgrammedBusterActor} from './moving-programmed-busters.mjs';
 import {assertMovingCheckpointControlBoard,assertMovingCheckpointControlActor} from './moving-checkpoint-controls.mjs';
 import {assertMovingCheckpointRailBoard,assertMovingCheckpointRailActor} from './moving-checkpoint-rails.mjs';
 import {assertMovingBusterBombBoard,assertMovingBusterBombActor} from './moving-buster-bombs.mjs';
@@ -25,8 +26,8 @@ export function isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers=f
  return typeof program==='string'&&program.length>0&&[...program].every(c=>c==='n'||c==='s'&&allowRotatingSpikeTransfers||c==='b'&&allowRotatingSpikeBounces);
 }
 
-function validateState(s,allowRotatingSpikes=false,allowSliding=false) {
-  if(!s||![1,2,3,...(allowRotatingSpikes?[4]:[])].includes(s.sourceActorType)||!integer(s.frame)||s.frame<0||s.frame>63||
+function validateState(s,allowRotatingSpikes=false,allowSliding=false,allowMovingProgrammedBusters=false) {
+  if(!s||![1,2,3,...(allowRotatingSpikes?[4]:[]),...(allowMovingProgrammedBusters?[5]:[])].includes(s.sourceActorType)||!integer(s.frame)||s.frame<0||s.frame>63||
      ![-1,1].includes(s.direction)||typeof s.visible!=='boolean'||typeof s.orphaned!=='boolean')
     throw new RangeError('Explicit ordinary canonical enemy state required');
   if(s.sliding&&!allowSliding)throw new Error('True source sliding is not a static transfer');
@@ -62,10 +63,12 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowGunTriggerSliding=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope,allowMovingCheckpointControls=false,movingCheckpointControlScope,allowMovingCheckpointRails=false,movingCheckpointRailScope,allowMovingBusterBombs=false,movingBusterBombScope,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingDoorOil=false,allowMovingDoorGoodies=false,allowMovingTubes=false,allowMovingMarkedOrdinary=false,movingMarkedOrdinaryScope,allowMovingSpikes=false,movingSpikeScope,allowMovingBombs=false,allowMovingMarkedGoals=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,movingSpecialScope,allowMovingElevators=false,movingElevatorScope,onMissingSlideTarget,sourceQuery,onSourceEvent=()=>{}
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowGunTriggerSliding=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope,allowMovingProgrammedBusters=false,movingProgrammedBusterScope,allowMovingCheckpointControls=false,movingCheckpointControlScope,allowMovingCheckpointRails=false,movingCheckpointRailScope,allowMovingBusterBombs=false,movingBusterBombScope,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingDoorOil=false,allowMovingDoorGoodies=false,allowMovingTubes=false,allowMovingMarkedOrdinary=false,movingMarkedOrdinaryScope,allowMovingSpikes=false,movingSpikeScope,allowMovingBombs=false,allowMovingMarkedGoals=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,movingSpecialScope,allowMovingElevators=false,movingElevatorScope,onMissingSlideTarget,sourceQuery,onSourceEvent=()=>{}
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
+  if(typeof allowMovingProgrammedBusters!=='boolean')throw Error('Literal programmed-buster callback capability required');
+  if(allowMovingProgrammedBusters){if(!allowMovingDots||!allowSliding||!allowUpDownDots||allowTeleports||allowRotatingSpikes||allowMovingBombs||classDelta>1||typeof sourceQuery!=='function'||sourceQuery.constructor?.name==='AsyncFunction'||movingProgrammedBusterScope?.dots!==dots)throw Error('Separate synchronous class1 moving programmed-buster callback required');assertMovingProgrammedBusterBoard(movingProgrammedBusterScope);assertMovingProgrammedBusterActor(state,{program});}
   if(typeof allowMovingCheckpointControls!=='boolean')throw Error('Literal moving checkpoint/control callback capability required');
   if(allowMovingCheckpointControls){if(!allowMovingDots||allowSliding||!allowUpDownDots||allowTeleports||allowRotatingSpikes||allowMovingBombs||typeof sourceQuery!=='function'||sourceQuery.constructor?.name==='AsyncFunction'||movingCheckpointControlScope?.dots!==dots)throw Error('Separate synchronous moving checkpoint/control callback required');assertMovingCheckpointControlBoard(movingCheckpointControlScope);assertMovingCheckpointControlActor(state,{program});}
   if(typeof allowMovingCheckpointRails!=='boolean')throw Error('Literal moving checkpoint/rail helper capability required');
@@ -121,7 +124,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
    if(!allowMovingDots||!allowSliding||allowUpDownDots||allowTeleports||allowRotatingSpikes||allowMovingBombs||allowSlidingOil||allowMovingTubes||allowMovingDoorCheckpoint)throw Error('Separate moving EX/door/Oil helper scope required');
    assertMovingDoorOilActor(state,program);
   }
-  if(allowMovingDots&&!allowMovingCheckpointControls&&!allowMovingCheckpointRails&&!allowMovingBusterBombs&&!allowMovingDoorGoodies&&!allowMovingDoorOil&&!allowMovingDoorCheckpoint&&!allowMovingTubes&&!allowMovingBombSpikeWaystation&&!allowMovingMarkedOrdinary&&!allowMovingSpikes&&!allowMovingMarkedGoals&&!allowMovingElevators&&!allowMovingCheckpointRings&&!allowMovingMarkedBonuses){
+  if(allowMovingDots&&!allowMovingProgrammedBusters&&!allowMovingCheckpointControls&&!allowMovingCheckpointRails&&!allowMovingBusterBombs&&!allowMovingDoorGoodies&&!allowMovingDoorOil&&!allowMovingDoorCheckpoint&&!allowMovingTubes&&!allowMovingBombSpikeWaystation&&!allowMovingMarkedOrdinary&&!allowMovingSpikes&&!allowMovingMarkedGoals&&!allowMovingElevators&&!allowMovingCheckpointRings&&!allowMovingMarkedBonuses){
    if(!allowMovingBombs||!allowSliding||allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingBombs||allowSlidingPrograms||allowSlidingGoodies||allowSlidingOil||allowSlidingTeleports||typeof sourceQuery!=='function'||![1,2].includes(state.sourceActorType)||state.speedClass!==1||state.checksWalls!==false||program!==null&&(!/^[bfn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1||state.sourcePC>program.length)||dots.some(d=>!['static','moving-program'].includes(d.motion)||d.teleport||d.ring||d.waystation||d.upDown||d.transferDeath||d.slowdown||d.motion==='moving-program'&&(d.slideMask||d.bonus||d.kind!=='dot')))throw new Error('Separate moving BO ordinary class1 b/f/n helper scope required');
   }else if(allowMovingBombs&&!allowMovingDots)throw new Error('Moving BO helper requires moving-dot core');
   dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding,allowMovingDots));
@@ -139,7 +142,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   if(allowSlidingBombOrbitals&&(!allowSlidingBombs||!allowSlidingBombCheckpoints||!allowRotatingSpikes))throw new Error('Separate BO/EX orbital callback required');
   const next={...state,unwrappedFrame:state.unwrappedFrame??state.frame},events=[];
   const record=e=>{events.push(e);if(allowSlidingTeleports||allowMovingDots){const v=onSourceEvent({...e},{...next});if(v&&typeof v.then==='function')throw new TypeError('Synchronous source diagnostics required');}};
-  const validate=s=>validateState(s,allowRotatingSpikes,allowSliding);
+  const validate=s=>validateState(s,allowRotatingSpikes,allowSliding,allowMovingProgrammedBusters);
   validate(next);
   if(next.sourceActorType===4&&(!(next.speedClass===1||allowFastRotatingSpikes&&next.speedClass===5||allowSlowRotatingSpikes&&next.speedClass===4||allowClass2RotatingSpikes&&next.speedClass===2||allowClass3RotatingSpikes&&next.speedClass===3)||next.checksWalls!==false||program!==null&&!isQualifiedOrbitalProgram(program,{allowRotatingSpikeTransfers,allowRotatingSpikeBounces})))
     throw new Error('Qualified rotating spike requires an enabled clock, no walls and an enabled no-action/bounce/transfer program');
@@ -153,6 +156,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
   dotAt(next.pivot);
   for(let step=0;step<classDelta;step++) {
     const context={human:false,step,guestTick};
+    if(allowMovingProgrammedBusters&&next.sourceActorType===5&&!next.visible&&next.hiddenUntil&&guestTick>next.hiddenUntil){next.visible=true;record({type:'buster-return'});}
     if(!allowSliding||!animateSliding(next)){next.unwrappedFrame+=next.direction;next.frame=next.unwrappedFrame&63;}
     // Source WACollide runs before stop-slide/direct-program/start-slide.
     afterAnimate(next,context);validate(next);
@@ -165,7 +169,7 @@ export function advanceStaticEnemyCallback(state,classDelta,{
     const oldDot=dotAt(next.pivot),[dx,dy]=offsets[next.frame];
     // Source selects the first present positional match, then checks its
     // nonhuman permission. Rendering visibility and color are not filters.
-    const query=allowMovingDots?sourceQuery(next):null;if((allowMovingCheckpointControls||allowMovingCheckpointRails||allowMovingDoorGoodies||allowMovingBombSpikeWaystation||allowMovingMarkedOrdinary||allowMovingSpikes||allowMovingElevators||allowMovingCheckpointRings||allowMovingMarkedBonuses)&&query&&typeof query.then==='function')throw new TypeError('Synchronous joined source query required');if(allowMovingDots&&query?.allowed&&query.grab?.realDot!==true)throw new Error('NPC moving query must return a real source dot');
+    const query=allowMovingDots?sourceQuery(next):null;if((allowMovingProgrammedBusters||allowMovingCheckpointControls||allowMovingCheckpointRails||allowMovingDoorGoodies||allowMovingBombSpikeWaystation||allowMovingMarkedOrdinary||allowMovingSpikes||allowMovingElevators||allowMovingCheckpointRings||allowMovingMarkedBonuses)&&query&&typeof query.then==='function')throw new TypeError('Synchronous joined source query required');if(allowMovingDots&&query?.allowed&&query.grab?.realDot!==true)throw new Error('NPC moving query must return a real source dot');
     const target=allowMovingDots?(query?.allowed?dots.find(d=>d.id===query.grab.dot&&d.sourceIndex===query.grab.sourceIndex):null):dots.find(d=>d.present&&d.x===oldDot.x+48*dx&&d.y===oldDot.y+48*dy);
     const allowed=Boolean(target?.nonhumanCanGrab),action=instruction.action;
     record({type:'program-command',step,frame:next.frame,allowed,action:{...action},...((allowSlidingTeleports||allowMovingDots)?{sourcePCBefore:commandPC,sourcePCAfter:next.sourcePC,sourceOpcode:program[commandPC-1]}:{})});

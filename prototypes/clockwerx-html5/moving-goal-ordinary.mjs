@@ -1,6 +1,7 @@
 // Default-off moving goal/bonus, static SP and ordinary class1/3 actors.
 import {assertClosedMovingProgram,movingProgramCell} from './moving-dots.mjs';
 import {dotColorOffset} from './dots.mjs';
+import {spikeGridPoint} from './hazards.mjs';
 const fail=()=>{throw Error('Separate moving goal and static spikes with ordinary class1/3 actors required');};
 const int=(n,a,b)=>Number.isInteger(n)&&n>=a&&n<=b;
 const required=['MovingDots','CanonicalPlayer','EnemyStaticPrograms','SpecialDots','ChildScoring'];
@@ -33,4 +34,21 @@ export function assertMovingGoalOrdinarySource(s){
   assertMovingGoalOrdinaryActor({sourceSlot:i,sourceActorType:a.actorTypeRaw,group:{0:700,6:4300,1:500,2:4400,3:4500}[a.actorTypeRaw],speedClass:w[7],checksWalls:a.version12ByteRaw!==0,program,sourcePC:w[6]});
  }
  return true;
+}
+export function assertMovingGoalOrdinaryBoard(b,{outlines,dotOutlines,initial=true,actors=[b?.player,...(b?.enemies??[])]}={}){
+ if(b?.movingGoalOrdinaryRules!==true||b.activeMask!==1||b.difficulty!=='Child'||b.origin?.x!==74||b.origin.y!==72||!['movingDotRules','canonicalPlayerRules','staticEnemyCallbacks','specialDotRules','childScoreRules'].every(k=>b[k]===true)||['slidingConnectorRules','teleportRules','bombRules','goodieOnlyRules','canonicalOilRules','elevatorRules','markedTransferRules','staticEnemyWallRules','rotatingSpikeRules','staticSlowdownRules','movingWaystationRules'].some(k=>b[k]))fail();
+ for(const k of['walls','doors','switches','puddles','bombs','goodies','connectors','elevators','teleports','guns','triggers'])if(b[k]?.length)fail();
+ const s=b.movingGoalOrdinarySource;assertMovingGoalOrdinarySource(s);const rows=k=>s.blocks.find(b=>b.kind===k)?.records??[],cells=s.cells.filter(c=>c.present),raw=rows('WA'),active=raw.filter(a=>a.activationMaskRaw&1),programs=rows('WP');
+ if(b.dots?.length!==cells.length||initial&&actors.length!==active.length-1||b.spikes?.length!==rows('SP').length)fail();
+ for(const[i,d]of b.dots.entries()){
+  const c=cells[i],e=c.flagsRaw,moving=!!(e&128),bonus=!!(e&2);
+  if(d.id!==`${c.column},${c.row}`||d.sourceIndex!==c.index||d.row!==c.row||d.column!==c.column||!Number.isInteger(d.x)||!Number.isInteger(d.y)||initial&&(d.x!==74+c.column*48||d.y!==72+c.row*48)||d.motion!==(moving?'moving-program':'static')||d.sourceInitialPosition?.x!==74+c.column*48||d.sourceInitialPosition?.y!==72+c.row*48||d.color!==dotColorOffset(c.secondaryRaw)||d.ring||d.protected||d.teleport||d.slideMask||d.upDown||d.transferDeath||d.burnt||d.slowdown||d.waystation||d.sourceInitialBonus!==bonus||d.cell!==(initial||d.bonus?e:e&~2)||d.bonus!==!!(d.cell&2)||d.kind!==(e&4?'goal':d.bonus?'bonus':'dot')||d.movingProgram!==(moving?c.inlineProgram.text:undefined))fail();
+ }
+ for(const[i,sp]of b.spikes.entries()){const r=rows('SP')[i],p=spikeGridPoint(r,b.origin);if(sp.id!==i||sp.row!==r.rawWords[0]||sp.column!==r.rawWords[1]||sp.subrow!==r.rawWords[2]||sp.subcolumn!==r.rawWords[3]||sp.x!==p.x||sp.y!==p.y||sp.activationMask!==15)fail();}
+ const slots=new Set();for(const a of actors){
+  assertMovingGoalOrdinaryActor(a);const r=active[a.sourceSlot],program=r?.programReferenceRaw<0?null:programs[r?.programReferenceRaw]?.text;
+  if(!r||a.sourceSlot===1||slots.has(a.sourceSlot)||a.sourceRawRecord!==raw.indexOf(r)||a.sourceActorType!==r.actorTypeRaw||a.speedClass!==r.rawWords[7]||a.program!==program||initial&&program!==null&&a.sourcePC!==r.rawWords[6]||!b.dots.some(d=>d.id===a.pivot)||initial&&a.pivot!==`${r.gridPosition.column},${r.gridPosition.row}`)fail();slots.add(a.sourceSlot);
+ }
+ if(outlines)for(const g of[700,4300,500,4400,4500,200])for(let f=0;f<(g===200?4:64);f++)if(!Array.isArray(outlines.groups?.[g]?.frames?.[f]?.rows))fail();
+ if(dotOutlines)for(const d of b.dots)for(const f of[1+d.color,9+d.color])if(!Array.isArray(dotOutlines.groups?.[300]?.frames?.[f]?.rows))fail();return true;
 }

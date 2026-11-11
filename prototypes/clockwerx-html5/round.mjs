@@ -1,3 +1,4 @@
+import {assertSlowdownWallBoard} from './slowdown-walls.mjs';
 import {assertStaticSlowdownBoard,StaticSlowdownRuntime} from './static-slowdown.mjs';
 import {assertMovingGoalGoodieRecipe,assertMovingGoalGoodieSource,assertMovingGoalGoodieBoard,assertMovingGoalGoodieActor} from './moving-goal-goodies.mjs';
 import {assertStaticTeleportBusterRecipe,assertStaticTeleportBusterSource,assertStaticTeleportBusterBoard,assertStaticTeleportBusterActor} from './static-teleport-busters.mjs';
@@ -79,7 +80,7 @@ export class SourceRound extends MovementGame {
   if(board.movingTubesRules)assertMovingTubesBoard(board);
   if(board.movingProgrammedBusterRules)assertMovingProgrammedBusterBoard(board,{outlines,dotOutlines,bombOutlines,elevatorOutlines});
   if(board.movingCheckpointControlRules)assertMovingCheckpointControlBoard(board,{outlines,dotOutlines,elevatorOutlines});
-  if(board.staticSlowdownRules)assertStaticSlowdownBoard(board,{outlines,dotOutlines});
+  if(board.staticSlowdownRules)(board.slowdownWallRules?assertSlowdownWallBoard:assertStaticSlowdownBoard)(board,{outlines,dotOutlines});
   if(board.movingGoalGoodieRules)assertMovingGoalGoodieBoard(board,{outlines,dotOutlines});
   if(board.staticTeleportBusterRules)assertStaticTeleportBusterBoard(board,{outlines,dotOutlines});
   if(board.gunSlidingBusterRules)assertGunSlidingBusterBoard(board,{outlines,gunOutlines,dotOutlines});
@@ -259,7 +260,7 @@ export class SourceRound extends MovementGame {
   const sequence=this.eventSequence;
   // WADirectHero only tests the current cardinal frame, then consumes Reverse.
   // A zero-duration direction request separates the grab from WA animation.
-  super.move(hand,0,hand.frame%16===0?action:null);
+  super.move(hand,0,hand.frame%16===0?action:null,this.board.slowdownWallRules?{sourceWallContact:this.canonicalPlayerContact}:{});
   if(this.pendingReverse){
    this.pendingReverse=false;
    if(!this.canonicalPlayerContact&&this.eventSequence===sequence&&!this.death){hand.direction*=-1;this.event('reverse',hand);}

@@ -14,7 +14,8 @@ export class MovementGame {
     this.move(this.player,dt,input.flip?'flip':input.swing&&input.bounce?'flip':input.swing?'swing':input.bounce?'bounce':null);
     for(const h of this.demos)this.move(h,dt,h.action);
   }
-  move(h,dt,action){
+  move(h,dt,action,{sourceWallContact=false}={}){
+    if(typeof sourceWallContact!=='boolean')throw new TypeError('Explicit source wall contact required');
     const pivot=this.board.dots.find(d=>d.id===h.pivot),radius=this.board.radius;
     const advance=this.board.angularSpeed*dt*h.direction*(h.speedScale??1),old=h.angle,next=old+advance;
     if(h.blocked!==null&&Math.abs(angleDelta(next,h.blocked))>0.22)h.blocked=null;
@@ -43,9 +44,9 @@ export class MovementGame {
     if(!target)return;
     const hit=sourceQuery?old:Math.atan2(target.y-pivot.y,target.x-pivot.x),remaining=Math.abs(advance)-nearest;
     if(action==='bounce'){
-      h.direction*=-1;h.angle=hit+remaining*h.direction;h.blocked=hit;this.event('bounce',h,target);return;
+      if(!sourceWallContact)h.direction*=-1;h.angle=hit+remaining*h.direction;h.blocked=hit;this.event('bounce',h,target);return;
     }
-    if(action==='swing')h.direction*=-1;
+    if((action==='swing')!==sourceWallContact)h.direction*=-1;
     if(h===this.player)this.onHumanRelease?.(pivot,h);
     h.pivot=target.id;h.transfers++;
     h.angle=hit+Math.PI+remaining*h.direction;h.blocked=hit+Math.PI;this.event(action,h,target);

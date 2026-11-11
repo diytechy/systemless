@@ -1,3 +1,5 @@
+**Superseded by accepted78 [review](frustration-review.md). Preparation below is historical.**
+
 # Frustration 78 qualification in progress
 
 Continue locally through 100 without per-level stops. Contraction 77 remains the installed acceptance. No push, upload or deployment.

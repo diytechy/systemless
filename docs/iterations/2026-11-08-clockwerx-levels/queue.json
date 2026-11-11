@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 78,
-  "currentAction": "Through77 Contraction accepted/locally installed; continue through100 without per-level stops. Frustration78 original cold active; separate static GN/TR/EX/ring/class1+3 free-buster join next.",
+  "currentOrdinal": 79,
+  "currentAction": "Through78 Frustration accepted/locally installed. Continue through100 without per-level stops; Hypertension79 original cold authorized, inspect its closure before source-only fitter.",
   "levels": [
     {
       "ordinal": 1,
@@ -6766,10 +6766,14 @@
       "menuTitle": "Frustration",
       "resourceTitle": "Frustration",
       "sha256": "a575745c4875361fe423adc8a3f92027c6ab93d5e7af6fd593e19e284b6281fb",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "frustration78-native-goal01/root-original-goal-review.json",
+        "frustration78-native-goal-fit01/actor-comparison01.json",
+        "frustration78-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -6797,7 +6801,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -6835,7 +6839,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "87a02997",
+      "sourceFreezeSHA256": "0d41584a3fa74da22fdd4e4ca79a505c04c888692ee0b172bc25cb793bfac659",
+      "sourceTests": 481,
+      "sourceFitterCommit": "7f9c2dd9",
+      "sourceFitterTests": 9,
+      "actualUpdates": 192450,
+      "actualConstructors": 32,
+      "functionalUpdatesUsed": 192450,
+      "functionalUpdatesRemaining": 57550,
+      "nativeColdClosed": true,
+      "review": "frustration-review.md",
+      "retainedSweep": {
+        "matchedGoals": 76,
+        "constructionOnly": 1,
+        "pairedUpdates": 592520,
+        "sha256": "b2e4a02dd6628ff493a0d10939b2a3f53cc353f36c0c7920275ce0b08bd8e193"
+      },
+      "deliveryAcceptance": {
+        "score": 21000,
+        "updates": 10598,
+        "transfers": 20,
+        "nextOrdinal": 79,
+        "nativeCampaignTotal": 490000,
+        "rootAcceptanceSHA256": "732ecff9836408dae8a41a3784eac1757f9a07c10c2db583ba7a782b5d9b30c3",
+        "rootProofSHA256": "b20f13742f991cc3500bb5dad63a8e33535096666183a8ef3f2ef7e483589f34",
+        "earnedThrough78FixtureSHA256": "1b5fd9014b10188dab7859a1edc60d50ec072c30b3842baf95236e674c0aea5b"
+      },
+      "qualificationBoundary": "Bounded Child route,670 clear positions exact667poses/3pose residuals retained; fixed class1+3 pack fitting is not an actor identity/visibility census. Cold438positions exact22pose residuals retained. Source class3 half class1 rate. Wider reset/orphan contracts synthetic; arbitrary inputs/audio/controllers/pacing separate."
     },
     {
       "ordinal": 79,

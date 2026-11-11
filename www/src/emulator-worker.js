@@ -257,9 +257,13 @@ self.onmessage = async (event) => {
     } else if (message.type === "deleteSave") {
       machine.deleteSave(message.path);
       publishSaveFiles("saveFiles", message.requestId);
+    } else if (message.type === "scanSaves") {
+      // Asked for by a page that is about to leave; no catalogue page sends it.
+      machine.scanSaves();
+      publishSaveFiles("saveFiles", message.requestId);
     }
   } catch (error) {
-    const fatal = !["importSave", "deleteSave"].includes(message.type);
+    const fatal = !["importSave", "deleteSave", "scanSaves"].includes(message.type);
     failed ||= fatal;
     if (fatal) { disconnectRenderer(); stopGpuCompute(); }
     reply({

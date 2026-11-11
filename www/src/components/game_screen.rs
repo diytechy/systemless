@@ -296,7 +296,15 @@ impl RuntimeHandle {
 struct SaveScope {
     id: String,
     memory_only: bool,
+    load_only: bool,
     extra_paths: Vec<String>,
+}
+
+impl SaveScope {
+    /// Anything other than the ordinary rules of every other build.
+    fn has_policy(&self) -> bool {
+        self.memory_only || self.load_only || !self.extra_paths.is_empty()
+    }
 }
 
 fn save_scope(game: &Game) -> SaveScope {
@@ -306,6 +314,7 @@ fn save_scope(game: &Game) -> SaveScope {
         SaveScope {
             id: scope.id,
             memory_only: scope.memory_only,
+            load_only: scope.load_only,
             extra_paths: scope.extra_paths,
         }
     }
@@ -313,7 +322,41 @@ fn save_scope(game: &Game) -> SaveScope {
     SaveScope {
         id: game.id.to_string(),
         memory_only: false,
+        load_only: false,
         extra_paths: Vec::new(),
+    }
+}
+
+/// Scan the running machine's save files now and return the current set.
+#[cfg(feature = "ottertube")]
+async fn scan_save_files(
+    handle: Option<RuntimeHandle>,
+    save_files: RwSignal<Vec<DownloadableSaveFile>>,
+) -> Vec<DownloadableSaveFile> {
+    match handle {
+        Some(RuntimeHandle::Local(machine)) => {
+            let mut machine = machine.borrow_mut();
+            machine.flush_save_files();
+            machine.save_files().to_vec()
+        }
+        Some(RuntimeHandle::Worker(runtime)) => {
+            let message = Object::new();
+            set_js_property(&message, "type", &JsValue::from_str("scanSaves"));
+            if let Ok(request) = runtime.begin_save_request(&message) {
+                if runtime.post(&message).is_ok() {
+                    // The reply updates `save_files` and clears the request.
+                    for _ in 0..40 {
+                        if !runtime.pending_save_requests.borrow().contains(&request) {
+                            break;
+                        }
+                        crate::ottertube::wait_ms(15.0).await;
+                    }
+                }
+                runtime.pending_save_requests.borrow_mut().remove(&request);
+            }
+            save_files.get_untracked()
+        }
+        None => save_files.get_untracked(),
     }
 }
 
@@ -380,12 +423,23 @@ fn GameRuntime(
     });
 
     #[cfg(feature = "ottertube")]
-    Effect::new(move |_| {
-        // Before the machine is ready the list is only the empty placeholder.
-        if machine_ready.get() {
-            save_files.with(|files| crate::ottertube::on_save_files(files));
-        }
-    });
+    {
+        Effect::new(move |_| {
+            // Before the machine is ready the list is only the empty placeholder.
+            if machine_ready.get() {
+                save_files.with(|files| crate::ottertube::on_save_files(files));
+            }
+        });
+        // Leaving asks the machine for a save scan first, so a change made in
+        // the last half second is not left behind.
+        let scan_handle = machine_handle.clone();
+        let scanner: crate::ottertube::SaveScanner = Rc::new(move || {
+            let handle = scan_handle.borrow().clone();
+            Box::pin(scan_save_files(handle, save_files))
+        });
+        crate::ottertube::set_save_scanner(Some(scanner));
+        on_cleanup(|| crate::ottertube::set_save_scanner(None));
+    }
 
     let machine_handle_for_effect = machine_handle.clone();
     Effect::new(move |_| {
@@ -570,8 +624,8 @@ fn GameRuntime(
                 return;
             }
             let scope = save_scope(game);
-            if scope.memory_only || !scope.extra_paths.is_empty() {
-                save_store::set_save_policy(scope.memory_only, &scope.extra_paths);
+            if scope.has_policy() {
+                save_store::set_save_policy(scope.memory_only, scope.load_only, &scope.extra_paths);
             }
             let mut machine = match Machine::new_with_progress(
                 &scope.id,
@@ -2611,8 +2665,9 @@ async fn boot_catalogue_worker(
         "arrows_as_numpad": game.settings.arrows_as_numpad,
         "plugins": plugin_files.iter().map(crate::worker_runtime::PluginMetadata::from).collect::<Vec<_>>(),
     });
-    if scope.memory_only || !scope.extra_paths.is_empty() {
+    if scope.has_policy() {
         config["save_memory_only"] = scope.memory_only.into();
+        config["save_load_only"] = scope.load_only.into();
         config["extra_save_paths"] = scope.extra_paths.into();
     }
     set_js_property(&message, "config", &JsValue::from_str(&config.to_string()));

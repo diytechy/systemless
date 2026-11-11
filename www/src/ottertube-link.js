@@ -12,6 +12,7 @@
   var hosts = meta ? String(meta.content || '').split(/\s+/).filter(Boolean) : [];
   var connection = null;
   var pageHide = null;
+  var leave = null;
   var settled = false;
   /** Checkpoint answers, newest last, for tests and for a parent-side page later. */
   var log = [];
@@ -74,6 +75,18 @@
     },
     /** One function, called when the page is hidden for good (a child leaving, a user switch). */
     onPageHide: function (callback) { pageHide = callback; },
+    /** One function that leaves properly: it saves what is pending, then calls `exit`. */
+    onLeave: function (callback) { leave = callback; },
+    /**
+     * What an Exit button calls. The newest change is stored and answered first (the page shows
+     * "Saving..." for at most about three seconds), then OtterTube is asked to leave.
+     */
+    requestExit: function () {
+      if (typeof leave === 'function') leave();
+      else if (connection) connection.exit();
+    },
+    /** Asks OtterTube to leave, now. Whatever is not acknowledged yet may be lost. */
     exit: function () { if (connection) connection.exit(); },
+    wait: function (ms) { return new Promise(function (resolve) { root.setTimeout(resolve, ms); }); },
   };
 })(window);

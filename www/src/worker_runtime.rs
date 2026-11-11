@@ -29,6 +29,9 @@ struct BootConfig {
     /// Keep no save at all (an OtterTube Guest). Absent in every other build.
     #[serde(default)]
     save_memory_only: bool,
+    /// Load the stored files and never write them: the OtterTube page does.
+    #[serde(default)]
+    save_load_only: bool,
     /// Extra saved guest paths for this entry. Absent in every other build.
     #[serde(default)]
     extra_save_paths: Vec<String>,
@@ -126,8 +129,12 @@ impl WorkerMachine {
             })
             .collect();
         let bytes = game_bytes.to_vec();
-        if config.save_memory_only || !config.extra_save_paths.is_empty() {
-            crate::save_store::set_save_policy(config.save_memory_only, &config.extra_save_paths);
+        if config.save_memory_only || config.save_load_only || !config.extra_save_paths.is_empty() {
+            crate::save_store::set_save_policy(
+                config.save_memory_only,
+                config.save_load_only,
+                &config.extra_save_paths,
+            );
         }
         let paths: Vec<&str> = config.remove_paths.iter().map(String::as_str).collect();
         let mappings: Vec<(&str, &str)> = config
@@ -413,6 +420,12 @@ impl WorkerMachine {
         crate::save_store::flush_pending_saves(&id)
             .await
             .map_err(|error| JsValue::from_str(&error))
+    }
+
+    /// Look for changed save files now instead of at the next periodic scan.
+    #[wasm_bindgen(js_name = scanSaves)]
+    pub fn scan_saves(&mut self) {
+        self.machine.flush_save_files();
     }
 
     #[wasm_bindgen(js_name = saveFilesVersion)]

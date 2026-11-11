@@ -116,7 +116,7 @@ if (typeof document !== 'undefined') {
     bar.querySelector('[data-pause]').hidden = !hasControllerProfile(canvas.dataset.gameId);
     bar.querySelector('[data-pause]').onclick = () => chord(
       canvas.dataset.gameId === 'clockwerx-personal-10' ? ['Meta', 'p'] : ['p']);
-    if (kiosk) bar.querySelector('[data-exit]').onclick = () => window.systemlessOtterTube?.exit();
+    if (kiosk) bar.querySelector('[data-exit]').onclick = () => window.systemlessOtterTube?.requestExit();
     else bar.querySelector('[data-fullscreen]').onclick = async () => {
       const target = canvas.closest('.game-canvas-wrap') || canvas;
       try { await target.requestFullscreen(); canvas.focus({preventScroll:true}); }

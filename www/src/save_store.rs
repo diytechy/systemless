@@ -16,25 +16,30 @@ const STORE_NAME: &str = "files";
 thread_local! {
     static PENDING_SAVES: std::cell::RefCell<std::collections::BTreeMap<String, usize>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
     static LAST_SAVE_ERRORS: std::cell::RefCell<std::collections::BTreeMap<String, String>> = const { std::cell::RefCell::new(std::collections::BTreeMap::new()) };
-    static SAVE_POLICY: std::cell::RefCell<SavePolicy> = const { std::cell::RefCell::new(SavePolicy { memory_only: false, extra_paths: Vec::new() }) };
+    static SAVE_POLICY: std::cell::RefCell<SavePolicy> = const { std::cell::RefCell::new(SavePolicy { memory_only: false, load_only: false, extra_paths: Vec::new() }) };
 }
 
 /// Per-thread save rules. The default (nothing kept in memory only, no extra
 /// paths) is the behavior of every build that never calls `set_save_policy`.
 struct SavePolicy {
     memory_only: bool,
+    load_only: bool,
     /// Lower-case guest paths saved although `is_user_save_path` excludes them.
     extra_paths: Vec<String>,
 }
 
 /// Set the rules for the machine about to start on this thread (the worker's
 /// own thread in worker mode). `memory_only` keeps nothing: no file is read
-/// from or written to IndexedDB. `extra_paths` are exact guest paths, compared
-/// without case, that are saved in addition to the ordinary save paths.
-pub fn set_save_policy(memory_only: bool, extra_paths: &[String]) {
+/// from or written to IndexedDB. `load_only` reads the stored files at boot and
+/// never writes or deletes one: another writer keeps the store (the OtterTube
+/// page, which commits the files together with their counter). `extra_paths`
+/// are exact guest paths, compared without case, that are saved in addition to
+/// the ordinary save paths.
+pub fn set_save_policy(memory_only: bool, load_only: bool, extra_paths: &[String]) {
     SAVE_POLICY.with(|policy| {
         let mut policy = policy.borrow_mut();
         policy.memory_only = memory_only;
+        policy.load_only = load_only;
         policy.extra_paths = extra_paths
             .iter()
             .map(|path| path.trim_matches('/').to_ascii_lowercase())
@@ -56,6 +61,14 @@ pub fn is_extra_save_path(path: &str) -> bool {
 
 fn memory_only() -> bool {
     SAVE_POLICY.with(|policy| policy.borrow().memory_only)
+}
+
+/// This thread writes nothing to the store.
+fn writes_nothing() -> bool {
+    SAVE_POLICY.with(|policy| {
+        let policy = policy.borrow();
+        policy.memory_only || policy.load_only
+    })
 }
 
 struct PendingSave(String);
@@ -215,7 +228,7 @@ async fn load_saved_files_inner(game_id: &str) -> Result<Vec<VfsFileSnapshot>, S
 }
 
 pub fn persist_save_file(game_id: String, file: VfsFileSnapshot) {
-    if memory_only() {
+    if writes_nothing() {
         return;
     }
     let pending = PendingSave::new(&game_id);
@@ -231,7 +244,7 @@ pub fn persist_save_file(game_id: String, file: VfsFileSnapshot) {
 }
 
 pub fn delete_save_file(game_id: String, path: String) {
-    if memory_only() {
+    if writes_nothing() {
         return;
     }
     let pending = PendingSave::new(&game_id);
@@ -270,10 +283,16 @@ async fn delete_save_file_inner(game_id: &str, path: &str) -> Result<(), String>
     completion.wait().await
 }
 
-/// Replace every stored file of `game_id` with `files`, in one transaction, so
-/// the next boot under that id loads exactly these. Other ids are untouched.
+/// Replace every stored file of `game_id` with `files` and record `counter`
+/// beside them, all in one transaction: the counter is never committed
+/// without the files it belongs to, nor the files without it. The next boot
+/// under that id loads exactly these. Other ids are untouched.
 #[cfg(feature = "ottertube")]
-pub async fn replace_saved_files(game_id: &str, files: &[VfsFileSnapshot]) -> Result<(), String> {
+pub async fn write_scope(
+    game_id: &str,
+    files: &[VfsFileSnapshot],
+    counter: u64,
+) -> Result<(), String> {
     let db = open_db().await?;
     let store = object_store(&db, IdbTransactionMode::Readwrite)?;
     let completion = TransactionCompletion::new(store.transaction());
@@ -297,7 +316,46 @@ pub async fn replace_saved_files(game_id: &str, files: &[VfsFileSnapshot]) -> Re
             )
             .map_err(js_error_string)?;
     }
+    store
+        .put_with_key(
+            &JsValue::from_str(&scope_counter_record(counter)),
+            &JsValue::from_str(&scope_counter_key(game_id)),
+        )
+        .map_err(js_error_string)?;
     completion.wait().await
+}
+
+/// The counter committed with the files of `game_id`, or `None` when that id
+/// has no committed copy.
+#[cfg(feature = "ottertube")]
+pub async fn read_scope_counter(game_id: &str) -> Result<Option<u64>, String> {
+    let db = open_db().await?;
+    let store = object_store(&db, IdbTransactionMode::Readonly)?;
+    let request = store
+        .get(&JsValue::from_str(&scope_counter_key(game_id)))
+        .map_err(js_error_string)?;
+    let value = await_idb_request(&request).await?;
+    Ok(value.as_string().as_deref().and_then(parse_scope_counter))
+}
+
+/// The key is outside every `{game_id}` NUL `{path}` range, and the value is
+/// not a stored file, so no loader takes the record for a save file.
+#[cfg_attr(not(any(feature = "ottertube", test)), allow(dead_code))]
+fn scope_counter_key(game_id: &str) -> String {
+    format!("ottertube-counter\u{0}{game_id}")
+}
+
+#[cfg_attr(not(any(feature = "ottertube", test)), allow(dead_code))]
+fn scope_counter_record(counter: u64) -> String {
+    format!("{{\"ottertube_counter\":{counter}}}")
+}
+
+#[cfg_attr(not(any(feature = "ottertube", test)), allow(dead_code))]
+fn parse_scope_counter(record: &str) -> Option<u64> {
+    serde_json::from_str::<serde_json::Value>(record)
+        .ok()?
+        .get("ottertube_counter")?
+        .as_u64()
 }
 
 fn record_key(game_id: &str, path: &str) -> String {
@@ -757,17 +815,39 @@ mod tests {
     fn save_policy_defaults_to_no_extra_paths_and_matches_exact_paths_without_case() {
         assert!(!is_extra_save_path("System Folder/Preferences/Game Prefs"));
         assert!(!memory_only());
-        set_save_policy(true, &["System Folder/Preferences/Game Prefs".to_string()]);
+        set_save_policy(
+            true,
+            false,
+            &["System Folder/Preferences/Game Prefs".to_string()],
+        );
         assert!(memory_only());
+        assert!(writes_nothing());
         assert!(is_extra_save_path("system folder/preferences/game prefs"));
         assert!(is_extra_save_path("/System Folder/Preferences/Game Prefs"));
         assert!(!is_extra_save_path("System Folder/Preferences/Other"));
         assert!(!is_extra_save_path(
             "System Folder/Preferences/Game Prefs/Inner"
         ));
-        set_save_policy(false, &[]);
+        set_save_policy(false, true, &[]);
+        assert!(!memory_only(), "a load-only thread still reads the store");
+        assert!(writes_nothing());
+        set_save_policy(false, false, &[]);
+        assert!(!writes_nothing());
         assert!(!is_extra_save_path("System Folder/Preferences/Game Prefs"));
         assert!(!memory_only());
+    }
+
+    #[test]
+    fn the_scope_counter_record_is_not_a_save_file_of_any_scope() {
+        let scope = "game@00000000000000000000000000000001";
+        let key = scope_counter_key(scope);
+        assert!(!key.starts_with(&record_key(scope, "")));
+        assert!(!key.starts_with(&record_key("game", "")));
+        let record = scope_counter_record(1_800_000_000_123);
+        assert_eq!(parse_scope_counter(&record), Some(1_800_000_000_123));
+        assert!(serde_json::from_str::<StoredSaveFile>(&record).is_err());
+        assert_eq!(parse_scope_counter("not json"), None);
+        assert_eq!(parse_scope_counter("{\"game_id\":\"x\"}"), None);
     }
 
     #[test]

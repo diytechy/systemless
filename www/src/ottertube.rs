@@ -199,22 +199,22 @@ pub fn next_counter(previous: u64, now_ms: u64) -> u64 {
 pub enum Resume {
     /// Neither side holds a save.
     Fresh,
-    /// The local copy is as new as OtterTube's or newer. `resend` when
-    /// OtterTube's is older or missing, so it is brought up to date.
-    KeepLocal { resend: bool },
-    /// OtterTube's copy is newer (another device, or a cleared browser).
+    /// The local copy is newer than OtterTube's, or OtterTube holds none. It
+    /// is sent again, so OtterTube is brought up to date.
+    KeepLocal,
+    /// OtterTube's copy is as new as the local one or newer (another device,
+    /// or a cleared browser). On a tie OtterTube's is taken: it is the copy
+    /// that was acknowledged, and taking it costs one local write.
     TakeSaved,
 }
 
 pub fn choose_resume(local_counter: Option<u64>, saved_counter: Option<u64>) -> Resume {
     match (local_counter, saved_counter) {
         (None, None) => Resume::Fresh,
-        (Some(_), None) => Resume::KeepLocal { resend: true },
+        (Some(_), None) => Resume::KeepLocal,
         (None, Some(_)) => Resume::TakeSaved,
-        (Some(local), Some(saved)) if saved > local => Resume::TakeSaved,
-        (Some(local), Some(saved)) => Resume::KeepLocal {
-            resend: local > saved,
-        },
+        (Some(local), Some(saved)) if saved >= local => Resume::TakeSaved,
+        (Some(_), Some(_)) => Resume::KeepLocal,
     }
 }
 
@@ -301,7 +301,10 @@ mod link {
     use crate::save_store::{self, DownloadableSaveFile};
     use leptos::prelude::*;
     use leptos::task::spawn_local;
-    use std::cell::RefCell;
+    use std::cell::{Cell, RefCell};
+    use std::future::Future;
+    use std::pin::Pin;
+    use std::rc::Rc;
     use wasm_bindgen::{prelude::*, JsCast};
     use wasm_bindgen_futures::JsFuture;
 
@@ -313,16 +316,30 @@ mod link {
         fn link_checkpoint(counter: f64, text: &str) -> Result<js_sys::Promise, JsValue>;
         #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = onPageHide, catch)]
         fn link_on_page_hide(callback: &js_sys::Function) -> Result<(), JsValue>;
+        #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = onLeave, catch)]
+        fn link_on_leave(callback: &js_sys::Function) -> Result<(), JsValue>;
+        #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = exit, catch)]
+        fn link_exit() -> Result<(), JsValue>;
+        #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = wait, catch)]
+        fn link_wait(ms: f64) -> Result<js_sys::Promise, JsValue>;
     }
 
-    const COUNTER_KEY: &str = "systemless.ottertube.counter:";
     const OVERSIZE_KEY: &str = "systemless.ottertube.oversize:";
+    const BLOCKED_KEY: &str = "systemless.ottertube.not-sending:";
+    /// A checkpoint OtterTube refused for now (`rate`, `storage`) is sent again
+    /// after this long, then after twice as long, up to `MAX_RETRIES` times.
+    const RETRY_FIRST_MS: f64 = 2500.0;
+    const MAX_RETRIES: u32 = 4;
+    /// How long leaving waits for the newest change to be stored and answered.
+    const LEAVE_WAIT_MS: f64 = 3000.0;
 
     struct Session {
         game_id: &'static str,
         /// `None` is Guest: nothing is read, kept or sent.
         scope: Option<String>,
-        /// OtterTube keeps the save (`mode: host`). Otherwise only the local copy exists.
+        /// Checkpoints go to OtterTube. Off under `self`/`none`, and for the
+        /// whole session when the save OtterTube holds could not be used: a
+        /// save this build cannot read must never be overwritten by it.
         host_saves: bool,
         counter: u64,
         /// The file set last accounted for. `None` until the booted machine reports its first.
@@ -331,16 +348,33 @@ mod link {
         /// The newest save text and its counter.
         latest: Option<(u64, String)>,
         acknowledged: u64,
+        /// The counter of the last local commit (files and counter together).
+        stored: u64,
+        retries: u32,
+        retry_waiting: bool,
     }
+
+    /// One local write: the scope, its files and the counter they belong to.
+    type LocalWrite = (String, Vec<VfsFileSnapshot>, u64);
+    /// Asks the running machine for a save scan now and returns its files.
+    pub type SaveScanner = Rc<dyn Fn() -> Pin<Box<dyn Future<Output = Vec<DownloadableSaveFile>>>>>;
 
     thread_local! {
         static SESSION: RefCell<Option<Session>> = const { RefCell::new(None) };
+        static NEXT_WRITE: RefCell<Option<LocalWrite>> = const { RefCell::new(None) };
+        static WRITING: Cell<bool> = const { Cell::new(false) };
+        static SCANNER: RefCell<Option<SaveScanner>> = const { RefCell::new(None) };
+        static LEAVING: Cell<Option<RwSignal<bool>>> = const { Cell::new(None) };
     }
 
     /// How the game's files are stored for whoever is playing.
     pub struct SaveScope {
         pub id: String,
+        /// Guest: nothing is read or written.
         pub memory_only: bool,
+        /// The machine loads the scope at boot and never writes it. This page
+        /// writes it instead, files and counter in one transaction.
+        pub load_only: bool,
         pub extra_paths: Vec<String>,
     }
 
@@ -357,14 +391,21 @@ mod link {
             }) => SaveScope {
                 id: scope.clone(),
                 memory_only: false,
+                load_only: true,
                 extra_paths,
             },
             _ => SaveScope {
                 id: format!("{game_id}@guest"),
                 memory_only: true,
+                load_only: false,
                 extra_paths,
             },
         })
+    }
+
+    /// The game screen hands over a way to scan the running machine's saves now.
+    pub fn set_save_scanner(scanner: Option<SaveScanner>) {
+        SCANNER.with(|slot| *slot.borrow_mut() = scanner);
     }
 
     fn warn(message: &str) {
@@ -375,18 +416,13 @@ mod link {
         web_sys::window()?.local_storage().ok().flatten()
     }
 
-    fn read_counter(scope: &str) -> Option<u64> {
-        storage()?
-            .get_item(&format!("{COUNTER_KEY}{scope}"))
-            .ok()
-            .flatten()?
-            .parse()
-            .ok()
-    }
-
-    fn write_counter(scope: &str, counter: u64) {
+    fn note(key: &str, scope: &str, value: Option<&str>) {
         if let Some(storage) = storage() {
-            let _ = storage.set_item(&format!("{COUNTER_KEY}{scope}"), &counter.to_string());
+            let key = format!("{key}{scope}");
+            let _ = match value {
+                Some(value) => storage.set_item(&key, value),
+                None => storage.remove_item(&key),
+            };
         }
     }
 
@@ -401,6 +437,55 @@ mod link {
             .unwrap_or_else(|| format!("{value:?}"))
     }
 
+    pub async fn wait_ms(ms: f64) {
+        if let Ok(promise) = link_wait(ms) {
+            let _ = JsFuture::from(promise).await;
+        }
+    }
+
+    /// The save state on the page's root element, for a parent-side page and for tests.
+    fn publish() {
+        let Some(root) = web_sys::window()
+            .and_then(|window| window.document())
+            .and_then(|document| document.query_selector(".app--ottertube").ok().flatten())
+        else {
+            return;
+        };
+        SESSION.with(|session| {
+            let session = session.borrow();
+            let Some(session) = session.as_ref() else {
+                return;
+            };
+            for (name, value) in [
+                ("data-save-counter", session.counter.to_string()),
+                ("data-save-stored", session.stored.to_string()),
+                ("data-save-acknowledged", session.acknowledged.to_string()),
+                (
+                    "data-save-host",
+                    if session.host_saves { "on" } else { "off" }.to_string(),
+                ),
+            ] {
+                let _ = root.set_attribute(name, &value);
+            }
+        });
+    }
+
+    fn new_session(game_id: &'static str) -> Session {
+        Session {
+            game_id,
+            scope: None,
+            host_saves: false,
+            counter: 0,
+            baseline: None,
+            resend_first: false,
+            latest: None,
+            acknowledged: 0,
+            stored: 0,
+            retries: 0,
+            retry_waiting: false,
+        }
+    }
+
     /// Wait for OtterTube's `init`, then make the local store hold whichever of
     /// its copy and OtterTube's is newer. `Err` means the page is not inside
     /// OtterTube: the caller shows a plain message and starts nothing.
@@ -412,80 +497,97 @@ mod link {
                 .as_string()
                 .unwrap_or_else(|| "OtterTube did not answer".into()));
         }
-        let host_saves = js_field(&init, "mode").as_string().as_deref() == Some("host");
         let subject = js_field(&init, "subject")
             .as_string()
             .filter(|subject| is_subject(subject));
         let Some(subject) = subject else {
             // Guest, or a mode that names nobody: a session that keeps nothing.
-            SESSION.with(|session| {
-                *session.borrow_mut() = Some(Session {
-                    game_id: game.id,
-                    scope: None,
-                    host_saves: false,
-                    counter: 0,
-                    baseline: None,
-                    resend_first: false,
-                    latest: None,
-                    acknowledged: 0,
-                });
-            });
+            SESSION.with(|session| *session.borrow_mut() = Some(new_session(game.id)));
+            register_page_callbacks();
             return Ok(());
         };
         let scope = namespaced_game_id(game.id, &subject);
-        let local = read_counter(&scope);
+        let mut session = new_session(game.id);
+        session.host_saves = js_field(&init, "mode").as_string().as_deref() == Some("host");
+
+        // The local copy counts only with its counter, which is committed in
+        // the same transaction as the files it belongs to.
+        let local = match save_store::read_scope_counter(&scope).await {
+            Ok(counter) => counter,
+            Err(error) => {
+                warn(&format!("the local copy could not be read ({error})"));
+                None
+            }
+        };
+        // A save is held but this build cannot use it: play on from the local
+        // copy and send nothing, so what OtterTube holds stays as it is.
+        let mut unusable = None;
         let saved =
             js_field(&init, "saved")
                 .as_string()
                 .and_then(|text| match decode_save_text(&text) {
                     Ok(bundle) if bundle.game_id == game.id => Some(bundle),
                     Ok(bundle) => {
-                        warn(&format!(
-                            "the save held is for {}, not this game; ignored",
-                            bundle.game_id
-                        ));
+                        unusable = Some(format!("the save held is for {}", bundle.game_id));
                         None
                     }
                     Err(error) => {
-                        warn(&format!(
-                            "the save held could not be read ({error}); ignored"
-                        ));
+                        unusable = Some(format!("the save held could not be read: {error}"));
                         None
                     }
                 });
-        let mut resume = choose_resume(local, saved.as_ref().map(|bundle| bundle.counter));
-        let mut counter = local.unwrap_or(0);
+        let mut resume = match unusable {
+            Some(_) if local.is_some() => Resume::KeepLocal,
+            Some(_) => Resume::Fresh,
+            None => choose_resume(local, saved.as_ref().map(|bundle| bundle.counter)),
+        };
+        session.counter = local.unwrap_or(0);
+        session.stored = session.counter;
         if resume == Resume::TakeSaved {
             let bundle = saved.as_ref().expect("a save to take");
-            match save_store::replace_saved_files(&scope, &bundle.files).await {
+            match save_store::write_scope(&scope, &bundle.files, bundle.counter).await {
                 Ok(()) => {
-                    counter = bundle.counter;
-                    write_counter(&scope, counter);
+                    session.counter = bundle.counter;
+                    session.stored = bundle.counter;
+                    session.acknowledged = bundle.counter;
                 }
                 Err(error) => {
-                    warn(&format!("the save held could not be stored locally ({error}); keeping the local copy"));
-                    resume = Resume::KeepLocal { resend: false };
+                    unusable = Some(format!(
+                        "the save held could not be stored on this device: {error}"
+                    ));
+                    resume = if local.is_some() {
+                        Resume::KeepLocal
+                    } else {
+                        Resume::Fresh
+                    };
                 }
             }
         }
-        SESSION.with(|session| {
-            *session.borrow_mut() = Some(Session {
-                game_id: game.id,
-                scope: Some(scope),
-                host_saves,
-                counter,
-                // A fresh start has no files; anything the game then writes is a change.
-                baseline: (resume == Resume::Fresh).then(|| files_fingerprint(&[])),
-                resend_first: resume == Resume::KeepLocal { resend: true },
-                latest: None,
-                acknowledged: saved.map_or(0, |bundle| bundle.counter),
-            });
-        });
+        if let Some(reason) = &unusable {
+            warn(&format!(
+                "{reason}; nothing will be sent to OtterTube this time"
+            ));
+            session.host_saves = false;
+        }
+        note(BLOCKED_KEY, &scope, unusable.as_deref());
+        // A fresh start has no files; anything the game then writes is a change.
+        session.baseline = (resume == Resume::Fresh).then(|| files_fingerprint(&[]));
+        session.resend_first = resume == Resume::KeepLocal;
+        session.scope = Some(scope);
+        SESSION.with(|slot| *slot.borrow_mut() = Some(session));
+        register_page_callbacks();
+        Ok(())
+    }
+
+    fn register_page_callbacks() {
         let on_hide = Closure::<dyn FnMut()>::new(flush_on_page_hide);
         if link_on_page_hide(on_hide.as_ref().unchecked_ref()).is_ok() {
             on_hide.forget();
         }
-        Ok(())
+        let on_leave = Closure::<dyn FnMut()>::new(|| spawn_local(leave()));
+        if link_on_leave(on_leave.as_ref().unchecked_ref()).is_ok() {
+            on_leave.forget();
+        }
     }
 
     /// The running machine's changed files, each time the set changes. The
@@ -515,16 +617,15 @@ mod link {
             }
             session.baseline = Some(fingerprint);
             if first {
-                if !std::mem::take(&mut session.resend_first) {
+                // What the machine loaded: already stored under its counter.
+                if !std::mem::take(&mut session.resend_first) || session.counter == 0 {
                     return None;
-                }
-                if session.counter == 0 {
-                    session.counter = next_counter(0, js_sys::Date::now() as u64);
                 }
             } else {
                 session.counter = next_counter(session.counter, js_sys::Date::now() as u64);
+                queue_local_write(scope.clone(), snapshots.clone(), session.counter);
             }
-            write_counter(&scope, session.counter);
+            session.retries = 0;
             let bundle = SaveBundle {
                 game_id: session.game_id.to_string(),
                 counter: session.counter,
@@ -532,9 +633,7 @@ mod link {
             };
             match encode_save_text(&bundle) {
                 Ok(text) => {
-                    if let Some(storage) = storage() {
-                        let _ = storage.remove_item(&format!("{OVERSIZE_KEY}{scope}"));
-                    }
+                    note(OVERSIZE_KEY, &scope, None);
                     session.latest = Some((session.counter, text.clone()));
                     session.host_saves.then_some((session.counter, text))
                 }
@@ -542,19 +641,40 @@ mod link {
                     // Keep playing: the local copy still holds everything. The
                     // note is for a parent-side page; the child sees nothing.
                     warn(&format!("checkpoint not sent: {error}"));
-                    if let (Some(storage), SaveTextError::TooLarge { body_bytes }) =
-                        (storage(), &error)
-                    {
-                        let _ = storage
-                            .set_item(&format!("{OVERSIZE_KEY}{scope}"), &body_bytes.to_string());
-                    }
+                    note(OVERSIZE_KEY, &scope, Some(&error.to_string()));
                     None
                 }
             }
         });
+        publish();
         if let Some((counter, text)) = outgoing {
             send_checkpoint(counter, text);
         }
+    }
+
+    /// Store the files and their counter locally, in one transaction. Writes
+    /// run one at a time; a change arriving meanwhile replaces the one waiting.
+    fn queue_local_write(scope: String, files: Vec<VfsFileSnapshot>, counter: u64) {
+        NEXT_WRITE.with(|next| *next.borrow_mut() = Some((scope, files, counter)));
+        if WRITING.with(|writing| writing.replace(true)) {
+            return;
+        }
+        spawn_local(async {
+            while let Some((scope, files, counter)) =
+                NEXT_WRITE.with(|next| next.borrow_mut().take())
+            {
+                match save_store::write_scope(&scope, &files, counter).await {
+                    Ok(()) => SESSION.with(|session| {
+                        if let Some(session) = session.borrow_mut().as_mut() {
+                            session.stored = session.stored.max(counter);
+                        }
+                    }),
+                    Err(error) => warn(&format!("the local copy was not stored ({error})")),
+                }
+                publish();
+            }
+            WRITING.with(|writing| writing.set(false));
+        });
     }
 
     fn send_checkpoint(counter: u64, text: String) {
@@ -569,37 +689,99 @@ mod link {
             let Ok(answer) = JsFuture::from(promise).await else {
                 return;
             };
-            if js_field(&answer, "saved").as_bool() == Some(true) {
-                SESSION.with(|session| {
-                    if let Some(session) = session.borrow_mut().as_mut() {
-                        session.acknowledged = session.acknowledged.max(counter);
+            let reason = js_field(&answer, "reason").as_string().unwrap_or_default();
+            let retry = SESSION.with(|session| {
+                let mut session = session.borrow_mut();
+                let session = session.as_mut()?;
+                if js_field(&answer, "saved").as_bool() == Some(true) {
+                    session.acknowledged = session.acknowledged.max(counter);
+                    session.retries = 0;
+                    return None;
+                }
+                warn(&format!("checkpoint {counter} was not kept: {reason}"));
+                match reason.as_str() {
+                    // Refused for now: the newest text goes again shortly.
+                    "rate" | "storage" => {
+                        if session.retry_waiting || session.retries >= MAX_RETRIES {
+                            return None;
+                        }
+                        session.retry_waiting = true;
+                        session.retries += 1;
+                        Some(RETRY_FIRST_MS * f64::from(1u32 << (session.retries - 1)))
                     }
+                    // OtterTube keeps no save here at all: stop offering one.
+                    "mode" | "no-user" => {
+                        session.host_saves = false;
+                        None
+                    }
+                    _ => None,
+                }
+            });
+            publish();
+            if let Some(delay) = retry {
+                wait_ms(delay).await;
+                let again = SESSION.with(|session| {
+                    let mut session = session.borrow_mut();
+                    let session = session.as_mut()?;
+                    session.retry_waiting = false;
+                    unacknowledged(session)
                 });
-            } else {
-                warn(&format!(
-                    "checkpoint {counter} was not kept: {}",
-                    js_field(&answer, "reason").as_string().unwrap_or_default()
-                ));
+                if let Some((counter, text)) = again {
+                    send_checkpoint(counter, text);
+                }
             }
         });
     }
 
-    /// The page is going away. Hand OtterTube the newest text once more if it
-    /// has not acknowledged it. OtterTube takes one checkpoint per 2 s and
-    /// tears the page down without waiting, so this can still be lost: the
-    /// local copy under the user's scope, with its counter, is what carries
-    /// the tail to the next `init`.
+    /// The newest text, if OtterTube takes saves and has not acknowledged it.
+    fn unacknowledged(session: &Session) -> Option<(u64, String)> {
+        let (counter, text) = session.latest.as_ref()?;
+        (session.host_saves && *counter > session.acknowledged).then(|| (*counter, text.clone()))
+    }
+
+    /// The page is going away without notice. Hand OtterTube the newest text
+    /// once more if it has not acknowledged it. OtterTube takes one checkpoint
+    /// per 2 s and tears the page down without waiting, so this can still be
+    /// lost: the local copy under the user's scope, with its counter, is what
+    /// carries the tail to the next `init`.
     fn flush_on_page_hide() {
-        let pending = SESSION.with(|session| {
-            let session = session.borrow();
-            let session = session.as_ref()?;
-            let (counter, text) = session.latest.as_ref()?;
-            (session.host_saves && *counter > session.acknowledged)
-                .then(|| (*counter, text.clone()))
-        });
+        let pending = SESSION.with(|session| session.borrow().as_ref().and_then(unacknowledged));
         if let Some((counter, text)) = pending {
             send_checkpoint(counter, text);
         }
+    }
+
+    /// Leave on purpose (the Exit button, or the game quitting): scan for a
+    /// change not yet seen, wait until the newest one is stored locally and
+    /// answered by OtterTube, then ask OtterTube to leave. The wait is bounded;
+    /// what it misses is still in the local copy.
+    pub async fn leave() {
+        let Some(signal) = LEAVING.with(|leaving| leaving.get()) else {
+            let _ = link_exit();
+            return;
+        };
+        if signal.get_untracked() {
+            return;
+        }
+        signal.set(true);
+        let deadline = js_sys::Date::now() + LEAVE_WAIT_MS;
+        if let Some(scanner) = SCANNER.with(|slot| slot.borrow().clone()) {
+            let files = scanner().await;
+            on_save_files(&files);
+        }
+        loop {
+            let settled = SESSION.with(|session| {
+                session.borrow().as_ref().is_none_or(|session| {
+                    session.scope.is_none()
+                        || (session.stored >= session.counter && unacknowledged(session).is_none())
+                })
+            });
+            if settled || js_sys::Date::now() >= deadline {
+                break;
+            }
+            wait_ms(50.0).await;
+        }
+        let _ = link_exit();
     }
 
     #[derive(Clone, PartialEq)]
@@ -617,12 +799,15 @@ mod link {
             .unwrap_or_default();
         let game = game_from_path(&path).filter(|game| game.approved);
         let state = RwSignal::new(LinkState::Connecting);
+        let leaving = RwSignal::new(false);
+        LEAVING.with(|slot| slot.set(Some(leaving)));
         match game {
             Some(game) => spawn_local(async move {
                 state.set(match begin(game).await {
                     Ok(()) => LinkState::Ready,
                     Err(reason) => LinkState::Absent(reason),
                 });
+                publish();
             }),
             None => state.set(LinkState::Absent(
                 "There is no game at this address.".into(),
@@ -652,6 +837,9 @@ mod link {
                     }.into_any(),
                     _ => view! { <main class="ottertube-plain"><p>"Starting\u{2026}"</p></main> }.into_any(),
                 }}
+                <Show when=move || leaving.get()>
+                    <div class="ottertube-saving" role="status">"Saving\u{2026}"</div>
+                </Show>
             </div>
         }
     }
@@ -903,18 +1091,10 @@ mod tests {
         assert_eq!(choose_resume(None, None), Resume::Fresh);
         assert_eq!(choose_resume(None, Some(1)), Resume::TakeSaved);
         assert_eq!(choose_resume(Some(4), Some(9)), Resume::TakeSaved);
-        assert_eq!(
-            choose_resume(Some(9), Some(9)),
-            Resume::KeepLocal { resend: false }
-        );
-        assert_eq!(
-            choose_resume(Some(9), Some(4)),
-            Resume::KeepLocal { resend: true }
-        );
-        assert_eq!(
-            choose_resume(Some(1), None),
-            Resume::KeepLocal { resend: true }
-        );
+        // A tie goes to the copy OtterTube acknowledged.
+        assert_eq!(choose_resume(Some(9), Some(9)), Resume::TakeSaved);
+        assert_eq!(choose_resume(Some(9), Some(4)), Resume::KeepLocal);
+        assert_eq!(choose_resume(Some(1), None), Resume::KeepLocal);
     }
 
     #[test]
@@ -929,7 +1109,7 @@ mod tests {
         );
         assert_eq!(
             choose_resume(Some(newer.counter), Some(older.counter)),
-            Resume::KeepLocal { resend: true }
+            Resume::KeepLocal
         );
     }
 

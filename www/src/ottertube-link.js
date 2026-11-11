@@ -48,6 +48,39 @@
     });
   });
 
+  // A tap button that presses keys once: data-kiosk-keys="Meta+n" is Command-N. The keys go to the
+  // game's canvas as keyboard events, the same way the gamepad adapter sends them, held long
+  // enough for the game to see them and released in reverse order. A comma separates presses
+  // made one after another: "Space,Space" is Space, a pause, Space again.
+  var KEY_HOLD_MS = 180;
+  var KEY_STEP_MS = 1200;
+  function keyEvent(type, name) {
+    var key = name === 'Space' ? ' ' : name;
+    var code = name === 'Space' ? 'Space' : name.length === 1 ? (/[0-9]/.test(name) ? 'Digit' + name : 'Key' + name.toUpperCase()) : name;
+    return new KeyboardEvent(type, { key: key, code: code, bubbles: true, cancelable: true });
+  }
+  root.document.addEventListener('pointerdown', function (event) {
+    var button = event.target && event.target.closest ? event.target.closest('[data-kiosk-keys]') : null;
+    if (!button || button.dataset.kioskBusy === 'true') return;
+    var canvas = root.document.querySelector('canvas.game-canvas');
+    if (!canvas) return;
+    event.preventDefault();
+    var steps = String(button.dataset.kioskKeys).split(',').filter(Boolean);
+    button.dataset.kioskBusy = 'true';
+    button.classList.add('is-active');
+    try { canvas.focus({ preventScroll: true }); } catch (_) { /* focus is a nicety */ }
+    (function press(index) {
+      var names = steps[index].split('+').filter(Boolean);
+      names.forEach(function (name) { canvas.dispatchEvent(keyEvent('keydown', name)); });
+      root.setTimeout(function () {
+        names.slice().reverse().forEach(function (name) { canvas.dispatchEvent(keyEvent('keyup', name)); });
+        if (index + 1 < steps.length) { root.setTimeout(function () { press(index + 1); }, KEY_STEP_MS); return; }
+        button.classList.remove('is-active');
+        delete button.dataset.kioskBusy;
+      }, KEY_HOLD_MS);
+    })(0);
+  });
+
   root.addEventListener('pagehide', function () {
     if (typeof pageHide === 'function') {
       try { pageHide(); } catch (_) { /* leaving must not throw */ }

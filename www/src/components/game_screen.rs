@@ -298,6 +298,7 @@ struct SaveScope {
     memory_only: bool,
     load_only: bool,
     extra_paths: Vec<String>,
+    boot_patches: Vec<save_store::BootPatch>,
 }
 
 impl SaveScope {
@@ -316,6 +317,7 @@ fn save_scope(game: &Game) -> SaveScope {
             memory_only: scope.memory_only,
             load_only: scope.load_only,
             extra_paths: scope.extra_paths,
+            boot_patches: scope.boot_patches,
         }
     }
     #[cfg(not(feature = "ottertube"))]
@@ -324,6 +326,7 @@ fn save_scope(game: &Game) -> SaveScope {
         memory_only: false,
         load_only: false,
         extra_paths: Vec::new(),
+        boot_patches: Vec::new(),
     }
 }
 
@@ -626,6 +629,9 @@ fn GameRuntime(
             let scope = save_scope(game);
             if scope.has_policy() {
                 save_store::set_save_policy(scope.memory_only, scope.load_only, &scope.extra_paths);
+            }
+            if !scope.boot_patches.is_empty() {
+                save_store::set_boot_patches(scope.boot_patches.clone());
             }
             let mut machine = match Machine::new_with_progress(
                 &scope.id,
@@ -2194,6 +2200,8 @@ fn start_render_loop(
         } else {
             // Emulator halted — break the capture chain so we don't leak.
             *cb_cell_self.borrow_mut() = None;
+            #[cfg(feature = "ottertube")]
+            crate::ottertube::guest_halted();
         }
     }) as Box<dyn FnMut()>));
 
@@ -2668,6 +2676,7 @@ async fn boot_catalogue_worker(
     if scope.has_policy() {
         config["save_memory_only"] = scope.memory_only.into();
         config["save_load_only"] = scope.load_only.into();
+        config["boot_patches"] = serde_json::to_value(&scope.boot_patches).unwrap_or_default();
         config["extra_save_paths"] = scope.extra_paths.into();
     }
     set_js_property(&message, "config", &JsValue::from_str(&config.to_string()));
@@ -2852,6 +2861,11 @@ async fn boot_catalogue_worker(
             state.save_error = Some(error);
         }
         state.running = js_bool_property(&data, "running").unwrap_or(false);
+        #[cfg(feature = "ottertube")]
+        if !state.running {
+            // The game quit: the add-on page saves and leaves, no dead screen.
+            crate::ottertube::guest_halted();
+        }
         if let Ok(audio_bytes) = Reflect::get(&data, &JsValue::from_str("audio")) {
             if !audio_bytes.is_undefined() {
                 let samples = Uint8Array::new(&audio_bytes).to_vec();
@@ -4568,6 +4582,13 @@ fn mobile_control_key_name(key: String) -> Option<&'static str> {
         "Escape" => Some("Escape"),
         "Shift" => Some("Shift"),
         "None" => Some("None"),
+        "Meta" if cfg!(feature = "ottertube") => Some("Meta"),
+        "Alt" if cfg!(feature = "ottertube") => Some("Alt"),
+        "Control" if cfg!(feature = "ottertube") => Some("Control"),
+        "Numpad2" if cfg!(feature = "ottertube") => Some("Numpad2"),
+        "Numpad4" if cfg!(feature = "ottertube") => Some("Numpad4"),
+        "Numpad6" if cfg!(feature = "ottertube") => Some("Numpad6"),
+        "Numpad8" if cfg!(feature = "ottertube") => Some("Numpad8"),
         "[" => Some("["),
         "]" => Some("]"),
         "\\" => Some("\\"),

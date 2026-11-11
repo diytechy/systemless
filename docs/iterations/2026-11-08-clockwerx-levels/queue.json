@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 72,
-  "currentAction": "Authorized through100 continuation active.71 installed;72 Firing Line source56v2 gun/buster/BO/WY join under qualification. Original cold capture closed; fixed prefix692 has zero452 position errors/18 retained pose errors. Retained71 regression562024 paired updates matches. Route work active; no acceptance72 yet.",
+  "currentOrdinal": 73,
+  "currentAction": "Through72 Firing Line accepted/locally installed. Continue through100 without per-level checkpoints. Quest73 original cold closed; source-only fitter rejected global EX exclusion before pixel reads. Qualify static buster packs on joined boards. No73 actual model yet.",
   "levels": [
     {
       "ordinal": 1,
@@ -6132,10 +6132,14 @@
       "menuTitle": "Firing Line",
       "resourceTitle": "Firing Line",
       "sha256": "5c9c21f93740f04c2e2c1750184901119d1a36b1ea0f889af94ade0f40d0d853",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "firing-line72-native-goal01/root-original-goal-review.json",
+        "firing-line72-native-goal-fit01/actor-comparison01.json",
+        "firing-line72-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -6163,7 +6167,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -6198,7 +6202,35 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "d9cd8676",
+      "sourceFreezeSHA256": "8eb7b1c08e80a2ea9a5000de38565b808261b7351b8446c4ce403ae67fb291ae",
+      "actualUpdates": 97828,
+      "actualConstructors": 15,
+      "functionalUpdatesUsed": 97828,
+      "functionalUpdatesRemaining": 152172,
+      "nativeColdClosed": true,
+      "sourceTests": 452,
+      "review": "firing-line-review.md",
+      "retainedSweep": {
+        "matchedGoals": 70,
+        "constructionOnly": 1,
+        "pairedUpdates": 562024,
+        "sha256": "fe8dd8e059a042035874e0771b6dc531eb58b4b64a0622c608afab87068d20f5"
+      },
+      "deliveryAcceptance": {
+        "score": 6000,
+        "updates": 7008,
+        "transfers": 22,
+        "nextOrdinal": 73,
+        "nativeCampaignTotal": 446000,
+        "rootAcceptanceSHA256": "9bfe515024ab944d2bfb2a7e903acf565b08aa84ddfff66716f7ceda736ec51c",
+        "activationSHA256": "d33959ea6cb660a7164a5e1b5cea6ec78e86cc4d88f79d1bd626fd60b74b7851",
+        "rootProofSHA256": "af253443e3ae92dcbbaef11d11e87d20dc8675e8566b8d9b573964eac46b697d",
+        "earnedThrough72FixtureSHA256": "ce5df2cc42b4b106657e2a6b10ad4c06b893c0c43223ddb4f59078f5e0304cbc"
+      },
+      "qualificationBoundary": "Bounded gold-hand Child route; GN/TR bomb destruction source/invented-test evidence, no native goal coverage. Cold18 pose residuals, overdraw, arbitrary input/reset/audio/hardware separate."
     },
     {
       "ordinal": 73,

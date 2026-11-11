@@ -1,5 +1,7 @@
 # ClockWerx continuation — through78 accepted
 
+**Active79 update:** Read [Hypertension preparation](hypertension-preparation.md) first. Original cold79 closed/source-only fitted and viewed; source64v3/83feb1d3 freeze536e1f4c42a483611b4c5a50f759bcd580c1fbcca2c8f3c5083df75f911aca51,491runtime21packaging. Actual cold03 completed8000/noRNG. Phase686/68788clear positions exact/5pose residuals retained; ALL3900 proposals excluded. Actual79ledger28529attempted/5constructors/30failedRNG before prepared route04. Source64v3 retained78 sweep02 active, oldv2sweep603118 matched. Route04 legal inputs explicitly reviewed after correcting hidden cross blast repaint; do not rerun consumed auth. Body below records accepted78 state; its initial79 status is superseded by preparation.
+
 Continue authorized locally through100 on SVG-Port without per-level stops, permission, push/upload/deployment. Read [Frustration review](frustration-review.md) and [queue](queue.json).22remain. Original69-title library queue is complete; do not restart it.
 
 Frustration is bounded Child accepted and locally installed. Continue authorized through100 without per-level stops. Source63/87a02997 freeze `0d41584a3fa74da22fdd4e4ca79a505c04c888692ee0b172bc25cb793bfac659` adds an explicit static GN/TR/EX/WL/SP/white-ring, ordinary class1 b/f/n and fixed class1+3 free-buster join. Class3 runs at half class1 rate. No fake bomb/elevator/mover capability.481 runtime and21 packaging tests pass. Retained77 sweep matches592520 paired updates:76goals plus Movement construction.

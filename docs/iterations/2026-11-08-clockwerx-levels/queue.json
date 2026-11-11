@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 74,
-  "currentAction": "Through73 Quest accepted/locally installed; continue through100 without per-level checkpoints. Release74 dedicated native cold active, no74 actual model yet. Separate Oil3/SPI/free-buster/programmed-wall join needed.",
+  "currentOrdinal": 75,
+  "currentAction": "Through74 Release accepted/locally installed; continue through100 without per-level checkpoints. Wavicle75 dedicated native cold active, no75 model yet. Separate moving checkpoint/staticEX/SPI/ordinary b/n/s join needed.",
   "levels": [
     {
       "ordinal": 1,
@@ -6350,10 +6350,14 @@
       "menuTitle": "Release",
       "resourceTitle": "Release",
       "sha256": "1eae4119477a4f39d1ab0a0516dd86c34e0d220dde6873a974339e7261863f9d",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "release74-native-goal01/root-original-goal-review.json",
+        "release74-native-goal-fit01/actor-comparison01.json",
+        "release74-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -6381,7 +6385,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -6411,7 +6415,35 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "ff95f4dd",
+      "sourceFreezeSHA256": "68e93aad8576658bfd346410c9848972ab81cbf53181e6bdbbc62579a9f431e1",
+      "actualUpdates": 36844,
+      "actualConstructors": 8,
+      "functionalUpdatesUsed": 36844,
+      "functionalUpdatesRemaining": 213156,
+      "nativeColdClosed": true,
+      "sourceTests": 460,
+      "review": "release-review.md",
+      "retainedSweep": {
+        "matchedGoals": 72,
+        "constructionOnly": 1,
+        "pairedUpdates": 574824,
+        "sha256": "624ba4b689d3262482422fb5cff773116e9344f64bc866f8269e76d0931f849f"
+      },
+      "deliveryAcceptance": {
+        "score": 11000,
+        "updates": 4082,
+        "transfers": 9,
+        "nextOrdinal": 75,
+        "nativeCampaignTotal": 459000,
+        "rootAcceptanceSHA256": "1c04cdfd791e90f2b9d5a8c6707ea2afb04873c6e4819efbe04d8ad245dbd7ba",
+        "activationSHA256": "65e2365277ae6bebc652f075639e8cba2b36e7e6ba32a59ddcc6ed7298cc5b46",
+        "rootProofSHA256": "b531dc41ffbaff674f140661b3074b888d509f64be9882c7d7fc89e3c8301e6e",
+        "earnedThrough74FixtureSHA256": "9a2f8375da3451bab814e7b767c935c1d163c0e1e0936ce05bb04598593f70f8"
+      },
+      "qualificationBoundary": "Bounded Child route;175 fitted positions match,148 exact poses/27 retained differences (10 human/ordinary2frame,17 dense buster overdraw/assignment). Cold45 pose residuals retained. Oil triggers/no droplet allocations before goal. Later Oil, arbitrary inputs/reset/audio/hardware separate."
     },
     {
       "ordinal": 75,

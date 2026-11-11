@@ -19,6 +19,11 @@ use std::collections::BTreeMap;
 pub const GUEST_SCREEN: [u16; 2] = [640, 480];
 /// One sixtieth of a second: the unit of every wait and timeout in a script.
 pub const FRAME_MS: f64 = 1000.0 / 60.0;
+/// How deep scripts may run scripts: the script a button starts, and this many
+/// below it. The check refuses data that goes deeper; the runner stops there.
+pub const RUN_DEPTH: u8 = 8;
+/// The longest a script may wait for a screen, in frames (a minute).
+const LONGEST_WAIT: u32 = 3600;
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq)]
 #[serde(default, deny_unknown_fields)]
@@ -36,6 +41,10 @@ pub struct GameData {
     pub pointer_offset: [i16; 2],
     /// The top lines of the screen that take no touch: the Mac menu bar.
     pub menu_bar: u16,
+    /// The letters a real keyboard may still press with Command. Every other
+    /// Command chord is dropped: they are the menu bar's shortcuts. A game
+    /// whose Quit a child cannot reach any other way keeps `q`.
+    pub command_keys: Vec<String>,
     /// Set for a game played a cell at a time: one move per push of the stick
     /// or the controller's direction, repeated only while it is held.
     pub stick_step: Option<StickStep>,
@@ -97,7 +106,10 @@ pub struct Screen {
 #[serde(deny_unknown_fields)]
 pub struct Block {
     pub at: [u16; 4],
-    /// Blocked only while this screen holds; always when absent.
+    /// Blocked only while this screen holds (and a moment after); always when
+    /// absent. Name a screen only where the same spot is touched in play on
+    /// another screen: a screen is not recognised while it fades in, and a
+    /// touch on such a spot waits for a fresh look at the screen.
     #[serde(default)]
     pub screen: Option<String>,
     /// What is under it, for whoever reads the data.
@@ -203,6 +215,17 @@ pub fn is_key_name(name: &str) -> bool {
             .all(|c| c.is_ascii_lowercase() || c.is_ascii_digit()))
 }
 
+/// The Mac's Command key, as the guest gets it.
+pub const MAC_COMMAND_KEY: u8 = 0x37;
+
+/// Is this key, as the guest gets it (its Mac key code and its character), one
+/// that makes a Command chord: a letter, a digit or a punctuation mark? Not
+/// Space, Return, Escape, the arrows or another modifier, and not the keypad:
+/// games hold those together with Command as plain keys.
+pub fn is_chord_key(mac_key: u8, character: u8) -> bool {
+    character > b' ' && character < 0x7f && !(0x41..=0x5c).contains(&mac_key)
+}
+
 /// Keys joined by `+` (together) and `,` (one press after another).
 fn keys_ok(keys: &str) -> bool {
     !keys.is_empty() && keys.split([',', '+']).all(is_key_name)
@@ -279,6 +302,14 @@ impl GameData {
         }
         if let Some(name) = &self.launch {
             script(name)?;
+        }
+        for key in &self.command_keys {
+            let mut letters = key.chars();
+            let one = matches!((letters.next(), letters.next()), (Some(letter), None)
+                if letter.is_ascii_lowercase() || letter.is_ascii_digit());
+            if !one {
+                return Err(format!("command key {key:?}"));
+            }
         }
         for (name, steps) in &self.scripts {
             // The page shows how a script ended as "name:outcome".
@@ -370,12 +401,12 @@ impl GameData {
                     timeout,
                 } => {
                     screen(name)?;
-                    if *timeout == 0 || *timeout > 3600 {
+                    if *timeout == 0 || *timeout > LONGEST_WAIT {
                         return Err(format!("a timeout of {timeout} frames"));
                     }
                 }
                 Step::UntilAny { screens, timeout } => {
-                    if screens.is_empty() || *timeout == 0 || *timeout > 3600 {
+                    if screens.is_empty() || *timeout == 0 || *timeout > LONGEST_WAIT {
                         return Err("until_any needs screens and a timeout".into());
                     }
                     for name in screens {
@@ -396,10 +427,14 @@ impl GameData {
                     if !keys_ok(press)
                         || press.contains(',')
                         || *every == 0
+                        || *every > LONGEST_WAIT
                         || *tries == 0
                         || *tries > 10
                     {
-                        return Err("a retry needs keys, a wait and up to 10 tries".into());
+                        return Err(
+                            "a retry needs keys, a wait of up to a minute and up to 10 tries"
+                                .into(),
+                        );
                     }
                 }
                 Step::Run(name) => {
@@ -408,6 +443,12 @@ impl GameData {
                     };
                     if path.contains(&name.as_str()) {
                         return Err(format!("{name:?} runs itself"));
+                    }
+                    // `path` holds the script a button starts and each one run below it.
+                    if path.len() > usize::from(RUN_DEPTH) {
+                        return Err(format!(
+                            "{name:?} is run more than {RUN_DEPTH} scripts deep"
+                        ));
                     }
                     path.push(name);
                     self.check_steps(steps, path)?;
@@ -498,10 +539,96 @@ mod tests {
     fn the_clockwerx_seed_is_a_neutral_name_as_a_pascal_string() {
         let games = embedded();
         let seed = &games["clockwerx-personal-10"].seed;
-        assert_eq!(seed.len(), 1);
         assert_eq!(seed[0].offset, 532);
+        assert!(!seed[0].enforce, "a save's own name wins");
         let length = usize::from(seed[0].bytes[0]);
         assert_eq!(&seed[0].bytes[1..=length], b"Player");
+    }
+
+    #[test]
+    fn clockwerx_cannot_be_left_in_mouse_control() {
+        // Mouse control stops the buttons working. Its switch is blocked on
+        // every screen (the list of levels fades in, and is not recognised
+        // until the fade has ended), and Keyboard is written over the saved
+        // settings on every boot, so a save that has Mouse comes back.
+        let games = embedded();
+        let game = &games["clockwerx-personal-10"];
+        assert!(!game.blocks.is_empty());
+        assert!(
+            game.blocks.iter().all(|block| block.screen.is_none()),
+            "ClockWerx is never played by touch on the picture: its blocks hold on every screen"
+        );
+        let keyboard: Vec<&Seed> = game.seed.iter().filter(|seed| seed.enforce).collect();
+        assert_eq!(keyboard.len(), 1);
+        assert_eq!(
+            (keyboard[0].offset, keyboard[0].bytes.as_slice()),
+            (608, &[1u8][..])
+        );
+        assert_eq!(keyboard[0].path, game.seed[0].path);
+    }
+
+    #[test]
+    fn command_chords_are_letters_digits_and_marks_only() {
+        // (Mac key code, character) as the page's key table gives them.
+        for (name, key) in [
+            ("p", (0x23, b'p')),
+            ("Q", (0x0c, b'Q')),
+            ("1", (0x12, b'1')),
+            (".", (0x2f, b'.')),
+        ] {
+            assert!(is_chord_key(key.0, key.1), "{name}");
+        }
+        // Held together with Command as plain game keys.
+        for (name, key) in [
+            ("Space", (0x31, b' ')),
+            ("Command", (MAC_COMMAND_KEY, 0)),
+            ("Shift", (0x38, 0)),
+            ("Return", (0x24, 0x0d)),
+            ("Escape", (0x35, 0x1b)),
+            ("an arrow", (0x7e, 0x1e)),
+            ("keypad 8", (0x5b, b'8')),
+        ] {
+            assert!(!is_chord_key(key.0, key.1), "{name}");
+        }
+        let games = embedded();
+        // Quit is in the menu bar only, which takes no touch: the chord stays.
+        assert_eq!(games["clockwerx-personal-10"].command_keys, ["q"]);
+        assert_eq!(games["blobbo-full-personal-101"].command_keys, ["q"]);
+        // Delirium has a Quit button of its own.
+        assert!(games["delirium-personal-11"].command_keys.is_empty());
+    }
+
+    #[test]
+    fn blobbo_save_checks_the_name_before_it_confirms() {
+        // A stray letter (Drop is the S key) has been seen to land in the Save
+        // dialog's name; the game was then saved where Load does not look.
+        let games = embedded();
+        let game = &games["blobbo-full-personal-101"];
+        assert!(game.has_screen("save-name"));
+        assert!(game.scripts["save"].contains(&Step::Run("save-confirm".into())));
+        let confirm = &game.scripts["save-confirm"];
+        assert!(matches!(&confirm[1], Step::IfNot { screen, .. } if screen == "save-name"));
+        assert_eq!(confirm.last(), Some(&Step::Press("Enter".into())));
+    }
+
+    #[test]
+    fn a_chain_of_scripts_deeper_than_the_runner_goes_is_refused() {
+        let chain = |length: usize| {
+            let scripts: Vec<String> = (0..length)
+                .map(|index| {
+                    if index + 1 < length {
+                        format!(r#""s{index}": [{{"run": "s{}"}}]"#, index + 1)
+                    } else {
+                        format!(r#""s{index}": [{{"wait": 1}}]"#)
+                    }
+                })
+                .collect();
+            game(&format!(r#"{{"scripts": {{{}}}}}"#, scripts.join(", ")))
+        };
+        // The script a button starts, and RUN_DEPTH below it.
+        assert!(chain(usize::from(RUN_DEPTH) + 1).is_ok());
+        let error = chain(usize::from(RUN_DEPTH) + 2).expect_err("too deep");
+        assert!(error.contains("scripts deep"), "{error}");
     }
 
     #[test]
@@ -572,6 +699,13 @@ mod tests {
             ),
             (r#"{"scripts": {"a": [{"wait": 0}]}}"#, "wait"),
             (r#"{"scripts": {"a:b": [{"wait": 1}]}}"#, "script name"),
+            (
+                r#"{"screens": [{"name": "s", "at": [0, 0, 8, 8], "hash": "0123456789abcdef"}],
+                    "scripts": {"a": [{"retry": {"press": "Space", "until": "s", "every": 3601, "tries": 2}}]}}"#,
+                "a retry needs",
+            ),
+            (r#"{"command_keys": ["Q"]}"#, "command key"),
+            (r#"{"command_keys": ["qq"]}"#, "command key"),
             (
                 r#"{"screens": [{"name": "s", "at": [600, 0, 80, 8], "hash": "0123456789abcdef"}]}"#,
                 "off the screen",

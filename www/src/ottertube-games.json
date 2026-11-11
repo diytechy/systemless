@@ -22,9 +22,11 @@
       "Hold the Back button to leave."
     ],
     "seed": [
-      {"path": "ClockWerx/System Folder/Preferences/ClockWerx Settings", "offset": 532, "bytes": [6, 80, 108, 97, 121, 101, 114]}
+      {"path": "ClockWerx/System Folder/Preferences/ClockWerx Settings", "offset": 532, "bytes": [6, 80, 108, 97, 121, 101, 114]},
+      {"path": "ClockWerx/System Folder/Preferences/ClockWerx Settings", "offset": 608, "bytes": [1], "enforce": true}
     ],
     "menu_bar": 20,
+    "command_keys": ["q"],
     "screens": [
       {"name": "title", "at": [20, 460, 150, 12], "hash": "7e326ae9b7288331"},
       {"name": "options", "at": [74, 301, 60, 12], "hash": "a6644af3660c59c6"},
@@ -33,10 +35,10 @@
       {"name": "scores", "at": [94, 80, 104, 20], "hash": "6498472e31502802"}
     ],
     "blocks": [
-      {"screen": "options", "at": [144, 127, 132, 23], "what": "the player's name (nobody has a keyboard; the seed names the player)"},
-      {"screen": "options", "at": [282, 125, 122, 25], "what": "Keyboard or Mouse control (Mouse would stop the buttons working)"},
-      {"screen": "options", "at": [143, 197, 267, 25], "what": "Single or Two Player (two players need a second set of keys)"},
-      {"screen": "options", "at": [415, 370, 150, 22], "what": "Skip Level (its alert does not draw, and the game then waits unseen)"}
+      {"at": [144, 127, 132, 23], "what": "the player's name (nobody has a keyboard; the seed names the player)"},
+      {"at": [282, 125, 122, 25], "what": "Keyboard or Mouse control (Mouse would stop the buttons working; the seed puts Keyboard back on every boot)"},
+      {"at": [143, 197, 267, 25], "what": "Single or Two Player (two players need a second set of keys)"},
+      {"at": [415, 370, 150, 22], "what": "Skip Level (its alert does not draw, and the game then waits unseen)"}
     ],
     "scripts": {
       "launch": [
@@ -178,11 +180,13 @@
       "Hold the Back button to leave."
     ],
     "menu_bar": 20,
+    "command_keys": ["q"],
     "stick_step": {"pulse_ms": 90, "delay_ms": 450, "repeat_ms": 220},
     "screens": [
       {"name": "about", "at": [290, 196, 60, 16], "hash": "4dd651e6deacd08d"},
       {"name": "board", "at": [296, 75, 50, 13], "hash": "9d0a3954184f0045"},
       {"name": "save-dialog", "at": [74, 217, 50, 13], "hash": "ef15dfe1f28146d4"},
+      {"name": "save-name", "at": [80, 241, 120, 10], "hash": "ef41c839fb055d2d"},
       {"name": "open-dialog", "at": [330, 190, 36, 12], "hash": "6b29255eb7aac3c4"},
       {"name": "load-ready", "at": [84, 126, 200, 12], "hash": "652e18f8e0c4db5d"}
     ],
@@ -196,8 +200,24 @@
         {"stop_unless": "board"},
         {"press": "Meta+s"},
         {"wait": 100},
-        {"if": {"screen": "save-dialog", "then": [{"press": "Enter"}]}},
+        {"run": "save-confirm"},
         {"until": {"screen": "board", "timeout": 600}}
+      ],
+      "save-confirm": [
+        {"stop_unless": "save-dialog"},
+        {"if_not": {"screen": "save-name", "then": [
+          {"tap": [256, 281]},
+          {"until": {"screen": "board", "timeout": 300}},
+          {"press": "Meta+s"},
+          {"until": {"screen": "save-dialog", "timeout": 300}},
+          {"wait": 30}
+        ]}},
+        {"if_not": {"screen": "save-name", "then": [
+          {"tap": [256, 281]},
+          {"until": {"screen": "board", "timeout": 300}},
+          {"until": {"screen": "save-name", "timeout": 1}}
+        ]}},
+        {"press": "Enter"}
       ],
       "load": [
         {"stop_unless": "board"},

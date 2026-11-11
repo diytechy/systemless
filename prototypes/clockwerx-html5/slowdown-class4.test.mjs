@@ -1,5 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {assertSlowdownClass4Recipe,assertSlowdownClass4Actor,assertSlowdownClass4Source} from './slowdown-class4.mjs';
+import {assertSlowdownClass4Recipe,assertSlowdownClass4Actor,assertSlowdownClass4Source,assertSlowdownClass4Board} from './slowdown-class4.mjs';
+import {compileWallTiles} from './walls.mjs';
+import {dotColorOffset} from './dots.mjs';
 const recipe={allowSlowdownClass4:true,...Object.fromEntries(['CanonicalPlayer','EnemyStaticPrograms','SpecialDots','ChildScoring'].map(k=>['allow'+k,true]))};
 function fixture(){
  const cells=Array.from({length:88},(_,i)=>({index:i,row:Math.floor(i/11),column:i%11,present:true,flagsRaw:i===87?0x4005:i===24?0x4021:1,secondaryRaw:i===24?4111:15}));const actor=(type)=>({actorTypeRaw:type,gridPosition:{row:0,column:0},activationMaskRaw:1,initialFrameHalfIndexRaw:24,programReferenceRaw:-1,version12ByteRaw:type===0||type===6?1:0,rawWords:[0,0,type,24,1,65535,1,type===0||type===6?0:4]});
@@ -13,4 +15,12 @@ test('class4 source preserves blue Slow and excludes active PU or programmed ord
 });
 test('class4 free red and blue actor admission keeps normal and slowed clock selection explicit',()=>{
  const a={sourceSlot:2,sourceActorType:3,group:4500,speedClass:4,program:null,checksWalls:false};assert.equal(assertSlowdownClass4Actor(a),true);for(const m of[{speedClass:3},{sourceActorType:4},{program:'n'},{checksWalls:true}])assert.throws(()=>assertSlowdownClass4Actor({...a,...m}));
+});
+test('normalized class4 board pins source dots, actors and live wall outlines',()=>{
+ const s=fixture(),b={slowdownClass4Rules:true,slowdownWallRules:true,staticSlowdownRules:true,activeMask:1,difficulty:'Child',origin:{x:74,y:72},canonicalPlayerRules:true,staticEnemyCallbacks:true,specialDotRules:true,childScoreRules:true,staticSlowdownSource:s};
+ b.dots=s.cells.map(c=>{const e=c.secondaryRaw&1?c.flagsRaw:c.flagsRaw&~0x26;return{id:`${c.column},${c.row}`,sourceIndex:c.index,x:74+c.column*48,y:72+c.row*48,slowdown:!!(e&32),color:dotColorOffset(c.secondaryRaw),cell:e,bonus:!!(e&2),kind:e&4?'goal':e&2?'bonus':'dot',motion:'static',sourceInBackground:!(e&0x3e)};});
+ const actors=s.blocks[0].records.map((r,sourceSlot)=>({sourceSlot,sourceRawRecord:sourceSlot,sourceActorType:r.actorTypeRaw,group:{0:700,6:4300,1:500,3:4500}[r.actorTypeRaw],speedClass:r.rawWords[7],checksWalls:!!r.version12ByteRaw,program:null,pivot:'0,0'}));b.player=actors[0];b.enemies=actors.slice(2);
+ b.walls=compileWallTiles([{axis:1,fixed:3,start:0,startInset:0,end:1,endInset:0}]).map(t=>({...t,x:74+t.column*48,y:72+t.row*48}));b.spikes=[{}];
+ const frames=n=>({frames:Array.from({length:n},()=>({rows:[]}))}),outlines={groups:Object.fromEntries([700,4300,500,4500].map(g=>[g,frames(64)]))};outlines.groups[200]=frames(4);outlines.groups[800]=frames(20);const dotOutlines={groups:{300:frames(207)}};
+ assert.equal(assertSlowdownClass4Board(b,{outlines,dotOutlines}),true);for(const mutate of[x=>x.dots[24].color=0,x=>x.enemies[1].group=4400,x=>x.walls[0].frame=100,x=>x.puddles=[{}],x=>x.slowdownClass4Rules=false]){const c=structuredClone(b);mutate(c);assert.throws(()=>assertSlowdownClass4Board(c,{outlines,dotOutlines}));}
 });

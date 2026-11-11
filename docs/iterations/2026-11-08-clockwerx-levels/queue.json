@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 81,
-  "currentAction": "Through80 Flywheels accepted/locally installed; continue through100 without per-level stops. Flail81 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Static slowdown admission8a7c0b33 unlinked; no81 model.",
+  "currentOrdinal": 82,
+  "currentAction": "Through81 Flail accepted/locally installed; continue through100 without per-level stops. Clutch82 original cold authorized; inspect closure then standard source-only fitter before dedicated PNG views. Slowdown wall admission9bf5b03f unlinked; no82 model.",
   "levels": [
     {
       "ordinal": 1,
@@ -7089,10 +7089,15 @@
       "menuTitle": "Flail",
       "resourceTitle": "Flail",
       "sha256": "b3c80b647e007242aa370f67c2bec00ddbe84bea7de1002e5a9ddbd2f5a50f44",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "flail81-native-goal01/root-original-goal-review.json",
+        "flail81-native-goal-fit01/actor-comparison01.json",
+        "flail81-native-goal-slow-fit01/model-comparison01.json",
+        "flail81-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7120,7 +7125,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x20",
@@ -7150,7 +7155,36 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "391a907a",
+      "sourceFreezeSHA256": "8a961681b44c9c6391a4b7e7efadcc4f92bbf364e3867dc94f8f6a1101f2e387",
+      "sourceTests": 508,
+      "sourceFitterCommit": "f7a6845c",
+      "sourceFitterTests": 10,
+      "actualUpdates": 32494,
+      "actualConstructors": 6,
+      "functionalUpdatesUsed": 32494,
+      "functionalUpdatesRemaining": 217506,
+      "nativeColdClosed": true,
+      "review": "flail-review.md",
+      "retainedSweep": {
+        "matchedGoals": 79,
+        "constructionOnly": 1,
+        "pairedUpdates": 614284,
+        "sha256": "854db83251bd0e8d4aa7eba0e6da3ae20f15af34e63935dff120a77b9c917cb7"
+      },
+      "deliveryAcceptance": {
+        "score": 11000,
+        "updates": 5336,
+        "transfers": 17,
+        "nextOrdinal": 82,
+        "nativeCampaignTotal": 526000,
+        "rootAcceptanceSHA256": "53d0250f99fc4f40fd96a36bf5dfaf55b50d23c262bfa28880d51a3a446b20e8",
+        "rootProofSHA256": "e6b14c4e4823ca4a518fa127cee7957718ecf5c88602d5d8cebca969bb119df3",
+        "earnedThrough81FixtureSHA256": "57938bbdd460329ff71808c5b6f8552fcfbda63778cc8c66bd65de21992a06b1"
+      },
+      "qualificationBoundary": "Original results11000 and earned82Clutch/526000 visually verified after actor+Slow original-only fitter/viewgate. All108clear main300Slow appearances exact including occupied204 at2,5 and subsequent idle195 release. Actor107/108positions/poses exact across18joins; initial3500 fit selects458,120 versus actual314,264, retained as residual, not silently excluded. All90hero+ordinary and17later orbital observations exact. Cold191clear retains2position16pose residuals; shared706 fixed from independent cold. Winning port17transfers/11Flip/6Swing/four bonuses/entry+exitSlow and source sound24/25 requests, zero winning RNG/death/reset. Arbitrary controls/audio/controllers/pacing/full pixel or actor-identity census separate."
     },
     {
       "ordinal": 82,

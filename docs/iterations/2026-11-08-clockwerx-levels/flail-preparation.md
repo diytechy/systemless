@@ -1,3 +1,5 @@
+**Superseded by accepted81 [review](flail-review.md). Preparation below is historical.**
+
 # Flail81 preparation
 
 Through80 Flywheels remains accepted/installed. Continue through100 without per-level stops. Original81 cold closes35captures/2224frontend ticks/76.57seconds using earned through80 fixture. Standard original-only fitter freezes78source anchors before dedicated PNG reads; prior80after-promotion81 exposure disclosed. Dedicated image confirms81Flail/515000.

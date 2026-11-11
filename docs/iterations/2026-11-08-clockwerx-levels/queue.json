@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 68,
-  "currentAction": "67 Chatter accepted and active on Source51. Both engines complete the 12-hold route for 1000. All 65 prior retained routes match. Continue Jumble68 from earned-through67 at 408000.",
+  "currentOrdinal": 69,
+  "currentAction": "68 Jumble accepted and active on Source52. Both engines complete for16000; 66 prior retained routes match. Continue Mishmash69 from earned-through68 at424000.",
   "levels": [
     {
       "ordinal": 1,
@@ -5704,10 +5704,15 @@
       "menuTitle": "Jumble",
       "resourceTitle": "Jumble",
       "sha256": "be7ef93cfae933c3f1b46d3c4461232ca7a465860cf57a1d003320ca4f3cfcff",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "jumble68-native-cold01/root-original-entry-review.json",
+        "jumble68-native-goal01/root-original-goal-review.json",
+        "jumble68-native-goal01/root-native-comparison.json",
+        "jumble68-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5735,7 +5740,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -5774,6 +5779,29 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "review": "jumble-review.md",
+      "functionalUpdatesUsed": 33860,
+      "functionalUpdatesRemaining": 216140,
+      "sourceTests": 435,
+      "retainedSweep": {
+        "matchedGoals": 66,
+        "constructionOnly": 1,
+        "pairedUpdates": 526174,
+        "checkpoints": 8027,
+        "seconds": 92.57531809999999,
+        "sha256": "e7181813129a44a87ac3f756b42bdde094dd1fefaa3ff7cd48619b2a29bb7305"
+      },
+      "deliveryAcceptance": {
+        "score": 16000,
+        "updates": 4310,
+        "transfers": 15,
+        "nextOrdinal": 69,
+        "nativeCampaignTotal": 424000,
+        "rootAcceptanceSHA256": "85da52fe6d06743035b9210418a4c2e4c6077160ee68f567eeb2dbeb3d3264da",
+        "activationSHA256": "52ac37b60f32ee37f4f970f2186455989feed90009b4b5954c232ff02984e088",
+        "rootProofSHA256": "3e3571b2282c9cab3a945f37eaf9848c89f80035fb4abd3634b3793d725d3018",
+        "earnedThrough68FixtureSHA256": "63a622e715b21f3ebd05c478de19871cd4be5262d5ccefb08a9a171ac304ae76"
       }
     },
     {
@@ -8241,7 +8269,7 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root: Jumble68 source composition and original cold; optimized native executable comparison pending",
+    "A": "Root: Mishmash69 original cold and BO/EX/checkpoint/orbital source composition",
     "B": "closed",
     "C": "closed",
     "D": "closed"

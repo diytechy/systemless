@@ -108,3 +108,17 @@ test('paired high-channel teleports defer arrival-trigger contact to the next ac
  assert.equal(game.gunTriggers.slots.filter(Boolean).length,2);
  assert.equal(game.gunTriggers.triggers[0].occupancy,1);
 });
+
+test('projectile door adapter uses translated current leaves and independent end caps',()=>{
+ let frame=0;
+ const fake={gunOutlines:{groups:{4200:frames(1,rectangle(0,0,2,2))}},
+  gunTriggers:{pointFor:p=>({x:p.x+28,y:p.y+28})},
+  doorOutlines:{groups:{1300:{frames:[rectangle(0,0,2,2),rectangle(10,0,12,2),
+   {...rectangle(0,0),collidable:false},{...rectangle(0,0),collidable:false}]},2900:frames(1,rectangle(0,0,2,2))}},
+  board:{doors:[{base:{x:70,y:70},caps:[{x:90,y:70,frame:0}]}]},
+  doorSystem:{snapshot:()=>({doors:[{frame,secondFrame:frame+1}]})}};
+ const hit=(x,y)=>SourceRound.prototype.projectileHitsDoor.call(fake,{frame:0,rawBase:{x,y}});
+ assert.equal(hit(32,42),false);assert.equal(hit(41,42),true);
+ frame=2;assert.equal(hit(41,42),false);
+ assert.equal(hit(61,42),true);
+});

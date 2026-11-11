@@ -44,7 +44,7 @@ export function assertGunTriggerChildBoard(b,gunOutlines,elevatorOutlines){
  assertGunTriggerOutlines(gunOutlines);
 }
 
-function assertGunTriggerOutlines(gunOutlines){
+export function assertGunTriggerOutlines(gunOutlines){
  for(const [group,n] of [[3300,6],[4200,3]])for(let i=0;i<n;i++){
   const f=gunOutlines?.groups?.[group]?.frames?.[i];
   if(!f||f.collidable===false||f.outlineIndex===-1||!['left','top','right','bottom'].every(k=>Number.isInteger(f[k]))||f.right<f.left||f.bottom<f.top||f.rows!==null&&(!Array.isArray(f.rows)||f.rows.length!==f.bottom-f.top))throw new Error(`Original collision frame ${group}:${i} required`);

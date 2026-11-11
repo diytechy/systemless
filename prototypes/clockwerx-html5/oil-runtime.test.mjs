@@ -59,6 +59,26 @@ test('an elevator moves attached oil by the stored offsets and detaches only its
  assert.equal(oil.puddles[0].visible,true);assert.equal(approaching.frame,61);
  oil.reset('a');assert.equal(oil.allocations,0);assert.equal(oil.puddles[0].targetDot,-1);
 });
+
+test('moving-dot DP and PU passes reposition only their own riders without advancing Oil clocks',()=>{
+ const {board,options}=fixture();
+ assert.throws(()=>new OilRuntime(board,options).positionMovingDroplets(1),/Moving Oil rider/);
+ board.movingDoorOilRules=true;board.puddles[0].kind=3;
+ let sliding=false;options.getHumanSliding=()=>sliding;
+ const oil=new OilRuntime(board,options),ctx=context();
+ oil.createDroplet(1,ctx);oil.createDroplet(12,ctx);
+ const [rider,other]=oil.droplets.map(x=>x.state),otherBefore=structuredClone(other);
+ Object.assign(oil.puddles[0],{targetDot:1,triggered:true,frame:41});
+ const puddleBefore=structuredClone(oil.puddles[0]),clockBefore=structuredClone(oil.counts);
+ Object.assign(board.dots[1],{x:36,y:12});
+ oil.positionMovingDroplets(1);
+ assert.deepEqual(rider.base,{x:20,y:-3});
+ assert.deepEqual(oil.puddles[0],puddleBefore);
+ oil.positionMovingPuddles(1);
+ assert.deepEqual(oil.puddles[0].base,{x:9,y:-11});
+ assert.deepEqual(other,otherBefore);assert.deepEqual(oil.counts,clockBefore);
+ assert.equal(oil.humanSliding(),false);sliding=true;assert.equal(oil.humanSliding(),true);
+});
 test('waking is harmless; delayed acquisition and eleven approach callbacks create one waiting droplet',()=>{
  const {board,options}=fixture(),oil=new OilRuntime(board,options),ctx=context();
  assert.deepEqual(oil.contactHuman({left:23,top:-15,right:24,bottom:-14,rows:null}),[{type:'sound',argument:29}]);

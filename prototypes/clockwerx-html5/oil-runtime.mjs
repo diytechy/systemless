@@ -13,7 +13,7 @@ export class OilRuntime {
   if(!bounds||!['left','top','right','bottom'].every(k=>Number.isInteger(bounds[k])))throw new Error('Qualified source universe bounds required');
   if(board.slidingOilGoodieRingRules&&!board.slidingOilRules)throw new Error('Oil/GO/rings require EX/Oil core');
   if(board.slidingOilRules)assertSlidingOilScope({...board,actors:[board.player,...(board.enemies||[])],rich:board.slidingOilGoodieRingRules===true,initial:true,activeSections:Object.fromEntries(['walls','doors','switches','elevators','bombs','teleports'].map(k=>[k,board[k]?.length??0]))});
-  if(board.slidingOilRules&&(typeof getHumanSliding!=='function'||getHumanSliding.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous human sliding accessor required');
+  if((board.slidingOilRules||board.movingDoorOilRules)&&(typeof getHumanSliding!=='function'||getHumanSliding.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous human sliding accessor required');
   if(board.slidingOilGoodieRingRules&&(typeof getMainDotSprite!=='function'||getMainDotSprite.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous main-dot sprite accessor required');
   this.getHumanSliding=getHumanSliding;this.getMainDotSprite=getMainDotSprite;
   if(board.slidingOilGoodieRingRules)for(const d of board.dots.filter(d=>d.ring))for(let f=23+7*d.color;f<=30+7*d.color;f++)if(!dotOutlines.groups[300].frames[f])throw new Error('Complete current ring collision profiles required');
@@ -37,6 +37,16 @@ export class OilRuntime {
   for(const {state:s} of this.droplets)if(s.dotIndex===index)s.base=dropletRiderBase(s,pixel);
   for(const s of this.puddles)if(s.targetDot===index)s.base=puddleRiderBase(s.kind,pixel);
  }
+ positionMovingDroplets(index){
+  if(!this.board.movingDoorOilRules)throw Error('Moving Oil rider composition required');
+  const pixel=this.pixel(index);
+  for(const {state:s} of this.droplets)if(s.dotIndex===index)s.base=dropletRiderBase(s,pixel);
+ }
+ positionMovingPuddles(index){
+  if(!this.board.movingDoorOilRules)throw Error('Moving Oil rider composition required');
+  const pixel=this.pixel(index);
+  for(const s of this.puddles)if(s.targetDot===index)s.base=puddleRiderBase(s.kind,pixel);
+ }
  orphanElevatorDroplets(index){
   if(!this.board.elevatorOilRiderRules)throw Error('Oil elevator rider composition required');
   for(const {state:s} of this.droplets)if(s.dotIndex===index){s.visible=false;s.clockAttached=false;}
@@ -47,7 +57,7 @@ export class OilRuntime {
   const dot=this.dots.find(dot=>{const p=this.pixel(dot.sourceIndex);return Math.abs(p.x-pixel.x)<=6&&Math.abs(p.y-pixel.y)<=6;});
   return dot&&this.canGrab(dot.sourceIndex,false)?{index:dot.sourceIndex,pixel:this.pixel(dot.sourceIndex)}:null;
  }
- humanSliding(){if(!this.board.slidingOilRules)return false;const value=this.getHumanSliding();if(typeof value!=='boolean')throw new Error('Live human sliding must be boolean');return value;}
+ humanSliding(){if(!this.board.slidingOilRules&&!this.board.movingDoorOilRules)return false;const value=this.getHumanSliding();if(typeof value!=='boolean')throw new Error('Live human sliding must be boolean');return value;}
  collideDot(state){
   const shape=oilOutline(this.outlines.groups['2200'].frames[state.frame],state.base);
   for(const dot of this.dots){

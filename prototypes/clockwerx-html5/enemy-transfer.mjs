@@ -1,3 +1,4 @@
+import {assertMovingDoorOilActor} from './moving-door-oil.mjs';
 import {assertMovingDoorCheckpointActor} from './moving-door-checkpoint.mjs';
 import {assertMovingTubesActor} from './moving-tubes.mjs';
 import {assertMovingBombSpikeWaystationScope,assertMovingBombSpikeWaystationActor} from './moving-bomb-spike-waystation.mjs';
@@ -57,7 +58,7 @@ export function markEnemyOrphaned(actor,{guestTick,adjustPeriod}) {
  * diagnostics and must not be dispatched a second time.
  */
 export function advanceStaticEnemyCallback(state,classDelta,{
-  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowGunTriggerSliding=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingTubes=false,allowMovingMarkedOrdinary=false,movingMarkedOrdinaryScope,allowMovingSpikes=false,movingSpikeScope,allowMovingBombs=false,allowMovingMarkedGoals=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,movingSpecialScope,allowMovingElevators=false,movingElevatorScope,onMissingSlideTarget,sourceQuery,onSourceEvent=()=>{}
+  program,dots,guestTick,adjustPeriod,afterAnimate,onDotRelease,onDotGrabFirst,afterDotGrab,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowUpDownDots=false,allowTeleports=false,allowSliding=false,allowSlidingPrograms=false,allowGunTriggerSliding=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowSlidingBombs=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingTeleports=false,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingDoorOil=false,allowMovingTubes=false,allowMovingMarkedOrdinary=false,movingMarkedOrdinaryScope,allowMovingSpikes=false,movingSpikeScope,allowMovingBombs=false,allowMovingMarkedGoals=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,movingSpecialScope,allowMovingElevators=false,movingElevatorScope,onMissingSlideTarget,sourceQuery,onSourceEvent=()=>{}
 }) {
   if(!integer(classDelta)||classDelta<0||classDelta>255||!integer(guestTick)||guestTick<0)
     throw new RangeError('Bounded class delta and latched guest tick required');
@@ -102,7 +103,11 @@ export function advanceStaticEnemyCallback(state,classDelta,{
       allowMovingElevators||allowMovingMarkedGoals||allowSlidingBombs||allowSlidingOil)throw new Error('Separate moving bonus/goal and EX actor scope required');
    assertMovingTubesActor(state,program);
   }
-  if(allowMovingDots&&!allowMovingDoorCheckpoint&&!allowMovingTubes&&!allowMovingBombSpikeWaystation&&!allowMovingMarkedOrdinary&&!allowMovingSpikes&&!allowMovingMarkedGoals&&!allowMovingElevators&&!allowMovingCheckpointRings&&!allowMovingMarkedBonuses){
+  if(allowMovingDoorOil){
+   if(!allowMovingDots||!allowSliding||allowUpDownDots||allowTeleports||allowRotatingSpikes||allowMovingBombs||allowSlidingOil||allowMovingTubes||allowMovingDoorCheckpoint)throw Error('Separate moving EX/door/Oil helper scope required');
+   assertMovingDoorOilActor(state,program);
+  }
+  if(allowMovingDots&&!allowMovingDoorOil&&!allowMovingDoorCheckpoint&&!allowMovingTubes&&!allowMovingBombSpikeWaystation&&!allowMovingMarkedOrdinary&&!allowMovingSpikes&&!allowMovingMarkedGoals&&!allowMovingElevators&&!allowMovingCheckpointRings&&!allowMovingMarkedBonuses){
    if(!allowMovingBombs||!allowSliding||allowTeleports||allowUpDownDots||allowRotatingSpikes||allowSlidingBombs||allowSlidingPrograms||allowSlidingGoodies||allowSlidingOil||allowSlidingTeleports||typeof sourceQuery!=='function'||![1,2].includes(state.sourceActorType)||state.speedClass!==1||state.checksWalls!==false||program!==null&&(!/^[bfn]+$/.test(program)||!integer(state.sourcePC)||state.sourcePC<1||state.sourcePC>program.length)||dots.some(d=>!['static','moving-program'].includes(d.motion)||d.teleport||d.ring||d.waystation||d.upDown||d.transferDeath||d.slowdown||d.motion==='moving-program'&&(d.slideMask||d.bonus||d.kind!=='dot')))throw new Error('Separate moving BO ordinary class1 b/f/n helper scope required');
   }else if(allowMovingBombs&&!allowMovingDots)throw new Error('Moving BO helper requires moving-dot core');
   dots.forEach(d=>validateDot(d,allowUpDownDots,allowTeleports,allowSliding,allowMovingDots));

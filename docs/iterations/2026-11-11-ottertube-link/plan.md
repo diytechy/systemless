@@ -197,3 +197,19 @@ Steps 1 to 3 touch only this worktree and can start now. Step 4 is the first tha
 - Whether a controller reaches an add-on view without an OtterTube change.
 - Real-time pace of the three games on the kids' devices (only the dev PC has been measured).
 - No game has had a browser save taken out and put back; step 2 is the first such test.
+
+## Status, 2026-11-11 (after steps 1 to 3)
+
+Steps 1, 2 and 3 are built on `research/ottertube-saves`, reviewed three rounds by
+Codex Sol and Opus (medium), all findings fixed or declined (IPv6 origin spelling).
+
+- Build: `scripts\Build-OtterTubeLink.ps1 -OtterTubeHost <origin>`; output only under
+  `D:\SystemlessBuild\ottertube-link\`. Bundle 33.6 MB, three routes.
+- Proof, headless Chrome against the fake host only: save test 72/72
+  (`verify-r5-saves`), touch-only controls test 41/41 (`verify-r5-controls`).
+- NOT proven: anything in real OtterTube (raw touch, two fingers in the add-on view,
+  signed list, sync, device cap), real fingers and pace, sound.
+- Touch rough edges found: Delirium's own pointer sits 56 lines below the finger;
+  ClockWerx restart is Stop, OK, Play; Blobbo's stick moves several cells per push;
+  Mac file dialogs and menus are small and all reachable by a child.
+- Next: step 4 (LAN https name, signed home list, trial in OtterTube desktop).

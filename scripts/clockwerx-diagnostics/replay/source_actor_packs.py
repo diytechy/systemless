@@ -1,8 +1,8 @@
 """Source-only angular exclusion for free class1 busters at fixed pivots."""
 
 
-def free_buster_packs(level, *, allow_joined_board=False):
-    if type(allow_joined_board) is not bool:
+def free_buster_packs(level, *, allow_joined_board=False, allow_wrapped_phases=False):
+    if type(allow_joined_board) is not bool or type(allow_wrapped_phases) is not bool:
         raise ValueError("Literal joined-board pack capability required")
     if level.get("structuralStatus") != "complete" or level.get("header", {}).get("version") != 12:
         raise ValueError("Complete version12 source required for free buster packs")
@@ -34,12 +34,14 @@ def free_buster_packs(level, *, allow_joined_board=False):
                     pivot[0]["flagsRaw"] & 0x380 or pivot[0].get("inlineProgram"):
                 raise ValueError("Joined-board buster packs require fixed non-connector pivots")
         if len(w) < 8 or w[7] != 1 or a["programReferenceRaw"] != -1 or \
-                w[4] not in (1, 65535) or not 0 <= w[3] < 32 or a["initialFrameHalfIndexRaw"] != w[3]:
+                w[4] not in (1, 65535) or not 0 <= w[3] < (64 if allow_wrapped_phases else 32) or a["initialFrameHalfIndexRaw"] != w[3]:
             raise ValueError("Unprogrammed class1 buster source declarations required")
         key = str(position["column"]) + "," + str(position["row"])
         pack = packs.setdefault(key, dict(sourceRawRecords=[], initialFrames=[], directions=[]))
         pack["sourceRawRecords"].append(index)
-        pack["initialFrames"].append(2 * w[3])
+        pack["initialFrames"].append((2 * w[3]) & 63)
+        if allow_wrapped_phases:
+            pack.setdefault("rawHalfIndices", []).append(w[3])
         pack["directions"].append(1 if w[4] == 1 else -1)
     if not packs:
         raise ValueError("No active source buster pack")

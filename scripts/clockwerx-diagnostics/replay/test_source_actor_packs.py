@@ -13,6 +13,21 @@ def fixture():
 
 
 class SourcePackTests(unittest.TestCase):
+    def test_wrapped_raw_half_indices_are_explicit_and_separation_uses_canonical_frames(self):
+        level = fixture()
+        for a, half in zip(level['blocks'][0]['records'], [35, 33, 31]):
+            a['rawWords'][3] = a['initialFrameHalfIndexRaw'] = half
+        with self.assertRaises(ValueError):
+            free_buster_packs(level)
+        p = free_buster_packs(level, allow_wrapped_phases=True)['2,1']
+        self.assertEqual(p['initialFrames'], [6, 2, 62])
+        self.assertEqual(p['rawHalfIndices'], [35, 33, 31])
+        self.assertEqual(p['minimumFrameSeparation'], 4)
+        for a, half in zip(level['blocks'][0]['records'], [0, 32, 3]):
+            a['rawWords'][3] = a['initialFrameHalfIndexRaw'] = half
+        with self.assertRaisesRegex(ValueError, 'Distinct'):
+            free_buster_packs(level, allow_wrapped_phases=True)
+
     def test_joined_board_keeps_each_buster_pivot_fixed_and_outside_connectors(self):
         level = fixture()
         level['blocks'].append(dict(kind='EX', records=[dict(rawWords=[3, 4, 0])]))

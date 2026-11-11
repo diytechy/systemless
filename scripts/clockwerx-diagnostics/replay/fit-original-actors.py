@@ -41,6 +41,8 @@ def main():
                         help="Source3900 art and separated fixed free class1 angular packs")
     parser.add_argument("--allow-fixed-buster-joined-board", action="store_true",
                         help="Allow movers/connectors elsewhere, with fixed non-connector buster pivots")
+    parser.add_argument("--allow-wrapped-buster-phases", action="store_true",
+                        help="Normalize source half-indices0..63 after doubling, retaining the raw words")
     a = parser.parse_args()
     if not 1 <= a.max_seconds <= 180 or a.output.exists():
         parser.error("Expected a fresh output and a 1–180 second fit limit")
@@ -56,11 +58,12 @@ def main():
     groups = {0: "700", 1: "500", 2: "4400", 3: "4500", 4: "3500"}
     blocks = {b["kind"]: b["records"] for b in level["blocks"]}
     packs = {}
-    if a.allow_fixed_buster_joined_board and not a.allow_free_buster_packs:
+    if (a.allow_fixed_buster_joined_board or a.allow_wrapped_buster_phases) and not a.allow_free_buster_packs:
         parser.error("Joined-board fitting requires free-buster pack qualification")
     if a.allow_free_buster_packs:
         try:
-            packs = free_buster_packs(level, allow_joined_board=a.allow_fixed_buster_joined_board)
+            packs = free_buster_packs(level, allow_joined_board=a.allow_fixed_buster_joined_board,
+                                      allow_wrapped_phases=a.allow_wrapped_buster_phases)
         except ValueError as error:
             parser.error(str(error))
         groups[5] = "3900"
@@ -132,6 +135,8 @@ def main():
                       packBoundary="Nominal source WA footprints; independent clones/overdraw can be ambiguous. No actor-identity or visibility census claim.")
         if a.allow_fixed_buster_joined_board:
             method["fixedBusterJoinedBoard"] = True
+        if a.allow_wrapped_buster_phases:
+            method["wrappedBusterHalfIndices"] = True
     a.output.mkdir()
     save(a.output / "root-original-method.json", method)
     templates, images = {}, {}

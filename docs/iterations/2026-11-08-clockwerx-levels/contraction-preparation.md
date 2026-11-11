@@ -1,3 +1,5 @@
+**Superseded by accepted77 [review](contraction-review.md). Preparation below is historical.**
+
 # Contraction77 preparation — actual candidate closed
 
 76 Transport remains the installed frontier.77 is not accepted or installed. Continue authorized through100 without per-level stops or permission. Runtime646230a6/source61 freeze748d96bc8f95beed960936c9744a45a88c707fee69a7d9e7b2d290065598e4a7 adds a separate default-off moving/programmed class1 buster + BO/EX/WL/SP/raised channel0 DO/EL composition.59 runtime files.474 runtime/21 packaging checks pass; retained76 sweep589,312 paired updates matches75 earlier goals plus Movement construction.

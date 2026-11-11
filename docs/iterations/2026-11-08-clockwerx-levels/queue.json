@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 64,
-  "currentAction": "63 Treachery bounded Child accepted and active on Source47. Original and visible goal confirm 11000 points; original advanced to Tubes at 394000. All 61 prior retained routes match. Continue 64 TYPE1/EX moving bonus and goal join from earned-through63 fixture.",
+  "currentOrdinal": 65,
+  "currentAction": "64 Tubes bounded Child accepted and active on Source48v2. Revised route completes in original and SVG for 11000. All 62 earlier retained routes match. Continue Slipstream65 from verified earned-through64 fixture.",
   "levels": [
     {
       "ordinal": 1,
@@ -5295,12 +5295,14 @@
       "menuTitle": "Tubes",
       "resourceTitle": "Tubes",
       "sha256": "f90bca523e383d5380cd88c625e98349ba8841df20929792b97209ed5da55d47",
-      "status": "queued",
+      "status": "bounded-child-goal-accepted",
       "nativeEvidence": [
-        "tubes64-native-cold01/closure.json"
+        "tubes64-native-goal02/root-original-goal-review.json",
+        "tubes64-native-goal02/root-native-comparison.json",
+        "tubes64-native-goal02/root-saved-progress-review.json"
       ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5328,7 +5330,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -5362,6 +5364,32 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "sourceRuntimeFreezeSHA256": "b4342dad14843a3c12bfcba1c9f6de7bc6a7637cea54ad8d135658c4ae38b45e",
+      "functionalUpdatesSpent": 40178,
+      "functionalUpdateBudget": 250000,
+      "functionalUpdatesRemaining": 209822,
+      "sourceTests": 430,
+      "review": "tubes-review.md",
+      "retainedSweep": {
+        "matchedGoals": 62,
+        "constructionOnly": 1,
+        "pairedUpdates": 506352,
+        "checkpoints": 7674,
+        "seconds": 84.1,
+        "sha256": "b2ee4c523a3455f5989a1d370fe71c10bc03d0e9e710210c001ad780183157b1"
+      },
+      "deliveryAcceptance": {
+        "score": 11000,
+        "updates": 4556,
+        "transfers": 8,
+        "nextOrdinal": 65,
+        "nativeCampaignTotal": 405000,
+        "nextEvidence": "original save export; clean relaunch separate",
+        "rootAcceptanceSHA256": "443948733cdd3df15aa946d179956c163db6db4596acd25630acd715c6b0629a",
+        "activationSHA256": "c5f9985d7763ca409384665d197bbcdc5bd7b40a18d2227cf70603fbc83eecf7",
+        "rootProofSHA256": "04190c234f10df6c519d43942c5e63a0e0823944ff7062b5aa9e98d92bdc4a37",
+        "earnedThrough64FixtureSHA256": "ec070225aa80a797123887be11afc6fd5554150bec747e56c61582a2cc273660"
       }
     },
     {
@@ -5371,7 +5399,9 @@
       "resourceTitle": "Slipstream",
       "sha256": "515eaca9d334779740a803d80f0d8f98a381876c072f5d1f103c27a2660b03e4",
       "status": "queued",
-      "nativeEvidence": [],
+      "nativeEvidence": [
+        "slipstream65-native-cold01/closure.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],
@@ -8117,7 +8147,7 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root: Tubes64 original cold and separate source composition",
+    "A": "Root: Slipstream65 original cold and source composition",
     "B": "closed",
     "C": "closed",
     "D": "closed"

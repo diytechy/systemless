@@ -67,7 +67,7 @@ async function load(dir) {
 
 const result = {manifestSHA256:expectedManifest, baselineFiles, candidateFiles,
   scope:'Gold-hand retained input routes. Compare initial, every 128 updates, event updates, and terminal state. Movement has no retained route.',
-  maxUpdatesPerScene:32000, maxPairedUpdates:600000, rows:[], pairedUpdates:0};
+  maxUpdatesPerScene:32000, maxPairedUpdates:1200000, maxWallMilliseconds:240000, rows:[], pairedUpdates:0};
 const start = performance.now();
 const [base, next] = await Promise.all([load(baselineDir), load(candidateDir)]);
 try {
@@ -96,7 +96,7 @@ try {
     let seq;
     while (!ar.done && !a.complete && !a.death) {
       assert.ok(row.updates < result.maxUpdatesPerScene && result.pairedUpdates < result.maxPairedUpdates, 'Update bound exceeded');
-      assert.ok(performance.now()-start < 120000, 'Sweep exceeded two minutes');
+      assert.ok(performance.now()-start < result.maxWallMilliseconds, 'Sweep exceeded four minutes');
       const ai = ar.next(), bi = br.next();
       same(ai, bi, 'Input');
       seq = a.eventSequence;

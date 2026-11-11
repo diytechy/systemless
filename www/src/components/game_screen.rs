@@ -3531,10 +3531,36 @@ fn attach_input(
         if !alive_kd.load(Ordering::Relaxed) {
             return;
         }
+        // A real keyboard on the add-on page: nothing while a script runs or
+        // the page is leaving.
+        #[cfg(feature = "ottertube")]
+        if crate::ottertube::guest_input_shut() {
+            ev.prevent_default();
+            return;
+        }
         let m = &machine_kd;
         m.resume_audio();
         if let Some((mac_key, char_code)) = mapped_key(&ev.key(), &ev.code(), mappings) {
             ev.prevent_default();
+            #[cfg(feature = "ottertube")]
+            {
+                // And no Command chord (they are the menu bar's shortcuts) but
+                // what the game's data lets through. Judged by the keys the
+                // guest gets: the page maps another key to Command for one
+                // game, and an on-screen button holds Command too.
+                let mut pressed = pressed_kd.borrow_mut();
+                let command_here = ev.meta_key()
+                    || pressed
+                        .values()
+                        .any(|(key, _)| crate::ottertube::is_command_key(*key));
+                if crate::ottertube::drops_chord(mac_key, char_code, command_here) {
+                    return;
+                }
+                // Command going down would make a chord of a letter already held.
+                if crate::ottertube::is_command_key(mac_key) {
+                    release_chord_keys(&mut pressed, m);
+                }
+            }
             pressed_kd
                 .borrow_mut()
                 .insert(ev.code(), (mac_key, char_code));
@@ -3556,7 +3582,15 @@ fn attach_input(
         if !alive_ku.load(Ordering::Relaxed) {
             return;
         }
-        pressed_ku.borrow_mut().remove(&ev.code());
+        #[cfg_attr(not(feature = "ottertube"), allow(unused_variables))]
+        let put_down = pressed_ku.borrow_mut().remove(&ev.code()).is_some();
+        // On the add-on page only a key this keyboard put down goes up: one
+        // that was dropped, or let go of when a script took over, never
+        // lifts a key the script or an on-screen control is holding.
+        #[cfg(feature = "ottertube")]
+        if !put_down {
+            return;
+        }
         let key = mapped_key(&ev.key(), &ev.code(), mappings);
         if let Some((mac_key, char_code)) = key {
             ev.prevent_default();
@@ -3567,6 +3601,32 @@ fn attach_input(
     listeners
         .borrow_mut()
         .push(InputListener::retain(canvas.as_ref(), "keyup", on_key_up));
+    #[cfg(feature = "ottertube")]
+    {
+        // A script takes the game over, or the page is leaving: the keys this
+        // keyboard holds go up.
+        let takeover_pressed = pressed.clone();
+        let takeover_machine = machine.clone();
+        let takeover_alive = alive.clone();
+        crate::ottertube::on_takeover(Rc::new(move |taken: bool| {
+            if taken && takeover_alive.load(Ordering::Relaxed) {
+                for (_, (mac_key, char_code)) in std::mem::take(&mut *takeover_pressed.borrow_mut())
+                {
+                    takeover_machine.key_up(mac_key, char_code);
+                }
+            }
+        }));
+        // Command goes down on one of the page's own controls: a letter this
+        // keyboard holds would become a chord, so it goes up.
+        let chord_pressed = pressed.clone();
+        let chord_machine = machine.clone();
+        let chord_alive = alive.clone();
+        crate::ottertube::on_command_down(Rc::new(move || {
+            if chord_alive.load(Ordering::Relaxed) {
+                release_chord_keys(&mut chord_pressed.borrow_mut(), &chord_machine);
+            }
+        }));
+    }
     attach_focus_release(Some(canvas), listeners, move || {
         if alive.load(Ordering::Relaxed) {
             for (_, (mac_key, char_code)) in std::mem::take(&mut *pressed.borrow_mut()) {
@@ -3574,6 +3634,24 @@ fn attach_input(
             }
         }
     });
+}
+
+/// Let go, in the guest, of the letters, digits and marks a real keyboard holds.
+#[cfg(feature = "ottertube")]
+fn release_chord_keys(
+    pressed: &mut std::collections::BTreeMap<String, (u8, u8)>,
+    machine: &RuntimeHandle,
+) {
+    let held: Vec<String> = pressed
+        .iter()
+        .filter(|(_, (key, character))| crate::ottertube::is_chord_key(*key, *character))
+        .map(|(code, _)| code.clone())
+        .collect();
+    for code in held {
+        if let Some((mac_key, char_code)) = pressed.remove(&code) {
+            machine.key_up(mac_key, char_code);
+        }
+    }
 }
 
 fn attach_focus_release(
@@ -3704,16 +3782,29 @@ fn attach_pointer_input(
         #[cfg(feature = "ottertube")]
         {
             // Where the finger is, before any offset: the menu bar, a blocked
-            // control, or anywhere while a script is running takes no touch.
+            // control, or anywhere while a script runs or the page is leaving
+            // takes no touch. A spot that is blocked on another screen than
+            // the one last seen waits for a fresh look, and is then dropped or
+            // made as a tap.
             let precise = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
             let finger = canvas_coords_from_client(
                 &canvas_el,
                 precise.client_x_f64(),
                 precise.client_y_f64(),
             );
-            if finger.is_some_and(|(v, h)| crate::ottertube::swallows_touch(v, h)) {
-                ev.prevent_default();
-                return;
+            if let Some((v, h)) = finger {
+                match crate::ottertube::touch_verdict(v, h) {
+                    crate::ottertube::Touch::Pass => {}
+                    crate::ottertube::Touch::Swallow => {
+                        ev.prevent_default();
+                        return;
+                    }
+                    crate::ottertube::Touch::Hold => {
+                        ev.prevent_default();
+                        crate::ottertube::judge_held_touch(v, h);
+                        return;
+                    }
+                }
             }
         }
         focus_canvas(&canvas_el);
@@ -3747,9 +3838,10 @@ fn attach_pointer_input(
         if !alive_pm.load(Ordering::Relaxed) || !primary_pointer_event(&ev) {
             return;
         }
-        // A mouse moving over the picture does not move a script's pointer.
+        // A mouse moving over the picture does not move a script's pointer,
+        // nor anything once the page is leaving.
         #[cfg(feature = "ottertube")]
-        if crate::ottertube::script_running() {
+        if crate::ottertube::guest_input_shut() {
             return;
         }
         let active = active_pm.get();
@@ -4769,6 +4861,9 @@ impl MobileInputState {
         if let Some(script) = &self.script_keys {
             next = dedup_mobile_keys(script);
         }
+        // A real keyboard is told when Command is held here.
+        #[cfg(feature = "ottertube")]
+        crate::ottertube::command_on_screen(next.contains(&"Meta"));
 
         for key in self.sent_keys.iter().copied() {
             if !next.contains(&key) {

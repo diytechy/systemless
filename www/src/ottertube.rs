@@ -372,10 +372,12 @@ mod link {
     /// yet, or it did not answer in time.
     pub type SaveScanner =
         Rc<dyn Fn(f64) -> Pin<Box<dyn Future<Output = Option<Vec<DownloadableSaveFile>>>>>>;
+    pub use crate::ottertube_data::is_chord_key;
     pub use crate::ottertube_play::{
-        busy as script_running, game_unmounted, guest_point, on_takeover, screen_reply,
+        command_on_screen, drops_chord, game_unmounted, guest_input_shut, guest_point,
+        is_command_key, judge_held_touch, on_command_down, on_takeover, screen_reply,
         set_guest_pointer, set_screen_reader, set_tap_keys, stick_is_stepped, stick_steps,
-        swallows_touch, KeyOwner, ScreenRequest,
+        touch_verdict, KeyOwner, ScreenRequest, Touch,
     };
 
     thread_local! {
@@ -891,8 +893,11 @@ mod link {
             return;
         }
         signal.set(true);
-        // A script that is running stops here: its keys and pointer are let go.
-        crate::ottertube_play::cancel_script("leaving");
+        // From here to teardown nothing reaches the guest: a script that is
+        // running stops (its keys and pointer are let go), none starts, and
+        // touch, controller and keyboard go nowhere. What is scanned next is
+        // what the guest has.
+        crate::ottertube_play::close("leaving");
         // One deadline for the scan, the local commit and OtterTube's answer.
         let deadline = js_sys::Date::now() + LEAVE_WAIT_MS;
         if let Some(scanner) = SCANNER.with(|slot| slot.borrow().clone()) {

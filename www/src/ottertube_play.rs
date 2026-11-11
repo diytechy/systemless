@@ -6,8 +6,13 @@
 //! Keys go through the game screen's one count of who holds each key (the
 //! stick, a held button, a tap action, a script, the controller), so nothing
 //! here can lift a key another owner still holds, or leave one down.
+//!
+//! Once the page is leaving (`close`) nothing reaches the guest any more: no
+//! script, no launch, no touch, no controller, no keyboard.
 use crate::ottertube::wait_ms;
-use crate::ottertube_data::{hash_text, GameData, Step, FRAME_MS};
+use crate::ottertube_data::{
+    hash_text, is_chord_key, Block, GameData, Step, FRAME_MS, MAC_COMMAND_KEY, RUN_DEPTH,
+};
 use leptos::prelude::*;
 use leptos::task::spawn_local;
 use std::cell::{Cell, RefCell};
@@ -39,7 +44,8 @@ pub enum KeyOwner {
     Script,
 }
 pub type TapKeys = Rc<dyn Fn(KeyOwner, Vec<String>, bool)>;
-/// Told `true` when a script takes the game over, `false` when it lets go.
+/// Told `true` when the child's input is taken away (a script has the game,
+/// or the page is leaving), `false` when a script gives it back.
 pub type Takeover = Rc<dyn Fn(bool)>;
 
 /// What the page shows of all this.
@@ -55,9 +61,22 @@ pub struct Signals {
     pub starting: RwSignal<bool>,
 }
 
+/// What a touch on the picture comes to.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Touch {
+    /// It goes to the game.
+    Pass,
+    /// It does nothing.
+    Swallow,
+    /// Its spot is blocked on a screen that was not showing at the last look.
+    /// The look may be a fifth of a second old: `judge_held_touch` looks again.
+    Hold,
+}
+
 #[derive(Default)]
 struct Script {
-    /// Raised to cancel whatever is running.
+    /// One number per script run. A script whose number is no longer this one
+    /// was cancelled: it acts on nothing it learns from then on.
     generation: u32,
     running: Option<String>,
     /// Keys the running script holds down, to let go of when it ends.
@@ -73,6 +92,11 @@ struct Stepper {
     running: bool,
 }
 
+/// A blocked control stays blocked this long after its screen was last seen.
+const BLOCK_GRACE_MS: f64 = 1000.0;
+/// How long a touch that was held back is pressed for, once it is let through.
+const HELD_TAP_MS: f64 = 130.0;
+
 thread_local! {
     static GAME: RefCell<Rc<GameData>> = RefCell::new(Rc::new(GameData::default()));
     static READER: RefCell<Option<ScreenReader>> = const { RefCell::new(None) };
@@ -82,10 +106,20 @@ thread_local! {
     static SIGNALS: Cell<Option<Signals>> = const { Cell::new(None) };
     static NEXT_PROBE: Cell<u32> = const { Cell::new(1) };
     static REPLIES: RefCell<BTreeMap<u32, Vec<u64>>> = const { RefCell::new(BTreeMap::new()) };
+    /// The screens that held at the last look at each, and when each last did.
     static SCREENS: RefCell<Vec<String>> = const { RefCell::new(Vec::new()) };
+    static SEEN: RefCell<BTreeMap<String, f64>> = const { RefCell::new(BTreeMap::new()) };
     static SCRIPT: RefCell<Script> = RefCell::new(Script::default());
     static STARTING: Cell<bool> = const { Cell::new(false) };
     static STEPPER: RefCell<Stepper> = RefCell::new(Stepper::default());
+    /// Where a touch that was held back and then let through is pressed now.
+    static HELD_TAP: Cell<Option<(i16, i16)>> = const { Cell::new(None) };
+    /// The page's own controls hold the guest's Command key; and what a real
+    /// keyboard does when they begin to.
+    static COMMAND_ON_SCREEN: Cell<bool> = const { Cell::new(false) };
+    static COMMAND_DOWN: RefCell<Option<Rc<dyn Fn()>>> = const { RefCell::new(None) };
+    /// The page is leaving. Set once, never cleared.
+    static CLOSING: Cell<bool> = const { Cell::new(false) };
     /// Raised when the game is mounted again or unmounted: ends the watcher.
     static MOUNT: Cell<u32> = const { Cell::new(0) };
 }
@@ -135,6 +169,32 @@ fn loopback() -> bool {
         .is_some_and(|host| matches!(host.as_str(), "127.0.0.1" | "localhost" | "[::1]"))
 }
 
+/// A browser check's request in the page address, honoured on a loopback host
+/// only: `systemless-test-screens=slow` makes every look at the screen start
+/// 600 ms late, so a check can act while one is under way and while the
+/// recognised screens are out of date. Nothing in OtterTube sets it.
+fn test_slow_screens() -> bool {
+    thread_local! {
+        static SLOW: Cell<Option<bool>> = const { Cell::new(None) };
+    }
+    SLOW.with(|slot| {
+        if let Some(slow) = slot.get() {
+            return slow;
+        }
+        let slow = loopback()
+            && web_sys::window()
+                .and_then(|window| window.location().search().ok())
+                .is_some_and(|search| {
+                    search
+                        .trim_start_matches('?')
+                        .split('&')
+                        .any(|pair| pair == "systemless-test-screens=slow")
+                });
+        slot.set(Some(slow));
+        slow
+    })
+}
+
 // ---------------------------------------------------------------------------
 // What the game screen hands over, and takes back when the game goes away
 // ---------------------------------------------------------------------------
@@ -162,9 +222,9 @@ pub fn set_tap_keys(keys: Option<TapKeys>) {
 }
 
 /// The parts of the game screen that carry the child's input (the keys held
-/// on the controls, a finger on the picture) ask to be told when a script
-/// takes the game over: they let go, and take the child's input up again when
-/// the script has ended.
+/// on the controls, a finger on the picture, a real keyboard) ask to be told
+/// when that input is taken away: they let go. A script gives it back when it
+/// ends; a page that is leaving never does.
 pub fn on_takeover(listener: Takeover) {
     TAKEOVER.with(|listeners| listeners.borrow_mut().push(listener));
 }
@@ -176,10 +236,41 @@ fn takeover(running: bool) {
     }
 }
 
+/// The page is leaving (Exit, or the game quit). Latched before the running
+/// script is cancelled, so that nothing can start in its place: from here to
+/// teardown no script runs, the launch script does not start, and no touch,
+/// controller or keyboard input reaches the guest. What the page saves is
+/// then what the guest has, and stays so.
+pub fn close(why: &str) {
+    if CLOSING.with(|closing| closing.replace(true)) {
+        return;
+    }
+    show("data-kiosk-closing", why);
+    cancel_script(why);
+    release_held_tap();
+    // Whatever the child holds goes up, for good.
+    takeover(true);
+    keys(KeyOwner::Pad, Vec::new(), false);
+    STEPPER.with(|stepper| stepper.borrow_mut().wanted.clear());
+}
+
+pub fn closing() -> bool {
+    CLOSING.with(|closing| closing.get())
+}
+
+/// Nothing from the child reaches the guest now: a script has the game, or the
+/// page is leaving.
+pub fn guest_input_shut() -> bool {
+    busy() || closing()
+}
+
 /// The game screen is gone: nothing may run on, and nothing stays held.
 pub fn game_unmounted() {
     cancel_script("the game closed");
+    release_held_tap();
     TAKEOVER.with(|listeners| listeners.borrow_mut().clear());
+    COMMAND_DOWN.with(|slot| *slot.borrow_mut() = None);
+    COMMAND_ON_SCREEN.with(|slot| slot.set(false));
     crate::ottertube::set_save_scanner(None);
     set_screen_reader(None);
     set_guest_pointer(None);
@@ -235,6 +326,9 @@ async fn region_hashes(regions: Vec<[u16; 4]>) -> Option<Vec<u64>> {
     if regions.is_empty() {
         return Some(Vec::new());
     }
+    if test_slow_screens() {
+        wait_ms(600.0).await;
+    }
     let reader = READER.with(|slot| slot.borrow().clone())?;
     let id = NEXT_PROBE.with(|next| next.replace(next.get().wrapping_add(1)));
     match reader(&regions, id) {
@@ -252,7 +346,21 @@ async fn region_hashes(regions: Vec<[u16; 4]>) -> Option<Vec<u64>> {
     }
 }
 
-/// Which of `names` hold now. `None`: the machine did not answer.
+/// Every screen the game's data names, once each.
+fn screen_names(game: &GameData) -> Vec<&str> {
+    let mut names: Vec<&str> = game
+        .screens
+        .iter()
+        .map(|screen| screen.name.as_str())
+        .collect();
+    names.sort_unstable();
+    names.dedup();
+    names
+}
+
+/// Which of `names` hold now. `None`: the machine did not answer. Whoever
+/// looks (the watcher, a script, a touch held back), what was seen goes into
+/// the one list of recognised screens.
 async fn screens_hold(names: &[&str]) -> Option<Vec<bool>> {
     let game = game();
     let mut regions = Vec::new();
@@ -268,11 +376,41 @@ async fn screens_hold(names: &[&str]) -> Option<Vec<bool>> {
     for ((index, expected), hash) in owners.into_iter().zip(hashes) {
         hold[index] |= hash_text(hash) == expected;
     }
+    note_screens(names, &hold);
     Some(hold)
 }
 
-async fn screen_holds(name: &str) -> Option<bool> {
-    Some(screens_hold(&[name]).await?[0])
+/// A look found these screens holding or not: keep the recognised list and
+/// when each screen was last seen, and show the list when it changes.
+fn note_screens(names: &[&str], hold: &[bool]) {
+    let now = js_sys::Date::now();
+    SEEN.with(|seen| {
+        let mut seen = seen.borrow_mut();
+        for (name, _) in names.iter().zip(hold).filter(|(_, hold)| **hold) {
+            seen.insert((*name).to_string(), now);
+        }
+    });
+    let changed = SCREENS.with(|screens| {
+        let mut screens = screens.borrow_mut();
+        let before = screens.clone();
+        for (name, hold) in names.iter().zip(hold) {
+            match (hold, screens.iter().position(|shown| shown == name)) {
+                (true, None) => screens.push((*name).to_string()),
+                (false, Some(index)) => {
+                    screens.remove(index);
+                }
+                _ => {}
+            }
+        }
+        screens.sort_unstable();
+        (*screens != before).then(|| screens.clone())
+    });
+    if let Some(list) = changed {
+        show("data-kiosk-screen", &list.join(" "));
+        if let Some(signals) = SIGNALS.with(|slot| slot.get()) {
+            let _ = signals.screens.try_set(list);
+        }
+    }
 }
 
 /// While the game is mounted: keep the recognised screens current (for the
@@ -281,51 +419,25 @@ async fn screen_holds(name: &str) -> Option<bool> {
 async fn watch(mount: u32) {
     let mounted = || MOUNT.with(|current| current.get()) == mount;
     let game = game();
-    let mut names: Vec<&str> = game
-        .screens
-        .iter()
-        .map(|screen| screen.name.as_str())
-        .collect();
-    names.dedup();
-    names.sort_unstable();
-    names.dedup();
+    let names = screen_names(&game);
     let mut launched = false;
     while mounted() {
         let hidden = web_sys::window()
             .and_then(|window| window.document())
             .is_some_and(|document| document.hidden());
-        if !hidden {
-            if let Some(hold) = screens_hold(&names).await {
-                if !mounted() {
-                    break;
-                }
-                let now: Vec<String> = names
-                    .iter()
-                    .zip(&hold)
-                    .filter(|(_, hold)| **hold)
-                    .map(|(name, _)| (*name).to_string())
-                    .collect();
-                let changed = SCREENS.with(|screens| {
-                    let mut screens = screens.borrow_mut();
-                    let changed = *screens != now;
-                    *screens = now.clone();
-                    changed
-                });
-                if changed {
-                    show("data-kiosk-screen", &now.join(" "));
-                    if let Some(signals) = SIGNALS.with(|slot| slot.get()) {
-                        let _ = signals.screens.try_set(now);
-                    }
-                }
-                if !launched {
-                    launched = true;
-                    show("data-kiosk-machine", "running");
-                    if let Some(script) = &game.launch {
-                        run_script(script);
-                    }
-                }
-                probe().await;
+        if !hidden && screens_hold(&names).await.is_some() {
+            if !mounted() {
+                break;
             }
+            if !launched {
+                launched = true;
+                show("data-kiosk-machine", "running");
+                // `run_script` refuses when the page is already leaving.
+                if let Some(script) = &game.launch {
+                    run_script(script);
+                }
+            }
+            probe().await;
         }
         wait_ms(200.0).await;
     }
@@ -361,30 +473,116 @@ async fn probe() {
 // Touches a child should not make
 // ---------------------------------------------------------------------------
 
-/// Does a touch at (v, h) on the picture do nothing? While a script runs,
-/// everywhere; on the Mac menu bar; and on a blocked control when its screen
-/// is showing. (v, h) is where the finger is, before the game's offset.
-pub fn swallows_touch(v: i16, h: i16) -> bool {
-    if busy() {
+fn block_covers(block: &Block, v: i16, h: i16) -> bool {
+    let [x, y, w, height] = block.at.map(i32::from);
+    (x..x + w).contains(&i32::from(h)) && (y..y + height).contains(&i32::from(v))
+}
+
+/// Is the block in force? Always, when it names no screen; else while its
+/// screen holds, and for a moment after it was last seen (a screen fading out,
+/// or one look that missed it, does not open the control under it).
+fn block_in_force(block: &Block, now: f64) -> bool {
+    let Some(name) = &block.screen else {
         return true;
+    };
+    SCREENS.with(|screens| screens.borrow().iter().any(|shown| shown == name))
+        || SEEN.with(|seen| {
+            seen.borrow()
+                .get(name)
+                .is_some_and(|at| now - at < BLOCK_GRACE_MS)
+        })
+}
+
+/// What a touch at (v, h) on the picture comes to. (v, h) is where the finger
+/// is, before the game's offset. It does nothing while a script runs or the
+/// page is leaving, on the Mac menu bar, and on a blocked control. A spot that
+/// is blocked on some screen, when that screen was not showing at the last
+/// look, is held back: the look can be a fifth of a second old, and a screen
+/// that has just come up would let the touch through.
+pub fn touch_verdict(v: i16, h: i16) -> Touch {
+    if guest_input_shut() {
+        return Touch::Swallow;
     }
     let game = game();
     if v < game.menu_bar as i16 {
-        return true;
+        return Touch::Swallow;
     }
-    SCREENS.with(|screens| {
-        let screens = screens.borrow();
-        game.blocks.iter().any(|block| {
-            let [x, y, w, height] = block.at.map(i32::from);
-            let inside =
-                (x..x + w).contains(&i32::from(h)) && (y..y + height).contains(&i32::from(v));
-            inside
-                && block
-                    .screen
-                    .as_ref()
-                    .is_none_or(|name| screens.iter().any(|shown| shown == name))
-        })
-    })
+    let now = js_sys::Date::now();
+    let mut held = false;
+    for block in game.blocks.iter().filter(|block| block_covers(block, v, h)) {
+        if block_in_force(block, now) {
+            return Touch::Swallow;
+        }
+        held = true;
+    }
+    if held {
+        Touch::Hold
+    } else {
+        Touch::Pass
+    }
+}
+
+/// A touch that `touch_verdict` held back: look at the screen afresh, then
+/// drop it if its spot is blocked after all, or else make it, as a tap.
+pub fn judge_held_touch(v: i16, h: i16) {
+    spawn_local(async move {
+        let game = game();
+        if screens_hold(&screen_names(&game)).await.is_none() {
+            return;
+        }
+        if touch_verdict(v, h) == Touch::Swallow {
+            return;
+        }
+        let at = guest_point(v, h);
+        release_held_tap();
+        HELD_TAP.with(|slot| slot.set(Some(at)));
+        pointer("mouseMove", at);
+        pointer("mouseDown", at);
+        wait_ms(HELD_TAP_MS).await;
+        release_held_tap();
+    });
+}
+
+fn release_held_tap() {
+    if let Some(at) = HELD_TAP.with(|slot| slot.take()) {
+        pointer("mouseUp", at);
+    }
+}
+
+pub fn is_command_key(mac_key: u8) -> bool {
+    mac_key == MAC_COMMAND_KEY
+}
+
+/// The page's own controls (a held button, a tap action, a script, the
+/// controller) hold the guest's Command key now, or have let go of it.
+pub fn command_on_screen(held: bool) {
+    let was = COMMAND_ON_SCREEN.with(|slot| slot.replace(held));
+    if held && !was {
+        if let Some(listener) = COMMAND_DOWN.with(|slot| slot.borrow().clone()) {
+            listener();
+        }
+    }
+}
+
+/// A real keyboard asks to be told when Command goes down on the page's own
+/// controls: a letter it holds would become a chord.
+pub fn on_command_down(listener: Rc<dyn Fn()>) {
+    COMMAND_DOWN.with(|slot| *slot.borrow_mut() = Some(listener));
+}
+
+/// Is a key from a real keyboard dropped because it would make a Command
+/// chord? Those are the menu bar's shortcuts, and the menu bar takes no touch.
+/// The key is judged as the guest would get it, with Command held on that
+/// keyboard or on the page's own controls; the game's data may let a letter
+/// through (its own Quit, where a child has no other way to it). Plain keys
+/// play the game.
+pub fn drops_chord(mac_key: u8, character: u8, command_on_keyboard: bool) -> bool {
+    (command_on_keyboard || COMMAND_ON_SCREEN.with(|slot| slot.get()))
+        && is_chord_key(mac_key, character)
+        && !game()
+            .command_keys
+            .iter()
+            .any(|allowed| allowed.as_bytes() == [character.to_ascii_lowercase()])
 }
 
 /// Where the guest's pointer goes for a finger at (v, h): moved by the game's
@@ -411,16 +609,21 @@ enum Stop {
     Never(String),
     /// The machine stopped answering.
     NoMachine,
+    /// Scripts ran scripts deeper than `RUN_DEPTH` (the data's check refuses that).
+    TooDeep,
 }
 
 pub fn busy() -> bool {
     SCRIPT.with(|script| script.borrow().running.is_some())
 }
 
-/// Run one of the game's scripts. One runs at a time: a second is refused.
-/// While it runs the page shows that it is busy and the child's input to the
-/// game is swallowed.
+/// Run one of the game's scripts. One runs at a time: a second is refused,
+/// and so is any once the page is leaving. While it runs the page shows that
+/// it is busy and the child's input to the game is swallowed.
 pub fn run_script(name: &str) -> bool {
+    if closing() {
+        return false;
+    }
     let game = game();
     let Some(steps) = game.scripts.get(name).cloned() else {
         return false;
@@ -430,6 +633,7 @@ pub fn run_script(name: &str) -> bool {
         if script.running.is_some() {
             return None;
         }
+        script.generation = script.generation.wrapping_add(1);
         script.running = Some(name.to_string());
         Some(script.generation)
     });
@@ -437,10 +641,11 @@ pub fn run_script(name: &str) -> bool {
         return false;
     };
     // The script has the game to itself: the keys the child holds go up and a
-    // finger on the picture is let go of, for the length of the script.
+    // finger on the picture is let go of, for the length of the script. What
+    // a stepped stick wants is kept: it steps again when the script has ended.
+    release_held_tap();
     takeover(true);
     keys(KeyOwner::Pad, Vec::new(), false);
-    STEPPER.with(|stepper| stepper.borrow_mut().wanted.clear());
     show("data-kiosk-busy", name);
     if let Some(signals) = SIGNALS.with(|slot| slot.get()) {
         let _ = signals.busy.try_set(Some(name.to_string()));
@@ -448,36 +653,50 @@ pub fn run_script(name: &str) -> bool {
     let name = name.to_string();
     spawn_local(async move {
         let result = run_steps(steps, generation, 0).await;
-        let outcome = match &result {
+        // A script that was cancelled was cleaned up by whoever cancelled it,
+        // and another may be running by now: whatever this one's last step
+        // came to, it ends nothing.
+        if cancelled(generation) {
+            return;
+        }
+        let outcome = match result {
             Ok(()) => "done".to_string(),
-            Err(Stop::Cancelled) => "cancelled".to_string(),
+            Err(Stop::Cancelled) => return,
             Err(Stop::NotHere(screen)) => format!("skipped:{screen}"),
             Err(Stop::Never(screen)) => format!("stopped:{screen}"),
             Err(Stop::NoMachine) => "stopped:no-machine".to_string(),
+            Err(Stop::TooDeep) => "stopped:too-deep".to_string(),
         };
-        // A cancelled script was already cleaned up by whoever cancelled it,
-        // and another may be running by now.
-        if !matches!(result, Err(Stop::Cancelled)) {
-            finish(&format!("{name}:{outcome}"));
-        }
+        finish(generation, &format!("{name}:{outcome}"));
     });
     true
 }
 
-/// Let go of everything the script holds and show that nothing runs.
-fn finish(outcome: &str) {
-    let (held, pointer_at) = SCRIPT.with(|script| {
+/// The script numbered `generation` is over: let go of everything it holds and
+/// show that nothing runs. Nothing happens if that script is not the one
+/// running now.
+fn finish(generation: u32, outcome: &str) {
+    let ended = SCRIPT.with(|script| {
         let mut script = script.borrow_mut();
+        if script.generation != generation || script.running.is_none() {
+            return None;
+        }
         script.running = None;
-        (std::mem::take(&mut script.keys), script.pointer.take())
+        Some((std::mem::take(&mut script.keys), script.pointer.take()))
     });
+    let Some((held, pointer_at)) = ended else {
+        return;
+    };
     if !held.is_empty() {
         keys(KeyOwner::Script, held, false);
     }
     if let Some(at) = pointer_at {
         pointer("mouseUp", at);
     }
-    takeover(false);
+    // The child's input comes back, unless the page is leaving.
+    if !closing() {
+        takeover(false);
+    }
     if let Some(root) = root() {
         let _ = root.remove_attribute("data-kiosk-busy");
         let _ = root.set_attribute("data-kiosk-script", outcome);
@@ -492,16 +711,21 @@ fn finish(outcome: &str) {
 }
 
 /// Stop the running script, if any: Exit, the game quitting, the page going.
-/// Its keys and its pointer are let go at once; its next step never runs.
+/// Its keys and its pointer are let go at once; its next step never runs, and
+/// an answer it was waiting for is not acted on.
 pub fn cancel_script(why: &str) {
     let running = SCRIPT.with(|script| {
+        let script = script.borrow();
+        script.running.clone().map(|name| (script.generation, name))
+    });
+    if let Some((generation, name)) = running {
+        finish(generation, &format!("{name}:cancelled:{why}"));
+    }
+    // Whatever was running is not the current script any more.
+    SCRIPT.with(|script| {
         let mut script = script.borrow_mut();
         script.generation = script.generation.wrapping_add(1);
-        script.running.clone()
     });
-    if let Some(name) = running {
-        finish(&format!("{name}:cancelled:{why}"));
-    }
 }
 
 fn cancelled(generation: u32) -> bool {
@@ -523,6 +747,19 @@ async fn pause(generation: u32, frames: f64) -> Result<(), Stop> {
     } else {
         Ok(())
     }
+}
+
+/// A script's look at the screen. An answer that comes after the script was
+/// cancelled is not acted on: the script stops there.
+async fn script_look(generation: u32, names: &[&str]) -> Result<Vec<bool>, Stop> {
+    if cancelled(generation) {
+        return Err(Stop::Cancelled);
+    }
+    let hold = screens_hold(names).await;
+    if cancelled(generation) {
+        return Err(Stop::Cancelled);
+    }
+    hold.ok_or(Stop::NoMachine)
 }
 
 fn key_names(keys: &str) -> Vec<String> {
@@ -585,10 +822,7 @@ fn script_pointer(kind: &str, at: (i16, i16)) {
 async fn until(generation: u32, names: &[&str], timeout: u32, wanted: bool) -> Result<usize, Stop> {
     let deadline = js_sys::Date::now() + f64::from(timeout) * FRAME_MS;
     loop {
-        if cancelled(generation) {
-            return Err(Stop::Cancelled);
-        }
-        let hold = screens_hold(names).await.ok_or(Stop::NoMachine)?;
+        let hold = script_look(generation, names).await?;
         if let Some(index) = hold.iter().position(|hold| *hold == wanted) {
             return Ok(index);
         }
@@ -654,12 +888,12 @@ fn run_steps(
                     until(generation, &names, timeout, true).await?;
                 }
                 Step::If { screen, then } => {
-                    if screen_holds(&screen).await.ok_or(Stop::NoMachine)? {
+                    if script_look(generation, &[screen.as_str()]).await?[0] {
                         run_steps(then, generation, depth).await?;
                     }
                 }
                 Step::IfNot { screen, then } => {
-                    if !screen_holds(&screen).await.ok_or(Stop::NoMachine)? {
+                    if !script_look(generation, &[screen.as_str()]).await?[0] {
                         run_steps(then, generation, depth).await?;
                     }
                 }
@@ -669,42 +903,43 @@ fn run_steps(
                     every,
                     tries,
                 } => {
-                    let mut reached = screen_holds(&screen).await.ok_or(Stop::NoMachine)?;
+                    let mut reached = script_look(generation, &[screen.as_str()]).await?[0];
                     for _ in 0..tries {
                         if reached {
                             break;
                         }
                         press(generation, &chord).await?;
-                        reached = until(generation, &[screen.as_str()], every, true)
-                            .await
-                            .is_ok();
-                        if cancelled(generation) {
-                            return Err(Stop::Cancelled);
-                        }
+                        reached = match until(generation, &[screen.as_str()], every, true).await {
+                            Ok(_) => true,
+                            Err(Stop::Never(_)) => false,
+                            Err(stop) => return Err(stop),
+                        };
                     }
                     if !reached {
                         return Err(Stop::Never(screen));
                     }
                 }
                 Step::Run(name) => {
-                    // The data's check refuses a script that runs itself; the depth is a second fence.
+                    // The data's check refuses a chain this deep, and a script
+                    // that runs itself; this is the second fence.
+                    if depth >= RUN_DEPTH {
+                        return Err(Stop::TooDeep);
+                    }
                     let steps = game().scripts.get(&name).cloned().unwrap_or_default();
-                    if depth < 8 {
-                        // A script that finds it has nothing to do here ends
-                        // itself, not the script that ran it.
-                        match run_steps(steps, generation, depth + 1).await {
-                            Ok(()) | Err(Stop::NotHere(_)) => {}
-                            Err(stop) => return Err(stop),
-                        }
+                    // A script that finds it has nothing to do here ends
+                    // itself, not the script that ran it.
+                    match run_steps(steps, generation, depth + 1).await {
+                        Ok(()) | Err(Stop::NotHere(_)) => {}
+                        Err(stop) => return Err(stop),
                     }
                 }
                 Step::StopUnless(screen) => {
-                    if !screen_holds(&screen).await.ok_or(Stop::NoMachine)? {
+                    if !script_look(generation, &[screen.as_str()]).await?[0] {
                         return Err(Stop::NotHere(screen));
                     }
                 }
                 Step::StopIf(screen) => {
-                    if screen_holds(&screen).await.ok_or(Stop::NoMachine)? {
+                    if script_look(generation, &[screen.as_str()]).await?[0] {
                         return Err(Stop::NotHere(screen));
                     }
                 }
@@ -726,10 +961,17 @@ pub fn stick_is_stepped() -> bool {
 /// The direction `source` (the on-screen stick, the controller) wants now.
 /// Returns false for a game whose stick simply holds its keys; true when the
 /// page pulses them instead: one move per push, again only after a hold.
+///
+/// What each source wants is kept while a script runs, releases included: a
+/// stick that is still pushed when the script ends steps again, as a new push,
+/// and one that was let go meanwhile does not.
 pub fn stick_steps(source: &'static str, wanted: &[&str]) -> bool {
     let Some(step) = game().stick_step else {
         return false;
     };
+    if closing() {
+        return true;
+    }
     let start = STEPPER.with(|stepper| {
         let mut stepper = stepper.borrow_mut();
         let wanted: Vec<String> = wanted.iter().map(|key| (*key).to_string()).collect();
@@ -749,8 +991,14 @@ pub fn stick_steps(source: &'static str, wanted: &[&str]) -> bool {
                 || STEPPER.with(|stepper| stepper.borrow().wanted.values().next().cloned());
             let mut last: Option<Vec<String>> = None;
             while let Some(direction) = wanted() {
-                if busy() {
+                if closing() {
                     break;
+                }
+                if busy() {
+                    // A script has the game: the push waits for it to end.
+                    last = None;
+                    wait_ms(30.0).await;
+                    continue;
                 }
                 keys(KeyOwner::Tap, direction.clone(), true);
                 wait_ms(f64::from(step.pulse_ms)).await;
@@ -765,20 +1013,14 @@ pub fn stick_steps(source: &'static str, wanted: &[&str]) -> bool {
                 let until = js_sys::Date::now() + f64::from(repeat);
                 while js_sys::Date::now() < until {
                     wait_ms(15.0).await;
-                    if wanted().as_ref() != Some(&direction) {
-                        // Let go, or pushed another way: that is a new push.
+                    if guest_input_shut() || wanted().as_ref() != Some(&direction) {
+                        // Let go, pushed another way, or a script: a new push.
                         last = None;
                         break;
                     }
                 }
             }
-            STEPPER.with(|stepper| {
-                let mut stepper = stepper.borrow_mut();
-                stepper.running = false;
-                if busy() {
-                    stepper.wanted.clear();
-                }
-            });
+            STEPPER.with(|stepper| stepper.borrow_mut().running = false);
         });
     }
     true
@@ -806,14 +1048,19 @@ pub fn input(kind: &str, names: Vec<String>, down: bool) {
         // A release always counts: a tap action that began before a script
         // must not leave its key down after it.
         "tap" if !down => keys(KeyOwner::Tap, names, false),
-        // While a script runs the child's input to the game is swallowed.
-        _ if busy() => {}
-        "tap" => keys(KeyOwner::Tap, names, true),
-        "pad" => keys(KeyOwner::Pad, names, down),
+        // What a stepped game's direction wants is kept through a script.
         "direction" => {
             let names: Vec<&str> = names.iter().map(String::as_str).collect();
             stick_steps("pad", &names);
         }
+        // A browser check's own, on a loopback host only: stop the running
+        // script without leaving, so that another can be started after it.
+        "test-cancel" if loopback() => cancel_script("test"),
+        // While a script runs, and once the page is leaving, the child's
+        // input to the game is swallowed.
+        _ if guest_input_shut() => {}
+        "tap" => keys(KeyOwner::Tap, names, true),
+        "pad" => keys(KeyOwner::Pad, names, down),
         "script" => {
             // Not before the launch script has had its turn.
             if let (false, Some(name)) = (starting(), names.first()) {

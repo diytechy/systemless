@@ -8,7 +8,7 @@
   "catalogCount": 100,
   "resourceCount": 120,
   "currentOrdinal": 77,
-  "currentAction": "Through76 Transport accepted/locally installed; continue through100 without per-level stops. Contraction77 original cold active, independent moving/programmed type5 fitter and separate runtime join next.",
+  "currentAction": "Through76 locally installed;77 Contraction source61 candidate7000 closed and original exact-input goal rehearsal active. Continue through100; no per-level stops.",
   "levels": [
     {
       "ordinal": 1,
@@ -6654,7 +6654,7 @@
       "menuTitle": "Contraction",
       "resourceTitle": "Contraction",
       "sha256": "cc74b9c4f47bd07d7287842bd7695be7544a7d03115f432f08575facd3a882a7",
-      "status": "queued",
+      "status": "candidate-native-goal-active",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -6725,6 +6725,24 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "installed": false,
+      "sourceCommit": "646230a6",
+      "sourceFreezeSHA256": "748d96bc8f95beed960936c9744a45a88c707fee69a7d9e7b2d290065598e4a7",
+      "sourceTests": 474,
+      "sourceFitterCommit": "857a067f",
+      "sourceFitterTests": 8,
+      "actualUpdates": 76140,
+      "actualConstructors": 13,
+      "functionalUpdatesUsed": 76140,
+      "functionalUpdatesRemaining": 173860,
+      "nativeColdClosed": true,
+      "review": "contraction-preparation.md",
+      "retainedSweep": {
+        "matchedGoals": 75,
+        "constructionOnly": 1,
+        "pairedUpdates": 589312,
+        "sha256": "09eb1655bdca2bfc266aec5a560b2767ee13c1c220383d5312e343fec71cee46"
       }
     },
     {

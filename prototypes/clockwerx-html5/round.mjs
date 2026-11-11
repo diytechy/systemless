@@ -178,7 +178,7 @@ export class SourceRound extends MovementGame {
  }
  reset({preserveCheckpoint=false}={}){
   if(this.board.gunSlidingBusterRules&&this.sourcePaint){
-   for(const [key,original]of Object.entries(this.sourcePaint.original))for(const saved of original){const current=this.board[key].find(x=>x.id===saved.id);Object.assign(current,saved);if(key==='dots')delete current.collected;}
+   for(const [key,original]of Object.entries(this.sourcePaint.original))for(const saved of original){const current=this.board[key].find(x=>x.id===saved.id);Object.assign(current,saved);if(key==='dots')delete current.collected;if(key==='walls'&&!Object.hasOwn(saved,'visible'))delete current.visible;}
   }
   if(this.board.staticMarkedOrbitalRules){
    if(this.staticMarkedInitialDots)for(const saved of this.staticMarkedInitialDots){const d=this.board.dots.find(d=>d.id===saved.id);Object.assign(d,saved);delete d.collected;}

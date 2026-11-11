@@ -2,7 +2,8 @@ import test from 'node:test';import assert from 'node:assert/strict';
 import {buildDecodedBoard} from './level.mjs';import {SourceRound} from './round.mjs';
 import {advanceFreeBuster} from './free-busters.mjs';
 import {advanceStaticEnemyCallback} from './enemy-transfer.mjs';
-import {assertGunSlidingBusterRecipe,assertGunSlidingBusterActor} from './gun-sliding-busters.mjs';
+import {assertGunSlidingBusterRecipe,assertGunSlidingBusterActor,assertGunSlidingBusterBoard} from './gun-sliding-busters.mjs';
+import {shatterFreeBusterWall} from './free-busters.mjs';
 const recipe={angularSpeed:1,allowGunSlidingBusters:true,allowFreeBusters:true,allowGunsTriggers:true,allowSlidingConnectors:true,allowCanonicalPlayer:true,allowEnemyStaticPrograms:true,allowSpecialDots:true,allowChildScoring:true,allowCombinedGoalBonus:true,allowInactiveSpikes:true};
 const block=(kind,rs)=>({kind,count:rs.length,records:rs.map(rawWords=>({rawWords}))});
 function fixture(){
@@ -13,6 +14,9 @@ function fixture(){
 const shape={left:0,top:0,right:1,bottom:1,rows:[],collidable:false,flipY:false},frames=(n,s=shape)=>({frames:Array.from({length:n},()=>({...s}))});
 const profiles={outlines:{groups:Object.fromEntries([200,500,700,800,4300,3900].map(g=>[g,frames(64)]))},dotOutlines:{groups:{300:frames(207)}},gunOutlines:{groups:{3300:frames(6,{...shape,rows:[[0,1]],collidable:true}),4200:frames(3,{...shape,rows:[[0,1]],collidable:true})}},deathFactory:()=>({update(){},snapshot(){return[];}})};
 const round=()=>new SourceRound(buildDecodedBoard(fixture(),recipe),profiles);
+test('removing the final cross arm admits only the hidden frame4 sentinel and reset restores its topology',()=>{
+ const g=round(),w=g.board.walls.find(w=>w.frame>=5),original=w.frame;shatterFreeBusterWall(w,()=>true);assert.equal(w.frame,4);assert.equal(w.visible,false);assert.equal(assertGunSlidingBusterBoard(g.board),true);g.update(1/120,{});assert.throws(()=>assertGunSlidingBusterBoard({...g.board,walls:g.board.walls.map(x=>x===w?{...w,visible:true}:x)}));g.reset();assert.equal(w.frame,original);assert.equal(w.visible,undefined);
+});
 test('ordinary b/f/n callbacks transfer onto EX through static source coordinates and require synchronous diagnostics',()=>{
  const g=round(),s={...g.enemies[0],pivot:'4,2',frame:15,unwrappedFrame:15},noop=()=>{},o={program:s.program,dots:g.board.dots,guestTick:1,adjustPeriod:n=>n,afterAnimate:noop,onDotRelease:noop,onDotGrabFirst:noop,afterDotGrab:noop,allowSliding:true,allowGunSlidingBusters:true,gunSlidingBusterScope:g.board};
  const r=advanceStaticEnemyCallback(s,1,o);assert.equal(r.state.pivot,'4,3');assert.ok(r.events.some(e=>e.type==='program-transfer'));assert.throws(()=>advanceStaticEnemyCallback(s,1,{...o,allowGunSlidingBusters:false}));assert.throws(()=>advanceStaticEnemyCallback(s,1,{...o,dots:[...g.board.dots]}));assert.throws(()=>advanceStaticEnemyCallback(s,1,{...o,onSourceEvent:()=>Promise.resolve()}));

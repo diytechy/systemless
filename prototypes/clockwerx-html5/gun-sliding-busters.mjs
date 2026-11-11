@@ -37,7 +37,10 @@ export function gunSlidingBusterSource(s,origin,mask=1){
 }
 export function assertGunSlidingBusterBoard(b,{outlines,gunOutlines,dotOutlines}={}){
  if(!b?.gunSlidingBusterRules||b.activeMask!==1||b.difficulty!=='Child'||b.origin?.x!==74||b.origin.y!==72||!['freeBusterRules','gunTriggerProjectileRules','slidingConnectorRules','canonicalPlayerRules','staticEnemyCallbacks','specialDotRules','childScoreRules','combinedGoalBonusRules'].every(k=>b[k]===true)||['movingDotRules','bombRules','bombObjectInteractionRules','goodieOnlyRules','canonicalOilRules','teleportRules','rotatingSpikeRules','markedTransferRules','staticEnemyWallRules','elevatorRules','gunBusterRules','gunTriggerSlidingRules','gunTriggerWallRules'].some(k=>b[k])||['bombs','goodies','puddles','doors','switches','teleports','elevators'].some(k=>b[k]?.length))fail();
- for(const a of[b.player,...b.enemies])assertGunSlidingBusterActor(a);validateBombWallTiles(b.walls);validateConnectorBoard(b.connectors,b.dots);
+ for(const a of[b.player,...b.enemies])assertGunSlidingBusterActor(a);
+ // PR may remove the last cross arm, leaving its source frame4 sentinel.
+ // It remains the same hidden cross identity, never a new collidable tile.
+ validateBombWallTiles(b.walls.map(w=>w.frame===4&&w.visible===false?{...w,frame:5}:w));validateConnectorBoard(b.connectors,b.dots);
  if(!b.walls.length||!b.spikes.length||!b.connectors.length||b.dots.filter(d=>d.ring).length!==1)fail();
  for(const d of b.dots)if(d.motion!=='static'||d.upDown||d.movingProgram||d.waystation||d.protected||d.transferDeath||d.slowdown||d.teleport||d.ring&&(d.color!==0||d.slideMask||d.bonus)||d.slideMask&&(d.kind!=='dot'||d.bonus))fail();
  const c=b.gunTriggerChild;if(!c||!gunsOK(c.guns,c.triggers)||c.frameOrigin?.x!==28||c.frameOrigin.y!==28||Object.keys(geometry.rawBounds).some(k=>c.rawBounds?.[k]!==geometry.rawBounds[k]))fail();

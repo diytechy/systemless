@@ -14,6 +14,33 @@ def fixture():
 
 
 class ProposalAdmission(unittest.TestCase):
+    def test_static_slow_ring_bomb_proposals_are_explicit_and_never_clear(self):
+        source = fixture()
+        source["cells"][24]["flagsRaw"] = 0x4021
+        source["cells"][25]["flagsRaw"] = 9
+        for kind in ("EX", "WL", "SP", "BO", "GO"):
+            source["blocks"].append(dict(kind=kind,count=1,records=[dict(rawWords=[0,0,0,0,15])]))
+        with self.assertRaises(ValueError):
+            buster_union_inventory(source)
+        result = buster_union_inventory(source,allow_static_slowdown_busters=True)
+        self.assertFalse(result["clearFitEligible"])
+        self.assertFalse(result["temporalStateUsed"])
+        self.assertFalse(result["actors"][0]["initialPivotMoving"])
+        for mutate in (lambda s:s["cells"][24].update(flagsRaw=0x4081),
+                       lambda s:s["cells"][25].update(flagsRaw=1),
+                       lambda s:s["blocks"][-1]["records"][0]["rawWords"].__setitem__(2,1),
+                       lambda s:s["blocks"][0]["records"][0]["rawWords"].__setitem__(7,3)):
+            changed=copy.deepcopy(source)
+            mutate(changed)
+            with self.assertRaises(ValueError):
+                buster_union_inventory(changed,allow_static_slowdown_busters=True)
+
+    def test_static_union_capabilities_are_literal_and_mutually_exclusive(self):
+        for options in (dict(allow_static_slowdown_busters=1),
+                        dict(allow_static_slowdown_busters=True,allow_static_teleport_busters=True)):
+            with self.assertRaises(ValueError):
+                buster_union_inventory(fixture(),**options)
+
     def test_static_teleport_bounce_proposals_are_separate_and_never_clear(self):
         source = fixture()
         source["cells"][24]["flagsRaw"] = 1

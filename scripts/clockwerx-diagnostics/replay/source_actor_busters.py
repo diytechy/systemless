@@ -5,8 +5,9 @@ Dense or overlapping proposals are deliberately excluded from clear-fit counts.
 """
 
 
-def buster_union_inventory(level, *, allow_static_teleport_busters=False):
-    if type(allow_static_teleport_busters) is not bool:
+def buster_union_inventory(level, *, allow_static_teleport_busters=False, allow_static_slowdown_busters=False):
+    if type(allow_static_teleport_busters) is not bool or type(allow_static_slowdown_busters) is not bool or \
+            allow_static_teleport_busters and allow_static_slowdown_busters:
         raise ValueError("Literal static teleport proposal capability required")
     if level.get("structuralStatus") != "complete" or level.get("header", {}).get("version") != 12 or \
             level["header"].get("displaySizeRaw") != 8 or len(level.get("cells", [])) != 88:
@@ -14,12 +15,20 @@ def buster_union_inventory(level, *, allow_static_teleport_busters=False):
     blocks = {b["kind"]: b["records"] for b in level["blocks"]}
     if len(blocks) != len(level["blocks"]) or any(b["count"] != len(b["records"]) for b in level["blocks"]):
         raise ValueError("Unique complete source sections required")
-    excluded = ("EX", "EL", "GN", "TR", "PU", "GO", "DR", "DS") if allow_static_teleport_busters else ("HY", "GN", "TR", "PU", "GO", "DR", "DS")
+    excluded = ("HY", "EL", "GN", "TR", "PU", "DR", "DS", "WY") if allow_static_slowdown_busters else \
+        ("EX", "EL", "GN", "TR", "PU", "GO", "DR", "DS") if allow_static_teleport_busters else ("HY", "GN", "TR", "PU", "GO", "DR", "DS")
     if any(blocks.get(k) for k in excluded):
         raise ValueError("Separate moving-buster proposal family required")
     if allow_static_teleport_busters and (not 2 <= len(blocks.get("HY", [])) <= 18 or
             any(c["present"] and (c["flagsRaw"] & 0x380 or c.get("inlineProgram")) for c in level["cells"])):
         raise ValueError("Static paired teleport proposal board required")
+    if allow_static_slowdown_busters:
+        present = [c for c in level["cells"] if c["present"]]
+        if any(c["flagsRaw"] & 0x380 or c.get("inlineProgram") for c in present) or \
+                not any(c["flagsRaw"] & 32 for c in present) or not any(c["flagsRaw"] & 8 for c in present) or \
+                any(not blocks.get(k) for k in ("EX", "WL", "SP", "BO", "GO")) or \
+                any(r.get("rawWords", [0, 0, -1])[2] not in (0, 169) for r in blocks["GO"]):
+            raise ValueError("Static Slow/ring/EX/BO/GO/WL/SP proposal board required")
     cells = {(c["row"], c["column"]): c for c in level["cells"] if c["present"]}
     programs = blocks.get("WP", [])
     actors = []

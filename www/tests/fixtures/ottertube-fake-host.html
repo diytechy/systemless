@@ -13,7 +13,10 @@
   Serve it from an origin the bundle was packaged for (--ottertube-host), then open
     /?game=http://127.0.0.1:8097/clockwerx/&subject=a   (a, b: two fixed test subjects; guest; or 32 hex)
   Optional: mode=host|self|none (default host), autostart=0 (frame nothing until fakeHost.open()),
-  silent=1 (never answer `ready`, as when the page is framed by something that is not OtterTube).
+  silent=1 (never answer `ready`, as when the page is framed by something that is not OtterTube),
+  refuse=rate:2 (answer the first 2 checkpoints that would be taken with `failed: rate`; any reason),
+  unsolicited=1 (post a well-formed `init` at the frame without being asked, several times: what a
+  parent that is not on the page's list of origins could do).
   Tests drive it through window.fakeHost.
 -->
 <style>
@@ -56,6 +59,9 @@
   var gameOrigin = '';
   try { gameOrigin = new URL(gameUrl).origin; } catch (_) {}
 
+  var refuse = (params.get('refuse') || '').split(':');
+  var refuseReason = refuse[0] || null;
+  var refuseLeft = refuseReason ? Number(refuse[1] || 1) : 0;
   var frame = null;
   var generation = null;
   var lastSeq = -1;
@@ -151,8 +157,10 @@
       else if (subject === null) reason = 'no-user';
       else if (now - lastTakenAt < CHECKPOINT_INTERVAL_MS) reason = 'rate';
       else if (m.seq <= lastSeq) reason = 'seq';
+      var injected = false;
+      if (!reason && refuseLeft > 0) { refuseLeft -= 1; reason = refuseReason; injected = true; }
       if (reason) {
-        note({ dir: 'in ', type: 'checkpoint', seq: m.seq, bytes: bytes, reason: reason, sinceLastMs: Math.round(now - lastTakenAt) });
+        note({ dir: 'in ', type: 'checkpoint', seq: m.seq, bytes: bytes, reason: reason, injected: injected, sinceLastMs: Math.round(now - lastTakenAt) });
         post({ type: 'failed', generation: generation, seq: m.seq, reason: reason });
         return;
       }
@@ -176,6 +184,15 @@
     frame.src = gameUrl;
     document.getElementById('frame-box').appendChild(frame);
     note({ dir: '---', type: 'open', note: gameUrl });
+    if (params.get('unsolicited') === '1') {
+      var sent = 0;
+      var timer = setInterval(function () {
+        if (!frame || sent >= 12) { clearInterval(timer); return; }
+        sent += 1;
+        post({ type: 'init', generation: randomGeneration(), subject: subject, mode: mode, saved: null });
+        note({ dir: 'out', type: 'unsolicited-init' });
+      }, 400);
+    }
   }
   /** Leaving never waits: the frame is removed at once. */
   function leave(why) {

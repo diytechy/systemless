@@ -53,12 +53,15 @@ if __name__ == '__main__':
     parser.add_argument('--port', type=int, default=8097)
     parser.add_argument('--bind', default='127.0.0.1')
     parser.add_argument('--verbose', action='store_true')
+    parser.add_argument('--also-frame-ancestor', action='append', default=[], metavar='ORIGIN',
+        help='Tests only: let this origin frame the pages too, although the bundle does not list it, '
+             'to show that the page ignores a parent that is not OtterTube')
     args = parser.parse_args()
     directory = args.directory.resolve(strict=True)
     routes, policy = bundle_policy(directory)
     server = ThreadingHTTPServer((args.bind, args.port), partial(Handler, directory=str(directory)))
     server.library_routes = routes
-    server.frame_policy = policy
+    server.frame_policy = ' '.join([policy, *args.also_frame_ancestor])
     server.verbose = args.verbose
     print(f'OtterTube add-on bundle at http://{args.bind}:{server.server_address[1]}/ ({policy})', flush=True)
     try:

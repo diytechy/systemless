@@ -180,6 +180,16 @@ Steps 1 to 3 touch only this worktree and can start now. Step 4 is the first tha
 3. ClockWerx name entry: one pre-seeded neutral pilot per child, or let children type.
 4. Blobbo: Full 1.0.1 (the registered copy in the library) is the one to ship at home: confirm.
 
+### Decided by the Owner, 2026-11-11
+
+1. Yes: the hub serves the bundle on a LAN-only https name. Serving a private network is not the "deployment" the
+   Systemless guide withholds. Other sessions are working on the hub: coordinate before any hub change.
+2. The player name should ideally be the child's own, so a child jumps straight in. An add-on is given only the private id,
+   never a name (OtterTube's rule), so this needs either an OtterTube change (pass a display name to home add-ons) or the
+   HTML5 port. Until then: a pre-seeded neutral pilot per child, no typing.
+3. Blobbo Full 1.0.1, as far as recalled.
+4. Proceed with the work.
+
 ## 10. Not known yet
 
 - Whether the control layer and two-finger play work inside OtterTube's raw-touch add-on view (step 4).

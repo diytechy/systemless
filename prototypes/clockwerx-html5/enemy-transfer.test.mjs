@@ -1,10 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs';
+import {GunTriggerRuntime} from './gun-triggers.mjs';
 
 const dot=(id,x,y,extra={})=>({id,x,y,present:true,humanCanGrab:true,nonhumanCanGrab:true,motion:'static',slideMask:0,teleport:false,...extra});
 const actor=(extra={})=>({sourceActorType:2,pivot:'a',frame:63,direction:1,sourcePC:1,sliding:false,visible:true,orphaned:false,hiddenUntil:0,...extra});
 const options=(extra={})=>({program:'s',dots:[dot('a',0,0),dot('b',48,0)],guestTick:100,adjustPeriod:n=>Math.floor(n*100/60),afterAnimate:()=>{},onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{},...extra});
+
+test('programmed EX callback contacts the gun trigger at the slide point before arrival',()=>{
+ const dots=[dot('a',0,0,{row:0,column:0,slideMask:1}),dot('b',48,0,{row:0,column:1,slideMask:4})];
+ const state=actor({speedClass:1,checksWalls:false,sourceSlot:2,frame:48,sliding:true,
+  slideProgress:15,slideDelta:1,slideDirection:0,slideVX:3,slideVY:0,slideX:45,slideY:0});
+ const gun=new GunTriggerRuntime({guns:[{id:0,sourceIndex:0,color:1,directions:5,rawBase:{x:48,y:90}}],
+  triggers:[{id:0,sourceIndex:0,color:1,rawBase:{x:48,y:0}}],frameOrigin:{x:0,y:0},rawBounds:{left:0,top:0,right:180,bottom:180},templateReference:0});
+ const sequence=[],o=options({program:'n',dots,allowUpDownDots:true,allowSliding:true,
+  afterAnimate:s=>{sequence.push(['contact',s.pivot,s.slideX]);gun.contact(s,()=>s.slideX===48);},
+  onDotRelease:(s,d)=>sequence.push(['release',d.id]),onDotGrabFirst:(s,d)=>sequence.push(['grab',d.id])});
+ assert.throws(()=>advanceStaticEnemyCallback(state,1,{...o,afterAnimate:()=>{},onDotRelease:()=>{},onDotGrabFirst:()=>{}}),/programmed actors unqualified/);
+ const r=advanceStaticEnemyCallback(state,1,{...o,allowGunTriggerSliding:true});
+ assert.deepEqual(sequence,[['contact','a',48],['release','a'],['grab','b']]);
+ assert.equal(r.state.pivot,'b');
+ assert.deepEqual(gun.insertionOrder.map(p=>[p.velocity.x,p.velocity.y]),[[0,-3],[0,3]]);
+ assert.equal(gun.triggers[0].frame,3);
+});
 
 test('a separately enabled free class2 orbital visits each multiplied canonical frame',()=>{
  const spike=actor({sourceActorType:4,speedClass:2,checksWalls:false}),frames=[],o=options({allowRotatingSpikes:true,program:null,afterAnimate:s=>frames.push(s.frame)});

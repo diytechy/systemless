@@ -133,3 +133,14 @@ consume the same draws for this regression check. A scene without a retained
 route gets a construction check. Inspect the per-scene outcomes: matching an
 early death or an input end is not the same as reaching the goal. This check
 does not replace a new scene's full proof, original replay, or visible check.
+
+## Stage a browser QA copy
+
+`stage-retained-scene.py` appends one sequential scene to a new private QA
+directory using the current installed pilot and a frozen runtime. Its private
+JSON recipe names `baseline`, `baselineManifestSHA256`, `output`, `runtime`,
+pins `freeze`, `config`, and `literal`, and supplies a `scene` with `id`,
+`ordinal`, `title`, and optional `backdrop` and `playfield`. Add new
+payloads with `addAssets` (each row is a pin with `name`); use
+`profileNames` to map renamed profiles to bundle filenames. The helper
+preserves the installed scene definitions and never replaces live assets.

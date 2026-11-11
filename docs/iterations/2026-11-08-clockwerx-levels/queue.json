@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 63,
-  "currentAction": "62 Seesaw bounded Child accepted and active on Source46. Native and visible goal confirm 1000 points; original advanced to Treachery at 383000. All 60 prior retained routes match. Continue 63 EX/gun/spikes/elevator join from verified earned-through62 fixture.",
+  "currentOrdinal": 64,
+  "currentAction": "63 Treachery bounded Child accepted and active on Source47. Original and visible goal confirm 11000 points; original advanced to Tubes at 394000. All 61 prior retained routes match. Continue 64 TYPE1/EX moving bonus and goal join from earned-through63 fixture.",
   "levels": [
     {
       "ordinal": 1,
@@ -5192,12 +5192,14 @@
       "menuTitle": "Treachery",
       "resourceTitle": "Treachery",
       "sha256": "adc33bf9d1a675f5c8c7ec336f1953f47fde85a495c7745f4958cd0794141e67",
-      "status": "queued",
+      "status": "bounded-child-goal-accepted",
       "nativeEvidence": [
-        "treachery63-native-cold01/closure.json"
+        "treachery63-native-goal01/root-original-goal-review.json",
+        "treachery63-native-goal01/root-native-comparison.json",
+        "treachery63-native-goal01/root-native-pretransfer-diagnostic.json"
       ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -5225,7 +5227,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -5260,6 +5262,31 @@
           }
         ],
         "gameplayAcceptedByTriage": false
+      },
+      "sourceRuntimeFreezeSHA256": "a6caa2e45c6471952a56fa49ff5fee3b14e60472919225e292bf1fcef0ba5276",
+      "functionalUpdatesSpent": 29188,
+      "functionalUpdateBudget": 250000,
+      "functionalUpdatesRemaining": 220812,
+      "sourceTests": 430,
+      "review": "treachery-review.md",
+      "retainedSweep": {
+        "matchedGoals": 61,
+        "constructionOnly": 1,
+        "pairedUpdates": 501644,
+        "checkpoints": 7570,
+        "seconds": 64.2,
+        "sha256": "95ed15192f4a4df0e8f480c560140c09553ade5be016eeff81c68fd858f46e18"
+      },
+      "deliveryAcceptance": {
+        "score": 11000,
+        "updates": 4708,
+        "transfers": 17,
+        "nextOrdinal": 64,
+        "nativeCampaignTotal": 394000,
+        "rootAcceptanceSHA256": "407f928bcb7af52c7be8c08bd8b35209fbf38b9e5c970f12b1f2705a76113a65",
+        "activationSHA256": "f9e22f3819f670b2f802a5b220537111245b90ad292022bff3356174088c3681",
+        "rootProofSHA256": "ce9a46f06054470dfdf0669eeab9c6527078e3026dd5f50d3e20961600e12462",
+        "earnedThrough63FixtureSHA256": "1a0c774acff6d6a633812f5e4e1dac73d2788397b6fd6c858dff7e06eff24676"
       }
     },
     {
@@ -5269,7 +5296,9 @@
       "resourceTitle": "Tubes",
       "sha256": "f90bca523e383d5380cd88c625e98349ba8841df20929792b97209ed5da55d47",
       "status": "queued",
-      "nativeEvidence": [],
+      "nativeEvidence": [
+        "tubes64-native-cold01/closure.json"
+      ],
       "requirements": [],
       "svgStatus": "not-reviewed",
       "generationConstraints": [],
@@ -8088,7 +8117,7 @@
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
   "activeSlots": {
-    "A": "Root: Treachery63 original cold and separate source composition",
+    "A": "Root: Tubes64 original cold and separate source composition",
     "B": "closed",
     "C": "closed",
     "D": "closed"

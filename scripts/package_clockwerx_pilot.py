@@ -14,7 +14,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCE=ROOT/'prototypes/clockwerx-html5'
 CODE=('index.html','app.mjs','engine.mjs','board.mjs','rendering.mjs','sparkles.mjs','dots.mjs',
       'hazards.mjs','level.mjs','round.mjs','death.mjs','replay.mjs','walls.mjs','doors.mjs','elevators.mjs','oil.mjs','oil-runtime.mjs','programs.mjs','actor-clocks.mjs','enemy-transfer.mjs','special-dots.mjs','special-dot-runtime.mjs','bombs.mjs','bomb-runtime.mjs','bomb-scene.mjs','score.mjs','teleports.mjs','teleport-runtime.mjs','sliding.mjs','sliding-oil.mjs','sliding-bombs.mjs','sliding-bomb-paint.mjs','sliding-teleports.mjs',
-      'moving-dots.mjs','source-grab.mjs','moving-bombs.mjs','marked-transfers.mjs','moving-elevators.mjs','moving-specials.mjs','moving-spikes.mjs','static-marked-orbitals.mjs','moving-marked-ordinary.mjs','static-sliding-bomb-goodies.mjs','moving-bomb-spike-waystation.mjs','gun-triggers.mjs','gun-trigger-child.mjs','elevator-oil-riders.mjs')
+      'moving-dots.mjs','source-grab.mjs','moving-bombs.mjs','marked-transfers.mjs','moving-elevators.mjs','moving-specials.mjs','moving-spikes.mjs','static-marked-orbitals.mjs','moving-marked-ordinary.mjs','static-sliding-bomb-goodies.mjs','moving-bomb-spike-waystation.mjs','gun-triggers.mjs','gun-trigger-child.mjs','elevator-oil-riders.mjs','gun-trigger-sliding.mjs')
 PILOT_ID='clockwerx-html5-pilot-v1'
 
 

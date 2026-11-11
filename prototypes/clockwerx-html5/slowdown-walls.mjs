@@ -51,6 +51,11 @@ export function assertSlowdownWallBoard(b,{outlines,dotOutlines}={}){
  const tiles=compileWallTiles(rows('WL').map(({rawWords:w})=>({axis:w[0]>>>8,fixed:w[1],start:w[2],startInset:w[3],end:w[4],endInset:w[5]})));
  if(b.walls?.length!==tiles.length||b.spikes?.length!==rows('SP').length)fail();
  for(const[i,w]of b.walls.entries()){const t=tiles[i];if(w.frame!==t.frame||w.row!==t.row||w.column!==t.column||w.x!==74+48*t.column||w.y!==72+48*t.row||w.visible===false)fail();}
- if(outlines)for(const g of[700,4300,500,4400,200,800])for(let f=0;f<(g===200?4:g===800?20:64);f++)if(!Array.isArray(outlines.groups?.[g]?.frames?.[f]?.rows))fail();
+ if(outlines){
+  for(const g of[700,4300,500,4400,200])for(let f=0;f<(g===200?4:64);f++)if(!Array.isArray(outlines.groups?.[g]?.frames?.[f]?.rows))fail();
+  // Shattered/empty WL sentinels may have null outlines. This family has no
+  // bombs or busters; require collision rows only for its actual live tiles.
+  for(const w of b.walls)if(!Array.isArray(outlines.groups?.[800]?.frames?.[w.frame]?.rows))fail();
+ }
  if(dotOutlines)for(const d of b.dots)for(const f of d.slowdown?[189+d.color,198+d.color]:[1+d.color,9+d.color])if(!Array.isArray(dotOutlines.groups?.[300]?.frames?.[f]?.rows))fail();return true;
 }

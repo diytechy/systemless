@@ -1,3 +1,5 @@
+**Superseded by accepted87 [review](gearshift-review.md). Preparation below historical.**
+
 # Gearshift87 source preparation
 
 Unlinked preparation after86 Passage acceptance. Continue through100 without per-level stops. RND2_6551 uses staticSlow16colors0/1/2, one horizontal wall, whiteWY3,6 and a colored goal9,6. There are no spikes, moving dots, rails, doors, bombs, goodies, Oil, teleports or guns. Both human starts are ordinary7,1/class0. Five ordinary programmed NPCs use fastred class5 n/s/b, greenclass1 n/s and blueclass2 n/s, without NPCwallchecks.

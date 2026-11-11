@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 87,
-  "currentAction": "Through86 Passage accepted/locally installed; continue through100 without per-level stops. Gearshift87 original cold authorized; inspect closure then original-only actor and Slow fitters before dedicatedPNGviews. Slowdown-waystation source/boardguardf7a82367/fourinventedchecks unlinked; no87actualmodel.",
+  "currentOrdinal": 88,
+  "currentAction": "Through87 Gearshift accepted/locally installed; continue through100 without per-level stops. Surrounded88 original cold authorized once. Original-only actor/buster and fixedSlow fitters before dedicatedPNGviews; prior87after-results88 disclosed. New staticSlow/buster/orbital/ring/EX/BO/GO/WL/SP composition required; no88actualmodel.",
   "levels": [
     {
       "ordinal": 1,
@@ -7706,10 +7706,15 @@
       "menuTitle": "Gearshift",
       "resourceTitle": "Gearshift",
       "sha256": "0c4f5daae04fa96234307648ea79b4457c45b7068eb4d0202276b161a2bf6e61",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "gearshift87-native-goal02/root-original-goal-review.json",
+        "gearshift87-native-goal-fit02/actor-comparison01.json",
+        "gearshift87-native-goal-slow-fit02/model-comparison01.json",
+        "gearshift87-native-goal02/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7737,7 +7742,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7766,7 +7771,34 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "0b794ae1",
+      "sourceFreezeSHA256": "f9b2057a460ad3988f8564ac2abfb587536fcd7728924854b4929950354dd3c0",
+      "sourceTests": 553,
+      "actualUpdates": 110130,
+      "actualConstructors": 15,
+      "functionalUpdatesUsed": 110130,
+      "functionalUpdatesRemaining": 139870,
+      "nativeColdClosed": true,
+      "review": "gearshift-review.md",
+      "retainedSweep": {
+        "matchedGoals": 85,
+        "constructionOnly": 1,
+        "pairedUpdates": 654582,
+        "sha256": "c8f7806822780f6bd551b98647b0f0d611f4f91c7539f67d927d02c2894c200f"
+      },
+      "deliveryAcceptance": {
+        "score": 1000,
+        "updates": 7768,
+        "transfers": 23,
+        "nextOrdinal": 88,
+        "nativeCampaignTotal": 541000,
+        "rootAcceptanceSHA256": "5e5adc9934edb076d7dd20a1881643319b7e217ee5df8b6bf05b82be089fef35",
+        "rootProofSHA256": "3884974b48c76f8c379df066775236ac7b462b446227797101b93f9229dde9dc",
+        "earnedThrough87FixtureSHA256": "238826c48b2806b5bf91e70433ba72ea14b7de15fcbe493149d078606a28d6c6"
+      },
+      "qualificationBoundary": "Original results1000 and earned88Surrounded/541000 visually verified after independent original-only67actoranchors and fixed16Slowdotcolor0/1/2 appearance fitters/viewgate. All147clear routepositions/poses exact across25joins atfixed700:human24/red73/green25/blue25. All400clear in-range Slowlooks exact including8occupied;417clear480raw retainambiguous/overdraw observations. Source main300 idle189+color/occupied198+color, gamma0.7/sourceanchors, noporttemporalinputs or per-imagephasefit. Cold191clearpositions exact22poseresiduals retained at700/701. Fivefailedlegalcontactroutes andfailedoriginal01retained; original01matchedfirst15transfers thenreleasedBatoncardinal16 allowingoneextraoriginalBounce, noearned88. Winningroute07/literal02/candidate02/original02:7768updates/23transfers/20Flip/3Swing/8Bounce/oneWY/fourSlowtoggles/59NPCprogramtransfers, zeroRNG/death/reset. CurrentF/S/B-onlycontroller, Bpark7,4untilred9,4frame0 thenmidarcrelease24, sourcewallleftdetour/WY3,6/Slowrow6/lowerhemisphere7,3->8,3->9,3 thenplus9,4/right10,4/down10,5/6/leftgoal9,6. Noengine/clock/phase/RNGstateassignments or actualcounterfactuals. Sourceclass2multiplier3/divisor8normal16slow andallretainedclockphases; checkpointdeath/newroundresetcontractssynthetic. 30nativecaptures/5460frontend/105.164sec, all24holds/idleedges exact plus20native-onlyfinalmargin/120resultsidle/Spaceadvance. Arbitrarycontrols/audio/controllers/pacing/fullpixel andactoridentitycensus separate. Source72v2/0b794ae1 fixes missing retained Slow background walls, including earlier82/84; eightfamilychecks553runtime21packagingpass. Candidate03 allcompletefinalState/streamdigests exactlymatchnative-boundcandidate02; root-render-reuse-review pinsoriginal02reuse, no repeatedoriginal/cold. Witness03/fresh03 bindsnewfreeze."
     },
     {
       "ordinal": 88,
@@ -8875,6 +8907,6 @@
   "handoff": "session-handoff-2026-11-11.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",
   "fasterValidationWorkflow": "faster-validation-workflow.md",
-  "sessionState": "through77-installed-continuing78",
+  "sessionState": "through87-installed-continuing88",
   "previousRestartCheckpoint": "restart-checkpoint-2026-11-10.md"
 }

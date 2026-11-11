@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fake OtterTube host</title>
+<!--
+  A stand-in for OtterTube's browser host, for testing the slim add-on build. It frames one game route
+  the way OtterTube does (sandbox="allow-scripts allow-same-origin allow-forms"), speaks the host side
+  of add-on protocol version 1 (OtterTube docs/ADDONS.md sections 6 and 7; app/src/addons/protocol.ts),
+  and keeps each subject's save for each game in this page's own localStorage, as OtterTube keeps it
+  under the user. It is not OtterTube: no signed list, no sync, no device cap.
+
+  Serve it from an origin the bundle was packaged for (--ottertube-host), then open
+    /?game=http://127.0.0.1:8097/clockwerx/&subject=a   (a, b: two fixed test subjects; guest; or 32 hex)
+  Optional: mode=host|self|none (default host), autostart=0 (frame nothing until fakeHost.open()),
+  silent=1 (never answer `ready`, as when the page is framed by something that is not OtterTube).
+  Tests drive it through window.fakeHost.
+-->
+<style>
+  body { margin: 0; font: 14px/1.4 system-ui, sans-serif; background: #1c1c1c; color: #eee; }
+  header { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 8px 12px; background: #333; }
+  header button { font: inherit; padding: 4px 10px; }
+  #who { font-weight: 600; }
+  #frame-box { width: 1000px; height: 760px; background: #000; }
+  iframe { width: 1000px; height: 760px; border: 0; display: block; }
+  #log { margin: 0; padding: 8px 12px; max-height: 220px; overflow: auto; font: 12px/1.4 ui-monospace, monospace; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<header>
+  <span id="who"></span>
+  <button type="button" data-subject="a">Child A</button>
+  <button type="button" data-subject="b">Child B</button>
+  <button type="button" data-subject="guest">Guest</button>
+  <button type="button" id="leave">Leave (tear down)</button>
+  <button type="button" id="forget">Forget this user's save</button>
+  <span id="held"></span>
+</header>
+<div id="frame-box"></div>
+<pre id="log"></pre>
+<script>
+(function () {
+  'use strict';
+  var VERSION = 1;
+  var CHECKPOINT_INTERVAL_MS = 2000;
+  var CHECKPOINT_BODY_MAX = 256 * 1024;
+  var MSG_RATE_MAX = 20;
+  var SUBJECTS = { a: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', b: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb', guest: null };
+
+  var params = new URLSearchParams(location.search);
+  var gameUrl = params.get('game') || '';
+  var mode = params.get('mode') || 'host';
+  var subjectName = params.get('subject') || 'a';
+  var subject = Object.prototype.hasOwnProperty.call(SUBJECTS, subjectName) ? SUBJECTS[subjectName]
+    : (/^[0-9a-f]{32}$/.test(subjectName) ? subjectName : null);
+  var gameOrigin = '';
+  try { gameOrigin = new URL(gameUrl).origin; } catch (_) {}
+
+  var frame = null;
+  var generation = null;
+  var lastSeq = -1;
+  var lastTakenAt = -Infinity;
+  var recent = [];
+  /** Every protocol event, in order: { t, at, dir, type, ... }. Tests read this. */
+  var events = [];
+
+  function note(event) {
+    event.t = Math.round(performance.now());
+    event.at = Date.now();
+    events.push(event);
+    var line = event.t + ' ms  ' + event.dir + ' ' + event.type;
+    if (event.seq !== undefined) line += ' seq=' + event.seq;
+    if (event.bytes !== undefined) line += ' bytes=' + event.bytes;
+    if (event.reason) line += ' reason=' + event.reason;
+    if (event.note) line += ' (' + event.note + ')';
+    var log = document.getElementById('log');
+    log.textContent += line + '\n';
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function storeKey(forSubject) { return 'fakehost.save|' + gameUrl + '|' + forSubject; }
+  /** What is held for a subject: { seq, data } or null. Guest has none. */
+  function held(forSubject) {
+    if (forSubject === null) return null;
+    try { return JSON.parse(localStorage.getItem(storeKey(forSubject))); } catch (_) { return null; }
+  }
+  function hold(forSubject, value) {
+    if (value === null) localStorage.removeItem(storeKey(forSubject));
+    else localStorage.setItem(storeKey(forSubject), JSON.stringify(value));
+    showHeld();
+  }
+  function showHeld() {
+    var value = held(subject);
+    document.getElementById('held').textContent = subject === null ? 'Guest: nothing is kept'
+      : value ? 'held: seq ' + value.seq + ', ' + value.data.length + ' characters' : 'held: nothing';
+  }
+  function randomGeneration() {
+    var bytes = crypto.getRandomValues(new Uint8Array(16));
+    return Array.from(bytes, function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+  function post(message) {
+    if (!frame || !frame.contentWindow) return;
+    message.otAddon = VERSION;
+    frame.contentWindow.postMessage(message, gameOrigin);
+  }
+  function bodyBytes(data) { return new TextEncoder().encode(JSON.stringify({ data: data })).byteLength; }
+  function keysAre(message, keys) {
+    var own = Object.keys(message);
+    return own.length === keys.length + 2 && own.every(function (k) { return k === 'otAddon' || k === 'type' || keys.indexOf(k) >= 0; });
+  }
+
+  window.addEventListener('message', function (event) {
+    if (!frame || event.source !== frame.contentWindow || event.origin !== gameOrigin) return;
+    var m = event.data;
+    if (typeof m !== 'object' || m === null || !Object.prototype.hasOwnProperty.call(m, 'otAddon')) return; // not ours: ignored
+    var now = performance.now();
+    recent = recent.filter(function (t) { return now - t < 1000; });
+    recent.push(now);
+    if (recent.length > MSG_RATE_MAX) { note({ dir: 'in ', type: 'dropped', note: 'more than 20 in a second' }); return; }
+    if (m.otAddon !== VERSION || typeof m.type !== 'string') { note({ dir: 'in ', type: 'dropped', note: 'bad envelope' }); return; }
+
+    if (m.type === 'ready' && keysAre(m, []) && params.get('silent') === '1') {
+      note({ dir: 'in ', type: 'ready', note: 'not answered (silent=1)' });
+      return;
+    }
+    if (m.type === 'ready' && keysAre(m, [])) {
+      generation = randomGeneration();
+      lastSeq = -1;
+      lastTakenAt = -Infinity;
+      var value = mode === 'host' ? held(subject) : null;
+      var given = mode === 'none' ? null : subject;
+      note({ dir: 'in ', type: 'ready' });
+      post({ type: 'init', generation: generation, subject: given, mode: mode, saved: value });
+      note({ dir: 'out', type: 'init', subject: given, savedSeq: value ? value.seq : null, bytes: value ? value.data.length : 0 });
+      return;
+    }
+    if (m.type === 'exit' && keysAre(m, [])) {
+      note({ dir: 'in ', type: 'exit' });
+      leave('the add-on asked to exit');
+      return;
+    }
+    if (m.type === 'checkpoint') {
+      if (!keysAre(m, ['generation', 'seq', 'data']) || m.generation !== generation || !Number.isSafeInteger(m.seq) || m.seq < 0 || typeof m.data !== 'string') {
+        note({ dir: 'in ', type: 'dropped', note: 'bad checkpoint or old generation' });
+        return;
+      }
+      var bytes = bodyBytes(m.data);
+      var reason = null;
+      if (bytes > CHECKPOINT_BODY_MAX) reason = 'size';
+      else if (mode !== 'host') reason = 'mode';
+      else if (subject === null) reason = 'no-user';
+      else if (now - lastTakenAt < CHECKPOINT_INTERVAL_MS) reason = 'rate';
+      else if (m.seq <= lastSeq) reason = 'seq';
+      if (reason) {
+        note({ dir: 'in ', type: 'checkpoint', seq: m.seq, bytes: bytes, reason: reason, sinceLastMs: Math.round(now - lastTakenAt) });
+        post({ type: 'failed', generation: generation, seq: m.seq, reason: reason });
+        return;
+      }
+      var since = lastTakenAt === -Infinity ? null : Math.round(now - lastTakenAt);
+      lastTakenAt = now;
+      lastSeq = m.seq;
+      hold(subject, { seq: m.seq, data: m.data });
+      note({ dir: 'in ', type: 'checkpoint', seq: m.seq, bytes: bytes, data: m.data, sinceLastMs: since });
+      post({ type: 'saved', generation: generation, seq: m.seq });
+      return;
+    }
+    note({ dir: 'in ', type: 'dropped', note: 'unknown type ' + m.type });
+  });
+
+  function open() {
+    if (!gameOrigin) { note({ dir: '---', type: 'error', note: 'no ?game= address' }); return; }
+    leave(null);
+    frame = document.createElement('iframe');
+    frame.id = 'addon';
+    frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
+    frame.src = gameUrl;
+    document.getElementById('frame-box').appendChild(frame);
+    note({ dir: '---', type: 'open', note: gameUrl });
+  }
+  /** Leaving never waits: the frame is removed at once. */
+  function leave(why) {
+    if (!frame) return;
+    frame.remove();
+    frame = null;
+    generation = null;
+    if (why) note({ dir: '---', type: 'left', note: why });
+  }
+
+  document.getElementById('who').textContent = (subject === null ? 'Guest' : 'subject ' + subject.slice(0, 8)) + ' · mode ' + mode;
+  document.querySelectorAll('[data-subject]').forEach(function (button) {
+    button.onclick = function () { params.set('subject', button.dataset.subject); location.search = params.toString(); };
+  });
+  document.getElementById('leave').onclick = function () { leave('the user left'); };
+  document.getElementById('forget').onclick = function () { if (subject !== null) hold(subject, null); };
+  showHeld();
+
+  window.fakeHost = {
+    events: events,
+    subjects: SUBJECTS,
+    subject: subject,
+    open: open,
+    leave: function () { leave('the test left'); },
+    held: held,
+    /** Give a subject a save from elsewhere (another device, another profile): seq 0, as OtterTube does. */
+    importSave: function (forSubject, data) { hold(forSubject, { seq: 0, data: data }); },
+    forget: function (forSubject) { hold(forSubject, null); },
+    checkpoints: function () { return events.filter(function (e) { return e.type === 'checkpoint' && !e.reason; }); },
+  };
+  if (params.get('autostart') !== '0') open();
+})();
+</script>
+</body>
+</html>

@@ -21,6 +21,8 @@ mod ottertube;
 mod ottertube_data;
 #[cfg(feature = "ottertube")]
 mod ottertube_play;
+#[cfg(any(feature = "ottertube", test))]
+mod ottertube_touch;
 mod paths;
 mod presentation;
 mod renderer_bridge;

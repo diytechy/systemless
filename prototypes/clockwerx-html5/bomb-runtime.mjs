@@ -1,3 +1,4 @@
+import {assertMovingProtectedBusterActor,assertMovingProtectedBusterBoard} from './moving-protected-busters.mjs';
 import {assertMovingSlowdownBusterActor,assertMovingSlowdownBusterBoard} from './moving-slowdown-busters.mjs';
 import {assertStaticSlowdownBusterActor,assertStaticSlowdownBusterBoard} from './static-slowdown-busters.mjs';
 import {assertMovingGoalGoodieRecipe,assertMovingGoalGoodieSource,assertMovingGoalGoodieBoard,assertMovingGoalGoodieActor} from './moving-goal-goodies.mjs';
@@ -27,7 +28,9 @@ const sameGrid=(a,b)=>a.row===b.row&&a.column===b.column;
 const sameCompositionInventory=(b,s)=>['connectors','bombs','walls','goodies'].every(k=>b?.[k]===s[k]);
 const grid=g=>{integer(g?.row,0,7);integer(g?.column,0,10);};
 const human=a=>a.sourceActorType===0||a.sourceActorType===6;
-function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowMovingDoorGoodies=false,allowFreeBusters=false,allowGunBusters=false,allowMovingBusterBombs=false,allowMovingProgrammedBusters=false,allowStaticTeleportBusters=false,allowMovingGoalGoodies=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false){
+function actor(a,allowObjectInteractions=false,allowSlidingGoodies=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowMovingDoorGoodies=false,allowFreeBusters=false,allowGunBusters=false,allowMovingBusterBombs=false,allowMovingProgrammedBusters=false,allowStaticTeleportBusters=false,allowMovingGoalGoodies=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false,allowMovingProtectedBusters=false){
+ if(typeof allowMovingProtectedBusters!=='boolean')throw Error('Literal moving protected bomb actor capability required');
+ if(allowMovingProtectedBusters){if(!allowFreeBusters)throw Error('Moving protected actors require free buster composition');assertMovingProtectedBusterActor(a);return a;}
  if(typeof allowMovingSlowdownBusters!=='boolean')throw Error('Literal moving Slow bomb actor capability required');
  if(allowMovingSlowdownBusters){if(!allowFreeBusters)throw Error('Moving Slow actors require free buster composition');assertMovingSlowdownBusterActor(a);return a;}
  if(allowStaticSlowdownBusters){if(!allowFreeBusters)throw Error('Static Slow buster actors require PR composition');assertStaticSlowdownBusterActor(a);return a;}
@@ -58,8 +61,10 @@ function staticDot(d,allowObjectInteractions=false){
 /** Call with the mode-filtered inventory before wiring a board. These are
  * normalized declarations, not a raw-level decoder. Empty absent sections
  * are permitted; future active combinations fail closed. */
-export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[],walls=[],allowMovingBombs=false,goodies=[],spikes=[],origin,sourceProvenance,allowImportedGoodie169=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope,allowFreeBusters=false,allowGunBusters=false,allowMovingProgrammedBusters=false,allowMovingBusterBombs=false,allowStaticTeleportBusters=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false,freeBusterScope}={}){
+export function assertBombRuntimeScope({mode='Child',dots=[],actors=[],activeSections={},allowObjectInteractions=false,allowMovingOilElevators=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,connectors=[],bombs=[],walls=[],allowMovingBombs=false,goodies=[],spikes=[],origin,sourceProvenance,allowImportedGoodie169=false,allowStaticSlidingBombGoodies=false,staticSlidingBombGoodieScope,allowMovingBombSpikeWaystation=false,movingBombSpikeWaystationScope,allowFreeBusters=false,allowGunBusters=false,allowMovingProgrammedBusters=false,allowMovingBusterBombs=false,allowStaticTeleportBusters=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false,allowMovingProtectedBusters=false,freeBusterScope}={}){
  if(mode!=='Child')throw new Error('Only Child bomb scope is supported');
+ if(typeof allowMovingProtectedBusters!=='boolean')throw Error('Literal moving protected bomb capability required');
+ if(allowMovingProtectedBusters){if(!allowFreeBusters||!allowObjectInteractions||freeBusterScope?.dots!==dots||!sameCompositionInventory(freeBusterScope,{connectors,bombs,walls,goodies})||freeBusterScope.spikes!==spikes)throw Error('Matching moving protected bomb inventory required');for(const a of actors)assertMovingProtectedBusterActor(a);return assertMovingProtectedBusterBoard(freeBusterScope);}
  if(typeof allowMovingSlowdownBusters!=='boolean')throw Error('Literal moving Slow bomb capability required');
  if(allowMovingSlowdownBusters){if(!allowFreeBusters||!allowObjectInteractions||freeBusterScope?.dots!==dots||!sameCompositionInventory(freeBusterScope,{connectors,bombs,walls,goodies})||freeBusterScope.spikes!==spikes)throw Error('Matching moving Slow bomb inventory required');for(const a of actors)assertMovingSlowdownBusterActor(a);return assertMovingSlowdownBusterBoard(freeBusterScope,{runtimeConstruction:true});}
  if(typeof allowStaticSlowdownBusters!=='boolean')throw Error('Literal static Slow buster bomb capability required');
@@ -171,10 +176,10 @@ export function bombStationaryDots(dots,origin,onChange,options){
 /** WABombed Child deadline is metadata for ordinary enemies, not a request to
  * resurrect them. Source WA reset owns restoring visibility. Death dispatch
  * does not stop the remaining source-slot scan. */
-export function bombActors(actors,{guestTick,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowFreeBusters=false,allowGunBusters=false,allowMovingBusterBombs=false,allowMovingProgrammedBusters=false,allowStaticTeleportBusters=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false}){
+export function bombActors(actors,{guestTick,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowFreeBusters=false,allowGunBusters=false,allowMovingBusterBombs=false,allowMovingProgrammedBusters=false,allowStaticTeleportBusters=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false,allowMovingProtectedBusters=false}){
  integer(guestTick);fn(collides,'actor outline collision');fn(onDeath,'human death');fn(onHidden,'actor visibility');
  if(!Array.isArray(actors))throw new TypeError('Live source-slot actor array required');
- let previous=-1;for(const a of actors){actor(a,allowObjectInteractions,allowSlidingBombs,allowSlidingBombs,allowMovingBombs,allowStaticSlidingBombGoodies,allowMovingBombSpikeWaystation,allowSlidingBombOrbitals,false,allowFreeBusters,allowGunBusters,allowMovingBusterBombs,allowMovingProgrammedBusters,allowStaticTeleportBusters,false,allowStaticSlowdownBusters,allowMovingSlowdownBusters);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
+ let previous=-1;for(const a of actors){actor(a,allowObjectInteractions,allowSlidingBombs,allowSlidingBombs,allowMovingBombs,allowStaticSlidingBombGoodies,allowMovingBombSpikeWaystation,allowSlidingBombOrbitals,false,allowFreeBusters,allowGunBusters,allowMovingBusterBombs,allowMovingProgrammedBusters,allowStaticTeleportBusters,false,allowStaticSlowdownBusters,allowMovingSlowdownBusters,allowMovingProtectedBusters);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
  const hits=[];
  for(const a of actors){
   if(a.visible===false||!sync(collides,a))continue;
@@ -231,6 +236,7 @@ export class BombRuntime {
   this.movingBombSpikeWaystation=scopeMode==='bombs'&&scope?.allowMovingBombSpikeWaystation===true;
   this.staticSlidingBombGoodies=scopeMode==='bombs'&&scope?.allowStaticSlidingBombGoodies===true;
   this.movingBombs=scopeMode==='bombs'&&scope?.allowMovingBombs===true;
+  this.movingProtectedBusters=scopeMode==='bombs'&&scope?.allowMovingProtectedBusters===true;
   this.movingSlowdownBusters=scopeMode==='bombs'&&scope?.allowMovingSlowdownBusters===true;
   this.staticSlowdownBusters=scopeMode==='bombs'&&scope?.allowStaticSlowdownBusters===true;
   this.freeBusters=scopeMode==='bombs'&&scope?.allowFreeBusters===true;this.gunBusters=scope?.allowGunBusters===true;this.movingBusterBombs=scope?.allowMovingBusterBombs===true;this.movingProgrammedBusters=scope?.allowMovingProgrammedBusters===true;this.staticTeleportBusters=scope?.allowStaticTeleportBusters===true;
@@ -286,7 +292,7 @@ export class BombRuntime {
   const events=[];this.emit(events,{type:'frame',target,index,frame:s.frame});return events;
  }
  ignite(bombIndex,who){
-  actor(who,false,this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters);const b=this.item(this.bombs,bombIndex),events=[];
+  actor(who,false,this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters,this.movingProtectedBusters);const b=this.item(this.bombs,bombIndex),events=[];
   if(this.frozen||b.role!=='match'||!this.armed[bombIndex]||(!human(who)&&!b.flags))return events;
   this.activateSpark(bombIndex,[4,8,1,2][b.kind-10],events);
   for(const s of this.matches)if(sameGrid(s.grid,b)){s.visible=false;this.emit(events,{type:'hide',target:'LI',index:s.index});}
@@ -356,24 +362,24 @@ export class BombRuntime {
   return events;
  }
  checkMatch(who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters);if(this.frozen)return [];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters,this.movingProtectedBusters);if(this.frozen)return [];
   const s=this.matches.find(s=>s.visible&&sync(this.adapters.collides,'LI',s,who));
   return s?this.ignite(s.bombIndex,who):[];
  }
  checkSpark(who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters);if(this.frozen||!human(who))return [];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters,this.movingProtectedBusters);if(this.frozen||!human(who))return [];
   const s=this.sparks.find(s=>s.visible&&s.travelling&&sync(this.adapters.collides,'SR',s,who)),events=[];
   if(s)this.emit(events,{type:'death',reason:15,actor:who,index:s.index});return events;
  }
  checkGoodie(who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters);if(this.frozen||!human(who))return [];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters,this.movingProtectedBusters);if(this.frozen||!human(who))return [];
   // GO collision ignores collected latch: first still-visible collected GO
   // blocks later overlapped GO until its flourish callback hides it.
   const s=this.goodies.find(s=>s.visible&&sync(this.adapters.collides,'GO',s,who));
   return s?this.collectGoodie(s.index,who):[];
  }
  collectGoodie(index,who){
-  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters);const s=this.item(this.goodies,index),events=[];
+  actor(who,false,this.slidingGoodies||this.slidingBombs,this.slidingBombs,this.movingBombs,this.staticSlidingBombGoodies,this.movingBombSpikeWaystation,false,this.movingDoorGoodies,this.freeBusters,this.gunBusters,this.movingBusterBombs,this.movingProgrammedBusters,this.staticTeleportBusters,this.movingGoalGoodies,this.staticSlowdownBusters,this.movingSlowdownBusters,this.movingProtectedBusters);const s=this.item(this.goodies,index),events=[];
   if(this.frozen||!human(who)||s.collected)return events;
   const generation=this.generation;
   this.emit(events,{type:'sound',id:22});

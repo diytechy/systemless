@@ -1,3 +1,4 @@
+import {assertMovingTeleportCheckpointActor} from './moving-teleport-checkpoints.mjs';
 import {assertMovingTeleportDoorActor} from './moving-teleport-doors.mjs';
 import {assertSlidingTeleportScope,assertSlidingTeleportActor} from './sliding-teleports.mjs';
 // Static Child HY sprites and ordinary WA one-shots. Private maps and atlas
@@ -18,6 +19,9 @@ export class TeleportRuntime {
  constructor(endpoints,dots,{hyperspace:hyperspaceCount=0,fader:faderCount=0}={},scope={}){
   count(hyperspaceCount);count(faderCount);
   if(!Array.isArray(endpoints)||!endpoints.length||endpoints.length>22||!Array.isArray(dots))throw new TypeError('Bounded paired HY endpoints and source dots required');
+  if(typeof scope.allowMovingTeleportCheckpoints!=='undefined'&&typeof scope.allowMovingTeleportCheckpoints!=='boolean')throw TypeError('Literal moving HY checkpoint runtime capability required');
+  if(scope.allowMovingTeleportCheckpoints===true&&(scope.board?.movingTeleportCheckpointRules!==true||scope.board.dots!==dots||scope.board.teleports!==endpoints))throw Error('Matching moving HY checkpoint declaration required');
+  this.movingTeleportCheckpoints=scope.allowMovingTeleportCheckpoints===true;
   if(typeof scope.allowMovingTeleportDoors!=='undefined'&&typeof scope.allowMovingTeleportDoors!=='boolean')throw new TypeError('Literal moving HY door capability required');
   if(scope.allowMovingTeleportDoors===true&&(scope.board?.movingTeleportDoorRules!==true||scope.board.dots!==dots||scope.board.teleports!==endpoints))throw new Error('Matching moving HY declaration required');
   this.movingTeleportDoors=scope.allowMovingTeleportDoors===true;
@@ -61,11 +65,12 @@ export class TeleportRuntime {
   this.faders.push(fader);return fader;
  }
  teleport(actor,grabbed,{sound,place,checkWalls,onWallDeath,suppressed=false}={}){
+  if(this.movingTeleportCheckpoints)assertMovingTeleportCheckpointActor(actor);
   if(this.movingTeleportDoors)assertMovingTeleportDoorActor(actor);
   if(this.slidingTeleportRules)assertSlidingTeleportActor(actor,{program:actor?.program??null,human:[0,6].includes(actor?.sourceActorType)});
   const endpoint=this.endpoints.find(e=>e.dot===grabbed.id);if(!endpoint)return false;
   const moved=teleportOrdinaryActor(actor,this.dot(endpoint.partner),{sound,startFader:a=>this.startFader(a,{suppressed}),place,checkWalls,onWallDeath});
-  if(moved&&this.movingTeleportDoors)actor.movingPivot=this.dot(actor.pivot).motion==='moving-program';
+  if(moved&&(this.movingTeleportDoors||this.movingTeleportCheckpoints))actor.movingPivot=this.dot(actor.pivot).motion==='moving-program';
   return moved;
  }
  snapshot(){return {counts:{...this.counts},endpoints:this.endpoints.map(e=>({...e,x:this.dot(e.dot).x-16,y:this.dot(e.dot).y-15})),faders:this.faders.map(f=>({...f}))};}

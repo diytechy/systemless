@@ -64,3 +64,9 @@ export function assertStaticRingRailBoard(b,{outlines,dotOutlines}={}){
  if(outlines)for(const g of[700,4300,500,4400,200])for(let f=0;f<(g===200?4:64);f++)if(!Array.isArray(outlines.groups?.[g]?.frames?.[f]?.rows))fail();
  if(dotOutlines)for(const d of b.dots)for(const f of d.ring?[23,24,25,26,27,28,29,30]:[1+d.color,9+d.color])if(!Array.isArray(dotOutlines.groups?.[300]?.frames?.[f]?.rows))fail();return true;
 }
+export function assertStaticRingRailRuntime(b,{actors=[]}={}){
+ if(b?.staticRingRailRules!==true||!Object.isFrozen(b.staticRingRailSource)||['puddles','bombs','goodies','walls','doors','switches','elevators','teleports','guns','triggers'].some(k=>b[k]?.length))fail();
+ for(const[k,v]of Object.entries(b))if(k.endsWith('Rules')&&v===true&&!['canonicalPlayerRules','specialDotRules','childScoreRules','sourceDotPermissions','slidingConnectorRules','staticRingRailRules'].includes(k))fail();
+ for(const d of b.dots)if(d.motion!=='static'||d.teleport!==false||d.protected||d.waystation||d.transferDeath||d.slowdown||d.upDown||d.movingProgram||d.burnt||typeof d.ring!=='boolean'||typeof d.humanCanGrab!=='boolean'||d.nonhumanCanGrab!==true||d.ring&&(d.color!==0||d.slideMask)||!d.ring&&!d.humanCanGrab)fail();
+ validateConnectorBoard(b.connectors,b.dots);for(const a of actors)assertStaticRingRailActor(a);return true;
+}

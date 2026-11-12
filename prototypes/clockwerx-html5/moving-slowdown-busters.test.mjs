@@ -45,6 +45,12 @@ const shape={left:0,top:0,right:1,bottom:1,rows:[],collidable:false,flipY:false}
 const frames=n=>({frames:Array.from({length:n},()=>({...shape}))});
 const profiles=()=>({outlines:{groups:Object.fromEntries([700,4300,500,4400,3900,200,800].map(g=>[g,frames(g===200?4:g===800?32:64)]))},dotOutlines:{groups:{300:frames(207)}},bombOutlines:{groups:Object.fromEntries([[1600,18],[1500,12],[1800,10],[1900,17]].map(([g,n])=>[g,frames(n)]))},bombRoutes:[1,10,11].map(kind=>({kind,points:[[0,0]],entryLeg:4,forwardExit:4,reverseExit:4,bomb:kind<4,flipVertical:false,flipHorizontal:false,swap:false})),deathFactory:()=>({complete:false,update(){},snapshot(){return[];}})});
 const round=()=>new SourceRound(buildDecodedBoard(movingSlowSource(),movingSlowRecipe()),profiles());
+test('legal moving-family transfer resolves detached query release to the board dot',()=>{
+ const s=movingSlowSource();Object.assign(s.cells[1],{present:true,flagsRaw:0x4001,secondaryRaw:15});
+ const g=new SourceRound(buildDecodedBoard(s,movingSlowRecipe()),profiles());
+ for(let i=0;i<256&&g.player.pivot==='0,0';i++)g.update(1/120,{flip:true});
+ assert.equal(g.player.pivot,'1,0');assert.equal(g.player.transfers,1);assert.equal(g.slowdown.enabled,false);
+});
 test('joined invented moving Slow round dispatches ordinary class2, green wall checks and free busters',()=>{
  const g=round();for(let i=0;i<300;i++)g.update(1/120,{});
  assert.equal(g.board.movingSlowdownBusterRules,true);assert.equal(g.board.staticSlowdownRules,undefined);assert.equal(g.board.movingBusterBombRules,undefined);

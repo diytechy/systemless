@@ -597,6 +597,9 @@ export class SourceRound extends MovementGame {
   this.afterActorDotGrab(this.player,dot);
  }
  onHumanRelease(dot,hand){
+  // Moving queries use detached position records. Slow appearance belongs to
+  // the board dot, so resolve the released source ID before its callback.
+  if(this.board.movingSlowdownBusterRules)dot=this.board.dots.find(d=>d.id===dot.id);
   this.slowdown?.humanRelease(dot);
   this.dotAnimations?.humanRelease(dot.id,{releasingActor:hand.name,orphanOccupants:id=>{
    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});

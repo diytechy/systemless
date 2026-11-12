@@ -8,10 +8,11 @@ import {assertMovingSpikeScope,assertMovingSpikePhysics,createMovingSpikeLifecyc
 
 // Entirely invented source declarations: no original map/program/art is here.
 const budget={rawBuilds:0,roundConstructors:0,roundUpdates:0,helperInvocations:0,explicitResets:0,resetInvocations:0},diagnostics={},run={pid:process.pid,startUTC:new Date().toISOString()};
-const sourceUpdate=SourceRound.prototype.updateSource;
-const sourceReset=SourceRound.prototype.reset;
-SourceRound.prototype.reset=function(...a){budget.resetInvocations++;return sourceReset.apply(this,a);};
-SourceRound.prototype.updateSource=function(...a){budget.roundUpdates++;assert.ok(budget.roundUpdates+budget.helperInvocations<=10000);return sourceUpdate.apply(this,a);};
+// Charge only this file's invented rounds when test files share a process.
+class BudgetedRound extends SourceRound {
+ reset(...a){budget.resetInvocations++;return super.reset(...a);}
+ updateSource(...a){budget.roundUpdates++;assert.ok(budget.roundUpdates+budget.helperInvocations<=10000);return super.updateSource(...a);}
+}
 after(()=>{console.log('MOVING_SPI_SYNTHETIC_RUN '+JSON.stringify({...run,endUTC:new Date().toISOString()}));console.log('MOVING_SPI_SYNTHETIC_BUDGET '+JSON.stringify(budget));console.log('MOVING_SPI_SYNTHETIC_DIAGNOSTICS '+JSON.stringify(diagnostics));});
 const clone=x=>structuredClone(x),wh=a=>a.map(x=>x.toString(16).padStart(4,'0')).join('');
 const permission=color=>15+(color&1?16:0)+(color&2?256:0)+(color&4?4096:0);
@@ -37,7 +38,7 @@ function raw({movingNear=false,staticNear=false,humanSPI=false,npcSPI=false,mask
 function board(opts,overrides={}){budget.rawBuilds++;return buildDecodedBoard(raw(opts),{...recipe,...overrides});}
 const small={left:-1,right:1,top:-1,bottom:1,rows:[[0,1],[0,1]],flipY:false};
 function profiles(){return {outlines:{groups:Object.fromEntries([700,4300,500,4400,4500].map(g=>[g,{frames:Array.from({length:64},()=>clone(small))}]).concat([['200',{frames:Array.from({length:4},(_,f)=>({left:[-5,-5,-6,-6][f],right:[13,13,12,12][f],top:[-4,-5,-5,-4][f],bottom:[14,13,13,14][f],rows:Array.from({length:18},()=>[0,17]),flipY:false}))}]]))},dotOutlines:{groups:{'300':{frames:Array.from({length:207},()=>clone(small))}}}};}
-function game(opts){const b=board(opts);budget.roundConstructors++;return new SourceRound(b,{...profiles(),deathFactory:()=>({complete:false,update(){},snapshot(){return [];}})});}
+function game(opts){const b=board(opts);budget.roundConstructors++;return new BudgetedRound(b,{...profiles(),deathFactory:()=>({complete:false,update(){},snapshot(){return [];}})});}
 function reset(g){budget.explicitResets++;g.reset();}
 const noHooks={guestTick:0,adjustPeriod:n=>n,afterAnimate:()=>{},onDotRelease:()=>{},onDotGrabFirst:()=>{},afterDotGrab:()=>{}};
 function helper(b,a=b.enemies[0],extra={}){budget.helperInvocations++;return advanceStaticEnemyCallback(a,0,{...noHooks,program:a.program,dots:b.dots,allowMovingDots:true,allowMovingSpikes:true,movingSpikeScope:b,sourceQuery:()=>({allowed:false}),...extra});}
@@ -56,7 +57,7 @@ test('malformed raw programs/mode/type/bytes and forbidden family joins reject',
 });
 test('normalized/delta0 boundaries reject mutation but permit consumed static bonus',()=>{
  const mutations=[b=>b.activeMask=2,b=>b.sourceGrid.rows=7,b=>b.resourceId++,b=>b.movingSpikeSource={...b.movingSpikeSource,sha256:new String('a'.repeat(64))},b=>b.enemies[0].group=700,b=>b.player.group=500,b=>b.enemies[0].frame=64,b=>b.enemies[0].sourcePC=0,b=>b.enemies[1].program='n',b=>b.spikes[0].phase=3,b=>b.spikes[0].x-=8,b=>b.goodies.push({}),b=>b.dots[0].humanCanGrab=false,b=>b.dots.find(d=>d.sourceIndex===44).sourceInitialBonus=false,b=>delete b.dots[0].sourceInBackground,b=>b.movingSpikeRules=false];
- for(const mutate of mutations){const b=clone(board());mutate(b);assert.throws(()=>assertMovingSpikeScope(b));assert.throws(()=>helper(b));budget.roundConstructors++;assert.throws(()=>new SourceRound(b,{...profiles(),deathFactory:()=>({complete:false,update(){},snapshot(){return [];}})}));}
+ for(const mutate of mutations){const b=clone(board());mutate(b);assert.throws(()=>assertMovingSpikeScope(b));assert.throws(()=>helper(b));budget.roundConstructors++;assert.throws(()=>new BudgetedRound(b,{...profiles(),deathFactory:()=>({complete:false,update(){},snapshot(){return [];}})}));}
  const b=board(),d=b.dots.find(d=>d.sourceIndex===44);d.bonus=false;d.cell&=~2;d.kind='dot';d.collected=true;assertMovingSpikeScope(b);helper(b);
  assert.throws(()=>helper(b,b.enemies[0],{program:'s'}));assert.throws(()=>helper(b,b.enemies[0],{sourceQuery:async()=>({allowed:false})}));
 });

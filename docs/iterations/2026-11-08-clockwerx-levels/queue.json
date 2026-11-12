@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 92,
-  "currentAction": "Immunity91 accepted and locally installed. Continue all100 without per-level stops;9levels remain. Dizziness92/RND2_216 earned cold next, independent original-only actor and relevant moving/teleport/door/spike appearance methods before dedicated PNG viewing. No92actualengine yet.",
+  "currentOrdinal": 97,
+  "currentAction": "March97 earned original cold running once; Box96 native/candidate/witness/fresh/retained95/QA complete. Visible92-96 pending, installed91 remains paused. Continue all100 without per-level stops; see current-action.md.",
   "levels": [
     {
       "ordinal": 1,
@@ -8242,7 +8242,7 @@
       "menuTitle": "Dizziness",
       "resourceTitle": "Dizziness",
       "sha256": "67b68b9137efbf1761044c249ab9d9b3409a648eec0539cb1e495d7ecb8902f7",
-      "status": "queued",
+      "status": "functional-proof-complete-visible-browser-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8312,7 +8312,9 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "review": "dizziness-review.md",
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
     },
     {
       "ordinal": 93,
@@ -8320,7 +8322,7 @@
       "menuTitle": "Twin Peaks",
       "resourceTitle": "Twin Peaks",
       "sha256": "1520497360f3db9924bd525cc8be41f6705cec4851e1c5115016041027e4aeab",
-      "status": "queued",
+      "status": "functional-proof-complete-visible-browser-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8385,7 +8387,9 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "review": "twin-peaks-review.md",
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
     },
     {
       "ordinal": 94,
@@ -8393,7 +8397,7 @@
       "menuTitle": "Fracas",
       "resourceTitle": "Fracas",
       "sha256": "a8087dbdbeb6ccec2d54f8445968a475659ba8edc54eb2763f23683484c8eee7",
-      "status": "source-prepared-import-and-blue-ring-assets-required",
+      "status": "functional-proof-complete-visible-browser-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8448,7 +8452,9 @@
         "newMechanicDependencies": [],
         "gameplayAcceptedByTriage": false
       },
-      "preparation": "fracas-preparation.md"
+      "preparation": "fracas-preparation.md",
+      "review": "fracas-review.md",
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
     },
     {
       "ordinal": 95,
@@ -8456,7 +8462,7 @@
       "menuTitle": "Fallback",
       "resourceTitle": "Fallback",
       "sha256": "67e1a04c63e3c61a2c62d89f066b0ab6857b2f5ee4c3b1bbf3a7a23981bda6f6",
-      "status": "queued",
+      "status": "functional-proof-complete-visible-browser-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8522,7 +8528,9 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "review": "fallback-review.md",
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
     },
     {
       "ordinal": 96,
@@ -8530,7 +8538,7 @@
       "menuTitle": "Box",
       "resourceTitle": "Box",
       "sha256": "ec3c8b527b151010cbcea2b8ea242a0eeb9332abb80101cfe39c5800bfb8b128",
-      "status": "queued",
+      "status": "functional-proof-complete-visible-browser-pending",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8595,7 +8603,9 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "review": "box-review.md",
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
     },
     {
       "ordinal": 97,
@@ -8603,7 +8613,7 @@
       "menuTitle": "March",
       "resourceTitle": "March",
       "sha256": "4c0ca24541e2b517912aae091f09fde7eba77a09a1fe2510fb5efc7a4fb21503",
-      "status": "queued",
+      "status": "earned-original-cold-running",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -9026,10 +9036,19 @@
   "workflow": "parallel-workflow.md",
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
-  "activeSlots": [],
+  "activeSlots": [
+    {
+      "owner": "Root",
+      "kind": "original-native-cold",
+      "ordinal": 97,
+      "managedSession": 77487,
+      "authorizationSHA256": "4079e326a085c168715a900482c8dd39612d7cc124fcef608a418e483df96553",
+      "noAutomaticRetry": true
+    }
+  ],
   "handoff": "session-handoff-2026-11-11.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",
   "fasterValidationWorkflow": "faster-validation-workflow.md",
-  "sessionState": "through91-installed-continuing92",
+  "sessionState": "through96-functional-proofs-complete-installed91-continuing97",
   "previousRestartCheckpoint": "restart-checkpoint-2026-11-10.md"
 }

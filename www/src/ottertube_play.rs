@@ -13,6 +13,7 @@ use crate::ottertube::wait_ms;
 use crate::ottertube_data::{
     hash_text, is_chord_key, Block, GameData, Step, FRAME_MS, MAC_COMMAND_KEY, RUN_DEPTH,
 };
+use crate::ottertube_touch::{Act, Deferred, Kind, Looked};
 use leptos::prelude::*;
 use leptos::task::spawn_local;
 use std::cell::{Cell, RefCell};
@@ -94,8 +95,12 @@ struct Stepper {
 
 /// A blocked control stays blocked this long after its screen was last seen.
 const BLOCK_GRACE_MS: f64 = 1000.0;
-/// How long a touch that was held back is pressed for, once it is let through.
+/// How long a touch that was held back is pressed for, once it is let through
+/// after its finger has lifted.
 const HELD_TAP_MS: f64 = 130.0;
+/// A game made to quit before the page leaves (`quit_first`): once its script
+/// has ended without the guest stopping, how long the page still waits.
+const QUIT_GRACE_MS: f64 = 3000.0;
 
 thread_local! {
     static GAME: RefCell<Rc<GameData>> = RefCell::new(Rc::new(GameData::default()));
@@ -112,8 +117,10 @@ thread_local! {
     static SCRIPT: RefCell<Script> = RefCell::new(Script::default());
     static STARTING: Cell<bool> = const { Cell::new(false) };
     static STEPPER: RefCell<Stepper> = RefCell::new(Stepper::default());
-    /// Where a touch that was held back and then let through is pressed now.
-    static HELD_TAP: Cell<Option<(i16, i16)>> = const { Cell::new(None) };
+    /// Touches held back for a fresh look at the screen.
+    static DEFERRED: RefCell<Deferred> = RefCell::new(Deferred::default());
+    /// How many times the game was made to quit before leaving (once at most).
+    static QUIT_RUNS: Cell<u32> = const { Cell::new(0) };
     /// The page's own controls hold the guest's Command key; and what a real
     /// keyboard does when they begin to.
     static COMMAND_ON_SCREEN: Cell<bool> = const { Cell::new(false) };
@@ -247,7 +254,7 @@ pub fn close(why: &str) {
     }
     show("data-kiosk-closing", why);
     cancel_script(why);
-    release_held_tap();
+    drop_deferred();
     // Whatever the child holds goes up, for good.
     takeover(true);
     keys(KeyOwner::Pad, Vec::new(), false);
@@ -267,7 +274,7 @@ pub fn guest_input_shut() -> bool {
 /// The game screen is gone: nothing may run on, and nothing stays held.
 pub fn game_unmounted() {
     cancel_script("the game closed");
-    release_held_tap();
+    drop_deferred();
     TAKEOVER.with(|listeners| listeners.borrow_mut().clear());
     COMMAND_DOWN.with(|slot| *slot.borrow_mut() = None);
     COMMAND_ON_SCREEN.with(|slot| slot.set(false));
@@ -500,6 +507,12 @@ fn block_in_force(block: &Block, now: f64) -> bool {
 /// look, is held back: the look can be a fifth of a second old, and a screen
 /// that has just come up would let the touch through.
 pub fn touch_verdict(v: i16, h: i16) -> Touch {
+    verdict(v, h, false)
+}
+
+/// `fresh`: the screen has just been looked at, so a spot whose block is not
+/// in force now is not blocked.
+fn verdict(v: i16, h: i16, fresh: bool) -> Touch {
     if guest_input_shut() {
         return Touch::Swallow;
     }
@@ -515,37 +528,79 @@ pub fn touch_verdict(v: i16, h: i16) -> Touch {
         }
         held = true;
     }
-    if held {
+    if held && !fresh {
         Touch::Hold
     } else {
         Touch::Pass
     }
 }
 
-/// A touch that `touch_verdict` held back: look at the screen afresh, then
-/// drop it if its spot is blocked after all, or else make it, as a tap.
-pub fn judge_held_touch(v: i16, h: i16) {
+/// A finger that `touch_verdict` held back. Its gesture keeps its own number
+/// while the screen is looked at afresh: a finger that lifts meanwhile becomes
+/// a tap, one still down becomes a press that follows it, and one cancelled
+/// or slid away comes to nothing (`ottertube_touch`).
+pub fn defer_touch(pointer_id: i32, v: i16, h: i16) {
+    let id = DEFERRED.with(|deferred| deferred.borrow_mut().begin(pointer_id, (v, h)));
     spawn_local(async move {
         let game = game();
-        if screens_hold(&screen_names(&game)).await.is_none() {
-            return;
+        let looked = screens_hold(&screen_names(&game)).await.is_some();
+        let allowed = looked && verdict(v, h, true) == Touch::Pass;
+        let outcome = DEFERRED.with(|deferred| deferred.borrow_mut().looked(id, allowed));
+        match outcome {
+            Looked::Nothing => {}
+            Looked::Press(acts) => act(acts),
+            Looked::Tap(acts) => {
+                act(acts);
+                wait_ms(HELD_TAP_MS).await;
+                // Only this tap's press: a newer one may hold the button now.
+                let acts = DEFERRED.with(|deferred| deferred.borrow_mut().tap_over(id));
+                act(acts);
+            }
         }
-        if touch_verdict(v, h) == Touch::Swallow {
-            return;
-        }
-        let at = guest_point(v, h);
-        release_held_tap();
-        HELD_TAP.with(|slot| slot.set(Some(at)));
-        pointer("mouseMove", at);
-        pointer("mouseDown", at);
-        wait_ms(HELD_TAP_MS).await;
-        release_held_tap();
     });
 }
 
-fn release_held_tap() {
-    if let Some(at) = HELD_TAP.with(|slot| slot.take()) {
-        pointer("mouseUp", at);
+/// A pointer event of a finger that was held back: `kind` is "move", "up" or
+/// "cancel". False when the pointer is not one of those (the page handles the
+/// event as usual).
+pub fn deferred_pointer(kind: &str, pointer_id: i32, finger: Option<(i16, i16)>) -> bool {
+    let kind = match kind {
+        "move" => Kind::Move,
+        "up" => Kind::Up,
+        _ => Kind::Cancel,
+    };
+    let acts = DEFERRED.with(|deferred| deferred.borrow_mut().pointer(kind, pointer_id, finger));
+    match acts {
+        Some(acts) => {
+            act(acts);
+            true
+        }
+        None => false,
+    }
+}
+
+fn drop_deferred() {
+    let acts = DEFERRED.with(|deferred| deferred.borrow_mut().drop_all());
+    act(acts);
+}
+
+/// Carry out a held-back touch's actions on the guest's pointer, and show
+/// what holds the button (`data-kiosk-deferred`).
+fn act(acts: Vec<Act>) {
+    for action in acts {
+        let (kind, (v, h)) = match action {
+            Act::Move(at) => ("mouseMove", at),
+            Act::Down(at) => ("mouseDown", at),
+            Act::Up(at) => ("mouseUp", at),
+        };
+        pointer(kind, guest_point(v, h));
+    }
+    let pressed = DEFERRED.with(|deferred| deferred.borrow().pressed());
+    if let Some(root) = root() {
+        let _ = match pressed {
+            Some(how) => root.set_attribute("data-kiosk-deferred", how),
+            None => root.remove_attribute("data-kiosk-deferred"),
+        };
     }
 }
 
@@ -621,7 +676,13 @@ pub fn busy() -> bool {
 /// and so is any once the page is leaving. While it runs the page shows that
 /// it is busy and the child's input to the game is swallowed.
 pub fn run_script(name: &str) -> bool {
-    if closing() {
+    start_script(name, false)
+}
+
+/// `leaving`: the one script that may run once the page is leaving, the game's
+/// `quit_first`; the page asks for it itself, once.
+fn start_script(name: &str, leaving: bool) -> bool {
+    if closing() && !leaving {
         return false;
     }
     let game = game();
@@ -643,7 +704,7 @@ pub fn run_script(name: &str) -> bool {
     // The script has the game to itself: the keys the child holds go up and a
     // finger on the picture is let go of, for the length of the script. What
     // a stepped stick wants is kept: it steps again when the script has ended.
-    release_held_tap();
+    drop_deferred();
     takeover(true);
     keys(KeyOwner::Pad, Vec::new(), false);
     show("data-kiosk-busy", name);
@@ -726,6 +787,75 @@ pub fn cancel_script(why: &str) {
         let mut script = script.borrow_mut();
         script.generation = script.generation.wrapping_add(1);
     });
+}
+
+/// Leaving, for a game that writes what matters only when it quits by its own
+/// Quit (Delirium keeps its score table in memory until then). When one of the
+/// game's `quit_first.after` screens has been seen on this visit (Delirium's
+/// "enter your name": a score went into the table), its `quit_first.script`
+/// drives the game's own Quit, and this waits for the guest to stop, up to
+/// `quit_first.timeout`. Then the page saves and leaves as it always does, and
+/// the file the game wrote is in the save. `keeps`: the visit keeps saves at
+/// all (not Guest, not a frozen session); `halted`: the guest has stopped.
+///
+/// The page is already closing: no other script, no touch, no controller and
+/// no keyboard reaches the guest meanwhile. It runs once a visit: Exit pressed
+/// again, or the game quitting, joins the leaving already under way.
+///
+/// Not covered: OtterTube's own Start and Guide buttons go Home at once, with
+/// no Exit; a score entered just before that is lost, as is one whose quit
+/// takes longer than the timeout.
+pub async fn quit_first(keeps: bool, halted: impl Fn() -> bool) {
+    let game = game();
+    let Some(rule) = game.quit_first.clone() else {
+        return;
+    };
+    let needed = SEEN.with(|seen| {
+        let seen = seen.borrow();
+        rule.after.iter().any(|name| seen.contains_key(name))
+    });
+    let skipped = if !keeps {
+        Some("not-kept")
+    } else if !needed {
+        Some("not-needed")
+    } else if halted() {
+        Some("already-quit")
+    } else {
+        None
+    };
+    if let Some(why) = skipped {
+        show("data-kiosk-quit", why);
+        return;
+    }
+    let runs = QUIT_RUNS.with(|runs| {
+        runs.set(runs.get() + 1);
+        runs.get()
+    });
+    show("data-kiosk-quit-runs", &runs.to_string());
+    show("data-kiosk-quit", "running");
+    let started = js_sys::Date::now();
+    let deadline = started + f64::from(rule.timeout) * FRAME_MS;
+    let mut ended_at = (!start_script(&rule.script, true)).then_some(started);
+    let outcome = loop {
+        if halted() {
+            break "quit";
+        }
+        let now = js_sys::Date::now();
+        if now >= deadline {
+            break "timed-out";
+        }
+        if !busy() && now - *ended_at.get_or_insert(now) >= QUIT_GRACE_MS {
+            break "not-quit";
+        }
+        wait_ms(50.0).await;
+    };
+    if busy() {
+        cancel_script(outcome);
+    }
+    show(
+        "data-kiosk-quit",
+        &format!("{outcome}:{}", (js_sys::Date::now() - started).round()),
+    );
 }
 
 fn cancelled(generation: u32) -> bool {

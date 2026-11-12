@@ -3784,8 +3784,8 @@ fn attach_pointer_input(
             // Where the finger is, before any offset: the menu bar, a blocked
             // control, or anywhere while a script runs or the page is leaving
             // takes no touch. A spot that is blocked on another screen than
-            // the one last seen waits for a fresh look, and is then dropped or
-            // made as a tap.
+            // the one last seen waits for a fresh look; its pointer's later
+            // events go to that held-back touch until it is over.
             let precise = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
             let finger = canvas_coords_from_client(
                 &canvas_el,
@@ -3801,7 +3801,9 @@ fn attach_pointer_input(
                     }
                     crate::ottertube::Touch::Hold => {
                         ev.prevent_default();
-                        crate::ottertube::judge_held_touch(v, h);
+                        focus_canvas(&canvas_el);
+                        let _ = canvas_el.set_pointer_capture(ev.pointer_id());
+                        crate::ottertube::defer_touch(ev.pointer_id(), v, h);
                         return;
                     }
                 }
@@ -3836,6 +3838,16 @@ fn attach_pointer_input(
     let last_pm = last_coords.clone();
     let on_pointer_move = Closure::wrap(Box::new(move |ev: PointerEvent| {
         if !alive_pm.load(Ordering::Relaxed) || !primary_pointer_event(&ev) {
+            return;
+        }
+        // A finger held back for a look at the screen.
+        #[cfg(feature = "ottertube")]
+        if crate::ottertube::deferred_pointer(
+            "move",
+            ev.pointer_id(),
+            finger_coords(&canvas_el, &ev),
+        ) {
+            ev.prevent_default();
             return;
         }
         // A mouse moving over the picture does not move a script's pointer,
@@ -3876,6 +3888,19 @@ fn attach_pointer_input(
     let down_ms_pu = pointer_down_ms.clone();
     let touch_like_pu = touch_like_pointer.clone();
     let on_pointer_up = Closure::wrap(Box::new(move |ev: PointerEvent| {
+        #[cfg(feature = "ottertube")]
+        if alive_pu.load(Ordering::Relaxed)
+            && primary_pointer_event(&ev)
+            && crate::ottertube::deferred_pointer(
+                "up",
+                ev.pointer_id(),
+                finger_coords(&canvas_el, &ev),
+            )
+        {
+            ev.prevent_default();
+            let _ = canvas_el.release_pointer_capture(ev.pointer_id());
+            return;
+        }
         if !alive_pu.load(Ordering::Relaxed)
             || !primary_pointer_event(&ev)
             || active_pu.get() != Some(ev.pointer_id())
@@ -3917,6 +3942,13 @@ fn attach_pointer_input(
     let active_pc = active_pointer_id;
     let last_pc = last_coords;
     let on_pointer_cancel = Closure::wrap(Box::new(move |ev: PointerEvent| {
+        #[cfg(feature = "ottertube")]
+        if alive_pc.load(Ordering::Relaxed)
+            && crate::ottertube::deferred_pointer("cancel", ev.pointer_id(), None)
+        {
+            ev.prevent_default();
+            return;
+        }
         if !alive_pc.load(Ordering::Relaxed) || active_pc.get() != Some(ev.pointer_id()) {
             return;
         }
@@ -5030,6 +5062,13 @@ fn mobile_control_pointer_event(ev: &PointerEvent) -> bool {
 
 fn mobile_control_pointer(pointer_type: &str, is_primary: bool) -> bool {
     pointer_type != "mouse" || is_primary
+}
+
+/// Where a pointer is on the guest's screen, before the game's offset.
+#[cfg(feature = "ottertube")]
+fn finger_coords(canvas: &HtmlCanvasElement, ev: &PointerEvent) -> Option<(i16, i16)> {
+    let ev = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
+    canvas_coords_from_client(canvas, ev.client_x_f64(), ev.client_y_f64())
 }
 
 fn pointer_coords(canvas: &HtmlCanvasElement, ev: &PointerEvent) -> Option<(i16, i16)> {

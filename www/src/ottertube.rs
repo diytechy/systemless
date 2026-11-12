@@ -374,8 +374,8 @@ mod link {
         Rc<dyn Fn(f64) -> Pin<Box<dyn Future<Output = Option<Vec<DownloadableSaveFile>>>>>>;
     pub use crate::ottertube_data::is_chord_key;
     pub use crate::ottertube_play::{
-        command_on_screen, drops_chord, game_unmounted, guest_input_shut, guest_point,
-        is_command_key, judge_held_touch, on_command_down, on_takeover, screen_reply,
+        command_on_screen, defer_touch, deferred_pointer, drops_chord, game_unmounted,
+        guest_input_shut, guest_point, is_command_key, on_command_down, on_takeover, screen_reply,
         set_guest_pointer, set_screen_reader, set_tap_keys, stick_is_stepped, stick_steps,
         touch_verdict, KeyOwner, ScreenRequest, Touch,
     };
@@ -898,6 +898,17 @@ mod link {
         // touch, controller and keyboard go nowhere. What is scanned next is
         // what the guest has.
         crate::ottertube_play::close("leaving");
+        // A game that writes what matters only when it quits is made to quit
+        // first, when there is something to write (Delirium, after a score
+        // went into its table on this visit); not for Guest, nor a frozen
+        // session, which keep nothing. "Saving..." shows the whole time.
+        let keeps = SESSION.with(|session| {
+            session
+                .borrow()
+                .as_ref()
+                .is_some_and(|session| session.scope.is_some() && !session.frozen)
+        });
+        crate::ottertube_play::quit_first(keeps, || HALTED.with(|halted| halted.get())).await;
         // One deadline for the scan, the local commit and OtterTube's answer.
         let deadline = js_sys::Date::now() + LEAVE_WAIT_MS;
         if let Some(scanner) = SCANNER.with(|slot| slot.borrow().clone()) {
@@ -1026,7 +1037,8 @@ mod link {
                                 }).collect_view()}
                             </div>
                             // The game is being started, or a script is driving it: say so, and take no touch but Exit.
-                            <Show when=move || signals.starting.get() || signals.busy.get().is_some()>
+                            // Once the page is leaving it says "Saving" instead, whatever runs.
+                            <Show when=move || !leaving.get() && (signals.starting.get() || signals.busy.get().is_some())>
                                 <div class="kiosk-busy" role="status"><span>"One moment\u{2026}"</span></div>
                             </Show>
                             <Show when=move || help_open.get()>

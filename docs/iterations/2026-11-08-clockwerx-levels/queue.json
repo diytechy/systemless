@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 90,
-  "currentAction": "Blowout89 accepted and locally installed. Continue all100 without per-level stops. Fade-out90 earned cold is next; independent original-only actor/ring fitters before dedicated PNG viewing. No90actualengine yet.",
+  "currentOrdinal": 91,
+  "currentAction": "Fade-out90 accepted and locally installed. Continue all100 without per-level stops. Immunity91 earned cold is next; independent original-only actor/buster and protected/moving appearance fitters before dedicated PNG viewing. No91actualengine yet.",
   "levels": [
     {
       "ordinal": 1,
@@ -8035,10 +8035,15 @@
       "menuTitle": "Fade-out",
       "resourceTitle": "Fade Out",
       "sha256": "2129cfd0f636032d6d3ad12d1622457aef8c5542792317fb9cdfe2eb92c98337",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "fade-out90-native-goal01/root-original-goal-review.json",
+        "fade-out90-native-goal-fit01/actor-comparison01.json",
+        "fade-out90-native-goal-ring-fit01/model-comparison01.json",
+        "fade-out90-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -8066,7 +8071,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -8095,7 +8100,34 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "8120b2dd",
+      "sourceFreezeSHA256": "0e310245cd924d48c87d7ad303c7024365043dbd912cdda97ac4d711c2e91269",
+      "sourceTests": 585,
+      "actualUpdates": 46276,
+      "actualConstructors": 10,
+      "functionalUpdatesUsed": 46276,
+      "functionalUpdatesRemaining": 203724,
+      "nativeColdClosed": true,
+      "review": "fade-out-review.md",
+      "retainedSweep": {
+        "matchedGoals": 88,
+        "constructionOnly": 1,
+        "pairedUpdates": 678266,
+        "sha256": "e60a6b88fa0b129c1bea95655fa512eeff8b782c7f19ffaf94ff32413e793a1d"
+      },
+      "deliveryAcceptance": {
+        "score": 7000,
+        "updates": 6096,
+        "transfers": 12,
+        "nextOrdinal": 91,
+        "nativeCampaignTotal": 567000,
+        "rootAcceptanceSHA256": "359e9626a1eeba5bf5298773509ebe2fe655b1d0916350059b4020848979fd1f",
+        "rootProofSHA256": "6eda53946b51114660795b1131b8eca77284cdc4aa6230347a9eae8837d31b19",
+        "earnedThrough90FixtureSHA256": "84af82a3284c915b37dd20fb00e7dd5ed2aa5adcd3e45594b07c2ae9844472ae"
+      },
+      "qualificationBoundary": "Root viewed goal-after-hold/results/after-results/after-promotion only afteroriginal-onlyactor/ring gate0815089e. OriginalFade-out7000=6000levelbonus+1000completion, Stage10MAELSTROMtransition and earned91Immunity567000 visuallyverified.25captures/5145frontend/94.6631795sec. Exact18evenholds(12FS6R)/12transfers/6096updates; fullidles,20nativefinalmargin/120resultsidle/Spaceadvance+stageadvance. All169clearactor positions/poses exact across19joins:17human76red76green. All302clearin-range ringappearances exact, including2nonidle/shrinkinglooks;318clear400rawtotal, tiny/tied/occluded/absent hypotheses retained withoutinvisibility/permission/identity census. Coldshared702tie7035position27pose residuals291clear retained, all528coldringlooksexact. Defaultoff staticRingRails Source77/freeze0e310245/8120b2dd72CODE585runtime21packaging8inventedchecks, no activeOil from7inactivePUrecords. Rings16EX12SP8/eightfreeclass1ordinaryredgreen. Ringrelease humanpermission/NPCorphan/remainders/sourceclockreturn/reset separately tested on inventedfixtures; sourcecollisionframes28/29rowsnull rectangleadmission corrected withoutcollisionlogicchange. Legal05/candidate7000/6096/12transferszeroRNGdeathreset. Currentstateonly6shortR upperpark9,2release56plus whenred3slidingleft/down16x<=480. Fourpriorpolicies retained90failedRNG; constructorcold01pre-reset/zero-update guardfailure retained, onlycold02executed8000. Noengine/clock/RNGstatewrites, clones/counterfactuals or explicitresets. Widerinputs/fullpixel/audio/controller/real-timepacing/completeactoridentity separate. Witness/fresh fullhooks, all5encodedstreams and6logicaldigests exact with qualified fast-delta-v3; default360sec fullstatewall bound. Visible IAB Replay/canvas7000 functionalonly, prior1Hz/catchup-capped UI diagnostics not pacing benchmarks. Prior89definitions/132assets exact, full89rollback retained."
     },
     {
       "ordinal": 91,

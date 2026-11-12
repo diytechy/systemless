@@ -1,3 +1,7 @@
+# Latest continuation: through90
+
+Fade-out90 accepted and locally installed. Continue all100 without per-level stops. Immunity91 earned cold is next; independent original-only actor/buster and protected/moving appearance fitters before dedicated PNG viewing. No91actualengine yet. See [Fade-out review](fade-out-review.md). Latest evidence supersedes historical checkpoints below.
+
 # Latest continuation: through89
 
 Blowout89 accepted and locally installed. Continue all100 without per-level stops. Fade-out90 earned cold is next; independent original-only actor/ring fitters before dedicated PNG viewing. No90actualengine yet. See [Blowout review](blowout-review.md). Latest evidence supersedes the historical checkpoints below.

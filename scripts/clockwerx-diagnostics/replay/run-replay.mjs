@@ -15,7 +15,7 @@ try{
  const auth=read(authPath),candidate=auth.mode==='candidate';out=auth.outputPath;
  const purpose=candidate?'clockwerx-generic-candidate-replay-v1':'clockwerx-generic-chosen-replay-v1';
  if(auth.schema!=='clockwerx-single-replay-authorization-v1'||auth.authority!=='Root'||auth.executionApproved!==true||auth.purpose!==purpose||!auth.invocationID||!['candidate','witness','fresh-proof'].includes(auth.mode))throw Error('Explicit fresh Root execution authorization required');
- if(auth.maxConstructors!==1||auth.maxConstructorResets!==1||auth.maxExplicitResets!==0||auth.wallBoundSeconds!==360||auth.dt!==1/120)throw Error('Replay bounds mismatch');
+ if(auth.maxConstructors!==1||auth.maxConstructorResets!==1||auth.maxExplicitResets!==0||!(auth.wallBoundSeconds===360||auth.wallBoundSeconds===600&&!candidate)||auth.dt!==1/120)throw Error('Replay bounds mismatch');
  if(candidate?auth.gates?.candidateLiteralReviewed!==true:auth.gates?.closedGoalLiteralReviewed!==true||auth.gates?.baselineReviewed!==true||auth.mode==='fresh-proof'&&auth.gates?.completedWitnessReviewed!==true)throw Error('Root literal review gates incomplete');
  const own=['run-replay.mjs','core.mjs','stream.mjs','factory-source-round.mjs','supervise.py'];
  for(const name of own){const p=auth.code.find(p=>path.resolve(p.path)===path.resolve(folder,name));if(!p)throw Error('Unpinned replay code: '+name);pin(p);}

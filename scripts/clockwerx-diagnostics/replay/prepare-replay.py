@@ -28,12 +28,16 @@ def main():
     p.add_argument("output", type=Path, help="New replay output directory")
     p.add_argument("authorization", type=Path, help="New authorization JSON")
     p.add_argument("--review", required=True, help="Short description of the operator's completed review")
+    p.add_argument("--wall-seconds", type=int, choices=(360,600), default=360,
+                   help="Explicit 600-second allowance for dense full-state witness/fresh recording only")
     p.add_argument("--observer", choices=("legacy", "fast-delta", "fast-delta-v2", "fast-delta-v3"), default="legacy",
                    help="Explicit frozen recorder choice; fast-delta changes only lossless encoding")
     p.add_argument("--baseline", type=Path, help="Reviewed, closed candidate or witness directory")
     p.add_argument("--original-review", type=Path, help="Reviewed original goal evidence")
     a = p.parse_args()
     candidate = a.mode == "candidate"
+    if candidate and a.wall_seconds != 360:
+        p.error("Candidates retain the 360-second limit")
     if (a.baseline is None) != candidate or (a.original_review is None) != candidate:
         p.error("Witness and fresh proof require a reviewed baseline and original goal; candidate takes neither")
     if a.output.exists():
@@ -54,7 +58,7 @@ def main():
                                   "fast-delta-v2": "observer-fast-delta-v2.mjs",
                                   "fast-delta-v3": "observer-fast-delta-v3.mjs"}.get(a.observer, "observer.mjs"))),
         code=[pin(HERE / name) for name in CODE], maxConstructors=1, maxConstructorResets=1,
-        maxExplicitResets=0, maxUpdates=updates, wallBoundSeconds=360, dt=1/120, noAutomaticRetry=True,
+        maxExplicitResets=0, maxUpdates=updates, wallBoundSeconds=a.wall_seconds, dt=1/120, noAutomaticRetry=True,
         gates=dict(candidateLiteralReviewed=True) if candidate else
         dict(closedGoalLiteralReviewed=True, baselineReviewed=True),
     )

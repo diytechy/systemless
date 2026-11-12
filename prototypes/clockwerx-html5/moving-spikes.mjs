@@ -1,3 +1,4 @@
+import {assertMovingFuseOrdinaryBoard,assertMovingFuseOrdinaryActor} from './moving-fuse-ordinary.mjs';
 import {assertMovingBombSpikeWaystationScope,assertMovingBombSpikeWaystationActor} from './moving-bomb-spike-waystation.mjs';
 import {effectiveMovingCell,movingProgramCell,assertClosedMovingProgram} from './moving-dots.mjs';
 import {dotColorOffset} from './dots.mjs';
@@ -135,11 +136,11 @@ const identity=s=>[s.id,s.row,s.column,s.subrow,s.subcolumn,s.x,s.y,s.phase,s.ac
 // remainder helper58c with divisor4 for SUSetFrameIndex. The later &3 selects
 // a phase-bank POINTER independently; its VALUE initializes the reference.
 export function sourceSpikeInitialFrame(createdOrdinal){if(!int(createdOrdinal,0,31))throw new Error('Allocated source SPI ordinal0..31 required');return createdOrdinal%4;}
-export function createMovingSpikeLifecycle(spikes,{allowMovingSpikes=false,allowMovingBombSpikeWaystation=false,sourceScope}={}){
- if(typeof allowMovingBombSpikeWaystation!=='boolean'||allowMovingBombSpikeWaystation&&allowMovingSpikes||!allowMovingBombSpikeWaystation&&allowMovingSpikes!==true||sourceScope?.spikes!==spikes)throw new Error('Explicit separate SPI lifecycle capability and source inventory required');
- if(allowMovingBombSpikeWaystation)assertMovingBombSpikeWaystationScope(sourceScope);else assertMovingSpikeScope(sourceScope);
+export function createMovingSpikeLifecycle(spikes,{allowMovingSpikes=false,allowMovingBombSpikeWaystation=false,allowMovingFuseOrdinary=false,sourceScope}={}){
+ if(typeof allowMovingBombSpikeWaystation!=='boolean'||typeof allowMovingFuseOrdinary!=='boolean'||[allowMovingSpikes===true,allowMovingBombSpikeWaystation,allowMovingFuseOrdinary].filter(Boolean).length!==1||sourceScope?.spikes!==spikes)throw new Error('Explicit separate SPI lifecycle capability and source inventory required');
+ if(allowMovingFuseOrdinary)assertMovingFuseOrdinaryBoard(sourceScope,{initial:false});else if(allowMovingBombSpikeWaystation)assertMovingBombSpikeWaystationScope(sourceScope);else assertMovingSpikeScope(sourceScope);
  let bank=[0,0,0,0],shared=0; // Fresh constructed source clock graph/DATA bank.
- const objects=[...spikes],stamp=()=>{const s=allowMovingBombSpikeWaystation?sourceScope.movingBombSpikeWaystationSource:sourceScope.movingSpikeSource;return JSON.stringify([s.sha256,s.byteLength,s.resourceId,s.spikes]);},sourceStamp=stamp();
+ const objects=[...spikes],stamp=()=>{if(allowMovingFuseOrdinary){const s=sourceScope.movingFuseOrdinarySource;return JSON.stringify([s.sha256,s.byteLength,s.resourceId,s.blocks.find(b=>b.kind==='SP').records]);}const s=allowMovingBombSpikeWaystation?sourceScope.movingBombSpikeWaystationSource:sourceScope.movingSpikeSource;return JSON.stringify([s.sha256,s.byteLength,s.resourceId,s.spikes]);},sourceStamp=stamp();
  const original=freeze(spikes.map(identity)),states=new Map(spikes.map(s=>[s.id,{frame:sourceSpikeInitialFrame(s.id),reference:bank[s.phase]}]));
  const check=ss=>{if(ss!==spikes||sourceScope.spikes!==spikes||stamp()!==sourceStamp||ss.some((s,i)=>s!==objects[i])||!same(ss.map(identity),original))throw new Error('Existing SPI source/instance identity/inventory changed across reset');};
  return {

@@ -51,6 +51,25 @@ class NativeRehearsalTests(unittest.TestCase):
         self.assertEqual(next(c["frontend"] for c in captures
                               if c["name"] == "input-01-B-nominal"), 13)
 
+    def test_selected_captures_preserve_all_key_edges_and_terminal_ticks(self):
+        literal = dict(updates=24, holds=[dict(k=k, start=i*6, end=i*6+4, nominal=i*6+2)
+                                        for i, k in enumerate(("F", "R", "B", "S"))])
+        full = compiler.build(self.entry, literal, 1, 0, 1000, 20, False)
+        selected = compiler.build(self.entry, literal, 1, 0, 1000, 20, False, [1, 4])
+        def edges(scenario):
+            tick, result = 0, []
+            for action in scenario["actions"]:
+                tick += action.get("ticks", 0)
+                if action["type"] in ("key_down", "key_up"):
+                    result.append((tick, action))
+            return tick, result
+        self.assertEqual(edges(full[0]), edges(selected[0]))
+        self.assertEqual(selected[1], [c for c in full[1]
+                                      if c["name"] not in ("input-02-R-nominal", "input-03-B-nominal")])
+        for invalid in ([], [0], [5], [1, 1]):
+            with self.assertRaises(ValueError):
+                compiler.build(self.entry, literal, 1, 0, 1000, 20, False, invalid)
+
 
 if __name__ == "__main__":
     unittest.main()

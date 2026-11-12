@@ -13,7 +13,7 @@ def read(path):
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
-def build(entry, literal, entry_actions, prefix, max_ticks, final_margin, promotion):
+def build(entry, literal, entry_actions, prefix, max_ticks, final_margin, promotion, capture_holds=None):
     if entry["version"] != 1 or entry["clock"] != "frontend_ticks":
         raise ValueError("Expected a frontend-tick Systemless entry script")
     actions = entry["actions"][:entry_actions]
@@ -51,6 +51,9 @@ def build(entry, literal, entry_actions, prefix, max_ticks, final_margin, promot
     holds = literal["holds"]
     if not holds or holds[-1]["end"] > literal["updates"]:
         raise ValueError("Literal needs holds within its update limit")
+    if capture_holds is not None and (not capture_holds or len(set(capture_holds)) != len(capture_holds)
+            or any(type(i) is not int or not 1 <= i <= len(holds) for i in capture_holds)):
+        raise ValueError("Capture hold indices must be unique, nonempty and within the literal")
     literal_end = frame(literal["updates"])
     ends_held = holds[-1]["end"] == literal["updates"]
     for i, hold in enumerate(holds, 1):
@@ -61,7 +64,8 @@ def build(entry, literal, entry_actions, prefix, max_ticks, final_margin, promot
         run(start)
         key(True, kind)
         run(nominal + 1)
-        capture(f"input-{i:02d}-{kind}-nominal")
+        if capture_holds is None or i in capture_holds:
+            capture(f"input-{i:02d}-{kind}-nominal")
         run(end + (final_margin if i == len(holds) and ends_held else 0))
         key(False, kind)
 
@@ -101,6 +105,8 @@ def main():
     p.add_argument("--prefix", required=True, type=int)
     p.add_argument("--max-ticks", type=int, default=6800)
     p.add_argument("--final-margin", type=int, default=20)
+    p.add_argument("--capture-holds", type=int, nargs="+",
+                   help="Capture selected 1-based holds while preserving every input edge and tick")
     p.add_argument("--advance-promotion", action="store_true",
                    help="Add one advance for an independently expected rank overlay")
     a = p.parse_args()
@@ -108,12 +114,14 @@ def main():
         p.error("Expected nonnegative prefix/margin, positive entry actions and a 1–10000 tick cap")
     literal = read(a.literal)
     scenario, captures, origin, ticks = build(read(a.entry), literal, a.entry_actions, a.prefix,
-                                             a.max_ticks, a.final_margin, a.advance_promotion)
+                                             a.max_ticks, a.final_margin, a.advance_promotion, a.capture_holds)
     a.output.mkdir()
     sidecar = dict(literal=str(a.literal.resolve()),
                    literalSHA256=hashlib.sha256(a.literal.read_bytes()).hexdigest(),
                    prefix=a.prefix, frontendOrigin=origin, nativeOnlyFinalHoldTicks=a.final_margin,
                    holds=literal["holds"], plannedTicks=ticks)
+    if a.capture_holds is not None:
+        sidecar["captureHoldIndices"] = a.capture_holds
     if literal["holds"][-1]["end"] < literal["updates"]:
         sidecar["nativeOnlyFinalHoldTicks"] = 0
         sidecar["nativeOnlyFinalIdleTicks"] = a.final_margin

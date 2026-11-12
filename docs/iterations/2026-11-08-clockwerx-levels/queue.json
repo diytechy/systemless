@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 91,
-  "currentAction": "Fade-out90 accepted and locally installed. Continue all100 without per-level stops. Immunity91 earned cold is next; independent original-only actor/buster and protected/moving appearance fitters before dedicated PNG viewing. No91actualengine yet.",
+  "currentOrdinal": 92,
+  "currentAction": "Immunity91 accepted and locally installed. Continue all100 without per-level stops;9levels remain. Dizziness92/RND2_216 earned cold next, independent original-only actor and relevant moving/teleport/door/spike appearance methods before dedicated PNG viewing. No92actualengine yet.",
   "levels": [
     {
       "ordinal": 1,
@@ -8135,10 +8135,15 @@
       "menuTitle": "Immunity",
       "resourceTitle": "Immunity",
       "sha256": "5cbc14d16861aee795892ad8d1b9a42a6df28646e1c15781e609b0094773c92b",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "immunity91-native-goal01/root-original-goal-review.json",
+        "immunity91-native-goal-fit01/actor-comparison01.json",
+        "immunity91-native-goal-protection-fit01/model-comparison01.json",
+        "immunity91-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -8166,7 +8171,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -8202,7 +8207,34 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "b2521865",
+      "sourceFreezeSHA256": "17df720f276b047b5ff514faf5d4824d1ce7ca172fa8b394f0239b3b86e814fa",
+      "sourceTests": 598,
+      "actualUpdates": 31266,
+      "actualConstructors": 9,
+      "functionalUpdatesUsed": 31266,
+      "functionalUpdatesRemaining": 218734,
+      "nativeColdClosed": true,
+      "review": "immunity-review.md",
+      "retainedSweep": {
+        "matchedGoals": 89,
+        "constructionOnly": 1,
+        "pairedUpdates": 684362,
+        "sha256": "cec4fec6a018d71a95fe0a90590e01b5124b7100e6c3a6ba28032154e58b367d"
+      },
+      "deliveryAcceptance": {
+        "score": 7000,
+        "updates": 3208,
+        "transfers": 12,
+        "nextOrdinal": 92,
+        "nativeCampaignTotal": 574000,
+        "rootAcceptanceSHA256": "a63a1356f7ad6c95bcfb498b5ab62c1e78cbc3714dc75dfeaedc3df6c81dd151",
+        "rootProofSHA256": "dbde54e4ecb983c0a433f6519b12ed49ec7b50fc4913b7f74338f38a9c24436e",
+        "earnedThrough91FixtureSHA256": "288f607b428bd839b2ba774397093c159c2f68a9c5ca40a6ccac66f9c4d0e704"
+      },
+      "qualificationBoundary": "Root viewed goal-after-hold/results/after-results only afteroriginal-only actor/protection gate22bbbbee. Original Immunity7000=6000levelbonus+1000completion; earned92Dizziness574000 visuallyverified.18captures3184frontend76.9704375sec. Exact12evenholds/12transfers3208updates; fullidles20nativefinalmargin120resultsidleSpaceadvance. All202clearactor positions/poses exact:11human50red37green104fixedbuster across13joins. Protection appearance residuals retained at actorselected692/tie693; source existingmisc warm-start phase is independent of reset actors, no per-client correction or visualphaseparity. Protection physics/ordinary immunity vs separatebuster/spark/blast, burnkeepsprotection/movement/goal, sourceBO/WL/reset/rider separately qualified13inventedchecks and primaryreview. Source78freeze17df720f/b2521865/73CODE598runtime21packaging; retained90matches684362paired. Legal05/candidatezeroRNGdeathreset; four failed policies retain120RNG. Ledger24850updates7constructorszeroexplicitreset225150remaining before fullproofs. No actualstateclockRNGwrites/clones/futurecounterfactuals. Route bypassesBOignition/bustercontact, which remain source/synthetic qualified. Widerinputs/fullpixel/audio/controller/real-timepacing/completeidentity separate. Witness/fresh fullhooks, all5encodedstreams and6logicaldigests exact with qualified fast-delta-v3; default360sec fullstatewall bound. Visible IAB Replay/canvas7000 functionalonly, prior1Hz/catchup-capped UI diagnostics not pacing benchmarks. Prior90definitions/132assets exact, source-derivedStage10background410 added as133rdasset, full90rollback retained. Protection warm-start visual phase residuals retained without adjustment."
     },
     {
       "ordinal": 92,
@@ -8998,6 +9030,6 @@
   "handoff": "session-handoff-2026-11-11.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",
   "fasterValidationWorkflow": "faster-validation-workflow.md",
-  "sessionState": "through88-installed-continuing89",
+  "sessionState": "through91-installed-continuing92",
   "previousRestartCheckpoint": "restart-checkpoint-2026-11-10.md"
 }

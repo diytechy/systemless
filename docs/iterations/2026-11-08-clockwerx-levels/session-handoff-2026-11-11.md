@@ -1,3 +1,7 @@
+# Latest continuation: through91
+
+Immunity91 accepted and locally installed. Continue all100 without per-level stops;9levels remain. Dizziness92/RND2_216 earned cold next, independent original-only actor and relevant moving/teleport/door/spike appearance methods before dedicated PNG viewing. No92actualengine yet. See [Immunity review](immunity-review.md). Latest evidence supersedes historical checkpoints below.
+
 # Latest continuation: through90
 
 Fade-out90 accepted and locally installed. Continue all100 without per-level stops. Immunity91 earned cold is next; independent original-only actor/buster and protected/moving appearance fitters before dedicated PNG viewing. No91actualengine yet. See [Fade-out review](fade-out-review.md). Latest evidence supersedes historical checkpoints below.

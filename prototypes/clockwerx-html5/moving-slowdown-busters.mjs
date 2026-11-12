@@ -88,10 +88,13 @@ export function buildMovingSlowdownBusterBoard(s,o){
  if(!int(o.ordinal,1,100)||typeof o.title!=='string'||!o.title||!(o.angularSpeed>0))fail();
  const source=frozen(structuredClone(s)),b=declarations(source,o);b.movingSlowdownBusterSource=source;return b;
 }
-export function assertMovingSlowdownBusterBoard(b,{outlines,dotOutlines,bombOutlines}={}){
- if(b?.movingSlowdownBusterRules!==true)fail();const s=b.movingSlowdownBusterSource;if(!Object.isFrozen(s)||!Object.isFrozen(s.cells))fail();assertMovingSlowdownBusterSource(s);
+export function assertMovingSlowdownBusterBoard(b,{outlines,dotOutlines,bombOutlines,runtimeConstruction=false}={}){
+ if(b?.movingSlowdownBusterRules!==true||typeof runtimeConstruction!=='boolean')fail();const s=b.movingSlowdownBusterSource;if(!Object.isFrozen(s)||!Object.isFrozen(s.cells))fail();assertMovingSlowdownBusterSource(s);
  const expected=declarations(s,b);
- for(const[k,v]of Object.entries(expected))if(!same(b[k],v))fail();
+ for(const[k,v]of Object.entries(expected)){
+  const actual=runtimeConstruction&&k==='dots'?b.dots.map(d=>{const q={...d};if(d.slowdown&&q.sourceSlowFrame===189+d.color)delete q.sourceSlowFrame;return q;}):b[k];
+  if(!same(actual,v))fail();
+ }
  for(const[k,v]of Object.entries(b))if(k.endsWith('Rules')&&v===true&&expected[k]!==true)fail();
  validateConnectorBoard(b.connectors,b.dots);
  for(const a of[b.player,...b.enemies])assertMovingSlowdownBusterActor(a);

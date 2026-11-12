@@ -33,6 +33,17 @@
 // Start, and a controller's A, get past Delirium's "enter your name" screen, as PLAYER when no
 // letter was tapped and with the child's own letters when some were.
 //
+// Delirium keeps its score table in memory until it quits by its own Quit. After a score went into
+// the table on a visit, Exit makes the game quit first (`quit_first`): checked from the menu and
+// from a game in play, with the table in the saved text and back on the next visit, Exit pressed
+// twice, nothing else let through meanwhile, and no time added when there was no new score or the
+// visit is Guest. A game given too long to quit is left as it is, after the timeout. For that one
+// part the games file is rewritten for a moment (the bundle server reads it on every request).
+//
+// Touches held back for a fresh look at the screen: one cancelled, or slid away, while the look is
+// under way comes to nothing; a tap is made; and an older tap's timer does not let go of a newer
+// press still under its finger.
+//
 // Environment as verify-ottertube-link-cdp.mjs. The fake host is opened with keep=1, so the page
 // can still be read after it has asked to leave.
 
@@ -69,7 +80,12 @@ const PREFERENCES = "Delirium/System Folder/Preferences/Delirium 1.1 Preferences
 const LAST_ROW = 2 + 8 * 16;
 games[DELIRIUM].seed = [{ path: PREFERENCES, offset: LAST_ROW + 10, bytes: [0, 0, 0, 0] }];
 const gamesFile = join(outDir, "games-with-test-scripts.json");
-writeFileSync(gamesFile, JSON.stringify(games, null, 1) + "\n");
+const writeGames = (data) => writeFileSync(gamesFile, JSON.stringify(data, null, 1) + "\n");
+writeGames(games);
+// For one part only: Blobbo given a quit_first whose script never makes it quit.
+const neverQuits = JSON.parse(JSON.stringify(games));
+neverQuits[BLOBBO].scripts["never-quits"] = [{ wait: 600 }];
+neverQuits[BLOBBO].quit_first = { after: ["board"], script: "never-quits", timeout: 180, what: "a check's own: a game that does not quit" };
 
 const stage = await startStage({ serverArgs: ["--dev-games", gamesFile] });
 const { check, part } = stage;
@@ -131,6 +147,58 @@ async function lastRow(browser, who) {
   return file ? { name: file.data.subarray(LAST_ROW, LAST_ROW + 10).toString("latin1"), score: file.data.readUInt32BE(LAST_ROW + 10),
     bytes: file.data.subarray(LAST_ROW, LAST_ROW + 16).toString("hex") } : null;
 }
+
+/** The last row of Delirium's score table in what OtterTube's stand-in holds for `who`. */
+async function heldRow(browser, who) {
+  const held = await browser.held(who);
+  const file = held && decodeSaveText(held.data).files.find((entry) => entry.path === PREFERENCES);
+  return file ? { name: file.data.subarray(LAST_ROW, LAST_ROW + 10).toString("latin1"), score: file.data.readUInt32BE(LAST_ROW + 10) } : null;
+}
+/** From Delirium's menu, its own Quit button; the page saves and leaves. The row it then holds. */
+async function quitFromMenu(browser, who) {
+  await browser.waitScreen("menu", 15_000);
+  await sleep(600);
+  await browser.tap([72, 414]);
+  await exited(browser, 15_000);
+  return heldRow(browser, who);
+}
+/** Delirium from its title to a game that ends with a score, and on to the screen that asks for a name. */
+async function toNameEntry(browser) {
+  await scriptSeen(browser, "start", () => browser.press(scriptButton("start")));
+  await scoreAndStop(browser, () => browser.press(heldButton("Bomb"), 300));
+  await browser.tap([320, 250]);
+  await browser.waitScreen("name-entry", 20_000);
+  await sleep(800);
+}
+/** Press Exit (twice when asked, at once) and wait for the page to leave: how long that took, and what the page said meanwhile. */
+async function exitAndTime(browser, { twice = false, meanwhile } = {}) {
+  const pressed = Date.now();
+  await browser.game(`(() => { const exit = document.querySelector("[data-kiosk-exit]"); exit.click(); ${twice ? "exit.click();" : ""} })()`);
+  const shown = [];
+  const watching = (async () => {
+    for (;;) {
+      const now = await browser.game(`({ saving: !!document.querySelector(".ottertube-saving"), busyNotice: !!document.querySelector(".kiosk-busy"),
+        busy: document.querySelector(".app--ottertube").dataset.kioskBusy ?? null, script: document.querySelector(".app--ottertube").dataset.kioskScript ?? null })`).catch(() => null);
+      if (now) shown.push(now);
+      if ((await browser.events()).some((event) => event.type === "exit")) return;
+      await sleep(150);
+    }
+  })();
+  if (meanwhile) await meanwhile();
+  const left = await exited(browser, 20_000);
+  await watching;
+  const page = await browser.game(`(() => { const d = document.querySelector(".app--ottertube").dataset;
+    return { quit: d.kioskQuit ?? null, runs: d.kioskQuitRuns ?? null, script: d.kioskScript ?? null }; })()`);
+  return { ms: left ? left.at - pressed : null, ...page,
+    savingAll: shown.length > 0 && shown.every((now) => now.saving), busyNoticeShown: shown.some((now) => now.busyNotice),
+    scripts: [...new Set(shown.map((now) => now.busy ?? now.script).filter(Boolean))] };
+}
+/** A point on the picture, in game coordinates, as the window sees it. */
+async function onPicture(browser, [h, v]) {
+  const box = await browser.rect("canvas.game-canvas");
+  return { x: box.x + (h + 0.5) * box.w / 640, y: box.y + (v + 0.5) * box.h / 480 };
+}
+const deferredPress = (browser) => browser.game(`document.querySelector(".app--ottertube").dataset.kioskDeferred ?? null`);
 
 /** Where Blobbo is on his board. */
 const blobboYellow = (r, g, b) => r > 245 && g >= 205 && g <= 230 && b < 20;
@@ -457,11 +525,156 @@ try {
     check("a control that is blocked on a screen takes no touch from the moment the screen comes up, before the page has recognised it",
       opened && after === preferencesAsOpened, { opened, taps, same: after === preferencesAsOpened });
   });
+
+  // ----------------------------------------------------------------------------------------------
+  // Delirium: Exit after a score went into the table makes the game quit first
+  // ----------------------------------------------------------------------------------------------
+  let rowQ1 = null;
+  const whoQ1 = "c".repeat(32);
+  await part("quit first, from the menu", async () => {
+    await launch(browser, "/delirium/", DELIRIUM, whoQ1, "title");
+    await toNameEntry(browser);
+    await browser.tap([222, 333]);
+    await sleep(500);
+    await browser.tap([589, 397]);
+    await browser.waitScreen("menu", 15_000);
+    await sleep(1000);
+    check("before Exit, nothing of the table has reached the save (Delirium has not written it)", (await heldRow(browser, whoQ1)) === null);
+    // Exit, pressed twice at once; then the controller's A (Start) and a touch on the picture, while the game is made to quit.
+    const exit = await exitAndTime(browser, { twice: true, meanwhile: async () => {
+      await sleep(300);
+      await browser.pad({ b: [] });
+      await browser.padPress([0], 150);
+      await browser.tap([320, 250]);
+    } });
+    rowQ1 = await heldRow(browser, whoQ1);
+    report.quitFromMenu = { ...exit, row: rowQ1 && { e: rowQ1.name === "e         ", score: rowQ1.score } };
+    check("Exit after a score went in: the game quits by its own Quit first, once, and the page then leaves",
+      /^quit:\d+$/.test(exit.quit ?? "") && exit.runs === "1" && exit.ms !== null, report.quitFromMenu);
+    check("the score table, with the child's name, is in the saved text OtterTube holds", !!rowQ1 && rowQ1.name === "e         " && rowQ1.score > 0, report.quitFromMenu.row);
+    check("meanwhile the page says it is saving (not \"One moment\"), and nothing the child pressed started anything",
+      exit.savingAll && !exit.busyNoticeShown && exit.scripts.every((name) => /^quit/.test(name)), { savingAll: exit.savingAll, busyNoticeShown: exit.busyNoticeShown, scripts: exit.scripts });
+    await browser.pad(null);
+  });
+
+  await part("the next visit has the score", async () => {
+    if (!rowQ1) throw new Error("no score was saved (the earlier part failed)");
+    const init = await browser.open("/delirium/", DELIRIUM, whoQ1, { query: "&keep=1" });
+    await browser.waitScreen("title", 60_000);
+    await waitFor("the launch script to end", async () => (await browser.kiosk()).busy === null, 30_000, 100);
+    await browser.tap([320, 250]);
+    // The game's own Quit writes the table it has in memory: the one it loaded from the save.
+    const row = await quitFromMenu(browser, whoQ1);
+    const quit = await browser.game(`document.querySelector(".app--ottertube").dataset.kioskQuit ?? null`);
+    check("on the next visit the game started with that table: its own Quit writes the same row back",
+      init.savedSeq !== null && !!row && row.name === rowQ1.name && row.score === rowQ1.score && quit === "not-needed", { savedSeq: init.savedSeq, same: !!row && row.name === rowQ1.name && row.score === rowQ1.score, quit });
+  });
+
+  await part("quit first, from a game in play", async () => {
+    const who = "d".repeat(32);
+    await launch(browser, "/delirium/", DELIRIUM, who, "title");
+    await scriptSeen(browser, "start", () => browser.press(scriptButton("start")));
+    await scoreAndStop(browser, () => browser.press(heldButton("Bomb"), 300));
+    // Start: the name is given as PLAYER on the way, and a new game begins.
+    const started = await scriptSeen(browser, "start", () => browser.press(scriptButton("start")));
+    await browser.waitScreen("playing", 10_000);
+    await sleep(1500);
+    const exit = await exitAndTime(browser);
+    const row = await heldRow(browser, who);
+    report.quitFromPlay = { ...exit, sawName: started.seen.includes("name-entry"), row: row && { player: row.name === "player    ", score: row.score } };
+    check("Exit in the middle of a later game: the game is stopped, quits, and the score from before is saved, inside the time allowed",
+      started.seen.includes("name-entry") && /^quit:\d+$/.test(exit.quit ?? "") && !!row && row.name === "player    " && row.score > 0, report.quitFromPlay);
+  });
+
+  await part("no new score", async () => {
+    const who = "e".repeat(32);
+    await launch(browser, "/delirium/", DELIRIUM, who, "title");
+    await browser.tap([320, 250]);
+    await browser.waitScreen("menu", 15_000);
+    await sleep(1000);
+    const exit = await exitAndTime(browser);
+    report.noNewScore = exit;
+    check("Exit with no new score: the game is not made to quit, and the page leaves at once (well under the 3 s it may wait)",
+      exit.quit === "not-needed" && exit.runs === null && exit.ms !== null && exit.ms < 1500, exit);
+  });
+
+  await part("guest", async () => {
+    await launch(browser, "/delirium/", DELIRIUM, "guest", "title");
+    await toNameEntry(browser);
+    await browser.tap([589, 397]);
+    await browser.waitScreen("menu", 15_000);
+    await sleep(1000);
+    const exit = await exitAndTime(browser);
+    report.guest = exit;
+    check("Guest, after a score: nothing is kept, so the game is not made to quit, and the page leaves at once",
+      exit.quit === "not-kept" && exit.runs === null && exit.ms !== null && exit.ms < 1500, exit);
+  });
+
+  await part("a game that does not quit in time", async () => {
+    writeGames(neverQuits);
+    try {
+      await launch(browser, "/blobbo/", BLOBBO, "ab".repeat(16), "board");
+    } finally {
+      writeGames(games);
+    }
+    await sleep(800);
+    const exit = await exitAndTime(browser);
+    report.quitTimesOut = exit;
+    check("a game that has not quit by its timeout (3 s here) is left as it is: the page saves and leaves all the same, saying it is saving throughout",
+      /^timed-out:\d+$/.test(exit.quit ?? "") && exit.ms >= 3000 && exit.ms < 3000 + 3600 && exit.savingAll, exit);
+  });
+
+  // ----------------------------------------------------------------------------------------------
+  // Touches held back for a fresh look at the screen (each look 600 ms late here)
+  // ----------------------------------------------------------------------------------------------
+  await part("held-back touches", async () => {
+    const who = "f".repeat(32);
+    await launch(browser, "/delirium/?systemless-test-screens=slow", DELIRIUM, who, "title");
+    await toNameEntry(browser);
+    await browser.waitScreen("name-empty", 10_000);
+    // The letters C and D lie where Deregister is blocked while Preferences shows: here each
+    // touch on them waits for a fresh look at the screen.
+    const c = await onPicture(browser, [123, 333]), d = await onPicture(browser, [172, 333]);
+    await browser.touch("touchStart", [{ ...c, id: 1 }]);
+    await sleep(200);
+    await browser.touch("touchCancel", []);
+    await sleep(1800);
+    const afterCancel = await browser.waitScreen("name-empty", 4000).then(() => true, () => false);
+    check("a touch cancelled while its look is under way comes to nothing", afterCancel && (await deferredPress(browser)) === null, { stillEmpty: afterCancel });
+    await browser.touch("touchStart", [{ ...c, id: 2 }]);
+    await sleep(100);
+    await browser.touch("touchMove", [{ x: c.x + 40, y: c.y - 150, id: 2 }]);
+    await sleep(100);
+    await browser.touch("touchEnd", []);
+    await sleep(1800);
+    const afterSlide = await browser.waitScreen("name-empty", 4000).then(() => true, () => false);
+    check("a finger slid away while its look is under way comes to nothing", afterSlide && (await deferredPress(browser)) === null, { stillEmpty: afterSlide });
+    // A quick tap on C, and at once a finger on D that stays: C's look answers first and taps;
+    // D's answers a moment later, while C's tap is still pressed, and D presses until it lifts.
+    await browser.touch("touchStart", [{ ...c, id: 3 }]);
+    await sleep(30);
+    await browser.touch("touchEnd", [{ ...c, id: 3 }]);
+    await browser.touch("touchStart", [{ ...d, id: 4 }]);
+    await sleep(1400);
+    const whileHeld = await deferredPress(browser);
+    await browser.touch("touchEnd", []);
+    await sleep(400);
+    const afterLift = await deferredPress(browser);
+    const typed = await browser.waitScreen("name-empty", 4000, false).then(() => true, () => false);
+    check("an older tap's timer does not let go of a newer press still under its finger; the press ends when the finger lifts",
+      whileHeld === "held" && afterLift === null && typed, { whileHeld, afterLift, typed });
+    await browser.picture("held-back-1-typed.png");
+    await browser.tap([589, 397]);
+    const row = await quitFromMenu(browser, who);
+    report.heldBack = { name: row && row.name.trim() };
+    check("both letters were typed, in the order tapped", !!row && /^cd/.test(row.name), report.heldBack);
+  });
 } catch (error) {
   check("the run completed", false, String(error?.stack ?? error));
 } finally {
   await browser?.close().catch(() => {});
 }
 const code = stage.finish(report);
-console.log(JSON.stringify({ passed: report.passed, failed: report.failed, exit: report.exit, report: join(stage.outDir, "report.json") }, null, 2));
+console.log(JSON.stringify({ passed: report.passed, failed: report.failed, quitFromMenu: report.quitFromMenu, quitFromPlay: report.quitFromPlay, noNewScore: report.noNewScore,
+  guest: report.guest, quitTimesOut: report.quitTimesOut, heldBack: report.heldBack, report: join(stage.outDir, "report.json") }, null, 2));
 process.exit(code);

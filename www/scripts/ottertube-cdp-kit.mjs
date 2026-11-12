@@ -134,15 +134,19 @@ export async function startStage({ serverArgs = [] } = {}) {
     response.end(readFileSync(hostPage));
   });
   await new Promise((done, fail) => hostServer.once("error", fail).listen(hostPort, "127.0.0.1", done));
-  await waitFor("the bundle server", async () => (await (await fetch(`${gameOrigin}/_macgames/health`)).json()).app === "systemless-ottertube-link", 20_000);
+  // (A busy machine can take a while to start Python.) A server that never answers is stopped.
+  await waitFor("the bundle server", async () => (await (await fetch(`${gameOrigin}/_macgames/health`)).json()).app === "systemless-ottertube-link", 60_000)
+    .catch((error) => { gameServer.kill(); hostServer.close(); throw error; });
 
   const checks = [];
   function check(name, pass, detail) {
     checks.push({ name, pass: !!pass, detail });
     process.stderr.write(`${pass ? "ok  " : "FAIL"} ${name}${detail === undefined ? "" : " :: " + JSON.stringify(detail)}\n`);
   }
-  /** One part of the run. A part that throws fails by name and the run goes on. */
+  /** One part of the run. A part that throws fails by name and the run goes on. OTTERTUBE_LINK_PARTS="a|b" runs only those. */
+  const onlyParts = process.env.OTTERTUBE_LINK_PARTS?.split("|").map((name) => name.trim()).filter(Boolean);
   async function part(name, body) {
+    if (onlyParts && !onlyParts.includes(name)) return;
     try { await body(); }
     catch (error) { check(`${name}: ran to its end`, false, String(error?.stack ?? error)); }
   }

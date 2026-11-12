@@ -1,3 +1,4 @@
+import {assertMovingTeleportDoorActor} from './moving-teleport-doors.mjs';
 import {assertSlidingTeleportScope,assertSlidingTeleportActor} from './sliding-teleports.mjs';
 // Static Child HY sprites and ordinary WA one-shots. Private maps and atlas
 // descriptors are supplied externally. Presentation never chooses a collider.
@@ -17,7 +18,10 @@ export class TeleportRuntime {
  constructor(endpoints,dots,{hyperspace:hyperspaceCount=0,fader:faderCount=0}={},scope={}){
   count(hyperspaceCount);count(faderCount);
   if(!Array.isArray(endpoints)||!endpoints.length||endpoints.length>22||!Array.isArray(dots))throw new TypeError('Bounded paired HY endpoints and source dots required');
-  if(dots.some(d=>d.slideMask)&&scope.allowSlidingTeleports!==true)throw new Error('Separate HY/EX runtime capability required');
+  if(typeof scope.allowMovingTeleportDoors!=='undefined'&&typeof scope.allowMovingTeleportDoors!=='boolean')throw new TypeError('Literal moving HY door capability required');
+  if(scope.allowMovingTeleportDoors===true&&(scope.board?.movingTeleportDoorRules!==true||scope.board.dots!==dots||scope.board.teleports!==endpoints))throw new Error('Matching moving HY declaration required');
+  this.movingTeleportDoors=scope.allowMovingTeleportDoors===true;
+  if(dots.some(d=>d.slideMask)&&scope.allowSlidingTeleports!==true&&!this.movingTeleportDoors)throw new Error('Separate HY/EX runtime capability required');
   if(scope.allowSlidingTeleports===true)assertSlidingTeleportScope({...scope,dots,teleports:endpoints});
   this.slidingTeleportRules=scope.allowSlidingTeleports===true;
   this.dots=dots;
@@ -57,9 +61,12 @@ export class TeleportRuntime {
   this.faders.push(fader);return fader;
  }
  teleport(actor,grabbed,{sound,place,checkWalls,onWallDeath,suppressed=false}={}){
+  if(this.movingTeleportDoors)assertMovingTeleportDoorActor(actor);
   if(this.slidingTeleportRules)assertSlidingTeleportActor(actor,{program:actor?.program??null,human:[0,6].includes(actor?.sourceActorType)});
   const endpoint=this.endpoints.find(e=>e.dot===grabbed.id);if(!endpoint)return false;
-  return teleportOrdinaryActor(actor,this.dot(endpoint.partner),{sound,startFader:a=>this.startFader(a,{suppressed}),place,checkWalls,onWallDeath});
+  const moved=teleportOrdinaryActor(actor,this.dot(endpoint.partner),{sound,startFader:a=>this.startFader(a,{suppressed}),place,checkWalls,onWallDeath});
+  if(moved&&this.movingTeleportDoors)actor.movingPivot=this.dot(actor.pivot).motion==='moving-program';
+  return moved;
  }
  snapshot(){return {counts:{...this.counts},endpoints:this.endpoints.map(e=>({...e,x:this.dot(e.dot).x-16,y:this.dot(e.dot).y-15})),faders:this.faders.map(f=>({...f}))};}
 }

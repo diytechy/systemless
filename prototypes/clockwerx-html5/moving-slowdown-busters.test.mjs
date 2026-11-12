@@ -1,6 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {assertMovingSlowdownBusterRecipe,assertMovingSlowdownBusterSource,assertMovingSlowdownBusterBoard,assertMovingSlowdownBusterActor} from './moving-slowdown-busters.mjs';
 import {movingSlowSource,movingSlowRecipe,movingSlowBoard} from './moving-slowdown-busters.fixture.mjs';
+import {buildDecodedBoard,levelRequirements} from './level.mjs';
 
 test('moving Slow composition requires explicit capabilities and retains earlier family gates',()=>{
  const o=movingSlowRecipe();assert.equal(assertMovingSlowdownBusterRecipe(o),true);
@@ -28,4 +29,12 @@ test('normalized moving Slow declaration guard is read-only and rejects source/b
  assert.equal(b.movingBusterBombRules,undefined);assert.equal(b.staticSlowdownRules,undefined);
  for(const mutate of[b=>b.dots[0].x++,b=>b.enemies[1].speedClass=1,b=>b.connectors[0].bonus=!b.connectors[0].bonus,b=>b.spikes[0].phase++,b=>b.movingBusterBombRules=true]){const q=movingSlowBoard();mutate(q);const bad=JSON.stringify(q);assert.throws(()=>assertMovingSlowdownBusterBoard(q));assert.equal(JSON.stringify(q),bad);}
  const green=b.enemies.find(a=>a.checksWalls);assert.equal(green.sourceActorType,2);assert.equal(assertMovingSlowdownBusterActor(green),true);assert.throws(()=>assertMovingSlowdownBusterActor({...green,sourceActorType:1,group:500}));
+});
+test('level adapter builds this composition through its own declarations and leaves the default path closed',()=>{
+ const s=movingSlowSource(),o=movingSlowRecipe(),before=JSON.stringify(s);
+ assert.deepEqual(levelRequirements(s,o),[]);const b=buildDecodedBoard(s,o);
+ assert.equal(JSON.stringify(s),before);assert.equal(assertMovingSlowdownBusterBoard(b),true);
+ assert.equal(b.movingDotRules,true);assert.equal(b.staticSlowdownRules,undefined);assert.equal(b.movingBusterBombRules,undefined);
+ assert.throws(()=>buildDecodedBoard(s,{...o,allowMovingSlowdownBusters:false}));
+ assert.ok(levelRequirements(s,{...o,allowMovingSlowdownBusters:1}).length);
 });

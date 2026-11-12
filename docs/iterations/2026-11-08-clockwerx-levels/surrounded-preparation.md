@@ -1,3 +1,5 @@
+**Accepted88: see [review](surrounded-review.md). Preparation below is historical.**
+
 # Surrounded preparation and original completion
 
 Level88 Surrounded/RND2_206 is still awaiting final repeatability/browser/install gates. Source73/805e1944 is frozen as `3f2f69e6a9567998eb225408acaa67e6766e8271c2bf29329e18cc45275b6e2d`;70runtimefiles,564runtime/21packaging checks, nine invented composition checks and two Slow-paint checks pass. The default-off static Slow/buster composition retains the real BO/GO/EX/WL/SP and programmed actor semantics. Class3 orbital normal4/slow8 clocks are separate from class1. Source Slow frames precede burnt appearance. Three source GO169 imports ignore the invalid frame request and start at0 with byte provenance. They do not use artwork frame169.

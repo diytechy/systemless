@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 88,
-  "currentAction": "Through87installed. Surrounded88coldclosed35captures; actor190anchors proposals-onlybusters/Slow132clear140raw/viewgate then88/541000seen. Sourceboard12577df1defaultoff/4checks557runtime21packaging, runtimejoins pending/no88actualengine. Continueall100.",
+  "currentOrdinal": 89,
+  "currentAction": "Surrounded88 accepted and locally installed. Continue all100 without per-level stops. Blowout89 earned cold is next; independent original-only fitters before dedicated PNG viewing. No89actualengine yet.",
   "levels": [
     {
       "ordinal": 1,
@@ -7806,10 +7806,15 @@
       "menuTitle": "Surrounded",
       "resourceTitle": "Surrounded",
       "sha256": "8e71474d6c5e0c0999c146d1d9b40d3ee7eee8297012e1347f6b2215fc8fc86b",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "surrounded88-native-goal01/root-original-goal-review.json",
+        "surrounded88-native-goal-fit01/actor-comparison01.json",
+        "surrounded88-native-goal-slow-fit01/model-comparison01.json",
+        "surrounded88-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7837,7 +7842,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7878,7 +7883,34 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "805e1944",
+      "sourceFreezeSHA256": "3f2f69e6a9567998eb225408acaa67e6766e8271c2bf29329e18cc45275b6e2d",
+      "sourceTests": 564,
+      "actualUpdates": 231044,
+      "actualConstructors": 37,
+      "functionalUpdatesUsed": 231044,
+      "functionalUpdatesRemaining": 18956,
+      "nativeColdClosed": true,
+      "review": "surrounded-review.md",
+      "retainedSweep": {
+        "matchedGoals": 86,
+        "constructionOnly": 1,
+        "pairedUpdates": 662350,
+        "sha256": "2c2ab53d22740b3472cecb3bb4a8339ce3058fa3ce9b8945b07fd75715c7b580"
+      },
+      "deliveryAcceptance": {
+        "score": 12000,
+        "updates": 10352,
+        "transfers": 18,
+        "nextOrdinal": 89,
+        "nativeCampaignTotal": 553000,
+        "rootAcceptanceSHA256": "b6bc91969bbe967c9d700cfe1c2148b327f1d70e11f81c25d551186f84e3d2c3",
+        "rootProofSHA256": "369a6933a5cf49fe56f58f0ed9bb5b7fe7b75ca3ac1df28c8d5156fa7baf1365",
+        "earnedThrough88FixtureSHA256": "f9425a909b310dafcf1125e9cc4ba31fdbbbc1aac14e3d849854deecc5a3d73b"
+      },
+      "qualificationBoundary": "Original Surrounded results12000 (11000levelbonus+1000completion), earned89Blowout/553000 visuallyverified afterRoot original-onlyfittergate3eb7eb51.42captures/6763frontend/155.893sec. All67evenF/S/Rholds andidlesretained;36selectedholdPNGs,20native-onlyfinalmargin/120resultsidle/Spaceadvance. All36clearhumanposes exact. Across37joins441cleargroupedobservations:416positionsandposes exact,25unmatchedorbital3500observations retained; no image/client/actorphaseadjustment or identitycensus claim. Group3900unionproposals neverclearfits. Cold678/tie679 386clear21position59poseresiduals retained. All148clear in-rangeSlowlooks exact/fouroccupied;152clear168raw. StaticSlow/buster/orbital/ring/EX/BO/GO/WL/SP composition Source73/3f2f69e6,564runtime21packaging9family2paintchecks. Legal31/candidate01:12000/10352/18transfers/49R/18F-S holds, zeroRNG/death/reset;30failedorcap policiesretained870failedRNG. Safeupperright6,6Rpark thenbottomwall10opens; finalSlow5,5minus R8minus/R24plus/R12minus/upgoal. Class3normal4slow8, Slowhumanarrivalonly/class0unchanged. Noengine/clock/RNGstatewrites, actualclones/counterfactuals/resets. GlobalSlowforegroundrenderpriority/atlasfix included; newyellowring45..50sourceSVG verified, priorblueartretained. Arbitrarycontrols/audio/controllers/real-timepacing/fullpixel andcompleteactoridentity separate."
     },
     {
       "ordinal": 89,
@@ -8907,6 +8939,6 @@
   "handoff": "session-handoff-2026-11-11.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",
   "fasterValidationWorkflow": "faster-validation-workflow.md",
-  "sessionState": "through87-installed-continuing88",
+  "sessionState": "through88-installed-continuing89",
   "previousRestartCheckpoint": "restart-checkpoint-2026-11-10.md"
 }

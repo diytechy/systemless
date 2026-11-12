@@ -62,7 +62,10 @@ export function assertStaticRingRailBoard(b,{outlines,dotOutlines}={}){
  for(const[k,v]of Object.entries(b))if(k.endsWith('Rules')&&v===true&&expected[k]!==true)fail();
  validateConnectorBoard(b.connectors,b.dots);for(const a of[b.player,...b.enemies])assertStaticRingRailActor(a);
  if(outlines)for(const g of[700,4300,500,4400,200])for(let f=0;f<(g===200?4:64);f++)if(!Array.isArray(outlines.groups?.[g]?.frames?.[f]?.rows))fail();
- if(dotOutlines)for(const d of b.dots)for(const f of d.ring?[23,24,25,26,27,28,29,30]:[1+d.color,9+d.color])if(!Array.isArray(dotOutlines.groups?.[300]?.frames?.[f]?.rows))fail();return true;
+ if(dotOutlines)for(const d of b.dots)for(const f of d.ring?[23,24,25,26,27,28,29,30]:[1+d.color,9+d.color]){
+  const shape=dotOutlines.groups?.[300]?.frames?.[f];
+  if(!shape||!['left','top','right','bottom'].every(k=>Number.isInteger(shape[k]))||shape.left>shape.right||shape.top>shape.bottom||shape.rows!==null&&!Array.isArray(shape.rows))fail();
+ }return true;
 }
 export function assertStaticRingRailRuntime(b,{actors=[]}={}){
  if(b?.staticRingRailRules!==true||!Object.isFrozen(b.staticRingRailSource)||['puddles','bombs','goodies','walls','doors','switches','elevators','teleports','guns','triggers'].some(k=>b[k]?.length))fail();

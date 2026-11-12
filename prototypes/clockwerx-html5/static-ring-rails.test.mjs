@@ -55,3 +55,9 @@ test('the released ring completes its shared-clock return without changing NPC g
  let updates=0;while(!ring.humanCanGrab&&updates++<2000)g.update(1/120,{});
  assert.ok(updates>600&&updates<2000);assert.equal(ring.humanCanGrab,true);assert.equal(ring.nonhumanCanGrab,true);
 });
+test('source rectangle ring outlines need no row mask and malformed profiles stay rejected',()=>{
+ const b=buildStaticRingRailBoard(staticRingRailSource(),staticRingRailRecipe()),p=profiles();
+ for(const f of[28,29])Object.assign(p.dotOutlines.groups[300].frames[f],{left:15,top:15,right:17,bottom:17,rows:null,collidable:true});
+ assert.equal(assertStaticRingRailBoard(b,p),true);assert.doesNotThrow(()=>new SourceRound(b,p));
+ for(const bad of[{rows:undefined},{rows:'rectangle'},{left:20,right:17}]){const q=profiles();Object.assign(q.dotOutlines.groups[300].frames[28],bad);assert.throws(()=>assertStaticRingRailBoard(buildStaticRingRailBoard(staticRingRailSource(),staticRingRailRecipe()),q));}
+});

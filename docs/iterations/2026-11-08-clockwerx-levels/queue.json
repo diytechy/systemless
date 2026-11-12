@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 89,
-  "currentAction": "Surrounded88 accepted and locally installed. Continue all100 without per-level stops. Blowout89 earned cold is next; independent original-only fitters before dedicated PNG viewing. No89actualengine yet.",
+  "currentOrdinal": 90,
+  "currentAction": "Blowout89 accepted and locally installed. Continue all100 without per-level stops. Fade-out90 earned cold is next; independent original-only actor/ring fitters before dedicated PNG viewing. No90actualengine yet.",
   "levels": [
     {
       "ordinal": 1,
@@ -7918,10 +7918,15 @@
       "menuTitle": "Blowout",
       "resourceTitle": "Blowout",
       "sha256": "6ebac9318944397d598236b0ba8592c124bfeacfb683528e62fbc3a72cdb8b81",
-      "status": "queued",
-      "nativeEvidence": [],
+      "status": "bounded-child-goal-accepted",
+      "nativeEvidence": [
+        "blowout89-native-goal01/root-original-goal-review.json",
+        "blowout89-native-goal-fit01/actor-comparison01.json",
+        "blowout89-native-goal-slow-fit01/model-comparison01.json",
+        "blowout89-native-goal01/root-saved-progress-review.json"
+      ],
       "requirements": [],
-      "svgStatus": "not-reviewed",
+      "svgStatus": "visible goal and installed level verified",
       "generationConstraints": [],
       "structuralStatus": "complete",
       "mechanicInventory": {
@@ -7949,7 +7954,7 @@
         },
         "boundary": "Record classes are source-verified; behavior and visual fidelity are unqualified."
       },
-      "gameplayQualified": false,
+      "gameplayQualified": true,
       "sourceInventoryReview": "complete; runtime and visual checks separate",
       "newSourceClasses": [],
       "newDotFlagBitsHex": "0x0",
@@ -7995,7 +8000,34 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "installed": true,
+      "sourceCommit": "671f0e29",
+      "sourceFreezeSHA256": "22053bee73e5834c25e385371372d23dfe3222cd5518d43a0c66ded7e727b74c",
+      "sourceTests": 577,
+      "actualUpdates": 59598,
+      "actualConstructors": 16,
+      "functionalUpdatesUsed": 59598,
+      "functionalUpdatesRemaining": 190402,
+      "nativeColdClosed": true,
+      "review": "blowout-review.md",
+      "retainedSweep": {
+        "matchedGoals": 87,
+        "constructionOnly": 1,
+        "pairedUpdates": 672702,
+        "sha256": "0e0a8b7e9ba0b3d7cbdbba8d96961c3833c2d2b39ba7fad12104ddfa7d33cae9"
+      },
+      "deliveryAcceptance": {
+        "score": 7000,
+        "updates": 5564,
+        "transfers": 15,
+        "nextOrdinal": 90,
+        "nativeCampaignTotal": 560000,
+        "rootAcceptanceSHA256": "33230513444c2363095264f1e8d9f9010b238b8a2712b85c5de146461460b6fe",
+        "rootProofSHA256": "0f0436398e87e6b94512ef533608600081dcf003711365c96ccf6591411455a6",
+        "earnedThrough89FixtureSHA256": "ae17603584d18444acb305cb6babc5aab97a517e9e9ee541baaf206b6757db46"
+      },
+      "qualificationBoundary": "Root viewed goal-after-hold, results and after-results only after original-only actor/Slow gate27fc8ce9. Original Blowout results7000=6000levelbonus+1000completion, earned90Fade-out/560000 visually verified.24captures/4365frontend/119.8865757sec. Exact18evenholds/15transfers/5564updates; three12R holds and complete idles;20nativefinalmargin/120resultsidle/Spaceadvance. Across19joins284clear observations274positions268posesexact; green4400 retains10position16pose residuals. All19human,170buster3900 and38red500 positions/posesexact. Cold686/tie687498clear16position46pose residuals unchanged. FixedSlowappearance and phasefree movingSlowproposal comparison separately recorded; moving proposals neveractoridentity/visibilitycensus. Winningroute bypasses Slowdots; primarysource+inventedfixtures qualify humanSlow contact, thisnative route doesnot. Defaultoff movingSlow/freebuster/EX/BO/WL/SP family Source75/freeze22053bee/671f0e29;577runtime21packaging13familychecks; retained88CLOSED_MATCH672702paired. Legal12/candidate7000/5564/15transferszeroRNGdeathreset. Elevenfailedpolicies retained270failedRNG. No actualengine state/clock/RNGwrites, clones/counterfactuals or resets. Fullpixel, exhaustiveinputs, audio/controller/real-timepacing and completeactoridentity separate. Witness/fresh fullhooks, all5encodedstreams and6logicaldigests exact with qualified fast-delta-v3; explicit600sec fullstatewall allowance only. Visible IAB Replay/canvas7000 functionalonly, prior1Hz/catchup-capped UI diagnostics not pacing benchmarks. Prior88definitions/132assets exact, full88rollback retained."
     },
     {
       "ordinal": 90,
@@ -8930,12 +8962,7 @@
   "workflow": "parallel-workflow.md",
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
-  "activeSlots": {
-    "A": "closed",
-    "B": "closed",
-    "C": "closed",
-    "D": "closed"
-  },
+  "activeSlots": [],
   "handoff": "session-handoff-2026-11-11.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",
   "fasterValidationWorkflow": "faster-validation-workflow.md",

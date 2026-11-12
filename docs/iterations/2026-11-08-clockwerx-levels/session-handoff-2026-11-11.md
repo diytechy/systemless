@@ -1,3 +1,7 @@
+# Latest continuation: through89
+
+Blowout89 accepted and locally installed. Continue all100 without per-level stops. Fade-out90 earned cold is next; independent original-only actor/ring fitters before dedicated PNG viewing. No90actualengine yet. See [Blowout review](blowout-review.md). Latest evidence supersedes the historical checkpoints below.
+
 # ClockWerx continuation — through88 accepted
 
 Read [Surrounded review](surrounded-review.md), [queue](queue.json), and [current action](current-action.md). Continue locally through100.

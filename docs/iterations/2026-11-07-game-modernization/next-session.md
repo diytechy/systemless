@@ -1,3 +1,7 @@
+# Latest continuation: through89
+
+Blowout89 accepted and locally installed. Continue all100 without per-level stops. Fade-out90 earned cold is next; independent original-only actor/ring fitters before dedicated PNG viewing. No90actualengine yet. See [Blowout review](../2026-11-08-clockwerx-levels/blowout-review.md). Latest evidence supersedes the historical checkpoints below.
+
 # Next session: Macintosh library tuning and one HTML5 pilot
 
 **Current follow-up,2026-11-11:**88 bounded Child scenes accepted/installed throughSurrounded/Source73 onSVG-Port. Continue all100 without per-level stops. Blowout89 original earned cold is next. Read [handoff](../2026-11-08-clockwerx-levels/session-handoff-2026-11-11.md), [review](../2026-11-08-clockwerx-levels/surrounded-review.md), [queue](../2026-11-08-clockwerx-levels/queue.json). No Rust rebuild/push/upload/deployment/library-queue restart.

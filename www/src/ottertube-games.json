@@ -146,9 +146,29 @@
           {"run": "name"}
         ]}},
         {"retry": {"press": "Space", "until": "playing", "every": 150, "tries": 5}}
+      ],
+      "quit": [
+        {"if": {"screen": "prefs", "then": [{"tap": [572, 364]}, {"until_not": {"screen": "prefs", "timeout": 300}}]}},
+        {"run": "name"},
+        {"if": {"screen": "playing", "then": [{"press": "Escape"}, {"until": {"screen": "game-over", "timeout": 360}}]}},
+        {"if": {"screen": "game-over", "then": [
+          {"wait": 30},
+          {"tap": [320, 250]},
+          {"until_any": {"screens": ["name-entry", "menu", "title"], "timeout": 240}},
+          {"run": "name"}
+        ]}},
+        {"if": {"screen": "title", "then": [{"tap": [320, 250]}, {"until": {"screen": "menu", "timeout": 300}}]}},
+        {"until": {"screen": "menu", "timeout": 300}},
+        {"tap": [72, 414]}
       ]
     },
     "launch": "launch",
+    "quit_first": {
+      "after": ["name-entry"],
+      "script": "quit",
+      "timeout": 600,
+      "what": "Delirium writes its score table only when it quits by its own Quit: after a score went into the table on this visit, Exit makes it quit first. OtterTube's Start and Guide go Home at once and are not covered."
+    },
     "pad": {
       "buttons": {
         "0": {"key": "Meta", "script": "start", "script_when": ["title", "menu", "game-over", "name-entry"]},

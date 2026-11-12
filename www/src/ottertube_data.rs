@@ -54,8 +54,31 @@ pub struct GameData {
     pub scripts: BTreeMap<String, Vec<Step>>,
     /// The script run once the game is up, to bring it to where play starts.
     pub launch: Option<String>,
+    /// For a game that writes what matters only when it quits by its own Quit:
+    /// made to quit before the page leaves, when there is something to write.
+    pub quit_first: Option<QuitFirst>,
     pub pad: Pad,
 }
+
+/// When Exit is pressed and one of the `after` screens has been seen on this
+/// visit, `script` drives the game's own Quit, and the page waits up to
+/// `timeout` frames (ten seconds at most) for the guest to stop before it
+/// saves and leaves. The script runs while the page is already closing, so
+/// nothing else reaches the guest meanwhile. Not for Guest, nor a session that
+/// keeps nothing. It does not cover OtterTube's own Start and Guide buttons,
+/// which go Home at once with no Exit.
+#[derive(Clone, Debug, Default, Deserialize, PartialEq)]
+#[serde(deny_unknown_fields)]
+pub struct QuitFirst {
+    pub after: Vec<String>,
+    pub script: String,
+    pub timeout: u32,
+    /// Why, for whoever reads the data.
+    pub what: String,
+}
+
+/// The longest a game may be given to quit before the page leaves: ten seconds.
+pub const LONGEST_QUIT: u32 = 600;
 
 /// A tap button: it presses keys once, or runs a script. `when` and `unless`
 /// name screens: the button shows only on (or except on) those.
@@ -302,6 +325,24 @@ impl GameData {
         }
         if let Some(name) = &self.launch {
             script(name)?;
+        }
+        if let Some(rule) = &self.quit_first {
+            if rule.after.is_empty() || rule.what.is_empty() {
+                return Err("quit_first needs the screens it follows, and why".into());
+            }
+            for name in &rule.after {
+                screen(name)?;
+            }
+            script(&rule.script)?;
+            if rule.timeout == 0 || rule.timeout > LONGEST_QUIT {
+                return Err(format!(
+                    "quit_first waits {} frames; up to {LONGEST_QUIT}",
+                    rule.timeout
+                ));
+            }
+            if self.launch.as_deref() == Some(rule.script.as_str()) {
+                return Err("quit_first cannot be the launch script".into());
+            }
         }
         for key in &self.command_keys {
             let mut letters = key.chars();
@@ -612,6 +653,26 @@ mod tests {
     }
 
     #[test]
+    fn delirium_quits_by_its_own_quit_before_leaving_after_a_score_went_in() {
+        let games = embedded();
+        let delirium = &games["delirium-personal-11"];
+        let rule = delirium
+            .quit_first
+            .as_ref()
+            .expect("Delirium has quit_first");
+        assert_eq!(rule.after, ["name-entry"]);
+        assert!(rule.timeout > 0 && rule.timeout <= LONGEST_QUIT);
+        let quit = &delirium.scripts[&rule.script];
+        // The name screen is finished first (its score goes into the table),
+        // and the last thing is the game's own QUIT button, on the menu.
+        assert!(quit.contains(&Step::Run("name".into())));
+        assert_eq!(quit.last(), Some(&Step::Tap([72, 414])));
+        // The other two write their files as they go.
+        assert!(games["clockwerx-personal-10"].quit_first.is_none());
+        assert!(games["blobbo-full-personal-101"].quit_first.is_none());
+    }
+
+    #[test]
     fn a_chain_of_scripts_deeper_than_the_runner_goes_is_refused() {
         let chain = |length: usize| {
             let scripts: Vec<String> = (0..length)
@@ -705,6 +766,28 @@ mod tests {
                 "a retry needs",
             ),
             (r#"{"command_keys": ["Q"]}"#, "command key"),
+            (
+                r#"{"screens": [{"name": "s", "at": [0, 0, 8, 8], "hash": "0123456789abcdef"}],
+                    "scripts": {"q": [{"wait": 1}]},
+                    "quit_first": {"after": ["s"], "script": "q", "timeout": 601, "what": "w"}}"#,
+                "up to 600",
+            ),
+            (
+                r#"{"scripts": {"q": [{"wait": 1}]},
+                    "quit_first": {"after": ["nowhere"], "script": "q", "timeout": 60, "what": "w"}}"#,
+                "no screen",
+            ),
+            (
+                r#"{"screens": [{"name": "s", "at": [0, 0, 8, 8], "hash": "0123456789abcdef"}],
+                    "quit_first": {"after": ["s"], "script": "missing", "timeout": 60, "what": "w"}}"#,
+                "no script",
+            ),
+            (
+                r#"{"screens": [{"name": "s", "at": [0, 0, 8, 8], "hash": "0123456789abcdef"}],
+                    "scripts": {"q": [{"wait": 1}]},
+                    "quit_first": {"after": [], "script": "q", "timeout": 60, "what": "w"}}"#,
+                "screens it follows",
+            ),
             (r#"{"command_keys": ["qq"]}"#, "command key"),
             (
                 r#"{"screens": [{"name": "s", "at": [600, 0, 80, 8], "hash": "0123456789abcdef"}]}"#,

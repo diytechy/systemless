@@ -241,3 +241,26 @@ and Opus, medium), all findings fixed except the one below.
   certificate and a name resolving only to a private address (hosts file is
   honoured; loopback refused). Waiting on the Owner: use of the Cloudflare DNS token
   for the certificate, and one elevated hosts line.
+
+## Status, 2026-11-19 (Delirium quit-first, one button owner; hosting on the hub)
+
+Built on `research/ottertube-saves` through `1db48fcd`; reviews closed (round 6: Opus
+nothing, Sol one MEDIUM, fixed; round 7 recheck: both nothing).
+
+- The Owner's rulings, 2026-11-12: the hub serves the bundle at `macgames.<domain>`,
+  LAN-only, certificate by Caddy's existing dns-01 token; Delirium quits first on Exit
+  when a new score was entered this visit.
+- Delirium: the detector is the name-entry screen seen during the visit (the score file
+  is unchanged until the game quits). Measured quits: 0.43 s from the menu, 2.33 s from
+  the name screen, 4.34 s mid-game, against a 10 s cap; no new score or Guest leaves in
+  about 20 ms. Still lost: a score entered just before OtterTube's Start or Guide.
+- Touch: held-back touches have an identity, and one press at a time owns the guest's
+  mouse button (held-back or ordinary); only the owner moves or releases it.
+- Proof, headless Chrome against the fake host: controls 78/78, scripts 40/40, saves
+  72/72 (`verify-r9-*`); cargo test 143; two mutant builds caught. Known residual
+  (Opus): an ordinary owner is not cleared on unmount; the kiosk mounts once per page.
+- Hosting: the hub work is handed off in HomeHub
+  `docs/HANDOFF_MACGAMES_SITE_2026-11-12.md`. The payload is assembled in
+  `D:\SystemlessBuild\ottertube-link\site\` (ready marker `macgames-build.json`); the
+  list's key is outside every repository.
+- NOT proven: real OtterTube, a real https name, a real controller, real fingers, sound.

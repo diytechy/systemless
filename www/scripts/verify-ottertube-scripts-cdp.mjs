@@ -573,6 +573,18 @@ try {
       init.savedSeq !== null && !!row && row.name === rowQ1.name && row.score === rowQ1.score && quit === "not-needed", { savedSeq: init.savedSeq, same: !!row && row.name === rowQ1.name && row.score === rowQ1.score, quit });
   });
 
+  await part("quit first, from the name screen", async () => {
+    const who = "cd".repeat(16);
+    await launch(browser, "/delirium/", DELIRIUM, who, "title");
+    await toNameEntry(browser);
+    // Exit while the game still asks for a name: the script gives PLAYER, then quits.
+    const exit = await exitAndTime(browser);
+    const row = await heldRow(browser, who);
+    report.quitFromNameScreen = { ...exit, row: row && { player: row.name === "player    ", score: row.score } };
+    check("Exit while the game asks for a name: the name is given as PLAYER, the game quits, and the score is saved, inside the time allowed",
+      /^quit:\d+$/.test(exit.quit ?? "") && !!row && row.name === "player    " && row.score > 0, report.quitFromNameScreen);
+  });
+
   await part("quit first, from a game in play", async () => {
     const who = "d".repeat(32);
     await launch(browser, "/delirium/", DELIRIUM, who, "title");
@@ -698,6 +710,6 @@ try {
   await browser?.close().catch(() => {});
 }
 const code = stage.finish(report);
-console.log(JSON.stringify({ passed: report.passed, failed: report.failed, quitFromMenu: report.quitFromMenu, quitFromPlay: report.quitFromPlay, noNewScore: report.noNewScore,
+console.log(JSON.stringify({ passed: report.passed, failed: report.failed, quitFromMenu: report.quitFromMenu, quitFromNameScreen: report.quitFromNameScreen, quitFromPlay: report.quitFromPlay, noNewScore: report.noNewScore,
   guest: report.guest, quitTimesOut: report.quitTimesOut, heldBack: report.heldBack, report: join(stage.outDir, "report.json") }, null, 2));
 process.exit(code);

@@ -374,10 +374,10 @@ mod link {
         Rc<dyn Fn(f64) -> Pin<Box<dyn Future<Output = Option<Vec<DownloadableSaveFile>>>>>>;
     pub use crate::ottertube_data::is_chord_key;
     pub use crate::ottertube_play::{
-        command_on_screen, defer_touch, deferred_pointer, drops_chord, game_unmounted,
-        guest_input_shut, guest_point, is_command_key, on_command_down, on_takeover, screen_reply,
-        set_guest_pointer, set_screen_reader, set_tap_keys, stick_is_stepped, stick_steps,
-        touch_verdict, KeyOwner, ScreenRequest, Touch,
+        button_moves, claim_button, command_on_screen, defer_touch, deferred_pointer, drops_chord,
+        free_button, game_unmounted, guest_input_shut, guest_point, is_command_key,
+        on_command_down, on_takeover, screen_reply, set_guest_pointer, set_screen_reader,
+        set_tap_keys, stick_is_stepped, stick_steps, touch_verdict, KeyOwner, ScreenRequest, Touch,
     };
 
     thread_local! {

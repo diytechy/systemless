@@ -538,7 +538,8 @@ fn verdict(v: i16, h: i16, fresh: bool) -> Touch {
 /// A finger that `touch_verdict` held back. Its gesture keeps its own number
 /// while the screen is looked at afresh: a finger that lifts meanwhile becomes
 /// a tap, one still down becomes a press that follows it, and one cancelled
-/// or slid away comes to nothing (`ottertube_touch`).
+/// or slid away comes to nothing; so does one whose look answers while
+/// another touch holds the guest's button (`ottertube_touch`).
 pub fn defer_touch(pointer_id: i32, v: i16, h: i16) {
     let id = DEFERRED.with(|deferred| deferred.borrow_mut().begin(pointer_id, (v, h)));
     spawn_local(async move {
@@ -552,7 +553,7 @@ pub fn defer_touch(pointer_id: i32, v: i16, h: i16) {
             Looked::Tap(acts) => {
                 act(acts);
                 wait_ms(HELD_TAP_MS).await;
-                // Only this tap's press: a newer one may hold the button now.
+                // Only this tap's own press: nobody else's is let go.
                 let acts = DEFERRED.with(|deferred| deferred.borrow_mut().tap_over(id));
                 act(acts);
             }
@@ -584,8 +585,7 @@ fn drop_deferred() {
     act(acts);
 }
 
-/// Carry out a held-back touch's actions on the guest's pointer, and show
-/// what holds the button (`data-kiosk-deferred`).
+/// Carry out a held-back touch's actions on the guest's pointer.
 fn act(acts: Vec<Act>) {
     for action in acts {
         let (kind, (v, h)) = match action {
@@ -595,13 +595,39 @@ fn act(acts: Vec<Act>) {
         };
         pointer(kind, guest_point(v, h));
     }
-    let pressed = DEFERRED.with(|deferred| deferred.borrow().pressed());
+    show_button();
+}
+
+/// Who holds the guest's button, on the page for the browser checks
+/// (`data-kiosk-button`: "held", "tap" or "ordinary").
+fn show_button() {
+    let owner = DEFERRED.with(|deferred| deferred.borrow().owner());
     if let Some(root) = root() {
-        let _ = match pressed {
-            Some(how) => root.set_attribute("data-kiosk-deferred", how),
-            None => root.remove_attribute("data-kiosk-deferred"),
+        let _ = match owner {
+            Some(how) => root.set_attribute("data-kiosk-button", how),
+            None => root.remove_attribute("data-kiosk-button"),
         };
     }
+}
+
+/// An ordinary press (a finger passed straight to the game) wants the guest's
+/// button. False while a held-back touch holds it: the press is ignored.
+pub fn claim_button(pointer_id: i32) -> bool {
+    let claimed = DEFERRED.with(|deferred| deferred.borrow_mut().ordinary_down(pointer_id));
+    show_button();
+    claimed
+}
+
+/// An ordinary press has let go of the guest's button.
+pub fn free_button(pointer_id: i32) {
+    DEFERRED.with(|deferred| deferred.borrow_mut().ordinary_up(pointer_id));
+    show_button();
+}
+
+/// May an ordinary pointer move the guest's pointer now? Not while a
+/// held-back touch holds the button.
+pub fn button_moves(pointer_id: i32) -> bool {
+    DEFERRED.with(|deferred| deferred.borrow().may_move(pointer_id))
 }
 
 pub fn is_command_key(mac_key: u8) -> bool {

@@ -3814,6 +3814,12 @@ fn attach_pointer_input(
         let m = &machine_pd;
         m.resume_audio();
         if let Some((v, h)) = pointer_coords(&canvas_el, &ev) {
+            // The guest has one button: a held-back touch may hold it, and
+            // then this press is ignored until that touch lets go.
+            #[cfg(feature = "ottertube")]
+            if !crate::ottertube::claim_button(ev.pointer_id()) {
+                return;
+            }
             let _ = canvas_el.set_attribute("data-cursor-pointer", &ev.pointer_type());
             active_pd.set(Some(ev.pointer_id()));
             last_pd.set(Some((v, h)));
@@ -3863,6 +3869,11 @@ fn attach_pointer_input(
         }
         if active == Some(ev.pointer_id()) {
             ev.prevent_default();
+        }
+        // Not while a held-back touch holds the guest's button.
+        #[cfg(feature = "ottertube")]
+        if !crate::ottertube::button_moves(ev.pointer_id()) {
+            return;
         }
         if let Some((v, h)) = pointer_coords(&canvas_el, &ev) {
             if active == Some(ev.pointer_id()) {
@@ -3964,6 +3975,8 @@ fn attach_pointer_input(
         if let Some((v, h)) = coords {
             machine_pc.mouse_up(v, h);
         }
+        #[cfg(feature = "ottertube")]
+        crate::ottertube::free_button(ev.pointer_id());
     }) as Box<dyn FnMut(PointerEvent)>);
     let _ = canvas.add_event_listener_with_callback(
         "pointercancel",
@@ -5202,12 +5215,13 @@ fn release_pointer_mouse_up_after(
         active_pointer_id.set(None);
         last_coords.set(None);
         let _ = canvas.release_pointer_capture(pointer_id);
-        if !alive.load(Ordering::Relaxed) {
-            return;
+        if alive.load(Ordering::Relaxed) {
+            if let Some((v, h)) = coords {
+                machine.mouse_up(v, h);
+            }
         }
-        if let Some((v, h)) = coords {
-            machine.mouse_up(v, h);
-        }
+        #[cfg(feature = "ottertube")]
+        crate::ottertube::free_button(pointer_id);
     };
 
     if delay_ms <= 0.0 {

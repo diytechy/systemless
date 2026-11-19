@@ -1,15 +1,20 @@
-//! Touches the OtterTube add-on page holds back for a fresh look at the
-//! screen: a finger that lands on a spot blocked on some other screen than the
-//! one last seen (`ottertube_play::touch_verdict`). While the look is under way
-//! the finger can lift, slide off or be cancelled, and another finger can
-//! land; this is what each of those comes to. No browser here: the page feeds
-//! in pointer events and the look's answer, and carries out the guest pointer
-//! actions that come back.
+//! The guest's one mouse button on the OtterTube add-on page, and the touches
+//! the page holds back for a fresh look at the screen: a finger that lands on
+//! a spot blocked on some other screen than the one last seen
+//! (`ottertube_play::touch_verdict`). While the look is under way the finger
+//! can lift, slide off or be cancelled, and another finger can land; this is
+//! what each of those comes to. No browser here: the page feeds in pointer
+//! events and the look's answer, and carries out the guest pointer actions
+//! that come back.
 //!
-//! Each held-back touch is a gesture with its own number. The guest has one
-//! mouse button; the gesture that holds it now is recorded, and only that
-//! gesture can let it go, so the timer of an older tap never lifts a newer
-//! press.
+//! The button has one owner at a time: an ordinary press (a finger the page
+//! passed straight to the game) or a held-back touch. Whoever comes while it
+//! is owned gets nothing: a held-back touch whose look answers then is
+//! dropped, and an ordinary press is ignored until the owner lets go. A lost
+//! tap is better than a press moved or let go of by someone else. Only the
+//! owner moves the pointer while the button is down, and only the owner lets
+//! go of it, a tap's timer included. (A script takes the game over: the page
+//! drops every held-back touch and lets go of an ordinary press first.)
 #![cfg_attr(not(feature = "ottertube"), allow(dead_code))]
 
 /// Where a finger is on the guest's screen, `(v, h)`, before the game's offset.
@@ -37,7 +42,8 @@ pub enum Kind {
 /// What the look's answer comes to.
 #[derive(Debug, PartialEq, Eq)]
 pub enum Looked {
-    /// Dropped: blocked after all, lifted far away, cancelled, or no look.
+    /// Dropped: blocked after all, lifted far away, cancelled, no look, or the
+    /// button is someone else's.
     Nothing,
     /// The finger is still down: the press starts now and follows the finger.
     Press(Vec<Act>),
@@ -74,18 +80,20 @@ impl Gesture {
     }
 }
 
+/// Who holds the guest's button.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
-struct Press {
-    gesture: u32,
-    at: Point,
-    synthetic: bool,
+enum Owner {
+    /// A held-back touch, by its number: `at` is where it lets go.
+    Held { gesture: u32, at: Point, tap: bool },
+    /// An ordinary press, by its pointer: the page lets go of it itself.
+    Ordinary { pointer: i32 },
 }
 
 #[derive(Debug, Default)]
 pub struct Deferred {
     gestures: Vec<Gesture>,
     next: u32,
-    press: Option<Press>,
+    owner: Option<Owner>,
 }
 
 fn far(a: Point, b: Point) -> bool {
@@ -116,6 +124,10 @@ impl Deferred {
         self.next
     }
 
+    fn holds(&self, id: u32) -> bool {
+        matches!(self.owner, Some(Owner::Held { gesture, .. }) if gesture == id)
+    }
+
     /// A pointer event. `None` when it is not a held-back finger's: the page
     /// handles it as usual. Otherwise the guest pointer actions it comes to.
     pub fn pointer(&mut self, kind: Kind, pointer: i32, at: Option<Point>) -> Option<Vec<Act>> {
@@ -123,7 +135,8 @@ impl Deferred {
             .gestures
             .iter()
             .position(|gesture| gesture.takes(pointer))?;
-        let owner = self.press.map(|press| press.gesture);
+        let id = self.gestures[index].id;
+        let owns = self.holds(id);
         let gesture = &mut self.gestures[index];
         let mut acts = Vec::new();
         match (gesture.state, kind) {
@@ -142,8 +155,13 @@ impl Deferred {
             (State::Pressing, Kind::Move) => {
                 if let Some(at) = at {
                     gesture.last = at;
-                    if owner == Some(gesture.id) {
+                    if owns {
                         acts.push(Act::Move(at));
+                        self.owner = Some(Owner::Held {
+                            gesture: id,
+                            at,
+                            tap: false,
+                        });
                     }
                 }
             }
@@ -153,9 +171,9 @@ impl Deferred {
                 } else {
                     gesture.last
                 };
-                if owner == Some(gesture.id) {
+                if owns {
                     acts.push(Act::Up(at));
-                    self.press = None;
+                    self.owner = None;
                 }
                 self.gestures.remove(index);
             }
@@ -172,24 +190,17 @@ impl Deferred {
         };
         let state = self.gestures[index].state;
         let (down, last) = (self.gestures[index].down, self.gestures[index].last);
-        if !allowed || !matches!(state, State::Waiting { .. }) {
+        // Blocked after all, given up, or the button is someone else's now.
+        if !allowed || !matches!(state, State::Waiting { .. }) || self.owner.is_some() {
             self.gestures.remove(index);
             return Looked::Nothing;
         }
-        // The guest's one button: whatever holds it lets go first.
-        let mut acts = self.release();
-        acts.push(Act::Move(down));
-        acts.push(Act::Down(down));
-        let index = self
-            .gestures
-            .iter()
-            .position(|gesture| gesture.id == id)
-            .expect("release keeps other gestures");
+        let mut acts = vec![Act::Move(down), Act::Down(down)];
         if state == (State::Waiting { lifted: true }) {
-            self.press = Some(Press {
+            self.owner = Some(Owner::Held {
                 gesture: id,
                 at: last,
-                synthetic: true,
+                tap: true,
             });
             self.gestures.remove(index);
             Looked::Tap(acts)
@@ -197,10 +208,10 @@ impl Deferred {
             if last != down {
                 acts.push(Act::Move(last));
             }
-            self.press = Some(Press {
+            self.owner = Some(Owner::Held {
                 gesture: id,
                 at: last,
-                synthetic: false,
+                tap: false,
             });
             self.gestures[index].state = State::Pressing;
             Looked::Press(acts)
@@ -209,40 +220,65 @@ impl Deferred {
 
     /// A tap's time is up: it lets go, if it still holds the button.
     pub fn tap_over(&mut self, id: u32) -> Vec<Act> {
-        match self.press {
-            Some(press) if press.gesture == id => {
-                self.press = None;
-                vec![Act::Up(press.at)]
+        match self.owner {
+            Some(Owner::Held { gesture, at, .. }) if gesture == id => {
+                self.owner = None;
+                vec![Act::Up(at)]
             }
             _ => Vec::new(),
         }
     }
 
-    /// A script takes the game, or the page goes: every held-back touch is
-    /// dropped and the button is let go.
-    pub fn drop_all(&mut self) -> Vec<Act> {
-        let acts = self.release();
-        self.gestures.clear();
-        acts
-    }
-
-    /// What holds the guest's button now: a press that follows a finger
-    /// ("held"), a tap ("tap"), or nothing.
-    pub fn pressed(&self) -> Option<&'static str> {
-        self.press
-            .map(|press| if press.synthetic { "tap" } else { "held" })
-    }
-
-    fn release(&mut self) -> Vec<Act> {
-        let Some(press) = self.press.take() else {
-            return Vec::new();
-        };
-        // A press that followed a finger is over: that finger's later events
-        // are nobody's.
-        if !press.synthetic {
-            self.gestures.retain(|gesture| gesture.id != press.gesture);
+    /// An ordinary press wants the button. True when it may have it (it is
+    /// free); false when another touch holds it, and the press is ignored.
+    pub fn ordinary_down(&mut self, pointer: i32) -> bool {
+        if self.owner.is_some() {
+            return false;
         }
-        vec![Act::Up(press.at)]
+        self.owner = Some(Owner::Ordinary { pointer });
+        true
+    }
+
+    /// An ordinary press let go: the button is free, if it was that press's.
+    pub fn ordinary_up(&mut self, pointer: i32) {
+        if self.owner == Some(Owner::Ordinary { pointer }) {
+            self.owner = None;
+        }
+    }
+
+    /// May an ordinary pointer move the guest's pointer? When the button is
+    /// free (a mouse moving over the picture), or that pointer holds it.
+    pub fn may_move(&self, pointer: i32) -> bool {
+        match self.owner {
+            None => true,
+            Some(Owner::Ordinary { pointer: owner }) => owner == pointer,
+            Some(Owner::Held { .. }) => false,
+        }
+    }
+
+    /// A script takes the game, or the page goes: every held-back touch is
+    /// dropped and a button one holds is let go. (An ordinary press is let go
+    /// of by the page, which then calls `ordinary_up`.)
+    pub fn drop_all(&mut self) -> Vec<Act> {
+        self.gestures.clear();
+        match self.owner {
+            Some(Owner::Held { at, .. }) => {
+                self.owner = None;
+                vec![Act::Up(at)]
+            }
+            _ => Vec::new(),
+        }
+    }
+
+    /// Who holds the guest's button: a held-back touch that follows its
+    /// finger ("held"), one that is a tap ("tap"), an ordinary press
+    /// ("ordinary"), or nobody.
+    pub fn owner(&self) -> Option<&'static str> {
+        self.owner.map(|owner| match owner {
+            Owner::Held { tap: true, .. } => "tap",
+            Owner::Held { tap: false, .. } => "held",
+            Owner::Ordinary { .. } => "ordinary",
+        })
     }
 }
 
@@ -262,9 +298,9 @@ mod tests {
             touches.looked(id, true),
             Looked::Tap(vec![Act::Move(C), Act::Down(C)])
         );
-        assert_eq!(touches.pressed(), Some("tap"));
+        assert_eq!(touches.owner(), Some("tap"));
         assert_eq!(touches.tap_over(id), vec![Act::Up(C)]);
-        assert_eq!(touches.pressed(), None);
+        assert_eq!(touches.owner(), None);
         assert_eq!(touches.tap_over(id), vec![], "let go once");
     }
 
@@ -287,7 +323,7 @@ mod tests {
         let id = touches.begin(7, C);
         assert_eq!(touches.pointer(Kind::Cancel, 7, None), Some(vec![]));
         assert_eq!(touches.looked(id, true), Looked::Nothing);
-        assert_eq!(touches.pressed(), None);
+        assert_eq!(touches.owner(), None);
     }
 
     #[test]
@@ -321,7 +357,7 @@ mod tests {
             touches.looked(id, true),
             Looked::Press(vec![Act::Move(C), Act::Down(C), Act::Move((C.0 + 1, C.1))])
         );
-        assert_eq!(touches.pressed(), Some("held"));
+        assert_eq!(touches.owner(), Some("held"));
         // Now it follows the finger, however far.
         let away = (C.0 + 50, C.1 + 50);
         assert_eq!(
@@ -332,7 +368,7 @@ mod tests {
             touches.pointer(Kind::Up, 7, Some(away)),
             Some(vec![Act::Up(away)])
         );
-        assert_eq!(touches.pressed(), None);
+        assert_eq!(touches.owner(), None);
         assert_eq!(touches.pointer(Kind::Move, 7, Some(away)), None);
     }
 
@@ -345,12 +381,14 @@ mod tests {
             touches.pointer(Kind::Cancel, 7, None),
             Some(vec![Act::Up(C)])
         );
-        assert_eq!(touches.pressed(), None);
+        assert_eq!(touches.owner(), None);
     }
 
     #[test]
-    fn an_older_taps_timer_never_lets_go_of_a_newer_press() {
-        // Two quick taps: each look answers, each takes the button in turn.
+    fn a_held_back_touch_whose_look_answers_while_another_holds_the_button_is_dropped() {
+        // Two quick taps: the first look answers and taps; the second answers
+        // while that tap still holds the button, and is dropped. The first
+        // tap's timer then lets go of its own press, and only that.
         let mut touches = Deferred::default();
         let first = touches.begin(7, C);
         touches.pointer(Kind::Up, 7, Some(C));
@@ -360,26 +398,73 @@ mod tests {
             touches.looked(first, true),
             Looked::Tap(vec![Act::Move(C), Act::Down(C)])
         );
+        assert_eq!(touches.looked(second, true), Looked::Nothing);
         assert_eq!(
-            touches.looked(second, true),
-            Looked::Tap(vec![Act::Up(C), Act::Move(D), Act::Down(D)]),
-            "the first tap lets go before the second presses"
+            touches.tap_over(second),
+            vec![],
+            "the dropped tap holds nothing"
         );
-        assert_eq!(touches.tap_over(first), vec![], "the first tap's timer");
-        assert_eq!(touches.pressed(), Some("tap"));
-        assert_eq!(touches.tap_over(second), vec![Act::Up(D)]);
-        // A tap, then a finger held: the tap's timer leaves the held press alone.
-        let tap = touches.begin(9, C);
-        touches.pointer(Kind::Up, 9, Some(C));
-        let held = touches.begin(10, D);
-        assert!(matches!(touches.looked(tap, true), Looked::Tap(_)));
+        assert_eq!(touches.tap_over(first), vec![Act::Up(C)]);
+        // A tap's timer never lets go of a press that is not its own.
+        let held = touches.begin(9, D);
         assert!(matches!(touches.looked(held, true), Looked::Press(_)));
-        assert_eq!(touches.tap_over(tap), vec![]);
-        assert_eq!(touches.pressed(), Some("held"));
+        assert_eq!(touches.tap_over(first), vec![]);
+        assert_eq!(touches.owner(), Some("held"));
         assert_eq!(
-            touches.pointer(Kind::Up, 10, Some(D)),
+            touches.pointer(Kind::Up, 9, Some(D)),
             Some(vec![Act::Up(D)])
         );
+    }
+
+    #[test]
+    fn a_held_back_touch_and_an_ordinary_press_never_share_the_button() {
+        // C is held back; while its look is under way, a finger on A (not
+        // held back) presses. C's look answers while A holds the button: C is
+        // dropped, and nothing moves or lets go of A's press.
+        let mut touches = Deferred::default();
+        let c = touches.begin(1, C);
+        touches.pointer(Kind::Up, 1, Some(C));
+        assert!(touches.ordinary_down(2), "the button was free");
+        assert_eq!(touches.owner(), Some("ordinary"));
+        assert_eq!(touches.looked(c, true), Looked::Nothing);
+        assert_eq!(touches.tap_over(c), vec![]);
+        assert!(touches.may_move(2), "A's own press follows A");
+        assert_eq!(touches.drop_all(), vec![], "the page lets go of A itself");
+        touches.ordinary_up(2);
+        assert_eq!(touches.owner(), None);
+
+        // The other way round: C's tap holds the button, and a finger on A
+        // lands meanwhile. A is ignored, and moves nothing, until C lets go.
+        let c = touches.begin(3, C);
+        touches.pointer(Kind::Up, 3, Some(C));
+        assert!(matches!(touches.looked(c, true), Looked::Tap(_)));
+        assert!(!touches.ordinary_down(4));
+        assert!(!touches.may_move(4));
+        assert!(
+            !touches.may_move(1),
+            "nor does a mouse moving over the picture"
+        );
+        touches.ordinary_up(4);
+        assert_eq!(
+            touches.owner(),
+            Some("tap"),
+            "an ignored press lets go of nothing"
+        );
+        assert_eq!(touches.tap_over(c), vec![Act::Up(C)]);
+        assert!(touches.ordinary_down(4), "free again");
+
+        // A held-back press that follows its finger: an ordinary press is
+        // ignored too.
+        touches.ordinary_up(4);
+        let held = touches.begin(5, D);
+        assert!(matches!(touches.looked(held, true), Looked::Press(_)));
+        assert!(!touches.ordinary_down(6));
+        assert_eq!(
+            touches.pointer(Kind::Up, 5, Some(D)),
+            Some(vec![Act::Up(D)])
+        );
+        assert!(touches.ordinary_down(6));
+        assert!(touches.may_move(6) && !touches.may_move(7));
     }
 
     #[test]

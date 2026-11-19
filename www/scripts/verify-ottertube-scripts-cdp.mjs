@@ -41,8 +41,10 @@
 // part the games file is rewritten for a moment (the bundle server reads it on every request).
 //
 // Touches held back for a fresh look at the screen: one cancelled, or slid away, while the look is
-// under way comes to nothing; a tap is made; and an older tap's timer does not let go of a newer
-// press still under its finger.
+// under way comes to nothing; a tap is made. The guest's one button has one owner, a held-back
+// touch or an ordinary press: a held-back touch whose look answers while another holds it is
+// dropped, whether that other is an ordinary press or another held-back tap, and nobody moves or
+// lets go of a press that is not their own.
 //
 // Environment as verify-ottertube-link-cdp.mjs. The fake host is opened with keep=1, so the page
 // can still be read after it has asked to leave.
@@ -198,7 +200,8 @@ async function onPicture(browser, [h, v]) {
   const box = await browser.rect("canvas.game-canvas");
   return { x: box.x + (h + 0.5) * box.w / 640, y: box.y + (v + 0.5) * box.h / 480 };
 }
-const deferredPress = (browser) => browser.game(`document.querySelector(".app--ottertube").dataset.kioskDeferred ?? null`);
+/** Who holds the guest's mouse button: "held" or "tap" (a held-back touch), "ordinary", or null. */
+const buttonOwner = (browser) => browser.game(`document.querySelector(".app--ottertube").dataset.kioskButton ?? null`);
 
 /** Where Blobbo is on his board. */
 const blobboYellow = (r, g, b) => r > 245 && g >= 205 && g <= 230 && b < 20;
@@ -640,7 +643,7 @@ try {
     await browser.touch("touchCancel", []);
     await sleep(1800);
     const afterCancel = await browser.waitScreen("name-empty", 4000).then(() => true, () => false);
-    check("a touch cancelled while its look is under way comes to nothing", afterCancel && (await deferredPress(browser)) === null, { stillEmpty: afterCancel });
+    check("a touch cancelled while its look is under way comes to nothing", afterCancel && (await buttonOwner(browser)) === null, { stillEmpty: afterCancel });
     await browser.touch("touchStart", [{ ...c, id: 2 }]);
     await sleep(100);
     await browser.touch("touchMove", [{ x: c.x + 40, y: c.y - 150, id: 2 }]);
@@ -648,26 +651,46 @@ try {
     await browser.touch("touchEnd", []);
     await sleep(1800);
     const afterSlide = await browser.waitScreen("name-empty", 4000).then(() => true, () => false);
-    check("a finger slid away while its look is under way comes to nothing", afterSlide && (await deferredPress(browser)) === null, { stillEmpty: afterSlide });
-    // A quick tap on C, and at once a finger on D that stays: C's look answers first and taps;
-    // D's answers a moment later, while C's tap is still pressed, and D presses until it lifts.
+    check("a finger slid away while its look is under way comes to nothing", afterSlide && (await buttonOwner(browser)) === null, { stillEmpty: afterSlide });
+    // A quick tap on C (held back), and at once a finger on A, which is not under any block and
+    // goes straight to the game. C's look answers while A holds the button: C is dropped, and A's
+    // press is neither moved nor let go of by it.
+    const a = await onPicture(browser, [25, 333]);
     await browser.touch("touchStart", [{ ...c, id: 3 }]);
     await sleep(30);
     await browser.touch("touchEnd", [{ ...c, id: 3 }]);
-    await browser.touch("touchStart", [{ ...d, id: 4 }]);
+    await browser.touch("touchStart", [{ ...a, id: 4 }]);
+    await sleep(1000);
+    const whileA = await buttonOwner(browser);
+    await browser.touch("touchEnd", []);
+    await sleep(600);
+    const afterA = await buttonOwner(browser);
+    const typedA = await browser.waitScreen("name-empty", 4000, false).then(() => true, () => false);
+    check("a held-back tap whose look answers while an ordinary press holds the button is dropped; the press is the button's one owner until it lifts",
+      whileA === "ordinary" && afterA === null && typedA, { whileA, afterA, typedA });
+    await browser.picture("held-back-1-a.png");
+    // A quick tap on C, and at once a finger on D that stays (both held back): C's look answers
+    // first and taps. D's answers a moment later: while C's tap still holds the button it is
+    // dropped; had C's tap already let go, D presses until its finger lifts. Never both.
+    await browser.touch("touchStart", [{ ...c, id: 5 }]);
+    await sleep(30);
+    await browser.touch("touchEnd", [{ ...c, id: 5 }]);
+    await browser.touch("touchStart", [{ ...d, id: 6 }]);
     await sleep(1400);
-    const whileHeld = await deferredPress(browser);
+    const whileD = await buttonOwner(browser);
     await browser.touch("touchEnd", []);
     await sleep(400);
-    const afterLift = await deferredPress(browser);
-    const typed = await browser.waitScreen("name-empty", 4000, false).then(() => true, () => false);
-    check("an older tap's timer does not let go of a newer press still under its finger; the press ends when the finger lifts",
-      whileHeld === "held" && afterLift === null && typed, { whileHeld, afterLift, typed });
-    await browser.picture("held-back-1-typed.png");
+    const afterD = await buttonOwner(browser);
+    await browser.picture("held-back-2-c-d.png");
     await browser.tap([589, 397]);
     const row = await quitFromMenu(browser, who);
-    report.heldBack = { name: row && row.name.trim() };
-    check("both letters were typed, in the order tapped", !!row && /^cd/.test(row.name), report.heldBack);
+    const name = row ? row.name.trim() : null;
+    report.heldBack = { name, whileA, whileD };
+    // Long presses may repeat a letter on Delirium's keyboard; C once and A at least once.
+    const dDropped = whileD === null && /^a+c$/.test(name ?? "");
+    const dPressed = whileD === "held" && /^a+cd+$/.test(name ?? "");
+    check("letters as the one-owner rule says: A from the ordinary press, not the C held back under it; C from the next tap; D only if it pressed after C let go",
+      afterD === null && (dDropped || dPressed), { ...report.heldBack, afterD });
   });
 } catch (error) {
   check("the run completed", false, String(error?.stack ?? error));

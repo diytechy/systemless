@@ -42,36 +42,127 @@ export function completionDetails(level, bonus, oldCampaign, newCampaign, nextAv
   };
 }
 
+export function padGlyphs(padFamily = null) {
+  if (padFamily === 'playstation') {
+    return {
+      label: 'PlayStation',
+      swing: '✕',
+      reverse: '○',
+      flip: '□',
+      bounce: '△',
+      pause: 'R1',
+      restart: 'R2',
+      levels: 'Options',
+    };
+  }
+  if (padFamily === 'xbox') {
+    return {
+      label: 'Xbox',
+      swing: 'A',
+      reverse: 'B',
+      flip: 'X',
+      bounce: 'Y',
+      pause: 'RB',
+      restart: 'RT',
+      levels: 'Start',
+    };
+  }
+  return {
+    label: 'Controller',
+    swing: '✕ / A',
+    reverse: '○ / B',
+    flip: '□ / X',
+    bounce: '△ / Y',
+    pause: 'R1',
+    restart: 'R2',
+    levels: 'Start',
+  };
+}
+
+export function levelMechanicCues(board) {
+  if (!board || (board.ordinal ?? 1) === 1 || board.title === 'Movement') return [];
+  const cues = [];
+  if (board.spikes?.length || board.rotatingSpikeRules || board.movingSpikeRules ||
+      board.enemies?.some(h => h.sourceActorType === 4)) cues.push('Spikes');
+  if (board.walls?.length) cues.push('Walls');
+  if (board.doors?.length) cues.push('Doors');
+  if (board.puddles?.length || board.slidingOilRules || board.gunTriggerOilRules) cues.push('Oil');
+  if (board.teleportRules || board.teleports?.length || board.slidingTeleportRules ||
+      board.dots?.some(d => d.teleport)) cues.push('Teleports');
+  if (board.elevatorRules || board.elevators?.length || board.movingElevatorRules ||
+      board.dots?.some(d => d.upDown)) cues.push('Elevators');
+  if (board.bombRules || board.bombs?.length || board.slidingBombRules || board.movingBombRules ||
+      board.movingBusterBombRules || board.staticSlidingBombGoodieRules ||
+      board.movingBombSpikeWaystationRules || board.staticBombElevatorRules) cues.push('Bombs & Matches');
+  if (board.gunTriggerProjectileRules || board.gunTriggerChild?.guns?.length ||
+      board.guns?.length) cues.push('Guns & Triggers');
+  if (board.dots?.some(d => d.waystation)) cues.push('Checkpoints');
+  if (board.dots?.some(d => d.ring)) cues.push('Bonus Rings');
+  return cues;
+}
+
+export function sideControlsSpec(inputMode = 'keyboard-mouse', cues = []) {
+  if (inputMode === 'playstation' || inputMode === 'xbox' || inputMode === 'gamepad') {
+    const g = padGlyphs(inputMode === 'gamepad' ? null : inputMode);
+    return {
+      modeLabel: g.label,
+      rows: [
+        {action: 'swing', keys: g.swing, label: 'Swing through next dot'},
+        {action: 'flip', keys: g.flip, label: 'Bounce to next dot (Flip)'},
+        {action: 'reverse', keys: g.reverse, label: 'Flip direction (Reverse)'},
+        {action: 'bounce', keys: g.bounce, label: 'Bounce off dot'},
+      ],
+      meta: `${g.pause} Pause · ${g.levels} Levels · ${g.restart} Restart`,
+      cues: Array.isArray(cues) ? cues : [],
+    };
+  }
+  return {
+    modeLabel: 'Keyboard & Mouse',
+    rows: [
+      {action: 'swing', keys: 'Space · D · L-Click', label: 'Swing through next dot'},
+      {action: 'flip', keys: 'L-Shift · X · L+R Click', label: 'Bounce to next dot (Flip)'},
+      {action: 'reverse', keys: 'W · C · R-Click', label: 'Flip direction (Reverse)'},
+      {action: 'bounce', keys: 'Z', label: 'Bounce off dot'},
+    ],
+    meta: 'P / Esc Pause & Levels',
+    cues: Array.isArray(cues) ? cues : [],
+  };
+}
+
+export function canShowSideControls({gameMode, playLayout, view, viewportWidth, viewportHeight}) {
+  if (!gameMode || playLayout || view !== 'play') return false;
+  if (!(viewportWidth > 0 && viewportHeight >= 420)) return false;
+  const boardWidth = Math.min(viewportWidth, viewportHeight * 4 / 3);
+  return (viewportWidth - boardWidth) / 2 >= 200;
+}
+
 export function menuPadAction(view, pressed, confirming = false) {
   if (view === 'title' && !confirming) {
     if (pressed.levels) return 'slot-reset';
     if (pressed.swing) return 'slot-play';
     if (pressed.flip) return 'slot-levels';
-    if (pressed.reverse) return 'slot-hand';
-    if (pressed.bounce) return 'slot-sound';
+    if (pressed.bounce) return 'slot-hand';
+    if (pressed.reverse) return 'slot-sound';
     if (pressed.pause) return 'previous';
     if (pressed.restart) return 'next';
   }
   if (view === 'title' && confirming) {
-    if (pressed.levels || pressed.bounce) return 'slot-keep';
+    if (pressed.levels || pressed.reverse) return 'slot-keep';
     if (pressed.swing) return 'activate';
   }
   if (view === 'levels') {
-    if (pressed.levels || pressed.bounce) return 'game-level-back';
+    if (pressed.levels || pressed.reverse) return 'game-level-back';
     if (pressed.swing) return 'activate';
     if (pressed.flip) return 'previous-chapter';
-    if (pressed.reverse) return 'next-chapter';
+    if (pressed.bounce) return 'next-chapter';
   }
   if (view === 'pause') {
-    if (pressed.pause || pressed.bounce) return 'game-resume';
+    if (pressed.pause || pressed.reverse) return 'game-resume';
     if (pressed.levels) return 'game-pause-levels';
     if (pressed.swing) return 'activate';
   }
   if (view === 'complete') {
-    if (pressed.levels) return 'game-complete-levels';
-    if (pressed.restart) return 'game-replay';
-    if (pressed.swing) return 'game-next';
-    if (pressed.pause) return 'game-complete-slots';
+    if (pressed.swing) return 'activate';
   }
   return null;
 }
@@ -93,7 +184,7 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
   const slotButtons = [];
   let levelButtons = [];
   let view = 'title', levelReturn = 'title', selectedSlot = 1, selectedLevel = 1, roundLevel = 1;
-  let needleAngle = 0, connected = false, busy = false, confirming = false, command = 0, result;
+  let needleAngle = 0, connected = false, padFamily = null, busy = false, confirming = false, command = 0, result;
 
   const focus = node => node?.focus({preventScroll: true});
   const text = (id, value) => { $(id).textContent = value; };
@@ -122,12 +213,20 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
 
   function updateControls() {
     root.toggleAttribute('data-gamepad', connected);
-    $('slot-controls').hidden = !connected;
-    text('game-level-controls', connected ? 'Stick / D-pad choose · A play · X / Y change chapter · B back'
+    const g = padGlyphs(padFamily);
+    const slotControls = $('slot-controls');
+    slotControls.hidden = !connected;
+    if (connected) {
+      slotControls.textContent = `Stick / D-pad choose · ${g.swing} play · ${g.flip} levels · ${g.bounce} hand · ${g.reverse} sound · ${g.levels} reset`;
+    }
+    text('game-level-controls', connected
+      ? `Stick / D-pad choose · ${g.swing} play · ${g.flip} / ${g.bounce} change chapter · ${g.reverse} back`
       : 'Arrows choose · Enter play · PgUp / PgDn change chapter');
-    text('game-replay', connected ? 'Replay Level · R2' : 'Replay Level · R');
-    text('game-complete-levels', connected ? 'Level Select · Start' : 'Level Select');
-    text('game-complete-slots', connected ? 'Save Slots · R1' : 'Save Slots');
+    $('game-complete-controls').hidden = !connected;
+    text('game-complete-controls', `Stick / D-pad choose · ${g.swing} select`);
+    text('game-replay', connected ? 'Replay Level' : 'Replay Level · R');
+    text('game-complete-levels', 'Level Select');
+    text('game-complete-slots', 'Save Slots');
   }
 
   function message(value, error = false) {
@@ -379,6 +478,7 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
       else levelButtons[(selectedLevel - 1) % chapterSize].click();
     }
     else if (view === 'pause') pauseButtons[command].click();
+    else if (view === 'complete') completionButtons[command].click();
   }
 
   return {
@@ -394,9 +494,11 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
       for (const [index, scene] of scenes.entries()) titles.set(scene.ordinal ?? index + 1, scene.title);
       renderSlots();
     },
-    setConnected(value) {
-      if (connected === value) return;
+    setConnected(value, family = null) {
+      const nextFamily = value ? family : null;
+      if (connected === value && padFamily === nextFamily) return;
       connected = value;
+      padFamily = nextFamily;
       cards.dataset.layout = connected ? 'radial' : 'grid';
       updateControls();
     },
@@ -447,7 +549,7 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
     },
     pad({direction, pressed}) {
       if (busy) return;
-      if (direction && view !== 'complete') navigate(direction);
+      if (direction) navigate(direction);
       const action = menuPadAction(view, pressed, confirming);
       if (action === 'activate') activate();
       else if (action === 'previous' || action === 'next') navigate(action);

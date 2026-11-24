@@ -14,10 +14,11 @@ import {createSparkles} from './sparkles.mjs';
 import {handPoses,presentedAngle,presentedFaderFrame,resizeCanvas,atlasFrame} from './rendering.mjs';
 import {createTouchGestures,clientToLogical} from './touch-controls.mjs';
 import {planPlayLayout} from './touch-layout.mjs';
+import {createMouseControls} from './mouse-controls.mjs';
 import {createGamepadControls} from './gamepad-controls.mjs';
 import {progressKey,readProgress,recordCompletion,slotStoreKey,readSlotStore,migrateLegacyProgress,
  recordSlotLevelCompletion,resetSlot,updateSlot} from './progress.mjs';
-import {campaignLevels,completionBonus,completionDetails,createGameMenu} from './game-menu.mjs';
+import {campaignLevels,completionBonus,completionDetails,createGameMenu,levelMechanicCues,sideControlsSpec,canShowSideControls,padGlyphs} from './game-menu.mjs';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 const bootUtc=new Date().toISOString(),bootStart=performance.now(),STEP=1/120;
 const params=new URLSearchParams(location.search),gameMode=document.documentElement.classList.contains('game-mode');
@@ -32,7 +33,7 @@ let slotStore=storedSlots==null?migrateLegacyProgress(progress):readSlotStore(st
 let activeSlotId=slotStore.activeSlotId,slotsUnsaved=false,gameMenu,gameScenes=new Map(),loadingScene=false;
 let soundContext,soundBuffers=new Map(),bombBonusBaseline=0;
 let chooseLevel;
-let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},buttonHeld={},padHeld={},capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
+let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},buttonHeld={},padHeld={},mouseHeld={},heldCodes=new Set(),capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
 const startup={bootUtc,boundary:'module evaluation to required foreground/background image decode and manifest parse complete',assetReadyUtc:null,readyMs:null,resourceEntries:[]};
 let inputReplay=null,checkedRoute=null,pilotInputBlocked=false;
 let wallLayer=null,wallLayerBoard=null,wallLayerRevision=null,drawFailure=null; // a draw error is reported once and never stops the rAF loop
@@ -58,12 +59,48 @@ function message(s,error=false){for(const id of['status','panel-status']){$(id).
 // Touch play view is the default on touch-first devices; ?layout=play|page overrides.
 const layoutQuery=params.get('layout');
 let playLayout=gameMode&&(layoutQuery==='play'||matchMedia('(pointer: coarse)').matches),rotateDismissed=false;
-let padConnected=false;
-function controlsHint(){if(padConnected)return 'A swing · B bounce · X flip · Y reverse · R1 pause · R2 restart · Start levels.';return playLayout?'Tap reverse · hold swing · two-finger hold flip.':'Space swing · Z bounce · X flip · C reverse.';}
+let padConnected=false,padFamily=null,activeInputMode='keyboard-mouse',sideControlsRenderKey='';
+function setActiveInputMode(next){if(activeInputMode===next)return;activeInputMode=next;updateSideControlsPanel();}
+function updateSideControlsPanel(){
+ const panel=$('game-controls-panel');
+ if(!panel)return;
+ const visible=canShowSideControls({gameMode,playLayout,view:gameMenu?.view,viewportWidth:window.innerWidth,viewportHeight:window.innerHeight});
+ panel.hidden=!visible;
+ if(!visible)return;
+ const cues=levelMechanicCues(game?.board);
+ const key=JSON.stringify([activeInputMode,cues]);
+ if(key===sideControlsRenderKey)return;
+ sideControlsRenderKey=key;
+ const spec=sideControlsSpec(activeInputMode,cues);
+ $('game-controls-mode').textContent=spec.modeLabel;
+ const list=$('game-controls-list');
+ list.replaceChildren(...spec.rows.map(row=>{
+  const item=document.createElement('div');
+  item.className='game-controls-row';
+  item.dataset.actionHint=row.action;
+  const dt=document.createElement('dt');
+  dt.textContent=row.keys;
+  const dd=document.createElement('dd');
+  dd.textContent=row.label;
+  item.append(dt,dd);
+  return item;
+ }));
+ $('game-controls-meta').textContent=spec.meta;
+ const levelBox=$('game-controls-level');
+ levelBox.hidden=!spec.cues.length;
+ if(spec.cues.length)$('game-controls-cues').textContent=spec.cues.join(' · ');
+}
+function controlsHint(){
+ if(padConnected){
+  const g=padGlyphs(padFamily);
+  return `${g.swing} swing · ${g.reverse} reverse · ${g.flip} flip · ${g.bounce} bounce · ${g.pause} pause · ${g.restart} restart · ${g.levels} levels.`;
+ }
+ return playLayout?'Tap reverse · hold swing · two-finger hold flip.':'Space / D / Left-Click swing · Z bounce · Shift / X / Both-Click flip · W / C / Right-Click reverse.';
+}
 function pauseLabels(paused){$('pause').textContent=paused?'Resume (P)':'Pause (P)';$('touch-pause').textContent=$('panel-pause').textContent=paused?'Resume':'Pause';}
 function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
 function action(name,on){inputReplay=null;buttonHeld[name]=on;if(on)canvas.focus({preventScroll:true})}
-function clearInputs(){held={};buttonHeld={};padHeld={};gamepad.reset();touch.reset();touchHeld={};}
+function clearInputs(){heldCodes.clear();held={};buttonHeld={};padHeld={};mouseHeld={};gamepad.reset();touch.reset();mouse.reset();touchHeld={};}
 function pause(){if(!ready)return;game.paused=!game.paused;pauseLabels(game.paused);message(game.paused?'Paused. Press R1 or P, or tap Resume.':'Play resumed.');}
 function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();bombBonusBaseline=0;resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
 async function toggleFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else{await $('play').requestFullscreen({navigationUI:'hide'});await screen.orientation?.lock?.('landscape')?.catch(()=>{});}}catch(e){message('Fullscreen unavailable: '+e.message,true);}}
@@ -77,7 +114,8 @@ function exportSlots(){
  download('clockwerx-save-slots.json',new Blob([JSON.stringify(slotStore,null,2)],{type:'application/json'}));
 }
 $('export-slots').onclick=exportSlots;
-const keys={Space:'swing',KeyZ:'bounce',KeyX:'flip'};
+const keys={Space:'swing',KeyD:'swing',KeyZ:'bounce',ShiftLeft:'flip',KeyX:'flip'};
+function syncHeldKeys(){held={};for(const code of heldCodes)held[keys[code]]=true;}
 window.addEventListener('keydown',e=>{
  if(gameMode){
   unlockSound();
@@ -91,16 +129,38 @@ window.addEventListener('keydown',e=>{
   if(e.target instanceof HTMLButtonElement)return;
  }
  if(levelMenu.open||e.target instanceof HTMLInputElement)return;
- if(keys[e.code]){e.preventDefault();inputReplay=null;held[keys[e.code]]=true;}
- if(!e.repeat&&e.code==='KeyC'){e.preventDefault();if(!pilotInputBlocked)game?.reverse();}
+ if(keys[e.code]){e.preventDefault();inputReplay=null;heldCodes.add(e.code);syncHeldKeys();setActiveInputMode('keyboard-mouse');}
+ if(!e.repeat&&(e.code==='KeyC'||e.code==='KeyW')){e.preventDefault();setActiveInputMode('keyboard-mouse');if(!pilotInputBlocked)game?.reverse();}
  if(!e.repeat&&e.code==='KeyP'){e.preventDefault();pause();}
 });
 window.addEventListener('keyup',e=>{if(keys[e.code]){if(!levelMenu.open&&(!gameMode||gameMenu.view==='play')&&
- !(gameMode&&e.target instanceof HTMLButtonElement))e.preventDefault();held[keys[e.code]]=false;}});
+ !(gameMode&&e.target instanceof HTMLButtonElement))e.preventDefault();heldCodes.delete(e.code);syncHeldKeys();}});
 window.addEventListener('blur',()=>{clearInputs();if(capture)capture.invalidReasons.add('window blur');});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(capture)capture.invalidReasons.add('document hidden');}last=performance.now();accumulator=0;});
-window.addEventListener('gamepaddisconnected',event=>{gamepad.disconnect(event.gamepad.index);padConnected=false;padHeld={};});
+window.addEventListener('gamepaddisconnected',event=>{gamepad.disconnect(event.gamepad.index);padConnected=false;padFamily=null;padHeld={};setActiveInputMode('keyboard-mouse');});
 canvas.onclick=()=>canvas.focus({preventScroll:true});
+// Desktop mouse on #game canvas: Left hold = swing, Left+Right hold = flip, Right release without Left = reverse.
+const mouse=createMouseControls();
+function mousePointer(e,kind){
+ if(e.pointerType!=='mouse')return;
+ if(levelMenu.open||(gameMode&&gameMenu.view!=='play')){if(mouse.active)mouse.reset();return;}
+ if(kind==='down'){
+  unlockSound();setActiveInputMode('keyboard-mouse');canvas.focus({preventScroll:true});
+  if(e.buttons&3){e.preventDefault();try{canvas.setPointerCapture(e.pointerId);}catch{}}
+  mouse.sync(e.buttons);
+ }else if(kind==='move'){
+  if(mouse.active||(e.buttons&3))mouse.sync(e.buttons);
+ }else if(kind==='up'){
+  if(mouse.active)mouse.sync(e.buttons);
+ }else mouse.reset();
+}
+for(const [type,kind] of [['pointerdown','down'],['pointermove','move'],['pointerup','up'],['pointercancel','cancel']])canvas.addEventListener(type,e=>mousePointer(e,kind),{passive:false});
+canvas.addEventListener('contextmenu',e=>e.preventDefault());
+function pollMouse(){
+ const v=mouse.poll();mouseHeld=v.held;
+ if(v.reverses||v.held.swing||v.held.flip)inputReplay=null;
+ if(!pilotInputBlocked)for(let i=0;i<v.reverses;i++)game?.reverse();
+}
 // Touch: tap = reverse, one-finger hold = swing, two-finger hold = flip, press-drag-hold = bounce.
 // Touch/pen only, so desktop mouse clicks keep their existing focus behaviour. See touch-controls.mjs.
 // The gesture surface is the whole play area (board and instruction panel) except its controls.
@@ -139,7 +199,7 @@ for(const button of document.querySelectorAll('[data-action]')){button.onpointer
 function applyLayout(){
  document.body.classList.toggle('play-layout',playLayout);$('touch-panel').hidden=!playLayout;
  const play=$('play'),panel=$('touch-panel');
- if(!playLayout){delete play.dataset.arrangement;canvas.style.width='';panel.removeAttribute('style');return;}
+ if(!playLayout){delete play.dataset.arrangement;canvas.style.width='';panel.removeAttribute('style');updateSideControlsPanel();return;}
  const area=play.getBoundingClientRect(),w=Math.round(area.width)||window.innerWidth,h=Math.round(area.height)||window.innerHeight,plan=planPlayLayout(w,h);
  play.dataset.arrangement=plan.arrangement;canvas.style.width=plan.board.w+'px';
  panel.style.width=plan.arrangement==='side'?plan.panel.w+'px':w+'px';panel.style.height=plan.arrangement==='side'?h+'px':plan.panel.h+'px';
@@ -148,6 +208,7 @@ function applyLayout(){
  if(ask){$('rotate-prompt').querySelector('b').textContent=plan.rotate.to==='landscape'?'Turn your phone sideways':'Turn your device upright';$('rotate-gain').textContent='The board gets about '+Math.round((plan.rotate.gain-1)*100)+'% bigger.';}
  // Densest-last: keep the most readable instruction style that fits the remaining area.
  for(const level of [[],['compact'],['compact','tight'],['compact','tight','minimal']]){panel.classList.remove('compact','tight','minimal');panel.classList.add(...level);if(panel.scrollHeight<=panel.clientHeight+1&&panel.scrollWidth<=panel.clientWidth+1)break;}
+ updateSideControlsPanel();
 }
 for(const target of [window,window.visualViewport].filter(Boolean))target.addEventListener('resize',applyLayout);
 document.addEventListener('fullscreenchange',applyLayout);screen.orientation?.addEventListener?.('change',applyLayout);
@@ -182,13 +243,20 @@ function pollGamepad(){
  }
  let pads;
  try{pads=navigator.getGamepads?.()??[];}catch{
-  gamepad.reset();padConnected=false;gameMenu?.setConnected(false);padStatus('Gamepad API unavailable in this browser context.');return;
+  gamepad.reset();padConnected=false;padFamily=null;gameMenu?.setConnected(false,null);setActiveInputMode('keyboard-mouse');padStatus('Gamepad API unavailable in this browser context.');return;
  }
  const state=gamepad.poll(pads,true,gameMenu?.view!=='play'&&gameMode?performance.now():undefined);
- const {connected,held:pad,pressed}=state;
+ const {connected,padFamily:family,held:pad,pressed}=state;
+ const wasConnected=padConnected;
  padConnected=connected;
+ padFamily=connected?(family??null):null;
+ if(connected&&(!wasConnected||state.direction||Object.values(pressed).some(Boolean)||Object.values(pad).some(Boolean))){
+  setActiveInputMode(padFamily??'gamepad');
+ }else if(!connected&&wasConnected){
+  setActiveInputMode('keyboard-mouse');
+ }
  if(gameMode){
-  gameMenu.setConnected(connected);
+  gameMenu.setConnected(connected,padFamily);
   if(!connected)return;
   if(state.direction||Object.values(pressed).some(Boolean))unlockSound();
   if(gameMenu.view!=='play'){gameMenu.pad(state);return;}
@@ -200,12 +268,12 @@ function pollGamepad(){
  padStatus(connected?'Standard gamepad connected. '+controlsHint():'Press a button on a standard controller to connect.');
  if(!connected||!ready)return;
  if(levelMenu.open){
-  if(pressed.levels||pressed.bounce)levelMenu.close();
+  if(pressed.levels||pressed.reverse)levelMenu.close();
   else if(pressed.swing)$('controller-level-confirm').click();
   else if(pressed.pause)shiftMenuLevel(-1);
   else if(pressed.restart)shiftMenuLevel(1);
   else if(pressed.flip)shiftMenuLevel(-10);
-  else if(pressed.reverse)shiftMenuLevel(10);
+  else if(pressed.bounce)shiftMenuLevel(10);
   return;
  }
  if(!gameMode&&pressed.levels){openLevelMenu();return;}
@@ -238,17 +306,19 @@ function unlockSound(enabled=getSlot(gameMenu?.slotId??activeSlotId).sound){
 function playSound(name){
  if(!(gameMode?getSlot(activeSlotId).sound:settings.sound)||!audio[name])return;
  if(gameMode&&(window.AudioContext||window.webkitAudioContext)){
-  if(soundContext?.state!=='running')return;
-  const startingGame=game;
-  loadSoundBuffer(name).then(buffer=>{
-   if(!buffer||game!==startingGame||!['play','complete'].includes(gameMenu.view)||!getSlot(activeSlotId).sound)return;
-   const source=soundContext.createBufferSource(),gain=soundContext.createGain();
-   source.buffer=buffer;
-   gain.gain.value=.45;
-   source.connect(gain).connect(soundContext.destination);
-   source.start();
-  }).catch(()=>{});
-  return;
+  if(soundContext?.state==='running'){
+   const startingGame=game;
+   loadSoundBuffer(name).then(buffer=>{
+    if(!buffer||game!==startingGame||!['play','complete'].includes(gameMenu.view)||!getSlot(activeSlotId).sound)return;
+    const source=soundContext.createBufferSource(),gain=soundContext.createGain();
+    source.buffer=buffer;
+    gain.gain.value=.45;
+    source.connect(gain).connect(soundContext.destination);
+    source.start();
+   }).catch(()=>{});
+   return;
+  }
+  soundContext?.resume?.().catch(()=>{});
  }
  const sound=gameMode?new Audio(audio[name]):audio[name].cloneNode();
  sound.volume=.45;
@@ -607,7 +677,7 @@ $('png').onclick=()=>{if(capture)capture.invalidReasons.add('PNG export during t
 $('memory').onclick=async()=>{if(capture){$('diagnostics').textContent='Memory measurement is disabled during capture.';return;}const start=new Date().toISOString();memoryPending=true;$('capture').disabled=true;$('capture-reset').disabled=true;$('memory').disabled=true;$('diagnostics').textContent='Measuring page memory…';try{if(performance.measureUserAgentSpecificMemory){const m=await performance.measureUserAgentSpecificMemory();memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'completed',method:'measureUserAgentSpecificMemory',boundary:'browser-reported page-associated memory; not process RSS or physical RAM',result:m};}else memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'unavailable',boundary:'No supported page memory API; no estimate invented'};}catch(e){memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'failed',error:String(e),boundary:'No memory result'}}finally{memoryPending=false;$('capture').disabled=false;$('capture-reset').disabled=false;$('memory').disabled=false;$('diagnostics').textContent=JSON.stringify(memoryResult);}};
 $('route').onclick=async()=>{if(!ready||!checkedRoute)return;try{await loadScene(activeScene);inputReplay=createInputReplay(checkedRoute);message('Replaying a checked input route from a new scene.');canvas.focus({preventScroll:true});}catch(e){message('Checked route unavailable: '+e.message,true);}};
 $('workload').onclick=()=>{restart();recordedUntil=12;message('Recorded input demo: swing held for 12 simulation seconds; no other actions.');};
-function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open&&(!gameMode||gameMenu.view==='play')){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!touch.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){bombBonusBaseline=game.bombScene?.score??0;inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){bombBonusBaseline=game.bombScene?.score??0;resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal')onGoal();}lastEvent=game.eventSequence;}const drawStart=performance.now();try{if(!gameMode||(gameMenu.boardVisible&&!loadingScene))draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
+function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();pollMouse();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open&&(!gameMode||gameMenu.view==='play')){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!touch.active&&!mouse.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){bombBonusBaseline=game.bombScene?.score??0;inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){bombBonusBaseline=game.bombScene?.score??0;resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal')onGoal();}lastEvent=game.eventSequence;}const drawStart=performance.now();try{if(!gameMode||(gameMenu.boardVisible&&!loadingScene))draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
 async function loadScene(scene,black=blackHand()){
  if(capture){capture.invalidReasons.add('scene changed');finishCapture(performance.now());}
  ready=false;clearInputs();inputReplay=null;recordedUntil=0;renderPrevious=null;lastEvent=0;
@@ -657,6 +727,7 @@ async function loadScene(scene,black=blackHand()){
  document.querySelector('h1').textContent=`ClockWerx · ${title}`;canvas.setAttribute('aria-label',title+' game');
  activeBackdrop=scene.backdrop||manifest.backdrop;activePlayfield=scene.playfield||null;
  activeScene=scene;bombBonusBaseline=0;clearInputs();pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
+ updateSideControlsPanel();
  message(playLayout?`${title} ready. ${controlsHint()}`:`${title} ready · ${manifest.vectorAssets?'SVG foreground, continuous rotation':'original bitmap foreground'}. ${controlsHint()}`);
 }
 function setGameView(view,coversBoard){
@@ -669,6 +740,7 @@ function setGameView(view,coversBoard){
  clearInputs();
  last=performance.now();
  accumulator=0;
+ updateSideControlsPanel();
  if(playing)canvas.focus({preventScroll:true});
  if(view==='title'){
   document.title='ClockWerx';

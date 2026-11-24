@@ -1,8 +1,8 @@
 {
   "swing": {"button": 0, "label": "Swing / play selected level"},
-  "bounce": {"button": 1, "label": "Bounce / close level picker"},
+  "reverse": {"button": 1, "label": "Reverse / back or close menu"},
   "flip": {"button": 2, "label": "Flip / previous 10 levels"},
-  "reverse": {"button": 3, "label": "Reverse / next 10 levels"},
+  "bounce": {"button": 3, "label": "Bounce / next 10 levels"},
   "pause": {"button": 5, "label": "Pause / previous level"},
   "restart": {"button": 7, "label": "Restart / next level"},
   "levels": {"button": 9, "label": "Open or close level picker"}

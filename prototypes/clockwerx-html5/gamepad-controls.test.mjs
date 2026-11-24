@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {createGamepadControls, readMenuDirection} from './gamepad-controls.mjs';
+import {createGamepadControls, detectPadFamily, readMenuDirection} from './gamepad-controls.mjs';
+import {createMouseControls} from './mouse-controls.mjs';
 
 function pad(down = [], overrides = {}) {
   return {
@@ -12,11 +13,11 @@ function pad(down = [], overrides = {}) {
 
 const active = actions => Object.keys(actions).filter(action => actions[action]);
 
-test('face buttons supply held actions; reverse and menu commands have one press edge', () => {
+test('face buttons supply held actions with Circle/B reverse and Triangle/Y bounce', () => {
   const controller = createGamepadControls();
   controller.poll([pad()], true);
   const all = [0, 1, 2, 3, 5, 7, 9];
-  const actions = ['swing', 'bounce', 'flip', 'reverse', 'pause', 'restart', 'levels'];
+  const actions = ['swing', 'reverse', 'flip', 'bounce', 'pause', 'restart', 'levels'];
   let state = controller.poll([pad(all)], true);
   assert.deepEqual(active(state.held), actions);
   assert.deepEqual(active(state.pressed), actions);
@@ -24,7 +25,8 @@ test('face buttons supply held actions; reverse and menu commands have one press
   assert.deepEqual(active(state.held), actions);
   assert.deepEqual(active(state.pressed), []);
   assert.deepEqual(active(controller.poll([pad()], true).held), []);
-  assert.deepEqual(active(controller.poll([pad([3])], true).pressed), ['reverse']);
+  assert.deepEqual(active(controller.poll([pad([1])], true).pressed), ['reverse']);
+  assert.deepEqual(active(controller.poll([pad([3])], true).pressed), ['bounce']);
 });
 
 test('reserved buttons, other buttons and axes supply no game input', () => {
@@ -38,11 +40,11 @@ test('reserved buttons, other buttons and axes supply no game input', () => {
 test('refocus and reset require a fresh press for each button that was down', () => {
   const controller = createGamepadControls();
   controller.poll([pad()], true);
-  assert.equal(controller.poll([pad([0, 3])], true).held.swing, true);
-  assert.deepEqual(controller.poll([pad([0, 3])], false).held, {});
-  assert.deepEqual(active(controller.poll([pad([0, 3])], true).held), []);
+  assert.equal(controller.poll([pad([0, 1])], true).held.swing, true);
+  assert.deepEqual(controller.poll([pad([0, 1])], false).held, {});
+  assert.deepEqual(active(controller.poll([pad([0, 1])], true).held), []);
   assert.deepEqual(active(controller.poll([pad([0, 5])], true).pressed), ['pause']);
-  assert.deepEqual(active(controller.poll([pad([0, 3, 5])], true).pressed), ['reverse']);
+  assert.deepEqual(active(controller.poll([pad([0, 1, 5])], true).pressed), ['reverse']);
   controller.reset();
   assert.deepEqual(active(controller.poll([pad([9])], true).pressed), []);
 });
@@ -61,6 +63,23 @@ test('a single connected standard controller owns input through list reordering 
   controller.disconnect(0);
   assert.deepEqual(active(controller.poll([pad([0])], true).held), []);
   assert.deepEqual(controller.poll([], true).held, {});
+});
+
+test('detects PlayStation vs Xbox pad families without misclassifying Xbox Wireless Controller', () => {
+  assert.equal(detectPadFamily('DualSense Wireless Controller (STANDARD GAMEPAD Vendor: 054c Product: 0ce6)'), 'playstation');
+  assert.equal(detectPadFamily('Wireless Controller (STANDARD GAMEPAD Vendor: 054c Product: 09cc)'), 'playstation');
+  assert.equal(detectPadFamily('DualShock 4'), 'playstation');
+  assert.equal(detectPadFamily('PLAYSTATION(R)3 Controller'), 'playstation');
+  assert.equal(detectPadFamily('Xbox Wireless Controller (STANDARD GAMEPAD Vendor: 045e Product: 0b13)'), 'xbox');
+  assert.equal(detectPadFamily('Xbox 360 Controller (XInput STANDARD GAMEPAD)'), 'xbox');
+  assert.equal(detectPadFamily('standard pad'), null);
+  assert.equal(detectPadFamily(''), null);
+
+  const controller = createGamepadControls();
+  assert.equal(controller.poll([], true).padFamily, null);
+  assert.equal(controller.poll([pad([], {id: 'DualSense Wireless Controller'})], true).padFamily, 'playstation');
+  controller.disconnect(0);
+  assert.equal(controller.poll([pad([], {id: 'Xbox Wireless Controller (045e)'})], true).padFamily, 'xbox');
 });
 
 test('menus read the dominant left stick axis and prioritize the standard D-pad', () => {
@@ -122,4 +141,48 @@ test('reserved buttons are never read in gameplay or menus', () => {
   assert.deepEqual(active(menu.held), []);
   assert.deepEqual(active(menu.pressed), []);
   assert.equal(menu.direction, undefined);
+});
+
+test('desktop mouse controls handle swing, chord flip, and solo right-click reverse', () => {
+  const mouse = createMouseControls();
+
+  // Left hold => swing; release => nothing.
+  mouse.sync(1);
+  assert.deepEqual(mouse.poll(), {held: {swing: true, flip: false}, reverses: 0});
+  mouse.sync(0);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 0});
+
+  // Right hold alone => nothing while held, 1 reverse on release.
+  mouse.sync(2);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 0});
+  mouse.sync(0);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 1});
+  assert.equal(mouse.poll().reverses, 0);
+
+  // Left held, then Right pressed => flip (not swing); releasing Right returns to swing with no reverse.
+  mouse.sync(1);
+  assert.deepEqual(mouse.poll().held, {swing: true, flip: false});
+  mouse.sync(3);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: true}, reverses: 0});
+  mouse.sync(1);
+  assert.deepEqual(mouse.poll(), {held: {swing: true, flip: false}, reverses: 0});
+  mouse.sync(0);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 0});
+
+  // Right pressed first, then Left pressed => flip; releasing Left then Right emits NO reverse.
+  mouse.sync(2);
+  assert.deepEqual(mouse.poll().held, {swing: false, flip: false});
+  mouse.sync(3);
+  assert.deepEqual(mouse.poll().held, {swing: false, flip: true});
+  mouse.sync(2);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 0});
+  mouse.sync(0);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 0});
+
+  // Reset clears active buttons without emitting a reverse.
+  mouse.sync(2);
+  assert.equal(mouse.active, true);
+  mouse.reset();
+  assert.equal(mouse.active, false);
+  assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 0});
 });

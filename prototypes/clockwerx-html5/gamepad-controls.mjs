@@ -3,6 +3,14 @@ import bindings from './gamepad-bindings.json' with {type: 'json'};
 const reserved = new Set([4, 6, 8, 16]);
 const directions = [['up', 12], ['down', 13], ['left', 14], ['right', 15]];
 
+export function detectPadFamily(id = '') {
+  if (typeof id !== 'string' || !id) return null;
+  if (/dualshock|dualsense|playstation|054c/i.test(id)) return 'playstation';
+  if (/xbox|xinput|045e/i.test(id)) return 'xbox';
+  if (/wireless controller/i.test(id)) return 'playstation';
+  return null;
+}
+
 export function readMenuDirection(pad, deadzone = 0.55) {
   const dpad = directions.find(([, button]) => pad.buttons?.[button]?.pressed);
   if (dpad) return dpad[0];
@@ -41,7 +49,7 @@ export function createGamepadControls() {
       const pad = standard.find(samePad) ?? standard[0];
       if (!focused || !pad) {
         reset();
-        return { connected: false, held: {}, pressed: {} };
+        return { connected: false, padFamily: null, held: {}, pressed: {} };
       }
 
       const joining = !owner || !samePad(pad);
@@ -58,7 +66,7 @@ export function createGamepadControls() {
         pressed[action] = held[action] && !previous[action];
       }
       previous = { ...held };
-      const state = {connected: true, held, pressed};
+      const state = {connected: true, padFamily: detectPadFamily(pad.id), held, pressed};
       if (menuTime !== undefined) {
         const direction = readMenuDirection(pad);
         directionBlocked = Boolean(direction && (joining || directionBlocked));

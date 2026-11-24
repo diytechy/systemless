@@ -1,6 +1,17 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {chapterOf, completionDetails, menuPadAction, moveChapter, moveInGrid, moveSlot} from './game-menu.mjs';
+import {
+  canShowSideControls,
+  chapterOf,
+  completionDetails,
+  createGameMenu,
+  levelMechanicCues,
+  menuPadAction,
+  moveChapter,
+  moveInGrid,
+  moveSlot,
+  sideControlsSpec,
+} from './game-menu.mjs';
 
 test('the clock face maps four compass points and shoulder steps wrap', () => {
   assert.deepEqual(['up', 'right', 'down', 'left'].map(direction => moveSlot(2, direction, true)), [1, 2, 3, 4]);
@@ -36,24 +47,27 @@ test('chapter jumps preserve the tile position and clamp at the ends of the camp
 test('controller buttons resolve to the actions of their current screen', () => {
   assert.equal(menuPadAction('title', {swing: true}), 'slot-play');
   assert.equal(menuPadAction('title', {flip: true}), 'slot-levels');
-  assert.equal(menuPadAction('title', {reverse: true}), 'slot-hand');
-  assert.equal(menuPadAction('title', {bounce: true}), 'slot-sound');
+  assert.equal(menuPadAction('title', {bounce: true}), 'slot-hand');
+  assert.equal(menuPadAction('title', {reverse: true}), 'slot-sound');
   assert.equal(menuPadAction('title', {pause: true}), 'previous');
   assert.equal(menuPadAction('title', {restart: true}), 'next');
   assert.equal(menuPadAction('title', {levels: true}), 'slot-reset');
   assert.equal(menuPadAction('title', {levels: true}, true), 'slot-keep');
+  assert.equal(menuPadAction('title', {reverse: true}, true), 'slot-keep');
   assert.equal(menuPadAction('title', {swing: true}, true), 'activate');
   assert.equal(menuPadAction('title', {flip: true}, true), null);
   assert.equal(menuPadAction('levels', {swing: true}), 'activate');
   assert.equal(menuPadAction('levels', {flip: true}), 'previous-chapter');
-  assert.equal(menuPadAction('levels', {reverse: true}), 'next-chapter');
-  assert.equal(menuPadAction('levels', {bounce: true}), 'game-level-back');
+  assert.equal(menuPadAction('levels', {bounce: true}), 'next-chapter');
+  assert.equal(menuPadAction('levels', {reverse: true}), 'game-level-back');
   assert.equal(menuPadAction('levels', {levels: true}), 'game-level-back');
   assert.equal(menuPadAction('pause', {pause: true}), 'game-resume');
+  assert.equal(menuPadAction('pause', {reverse: true}), 'game-resume');
   assert.equal(menuPadAction('pause', {swing: true}), 'activate');
-  assert.equal(menuPadAction('complete', {swing: true}), 'game-next');
-  assert.equal(menuPadAction('complete', {restart: true}), 'game-replay');
-  assert.equal(menuPadAction('complete', {levels: true}), 'game-complete-levels');
+  assert.equal(menuPadAction('complete', {swing: true}), 'activate');
+  assert.equal(menuPadAction('complete', {restart: true}), null);
+  assert.equal(menuPadAction('complete', {levels: true}), null);
+  assert.equal(menuPadAction('complete', {pause: true}), null);
   for (const view of ['title', 'levels', 'pause', 'complete', 'play', 'loading']) {
     assert.equal(menuPadAction(view, {}), null);
   }
@@ -67,4 +81,199 @@ test('completion plaque reports round points separately from the campaign improv
   assert.equal(final.delta, 0);
   assert.equal(final.nextLevel, null);
   assert.equal(completionDetails(1, 0, 0, 1000, false).nextLevel, null);
+});
+
+test('completion plaque navigates with D-pad/stick and activates highlighted command with Cross/A', () => {
+  const byId = new Map();
+  let activeElement = null;
+  function makeNode(tag, id = '') {
+    const attrs = new Map();
+    const classes = new Set();
+    const node = {
+      tagName: tag.toUpperCase(),
+      id,
+      hidden: false,
+      disabled: false,
+      inert: false,
+      textContent: '',
+      dataset: {},
+      style: {setProperty() {}},
+      children: [],
+      classList: {toggle(name, force) { force ? classes.add(name) : classes.delete(name); }},
+      setAttribute(k, v) { attrs.set(k, String(v)); },
+      getAttribute(k) { return attrs.get(k); },
+      hasAttribute(k) { return attrs.has(k); },
+      toggleAttribute(k, force) {
+        const next = force === undefined ? !attrs.has(k) : Boolean(force);
+        next ? attrs.set(k, '') : attrs.delete(k);
+        return next;
+      },
+      focus() { activeElement = node; node.onfocus?.(); },
+      click() { if (!node.disabled) node.onclick?.(); },
+      append(...items) { node.children.push(...items); },
+      replaceChildren(...items) { node.children = [...items]; },
+      contains(other) { return other === node || node.children.some(c => c.contains?.(other)); },
+      querySelector(sel) {
+        if (sel === 'h2') return node.children.find(c => c.tagName === 'H2') ?? makeNode('h2');
+        return null;
+      },
+      querySelectorAll(sel) {
+        if (sel === '[data-screen]') return node.children.filter(c => 'screen' in c.dataset);
+        if (sel === 'button') return Array.from(byId.values()).filter(n => n.tagName === 'BUTTON');
+        return [];
+      },
+    };
+    if (id) byId.set(id, node);
+    return node;
+  }
+
+  globalThis.document = {
+    get activeElement() { return activeElement; },
+    getElementById: id => byId.get(id),
+    createElement: tag => makeNode(tag),
+  };
+
+  try {
+    const root = makeNode('div', 'game-overlay');
+    const titleSection = makeNode('section', 'game-title-screen');
+    titleSection.dataset.screen = 'title';
+    titleSection.append(makeNode('h2', 'game-title'));
+    const completeSection = makeNode('section', 'game-complete-screen');
+    completeSection.dataset.screen = 'complete';
+    completeSection.append(makeNode('h2', 'game-complete-title'));
+    const pauseSection = makeNode('section', 'game-pause-screen');
+    pauseSection.dataset.screen = 'pause';
+    pauseSection.append(makeNode('h2', 'game-pause-title'));
+    const levelsSection = makeNode('section', 'game-level-screen');
+    levelsSection.dataset.screen = 'levels';
+    levelsSection.append(makeNode('h2', 'game-level-title'));
+    const loadingSection = makeNode('section', 'game-loading');
+    loadingSection.dataset.screen = 'loading';
+    loadingSection.append(makeNode('h2', 'game-loading-title'));
+    root.append(titleSection, levelsSection, pauseSection, completeSection, loadingSection);
+
+    for (const id of [
+      'game-slots', 'game-level-grid', 'game-free-play', 'game-chapters', 'game-menu-status',
+      'slot-confirm', 'slot-keep', 'slot-erase', 'slot-play', 'slot-levels', 'slot-hand', 'slot-sound',
+      'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
+      'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-round-bonus',
+      'game-finish-bonus', 'game-level-total', 'game-campaign-total', 'game-score-delta',
+      'game-complete-controls',
+    ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') ? 'button' : 'div', id);
+
+    const pauseActions = makeNode('div', 'pause-actions');
+    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-hand', 'game-save-slots'].map(id => makeNode('button', id));
+    pauseActions.append(...pauseButtons);
+    pauseActions.querySelectorAll = () => pauseButtons;
+
+    const completeActions = makeNode('div', 'complete-actions');
+    const completeButtons = ['game-next', 'game-replay', 'game-complete-levels', 'game-complete-slots'].map(id => makeNode('button', id));
+    completeActions.append(...completeButtons);
+    completeActions.querySelectorAll = () => completeButtons;
+
+    let restarted = 0;
+    const played = [];
+    const menu = createGameMenu({
+      root,
+      getSlot: () => ({started: false, currentLevel: 1, completedLevels: [], bestLevelScores: {}, campaignScore: 0, black: false, sound: true, freePlay: false}),
+      onView() {},
+      onPlay: (slot, level) => played.push([slot, level]),
+      onResume() {},
+      onRestart: () => restarted++,
+      onSetting() {},
+      onReset() {},
+      onExport() {},
+    });
+
+    menu.setScenes([{ordinal: 1, title: 'Movement'}, {ordinal: 2, title: 'Two'}]);
+    menu.setConnected(true, 'playstation');
+    assert.equal(byId.get('game-complete-controls').hidden, false);
+    assert.equal(byId.get('game-complete-controls').textContent, 'Stick / D-pad choose · ✕ select');
+    assert.equal(byId.get('game-replay').textContent, 'Replay Level');
+    assert.equal(byId.get('game-complete-levels').textContent, 'Level Select');
+    assert.equal(byId.get('game-complete-slots').textContent, 'Save Slots');
+
+    menu.complete({level: 1, bonus: 500, levelTotal: 1500, campaignTotal: 1500, delta: 1500, nextLevel: 2});
+    assert.equal(byId.get('game-next').hasAttribute('data-selected'), true);
+    menu.pad({direction: 'down', pressed: {}});
+    assert.equal(byId.get('game-replay').hasAttribute('data-selected'), true);
+    menu.pad({pressed: {swing: true}});
+    assert.equal(restarted, 1);
+
+    // Navigate down to Save Slots and activate.
+    menu.complete({level: 1, bonus: 500, levelTotal: 1500, campaignTotal: 1500, delta: 1500, nextLevel: 2});
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'down', pressed: {}});
+    assert.equal(byId.get('game-complete-slots').hasAttribute('data-selected'), true);
+    menu.pad({pressed: {swing: true}});
+    assert.equal(menu.view, 'title');
+
+    // On level 100 (nextLevel null), Level Select button is hidden and skipped by navigation.
+    menu.complete({level: 100, bonus: 0, levelTotal: 1000, campaignTotal: 50000, delta: 0, nextLevel: null});
+    assert.equal(byId.get('game-complete-levels').hidden, true);
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'down', pressed: {}});
+    assert.equal(byId.get('game-complete-slots').hasAttribute('data-selected'), true);
+    assert.equal(played.length, 0);
+  } finally {
+    delete globalThis.document;
+  }
+});
+
+test('levelMechanicCues hides cues on Level 1 Movement and summarizes active mechanics elsewhere', () => {
+  assert.deepEqual(levelMechanicCues({ordinal: 1, title: 'Movement', spikes: [{id: 0}], dots: [{ring: true}]}), []);
+  assert.deepEqual(levelMechanicCues({title: 'Movement', walls: [{id: 0}]}), []);
+  assert.deepEqual(levelMechanicCues({
+    ordinal: 15,
+    title: 'Chaos',
+    spikes: [{id: 0}],
+    walls: [{id: 0}],
+    doors: [{id: 0}],
+    puddles: [{id: 0}],
+    teleportRules: true,
+    elevatorRules: true,
+    bombRules: true,
+    gunTriggerProjectileRules: true,
+    dots: [{waystation: true}, {ring: true}],
+  }), [
+    'Spikes',
+    'Walls',
+    'Doors',
+    'Oil',
+    'Teleports',
+    'Elevators',
+    'Bombs & Matches',
+    'Guns & Triggers',
+    'Checkpoints',
+    'Bonus Rings',
+  ]);
+  assert.deepEqual(levelMechanicCues({ordinal: 2, title: 'Plain', dots: [{kind: 'dot'}]}), []);
+});
+
+test('sideControlsSpec formats PlayStation, Xbox, generic controller, and Keyboard & Mouse panels', () => {
+  const ps = sideControlsSpec('playstation', ['Spikes', 'Walls']);
+  assert.equal(ps.modeLabel, 'PlayStation');
+  assert.deepEqual(ps.rows.map(r => r.keys), ['✕', '□', '○', '△']);
+  assert.deepEqual(ps.cues, ['Spikes', 'Walls']);
+
+  const xb = sideControlsSpec('xbox', []);
+  assert.equal(xb.modeLabel, 'Xbox');
+  assert.deepEqual(xb.rows.map(r => r.keys), ['A', 'X', 'B', 'Y']);
+
+  const km = sideControlsSpec('keyboard-mouse', ['Teleports']);
+  assert.equal(km.modeLabel, 'Keyboard & Mouse');
+  assert.deepEqual(km.rows.map(r => r.keys), ['Space · D · L-Click', 'L-Shift · X · L+R Click', 'W · C · R-Click', 'Z']);
+  assert.deepEqual(km.cues, ['Teleports']);
+});
+
+test('canShowSideControls only shows on widescreen game-mode desktop play without overlapping the 4:3 canvas', () => {
+  assert.equal(canShowSideControls({gameMode: true, playLayout: false, view: 'play', viewportWidth: 1920, viewportHeight: 1080}), true);
+  assert.equal(canShowSideControls({gameMode: true, playLayout: false, view: 'play', viewportWidth: 1600, viewportHeight: 900}), true);
+  assert.equal(canShowSideControls({gameMode: true, playLayout: false, view: 'play', viewportWidth: 1280, viewportHeight: 720}), false);
+  assert.equal(canShowSideControls({gameMode: true, playLayout: false, view: 'play', viewportWidth: 1024, viewportHeight: 768}), false);
+  assert.equal(canShowSideControls({gameMode: true, playLayout: false, view: 'play', viewportWidth: 800, viewportHeight: 1200}), false);
+  assert.equal(canShowSideControls({gameMode: true, playLayout: true, view: 'play', viewportWidth: 1920, viewportHeight: 1080}), false);
+  assert.equal(canShowSideControls({gameMode: true, playLayout: false, view: 'pause', viewportWidth: 1920, viewportHeight: 1080}), false);
+  assert.equal(canShowSideControls({gameMode: false, playLayout: false, view: 'play', viewportWidth: 1920, viewportHeight: 1080}), false);
 });

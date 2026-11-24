@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {createGamepadControls} from './gamepad-controls.mjs';
+import {createGamepadControls, readMenuDirection} from './gamepad-controls.mjs';
 
 function pad(down = [], overrides = {}) {
   return {
@@ -61,4 +61,65 @@ test('a single connected standard controller owns input through list reordering 
   controller.disconnect(0);
   assert.deepEqual(active(controller.poll([pad([0])], true).held), []);
   assert.deepEqual(controller.poll([], true).held, {});
+});
+
+test('menus read the dominant left stick axis and prioritize the standard D-pad', () => {
+  assert.equal(readMenuDirection(pad([], {axes: [.54, -.2, 1, 1]})), null);
+  assert.equal(readMenuDirection(pad([], {axes: [.6, -.8]})), 'up');
+  assert.equal(readMenuDirection(pad([], {axes: [-.9, .6]})), 'left');
+  assert.equal(readMenuDirection(pad([], {axes: [.55, 0]})), 'right');
+  assert.equal(readMenuDirection(pad([], {axes: [0, .9]})), 'down');
+  for (const [button, direction] of [[12, 'up'], [13, 'down'], [14, 'left'], [15, 'right']]) {
+    assert.equal(readMenuDirection(pad([button], {axes: [1, 1]})), direction);
+  }
+});
+
+test('menu directional input repeats, while menu face and shoulder buttons remain press-edge actions', () => {
+  const controller = createGamepadControls();
+  const right = pad([0, 15]);
+  assert.equal(controller.poll([pad()], true, 0).direction, undefined);
+  assert.equal(controller.poll([right], true, 10).direction, 'right');
+  assert.equal(controller.poll([right], true, 339).direction, undefined);
+  const repeated = controller.poll([right], true, 340);
+  assert.equal(repeated.direction, 'right');
+  assert.deepEqual(active(repeated.pressed), []);
+  assert.equal(controller.poll([right], true, 449).direction, undefined);
+  assert.equal(controller.poll([right], true, 450).direction, 'right');
+  assert.equal(controller.poll([pad([12])], true, 460).direction, 'up');
+  assert.equal(controller.poll([pad([12])], true).direction, undefined);
+});
+
+test('menu input requires focus and a neutral stick or D-pad after reconnect or reset', () => {
+  const controller = createGamepadControls();
+  const heldUp = pad([9], {axes: [0, -1]});
+  assert.equal(controller.poll([heldUp], false, 0).connected, false);
+  assert.equal(controller.poll([heldUp], true, 1).direction, undefined);
+  assert.equal(controller.poll([pad([13])], true, 100).direction, undefined);
+  controller.poll([pad()], true, 200);
+  assert.equal(controller.poll([heldUp], true, 201).direction, 'up');
+  controller.disconnect(0);
+  assert.equal(controller.poll([heldUp], true, 202).direction, undefined);
+  controller.poll([], true, 203);
+  assert.equal(controller.poll([heldUp], true, 204).direction, undefined);
+  controller.reset();
+  assert.deepEqual(active(controller.poll([heldUp], true, 205).pressed), []);
+});
+
+test('reserved buttons are never read in gameplay or menus', () => {
+  const reserved = new Set([4, 6, 8, 16]);
+  const pressed = pad([...reserved]);
+  pressed.buttons = new Proxy(pressed.buttons, {
+    get(target, key) {
+      assert.ok(!reserved.has(Number(key)), 'reserved button read');
+      return Reflect.get(target, key);
+    },
+  });
+  const controller = createGamepadControls();
+  controller.poll([pad()], true);
+  const gameplay = controller.poll([pressed], true);
+  const menu = controller.poll([pressed], true, 100);
+  assert.deepEqual(active(gameplay.held), []);
+  assert.deepEqual(active(menu.held), []);
+  assert.deepEqual(active(menu.pressed), []);
+  assert.equal(menu.direction, undefined);
 });

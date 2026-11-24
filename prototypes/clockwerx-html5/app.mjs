@@ -15,12 +15,22 @@ import {handPoses,presentedAngle,presentedFaderFrame,resizeCanvas,atlasFrame} fr
 import {createTouchGestures,clientToLogical} from './touch-controls.mjs';
 import {planPlayLayout} from './touch-layout.mjs';
 import {createGamepadControls} from './gamepad-controls.mjs';
-import {progressKey,readProgress,recordCompletion} from './progress.mjs';
+import {progressKey,readProgress,recordCompletion,slotStoreKey,readSlotStore,migrateLegacyProgress,
+ recordSlotLevelCompletion,resetSlot,updateSlot} from './progress.mjs';
+import {campaignLevels,completionBonus,completionDetails,createGameMenu} from './game-menu.mjs';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 const bootUtc=new Date().toISOString(),bootStart=performance.now(),STEP=1/120;
-let storedProgress;try{storedProgress=localStorage.getItem(progressKey);}catch{}
+const params=new URLSearchParams(location.search),gameMode=document.documentElement.classList.contains('game-mode');
+let storedProgress,storedSlots;
+try{
+ storedProgress=localStorage.getItem(progressKey);
+ storedSlots=localStorage.getItem(slotStoreKey);
+}catch{}
 const progress=readProgress(storedProgress),settings={sound:false};
 const gamepad=createGamepadControls(),levelMenu=$('controller-level-menu'),menuLevel=$('controller-level');
+let slotStore=storedSlots==null?migrateLegacyProgress(progress):readSlotStore(storedSlots);
+let activeSlotId=slotStore.activeSlotId,slotsUnsaved=false,gameMenu,gameScenes=new Map(),loadingScene=false;
+let soundContext,soundBuffers=new Map(),bombBonusBaseline=0;
 let chooseLevel;
 let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},buttonHeld={},padHeld={},capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
 const startup={bootUtc,boundary:'module evaluation to required foreground/background image decode and manifest parse complete',assetReadyUtc:null,readyMs:null,resourceEntries:[]};
@@ -29,10 +39,25 @@ let wallLayer=null,wallLayerBoard=null,wallLayerRevision=null,drawFailure=null; 
 let activeBackdrop,activePlayfield,activeScene;
 const movementScope=$('scope-description').textContent,movementFidelity=$('fidelity-description').textContent;
 function persist(){try{localStorage.setItem(progressKey,JSON.stringify(progress));}catch{}}
+function refreshSlotStore(){
+ if(slotsUnsaved)return;
+ try{
+  const json=localStorage.getItem(slotStoreKey);
+  slotStore=json===null?migrateLegacyProgress(progress):readSlotStore(json);
+ }catch{}
+}
+function persistSlots(){
+ try{
+  localStorage.setItem(slotStoreKey,JSON.stringify(slotStore));
+  slotsUnsaved=false;
+ }catch{slotsUnsaved=true;}
+}
+const getSlot=id=>slotStore.slots[id-1];
+const blackHand=()=>gameMode?getSlot(activeSlotId).black:progress.black;
 function message(s,error=false){for(const id of['status','panel-status']){$(id).textContent=s;$(id).className=error?'error':'';}}
 // Touch play view is the default on touch-first devices; ?layout=play|page overrides.
-const layoutQuery=new URLSearchParams(location.search).get('layout');
-let playLayout=layoutQuery==='play'||(layoutQuery!=='page'&&matchMedia('(pointer: coarse)').matches),rotateDismissed=false;
+const layoutQuery=params.get('layout');
+let playLayout=gameMode&&(layoutQuery==='play'||matchMedia('(pointer: coarse)').matches),rotateDismissed=false;
 let padConnected=false;
 function controlsHint(){if(padConnected)return 'A swing · B bounce · X flip · Y reverse · R1 pause · R2 restart · Start levels.';return playLayout?'Tap reverse · hold swing · two-finger hold flip.':'Space swing · Z bounce · X flip · C reverse.';}
 function pauseLabels(paused){$('pause').textContent=paused?'Resume (P)':'Pause (P)';$('touch-pause').textContent=$('panel-pause').textContent=paused?'Resume':'Pause';}
@@ -40,16 +65,38 @@ function download(name,blob){const a=document.createElement('a');a.href=URL.crea
 function action(name,on){inputReplay=null;buttonHeld[name]=on;if(on)canvas.focus({preventScroll:true})}
 function clearInputs(){held={};buttonHeld={};padHeld={};gamepad.reset();touch.reset();touchHeld={};}
 function pause(){if(!ready)return;game.paused=!game.paused;pauseLabels(game.paused);message(game.paused?'Paused. Press R1 or P, or tap Resume.':'Play resumed.');}
-function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
+function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();bombBonusBaseline=0;resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
 async function toggleFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else{await $('play').requestFullscreen({navigationUI:'hide'});await screen.orientation?.lock?.('landscape')?.catch(()=>{});}}catch(e){message('Fullscreen unavailable: '+e.message,true);}}
 $('pause').onclick=pause;$('touch-pause').onclick=pause;$('panel-pause').onclick=pause;$('fullscreen').onclick=toggleFullscreen;$('panel-fullscreen').onclick=toggleFullscreen;$('restart').onclick=restart;$('panel-restart').onclick=restart;
 // iPhone Safari has no element fullscreen; hide the button rather than show a failing control.
 if(!document.fullscreenEnabled)$('panel-fullscreen').hidden=true;
 $('panel-page').onclick=()=>{playLayout=false;applyLayout();};$('play-view').onclick=()=>{playLayout=true;applyLayout();};$('rotate-dismiss').onclick=()=>{rotateDismissed=true;applyLayout();};$('reverse').onclick=()=>{if(!pilotInputBlocked)game?.reverse();};$('black').onclick=()=>{if(capture)capture.invalidReasons.add('hand color changed during capture');progress.black=!progress.black;if(game instanceof SourceRound)game.setPlayerGroup(progress.black?4300:700);persist()};$('sound').checked=settings.sound;$('sound').onchange=()=>{if(capture)capture.invalidReasons.add('sound changed during capture');settings.sound=$('sound').checked;if(settings.sound)playSound('ActionSwing')};
 $('export-progress').onclick=()=>download('clockwerx-progress.json',new Blob([JSON.stringify(progress,null,2)],{type:'application/json'}));
+function exportSlots(){
+ refreshSlotStore();
+ download('clockwerx-save-slots.json',new Blob([JSON.stringify(slotStore,null,2)],{type:'application/json'}));
+}
+$('export-slots').onclick=exportSlots;
 const keys={Space:'swing',KeyZ:'bounce',KeyX:'flip'};
-window.addEventListener('keydown',e=>{if(levelMenu.open||e.target instanceof HTMLInputElement)return;if(keys[e.code]){e.preventDefault();inputReplay=null;held[keys[e.code]]=true;}if(!e.repeat&&e.code==='KeyC'){e.preventDefault();if(!pilotInputBlocked)game?.reverse()}if(!e.repeat&&e.code==='KeyP'){e.preventDefault();pause()}});
-window.addEventListener('keyup',e=>{if(keys[e.code]){if(!levelMenu.open)e.preventDefault();held[keys[e.code]]=false}});
+window.addEventListener('keydown',e=>{
+ if(gameMode){
+  unlockSound();
+  if(gameMenu.view!=='play'){
+   if(gameMenu.key(e))e.preventDefault();
+   return;
+  }
+  if(!e.repeat&&(e.code==='KeyP'||e.code==='Escape')){
+   e.preventDefault();openPause();return;
+  }
+  if(e.target instanceof HTMLButtonElement)return;
+ }
+ if(levelMenu.open||e.target instanceof HTMLInputElement)return;
+ if(keys[e.code]){e.preventDefault();inputReplay=null;held[keys[e.code]]=true;}
+ if(!e.repeat&&e.code==='KeyC'){e.preventDefault();if(!pilotInputBlocked)game?.reverse();}
+ if(!e.repeat&&e.code==='KeyP'){e.preventDefault();pause();}
+});
+window.addEventListener('keyup',e=>{if(keys[e.code]){if(!levelMenu.open&&(!gameMode||gameMenu.view==='play')&&
+ !(gameMode&&e.target instanceof HTMLButtonElement))e.preventDefault();held[keys[e.code]]=false;}});
 window.addEventListener('blur',()=>{clearInputs();if(capture)capture.invalidReasons.add('window blur');});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(capture)capture.invalidReasons.add('document hidden');}last=performance.now();accumulator=0;});
 window.addEventListener('gamepaddisconnected',event=>{gamepad.disconnect(event.gamepad.index);padConnected=false;padHeld={};});
@@ -59,7 +106,7 @@ canvas.onclick=()=>canvas.focus({preventScroll:true});
 // The gesture surface is the whole play area (board and instruction panel) except its controls.
 const touch=createTouchGestures(),touchSurface=$('play');let touchHeld={},touchView=null,touchButtonsKey='',tapFlashTimer=0;
 function touchPointer(e,kind){
- if(levelMenu.open||(e.pointerType!=='touch'&&e.pointerType!=='pen'))return;
+ if(levelMenu.open||(gameMode&&gameMenu.view!=='play')||(e.pointerType!=='touch'&&e.pointerType!=='pen'))return;
  if(kind==='down'?e.target.closest?.('button,select,a,input,label,summary,[data-no-gesture]'):!touch.tracks(e.pointerId))return;
  e.preventDefault();const t=performance.now();
  if(kind==='down'){try{touchSurface.setPointerCapture(e.pointerId);}catch{}canvas.focus({preventScroll:true});touch.down(e.pointerId,e.clientX,e.clientY,t);}
@@ -135,10 +182,21 @@ function pollGamepad(){
  }
  let pads;
  try{pads=navigator.getGamepads?.()??[];}catch{
-  gamepad.reset();padConnected=false;padStatus('Gamepad API unavailable in this browser context.');return;
+  gamepad.reset();padConnected=false;gameMenu?.setConnected(false);padStatus('Gamepad API unavailable in this browser context.');return;
  }
- const {connected,held:pad,pressed}=gamepad.poll(pads,true);
+ const state=gamepad.poll(pads,true,gameMenu?.view!=='play'&&gameMode?performance.now():undefined);
+ const {connected,held:pad,pressed}=state;
  padConnected=connected;
+ if(gameMode){
+  gameMenu.setConnected(connected);
+  if(!connected)return;
+  if(state.direction||Object.values(pressed).some(Boolean))unlockSound();
+  if(gameMenu.view!=='play'){gameMenu.pad(state);return;}
+  if(!ready)return;
+  if(pressed.levels){gameMenu.levels('play');return;}
+  if(pressed.restart){restart();return;}
+  if(pressed.pause){openPause();return;}
+ }
  padStatus(connected?'Standard gamepad connected. '+controlsHint():'Press a button on a standard controller to connect.');
  if(!connected||!ready)return;
  if(levelMenu.open){
@@ -150,15 +208,52 @@ function pollGamepad(){
   else if(pressed.reverse)shiftMenuLevel(10);
   return;
  }
- if(pressed.levels){openLevelMenu();return;}
- if(pressed.restart){restart();return;}
- if(pressed.pause)pause();
+ if(!gameMode&&pressed.levels){openLevelMenu();return;}
+ if(!gameMode&&pressed.restart){restart();return;}
+ if(!gameMode&&pressed.pause)pause();
  const {swing,bounce,flip,reverse}=pad;
  padHeld={swing,bounce,flip,reverse};
  if(swing||bounce||flip||pressed.reverse)inputReplay=null;
  if(pressed.reverse&&!pilotInputBlocked)game.reverse();
 }
-function playSound(name){if(!settings.sound||!audio[name])return;const s=audio[name].cloneNode();s.volume=.45;s.play().catch(()=>{});}
+function loadSoundBuffer(name){
+ if(!soundBuffers.has(name)){
+  soundBuffers.set(name,fetch(audio[name])
+   .then(response=>{if(!response.ok)throw new Error('Sound unavailable');return response.arrayBuffer();})
+   .then(buffer=>soundContext.decodeAudioData(buffer))
+   .catch(()=>null));
+ }
+ return soundBuffers.get(name);
+}
+function unlockSound(enabled=getSlot(gameMenu?.slotId??activeSlotId).sound){
+ if(!gameMode||!enabled)return;
+ const AudioContext=window.AudioContext||window.webkitAudioContext;
+ if(!AudioContext)return;
+ try{
+  soundContext??=new AudioContext();
+  if(soundContext.state!=='running')soundContext.resume().catch(()=>{});
+  for(const name of Object.keys(audio))loadSoundBuffer(name);
+ }catch{}
+}
+function playSound(name){
+ if(!(gameMode?getSlot(activeSlotId).sound:settings.sound)||!audio[name])return;
+ if(gameMode&&(window.AudioContext||window.webkitAudioContext)){
+  if(soundContext?.state!=='running')return;
+  const startingGame=game;
+  loadSoundBuffer(name).then(buffer=>{
+   if(!buffer||game!==startingGame||!['play','complete'].includes(gameMenu.view)||!getSlot(activeSlotId).sound)return;
+   const source=soundContext.createBufferSource(),gain=soundContext.createGain();
+   source.buffer=buffer;
+   gain.gain.value=.45;
+   source.connect(gain).connect(soundContext.destination);
+   source.start();
+  }).catch(()=>{});
+  return;
+ }
+ const sound=gameMode?new Audio(audio[name]):audio[name].cloneNode();
+ sound.volume=.45;
+ sound.play().catch(()=>{});
+}
 
 function resetSparkles(){
  sparkleSystems=[];const spec=manifest.vectorAssets?.starbursts;if(!spec)return;
@@ -178,7 +273,7 @@ function sprite(gid,index,x,y){const g=manifest.groups[gid],f=g.frames[index%g.f
 function drawBuster(p,angle){const a=manifest.vectorAssets.busters;if(!a)throw Error('Buster artwork required');ctx.drawImage(images[a.file],p.x+a.radius*Math.cos(angle)+a.x,p.y+(game.board.handOffsetY||0)+a.radius*Math.sin(angle)+a.y,a.width,a.height);}
 function drawHand(h){
  if(h.visible===false)return;
- const p=game.point?game.point(h):game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(progress.black?'4300':'700'):String(h.group);
+ const p=game.point?game.point(h):game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(blackHand()?'4300':'700'):String(h.group);
  if(h.sourceActorType===5&&manifest.vectorAssets){drawBuster(p,presentedAngle(h,renderPrevious?.[h.name],accumulator/STEP,true));return;}
  if(h.sourceActorType===4&&manifest.vectorAssets){
   const asset=manifest.vectorAssets.rotatingSpikes;
@@ -212,7 +307,7 @@ function drawTeleports(){
 function drawActorFaders(){
  if(!game.teleports)return;
  const atlas=manifest.vectorAssets?.teleports?.faders;
- for(const f of game.teleports.snapshot().faders)if(f.visible)drawTeleportAtlas(atlas,presentedFaderFrame(f,progress.black),f);
+ for(const f of game.teleports.snapshot().faders)if(f.visible)drawTeleportAtlas(atlas,presentedFaderFrame(f,blackHand()),f);
 }
 function drawConnectors(){
  if(!game.board.slidingConnectorRules)return;
@@ -427,9 +522,15 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  drawBackdrop(images[activeBackdrop||manifest.backdrop]);ctx.imageSmoothingEnabled=!!manifest.vectorAssets;
  const field=activePlayfield||{x:68,y:69,width:504,height:360,color:'#808080'};
  ctx.fillStyle=field.color;ctx.fillRect(field.x,field.y,field.width,field.height);ctx.fillStyle='white';ctx.font='bold 12px sans-serif';ctx.fillText('Level:',106,49);ctx.fillText(`${game.board.ordinal||1}: ${game.board.title||'Movement'}`,92,62);ctx.fillStyle='#ffff00';
- if(game.childScore){ctx.fillText('Round:',431,49);ctx.fillText('Total:',505,49);ctx.textAlign='right';ctx.fillText(game.childScore.roundBonus.toLocaleString(),477,62);ctx.fillText(game.childScore.totalCommitted.toLocaleString(),568,62);ctx.textAlign='left';}
+ if(gameMode){
+  const bonus=liveRoundBonus(),campaign=getSlot(activeSlotId).campaignScore;
+  ctx.fillStyle='#ffe66b';ctx.fillText('Round:',431,49);ctx.fillText('Total:',505,49);ctx.textAlign='right';
+  ctx.fillText((bonus+(game.complete?completionBonus:0)).toLocaleString(),477,62);
+  ctx.fillText((campaign+(game.complete?0:bonus)).toLocaleString(),568,62);ctx.textAlign='left';
+ }
+ else if(game.childScore){ctx.fillText('Round:',431,49);ctx.fillText('Total:',505,49);ctx.textAlign='right';ctx.fillText(game.childScore.roundBonus.toLocaleString(),477,62);ctx.fillText(game.childScore.totalCommitted.toLocaleString(),568,62);ctx.textAlign='left';}
  else{ctx.fillText('Pilot',441,50);ctx.fillText(game.bombScene?'Level Score:':'Total Score:',493,49);ctx.fillText(String(game.bombScene?.score??'—'),536,62);}
- if(game.paused){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';return;}
+ if(game.paused){if(!gameMode){ctx.fillStyle='#ffff00';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('Paused',320,252);ctx.textAlign='left';}return;}
  const sourcePaint=game.board.movingTeleportCheckpointRules||game.board.movingTeleportDoorRules||game.board.movingProtectedPassageRules||game.board.staticRingDoorRules||game.board.staticGunRailRules||game.board.movingGoalRailRules||game.board.movingGoalOrdinaryRules||game.board.movingWaystationRules||game.board.staticSlowdownRules||game.board.movingGoalGoodieRules||game.board.staticTeleportBusterRules||game.board.gunSlidingBusterRules||game.board.movingProgrammedBusterRules||game.board.movingCheckpointControlRules===true||game.board.movingCheckpointRailRules===true||game.board.movingBusterBombRules===true||game.board.movingDoorCheckpointRules===true||game.board.movingTubesRules===true||game.board.movingFuseOrdinaryRules||game.board.movingBombSpikeWaystationRules===true||game.board.movingSpikeRules===true||game.board.slidingBombRules===true||game.board.movingBombRules===true||game.board.movingMarkedGoalRules===true||game.board.movingElevatorRules===true||game.board.movingCheckpointRingRules===true||game.board.movingMarkedBonusRules===true||game.board.staticMarkedOrbitalRules===true||game.board.movingMarkedOrdinaryRules===true||game.board.staticSlidingBombGoodieRules===true;
  if(sourcePaint){ctx.save();clipSourceUniverse(ctx);ctx.drawImage(sourceBackground.draw(game,field,{width:canvas.width,height:canvas.height}),0,0,640,480);if(game.board.staticGunRailRules||game.board.gunSlidingBusterRules)drawGunTriggerLayer(true);if(game.board.movingTeleportCheckpointRules||game.board.movingTeleportDoorRules||game.board.movingProtectedPassageRules||game.board.staticRingDoorRules||game.board.staticGunRailRules||game.board.movingGoalRailRules||game.board.movingGoalOrdinaryRules||game.board.movingWaystationRules||game.board.staticSlowdownRules||game.board.movingGoalGoodieRules||game.board.staticTeleportBusterRules||game.board.gunSlidingBusterRules||game.board.movingProgrammedBusterRules)drawBusterWallEffects();drawSourceForeground();if(game.board.movingTeleportCheckpointRules||game.board.movingTeleportDoorRules||game.board.staticTeleportBusterRules)drawTeleports();drawGunTriggerLayer(false);if(game.board.staticRingDoorRules||game.board.movingTeleportCheckpointRules||game.board.movingTeleportDoorRules||game.board.movingProtectedPassageRules||game.board.movingDoorCheckpointRules)drawDoors();drawSpikes();drawBombs('upper');drawBombs('explosions');}
  else{
@@ -453,7 +554,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  drawBombs('effects');
  drawSparkles();
  if(sourcePaint)ctx.restore();
- if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';const points=game.childScore?.roundBonus??game.bombScene?.score;if(points!==undefined)ctx.fillText(points.toLocaleString()+' points · Child completion bonus 1,000',320,239);ctx.fillText(padConnected?'R2 restart · Start choose level':'Goal dot grabbed · Restart to play again',320,points!==undefined?268:250);ctx.textAlign='left';}
+ if(game.complete&&!gameMode){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';const points=game.childScore?.roundBonus??game.bombScene?.score;if(points!==undefined)ctx.fillText(points.toLocaleString()+' points · Child completion bonus 1,000',320,239);ctx.fillText(padConnected?'R2 restart · Start choose level':'Goal dot grabbed · Restart to play again',320,points!==undefined?268:250);ctx.textAlign='left';}
  drawTouchFeedback();
 }
 // Sharp-bilinear backdrop: integer nearest-neighbour prescale keeps the 8-bit pixels square, then one
@@ -471,6 +572,31 @@ function drawBackdrop(image){
  }
  ctx.drawImage(backdropCache.canvas,0,0,640,480);
 }
+function liveRoundBonus(){
+ if(game.childScore){
+  return game.childScore.roundBonus-(game.childScore.completed?completionBonus:0);
+ }
+ // Early pilot boards emit bonus grabs but have no Child score object.
+ const collected=game.board.dots.filter(dot=>dot.collected&&dot.kind==='bonus').length;
+ const escalating=Math.min(collected,5);
+ const dotBonus=1000*escalating*(escalating+1)/2+5000*(collected-escalating);
+ const bombs=game.bombScene;
+ return dotBonus+(bombs?bombs.score-bombBonusBaseline-(bombs.completed?completionBonus:0):0);
+}
+function onGoal(){
+ if(gameMode){
+  const level=activeScene.ordinal??1,bonus=liveRoundBonus();
+  refreshSlotStore();
+  const before=getSlot(activeSlotId).campaignScore;
+  slotStore=recordSlotLevelCompletion(slotStore,activeSlotId,level,bonus+completionBonus,campaignLevels,new Date().toISOString());
+  persistSlots();
+  gameMenu.complete(completionDetails(level,bonus,before,getSlot(activeSlotId).campaignScore,gameScenes.has(level+1)));
+ }else{
+  recordCompletion(progress,activeScene.ordinal);
+  persist();
+  message('Goal dot grabbed. '+(game.board.title||'Movement')+' complete.');
+ }
+}
 function workloadTime(){return game.elapsedTime??game.time;}
 function captureInfo(){return {visibility:document.visibilityState,focused:document.hasFocus()};}
 function finishCapture(now){const c=capture;if(!c)return;lastCapture={schema:'clockwerx-html5-timing-v1',captureUtc:c.utc,completionUtc:new Date().toISOString(),durationMs:now-c.start,requestedDurationMs:20000,valid:c.invalidReasons.size===0,invalidReasons:[...c.invalidReasons],scene:(game.board.title||'Movement')+(c.fromRestart?'; atomic reset; no-input rotating scene':'; current state at capture start'),fromRestart:c.fromRestart,pageUrl:location.href,workload:c.workload,boundary:'main-thread rAF entry through fixed simulation and Canvas2D draw; SVG mode includes interpolated vector image rotation; not physical presentation or input latency',presentation:manifest.vectorAssets?'svg-continuous':'bitmap-64-directions',devicePixelRatio:window.devicePixelRatio||1,logicalSize:[640,480],backingSize:[canvas.width,canvas.height],cssSize:[canvas.getBoundingClientRect().width,canvas.getBoundingClientRect().height],sound:c.sound,handColor:c.handColor,startState:c.state,endState:game.snapshot(),startFocus:c.focus,endFocus:captureInfo(),counters:{rafCallbacks:rafCalls-c.raf,renderCalls:renderCalls-c.render,fixedStepCalls:game.steps-c.steps,activeSimulationSteps:game.activeSteps-c.activeSteps,droppedCatchupSeconds:droppedSeconds-c.dropped},frames:c.frames,startup,pageMemory:memoryResult,userAgent:navigator.userAgent};capture=null;$('capture').disabled=false;$('capture-reset').disabled=false;$('json').disabled=false;$('diagnostics').textContent=`Capture complete: ${lastCapture.valid?'valid':'INVALID — '+lastCapture.invalidReasons.join(', ')}. ${lastCapture.frames.length} raw rAF records. Download JSON.`;}
@@ -481,12 +607,11 @@ $('png').onclick=()=>{if(capture)capture.invalidReasons.add('PNG export during t
 $('memory').onclick=async()=>{if(capture){$('diagnostics').textContent='Memory measurement is disabled during capture.';return;}const start=new Date().toISOString();memoryPending=true;$('capture').disabled=true;$('capture-reset').disabled=true;$('memory').disabled=true;$('diagnostics').textContent='Measuring page memory…';try{if(performance.measureUserAgentSpecificMemory){const m=await performance.measureUserAgentSpecificMemory();memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'completed',method:'measureUserAgentSpecificMemory',boundary:'browser-reported page-associated memory; not process RSS or physical RAM',result:m};}else memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'unavailable',boundary:'No supported page memory API; no estimate invented'};}catch(e){memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'failed',error:String(e),boundary:'No memory result'}}finally{memoryPending=false;$('capture').disabled=false;$('capture-reset').disabled=false;$('memory').disabled=false;$('diagnostics').textContent=JSON.stringify(memoryResult);}};
 $('route').onclick=async()=>{if(!ready||!checkedRoute)return;try{await loadScene(activeScene);inputReplay=createInputReplay(checkedRoute);message('Replaying a checked input route from a new scene.');canvas.focus({preventScroll:true});}catch(e){message('Checked route unavailable: '+e.message,true);}};
 $('workload').onclick=()=>{restart();recordedUntil=12;message('Recorded input demo: swing held for 12 simulation seconds; no other actions.');};
-function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!touch.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal'){recordCompletion(progress,activeScene.ordinal);persist();message('Goal dot grabbed. '+(game.board.title||'Movement')+' complete.');}}lastEvent=game.eventSequence;}const drawStart=performance.now();try{draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
-async function loadScene(scene){
+function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open&&(!gameMode||gameMenu.view==='play')){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!touch.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){bombBonusBaseline=game.bombScene?.score??0;inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){bombBonusBaseline=game.bombScene?.score??0;resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal')onGoal();}lastEvent=game.eventSequence;}const drawStart=performance.now();try{if(!gameMode||(gameMenu.boardVisible&&!loadingScene))draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
+async function loadScene(scene,black=blackHand()){
  if(capture){capture.invalidReasons.add('scene changed');finishCapture(performance.now());}
  ready=false;clearInputs();inputReplay=null;recordedUntil=0;renderPrevious=null;lastEvent=0;
  const reference=scene.levelDefinition;
- activeBackdrop=scene.backdrop||manifest.backdrop;activePlayfield=scene.playfield||null;
  if(reference){
   const profileResponse=await fetch('./assets/'+reference.outlinesFile);
   if(!profileResponse.ok)throw new Error('Source collision profile is unavailable');
@@ -504,7 +629,7 @@ async function loadScene(scene){
    // Construct from the unmodified source declaration, then apply the live gold/black preference.
    // Mutating board.player first broke the frozen source-board assertions (levels 89-97) with the black hand.
    game=new SourceRound(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,bombOutlines,gunOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
-   if(progress.black)game.setPlayerGroup(4300);
+   if(black)game.setPlayerGroup(4300);
   $('presentation').textContent=board.canonicalPlayerRules?'Private SVG pilot · source map and callback-stepped Child movement with smooth SVG drawing.': 'Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
   const rules=[];
   if(board.gunTriggerProjectileRules)rules.push('Hands entering a pressure trigger fire the matching gun. Avoid its projectiles.');
@@ -528,10 +653,73 @@ async function loadScene(scene){
   $('scope-description').textContent=movementScope;$('fidelity-description').textContent=movementFidelity;
  }
  checkedRoute=scene.checkedRoute||null;$('route').hidden=!checkedRoute;
- const title=game.board.title||'Movement';document.title=`ClockWerx ${title} — HTML5 pilot`;
+ const title=game.board.title||'Movement';document.title=gameMode?`ClockWerx · ${title}`:`ClockWerx ${title} — HTML5 pilot`;
  document.querySelector('h1').textContent=`ClockWerx · ${title}`;canvas.setAttribute('aria-label',title+' game');
- activeScene=scene;clearInputs();pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
+ activeBackdrop=scene.backdrop||manifest.backdrop;activePlayfield=scene.playfield||null;
+ activeScene=scene;bombBonusBaseline=0;clearInputs();pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
  message(playLayout?`${title} ready. ${controlsHint()}`:`${title} ready · ${manifest.vectorAssets?'SVG foreground, continuous rotation':'original bitmap foreground'}. ${controlsHint()}`);
+}
+function setGameView(view,coversBoard){
+ const playing=view==='play';
+ $('play').dataset.screen=view;
+ $('play').toggleAttribute('data-board-covered',coversBoard);
+ $('stage').inert=$('touch-panel').inert=!playing;
+ $('game-pause').hidden=!playing;
+ if(game)game.paused=view==='pause'||(view==='levels'&&!game.complete);
+ clearInputs();
+ last=performance.now();
+ accumulator=0;
+ if(playing)canvas.focus({preventScroll:true});
+ if(view==='title'){
+  document.title='ClockWerx';
+  const url=new URL(location.href);
+  if(url.searchParams.has('level')){
+   url.searchParams.delete('level');
+   history.replaceState(null,'',url);
+  }
+ }
+}
+function openPause(){if(ready&&!loadingScene)gameMenu.show('pause');}
+async function playLevel(slotId,level,userInitiated=true){
+ const scene=gameScenes.get(level);
+ if(loadingScene||!scene)return;
+ refreshSlotStore();
+ const black=getSlot(slotId).black,wasReady=ready;
+ if(userInitiated)unlockSound(getSlot(slotId).sound);
+ loadingScene=true;
+ gameMenu.setBusy(true,'Loading level '+level+'…');
+ try{
+  await loadScene(scene,black);
+  refreshSlotStore();
+  slotStore=updateSlot({...slotStore,activeSlotId:slotId},slotId,slot=>({
+   ...slot,started:true,updatedUtc:new Date().toISOString(),
+   currentLevel:slot.completedLevels.includes(level)?slot.currentLevel:level,
+  }));
+  activeSlotId=slotId;
+  if(game instanceof SourceRound)game.setPlayerGroup(blackHand()?4300:700);
+  persistSlots();
+  gameMenu.selectSlot(slotId,false);
+  gameMenu.setRound(level);
+  gameMenu.show('play');
+  const url=new URL(location.href);
+  if(url.searchParams.has('level')){
+   url.searchParams.set('level',level);
+   history.replaceState(null,'',url);
+  }
+  gameMenu.setBusy(false);
+ }catch(error){
+  ready=wasReady;
+  gameMenu.setBusy(false);
+  if(gameMenu.view==='loading')gameMenu.show('title');
+  gameMenu.message('Level unavailable. '+error.message,true);
+ }finally{loadingScene=false;}
+}
+function changeSlotSetting(id,name){
+ refreshSlotStore();
+ slotStore=updateSlot(slotStore,id,slot=>({...slot,[name]:!slot[name]}));
+ persistSlots();
+ if(name==='black'&&id===activeSlotId&&game instanceof SourceRound)game.setPlayerGroup(blackHand()?4300:700);
+ if(name==='sound')unlockSound(getSlot(id).sound);
 }
 async function load(){
  try{
@@ -564,8 +752,23 @@ async function load(){
   ]:Object.entries(manifest.groups).flatMap(([gid,g])=>gid==='401'?[]:gid==='300'?g.images.slice(0,16):g.images);
   const names=[...new Set([...foreground,manifest.backdrop,...(manifest.scenes||[]).map(s=>s.backdrop).filter(Boolean)])];
   await Promise.all(names.map(async name=>{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}));
-  for(const [name,fn] of Object.entries(manifest.sounds||{})){audio[name]=new Audio('./assets/'+fn);audio[name].preload='auto';}
+  for(const [name,fn] of Object.entries(manifest.sounds||{})){
+   const url='./assets/'+fn;
+   if(gameMode)audio[name]=url;
+   else{audio[name]=new Audio(url);audio[name].preload='auto';}
+  }
   const scenes=manifest.scenes||[{id:'single',title:manifest.levelDefinition?.title||'Movement',levelDefinition:manifest.levelDefinition,checkedRoute:manifest.checkedRoute}];
+  if(gameMode){
+   gameScenes=new Map(scenes.map((scene,index)=>[scene.ordinal??index+1,scene]));
+   gameMenu.setScenes(scenes);
+   gameMenu.setBusy(false);
+   const wanted=Number(params.get('level'));
+   if(gameScenes.has(wanted)){
+    gameMenu.show('loading');
+    await playLevel(activeSlotId,wanted,false);
+   }else if(gameMenu.view==='loading')gameMenu.show('title');
+   return;
+  }
   const levelSelects=[$('level'),$('panel-level'),menuLevel];
   const options=scenes.map((scene,index)=>{
    const option=document.createElement('option');
@@ -599,7 +802,6 @@ async function load(){
    finally{changingLevel=false;for(const select of levelSelects)select.disabled=false;}
   };
   // An explicit level link takes precedence over the last successfully loaded level.
-  const params=new URLSearchParams(location.search);
   const wanted=params.has('level')?Number(params.get('level')):progress.lastLevel;
   const initial=Math.max(0,scenes.findIndex(scene=>scene.ordinal===wanted));
   await loadLevel(initial);
@@ -608,6 +810,27 @@ async function load(){
 startup.assetReadyUtc=new Date().toISOString();startup.readyMs=performance.now()-bootStart;
   startup.resourceEntries=performance.getEntriesByType('resource').map(r=>({name:new URL(r.name).pathname,durationMs:r.duration,transferSize:r.transferSize,encodedBodySize:r.encodedBodySize,decodedBodySize:r.decodedBodySize}));
   message(playLayout?`${game.board.title||'Movement'} ready. ${controlsHint()}`:`${game.board.title||'Movement'} ready · ${vector?'SVG foreground, continuous rotation':'original bitmap foreground'}. ${controlsHint()}`);
- }catch(e){message(`Private ClockWerx assets missing or unreadable: ${e.message}. Run extract_assets.py on your owned copied fixture and place its output in this route’s assets/ folder.`,true);}
+ }catch(e){
+  if(gameMode){
+   gameMenu.setBusy(false);
+   if(gameMenu.view==='loading')gameMenu.show('title');
+   gameMenu.message('ClockWerx assets could not be loaded. '+e.message,true);
+  }else message(`Private ClockWerx assets missing or unreadable: ${e.message}. Run extract_assets.py on your owned copied fixture and place its output in this route’s assets/ folder.`,true);
+ }
+}
+if(gameMode){
+ if(storedSlots==null)persistSlots();
+ gameMenu=createGameMenu({
+  root:$('game-overlay'),getSlot,onView:setGameView,onPlay:playLevel,onResume:()=>gameMenu.show('play'),
+  onRestart:()=>{if(!loadingScene){gameMenu.show('play');restart();}},
+  onSetting:changeSlotSetting,onReset:id=>{refreshSlotStore();slotStore=resetSlot(slotStore,id);persistSlots();},onExport:exportSlots,
+ });
+ // A valid explicit link stays in the URL until the player returns to Save Slots.
+ gameMenu.selectSlot(activeSlotId,false);
+ const wanted=Number(params.get('level'));
+ gameMenu.show(Number.isInteger(wanted)&&wanted>=1&&wanted<=campaignLevels?'loading':'title');
+ gameMenu.setBusy(true,'Loading levels…');
+ $('game-pause').onclick=openPause;
+ window.addEventListener('pointerup',()=>unlockSound());
 }
 load();requestAnimationFrame(frame);

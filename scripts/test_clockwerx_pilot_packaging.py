@@ -29,6 +29,9 @@ class PilotPackagingTests(unittest.TestCase):
         self.assertEqual(len(meta['experiments']),1)
         self.assertEqual((self.dist/'index.html').read_text().count('aria-label="Private experiments"'),1)
         self.assertEqual((self.dist/'clockwerx-html5/assets/sample.png').read_bytes(),b'synthetic private pixel')
+        for name in ('game.css', 'game-menu.mjs'):
+            self.assertTrue((self.dist/'clockwerx-html5'/name).is_file())
+        self.assertFalse((self.dist/'clockwerx-html5/game-ui.test.mjs').exists())
     def test_changed_or_unlisted_art_fails_before_copy(self):
         (self.assets/'sample.png').write_bytes(b'changed')
         with self.assertRaisesRegex(ValueError,'changed private asset'):package(self.dist,self.assets)

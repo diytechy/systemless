@@ -7,8 +7,8 @@
   "resourceIndexSha256": "3fb5c8f542a50f00060d264bbc253d85801cb56bfc2cc83b5556179c94d771f8",
   "catalogCount": 100,
   "resourceCount": 120,
-  "currentOrdinal": 97,
-  "currentAction": "March97 earned original cold running once; Box96 native/candidate/witness/fresh/retained95/QA complete. Visible92-96 pending, installed91 remains paused. Continue all100 without per-level stops; see current-action.md.",
+  "currentOrdinal": 100,
+  "currentAction": "2026-11-13: QA100 bundle has all 100 scenes with checked routes (97-100 found by search). Exact sweep 100 scenes/760334 paired updates. 92-100 need a human check, then install over dist-v2. See ../2026-11-13-clockwerx-completion/review.md.",
   "levels": [
     {
       "ordinal": 1,
@@ -8314,7 +8314,8 @@
         "gameplayAcceptedByTriage": false
       },
       "review": "dizziness-review.md",
-      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled.",
+      "visibleReplay": "headless Edge checked-route replay reached the goal 2026-11-13 (see ../2026-11-13-clockwerx-completion/review.md); human check pending"
     },
     {
       "ordinal": 93,
@@ -8389,7 +8390,8 @@
         "gameplayAcceptedByTriage": false
       },
       "review": "twin-peaks-review.md",
-      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled.",
+      "visibleReplay": "headless Edge checked-route replay reached the goal 2026-11-13 (see ../2026-11-13-clockwerx-completion/review.md); human check pending"
     },
     {
       "ordinal": 94,
@@ -8454,7 +8456,8 @@
       },
       "preparation": "fracas-preparation.md",
       "review": "fracas-review.md",
-      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled.",
+      "visibleReplay": "headless Edge checked-route replay reached the goal 2026-11-13 (see ../2026-11-13-clockwerx-completion/review.md); human check pending"
     },
     {
       "ordinal": 95,
@@ -8530,7 +8533,8 @@
         "gameplayAcceptedByTriage": false
       },
       "review": "fallback-review.md",
-      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled.",
+      "visibleReplay": "headless Edge checked-route replay reached the goal 2026-11-13 (see ../2026-11-13-clockwerx-completion/review.md); human check pending"
     },
     {
       "ordinal": 96,
@@ -8605,7 +8609,8 @@
         "gameplayAcceptedByTriage": false
       },
       "review": "box-review.md",
-      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled."
+      "acceptanceBoundary": "Original goal, exact witness/fresh and retained comparison complete. Isolated QA only; browser visible gate missing, unaccepted/uninstalled.",
+      "visibleReplay": "headless Edge checked-route replay reached the goal 2026-11-13 (see ../2026-11-13-clockwerx-completion/review.md); human check pending"
     },
     {
       "ordinal": 97,
@@ -8613,7 +8618,7 @@
       "menuTitle": "March",
       "resourceTitle": "March",
       "sha256": "4c0ca24541e2b517912aae091f09fde7eba77a09a1fe2510fb5efc7a4fb21503",
-      "status": "earned-original-cold-running",
+      "status": "ported-route-found-qa100",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8673,7 +8678,11 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "composition": "moving-fuse-ordinary",
+      "sceneFlag": "movingFuseOrdinaryQualified",
+      "review": "../2026-11-13-clockwerx-completion/review.md",
+      "acceptanceBoundary": "QA100 checked route 16146 updates, death-free, replay-verified in Node and headless Edge; exact QA100 sweep MATCHED_GOAL. No original-game comparison or human playthrough yet; not installed."
     },
     {
       "ordinal": 98,
@@ -8681,7 +8690,7 @@
       "menuTitle": "Slaughter",
       "resourceTitle": "Slaughter",
       "sha256": "3cb9142d8103bcadf28f4e87ec268fa5b8a875eedd862f17f569ba83d2b23195",
-      "status": "queued",
+      "status": "ported-route-found-qa100",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8744,7 +8753,11 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "composition": "static-gun-rails + staticGunRailHazards",
+      "sceneFlag": "staticGunRailHazardsQualified",
+      "review": "../2026-11-13-clockwerx-completion/review.md",
+      "acceptanceBoundary": "QA100 checked route 7634 updates, death-free, replay-verified in Node and headless Edge; exact QA100 sweep MATCHED_GOAL. No original-game comparison or human playthrough yet; not installed."
     },
     {
       "ordinal": 99,
@@ -8752,7 +8765,7 @@
       "menuTitle": "Crossfire",
       "resourceTitle": "Crossfire",
       "sha256": "ffc9f25bba23d29470888ee06c9d8f432bbacbdc2ed330594504df5220e61dd7",
-      "status": "queued",
+      "status": "ported-route-found-qa100",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8812,7 +8825,11 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "composition": "gun-trigger-oil",
+      "sceneFlag": "gunTriggerOilQualified",
+      "review": "../2026-11-13-clockwerx-completion/review.md",
+      "acceptanceBoundary": "QA100 checked route 10180 updates, death-free, replay-verified in Node and headless Edge; exact QA100 sweep MATCHED_GOAL. No original-game comparison or human playthrough yet; not installed."
     },
     {
       "ordinal": 100,
@@ -8820,7 +8837,7 @@
       "menuTitle": "Break In",
       "resourceTitle": "Break In",
       "sha256": "93e0aade8c2b7fad955a297c6a142dd5fb3bcf5036840bd62c284e59d7745a81",
-      "status": "queued",
+      "status": "ported-route-found-qa100",
       "nativeEvidence": [],
       "requirements": [],
       "svgStatus": "not-reviewed",
@@ -8880,7 +8897,11 @@
           }
         ],
         "gameplayAcceptedByTriage": false
-      }
+      },
+      "composition": "moving-programmed-busters + staticBombElevators",
+      "sceneFlag": "staticBombElevatorsQualified",
+      "review": "../2026-11-13-clockwerx-completion/review.md",
+      "acceptanceBoundary": "QA100 checked route 8338 updates, death-free, replay-verified in Node and headless Edge; exact QA100 sweep MATCHED_GOAL. No original-game comparison or human playthrough yet; not installed."
     }
   ],
   "unlisted": [
@@ -9036,19 +9057,10 @@
   "workflow": "parallel-workflow.md",
   "maximumFunctionalRunners": 3,
   "runnerAuthorization": "User permits two or more; explicit coordinator slot assignments, shared mechanics and heavy work serial.",
-  "activeSlots": [
-    {
-      "owner": "Root",
-      "kind": "original-native-cold",
-      "ordinal": 97,
-      "managedSession": 77487,
-      "authorizationSHA256": "4079e326a085c168715a900482c8dd39612d7cc124fcef608a418e483df96553",
-      "noAutomaticRetry": true
-    }
-  ],
-  "handoff": "session-handoff-2026-11-11.md",
+  "activeSlots": [],
+  "handoff": "../2026-11-13-clockwerx-completion/review.md",
   "workflowRuntimeAudit": "workflow-runtime-audit.md",
   "fasterValidationWorkflow": "faster-validation-workflow.md",
-  "sessionState": "through96-functional-proofs-complete-installed91-continuing97",
+  "sessionState": "qa100-all-scenes-routed-human-check-pending",
   "previousRestartCheckpoint": "restart-checkpoint-2026-11-10.md"
 }

@@ -1,3 +1,7 @@
+# Latest continuation: all 100 in QA (2026-11-13)
+
+All 100 ClockWerx scenes are in an isolated QA bundle with checked routes (97-100 found by search and replayed to the goal in a browser); 97-100 were ported with three explicit, default-off composition extensions, a Dizziness92 browser freeze (unloaded ring atlas) was fixed, the black-hand load bug (89-96) was fixed, March simulation is 3.3x faster, touch controls and mobile layout were added, and the exact retained sweep still matches all 96 earlier scenes. Next: visible play of 92-100 (desktop and phone), then install. See [2026-11-13 review](../2026-11-13-clockwerx-completion/review.md). Supersedes the checkpoints below.
+
 # Latest continuation: through91
 
 Immunity91 accepted and locally installed. Continue all100 without per-level stops;9levels remain. Dizziness92/RND2_216 earned cold next, independent original-only actor and relevant moving/teleport/door/spike appearance methods before dedicated PNG viewing. No92actualengine yet. See [Immunity review](../2026-11-08-clockwerx-levels/immunity-review.md). Latest evidence supersedes historical checkpoints below.

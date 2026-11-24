@@ -38,3 +38,31 @@ test('reset restores the bonus network, projectile pool and trigger occupancy',(
 test('projectile death is latched before the dispatched human EX callback finishes',()=>{
  let atDeath;const p=profiles();p.outlines.groups[700]=frames(64,solid);p.gunOutlines.groups[4200]=frames(3,{...solid,right:7,rows:[[0,7]]});p.deathFactory=(point,hand)=>{atDeath={pivot:hand.pivot,transfers:hand.transfers};return{complete:false,update(){},snapshot(){return[];}};};const g=new SourceRound(board(),p);g.gunTriggers.contact(g.player,()=>true);const shot=g.gunTriggers.insertionOrder[0],point=g.point(g.player);shot.rawBase={x:point.x-31,y:point.y-28};for(let n=0;n<30&&!g.death;n++)g.update(1/120,{flip:true});assert.ok(g.death);assert.deepEqual(atDeath,{pivot:'0,0',transfers:0});assert.equal(g.player.transfers,1);assert.equal(g.events.find(e=>e.type==='death').cause.reason,'projectile');assert.ok(g.events.findIndex(e=>e.type==='death')<g.events.findIndex(e=>e.type==='flip'));
 });
+test('black hand preference applies to the live player without breaking the frozen source declaration',()=>{
+ // Regression: app.mjs used to set board.player.group=4300 before construction, which made every
+ // self-building source composition (levels 89-97) reject the board when the black hand was saved.
+ const pre=board();pre.player.group=4300;assert.throws(()=>new SourceRound(pre,profiles()),'pre-mutated source declarations stay rejected');
+ const g=round();g.setPlayerGroup(4300);assert.equal(g.player.group,4300);assert.equal(g.board.player.group,700);
+ assert.equal(assertStaticGunRailBoard(g.board,profiles()),true);g.reset();assert.equal(g.player.group,4300);g.restartAfterDeath();assert.equal(g.player.group,4300);
+ for(let n=0;n<240;n++)g.update(1/120,{});assert.equal(g.player.group,4300);g.setPlayerGroup(700);g.reset();assert.equal(g.player.group,700);assert.throws(()=>g.setPlayerGroup(500));
+});
+test('hazard extension is separately flagged: SP/WL and multi-color guns need allowStaticGunRailHazards',()=>{
+ const hazardSource=()=>{const s=staticGunRailSource();s.blocks.push({kind:'SP',count:2,records:[{rawWords:[2,2,0,2,0,15]},{rawWords:[1,1,2,0,0,14]}]},{kind:'WL',count:1,records:[{rawWords:[256,1,0,1,1,0]}]});const gn=s.blocks.find(b=>b.kind==='GN');gn.records[0].rawWords=[6,8,1,0,5,0,15];s.blocks.find(b=>b.kind==='TR').records[0].rawWords=[6,7,3,0,0,15];return s;};
+ const recipe={...staticGunRailRecipe(),allowStaticGunRailHazards:true};
+ assert.throws(()=>assertStaticGunRailSource(hazardSource()),'Box96 scope still rejects hazards');assert.throws(()=>buildDecodedBoard(hazardSource(),staticGunRailRecipe()));
+ assert.equal(assertStaticGunRailSource(hazardSource(),{hazards:true}),true);assert.deepEqual(levelRequirements(hazardSource(),recipe),[]);
+ assert.throws(()=>assertStaticGunRailSource(staticGunRailSource(),{hazards:true}),'hazard flag requires hazards');
+ const b=buildDecodedBoard(hazardSource(),recipe);assert.equal(b.staticGunRailHazardRules,true);assert.equal(b.spikes.length,1,'inactive spikes allocate nothing');assert.equal(b.walls.length>0,true);assert.equal(b.gunTriggerChild.guns[0].color,0);assert.equal(b.gunTriggerChild.guns[0].directions,5);
+ const p=profiles();p.outlines.groups[800]=frames(24,empty);assert.equal(assertStaticGunRailBoard(b,p),true);
+ for(const mutate of[x=>x.staticGunRailHazardRules=false,x=>x.spikes.pop(),x=>x.walls[0].x++])assert.throws(()=>{const y=buildDecodedBoard(hazardSource(),recipe);mutate(y);assertStaticGunRailBoard(y);});
+ for(const mutate of[s=>s.blocks.find(b=>b.kind==='SP').records[0].rawWords[5]=13,s=>s.blocks.find(b=>b.kind==='SP').records[0].rawWords[4]=1,s=>s.blocks.find(b=>b.kind==='WL').records[0].rawWords[3]=3,s=>s.blocks.push({kind:'PU',count:1,records:[{rawWords:[0,0,0,0,15]}]})]){const s=hazardSource();mutate(s);assert.throws(()=>assertStaticGunRailSource(s,{hazards:true}));}
+ const g=new SourceRound(b,p);assert.equal(g.board.spikes.length,1);for(let n=0;n<600;n++)g.update(1/120,{});assert.ok(g.sourcePaint.original.walls.length>0,'walls are retained for the source background');
+});
+test('hazard extension: projectiles are disposed by walls and spikes kill the hand',()=>{
+ const s=staticGunRailSource();s.blocks.push({kind:'WL',count:1,records:[{rawWords:[256,9,6,0,6,0]}]});
+ const rect={left:-40,top:-40,right:40,bottom:40,rows:Array.from({length:80},()=>[0,80]),collidable:true,flipY:false},b=buildDecodedBoard(s,{...staticGunRailRecipe(),allowStaticGunRailHazards:true}),p=profiles();p.outlines.groups[800]=frames(24,rect);const g=new SourceRound(b,p);
+ g.gunTriggers.contact(g.player,()=>true);assert.equal(g.gunTriggers.insertionOrder.length,1);let disposed=null;for(let n=0;n<2400&&!disposed;n++){g.update(1/120,{});disposed=g.events.find(e=>e.type==='projectile-dispose');}
+ assert.equal(disposed?.gunTrigger?.reason,'wall');
+ const s2=staticGunRailSource();s2.blocks.push({kind:'SP',count:1,records:[{rawWords:[0,0,0,2,0,15]}]});const p2=profiles();p2.outlines.groups[700]=frames(64,solid);p2.outlines.groups[200]=frames(4,rect);
+ const g2=new SourceRound(buildDecodedBoard(s2,{...staticGunRailRecipe(),allowStaticGunRailHazards:true}),p2);for(let n=0;n<240&&!g2.death;n++)g2.update(1/120,{});assert.equal(g2.events.find(e=>e.type==='death')?.cause?.reason,'spike');
+});

@@ -48,3 +48,26 @@ test('mixed blast tests current up/down and mover outlines after stationary pass
  g.bombScene.effect({type:'stationary',target:'EL',grid:{row:3,column:1}});assert.equal(g.elevators.snapshot().controls[0].visible,false);assert.ok(g.bombScene.backgroundPaints.some(p=>p.kind==='EL'&&p.frame===9));
  g.reset();assert.equal(u.burnt,undefined);assert.equal(m.bonus,true);assert.equal(g.elevators.snapshot().controls[0].visible,true);assert.deepEqual(g.bombScene.backgroundPaints,[]);
 });
+
+test('static bomb/elevator variant (Break In) is separately flagged and keeps Contraction literal',()=>{
+ // Invented Break In-like source: no movers or busters, an initially lowered channel0 dot, EL subcell1,
+ // a class3 ordinary actor, one on-board GO with an out-of-range frame request and an inactive PU.
+ const variant=()=>{const f=fixture();const c=f.cells;for(const i of[24,25]){Object.assign(c[i],{flagsRaw:1,secondaryRaw:15});delete c[i].inlineProgram;}
+  c[13].flagsRaw=0x4101;const wa=f.blocks.find(b=>b.kind==='WA');wa.records[2]={...wa.records[3],gridPosition:{row:2,column:2},rawWords:[2,2,3,24,1,65535,1,3,0,1,0],actorTypeRaw:3};
+  f.blocks.find(b=>b.kind==='EL').records[0].rawWords=[3,1,1,0,0,15];
+  f.sha256='a'.repeat(64);f.byteLength=1462;f.resourceId=194;
+  f.blocks.push({kind:'GO',count:1,records:[{offset:1044,byteLength:10,rawHex:'0002000300bc00000003',rawWords:[2,3,188,0,3]}]},{kind:'PU',count:1,records:[{rawWords:[2,2,1,0,8]}]});return f;};
+ const opts={...recipe,allowStaticBombElevators:true};
+ assert.throws(()=>buildDecodedBoard(variant(),recipe),'Contraction scope still rejects the variant source');
+ assert.throws(()=>assertMovingProgrammedBusterRecipe({...recipe,allowGoodies:true}));assert.equal(assertMovingProgrammedBusterRecipe(opts),true);
+ const b=buildDecodedBoard(variant(),opts);assert.equal(b.staticBombElevatorRules,true);
+ const lowered=b.dots.find(d=>d.id==='2,1');assert.deepEqual([lowered.motion,lowered.upDown.group,lowered.upDown.initialLowered],['up-down',0,true]);
+ assert.equal(b.goodies.length,1);assert.equal(b.goodies[0].initialFrame,0);assert.equal(b.goodies[0].sourceInitialFrameRequest,188,'the actual ignored request is retained');
+ assert.equal(b.puddles.length,0);assert.equal(b.enemies.find(e=>e.sourceActorType===3).speedClass,3);
+ const a=b.enemies.find(e=>e.sourceActorType===3);assert.throws(()=>assertMovingProgrammedBusterActor(a));assert.equal(assertMovingProgrammedBusterActor(a,{variant:true}),true);
+ const p={...profiles,outlines:{groups:{...profiles.outlines.groups,4500:frames(64)}}},g=new SourceRound(b,p);assert.equal(g.elevators.snapshot().dots.find(d=>d.id==='2,1').phase,0);assert.equal(g.bombScene.runtime.goodies.length,1);
+ for(let n=0;n<600;n++)g.update(1/120,n%200<100?{swing:true}:{});
+ const events=g.elevators.contact('player',0);assert.ok(events.some(e=>e.type==='toggle'&&e.dot==='2,1'));for(let n=0;n<1200;n++)g.update(1/120,{});
+ assert.equal(g.elevators.snapshot().dots.find(d=>d.id==='2,1').phase,12,'lowered channel0 dot rises after control entry');
+ g.reset();assert.equal(g.elevators.snapshot().dots.find(d=>d.id==='2,1').phase,0,'reset restores the initial lowered state');
+});

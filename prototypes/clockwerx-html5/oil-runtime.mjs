@@ -14,9 +14,9 @@ export class OilRuntime {
   if(board.slidingOilGoodieRingRules&&!board.slidingOilRules)throw new Error('Oil/GO/rings require EX/Oil core');
   if(board.slidingOilRules)assertSlidingOilScope({...board,actors:[board.player,...(board.enemies||[])],rich:board.slidingOilGoodieRingRules===true,initial:true,activeSections:Object.fromEntries(['walls','doors','switches','elevators','bombs','teleports'].map(k=>[k,board[k]?.length??0]))});
   if((board.slidingOilRules||board.movingDoorOilRules)&&(typeof getHumanSliding!=='function'||getHumanSliding.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous human sliding accessor required');
-  if(board.slidingOilGoodieRingRules&&(typeof getMainDotSprite!=='function'||getMainDotSprite.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous main-dot sprite accessor required');
+  if((board.slidingOilGoodieRingRules||board.gunTriggerOilRules)&&(typeof getMainDotSprite!=='function'||getMainDotSprite.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous main-dot sprite accessor required');
   this.getHumanSliding=getHumanSliding;this.getMainDotSprite=getMainDotSprite;
-  if(board.slidingOilGoodieRingRules)for(const d of board.dots.filter(d=>d.ring))for(let f=23+7*d.color;f<=30+7*d.color;f++)if(!dotOutlines.groups[300].frames[f])throw new Error('Complete current ring collision profiles required');
+  if(board.slidingOilGoodieRingRules||board.gunTriggerOilRules)for(const d of board.dots.filter(d=>d.ring))for(let f=23+7*d.color;f<=30+7*d.color;f++)if(!dotOutlines.groups[300].frames[f])throw new Error('Complete current ring collision profiles required');
   this.board=board;this.outlines=outlines;this.dotOutlines=dotOutlines;this.bounds={...bounds};
   this.dots=[...board.dots].sort((a,b)=>a.sourceIndex-b.sourceIndex);
   if(this.dots.some(d=>!Number.isInteger(d.sourceIndex)||d.sourceIndex<0||d.sourceIndex>87)||new Set(this.dots.map(d=>d.sourceIndex)).size!==this.dots.length)throw new Error('Unique source dot slots required');
@@ -62,7 +62,7 @@ export class OilRuntime {
   const shape=oilOutline(this.outlines.groups['2200'].frames[state.frame],state.base);
   for(const dot of this.dots){
    let frame,base;
-   if(this.board.slidingOilGoodieRingRules){
+    if(this.board.slidingOilGoodieRingRules||this.board.gunTriggerOilRules){
     const main=this.getMainDotSprite(dot);
     if(!main||typeof main.exists!=='boolean')throw new Error('Explicit current main-dot sprite state required');
     if(!main.exists)continue;

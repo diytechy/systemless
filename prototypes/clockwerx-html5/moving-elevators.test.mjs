@@ -100,6 +100,6 @@ test('direct joined NPC helper requires actual matching inventory and synchronou
 });
 
 test('existing persisted black human palette constructs, resets and round-trips without changing source/NPC identities',()=>{
- const f=movingElevatorFixture();f.board.player.group=4300;const g=f.create();assert.equal(g.player.group,4300);assert.equal(g.player.sourceActorType,0);assert.equal(g.board.player.group,4300);g.reset();assert.equal(g.player.group,4300);g.setPlayerGroup(700);assert.equal(g.player.group,700);assert.equal(g.board.player.group,700);g.setPlayerGroup(4300);g.reset({preserveCheckpoint:true});assert.equal(g.player.group,4300);assert.equal(g.board.player.group,4300);assert.equal(g.enemies[0].group,500);
+ const f=movingElevatorFixture();f.board.player.group=4300;const g=f.create();assert.equal(g.player.group,4300);assert.equal(g.player.sourceActorType,0);assert.equal(g.board.player.group,4300);g.reset();assert.equal(g.player.group,4300);g.setPlayerGroup(700);assert.equal(g.player.group,700);assert.equal(g.board.player.group,4300,'live preference leaves the source declaration unchanged');g.reset();assert.equal(g.player.group,700);g.setPlayerGroup(4300);g.reset({preserveCheckpoint:true});assert.equal(g.player.group,4300);assert.equal(g.board.player.group,4300);assert.equal(g.enemies[0].group,500);
  for(const edit of[b=>b.player.group=500,b=>b.enemies[0].group=4300,b=>b.enemies[0].group=4500]){const f=movingElevatorFixture();edit(f.board);assert.throws(f.create);}
 });

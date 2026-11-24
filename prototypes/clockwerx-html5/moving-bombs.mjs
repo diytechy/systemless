@@ -8,12 +8,14 @@ const wordsHex=words=>words.map(w=>w.toString(16).padStart(4,'0')).join('');
 // Explicit imported-source exception. Effective0 is the retained clone frame;
 // authored169 and its byte/hash provenance stay separate. No modulo rule and
 // no normalization of generated/direct default-invalid GO declarations.
-export function importMovingGoodie(record,source,{allowImportedGoodie169=false}={}){
+export function importMovingGoodie(record,source,{allowImportedGoodie169=false,allowImportedGoodieOutOfRange=false}={}){
  const w=record?.rawWords;if(!Array.isArray(w)||w.length!==5||w.some(n=>!integer(n,0,65535)))throw new TypeError('Original version12 GO words required');
  const base={row:w[0],column:w[1],initialFrame:w[2],activationMask:w[3]*65536+w[4]};
  if(w[2]<17)return base;
- if(w[2]!==169||allowImportedGoodie169!==true||!hash(source?.sha256)||!integer(source?.byteLength,10,0x7fffffff)||!integer(record.offset,0,source.byteLength-10)||record.byteLength!==10||record.rawHex!==wordsHex(w))throw new Error('Qualified imported GO169 bytes/hash required; generated frames remain0..16');
- return {...base,initialFrame:0,sourceInitialFrameRequest:169,sourceInitialFrameIgnored:true,sourceImport:{sha256:source.sha256,byteLength:source.byteLength,resourceId:source.resourceId,offset:record.offset,rawHex:record.rawHex}};
+ // GOCreate ignores any request outside the 17-frame goodie group. GO169 was qualified first;
+ // the explicit out-of-range option applies the same ignored-request import to other values (e.g. 188).
+ if(!(w[2]===169&&allowImportedGoodie169===true||allowImportedGoodieOutOfRange===true)||!hash(source?.sha256)||!integer(source?.byteLength,10,0x7fffffff)||!integer(record.offset,0,source.byteLength-10)||record.byteLength!==10||record.rawHex!==wordsHex(w))throw new Error('Qualified imported GO169 bytes/hash required; generated frames remain0..16');
+ return {...base,initialFrame:0,sourceInitialFrameRequest:w[2],sourceInitialFrameIgnored:true,sourceImport:{sha256:source.sha256,byteLength:source.byteLength,resourceId:source.resourceId,offset:record.offset,rawHex:record.rawHex}};
 }
 
 export function assertMovingGoodie(g,source,{allowImportedGoodie169=false}={}){

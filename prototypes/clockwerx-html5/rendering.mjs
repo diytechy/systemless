@@ -30,7 +30,8 @@ export function renderAngle(hand,previous,alpha){
 }
 export function resizeCanvas(canvas,ratio=1){
   const rect=canvas.getBoundingClientRect();
-  const scale=Math.max(1,Math.min(4,ratio*rect.width/640));
+  // Match device pixels exactly (also below 1x) so the browser never resamples the finished frame.
+  const scale=Math.max(0.5,Math.min(4,ratio*rect.width/640));
   const width=Math.round(640*scale),height=Math.round(480*scale);
   if(canvas.width!==width||canvas.height!==height){canvas.width=width;canvas.height=height;}
   return {scaleX:canvas.width/640,scaleY:canvas.height/480};

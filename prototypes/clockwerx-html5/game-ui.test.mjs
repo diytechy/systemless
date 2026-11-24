@@ -155,14 +155,14 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     for (const id of [
       'game-slots', 'game-level-grid', 'game-free-play', 'game-chapters', 'game-menu-status',
       'slot-confirm', 'slot-keep', 'slot-erase', 'slot-play', 'slot-levels', 'slot-hand', 'slot-sound',
-      'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
+      'slot-music', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
       'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-round-bonus',
       'game-finish-bonus', 'game-level-total', 'game-campaign-total', 'game-score-delta',
       'game-complete-controls',
     ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') ? 'button' : 'div', id);
 
     const pauseActions = makeNode('div', 'pause-actions');
-    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-hand', 'game-save-slots'].map(id => makeNode('button', id));
+    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-save-slots'].map(id => makeNode('button', id));
     pauseActions.append(...pauseButtons);
     pauseActions.querySelectorAll = () => pauseButtons;
 
@@ -173,17 +173,26 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
 
     let restarted = 0;
     const played = [];
+    const slotState = {started: false, currentLevel: 1, completedLevels: [], bestLevelScores: {}, campaignScore: 0, black: false, sound: true, music: true, freePlay: false};
+    const settingsToggled = [];
     const menu = createGameMenu({
       root,
-      getSlot: () => ({started: false, currentLevel: 1, completedLevels: [], bestLevelScores: {}, campaignScore: 0, black: false, sound: true, freePlay: false}),
+      getSlot: () => slotState,
       onView() {},
       onPlay: (slot, level) => played.push([slot, level]),
       onResume() {},
       onRestart: () => restarted++,
-      onSetting() {},
+      onSetting(slot, name) { settingsToggled.push([slot, name]); slotState[name] = !slotState[name]; },
       onReset() {},
       onExport() {},
     });
+
+    assert.equal(byId.get('slot-music').textContent, 'Music: On');
+    assert.equal(byId.get('game-music').textContent, 'Music: On');
+    byId.get('slot-music').click();
+    assert.deepEqual(settingsToggled, [[1, 'music']]);
+    assert.equal(byId.get('slot-music').textContent, 'Music: Off');
+    assert.equal(byId.get('game-music').textContent, 'Music: Off');
 
     menu.setScenes([{ordinal: 1, title: 'Movement'}, {ordinal: 2, title: 'Two'}]);
     menu.setConnected(true, 'playstation');

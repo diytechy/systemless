@@ -32,7 +32,7 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
       </svg>
     </div>
     <div class="game-actions" id="slot-actions">
-      <button class="game-button primary" id="slot-play" data-needs-levels>Play</button><button class="game-button" id="slot-levels" data-needs-levels>Level Select</button><button class="game-button" id="slot-hand">Hand: Gold</button><button class="game-button" id="slot-sound">Sound: On</button><button class="game-button" id="slot-reset">Reset</button>
+      <button class="game-button primary" id="slot-play" data-needs-levels>Play</button><button class="game-button" id="slot-levels" data-needs-levels>Level Select</button><button class="game-button" id="slot-hand">Hand: Gold</button><button class="game-button" id="slot-sound">Sound: On</button><button class="game-button" id="slot-music">Music: On</button><button class="game-button" id="slot-reset">Reset</button>
     </div>
     <div id="slot-confirm" class="game-confirm" hidden><p id="slot-confirm-label"></p><div class="game-actions"><button class="game-button" id="slot-keep">Cancel</button><button class="game-button" id="slot-erase">Reset Slot</button></div></div>
     <footer class="game-footer"><p id="slot-controls" hidden>Stick / D-pad choose · A play · X levels · Y hand · B sound · Start reset</p><button class="game-button quiet" id="slot-export">Export Saves</button></footer>
@@ -46,7 +46,7 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
   <section id="game-pause-screen" class="game-plaque game-small" data-screen="pause" hidden>
     <header class="game-heading"><h2 id="game-pause-title" tabindex="-1">Paused</h2><p id="game-pause-level"></p></header>
     <div class="game-command-list" id="pause-actions">
-      <button class="game-button primary" id="game-resume">Resume</button><button class="game-button" id="game-restart">Restart Level</button><button class="game-button" id="game-pause-levels">Level Select</button><button class="game-button" id="game-sound">Sound: On</button><button class="game-button" id="game-hand">Hand: Gold</button><button class="game-button" id="game-save-slots">Save Slots</button>
+      <button class="game-button primary" id="game-resume">Resume</button><button class="game-button" id="game-restart">Restart Level</button><button class="game-button" id="game-pause-levels">Level Select</button><button class="game-button" id="game-sound">Sound: On</button><button class="game-button" id="game-music">Music: On</button><button class="game-button" id="game-hand">Hand: Gold</button><button class="game-button" id="game-save-slots">Save Slots</button>
     </div>
   </section>
   <section id="game-complete-screen" class="game-plaque game-small" data-screen="complete" hidden>
@@ -72,7 +72,7 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
   <button id="controller-level-confirm">Play (Cross / A)</button>
   <button id="controller-level-cancel">Cancel (Circle / B)</button>
 </dialog></div>
-<div class="bar"><label id="level-picker" hidden>Level <select id="level"></select></label><button id="pause">Pause (P)</button><button id="restart">Restart</button><label><input type="checkbox" id="sound"> Original effects</label><button id="black">Gold / black hand</button><button id="fullscreen">Fullscreen</button><button id="play-view">Touch play view</button></div>
+<div class="bar"><label id="level-picker" hidden>Level <select id="level"></select></label><button id="pause">Pause (P)</button><button id="restart">Restart</button><label><input type="checkbox" id="sound"> Original effects</label><label><input type="checkbox" id="music"> Original music</label><button id="black">Gold / black hand</button><button id="fullscreen">Fullscreen</button><button id="play-view">Touch play view</button></div>
 <p>Hold <b>Space / D / Left Mouse</b> swing · <b>Z</b> bounce · <b>Left Shift / X / Left+Right Mouse</b> flip · tap <b>W / C / Right Mouse</b> reverse. Click the board to focus.<br>Touch the board: <b>tap</b> reverse · <b>hold</b> swing · <b>two-finger hold</b> flip · optional <b>slide, then hold</b> bounce. A hold starts after 0.15 s, so press slightly before the hand reaches the dot.</p>
 <div class="bar"><button data-action="swing">Hold: Swing</button><button data-action="bounce">Hold: Bounce</button><button data-action="flip">Hold: Flip</button><button id="reverse">Reverse</button></div>
 <p>Controller: Cross / A swing · Circle / B reverse · Square / X flip · Triangle / Y bounce · R1 pause · R2 restart · Options / Start levels.</p>

@@ -177,5 +177,20 @@ class PilotPackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
 
+    def test_music_tracks_are_verified_and_copied_with_audio_engine(self):
+        track=self.assets/'music-song-a.ogg';track.write_bytes(b'OggS synthetic audio')
+        self.manifest['files'].append(dict(name=track.name,sha256=sha256_file(track),bytes=track.stat().st_size))
+        self.manifest['music']=dict(tracks={'song-a':'music-song-a.ogg'},titleTrack='song-a',victoryTrack='song-a',chapterTracks=['song-a'])
+        self.save_manifest()
+        package(self.dist,self.assets)
+        self.assertTrue((self.dist/'clockwerx-html5/audio-engine.mjs').is_file())
+        self.assertEqual((self.dist/'clockwerx-html5/assets/music-song-a.ogg').read_bytes(),b'OggS synthetic audio')
+
+    def test_unlisted_music_track_is_rejected_before_copy(self):
+        self.manifest['music']=dict(tracks={'song-a':'missing-track.ogg'},titleTrack='song-a',victoryTrack='song-a',chapterTracks=['song-a'])
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+
 
 if __name__=='__main__':unittest.main()

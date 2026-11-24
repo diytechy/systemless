@@ -551,7 +551,10 @@ export class SourceRound extends MovementGame {
   if(!this.board.switches?.length)return;
   const frames=this.doorSystem.snapshot().switches,actor=this.collider(hand);
   const index=this.board.switches.findIndex((s,i)=>s.visible!==false&&outlineCollision(actor,worldOutline(this.doorOutlines,1000,frames[i].frame,s)));
-  for(const sound of this.doorSystem.contact(hand.name,index))this.event('door-toggle',hand,{id:sound.doorIndex});
+  this.emitDoorSounds(this.doorSystem.contact(hand.name,index),hand);
+ }
+ emitDoorSounds(sounds,hand){
+  for(const {doorIndex,soundArgument} of sounds)this.event('door-toggle',hand,{id:doorIndex}).soundArgument=soundArgument;
  }
  syncElevatorDots(){
   const states=this.elevators?.snapshot().dots;
@@ -590,6 +593,7 @@ export class SourceRound extends MovementGame {
   if(this.dotAnimations){
    const result=this.dotAnimations.humanGrab(dot.id,this.remainingTime);
    if(result.checkpointChanged)this.event('checkpoint',this.player,dot);
+   if(result.sounds.includes(46))this.event('protected',this.player,dot);
   }
   return !this.death;
  }
@@ -698,7 +702,7 @@ export class SourceRound extends MovementGame {
   if(!this.death&&!this.bombScene&&!this.board.slidingOilRules)this.advanceSpikes();
   // Door callbacks observe one changed shared count, rather than catching up
   // every missed phase. Cross-layer source traversal phase remains approximate.
-  if(!this.death)this.doorSystem.observeClock(doorCount);
+  if(!this.death)this.emitDoorSounds(this.doorSystem.observeClock(doorCount),this.player);
   if(!this.death&&this.busterWallEffects)this.busterWallEffects=advanceBusterWallEffects(this.busterWallEffects,wallEffectCount);
   this.bombScene?.processUpper();
   // Physical source layer11 (PU/DP) precedes enemy1, then human0. A droplet

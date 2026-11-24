@@ -80,7 +80,7 @@ export class BombScene {
   }
   if(e.type==='paint-crater'){this.craters.push({...e.grid});if(b.bombOilElevatorRules||(b.movingProtectedBusterRules||b.movingSlowdownBusterRules||b.staticSlowdownBusterRules||b.staticTeleportBusterRules||b.movingProgrammedBusterRules||b.movingBusterBombRules||b.movingFuseOrdinaryRules||b.movingBombSpikeWaystationRules||b.slidingBombRules||b.staticSlidingBombGoodieRules||b.movingBombRules))this.backgroundPaints.push({kind:'crater',...e.grid});}
   if(e.type==='erase-spark-background'&&(b.movingProtectedBusterRules||b.movingSlowdownBusterRules||b.staticSlowdownBusterRules||b.staticTeleportBusterRules||b.movingProgrammedBusterRules||b.movingBusterBombRules||b.movingFuseOrdinaryRules||b.movingBombSpikeWaystationRules||b.slidingBombRules||b.staticSlidingBombGoodieRules||b.movingBombRules))this.backgroundPaints.push({kind:'erase-spark-background',...structuredClone(e)});
-  if(e.type==='sound'&&(b.movingProtectedBusterRules||b.movingSlowdownBusterRules||b.staticSlowdownBusterRules||b.staticTeleportBusterRules||b.movingProgrammedBusterRules||b.movingBusterBombRules||b.movingFuseOrdinaryRules||b.movingBombSpikeWaystationRules||b.slidingBombRules||b.staticSlidingBombGoodieRules||b.movingBombRules))r.event('bomb-sound',r.player).soundId=e.id;
+  if(e.type==='sound'){const event=r.event('bomb-sound',r.player);if(event)event.soundId=e.id;}
   if(e.type==='death')r.beginDeath({reason:'spark',sourceReason:e.reason});
   if(e.type==='flourish'||e.type==='floating-score')this.effects.push({kind:e.type,point:this.gridPixel(e.grid,e.gridOffset),frame:0,visible:true,callbacks:0,count:(e.type==='flourish'?this.flourishClock:this.scoreClock).advance(0).clientCount,finish:e.finish});
   if(e.type==='add-time')r.remainingTime+=e.seconds;

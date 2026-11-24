@@ -3,8 +3,6 @@ Requires machfs and Pillow. Reads copied HFS fixture without modifying it.
 """
 import argparse, hashlib, json, os, struct, wave, subprocess, time
 from pathlib import Path
-import machfs
-from PIL import Image
 
 def resources(b):
     do,mo,_,_=struct.unpack_from('>4I',b);to,no=struct.unpack_from('>HH',b,mo+24);tb=mo+to
@@ -17,6 +15,8 @@ def resources(b):
             yield typ,rid,name,b[do+off+4:do+off+4+size]
 
 def extract(fixture,out):
+    import machfs
+    from PIL import Image
     started=time.time();print(json.dumps({'phase':'start','ownedPid':os.getpid(),'utcEpoch':started}),flush=True)
     out.mkdir(parents=True,exist_ok=True);raw=fixture.read_bytes();sha=hashlib.sha256(raw).hexdigest()
     if sha!='03f7f09e3c4a4c820a373873bc103de0ec0777f36c5aa5e778afa61b33c959f4':raise ValueError('Unexpected fixture hash')

@@ -167,7 +167,7 @@ export function menuPadAction(view, pressed, confirming = false) {
   return null;
 }
 
-export function createGameMenu({root, getSlot, onView, onPlay, onResume, onRestart, onSetting, onReset, onExport}) {
+export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, onPlay, onResume, onRestart, onSetting, onReset, onExport}) {
   const $ = id => document.getElementById(id);
   const screen = Object.fromEntries(Array.from(root.querySelectorAll('[data-screen]'), node => [node.dataset.screen, node]));
   const cards = $('game-slots');
@@ -263,8 +263,10 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
     text('slot-play', slot.started ? 'Continue' : 'Play');
     text('slot-hand', 'Hand: ' + (slot.black ? 'Black' : 'Gold'));
     text('slot-sound', 'Sound: ' + (slot.sound ? 'On' : 'Off'));
+    text('slot-music', 'Music: ' + (slot.music ? 'On' : 'Off'));
     text('game-hand', $('slot-hand').textContent);
     text('game-sound', $('slot-sound').textContent);
+    text('game-music', $('slot-music').textContent);
   }
 
   function renderSlots(takeFocus = false) {
@@ -295,8 +297,10 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
   }
 
   function selectSlot(id, takeFocus = true) {
+    const changed = selectedSlot !== id;
     selectedSlot = id;
     highlightSlot(takeFocus);
+    if (changed) onSlotChange();
   }
 
   function renderLevels(takeFocus = true) {
@@ -421,6 +425,7 @@ export function createGameMenu({root, getSlot, onView, onPlay, onResume, onResta
   $('slot-levels').onclick = () => levels('title');
   $('slot-hand').onclick = $('game-hand').onclick = () => setting('black');
   $('slot-sound').onclick = $('game-sound').onclick = () => setting('sound');
+  $('slot-music').onclick = $('game-music').onclick = () => setting('music');
   $('slot-reset').onclick = startConfirm;
   $('slot-keep').onclick = endConfirm;
   $('slot-erase').onclick = () => { onReset(selectedSlot); endConfirm(); };

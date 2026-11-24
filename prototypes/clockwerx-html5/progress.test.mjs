@@ -31,14 +31,14 @@ test('malformed progress defaults safely and out-of-range solo levels are ignore
     {...defaults, completedLevels: [1]});
 });
 
-test('new stores have four independent Roman slots and sound defaults on', () => {
+test('new stores have four independent Roman slots and sound and music default on', () => {
   const store = readSlotStore(null);
   assert.equal(store.activeSlotId, 1);
   assert.deepEqual(store.slots.map(slot => slotSummary(slot).label), ['I', 'II', 'III', 'IV']);
   for (const slot of store.slots) {
     assert.deepEqual(slot, {
       id: slot.id, started: false, currentLevel: 1, completedLevels: [], bestLevelScores: {},
-      campaignScore: 0, black: false, sound: true, freePlay: false, updatedUtc: null,
+      campaignScore: 0, black: false, sound: true, music: true, freePlay: false, updatedUtc: null,
     });
   }
   assert.notEqual(store.slots[0].bestLevelScores, store.slots[1].bestLevelScores);
@@ -49,7 +49,7 @@ test('legacy migration preserves the selected level, hand and known clears in Sl
   const store = migrateLegacyProgress(legacy);
   assert.deepEqual(store.slots[0], {
     id: 1, started: true, currentLevel: 6, completedLevels: [3, 9], bestLevelScores: {},
-    campaignScore: 0, black: true, sound: true, freePlay: false, updatedUtc: null,
+    campaignScore: 0, black: true, sound: true, music: true, freePlay: false, updatedUtc: null,
   });
   assert.deepEqual(store.slots.slice(1), readSlotStore().slots.slice(1));
   assert.equal(migrateLegacyProgress(readProgress('{"completedLevels":[2]}')).slots[0].currentLevel, 3);
@@ -73,7 +73,7 @@ test('clear scores accrue once per level plus improvements, only in the selected
   assert.deepEqual(equal, another);
   assert.deepEqual(better.slots[1], {
     id: 2, started: true, currentLevel: 4, completedLevels: [1, 3], bestLevelScores: {1: 3000, 3: 9000},
-    campaignScore: 12000, black: false, sound: true, freePlay: false, updatedUtc: timestamp,
+    campaignScore: 12000, black: false, sound: true, music: true, freePlay: false, updatedUtc: timestamp,
   });
   assert.equal(better.slots[1].campaignScore - lower.slots[1].campaignScore, 3000);
   for (const index of [0, 2, 3]) assert.equal(better.slots[index], empty.slots[index]);
@@ -87,7 +87,7 @@ test('malformed saves cannot inject totals, uncleared scores or out-of-range slo
     activeSlotId: 5, slots: [null, {
       id: 3, currentLevel: 103, completedLevels: [10, 10, 7, 2, '1', 101],
       campaignScore: 9999, bestLevelScores: {1: 900, 2: 1200, 7: -1, 10: '3000'},
-      black: true, sound: false, freePlay: true, updatedUtc: 'bad time',
+      black: true, sound: false, music: false, freePlay: true, updatedUtc: 'bad time',
     }],
   }));
   assert.equal(store.activeSlotId, 1);
@@ -100,6 +100,7 @@ test('malformed saves cannot inject totals, uncleared scores or out-of-range slo
   assert.equal(slot.started, true);
   assert.equal(slot.black, true);
   assert.equal(slot.sound, false);
+  assert.equal(slot.music, false);
   assert.equal(slot.freePlay, true);
   assert.deepEqual(readSlotStore(JSON.stringify(store)), store);
   for (const args of [[0, 1, 0], [5, 1, 0], [3, 0, 5], [3, 101, 5], [3, 7, -1], [3, 7, NaN],

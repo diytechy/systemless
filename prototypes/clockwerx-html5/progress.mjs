@@ -46,7 +46,7 @@ function normalizeSlot(id, value) {
     id, started: value?.started === true || completedLevels.length > 0,
     currentLevel: isLevel(value?.currentLevel) ? value.currentLevel : 1,
     completedLevels, bestLevelScores, campaignScore: campaignTotal(bestLevelScores),
-    black: value?.black === true, sound: value?.sound !== false, freePlay: value?.freePlay === true,
+    black: value?.black === true, sound: value?.sound !== false, music: value?.music !== false, freePlay: value?.freePlay === true,
     updatedUtc: typeof value?.updatedUtc === 'string' && Number.isFinite(Date.parse(value.updatedUtc))
       ? new Date(value.updatedUtc).toISOString() : null,
   };

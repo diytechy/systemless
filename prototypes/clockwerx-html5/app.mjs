@@ -16,6 +16,7 @@ import {createTouchGestures,clientToLogical} from './touch-controls.mjs';
 import {planPlayLayout} from './touch-layout.mjs';
 import {createMouseControls} from './mouse-controls.mjs';
 import {createGamepadControls} from './gamepad-controls.mjs';
+import {createSoundLimiter,musicTrackForState,soundKeyForEvent} from './audio-engine.mjs';
 import {progressKey,readProgress,recordCompletion,slotStoreKey,readSlotStore,migrateLegacyProgress,
  recordSlotLevelCompletion,resetSlot,updateSlot} from './progress.mjs';
 import {campaignLevels,completionBonus,completionDetails,createGameMenu,levelMechanicCues,sideControlsSpec,canShowSideControls,padGlyphs} from './game-menu.mjs';
@@ -27,13 +28,14 @@ try{
  storedProgress=localStorage.getItem(progressKey);
  storedSlots=localStorage.getItem(slotStoreKey);
 }catch{}
-const progress=readProgress(storedProgress),settings={sound:false};
+const progress=readProgress(storedProgress),settings={sound:false,music:false};
 const gamepad=createGamepadControls(),levelMenu=$('controller-level-menu'),menuLevel=$('controller-level');
 let slotStore=storedSlots==null?migrateLegacyProgress(progress):readSlotStore(storedSlots);
 let activeSlotId=slotStore.activeSlotId,slotsUnsaved=false,gameMenu,gameScenes=new Map(),loadingScene=false;
-let soundContext,soundBuffers=new Map(),bombBonusBaseline=0;
+const soundBuffers=new Map(),allowSound=createSoundLimiter();
+let soundContext,musicPlayer,activeEffects=0,bombBonusBaseline=0;
 let chooseLevel;
-let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},buttonHeld={},padHeld={},mouseHeld={},heldCodes=new Set(),capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
+let sparkleSystems=[],renderPrevious=null,manifest,game,images={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},buttonHeld={},padHeld={},mouseHeld={},heldCodes=new Set(),capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
 const startup={bootUtc,boundary:'module evaluation to required foreground/background image decode and manifest parse complete',assetReadyUtc:null,readyMs:null,resourceEntries:[]};
 let inputReplay=null,checkedRoute=null,pilotInputBlocked=false;
 let wallLayer=null,wallLayerBoard=null,wallLayerRevision=null,drawFailure=null; // a draw error is reported once and never stops the rAF loop
@@ -101,13 +103,15 @@ function pauseLabels(paused){$('pause').textContent=paused?'Resume (P)':'Pause (
 function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
 function action(name,on){inputReplay=null;buttonHeld[name]=on;if(on)canvas.focus({preventScroll:true})}
 function clearInputs(){heldCodes.clear();held={};buttonHeld={};padHeld={};mouseHeld={};gamepad.reset();touch.reset();mouse.reset();touchHeld={};}
-function pause(){if(!ready)return;game.paused=!game.paused;pauseLabels(game.paused);message(game.paused?'Paused. Press R1 or P, or tap Resume.':'Play resumed.');}
-function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();bombBonusBaseline=0;resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
+function pause(){if(!ready)return;game.paused=!game.paused;pauseLabels(game.paused);syncMusic();message(game.paused?'Paused. Press R1 or P, or tap Resume.':'Play resumed.');}
+function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();bombBonusBaseline=0;resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);syncMusic();message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
 async function toggleFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else{await $('play').requestFullscreen({navigationUI:'hide'});await screen.orientation?.lock?.('landscape')?.catch(()=>{});}}catch(e){message('Fullscreen unavailable: '+e.message,true);}}
 $('pause').onclick=pause;$('touch-pause').onclick=pause;$('panel-pause').onclick=pause;$('fullscreen').onclick=toggleFullscreen;$('panel-fullscreen').onclick=toggleFullscreen;$('restart').onclick=restart;$('panel-restart').onclick=restart;
 // iPhone Safari has no element fullscreen; hide the button rather than show a failing control.
 if(!document.fullscreenEnabled)$('panel-fullscreen').hidden=true;
 $('panel-page').onclick=()=>{playLayout=false;applyLayout();};$('play-view').onclick=()=>{playLayout=true;applyLayout();};$('rotate-dismiss').onclick=()=>{rotateDismissed=true;applyLayout();};$('reverse').onclick=()=>{if(!pilotInputBlocked)game?.reverse();};$('black').onclick=()=>{if(capture)capture.invalidReasons.add('hand color changed during capture');progress.black=!progress.black;if(game instanceof SourceRound)game.setPlayerGroup(progress.black?4300:700);persist()};$('sound').checked=settings.sound;$('sound').onchange=()=>{if(capture)capture.invalidReasons.add('sound changed during capture');settings.sound=$('sound').checked;if(settings.sound)playSound('ActionSwing')};
+$('music').checked=settings.music;
+$('music').onchange=()=>{if(capture)capture.invalidReasons.add('music changed during capture');settings.music=$('music').checked;syncMusic();};
 $('export-progress').onclick=()=>download('clockwerx-progress.json',new Blob([JSON.stringify(progress,null,2)],{type:'application/json'}));
 function exportSlots(){
  refreshSlotStore();
@@ -136,7 +140,7 @@ window.addEventListener('keydown',e=>{
 window.addEventListener('keyup',e=>{if(keys[e.code]){if(!levelMenu.open&&(!gameMode||gameMenu.view==='play')&&
  !(gameMode&&e.target instanceof HTMLButtonElement))e.preventDefault();heldCodes.delete(e.code);syncHeldKeys();}});
 window.addEventListener('blur',()=>{clearInputs();if(capture)capture.invalidReasons.add('window blur');});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(capture)capture.invalidReasons.add('document hidden');}last=performance.now();accumulator=0;});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(capture)capture.invalidReasons.add('document hidden');}syncMusic();last=performance.now();accumulator=0;});
 window.addEventListener('gamepaddisconnected',event=>{gamepad.disconnect(event.gamepad.index);padConnected=false;padFamily=null;padHeld={};setActiveInputMode('keyboard-mouse');});
 canvas.onclick=()=>canvas.focus({preventScroll:true});
 // Desktop mouse on #game canvas: Left hold = swing, Left+Right hold = flip, Right release without Left = reverse.
@@ -255,10 +259,10 @@ function pollGamepad(){
  }else if(!connected&&wasConnected){
   setActiveInputMode('keyboard-mouse');
  }
+ if(connected&&(state.direction||Object.values(pressed).some(Boolean)))unlockSound();
  if(gameMode){
   gameMenu.setConnected(connected,padFamily);
   if(!connected)return;
-  if(state.direction||Object.values(pressed).some(Boolean))unlockSound();
   if(gameMenu.view!=='play'){gameMenu.pad(state);return;}
   if(!ready)return;
   if(pressed.levels){gameMenu.levels('play');return;}
@@ -284,45 +288,79 @@ function pollGamepad(){
  if(swing||bounce||flip||pressed.reverse)inputReplay=null;
  if(pressed.reverse&&!pilotInputBlocked)game.reverse();
 }
-function loadSoundBuffer(name){
- if(!soundBuffers.has(name)){
-  soundBuffers.set(name,fetch(audio[name])
+function syncMusic(){
+ const musicManifest=manifest?.music;
+ if(!musicManifest)return;
+ const view=gameMode?gameMenu.view:game?.complete?'complete':game?.paused?'pause':'play';
+ const coversBoard=gameMode&&!gameMenu.boardVisible;
+ const enabled=gameMode?getSlot(coversBoard?gameMenu.slotId:activeSlotId).music:settings.music;
+ const track=musicTrackForState({view,coversBoard,level:activeScene?.ordinal??1,musicManifest});
+ const file=musicManifest.tracks?.[track];
+ if(!file||!enabled||document.hidden||view==='pause'){
+  musicPlayer?.pause();
+  return;
+ }
+ if(!musicPlayer){
+  musicPlayer=new Audio();
+  musicPlayer.loop=true;
+  musicPlayer.volume=.32;
+ }
+ const url=new URL('./assets/'+file,location.href).href;
+ if(musicPlayer.src!==url)musicPlayer.src=url;
+ if(musicPlayer.paused)musicPlayer.play().catch(()=>{});
+}
+
+function loadSoundBuffer(url){
+ if(!soundBuffers.has(url)){
+  soundBuffers.set(url,fetch(url)
    .then(response=>{if(!response.ok)throw new Error('Sound unavailable');return response.arrayBuffer();})
    .then(buffer=>soundContext.decodeAudioData(buffer))
    .catch(()=>null));
  }
- return soundBuffers.get(name);
+ return soundBuffers.get(url);
 }
 function unlockSound(enabled=getSlot(gameMenu?.slotId??activeSlotId).sound){
+ syncMusic();
  if(!gameMode||!enabled)return;
  const AudioContext=window.AudioContext||window.webkitAudioContext;
  if(!AudioContext)return;
  try{
   soundContext??=new AudioContext();
   if(soundContext.state!=='running')soundContext.resume().catch(()=>{});
-  for(const name of Object.keys(audio))loadSoundBuffer(name);
  }catch{}
 }
-function playSound(name){
- if(!(gameMode?getSlot(activeSlotId).sound:settings.sound)||!audio[name])return;
- if(gameMode&&(window.AudioContext||window.webkitAudioContext)){
-  if(soundContext?.state==='running'){
-   const startingGame=game;
-   loadSoundBuffer(name).then(buffer=>{
-    if(!buffer||game!==startingGame||!['play','complete'].includes(gameMenu.view)||!getSlot(activeSlotId).sound)return;
-    const source=soundContext.createBufferSource(),gain=soundContext.createGain();
-    source.buffer=buffer;
-    gain.gain.value=.45;
-    source.connect(gain).connect(soundContext.destination);
-    source.start();
-   }).catch(()=>{});
-   return;
-  }
+function effectsEnabled(){
+ return !document.hidden&&(gameMode?getSlot(activeSlotId).sound:settings.sound);
+}
+function playSound(name,volume=.32){
+ const file=manifest?.sounds?.[name];
+ if(!file||!effectsEnabled()||activeEffects>=6||!allowSound(file))return;
+ const url='./assets/'+file,startingGame=game;
+ activeEffects++;
+ let released=false;
+ const release=()=>{if(!released){released=true;activeEffects--;}};
+ const fallback=()=>{
+  const sound=new Audio(url);
+  sound.volume=volume;
+  sound.addEventListener('ended',release,{once:true});
+  sound.addEventListener('error',release,{once:true});
+  sound.play().catch(release);
+ };
+ if(soundContext?.state==='running'){
+  loadSoundBuffer(url).then(buffer=>{
+   if(game!==startingGame||(gameMode&&!['play','complete'].includes(gameMenu.view))||!effectsEnabled()){release();return;}
+   if(!buffer){fallback();return;}
+   const source=soundContext.createBufferSource(),gain=soundContext.createGain();
+   source.buffer=buffer;
+   gain.gain.value=volume;
+   source.connect(gain).connect(soundContext.destination);
+   source.onended=release;
+   source.start();
+  }).catch(release);
+ }else{
   soundContext?.resume?.().catch(()=>{});
+  fallback();
  }
- const sound=gameMode?new Audio(audio[name]):audio[name].cloneNode();
- sound.volume=.45;
- sound.play().catch(()=>{});
 }
 
 function resetSparkles(){
@@ -664,6 +702,7 @@ function onGoal(){
  }else{
   recordCompletion(progress,activeScene.ordinal);
   persist();
+  syncMusic();
   message('Goal dot grabbed. '+(game.board.title||'Movement')+' complete.');
  }
 }
@@ -677,7 +716,7 @@ $('png').onclick=()=>{if(capture)capture.invalidReasons.add('PNG export during t
 $('memory').onclick=async()=>{if(capture){$('diagnostics').textContent='Memory measurement is disabled during capture.';return;}const start=new Date().toISOString();memoryPending=true;$('capture').disabled=true;$('capture-reset').disabled=true;$('memory').disabled=true;$('diagnostics').textContent='Measuring page memory…';try{if(performance.measureUserAgentSpecificMemory){const m=await performance.measureUserAgentSpecificMemory();memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'completed',method:'measureUserAgentSpecificMemory',boundary:'browser-reported page-associated memory; not process RSS or physical RAM',result:m};}else memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'unavailable',boundary:'No supported page memory API; no estimate invented'};}catch(e){memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'failed',error:String(e),boundary:'No memory result'}}finally{memoryPending=false;$('capture').disabled=false;$('capture-reset').disabled=false;$('memory').disabled=false;$('diagnostics').textContent=JSON.stringify(memoryResult);}};
 $('route').onclick=async()=>{if(!ready||!checkedRoute)return;try{await loadScene(activeScene);inputReplay=createInputReplay(checkedRoute);message('Replaying a checked input route from a new scene.');canvas.focus({preventScroll:true});}catch(e){message('Checked route unavailable: '+e.message,true);}};
 $('workload').onclick=()=>{restart();recordedUntil=12;message('Recorded input demo: swing held for 12 simulation seconds; no other actions.');};
-function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();pollMouse();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open&&(!gameMode||gameMenu.view==='play')){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!touch.active&&!mouse.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){bombBonusBaseline=game.bombScene?.score??0;inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){bombBonusBaseline=game.bombScene?.score??0;resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal')onGoal();}lastEvent=game.eventSequence;}const drawStart=performance.now();try{if(!gameMode||(gameMenu.boardVisible&&!loadingScene))draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
+function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();pollMouse();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open&&(!gameMode||gameMenu.view==='play')){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!touch.active&&!mouse.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){bombBonusBaseline=game.bombScene?.score??0;inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){bombBonusBaseline=game.bombScene?.score??0;resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){const key=soundKeyForEvent(e,manifest.sounds);if(key)playSound(key,['wall-bounce','door-bounce'].includes(e.type) ? .16 : .32);if(e.type==='goal')onGoal();}lastEvent=game.eventSequence;}const drawStart=performance.now();try{if(!gameMode||(gameMenu.boardVisible&&!loadingScene))draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
 async function loadScene(scene,black=blackHand()){
  if(capture){capture.invalidReasons.add('scene changed');finishCapture(performance.now());}
  ready=false;clearInputs();inputReplay=null;recordedUntil=0;renderPrevious=null;lastEvent=0;
@@ -727,6 +766,7 @@ async function loadScene(scene,black=blackHand()){
  document.querySelector('h1').textContent=`ClockWerx · ${title}`;canvas.setAttribute('aria-label',title+' game');
  activeBackdrop=scene.backdrop||manifest.backdrop;activePlayfield=scene.playfield||null;
  activeScene=scene;bombBonusBaseline=0;clearInputs();pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
+ syncMusic();
  updateSideControlsPanel();
  message(playLayout?`${title} ready. ${controlsHint()}`:`${title} ready · ${manifest.vectorAssets?'SVG foreground, continuous rotation':'original bitmap foreground'}. ${controlsHint()}`);
 }
@@ -741,6 +781,7 @@ function setGameView(view,coversBoard){
  last=performance.now();
  accumulator=0;
  updateSideControlsPanel();
+ syncMusic();
  if(playing)canvas.focus({preventScroll:true});
  if(view==='title'){
   document.title='ClockWerx';
@@ -792,6 +833,7 @@ function changeSlotSetting(id,name){
  persistSlots();
  if(name==='black'&&id===activeSlotId&&game instanceof SourceRound)game.setPlayerGroup(blackHand()?4300:700);
  if(name==='sound')unlockSound(getSlot(id).sound);
+ if(name==='music')syncMusic();
 }
 async function load(){
  try{
@@ -824,16 +866,12 @@ async function load(){
   ]:Object.entries(manifest.groups).flatMap(([gid,g])=>gid==='401'?[]:gid==='300'?g.images.slice(0,16):g.images);
   const names=[...new Set([...foreground,manifest.backdrop,...(manifest.scenes||[]).map(s=>s.backdrop).filter(Boolean)])];
   await Promise.all(names.map(async name=>{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}));
-  for(const [name,fn] of Object.entries(manifest.sounds||{})){
-   const url='./assets/'+fn;
-   if(gameMode)audio[name]=url;
-   else{audio[name]=new Audio(url);audio[name].preload='auto';}
-  }
   const scenes=manifest.scenes||[{id:'single',title:manifest.levelDefinition?.title||'Movement',levelDefinition:manifest.levelDefinition,checkedRoute:manifest.checkedRoute}];
   if(gameMode){
    gameScenes=new Map(scenes.map((scene,index)=>[scene.ordinal??index+1,scene]));
    gameMenu.setScenes(scenes);
    gameMenu.setBusy(false);
+   syncMusic();
    const wanted=Number(params.get('level'));
    if(gameScenes.has(wanted)){
     gameMenu.show('loading');
@@ -893,9 +931,9 @@ startup.assetReadyUtc=new Date().toISOString();startup.readyMs=performance.now()
 if(gameMode){
  if(storedSlots==null)persistSlots();
  gameMenu=createGameMenu({
-  root:$('game-overlay'),getSlot,onView:setGameView,onPlay:playLevel,onResume:()=>gameMenu.show('play'),
+  root:$('game-overlay'),getSlot,onView:setGameView,onSlotChange:syncMusic,onPlay:playLevel,onResume:()=>gameMenu.show('play'),
   onRestart:()=>{if(!loadingScene){gameMenu.show('play');restart();}},
-  onSetting:changeSlotSetting,onReset:id=>{refreshSlotStore();slotStore=resetSlot(slotStore,id);persistSlots();},onExport:exportSlots,
+  onSetting:changeSlotSetting,onReset:id=>{refreshSlotStore();slotStore=resetSlot(slotStore,id);persistSlots();syncMusic();},onExport:exportSlots,
  });
  // A valid explicit link stays in the URL until the player returns to Save Slots.
  gameMenu.selectSlot(activeSlotId,false);
@@ -903,6 +941,6 @@ if(gameMode){
  gameMenu.show(Number.isInteger(wanted)&&wanted>=1&&wanted<=campaignLevels?'loading':'title');
  gameMenu.setBusy(true,'Loading levels…');
  $('game-pause').onclick=openPause;
- window.addEventListener('pointerup',()=>unlockSound());
 }
+window.addEventListener('pointerup',()=>unlockSound());
 load();requestAnimationFrame(frame);

@@ -14,17 +14,21 @@ import {createSparkles} from './sparkles.mjs';
 import {handPoses,presentedAngle,presentedFaderFrame,resizeCanvas,atlasFrame} from './rendering.mjs';
 import {createTouchGestures,clientToLogical} from './touch-controls.mjs';
 import {planPlayLayout} from './touch-layout.mjs';
+import {createGamepadControls} from './gamepad-controls.mjs';
+import {progressKey,readProgress,recordCompletion} from './progress.mjs';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
-const bootUtc=new Date().toISOString(),bootStart=performance.now(),KEY='systemless.clockwerx-html5.pilot.v1',STEP=1/120;
-let settings={black:false,sound:false,completed:0};try{settings={...settings,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch{}
-settings.sound=false; // Every visit starts silent; audio is a deliberate user opt-in.
-let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},padHeld={},previousPad=[],capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
+const bootUtc=new Date().toISOString(),bootStart=performance.now(),STEP=1/120;
+let storedProgress;try{storedProgress=localStorage.getItem(progressKey);}catch{}
+const progress=readProgress(storedProgress),settings={sound:false};
+const gamepad=createGamepadControls(),levelMenu=$('controller-level-menu'),menuLevel=$('controller-level');
+let chooseLevel;
+let sparkleSystems=[],renderPrevious=null,manifest,game,images={},audio={},ready=false,last=performance.now(),accumulator=0,renderCalls=0,rafCalls=0,droppedSeconds=0,held={},buttonHeld={},padHeld={},capture=null,lastCapture=null,memoryResult=null,memoryPending=false,recordedUntil=0,lastEvent=0;
 const startup={bootUtc,boundary:'module evaluation to required foreground/background image decode and manifest parse complete',assetReadyUtc:null,readyMs:null,resourceEntries:[]};
 let inputReplay=null,checkedRoute=null,pilotInputBlocked=false;
 let wallLayer=null,wallLayerBoard=null,wallLayerRevision=null,drawFailure=null; // a draw error is reported once and never stops the rAF loop
 let activeBackdrop,activePlayfield,activeScene;
 const movementScope=$('scope-description').textContent,movementFidelity=$('fidelity-description').textContent;
-function persist(){try{localStorage.setItem(KEY,JSON.stringify({black:settings.black,completed:settings.completed}))}catch{}}
+function persist(){try{localStorage.setItem(progressKey,JSON.stringify(progress));}catch{}}
 function message(s,error=false){for(const id of['status','panel-status']){$(id).textContent=s;$(id).className=error?'error':'';}}
 // Touch play view is the default on touch-first devices; ?layout=play|page overrides.
 const layoutQuery=new URLSearchParams(location.search).get('layout');
@@ -32,26 +36,29 @@ let playLayout=layoutQuery==='play'||(layoutQuery!=='page'&&matchMedia('(pointer
 function controlsHint(){return playLayout?'Tap reverse · hold swing · two-finger hold flip.':'Space swing · Z bounce · X flip · C reverse.';}
 function pauseLabels(paused){$('pause').textContent=paused?'Resume (P)':'Pause (P)';$('touch-pause').textContent=$('panel-pause').textContent=paused?'Resume':'Pause';}
 function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
-function action(name,on){inputReplay=null;held[name]=on;canvas.focus({preventScroll:true})}
-function pause(){if(!game)return;game.paused=!game.paused;pauseLabels(game.paused);message(game.paused?(playLayout?'Paused. Tap Resume to continue.':'Paused. Press P or Resume to continue.'):'Movement resumed.');}
-function restart(){if(!game)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;held={};pauseLabels(false);message((game.board.title||'Movement')+(playLayout?' restarted. Hold as the hand reaches the next dot.':' restarted. Hold Space as the hand passes the next dot.'));canvas.focus({preventScroll:true});}
+function action(name,on){inputReplay=null;buttonHeld[name]=on;if(on)canvas.focus({preventScroll:true})}
+function clearInputs(){held={};buttonHeld={};padHeld={};gamepad.reset();touch.reset();touchHeld={};}
+function pause(){if(!ready)return;game.paused=!game.paused;pauseLabels(game.paused);message(game.paused?'Paused. Press R1 or P, or tap Resume.':'Play resumed.');}
+function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
 async function toggleFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else{await $('play').requestFullscreen({navigationUI:'hide'});await screen.orientation?.lock?.('landscape')?.catch(()=>{});}}catch(e){message('Fullscreen unavailable: '+e.message,true);}}
 $('pause').onclick=pause;$('touch-pause').onclick=pause;$('panel-pause').onclick=pause;$('fullscreen').onclick=toggleFullscreen;$('panel-fullscreen').onclick=toggleFullscreen;$('restart').onclick=restart;$('panel-restart').onclick=restart;
 // iPhone Safari has no element fullscreen; hide the button rather than show a failing control.
 if(!document.fullscreenEnabled)$('panel-fullscreen').hidden=true;
-$('panel-page').onclick=()=>{playLayout=false;applyLayout();};$('play-view').onclick=()=>{playLayout=true;applyLayout();};$('rotate-dismiss').onclick=()=>{rotateDismissed=true;applyLayout();};$('reverse').onclick=()=>{if(!pilotInputBlocked)game?.reverse();};$('black').onclick=()=>{if(capture)capture.invalidReasons.add('hand color changed during capture');settings.black=!settings.black;if(game instanceof SourceRound)game.setPlayerGroup(settings.black?4300:700);persist()};$('sound').checked=settings.sound;$('sound').onchange=()=>{if(capture)capture.invalidReasons.add('sound changed during capture');settings.sound=$('sound').checked;persist();if(settings.sound)playSound('ActionSwing')};
+$('panel-page').onclick=()=>{playLayout=false;applyLayout();};$('play-view').onclick=()=>{playLayout=true;applyLayout();};$('rotate-dismiss').onclick=()=>{rotateDismissed=true;applyLayout();};$('reverse').onclick=()=>{if(!pilotInputBlocked)game?.reverse();};$('black').onclick=()=>{if(capture)capture.invalidReasons.add('hand color changed during capture');progress.black=!progress.black;if(game instanceof SourceRound)game.setPlayerGroup(progress.black?4300:700);persist()};$('sound').checked=settings.sound;$('sound').onchange=()=>{if(capture)capture.invalidReasons.add('sound changed during capture');settings.sound=$('sound').checked;if(settings.sound)playSound('ActionSwing')};
+$('export-progress').onclick=()=>download('clockwerx-progress.json',new Blob([JSON.stringify(progress,null,2)],{type:'application/json'}));
 const keys={Space:'swing',KeyZ:'bounce',KeyX:'flip'};
-window.addEventListener('keydown',e=>{if(e.target instanceof HTMLInputElement)return;if(keys[e.code]){e.preventDefault();inputReplay=null;held[keys[e.code]]=true;}if(!e.repeat&&e.code==='KeyC'){e.preventDefault();if(!pilotInputBlocked)game?.reverse()}if(!e.repeat&&e.code==='KeyP'){e.preventDefault();pause()}});
-window.addEventListener('keyup',e=>{if(keys[e.code]){e.preventDefault();held[keys[e.code]]=false}});
-window.addEventListener('blur',()=>{held={};padHeld={};previousPad=[];touch.reset();touchHeld={};if(capture)capture.invalidReasons.add('window blur');});
-document.addEventListener('visibilitychange',()=>{if(capture&&document.hidden)capture.invalidReasons.add('document hidden');last=performance.now();accumulator=0;});
+window.addEventListener('keydown',e=>{if(levelMenu.open||e.target instanceof HTMLInputElement)return;if(keys[e.code]){e.preventDefault();inputReplay=null;held[keys[e.code]]=true;}if(!e.repeat&&e.code==='KeyC'){e.preventDefault();if(!pilotInputBlocked)game?.reverse()}if(!e.repeat&&e.code==='KeyP'){e.preventDefault();pause()}});
+window.addEventListener('keyup',e=>{if(keys[e.code]){if(!levelMenu.open)e.preventDefault();held[keys[e.code]]=false}});
+window.addEventListener('blur',()=>{clearInputs();if(capture)capture.invalidReasons.add('window blur');});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(capture)capture.invalidReasons.add('document hidden');}last=performance.now();accumulator=0;});
+window.addEventListener('gamepaddisconnected',event=>gamepad.disconnect(event.gamepad.index));
 canvas.onclick=()=>canvas.focus({preventScroll:true});
-// Touch: tap = reverse, one-finger hold = swing, two-finger hold = bounce, press-drag-hold = flip.
+// Touch: tap = reverse, one-finger hold = swing, two-finger hold = flip, press-drag-hold = bounce.
 // Touch/pen only, so desktop mouse clicks keep their existing focus behaviour. See touch-controls.mjs.
 // The gesture surface is the whole play area (board and instruction panel) except its controls.
 const touch=createTouchGestures(),touchSurface=$('play');let touchHeld={},touchView=null,touchButtonsKey='',tapFlashTimer=0;
 function touchPointer(e,kind){
- if(e.pointerType!=='touch'&&e.pointerType!=='pen')return;
+ if(levelMenu.open||(e.pointerType!=='touch'&&e.pointerType!=='pen'))return;
  if(kind==='down'?e.target.closest?.('button,select,a,input,label,summary,[data-no-gesture]'):!touch.tracks(e.pointerId))return;
  e.preventDefault();const t=performance.now();
  if(kind==='down'){try{touchSurface.setPointerCapture(e.pointerId);}catch{}canvas.focus({preventScroll:true});touch.down(e.pointerId,e.clientX,e.clientY,t);}
@@ -80,7 +87,7 @@ function drawTouchFeedback(){
  if(flash){const q=clientToLogical(rect,v.lastTap.x,v.lastTap.y)||(hand&&{x:hand.x,y:hand.y}),k=(now-v.lastTap.t)/240;if(q){ctx.globalAlpha=1-k;ctx.strokeStyle=ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(q.x,q.y,10+28*k,0,TAU);ctx.stroke();ctx.fillText('Reverse',q.x,Math.max(14,q.y-30));}}
  ctx.restore();
 }
-for(const button of document.querySelectorAll('[data-action]')){button.onpointerdown=e=>{e.preventDefault();button.setPointerCapture(e.pointerId);action(button.dataset.action,true)};button.onpointerup=()=>action(button.dataset.action,false);button.onpointercancel=()=>action(button.dataset.action,false);}
+for(const button of document.querySelectorAll('[data-action]')){button.onpointerdown=e=>{e.preventDefault();button.setPointerCapture(e.pointerId);action(button.dataset.action,true)};button.onlostpointercapture=()=>action(button.dataset.action,false);}
 function applyLayout(){
  document.body.classList.toggle('play-layout',playLayout);$('touch-panel').hidden=!playLayout;
  const play=$('play'),panel=$('touch-panel');
@@ -97,12 +104,57 @@ function applyLayout(){
 for(const target of [window,window.visualViewport].filter(Boolean))target.addEventListener('resize',applyLayout);
 document.addEventListener('fullscreenchange',applyLayout);screen.orientation?.addEventListener?.('change',applyLayout);
 applyLayout();
+function openLevelMenu(){
+ if(!ready||!chooseLevel)return;
+ if(capture)capture.invalidReasons.add('level menu opened');
+ clearInputs();
+ menuLevel.value=$('level').value;
+ levelMenu.showModal();
+}
+$('controller-level-cancel').onclick=()=>levelMenu.close();
+$('controller-level-confirm').onclick=()=>{
+ const index=menuLevel.selectedIndex;
+ levelMenu.close();
+ if(index!==$('level').selectedIndex)chooseLevel(index);
+};
+levelMenu.addEventListener('close',()=>{
+ clearInputs();last=performance.now();accumulator=0;
+ canvas.focus({preventScroll:true});
+});
+
+function shiftMenuLevel(offset){
+ menuLevel.selectedIndex=Math.max(0,Math.min(menuLevel.options.length-1,menuLevel.selectedIndex+offset));
+}
+
 function padStatus(s){if($('padstatus').textContent!==s)$('padstatus').textContent=s;}
 function pollGamepad(){
- padHeld={};if(document.hidden||!document.hasFocus()){previousPad=[];padStatus('Controller inactive while page is unfocused or hidden.');return;}
- let pads;try{pads=Array.from(navigator.getGamepads?.()||[]).filter(Boolean)}catch{previousPad=[];padStatus('Gamepad API unavailable in this browser context; use keyboard.');return;}const p=pads.find(p=>p.mapping==='standard');
- if(!p){previousPad=[];padStatus(pads.length?'Nonstandard controller mapping ignored; use keyboard.':'No standard gamepad detected. Physical hardware unqualified.');return;}
- padStatus('Standard gamepad adapter active; physical hardware unqualified.');const b=p.buttons.map(b=>b.pressed);padHeld={swing:b[0],bounce:b[1],flip:b[2]};if(b[3]&&!previousPad[3]&&!pilotInputBlocked)game?.reverse();if(b[9]&&!previousPad[9])pause();previousPad=b;
+ padHeld={};
+ if(document.hidden||!document.hasFocus()){
+  gamepad.reset();padStatus('Controller inactive while page is unfocused or hidden.');return;
+ }
+ let pads;
+ try{pads=navigator.getGamepads?.()??[];}catch{
+  gamepad.reset();padStatus('Gamepad API unavailable in this browser context.');return;
+ }
+ const {connected,held:pad,pressed}=gamepad.poll(pads,true);
+ padStatus(connected?'Standard gamepad connected.':'Press a button on a standard controller to connect.');
+ if(!connected||!ready)return;
+ if(levelMenu.open){
+  if(pressed.levels||pressed.bounce)levelMenu.close();
+  else if(pressed.swing)$('controller-level-confirm').click();
+  else if(pressed.pause)shiftMenuLevel(-1);
+  else if(pressed.restart)shiftMenuLevel(1);
+  else if(pressed.flip)shiftMenuLevel(-10);
+  else if(pressed.reverse)shiftMenuLevel(10);
+  return;
+ }
+ if(pressed.levels){openLevelMenu();return;}
+ if(pressed.restart){restart();return;}
+ if(pressed.pause)pause();
+ const {swing,bounce,flip,reverse}=pad;
+ padHeld={swing,bounce,flip,reverse};
+ if(swing||bounce||flip||pressed.reverse)inputReplay=null;
+ if(pressed.reverse&&!pilotInputBlocked)game.reverse();
 }
 function playSound(name){if(!settings.sound||!audio[name])return;const s=audio[name].cloneNode();s.volume=.45;s.play().catch(()=>{});}
 
@@ -124,7 +176,7 @@ function sprite(gid,index,x,y){const g=manifest.groups[gid],f=g.frames[index%g.f
 function drawBuster(p,angle){const a=manifest.vectorAssets.busters;if(!a)throw Error('Buster artwork required');ctx.drawImage(images[a.file],p.x+a.radius*Math.cos(angle)+a.x,p.y+(game.board.handOffsetY||0)+a.radius*Math.sin(angle)+a.y,a.width,a.height);}
 function drawHand(h){
  if(h.visible===false)return;
- const p=game.point?game.point(h):game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(settings.black?'4300':'700'):String(h.group);
+ const p=game.point?game.point(h):game.board.dots.find(d=>d.id===h.pivot),gid=h.name==='player'?(progress.black?'4300':'700'):String(h.group);
  if(h.sourceActorType===5&&manifest.vectorAssets){drawBuster(p,presentedAngle(h,renderPrevious?.[h.name],accumulator/STEP,true));return;}
  if(h.sourceActorType===4&&manifest.vectorAssets){
   const asset=manifest.vectorAssets.rotatingSpikes;
@@ -158,7 +210,7 @@ function drawTeleports(){
 function drawActorFaders(){
  if(!game.teleports)return;
  const atlas=manifest.vectorAssets?.teleports?.faders;
- for(const f of game.teleports.snapshot().faders)if(f.visible)drawTeleportAtlas(atlas,presentedFaderFrame(f,settings.black),f);
+ for(const f of game.teleports.snapshot().faders)if(f.visible)drawTeleportAtlas(atlas,presentedFaderFrame(f,progress.black),f);
 }
 function drawConnectors(){
  if(!game.board.slidingConnectorRules)return;
@@ -420,17 +472,17 @@ function drawBackdrop(image){
 function workloadTime(){return game.elapsedTime??game.time;}
 function captureInfo(){return {visibility:document.visibilityState,focused:document.hasFocus()};}
 function finishCapture(now){const c=capture;if(!c)return;lastCapture={schema:'clockwerx-html5-timing-v1',captureUtc:c.utc,completionUtc:new Date().toISOString(),durationMs:now-c.start,requestedDurationMs:20000,valid:c.invalidReasons.size===0,invalidReasons:[...c.invalidReasons],scene:(game.board.title||'Movement')+(c.fromRestart?'; atomic reset; no-input rotating scene':'; current state at capture start'),fromRestart:c.fromRestart,pageUrl:location.href,workload:c.workload,boundary:'main-thread rAF entry through fixed simulation and Canvas2D draw; SVG mode includes interpolated vector image rotation; not physical presentation or input latency',presentation:manifest.vectorAssets?'svg-continuous':'bitmap-64-directions',devicePixelRatio:window.devicePixelRatio||1,logicalSize:[640,480],backingSize:[canvas.width,canvas.height],cssSize:[canvas.getBoundingClientRect().width,canvas.getBoundingClientRect().height],sound:c.sound,handColor:c.handColor,startState:c.state,endState:game.snapshot(),startFocus:c.focus,endFocus:captureInfo(),counters:{rafCallbacks:rafCalls-c.raf,renderCalls:renderCalls-c.render,fixedStepCalls:game.steps-c.steps,activeSimulationSteps:game.activeSteps-c.activeSteps,droppedCatchupSeconds:droppedSeconds-c.dropped},frames:c.frames,startup,pageMemory:memoryResult,userAgent:navigator.userAgent};capture=null;$('capture').disabled=false;$('capture-reset').disabled=false;$('json').disabled=false;$('diagnostics').textContent=`Capture complete: ${lastCapture.valid?'valid':'INVALID — '+lastCapture.invalidReasons.join(', ')}. ${lastCapture.frames.length} raw rAF records. Download JSON.`;}
-function beginCapture(fromRestart=false){if(!ready||capture||memoryPending)return;if(fromRestart){restart();accumulator=0;last=performance.now();padHeld={};previousPad=[];}const focus=captureInfo();capture={fromRestart,sound:settings.sound,handColor:settings.black?'black':'gold',start:performance.now(),utc:new Date().toISOString(),focus,state:game.snapshot(),workload:inputReplay?'checked input-only route replay':recordedUntil>workloadTime()?'recorded swing hold until simulation second12':'manual inputs only; idle comparison requires no input',raf:rafCalls,render:renderCalls,steps:game.steps,activeSteps:game.activeSteps,dropped:droppedSeconds,frames:[],invalidReasons:new Set()};if(document.hidden)capture.invalidReasons.add('started hidden');if(!focus.focused)capture.invalidReasons.add('started unfocused');$('capture').disabled=true;$('capture-reset').disabled=true;$('json').disabled=true;$('diagnostics').textContent='Capturing 20 seconds; keep this window visible and focused.';}
+function beginCapture(fromRestart=false){if(!ready||capture||memoryPending)return;if(fromRestart){restart();accumulator=0;last=performance.now();gamepad.reset();padHeld={};}const focus=captureInfo();capture={fromRestart,sound:settings.sound,handColor:progress.black?'black':'gold',start:performance.now(),utc:new Date().toISOString(),focus,state:game.snapshot(),workload:inputReplay?'checked input-only route replay':recordedUntil>workloadTime()?'recorded swing hold until simulation second12':'manual inputs only; idle comparison requires no input',raf:rafCalls,render:renderCalls,steps:game.steps,activeSteps:game.activeSteps,dropped:droppedSeconds,frames:[],invalidReasons:new Set()};if(document.hidden)capture.invalidReasons.add('started hidden');if(!focus.focused)capture.invalidReasons.add('started unfocused');$('capture').disabled=true;$('capture-reset').disabled=true;$('json').disabled=true;$('diagnostics').textContent='Capturing 20 seconds; keep this window visible and focused.';}
 $('capture').onclick=()=>beginCapture();$('capture-reset').onclick=()=>beginCapture(true);
 $('json').onclick=()=>{if(lastCapture)download(`clockwerx-html5-${lastCapture.captureUtc.replaceAll(':','-')}.json`,new Blob([JSON.stringify({...lastCapture,pageMemory:memoryResult},null,2)],{type:'application/json'}));};
 $('png').onclick=()=>{if(capture)capture.invalidReasons.add('PNG export during timing capture');draw();canvas.toBlob(b=>{if(b)download('clockwerx-html5-canvas.png',b)},'image/png');};
 $('memory').onclick=async()=>{if(capture){$('diagnostics').textContent='Memory measurement is disabled during capture.';return;}const start=new Date().toISOString();memoryPending=true;$('capture').disabled=true;$('capture-reset').disabled=true;$('memory').disabled=true;$('diagnostics').textContent='Measuring page memory…';try{if(performance.measureUserAgentSpecificMemory){const m=await performance.measureUserAgentSpecificMemory();memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'completed',method:'measureUserAgentSpecificMemory',boundary:'browser-reported page-associated memory; not process RSS or physical RAM',result:m};}else memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'unavailable',boundary:'No supported page memory API; no estimate invented'};}catch(e){memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'failed',error:String(e),boundary:'No memory result'}}finally{memoryPending=false;$('capture').disabled=false;$('capture-reset').disabled=false;$('memory').disabled=false;$('diagnostics').textContent=JSON.stringify(memoryResult);}};
 $('route').onclick=async()=>{if(!ready||!checkedRoute)return;try{await loadScene(activeScene);inputReplay=createInputReplay(checkedRoute);message('Replaying a checked input route from a new scene.');canvas.focus({preventScroll:true});}catch(e){message('Checked route unavailable: '+e.message,true);}};
 $('workload').onclick=()=>{restart();recordedUntil=12;message('Recorded input demo: swing held for 12 simulation seconds; no other actions.');};
-function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||padHeld[k]||touchHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!previousPad[3]&&!touch.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal'){settings.completed++;persist();message('Goal dot grabbed. '+(game.board.title||'Movement')+' complete.');}}lastEvent=game.eventSequence;}const drawStart=performance.now();try{draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:{...held,...Object.fromEntries(Object.entries(padHeld).filter(([,v])=>v))}});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
+function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!touch.active)pilotInputBlocked=false;input={};}game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message('Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!game.death)updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){playSound(e.type==='flip'?'ActionFlip':e.type==='bounce'?'ActionBounce':e.type==='swing'?'ActionSwing':'');if(e.type==='goal'){recordCompletion(progress,activeScene.ordinal);persist();message('Goal dot grabbed. '+(game.board.title||'Movement')+' complete.');}}lastEvent=game.eventSequence;}const drawStart=performance.now();try{draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
 async function loadScene(scene){
  if(capture){capture.invalidReasons.add('scene changed');finishCapture(performance.now());}
- ready=false;held={};padHeld={};previousPad=[];touch.reset();touchHeld={};inputReplay=null;recordedUntil=0;renderPrevious=null;lastEvent=0;
+ ready=false;clearInputs();inputReplay=null;recordedUntil=0;renderPrevious=null;lastEvent=0;
  const reference=scene.levelDefinition;
  activeBackdrop=scene.backdrop||manifest.backdrop;activePlayfield=scene.playfield||null;
  if(reference){
@@ -450,7 +502,7 @@ async function loadScene(scene){
    // Construct from the unmodified source declaration, then apply the live gold/black preference.
    // Mutating board.player first broke the frozen source-board assertions (levels 89-97) with the black hand.
    game=new SourceRound(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,bombOutlines,gunOutlines,bombRoutes:reference.bombRoutes,oilBounds:reference.oilBounds,deathFactory:(pivot,hand,clock)=>createDeathEffect({pivot,frame:hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),randomUnsigned:()=>Math.floor(Math.random()*65536),clock,advanceClock:false})});
-   if(settings.black)game.setPlayerGroup(4300);
+   if(progress.black)game.setPlayerGroup(4300);
   $('presentation').textContent=board.canonicalPlayerRules?'Private SVG pilot · source map and callback-stepped Child movement with smooth SVG drawing.': 'Private SVG pilot · source map, collision outlines and death lifecycle. Continuous hand timing uses the source Child-speed average at 60 guest ticks/second.';
   const rules=[];
   if(board.gunTriggerProjectileRules)rules.push('Hands entering a pressure trigger fire the matching gun. Avoid its projectiles.');
@@ -476,7 +528,7 @@ async function loadScene(scene){
  checkedRoute=scene.checkedRoute||null;$('route').hidden=!checkedRoute;
  const title=game.board.title||'Movement';document.title=`ClockWerx ${title} — HTML5 pilot`;
  document.querySelector('h1').textContent=`ClockWerx · ${title}`;canvas.setAttribute('aria-label',title+' game');
- activeScene=scene;pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
+ activeScene=scene;clearInputs();pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
  message(playLayout?`${title} ready. ${controlsHint()}`:`${title} ready · ${manifest.vectorAssets?'SVG foreground, continuous rotation':'original bitmap foreground'}. ${controlsHint()}`);
 }
 async function load(){
@@ -512,14 +564,45 @@ async function load(){
   await Promise.all(names.map(async name=>{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}));
   for(const [name,fn] of Object.entries(manifest.sounds||{})){audio[name]=new Audio('./assets/'+fn);audio[name].preload='auto';}
   const scenes=manifest.scenes||[{id:'single',title:manifest.levelDefinition?.title||'Movement',levelDefinition:manifest.levelDefinition,checkedRoute:manifest.checkedRoute}];
-  $('level').replaceChildren(...scenes.map((scene,index)=>{const option=document.createElement('option');option.value=String(index);option.textContent=(scene.ordinal?scene.ordinal+': ':'')+scene.title;return option;}));
-  $('panel-level').replaceChildren(...[...$('level').options].map(o=>o.cloneNode(true)));
+  const levelSelects=[$('level'),$('panel-level'),menuLevel];
+  const options=scenes.map((scene,index)=>{
+   const option=document.createElement('option');
+   option.value=String(index);
+   option.textContent=(scene.ordinal?scene.ordinal+': ':'')+scene.title;
+   return option;
+  });
+  for(const select of levelSelects)select.replaceChildren(...options.map(o=>o.cloneNode(true)));
   $('level-picker').hidden=$('panel-level').hidden=scenes.length<2;
-  const choose=index=>{const scene=scenes[index];$('level').value=$('panel-level').value=String(index);if(scene?.ordinal){const u=new URL(location.href);u.searchParams.set('level',scene.ordinal);history.replaceState(null,'',u);}loadScene(scene).catch(e=>message('Level unavailable: '+e.message,true));};
-  $('level').onchange=()=>choose(Number($('level').value));$('panel-level').onchange=()=>choose(Number($('panel-level').value));
-  // Deep link: ?level=97 opens that ordinal directly (falls back to the first scene).
-  const wanted=Number(new URLSearchParams(location.search).get('level')),initial=Math.max(0,scenes.findIndex(s=>s.ordinal===wanted));
-  $('level').value=$('panel-level').value=String(initial);await loadScene(scenes[initial]);
+  const loadLevel=async(index,updateUrl=false)=>{
+   const scene=scenes[index];
+   await loadScene(scene);
+   for(const select of levelSelects)select.selectedIndex=index;
+   if(scene.ordinal){
+    progress.lastLevel=scene.ordinal;
+    persist();
+    if(updateUrl){
+     const url=new URL(location.href);
+     url.searchParams.set('level',scene.ordinal);
+     history.replaceState(null,'',url);
+    }
+   }
+  };
+  let changingLevel=false;
+  if(scenes.length>1)chooseLevel=async index=>{
+   if(changingLevel||!scenes[index])return;
+   changingLevel=true;
+   for(const select of levelSelects)select.disabled=true;
+   try{await loadLevel(index,true);}
+   catch(e){message('Level unavailable: '+e.message,true);}
+   finally{changingLevel=false;for(const select of levelSelects)select.disabled=false;}
+  };
+  // An explicit level link takes precedence over the last successfully loaded level.
+  const params=new URLSearchParams(location.search);
+  const wanted=params.has('level')?Number(params.get('level')):progress.lastLevel;
+  const initial=Math.max(0,scenes.findIndex(scene=>scene.ordinal===wanted));
+  await loadLevel(initial);
+  $('level').onchange=event=>chooseLevel?.(event.target.selectedIndex);
+  $('panel-level').onchange=event=>chooseLevel?.(event.target.selectedIndex);
 startup.assetReadyUtc=new Date().toISOString();startup.readyMs=performance.now()-bootStart;
   startup.resourceEntries=performance.getEntriesByType('resource').map(r=>({name:new URL(r.name).pathname,durationMs:r.duration,transferSize:r.transferSize,encodedBodySize:r.encodedBodySize,decodedBodySize:r.decodedBodySize}));
   message(playLayout?`${game.board.title||'Movement'} ready. ${controlsHint()}`:`${game.board.title||'Movement'} ready · ${vector?'SVG foreground, continuous rotation':'original bitmap foreground'}. ${controlsHint()}`);

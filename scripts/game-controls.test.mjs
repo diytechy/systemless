@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {keysForPad,PadKeys,hasControllerProfile,KioskPad,EXIT_HOLD_MS} from './game-controls.mjs';
-const pad=(buttons=[],axes=[0,0])=>({mapping:'standard',axes,buttons:Array.from({length:16},(_,i)=>({pressed:buttons.includes(i)}))});
+import {keysForPad as legacyKojiKeys} from './koji-controls.mjs';
+const pad=(buttons=[],axes=[0,0])=>({mapping:'standard',axes,buttons:Array.from({length:17},(_,i)=>({pressed:buttons.includes(i)}))});
 const keys=(buttons,game)=>keysForPad(pad(buttons),.35,game);
 test('each game has an isolated controller profile',()=>{
  assert.deepEqual([...keys([0,2,14],'koji-personal-204')].sort(),[' ','i','j']);
@@ -35,6 +36,7 @@ test('shipped library and kiosk mappings leave the SpectreLaunch buttons reserve
  for(const id of ['koji-personal-204','clockwerx-personal-10','delirium-personal-11']){
   assert.equal(keys(reserved,id).size,0,id);
  }
+ assert.equal(legacyKojiKeys(pad(reserved)).size,0);
  const kiosk=JSON.parse(readFileSync(new URL('../www/src/ottertube-games.json',import.meta.url),'utf8'));
  for(const [id,{pad:{buttons}}] of Object.entries(kiosk)){
   for(const index of reserved)assert.equal(buttons[index],undefined,`${id}, button ${index}`);

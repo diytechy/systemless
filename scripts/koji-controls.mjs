@@ -8,11 +8,11 @@ export function keysForPad(pad, deadzone = 0.35) {
   if (down(15) || x > deadzone) keys.add('l');
   if (down(0) || down(12)) keys.add('i');
   if (down(1) || down(2)) keys.add(' ');
-  if (down(4)) keys.add('u');
+  if (down(7)) keys.add('u');
   if (down(5)) keys.add('o');
   if (down(3)) keys.add('k');
   if (down(9)) keys.add('p');
-  if (down(8)) keys.add('Escape');
+  if (down(11)) keys.add('Escape');
   return keys;
 }
 

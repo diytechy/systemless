@@ -1,0 +1,2008 @@
+{
+  "schema": "systemless-spectrelaunch-playability-audit/1",
+  "catalogueInputs": [
+    "www/private_koji.rs",
+    "www/private_library.rs",
+    "build-manifest-v2.json",
+    "private-library.json",
+    "docs/iterations/2026-11-07-library-coordinator/final-game-table.md"
+  ],
+  "scope": "61 prepared routes. Historical captures provide triage evidence. Track A verification is recorded separately.",
+  "qualification": "controllerVerified refers to the intended launch mode and end-to-end controller software. Physical hardware has a separate flag. Tier 3 includes plausible native candidates awaiting Track B.",
+  "tierCounts": {
+    "1": 1,
+    "2": 8,
+    "3": 52
+  },
+  "controlArchetypes": {
+    "A": "Arcade Digital",
+    "B": "stick_step Grid",
+    "C": "Mouse/Paddle",
+    "D": "Hybrid",
+    "E": "Scripted Menu"
+  },
+  "games": [
+    {
+      "id": "clockwerx-personal-10",
+      "slug": "clockwerx",
+      "title": "ClockWerx 1.0",
+      "tier": 1,
+      "controllerVerified": true,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": true,
+      "controlArchetype": "A",
+      "launchMode": "html5",
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 1,
+      "coordinatorNativeResult": null,
+      "priorBrowserEvidence": "QA100 retained sweep previously matched all 100 port scenes.",
+      "disposition": "Default to HTML5. Complete the physical-controller and couch-distance display checks. Keep the emulated route as a future override for original saves.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/clockwerx/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/clockwerx-html5/final-comparison-review.md",
+        "docs/iterations/2026-11-13-clockwerx-completion/review.md"
+      ],
+      "launchRoute": "/clockwerx-html5/",
+      "controllerVerification": "edge-standard-gamepad-api-injected",
+      "trackAHtml5": {
+        "appModeFullscreen": true,
+        "levels": 100,
+        "passingBrowserChecks": 7,
+        "injectedGamepad": true,
+        "progressExportAndReload": true
+      }
+    },
+    {
+      "id": "koji-personal-204",
+      "slug": "koji-the-frog",
+      "title": "Koji the Frog 2.0.4",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 2,
+      "coordinatorNativeResult": null,
+      "priorBrowserEvidence": "First lily-pad field ran, including enemies and respawns. Browser keyboard aliases cover movement and actions.",
+      "disposition": "Verify jump, diagonal movement, pause and any mapped preferences on a fresh native start.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/koji/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/koji.json"
+      ],
+      "priorBrowserGuestHz": 60.248,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 1,
+      "trackANativeSmoke": {
+        "architecture": "68k",
+        "headlessBootPassed": true,
+        "headlessBootFrontendTicks": 300,
+        "threadedDesktopCloseExitCode": 0,
+        "visibleWindowMs": 93,
+        "guestLoadedMs": 109,
+        "cpuAudioPhaseMs": {
+          "samples": 210,
+          "p50": 0.08,
+          "p95": 8.903,
+          "p99": 19.968
+        },
+        "audioInitializationWarning": false,
+        "sourceImageUnchanged": true,
+        "observation": "Level 1 showed movement, tongue and pause. The scenario passed both its pixel and guest audio assertions.",
+        "gameplayScriptFrontendTicks": 489,
+        "gameplayScriptAssertions": 2
+      }
+    },
+    {
+      "id": "delirium-personal-11",
+      "slug": "delirium",
+      "title": "Delirium 1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 4
+      },
+      "coordinatorRow": 3,
+      "coordinatorNativeResult": null,
+      "priorBrowserEvidence": "Classic playfield and saved keypad steering were exercised. The OtterTube browser harness proved scripted start and guest Quit before leaving.",
+      "disposition": "Map keypad movement and fire, bomb, reverse and thrust. Verify the name flow and actual high-score write on guest Quit.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/delirium/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/delirium.json"
+      ],
+      "priorBrowserGuestHz": 60.096,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 1,
+      "trackANativeSmoke": {
+        "architecture": "68k",
+        "headlessBootPassed": true,
+        "headlessBootFrontendTicks": 300,
+        "threadedDesktopCloseExitCode": 0,
+        "visibleWindowMs": 360,
+        "guestLoadedMs": 360,
+        "cpuAudioPhaseMs": {
+          "samples": 211,
+          "p50": 1.421,
+          "p95": 7.952,
+          "p99": 16.294
+        },
+        "audioInitializationWarning": false,
+        "sourceImageUnchanged": true,
+        "observation": "The script reached the arena and showed movement/fire and resume. The script supplied the catalogue’s 2,048,000-byte partition.",
+        "gameplayScriptFrontendTicks": 840,
+        "gameplayScriptAssertions": 0
+      }
+    },
+    {
+      "id": "owned-3-d-cannon-v1",
+      "slug": "3-d-cannon",
+      "title": "3-D Cannon",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "D",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 4,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "One-player terrain and aim changes were seen. The view changed after Space.",
+      "disposition": "Qualify aim, power, fire and view selection with a stick and a short start script.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/3-d-cannon/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/3-d-cannon.json"
+      ],
+      "priorBrowserGuestHz": 56.232,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-3d-brick-bash-1-1-1-v1",
+      "slug": "3d-brick-bash-1-1-1",
+      "title": "3d Brick Bash! 1.1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 5,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "Aiming drag changed the rendered polygon into a broad band. No dependable paddle or collision baseline.",
+      "disposition": "Reproduce the distortion against the original before committing to a cursor or paddle mapping.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/3d-brick-bash-1-1-1/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/brick-bash.json"
+      ]
+    },
+    {
+      "id": "owned-acquire-1-0-v1",
+      "slug": "acquire-1-0",
+      "title": "Acquire 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 6,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "First timed board responds to target selection and continues to generate icons.",
+      "disposition": "Test at couch distance with precision cursor movement and target acquisition.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/acquire-1-0/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/acquire.json"
+      ],
+      "priorBrowserGuestHz": 60.126,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-action-dome-1-0-v1",
+      "slug": "action-dome-1-0",
+      "title": "Alien Action Dome 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 7,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "Stage 1 proceeded through a life loss to the score screen.",
+      "disposition": "Verify continuous steering and the restart and score-dialog paths.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/action-dome-1-0/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/action-dome.json"
+      ],
+      "priorBrowserGuestHz": 60.12,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-adventure-v1",
+      "slug": "adventure",
+      "title": "Adventure 1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "E",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 8,
+      "coordinatorNativeResult": "N0",
+      "priorBrowserEvidence": "A titled but blank window persisted. No text prompt appeared.",
+      "disposition": "Investigate startup. Reassess controller suitability once the command interface is available.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/adventure/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/adventure.json"
+      ]
+    },
+    {
+      "id": "owned-angband-v1",
+      "slug": "angband",
+      "title": "Angband 2.0.2 (Macintosh)",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "B",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 9,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "A new character reached town and awaited turns.",
+      "disposition": "Character creation, inventory and the broad keyboard command set need a dedicated UI before couch qualification.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/angband/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/angband.json"
+      ],
+      "priorBrowserGuestHz": 60.121,
+      "priorBrowserDiagnosticOnly": false
+    },
+    {
+      "id": "owned-arashi-1-1-1-v1",
+      "slug": "arashi-1-1-1",
+      "title": "Arashi 1.1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 10,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The selected tube level responded to mouse input before the score prompt.",
+      "disposition": "Try direct horizontal positioning and a holdable fire button, then verify precision.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/arashi-1-1-1/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/arashi.json"
+      ],
+      "priorBrowserGuestHz": 60.167,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-bachman-2-0u-v1",
+      "slug": "bachman-2-0u",
+      "title": "Bachman 2.0u",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 11,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The maze animated and reached game over in the first level.",
+      "disposition": "Script Game → Begin and confirm directional changes and restarts.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/bachman-2-0u/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/bachman.json"
+      ],
+      "priorBrowserGuestHz": 59.927,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-balderdoush-1-04i-v1",
+      "slug": "balderdoush-1-04i",
+      "title": "Balderdoush 1.04i",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 12,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The first field stayed active across an idle sample and a right input.",
+      "disposition": "Confirm movement, firing and cleanup of the high-score prompt.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/balderdoush-1-04i/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/balderdoush.json"
+      ],
+      "priorBrowserGuestHz": 60.121,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-barney-carnage-2-0-v1",
+      "slug": "barney-carnage-2-0",
+      "title": "Barney Carnage 2.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 13,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The scene ran at roughly 5 guest Hz with only a small moving target on a mostly white field.",
+      "disposition": "A rendering and timing reference is needed before judging playability or rewrite size.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/barney-carnage-2-0/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/barney.json"
+      ],
+      "priorBrowserGuestHz": 5.006,
+      "priorBrowserDiagnosticOnly": false
+    },
+    {
+      "id": "owned-battletanks-2-12-1-v1",
+      "slug": "battletanks-2-12-1",
+      "title": "BattleTanks 2.12.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "D",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 14,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "Two-player New Game enabled save commands but produced a flat field without units.",
+      "disposition": "Establish an active arena before mapping movement and targeting.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/battletanks-2-12-1/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/battletanks-css.json"
+      ]
+    },
+    {
+      "id": "owned-bedlam-v1",
+      "slug": "bedlam",
+      "title": "Bedlam 1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "D",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 1
+      },
+      "coordinatorRow": 15,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "A monochrome briefing and sparse star transition appeared. Cockpit combat did not appear.",
+      "disposition": "Find a reliable transition into combat and identify the flight and firing inputs.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/bedlam/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/bedlam.json"
+      ]
+    },
+    {
+      "id": "owned-bikaka-1-4-v1",
+      "slug": "bikaka-1-4",
+      "title": "Bikaka 1.4",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 16,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The first falling hex piece rendered at roughly 26 guest Hz.",
+      "disposition": "Conversion priority 2. Compare native drop timing first, then prototype hex rotation, line clears and responsive digital repeat on one board.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/bikaka-1-4/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/bikaka.json"
+      ],
+      "priorBrowserGuestHz": 26.024,
+      "priorBrowserDiagnosticOnly": false,
+      "conversionPriority": 2
+    },
+    {
+      "id": "blobbo-full-personal-101",
+      "slug": "blobbo",
+      "title": "Blobbo Full 1.0.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "B",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 17,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The welcome board responded to mouse movement. OtterTube verified grid pulses and scripted save/load in the browser.",
+      "disposition": "Port stick_step and the dialog scripts. Test native gameplay and actual persistence of root Preferences.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/blobbo/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/blobbo.json"
+      ],
+      "priorBrowserGuestHz": 60.171,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 1,
+      "trackANativeSmoke": {
+        "architecture": "68k",
+        "headlessBootPassed": true,
+        "headlessBootFrontendTicks": 300,
+        "threadedDesktopCloseExitCode": 0,
+        "visibleWindowMs": 93,
+        "guestLoadedMs": 109,
+        "cpuAudioPhaseMs": {
+          "samples": 211,
+          "p50": 0.117,
+          "p95": 4.137,
+          "p99": 8.263
+        },
+        "audioInitializationWarning": false,
+        "sourceImageUnchanged": true,
+        "observation": "Startup reached About. The 640×480 desktop run dismissed About, wrote a game save, closed and restored one snapshot.",
+        "isolatedDesktopSaveRoundTrip": true
+      }
+    },
+    {
+      "id": "owned-blood-bath-demo-1-96-v1",
+      "slug": "blood-bath-demo-1-96",
+      "title": "Blood Bath Demo 1.96",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 18,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The explicitly selected demo still showed a partial red title screen.",
+      "disposition": "Isolate the presentation failure before assessing aiming.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/blood-bath-demo-1-96/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/blood-bath-css.json"
+      ]
+    },
+    {
+      "id": "owned-bloodsuckers-v1",
+      "slug": "bloodsuckers",
+      "title": "Bloodsuckers",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 19,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The animated title menu persisted after attempted selection.",
+      "disposition": "Find a reliable transition to the in-game arm and meters.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/bloodsuckers/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/bloodsuckers-css.json"
+      ]
+    },
+    {
+      "id": "owned-bolo-v1",
+      "slug": "bolo",
+      "title": "Bolo 0.99.7",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "D",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 21,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "Offline tutorial reached the river and the boat responded to a stop command.",
+      "disposition": "Qualify steering, aiming, builder commands and tutorial dialogs with dual-stick input.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/bolo/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/bolo.json"
+      ],
+      "priorBrowserGuestHz": 60.172,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-bonk-1-4-2-v1",
+      "slug": "bonk-1-4-2",
+      "title": "Bonk 1.4.2",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 22,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The face grid displayed then returned to the chooser.",
+      "disposition": "Identify the return trigger and check precise selection across several rounds.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/bonk-1-4-2/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/bonk.json"
+      ],
+      "priorBrowserGuestHz": 58.87,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-bonkheads-deluxe-v1",
+      "slug": "bonkheads-deluxe",
+      "title": "Bonkheads Deluxe 1.0.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 23,
+      "coordinatorNativeResult": "N0",
+      "priorBrowserEvidence": "One-player Surfaceville remained active with moving enemies.",
+      "disposition": "Verify jump and attack timing, pause, restart and the distinction between single-player and co-op.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/bonkheads-deluxe/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/bonkheads.json"
+      ],
+      "priorBrowserGuestHz": 60.15,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-brickles-plus-3-0-v1",
+      "slug": "brickles-plus-3-0",
+      "title": "Brickles Plus 3.0",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 25,
+      "coordinatorNativeResult": "N0",
+      "priorBrowserEvidence": "Score and ball counts changed, with bricks disappearing, but the paddle and ball were unclear in both browser and historical native captures.",
+      "disposition": "Conversion priority 8. Confirm the renderer gap against the original. A bounded single-paddle port could deliver visible ball/paddle feedback and analog positioning.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/brickles-plus-3-0/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/brickles-css.json"
+      ],
+      "conversionPriority": 8
+    },
+    {
+      "id": "owned-brickoids-millenium-v1",
+      "slug": "brickoids-millenium",
+      "title": "Brickoids Millenium 1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 26,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "Level 1 advanced after the ball launched, and score and ball count changed.",
+      "disposition": "Test an analog paddle and confirm ball visibility, launch and pause.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/brickoids-millenium/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/brickoids.json"
+      ],
+      "priorBrowserGuestHz": 60.06,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-chiral-v1",
+      "slug": "chiral",
+      "title": "Chiral 1.0.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 27,
+      "coordinatorNativeResult": "N0",
+      "priorBrowserEvidence": "One atom was placed in Practice 1 before the sample ended at the title.",
+      "disposition": "Test placement, precision and pause under faster stages.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/chiral/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/chiral.json"
+      ],
+      "priorBrowserGuestHz": 55.469,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-chrysanthemum-1-01-v1",
+      "slug": "chrysanthemum-1-01",
+      "title": "Chrysanthemum 1.01",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 28,
+      "coordinatorNativeResult": "N0",
+      "priorBrowserEvidence": "The first flower-arrangement field appeared without clearly visible flowers. About 14 guest Hz was diagnostic only.",
+      "disposition": "Resolve resource or presentation behavior before estimating playability.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/chrysanthemum-1-01/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/chrysanthemum.json"
+      ],
+      "priorBrowserGuestHz": 13.915,
+      "priorBrowserDiagnosticOnly": true
+    },
+    {
+      "id": "owned-columns-v1",
+      "slug": "columns",
+      "title": "Columns 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 29,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "Gems fell into the well. Earlier native probes held pause and then resumed motion.",
+      "disposition": "Confirm rotation, lateral repeat, fast drop and score prompt handling.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/columns/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/columns.json"
+      ],
+      "priorBrowserGuestHz": 60.202,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-crunch-v1",
+      "slug": "crunch",
+      "title": "Crunch! 2.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 30,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The marble moved right and Space pause/resume was seen.",
+      "disposition": "Check directional feel, collision and restart at native pace.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/crunch/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/crunch.json"
+      ],
+      "priorBrowserGuestHz": 60.136,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-cybernation-1-1-1-v1",
+      "slug": "cybernation-1-1-1",
+      "title": "CyberNation 1.1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 32,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "First room and NPC state advanced after a right input.",
+      "disposition": "Confirm movement, attack and pause from a known scene.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/cybernation-1-1-1/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/cybernation-active.json"
+      ],
+      "priorBrowserGuestHz": 60.143,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-deliverance-v1",
+      "slug": "deliverance",
+      "title": "Deliverance™ 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "E",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 33,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "Installation stops at a serial prompt.",
+      "disposition": "Keep hidden until there is an authorized registered setup and gameplay proof.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/deliverance/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/deliverance.json"
+      ]
+    },
+    {
+      "id": "owned-dome-wars-v1",
+      "slug": "dome-wars",
+      "title": "Dome Wars Public Beta",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 35,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "Terrain rendered and the first human turn accepted a power adjustment.",
+      "disposition": "Try cursor and aim/power bindings. Check turn setup and fire without typing.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/dome-wars/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/dome-wars.json"
+      ],
+      "priorBrowserGuestHz": 60.12,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-drol-v1",
+      "slug": "drol",
+      "title": "Drol 0.9",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 36,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "Initial platforms and enemies remained active after starting and input.",
+      "disposition": "Verify direction, action and pause on the first stage.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/drol/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/drol.json"
+      ],
+      "priorBrowserGuestHz": 60.126,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-fantastic-voyage-v1",
+      "slug": "fantastic-voyage",
+      "title": "Fantastic Voyage 1.1a",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "D",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 37,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The first mission room ran at roughly 15 guest Hz with active actors and a timer.",
+      "disposition": "Conversion priority 7. Retest native pacing and movement first. Bound a feasibility slice to one room, rescue objectives and one controller action loop.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/fantastic-voyage/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/fantastic-voyage.json"
+      ],
+      "priorBrowserGuestHz": 14.775,
+      "priorBrowserDiagnosticOnly": false,
+      "conversionPriority": 7
+    },
+    {
+      "id": "owned-gold-digger-v1",
+      "slug": "gold-digger",
+      "title": "Gold Digger 1.3.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 39,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The first Lost Mines board rendered with the player and enemies.",
+      "disposition": "Confirm movement, digging controls, pause and completion on a stock map.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/gold-digger/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/gold-digger.json"
+      ],
+      "priorBrowserGuestHz": 60.122,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-goldpusher-v1",
+      "slug": "goldpusher",
+      "title": "GoldPusher 1.5",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "B",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 40,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The populated first room progressed and the score changed.",
+      "disposition": "Measure single-cell movement and repeat. Add a safe undo or restart mapping if the game supports it.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/goldpusher/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/goldpusher.json"
+      ],
+      "priorBrowserGuestHz": 60.087,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-guy-smiley-vs-the-monsters-v1",
+      "slug": "guy-smiley-vs-the-monsters",
+      "title": "Guy Smiley vs. the Monsters 1.0.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 41,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "New Game left a white client after a movement attempt.",
+      "disposition": "Investigate initialization and wait states before assigning arcade inputs.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/guy-smiley-vs-the-monsters/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/guy-smiley.json"
+      ]
+    },
+    {
+      "id": "owned-lawyers-v1",
+      "slug": "lawyers",
+      "title": "Lawyers 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "B",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 42,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "A randomized board rendered and awaited a turn.",
+      "disposition": "Qualify single-step movement and restart without replacing existing game state.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/lawyers/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/lawyers.json"
+      ],
+      "priorBrowserGuestHz": 60.169,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "lemmings-personal-152",
+      "slug": "lemmings",
+      "title": "Lemmings 1.5.2",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 43,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "First Fun level advanced with the release count and countdown changing.",
+      "disposition": "Verify skill selection, cursor precision, actual assignment and pause at couch distance.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/lemmings/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/lemmings.json"
+      ],
+      "priorBrowserGuestHz": 60.126,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 1,
+      "trackANativeSmoke": {
+        "architecture": "68k",
+        "headlessBootPassed": true,
+        "headlessBootFrontendTicks": 300,
+        "threadedDesktopCloseExitCode": 0,
+        "visibleWindowMs": 375,
+        "guestLoadedMs": 390,
+        "cpuAudioPhaseMs": {
+          "samples": 221,
+          "p50": 0.122,
+          "p95": 0.523,
+          "p99": 15.569
+        },
+        "audioInitializationWarning": false,
+        "sourceImageUnchanged": true,
+        "observation": "The scenario reached Fun level 1 and observed release count changes and pause/resume. Skill assignment remained inconclusive.",
+        "gameplayScriptFrontendTicks": 914,
+        "gameplayScriptAssertions": 0
+      }
+    },
+    {
+      "id": "owned-macpipes-v1",
+      "slug": "macpipes",
+      "title": "MacPipes 2.2.7",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 44,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The shareware reminder returned after dismissal.",
+      "disposition": "Require a repeatable authorized start before evaluating pipe selection.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/macpipes/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/macpipes.json"
+      ]
+    },
+    {
+      "id": "owned-maelstrom-v1",
+      "slug": "maelstrom",
+      "title": "Maelstrom 1.4.3",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 45,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "Wave 1 advanced to a life loss in the browser.",
+      "disposition": "Verify rotation, thrust, fire and pause, plus keyboard-to-pad input cadence.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/maelstrom/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/maelstrom.json"
+      ],
+      "priorBrowserGuestHz": 57.695,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 1,
+      "trackANativeSmoke": {
+        "architecture": "68k",
+        "headlessBootPassed": true,
+        "headlessBootFrontendTicks": 300,
+        "threadedDesktopCloseExitCode": 0,
+        "visibleWindowMs": 156,
+        "guestLoadedMs": 171,
+        "cpuAudioPhaseMs": {
+          "samples": 214,
+          "p50": 0.467,
+          "p95": 8.697,
+          "p99": 23.217
+        },
+        "audioInitializationWarning": false,
+        "sourceImageUnchanged": true,
+        "observation": "The start key entered Wave 1. The desktop store gained one startup snapshot; its restoration was outside this probe.",
+        "gameplayScriptFrontendTicks": 303,
+        "gameplayScriptAssertions": 0
+      }
+    },
+    {
+      "id": "owned-mantra-v1",
+      "slug": "mantra",
+      "title": "Mantra 1.02",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "B",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 46,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The initial beach and status UI rendered.",
+      "disposition": "Confirm discrete movement and repeat, then dialog dismissal and save behavior.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/mantra/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/mantra.json"
+      ],
+      "priorBrowserGuestHz": 60.156,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-mantra-ii-v1",
+      "slug": "mantra-ii",
+      "title": "Mantra II 1.02",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "B",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 47,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "Keypad movement changed the actor location in the native follow-up. Browser play reached a conversation.",
+      "disposition": "Try stick_step and confirm/cancel for NPC interactions. The prepared entry selects the 68K application.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/mantra-ii/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/mantra-ii.json"
+      ],
+      "priorBrowserGuestHz": 60.12,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3,
+      "trackANativeSmoke": {
+        "architecture": "ppc",
+        "headlessBootPassed": true,
+        "headlessBootFrontendTicks": 300,
+        "threadedDesktopCloseExitCode": 0,
+        "visibleWindowMs": 94,
+        "guestLoadedMs": 203,
+        "cpuAudioPhaseMs": {
+          "samples": 203,
+          "p50": 12.156,
+          "p95": 14.894,
+          "p99": 36.684
+        },
+        "audioInitializationWarning": false,
+        "sourceImageUnchanged": true,
+        "observation": "PPC was confirmed by the runner and the title rendered. The prepared route keeps the selected 68K executable."
+      }
+    },
+    {
+      "id": "owned-nort-v1",
+      "slug": "nort",
+      "title": "Nort",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 48,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The browser entered a persistent black field. A historical headless run reached a split arena after delay.",
+      "disposition": "Reconcile the two starts and prove steering before exposing the game.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/nort/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/nort.json"
+      ]
+    },
+    {
+      "id": "oh-no-more-lemmings-personal-10",
+      "slug": "oh-no-more-lemmings",
+      "title": "Oh No! More Lemmings 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 49,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The first Tame level progressed. Earlier native capture proved pause and resume.",
+      "disposition": "Validate skill cycling, cursor assignment and nuke confirmation with the Lemmings profile.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/oh-no-more-lemmings/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/onml.json"
+      ],
+      "priorBrowserGuestHz": 60.124,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 1
+    },
+    {
+      "id": "owned-oregon-trail-v1",
+      "slug": "oregon-trail",
+      "title": "Oregon Trail 1.1",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 50,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The wagon travelled on the map, with roughly 24 guest Hz in the measured scene.",
+      "disposition": "Conversion priority 6. Verify native travel and hunting first. A slice should cover readable prompts, a no-typing party setup and one coherent travel decision loop.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/oregon-trail/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/oregon-trail.json"
+      ],
+      "priorBrowserGuestHz": 24.43,
+      "priorBrowserDiagnosticOnly": false,
+      "conversionPriority": 6
+    },
+    {
+      "id": "owned-pac-in-time-v1",
+      "slug": "pac-in-time",
+      "title": "Pac-in-Time 1.0",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 51,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "A first-desert platform scene and a right input were observed at roughly 46 guest Hz.",
+      "disposition": "Conversion priority 5. Compare native jump, momentum and item use first. Full levels and physics make this a larger rewrite.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/pac-in-time/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/pac-in-time.json"
+      ],
+      "priorBrowserGuestHz": 45.504,
+      "priorBrowserDiagnosticOnly": false,
+      "conversionPriority": 5
+    },
+    {
+      "id": "owned-pac-the-man-v1",
+      "slug": "pac-the-man",
+      "title": "Pac the Man 4.5.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 52,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "Opening maze accepted a right input and advanced through lives and score changes.",
+      "disposition": "Qualify directional turns at intersections, pause/restart and name prompt handling.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/pac-the-man/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/pac-the-man.json"
+      ],
+      "priorBrowserGuestHz": 60.113,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 2
+    },
+    {
+      "id": "owned-particleman-1-0-v1",
+      "slug": "particleman-1-0",
+      "title": "ParticleMan 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 53,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "A populated board and changing counters appeared. The directional mapping remains uncertain.",
+      "disposition": "Identify movement and actions from the game controls, then verify a representative board.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/particleman-1-0/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/particleman.json"
+      ],
+      "priorBrowserGuestHz": 60.147,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-polybrid-1-0-v1",
+      "slug": "polybrid-1-0",
+      "title": "Polybrid 1.0",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          640,
+          480
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 54,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "A live falling well reached roughly 29 guest Hz after startup.",
+      "disposition": "Conversion priority 3. Test native timing, then prototype one well with precise repeat, rotate and drop.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/polybrid-1-0/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/polybrid.json"
+      ],
+      "priorBrowserGuestHz": 29.236,
+      "priorBrowserDiagnosticOnly": false,
+      "conversionPriority": 3
+    },
+    {
+      "id": "owned-prince-of-persia-v1",
+      "slug": "prince-of-persia",
+      "title": "Prince of Persia 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 55,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The first room booted and a right input was observed in the browser. A prior native probe reached Escape pause.",
+      "disposition": "Map the start chord and verify walk/run, jump, careful step, fight, and resume.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/prince-of-persia/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/prince.json"
+      ],
+      "priorBrowserGuestHz": 60.17,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 1,
+      "trackANativeSmoke": {
+        "architecture": "68k",
+        "headlessBootPassed": true,
+        "headlessBootFrontendTicks": 300,
+        "threadedDesktopCloseExitCode": 0,
+        "visibleWindowMs": 203,
+        "guestLoadedMs": 313,
+        "cpuAudioPhaseMs": {
+          "samples": 223,
+          "p50": 0.439,
+          "p95": 8.088,
+          "p99": 15.997
+        },
+        "audioInitializationWarning": false,
+        "sourceImageUnchanged": true,
+        "observation": "The New Game chord entered the first dungeon room and Escape showed pause. Movement displacement remained inconclusive.",
+        "gameplayScriptFrontendTicks": 802,
+        "gameplayScriptAssertions": 0
+      }
+    },
+    {
+      "id": "owned-robowar-4-1-1-v1",
+      "slug": "robowar-4-1-1",
+      "title": "RoboWar 4.1.1",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "D",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 57,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "Supplied robots fought in a live arena. Loading and editing programs remains a keyboard/file workflow.",
+      "disposition": "Keep experimental for general couch use. Assess a scripted preset-battle mode separately.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/robowar-4-1-1/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/robowar.json"
+      ],
+      "priorBrowserGuestHz": 60.153,
+      "priorBrowserDiagnosticOnly": false
+    },
+    {
+      "id": "owned-ruckus-v1",
+      "slug": "ruckus",
+      "title": "Ruckus",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "D",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 58,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "Mission 9 displayed the terrain and scrolled to a hostage building.",
+      "disposition": "Verify command selection, panning and vehicle control with dual sticks and a cursor.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/ruckus/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/ruckus.json"
+      ],
+      "priorBrowserGuestHz": 60.138,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-scruffy-v1",
+      "slug": "scruffy",
+      "title": "Scruffy",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 1
+      },
+      "coordinatorRow": 59,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The monochrome puppy field rendered and moved after a D input.",
+      "disposition": "Retain 1-bit depth and verify jump, movement and restart.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/scruffy/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/scruffy.json"
+      ],
+      "priorBrowserGuestHz": 60.122,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-scruffy-ii-v1",
+      "slug": "scruffy-ii",
+      "title": "Scruffy II 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 4
+      },
+      "coordinatorRow": 60,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "A 4-bit title appeared. Bounded clicks and keys did not reach gameplay.",
+      "disposition": "Resolve how the mode starts and retain 4-bit depth.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/scruffy-ii/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/scruffy-ii.json"
+      ]
+    },
+    {
+      "id": "owned-slithereens-v1",
+      "slug": "slithereens",
+      "title": "Slithereens",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 61,
+      "coordinatorNativeResult": "N0",
+      "priorBrowserEvidence": "Only a uniform pale-cyan screen was observed after startup and New Game input.",
+      "disposition": "Investigate readiness and rendering before inferring a gamepad layout.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/slithereens/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/slithereens.json"
+      ]
+    },
+    {
+      "id": "owned-spin-doctor-v1",
+      "slug": "spin-doctor",
+      "title": "Spin Doctor 1.2",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 63,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The two-wand scene rendered four rotating hands at roughly 24 guest Hz. A native probe observed a pause screen.",
+      "disposition": "Conversion priority 1. Recheck native timing, then trial transfer windows and control feel on one wand course. Evaluate rule reuse from ClockWerx.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/spin-doctor/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/spin-doctor.json"
+      ],
+      "priorBrowserGuestHz": 24.129,
+      "priorBrowserDiagnosticOnly": false,
+      "conversionPriority": 1
+    },
+    {
+      "id": "owned-star-trek-final-unity-v1",
+      "slug": "star-trek-final-unity",
+      "title": "Star Trek: A Final Unity",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 64,
+      "coordinatorNativeResult": "N0",
+      "priorBrowserEvidence": "The large two-volume package mounted, but output stayed mostly black or white at roughly 9 guest Hz.",
+      "disposition": "Treat as a compatibility case. Recover game presentation before estimating a high-effort conversion.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/star-trek-final-unity/followup.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/star-trek-startup.json"
+      ],
+      "priorBrowserGuestHz": 9.006,
+      "priorBrowserDiagnosticOnly": true
+    },
+    {
+      "id": "owned-super-munchers-v1",
+      "slug": "super-munchers",
+      "title": "Super Munchers",
+      "tier": 2,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": true,
+      "defaultVisible": false,
+      "controlArchetype": "B",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 65,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "The Animals board accepted right and the earlier native probe proved eating feedback and pause/resume. Browser rate was roughly 19 guest Hz.",
+      "disposition": "Conversion priority 4. Check native timing and the picture fault first. Bound a prototype to one ruleset, grid repeat and readable feedback.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/super-munchers/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/super-munchers.json"
+      ],
+      "priorBrowserGuestHz": 19.325,
+      "priorBrowserDiagnosticOnly": false,
+      "conversionPriority": 4
+    },
+    {
+      "id": "owned-system-s-twilight-v1-0-5-v1",
+      "slug": "system-s-twilight-v1-0-5",
+      "title": "System's Twilight 1.0.5",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 66,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "New Game opened a Standard File dialog, then reported error -1303 after accepting a disposable name.",
+      "disposition": "Fix new-game file creation before judging any puzzle cursor profile.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/system-s-twilight-v1-0-5/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/twilight.json"
+      ]
+    },
+    {
+      "id": "owned-the-big-one-v1",
+      "slug": "the-big-one",
+      "title": "The Big One Demo 1.0",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "A",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 1
+      },
+      "coordinatorRow": 67,
+      "coordinatorNativeResult": "N2",
+      "priorBrowserEvidence": "At 1-bit, the demo showed player displacement and shots. Higher-depth presentation was incomplete.",
+      "disposition": "Retain 1-bit and verify movement plus fire through a full demo loop.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/the-big-one/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/big-one.json"
+      ],
+      "priorBrowserGuestHz": 60.071,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    },
+    {
+      "id": "owned-zap-t-balls-v1",
+      "slug": "zap-t-balls",
+      "title": "Zap'T'Balls",
+      "tier": 3,
+      "controllerVerified": false,
+      "physicalControllerVerified": false,
+      "html5ConversionCandidate": false,
+      "defaultVisible": false,
+      "controlArchetype": "C",
+      "launchMode": null,
+      "classicConfig": {
+        "architecture": "68k",
+        "screenSize": [
+          800,
+          600
+        ],
+        "screenDepth": 8
+      },
+      "coordinatorRow": 69,
+      "coordinatorNativeResult": "N1",
+      "priorBrowserEvidence": "The mouse-click round ran through to a score prompt.",
+      "disposition": "Check cursor precision, repeated rounds, and a controller-only exit from score entry.",
+      "evidencePaths": [
+        "docs/iterations/2026-11-07-library-coordinator/zap-t-balls/report.md",
+        "docs/iterations/2026-11-07-library-coordinator/release-browser-reviews/zap.json"
+      ],
+      "priorBrowserGuestHz": 60.151,
+      "priorBrowserDiagnosticOnly": false,
+      "nativeQualificationBatch": 3
+    }
+  ]
+}

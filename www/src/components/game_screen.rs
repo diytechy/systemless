@@ -54,12 +54,15 @@ pub fn GameScreen(game: &'static Game) -> impl IntoView {
     });
 
     view! {
-        <a class="game-download"
-            href=move || asset_path(game.assets.archive_for(selected_architecture.get()).0)
-            target="_blank" rel="noopener noreferrer"
-            download=move || game.assets.archive_for(selected_architecture.get()).1
-            aria-label=move || format!("Download {} for {}", game.title, selected_architecture.get().label())
-        >"Download game"</a>
+        // The OtterTube add-on page has no link out, not even a hidden one.
+        {(!cfg!(feature = "ottertube")).then(|| view! {
+            <a class="game-download"
+                href=move || asset_path(game.assets.archive_for(selected_architecture.get()).0)
+                target="_blank" rel="noopener noreferrer"
+                download=move || game.assets.archive_for(selected_architecture.get()).1
+                aria-label=move || format!("Download {} for {}", game.title, selected_architecture.get().label())
+            >"Download game"</a>
+        })}
         {if game.architectures.len() > 1 {
             view! {
                 <div class="game-architecture" role="group" aria-label="Choose game architecture">
@@ -287,6 +290,91 @@ impl RuntimeHandle {
     }
 }
 
+/// Where this game's files are kept: the id they are stored under, whether
+/// nothing is kept at all, and extra saved guest paths. Every build but the
+/// OtterTube add-on build uses the game's own id and the ordinary rules.
+struct SaveScope {
+    id: String,
+    memory_only: bool,
+    load_only: bool,
+    extra_paths: Vec<String>,
+    boot_patches: Vec<save_store::BootPatch>,
+    /// Tests only: the machine scans for save changes only when asked.
+    scan_paused: bool,
+}
+
+impl SaveScope {
+    /// Anything other than the ordinary rules of every other build.
+    fn has_policy(&self) -> bool {
+        self.memory_only || self.load_only || !self.extra_paths.is_empty()
+    }
+}
+
+fn save_scope(game: &Game) -> SaveScope {
+    #[cfg(feature = "ottertube")]
+    {
+        let scope = crate::ottertube::save_scope(game.id);
+        SaveScope {
+            id: scope.id,
+            memory_only: scope.memory_only,
+            load_only: scope.load_only,
+            extra_paths: scope.extra_paths,
+            boot_patches: scope.boot_patches,
+            scan_paused: scope.scan_paused,
+        }
+    }
+    #[cfg(not(feature = "ottertube"))]
+    SaveScope {
+        id: game.id.to_string(),
+        memory_only: false,
+        load_only: false,
+        extra_paths: Vec::new(),
+        boot_patches: Vec::new(),
+        scan_paused: false,
+    }
+}
+
+/// Scan the running machine's save files now and return the current set.
+#[cfg(feature = "ottertube")]
+/// `None` means not scanned: there is no running machine yet, or the worker
+/// did not answer before `deadline_ms` (a `Date.now()` time). The caller must
+/// not take the list it already has for a scan result.
+async fn scan_save_files(
+    handle: Option<RuntimeHandle>,
+    save_files: RwSignal<Vec<DownloadableSaveFile>>,
+    deadline_ms: f64,
+) -> Option<Vec<DownloadableSaveFile>> {
+    match handle? {
+        RuntimeHandle::Local(machine) => {
+            let mut machine = machine.borrow_mut();
+            machine.flush_save_files();
+            Some(machine.save_files().to_vec())
+        }
+        RuntimeHandle::Worker(runtime) => {
+            let message = Object::new();
+            set_js_property(&message, "type", &JsValue::from_str("scanSaves"));
+            let delay = crate::ottertube::test_scan_delay_ms();
+            if delay > 0.0 {
+                set_js_property(&message, "delayMs", &JsValue::from_f64(delay));
+            }
+            let request = runtime.begin_save_request(&message).ok()?;
+            if runtime.post(&message).is_err() {
+                runtime.pending_save_requests.borrow_mut().remove(&request);
+                return None;
+            }
+            // The reply updates `save_files` and clears the request.
+            while runtime.pending_save_requests.borrow().contains(&request) {
+                if js_sys::Date::now() >= deadline_ms {
+                    runtime.pending_save_requests.borrow_mut().remove(&request);
+                    return None;
+                }
+                crate::ottertube::wait_ms(15.0).await;
+            }
+            Some(save_files.get_untracked())
+        }
+    }
+}
+
 #[component]
 fn GameRuntime(
     game: &'static Game,
@@ -348,6 +436,57 @@ fn GameRuntime(
             None => {}
         });
     });
+
+    #[cfg(feature = "ottertube")]
+    {
+        Effect::new(move |_| {
+            // Before the machine is ready the list is only the empty placeholder.
+            if machine_ready.get() {
+                save_files.with(|files| crate::ottertube::on_save_files(files));
+            }
+        });
+        // Leaving asks the machine for a save scan first, so a change made in
+        // the last half second is not left behind.
+        let scan_handle = machine_handle.clone();
+        let scanner: crate::ottertube::SaveScanner = Rc::new(move |deadline_ms| {
+            let handle = scan_handle.borrow().clone();
+            Box::pin(scan_save_files(handle, save_files, deadline_ms))
+        });
+        crate::ottertube::set_save_scanner(Some(scanner));
+        // The page's scripts read the game's screen and move its pointer
+        // through whichever machine is running.
+        let screen_handle = machine_handle.clone();
+        crate::ottertube::set_screen_reader(Some(Rc::new(
+            move |regions: &[[u16; 4]], probe_id: u32| match screen_handle.borrow().clone() {
+                Some(RuntimeHandle::Local(machine)) => crate::ottertube::ScreenRequest::Ready(
+                    machine.borrow_mut().region_hashes(regions),
+                ),
+                Some(RuntimeHandle::Worker(runtime)) => {
+                    let message = Object::new();
+                    set_js_property(&message, "type", &JsValue::from_str("screenHashes"));
+                    set_js_property(&message, "probeId", &JsValue::from_f64(f64::from(probe_id)));
+                    let flat = Array::new();
+                    for value in regions.iter().flatten() {
+                        flat.push(&JsValue::from_f64(f64::from(*value)));
+                    }
+                    set_js_property(&message, "regions", flat.as_ref());
+                    if runtime.post(&message).is_ok() {
+                        crate::ottertube::ScreenRequest::Posted
+                    } else {
+                        crate::ottertube::ScreenRequest::Unavailable
+                    }
+                }
+                None => crate::ottertube::ScreenRequest::Unavailable,
+            },
+        )));
+        let pointer_handle = machine_handle.clone();
+        crate::ottertube::set_guest_pointer(Some(Rc::new(move |kind: &str, v: i16, h: i16| {
+            if let Some(handle) = pointer_handle.borrow().as_ref() {
+                handle.mouse(kind, v, h);
+            }
+        })));
+        on_cleanup(|| crate::ottertube::game_unmounted());
+    }
 
     let machine_handle_for_effect = machine_handle.clone();
     Effect::new(move |_| {
@@ -438,7 +577,7 @@ fn GameRuntime(
                 );
                 return;
             }
-            if let Err(error) = save_store::flush_pending_saves(game.id).await {
+            if let Err(error) = save_store::flush_pending_saves(&save_scope(game).id).await {
                 set_status(
                     status,
                     format!("Previous game could not finish saving: {error}"),
@@ -531,8 +670,18 @@ fn GameRuntime(
             if !alive.load(Ordering::Relaxed) {
                 return;
             }
+            let scope = save_scope(game);
+            if scope.has_policy() {
+                save_store::set_save_policy(scope.memory_only, scope.load_only, &scope.extra_paths);
+            }
+            if !scope.boot_patches.is_empty() {
+                save_store::set_boot_patches(scope.boot_patches.clone());
+            }
+            if scope.scan_paused {
+                save_store::set_periodic_scan_paused(true);
+            }
             let mut machine = match Machine::new_with_progress(
-                game.id,
+                &scope.id,
                 &bytes,
                 &plugin_files,
                 architecture,
@@ -649,14 +798,16 @@ fn GameRuntime(
             </div>
             {controls_view}
         </div>
-        <GameFilesDialog
-            game=game
-            selected_plugin_ids=selected_plugin_ids_for_shelf
-            selected_plugins_signal=selected_plugins_signal
-            files=save_files
-            machine=machine_handle
-            machine_ready=machine_ready
-        />
+        {(!cfg!(feature = "ottertube")).then(move || view! {
+            <GameFilesDialog
+                game=game
+                selected_plugin_ids=selected_plugin_ids_for_shelf
+                selected_plugins_signal=selected_plugins_signal
+                files=save_files
+                machine=machine_handle
+                machine_ready=machine_ready
+            />
+        })}
     }
 }
 
@@ -2096,6 +2247,8 @@ fn start_render_loop(
         } else {
             // Emulator halted — break the capture chain so we don't leak.
             *cb_cell_self.borrow_mut() = None;
+            #[cfg(feature = "ottertube")]
+            crate::ottertube::guest_halted();
         }
     }) as Box<dyn FnMut()>));
 
@@ -2551,8 +2704,9 @@ async fn boot_catalogue_worker(
     set_js_property(&message, "moduleUrl", &JsValue::from_str(&module_url));
     set_js_property(&message, "wasmUrl", &JsValue::from_str(&wasm_url));
     set_js_property(&message, "gameBytes", bytes.buffer().as_ref());
-    let config = serde_json::json!({
-        "id": game.id, "architecture": architecture.key(),
+    let scope = save_scope(game);
+    let mut config = serde_json::json!({
+        "id": scope.id, "architecture": architecture.key(),
         "launch_modifiers": game.settings.launch_modifiers,
         "show_menu_bar": game.settings.show_menu_bar,
         "screen_depth": game.settings.screen_depth,
@@ -2566,6 +2720,13 @@ async fn boot_catalogue_worker(
         "arrows_as_numpad": game.settings.arrows_as_numpad,
         "plugins": plugin_files.iter().map(crate::worker_runtime::PluginMetadata::from).collect::<Vec<_>>(),
     });
+    if scope.has_policy() {
+        config["save_memory_only"] = scope.memory_only.into();
+        config["save_load_only"] = scope.load_only.into();
+        config["boot_patches"] = serde_json::to_value(&scope.boot_patches).unwrap_or_default();
+        config["save_scan_paused"] = scope.scan_paused.into();
+        config["extra_save_paths"] = scope.extra_paths.into();
+    }
     set_js_property(&message, "config", &JsValue::from_str(&config.to_string()));
     let transfer = Array::new();
     transfer.push(bytes.buffer().as_ref());
@@ -2721,6 +2882,11 @@ async fn boot_catalogue_worker(
             }
             return;
         }
+        #[cfg(feature = "ottertube")]
+        if js_string_property(&data, "type").as_deref() == Some("screenHashes") {
+            crate::ottertube::screen_reply(&data);
+            return;
+        }
         if js_string_property(&data, "type").as_deref() == Some("saveFiles") {
             if let Some(version) = js_string_property(&data, "saveFilesVersion")
                 .and_then(|version| version.parse::<u64>().ok())
@@ -2748,6 +2914,11 @@ async fn boot_catalogue_worker(
             state.save_error = Some(error);
         }
         state.running = js_bool_property(&data, "running").unwrap_or(false);
+        #[cfg(feature = "ottertube")]
+        if !state.running {
+            // The game quit: the add-on page saves and leaves, no dead screen.
+            crate::ottertube::guest_halted();
+        }
         if let Ok(audio_bytes) = Reflect::get(&data, &JsValue::from_str("audio")) {
             if !audio_bytes.is_undefined() {
                 let samples = Uint8Array::new(&audio_bytes).to_vec();
@@ -3360,10 +3531,36 @@ fn attach_input(
         if !alive_kd.load(Ordering::Relaxed) {
             return;
         }
+        // A real keyboard on the add-on page: nothing while a script runs or
+        // the page is leaving.
+        #[cfg(feature = "ottertube")]
+        if crate::ottertube::guest_input_shut() {
+            ev.prevent_default();
+            return;
+        }
         let m = &machine_kd;
         m.resume_audio();
         if let Some((mac_key, char_code)) = mapped_key(&ev.key(), &ev.code(), mappings) {
             ev.prevent_default();
+            #[cfg(feature = "ottertube")]
+            {
+                // And no Command chord (they are the menu bar's shortcuts) but
+                // what the game's data lets through. Judged by the keys the
+                // guest gets: the page maps another key to Command for one
+                // game, and an on-screen button holds Command too.
+                let mut pressed = pressed_kd.borrow_mut();
+                let command_here = ev.meta_key()
+                    || pressed
+                        .values()
+                        .any(|(key, _)| crate::ottertube::is_command_key(*key));
+                if crate::ottertube::drops_chord(mac_key, char_code, command_here) {
+                    return;
+                }
+                // Command going down would make a chord of a letter already held.
+                if crate::ottertube::is_command_key(mac_key) {
+                    release_chord_keys(&mut pressed, m);
+                }
+            }
             pressed_kd
                 .borrow_mut()
                 .insert(ev.code(), (mac_key, char_code));
@@ -3385,7 +3582,15 @@ fn attach_input(
         if !alive_ku.load(Ordering::Relaxed) {
             return;
         }
-        pressed_ku.borrow_mut().remove(&ev.code());
+        #[cfg_attr(not(feature = "ottertube"), allow(unused_variables))]
+        let put_down = pressed_ku.borrow_mut().remove(&ev.code()).is_some();
+        // On the add-on page only a key this keyboard put down goes up: one
+        // that was dropped, or let go of when a script took over, never
+        // lifts a key the script or an on-screen control is holding.
+        #[cfg(feature = "ottertube")]
+        if !put_down {
+            return;
+        }
         let key = mapped_key(&ev.key(), &ev.code(), mappings);
         if let Some((mac_key, char_code)) = key {
             ev.prevent_default();
@@ -3396,6 +3601,32 @@ fn attach_input(
     listeners
         .borrow_mut()
         .push(InputListener::retain(canvas.as_ref(), "keyup", on_key_up));
+    #[cfg(feature = "ottertube")]
+    {
+        // A script takes the game over, or the page is leaving: the keys this
+        // keyboard holds go up.
+        let takeover_pressed = pressed.clone();
+        let takeover_machine = machine.clone();
+        let takeover_alive = alive.clone();
+        crate::ottertube::on_takeover(Rc::new(move |taken: bool| {
+            if taken && takeover_alive.load(Ordering::Relaxed) {
+                for (_, (mac_key, char_code)) in std::mem::take(&mut *takeover_pressed.borrow_mut())
+                {
+                    takeover_machine.key_up(mac_key, char_code);
+                }
+            }
+        }));
+        // Command goes down on one of the page's own controls: a letter this
+        // keyboard holds would become a chord, so it goes up.
+        let chord_pressed = pressed.clone();
+        let chord_machine = machine.clone();
+        let chord_alive = alive.clone();
+        crate::ottertube::on_command_down(Rc::new(move || {
+            if chord_alive.load(Ordering::Relaxed) {
+                release_chord_keys(&mut chord_pressed.borrow_mut(), &chord_machine);
+            }
+        }));
+    }
     attach_focus_release(Some(canvas), listeners, move || {
         if alive.load(Ordering::Relaxed) {
             for (_, (mac_key, char_code)) in std::mem::take(&mut *pressed.borrow_mut()) {
@@ -3403,6 +3634,24 @@ fn attach_input(
             }
         }
     });
+}
+
+/// Let go, in the guest, of the letters, digits and marks a real keyboard holds.
+#[cfg(feature = "ottertube")]
+fn release_chord_keys(
+    pressed: &mut std::collections::BTreeMap<String, (u8, u8)>,
+    machine: &RuntimeHandle,
+) {
+    let held: Vec<String> = pressed
+        .iter()
+        .filter(|(_, (key, character))| crate::ottertube::is_chord_key(*key, *character))
+        .map(|(code, _)| code.clone())
+        .collect();
+    for code in held {
+        if let Some((mac_key, char_code)) = pressed.remove(&code) {
+            machine.key_up(mac_key, char_code);
+        }
+    }
 }
 
 fn attach_focus_release(
@@ -3488,6 +3737,31 @@ fn attach_pointer_input(
         }
     });
 
+    #[cfg(feature = "ottertube")]
+    {
+        // A script takes the picture over: a finger the child has on it is let
+        // go of first, and counts for nothing until it is put down again.
+        let takeover_canvas = canvas.clone();
+        let takeover_machine = machine.clone();
+        let takeover_alive = alive.clone();
+        let takeover_active = active_pointer_id.clone();
+        let takeover_coords = last_coords.clone();
+        crate::ottertube::on_takeover(Rc::new(move |running: bool| {
+            if let (true, Some(pointer_id)) = (running, takeover_active.get()) {
+                release_pointer_mouse_up_after(
+                    takeover_canvas.clone(),
+                    takeover_machine.clone(),
+                    takeover_alive.clone(),
+                    takeover_active.clone(),
+                    takeover_coords.clone(),
+                    pointer_id,
+                    takeover_coords.get(),
+                    0.0,
+                );
+            }
+        }));
+    }
+
     // Pointer events give touch, pen, and mouse a single path and let us capture
     // the active touch, so a game redraw or finger drift does not lose mouseUp.
     let canvas_el = canvas.clone();
@@ -3505,11 +3779,47 @@ fn attach_pointer_input(
         {
             return;
         }
+        #[cfg(feature = "ottertube")]
+        {
+            // Where the finger is, before any offset: the menu bar, a blocked
+            // control, or anywhere while a script runs or the page is leaving
+            // takes no touch. A spot that is blocked on another screen than
+            // the one last seen waits for a fresh look; its pointer's later
+            // events go to that held-back touch until it is over.
+            let precise = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
+            let finger = canvas_coords_from_client(
+                &canvas_el,
+                precise.client_x_f64(),
+                precise.client_y_f64(),
+            );
+            if let Some((v, h)) = finger {
+                match crate::ottertube::touch_verdict(v, h) {
+                    crate::ottertube::Touch::Pass => {}
+                    crate::ottertube::Touch::Swallow => {
+                        ev.prevent_default();
+                        return;
+                    }
+                    crate::ottertube::Touch::Hold => {
+                        ev.prevent_default();
+                        focus_canvas(&canvas_el);
+                        let _ = canvas_el.set_pointer_capture(ev.pointer_id());
+                        crate::ottertube::defer_touch(ev.pointer_id(), v, h);
+                        return;
+                    }
+                }
+            }
+        }
         focus_canvas(&canvas_el);
         ev.prevent_default();
         let m = &machine_pd;
         m.resume_audio();
         if let Some((v, h)) = pointer_coords(&canvas_el, &ev) {
+            // The guest has one button: a held-back touch may hold it, and
+            // then this press is ignored until that touch lets go.
+            #[cfg(feature = "ottertube")]
+            if !crate::ottertube::claim_button(ev.pointer_id()) {
+                return;
+            }
             let _ = canvas_el.set_attribute("data-cursor-pointer", &ev.pointer_type());
             active_pd.set(Some(ev.pointer_id()));
             last_pd.set(Some((v, h)));
@@ -3536,6 +3846,22 @@ fn attach_pointer_input(
         if !alive_pm.load(Ordering::Relaxed) || !primary_pointer_event(&ev) {
             return;
         }
+        // A finger held back for a look at the screen.
+        #[cfg(feature = "ottertube")]
+        if crate::ottertube::deferred_pointer(
+            "move",
+            ev.pointer_id(),
+            finger_coords(&canvas_el, &ev),
+        ) {
+            ev.prevent_default();
+            return;
+        }
+        // A mouse moving over the picture does not move a script's pointer,
+        // nor anything once the page is leaving.
+        #[cfg(feature = "ottertube")]
+        if crate::ottertube::guest_input_shut() {
+            return;
+        }
         let active = active_pm.get();
         let pointer_type = ev.pointer_type();
         if pointer_type != "mouse" && active != Some(ev.pointer_id()) {
@@ -3543,6 +3869,11 @@ fn attach_pointer_input(
         }
         if active == Some(ev.pointer_id()) {
             ev.prevent_default();
+        }
+        // Not while a held-back touch holds the guest's button.
+        #[cfg(feature = "ottertube")]
+        if !crate::ottertube::button_moves(ev.pointer_id()) {
+            return;
         }
         if let Some((v, h)) = pointer_coords(&canvas_el, &ev) {
             if active == Some(ev.pointer_id()) {
@@ -3568,6 +3899,19 @@ fn attach_pointer_input(
     let down_ms_pu = pointer_down_ms.clone();
     let touch_like_pu = touch_like_pointer.clone();
     let on_pointer_up = Closure::wrap(Box::new(move |ev: PointerEvent| {
+        #[cfg(feature = "ottertube")]
+        if alive_pu.load(Ordering::Relaxed)
+            && primary_pointer_event(&ev)
+            && crate::ottertube::deferred_pointer(
+                "up",
+                ev.pointer_id(),
+                finger_coords(&canvas_el, &ev),
+            )
+        {
+            ev.prevent_default();
+            let _ = canvas_el.release_pointer_capture(ev.pointer_id());
+            return;
+        }
         if !alive_pu.load(Ordering::Relaxed)
             || !primary_pointer_event(&ev)
             || active_pu.get() != Some(ev.pointer_id())
@@ -3609,6 +3953,13 @@ fn attach_pointer_input(
     let active_pc = active_pointer_id;
     let last_pc = last_coords;
     let on_pointer_cancel = Closure::wrap(Box::new(move |ev: PointerEvent| {
+        #[cfg(feature = "ottertube")]
+        if alive_pc.load(Ordering::Relaxed)
+            && crate::ottertube::deferred_pointer("cancel", ev.pointer_id(), None)
+        {
+            ev.prevent_default();
+            return;
+        }
         if !alive_pc.load(Ordering::Relaxed) || active_pc.get() != Some(ev.pointer_id()) {
             return;
         }
@@ -3624,6 +3975,8 @@ fn attach_pointer_input(
         if let Some((v, h)) = coords {
             machine_pc.mouse_up(v, h);
         }
+        #[cfg(feature = "ottertube")]
+        crate::ottertube::free_button(ev.pointer_id());
     }) as Box<dyn FnMut(PointerEvent)>);
     let _ = canvas.add_event_listener_with_callback(
         "pointercancel",
@@ -3898,6 +4251,56 @@ fn attach_mobile_controls(
     listeners: &InputListeners,
 ) {
     let state = Rc::new(RefCell::new(MobileInputState::new()));
+    #[cfg(feature = "ottertube")]
+    {
+        // The page's tap actions press their keys through the same state as
+        // the held controls, so a tap never releases a key a finger still holds.
+        state.borrow_mut().shown_on = Some(controls.clone());
+        let tap_state = state.clone();
+        let tap_machine = machine.clone();
+        let tap_alive = alive.clone();
+        crate::ottertube::set_tap_keys(Some(Rc::new(
+            move |owner: crate::ottertube::KeyOwner, names: Vec<String>, down: bool| {
+                if !tap_alive.load(Ordering::Relaxed) {
+                    return;
+                }
+                let mut state = tap_state.borrow_mut();
+                let keys = names.into_iter().filter_map(mobile_control_key_name);
+                match owner {
+                    // Everything the controller holds now, as one set.
+                    crate::ottertube::KeyOwner::Pad => {
+                        state.set_pad_keys(&tap_machine, keys.collect())
+                    }
+                    // One press or release, counted.
+                    crate::ottertube::KeyOwner::Tap => {
+                        for key in keys {
+                            if down {
+                                state.press_tap_key(&tap_machine, key);
+                            } else {
+                                state.release_tap_key(&tap_machine, key);
+                            }
+                        }
+                    }
+                    crate::ottertube::KeyOwner::Script => {
+                        for key in keys {
+                            state.script_key(&tap_machine, key, down);
+                        }
+                    }
+                }
+            },
+        )));
+        // While a script runs its keys are the only ones down.
+        let takeover_state = state.clone();
+        let takeover_machine = machine.clone();
+        let takeover_alive = alive.clone();
+        crate::ottertube::on_takeover(Rc::new(move |running: bool| {
+            if takeover_alive.load(Ordering::Relaxed) {
+                takeover_state
+                    .borrow_mut()
+                    .set_scripted(&takeover_machine, running);
+            }
+        }));
+    }
     attach_mobile_gesture_guard(controls, alive.clone(), listeners);
     attach_mobile_joystick(
         joystick,
@@ -4298,6 +4701,15 @@ fn update_mobile_joystick(
     } else if ny > dead_zone {
         keys.push(settings.joystick.down);
     }
+    #[cfg(feature = "ottertube")]
+    if keys.len() == 2 && crate::ottertube::stick_is_stepped() {
+        // A game played a cell at a time takes the stronger of two directions.
+        if nx.abs() >= ny.abs() {
+            keys.truncate(1);
+        } else {
+            keys.remove(0);
+        }
+    }
     state.borrow_mut().set_joystick_keys(machine, &keys);
 }
 
@@ -4391,7 +4803,20 @@ fn take_active_mobile_button(
 struct MobileInputState {
     joystick_keys: Vec<&'static str>,
     button_keys: Vec<&'static str>,
+    /// Keys a tap action is pressing right now, once per action that holds
+    /// one. Only the OtterTube page has tap actions.
+    tap_keys: Vec<&'static str>,
+    /// Keys a game controller is holding (the OtterTube page's adapter).
+    pad_keys: Vec<&'static str>,
+    /// `Some` while a script of the OtterTube page runs: the keys it presses,
+    /// once per press. They are then the only keys down in the guest; what
+    /// the child holds comes back when the script ends.
+    #[cfg(feature = "ottertube")]
+    script_keys: Option<Vec<&'static str>>,
     sent_keys: Vec<&'static str>,
+    /// Where the keys held down in the guest are shown (`data-held-keys`).
+    #[cfg(feature = "ottertube")]
+    shown_on: Option<HtmlElement>,
 }
 
 impl MobileInputState {
@@ -4400,7 +4825,21 @@ impl MobileInputState {
     }
 
     fn set_joystick_keys(&mut self, machine: &RuntimeHandle, keys: &[&'static str]) {
+        // A game set to step (one move per push) has its stick pulsed by the
+        // OtterTube page instead of held here.
+        #[cfg(feature = "ottertube")]
+        let keys: &[&'static str] = if crate::ottertube::stick_steps("stick", keys) {
+            &[]
+        } else {
+            keys
+        };
         self.joystick_keys = dedup_mobile_keys(keys);
+        self.flush(machine);
+    }
+
+    #[cfg(feature = "ottertube")]
+    fn set_pad_keys(&mut self, machine: &RuntimeHandle, keys: Vec<&'static str>) {
+        self.pad_keys = keys;
         self.flush(machine);
     }
 
@@ -4416,13 +4855,60 @@ impl MobileInputState {
         self.flush(machine);
     }
 
+    /// A tap action presses `key`. It stays down in the guest until every
+    /// owner (this action, a held button, the stick) has let go of it.
+    #[cfg(feature = "ottertube")]
+    fn press_tap_key(&mut self, machine: &RuntimeHandle, key: &'static str) {
+        self.tap_keys.push(key);
+        self.flush(machine);
+    }
+
+    #[cfg(feature = "ottertube")]
+    fn release_tap_key(&mut self, machine: &RuntimeHandle, key: &'static str) {
+        if let Some(index) = self.tap_keys.iter().position(|held| *held == key) {
+            self.tap_keys.remove(index);
+        }
+        self.flush(machine);
+    }
+
+    /// A script takes the keys over, or gives them back.
+    #[cfg(feature = "ottertube")]
+    fn set_scripted(&mut self, machine: &RuntimeHandle, running: bool) {
+        self.script_keys = running.then(Vec::new);
+        self.flush(machine);
+    }
+
+    #[cfg(feature = "ottertube")]
+    fn script_key(&mut self, machine: &RuntimeHandle, key: &'static str, down: bool) {
+        if let Some(keys) = self.script_keys.as_mut() {
+            if down {
+                keys.push(key);
+            } else if let Some(index) = keys.iter().position(|held| *held == key) {
+                keys.remove(index);
+            }
+        }
+        self.flush(machine);
+    }
+
     fn flush(&mut self, machine: &RuntimeHandle) {
         let mut next = self.joystick_keys.clone();
-        for key in &self.button_keys {
+        for key in self
+            .button_keys
+            .iter()
+            .chain(&self.tap_keys)
+            .chain(&self.pad_keys)
+        {
             if !next.contains(key) {
                 next.push(key);
             }
         }
+        #[cfg(feature = "ottertube")]
+        if let Some(script) = &self.script_keys {
+            next = dedup_mobile_keys(script);
+        }
+        // A real keyboard is told when Command is held here.
+        #[cfg(feature = "ottertube")]
+        crate::ottertube::command_on_screen(next.contains(&"Meta"));
 
         for key in self.sent_keys.iter().copied() {
             if !next.contains(&key) {
@@ -4439,6 +4925,10 @@ impl MobileInputState {
             }
         }
         self.sent_keys = next;
+        #[cfg(feature = "ottertube")]
+        if let Some(element) = &self.shown_on {
+            let _ = element.set_attribute("data-held-keys", &self.sent_keys.join(" "));
+        }
     }
 }
 
@@ -4464,6 +4954,13 @@ fn mobile_control_key_name(key: String) -> Option<&'static str> {
         "Escape" => Some("Escape"),
         "Shift" => Some("Shift"),
         "None" => Some("None"),
+        "Meta" if cfg!(feature = "ottertube") => Some("Meta"),
+        "Alt" if cfg!(feature = "ottertube") => Some("Alt"),
+        "Control" if cfg!(feature = "ottertube") => Some("Control"),
+        "Numpad2" if cfg!(feature = "ottertube") => Some("Numpad2"),
+        "Numpad4" if cfg!(feature = "ottertube") => Some("Numpad4"),
+        "Numpad6" if cfg!(feature = "ottertube") => Some("Numpad6"),
+        "Numpad8" if cfg!(feature = "ottertube") => Some("Numpad8"),
         "[" => Some("["),
         "]" => Some("]"),
         "\\" => Some("\\"),
@@ -4580,9 +5077,20 @@ fn mobile_control_pointer(pointer_type: &str, is_primary: bool) -> bool {
     pointer_type != "mouse" || is_primary
 }
 
-fn pointer_coords(canvas: &HtmlCanvasElement, ev: &PointerEvent) -> Option<(i16, i16)> {
+/// Where a pointer is on the guest's screen, before the game's offset.
+#[cfg(feature = "ottertube")]
+fn finger_coords(canvas: &HtmlCanvasElement, ev: &PointerEvent) -> Option<(i16, i16)> {
     let ev = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
     canvas_coords_from_client(canvas, ev.client_x_f64(), ev.client_y_f64())
+}
+
+fn pointer_coords(canvas: &HtmlCanvasElement, ev: &PointerEvent) -> Option<(i16, i16)> {
+    let ev = ev.unchecked_ref::<crate::browser_bridge::PrecisePointerEvent>();
+    let coords = canvas_coords_from_client(canvas, ev.client_x_f64(), ev.client_y_f64());
+    // A game that draws its own pointer away from the finger has an offset.
+    #[cfg(feature = "ottertube")]
+    let coords = coords.map(|(v, h)| crate::ottertube::guest_point(v, h));
+    coords
 }
 
 fn touch_coords(canvas: &HtmlCanvasElement, touch: &Touch) -> Option<(i16, i16)> {
@@ -4707,12 +5215,13 @@ fn release_pointer_mouse_up_after(
         active_pointer_id.set(None);
         last_coords.set(None);
         let _ = canvas.release_pointer_capture(pointer_id);
-        if !alive.load(Ordering::Relaxed) {
-            return;
+        if alive.load(Ordering::Relaxed) {
+            if let Some((v, h)) = coords {
+                machine.mouse_up(v, h);
+            }
         }
-        if let Some((v, h)) = coords {
-            machine.mouse_up(v, h);
-        }
+        #[cfg(feature = "ottertube")]
+        crate::ottertube::free_button(pointer_id);
     };
 
     if delay_ms <= 0.0 {

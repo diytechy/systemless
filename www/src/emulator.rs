@@ -287,6 +287,7 @@ pub struct Machine {
     save_files: Vec<DownloadableSaveFile>,
     save_files_version: u64,
     save_scan_frame: u8,
+    halted_save_scan_done: bool,
     pending_launch_modifiers: Vec<LaunchModifier>,
     launch_modifiers_release_tick: Option<u32>,
 }
@@ -441,6 +442,17 @@ impl Machine {
         for plugin in plugin_files {
             runner.import_vfs_file_relative_to_launched_app(&plugin.mount_path, &plugin.file)?;
         }
+        // A seed for a fresh player (none unless a build sets one): it becomes
+        // part of the mounted files, so it is not itself a change to save.
+        let boot_patches = save_store::take_boot_patches();
+        for patch in &boot_patches {
+            if let Some(mut file) = runner.vfs_file_snapshot(&patch.path) {
+                if let Some(data_fork) = patch.apply(&file.data_fork) {
+                    file.data_fork = data_fork;
+                    runner.import_vfs_file(&file);
+                }
+            }
+        }
         let archive_vfs_stats = vfs_stats(&mut runner);
         let restored_saves = save_store::load_saved_files(game_id)
             .await
@@ -457,6 +469,18 @@ impl Machine {
             .collect::<HashSet<_>>();
         for file in &restored_saves {
             runner.import_vfs_file(file);
+        }
+        // An enforced patch goes over the saved file as well, where it changes
+        // anything: a setting the build does not let a player change back.
+        for patch in boot_patches.iter().filter(|patch| patch.enforce) {
+            if let Some(mut file) = runner.vfs_file_snapshot(&patch.path) {
+                if let Some(data_fork) = patch.apply(&file.data_fork) {
+                    if data_fork != file.data_fork {
+                        file.data_fork = data_fork;
+                        runner.import_vfs_file(&file);
+                    }
+                }
+            }
         }
         // Modifier-only launch conditions are polled through GetKeys/KeyMap.
         // Inject them before init_app republishes the current key state into
@@ -536,6 +560,7 @@ impl Machine {
             save_files: Vec::new(),
             save_files_version: 0,
             save_scan_frame: 0,
+            halted_save_scan_done: false,
             pending_launch_modifiers: launch_modifiers.to_vec(),
             launch_modifiers_release_tick,
         };
@@ -873,6 +898,49 @@ impl Machine {
         } else {
             Vec::new()
         }
+    }
+
+    /// One hash for each `[x, y, width, height]` region of the guest's own
+    /// screen, in guest pixels and without the pointer: what a script in the
+    /// OtterTube page tells one screen of a game from another by. A region
+    /// that leaves the screen is clipped; one wholly outside hashes as empty.
+    #[cfg(feature = "ottertube")]
+    pub fn region_hashes(&mut self, regions: &[[u16; 4]]) -> Vec<u64> {
+        let (screen_mode, clut) = {
+            let dispatcher = self.runner.dispatcher();
+            (dispatcher.screen_mode, *dispatcher.device_clut)
+        };
+        let palette = display::rgba_palette_from_clut(&clut);
+        let mut rgba = Vec::new();
+        display::render_screen_with_rgba_palette_into(
+            self.runner.bus(),
+            screen_mode,
+            &palette,
+            &mut rgba,
+        );
+        let width = usize::from(screen_mode.2);
+        let height = usize::from(screen_mode.3);
+        if width == 0 || rgba.len() < width * height * 4 {
+            return vec![0; regions.len()];
+        }
+        regions
+            .iter()
+            .map(|&[x, y, w, h]| {
+                let (x, y) = (usize::from(x).min(width), usize::from(y).min(height));
+                let (right, bottom) = (
+                    (x + usize::from(w)).min(width),
+                    (y + usize::from(h)).min(height),
+                );
+                let mut hash = 0xcbf2_9ce4_8422_2325u64;
+                for row in y..bottom {
+                    for &byte in &rgba[(row * width + x) * 4..(row * width + right) * 4] {
+                        hash ^= u64::from(byte);
+                        hash = hash.wrapping_mul(0x0000_0100_0000_01b3);
+                    }
+                }
+                hash
+            })
+            .collect()
     }
 
     pub fn save_files(&self) -> &[DownloadableSaveFile] {
@@ -1284,14 +1352,27 @@ impl Machine {
 
     fn sync_save_files(&mut self) {
         self.save_scan_frame = self.save_scan_frame.wrapping_add(1);
+        // A game that writes its settings or scores as it quits stops inside
+        // the scan interval, and nothing unmounts an add-on page to flush it.
+        // Scan once more when the guest halts. Add-on build only for now, so
+        // other builds keep their exact scan timing.
+        if cfg!(feature = "ottertube") && !self.halted_save_scan_done && self.runner.is_halted() {
+            self.halted_save_scan_done = true;
+            self.sync_save_files_now();
+            return;
+        }
         if self.save_scan_frame % SAVE_SCAN_FRAME_INTERVAL != 0 {
+            return;
+        }
+        if cfg!(feature = "ottertube") && save_store::periodic_scan_paused() {
+            // A browser check asked for explicit scans only.
             return;
         }
         self.sync_save_files_now();
     }
 
     fn sync_save_files_now(&mut self) {
-        let stats = self.runner.vfs_file_stats_where(is_user_save_path);
+        let stats = self.runner.vfs_file_stats_where(is_saved_path);
         let mut current_fingerprints = HashMap::new();
         let previous_fingerprints = self.last_vfs_fingerprints.clone();
         let previous_persisted_paths = self.persisted_save_paths.clone();
@@ -1490,6 +1571,12 @@ fn remove_save_from_local_state(
     persisted_save_paths.remove(path);
     last_vfs_fingerprints.remove(path);
     save_files.retain(|file| file.path != path);
+}
+
+/// A path the save scan keeps: an ordinary save path, or one of the entry's
+/// extra paths (none unless a build sets a save policy).
+fn is_saved_path(path: &str) -> bool {
+    is_user_save_path(path) || save_store::is_extra_save_path(path)
 }
 
 fn is_user_save_path(path: &str) -> bool {

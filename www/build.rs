@@ -6,6 +6,7 @@ use std::{
 
 use systemless_catalogue_tools::catalogue_tools;
 
+mod ottertube_slim;
 mod private_additions;
 mod private_koji;
 mod private_library;
@@ -41,6 +42,7 @@ fn main() {
     private_koji::apply(&mut compiled, &manifest_dir);
     private_library::apply(&mut compiled, &manifest_dir);
     private_additions::apply(&mut compiled, &manifest_dir);
+    ottertube_slim::apply(&mut compiled);
     let mut generated =
         catalogue_tools::site::rust_games(&compiled).expect("invalid game configuration");
     if env::var("SYSTEMLESS_PRIVATE_LIBRARY").as_deref() == Ok("1") {

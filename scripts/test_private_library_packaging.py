@@ -81,5 +81,102 @@ class PackagingTests(unittest.TestCase):
         self.assertEqual(pointer.read_bytes(),before)
 
 
+class OtterTubeBundleTests(unittest.TestCase):
+    """The slim add-on bundle: exactly ClockWerx, Delirium and Blobbo."""
+    HOSTS=['https://ottertube.example','http://127.0.0.1:8098']
+
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.dist = self.root/'dist'; self.dist.mkdir()
+        (self.dist/'index.html').write_text('<html><head></head><body></body></html>', encoding='utf-8')
+        self.media = self.root/'media'; self.media.mkdir()
+        for slug, _, _ in BUILTINS:
+            (self.media/(slug+'.img')).write_bytes(b'synthetic image '+slug.encode())
+        self.image = self.root/'blobbo-source.img'; self.image.write_bytes(b'synthetic blobbo')
+        self.manifest=self.root/'additions.json'
+        self.write_manifest('blobbo','blobbo-full-personal-101')
+        self.binary=self.dist/'synthetic_bg.wasm'
+        self.markers=['clockwerx-personal-10','/clockwerx/','/private/clockwerx.img',
+                      'delirium-personal-11','/delirium/','/private/delirium.img',
+                      'blobbo-full-personal-101','/blobbo/','/private/blobbo.img']
+        self.binary.write_bytes(b'\0asm'+b' '.join(value.encode() for value in self.markers))
+
+    def write_manifest(self, slug, identity):
+        row = dict(slug=slug,id=identity,title='Sample',summary='Synthetic test',
+                   image_path=str(self.image),image_sha256=sha256_file(self.image),
+                   architecture='68k',executable_path='Volume/Folder/Sample',screen_size=[800,600],screen_depth=8)
+        self.manifest.write_text(json.dumps(dict(schema_version=1,entries=[row])),encoding='utf-8')
+
+    def test_bundle_lists_exactly_three_routes_and_leaves_koji_out(self):
+        from serve_ottertube_link import bundle_policy
+        package(self.dist,self.manifest,self.media,self.HOSTS)
+        metadata=json.loads((self.dist/'private-library.json').read_text())
+        self.assertEqual([entry['route'] for entry in metadata['entries']],['/clockwerx/','/delirium/','/blobbo/'])
+        self.assertEqual(sorted(path.name for path in (self.dist/'private').iterdir()),
+                         ['blobbo.img','clockwerx.img','delirium.img'])
+        for entry in metadata['entries']:
+            self.assertEqual(sha256_file(self.dist/entry['image_path']),entry['image_sha256'])
+        html=(self.dist/'index.html').read_text(encoding='utf-8')
+        self.assertIn('<meta name="systemless-ottertube-hosts" content="https://ottertube.example http://127.0.0.1:8098">',html)
+        self.assertLess(html.index('/ottertube-addon.js'),html.index('/ottertube-link.js'))
+        self.assertTrue((self.dist/'ottertube-addon.js').is_file() and (self.dist/'ottertube-link.js').is_file())
+        self.assertTrue((self.dist/'ottertube-kiosk.css').is_file())
+        self.assertEqual(html.count('href="/ottertube-kiosk.css"'),1)
+        routes,policy=bundle_policy(self.dist)
+        self.assertEqual(routes,{'/clockwerx','/delirium','/blobbo'})
+        self.assertEqual(policy,'frame-ancestors https://ottertube.example http://127.0.0.1:8098')
+        # Packaging again (new hosts, same build) leaves one tag, not two.
+        package(self.dist,self.manifest,self.media,['https://other.example'])
+        html=(self.dist/'index.html').read_text(encoding='utf-8')
+        self.assertEqual(html.count('systemless-ottertube-hosts'),1)
+        self.assertIn('content="https://other.example"',html)
+
+    def test_a_build_that_still_holds_koji_is_refused_before_copy(self):
+        self.binary.write_bytes(self.binary.read_bytes()+b' koji-personal-204')
+        with self.assertRaisesRegex(ValueError,'not the slim OtterTube variant'):
+            package(self.dist,self.manifest,self.media,self.HOSTS)
+        self.assertFalse((self.dist/'private').exists())
+
+    def test_any_other_fourth_entry_is_refused(self):
+        self.write_manifest('sample','sample-personal-1')
+        with self.assertRaisesRegex(ValueError,'holds exactly'):
+            package(self.dist,self.manifest,self.media,self.HOSTS)
+        with self.assertRaisesRegex(ValueError,'holds exactly'):
+            package(self.dist,None,self.media,self.HOSTS)
+        self.assertFalse((self.dist/'private').exists())
+
+    def test_hosts_must_be_full_origins(self):
+        for hosts in ([],['*'],['https://ottertube.example/'],['https://ottertube.example/app'],['ottertube.example'],
+                      ['https://*.example'],['ftp://ottertube.example'],['https://ottertube.example:0'],
+                      ['https://ottertube.example:70000'],['https://user@ottertube.example'],['https://otter tube.example'],[None]):
+            with self.assertRaisesRegex(ValueError,'origins in full'):
+                package(self.dist,self.manifest,self.media,hosts)
+
+    def test_hosts_are_written_as_a_browser_reports_an_origin(self):
+        from package_library import normalise_origin
+        self.assertEqual(normalise_origin('HTTPS://OtterTube.Example:443'),'https://ottertube.example')
+        self.assertEqual(normalise_origin('http://127.0.0.1:80'),'http://127.0.0.1')
+        self.assertEqual(normalise_origin(' https://ottertube.example:8443 '),'https://ottertube.example:8443')
+        self.assertEqual(normalise_origin('http://ottertube.example:443'),'http://ottertube.example:443')
+        self.assertEqual(normalise_origin('https://[FD00::1]:08443'),'https://[fd00::1]:8443')
+        package(self.dist,self.manifest,self.media,['HTTPS://OtterTube.Example:443','https://ottertube.example','http://127.0.0.1:8098'])
+        html=(self.dist/'index.html').read_text(encoding='utf-8')
+        self.assertIn('content="https://ottertube.example http://127.0.0.1:8098"',html)
+        link=json.loads((self.dist/'ottertube-link.json').read_text())
+        self.assertEqual(link['hosts'],['https://ottertube.example','http://127.0.0.1:8098'])
+
+    def test_the_full_library_is_not_served_as_the_add_on_bundle(self):
+        from serve_ottertube_link import bundle_policy
+        package(self.dist,self.manifest,self.media,self.HOSTS)
+        metadata=json.loads((self.dist/'private-library.json').read_text())
+        (self.dist/'private/koji.img').write_bytes(b'x')
+        metadata['entries'].append(dict(id='koji-personal-204',route='/koji-the-frog/',image_path='private/koji.img',image_sha256='0'*64))
+        (self.dist/'private-library.json').write_text(json.dumps(metadata))
+        with self.assertRaisesRegex(ValueError,'Not the slim OtterTube bundle'):
+            bundle_policy(self.dist)
+
+
 if __name__ == '__main__':
     unittest.main()

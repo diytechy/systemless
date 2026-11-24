@@ -26,6 +26,21 @@ struct BootConfig {
     arrows_as_numpad: bool,
     #[serde(default)]
     plugins: Vec<PluginMetadata>,
+    /// Keep no save at all (an OtterTube Guest). Absent in every other build.
+    #[serde(default)]
+    save_memory_only: bool,
+    /// Load the stored files and never write them: the OtterTube page does.
+    #[serde(default)]
+    save_load_only: bool,
+    /// Extra saved guest paths for this entry. Absent in every other build.
+    #[serde(default)]
+    extra_save_paths: Vec<String>,
+    /// A fresh player's seed, applied to the mounted files. Absent in every other build.
+    #[serde(default)]
+    boot_patches: Vec<crate::save_store::BootPatch>,
+    /// Tests only: no periodic save scan. Absent in every other build.
+    #[serde(default)]
+    save_scan_paused: bool,
 }
 
 // Fork bytes travel separately in transfer lists. Keep every Finder field and
@@ -120,6 +135,19 @@ impl WorkerMachine {
             })
             .collect();
         let bytes = game_bytes.to_vec();
+        if config.save_memory_only || config.save_load_only || !config.extra_save_paths.is_empty() {
+            crate::save_store::set_save_policy(
+                config.save_memory_only,
+                config.save_load_only,
+                &config.extra_save_paths,
+            );
+        }
+        if config.save_scan_paused {
+            crate::save_store::set_periodic_scan_paused(true);
+        }
+        if !config.boot_patches.is_empty() {
+            crate::save_store::set_boot_patches(config.boot_patches);
+        }
         let paths: Vec<&str> = config.remove_paths.iter().map(String::as_str).collect();
         let mappings: Vec<(&str, &str)> = config
             .file_mappings
@@ -404,6 +432,28 @@ impl WorkerMachine {
         crate::save_store::flush_pending_saves(&id)
             .await
             .map_err(|error| JsValue::from_str(&error))
+    }
+
+    /// Look for changed save files now instead of at the next periodic scan.
+    #[wasm_bindgen(js_name = scanSaves)]
+    pub fn scan_saves(&mut self) {
+        self.machine.flush_save_files();
+    }
+
+    /// Hashes of screen regions given as x, y, width, height four at a time,
+    /// each as 16 hex digits. Only the OtterTube page asks.
+    #[cfg(feature = "ottertube")]
+    #[wasm_bindgen(js_name = regionHashes)]
+    pub fn region_hashes(&mut self, regions: Vec<u16>) -> Array {
+        let regions: Vec<[u16; 4]> = regions
+            .chunks_exact(4)
+            .map(|region| [region[0], region[1], region[2], region[3]])
+            .collect();
+        let hashes = Array::new();
+        for hash in self.machine.region_hashes(&regions) {
+            hashes.push(&JsValue::from_str(&format!("{hash:016x}")));
+        }
+        hashes
     }
 
     #[wasm_bindgen(js_name = saveFilesVersion)]

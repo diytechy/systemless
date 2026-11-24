@@ -1,0 +1,269 @@
+{
+  "clockwerx-personal-10": {
+    "actions": [
+      {"label": "Play", "script": "play", "when": ["options"]},
+      {"label": "Next level", "keys": "ArrowDown", "when": ["options"]},
+      {"label": "Level before", "keys": "ArrowUp", "when": ["options"]},
+      {"label": "Try again", "keys": "Meta+r", "unless": ["title", "options", "scores"]},
+      {"label": "Pause", "keys": "Meta+p", "unless": ["title", "options", "scores"]},
+      {"label": "New game", "script": "new-game", "unless": ["options"]}
+    ],
+    "help": [
+      "Pick a level with Next level, then tap Play.",
+      "Your hand spins round a dot. Get to the goal dot.",
+      "Hold Swing to hop to the next dot as you pass it.",
+      "Bounce turns you back. Flip jumps across. Reverse spins the other way.",
+      "Stuck? Tap Try again. For another level tap New game."
+    ],
+    "pad_help": [
+      "A starts the game. Up and down pick the level first.",
+      "In the game: A swings, B bounces, X flips, Y reverses.",
+      "R2 tries the level again. R1 pauses.",
+      "Hold the right stick button (R3) to leave."
+    ],
+    "seed": [
+      {"path": "ClockWerx/System Folder/Preferences/ClockWerx Settings", "offset": 532, "bytes": [6, 80, 108, 97, 121, 101, 114]},
+      {"path": "ClockWerx/System Folder/Preferences/ClockWerx Settings", "offset": 608, "bytes": [1], "enforce": true}
+    ],
+    "menu_bar": 20,
+    "command_keys": ["q"],
+    "screens": [
+      {"name": "title", "at": [20, 460, 150, 12], "hash": "7e326ae9b7288331"},
+      {"name": "options", "at": [74, 301, 60, 12], "hash": "a6644af3660c59c6"},
+      {"name": "playing", "at": [2, 2, 40, 12], "hash": "bfe2a413e0206ab2"},
+      {"name": "playing", "at": [53, 100, 5, 200], "hash": "2e7ed6589e5bd5b6"},
+      {"name": "scores", "at": [94, 80, 104, 20], "hash": "6498472e31502802"}
+    ],
+    "blocks": [
+      {"at": [144, 127, 132, 23], "what": "the player's name (nobody has a keyboard; the seed names the player)"},
+      {"at": [282, 125, 122, 25], "what": "Keyboard or Mouse control (Mouse would stop the buttons working; the seed puts Keyboard back on every boot)"},
+      {"at": [143, 197, 267, 25], "what": "Single or Two Player (two players need a second set of keys)"},
+      {"at": [415, 370, 150, 22], "what": "Skip Level (its alert does not draw, and the game then waits unseen)"}
+    ],
+    "scripts": {
+      "launch": [
+        {"until": {"screen": "title", "timeout": 1800}},
+        {"press": "Meta+n"},
+        {"until": {"screen": "options", "timeout": 600}}
+      ],
+      "new-game": [
+        {"if": {"screen": "title", "then": [{"press": "Meta+n"}, {"until": {"screen": "options", "timeout": 600}}]}},
+        {"if_not": {"screen": "options", "then": [
+          {"if_not": {"screen": "scores", "then": [
+            {"press": "Meta+e"},
+            {"until_any": {"screens": ["scores", "options"], "timeout": 600}}
+          ]}},
+          {"if": {"screen": "scores", "then": [{"tap": [144, 370]}]}}
+        ]}},
+        {"until": {"screen": "options", "timeout": 600}}
+      ],
+      "play": [
+        {"run": "new-game"},
+        {"tap": [318, 402]},
+        {"until_not": {"screen": "options", "timeout": 900}}
+      ],
+      "try-again": [{"stop_if": "options"}, {"press": "Meta+r"}],
+      "pause": [{"stop_if": "options"}, {"press": "Meta+p"}]
+    },
+    "launch": "launch",
+    "pad": {
+      "buttons": {
+        "0": {"key": "Meta", "script": "play", "script_when": ["title", "options", "scores"]},
+        "1": {"key": "Alt"},
+        "2": {"key": "Control"},
+        "3": {"key": "Space"},
+        "5": {"script": "pause"},
+        "7": {"script": "try-again"},
+        "9": {"script": "play"},
+        "11": {"exit": true},
+        "12": {"key": "ArrowUp"},
+        "13": {"key": "ArrowDown"}
+      }
+    }
+  },
+  "delirium-personal-11": {
+    "actions": [
+      {"label": "Start", "script": "start", "unless": ["playing"]},
+      {"label": "Stop", "keys": "Escape", "when": ["playing"]}
+    ],
+    "help": [
+      "Tap Start to begin.",
+      "Push the stick to fly. Fire shoots. Bomb clears the screen.",
+      "Thrust speeds you up. Turn makes you face the other way.",
+      "Save the little people and shoot the aliens.",
+      "Stop ends the game you are playing."
+    ],
+    "pad_help": [
+      "A starts the game.",
+      "The stick or the arrows fly the ship.",
+      "A fires, B drops a bomb, X turns round, Y is thrust.",
+      "Hold the right stick button (R3) to leave."
+    ],
+    "pointer_offset": [0, -56],
+    "menu_bar": 76,
+    "screens": [
+      {"name": "title", "at": [20, 170, 300, 6], "hash": "80c957d7c8c86c35"},
+      {"name": "title", "at": [20, 266, 300, 6], "hash": "80c957d7c8c86c35"},
+      {"name": "menu", "at": [4, 408, 40, 12], "hash": "136ef822e25af165"},
+      {"name": "menu", "at": [596, 408, 40, 12], "hash": "136ef822e25af165"},
+      {"name": "playing", "at": [240, 50, 120, 6], "hash": "325619fb37999669"},
+      {"name": "playing", "at": [2, 62, 6, 20], "hash": "b98b88d670ca48a5"},
+      {"name": "game-over", "at": [353, 215, 8, 20], "hash": "d836cf23261631e5"},
+      {"name": "game-over", "at": [9, 215, 8, 20], "hash": "d836cf23261631e5"},
+      {"name": "prefs", "at": [276, 108, 96, 10], "hash": "bd86cfde52112dd5"},
+      {"name": "name-entry", "at": [290, 390, 60, 14], "hash": "5e70b8b0fb3b61ac"},
+      {"name": "name-entry", "at": [25, 390, 50, 14], "hash": "d51910092d5e5a71"},
+      {"name": "name-entry", "at": [565, 390, 56, 14], "hash": "9e3d71e34ff187e5"},
+      {"name": "name-empty", "at": [234, 211, 10, 8], "hash": "e7f19e4408455c09"}
+    ],
+    "blocks": [
+      {"at": [164, 402, 152, 26], "what": "Preferences (Deregister, Clear Highscores, Set Keys, sound); always, since one tap can both clear a screen and land on the button under it"},
+      {"screen": "prefs", "at": [34, 312, 156, 28], "what": "Deregister"},
+      {"screen": "prefs", "at": [34, 350, 156, 28], "what": "Clear Highscores"},
+      {"screen": "prefs", "at": [369, 312, 156, 28], "what": "Default Keys"},
+      {"screen": "prefs", "at": [369, 350, 156, 28], "what": "Set Keys"}
+    ],
+    "scripts": {
+      "launch": [
+        {"until_any": {"screens": ["title", "menu"], "timeout": 1800}}
+      ],
+      "name": [
+        {"stop_unless": "name-entry"},
+        {"wait": 20},
+        {"if": {"screen": "name-empty", "then": [
+          {"tap": [123, 364]}, {"tap": [566, 333]}, {"tap": [25, 333]}, {"tap": [566, 364]}, {"tap": [222, 333]}, {"tap": [222, 364]}
+        ]}},
+        {"tap": [589, 397]},
+        {"until_not": {"screen": "name-entry", "timeout": 300}}
+      ],
+      "start": [
+        {"stop_if": "playing"},
+        {"if": {"screen": "prefs", "then": [{"tap": [572, 364]}, {"until_not": {"screen": "prefs", "timeout": 300}}]}},
+        {"run": "name"},
+        {"if": {"screen": "game-over", "then": [
+          {"tap": [320, 250]},
+          {"until_any": {"screens": ["name-entry", "menu", "title", "playing"], "timeout": 300}},
+          {"run": "name"}
+        ]}},
+        {"retry": {"press": "Space", "until": "playing", "every": 150, "tries": 5}}
+      ],
+      "quit": [
+        {"if": {"screen": "prefs", "then": [{"tap": [572, 364]}, {"until_not": {"screen": "prefs", "timeout": 300}}]}},
+        {"run": "name"},
+        {"if": {"screen": "playing", "then": [{"press": "Escape"}, {"until": {"screen": "game-over", "timeout": 360}}]}},
+        {"if": {"screen": "game-over", "then": [
+          {"wait": 30},
+          {"tap": [320, 250]},
+          {"until_any": {"screens": ["name-entry", "menu", "title"], "timeout": 240}},
+          {"run": "name"}
+        ]}},
+        {"if": {"screen": "title", "then": [{"tap": [320, 250]}, {"until": {"screen": "menu", "timeout": 300}}]}},
+        {"until": {"screen": "menu", "timeout": 300}},
+        {"tap": [72, 414]}
+      ]
+    },
+    "launch": "launch",
+    "quit_first": {
+      "after": ["name-entry"],
+      "script": "quit",
+      "timeout": 600,
+      "what": "Delirium writes its score table only when it quits by its own Quit: after a score went into the table on this visit, Exit makes it quit first. OtterTube's Start and Guide go Home at once and are not covered."
+    },
+    "pad": {
+      "buttons": {
+        "0": {"key": "Meta", "script": "start", "script_when": ["title", "menu", "game-over", "name-entry"]},
+        "1": {"key": "Shift"},
+        "2": {"key": "Control"},
+        "3": {"key": "Space"},
+        "9": {"script": "start"},
+        "11": {"exit": true}
+      },
+      "directions": ["Numpad8", "Numpad2", "Numpad4", "Numpad6"]
+    }
+  },
+  "blobbo-full-personal-101": {
+    "actions": [
+      {"label": "Start again", "keys": "Meta+a", "when": ["board"]},
+      {"label": "Save", "script": "save", "when": ["board"]},
+      {"label": "Load", "script": "load", "when": ["board"]}
+    ],
+    "help": [
+      "Tap beside Blobbo to send him that way, or push the stick.",
+      "Push the boxes, collect the toys, find the way out.",
+      "Stuck? Tap Start again.",
+      "Save keeps where you are. Load brings it back."
+    ],
+    "pad_help": [
+      "The arrows or the stick move Blobbo one step.",
+      "A waits a turn. B drops what he carries.",
+      "R2 saves. R1 loads. Y begins the level again.",
+      "Hold the right stick button (R3) to leave."
+    ],
+    "menu_bar": 20,
+    "command_keys": ["q"],
+    "stick_step": {"pulse_ms": 90, "delay_ms": 450, "repeat_ms": 220},
+    "screens": [
+      {"name": "about", "at": [290, 196, 60, 16], "hash": "4dd651e6deacd08d"},
+      {"name": "board", "at": [296, 75, 50, 13], "hash": "9d0a3954184f0045"},
+      {"name": "save-dialog", "at": [74, 217, 50, 13], "hash": "ef15dfe1f28146d4"},
+      {"name": "save-name", "at": [80, 241, 120, 10], "hash": "ef41c839fb055d2d"},
+      {"name": "open-dialog", "at": [330, 190, 36, 12], "hash": "6b29255eb7aac3c4"},
+      {"name": "load-ready", "at": [84, 126, 200, 12], "hash": "652e18f8e0c4db5d"}
+    ],
+    "scripts": {
+      "launch": [
+        {"until": {"screen": "about", "timeout": 1800}},
+        {"tap": [316, 204]},
+        {"until": {"screen": "board", "timeout": 600}}
+      ],
+      "save": [
+        {"stop_unless": "board"},
+        {"press": "Meta+s"},
+        {"wait": 100},
+        {"run": "save-confirm"},
+        {"until": {"screen": "board", "timeout": 600}}
+      ],
+      "save-confirm": [
+        {"stop_unless": "save-dialog"},
+        {"if_not": {"screen": "save-name", "then": [
+          {"tap": [256, 281]},
+          {"until": {"screen": "board", "timeout": 300}},
+          {"press": "Meta+s"},
+          {"until": {"screen": "save-dialog", "timeout": 300}},
+          {"wait": 30}
+        ]}},
+        {"if_not": {"screen": "save-name", "then": [
+          {"tap": [256, 281]},
+          {"until": {"screen": "board", "timeout": 300}},
+          {"until": {"screen": "save-name", "timeout": 1}}
+        ]}},
+        {"press": "Enter"}
+      ],
+      "load": [
+        {"stop_unless": "board"},
+        {"press": "Meta+r"},
+        {"until": {"screen": "open-dialog", "timeout": 300}},
+        {"tap": [108, 134]},
+        {"wait": 30},
+        {"if": {"screen": "load-ready", "then": [{"tap": [347, 197]}, {"until": {"screen": "board", "timeout": 600}}]}},
+        {"if": {"screen": "open-dialog", "then": [{"tap": [346, 169]}]}},
+        {"until": {"screen": "board", "timeout": 600}}
+      ],
+      "restart": [{"stop_unless": "board"}, {"press": "Meta+a"}]
+    },
+    "launch": "launch",
+    "pad": {
+      "buttons": {
+        "0": {"key": "Space"},
+        "1": {"key": "s"},
+        "3": {"script": "restart"},
+        "5": {"script": "load"},
+        "7": {"script": "save"},
+        "9": {"script": "restart"},
+        "11": {"exit": true}
+      },
+      "directions": ["Numpad8", "Numpad2", "Numpad4", "Numpad6"],
+      "step": true
+    }
+  }
+}

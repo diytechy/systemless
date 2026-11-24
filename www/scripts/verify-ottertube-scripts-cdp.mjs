@@ -57,7 +57,7 @@ const outDir = process.env.OTTERTUBE_LINK_OUT;
 if (!outDir) throw new Error("Set OTTERTUBE_LINK_DIST and OTTERTUBE_LINK_OUT");
 mkdirSync(outDir, { recursive: true });
 const CLOCKWERX = "clockwerx-personal-10", DELIRIUM = "delirium-personal-11", BLOBBO = "blobbo-full-personal-101";
-const games = JSON.parse(readFileSync(join(repoRoot, "www", "src", "ottertube-games.json"), "utf8"));
+const games = JSON.parse(readFileSync(join(repoRoot, "src", "ottertube-games.json"), "utf8"));
 const HOLD_FRAMES = 360, AFTER_FRAMES = 180;
 games[CLOCKWERX].scripts["hold-test"] = [{ hold: "Meta" }, { wait: HOLD_FRAMES }, { hold: "Alt" }, { wait: AFTER_FRAMES }, { release: "Alt" }, { release: "Meta" }];
 games[CLOCKWERX].actions.push({ label: "Hold test", script: "hold-test" });

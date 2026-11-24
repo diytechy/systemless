@@ -57,6 +57,8 @@ pub(super) struct GuiDriver {
     /// Force the next host present even if the guest tick has not advanced.
     pub(super) force_next_render: bool,
     game_path: PathBuf,
+    pub(super) game_config: super::game_config::GameConfig,
+    pub(super) couch: Option<super::couch_input::CouchInput>,
     arrows_as_numpad: bool,
     #[cfg(target_os = "macos")]
     native_integrations: bool,
@@ -117,6 +119,8 @@ impl GuiDriver {
             last_presented_guest_tick: None,
             force_next_render: true,
             game_path,
+            game_config: Default::default(),
+            couch: None,
             arrows_as_numpad,
             addressing_24_bit,
             screen_depth,
@@ -132,12 +136,7 @@ impl GuiDriver {
             return;
         }
 
-        let mut runner = match self.screen_depth {
-            Some(screen_depth) => {
-                game::new_runner_with_configuration(!self.addressing_24_bit, screen_depth)
-            }
-            None => game::new_runner_with_addressing(!self.addressing_24_bit),
-        };
+        let mut runner = self.game_config.new_runner(!self.addressing_24_bit, self.screen_depth);
         runner.set_ui_theme(self.ui_theme);
         if self.gpu {
             runner.set_q3_gpu_renderer(Box::new(super::wgpu_qd3d::Qd3dRenderer::new()));
@@ -147,10 +146,17 @@ impl GuiDriver {
         if self.native_integrations {
             runner.set_menu_bar_policy(MenuBarPolicy::ForceHidden);
         }
-        let app =
-            game::load_game_from_path(&mut runner, &self.game_path).expect("Failed to load game");
-        let mut save_store = DesktopSaveStore::for_loaded_archive(&self.game_path, &mut runner)
-            .expect("Failed to open desktop save store");
+        let app = game::load_game_from_path(&mut runner, &self.game_path)
+            .unwrap_or_else(|error| panic!("Failed to load game: {error}"));
+        for (source, destination) in &self.game_config.file_mappings {
+            runner.map_vfs_file(source, destination)
+                .unwrap_or_else(|error| panic!("Cannot map {source:?} to {destination:?}: {error}"));
+        }
+        self.game_config.apply_patches(&mut runner, false);
+        let mut save_store = DesktopSaveStore::for_game_config(
+            &self.game_path, &mut runner, self.game_config.save_root.as_deref(),
+            &self.game_config.extra_save_paths,
+        ).unwrap_or_else(|error| panic!("Failed to open desktop save store: {error}"));
         eprintln!(
             "[SYSTEMLESS] Desktop save dir: {}",
             save_store.root().display()
@@ -165,6 +171,7 @@ impl GuiDriver {
                 restored_saves.len()
             );
         }
+        self.game_config.apply_patches(&mut runner, true);
         let a5_base = app.a5_base;
         let entry_point = app.entry_point(a5_base);
         game::init_game_owned(&mut runner, app);
@@ -206,6 +213,19 @@ impl GuiDriver {
             return;
         };
         self.force_next_render = true;
+        if let Some(couch) = self.couch.as_mut() {
+            match command {
+                GuiCommand::KeyDown { key, character } => {
+                    couch.host_key(runner, key, character, true);
+                    return;
+                }
+                GuiCommand::KeyUp { key, character } => {
+                    couch.host_key(runner, key, character, false);
+                    return;
+                }
+                _ => {}
+            }
+        }
         Self::apply_guest_command(runner, &mut self.mouse_release_latch, command);
     }
 
@@ -234,6 +254,47 @@ impl GuiDriver {
                 runner.select_guest_menu_item(menu, item);
             }
             GuiCommand::AcknowledgeWarp { .. } => unreachable!(),
+        }
+    }
+
+    pub(super) fn enable_couch_input(&mut self) {
+        self.couch = Some(super::couch_input::CouchInput::new(
+            self.game_config.controls.clone(), self.game_config.tuning,
+        ));
+    }
+
+    pub(super) fn blur_couch_input(&mut self) {
+        if let (Some(couch), Some(runner)) = (&mut self.couch, &mut self.runner) {
+            couch.blur(runner, &mut self.mouse_release_latch);
+        }
+    }
+
+    pub(super) fn couch_frame(&mut self, focused: bool, quitting: bool, now: std::time::Instant) {
+        if let (Some(couch), Some(runner)) = (&mut self.couch, &mut self.runner) {
+            couch.frame(runner, &mut self.mouse_release_latch, focused, quitting, now);
+        }
+    }
+
+    pub(super) fn set_control_pause(&mut self, paused: bool) {
+        if paused {
+            self.blur_couch_input();
+            if let Some(runner) = self.runner.as_mut() {
+                runner.clear_host_audio();
+            }
+        }
+        self.start_time = None;
+        self.next_frame_time = None;
+        self.last_audio_mix_time = None;
+        self.audio_sample_remainder = 0.0;
+    }
+
+    pub(super) fn begin_graceful_quit(&mut self) -> std::time::Duration {
+        if self.couch.is_none() {
+            self.enable_couch_input();
+        }
+        match (&mut self.couch, &mut self.runner) {
+            (Some(couch), Some(runner)) => couch.begin_quit(runner, &mut self.mouse_release_latch),
+            _ => std::time::Duration::ZERO,
         }
     }
 
@@ -434,17 +495,15 @@ impl GuiDriver {
     }
 
     pub(super) fn sync_save_files(&mut self, force: bool) {
-        let Some(save_store) = self.save_store.as_mut() else {
-            return;
-        };
-        let Some(runner) = self.runner.as_mut() else {
-            return;
-        };
         if force {
-            save_store.sync_save_files_now(runner);
-        } else {
-            save_store.sync_save_files(runner);
+            let _ = self.flush_saves();
+        } else if let (Some(store), Some(runner)) = (&mut self.save_store, &mut self.runner) {
+            store.sync_save_files(runner);
         }
+    }
+
+    pub(super) fn flush_saves(&mut self) -> Option<super::desktop_save_store::SaveFlush> {
+        Some(self.save_store.as_mut()?.sync_save_files_now(self.runner.as_mut()?))
     }
 
     pub(super) fn guest_requested_exit(&self) -> bool {

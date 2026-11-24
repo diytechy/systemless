@@ -40,12 +40,14 @@ export function keysForPad(pad, deadzone = 0.35, game = 'koji-personal-204') {
   return keys;
 }
 
-// The OtterTube add-on page: one game, its controller mapping as data (the page's `pad`).
+// Compatibility adapter for OtterTube bundles without the shared WASM router.
+// One game, its controller mapping as data (the page's `pad`).
 // `buttons` is keyed by standard-mapping index: { key } is held while the button is, { script }
 // runs on the press (on the `script_when` screens only when any are named; elsewhere the button is
 // its key), { exit } leaves once the button has been held for EXIT_HOLD_MS. `directions` are the
 // keys for up, down, left, right, from the d-pad and the left stick; with `step` only one at a time.
 export const EXIT_HOLD_MS = 1000;
+const reservedButtons = new Set([4, 6, 8, 16]);
 export class KioskPad {
   constructor(map) { this.map = map || {}; this.was = new Set(); this.scripted = new Set(); this.heldSince = new Map(); this.left = false; }
   // What the pad means now: keys to hold, the direction keys, scripts to run, and whether to leave.
@@ -68,7 +70,7 @@ export class KioskPad {
     }
     const pressed = new Set();
     for (const [index, button] of Object.entries(this.map.buttons || {})) {
-      if (!down(Number(index))) { this.scripted.delete(index); this.heldSince.delete(index); continue; }
+      if (reservedButtons.has(Number(index)) || !down(Number(index))) { this.scripted.delete(index); this.heldSince.delete(index); continue; }
       pressed.add(index);
       if (!this.was.has(index)) {
         this.heldSince.set(index, now);
@@ -183,9 +185,20 @@ if (typeof document !== 'undefined') {
   // not the picture has the keyboard focus (nobody has a mouse to give it).
   let kioskPad = null, kioskHeld = '', kioskDirection = '', kioskConnected = false;
   function pollKiosk(link, pad) {
-    if (!kioskPad || kioskPad.map !== link.pad) kioskPad = new KioskPad(link.pad);
     const connected = Boolean(pad);
     if (connected !== kioskConnected) { kioskConnected = connected; link.input('pad-connected', [], connected); }
+    if (link.acceptsPadSamples) {
+      if (pad && !document.hidden) {
+        const mask = pad.buttons.reduce((bits, button, index) =>
+          index < 17 && button?.pressed ? bits | (1 << index) : bits, 0);
+        const axes = Array.from({length: 4}, (_, index) => pad.axes?.[index] ?? 0);
+        link.input('pad-sample', [pad.index, mask, ...axes].map(String), true);
+      } else {
+        link.input('pad-sample', [], false);
+      }
+      return;
+    }
+    if (!kioskPad || kioskPad.map !== link.pad) kioskPad = new KioskPad(link.pad);
     const root = document.querySelector('.app--ottertube');
     const screens = (root?.dataset.kioskScreen ?? '').split(' ').filter(Boolean);
     const out = kioskPad.update(document.hidden ? null : pad, performance.now(), screens);

@@ -11,7 +11,6 @@
 //! any of them matches (a game that draws its own pointer can cover one).
 //!
 //! Nothing here touches the browser. The runner is in `ottertube_play`.
-#![cfg_attr(not(feature = "ottertube"), allow(dead_code))]
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
@@ -58,6 +57,7 @@ pub struct GameData {
     /// made to quit before the page leaves, when there is something to write.
     pub quit_first: Option<QuitFirst>,
     pub pad: Pad,
+    pub mouse: Option<Mouse>,
 }
 
 /// When Exit is pressed and one of the `after` screens has been seen on this
@@ -80,6 +80,47 @@ pub struct QuitFirst {
 /// The longest a game may be given to quit before the page leaves: ten seconds.
 pub const LONGEST_QUIT: u32 = 600;
 
+/// Standard Gamepad API indices owned by the launcher.
+pub const RESERVED_BUTTONS: [u8; 4] = [4, 6, 8, 16];
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
+pub enum KeyOwner {
+    Host,
+    Tap,
+    Pad,
+    Script,
+}
+
+#[derive(Clone, Copy, Debug, Default, Deserialize, PartialEq)]
+#[serde(rename_all = "snake_case")]
+pub enum Stick {
+    #[default]
+    Left,
+    Right,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[serde(default, deny_unknown_fields)]
+pub struct Mouse {
+    pub stick: Stick,
+    pub cursor_speed: f32,
+    pub precision_cursor_speed: f32,
+    pub click_button: Option<u8>,
+    pub precision_button: Option<u8>,
+}
+
+impl Default for Mouse {
+    fn default() -> Self {
+        Self {
+            stick: Stick::Left,
+            cursor_speed: 420.0,
+            precision_cursor_speed: 110.0,
+            click_button: None,
+            precision_button: None,
+        }
+    }
+}
+
 /// A tap button: it presses keys once, or runs a script. `when` and `unless`
 /// name screens: the button shows only on (or except on) those.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq)]
@@ -92,7 +133,7 @@ pub struct Action {
     pub unless: Vec<String>,
 }
 
-#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(deny_unknown_fields)]
 pub struct Seed {
     pub path: String,
@@ -105,6 +146,28 @@ pub struct Seed {
     pub enforce: bool,
 }
 
+impl Seed {
+    pub fn apply(&self, data_fork: &[u8]) -> Option<Vec<u8>> {
+        let end = self.offset.checked_add(self.bytes.len())?;
+        let mut patched = data_fork.to_vec();
+        patched
+            .get_mut(self.offset..end)?
+            .copy_from_slice(&self.bytes);
+        Some(patched)
+    }
+
+    pub fn apply_to_guest(&self, runner: &mut crate::runner::FixtureRunner) {
+        if let Some(mut file) = runner.vfs_file_snapshot(&self.path) {
+            if let Some(data) = self.apply(&file.data_fork) {
+                if data != file.data_fork {
+                    file.data_fork = data;
+                    runner.import_vfs_file(&file);
+                }
+            }
+        }
+    }
+}
+
 #[derive(Clone, Copy, Debug, Deserialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct StickStep {
@@ -113,6 +176,67 @@ pub struct StickStep {
     /// Held this long before it repeats, then every `repeat_ms`.
     pub delay_ms: u32,
     pub repeat_ms: u32,
+}
+
+#[derive(Clone, Copy, Debug, Deserialize)]
+#[serde(default, rename_all = "camelCase", deny_unknown_fields)]
+pub struct Tuning {
+    pub stick_deadzone: f32,
+    pub stick_step_pulse_ms: Option<u32>,
+    pub stick_step_delay_ms: Option<u32>,
+    pub stick_step_repeat_ms: Option<u32>,
+    pub cursor_speed: Option<f32>,
+    pub precision_cursor_speed: Option<f32>,
+}
+
+impl Default for Tuning {
+    fn default() -> Self {
+        Self {
+            stick_deadzone: 0.25,
+            stick_step_pulse_ms: None,
+            stick_step_delay_ms: None,
+            stick_step_repeat_ms: None,
+            cursor_speed: None,
+            precision_cursor_speed: None,
+        }
+    }
+}
+
+impl Tuning {
+    pub fn check(self) -> Result<(), String> {
+        if !((0.0..1.0).contains(&self.stick_deadzone)) {
+            return Err("stickDeadzone must be in [0, 1)".into());
+        }
+        if [
+            self.stick_step_pulse_ms,
+            self.stick_step_delay_ms,
+            self.stick_step_repeat_ms,
+        ]
+        .into_iter()
+        .flatten()
+        .any(|ms| !(1..=10_000).contains(&ms))
+        {
+            return Err("stick step timings must be from 1 through 10000 ms".into());
+        }
+        if [self.cursor_speed, self.precision_cursor_speed]
+            .into_iter()
+            .flatten()
+            .any(|speed| !speed.is_finite() || speed <= 0.0 || speed > 10_000.0)
+        {
+            return Err(
+                "cursor speeds must be positive and at most 10000 pixels per second".into(),
+            );
+        }
+        Ok(())
+    }
+
+    pub fn step(self, timing: StickStep) -> StickStep {
+        StickStep {
+            pulse_ms: self.stick_step_pulse_ms.unwrap_or(timing.pulse_ms),
+            delay_ms: self.stick_step_delay_ms.unwrap_or(timing.delay_ms),
+            repeat_ms: self.stick_step_repeat_ms.unwrap_or(timing.repeat_ms),
+        }
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq)]
@@ -196,6 +320,7 @@ pub struct Pad {
     pub buttons: BTreeMap<String, PadButton>,
     /// Keys for up, down, left, right: the d-pad and the left stick.
     pub directions: Option<[String; 4]>,
+    pub directions_label: Option<String>,
     /// One move per push (the game's `stick_step`), not a held key.
     pub step: bool,
 }
@@ -208,8 +333,18 @@ pub struct Pad {
 pub struct PadButton {
     pub key: Option<String>,
     pub script: Option<String>,
+    pub label: Option<String>,
     pub script_when: Vec<String>,
     pub exit: bool,
+}
+
+impl PadButton {
+    pub fn script_for(&self, screen_matches: impl Fn(&str) -> bool) -> Option<&str> {
+        self.script.as_deref().filter(|_| {
+            self.script_when.is_empty()
+                || self.script_when.iter().any(|screen| screen_matches(screen))
+        })
+    }
 }
 
 /// Is `name` a key the page can press? The names the held-button layer knows.
@@ -232,6 +367,8 @@ pub fn is_key_name(name: &str) -> bool {
             | "ArrowDown"
             | "ArrowLeft"
             | "ArrowRight"
+            | "["
+            | "]"
     ) || (name.len() == 1
         && name
             .chars()
@@ -254,14 +391,40 @@ fn keys_ok(keys: &str) -> bool {
     !keys.is_empty() && keys.split([',', '+']).all(is_key_name)
 }
 
-fn in_screen(at: [u16; 4]) -> bool {
+fn in_screen(at: [u16; 4], size: [u16; 2]) -> bool {
     at[2] > 0
         && at[3] > 0
-        && u32::from(at[0]) + u32::from(at[2]) <= u32::from(GUEST_SCREEN[0])
-        && u32::from(at[1]) + u32::from(at[3]) <= u32::from(GUEST_SCREEN[1])
+        && u32::from(at[0]) + u32::from(at[2]) <= u32::from(size[0])
+        && u32::from(at[1]) + u32::from(at[3]) <= u32::from(size[1])
 }
 
 impl GameData {
+    pub fn pointer_point(&self, x: u16, y: u16) -> (i16, i16) {
+        let [right, down] = self.pointer_offset;
+        (
+            (y as i16).saturating_add(down).max(0),
+            (x as i16).saturating_add(right).max(0),
+        )
+    }
+
+    pub fn matching_screens(
+        &self,
+        runner: &crate::runner::FixtureRunner,
+    ) -> std::collections::BTreeSet<String> {
+        let regions: Vec<_> = self.screens.iter().map(|screen| screen.at).collect();
+        if regions.is_empty() {
+            return Default::default();
+        }
+        self.screens
+            .iter()
+            .zip(region_hashes(runner, &regions))
+            .filter_map(|(screen, hash)| {
+                (u64::from_str_radix(&screen.hash, 16).ok() == Some(hash))
+                    .then(|| screen.name.clone())
+            })
+            .collect()
+    }
+
     pub fn has_screen(&self, name: &str) -> bool {
         self.screens.iter().any(|screen| screen.name == name)
     }
@@ -277,6 +440,10 @@ impl GameData {
     /// Every name is known, every key can be pressed, every point is on the
     /// screen, and no script can run for ever by calling itself.
     pub fn check(&self) -> Result<(), String> {
+        self.check_for_screen(GUEST_SCREEN)
+    }
+
+    pub fn check_for_screen(&self, size: [u16; 2]) -> Result<(), String> {
         let screen = |name: &str| {
             if self.has_screen(name) {
                 Ok(())
@@ -292,7 +459,7 @@ impl GameData {
             }
         };
         for entry in &self.screens {
-            if !in_screen(entry.at) {
+            if !in_screen(entry.at, size) {
                 return Err(format!("screen {:?} is off the screen", entry.name));
             }
             if entry.hash.len() != 16 || !entry.hash.bytes().all(|b| b.is_ascii_hexdigit()) {
@@ -300,7 +467,7 @@ impl GameData {
             }
         }
         for block in &self.blocks {
-            if !in_screen(block.at) || block.what.is_empty() {
+            if !in_screen(block.at, size) || block.what.is_empty() {
                 return Err(format!(
                     "block {:?} is off the screen or unnamed",
                     block.what
@@ -361,11 +528,13 @@ impl GameData {
             {
                 return Err(format!("script name {name:?}"));
             }
-            self.check_steps(steps, &mut vec![name.as_str()])
+            self.check_steps(steps, &mut vec![name.as_str()], size)
                 .map_err(|error| format!("script {name:?}: {error}"))?;
         }
         for (index, button) in &self.pad.buttons {
-            if index.parse::<u8>().map_or(true, |index| index > 16) {
+            if index.parse::<u8>().map_or(true, |number| {
+                number > 16 || number.to_string() != *index || RESERVED_BUTTONS.contains(&number)
+            }) {
                 return Err(format!("pad button {index:?}"));
             }
             if let Some(key) = &button.key {
@@ -381,12 +550,46 @@ impl GameData {
             }
         }
         if let Some(directions) = &self.pad.directions {
-            if !directions.iter().all(|key| is_key_name(key)) {
+            if !directions
+                .iter()
+                .all(|key| is_key_name(key) || key == "None")
+            {
                 return Err("pad directions press unknown keys".into());
             }
         }
         if self.pad.step && self.stick_step.is_none() {
             return Err("the pad steps but the game has no stick_step".into());
+        }
+        if let Some(timing) = self.stick_step {
+            Tuning {
+                stick_step_pulse_ms: Some(timing.pulse_ms),
+                stick_step_delay_ms: Some(timing.delay_ms),
+                stick_step_repeat_ms: Some(timing.repeat_ms),
+                ..Default::default()
+            }
+            .check()?;
+        }
+        if let Some(mouse) = &self.mouse {
+            Tuning {
+                cursor_speed: Some(mouse.cursor_speed),
+                precision_cursor_speed: Some(mouse.precision_cursor_speed),
+                ..Default::default()
+            }
+            .check()?;
+            for button in [mouse.click_button, mouse.precision_button]
+                .into_iter()
+                .flatten()
+            {
+                if button > 16 || RESERVED_BUTTONS.contains(&button) {
+                    return Err(format!("mouse button {button} is invalid or reserved"));
+                }
+                if self.pad.buttons.contains_key(&button.to_string()) {
+                    return Err(format!("mouse button {button} is also mapped to an action"));
+                }
+            }
+            if mouse.click_button.is_some() && mouse.click_button == mouse.precision_button {
+                return Err("mouse click and precision need separate buttons".into());
+            }
         }
         for seed in &self.seed {
             if seed.path.is_empty() || seed.bytes.is_empty() {
@@ -401,7 +604,12 @@ impl GameData {
         Ok(())
     }
 
-    fn check_steps<'a>(&'a self, steps: &'a [Step], path: &mut Vec<&'a str>) -> Result<(), String> {
+    fn check_steps<'a>(
+        &'a self,
+        steps: &'a [Step],
+        path: &mut Vec<&'a str>,
+        size: [u16; 2],
+    ) -> Result<(), String> {
         let screen = |name: &str| {
             if self.has_screen(name) {
                 Ok(())
@@ -410,7 +618,7 @@ impl GameData {
             }
         };
         let point = |x: u16, y: u16| {
-            if x < GUEST_SCREEN[0] && y < GUEST_SCREEN[1] {
+            if x < size[0] && y < size[1] {
                 Ok(())
             } else {
                 Err(format!("[{x}, {y}] is off the screen"))
@@ -456,7 +664,7 @@ impl GameData {
                 }
                 Step::If { screen: name, then } | Step::IfNot { screen: name, then } => {
                     screen(name)?;
-                    self.check_steps(then, path)?;
+                    self.check_steps(then, path, size)?;
                 }
                 Step::Retry {
                     press,
@@ -492,7 +700,7 @@ impl GameData {
                         ));
                     }
                     path.push(name);
-                    self.check_steps(steps, path)?;
+                    self.check_steps(steps, path, size)?;
                     path.pop();
                 }
                 Step::StopUnless(name) | Step::StopIf(name) => screen(name)?,
@@ -521,6 +729,45 @@ pub fn parse(json: &str) -> Result<BTreeMap<String, GameData>, String> {
 /// A screen hash as the data writes it.
 pub fn hash_text(hash: u64) -> String {
     format!("{hash:016x}")
+}
+
+/// Hash guest pixels without compositing the host cursor.
+pub fn region_hashes(runner: &crate::runner::FixtureRunner, regions: &[[u16; 4]]) -> Vec<u64> {
+    let (screen_mode, clut) = {
+        let dispatcher = runner.dispatcher();
+        (dispatcher.screen_mode, *dispatcher.device_clut)
+    };
+    let palette = crate::display::rgba_palette_from_clut(&clut);
+    let mut rgba = Vec::new();
+    crate::display::render_screen_with_rgba_palette_into(
+        runner.bus(),
+        screen_mode,
+        &palette,
+        &mut rgba,
+    );
+    let width = usize::from(screen_mode.2);
+    let height = usize::from(screen_mode.3);
+    if width == 0 || rgba.len() < width * height * 4 {
+        return vec![0; regions.len()];
+    }
+    regions
+        .iter()
+        .map(|&[x, y, w, h]| {
+            let (x, y) = (usize::from(x).min(width), usize::from(y).min(height));
+            let (right, bottom) = (
+                (x + usize::from(w)).min(width),
+                (y + usize::from(h)).min(height),
+            );
+            let mut hash = 0xcbf2_9ce4_8422_2325u64;
+            for row in y..bottom {
+                for &byte in &rgba[(row * width + x) * 4..(row * width + right) * 4] {
+                    hash ^= u64::from(byte);
+                    hash = hash.wrapping_mul(0x0000_0100_0000_01b3);
+                }
+            }
+            hash
+        })
+        .collect()
 }
 
 #[cfg(test)]

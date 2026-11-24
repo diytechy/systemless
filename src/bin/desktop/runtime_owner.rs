@@ -1,13 +1,14 @@
 //! The desktop guest is constructed, executed and destroyed on one owner thread.
 //! Only configuration, commands and owned snapshots cross this boundary.
 
+use super::control::{Control, Request};
 use super::runtime_driver::GuiDriver;
 use super::runtime_mailbox::{PresentationOptions, RuntimeMailbox, RuntimeStatus};
 use super::runtime_protocol::{GuiCommand, GuiState};
 use std::path::PathBuf;
-use std::sync::Arc;
+use std::sync::{mpsc::Receiver, Arc};
 use std::thread::JoinHandle;
-use std::time::Instant;
+use std::time::{Duration, Instant};
 
 #[derive(Clone)]
 pub(super) struct RuntimeConfig {
@@ -15,6 +16,7 @@ pub(super) struct RuntimeConfig {
     #[cfg(target_os = "macos")]
     pub native_preflight: bool,
     pub game_path: PathBuf,
+    pub game_config: super::game_config::GameConfig,
     pub arrows_as_numpad: bool,
     pub native_integrations: bool,
     pub addressing_24_bit: bool,
@@ -41,20 +43,39 @@ fn panic_message(panic: Box<dyn std::any::Any + Send>) -> String {
 }
 
 impl RuntimeOwner {
+    #[cfg(any(target_os = "macos", test))]
     pub fn spawn(
         config: RuntimeConfig,
         wake: impl Fn() + Send + Sync + 'static,
     ) -> std::io::Result<Self> {
-        Self::spawn_with(config, wake, |driver| {
-            driver.init_game();
-            Ok(())
-        })
+        Self::spawn_controlled(config, None, wake)
     }
 
+    pub fn spawn_controlled(
+        config: RuntimeConfig,
+        requests: Option<Receiver<Request>>,
+        wake: impl Fn() + Send + Sync + 'static,
+    ) -> std::io::Result<Self> {
+        Self::spawn_with_control(config, wake, |driver| {
+            driver.init_game();
+            Ok(())
+        }, requests)
+    }
+
+    #[cfg(test)]
     fn spawn_with(
         config: RuntimeConfig,
         wake: impl Fn() + Send + Sync + 'static,
         initialize: impl FnOnce(&mut GuiDriver) -> Result<(), String> + Send + 'static,
+    ) -> std::io::Result<Self> {
+        Self::spawn_with_control(config, wake, initialize, None)
+    }
+
+    fn spawn_with_control(
+        config: RuntimeConfig,
+        wake: impl Fn() + Send + Sync + 'static,
+        initialize: impl FnOnce(&mut GuiDriver) -> Result<(), String> + Send + 'static,
+        requests: Option<Receiver<Request>>,
     ) -> std::io::Result<Self> {
         let mailbox = Arc::new(RuntimeMailbox::new(wake));
         let shared = mailbox.clone();
@@ -76,6 +97,10 @@ impl RuntimeOwner {
                     config.ui_theme,
                 );
                 driver.gpu = config.gpu;
+                driver.game_config = config.game_config;
+                if requests.is_some() {
+                    driver.enable_couch_input();
+                }
                 let outcome = std::panic::catch_unwind(std::panic::AssertUnwindSafe(
                     || -> Result<(), String> {
                         #[cfg(target_os = "macos")]
@@ -105,7 +130,7 @@ impl RuntimeOwner {
                         driver.capture_state(&mut state, true);
                         shared.publish(None, state);
                         shared.set_status(RuntimeStatus::Ready);
-                        run(&mut driver, &shared, config.native_integrations);
+                        run(&mut driver, &shared, config.native_integrations, requests.as_ref());
                         Ok(())
                     },
                 ));
@@ -178,7 +203,9 @@ impl Drop for RuntimeOwner {
     }
 }
 
-fn run(driver: &mut GuiDriver, mailbox: &RuntimeMailbox, native_integrations: bool) {
+fn run(driver: &mut GuiDriver, mailbox: &RuntimeMailbox, native_integrations: bool,
+    requests: Option<&Receiver<Request>>) {
+    let mut control = Control::default();
     let mut options = PresentationOptions {
         capture_crop: native_integrations,
         learning_crop: true,
@@ -192,6 +219,17 @@ fn run(driver: &mut GuiDriver, mailbox: &RuntimeMailbox, native_integrations: bo
             driver.force_next_render |= next.force;
             options = next;
         }
+        control.receive(driver, requests);
+        let (_, lost_focus) = mailbox.take_focus();
+        if lost_focus && !control.quitting() {
+            driver.blur_couch_input();
+        }
+        if control.quit_ready(driver.guest_requested_exit(), Instant::now())
+            || (control.quitting() && mailbox.shutdown_requested())
+        {
+            control.finish_quit(driver);
+            break;
+        }
         // Do not collapse queued click transitions before the guest observes
         // each press/release. Preserve the existing driver's observation latch.
         if mailbox.shutdown_requested() {
@@ -200,8 +238,19 @@ fn run(driver: &mut GuiDriver, mailbox: &RuntimeMailbox, native_integrations: bo
             }
             break;
         }
+        if control.paused || control.quitting() {
+            for _ in 0..512 {
+                if mailbox.next_command().is_none() {
+                    break;
+                }
+            }
+        }
+        if control.paused {
+            mailbox.wait_until_accepting(Instant::now() + Duration::from_millis(16), true);
+            continue;
+        }
         for _ in 0..32 {
-            if driver.mouse_release_latch.requires_guest_progress() {
+            if control.quitting() || driver.mouse_release_latch.requires_guest_progress() {
                 break;
             }
             let Some(command) = mailbox.next_command() else {
@@ -217,6 +266,12 @@ fn run(driver: &mut GuiDriver, mailbox: &RuntimeMailbox, native_integrations: bo
                 .wait_until_accepting(next, !driver.mouse_release_latch.requires_guest_progress());
             continue;
         }
+        let (focused, lost_focus) = mailbox.take_focus();
+        if lost_focus && !control.quitting() {
+            driver.blur_couch_input();
+        }
+        driver.couch_frame(focused, control.quitting(), now);
+        let accept_direct_events = driver.couch.is_none();
         let (target, _) = GuiDriver::next_frame_target(now, next);
         driver.next_frame_time = Some(target);
         let mut acknowledgements = Vec::with_capacity(32);
@@ -224,6 +279,9 @@ fn run(driver: &mut GuiDriver, mailbox: &RuntimeMailbox, native_integrations: bo
         driver.step_frame_with_safe_points(Instant::now, |runner, latch| {
             if mailbox.shutdown_requested() {
                 return false;
+            }
+            if !accept_direct_events {
+                return true;
             }
             // Work per safe point is bounded even while a producer stays busy.
             for _ in 0..32 {
@@ -247,6 +305,10 @@ fn run(driver: &mut GuiDriver, mailbox: &RuntimeMailbox, native_integrations: bo
             driver.apply_command(command);
         }
         driver.flush_ready_mouse_release();
+        if control.quit_ready(driver.guest_requested_exit(), Instant::now()) {
+            control.finish_quit(driver);
+            break;
+        }
         if driver.guest_requested_exit() {
             if !driver.guest_exit_reported {
                 driver.sync_save_files(true);
@@ -300,6 +362,7 @@ mod tests {
             #[cfg(target_os = "macos")]
             native_preflight: false,
             game_path: "owner-test".into(),
+            game_config: Default::default(),
             arrows_as_numpad: false,
             native_integrations: false,
             addressing_24_bit: false,

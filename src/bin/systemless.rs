@@ -57,6 +57,15 @@ mod renderer_bench;
 #[path = "desktop/d3d_present.rs"]
 mod d3d_present;
 
+#[path = "desktop/couch_input.rs"]
+mod couch_input;
+#[path = "desktop/control.rs"]
+mod control;
+#[cfg(target_os = "windows")]
+#[path = "desktop/windows_control_pipe.rs"]
+mod windows_control_pipe;
+#[path = "desktop/game_config.rs"]
+mod game_config;
 #[path = "desktop/desktop_save_store.rs"]
 mod desktop_save_store;
 #[path = "desktop/frame_metrics.rs"]
@@ -276,14 +285,55 @@ const CONTENT_RECT_ACTIVE_MARGIN_PERCENT: usize = 10;
 #[cfg(target_os = "macos")]
 const VIEWPORT_CACHE_FILE: &str = "viewport.json";
 const MAX_AUDIO_MIX_INTERVAL: std::time::Duration = std::time::Duration::from_millis(250);
+const DEFAULT_DESKTOP_TITLE: &str = "Systemless - Macintosh Emulator";
 const DEFAULT_GUI_ARROWS_AS_NUMPAD: bool = false;
 
 #[derive(Debug, Parser)]
 #[command(name = "systemless", version, about)]
 struct Cli {
     /// Application or game archive to launch
-    #[arg(value_name = "GAME")]
-    game: PathBuf,
+    #[arg(value_name = "GAME", required_unless_present = "game_config")]
+    game: Option<PathBuf>,
+
+    /// Launch settings JSON. A relative imagePath or saveRoot resolves beside the JSON.
+    #[arg(long, value_name = "JSON", conflicts_with = "headless")]
+    game_config: Option<PathBuf>,
+
+    /// Select an exact application path in the guest archive.
+    #[arg(long, conflicts_with = "headless")]
+    executable_path: Option<String>,
+
+    /// Map a bundled guest file (both forks) to another guest path.
+    #[arg(long, value_name = "SRC=DST", value_parser = game_config::parse_file_mapping, conflicts_with = "headless")]
+    file_mapping: Vec<(String, String)>,
+
+    /// Application heap partition size in bytes.
+    #[arg(long, value_parser = clap::value_parser!(u32).range(131_072..), conflicts_with = "headless")]
+    application_partition_size: Option<u32>,
+
+    /// Initial guest screen dimensions.
+    #[arg(long, value_name = "WxH", value_parser = game_config::parse_screen_size, conflicts_with = "headless")]
+    screen_size: Option<(u16, u16)>,
+
+    /// Include an additional exact guest path in desktop saves.
+    #[arg(long, conflicts_with = "headless")]
+    extra_save_path: Vec<String>,
+
+    /// Apply a boot seed JSON object with path, offset, bytes and optional enforce.
+    #[arg(long, value_name = "JSON", value_parser = game_config::parse_boot_patch, conflicts_with = "headless")]
+    boot_patch: Vec<systemless::controller_data::Seed>,
+
+    /// Override the desktop window title.
+    #[arg(long, conflicts_with = "headless")]
+    window_title: Option<String>,
+
+    /// Use this exact isolated desktop save directory, without legacy migration.
+    #[arg(long, value_name = "DIR", conflicts_with_all = ["headless", "import_saves"])]
+    save_root: Option<PathBuf>,
+
+    /// Enable the Windows control pipe. Defaults to systemless.<pid> with --game-config.
+    #[arg(long, value_name = "NAME", num_args = 0..=1, default_missing_value = "", conflicts_with = "headless")]
+    control_pipe: Option<String>,
 
     /// Use wgpu for desktop presentation, drawing, text, and supported 3D rendering
     #[arg(long, conflicts_with = "renderer")]
@@ -967,6 +1017,8 @@ struct App {
         winit::event_loop::EventLoopProxy<()>,
     )>,
     closing: bool,
+    window_title: Option<String>,
+    exit_on_runtime_error: bool,
     runtime_error: Option<String>,
     force_next_render: bool,
     last_presented_guest_tick: Option<u32>,
@@ -1155,6 +1207,8 @@ impl App {
             #[cfg(target_os = "macos")]
             native_startup_fallback: None,
             closing: false,
+            window_title: None,
+            exit_on_runtime_error: false,
             runtime_error: None,
             force_next_render: true,
             last_presented_guest_tick: None,
@@ -1396,8 +1450,12 @@ impl App {
                     }
                 }
             }
-            if self.closing || self.runtime_error.is_none() {
+            if self.closing || self.runtime_error.is_none() || self.exit_on_runtime_error {
                 eprintln!("[SYSTEMLESS] Runtime stopped. Total instructions: {instructions}");
+                self.closing = true;
+                // Winit's Windows loop can enter its wait before observing
+                // an exit requested from AboutToWait. No owner wake remains.
+                event_loop.set_control_flow(ControlFlow::Poll);
                 event_loop.exit();
             } else if let Some(window) = self.window.as_ref() {
                 window.set_title(&format!(
@@ -1579,8 +1637,10 @@ impl App {
             native_menu.set_app_name(identity.name.clone());
         }
         native_application::set_application_icon(identity.icon.as_ref());
-        if let Some(window) = &self.window {
-            window.set_title(&identity.name);
+        if self.window_title.is_none() {
+            if let Some(window) = &self.window {
+                window.set_title(&identity.name);
+            }
         }
         self.native_app_path = Some(identity.path.clone());
         self.native_app_name = identity.name.clone();
@@ -3077,17 +3137,23 @@ impl ApplicationHandler for App {
                 (content.width, content.height)
             };
             #[cfg(not(target_os = "macos"))]
-            let initial_size = (initial_screen_width(), initial_screen_height());
+            let initial_size = (self.current_screen_width, self.current_screen_height);
             #[cfg(target_os = "macos")]
             let window_title = if self.native_startup_fallback.is_some() {
                 "Systemless — Loading application…"
             } else if self.native_integrations {
                 self.native_app_name.as_str()
             } else {
-                "Systemless - Macintosh Emulator"
+                DEFAULT_DESKTOP_TITLE
             };
             #[cfg(not(target_os = "macos"))]
-            let window_title = "Systemless - Macintosh Emulator";
+            let window_title = DEFAULT_DESKTOP_TITLE;
+            let window_title = self.window_title.as_deref().unwrap_or(window_title);
+            let initial_size = match self.guest_state.screen_mode {
+                (_, _, width, height, _) if !cfg!(target_os = "macos") && width > 0 && height > 0 =>
+                    (u32::from(width), u32::from(height)),
+                _ => initial_size,
+            };
             let monitor = event_loop.primary_monitor();
             let initial_window_size = self.display_scale.map_or_else(
                 || {
@@ -3148,6 +3214,9 @@ impl ApplicationHandler for App {
                 window.set_fullscreen(Some(winit::window::Fullscreen::Borderless(None)));
             }
             window.set_visible(true);
+            if let Some(owner) = self.owner.as_ref() {
+                owner.mailbox.set_focus(window.has_focus());
+            }
 
             self.window = Some(window);
             self.wgpu_display = Some(event_loop.owned_display_handle());
@@ -3164,6 +3233,11 @@ impl ApplicationHandler for App {
 
     fn window_event(&mut self, event_loop: &ActiveEventLoop, _id: WindowId, event: WindowEvent) {
         match event {
+            WindowEvent::Focused(focused) => {
+                if let Some(owner) = self.owner.as_ref() {
+                    owner.mailbox.set_focus(focused);
+                }
+            }
             WindowEvent::CloseRequested => {
                 if self.owner.is_none() && self.driver.is_none() {
                     event_loop.exit();
@@ -3492,6 +3566,8 @@ impl ApplicationHandler for App {
 
 fn run_gui(
     game_path: PathBuf,
+    game_config: game_config::GameConfig,
+    control_pipe: Option<String>,
     arrows_as_numpad: bool,
     native_integrations: bool,
     addressing_24_bit: bool,
@@ -3514,7 +3590,8 @@ fn run_gui(
         }
     );
 
-    let threaded = std::env::var("SYSTEMLESS_DESKTOP_RUNTIME").as_deref() == Ok("thread");
+    let threaded = control_pipe.is_some()
+        || std::env::var("SYSTEMLESS_DESKTOP_RUNTIME").as_deref() == Ok("thread");
     #[cfg(target_os = "macos")]
     let native_termination = if threaded {
         match native_termination::NativeTermination::install() {
@@ -3531,6 +3608,7 @@ fn run_gui(
         #[cfg(target_os = "macos")]
         native_preflight: native_integrations && !native_bundle::already_relaunched(),
         game_path: game_path.clone(),
+        game_config: game_config.clone(),
         arrows_as_numpad,
         native_integrations,
         addressing_24_bit,
@@ -3550,24 +3628,44 @@ fn run_gui(
         fullscreen,
         threaded,
     );
+    app.window_title = game_config.window_title.clone();
+    if let Some((width, height)) = game_config.screen_size {
+        app.current_screen_width = u32::from(width);
+        app.current_screen_height = u32::from(height);
+    }
+    app.exit_on_runtime_error = control_pipe.is_some();
     app.use_wgpu = use_wgpu;
     app.use_software = use_software;
     app.gpu_fallback = gpu_fallback;
     app.wgpu_wake = Some(event_loop.create_proxy());
     if let Some(driver) = app.driver.as_mut() {
         driver.gpu = use_wgpu;
+        driver.game_config = game_config;
     }
     #[cfg(target_os = "windows")]
     {
         app.gpu_wake = Some(event_loop.create_proxy());
     }
+    #[cfg(target_os = "windows")]
+    let (_pipe, requests) = match control_pipe.as_deref() {
+        Some(name) => match windows_control_pipe::PipeServer::start(name) {
+            Ok((pipe, requests)) => (Some(pipe), Some(requests)),
+            Err(error) => {
+                eprintln!("[SYSTEMLESS] Cannot start control pipe: {error}");
+                std::process::exit(1);
+            }
+        },
+        None => (None, None),
+    };
+    #[cfg(not(target_os = "windows"))]
+    let requests = None;
     if threaded {
         let proxy = event_loop.create_proxy();
         #[cfg(target_os = "macos")]
         if config.native_preflight {
             app.native_startup_fallback = Some((config.clone(), proxy.clone()));
         }
-        match runtime_owner::RuntimeOwner::spawn(config, move || {
+        match runtime_owner::RuntimeOwner::spawn_controlled(config, requests, move || {
             let _ = proxy.send_event(());
         }) {
             Ok(owner) => {
@@ -3612,6 +3710,9 @@ fn run_gui(
     }
     event_loop.run_app(&mut app).expect("Event loop failed");
     frame_metrics::flush();
+    if app.exit_on_runtime_error && app.runtime_error.is_some() {
+        std::process::exit(1);
+    }
 }
 
 #[cfg(target_os = "macos")]
@@ -3903,6 +4004,10 @@ fn run_ppc_import_audit(game_path: &std::path::Path) {
     }
 }
 
+fn cli_config_error<T>(error: String) -> T {
+    clap::Error::raw(clap::error::ErrorKind::ValueValidation, error).exit()
+}
+
 fn main() {
     let cli = Cli::parse()
         .validate_renderer()
@@ -3929,7 +4034,37 @@ fn main() {
             "platform"
         }
     );
-    let game_path = cli.game;
+    let mut config = cli.game_config.as_deref().map(game_config::GameConfig::read)
+        .transpose().unwrap_or_else(cli_config_error).unwrap_or_default();
+    let game_path = cli.game.clone().or_else(|| config.image_path.take())
+        .unwrap_or_else(|| cli_config_error("provide GAME or imagePath in --game-config".into()));
+    config.executable_path = cli.executable_path.or(config.executable_path);
+    config.file_mappings.extend(cli.file_mapping);
+    config.application_partition_size = cli.application_partition_size.or(config.application_partition_size);
+    config.screen_size = cli.screen_size.or(config.screen_size);
+    config.screen_depth = cli.screen_depth.or(config.screen_depth);
+    config.extra_save_paths.extend(cli.extra_save_path);
+    config.boot_patches.extend(cli.boot_patch);
+    config.window_title = cli.window_title.or(config.window_title)
+        .or_else(|| config.title.as_ref().map(|title| format!("{title} — Systemless")));
+    config.save_root = cli.save_root.or(config.save_root);
+    if cli.prefer_classic_68k || cli.prefer_powerpc {
+        config.architecture = Some(if cli.prefer_classic_68k {
+            game_config::Architecture::Classic
+        } else {
+            game_config::Architecture::PowerPc
+        });
+    }
+    config.validate().unwrap_or_else(cli_config_error);
+    if config.save_root.is_some() && cli.import_saves.is_some() {
+        cli_config_error::<()>("--import-saves uses the content-addressed store; omit saveRoot".into());
+    }
+    let control_pipe = cli.control_pipe.or_else(|| {
+        (cfg!(target_os = "windows") && cli.game_config.is_some()).then(String::new)
+    });
+    if !cfg!(target_os = "windows") && control_pipe.is_some() {
+        cli_config_error::<()>("--control-pipe requires Windows".into());
+    }
     let native_integrations = !cli.no_native_integrations;
     let arrows_as_numpad = if cli.literal_arrows {
         false
@@ -3971,6 +4106,13 @@ fn main() {
         std::process::exit(1);
     }
 
+    if cli.save_dir {
+        if let Some(root) = config.save_root.as_deref() {
+            let root = std::path::absolute(root).unwrap_or_else(|error| cli_config_error(error.to_string()));
+            println!("{}", root.display());
+            return;
+        }
+    }
     if cli.save_dir || cli.import_saves.is_some() {
         match DesktopSaveStore::locate(&game_path, cli.import_saves.as_deref()) {
             Ok(root) => println!("{}", root.display()),
@@ -3983,7 +4125,11 @@ fn main() {
     }
 
     if cli.reset_preferences {
-        match DesktopSaveStore::reset_preferences(&game_path) {
+        let reset = match config.save_root.as_deref() {
+            Some(root) => DesktopSaveStore::reset_explicit_root(root),
+            None => DesktopSaveStore::reset_preferences(&game_path),
+        };
+        match reset {
             Ok(0) => eprintln!("[SYSTEMLESS] No persisted preferences to reset"),
             Ok(_) => eprintln!("[SYSTEMLESS] Reset persisted System Folder preferences"),
             Err(err) => {
@@ -4053,12 +4199,15 @@ fn main() {
             eprintln!("Error: --input-script requires --headless");
             std::process::exit(1);
         }
+        let screen_depth = config.screen_depth;
         run_gui(
             game_path,
+            config,
+            control_pipe,
             arrows_as_numpad,
             native_integrations,
             cli.addressing_24_bit,
-            cli.screen_depth,
+            screen_depth,
             cli.display_scale,
             cli.ui_theme,
             cli.fullscreen,
@@ -4654,7 +4803,7 @@ mod tests {
         ])
         .expect("runner options should parse");
 
-        assert_eq!(cli.game, PathBuf::from("game.sit"));
+        assert_eq!(cli.game, Some(PathBuf::from("game.sit")));
         assert!(cli.headless);
         assert!(cli.no_native_integrations);
         assert!(cli.arrows_as_numpad);

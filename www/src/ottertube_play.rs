@@ -10,16 +10,16 @@
 //! Once the page is leaving (`close`) nothing reaches the guest any more: no
 //! script, no launch, no touch, no controller, no keyboard.
 use crate::ottertube::wait_ms;
-use crate::ottertube_data::{
-    hash_text, is_chord_key, Block, GameData, Step, FRAME_MS, MAC_COMMAND_KEY, RUN_DEPTH,
+use systemless::controller_router::{PadRouter, PadState};
+use systemless::controller_script::{run_steps, Stop};
+use systemless::controller_data::{
+    hash_text, is_chord_key, Block, GameData, FRAME_MS, MAC_COMMAND_KEY,
 };
 use crate::ottertube_touch::{Act, Deferred, Kind, Looked};
 use leptos::prelude::*;
 use leptos::task::spawn_local;
 use std::cell::{Cell, RefCell};
 use std::collections::BTreeMap;
-use std::future::Future;
-use std::pin::Pin;
 use std::rc::Rc;
 use wasm_bindgen::JsValue;
 
@@ -38,12 +38,7 @@ pub type GuestPointer = Rc<dyn Fn(&str, i16, i16)>;
 /// Who is pressing: a tap action (each press counted), the controller
 /// (everything it holds now, as one set), or a script (each press counted;
 /// while a script runs its keys are the only ones down).
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
-pub enum KeyOwner {
-    Tap,
-    Pad,
-    Script,
-}
+pub use systemless::controller_data::KeyOwner;
 pub type TapKeys = Rc<dyn Fn(KeyOwner, Vec<String>, bool)>;
 /// Told `true` when the child's input is taken away (a script has the game,
 /// or the page is leaving), `false` when a script gives it back.
@@ -117,6 +112,8 @@ thread_local! {
     static SCRIPT: RefCell<Script> = RefCell::new(Script::default());
     static STARTING: Cell<bool> = const { Cell::new(false) };
     static STEPPER: RefCell<Stepper> = RefCell::new(Stepper::default());
+    static PAD: RefCell<(Option<u32>, PadRouter)> = RefCell::new(Default::default());
+    static PAD_POINTER: Cell<([f32; 2], bool)> = const { Cell::new(([320.0, 240.0], false)) };
     /// Touches held back for a fresh look at the screen.
     static DEFERRED: RefCell<Deferred> = RefCell::new(Deferred::default());
     /// How many times the game was made to quit before leaving (once at most).
@@ -680,20 +677,6 @@ pub fn guest_point(v: i16, h: i16) -> (i16, i16) {
 // Scripts
 // ---------------------------------------------------------------------------
 
-#[derive(Debug)]
-enum Stop {
-    /// Exit, the game quitting, or the page going away.
-    Cancelled,
-    /// A step said this is not the place for the script. Not a failure.
-    NotHere(String),
-    /// A screen the script waited for never came.
-    Never(String),
-    /// The machine stopped answering.
-    NoMachine,
-    /// Scripts ran scripts deeper than `RUN_DEPTH` (the data's check refuses that).
-    TooDeep,
-}
-
 pub fn busy() -> bool {
     SCRIPT.with(|script| script.borrow().running.is_some())
 }
@@ -739,7 +722,7 @@ fn start_script(name: &str, leaving: bool) -> bool {
     }
     let name = name.to_string();
     spawn_local(async move {
-        let result = run_steps(steps, generation, 0).await;
+        let result = run_steps(&game, &BrowserScript(generation), steps, 0).await;
         // A script that was cancelled was cleaned up by whoever cancelled it,
         // and another may be running by now: whatever this one's last step
         // came to, it ends nothing.
@@ -918,13 +901,6 @@ async fn script_look(generation: u32, names: &[&str]) -> Result<Vec<bool>, Stop>
     hold.ok_or(Stop::NoMachine)
 }
 
-fn key_names(keys: &str) -> Vec<String> {
-    keys.split('+')
-        .filter(|key| !key.is_empty())
-        .map(str::to_string)
-        .collect()
-}
-
 fn script_keys(names: &[String], down: bool) {
     SCRIPT.with(|script| {
         let mut script = script.borrow_mut();
@@ -937,24 +913,6 @@ fn script_keys(names: &[String], down: bool) {
         }
     });
     keys(KeyOwner::Script, names.to_vec(), down);
-}
-
-async fn press(generation: u32, chord: &str) -> Result<(), Stop> {
-    let names = key_names(chord);
-    script_keys(&names, true);
-    let held = pause(generation, 11.0).await;
-    let mut reversed = names;
-    reversed.reverse();
-    if held.is_ok() {
-        script_keys(&reversed, false);
-    }
-    held?;
-    pause(generation, 4.0).await
-}
-
-/// Where a script's point lands: the same offset a finger gets.
-fn script_point(x: u16, y: u16) -> (i16, i16) {
-    guest_point(y as i16, x as i16)
 }
 
 fn script_pointer(kind: &str, at: (i16, i16)) {
@@ -974,135 +932,37 @@ fn script_pointer(kind: &str, at: (i16, i16)) {
     pointer(kind, at);
 }
 
-/// Wait for one of the screens: its index, or which never came.
-async fn until(generation: u32, names: &[&str], timeout: u32, wanted: bool) -> Result<usize, Stop> {
-    let deadline = js_sys::Date::now() + f64::from(timeout) * FRAME_MS;
-    loop {
-        let hold = script_look(generation, names).await?;
-        if let Some(index) = hold.iter().position(|hold| *hold == wanted) {
-            return Ok(index);
-        }
-        if js_sys::Date::now() >= deadline {
-            return Err(Stop::Never(names.join("|")));
-        }
-        pause(generation, 4.0).await?;
-    }
-}
+struct BrowserScript(u32);
 
-fn run_steps(
-    steps: Vec<Step>,
-    generation: u32,
-    depth: u8,
-) -> Pin<Box<dyn Future<Output = Result<(), Stop>>>> {
-    Box::pin(async move {
-        for step in steps {
-            if cancelled(generation) {
-                return Err(Stop::Cancelled);
-            }
-            match step {
-                Step::Press(chord) => press(generation, &chord).await?,
-                Step::Hold(chord) => script_keys(&key_names(&chord), true),
-                Step::Release(chord) => script_keys(&key_names(&chord), false),
-                Step::Tap([x, y]) => {
-                    let at = script_point(x, y);
-                    script_pointer("mouseMove", at);
-                    script_pointer("mouseDown", at);
-                    let held = pause(generation, 8.0).await;
-                    if held.is_ok() {
-                        script_pointer("mouseUp", at);
-                    }
-                    held?;
-                    pause(generation, 4.0).await?;
-                }
-                Step::Drag([x1, y1, x2, y2]) => {
-                    let from = script_point(x1, y1);
-                    let to = script_point(x2, y2);
-                    script_pointer("mouseMove", from);
-                    script_pointer("mouseDown", from);
-                    pause(generation, 24.0).await?;
-                    for part in 1..=8i32 {
-                        let at = (
-                            from.0 + ((i32::from(to.0) - i32::from(from.0)) * part / 8) as i16,
-                            from.1 + ((i32::from(to.1) - i32::from(from.1)) * part / 8) as i16,
-                        );
-                        script_pointer("mouseMove", at);
-                        pause(generation, 4.0).await?;
-                    }
-                    pause(generation, 18.0).await?;
-                    script_pointer("mouseUp", to);
-                    pause(generation, 4.0).await?;
-                }
-                Step::Wait(frames) => pause(generation, f64::from(frames)).await?,
-                Step::Until { screen, timeout } => {
-                    until(generation, &[screen.as_str()], timeout, true).await?;
-                }
-                Step::UntilNot { screen, timeout } => {
-                    until(generation, &[screen.as_str()], timeout, false).await?;
-                }
-                Step::UntilAny { screens, timeout } => {
-                    let names: Vec<&str> = screens.iter().map(String::as_str).collect();
-                    until(generation, &names, timeout, true).await?;
-                }
-                Step::If { screen, then } => {
-                    if script_look(generation, &[screen.as_str()]).await?[0] {
-                        run_steps(then, generation, depth).await?;
-                    }
-                }
-                Step::IfNot { screen, then } => {
-                    if !script_look(generation, &[screen.as_str()]).await?[0] {
-                        run_steps(then, generation, depth).await?;
-                    }
-                }
-                Step::Retry {
-                    press: chord,
-                    until: screen,
-                    every,
-                    tries,
-                } => {
-                    let mut reached = script_look(generation, &[screen.as_str()]).await?[0];
-                    for _ in 0..tries {
-                        if reached {
-                            break;
-                        }
-                        press(generation, &chord).await?;
-                        reached = match until(generation, &[screen.as_str()], every, true).await {
-                            Ok(_) => true,
-                            Err(Stop::Never(_)) => false,
-                            Err(stop) => return Err(stop),
-                        };
-                    }
-                    if !reached {
-                        return Err(Stop::Never(screen));
-                    }
-                }
-                Step::Run(name) => {
-                    // The data's check refuses a chain this deep, and a script
-                    // that runs itself; this is the second fence.
-                    if depth >= RUN_DEPTH {
-                        return Err(Stop::TooDeep);
-                    }
-                    let steps = game().scripts.get(&name).cloned().unwrap_or_default();
-                    // A script that finds it has nothing to do here ends
-                    // itself, not the script that ran it.
-                    match run_steps(steps, generation, depth + 1).await {
-                        Ok(()) | Err(Stop::NotHere(_)) => {}
-                        Err(stop) => return Err(stop),
-                    }
-                }
-                Step::StopUnless(screen) => {
-                    if !script_look(generation, &[screen.as_str()]).await?[0] {
-                        return Err(Stop::NotHere(screen));
-                    }
-                }
-                Step::StopIf(screen) => {
-                    if script_look(generation, &[screen.as_str()]).await?[0] {
-                        return Err(Stop::NotHere(screen));
-                    }
-                }
-            }
-        }
-        Ok(())
-    })
+impl systemless::controller_script::ScriptHost for BrowserScript {
+    fn now_ms(&self) -> f64 {
+        js_sys::Date::now()
+    }
+
+    fn cancelled(&self) -> bool {
+        cancelled(self.0)
+    }
+
+    fn keys(&self, names: &[String], down: bool) {
+        script_keys(names, down);
+    }
+
+    fn pointer(&self, kind: systemless::controller_script::Pointer, at: (i16, i16)) {
+        use systemless::controller_script::Pointer;
+        script_pointer(match kind {
+            Pointer::Move => "mouseMove",
+            Pointer::Down => "mouseDown",
+            Pointer::Up => "mouseUp",
+        }, at);
+    }
+
+    async fn pause(&self, frames: f64) -> Result<(), Stop> {
+        pause(self.0, frames).await
+    }
+
+    async fn look(&self, names: &[&str]) -> Result<Vec<bool>, Stop> {
+        script_look(self.0, names).await
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -1185,6 +1045,79 @@ pub fn stick_steps(source: &'static str, wanted: &[&str]) -> bool {
 // ---------------------------------------------------------------------------
 // What the page's script and the controller adapter send in
 // ---------------------------------------------------------------------------
+
+/// Browser Gamepad API samples use the same standard indices as native.
+pub fn pad_sample(fields: &[String]) -> bool {
+    let sample = (|| {
+        let [index, mask, x, y, rx, ry] = fields else { return None };
+        let index = index.parse::<u32>().ok()?;
+        let mask = mask.parse::<u32>().ok()?;
+        let axis = |value: &str| value.parse::<f32>().ok()
+            .filter(|axis| axis.is_finite()).map(|axis| axis.clamp(-1.0, 1.0));
+        Some((index, PadState {
+            buttons: std::array::from_fn(|index| mask & (1 << index) != 0),
+            left: [axis(x)?, axis(y)?],
+            right: [axis(rx)?, axis(ry)?],
+        }))
+    })();
+    let data = game();
+    PAD.with(|state| {
+        let mut state = state.borrow_mut();
+        let index = sample.map(|(index, _)| index);
+        if state.0 != index {
+            *state = (index, PadRouter::default());
+        }
+        let tuning = systemless::controller_data::Tuning {
+            stick_deadzone: 0.5, ..Default::default()
+        };
+        let out = state.1.poll(&data, tuning, sample.map(|(_, pad)| pad), js_sys::Date::now(),
+            |name| SCREENS.with(|screens| screens.borrow().iter().any(|screen| screen == name)));
+        drop(state);
+
+        let allowed = !guest_input_shut() && !starting();
+        if !allowed || sample.is_none() {
+            release_pad_pointer(&data);
+        }
+        if !allowed {
+            return out.exit;
+        }
+        if out.exit || out.script.is_some() {
+            release_pad_pointer(&data);
+        }
+        if let Some(script) = out.script {
+            run_script(script);
+        } else {
+            keys(KeyOwner::Pad, out.keys.into_iter().map(str::to_owned).collect(), true);
+            if data.mouse.is_some() && sample.is_some() {
+                PAD_POINTER.with(|state| {
+                    let ([x, y], pressed) = state.get();
+                    let [dx, dy] = out.cursor_delta;
+                    let x = (x + dx).clamp(0.0, f32::from(systemless::controller_data::GUEST_SCREEN[0] - 1));
+                    let y = (y + dy).clamp(0.0, f32::from(systemless::controller_data::GUEST_SCREEN[1] - 1));
+                    let at = data.pointer_point(x as u16, y as u16);
+                    if dx != 0.0 || dy != 0.0 {
+                        pointer("mouseMove", at);
+                    }
+                    if out.mouse_down != pressed {
+                        pointer(if out.mouse_down { "mouseDown" } else { "mouseUp" }, at);
+                    }
+                    state.set(([x, y], out.mouse_down));
+                });
+            }
+        }
+        out.exit
+    })
+}
+
+fn release_pad_pointer(data: &GameData) {
+    PAD_POINTER.with(|state| {
+        let ([x, y], pressed) = state.get();
+        if pressed {
+            pointer("mouseUp", data.pointer_point(x as u16, y as u16));
+            state.set(([x, y], false));
+        }
+    });
+}
 
 /// `tap`: a tap action presses or releases keys. `script`: run one. `pad`:
 /// everything the controller holds now. `direction`: the direction it pushes,

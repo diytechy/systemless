@@ -48,6 +48,9 @@
 #![deny(rustdoc::broken_intra_doc_links)]
 
 pub mod api;
+pub mod controller_data;
+pub mod controller_script;
+pub mod controller_router;
 mod error;
 mod fast_hash;
 pub mod gpu_compute;

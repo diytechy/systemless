@@ -56,16 +56,7 @@ pub fn new_runner() -> FixtureRunner {
 /// Create a runner in either the default 32-bit addressing mode or classic
 /// 24-bit mode, where the upper address byte is ignored by memory accesses.
 pub fn new_runner_with_addressing(addressing_32_bit: bool) -> FixtureRunner {
-    let config = FixtureRunnerConfig {
-        load_address: 0x10000,
-        max_instructions: MAX_INSTRUCTIONS_PER_FRAME,
-        addressing_32_bit,
-        ..FixtureRunnerConfig::default()
-    };
-    FixtureRunner::new(
-        crate::machine_profile::reference_machine_profile().ram_size_bytes as usize,
-        config,
-    )
+    new_runner_with_display_options(addressing_32_bit, None, None)
 }
 
 /// Create a standard runner with one explicit indexed depth for both 68K and
@@ -82,22 +73,34 @@ pub fn new_runner_with_configuration(addressing_32_bit: bool, screen_depth: u16)
 
 /// Create a runner with explicit addressing, depth and initial screen size.
 pub fn new_runner_with_display(addressing_32_bit: bool, screen_depth: u16, screen_size: Option<(u16, u16)>) -> FixtureRunner {
-    let config = FixtureRunnerConfig {
+    new_runner_with_display_options(addressing_32_bit, Some(screen_depth), screen_size)
+}
+
+/// With no depth override, preserve the architecture's default.
+pub fn new_runner_with_display_options(
+    addressing_32_bit: bool,
+    depth: Option<u16>,
+    screen_size: Option<(u16, u16)>,
+) -> FixtureRunner {
+    let mut config = FixtureRunnerConfig {
         load_address: 0x10000,
         max_instructions: MAX_INSTRUCTIONS_PER_FRAME,
         addressing_32_bit,
         screen_size,
         ..FixtureRunnerConfig::default()
+    };
+    if let Some(depth) = depth {
+        config = config.with_screen_depth(depth)
+            .expect("frontend selected an unsupported screen depth");
     }
-    .with_screen_depth(screen_depth)
-    .expect("frontend selected an unsupported screen depth");
     let mut runner = FixtureRunner::new(
         crate::machine_profile::reference_machine_profile().ram_size_bytes as usize,
         config,
     );
-    runner
-        .set_powerpc_screen_depth(screen_depth)
-        .expect("frontend selected an unsupported PowerPC screen depth");
+    if let Some(depth) = depth {
+        runner.set_powerpc_screen_depth(depth)
+            .expect("frontend selected an unsupported PowerPC screen depth");
+    }
     runner
 }
 

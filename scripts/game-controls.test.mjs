@@ -37,7 +37,7 @@ test('shipped library and kiosk mappings leave the SpectreLaunch buttons reserve
   assert.equal(keys(reserved,id).size,0,id);
  }
  assert.equal(legacyKojiKeys(pad(reserved)).size,0);
- const kiosk=JSON.parse(readFileSync(new URL('../www/src/ottertube-games.json',import.meta.url),'utf8'));
+ const kiosk=JSON.parse(readFileSync(new URL('../src/ottertube-games.json',import.meta.url),'utf8'));
  for(const [id,{pad:{buttons}}] of Object.entries(kiosk)){
   for(const index of reserved)assert.equal(buttons[index],undefined,`${id}, button ${index}`);
  }

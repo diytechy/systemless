@@ -20,9 +20,17 @@ const RESOURCE_FORK_FILE: &str = "resource.fork";
 pub struct DesktopSaveStore {
     root: PathBuf,
     archive_vfs_stats: HashMap<String, VfsFileStat>,
+    extra_save_paths: HashSet<String>,
+    _session_lock: Option<fs::File>,
     last_vfs_fingerprints: HashMap<String, SaveFingerprint>,
     persisted_save_paths: HashSet<String>,
     save_scan_frame: u8,
+}
+
+#[derive(Default)]
+pub(super) struct SaveFlush {
+    pub files_written: usize,
+    pub failures: usize,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -189,6 +197,45 @@ impl DesktopSaveStore {
         Self::for_loaded_archive_in(game_path, &application_data_dir()?, runner)
     }
 
+    pub(super) fn for_game_config(
+        game_path: &Path,
+        runner: &mut FixtureRunner,
+        root: Option<&Path>,
+        extra_save_paths: &[String],
+    ) -> io::Result<Self> {
+        let mut store = if let Some(root) = root {
+            fs::create_dir_all(root)?;
+            let root = fs::canonicalize(root)?;
+            let lock = Self::lock_explicit_root(&root)?;
+            let mut store = Self::at_root(root, vfs_stats(runner));
+            store._session_lock = Some(lock);
+            store
+        } else {
+            Self::for_loaded_archive(game_path, runner)?
+        };
+        store.extra_save_paths = extra_save_paths.iter()
+            .map(|path| path.trim_matches('/').to_ascii_lowercase()).collect();
+        Ok(store)
+    }
+
+    fn lock_explicit_root(root: &Path) -> io::Result<fs::File> {
+        let lock = fs::OpenOptions::new()
+            .create(true).truncate(false).write(true)
+            .open(root.join(".systemless-session.lock"))?;
+        lock.try_lock().map_err(|error| io::Error::other(format!(
+            "cannot lock save root {}: {error}", root.display()
+        )))?;
+        Ok(lock)
+    }
+
+    pub(super) fn reset_explicit_root(root: &Path) -> io::Result<usize> {
+        if !root.try_exists()? {
+            return Ok(0);
+        }
+        let _lock = Self::lock_explicit_root(root)?;
+        reset_preferences_in_root(root)
+    }
+
     pub(super) fn for_loaded_archive_in(
         game_path: &Path,
         data_dir: &Path,
@@ -204,6 +251,8 @@ impl DesktopSaveStore {
         Self {
             root,
             archive_vfs_stats,
+            extra_save_paths: HashSet::new(),
+            _session_lock: None,
             last_vfs_fingerprints: HashMap::new(),
             persisted_save_paths: HashSet::new(),
             save_scan_frame: 0,
@@ -227,7 +276,9 @@ impl DesktopSaveStore {
     }
 
     pub fn load_saved_files(&mut self) -> Vec<VfsFileSnapshot> {
-        let files = match load_saved_files_from_root(&self.root) {
+        let files = match load_saved_files_matching(&self.root, |path| {
+            is_save_path(path, &self.extra_save_paths)
+        }) {
             Ok(files) => files,
             Err(err) => {
                 eprintln!(
@@ -254,8 +305,11 @@ impl DesktopSaveStore {
         self.sync_save_files_now(runner);
     }
 
-    pub fn sync_save_files_now(&mut self, runner: &mut FixtureRunner) {
-        let stats = runner.vfs_file_stats_where(is_user_save_path);
+    pub fn sync_save_files_now(&mut self, runner: &mut FixtureRunner) -> SaveFlush {
+        let mut report = SaveFlush::default();
+        let stats = runner.vfs_file_stats_where(|path| {
+            is_save_path(path, &self.extra_save_paths)
+        });
         let mut next_fingerprints = HashMap::new();
         let mut next_persisted_paths = HashSet::new();
 
@@ -283,6 +337,7 @@ impl DesktopSaveStore {
             {
                 match self.persist_save_file(&snapshot) {
                     Ok(()) => {
+                        report.files_written += 1;
                         eprintln!(
                             "[SYSTEMLESS] Saved desktop file: {}",
                             self.save_dir_for_vfs_path(&snapshot.path).display()
@@ -290,6 +345,7 @@ impl DesktopSaveStore {
                         next_persisted_paths.insert(summary.path.clone());
                     }
                     Err(err) => {
+                        report.failures += 1;
                         eprintln!(
                             "[SYSTEMLESS] Could not persist desktop save {}: {}",
                             snapshot.path, err
@@ -312,6 +368,7 @@ impl DesktopSaveStore {
             .collect::<Vec<_>>();
         for path in stale_paths {
             if let Err(err) = self.delete_save_file(&path) {
+                report.failures += 1;
                 eprintln!(
                     "[SYSTEMLESS] Could not remove desktop save {}: {}",
                     path, err
@@ -323,6 +380,7 @@ impl DesktopSaveStore {
 
         self.persisted_save_paths = next_persisted_paths;
         self.last_vfs_fingerprints = next_fingerprints;
+        report
     }
 
     fn persist_save_file(&self, file: &VfsFileSnapshot) -> io::Result<()> {
@@ -492,7 +550,7 @@ fn strict_snapshots(root: &Path) -> io::Result<Vec<VfsFileSnapshot>> {
     let mut paths = Vec::new();
     collect_metadata_files(root, &mut paths)?;
     paths.sort();
-    paths.iter().map(|p| read_saved_file(p)).collect()
+    paths.iter().map(|p| read_saved_file(p, is_user_save_path)).collect()
 }
 
 /// A retained legacy backup must not silently transfer state to a later
@@ -730,7 +788,15 @@ fn save_fork_hash(bytes: &[u8]) -> u64 {
     hash
 }
 
+#[cfg(test)]
 fn load_saved_files_from_root(root: &Path) -> io::Result<Vec<VfsFileSnapshot>> {
+    load_saved_files_matching(root, is_user_save_path)
+}
+
+fn load_saved_files_matching(
+    root: &Path,
+    include: impl Fn(&str) -> bool,
+) -> io::Result<Vec<VfsFileSnapshot>> {
     if !root.exists() {
         return Ok(Vec::new());
     }
@@ -739,7 +805,7 @@ fn load_saved_files_from_root(root: &Path) -> io::Result<Vec<VfsFileSnapshot>> {
     collect_metadata_files(root, &mut metadata_files)?;
     let mut files = Vec::new();
     for metadata_path in metadata_files {
-        match read_saved_file(&metadata_path) {
+        match read_saved_file(&metadata_path, &include) {
             Ok(file) => files.push(file),
             Err(err) => eprintln!(
                 "[SYSTEMLESS] Skipping unreadable desktop save {}: {}",
@@ -770,7 +836,10 @@ fn collect_metadata_files(dir: &Path, out: &mut Vec<PathBuf>) -> io::Result<()> 
     Ok(())
 }
 
-fn read_saved_file(metadata_path: &Path) -> io::Result<VfsFileSnapshot> {
+fn read_saved_file(
+    metadata_path: &Path,
+    include: impl FnOnce(&str) -> bool,
+) -> io::Result<VfsFileSnapshot> {
     let metadata = fs::read(metadata_path)?;
     let metadata: StoredSaveMetadata = serde_json::from_slice(&metadata)
         .map_err(|err| io::Error::new(io::ErrorKind::InvalidData, err))?;
@@ -780,7 +849,7 @@ fn read_saved_file(metadata_path: &Path) -> io::Result<VfsFileSnapshot> {
             format!("unsupported save metadata version {}", metadata.version),
         ));
     }
-    if !is_user_save_path(&metadata.path) {
+    if !include(&metadata.path) {
         return Err(io::Error::new(
             io::ErrorKind::InvalidData,
             "stored path is not a user save path",
@@ -829,6 +898,11 @@ fn legacy_root_for_game_path(game_path: &Path) -> PathBuf {
         .join(".systemless")
         .join("saves")
         .join(archive_stem)
+}
+
+fn is_save_path(path: &str, extra_paths: &HashSet<String>) -> bool {
+    is_user_save_path(path)
+        || (!extra_paths.is_empty() && extra_paths.contains(&path.trim_matches('/').to_ascii_lowercase()))
 }
 
 fn is_user_save_path(path: &str) -> bool {
@@ -955,6 +1029,8 @@ mod tests {
         let store = DesktopSaveStore {
             root: root.clone(),
             archive_vfs_stats: HashMap::new(),
+            extra_save_paths: HashSet::new(),
+            _session_lock: None,
             last_vfs_fingerprints: HashMap::new(),
             persisted_save_paths: HashSet::new(),
             save_scan_frame: 0,
@@ -1071,6 +1147,8 @@ mod tests {
         let store = DesktopSaveStore {
             root: root.clone(),
             archive_vfs_stats: HashMap::new(),
+            extra_save_paths: HashSet::new(),
+            _session_lock: None,
             last_vfs_fingerprints: HashMap::new(),
             persisted_save_paths: HashSet::new(),
             save_scan_frame: 0,

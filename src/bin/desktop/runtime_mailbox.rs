@@ -43,6 +43,9 @@ struct Shared {
     native_bundle: Option<super::native_bundle::NativeBundle>,
     commands: VecDeque<GuiCommand>,
     shutdown: bool,
+    focused: bool,
+    focus_changed: bool,
+    focus_lost: bool,
     presentation: Option<PresentationOptions>,
     frame: Option<Box<GuiFrame>>,
     recycled: Vec<Box<GuiFrame>>,
@@ -71,6 +74,9 @@ impl RuntimeMailbox {
                 native_bundle: None,
                 commands: VecDeque::with_capacity(COMMAND_CAPACITY),
                 shutdown: false,
+                focused: false,
+                focus_changed: false,
+                focus_lost: false,
                 presentation: None,
                 frame: None,
                 recycled: Vec::with_capacity(RECYCLED_FRAME_CAPACITY),
@@ -105,6 +111,21 @@ impl RuntimeMailbox {
         drop(shared);
         self.changed.notify_one();
         Ok(())
+    }
+
+    pub fn set_focus(&self, focused: bool) {
+        let mut shared = self.shared.lock().unwrap();
+        shared.focused = focused;
+        shared.focus_changed = true;
+        shared.focus_lost |= !focused;
+        drop(shared);
+        self.changed.notify_one();
+    }
+
+    pub fn take_focus(&self) -> (bool, bool) {
+        let mut shared = self.shared.lock().unwrap();
+        shared.focus_changed = false;
+        (shared.focused, std::mem::take(&mut shared.focus_lost))
     }
 
     /// Reserved shutdown capacity is independent of the command queue. Already
@@ -146,6 +167,7 @@ impl RuntimeMailbox {
         while (!accept_commands || shared.commands.is_empty())
             && shared.presentation.is_none()
             && !shared.shutdown
+            && !shared.focus_changed
         {
             let now = Instant::now();
             if now >= deadline {

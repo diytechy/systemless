@@ -17,8 +17,6 @@ mod host_cursor;
 mod indexed_frame;
 #[cfg(any(feature = "ottertube", test))]
 mod ottertube;
-#[cfg(any(feature = "ottertube", test))]
-mod ottertube_data;
 #[cfg(feature = "ottertube")]
 mod ottertube_play;
 #[cfg(any(feature = "ottertube", test))]

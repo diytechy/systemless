@@ -28,27 +28,7 @@ thread_local! {
 /// A patch goes in before the saved files are put over the mounted ones, so a
 /// save's own bytes win. One that is `enforce`d goes in after them as well:
 /// the saved file gets it on every boot.
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
-pub struct BootPatch {
-    pub path: String,
-    pub offset: usize,
-    pub bytes: Vec<u8>,
-    #[serde(default)]
-    pub enforce: bool,
-}
-
-impl BootPatch {
-    /// The data fork with the patch applied, or `None` when it does not fit.
-    pub fn apply(&self, data_fork: &[u8]) -> Option<Vec<u8>> {
-        let end = self.offset.checked_add(self.bytes.len())?;
-        if end > data_fork.len() {
-            return None;
-        }
-        let mut patched = data_fork.to_vec();
-        patched[self.offset..end].copy_from_slice(&self.bytes);
-        Some(patched)
-    }
-}
+pub use systemless::controller_data::Seed as BootPatch;
 
 /// Patches for the machine about to start on this thread. None in any build
 /// that does not call this.

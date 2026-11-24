@@ -1,0 +1,49 @@
+{
+  "koji-personal-204": {
+    "pad": {
+      "directions": ["Space", "Control", "Numpad4", "Numpad6"],
+      "directions_label": "Move, jump, or drop",
+      "buttons": {
+        "0": {"key": "Space", "label": "Jump"},
+        "1": {"key": "Meta", "label": "Tongue"},
+        "2": {"key": "Meta", "label": "Tongue"},
+        "3": {"key": "Control", "label": "Water drop"},
+        "5": {"key": "]", "label": "Jump right"},
+        "7": {"key": "[", "label": "Jump left"},
+        "9": {"key": "p", "label": "Pause"}
+      }
+    }
+  },
+  "lemmings-personal-152": {
+    "mouse": {"click_button": 0, "precision_button": 7},
+    "pad": {"buttons": {"9": {"key": "p", "label": "Pause"}}}
+  },
+  "oh-no-more-lemmings-personal-10": {
+    "mouse": {"click_button": 0, "precision_button": 7},
+    "pad": {"buttons": {"9": {"key": "p", "label": "Pause"}}}
+  },
+  "owned-maelstrom-v1": {
+    "pad": {
+      "directions": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"],
+      "directions_label": "Rotate and thrust",
+      "buttons": {
+        "0": {"key": "Space", "label": "Fire"},
+        "5": {"key": "Escape", "label": "Abort wave"},
+        "9": {"key": "p", "label": "Start"}
+      }
+    }
+  },
+  "owned-prince-of-persia-v1": {
+    "scripts": {"start": [{"press": "Meta+n"}]},
+    "pad": {
+      "directions": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"],
+      "directions_label": "Move / climb",
+      "buttons": {
+        "0": {"key": "ArrowUp", "label": "Jump"},
+        "1": {"key": "Shift", "label": "Careful step / action"},
+        "5": {"key": "Escape", "label": "Pause"},
+        "9": {"script": "start", "label": "New game"}
+      }
+    }
+  }
+}

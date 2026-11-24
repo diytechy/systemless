@@ -112,7 +112,9 @@ debug-server = ["debug"]
 windows = { version = "0.54", optional = true, features = [
     "Win32_Foundation", "Win32_Graphics_Direct3D", "Win32_Graphics_Direct3D_Fxc",
     "Win32_Graphics_Direct3D11", "Win32_Graphics_Dxgi", "Win32_Graphics_Dxgi_Common",
-    "Win32_System_Threading", "Win32_Security",
+    "Win32_System_Threading", "Win32_Security", "Win32_Security_Authorization",
+    "Win32_System_Pipes", "Win32_System_IO", "Win32_Storage_FileSystem",
+    "Win32_UI_Input_XboxController",
     "Win32_UI_WindowsAndMessaging",
 ] }
 

@@ -325,7 +325,7 @@ mod link {
         #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = onInput, catch)]
         fn link_on_input(callback: &js_sys::Function) -> Result<(), JsValue>;
         #[wasm_bindgen(js_namespace = ["window", "systemlessOtterTube"], js_name = setPad, catch)]
-        fn link_set_pad(json: &str) -> Result<(), JsValue>;
+        fn link_set_pad(json: &str, accepts_samples: bool) -> Result<(), JsValue>;
     }
 
     const OVERSIZE_KEY: &str = "systemless.ottertube.oversize:";
@@ -372,7 +372,7 @@ mod link {
     /// yet, or it did not answer in time.
     pub type SaveScanner =
         Rc<dyn Fn(f64) -> Pin<Box<dyn Future<Output = Option<Vec<DownloadableSaveFile>>>>>>;
-    pub use crate::ottertube_data::is_chord_key;
+    pub use systemless::controller_data::is_chord_key;
     pub use crate::ottertube_play::{
         button_moves, claim_button, command_on_screen, defer_touch, deferred_pointer, drops_chord,
         free_button, game_unmounted, guest_input_shut, guest_point, is_command_key,
@@ -487,8 +487,8 @@ mod link {
     /// the page, `/ottertube-games.dev.json`, is used instead when it is there
     /// and passes the same checks: for whoever is working out a game's screens
     /// and scripts. A bundle served from a real name never looks for it.
-    async fn game_data(game_id: &str) -> crate::ottertube_data::GameData {
-        let mut games = crate::ottertube_data::embedded();
+    async fn game_data(game_id: &str) -> systemless::controller_data::GameData {
+        let mut games = systemless::controller_data::embedded();
         let loopback = web_sys::window()
             .and_then(|window| window.location().hostname().ok())
             .is_some_and(|host| matches!(host.as_str(), "127.0.0.1" | "localhost" | "[::1]"));
@@ -499,7 +499,7 @@ mod link {
             {
                 if response.ok() {
                     match response.text().await.map_err(|error| error.to_string()) {
-                        Ok(text) => match crate::ottertube_data::parse(&text) {
+                        Ok(text) => match systemless::controller_data::parse(&text) {
                             Ok(dev) => {
                                 warn("using /ottertube-games.dev.json");
                                 games = dev;
@@ -702,7 +702,13 @@ mod link {
         let on_input = Closure::<dyn FnMut(String, js_sys::Array, bool)>::new(
             |kind: String, names: js_sys::Array, down: bool| {
                 let names: Vec<String> = names.iter().filter_map(|name| name.as_string()).collect();
-                crate::ottertube_play::input(&kind, names, down);
+                if kind == "pad-sample" {
+                    if crate::ottertube_play::pad_sample(&names) {
+                        spawn_local(leave());
+                    }
+                } else {
+                    crate::ottertube_play::input(&kind, names, down);
+                }
             },
         );
         if link_on_input(on_input.as_ref().unchecked_ref()).is_ok() {
@@ -979,7 +985,7 @@ mod link {
                 crate::ottertube_play::set_game(game_data(game.id).await, signals);
                 let pad =
                     serde_json::to_string(&crate::ottertube_play::game().pad).unwrap_or_default();
-                let _ = link_set_pad(&pad);
+                let _ = link_set_pad(&pad, true);
                 state.set(match begin(game).await {
                     Ok(()) => LinkState::Ready,
                     Err(reason) => LinkState::Absent(reason),

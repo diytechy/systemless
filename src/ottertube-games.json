@@ -68,16 +68,16 @@
     "launch": "launch",
     "pad": {
       "buttons": {
-        "0": {"key": "Meta", "script": "play", "script_when": ["title", "options", "scores"]},
-        "1": {"key": "Alt"},
-        "2": {"key": "Control"},
-        "3": {"key": "Space"},
-        "5": {"script": "pause"},
-        "7": {"script": "try-again"},
-        "9": {"script": "play"},
+        "0": {"label": "Swing / play", "key": "Meta", "script": "play", "script_when": ["title", "options", "scores"]},
+        "1": {"label": "Bounce", "key": "Alt"},
+        "2": {"label": "Flip", "key": "Control"},
+        "3": {"label": "Reverse", "key": "Space"},
+        "5": {"label": "Pause", "script": "pause"},
+        "7": {"label": "Try again", "script": "try-again"},
+        "9": {"label": "Play", "script": "play"},
         "11": {"exit": true},
-        "12": {"key": "ArrowUp"},
-        "13": {"key": "ArrowDown"}
+        "12": {"label": "Previous level", "key": "ArrowUp"},
+        "13": {"label": "Next level", "key": "ArrowDown"}
       }
     }
   },
@@ -171,13 +171,14 @@
     },
     "pad": {
       "buttons": {
-        "0": {"key": "Meta", "script": "start", "script_when": ["title", "menu", "game-over", "name-entry"]},
-        "1": {"key": "Shift"},
-        "2": {"key": "Control"},
-        "3": {"key": "Space"},
-        "9": {"script": "start"},
+        "0": {"label": "Fire / start", "key": "Meta", "script": "start", "script_when": ["title", "menu", "game-over", "name-entry"]},
+        "1": {"label": "Bomb", "key": "Shift"},
+        "2": {"label": "Reverse", "key": "Control"},
+        "3": {"label": "Thrust", "key": "Space"},
+        "9": {"label": "Start", "script": "start"},
         "11": {"exit": true}
       },
+      "directions_label": "Fly",
       "directions": ["Numpad8", "Numpad2", "Numpad4", "Numpad6"]
     }
   },
@@ -254,14 +255,15 @@
     "launch": "launch",
     "pad": {
       "buttons": {
-        "0": {"key": "Space"},
-        "1": {"key": "s"},
-        "3": {"script": "restart"},
-        "5": {"script": "load"},
-        "7": {"script": "save"},
-        "9": {"script": "restart"},
+        "0": {"label": "Wait a turn", "key": "Space"},
+        "1": {"label": "Drop carried item", "key": "s"},
+        "3": {"label": "Restart level", "script": "restart"},
+        "5": {"label": "Load", "script": "load"},
+        "7": {"label": "Save", "script": "save"},
+        "9": {"label": "Restart level", "script": "restart"},
         "11": {"exit": true}
       },
+      "directions_label": "Move one cell",
       "directions": ["Numpad8", "Numpad2", "Numpad4", "Numpad6"],
       "step": true
     }

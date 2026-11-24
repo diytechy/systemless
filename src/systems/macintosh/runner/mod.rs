@@ -3369,6 +3369,14 @@ impl FixtureRunner {
         self.audio = Some(audio);
     }
 
+    /// Drop queued host audio before parking the desktop runtime.
+    pub fn clear_host_audio(&mut self) {
+        if let Some(backend) = self.audio.as_mut() {
+            backend.stop();
+        }
+        self.audio_buffer.clear();
+    }
+
     pub fn set_instructions_per_tick(&mut self, instructions_per_tick: u32) {
         let old = self.instructions_per_tick.max(1);
         let new = instructions_per_tick.max(1);

@@ -1,12 +1,6 @@
-const bindings = Object.freeze({
-  swing: 0,
-  bounce: 1,
-  flip: 2,
-  reverse: 3,
-  pause: 5,
-  restart: 7,
-  levels: 9,
-});
+import bindings from './gamepad-bindings.json' with {type: 'json'};
+
+const reserved = new Set([4, 6, 8, 16]);
 
 export function createGamepadControls() {
   let owner = null;
@@ -38,7 +32,8 @@ export function createGamepadControls() {
       owner = { index: pad.index, id: pad.id };
       const held = {};
       const pressed = {};
-      for (const [action, button] of Object.entries(bindings)) {
+      for (const [action, {button}] of Object.entries(bindings)) {
+        if (reserved.has(button)) continue;
         const down = Boolean(pad.buttons?.[button]?.pressed);
         // A button already down when joining must first be released. This also
         // applies on refocus, after a disconnect, and when changing scenes.

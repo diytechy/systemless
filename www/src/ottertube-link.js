@@ -15,6 +15,7 @@
   var leave = null;
   var inputSink = null;
   var padMap = null;
+  var acceptsPadSamples = false;
   var settled = false;
   /** Checkpoint answers, newest last, for tests and for a parent-side page later. */
   var log = [];
@@ -134,8 +135,12 @@
     onInput: function (callback) { inputSink = callback; },
     input: input,
     /** The game's controller mapping, as JSON; the adapter in game-controls.mjs reads `pad`. */
-    setPad: function (json) { try { padMap = JSON.parse(json); } catch (_) { padMap = null; } },
+    setPad: function (json, acceptsSamples) {
+      try { padMap = JSON.parse(json); } catch (_) { padMap = null; }
+      acceptsPadSamples = Boolean(acceptsSamples);
+    },
     get pad() { return padMap; },
+    get acceptsPadSamples() { return acceptsPadSamples; },
     /** One function that leaves properly: it saves what is pending, then calls `exit`. */
     onLeave: function (callback) { leave = callback; },
     /**

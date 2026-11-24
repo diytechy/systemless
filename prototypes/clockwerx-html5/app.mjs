@@ -33,7 +33,8 @@ function message(s,error=false){for(const id of['status','panel-status']){$(id).
 // Touch play view is the default on touch-first devices; ?layout=play|page overrides.
 const layoutQuery=new URLSearchParams(location.search).get('layout');
 let playLayout=layoutQuery==='play'||(layoutQuery!=='page'&&matchMedia('(pointer: coarse)').matches),rotateDismissed=false;
-function controlsHint(){return playLayout?'Tap reverse · hold swing · two-finger hold flip.':'Space swing · Z bounce · X flip · C reverse.';}
+let padConnected=false;
+function controlsHint(){if(padConnected)return 'A swing · B bounce · X flip · Y reverse · R1 pause · R2 restart · Start levels.';return playLayout?'Tap reverse · hold swing · two-finger hold flip.':'Space swing · Z bounce · X flip · C reverse.';}
 function pauseLabels(paused){$('pause').textContent=paused?'Resume (P)':'Pause (P)';$('touch-pause').textContent=$('panel-pause').textContent=paused?'Resume':'Pause';}
 function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000)}
 function action(name,on){inputReplay=null;buttonHeld[name]=on;if(on)canvas.focus({preventScroll:true})}
@@ -51,7 +52,7 @@ window.addEventListener('keydown',e=>{if(levelMenu.open||e.target instanceof HTM
 window.addEventListener('keyup',e=>{if(keys[e.code]){if(!levelMenu.open)e.preventDefault();held[keys[e.code]]=false}});
 window.addEventListener('blur',()=>{clearInputs();if(capture)capture.invalidReasons.add('window blur');});
 document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(capture)capture.invalidReasons.add('document hidden');}last=performance.now();accumulator=0;});
-window.addEventListener('gamepaddisconnected',event=>gamepad.disconnect(event.gamepad.index));
+window.addEventListener('gamepaddisconnected',event=>{gamepad.disconnect(event.gamepad.index);padConnected=false;padHeld={};});
 canvas.onclick=()=>canvas.focus({preventScroll:true});
 // Touch: tap = reverse, one-finger hold = swing, two-finger hold = flip, press-drag-hold = bounce.
 // Touch/pen only, so desktop mouse clicks keep their existing focus behaviour. See touch-controls.mjs.
@@ -134,10 +135,11 @@ function pollGamepad(){
  }
  let pads;
  try{pads=navigator.getGamepads?.()??[];}catch{
-  gamepad.reset();padStatus('Gamepad API unavailable in this browser context.');return;
+  gamepad.reset();padConnected=false;padStatus('Gamepad API unavailable in this browser context.');return;
  }
  const {connected,held:pad,pressed}=gamepad.poll(pads,true);
- padStatus(connected?'Standard gamepad connected.':'Press a button on a standard controller to connect.');
+ padConnected=connected;
+ padStatus(connected?'Standard gamepad connected. '+controlsHint():'Press a button on a standard controller to connect.');
  if(!connected||!ready)return;
  if(levelMenu.open){
   if(pressed.levels||pressed.bounce)levelMenu.close();
@@ -451,7 +453,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  drawBombs('effects');
  drawSparkles();
  if(sourcePaint)ctx.restore();
- if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';const points=game.childScore?.roundBonus??game.bombScene?.score;if(points!==undefined)ctx.fillText(points.toLocaleString()+' points · Child completion bonus 1,000',320,239);ctx.fillText('Goal dot grabbed · Restart to play again',320,points!==undefined?268:250);ctx.textAlign='left';}
+ if(game.complete){ctx.fillStyle='rgba(20,20,20,.88)';ctx.fillRect(120,170,400,120);ctx.fillStyle='#ffe66b';ctx.textAlign='center';ctx.font='bold 25px serif';ctx.fillText((game.board.title||'Movement')+' complete',320,214);ctx.font='16px sans-serif';const points=game.childScore?.roundBonus??game.bombScene?.score;if(points!==undefined)ctx.fillText(points.toLocaleString()+' points · Child completion bonus 1,000',320,239);ctx.fillText(padConnected?'R2 restart · Start choose level':'Goal dot grabbed · Restart to play again',320,points!==undefined?268:250);ctx.textAlign='left';}
  drawTouchFeedback();
 }
 // Sharp-bilinear backdrop: integer nearest-neighbour prescale keeps the 8-bit pixels square, then one

@@ -446,12 +446,7 @@ impl Machine {
         // part of the mounted files, so it is not itself a change to save.
         let boot_patches = save_store::take_boot_patches();
         for patch in &boot_patches {
-            if let Some(mut file) = runner.vfs_file_snapshot(&patch.path) {
-                if let Some(data_fork) = patch.apply(&file.data_fork) {
-                    file.data_fork = data_fork;
-                    runner.import_vfs_file(&file);
-                }
-            }
+            patch.apply_to_guest(&mut runner);
         }
         let archive_vfs_stats = vfs_stats(&mut runner);
         let restored_saves = save_store::load_saved_files(game_id)
@@ -473,14 +468,7 @@ impl Machine {
         // An enforced patch goes over the saved file as well, where it changes
         // anything: a setting the build does not let a player change back.
         for patch in boot_patches.iter().filter(|patch| patch.enforce) {
-            if let Some(mut file) = runner.vfs_file_snapshot(&patch.path) {
-                if let Some(data_fork) = patch.apply(&file.data_fork) {
-                    if data_fork != file.data_fork {
-                        file.data_fork = data_fork;
-                        runner.import_vfs_file(&file);
-                    }
-                }
-            }
+            patch.apply_to_guest(&mut runner);
         }
         // Modifier-only launch conditions are polled through GetKeys/KeyMap.
         // Inject them before init_app republishes the current key state into
@@ -906,41 +894,7 @@ impl Machine {
     /// that leaves the screen is clipped; one wholly outside hashes as empty.
     #[cfg(feature = "ottertube")]
     pub fn region_hashes(&mut self, regions: &[[u16; 4]]) -> Vec<u64> {
-        let (screen_mode, clut) = {
-            let dispatcher = self.runner.dispatcher();
-            (dispatcher.screen_mode, *dispatcher.device_clut)
-        };
-        let palette = display::rgba_palette_from_clut(&clut);
-        let mut rgba = Vec::new();
-        display::render_screen_with_rgba_palette_into(
-            self.runner.bus(),
-            screen_mode,
-            &palette,
-            &mut rgba,
-        );
-        let width = usize::from(screen_mode.2);
-        let height = usize::from(screen_mode.3);
-        if width == 0 || rgba.len() < width * height * 4 {
-            return vec![0; regions.len()];
-        }
-        regions
-            .iter()
-            .map(|&[x, y, w, h]| {
-                let (x, y) = (usize::from(x).min(width), usize::from(y).min(height));
-                let (right, bottom) = (
-                    (x + usize::from(w)).min(width),
-                    (y + usize::from(h)).min(height),
-                );
-                let mut hash = 0xcbf2_9ce4_8422_2325u64;
-                for row in y..bottom {
-                    for &byte in &rgba[(row * width + x) * 4..(row * width + right) * 4] {
-                        hash ^= u64::from(byte);
-                        hash = hash.wrapping_mul(0x0000_0100_0000_01b3);
-                    }
-                }
-                hash
-            })
-            .collect()
+        systemless::controller_data::region_hashes(&self.runner, regions)
     }
 
     pub fn save_files(&self) -> &[DownloadableSaveFile] {

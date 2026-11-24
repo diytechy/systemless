@@ -4268,6 +4268,7 @@ fn attach_mobile_controls(
                 let keys = names.into_iter().filter_map(mobile_control_key_name);
                 match owner {
                     // Everything the controller holds now, as one set.
+                    crate::ottertube::KeyOwner::Host => unreachable!("not a browser tap source"),
                     crate::ottertube::KeyOwner::Pad => {
                         state.set_pad_keys(&tap_machine, keys.collect())
                     }
@@ -4803,17 +4804,9 @@ fn take_active_mobile_button(
 struct MobileInputState {
     joystick_keys: Vec<&'static str>,
     button_keys: Vec<&'static str>,
-    /// Keys a tap action is pressing right now, once per action that holds
-    /// one. Only the OtterTube page has tap actions.
-    tap_keys: Vec<&'static str>,
-    /// Keys a game controller is holding (the OtterTube page's adapter).
-    pad_keys: Vec<&'static str>,
-    /// `Some` while a script of the OtterTube page runs: the keys it presses,
-    /// once per press. They are then the only keys down in the guest; what
-    /// the child holds comes back when the script ends.
+    keys: systemless::controller_router::KeyOwners<&'static str>,
     #[cfg(feature = "ottertube")]
-    script_keys: Option<Vec<&'static str>>,
-    sent_keys: Vec<&'static str>,
+    scripted: bool,
     /// Where the keys held down in the guest are shown (`data-held-keys`).
     #[cfg(feature = "ottertube")]
     shown_on: Option<HtmlElement>,
@@ -4839,7 +4832,7 @@ impl MobileInputState {
 
     #[cfg(feature = "ottertube")]
     fn set_pad_keys(&mut self, machine: &RuntimeHandle, keys: Vec<&'static str>) {
-        self.pad_keys = keys;
+        self.keys.set(systemless::controller_data::KeyOwner::Pad, keys);
         self.flush(machine);
     }
 
@@ -4859,75 +4852,51 @@ impl MobileInputState {
     /// owner (this action, a held button, the stick) has let go of it.
     #[cfg(feature = "ottertube")]
     fn press_tap_key(&mut self, machine: &RuntimeHandle, key: &'static str) {
-        self.tap_keys.push(key);
+        self.keys.change(systemless::controller_data::KeyOwner::Tap, key, true);
         self.flush(machine);
     }
 
     #[cfg(feature = "ottertube")]
     fn release_tap_key(&mut self, machine: &RuntimeHandle, key: &'static str) {
-        if let Some(index) = self.tap_keys.iter().position(|held| *held == key) {
-            self.tap_keys.remove(index);
-        }
+        self.keys.change(systemless::controller_data::KeyOwner::Tap, key, false);
         self.flush(machine);
     }
 
     /// A script takes the keys over, or gives them back.
     #[cfg(feature = "ottertube")]
     fn set_scripted(&mut self, machine: &RuntimeHandle, running: bool) {
-        self.script_keys = running.then(Vec::new);
+        self.scripted = running;
+        self.keys.set(systemless::controller_data::KeyOwner::Script, Vec::new());
         self.flush(machine);
     }
 
     #[cfg(feature = "ottertube")]
     fn script_key(&mut self, machine: &RuntimeHandle, key: &'static str, down: bool) {
-        if let Some(keys) = self.script_keys.as_mut() {
-            if down {
-                keys.push(key);
-            } else if let Some(index) = keys.iter().position(|held| *held == key) {
-                keys.remove(index);
-            }
+        if self.scripted {
+            self.keys.change(systemless::controller_data::KeyOwner::Script, key, down);
         }
         self.flush(machine);
     }
 
     fn flush(&mut self, machine: &RuntimeHandle) {
-        let mut next = self.joystick_keys.clone();
-        for key in self
-            .button_keys
-            .iter()
-            .chain(&self.tap_keys)
-            .chain(&self.pad_keys)
-        {
-            if !next.contains(key) {
-                next.push(key);
-            }
-        }
+        use systemless::controller_data::KeyOwner;
+        let physical = self.joystick_keys.iter().chain(&self.button_keys).copied().collect();
+        self.keys.set(KeyOwner::Host, physical);
         #[cfg(feature = "ottertube")]
-        if let Some(script) = &self.script_keys {
-            next = dedup_mobile_keys(script);
-        }
-        // A real keyboard is told when Command is held here.
+        let scripted = self.scripted;
+        #[cfg(not(feature = "ottertube"))]
+        let scripted = false;
+        let transitions = self.keys.transitions(scripted);
         #[cfg(feature = "ottertube")]
-        crate::ottertube::command_on_screen(next.contains(&"Meta"));
-
-        for key in self.sent_keys.iter().copied() {
-            if !next.contains(&key) {
-                if let Some((mac_key, char_code)) = mobile_key_code(key) {
-                    machine.mobile_key(false, mac_key, char_code);
-                }
+        crate::ottertube::command_on_screen(self.keys.sent().contains(&"Meta"));
+        for (key, down) in transitions {
+            if let Some((mac_key, char_code)) = mobile_key_code(key) {
+                machine.mobile_key(down, mac_key, char_code);
             }
         }
-        for key in next.iter().copied() {
-            if !self.sent_keys.contains(&key) {
-                if let Some((mac_key, char_code)) = mobile_key_code(key) {
-                    machine.mobile_key(true, mac_key, char_code);
-                }
-            }
-        }
-        self.sent_keys = next;
         #[cfg(feature = "ottertube")]
         if let Some(element) = &self.shown_on {
-            let _ = element.set_attribute("data-held-keys", &self.sent_keys.join(" "));
+            let _ = element.set_attribute("data-held-keys", &self.keys.sent().join(" "));
         }
     }
 }

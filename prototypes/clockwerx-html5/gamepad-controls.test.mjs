@@ -186,3 +186,41 @@ test('desktop mouse controls handle swing, chord flip, and solo right-click reve
   assert.equal(mouse.active, false);
   assert.deepEqual(mouse.poll(), {held: {swing: false, flip: false}, reverses: 0});
 });
+
+test('two simultaneous standard gamepads track independent P1 and P2 actions and block reserved buttons on both', () => {
+  const controller = createGamepadControls();
+  const reserved = new Set([4, 6, 8, 16]);
+  const guardedPad = (buttons, overrides) => {
+    const p = pad(buttons, overrides);
+    p.buttons = new Proxy(p.buttons, {
+      get(target, key) {
+        assert.ok(!reserved.has(Number(key)), 'reserved button read on pad ' + p.index);
+        return Reflect.get(target, key);
+      },
+    });
+    return p;
+  };
+  const p1 = (down = []) => guardedPad(down, {index: 0, id: 'DualSense Wireless Controller (054c)'});
+  const p2 = (down = []) => guardedPad(down, {index: 1, id: 'Xbox Wireless Controller (045e)'});
+
+  let state = controller.poll([p1(), p2()], true);
+  assert.equal(state.connected, true);
+  assert.equal(state.connectedCount, 2);
+  assert.equal(state.padFamily, 'playstation');
+  assert.equal(state.player2.connected, true);
+  assert.equal(state.player2.padFamily, 'xbox');
+
+  state = controller.poll([p1([0, 4, 6, 8, 16]), p2([2, 1, 4, 6, 8, 16])], true);
+  assert.deepEqual(active(state.held), ['swing']);
+  assert.deepEqual(active(state.pressed), ['swing']);
+  assert.deepEqual(active(state.player2.held), ['reverse', 'flip']);
+  assert.deepEqual(active(state.player2.pressed), ['reverse', 'flip']);
+
+  // Disconnect P2 only: P1 continues uninterrupted.
+  controller.disconnect(1);
+  state = controller.poll([p1([0])], true);
+  assert.equal(state.connectedCount, 1);
+  assert.deepEqual(active(state.held), ['swing']);
+  assert.equal(state.player2.connected, false);
+  assert.deepEqual(active(state.player2.held), []);
+});

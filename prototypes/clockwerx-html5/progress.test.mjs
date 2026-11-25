@@ -37,7 +37,7 @@ test('new stores have four independent Roman slots and sound and music default o
   assert.deepEqual(store.slots.map(slot => slotSummary(slot).label), ['I', 'II', 'III', 'IV']);
   for (const slot of store.slots) {
     assert.deepEqual(slot, {
-      id: slot.id, started: false, currentLevel: 1, completedLevels: [], bestLevelScores: {}, difficulty: 'Child', bestLevelDifficulties: {},
+      id: slot.id, started: false, currentLevel: 1, completedLevels: [], bestLevelScores: {}, difficulty: 'Child', players: 1, bestLevelDifficulties: {},
       campaignScore: 0, black: false, sound: true, music: true, freePlay: false, updatedUtc: null,
     });
   }
@@ -48,7 +48,7 @@ test('legacy migration preserves the selected level, hand and known clears in Sl
   const legacy = readProgress('{"black":true,"completed":4,"completedLevels":[9,3,3],"lastLevel":6}');
   const store = migrateLegacyProgress(legacy);
   assert.deepEqual(store.slots[0], {
-    id: 1, started: true, currentLevel: 6, completedLevels: [3, 9], bestLevelScores: {}, difficulty: 'Child', bestLevelDifficulties: {3: 0, 9: 0},
+    id: 1, started: true, currentLevel: 6, completedLevels: [3, 9], bestLevelScores: {}, difficulty: 'Child', players: 1, bestLevelDifficulties: {3: 0, 9: 0},
     campaignScore: 0, black: true, sound: true, music: true, freePlay: false, updatedUtc: null,
   });
   assert.deepEqual(store.slots.slice(1), readSlotStore().slots.slice(1));
@@ -72,7 +72,7 @@ test('clear scores accrue once per level plus improvements, only in the selected
   assert.deepEqual(lower, another);
   assert.deepEqual(equal, another);
   assert.deepEqual(better.slots[1], {
-    id: 2, started: true, currentLevel: 4, completedLevels: [1, 3], bestLevelScores: {1: 3000, 3: 9000}, difficulty: 'Child', bestLevelDifficulties: {1: 0, 3: 0},
+    id: 2, started: true, currentLevel: 4, completedLevels: [1, 3], bestLevelScores: {1: 3000, 3: 9000}, difficulty: 'Child', players: 1, bestLevelDifficulties: {1: 0, 3: 0},
     campaignScore: 12000, black: false, sound: true, music: true, freePlay: false, updatedUtc: timestamp,
   });
   assert.equal(better.slots[1].campaignScore - lower.slots[1].campaignScore, 3000);
@@ -151,4 +151,9 @@ test('per-slot difficulty and highest clears survive serialization and lower-dif
   assert.deepEqual(store.slots[0].bestLevelDifficulties,{4:3,5:2});
   assert.deepEqual(store.slots[0].bestLevelScores,{4:55000,5:15000});
   assert.equal(store.slots[1].difficulty,'Child');
+
+  let twoP = readSlotStore('{"slots":[{"id":1,"players":2},{"id":2,"players":99}]}');
+  assert.equal(twoP.slots[0].players, 2);
+  assert.equal(twoP.slots[1].players, 1);
+  assert.equal(readSlotStore(JSON.stringify(twoP)).slots[0].players, 2);
 });

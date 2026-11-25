@@ -8,9 +8,10 @@ import {teleportOrdinaryActor} from './teleports.mjs';
 
 const count=n=>{if(!Number.isSafeInteger(n)||n<0)throw new RangeError('Nonnegative source count required');};
 
-export function actorFaderFrames(actor){
+export function actorFaderFrames(actor,{useHandGroup=false}={}){
  if(!actor||![0,1,2,3,6].includes(actor.sourceActorType)||!Number.isInteger(actor.frame)||actor.frame<0||actor.frame>63)throw new TypeError('Ordinary source actor and canonical frame required');
- const type=actor.sourceActorType===6?4:actor.sourceActorType;
+ const type=useHandGroup&&[0,6].includes(actor.sourceActorType)?(actor.group===4300?4:0):
+  actor.sourceActorType===6?4:actor.sourceActorType;
  const first=Math.floor((actor.frame&63)*3/16)+12*type;
  return {first,last:first+2};
 }
@@ -27,7 +28,7 @@ export class TeleportRuntime {
   this.movingTeleportDoors=scope.allowMovingTeleportDoors===true;
   if(!scope.multiDifficulty&&dots.some(d=>d.slideMask)&&scope.allowSlidingTeleports!==true&&!this.movingTeleportDoors)throw new Error('Separate HY/EX runtime capability required');
   if(scope.allowSlidingTeleports===true)assertSlidingTeleportScope({...scope,dots,teleports:endpoints});
-  this.multiDifficulty=scope.multiDifficulty===true;
+  this.multiDifficulty=scope.multiDifficulty===true;this.twoPlayer=scope.twoPlayer===true;
   this.slidingTeleportRules=scope.allowSlidingTeleports===true;
   this.dots=dots;
   this.endpoints=endpoints.map(e=>{
@@ -59,7 +60,7 @@ export class TeleportRuntime {
  startFader(actor,{suppressed=false}={}){
   if(typeof suppressed!=='boolean')throw new TypeError('Explicit source fader suppression flag required');
   if(suppressed)return null;
-  const {first,last}=actorFaderFrames(actor),dot=this.dot(actor.pivot);
+  const {first,last}=actorFaderFrames(actor,{useHandGroup:this.twoPlayer}),dot=this.dot(actor.pivot);
   // WAGetPixel = current raw dot pixel plus DATA(-28,-28). The raw dot
   // base is logical center(-16,-15), so actor/fader base is(-44,-43).
   const fader={id:this.nextFader++,group:2100,actor:actor.name,pivot:dot.id,x:dot.x-44,y:dot.y-43,frame:first,firstFrame:first,lastFrame:last,visible:true,clockReference:this.counts.fader};

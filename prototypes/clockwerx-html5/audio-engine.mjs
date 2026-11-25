@@ -20,10 +20,10 @@ function eventSoundKey(event) {
     case 'bomb-sound':
     case 'sound': return event.soundId ?? event.id;
     case 'slowdown': return (event.slow ?? event.enabled) ? '24' : '25';
-    case 'wall-bounce': return event.hand === 'player' ? '31' : undefined;
-    case 'door-bounce': return event.hand === 'player' ? '30' : undefined;
+    case 'wall-bounce': return (event.hand === 'player' || event.hand === 'player2') ? '31' : undefined;
+    case 'door-bounce': return (event.hand === 'player' || event.hand === 'player2') ? '30' : undefined;
     case 'elevator-enter':
-    case 'elevator-toggle': return event.hand === 'player' ? '6' : undefined;
+    case 'elevator-toggle': return (event.hand === 'player' || event.hand === 'player2') ? '6' : undefined;
     default: return Object.hasOwn(eventSounds, event.type) ? eventSounds[event.type] : undefined;
   }
 }

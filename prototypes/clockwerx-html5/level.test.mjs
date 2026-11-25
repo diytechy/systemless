@@ -501,3 +501,22 @@ test('bomb/Oil/two-group elevators have an explicit gate and clear only qualifie
  level.blocks.find(b=>b.kind==='PU').records[0].rawWords[2]=3;assert.ok(levelRequirements(level,qualified).includes('bomb/Oil/elevators require kind0/2 Oil and a bomb inventory'));level.blocks.find(b=>b.kind==='PU').records[0].rawWords[2]=0;
  level.blocks.find(b=>b.kind==='EL').records[0].rawWords[2]=2;assert.ok(levelRequirements(level,qualified).includes('bomb/Oil/elevators require group0 upper and group1 center controls'));
 });
+
+test('2P boards use the raw Black start on every difficulty and synthesize an absent one',()=>{
+ const level=fixture(),records=level.blocks[0].records;
+ level.header.timeLimitRaw=120;
+ Object.assign(records[1],{initialFrameHalfIndexRaw:12,activationMaskRaw:1,gridPosition:{row:0,column:1}});
+ records[1].rawWords[4]=65535;
+ for(const difficulty of ['Child','Easy','Medium','Hard']){
+  const board=buildDecodedBoard(level,{difficulty,players:2});
+  const hand=board.player2;
+  assert.deepEqual([hand.name,hand.sourceSlot,hand.sourceActorType,hand.group,hand.pivot,hand.direction,hand.initialFrame],
+   ['player2',1,6,4300,'1,0',-1,sourceInitialFrame(12)]);
+  assert.deepEqual(board.enemies.map(a=>a.sourceSlot),[2]);
+ }
+ records.splice(1,1);
+ const board=buildDecodedBoard(level,{players:2});
+ assert.deepEqual([board.player2.pivot,board.player2.direction,board.player2.initialFrame],
+  [board.player.pivot,board.player.direction,(board.player.frame+16)&63]);
+ assert.deepEqual(board.enemies.map(a=>a.sourceSlot),[2]);
+});

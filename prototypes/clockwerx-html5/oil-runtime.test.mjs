@@ -134,3 +134,15 @@ test('a fatal human-grab observer suppresses bonus and goal effects after a lega
   assert.equal(g.events.some(e=>['goal','bonus'].includes(e.type)),false);
  }
 });
+
+test('a droplet arrival hits all active hands on the dot except a sliding hand',()=>{
+ const {board,options}=fixture();
+ const players=[{playerIndex:0,pivot:'b',sliding:true},{playerIndex:1,pivot:'b',sliding:false}];
+ const oil=new OilRuntime(board,{...options,getActiveHumans:()=>players});
+ const deaths=[],ctx={isFrozen:()=>false,onDeath:(reason,index)=>deaths.push([reason,index])};
+ oil.createDroplet(1,ctx);
+ assert.deepEqual(deaths,[[10,1]]);
+ players[0].sliding=false;
+ oil.createDroplet(1,ctx);
+ assert.deepEqual(deaths,[[10,1],[10,0],[10,1]]);
+});

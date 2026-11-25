@@ -24,14 +24,17 @@ export class ChildRoundScore {
 export class RoundScore extends ChildRoundScore {
  constructor({mode='Child',difficulty=mode,players=1}={}){
   if(!DIFFICULTIES.includes(difficulty))throw new RangeError('Unknown difficulty');
-  super({players});
+  if(![1,2].includes(players))throw new RangeError('Expected one or two players');
+  super();
+  this.players=players;
   this.difficulty=difficulty;
  }
  resetGame(){super.resetGame();this.completionBonus=0;this.timeBonus=0;}
  startRound(){super.startRound();this.completionBonus=0;this.timeBonus=0;}
- complete(remainingTime=0){
+ complete(remainingTime=0,{second=false,timed=this.difficulty!=='Child'}={}){
   if(this.completed)return 0;
-  const completion=completionBonusForDifficulty(this.difficulty),time=timeBonusForDifficulty(this.difficulty,remainingTime);
+  const base=completionBonusForDifficulty(this.difficulty);
+  const completion=second?Math.floor(base/2):base,time=timed?Math.max(0,Math.floor(remainingTime))*TIME_BONUS_PER_SECOND:0;
   this.addFlatBonus(completion+time);
   this.completionBonus=completion;this.timeBonus=time;this.completed=true;
   return completion+time;

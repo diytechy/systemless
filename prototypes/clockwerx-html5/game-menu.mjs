@@ -110,7 +110,35 @@ export function levelMechanicCues(board) {
   return cues;
 }
 
-export function sideControlsSpec(inputMode = 'keyboard-mouse', cues = []) {
+export function sideControlsSpec(inputMode = 'keyboard-mouse', cues = [], players = 1, padCount = 0) {
+  if (players === 2) {
+    if (inputMode === 'playstation' || inputMode === 'xbox' || inputMode === 'gamepad') {
+      const g = padGlyphs(inputMode === 'gamepad' ? null : inputMode);
+      const dualPads = padCount >= 2;
+      return {
+        modeLabel: dualPads ? '2P · Dual Controllers' : '2P · Pad + Keys',
+        rows: [
+          {action: 'swing', keys: dualPads ? `P1 / P2: ${g.swing}` : `P1: ${g.swing} · P2: Enter / →`, label: 'Swing through next dot'},
+          {action: 'flip', keys: dualPads ? `P1 / P2: ${g.flip}` : `P1: ${g.flip} · P2: R-Shift / ↑`, label: 'Bounce to next dot (Flip)'},
+          {action: 'reverse', keys: dualPads ? `P1 / P2: ${g.reverse}` : `P1: ${g.reverse} · P2: ↓ / /`, label: 'Flip direction (Reverse)'},
+          {action: 'bounce', keys: dualPads ? `P1 / P2: ${g.bounce}` : `P1: ${g.bounce} · P2: ←`, label: 'Bounce off dot'},
+        ],
+        meta: `${g.pause} Pause · ${g.levels} Levels · ${g.restart} Restart`,
+        cues: Array.isArray(cues) ? cues : [],
+      };
+    }
+    return {
+      modeLabel: '2P · Keyboard',
+      rows: [
+        {action: 'swing', keys: 'P1: Space / D · P2: Enter / →', label: 'Swing through next dot'},
+        {action: 'flip', keys: 'P1: L-Shift / X · P2: R-Shift / ↑', label: 'Bounce to next dot (Flip)'},
+        {action: 'reverse', keys: 'P1: W / C · P2: ↓ / /', label: 'Flip direction (Reverse)'},
+        {action: 'bounce', keys: 'P1: Z · P2: ←', label: 'Bounce off dot'},
+      ],
+      meta: 'P / Esc Pause & Levels',
+      cues: Array.isArray(cues) ? cues : [],
+    };
+  }
   if (inputMode === 'playstation' || inputMode === 'xbox' || inputMode === 'gamepad') {
     const g = padGlyphs(inputMode === 'gamepad' ? null : inputMode);
     return {
@@ -193,10 +221,10 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
   const slotButtons = [];
   let levelButtons = [];
   let view = 'title', levelReturn = 'title', selectedSlot = 1, selectedLevel = 1, roundLevel = 1;
-  let needleAngle = 0, connected = false, padFamily = null, busy = false, confirming = false, command = 0, result;
+  let needleAngle = 0, connected = false, padFamily = null, connectedCount = 0, busy = false, confirming = false, command = 0, result;
 
   const focus = node => node?.focus({preventScroll: true});
-  const text = (id, value) => { $(id).textContent = value; };
+  const text = (id, value) => { const el = $(id); if (el) el.textContent = value; };
 
   function makeButton(className) {
     const button = document.createElement('button');
@@ -274,10 +302,13 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
     text('slot-sound', 'Sound: ' + (slot.sound ? 'On' : 'Off'));
     text('slot-music', 'Music: ' + (slot.music ? 'On' : 'Off'));
     text('slot-difficulty', 'Difficulty: ' + (slot.difficulty ?? 'Child'));
+    const players = slot.players === 2 ? 2 : 1;
+    text('slot-players', 'Players: ' + players + 'P' + (connectedCount >= 2 ? ' (2 Pads)' : ''));
     text('game-hand', $('slot-hand').textContent);
     text('game-sound', $('slot-sound').textContent);
     text('game-music', $('slot-music').textContent);
     text('game-difficulty', $('slot-difficulty').textContent);
+    text('game-players', 'Players: ' + players + 'P');
   }
 
   function renderSlots(takeFocus = false) {
@@ -427,7 +458,11 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
   }
   const setting = name => {
     if (busy) return;
-    onSetting(selectedSlot, name, name === 'difficulty' ? nextDifficulty(getSlot(selectedSlot).difficulty) : undefined);
+    const slot = getSlot(selectedSlot);
+    const nextValue = name === 'difficulty' ? nextDifficulty(slot.difficulty)
+      : name === 'players' ? (slot.players === 2 ? 1 : 2)
+      : undefined;
+    onSetting(selectedSlot, name, nextValue);
     if (view === 'title') renderSlots();
     else if (view === 'levels') renderLevels(false);
     else refreshActions();
@@ -438,6 +473,8 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
   $('slot-sound').onclick = $('game-sound').onclick = () => setting('sound');
   $('slot-music').onclick = $('game-music').onclick = () => setting('music');
   $('slot-difficulty').onclick = $('game-difficulty').onclick = () => setting('difficulty');
+  if ($('slot-players')) $('slot-players').onclick = () => setting('players');
+  if ($('game-players')) $('game-players').onclick = () => setting('players');
   $('slot-reset').onclick = startConfirm;
   $('slot-keep').onclick = endConfirm;
   $('slot-erase').onclick = () => { onReset(selectedSlot); endConfirm(); };
@@ -462,9 +499,19 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
 
   function navigate(direction) {
     if (view === 'title' && !confirming) {
+      const diffBtn = $('slot-difficulty'), playersBtn = $('slot-players');
+      if (document.activeElement === diffBtn) {
+        if (direction === 'up') focus(slotButtons[selectedSlot - 1]);
+        else if (direction === 'right' && playersBtn) focus(playersBtn);
+        return;
+      }
+      if (playersBtn && document.activeElement === playersBtn) {
+        if (direction === 'up') focus(slotButtons[selectedSlot - 1]);
+        else if (direction === 'left' && diffBtn) focus(diffBtn);
+        return;
+      }
       const next = moveSlot(selectedSlot, direction, connected);
-      if (direction === 'down' && selectedSlot >= 3 && next === selectedSlot) focus($('slot-difficulty'));
-      else if (direction === 'up' && document.activeElement === $('slot-difficulty')) focus(slotButtons[selectedSlot - 1]);
+      if (direction === 'down' && selectedSlot >= 3 && next === selectedSlot) focus(diffBtn);
       else selectSlot(next);
     }
     else if (view === 'levels') {
@@ -516,12 +563,15 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       for (const [index, scene] of scenes.entries()) titles.set(scene.ordinal ?? index + 1, scene.title);
       renderSlots();
     },
-    setConnected(value, family = null) {
+    setConnected(value, family = null, count = value ? 1 : 0) {
       const nextFamily = value ? family : null;
-      if (connected === value && padFamily === nextFamily) return;
+      const nextCount = value ? Math.max(1, count) : 0;
+      if (connected === value && padFamily === nextFamily && connectedCount === nextCount) return;
       connected = value;
       padFamily = nextFamily;
+      connectedCount = nextCount;
       cards.dataset.layout = connected ? 'radial' : 'grid';
+      refreshActions();
       updateControls();
     },
     setRound(level) { roundLevel = level; },
@@ -529,6 +579,22 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       result = details;
       text('game-complete-title', details.level === campaignLevels ? 'Victory' : 'Level Complete');
       text('game-complete-level', 'Lv ' + details.level + ' · ' + titles.get(details.level));
+      const box2p = $('game-complete-2p');
+      if (box2p) {
+        const two = details.twoPlayer;
+        box2p.hidden = !two;
+        if (two) {
+          const p1Hand = two.p1Hand ?? 'Gold';
+          const p2Hand = two.p2Hand ?? 'Black';
+          text('game-complete-winner', two.winner === 'tie' ? 'Tie Game!'
+            : two.winner === 0 ? `Player 1 (${p1Hand}) Wins!`
+            : `Player 2 (${p2Hand}) Wins!`);
+          text('game-p1-label', `P1 (${p1Hand}) · ${two.player1.won ? 'Goal' : 'Out'}`);
+          text('game-p2-label', `P2 (${p2Hand}) · ${two.player2.won ? 'Goal' : 'Out'}`);
+          text('game-p1-summary', points(two.player1.levelTotal));
+          text('game-p2-summary', points(two.player2.levelTotal));
+        }
+      }
       text('game-round-bonus', points(details.bonus));
       text('game-finish-bonus', points(details.completionBonus ?? completionBonus));
       $('game-time-row').hidden = !details.difficulty || details.difficulty === 'Child';
@@ -574,8 +640,8 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
     pad({direction, pressed}) {
       if (busy) return;
       if (direction) navigate(direction);
-      if (view === 'title' && !confirming && pressed.swing && document.activeElement === $('slot-difficulty')) {
-        $('slot-difficulty').click();
+      if (view === 'title' && !confirming && pressed.swing && (document.activeElement === $('slot-difficulty') || ($('slot-players') && document.activeElement === $('slot-players')))) {
+        document.activeElement.click();
         return;
       }
       const action = menuPadAction(view, pressed, confirming);

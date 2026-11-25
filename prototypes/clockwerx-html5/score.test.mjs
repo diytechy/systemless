@@ -44,3 +44,17 @@ test('fresh play clears both counters and snapshots cannot mutate score state',(
 test('unsupported modes, players, invalid points and source-score overflow fail closed',()=>{
  assert.throws(()=>new ChildRoundScore({mode:'Hard'}),/Only Child/);assert.throws(()=>new ChildRoundScore({players:2}),/single-player/);const s=new ChildRoundScore();for(const p of [-1,.5,Infinity,0x80000000])assert.throws(()=>s.addFlatBonus(p),/Bounded/);s.addFlatBonus(0x7fffffff);assert.throws(()=>s.complete(),/Bounded/);
 });
+
+test('each two-player RoundScore keeps its own dot ladder and awards the second finisher half',()=>{
+ for(const [difficulty,base] of Object.entries({Child:1000,Easy:5000,Medium:15000,Hard:50000})){
+  const first=new RoundScore({difficulty,players:2}),second=new RoundScore({difficulty,players:2});
+  first.bonusDot();first.bonusDot();
+  assert.equal(second.bonusDot(),1000);
+  first.complete(12.9);second.complete(9.9,{second:true});
+  assert.deepEqual([first.completionBonus,second.completionBonus],[base,base/2]);
+  assert.deepEqual([first.timeBonus,second.timeBonus],difficulty==='Child'?[0,0]:[1200,900]);
+  const earned=second.roundBonus;
+  second.startRound();
+  assert.deepEqual([second.totalCommitted,second.roundBonus,second.nextDotAward],[earned,0,1000]);
+ }
+});

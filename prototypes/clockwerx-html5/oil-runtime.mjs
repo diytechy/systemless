@@ -1,4 +1,4 @@
-// Static-dot single-player Oil coordinator. Private outlines and qualified
+// Oil sprite coordinator. Private outlines and qualified
 // source bounds are mandatory; preparing this module does not enable a level.
 import {adjustSourcePeriod} from './actor-clocks.mjs';
 import {createSourceTimerChain,outlineCollision} from './hazards.mjs';
@@ -9,14 +9,14 @@ import {createPuddleState,triggerPuddle,observePuddle,createDropletState,
  findDormantPuddleContact,OIL_LIMITS} from './oil.mjs';
 
 export class OilRuntime {
- constructor(board,{outlines,dotOutlines,bounds,getHumanSliding,getMainDotSprite}={}){
+ constructor(board,{outlines,dotOutlines,bounds,getHumanSliding,getMainDotSprite,getActiveHumans}={}){
   if(!outlines?.groups?.['1200']||!outlines.groups['2200']||!dotOutlines?.groups?.['300'])throw new Error('Original oil and dot outlines required');
   if(!bounds||!['left','top','right','bottom'].every(k=>Number.isInteger(bounds[k])))throw new Error('Qualified source universe bounds required');
   if(board.slidingOilGoodieRingRules&&!board.slidingOilRules)throw new Error('Oil/GO/rings require EX/Oil core');
   if(board.slidingOilRules)assertSlidingOilScope({...board,actors:[board.player,...(board.enemies||[])],rich:board.slidingOilGoodieRingRules===true,initial:true,activeSections:Object.fromEntries(['walls','doors','switches','elevators','bombs','teleports'].map(k=>[k,board[k]?.length??0]))});
   if((board.multiDifficulty||board.slidingOilRules||board.movingDoorOilRules)&&(typeof getHumanSliding!=='function'||getHumanSliding.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous human sliding accessor required');
   if((board.multiDifficulty||board.slidingOilGoodieRingRules||board.gunTriggerOilRules)&&(typeof getMainDotSprite!=='function'||getMainDotSprite.constructor?.name==='AsyncFunction'))throw new Error('Live synchronous main-dot sprite accessor required');
-  this.getHumanSliding=getHumanSliding;this.getMainDotSprite=getMainDotSprite;
+  this.getActiveHumans=getActiveHumans;this.getHumanSliding=getHumanSliding;this.getMainDotSprite=getMainDotSprite;
   if(board.slidingOilGoodieRingRules||board.gunTriggerOilRules)for(const d of board.dots.filter(d=>d.ring))for(let f=23+7*d.color;f<=30+7*d.color;f++)if(!dotOutlines.groups[300].frames[f])throw new Error('Complete current ring collision profiles required');
   this.board=board;this.outlines=outlines;this.dotOutlines=dotOutlines;this.bounds={...bounds};
   this.dots=[...board.dots].sort((a,b)=>a.sourceIndex-b.sourceIndex);
@@ -97,26 +97,40 @@ export class OilRuntime {
   }
   return hidden;
  }
- humanGrab(id){
-  this.heroPivot=this.index(id);
-  return this.droplets.flatMap(({state})=>dropletHumanGrab(state,this.heroPivot));
+ humanGrab(id,hand){
+  const pivot=this.index(id);
+  if(!hand||hand.sourceSlot!==1)this.heroPivot=pivot;
+  return this.droplets.flatMap(({state})=>dropletHumanGrab(state,pivot));
+ }
+ humanTargets(){
+  return this.getActiveHumans?.().map(({playerIndex,pivot,sliding})=>({playerIndex,pivot:this.index(pivot),sliding}));
+ }
+ targetPivot(dotIndex,targets){
+  if(!targets?.length)return this.heroPivot;
+  const {x,y}=this.pixel(dotIndex);
+  const distance=target=>{const p=this.pixel(target.pivot);return (p.x-x)**2+(p.y-y)**2;};
+  return targets.reduce((best,target)=>distance(target)<distance(best)?target:best).pivot;
  }
  createDroplet(index,context,clonePreference){
   if(this.allocations>=OIL_LIMITS.droplets)return;
   this.allocations++;
   let state=createDropletState(index,this.pixel(index),{now:this.now,delay150:this.delay150,delay700:this.delay700});
-  const arrival=dropletArrived(state,{humanCanGrab:this.canGrab(index,true),heroPivot:this.heroPivot,heroSliding:this.humanSliding()});
+  const targets=this.humanTargets(),heroPivot=this.targetPivot(index,targets);
+  const arrival=dropletArrived(state,targets?{humanCanGrab:this.canGrab(index,true),targets}:{humanCanGrab:this.canGrab(index,true),heroPivot,heroSliding:this.humanSliding()});
   state=arrival.state;
   const entry={state,clockReference:this.counts.droplet};
   const slot=this.droplets.push(entry)-1;this.sprites.push({kind:'droplet',index:slot});
   this.dispatch(arrival.events,context);
   if(clonePreference!==undefined){
-   Object.assign(state,dropletDirection(this.pixel(index),this.pixel(this.heroPivot),clonePreference),{moveDeadline:1});
+   Object.assign(state,dropletDirection(this.pixel(index),this.pixel(heroPivot),clonePreference),{moveDeadline:1});
   }
  }
  dispatch(events,context){
   for(const event of events){
-   if(event.type==='death')context.onDeath(event.reason);
+   if(event.type==='death'){
+    if(event.playerIndex===undefined)context.onDeath(event.reason);
+    else context.onDeath(event.reason,event.playerIndex);
+   }
    else if(event.type==='createDroplet')this.createDroplet(event.dotIndex,context);
    else if(event.type==='fader'){
     const slot=this.faders.push({base:this.pixel(event.dotIndex),frame:104,visible:true,clockReference:this.counts.fader})-1;
@@ -139,9 +153,10 @@ export class OilRuntime {
     const entry=this.droplets[index];
     if(entry.clockReference!==this.counts.droplet){
      entry.clockReference=this.counts.droplet;
+     const targets=this.humanTargets(),target=this.targetPivot(entry.state.dotIndex<0?entry.state.previousDot:entry.state.dotIndex,targets);
      const result=advanceDroplet(entry.state,{now:this.now,delay150:this.delay150,delay700:this.delay700,
-      targetPixel:this.pixel(this.heroPivot),dotPixel:i=>this.pixel(i),collideDot:s=>this.collideDot(s),
-      humanCanGrab:i=>this.canGrab(i,true),heroPivot:this.heroPivot,heroSliding:false,...(this.board.slidingOilRules?{getHumanSliding:()=>this.humanSliding()}:{}),bounds:this.bounds,
+      targetPixel:this.pixel(target),dotPixel:i=>this.pixel(i),collideDot:s=>this.collideDot(s),
+      humanCanGrab:i=>this.canGrab(i,true),targets,heroPivot:this.heroPivot,heroSliding:false,...(this.board.slidingOilRules?{getHumanSliding:()=>this.humanSliding()}:{}),bounds:this.bounds,
       onClone:event=>this.createDroplet(event.dotIndex,context,event.preferVertical)});
      entry.state=result.state;this.dispatch(result.events.filter(e=>e.type!=='clone'),context);
     }

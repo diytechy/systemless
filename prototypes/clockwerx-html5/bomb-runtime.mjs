@@ -181,14 +181,17 @@ export function bombStationaryDots(dots,origin,onChange,options){
 /** WABombed Child deadline is metadata for ordinary enemies, not a request to
  * resurrect them. Source WA reset owns restoring visibility. Death dispatch
  * does not stop the remaining source-slot scan. */
-export function bombActors(actors,{guestTick,multiDifficulty=false,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowFreeBusters=false,allowGunBusters=false,allowMovingBusterBombs=false,allowMovingProgrammedBusters=false,allowStaticTeleportBusters=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false,allowMovingProtectedBusters=false,allowMovingFuseOrdinary=false,staticBombElevatorVariant=false}){
+export function bombActors(actors,{guestTick,multiDifficulty=false,deferHumanHide=false,collides,onDeath,onHidden,allowObjectInteractions=false,allowSlidingBombs=false,allowMovingBombs=false,allowStaticSlidingBombGoodies=false,allowMovingBombSpikeWaystation=false,allowSlidingBombOrbitals=false,allowFreeBusters=false,allowGunBusters=false,allowMovingBusterBombs=false,allowMovingProgrammedBusters=false,allowStaticTeleportBusters=false,allowStaticSlowdownBusters=false,allowMovingSlowdownBusters=false,allowMovingProtectedBusters=false,allowMovingFuseOrdinary=false,staticBombElevatorVariant=false}){
  integer(guestTick);fn(collides,'actor outline collision');fn(onDeath,'human death');fn(onHidden,'actor visibility');
  if(!Array.isArray(actors))throw new TypeError('Live source-slot actor array required');
  let previous=-1;for(const a of actors){if(!multiDifficulty)actor(a,allowObjectInteractions,allowSlidingBombs,allowSlidingBombs,allowMovingBombs,allowStaticSlidingBombGoodies,allowMovingBombSpikeWaystation,allowSlidingBombOrbitals,false,allowFreeBusters,allowGunBusters,allowMovingBusterBombs,allowMovingProgrammedBusters,allowStaticTeleportBusters,false,allowStaticSlowdownBusters,allowMovingSlowdownBusters,allowMovingProtectedBusters,allowMovingFuseOrdinary,staticBombElevatorVariant);if(a.sourceSlot<=previous)throw new Error('Actors must retain unique ascending source slots');previous=a.sourceSlot;}
  const hits=[];
  for(const a of actors){
   if(a.visible===false||!sync(collides,a))continue;
-  a.visible=false;a.hiddenUntil=guestTick+300;hits.push(a.sourceSlot);sync(onHidden,a);
+  hits.push(a.sourceSlot);
+  if(!deferHumanHide||!human(a)){
+   a.visible=false;a.hiddenUntil=guestTick+300;sync(onHidden,a);
+  }
   if(human(a))sync(onDeath,a,{reason:-1,type:'bomb'});
  }
  return hits;

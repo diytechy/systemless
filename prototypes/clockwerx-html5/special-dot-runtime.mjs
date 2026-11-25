@@ -6,10 +6,11 @@ import {TAU} from './engine.mjs';
 const count=n=>{if(!Number.isInteger(n)||n<0)throw new RangeError('Nonnegative source count required');};
 const time=n=>{if(!Number.isInteger(n)||n<0)throw new RangeError('Nonnegative integer source time required');};
 export class StaticDotRuntime {
- constructor(dots,playerSpec,{originalTime,dotCount=0,overlayCount=0,difficulty=0,allowGoalMisc=false}={}){
+ constructor(dots,playerSpec,{originalTime,dotCount=0,overlayCount=0,difficulty=0,allowGoalMisc=false,sharedCheckpoint=false}={}){
   if(!Array.isArray(dots)||!playerSpec||!dots.some(d=>d.id===playerSpec.pivot))throw new TypeError('Static dots and original player spawn required');
   time(originalTime);count(dotCount);count(overlayCount);
   this.dots=dots;this.originalSpawn={...playerSpec};this.savedSpawn={...playerSpec};
+  this.sharedCheckpoint=sharedCheckpoint;this.savedCheckpoint=null;
   this.originalTime=originalTime;this.savedTime=originalTime;this.special=new Map();this.overlays=new Map();if(allowGoalMisc===true)this.goals=new Map();
   for(const dot of dots){
    if(dot.ring&&dot.waystation)throw new Error('Combined ring/checkpoint is unqualified');
@@ -26,7 +27,7 @@ export class StaticDotRuntime {
  reset({restartLevel=false,dotCount=this.dotCount,overlayCount=this.overlayCount}={}){
   count(dotCount);count(overlayCount);this.dotCount=dotCount;this.overlayCount=overlayCount;
   if(restartLevel){
-   this.savedSpawn={...this.originalSpawn};this.savedTime=this.originalTime;
+   this.savedCheckpoint=null;this.savedSpawn={...this.originalSpawn};this.savedTime=this.originalTime;
    if(this.selectedCheckpoint!=null)this.special.get(this.selectedCheckpoint).reset(dotCount);
   }
   this.selectedCheckpoint=null;
@@ -52,7 +53,8 @@ export class StaticDotRuntime {
  humanGrab(id,currentTime){
   const dot=this.dot(id);time(currentTime);const sounds=[],result={checkpointChanged:false,sounds};
   if(dot.waystation){
-   if(this.savedSpawn.pivot!==id){
+   if(this.sharedCheckpoint?this.savedCheckpoint!==id:this.savedSpawn.pivot!==id){
+    this.savedCheckpoint=id;
     this.savedSpawn={...this.savedSpawn,pivot:id,angle:((dot.waystation.halfIndex*2)&63)*TAU/64,direction:dot.waystation.direction};
     this.savedTime=currentTime;result.checkpointChanged=true;
    }

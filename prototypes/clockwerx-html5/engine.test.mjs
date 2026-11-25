@@ -57,3 +57,44 @@ console.log('PASS: documented swing/flip/bounce/reverse semantics, early release
  const h=new MovementGame(b);h.update(.02,{bounce:true});assert.equal(h.player.direction,-1,'bounce reflects without grabbing a masked neighbor');
  const c=fixture();c.player.grabMask=0x000f;c.dots[1].flags=0x00ff;const p=new MovementGame(c);p.update(.02,{flip:true});assert.equal(p.player.pivot,'b','player nibble permits colored demonstration dots');
 }
+
+test('Movement creates opposite-color hands on the same start with a quarter-turn offset',()=>{
+ const manifest={board:{cells:Array.from({length:88},()=>[1,15])}};
+ const board=buildBoard(manifest,{players:2});
+ const game=new MovementGame(board);
+ assert.equal(game.player2.pivot,game.player.pivot);
+ assert.equal(game.player2.angle,(game.player.angle+Math.PI/2)%TAU);
+ assert.equal(game.player2.initialFrame,(board.player.initialFrame+16)&63);
+ assert.equal(game.player2.direction,game.player.direction);
+ assert.deepEqual([game.player2.name,game.player2.sourceSlot,game.player2.sourceActorType,game.player2.group],['player2',1,6,4300]);
+ assert.equal(new MovementGame(buildBoard(manifest)).player2,null);
+
+ game.setPlayerGroup(4300);
+ game.reset();
+ assert.deepEqual([game.player.group,game.player2.group],[4300,700]);
+ assert.equal(board.player.group,700);
+ game.reverse(1);
+ assert.deepEqual([game.player.direction,game.player2.direction],[1,-1]);
+ game.reverse();
+ assert.deepEqual([game.player.direction,game.player2.direction],[-1,-1]);
+});
+
+test('Movement dispatches swing, flip, bounce and reverse independently through both input forms',()=>{
+ for(const [action,pivot,direction] of [['swing','2,1',-1],['flip','2,1',1],['bounce','1,1',-1]]){
+  const board=buildBoard({board:{cells:Array.from({length:88},()=>[1,15])}},{players:2});
+  const game=new MovementGame(board);
+  game.player2.angle=0;
+  const before=game.player.angle;
+  game.update(1/60,{}, {[action]:true});
+  assert.notEqual(game.player.angle,before);
+  assert.deepEqual([game.player.pivot,game.player.direction],['1,1',1]);
+  assert.deepEqual([game.player2.pivot,game.player2.direction],[pivot,direction]);
+  assert.ok(game.events.some(e=>e.type===action&&e.playerIndex===1&&e.hand==='player2'));
+ }
+ const game=new MovementGame(fixture(),{players:2});
+ game.update(0,{player2:{reverse:true}});
+ game.update(0,{player2:{reverse:true}});
+ assert.deepEqual([game.player.direction,game.player2.direction],[1,-1]);
+ game.update(0,{reverse:true,player2:{reverse:true}},{});
+ assert.deepEqual([game.player.direction,game.player2.direction],[-1,-1]);
+});

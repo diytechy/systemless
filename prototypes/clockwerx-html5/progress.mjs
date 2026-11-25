@@ -45,6 +45,7 @@ function normalizeSlot(id, value) {
     return isScore(score) ? [[level, score]] : [];
   }));
   const difficulty = DIFFICULTIES.includes(value?.difficulty) ? value.difficulty : 'Child';
+  const players = value?.players === 2 ? 2 : 1;
   const bestLevelDifficulties = Object.fromEntries(completedLevels.map(level => {
     const best = value?.bestLevelDifficulties?.[level];
     return [level, Number.isInteger(best) && best >= 0 && best < DIFFICULTIES.length ? best : 0];
@@ -52,7 +53,7 @@ function normalizeSlot(id, value) {
   return {
     id, started: value?.started === true || completedLevels.length > 0,
     currentLevel: isLevel(value?.currentLevel) ? value.currentLevel : 1,
-    completedLevels, bestLevelScores, bestLevelDifficulties, difficulty, campaignScore: campaignTotal(bestLevelScores),
+    completedLevels, bestLevelScores, bestLevelDifficulties, difficulty, players, campaignScore: campaignTotal(bestLevelScores),
     black: value?.black === true, sound: value?.sound !== false, music: value?.music !== false, freePlay: value?.freePlay === true,
     updatedUtc: typeof value?.updatedUtc === 'string' && Number.isFinite(Date.parse(value.updatedUtc))
       ? new Date(value.updatedUtc).toISOString() : null,

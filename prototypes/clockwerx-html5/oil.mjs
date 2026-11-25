@@ -105,11 +105,15 @@ export function createDropletState(dotIndex,pixel,{now,delay150,delay700}) {
 }
 /** DPGrabbed uses human DOCanGrab permission, then pivot occupancy. No
  * protected-dot exemption. Sliding is checked here, not in DPWandGrabbed. */
-export function dropletArrived(s,{humanCanGrab,heroPivot,heroSliding=false}) {
+export function dropletArrived(s,{humanCanGrab,heroPivot,heroSliding=false,targets}) {
   const n={...s},events=[];
   if(!humanCanGrab) {
     n.visible=false;n.clockAttached=false;events.push({type:'fader',dotIndex:n.dotIndex});
-  } else if(n.visible&&n.dotIndex===heroPivot&&!heroSliding)events.push({type:'death',reason:10});
+  } else if(n.visible){
+    if(targets){
+      for(const {pivot,sliding,playerIndex} of targets)if(n.dotIndex===pivot&&!sliding)events.push({type:'death',reason:10,playerIndex});
+    }else if(n.dotIndex===heroPivot&&!heroSliding)events.push({type:'death',reason:10});
+  }
   return {state:n,events};
 }
 export function dropletHumanGrab(s,dotIndex) {
@@ -127,7 +131,7 @@ export function dropletHumanGrab(s,dotIndex) {
  * snapshots its current MT count, preventing a same-count frame callback.
  */
 export function advanceDroplet(s,{now,delay150,delay700,targetPixel,dotPixel,
-  collideDot,humanCanGrab,heroPivot,heroSliding=false,getHumanSliding,bounds,onClone}) {
+  collideDot,humanCanGrab,heroPivot,heroSliding=false,getHumanSliding,targets,bounds,onClone}) {
   integer(now);point(targetPixel);
   const n={...s,base:{...s.base}},events=[];
   if(!n.clockAttached)return {state:n,events};
@@ -149,7 +153,7 @@ export function advanceDroplet(s,{now,delay150,delay700,targetPixel,dotPixel,
   let phase=n.frame-n.travelBase;
   if(phase===0) {
     if(n.dotIndex<0)throw new RangeError('Arrival requires an acquired dot');
-    const arrived=dropletArrived(n,{humanCanGrab:humanCanGrab(n.dotIndex),heroPivot,heroSliding:getHumanSliding?getHumanSliding():heroSliding});
+    const arrived=dropletArrived(n,{humanCanGrab:humanCanGrab(n.dotIndex),heroPivot,heroSliding:getHumanSliding?getHumanSliding():heroSliding,targets});
     Object.assign(n,arrived.state);events.push(...arrived.events);
     n.moveDeadline=deadline(now,delay150);n.base={...point(dotPixel(n.dotIndex))};
     n.min=0;n.max=0;n.frame=0;phase=0;

@@ -155,14 +155,15 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     for (const id of [
       'game-slots', 'game-level-grid', 'game-free-play', 'game-chapters', 'game-menu-status',
       'slot-confirm', 'slot-keep', 'slot-erase', 'slot-play', 'slot-levels', 'slot-hand', 'slot-sound',
-      'slot-music', 'slot-difficulty', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
-      'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-round-bonus',
+      'slot-music', 'slot-difficulty', 'slot-players', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
+      'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-complete-2p', 'game-complete-winner',
+      'game-p1-label', 'game-p2-label', 'game-p1-summary', 'game-p2-summary', 'game-round-bonus',
       'game-finish-bonus', 'game-time-row', 'game-time-bonus', 'game-level-total', 'game-campaign-total', 'game-score-delta',
       'game-complete-controls',
     ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') ? 'button' : 'div', id);
 
     const pauseActions = makeNode('div', 'pause-actions');
-    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-difficulty', 'game-save-slots'].map(id => makeNode('button', id));
+    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-difficulty', 'game-players', 'game-save-slots'].map(id => makeNode('button', id));
     pauseActions.append(...pauseButtons);
     pauseActions.querySelectorAll = () => pauseButtons;
 
@@ -238,10 +239,36 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     menu.complete({level: 100, bonus: 0, levelTotal: 1000, campaignTotal: 50000, delta: 0, nextLevel: null});
     assert.equal(byId.get('game-complete-levels').hidden, true);
     assert.equal(byId.get('game-time-row').hidden, true);
+    assert.equal(byId.get('game-complete-2p').hidden, true);
     menu.pad({direction: 'down', pressed: {}});
     menu.pad({direction: 'down', pressed: {}});
     assert.equal(byId.get('game-complete-slots').hasAttribute('data-selected'), true);
     assert.equal(played.length, 0);
+
+    // 2P players toggle, 2-pad indicator, and 2P completion plaque breakdown.
+    menu.setConnected(true, 'playstation', 2);
+    menu.show('title');
+    assert.equal(byId.get('slot-players').textContent, 'Players: 1P (2 Pads)');
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'right', pressed: {}});
+    assert.equal(document.activeElement.id, 'slot-players');
+    menu.pad({pressed: {swing: true}});
+    assert.equal(slotState.players, 2);
+    assert.equal(byId.get('slot-players').textContent, 'Players: 2P (2 Pads)');
+    menu.complete({
+      level: 2, bonus: 1000, levelTotal: 6000, campaignTotal: 12000, delta: 6000, nextLevel: 3,
+      difficulty: 'Easy', completionBonus: 5000, timeBonus: 0,
+      twoPlayer: {
+        winner: 1, p1Hand: 'Gold', p2Hand: 'Black',
+        player1: {won: false, died: true, levelTotal: 1000},
+        player2: {won: true, died: false, levelTotal: 6000},
+      },
+    });
+    assert.equal(byId.get('game-complete-2p').hidden, false);
+    assert.equal(byId.get('game-complete-winner').textContent, 'Player 2 (Black) Wins!');
+    assert.equal(byId.get('game-p1-label').textContent, 'P1 (Gold) · Out');
+    assert.equal(byId.get('game-p2-label').textContent, 'P2 (Black) · Goal');
   } finally {
     delete globalThis.document;
   }
@@ -291,6 +318,13 @@ test('sideControlsSpec formats PlayStation, Xbox, generic controller, and Keyboa
   assert.equal(km.modeLabel, 'Keyboard & Mouse');
   assert.deepEqual(km.rows.map(r => r.keys), ['Space · D · L-Click', 'L-Shift · X · L+R Click', 'W · C · R-Click', 'Z']);
   assert.deepEqual(km.cues, ['Teleports']);
+
+  const twoPads = sideControlsSpec('playstation', [], 2, 2);
+  assert.equal(twoPads.modeLabel, '2P · Dual Controllers');
+  assert.equal(twoPads.rows[0].keys, 'P1 / P2: ✕');
+  const twoKeys = sideControlsSpec('keyboard-mouse', ['Walls'], 2, 0);
+  assert.equal(twoKeys.modeLabel, '2P · Keyboard');
+  assert.match(twoKeys.rows[0].keys, /P2: Enter/);
 });
 
 test('canShowSideControls only shows on widescreen game-mode desktop play without overlapping the 4:3 canvas', () => {

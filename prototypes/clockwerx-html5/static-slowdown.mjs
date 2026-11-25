@@ -62,10 +62,10 @@ export class StaticSlowdownRuntime {
  dot(dot){if(!this.dots.includes(dot))fail();return dot;}
  reset(){for(const d of this.dots)if(d.slowdown)d.sourceSlowFrame=189+d.color;}
  humanRelease(dot){this.dot(dot);if(dot.slowdown)dot.sourceSlowFrame=189+dot.color;}
- humanGrab(dot){
+ humanGrab(dot,hand){
   this.dot(dot);if(dot.slowdown)dot.sourceSlowFrame=198+dot.color;
   const enabled=dot.slowdown===true;if(enabled===this.enabled)return false;
-  this.enabled=enabled;this.clocks.setSlowdown(enabled);this.onTransition({enabled,sound:enabled?24:25});return true;
+  this.enabled=enabled;this.clocks.setSlowdown(enabled);this.onTransition({enabled,sound:enabled?24:25},hand);return true;
  }
  snapshot(){return{enabled:this.enabled,dots:this.dots.filter(d=>d.slowdown).map(d=>({id:d.id,frame:d.sourceSlowFrame}))};}
 }

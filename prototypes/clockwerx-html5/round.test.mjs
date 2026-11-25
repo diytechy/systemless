@@ -566,3 +566,242 @@ test('mixed bomb/Oil/elevator admission rejects missing burnt outlines and narro
   const f=bombOilElevatorFixture();mutate(f);assert.throws(()=>new SourceRound(f.board,f.options),/Qualified|Separate/);
  }
 });
+
+function twoPlayerFixture({difficulty='Easy',configure=()=>{}}={}){
+ const {board,options}=canonicalFixture();
+ Object.assign(board,{players:2,difficulty,timeLimit:120,multiDifficulty:true,specialDotRules:true,
+  origin:{x:0,y:0},walls:[],doors:[],switches:[],puddles:[],connectors:[]});
+ Object.assign(board.player,{sourceSlot:0,program:null});
+ board.player2={...board.player,pivot:'c',angle:Math.PI,group:4300,sourceSlot:1,sourceActorType:6};
+ board.dots=[['a',0,0],['b',48,0,'goal'],['c',96,0],['d',0,48,'bonus'],['e',96,48,'bonus']]
+  .map(([id,x,y,kind='dot'])=>({id,x,y,row:y/48,column:x/48,sourceIndex:y/48*11+x/48,
+   kind,bonus:kind==='bonus',cell:kind==='bonus'?3:1,present:true,humanCanGrab:true,nonhumanCanGrab:true}));
+ options.outlines.groups[4300]=options.outlines.groups[700];
+ options.deathFactory=(point,hand)=>{
+  let ticks=0;
+  return {update(n){ticks+=n;},get heroVisible(){return ticks<2;},
+   get complete(){return ticks>=(hand.sourceSlot===0?4:8);},snapshot(){return [{x:point.x,frame:ticks}];}};
+ };
+ configure(board,options);
+ return new SourceRound(board,options);
+}
+
+function stepTwoPlayer(game,ticks,inputs={}){
+ for(let i=0;i<ticks;i++)game.update(1/60,inputs);
+}
+
+test('overlapping human hands pass through each other and only the requested hand reverses',()=>{
+ const game=twoPlayerFixture();
+ Object.assign(game.player2,{pivot:'a',frame:0,unwrappedFrame:0,angle:0});
+ game.reverse(1);
+ stepTwoPlayer(game,120);
+ assert.deepEqual([game.player.direction,game.player2.direction],[1,-1]);
+ assert.ok(game.playerStates.every(state=>state.alive&&!state.won));
+ assert.ok(game.events.some(e=>e.type==='reverse'&&e.playerIndex===1));
+});
+
+test('a P1 spike death hides that hand while P2 and the shared clock continue to the goal',()=>{
+ const game=twoPlayerFixture({configure(board){board.spikes=[{id:0,x:0,y:0,phase:0}];}});
+ stepTwoPlayer(game,12);
+ assert.ok(game.death);
+ assert.equal(game.death2,null);
+ const [deadAngle,survivorAngle]=game.humans.map(h=>h.angle);
+ stepTwoPlayer(game,48);
+ assert.equal(game.player.visible,false);
+ assert.equal(game.player.angle,deadAngle);
+ assert.notEqual(game.player2.angle,survivorAngle);
+ assert.equal(game.remainingTime,119);
+ assert.equal(game.complete,false);
+ // Align the survivor to the cardinal goal direction and use normal flip input.
+ Object.assign(game.player2,{frame:32,unwrappedFrame:32,angle:Math.PI});
+ stepTwoPlayer(game,12,{player2:{flip:true}});
+ assert.equal(game.player2.pivot,'b');
+ assert.equal(game.player2Won,true);
+ assert.equal(game.complete,true);
+ assert.deepEqual(game.events.filter(e=>e.type==='goal').map(e=>[e.hand,e.playerIndex]),[['player2',1]]);
+ const done=game.events.at(-1);
+ assert.equal(done.type,'round-complete');
+ assert.equal(done.winner,1);
+ assert.deepEqual(done.player1,{won:false,died:true,roundBonus:0,completionBonus:0,timeBonus:0,levelTotal:0});
+ assert.deepEqual(done.player2,{won:true,died:false,roundBonus:16900,completionBonus:5000,timeBonus:11900,levelTotal:16900});
+ const snapshot=game.snapshot();
+ assert.equal(snapshot.twoPlayer,true);
+ assert.equal(snapshot.player2.pivot,'b');
+ assert.deepEqual(snapshot.players.map(s=>[s.alive,s.won,s.dying,s.score.roundBonus]),[[false,false,false,0],[true,true,false,16900]]);
+});
+
+test('both deaths wait for the longer animation and commit each score before a shared checkpoint restart',()=>{
+ const game=twoPlayerFixture({configure(board){board.dots[4].waystation={halfIndex:4,direction:-1};}});
+ Object.assign(game.player2,{frame:16,unwrappedFrame:16,angle:Math.PI/2});
+ game.remainingTime=37;
+ stepTwoPlayer(game,12,{player2:{swing:true}});
+ assert.equal(game.events.find(e=>e.type==='checkpoint')?.playerIndex,1);
+ assert.equal(game.scores[1].roundBonus,1000);
+ game.remainingTime=20;
+ game.beginDeath({reason:'test'},0);
+ game.beginDeath({reason:'test'},1);
+ assert.notEqual(game.death,game.death2);
+ stepTwoPlayer(game,4);
+ assert.equal(game.playerStates[0].dying,false);
+ assert.equal(game.playerStates[1].dying,true);
+ assert.equal(game.roundRestarts,0);
+ stepTwoPlayer(game,4);
+ assert.equal(game.roundRestarts,1);
+ assert.deepEqual(game.humans.map(h=>[h.pivot,h.frame,h.visible,h.direction]),[['e',8,true,-1],['e',24,true,-1]]);
+ assert.deepEqual(game.playerStates.map(s=>[s.alive,s.won,s.death,s.totalCommitted]),[[true,false,null,0],[true,false,null,1000]]);
+ assert.equal(game.remainingTime,37);
+ assert.equal(game.death,null);
+ assert.equal(game.death2,null);
+});
+
+test('without a checkpoint a double death restores the original separate spawns',()=>{
+ const game=twoPlayerFixture();
+ game.player2.pivot='e';
+ game.beginDeath({reason:'test'},0);
+ game.beginDeath({reason:'test'},1);
+ stepTwoPlayer(game,8);
+ assert.deepEqual(game.humans.map(h=>h.pivot),['a','c']);
+});
+
+test('two finishers get distinct completion and time awards and the parked hand cannot die',()=>{
+ const game=twoPlayerFixture();
+ game.remainingTime=30;
+ stepTwoPlayer(game,12,{player1:{swing:true}});
+ assert.equal(game.player1Won,true);
+ assert.equal(game.player2Won,false);
+ assert.equal(game.complete,false);
+ const pose={...game.player};
+ game.beginDeath({reason:'test'},0);
+ game.reverse(0);
+ game.remainingTime=20;
+ Object.assign(game.player2,{frame:32,unwrappedFrame:32,angle:Math.PI});
+ stepTwoPlayer(game,12,{player1:{flip:true},player2:{flip:true}});
+ assert.equal(game.player1Dead,false);
+ for(const key of ['pivot','angle','direction','transfers'])assert.equal(game.player[key],pose[key]);
+ assert.deepEqual(game.scores.map(s=>[s.completionBonus,s.timeBonus,s.roundBonus]),[[5000,3000,8000],[2500,2000,4500]]);
+ assert.equal(game.complete,true);
+ assert.equal(game.events.at(-1).winner,0);
+ assert.deepEqual(game.events.filter(e=>e.type==='goal').map(e=>e.playerIndex),[0,1]);
+});
+
+test('timeout kills only active hands and produces one completion when a hand has parked',()=>{
+ const game=twoPlayerFixture();
+ stepTwoPlayer(game,12,{player2:{flip:true}});
+ assert.equal(game.player2Won,true);
+ game.remainingTime=1;
+ stepTwoPlayer(game,60);
+ assert.equal(game.remainingTime,0);
+ assert.equal(game.player1Dead,true);
+ assert.equal(game.player2Dead,false);
+ assert.equal(game.complete,true);
+ assert.equal(game.events.at(-1).winner,1);
+ assert.deepEqual(game.events.filter(e=>e.type==='death').map(e=>[e.playerIndex,e.cause.sourceReason]),[[0,7]]);
+ stepTwoPlayer(game,8);
+ assert.equal(game.player.visible,false);
+ assert.equal(game.roundRestarts,0);
+ assert.equal(game.events.filter(e=>e.type==='round-complete').length,1);
+
+ const both=twoPlayerFixture();
+ both.remainingTime=0;
+ stepTwoPlayer(both,1);
+ assert.deepEqual(both.events.filter(e=>e.type==='death').map(e=>[e.playerIndex,e.cause.sourceReason]),[[0,7],[1,7]]);
+ assert.equal(both.complete,false);
+});
+
+test('bonus dots and goodie overlaps credit their own player and share hourglass time',()=>{
+ const game=twoPlayerFixture({configure(board,options){
+  Object.assign(board,{activeMask:2,bombs:[],goodieOnlyRules:true,
+   goodies:[0,2].map(column=>({row:0,column,initialFrame:0,activationMask:2}))});
+  const frame={left:7,top:6,right:9,bottom:8,rows:null};
+  options.bombOutlines={groups:{1900:{frames:Array(16).fill(frame)}}};
+ }});
+ Object.assign(game.player,{frame:16,unwrappedFrame:16,angle:Math.PI/2});
+ Object.assign(game.player2,{frame:16,unwrappedFrame:16,angle:Math.PI/2});
+ game.update(1/60,{flip:true},{swing:true});
+ stepTwoPlayer(game,12,{player1:{flip:true},player2:{swing:true}});
+ assert.deepEqual(game.humans.map(h=>h.pivot),['d','e']);
+ assert.deepEqual(game.scores.map(s=>[s.roundBonus,s.nextDotAward]),[[2000,2000],[2000,2000]]);
+ assert.equal(game.remainingTime,140);
+ assert.deepEqual(game.events.filter(e=>['bonus','goodie'].includes(e.type)).map(e=>[e.type,e.playerIndex,e.points]),
+  [['goodie',0,1000],['goodie',1,1000],['bonus',0,1000],['bonus',1,1000]]);
+});
+
+test('one blast can resolve both hands while each death effect owns its visibility',()=>{
+ const game=twoPlayerFixture({configure(board,options){
+  Object.assign(board,{activeMask:2,bombs:[],goodieOnlyRules:true,
+   goodies:[{row:7,column:7,initialFrame:0,activationMask:2}]});
+  options.bombOutlines={groups:{1800:{frames:[{left:0,top:0,right:110,bottom:10,rows:null}]}}};
+ }});
+ game.bombScene.effect({type:'moving',target:'WA',grid:{row:0,column:0},descriptorFrame:0});
+ assert.deepEqual(game.playerStates.map(s=>s.alive),[false,false]);
+ assert.deepEqual(game.humans.map(h=>h.visible),[true,true]);
+ stepTwoPlayer(game,2);
+ assert.deepEqual(game.humans.map(h=>h.visible),[false,false]);
+ assert.deepEqual(game.events.filter(e=>e.type==='death').map(e=>[e.playerIndex,e.cause.reason]),[[0,'bomb'],[1,'bomb']]);
+});
+
+test('a combined goal bonus is collected once and the final scores can tie',()=>{
+ const game=twoPlayerFixture({configure(board){
+  board.combinedGoalBonusRules=true;
+  board.dots[1].bonus=true;
+ }});
+ game.scores[1].bonusDot();
+ game.scores[1].bonusDot();
+ game.scores[1].bonusDot();
+ game.remainingTime=30;
+ stepTwoPlayer(game,12,{player1:{flip:true}});
+ game.remainingTime=25;
+ Object.assign(game.player2,{frame:32,unwrappedFrame:32,angle:Math.PI});
+ stepTwoPlayer(game,12,{player2:{flip:true}});
+ assert.deepEqual(game.events.filter(e=>['goal','bonus','round-complete'].includes(e.type)).map(e=>e.type),
+  ['goal','bonus','goal','round-complete']);
+ assert.deepEqual(game.scores.map(s=>s.roundBonus),[9000,11000]);
+ assert.equal(game.events.at(-1).winner,1);
+ // Two bonus dots offset the smaller goal and time awards for a tie.
+ const tie=twoPlayerFixture();
+ tie.scores[1].bonusDot();tie.scores[1].bonusDot();
+ tie.remainingTime=30;
+ stepTwoPlayer(tie,12,{player1:{flip:true}});
+ tie.remainingTime=25;
+ Object.assign(tie.player2,{frame:32,unwrappedFrame:32,angle:Math.PI});
+ stepTwoPlayer(tie,12,{player2:{flip:true}});
+ assert.equal(tie.events.at(-1).winner,'tie');
+});
+
+test('only the P2 hand teleports, with a fader in its currently selected hand color',()=>{
+ const game=twoPlayerFixture({configure(board){
+  board.teleportRules=true;board.markedTransferRules=true;
+  for(const dot of board.dots)Object.assign(dot,{motion:'static',motionType:0,transferDeath:false});
+  board.teleports=[
+   {dot:'d',partner:'e',initialFrame:1,firstFrame:1,lastFrame:2},
+   {dot:'e',partner:'d',initialFrame:2,firstFrame:1,lastFrame:2},
+  ];
+ }});
+ game.setPlayerGroup(4300);
+ Object.assign(game.player2,{frame:16,unwrappedFrame:16,angle:Math.PI/2});
+ stepTwoPlayer(game,12,{player2:{flip:true}});
+ assert.deepEqual(game.humans.map(h=>h.pivot),['a','d']);
+ const teleport=game.events.find(e=>e.type==='teleport');
+ assert.deepEqual([teleport.playerIndex,teleport.from,teleport.dot],[1,'e','d']);
+ const fader=game.teleports.snapshot().faders[0];
+ assert.equal(fader.actor,'player2');
+ assert.equal(fader.firstFrame,9);
+});
+
+test('a gun projectile aimed at P2 leaves P1 and the round active',()=>{
+ const game=twoPlayerFixture({configure(board,options){
+  board.gunTriggerProjectileRules=true;
+  board.gunTriggerChild={
+   guns:[{id:0,sourceIndex:0,color:0,directions:2,rawBase:{x:50,y:-22}}],
+   triggers:[],frameOrigin:{x:0,y:0},rawBounds:{left:0,top:0,right:600,bottom:400},
+  };
+  options.gunOutlines={groups:{4200:{frames:[{left:-1,top:-1,right:1,bottom:1,rows:null}]}}};
+ }});
+ game.gunTriggers.activateColor(0);
+ stepTwoPlayer(game,12);
+ assert.equal(game.player1Dead,false);
+ assert.equal(game.player2Dead,true);
+ assert.equal(game.complete,false);
+ const death=game.events.find(e=>e.type==='death');
+ assert.deepEqual([death.playerIndex,death.cause.reason,death.cause.sourceReason],[1,'projectile',16]);
+});

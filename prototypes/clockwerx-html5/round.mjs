@@ -40,7 +40,7 @@ import {assertSlidingTeleportScope} from './sliding-teleports.mjs';
 import {startSliding,animateSliding,stopSliding,reverseSliding,slidingPoint,initializeConnectorBonuses,consumeConnectorBonus,validateConnectorBoard,connectorLook} from './sliding.mjs';
 // First hazard-bearing round adapter. Source outlines remain private. Rendering
 // may interpolate SVG poses; collisions use the original 64-angle pixel lattice.
-import {MovementGame,TAU} from './engine.mjs';
+import {MovementGame,TAU,humanAction} from './engine.mjs';
 import {outlineCollision,enemyFrameGate,createSourceTimerChain} from './hazards.mjs';
 import {createDeathClock} from './death.mjs';
 import {advanceWallContactGuard} from './walls.mjs';
@@ -78,7 +78,7 @@ export function worldOutline(profile,group,frame,point){
 }
 
 export class SourceRound extends MovementGame {
- constructor(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,oilBounds,bombOutlines,bombRoutes,gunOutlines,deathFactory,sourceGoodieFrames=false,guestTicksPerSecond=60}={}){
+ constructor(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,oilBounds,bombOutlines,bombRoutes,gunOutlines,deathFactory,sourceGoodieFrames=false,guestTicksPerSecond=60,players=board.players??1}={}){
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   // Validate authored moving declarations before reset/EX closure can repair
@@ -125,8 +125,8 @@ export class SourceRound extends MovementGame {
   else if(board.gunTriggerOilRules)assertGunTriggerOilBoard(board,gunOutlines);
   else if(!board.multiDifficulty&&board.gunTriggerProjectileRules&&!board.staticGunRailRules)assertGunTriggerChildBoard(board,gunOutlines,elevatorOutlines);
   if(!board.multiDifficulty&&board.freeBusterRules&&!board.movingProtectedBusterRules&&!board.movingSlowdownBusterRules&&!board.staticSlowdownBusterRules&&!board.staticTeleportBusterRules&&!board.gunSlidingBusterRules&&!board.movingProgrammedBusterRules&&!board.oilBusterRules&&!board.movingBusterBombRules&&!board.gunBusterRules)assertFreeBusterBoard(board,outlines);
-  super(board);this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
-  if(board.staticSlowdownRules||board.movingSlowdownBusterRules)this.slowdown=new StaticSlowdownRuntime(board.dots,this.actorClasses,e=>{Object.assign(this.event('slowdown',this.player),e);});
+  super(board,{players});this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
+  if(board.staticSlowdownRules||board.movingSlowdownBusterRules)this.slowdown=new StaticSlowdownRuntime(board.dots,this.actorClasses,(e,hand)=>{Object.assign(this.event('slowdown',hand??this.player),e);});
   if(!board.multiDifficulty) {
   if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask&&!board.slidingConnectorRules||d.motion&&d.motion!=='static'&&!(board.elevatorRules&&d.motion==='up-down')&&!(board.movingDotRules&&d.motion==='moving-program'))))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
   if(board.elevatorOilSpikeRules&&(!board.elevatorRules||!board.canonicalOilRules||board.canonicalOilSpikeRules||!board.puddles?.length||board.puddles.some(p=>p.kind!==3)||!board.spikes?.length))throw new Error('Separate group0 elevators, kind3 Oil and static spike scope required');
@@ -196,17 +196,17 @@ export class SourceRound extends MovementGame {
   if(this.enemies.some(e=>e.sourceActorType===4)&&(!board.rotatingSpikeRules||!board.staticEnemyCallbacks||!outlines.groups['3500']))throw new Error('Rotating spike rules, canonical clock and source outlines require qualification');
   }
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
-  if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds,...(board.multiDifficulty||board.slidingOilRules||board.movingDoorOilRules?{getHumanSliding:()=>this.player.sliding===true}:{}),...(board.multiDifficulty||board.slidingOilGoodieRingRules||board.gunTriggerOilRules?{getMainDotSprite:dot=>this.mainDotSprite(dot)}:{})});
+  if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds,...(this.twoPlayer?{getActiveHumans:()=>this.humans.flatMap((hand,playerIndex)=>this.humanActive(hand)?[{playerIndex,pivot:hand.pivot,sliding:hand.sliding===true}]:[])}:{}),...(board.multiDifficulty||board.slidingOilRules||board.movingDoorOilRules?{getHumanSliding:()=>this.player.sliding===true}:{}),...(board.multiDifficulty||board.slidingOilGoodieRingRules||board.gunTriggerOilRules?{getMainDotSprite:dot=>this.mainDotSprite(dot)}:{})});
   if(board.elevatorRules){
    this.elevatorOutlines=elevatorOutlines;
    this.elevators=createElevatorSystem(board.elevators,board.dots.filter(d=>d.upDown).map(d=>({id:d.id,...d.upDown,...((board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingElevatorRules||board.movingCheckpointControlRules)?{sourceIndex:d.sourceIndex,row:d.row,column:d.column,originalPixel:d.sourceInitialPosition}:{})})),{origin:board.origin,clockCount:this.actorClasses.snapshot().classes[1].count,surfaceCount:this.elevatorSurfaceClock.advance(0).clientCount,...((board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingElevatorRules||board.movingCheckpointControlRules)?{allowSourceDotDispatch:true,allowLoweredCheckpointControls:board.movingCheckpointControlRules===true,allowLoweredChannel0:board.staticBombElevatorRules===true,onRiders:(index,p,o)=>this.positionJoinedUpDownRiders(index,p,o),onLowered:id=>this.onSourceDotLowered(id)}:{})});
    this.syncElevatorDots();
   }
   if(board.specialDotRules){
-   this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,difficulty:DIFFICULTIES.indexOf(board.difficulty??'Child'),dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount,...(board.movingTeleportCheckpointRules||board.movingTeleportDoorRules||board.movingProtectedPassageRules||board.staticRingDoorRules||board.staticGunRailRules||board.movingGoalRailRules||board.movingGoalOrdinaryRules||board.movingWaystationRules||board.movingProtectedBusterRules||board.movingSlowdownBusterRules||board.staticSlowdownRules||board.movingGoalGoodieRules||board.staticTeleportBusterRules||board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingCheckpointControlRules||board.movingCheckpointRailRules||board.movingBusterBombRules||board.movingDoorGoodieRules||board.movingDoorOilRules||board.movingDoorCheckpointRules||board.movingTubesRules||board.movingFuseOrdinaryRules||board.movingBombSpikeWaystationRules||board.staticSlidingBombGoodieRules||board.movingMarkedOrdinaryRules||board.staticMarkedOrbitalRules||board.movingSpikeRules||board.movingMarkedGoalRules||board.movingElevatorRules||board.movingCheckpointRingRules||board.movingMarkedBonusRules?{allowGoalMisc:true}:{})});
-   this.remainingTime=board.timeLimit;this.onHumanGrab(this.point(this.player));
+   this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,sharedCheckpoint:this.twoPlayer,difficulty:DIFFICULTIES.indexOf(board.difficulty??'Child'),dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount,...(board.movingTeleportCheckpointRules||board.movingTeleportDoorRules||board.movingProtectedPassageRules||board.staticRingDoorRules||board.staticGunRailRules||board.movingGoalRailRules||board.movingGoalOrdinaryRules||board.movingWaystationRules||board.movingProtectedBusterRules||board.movingSlowdownBusterRules||board.staticSlowdownRules||board.movingGoalGoodieRules||board.staticTeleportBusterRules||board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingCheckpointControlRules||board.movingCheckpointRailRules||board.movingBusterBombRules||board.movingDoorGoodieRules||board.movingDoorOilRules||board.movingDoorCheckpointRules||board.movingTubesRules||board.movingFuseOrdinaryRules||board.movingBombSpikeWaystationRules||board.staticSlidingBombGoodieRules||board.movingMarkedOrdinaryRules||board.staticMarkedOrbitalRules||board.movingSpikeRules||board.movingMarkedGoalRules||board.movingElevatorRules||board.movingCheckpointRingRules||board.movingMarkedBonusRules?{allowGoalMisc:true}:{})});
+   this.remainingTime=board.timeLimit;for(const hand of this.humans)this.onHumanGrab(this.point(hand),hand);
   }
-  if(board.teleportRules){this.teleports=new TeleportRuntime(board.teleports,board.dots,this.teleportClocks.advance(0),board.movingTeleportCheckpointRules?{allowMovingTeleportCheckpoints:true,board}:board.movingTeleportDoorRules?{allowMovingTeleportDoors:true,board}:board.multiDifficulty?{multiDifficulty:true}:board.slidingTeleportRules?{allowSlidingTeleports:true,connectors:board.connectors,actors:[this.player,...this.enemies]}:{});this.onAfterHumanGrab(this.point(this.player));}
+  if(board.teleportRules){this.teleports=new TeleportRuntime(board.teleports,board.dots,this.teleportClocks.advance(0),board.movingTeleportCheckpointRules?{allowMovingTeleportCheckpoints:true,board}:board.movingTeleportDoorRules?{allowMovingTeleportDoors:true,board}:board.multiDifficulty?{multiDifficulty:true,twoPlayer:this.twoPlayer}:board.slidingTeleportRules?{allowSlidingTeleports:true,connectors:board.connectors,actors:[this.player,...this.enemies]}:{});for(const hand of this.humans)this.onAfterHumanGrab(this.point(hand),hand);}
   if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline,sourceGoodieFrames});
   // PR stores universe-local sprite bases. frameOrigin is added only for
   // canonical collision/render coordinates, never to the raw clipping bounds.
@@ -239,8 +239,9 @@ export class SourceRound extends MovementGame {
   if(this.board.movingSpikeRules){assertMovingSpikeScope(this.board);if(this.movingSpikes)this.movingSpikes.reset(this.board.spikes);else this.movingSpikes=createMovingSpikeLifecycle(this.board.spikes,{allowMovingSpikes:true,sourceScope:this.board});}
   if(this.board.movingDotRules&&this.movingDots){for(const saved of this.movingInitialDots){const d=this.board.dots.find(d=>d.id===saved.id);Object.assign(d,saved);delete d.burnt;delete d.collected;}for(const runtime of this.movingDots.values())runtime.reset(this.actorClasses.snapshot().classes[1].count);}
   if(!this.board.multiDifficulty&&(this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingGoalOrdinaryRules||this.board.movingWaystationRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingGoalGoodieRules||this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingDoorCheckpointRules||this.board.movingTubesRules||this.board.movingMarkedOrdinaryRules||this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules)){this.sourcePaint??={original:{dots:this.board.dots.map(d=>({id:d.id,cell:d.cell,kind:d.kind,bonus:d.bonus,sourceInBackground:d.sourceInBackground})),...(this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingElevatorRules||this.board.movingTubesRules?{connectors:this.board.connectors.map(e=>({...e}))}:{}),...(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingElevatorRules||this.board.movingDoorCheckpointRules||this.board.staticGunRailHazardRules?{walls:this.board.walls.map(w=>({...w}))}:{}),...((this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingElevatorRules||this.board.movingCheckpointControlRules)?{elevators:this.board.elevators.map(e=>({...e}))}:{})}};this.sourcePaint.backgroundPaints=[];if(this.board.movingElevatorRules&&!preserveCheckpoint){this.pilotRecoveries=0;this.pilotInputLatch=false;}}
-  super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
-  if(this.board.childScoreRules){
+  super.reset({preserveCheckpoint});this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
+  if(this.twoPlayer)this.childScore=this.scores[0];
+  else if(this.board.childScoreRules){
    if(!this.childScore)this.childScore=this.board.multiDifficulty?new RoundScore({difficulty:this.board.difficulty}):new ChildRoundScore();
    else if(preserveCheckpoint)this.childScore.startRound();
    else this.childScore.resetGame();
@@ -254,7 +255,7 @@ export class SourceRound extends MovementGame {
   this.slowdown?.reset();
   if(this.board.elevatorRules)this.elevatorSurfaceClock??=createSourceTimerChain(160,1);
   const classes=this.actorClasses.snapshot().classes;
-  for(const hand of [this.player,...this.enemies])hand.frameReference=classes[hand.speedClass??0].count;
+  for(const hand of [...this.humans,...this.enemies])hand.frameReference=classes[hand.speedClass??0].count;
   if(this.board.movingDotRules&&!this.movingDots)this.initializeMovingDots(classes[1].count);
   if(this.board.movingDotRules)this.syncMovingActors();
   this.doorClock??=createSourceTimerChain(this.adjustPeriod(80),1);
@@ -273,15 +274,18 @@ export class SourceRound extends MovementGame {
     const reset=this.dotAnimations.reset({restartLevel:!preserveCheckpoint,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
     for(const key of ['pivot','angle','direction'])this.player[key]=reset.player[key];
     this.remainingTime=this.timed&&reset.remainingTime<=0?this.board.timeLimit:reset.remainingTime;
+    if(this.player2&&this.dotAnimations.savedCheckpoint!=null){
+     Object.assign(this.player2,{pivot:this.player.pivot,angle:(this.player.angle+Math.PI/2)%TAU,direction:this.player.direction});
+    }
    }
   }
   // PU/DP follows the restored WY spawn, rather than the original level start.
   if(this.board.elevatorRules){this.elevators?.reset(this.actorClasses.snapshot().classes[1].count,this.elevatorSurfaceClock.advance(0).clientCount);this.syncElevatorDots();}
   this.oil?.reset(this.player.pivot);
-  if(this.dotAnimations)this.onHumanGrab(this.point(this.player));
-  if(this.board.canonicalPlayerRules){this.canonicalPlayerContact=false;this.player.frame=sourceFrame(this.player.angle);this.player.unwrappedFrame=this.player.frame;}
+  if(this.dotAnimations)for(const hand of this.humans)this.onHumanGrab(this.point(hand),hand);
+  if(this.board.canonicalPlayerRules){this.canonicalPlayerContact=false;for(const hand of this.humans)hand.unwrappedFrame=hand.frame=sourceFrame(hand.angle);}
   if(this.board.movingCheckpointRailRules)this.syncMovingActors();
-  if(this.teleports)this.onAfterHumanGrab(this.point(this.player));
+  if(this.teleports)for(const hand of this.humans)this.onAfterHumanGrab(this.point(hand),hand);
  }
  adjustPeriod(period){return adjustSourcePeriod(period,this.board.difficulty??'Child');}
  makeHand(hand){
@@ -294,7 +298,8 @@ export class SourceRound extends MovementGame {
    return result;
   }
  move(hand,dt,action){
-  if(hand!==this.player||!this.board.canonicalPlayerRules)return super.move(hand,dt,action);
+  if(!this.isHuman(hand)||!this.board.canonicalPlayerRules)return super.move(hand,dt,action);
+  const control=this.humanControl(hand);
   if(this.board.staticMarkedOrbitalRules)return this.moveStaticMarkedHuman(hand,action);
   if(this.board.movingDotRules||this.board.multiDifficulty&&this.board.markedTransferRules)return this.moveMovingHuman(hand,action);
   if(this.board.slidingConnectorRules)return this.moveSlidingHuman(hand,action);
@@ -306,18 +311,19 @@ export class SourceRound extends MovementGame {
   const sequence=this.eventSequence;
   // WADirectHero only tests the current cardinal frame, then consumes Reverse.
   // A zero-duration direction request separates the grab from WA animation.
-  super.move(hand,0,hand.frame%16===0?action:null,(this.board.multiDifficulty||this.board.slowdownWallRules)?{sourceWallContact:this.canonicalPlayerContact}:{});
-  if(this.pendingReverse){
-   this.pendingReverse=false;
-   if(!this.canonicalPlayerContact&&this.eventSequence===sequence&&!this.death){hand.direction*=-1;this.event('reverse',hand);}
+  super.move(hand,0,hand.frame%16===0?action:null,(this.board.multiDifficulty||this.board.slowdownWallRules)?{sourceWallContact:control.canonicalPlayerContact}:{});
+  if(control.pendingReverse){
+   control.pendingReverse=false;
+   if(!control.canonicalPlayerContact&&this.eventSequence===sequence&&(this.twoPlayer?this.humanActive(hand):!this.death)){hand.direction*=-1;this.event('reverse',hand);}
   }
   hand.unwrappedFrame=Math.round(hand.angle*64/TAU);
-  if(!this.complete&&!this.death)hand.unwrappedFrame+=hand.direction;
+  if(this.humanActive(hand))hand.unwrappedFrame+=hand.direction;
   hand.frame=hand.unwrappedFrame&63;
   hand.angle=hand.unwrappedFrame*TAU/64;
  }
  moveStaticMarkedHuman(hand,action){
-  if(this.death||this.complete)return;
+  const control=this.humanControl(hand);
+  if(!this.humanActive(hand))return;
   const delta=this.actorClasses.snapshot().classes[0].delta;if(delta>1)throw new Error('Static marked human single callback required');if(!delta)return;
   assertStaticMarkedOrbitalScope(this.board,{actors:[hand]});
   hand.angle=hand.unwrappedFrame*TAU/64;let consumed=false;
@@ -325,42 +331,43 @@ export class SourceRound extends MovementGame {
   if(hand.frame%16===0&&action){
    const query=staticMarkedHumanQuery(this.board,hand,{allowStaticMarkedOrbitals:true}),target=query.result.grab&&this.board.dots.find(d=>d.id===query.result.grab.dot);
    if(query.result.allowed&&target.id!==hand.sourceBlockedTarget){
-    if((action!=='flip')!==!!this.canonicalPlayerContact)hand.direction*=-1;
+    if((action!=='flip')!==!!control.canonicalPlayerContact)hand.direction*=-1;
     if(action==='bounce'){this.event('bounce',hand,target);consumed=true;}
     else{const old=hand.pivot;hand.sourceBlockedTarget=old;hand.transfers++;
-     grabStaticMarkedHuman(this.board,hand,query,{physicalPoint:this.point(hand),release:(d,a)=>this.onHumanRelease(d,a),place:a=>{a.angle=a.unwrappedFrame*TAU/64;},grab:()=>this.slideGrabHuman(target,hand),onTransfer:receipt=>Object.assign(this.event(action,hand,target),receipt,{type:action}),onMarkedDeath:cause=>this.beginDeath(cause)},{allowStaticMarkedOrbitals:true});
+     grabStaticMarkedHuman(this.board,hand,query,{physicalPoint:this.point(hand),release:(d,a)=>this.onHumanRelease(d,a),place:a=>{a.angle=a.unwrappedFrame*TAU/64;},grab:()=>this.slideGrabHuman(target,hand),onTransfer:receipt=>Object.assign(this.event(action,hand,target),receipt,{type:action}),onMarkedDeath:cause=>this.beginDeath(cause,this.humanIndex(hand))},{allowStaticMarkedOrbitals:true});
     }
    }
   }
-  if(this.pendingReverse){this.pendingReverse=false;if(!this.canonicalPlayerContact&&!consumed&&!this.death){hand.direction*=-1;this.event('reverse',hand);}}
-  if(!this.death&&!this.complete)hand.unwrappedFrame+=hand.direction;
+  if(control.pendingReverse){control.pendingReverse=false;if(!control.canonicalPlayerContact&&!consumed&&(this.twoPlayer?this.humanActive(hand):!this.death)){hand.direction*=-1;this.event('reverse',hand);}}
+  if(this.humanActive(hand))hand.unwrappedFrame+=hand.direction;
   hand.frame=hand.unwrappedFrame&63;hand.angle=hand.unwrappedFrame*TAU/64;
  }
  slideGrabHuman(target,hand){
+  if(this.twoPlayer)return this.grabTwoPlayerDot(target,hand);
   if(this.onHumanGrab?.(target)===false)return;
   if(this.board.combinedGoalBonusRules&&target.kind==='goal'&&target.bonus){this.onGoal?.(target);this.complete=true;this.event('goal',hand,target);if(!target.collected){target.collected=true;const points=this.onGoalBonus?.(target),e=this.event('bonus',hand,target);if(points!==undefined)e.points=points;}this.onAfterHumanGrab?.(target);return;}
   if(target.kind==='bonus'&&!target.collected){target.collected=true;const points=this.onBonus?.(target),e=this.event('bonus',hand,target);if(points!==undefined)e.points=points;}
   if(target.kind==='goal'){this.onGoal?.(target);this.complete=true;this.event('goal',hand,target);}
   this.onAfterHumanGrab?.(target);
  }
- stopHumanSlide(){
-  const e=stopSliding(this.player,this.board.dots,{currentPivot:this.board.slidingTeleportRules===true||this.board.movingDotRules===true,...((this.board.multiDifficulty||this.board.pilotAbsentSlideRecoveryRules)?{onMissingTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a)}:{}),release:(d,h)=>this.onHumanRelease?.(d,h),grab:(d,h)=>this.slideGrabHuman(d,h)});
-  if(e){this.player.blocked=null;this.event(e.type,this.player,{id:e.to??e.dot});}
+ stopHumanSlide(hand=this.player){
+  const e=stopSliding(hand,this.board.dots,{currentPivot:this.board.slidingTeleportRules===true||this.board.movingDotRules===true,...((this.board.multiDifficulty||this.board.pilotAbsentSlideRecoveryRules)?{onMissingTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a)}:{}),release:(d,h)=>this.onHumanRelease?.(d,h),grab:(d,h)=>this.slideGrabHuman(d,h)});
+  if(e){hand.blocked=null;this.event(e.type,hand,{id:e.to??e.dot});}
  }
  initializeMovingDots(classCount){
   this.movingInitialDots=this.board.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind,cell:d.cell,sourceCollidable:d.sourceCollidable}));this.movingDots=new Map();
   for(const d of this.board.dots)if(d.motion==='moving-program')this.movingDots.set(d.id,createMovingDot({id:d.id,sourceIndex:d.sourceIndex,row:d.row,column:d.column,originalPixel:d.sourceInitialPosition,program:d.movingProgram},{allowMovingDots:true,allowStationaryLR:this.board.multiDifficulty===true||this.board.movingDoorCheckpointRules===true,classCount,onRiders:(index,p)=>{const dot=this.board.dots.find(d=>d.sourceIndex===index);dot.x=p.x;dot.y=p.y;positionMovingRiders({WA:()=>this.syncMovingActors(),HY:()=>{if(this.board.teleports?.length&&!this.board.multiDifficulty&&!this.board.movingTeleportCheckpointRules&&!this.board.movingTeleportDoorRules)throw new Error('Moving HY riders unqualified');/* HY snapshot resolves current DO pixels; its existing frame/reference survive. */},DO:()=>this.dotAnimations?.positionRiders(index),DP:()=>{if(this.board.multiDifficulty||this.board.movingDoorOilRules)this.oil?.positionMovingDroplets(index);else if(this.oil)throw new Error('Moving DP riders unqualified');},PU:()=>{if(this.board.multiDifficulty||this.board.movingDoorOilRules)this.oil?.positionMovingPuddles(index);else if(this.board.puddles?.length)throw new Error('Moving PU riders unqualified');},DE:()=>{}},index,p);}}));
  }
- syncMovingActors(){for(const a of [this.player,...(this.enemies||[])].filter(Boolean))a.movingPivot=this.board.dots.find(d=>d.id===a.pivot)?.motion==='moving-program';}
+ syncMovingActors(){for(const a of [...this.humans,...(this.enemies||[])].filter(Boolean))a.movingPivot=this.board.dots.find(d=>d.id===a.pivot)?.motion==='moving-program';}
  positionJoinedUpDownRiders(index,p,options){
   const d=this.board.dots.find(d=>d.sourceIndex===index);d.x=p.x;d.y=p.y;d.humanCanGrab=options.state.humanAvailable;
   positionMovingRiders({WA:()=>this.syncMovingActors(),HY:()=>{},DO:()=>this.dotAnimations?.positionRiders(index),DP:()=>{},PU:()=>{},DE:()=>{}},index,p,{skipSpecialMisc:true});
  }
- onSourceDotLowered(id){if(this.player.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id});for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});}
+ onSourceDotLowered(id){for(const hand of this.humans)if(hand.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id},this.humanIndex(hand));for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});}
  processMovingDots({classCount,classDelta,dotCount,overlayCount,surfaceCount}){
   if(this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingElevatorRules||this.board.movingCheckpointControlRules)this.elevators?.observeSurfaceClock(surfaceCount);
   for(const d of this.board.dots){
-   if(this.board.movingElevatorRules&&this.death)break;
+   if(this.board.movingElevatorRules&&this.worldFrozen)break;
    this.movingDots.get(d.id)?.dispatch(classCount,classDelta);
    if((this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingElevatorRules||this.board.movingCheckpointControlRules)&&d.upDown){this.elevators.dispatchDot(d.id,classCount,classDelta);this.syncElevatorDots();}
    this.dotAnimations?.observeDotClocks(d.id,{dotCount,overlayCount,guestTick:this.guestTicks});
@@ -374,23 +381,26 @@ export class SourceRound extends MovementGame {
   return hand.sliding?querySourceGrab(dots,{...options,originPixel:this.point(hand),movingOrigin:false,currentPass:true}):queryIndexedSourceGrab(dots,{...options,originIndex:this.board.dots.find(d=>d.id===hand.pivot).sourceIndex});
  }
  moveMovingHuman(hand,action){
-  if(this.board.movingMarkedOrdinaryRules){if(this.death||this.complete)return;assertMovingMarkedOrdinaryScope(this.board,{actors:[hand]});}
+  const control=this.humanControl(hand);
+  if(this.board.movingMarkedOrdinaryRules){if(!this.humanActive(hand))return;assertMovingMarkedOrdinaryScope(this.board,{actors:[hand]});}
   const delta=this.actorClasses.snapshot().classes[0].delta;if(delta>1)throw new Error('Moving Child human single callback required');if(!delta)return;
   hand.angle=hand.unwrappedFrame*TAU/64;let consumed=false;if(hand.frame%16)hand.sourceBlockedTarget=null;
   if(hand.frame%16===0&&action&&!this.complete){const query=this.sourceGrabQuery(hand,true),target=query.grab&&this.board.dots.find(d=>d.id===query.grab.dot);
    if(query.allowed&&target.id!==hand.sourceBlockedTarget){
-    if((action!=='flip')!==!!this.canonicalPlayerContact)reverseSliding(hand);
-    if(action!=='bounce'){const old=hand.pivot,before=this.point(hand);hand.sourceBlockedTarget=old;hand.transfers++;grabSourceActor(hand,query,{allowMovingQueries:true,...((this.board.multiDifficulty||this.board.movingBusterBombRules||this.board.movingMarkedOrdinaryRules||this.board.movingMarkedGoalRules||this.board.movingMarkedBonusRules)?{allowMarkedTransfers:true,onMarkedDeath:cause=>this.beginDeath(cause)}:{}),dots:this.movingQueryDots(),connectors:this.board.connectors,physicalPoint:before,release:(d,a)=>this.onHumanRelease(d,a),place:()=>{},onTransfer:receipt=>{hand.movingPivot=target.motion==='moving-program';Object.assign(this.event(action,hand,target),receipt,{type:action,realDot:query.grab.realDot,queryPixel:query.requestedPixel});},grab:()=>this.slideGrabHuman(target,hand)});
+    if((action!=='flip')!==!!control.canonicalPlayerContact)reverseSliding(hand);
+    if(action!=='bounce'){const old=hand.pivot,before=this.point(hand);hand.sourceBlockedTarget=old;hand.transfers++;grabSourceActor(hand,query,{allowMovingQueries:true,...((this.board.multiDifficulty||this.board.movingBusterBombRules||this.board.movingMarkedOrdinaryRules||this.board.movingMarkedGoalRules||this.board.movingMarkedBonusRules)?{allowMarkedTransfers:true,onMarkedDeath:cause=>this.beginDeath(cause,this.humanIndex(hand))}:{}),dots:this.movingQueryDots(),connectors:this.board.connectors,physicalPoint:before,release:(d,a)=>this.onHumanRelease(d,a),place:()=>{},onTransfer:receipt=>{hand.movingPivot=target.motion==='moving-program';Object.assign(this.event(action,hand,target),receipt,{type:action,realDot:query.grab.realDot,queryPixel:query.requestedPixel});},grab:()=>this.slideGrabHuman(target,hand)});
     }else this.event('bounce',hand,target);consumed=action==='bounce';
    }
   }
-  if(this.pendingReverse){this.pendingReverse=false;if(!this.canonicalPlayerContact&&!consumed&&(!this.board.movingMarkedOrdinaryRules||!this.death)){reverseSliding(hand);this.event('reverse',hand);}}
+  if(control.pendingReverse){control.pendingReverse=false;if(!control.canonicalPlayerContact&&!consumed&&(this.twoPlayer?this.humanActive(hand):!this.board.movingMarkedOrdinaryRules||!this.death)){reverseSliding(hand);this.event('reverse',hand);}}
+  if(this.twoPlayer&&!this.humanActive(hand)){hand.angle=hand.unwrappedFrame*TAU/64;return;}
   if(startSliding(hand,this.board.dots.find(d=>d.id===hand.pivot)))delete hand.sourceRailSpritePoint;
-  if(animateSliding(hand)){if(hand.sourceRailSpritePoint)hand.sourceRailSpritePoint={x:hand.slideX,y:hand.slideY};}else if(!this.complete&&!this.death)hand.unwrappedFrame+=hand.direction;
+  if(animateSliding(hand)){if(hand.sourceRailSpritePoint)hand.sourceRailSpritePoint={x:hand.slideX,y:hand.slideY};}else if(this.humanActive(hand))hand.unwrappedFrame+=hand.direction;
   hand.frame=hand.unwrappedFrame&63;hand.angle=hand.unwrappedFrame*TAU/64;
  }
  moveSlidingHuman(hand,action){
-  if(this.board.staticSlidingBombGoodieRules){if(this.death||this.complete)return;assertStaticSlidingBombGoodieScope(this.board,{actors:[hand]});}
+  const control=this.humanControl(hand);
+  if(this.board.staticSlidingBombGoodieRules){if(!this.humanActive(hand))return;assertStaticSlidingBombGoodieScope(this.board,{actors:[hand]});}
   const delta=this.actorClasses.snapshot().classes[hand.speedClass??0].delta;
   if(delta>1)throw new Error('EX human single callback required');if(!delta)return;
   hand.angle=hand.unwrappedFrame*TAU/64;
@@ -401,7 +411,7 @@ export class SourceRound extends MovementGame {
    const target=this.board.dots.find(d=>d.present&&d.x===p.x+offset[0]&&d.y===p.y+offset[1]);
    if(target?.humanCanGrab&&target.id!==hand.sourceBlockedTarget){
     // WADirectHero inverts the reverse action on collision to compensate the preceding wall reversal.
-    if((action!=='flip')!==!!this.canonicalPlayerContact)reverseSliding(hand);
+    if((action!=='flip')!==!!control.canonicalPlayerContact)reverseSliding(hand);
     if(action!=='bounce'){
      const old=this.board.dots.find(d=>d.id===hand.pivot);this.onHumanRelease?.(old,hand);
      hand.sourceBlockedTarget=old.id;hand.pivot=target.id;hand.transfers++;hand.sliding=false;hand.unwrappedFrame+=32;hand.frame=hand.unwrappedFrame&63;hand.blocked=hand.frame;
@@ -410,15 +420,19 @@ export class SourceRound extends MovementGame {
     consumed=action==='bounce';
    }
   }
-  if(this.pendingReverse){this.pendingReverse=false;if(!this.canonicalPlayerContact&&!consumed&&(!this.board.movingMarkedOrdinaryRules||!this.death)){reverseSliding(hand);this.event('reverse',hand);}}
+  if(control.pendingReverse){control.pendingReverse=false;if(!control.canonicalPlayerContact&&!consumed&&(this.twoPlayer?this.humanActive(hand):!this.board.movingMarkedOrdinaryRules||!this.death)){reverseSliding(hand);this.event('reverse',hand);}}
+  if(this.twoPlayer&&!this.humanActive(hand)){hand.angle=hand.unwrappedFrame*TAU/64;return;}
   startSliding(hand,this.board.dots.find(d=>d.id===hand.pivot));
-  if(!animateSliding(hand)&&!this.complete&&!this.death)hand.unwrappedFrame+=hand.direction;
+  if(!animateSliding(hand)&&this.humanActive(hand))hand.unwrappedFrame+=hand.direction;
   hand.frame=hand.unwrappedFrame&63;hand.angle=hand.unwrappedFrame*TAU/64;
  }
- reverse(){if(!this.death&&!this.paused&&!this.complete)this.pendingReverse=!this.pendingReverse;}
+ reverse(playerIndex=0){
+  const hand=this.humans[playerIndex];
+  if(hand&&!this.paused&&this.humanActive(hand)){const control=this.humanControl(hand);control.pendingReverse=!control.pendingReverse;}
+ }
  setPlayerGroup(group){
   if(![700,4300].includes(group)||!this.outlines.groups[String(group)])throw new Error('Unqualified player artwork group');
-   this.playerGroup=group;this.player.group=group;
+   super.setPlayerGroup(group);
  }
  spikeFrame(spike){return (this.board.movingSpikeRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules)?this.movingSpikes.frame(spike):this.spikeStates.get(spike.id).frame;}
  advanceSpikes(){
@@ -440,25 +454,25 @@ export class SourceRound extends MovementGame {
   return {exists:true,frame:dot.ring?main.frame:dotBodyFrame(dot),base,background:dot.sourceInBackground,visible:dot.ring?main.visible:dot.sourceCollidable};
  }
  point(hand){if(this.board.movingDotRules&&hand.sliding&&hand.sourceRailSpritePoint){const d=this.board.dots.find(d=>d.id===hand.pivot);return {...d,...hand.sourceRailSpritePoint};}const d=this.board.dots.find(d=>d.id===hand.pivot);return this.board.slidingConnectorRules?slidingPoint(hand,d):d;}
- collider(hand){return hand.visible===false?null:worldOutline(this.outlines,hand.group,hand.program||hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),this.point(hand));}
- spikeCollision(){
-  const hero=this.collider(this.player);
+ collider(hand){return hand.visible===false||this.twoPlayer&&this.isHuman(hand)&&!this.humanActive(hand)?null:worldOutline(this.outlines,hand.group,hand.program||hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),this.point(hand));}
+ spikeCollision(hand=this.player){
+  const hero=this.collider(hand);
   for(const spike of this.board.spikes)if(spike.visible!==false&&outlineCollision(hero,worldOutline(this.outlines,200,this.spikeFrame(spike),spike)))
    return {reason:'spike',object:spike.id};
   return null;
  }
- enemyCollision(){
-  const hero=this.collider(this.player);
-  for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,this.player.canonicalFrame?this.player.frame:sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy))){
+ enemyCollision(hand=this.player){
+  const hero=this.collider(hand);
+  for(const enemy of this.enemies)if(!(this.point(hand).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(hand.pivot,enemy.pivot,hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy))){
    if(this.board.freeBusterRules&&enemy.sourceActorType===5){
-    this.emitGunTriggerEvents([{type:'sound',id:41},...this.gunTriggers.launchBuster(enemy,this.point(enemy),busterVelocity(this.player.canonicalFrame?this.player.frame:sourceFrame(this.player.angle),this.player.direction))],this.player);
+    this.emitGunTriggerEvents([{type:'sound',id:41},...this.gunTriggers.launchBuster(enemy,this.point(enemy),busterVelocity(hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),hand.direction))],hand);
     enemy.visible=false;enemy.hiddenUntil=this.guestTicks+300;this.event('buster-hidden',enemy);continue;
    }
    return {reason:'enemy',object:enemy.name,...(enemy.sourceActorType===4?{sourceReason:0}:{})};
   }
   return null;
  }
- collision(){return this.spikeCollision()||this.enemyCollision();}
+ collision(playerIndex=0){const hand=this.humans[playerIndex];return this.spikeCollision(hand)||this.enemyCollision(hand);}
  emitGunTriggerEvents(events,hand){
   for(const event of events){const e=this.event(event.type==='sound'?'gun-sound':event.type,hand);e.gunTrigger={...event};}
  }
@@ -492,10 +506,10 @@ export class SourceRound extends MovementGame {
   effect.reference=this.busterWallClock.advance(0).clientCount;this.busterWallEffects.push(effect);
   this.board.wallRevision=(this.board.wallRevision??0)+1;this.event('buster-wall-shatter',this.player,{id:w.id});
  }
- projectileCollision(){
+ projectileCollision(hand=this.player){
   if(!this.board.multiDifficulty&&this.board.freeBusterRules&&!this.board.gunSlidingBusterRules&&!this.board.gunBusterRules)return null;
-  const actor=this.collider(this.player),g=this.gunTriggers;
-  return g.humanHit(this.player,p=>outlineCollision(actor,worldOutline(this.gunOutlines,4200,p.frame,g.pointFor(p.rawBase))));
+  const actor=this.collider(hand),g=this.gunTriggers;
+  return g.humanHit(hand,p=>outlineCollision(actor,worldOutline(this.gunOutlines,4200,p.frame,g.pointFor(p.rawBase))));
  }
  wallCollision(hand){
   if(!hand.checksWalls)return null;
@@ -595,26 +609,32 @@ export class SourceRound extends MovementGame {
   // that same collision frame so a shorter next clock interval can retreat to
   // its neighbor, rather than spuriously testing the identical pose again.
   // This changes neither pivot nor current outline and adds no source step.
-  if(!this.board.canonicalPlayerRules||hand!==this.player)hand.angle=(sourceFrame(hand.angle)+.5)*TAU/64;
-  if(this.board.slidingConnectorRules)reverseSliding(hand);else hand.direction*=-1;hand.blocked=null;if(hand===this.player&&!this.board.canonicalPlayerRules)this.pendingReverse=false;
+  if(!this.board.canonicalPlayerRules||!this.isHuman(hand))hand.angle=(sourceFrame(hand.angle)+.5)*TAU/64;
+  if(this.board.slidingConnectorRules)reverseSliding(hand);else hand.direction*=-1;hand.blocked=null;if(this.isHuman(hand)&&!this.board.canonicalPlayerRules)this.humanControl(hand).pendingReverse=false;
   this.event(type,hand,this.point(hand));
  }
- beginDeath(cause){
-  if(this.death)return;
-  this.death=this.deathFactory(this.point(this.player),this.player,this.deathClock);
-  this.event('death',this.player);this.events[this.events.length-1].cause=cause;
+ onPlayerResolved(hand){
+  this.contactSwitch(hand);
+  this.contactElevators(hand);
+  if(this.gunTriggers)this.contactGunTrigger(hand);
  }
- onHumanGrab(dot){
-  const deaths=this.oil?.humanGrab(dot.id)||[];
-  for(const event of deaths)this.beginDeath({reason:'oil',sourceReason:event.reason,object:dot.id});
-  this.slowdown?.humanGrab(this.board.multiDifficulty?this.board.dots.find(d=>d.id===dot.id):dot);
-  if(this.death&&!this.board.slidingConnectorRules)return false;
+ beginDeath(cause,playerIndex=0){
+  const hand=this.humans[playerIndex];
+  if(!hand||(this.twoPlayer?!this.humanActive(hand):this.death))return;
+  this.recordDeath(hand,this.deathFactory(this.point(hand),hand,this.deathClock),cause);
+ }
+ onHumanGrab(dot,hand=this.player){
+  const deaths=this.oil?.humanGrab(dot.id,this.twoPlayer?hand:undefined)||[];
+  for(const event of deaths)this.beginDeath({reason:'oil',sourceReason:event.reason,object:dot.id},this.humanIndex(hand));
+  this.slowdown?.humanGrab(this.board.multiDifficulty?this.board.dots.find(d=>d.id===dot.id):dot,hand);
+  const alive=this.twoPlayer?this.humanActive(hand):!this.death;
+  if(!alive&&(this.twoPlayer||!this.board.slidingConnectorRules))return false;
   if(this.dotAnimations){
    const result=this.dotAnimations.humanGrab(dot.id,this.remainingTime);
-   if(result.checkpointChanged)this.event('checkpoint',this.player,dot);
-   if(result.sounds.includes(46))this.event('protected',this.player,dot);
+   if(result.checkpointChanged)this.event('checkpoint',hand,dot);
+   if(result.sounds.includes(46))this.event('protected',hand,dot);
   }
-  return !this.death;
+  return alive;
  }
  afterActorDotGrab(hand,dot){
   if(!this.teleports||(this.board.multiDifficulty||this.board.staticTeleportBusterRules)&&hand.sourceActorType===5)return;
@@ -626,20 +646,24 @@ export class SourceRound extends MovementGame {
    // bounce/reversal before WATeleport dispatches death36. Earlier wall-free
    // families retain their false result and reject unqualified WL joins.
    checkWalls:a=>{if(this.board.multiDifficulty){const wall=this.wallCollision(a);if(wall)this.bounceFromWall(a,wall);return Boolean(wall);}if(this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.staticTeleportBusterRules){if(this.board.movingTeleportCheckpointRules)assertMovingTeleportCheckpointActor(a);else if(this.board.movingTeleportDoorRules)assertMovingTeleportDoorActor(a);else assertStaticTeleportBusterActor(a);const wall=this.wallCollision(a);if(wall){this.bounceFromWall(a,wall);return true;}return false;}if(this.board.walls?.length)throw new Error('HY wall composition is unqualified');return false;},
-   onWallDeath:(s,{reason})=>this.beginDeath({reason:'teleport-wall',sourceReason:reason,actor:s.name})
+   onWallDeath:(s,{reason})=>{if(!this.twoPlayer||this.isHuman(s))this.beginDeath({reason:'teleport-wall',sourceReason:reason,actor:s.name},this.twoPlayer?this.humanIndex(s):0);}
   });
   if(moved){this.event('teleport',hand,{id:hand.pivot});this.events.at(-1).from=from;if(this.board.slidingTeleportRules){const f=this.teleports.faders[faderIndex];Object.assign(this.events.at(-1),{to:hand.pivot,fader:f?{...f}:null});}
    // DOGrabbed invokes only the DP destination hook after WATeleport.
    // It does not recursively activate destination bonus/WY/goal/ring hooks.
-   if(hand===this.player)for(const event of this.oil?.humanGrab(hand.pivot)||[])this.beginDeath({reason:'oil',sourceReason:event.reason,object:hand.pivot});
+   if(this.isHuman(hand))for(const event of this.oil?.humanGrab(hand.pivot,this.twoPlayer?hand:undefined)||[])this.beginDeath({reason:'oil',sourceReason:event.reason,object:hand.pivot},this.humanIndex(hand));
   }
  }
- onAfterHumanGrab(dot){
+ onAfterHumanGrab(dot,hand=this.player){
   if(!this.teleports)return;
   // WAGrab has already added32 before DOGrabbed. The existing Movement
   // adapter stores that new canonical phase in angle until move returns.
-  if(!this.board.movingTeleportCheckpointRules&&!this.board.movingTeleportDoorRules&&!this.board.slidingTeleportRules){this.player.unwrappedFrame=Math.round(this.player.angle*64/TAU);this.player.frame=this.player.unwrappedFrame&63;}
-  this.afterActorDotGrab(this.player,dot);
+  if(this.twoPlayer&&(this.board.movingDotRules||this.board.markedTransferRules||this.board.slidingConnectorRules)){
+   hand.angle=hand.unwrappedFrame*TAU/64;
+  }else if(!this.board.movingTeleportCheckpointRules&&!this.board.movingTeleportDoorRules&&!this.board.slidingTeleportRules){
+   hand.unwrappedFrame=Math.round(hand.angle*64/TAU);hand.frame=hand.unwrappedFrame&63;
+  }
+  this.afterActorDotGrab(hand,dot);
  }
  onHumanRelease(dot,hand){
   // Moving queries use detached position records. Slow appearance belongs to
@@ -650,7 +674,7 @@ export class SourceRound extends MovementGame {
    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});
   }});
  }
- onBonus(dot){if(this.board.multiDifficulty||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingGoalOrdinaryRules||this.board.movingWaystationRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingGoalGoodieRules||this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingDoorCheckpointRules||this.board.movingTubesRules||this.board.movingMarkedOrdinaryRules||this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){dot.bonus=false;dot.cell&=~2;if(dot.kind==='bonus')dot.kind='dot';}if(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.movingProgrammedBusterRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules||this.board.slidingBombRules||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore?.bonusDot();}
+ onBonus(dot,hand=this.player){if(this.board.multiDifficulty||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingGoalOrdinaryRules||this.board.movingWaystationRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingGoalGoodieRules||this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingDoorCheckpointRules||this.board.movingTubesRules||this.board.movingMarkedOrdinaryRules||this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){dot.bonus=false;dot.cell&=~2;if(dot.kind==='bonus')dot.kind='dot';}if(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.movingProgrammedBusterRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules||this.board.slidingBombRules||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.twoPlayer?super.onBonus(dot,hand):this.childScore?.bonusDot();}
  onGoalBonus(dot){if(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.movingProgrammedBusterRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules||this.board.slidingBombRules||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore.bonusDotAfterGoal();}
  onGoal(){this.childScore?.complete(this.remainingTime);this.bombScene?.finish(completionBonusForDifficulty(this.board.difficulty));}
  restartAfterDeath(){
@@ -668,19 +692,86 @@ export class SourceRound extends MovementGame {
   const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,events:this.events,roundRestarts:this.roundRestarts+1,elapsedTime:this.elapsedTime,pilotRecoveries:(this.pilotRecoveries??0)+1,pilotInputLatch:true};
   this.reset({preserveCheckpoint:true});Object.assign(this,history);Object.assign(this.event('pilot-round-restart',this.player),{pilotRecovery:true,recoveries:this.pilotRecoveries});
  }
- update(dt,input={}){
+ update(dt,input={},input2=null){
+  if(this.twoPlayer)input=this.getPlayerInputs(input,input2);
   if(!this.board.multiDifficulty&&!this.board.pilotAbsentSlideRecoveryRules)return this.updateSource(dt,input);
-  if(this.pilotInputLatch){if(['swing','flip','bounce','reverse'].some(k=>input[k]))input={};else this.pilotInputLatch=false;}
+  if(this.pilotInputLatch){
+   const held=this.twoPlayer?input.some(p=>['swing','flip','bounce','reverse'].some(k=>p?.[k])):['swing','flip','bounce','reverse'].some(k=>input[k]);
+   if(held)input=this.twoPlayer?[{},{}]:{};else this.pilotInputLatch=false;
+  }
   const before={steps:this.steps,activeSteps:this.activeSteps};try{return this.updateSource(dt,input);}catch(error){
    if(!(error instanceof PilotAbsentSlideContinuation))throw error;
    if(this.steps===before.steps)this.steps++;if(this.activeSteps===before.activeSteps)this.activeSteps++;this.recoverPilotContinuation();return;
   }
  }
+ processHumanContacts(hand){
+  const control=this.humanControl(hand);
+  if(this.board.canonicalPlayerRules)hand.angle=hand.unwrappedFrame*TAU/64;
+  const spike=this.spikeCollision(hand);
+  if(spike)this.beginDeath(spike,this.humanIndex(hand));
+  if(this.twoPlayer&&!this.humanActive(hand))return;
+  this.bombScene?.runtime.checkGoodie(hand);
+  if(!spike||this.bombScene||this.board.slidingOilRules){
+   this.oil?.contactHuman(this.collider(hand));
+   this.bombScene?.runtime.checkMatch(hand);
+   this.bombScene?.runtime.checkSpark(hand);
+   if(this.gunTriggers){const hit=this.projectileCollision(hand);if(hit)this.beginDeath(hit,this.humanIndex(hand));}
+   if(this.twoPlayer&&!this.humanActive(hand))return;
+   const wall=this.wallCollision(hand),door=wall?null:this.doorCollision(hand);
+   if(this.board.canonicalPlayerRules)control.canonicalPlayerContact=!!wall||!!door?.guardContact;
+   if(door?.lethal)this.beginDeath({reason:'door',object:door.doorIndex},this.humanIndex(hand));
+   else{
+    const guard=advanceWallContactGuard(hand.wallContacts,!!wall||!!door?.guardContact);
+    hand.wallContacts=guard.count;
+    if(wall)this.bounceFromWall(hand,wall);
+    else if(door?.bounce)this.bounceFromWall(hand,door,'door-bounce');
+    this.contactSwitch(hand);
+    this.contactElevators(hand);
+    if(this.gunTriggers)this.contactGunTrigger(hand);
+    if(guard.lethal)this.beginDeath({reason:wall?'trapped-wall':'trapped-door',object:wall?.id??door?.doorIndex},this.humanIndex(hand));
+    else if(!this.board.canonicalPlayerRules&&!wall&&!door&&control.pendingReverse){control.pendingReverse=false;hand.direction*=-1;this.event('reverse',hand);}
+   }
+  }
+ }
+ updateSourcePlayers(dt,inputs,{elapsed,substeps,actorState,actorTimer}){
+  this.steps++;this.activeSteps++;
+  if(!this.worldFrozen){
+   for(const hand of this.humans)if(this.humanActive(hand)&&substeps.has(hand)){
+    this.processHumanContacts(hand);
+    if(this.board.slidingConnectorRules&&this.humanActive(hand)){
+     try{this.stopHumanSlide(hand);}catch(error){
+      if(!(error instanceof PilotAbsentSlideContinuation))throw error;
+      this.beginDeath({reason:'missing-slide-target'},this.humanIndex(hand));
+     }
+    }
+   }
+   this.bombScene?.processEffects();
+   this.time+=dt;
+   for(const [index,hand] of this.humans.entries())if(this.humanActive(hand)){
+    this.move(hand,dt,humanAction(inputs[index]));
+    if(!this.humanActive(hand))continue;
+    const hit=this.enemyCollision(hand);
+    if(hit)this.beginDeath(hit,index);
+    if(this.board.canonicalPlayerRules&&this.humanActive(hand))this.presentCanonicalEnemy(hand,actorState.classes[hand.speedClass??0],actorTimer);
+   }
+   for(const hand of this.demos)this.move(hand,dt,hand.action);
+  }
+  this.stepPlayerDeaths(elapsed);
+ }
  updateSource(dt,input={}){
   if(!(dt>0&&dt<=1/60+1e-9))throw new RangeError('Round requires fixed steps no longer than one guest tick');
-  if(this.paused||this.complete){this.steps++;return;}
-  const latchMovingSpikeBank=(this.board.movingSpikeRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules)===true&&!this.death;
-  if(input.reverse&&!this.reverseHeld)this.reverse();this.reverseHeld=!!input.reverse;
+  if(this.paused||this.complete){
+   this.steps++;
+   if(this.twoPlayer&&!this.paused&&this.playerStates.some(state=>state.dying)){
+    this.guestTickRemainder+=dt*this.guestTicksPerSecond;
+    const ticks=Math.floor(this.guestTickRemainder+1e-9);this.guestTickRemainder-=ticks;
+    this.deathClock.advance(ticks);this.stepPlayerDeaths(ticks);
+   }
+   return;
+  }
+  const latchMovingSpikeBank=(this.board.movingSpikeRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules)===true&&!this.worldFrozen;
+  if(this.twoPlayer){for(const [index,hand] of this.humans.entries())this.updateReverseInput(hand,input[index]);}
+  else this.updateReverseInput(this.player,input);
   this.elapsedTime+=dt;
   this.guestTickRemainder+=dt*this.guestTicksPerSecond;
   const elapsed=Math.floor(this.guestTickRemainder+1e-9);this.guestTickRemainder-=elapsed;
@@ -696,85 +787,72 @@ export class SourceRound extends MovementGame {
   const doorCount=this.doorClock.advance(elapsed).clientCount;
   const actorTimer=this.actorClock.advance(elapsed),actorState=this.actorClasses.latch(actorTimer.clientCount),substeps=new Map();
   const elevatorSurfaceCount=this.elevatorSurfaceClock?.advance(elapsed).clientCount;
-  for(const hand of [this.player,...this.enemies]){
+  for(const hand of [...this.humans,...this.enemies]){
    const timer=actorState.classes[hand.speedClass??0];if(timer.count!==hand.frameReference)substeps.set(hand,timer.delta);
    hand.frameReference=timer.count;
   }
   const actorSubstep=substeps.has(this.player);
   const dotCount=this.dotClock?.advance(elapsed).clientCount,overlayCount=this.protectionClock?.advance(elapsed).clientCount;
-  if(this.dotAnimations&&!this.death&&!this.board.movingDotRules)this.dotAnimations.observeClocks({dotCount,overlayCount,guestTick:this.guestTicks});
-  if(!this.death&&this.board.movingDotRules)this.processMovingDots({classCount:actorState.classes[1].count,classDelta:actorState.classes[1].delta,dotCount,overlayCount,surfaceCount:elevatorSurfaceCount});
-  if(!this.death&&!this.board.movingProgrammedBusterRules&&!this.board.movingElevatorRules&&!this.board.movingCheckpointControlRules)this.elevators?.observeClock(actorState.classes[1].count,{
+  if(this.dotAnimations&&!this.worldFrozen&&!this.board.movingDotRules)this.dotAnimations.observeClocks({dotCount,overlayCount,guestTick:this.guestTicks});
+  if(!this.worldFrozen&&this.board.movingDotRules)this.processMovingDots({classCount:actorState.classes[1].count,classDelta:actorState.classes[1].delta,dotCount,overlayCount,surfaceCount:elevatorSurfaceCount});
+  if(!this.worldFrozen&&!this.board.movingProgrammedBusterRules&&!this.board.movingElevatorRules&&!this.board.movingCheckpointControlRules)this.elevators?.observeClock(actorState.classes[1].count,{
    onPhase:id=>{
     this.syncElevatorDots();
     if(this.board.elevatorOilRiderRules||this.board.multiDifficulty&&this.oil)this.oil.positionElevatorRiders(this.oil.index(id));
    },
    onLowered:id=>{
-    if(this.player.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id});
+    for(const hand of this.humans)if(hand.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id},this.humanIndex(hand));
     for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});
     if(this.board.elevatorOilRiderRules||this.board.multiDifficulty&&this.oil)this.oil.orphanElevatorDroplets(this.oil.index(id));
-   },isFrozen:()=>!!this.death
+   },isFrozen:()=>this.worldFrozen
   });
-  if(!this.death&&!this.board.movingProgrammedBusterRules&&!this.board.movingElevatorRules&&!this.board.movingCheckpointControlRules)this.elevators?.observeSurfaceClock(elevatorSurfaceCount);
+  if(!this.worldFrozen&&!this.board.movingProgrammedBusterRules&&!this.board.movingElevatorRules&&!this.board.movingCheckpointControlRules)this.elevators?.observeSurfaceClock(elevatorSurfaceCount);
   // Existing scenes retain their qualified phase. BO scenes place layer2
   // after the upper fuse/GO/Oil layers, before appended explosion callbacks.
-  if(!this.death&&this.teleports)this.teleports.observeHyperspace(teleportCounts.hyperspace);
-  if(!this.death&&!this.bombScene&&!this.board.slidingOilRules)this.advanceSpikes();
+  if(!this.worldFrozen&&this.teleports)this.teleports.observeHyperspace(teleportCounts.hyperspace);
+  if(!this.worldFrozen&&!this.bombScene&&!this.board.slidingOilRules)this.advanceSpikes();
   // Door callbacks observe one changed shared count, rather than catching up
   // every missed phase. Cross-layer source traversal phase remains approximate.
-  if(!this.death)this.emitDoorSounds(this.doorSystem.observeClock(doorCount),this.player);
-  if(!this.death&&this.busterWallEffects)this.busterWallEffects=advanceBusterWallEffects(this.busterWallEffects,wallEffectCount);
+  if(!this.worldFrozen)this.emitDoorSounds(this.doorSystem.observeClock(doorCount),this.player);
+  if(!this.worldFrozen&&this.busterWallEffects)this.busterWallEffects=advanceBusterWallEffects(this.busterWallEffects,wallEffectCount);
   this.bombScene?.processUpper();
   // Physical source layer11 (PU/DP) precedes enemy1, then human0. A droplet
   // arrival may latch death and freeze the remaining sprite callbacks.
-  if(!this.death)this.oil?.processSprites({onDeath:reason=>this.beginDeath({reason:'oil',sourceReason:reason}),isFrozen:()=>!!this.death});
-  if(!this.death&&(this.bombScene||this.board.slidingOilRules))this.advanceSpikes();
+  if(!this.worldFrozen)this.oil?.processSprites({onDeath:(reason,playerIndex)=>this.beginDeath({reason:'oil',sourceReason:reason},playerIndex),isFrozen:()=>this.worldFrozen});
+  if(!this.worldFrozen&&(this.bombScene||this.board.slidingOilRules))this.advanceSpikes();
   this.bombScene?.processExplosions();
   // The original logical PR9 layer precedes both WA layers in the universe
   // list. WA entrants append later, after this traversal has passed PR9.
-  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.freeBusterRules?{...(this.board.multiDifficulty?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:(this.board.gunSlidingBusterRules||this.board.gunBusterRules)?{wall:p=>this.projectileHitsWall(p)}:{}),classes:actorState.classes,busterWall:p=>this.busterHitsWall(p),busterDoor:p=>this.busterHitsDoor(p),shatter:(w,p)=>this.shatterBusterWall(w,p)}:(this.board.multiDifficulty||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:(this.board.gunTriggerWallRules||this.board.staticGunRailHazardRules||this.board.gunTriggerOilRules)?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
-  if(!this.death)for(const enemy of this.enemies){
+  if(!this.worldFrozen&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.freeBusterRules?{...(this.board.multiDifficulty?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:(this.board.gunSlidingBusterRules||this.board.gunBusterRules)?{wall:p=>this.projectileHitsWall(p)}:{}),classes:actorState.classes,busterWall:p=>this.busterHitsWall(p),busterDoor:p=>this.busterHitsDoor(p),shatter:(w,p)=>this.shatterBusterWall(w,p)}:(this.board.multiDifficulty||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:(this.board.gunTriggerWallRules||this.board.staticGunRailHazardRules||this.board.gunTriggerOilRules)?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
+  if(!this.worldFrozen)for(const enemy of this.enemies){
    if(!this.board.multiDifficulty&&![4,5].includes(enemy.sourceActorType)&&!this.board.staticTeleportBusterRules&&!this.board.movingProgrammedBusterRules&&!this.board.movingBusterBombRules&&!this.board.movingFuseOrdinaryRules&&!this.board.movingBombSpikeWaystationRules&&!this.board.slidingBombRules&&!this.board.staticSlidingBombGoodieRules&&!this.board.movingBombRules)this.bombScene?.runtime.checkMatch(enemy);
-   if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}
+   if(this.board.staticEnemyCallbacks){
+    try{this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));}
+    catch(error){
+     if(!this.twoPlayer||!(error instanceof PilotAbsentSlideContinuation))throw error;
+     enemy.sliding=false;markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});
+    }
+    continue;
+   }
    if(enemy.program){this.animateProgramEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer);continue;}
    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);
    if(substeps.has(enemy)){const wall=this.wallCollision(enemy);if(wall)this.bounceFromWall(enemy,wall);this.contactSwitch(enemy);}
   }
   // WA one-shot faders use logical layer1, after already-created ordinary
   // enemies and before humans. Their creation snapshots this current count.
-  if(!this.death&&this.teleports)this.teleports.observeFaders(teleportCounts.fader);
+  if(!this.worldFrozen&&this.teleports)this.teleports.observeFaders(teleportCounts.fader);
+  if(this.twoPlayer){
+   this.updateSourcePlayers(dt,input,{elapsed,substeps,actorState,actorTimer});
+   if(latchMovingSpikeBank)this.movingSpikes.latchBank(this.spikeCount);
+   return;
+  }
   // Human spike/wall tests precede input and animation. The contact guard is
   // evaluated at source-class clock changes, never on every 120Hz update.
   // Earlier scenes retain continuous human timing; opted-in scenes use the
   // same canonical callbacks and independent presentation as static enemies.
   const staticSlowdownHumanCallback=this.board.staticSlowdownRules&&!this.death&&actorSubstep;
   const exHumanCallback=this.board.slidingConnectorRules&&!this.death&&actorSubstep;
-  if(!this.death&&actorSubstep){
-   if(this.board.canonicalPlayerRules)this.player.angle=this.player.unwrappedFrame*TAU/64;
-   const spike=this.spikeCollision();
-   if(spike)this.beginDeath(spike);
-   this.bombScene?.runtime.checkGoodie(this.player);
-   if(!spike||this.bombScene||this.board.slidingOilRules){
-    this.oil?.contactHuman(this.collider(this.player));
-    this.bombScene?.runtime.checkMatch(this.player);
-    this.bombScene?.runtime.checkSpark(this.player);
-    if(this.gunTriggers){const hit=this.projectileCollision();if(hit)this.beginDeath(hit);}
-    const wall=this.wallCollision(this.player),door=wall?null:this.doorCollision(this.player);
-    if(this.board.canonicalPlayerRules)this.canonicalPlayerContact=!!wall||!!door?.guardContact;
-    if(door?.lethal)this.beginDeath({reason:'door',object:door.doorIndex});
-    else{
-     const guard=advanceWallContactGuard(this.player.wallContacts,!!wall||!!door?.guardContact);
-     this.player.wallContacts=guard.count;
-     if(wall)this.bounceFromWall(this.player,wall);
-     else if(door?.bounce)this.bounceFromWall(this.player,door,'door-bounce');
-     this.contactSwitch(this.player);
-     this.contactElevators(this.player);
-     if(this.gunTriggers)this.contactGunTrigger(this.player);
-     if(guard.lethal)this.beginDeath({reason:wall?'trapped-wall':'trapped-door',object:wall?.id??door?.doorIndex});
-     else if(!this.board.canonicalPlayerRules&&!wall&&!door&&this.pendingReverse){this.pendingReverse=false;this.player.direction*=-1;this.event('reverse',this.player);}
-    }
-   }
-  }
+  if(!this.death&&actorSubstep)this.processHumanContacts(this.player);
   if(exHumanCallback){this.stopHumanSlide();if(this.death||this.complete)(this.board.movingDotRules?this.moveMovingHuman:this.moveSlidingHuman).call(this,this.player,input.flip||input.swing&&input.bounce?'flip':input.swing?'swing':input.bounce?'bounce':null);}
   // Preserve the remainder of a dispatched non-EX human callback.
   // Arrival selects Slow art/divisors before the existing death scoring guard.
@@ -785,7 +863,7 @@ export class SourceRound extends MovementGame {
    this.death.update(elapsed);
    if(this.death.complete)this.restartAfterDeath();
   }else{
-   super.update(dt,input,{sourceClock:true});if(this.complete){if(latchMovingSpikeBank)this.movingSpikes.latchBank(this.spikeCount);return;}
+   super.updateSinglePlayer(dt,input,{sourceClock:true});if(this.complete){if(latchMovingSpikeBank)this.movingSpikes.latchBank(this.spikeCount);return;}
    // Hero/enemy overlaps are a separate periodic pass after sprite processing.
    if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
    if(this.board.canonicalPlayerRules&&!this.death)this.presentCanonicalEnemy(this.player,actorState.classes[this.player.speedClass??0],actorTimer);

@@ -51,7 +51,7 @@ import {assertSlidingTeleportScope} from './sliding-teleports.mjs';
 import {connectorSpecs,initializeConnectorBonuses} from './sliding.mjs';
 // Adapter for source-decoded private round data. No original map/text/art lives
 // here. Successful structural decoding alone never enables unsupported rules.
-import {TAU} from './engine.mjs';
+import {TAU,secondPlayerSpawn} from './engine.mjs';
 import {isQualifiedOrbitalProgram} from './enemy-transfer.mjs';
 import {decodeDot,dotColorOffset} from './dots.mjs';
 import {spikeGridPoint,actorInitialFrame,actorTiming} from './hazards.mjs';
@@ -484,12 +484,13 @@ if(allowGunsTriggers&&!allowGunTriggerSliding&&!allowGunTriggerWalls&&!allowGunT
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,difficulty,allowDifficultyModes=false,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowProtectedBonuses=false,allowInactiveProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowElevatorGoodies=false,allowColoredElevatorGoodies=false,allowElevatorOilSpikes=false,allowBombOilElevators=false,allowElevatorOilRiders=false,allowGunsTriggers=false,allowGunTriggerSliding=false,allowGunTriggerWalls=false,allowGunTriggerTeleports=false,allowGunTriggerOil=false,allowStaticBombElevators=false,allowMovingBombSpikeWaystation=false,allowStaticSlidingBombGoodies=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingPrograms=false,allowSlidingConnectors=false,allowTeleports=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingDoorOil=false,allowMovingFuseOrdinary=false,allowStaticGunRails=false,allowMovingTeleportCheckpoints=false,allowStaticRingDoors=false,allowMovingGoalRails=false,allowMovingTeleportDoors=false,allowMovingProtectedBusters=false,allowStaticRingRails=false,allowMovingSlowdownBusters=false,allowStaticSlowdownBusters=false,allowSlowdownWaystation=false,allowSlowdownClass4=false,allowSlowdownWalls=false,allowStaticSlowdown=false,allowMovingProtectedPassage=false,allowMovingGoalOrdinary=false,allowMovingWaystation=false,allowMovingGoalGoodies=false,allowStaticTeleportBusters=false,allowGunSlidingBusters=false,allowMovingProgrammedBusters=false,allowMovingCheckpointControls=false,allowMovingCheckpointRails=false,allowOilBusters=false,allowMovingBusterBombs=false,allowGunBusters=false,allowFreeBusters=false,allowMovingDoorGoodies=false,allowMovingTubes=false,allowMovingSpikes=false,allowStaticMarkedOrbitals=false,allowMovingMarkedOrdinary=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,allowMarkedTransfers=false,allowMovingMarkedGoals=false,allowMovingElevators=false,allowPilotAbsentSlideRecovery=false,allowMovingBombs=false,allowImportedGoodie169=false,allowCombinedGoalBonus=false}={}){
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,difficulty,players=1,allowDifficultyModes=false,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowProtectedBonuses=false,allowInactiveProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowElevatorGoodies=false,allowColoredElevatorGoodies=false,allowElevatorOilSpikes=false,allowBombOilElevators=false,allowElevatorOilRiders=false,allowGunsTriggers=false,allowGunTriggerSliding=false,allowGunTriggerWalls=false,allowGunTriggerTeleports=false,allowGunTriggerOil=false,allowStaticBombElevators=false,allowMovingBombSpikeWaystation=false,allowStaticSlidingBombGoodies=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingPrograms=false,allowSlidingConnectors=false,allowTeleports=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingDoorOil=false,allowMovingFuseOrdinary=false,allowStaticGunRails=false,allowMovingTeleportCheckpoints=false,allowStaticRingDoors=false,allowMovingGoalRails=false,allowMovingTeleportDoors=false,allowMovingProtectedBusters=false,allowStaticRingRails=false,allowMovingSlowdownBusters=false,allowStaticSlowdownBusters=false,allowSlowdownWaystation=false,allowSlowdownClass4=false,allowSlowdownWalls=false,allowStaticSlowdown=false,allowMovingProtectedPassage=false,allowMovingGoalOrdinary=false,allowMovingWaystation=false,allowMovingGoalGoodies=false,allowStaticTeleportBusters=false,allowGunSlidingBusters=false,allowMovingProgrammedBusters=false,allowMovingCheckpointControls=false,allowMovingCheckpointRails=false,allowOilBusters=false,allowMovingBusterBombs=false,allowGunBusters=false,allowFreeBusters=false,allowMovingDoorGoodies=false,allowMovingTubes=false,allowMovingSpikes=false,allowStaticMarkedOrbitals=false,allowMovingMarkedOrdinary=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,allowMarkedTransfers=false,allowMovingMarkedGoals=false,allowMovingElevators=false,allowPilotAbsentSlideRecovery=false,allowMovingBombs=false,allowImportedGoodie169=false,allowCombinedGoalBonus=false}={}){
  if(difficulty!==undefined&&!DIFFICULTIES.includes(difficulty))throw new RangeError('Unknown difficulty');
- if(allowDifficultyModes===true||difficulty&&difficulty!=='Child'){
+ if(![1,2].includes(players))throw new RangeError('Expected one or two players');
+ if(players===2||allowDifficultyModes===true||difficulty&&difficulty!=='Child'){
   const selected=difficulty??DIFFICULTIES.find(name=>DIFFICULTY_MASK[name]===activeMask);
   if(!selected)throw new RangeError('Expected a single difficulty mask');
-  return buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty:selected,canonicalPlayer:allowCanonicalPlayer});
+  return buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty:selected,players,canonicalPlayer:allowCanonicalPlayer});
  }
  if(allowMovingFuseOrdinary)return buildMovingFuseOrdinaryBoard(level,arguments[1]);
  if(allowStaticGunRails)return buildStaticGunRailBoard(level,arguments[1]);
@@ -588,7 +589,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,difficulty,a
 
 // RND2 records without an activation word (e.g. EX/BO/doors) apply in every
 // mode. Use the original record index for actors and source dot queries.
-function buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty,canonicalPlayer}){
+function buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty,players,canonicalPlayer}){
  const activeMask=DIFFICULTY_MASK[difficulty],masterRate=DIFFICULTY_MASTER_RATE[difficulty];
  const origin=decodedGridOrigin(level.header);
  const records=kind=>(level.blocks.find(b=>b.kind===kind)?.records??[])
@@ -619,8 +620,10 @@ function buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty,canon
  const teleports=pairTeleportSpecs(activeTeleportSpecs(records('HY'),activeMask),dots);
  for(const endpoint of teleports)dots.find(d=>d.id===endpoint.dot).teleport=true;
  const programs=records('WP').map(r=>r.text);
- const actors=(level.blocks.find(b=>b.kind==='WA')?.records??[]).flatMap((a,sourceSlot)=>{
-  if(!(a.activationMaskRaw&activeMask))return [];
+ const actorRecords=level.blocks.find(b=>b.kind==='WA')?.records??[];
+ const actors=actorRecords.flatMap((a,index)=>{
+  const sourceSlot=players===2&&actorRecords[1]?.actorTypeRaw!==6&&index>0?index+1:index;
+  if(!(a.activationMaskRaw&activeMask)&&!(players===2&&a.actorTypeRaw===6))return [];
   const sourceActorType=a.actorTypeRaw,frame=sourceInitialFrame(a.initialFrameHalfIndexRaw),speedClass=a.rawWords[7];
   const {row,column}=a.gridPosition,pivot=dotAt(row,column)?.id;
   if(!pivot||GROUPS[sourceActorType]===undefined)throw new Error('Invalid source actor declaration');
@@ -631,8 +634,10 @@ function buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty,canon
    speedScale:actorTiming(speedClass).speedScale,program,sourcePC,canonicalFrame:sourceSlot>=2,visible:true,orphaned:false,hiddenUntil:0,
    checksWalls:actorChecksWalls(a.version12ByteRaw??0)}];
  });
- const [player,secondPlayer,...enemies]=actors;
- if(player?.sourceActorType!==0||secondPlayer?.sourceActorType!==6)throw new Error('Expected two source human starts');
+ const player=actors[0],secondPlayer=actors.find(a=>a.sourceActorType===6);
+ if(player?.sourceActorType!==0||players===1&&actors[1]?.sourceActorType!==6)throw new Error('Expected source human starts');
+ const enemies=players===1?actors.slice(2):actors.filter(a=>![0,6].includes(a.sourceActorType));
+ const player2=players===2?secondPlayerSpawn(player,secondPlayer):null;
  const spikes=maskedRecords('SP').map((r,id)=>({id,...spikeGridPoint(r,origin),row:r.rawWords[0],column:r.rawWords[1],
   subrow:r.rawWords[2],subcolumn:r.rawWords[3],phase:id%4,visible:true}));
  const tiles=compileWallTiles(records('WL').map(({rawWords:w})=>({axis:w[0]>>>8,fixed:signedWord(w[1]),start:signedWord(w[2]),
@@ -651,10 +656,10 @@ function buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty,canon
  const freeBusterRules=enemies.some(e=>e.sourceActorType===5),markedTransferRules=dots.some(d=>d.transferDeath);
  return {ordinal,title,origin,activeMask,difficulty,masterRate,multiDifficulty:true,timeLimit:level.header.timeLimitRaw,
   radius:48,distanceTolerance:1,handOffsetY:0,angularSpeed:(angularSpeed??TAU*960/(76*64))*masterRate/60,
-  dots,player,demos:[],enemies,spikes,walls,doors,switches,puddles,elevators,bombs,goodies,connectors,teleports,guns,triggers,
+  dots,player,...(player2?{players,player2}:{}),demos:[],enemies,spikes,walls,doors,switches,puddles,elevators,bombs,goodies,connectors,teleports,guns,triggers,
   canonicalPlayerRules:Boolean(canonicalPlayer||puddles.length||elevatorRules||connectors.length||movingDotRules||teleports.length||markedTransferRules),
   canonicalOilRules:puddles.length>0,elevatorRules,teleportRules:teleports.length>0,
-  teleportHumanStarts:[player.pivot,secondPlayer.pivot],
+  teleportHumanStarts:[player.pivot,(player2??secondPlayer).pivot],
   staticEnemyCallbacks:true,staticEnemyWallRules:true,rotatingSpikeRules:enemies.some(e=>e.sourceActorType===4),
   freeBusterRules,movingDotRules,slidingConnectorRules:connectors.length>0,staticSlowdownRules:dots.some(d=>d.slowdown),
   markedTransferRules,specialDotRules:true,childScoreRules:true,sourceDotPermissions:true,

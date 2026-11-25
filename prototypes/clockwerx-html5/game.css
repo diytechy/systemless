@@ -297,6 +297,16 @@ html.game-mode {
 .game-tally div[hidden] { display: none; }
 .game-tally div:last-child { border-color: #9e824b; color: var(--light-gold); font-weight: bold; }
 .game-tally dd { margin: 0; text-align: right; }
+.game-tally-2p[hidden] { display: none; }
+.game-winner {
+  margin: 0 0 8px;
+  padding: 5px 8px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--light-gold);
+  background: #2c2316;
+  border: 1px solid #9e824b;
+}
 #game-score-delta {
   display: inline-block;
   margin-left: 7px;

@@ -1019,6 +1019,7 @@ async function load(){
  try{
   const r=await fetch('./assets/manifest.json');if(!r.ok)throw new Error(`manifest HTTP ${r.status}`);
   manifest=await r.json();const vector=manifest.vectorAssets;
+  if(gameMode)syncMusic();
   if(!vector)$('presentation').textContent='Private HTML5 pilot using the original bitmap foreground and background. One tutorial board; reconstructed rules and timing.';
   const foreground=vector?[
    ...Object.values(vector.hands).map(h=>h.file),...(vector.rotatingSpikes?[vector.rotatingSpikes.file]:[]),...vector.dots,
@@ -1167,5 +1168,7 @@ if(gameMode){
  gameMenu.setBusy(true,'Loading levels…');
  $('game-pause').onclick=openPause;
 }
+window.addEventListener('pointerdown',()=>unlockSound());
 window.addEventListener('pointerup',()=>unlockSound());
+window.addEventListener('focus',()=>syncMusic());
 load();requestAnimationFrame(frame);

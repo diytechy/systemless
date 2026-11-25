@@ -34,9 +34,11 @@ export function soundKeyForEvent(event, sounds) {
 }
 
 export function musicTrackForState({view, level, coversBoard, musicManifest}) {
-  if (view === 'title' || (view === 'levels' && coversBoard)) return musicManifest?.titleTrack;
+  if (view === 'title' || view === 'credits' || ((view === 'levels' || view === 'scores') && coversBoard)) {
+    return musicManifest?.titleTrack;
+  }
   if (view === 'complete') return musicManifest?.victoryTrack;
-  if (['play', 'pause', 'levels'].includes(view)) {
+  if (['play', 'pause', 'levels', 'scores'].includes(view)) {
     return musicManifest?.chapterTracks?.[Math.floor((level - 1) / 10)];
   }
 }

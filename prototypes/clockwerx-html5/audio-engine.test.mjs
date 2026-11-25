@@ -81,6 +81,9 @@ test('soundKeyForEvent maps gameplay events to original ClockWerx sound indices 
 
 test('musicTrackForState selects title, victory, and chapter tracks matching original SSPC', () => {
   assert.equal(musicTrackForState({view: 'title', level: 1, coversBoard: true, musicManifest}), 'song-a');
+  assert.equal(musicTrackForState({view: 'credits', level: 1, coversBoard: true, musicManifest}), 'song-a');
+  assert.equal(musicTrackForState({view: 'scores', level: 1, coversBoard: true, musicManifest}), 'song-a');
+  assert.equal(musicTrackForState({view: 'scores', level: 25, coversBoard: false, musicManifest}), 'song-d');
   assert.equal(musicTrackForState({view: 'levels', level: 25, coversBoard: true, musicManifest}), 'song-a');
   assert.equal(musicTrackForState({view: 'levels', level: 25, coversBoard: false, musicManifest}), 'song-d');
   assert.equal(musicTrackForState({view: 'complete', level: 1, coversBoard: false, musicManifest}), 'song-g');

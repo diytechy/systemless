@@ -294,6 +294,7 @@ html.game-mode {
   padding: 5px 0;
   border-bottom: 1px solid #545148;
 }
+.game-tally div[hidden] { display: none; }
 .game-tally div:last-child { border-color: #9e824b; color: var(--light-gold); font-weight: bold; }
 .game-tally dd { margin: 0; text-align: right; }
 #game-score-delta {

@@ -15,6 +15,15 @@ const legacySounds = {
   ActionBounce: 'ActionBounce.wav',
 };
 
+test('original countdown, timeout and hourglass sounds use IDs 14, 7 and 22',()=>{
+ for(const cause of [{type:'timeout'},{reason:'timeout'},{sourceReason:7}]){
+  const event={type:'death',cause};
+  assert.equal(soundKeyForEvent(event,fullSounds),'7');
+  assert.equal(soundKeyForEvent(event,legacySounds),undefined);
+ }
+ for(const soundId of [14,22])assert.equal(soundKeyForEvent({type:'sound',soundId},fullSounds),String(soundId));
+});
+
 const musicManifest = {
   tracks: Object.fromEntries(Array.from({length: 12}, (_, i) => {
     const key = 'song-' + String.fromCharCode(97 + i);

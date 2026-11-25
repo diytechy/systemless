@@ -7,6 +7,7 @@ function eventSoundKey(event) {
   switch (event.type) {
     case 'death': {
       const {cause} = event;
+      if (cause?.type === 'timeout' || cause?.reason === 'timeout' || cause?.sourceReason === 7) return '7';
       if (cause?.type === 'door' || cause?.soundArgument === 13 ||
           cause?.reason === 13 || ['door', 'trapped-door'].includes(cause?.reason)) return '13';
       if (cause?.type === 'bomb' || cause?.reason === 15 || cause?.sourceReason === 15 ||

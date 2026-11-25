@@ -1,3 +1,5 @@
+import {DIFFICULTIES} from './actor-clocks.mjs';
+
 export const progressKey = 'systemless.clockwerx-html5.pilot.v1';
 
 function isLevel(value) {
@@ -42,10 +44,15 @@ function normalizeSlot(id, value) {
     const score = value?.bestLevelScores?.[level];
     return isScore(score) ? [[level, score]] : [];
   }));
+  const difficulty = DIFFICULTIES.includes(value?.difficulty) ? value.difficulty : 'Child';
+  const bestLevelDifficulties = Object.fromEntries(completedLevels.map(level => {
+    const best = value?.bestLevelDifficulties?.[level];
+    return [level, Number.isInteger(best) && best >= 0 && best < DIFFICULTIES.length ? best : 0];
+  }));
   return {
     id, started: value?.started === true || completedLevels.length > 0,
     currentLevel: isLevel(value?.currentLevel) ? value.currentLevel : 1,
-    completedLevels, bestLevelScores, campaignScore: campaignTotal(bestLevelScores),
+    completedLevels, bestLevelScores, bestLevelDifficulties, difficulty, campaignScore: campaignTotal(bestLevelScores),
     black: value?.black === true, sound: value?.sound !== false, music: value?.music !== false, freePlay: value?.freePlay === true,
     updatedUtc: typeof value?.updatedUtc === 'string' && Number.isFinite(Date.parse(value.updatedUtc))
       ? new Date(value.updatedUtc).toISOString() : null,
@@ -78,12 +85,15 @@ export function updateSlot(store, slotId, change) {
   return {...store, slots: store.slots.map(slot => slot.id === slotId ? change(slot) : slot)};
 }
 
-export function recordSlotLevelCompletion(store, slotId, level, levelScore, totalLevels = 100, updatedUtc) {
+export function recordSlotLevelCompletion(store, slotId, level, levelScore, totalLevels = 100, updatedUtc, difficulty) {
   if (!isLevel(level) || !isLevel(totalLevels) || level > totalLevels || !isScore(levelScore)) return store;
   return updateSlot(store, slotId, slot => {
     const bestLevelScores = {...slot.bestLevelScores, [level]: Math.max(slot.bestLevelScores[level] ?? 0, levelScore)};
+    const index = DIFFICULTIES.indexOf(difficulty ?? slot.difficulty);
+    const bestLevelDifficulties = {...slot.bestLevelDifficulties,
+      [level]: Math.max(slot.bestLevelDifficulties?.[level] ?? 0, index)};
     const completedLevels = sortedLevels([...slot.completedLevels, level]);
-    return {...slot, started: true, completedLevels, bestLevelScores,
+    return {...slot, started: true, completedLevels, bestLevelScores, bestLevelDifficulties,
       currentLevel: Math.min(totalLevels, Math.max(slot.currentLevel, level + 1)),
       campaignScore: campaignTotal(bestLevelScores), updatedUtc: updatedUtc ?? slot.updatedUtc};
   });

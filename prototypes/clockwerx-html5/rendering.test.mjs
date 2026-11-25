@@ -1,6 +1,32 @@
 import assert from 'node:assert/strict';
-import {handPoses,renderAngle,resizeCanvas,presentedAngle,atlasFrame} from './rendering.mjs';
+import test from 'node:test';
+import {handPoses,renderAngle,resizeCanvas,presentedAngle,atlasFrame,resolveSceneProfiles,difficultyDotPaint} from './rendering.mjs';
 import {MovementGame,TAU} from './engine.mjs';
+
+test('scene profiles prefer local frames and fill missing artwork and fuse routes from other scenes',async()=>{
+ const localRoute={kind:1},sharedRoute={kind:2};
+ const reference={outlinesFile:'preferred',oilOutlinesFile:'missing',bombRoutes:[localRoute]};
+ const manifest={scenes:[{levelDefinition:{outlinesFile:'shared',oilOutlinesFile:'oil',bombRoutes:[{kind:1},sharedRoute]}}],
+  oilBaseline:{bounds:{left:4,top:8,right:540,bottom:400}}};
+ const profiles={
+  preferred:{groups:{700:{frames:['preferred']}}},
+  shared:{groups:{700:{frames:['shared','second']},3500:{frames:['rotating spike']}}},
+  oil:{groups:{1200:{frames:['puddle']}}},
+ };
+ const board={multiDifficulty:true,bombs:[{kind:1},{kind:2}],puddles:[{}]};
+ const result=await resolveSceneProfiles(manifest,reference,board,file=>profiles[file]);
+ assert.deepEqual(result.outlines.groups[700].frames,['preferred','second']);
+ assert.deepEqual(result.outlines.groups[3500].frames,['rotating spike']);
+ assert.deepEqual(result.oilOutlines.groups[1200].frames,['puddle']);
+ assert.equal(result.dotOutlines,undefined);
+ assert.deepEqual(result.bombRoutes,[localRoute,sharedRoute]);
+ assert.equal(result.oilBounds,manifest.oilBaseline.bounds);
+});
+
+test('a missing higher-difficulty ring color still uses the corresponding animation frame',()=>{
+ const vector={specialDots:{300:{file:'ring',frames:[{frame:25,x:7,y:10}]}}};
+ assert.equal(difficultyDotPaint(vector,300,60,{ring:true,color:5}).frame,25);
+});
 const animation={type:'atlas',frameWidth:18,frameHeight:18,frameCount:6,frameSeconds:1.25/24};
 assert.deepEqual(atlasFrame(animation,0),{x:0,y:0,width:18,height:18});
 assert.equal(atlasFrame(animation,animation.frameSeconds*.99).x,0);

@@ -25,8 +25,9 @@ export class TeleportRuntime {
   if(typeof scope.allowMovingTeleportDoors!=='undefined'&&typeof scope.allowMovingTeleportDoors!=='boolean')throw new TypeError('Literal moving HY door capability required');
   if(scope.allowMovingTeleportDoors===true&&(scope.board?.movingTeleportDoorRules!==true||scope.board.dots!==dots||scope.board.teleports!==endpoints))throw new Error('Matching moving HY declaration required');
   this.movingTeleportDoors=scope.allowMovingTeleportDoors===true;
-  if(dots.some(d=>d.slideMask)&&scope.allowSlidingTeleports!==true&&!this.movingTeleportDoors)throw new Error('Separate HY/EX runtime capability required');
+  if(!scope.multiDifficulty&&dots.some(d=>d.slideMask)&&scope.allowSlidingTeleports!==true&&!this.movingTeleportDoors)throw new Error('Separate HY/EX runtime capability required');
   if(scope.allowSlidingTeleports===true)assertSlidingTeleportScope({...scope,dots,teleports:endpoints});
+  this.multiDifficulty=scope.multiDifficulty===true;
   this.slidingTeleportRules=scope.allowSlidingTeleports===true;
   this.dots=dots;
   this.endpoints=endpoints.map(e=>{
@@ -70,7 +71,7 @@ export class TeleportRuntime {
   if(this.slidingTeleportRules)assertSlidingTeleportActor(actor,{program:actor?.program??null,human:[0,6].includes(actor?.sourceActorType)});
   const endpoint=this.endpoints.find(e=>e.dot===grabbed.id);if(!endpoint)return false;
   const moved=teleportOrdinaryActor(actor,this.dot(endpoint.partner),{sound,startFader:a=>this.startFader(a,{suppressed}),place,checkWalls,onWallDeath});
-  if(moved&&(this.movingTeleportDoors||this.movingTeleportCheckpoints))actor.movingPivot=this.dot(actor.pivot).motion==='moving-program';
+  if(moved&&(this.multiDifficulty||this.movingTeleportDoors||this.movingTeleportCheckpoints))actor.movingPivot=this.dot(actor.pivot).motion==='moving-program';
   return moved;
  }
  snapshot(){return {counts:{...this.counts},endpoints:this.endpoints.map(e=>({...e,x:this.dot(e.dot).x-16,y:this.dot(e.dot).y-15})),faders:this.faders.map(f=>({...f}))};}

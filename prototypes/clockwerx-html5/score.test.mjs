@@ -1,6 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {ChildRoundScore} from './score.mjs';
+import {ChildRoundScore,RoundScore,completionBonusForDifficulty,timeBonusForDifficulty,TIME_BONUS_PER_SECOND} from './score.mjs';
+
+test('every difficulty awards the source finish bonus and whole remaining seconds',()=>{
+ const cases=[['Child',1000,0],['Easy',5000,1200],['Medium',15000,1200],['Hard',50000,1200]];
+ assert.equal(TIME_BONUS_PER_SECOND,100);
+ for(const [difficulty,completionBonus,timeBonus] of cases){
+  const score=new RoundScore({mode:'campaign',difficulty,players:1});
+  assert.equal(completionBonusForDifficulty(difficulty),completionBonus);
+  assert.equal(timeBonusForDifficulty(difficulty,12.9),timeBonus);
+  assert.equal(score.bonusDot(),1000);
+  assert.equal(score.complete(12.9),completionBonus+timeBonus);
+  assert.deepEqual([score.snapshot().completionBonus,score.snapshot().timeBonus],[completionBonus,timeBonus]);
+  assert.equal(score.complete(99),0);
+  assert.equal(score.bonusDotAfterGoal(),2000);
+  score.startRound();
+  assert.equal(score.snapshot().overallEarned,3000+completionBonus+timeBonus);
+  assert.equal(score.snapshot().timeBonus,0);
+ }
+ assert.equal(timeBonusForDifficulty('Hard',-10),0);
+});
 test('Child dot awards increase by1000 and remain capped at5000',()=>{
  const s=new ChildRoundScore();assert.deepEqual(Array.from({length:7},()=>s.bonusDot()),[1000,2000,3000,4000,5000,5000,5000]);assert.equal(s.roundBonus,25000);
 });

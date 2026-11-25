@@ -1,6 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createActorClocks} from './actor-clocks.mjs';
+import {createActorClocks,DIFFICULTIES,DIFFICULTY_MASK,DIFFICULTY_MASTER_RATE,adjustSourcePeriod} from './actor-clocks.mjs';
+
+test('difficulty scales the upstream periods without changing actor clock ratios',()=>{
+ assert.deepEqual(DIFFICULTIES.map(name=>DIFFICULTY_MASK[name]),[1,2,4,8]);
+ assert.deepEqual(DIFFICULTIES.map(name=>DIFFICULTY_MASTER_RATE[name]),[60,75,100,150]);
+ assert.deepEqual(DIFFICULTIES.map(name=>adjustSourcePeriod(23,name)),[38,30,23,15]);
+ assert.deepEqual(DIFFICULTIES.map(name=>adjustSourcePeriod(80,name)),[133,106,80,53]);
+ assert.deepEqual(DIFFICULTIES.map(name=>adjustSourcePeriod(62,name)),[103,82,62,41]);
+ assert.deepEqual(createActorClocks().snapshot().classes.map(clock=>[clock.multiplier,clock.normalDivisor,clock.slowDivisor]),
+  [[1,2,2],[1,2,4],[3,8,16],[1,4,8],[1,8,16],[1,1,2]]);
+});
 
 test('class counts share one upstream reference and drain with >= divisor',()=>{
  const clocks=createActorClocks();let s=clocks.latch(1);

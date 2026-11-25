@@ -1,3 +1,12 @@
+export const DIFFICULTIES=Object.freeze(['Child','Easy','Medium','Hard']);
+export const DIFFICULTY_MASK=Object.freeze({Child:1,Easy:2,Medium:4,Hard:8});
+export const DIFFICULTY_MASTER_RATE=Object.freeze({Child:60,Easy:75,Medium:100,Hard:150});
+
+export function adjustSourcePeriod(period,difficulty='Child'){
+ if(!DIFFICULTIES.includes(difficulty))throw new RangeError('Unknown difficulty');
+ return Math.floor(period*100/DIFFICULTY_MASTER_RATE[difficulty]);
+}
+
 // Canonical WATimer latch. Upstream values are scalable MT client counts,
 // not guest ticks. Sprite callbacks consume this latch's delta, not the
 // private difference since an actor was last processed while frozen.

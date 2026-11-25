@@ -1,5 +1,11 @@
-// Child single-player SCBonusDot/SCStart contracts. Campaign persistence and
-// other difficulties are deliberately outside this per-scene score state.
+import {DIFFICULTIES} from './actor-clocks.mjs';
+
+export const DIFFICULTY_COMPLETION_BONUS=Object.freeze({Child:1000,Easy:5000,Medium:15000,Hard:50000});
+export const TIME_BONUS_PER_SECOND=100;
+export const completionBonusForDifficulty=(difficulty='Child')=>DIFFICULTY_COMPLETION_BONUS[difficulty];
+export const timeBonusForDifficulty=(difficulty='Child',remainingTime=0)=>difficulty==='Child'?0:Math.max(0,Math.floor(remainingTime))*TIME_BONUS_PER_SECOND;
+
+// Single-player SCBonusDot/SCStart contracts.
 const amount=n=>{if(!Number.isSafeInteger(n)||n<0||n>0x7fffffff)throw new RangeError('Bounded source score required');return n;};
 export class ChildRoundScore {
  constructor({mode='Child',players=1}={}){if(mode!=='Child'||players!==1)throw new Error('Only Child single-player scores are qualified');this.resetGame();}
@@ -13,4 +19,22 @@ export class ChildRoundScore {
  }
  startRound(){this.totalCommitted=amount(this.totalCommitted+this.roundBonus);this.roundBonus=0;this.nextDotAward=1000;this.completed=false;this.goalBonusAwarded=false;}
  snapshot(){return {mode:'Child',roundBonus:this.roundBonus,totalCommitted:this.totalCommitted,nextDotAward:this.nextDotAward,completed:this.completed,overallEarned:this.totalCommitted+this.roundBonus};}
+}
+
+export class RoundScore extends ChildRoundScore {
+ constructor({mode='Child',difficulty=mode,players=1}={}){
+  if(!DIFFICULTIES.includes(difficulty))throw new RangeError('Unknown difficulty');
+  super({players});
+  this.difficulty=difficulty;
+ }
+ resetGame(){super.resetGame();this.completionBonus=0;this.timeBonus=0;}
+ startRound(){super.startRound();this.completionBonus=0;this.timeBonus=0;}
+ complete(remainingTime=0){
+  if(this.completed)return 0;
+  const completion=completionBonusForDifficulty(this.difficulty),time=timeBonusForDifficulty(this.difficulty,remainingTime);
+  this.addFlatBonus(completion+time);
+  this.completionBonus=completion;this.timeBonus=time;this.completed=true;
+  return completion+time;
+ }
+ snapshot(){return {...super.snapshot(),mode:this.difficulty,difficulty:this.difficulty,completionBonus:this.completionBonus,timeBonus:this.timeBonus};}
 }

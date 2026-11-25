@@ -47,14 +47,15 @@ import {advanceWallContactGuard} from './walls.mjs';
 import {createDoorSystem,findDoorContact} from './doors.mjs';
 import {OilRuntime} from './oil-runtime.mjs';
 import {dotBodyFrame} from './dots.mjs';
+import {sourceDotLook} from './sliding-bomb-paint.mjs';
 import {assertSlidingOilScope} from './sliding-oil.mjs';
 import {assertSlidingBombScope} from './sliding-bombs.mjs';
-import {createActorClocks} from './actor-clocks.mjs';
+import {createActorClocks,adjustSourcePeriod,DIFFICULTIES} from './actor-clocks.mjs';
 import {advanceBounceEnemy} from './programs.mjs';
 import {advanceStaticEnemyCallback,markEnemyOrphaned} from './enemy-transfer.mjs';
 import {StaticDotRuntime} from './special-dot-runtime.mjs';
 import {BombScene} from './bomb-scene.mjs';
-import {ChildRoundScore} from './score.mjs';
+import {ChildRoundScore,RoundScore,completionBonusForDifficulty} from './score.mjs';
 import {TeleportRuntime,createTeleportClocks} from './teleport-runtime.mjs';
 import {createElevatorSystem,createUpDownState,upDownPlacement,findElevatorContact} from './elevators.mjs';
 import {assertElevatorOilRiderBoard} from './elevator-oil-riders.mjs';
@@ -77,7 +78,7 @@ export function worldOutline(profile,group,frame,point){
 }
 
 export class SourceRound extends MovementGame {
- constructor(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,oilBounds,bombOutlines,bombRoutes,gunOutlines,deathFactory,guestTicksPerSecond=60}={}){
+ constructor(board,{outlines,doorOutlines,elevatorOutlines,oilOutlines,dotOutlines,oilBounds,bombOutlines,bombRoutes,gunOutlines,deathFactory,sourceGoodieFrames=false,guestTicksPerSecond=60}={}){
   if(!outlines?.groups||typeof deathFactory!=='function')throw new Error('Source outlines and death lifecycle required');
   if(guestTicksPerSecond!==60)throw new Error('Only disclosed 60 guest-tick normalization is implemented');
   // Validate authored moving declarations before reset/EX closure can repair
@@ -105,7 +106,7 @@ export class SourceRound extends MovementGame {
   if(board.movingTeleportDoorRules)assertMovingTeleportDoorBoard(board,{outlines,dotOutlines,doorOutlines});
   if(board.movingProtectedBusterRules)assertMovingProtectedBusterBoard(board,{outlines,dotOutlines,bombOutlines});
   if(board.movingSlowdownBusterRules)assertMovingSlowdownBusterBoard(board,{outlines,dotOutlines,bombOutlines});
-  if(board.staticSlowdownRules)(board.staticSlowdownBusterRules?assertStaticSlowdownBusterBoard:board.slowdownWaystationRules?assertSlowdownWaystationBoard:board.slowdownClass4Rules?assertSlowdownClass4Board:board.slowdownWallRules?assertSlowdownWallBoard:assertStaticSlowdownBoard)(board,{outlines,dotOutlines});
+  if(!board.multiDifficulty&&board.staticSlowdownRules)(board.staticSlowdownBusterRules?assertStaticSlowdownBusterBoard:board.slowdownWaystationRules?assertSlowdownWaystationBoard:board.slowdownClass4Rules?assertSlowdownClass4Board:board.slowdownWallRules?assertSlowdownWallBoard:assertStaticSlowdownBoard)(board,{outlines,dotOutlines});
   if(board.movingProtectedPassageRules)assertMovingProtectedPassageBoard(board,{outlines,dotOutlines,doorOutlines});
   if(board.movingGoalOrdinaryRules)assertMovingGoalOrdinaryBoard(board,{outlines,dotOutlines});
   if(board.movingWaystationRules)assertMovingWaystationBoard(board,{outlines,dotOutlines});
@@ -122,10 +123,11 @@ export class SourceRound extends MovementGame {
   else if(board.gunTriggerWallRules)assertGunTriggerWallBoard(board,gunOutlines);
   else if(board.gunTriggerSlidingRules)assertGunTriggerSlidingBoard(board,gunOutlines,elevatorOutlines);
   else if(board.gunTriggerOilRules)assertGunTriggerOilBoard(board,gunOutlines);
-  else if(board.gunTriggerProjectileRules&&!board.staticGunRailRules)assertGunTriggerChildBoard(board,gunOutlines,elevatorOutlines);
-  if(board.freeBusterRules&&!board.movingProtectedBusterRules&&!board.movingSlowdownBusterRules&&!board.staticSlowdownBusterRules&&!board.staticTeleportBusterRules&&!board.gunSlidingBusterRules&&!board.movingProgrammedBusterRules&&!board.oilBusterRules&&!board.movingBusterBombRules&&!board.gunBusterRules)assertFreeBusterBoard(board,outlines);
+  else if(!board.multiDifficulty&&board.gunTriggerProjectileRules&&!board.staticGunRailRules)assertGunTriggerChildBoard(board,gunOutlines,elevatorOutlines);
+  if(!board.multiDifficulty&&board.freeBusterRules&&!board.movingProtectedBusterRules&&!board.movingSlowdownBusterRules&&!board.staticSlowdownBusterRules&&!board.staticTeleportBusterRules&&!board.gunSlidingBusterRules&&!board.movingProgrammedBusterRules&&!board.oilBusterRules&&!board.movingBusterBombRules&&!board.gunBusterRules)assertFreeBusterBoard(board,outlines);
   super(board);this.outlines=outlines;this.dotOutlines=dotOutlines;this.doorOutlines=doorOutlines;this.deathFactory=deathFactory;this.guestTicksPerSecond=guestTicksPerSecond;
   if(board.staticSlowdownRules||board.movingSlowdownBusterRules)this.slowdown=new StaticSlowdownRuntime(board.dots,this.actorClasses,e=>{Object.assign(this.event('slowdown',this.player),e);});
+  if(!board.multiDifficulty) {
   if(board.canonicalPlayerRules&&(!board.staticEnemyCallbacks||(board.player.speedClass??0)!==0||board.puddles?.length&&!board.canonicalOilRules||board.dots.some(d=>d.slideMask&&!board.slidingConnectorRules||d.motion&&d.motion!=='static'&&!(board.elevatorRules&&d.motion==='up-down')&&!(board.movingDotRules&&d.motion==='moving-program'))))throw new Error('Canonical player requires static Child class0 callbacks without sliding');
   if(board.elevatorOilSpikeRules&&(!board.elevatorRules||!board.canonicalOilRules||board.canonicalOilSpikeRules||!board.puddles?.length||board.puddles.some(p=>p.kind!==3)||!board.spikes?.length))throw new Error('Separate group0 elevators, kind3 Oil and static spike scope required');
   if(board.elevatorRules&&!board.movingProgrammedBusterRules&&!board.movingCheckpointControlRules&&!board.elevatorOilRiderRules&&!board.gunTriggerProjectileRules&&!board.slidingConnectorRules&&!board.bombOilElevatorRules&&!board.elevatorGoodieRules&&!board.coloredElevatorGoodieRules&&(!board.canonicalPlayerRules||!board.staticEnemyCallbacks||!board.specialDotRules||!board.childScoreRules||board.difficulty!=='Child'||!board.elevators?.length||!elevatorOutlines?.groups?.['3400']||board.elevators.some(s=>s.group!==(board.elevatorOilSpikeRules?0:1)||s.subcell!==(board.elevatorOilSpikeRules?2:3))||board.puddles?.length&&!board.elevatorOilSpikeRules||board.bombRules||board.goodieOnlyRules||board.spikes?.length&&!board.elevatorOilSpikeRules||board.walls?.length||board.doors?.length||board.switches?.length||this.enemies.some(e=>![1,2,3].includes(e.sourceActorType)||e.speedClass!==1||e.checksWalls!==false)||!board.dots.some(d=>d.upDown)||board.dots.some(d=>d.ring||d.protected||d.waystation||d.upDown&&(d.upDown.group!==(board.elevatorOilSpikeRules?0:1)||d.upDown.initialLowered||d.color!==0||d.kind!=='dot'))))throw new Error('Qualified plain raised Child elevator composition and source outlines required');
@@ -192,29 +194,39 @@ export class SourceRound extends MovementGame {
   if(board.combinedGoalBonusRules&&!board.childScoreRules)throw new Error('Combined goal bonus requires Child score qualification');
   if(board.staticEnemyCallbacks&&!board.staticEnemyWallRules&&this.enemies.some(e=>e.checksWalls))throw new Error('Canonical enemy wall response requires qualification');
   if(this.enemies.some(e=>e.sourceActorType===4)&&(!board.rotatingSpikeRules||!board.staticEnemyCallbacks||!outlines.groups['3500']))throw new Error('Rotating spike rules, canonical clock and source outlines require qualification');
+  }
   if((board.doors?.length||board.switches?.length)&&!doorOutlines?.groups)throw new Error('Door source outlines required');
-  if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds,...(board.slidingOilRules||board.movingDoorOilRules?{getHumanSliding:()=>this.player.sliding===true}:{}),...(board.slidingOilGoodieRingRules||board.gunTriggerOilRules?{getMainDotSprite:dot=>this.mainDotSprite(dot)}:{})});
+  if(board.puddles?.length)this.oil=new OilRuntime(board,{outlines:oilOutlines,dotOutlines,bounds:oilBounds,...(board.multiDifficulty||board.slidingOilRules||board.movingDoorOilRules?{getHumanSliding:()=>this.player.sliding===true}:{}),...(board.multiDifficulty||board.slidingOilGoodieRingRules||board.gunTriggerOilRules?{getMainDotSprite:dot=>this.mainDotSprite(dot)}:{})});
   if(board.elevatorRules){
    this.elevatorOutlines=elevatorOutlines;
    this.elevators=createElevatorSystem(board.elevators,board.dots.filter(d=>d.upDown).map(d=>({id:d.id,...d.upDown,...((board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingElevatorRules||board.movingCheckpointControlRules)?{sourceIndex:d.sourceIndex,row:d.row,column:d.column,originalPixel:d.sourceInitialPosition}:{})})),{origin:board.origin,clockCount:this.actorClasses.snapshot().classes[1].count,surfaceCount:this.elevatorSurfaceClock.advance(0).clientCount,...((board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingElevatorRules||board.movingCheckpointControlRules)?{allowSourceDotDispatch:true,allowLoweredCheckpointControls:board.movingCheckpointControlRules===true,allowLoweredChannel0:board.staticBombElevatorRules===true,onRiders:(index,p,o)=>this.positionJoinedUpDownRiders(index,p,o),onLowered:id=>this.onSourceDotLowered(id)}:{})});
    this.syncElevatorDots();
   }
   if(board.specialDotRules){
-   this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount,...(board.movingTeleportCheckpointRules||board.movingTeleportDoorRules||board.movingProtectedPassageRules||board.staticRingDoorRules||board.staticGunRailRules||board.movingGoalRailRules||board.movingGoalOrdinaryRules||board.movingWaystationRules||board.movingProtectedBusterRules||board.movingSlowdownBusterRules||board.staticSlowdownRules||board.movingGoalGoodieRules||board.staticTeleportBusterRules||board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingCheckpointControlRules||board.movingCheckpointRailRules||board.movingBusterBombRules||board.movingDoorGoodieRules||board.movingDoorOilRules||board.movingDoorCheckpointRules||board.movingTubesRules||board.movingFuseOrdinaryRules||board.movingBombSpikeWaystationRules||board.staticSlidingBombGoodieRules||board.movingMarkedOrdinaryRules||board.staticMarkedOrbitalRules||board.movingSpikeRules||board.movingMarkedGoalRules||board.movingElevatorRules||board.movingCheckpointRingRules||board.movingMarkedBonusRules?{allowGoalMisc:true}:{})});
+   this.dotAnimations=new StaticDotRuntime(board.dots,board.player,{originalTime:board.timeLimit,difficulty:DIFFICULTIES.indexOf(board.difficulty??'Child'),dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount,...(board.movingTeleportCheckpointRules||board.movingTeleportDoorRules||board.movingProtectedPassageRules||board.staticRingDoorRules||board.staticGunRailRules||board.movingGoalRailRules||board.movingGoalOrdinaryRules||board.movingWaystationRules||board.movingProtectedBusterRules||board.movingSlowdownBusterRules||board.staticSlowdownRules||board.movingGoalGoodieRules||board.staticTeleportBusterRules||board.gunSlidingBusterRules||board.movingProgrammedBusterRules||board.movingCheckpointControlRules||board.movingCheckpointRailRules||board.movingBusterBombRules||board.movingDoorGoodieRules||board.movingDoorOilRules||board.movingDoorCheckpointRules||board.movingTubesRules||board.movingFuseOrdinaryRules||board.movingBombSpikeWaystationRules||board.staticSlidingBombGoodieRules||board.movingMarkedOrdinaryRules||board.staticMarkedOrbitalRules||board.movingSpikeRules||board.movingMarkedGoalRules||board.movingElevatorRules||board.movingCheckpointRingRules||board.movingMarkedBonusRules?{allowGoalMisc:true}:{})});
    this.remainingTime=board.timeLimit;this.onHumanGrab(this.point(this.player));
   }
-  if(board.teleportRules){this.teleports=new TeleportRuntime(board.teleports,board.dots,this.teleportClocks.advance(0),board.movingTeleportCheckpointRules?{allowMovingTeleportCheckpoints:true,board}:board.movingTeleportDoorRules?{allowMovingTeleportDoors:true,board}:board.slidingTeleportRules?{allowSlidingTeleports:true,connectors:board.connectors,actors:[this.player,...this.enemies]}:{});this.onAfterHumanGrab(this.point(this.player));}
-  if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline});
+  if(board.teleportRules){this.teleports=new TeleportRuntime(board.teleports,board.dots,this.teleportClocks.advance(0),board.movingTeleportCheckpointRules?{allowMovingTeleportCheckpoints:true,board}:board.movingTeleportDoorRules?{allowMovingTeleportDoors:true,board}:board.multiDifficulty?{multiDifficulty:true}:board.slidingTeleportRules?{allowSlidingTeleports:true,connectors:board.connectors,actors:[this.player,...this.enemies]}:{});this.onAfterHumanGrab(this.point(this.player));}
+  if(board.bombRules||board.goodieOnlyRules)this.bombScene=new BombScene(this,{outlines:bombOutlines,routes:bombRoutes,worldOutline,sourceGoodieFrames});
   // PR stores universe-local sprite bases. frameOrigin is added only for
   // canonical collision/render coordinates, never to the raw clipping bounds.
-  if(board.freeBusterRules&&!board.gunSlidingBusterRules&&!board.gunBusterRules)this.gunTriggers=new GunTriggerRuntime({guns:[],triggers:[],rawBounds:{left:0,top:0,right:584,bottom:424},frameOrigin:{x:28,y:28},templateReference:this.actorClasses.snapshot().classes[0].count});
+  if(board.freeBusterRules&&!board.multiDifficulty&&!board.gunSlidingBusterRules&&!board.gunBusterRules)this.gunTriggers=new GunTriggerRuntime({guns:[],triggers:[],rawBounds:{left:0,top:0,right:584,bottom:424},frameOrigin:{x:28,y:28},templateReference:this.actorClasses.snapshot().classes[0].count});
   if(board.gunTriggerProjectileRules){
    this.gunOutlines=gunOutlines;
    this.gunTriggers=new GunTriggerRuntime({...board.gunTriggerChild,templateReference:this.actorClasses.snapshot().classes[0].count});
   }
  }
  reset({preserveCheckpoint=false}={}){
-  if((this.board.staticGunRailRules||this.board.staticRingDoorRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.gunSlidingBusterRules)&&this.sourcePaint){
+  if(this.board.multiDifficulty){
+   this.initialDifficultyDots??=this.board.dots.map(d=>({bonus:d.bonus,kind:d.kind,cell:d.cell,sourceCollidable:d.sourceCollidable}));
+   this.initialDifficultyWalls??=structuredClone(this.board.walls??[]);
+   for(const [index,dot] of this.board.dots.entries()){
+    Object.assign(dot,this.initialDifficultyDots[index]);delete dot.burnt;
+   }
+   this.board.walls=structuredClone(this.initialDifficultyWalls);
+   this.board.wallRevision=(this.board.wallRevision??0)+1;
+  }
+  if(!this.board.multiDifficulty&&(this.board.staticGunRailRules||this.board.staticRingDoorRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.gunSlidingBusterRules)&&this.sourcePaint){
    for(const [key,original]of Object.entries(this.sourcePaint.original))for(const saved of original){const current=this.board[key].find(x=>x.id===saved.id);Object.assign(current,saved);if(key==='dots')delete current.collected;if(key==='walls'&&!Object.hasOwn(saved,'visible'))delete current.visible;}
   }
   if(this.board.staticMarkedOrbitalRules){
@@ -226,10 +238,10 @@ export class SourceRound extends MovementGame {
   if(this.board.movingBombSpikeWaystationRules){assertMovingBombSpikeWaystationScope(this.board);if(this.movingSpikes)this.movingSpikes.reset(this.board.spikes);else this.movingSpikes=createMovingSpikeLifecycle(this.board.spikes,{allowMovingBombSpikeWaystation:true,sourceScope:this.board});}
   if(this.board.movingSpikeRules){assertMovingSpikeScope(this.board);if(this.movingSpikes)this.movingSpikes.reset(this.board.spikes);else this.movingSpikes=createMovingSpikeLifecycle(this.board.spikes,{allowMovingSpikes:true,sourceScope:this.board});}
   if(this.board.movingDotRules&&this.movingDots){for(const saved of this.movingInitialDots){const d=this.board.dots.find(d=>d.id===saved.id);Object.assign(d,saved);delete d.burnt;delete d.collected;}for(const runtime of this.movingDots.values())runtime.reset(this.actorClasses.snapshot().classes[1].count);}
-  if(this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingGoalOrdinaryRules||this.board.movingWaystationRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingGoalGoodieRules||this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingDoorCheckpointRules||this.board.movingTubesRules||this.board.movingMarkedOrdinaryRules||this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){this.sourcePaint??={original:{dots:this.board.dots.map(d=>({id:d.id,cell:d.cell,kind:d.kind,bonus:d.bonus,sourceInBackground:d.sourceInBackground})),...(this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingElevatorRules||this.board.movingTubesRules?{connectors:this.board.connectors.map(e=>({...e}))}:{}),...(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingElevatorRules||this.board.movingDoorCheckpointRules||this.board.staticGunRailHazardRules?{walls:this.board.walls.map(w=>({...w}))}:{}),...((this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingElevatorRules||this.board.movingCheckpointControlRules)?{elevators:this.board.elevators.map(e=>({...e}))}:{})}};this.sourcePaint.backgroundPaints=[];if(this.board.movingElevatorRules&&!preserveCheckpoint){this.pilotRecoveries=0;this.pilotInputLatch=false;}}
+  if(!this.board.multiDifficulty&&(this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingGoalOrdinaryRules||this.board.movingWaystationRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingGoalGoodieRules||this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingDoorCheckpointRules||this.board.movingTubesRules||this.board.movingMarkedOrdinaryRules||this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules)){this.sourcePaint??={original:{dots:this.board.dots.map(d=>({id:d.id,cell:d.cell,kind:d.kind,bonus:d.bonus,sourceInBackground:d.sourceInBackground})),...(this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingElevatorRules||this.board.movingTubesRules?{connectors:this.board.connectors.map(e=>({...e}))}:{}),...(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingElevatorRules||this.board.movingDoorCheckpointRules||this.board.staticGunRailHazardRules?{walls:this.board.walls.map(w=>({...w}))}:{}),...((this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingElevatorRules||this.board.movingCheckpointControlRules)?{elevators:this.board.elevators.map(e=>({...e}))}:{})}};this.sourcePaint.backgroundPaints=[];if(this.board.movingElevatorRules&&!preserveCheckpoint){this.pilotRecoveries=0;this.pilotInputLatch=false;}}
   super.reset();this.enemies=(this.board.enemies||[]).map(h=>this.makeHand(h));
   if(this.board.childScoreRules){
-   if(!this.childScore)this.childScore=new ChildRoundScore();
+   if(!this.childScore)this.childScore=this.board.multiDifficulty?new RoundScore({difficulty:this.board.difficulty}):new ChildRoundScore();
    else if(preserveCheckpoint)this.childScore.startRound();
    else this.childScore.resetGame();
   }
@@ -237,7 +249,7 @@ export class SourceRound extends MovementGame {
   this.deathClock??=createDeathClock();
   if(this.board.slidingConnectorRules){if(!(this.board.slidingBombRules||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)||!this.bombScene)initializeConnectorBonuses(this.board.connectors,this.board.dots);for(const h of this.enemies)startSliding(h,this.board.dots.find(d=>d.id===h.pivot));}
   if(this.board.teleportRules){this.teleportClocks??=createTeleportClocks();this.teleports?.reset();}
-  this.actorClock??=createSourceTimerChain(38,1);
+  this.actorClock??=createSourceTimerChain(this.adjustPeriod(23),1);
   this.actorClasses??=createActorClocks(this.actorClock.advance(0).clientCount);
   this.slowdown?.reset();
   if(this.board.elevatorRules)this.elevatorSurfaceClock??=createSourceTimerChain(160,1);
@@ -245,7 +257,7 @@ export class SourceRound extends MovementGame {
   for(const hand of [this.player,...this.enemies])hand.frameReference=classes[hand.speedClass??0].count;
   if(this.board.movingDotRules&&!this.movingDots)this.initializeMovingDots(classes[1].count);
   if(this.board.movingDotRules)this.syncMovingActors();
-  this.doorClock??=createSourceTimerChain(133,1);
+  this.doorClock??=createSourceTimerChain(this.adjustPeriod(80),1);
   this.doorSystem??=createDoorSystem(this.board.doors||[],this.board.switches||[]);
   this.doorSystem.reset(this.doorClock.advance(0).clientCount);
   if(!this.board.movingSpikeRules&&!this.board.movingFuseOrdinaryRules&&!this.board.movingBombSpikeWaystationRules)this.spikeStates=new Map((this.board.spikes||[]).map(s=>[s.id,{frame:s.phase,reference:Math.floor((this.spikeCount+s.phase)/4)}]));
@@ -260,7 +272,7 @@ export class SourceRound extends MovementGame {
    if(this.dotAnimations){
     const reset=this.dotAnimations.reset({restartLevel:!preserveCheckpoint,dotCount:this.dotClock.advance(0).clientCount,overlayCount:this.protectionClock.advance(0).clientCount});
     for(const key of ['pivot','angle','direction'])this.player[key]=reset.player[key];
-    this.remainingTime=reset.remainingTime;
+    this.remainingTime=this.timed&&reset.remainingTime<=0?this.board.timeLimit:reset.remainingTime;
    }
   }
   // PU/DP follows the restored WY spawn, rather than the original level start.
@@ -271,6 +283,7 @@ export class SourceRound extends MovementGame {
   if(this.board.movingCheckpointRailRules)this.syncMovingActors();
   if(this.teleports)this.onAfterHumanGrab(this.point(this.player));
  }
+ adjustPeriod(period){return adjustSourcePeriod(period,this.board.difficulty??'Child');}
  makeHand(hand){
   const result={...super.makeHand(hand),wallContacts:0,...(hand.program||hand.canonicalFrame?{presentationPhase:0}:{})};
   if(this.board.canonicalPlayerRules&&[0,6].includes(hand.sourceActorType))Object.assign(result,{canonicalFrame:true,frame:sourceFrame(result.angle),unwrappedFrame:sourceFrame(result.angle),presentationPhase:0});
@@ -283,7 +296,7 @@ export class SourceRound extends MovementGame {
  move(hand,dt,action){
   if(hand!==this.player||!this.board.canonicalPlayerRules)return super.move(hand,dt,action);
   if(this.board.staticMarkedOrbitalRules)return this.moveStaticMarkedHuman(hand,action);
-  if(this.board.movingDotRules)return this.moveMovingHuman(hand,action);
+  if(this.board.movingDotRules||this.board.multiDifficulty&&this.board.markedTransferRules)return this.moveMovingHuman(hand,action);
   if(this.board.slidingConnectorRules)return this.moveSlidingHuman(hand,action);
   const delta=this.actorClasses.snapshot().classes[hand.speedClass??0].delta;
   if(delta>1)throw new Error('Canonical player requires at most one Child callback per fixed update');
@@ -293,7 +306,7 @@ export class SourceRound extends MovementGame {
   const sequence=this.eventSequence;
   // WADirectHero only tests the current cardinal frame, then consumes Reverse.
   // A zero-duration direction request separates the grab from WA animation.
-  super.move(hand,0,hand.frame%16===0?action:null,this.board.slowdownWallRules?{sourceWallContact:this.canonicalPlayerContact}:{});
+  super.move(hand,0,hand.frame%16===0?action:null,(this.board.multiDifficulty||this.board.slowdownWallRules)?{sourceWallContact:this.canonicalPlayerContact}:{});
   if(this.pendingReverse){
    this.pendingReverse=false;
    if(!this.canonicalPlayerContact&&this.eventSequence===sequence&&!this.death){hand.direction*=-1;this.event('reverse',hand);}
@@ -331,19 +344,19 @@ export class SourceRound extends MovementGame {
   this.onAfterHumanGrab?.(target);
  }
  stopHumanSlide(){
-  const e=stopSliding(this.player,this.board.dots,{currentPivot:this.board.slidingTeleportRules===true||this.board.movingDotRules===true,...(this.board.pilotAbsentSlideRecoveryRules?{onMissingTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a)}:{}),release:(d,h)=>this.onHumanRelease?.(d,h),grab:(d,h)=>this.slideGrabHuman(d,h)});
+  const e=stopSliding(this.player,this.board.dots,{currentPivot:this.board.slidingTeleportRules===true||this.board.movingDotRules===true,...((this.board.multiDifficulty||this.board.pilotAbsentSlideRecoveryRules)?{onMissingTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a)}:{}),release:(d,h)=>this.onHumanRelease?.(d,h),grab:(d,h)=>this.slideGrabHuman(d,h)});
   if(e){this.player.blocked=null;this.event(e.type,this.player,{id:e.to??e.dot});}
  }
  initializeMovingDots(classCount){
   this.movingInitialDots=this.board.dots.map(d=>({id:d.id,bonus:d.bonus,kind:d.kind,cell:d.cell,sourceCollidable:d.sourceCollidable}));this.movingDots=new Map();
-  for(const d of this.board.dots)if(d.motion==='moving-program')this.movingDots.set(d.id,createMovingDot({id:d.id,sourceIndex:d.sourceIndex,row:d.row,column:d.column,originalPixel:d.sourceInitialPosition,program:d.movingProgram},{allowMovingDots:true,allowStationaryLR:this.board.movingDoorCheckpointRules===true,classCount,onRiders:(index,p)=>{const dot=this.board.dots.find(d=>d.sourceIndex===index);dot.x=p.x;dot.y=p.y;positionMovingRiders({WA:()=>this.syncMovingActors(),HY:()=>{if(this.board.teleports?.length&&!this.board.movingTeleportCheckpointRules&&!this.board.movingTeleportDoorRules)throw new Error('Moving HY riders unqualified');/* HY snapshot resolves current DO pixels; its existing frame/reference survive. */},DO:()=>this.dotAnimations?.positionRiders(index),DP:()=>{if(this.board.movingDoorOilRules)this.oil?.positionMovingDroplets(index);else if(this.oil)throw new Error('Moving DP riders unqualified');},PU:()=>{if(this.board.movingDoorOilRules)this.oil?.positionMovingPuddles(index);else if(this.board.puddles?.length)throw new Error('Moving PU riders unqualified');},DE:()=>{}},index,p);}}));
+  for(const d of this.board.dots)if(d.motion==='moving-program')this.movingDots.set(d.id,createMovingDot({id:d.id,sourceIndex:d.sourceIndex,row:d.row,column:d.column,originalPixel:d.sourceInitialPosition,program:d.movingProgram},{allowMovingDots:true,allowStationaryLR:this.board.multiDifficulty===true||this.board.movingDoorCheckpointRules===true,classCount,onRiders:(index,p)=>{const dot=this.board.dots.find(d=>d.sourceIndex===index);dot.x=p.x;dot.y=p.y;positionMovingRiders({WA:()=>this.syncMovingActors(),HY:()=>{if(this.board.teleports?.length&&!this.board.multiDifficulty&&!this.board.movingTeleportCheckpointRules&&!this.board.movingTeleportDoorRules)throw new Error('Moving HY riders unqualified');/* HY snapshot resolves current DO pixels; its existing frame/reference survive. */},DO:()=>this.dotAnimations?.positionRiders(index),DP:()=>{if(this.board.multiDifficulty||this.board.movingDoorOilRules)this.oil?.positionMovingDroplets(index);else if(this.oil)throw new Error('Moving DP riders unqualified');},PU:()=>{if(this.board.multiDifficulty||this.board.movingDoorOilRules)this.oil?.positionMovingPuddles(index);else if(this.board.puddles?.length)throw new Error('Moving PU riders unqualified');},DE:()=>{}},index,p);}}));
  }
  syncMovingActors(){for(const a of [this.player,...(this.enemies||[])].filter(Boolean))a.movingPivot=this.board.dots.find(d=>d.id===a.pivot)?.motion==='moving-program';}
  positionJoinedUpDownRiders(index,p,options){
   const d=this.board.dots.find(d=>d.sourceIndex===index);d.x=p.x;d.y=p.y;d.humanCanGrab=options.state.humanAvailable;
   positionMovingRiders({WA:()=>this.syncMovingActors(),HY:()=>{},DO:()=>this.dotAnimations?.positionRiders(index),DP:()=>{},PU:()=>{},DE:()=>{}},index,p,{skipSpecialMisc:true});
  }
- onSourceDotLowered(id){if(this.player.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id});for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});}
+ onSourceDotLowered(id){if(this.player.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id});for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});}
  processMovingDots({classCount,classDelta,dotCount,overlayCount,surfaceCount}){
   if(this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingElevatorRules||this.board.movingCheckpointControlRules)this.elevators?.observeSurfaceClock(surfaceCount);
   for(const d of this.board.dots){
@@ -367,7 +380,7 @@ export class SourceRound extends MovementGame {
   if(hand.frame%16===0&&action&&!this.complete){const query=this.sourceGrabQuery(hand,true),target=query.grab&&this.board.dots.find(d=>d.id===query.grab.dot);
    if(query.allowed&&target.id!==hand.sourceBlockedTarget){
     if((action!=='flip')!==!!this.canonicalPlayerContact)reverseSliding(hand);
-    if(action!=='bounce'){const old=hand.pivot,before=this.point(hand);hand.sourceBlockedTarget=old;hand.transfers++;grabSourceActor(hand,query,{allowMovingQueries:true,...((this.board.movingBusterBombRules||this.board.movingMarkedOrdinaryRules||this.board.movingMarkedGoalRules||this.board.movingMarkedBonusRules)?{allowMarkedTransfers:true,onMarkedDeath:cause=>this.beginDeath(cause)}:{}),dots:this.movingQueryDots(),connectors:this.board.connectors,physicalPoint:before,release:(d,a)=>this.onHumanRelease(d,a),place:()=>{},onTransfer:receipt=>{hand.movingPivot=target.motion==='moving-program';Object.assign(this.event(action,hand,target),receipt,{type:action,realDot:query.grab.realDot,queryPixel:query.requestedPixel});},grab:()=>this.slideGrabHuman(target,hand)});
+    if(action!=='bounce'){const old=hand.pivot,before=this.point(hand);hand.sourceBlockedTarget=old;hand.transfers++;grabSourceActor(hand,query,{allowMovingQueries:true,...((this.board.multiDifficulty||this.board.movingBusterBombRules||this.board.movingMarkedOrdinaryRules||this.board.movingMarkedGoalRules||this.board.movingMarkedBonusRules)?{allowMarkedTransfers:true,onMarkedDeath:cause=>this.beginDeath(cause)}:{}),dots:this.movingQueryDots(),connectors:this.board.connectors,physicalPoint:before,release:(d,a)=>this.onHumanRelease(d,a),place:()=>{},onTransfer:receipt=>{hand.movingPivot=target.motion==='moving-program';Object.assign(this.event(action,hand,target),receipt,{type:action,realDot:query.grab.realDot,queryPixel:query.requestedPixel});},grab:()=>this.slideGrabHuman(target,hand)});
     }else this.event('bounce',hand,target);consumed=action==='bounce';
    }
   }
@@ -416,10 +429,15 @@ export class SourceRound extends MovementGame {
   }
  }
  mainDotSprite(dot){
+  const base={x:dot.x-16,y:dot.y-15};
+  if(this.board.multiDifficulty){
+   const {frame,visible}=sourceDotLook(dot,this.dotAnimations?.renderState(dot.id));
+   return {exists:true,frame,visible,base,background:dot.sourceInBackground};
+  }
   if(!this.board.slidingOilGoodieRingRules&&!this.board.gunTriggerOilRules)throw new Error('Current main-dot accessor requires Oil/GO/ring scope');
   const main=dot.ring?this.dotAnimations?.renderState(dot.id).main:null;
   if(dot.ring&&(!main||!Number.isInteger(main.frame)||typeof main.visible!=='boolean'))throw new Error('Current ring animation required');
-  return {exists:true,frame:dot.ring?main.frame:dotBodyFrame(dot),base:{x:dot.x-16,y:dot.y-15},background:dot.sourceInBackground,visible:dot.ring?main.visible:dot.sourceCollidable};
+  return {exists:true,frame:dot.ring?main.frame:dotBodyFrame(dot),base,background:dot.sourceInBackground,visible:dot.ring?main.visible:dot.sourceCollidable};
  }
  point(hand){if(this.board.movingDotRules&&hand.sliding&&hand.sourceRailSpritePoint){const d=this.board.dots.find(d=>d.id===hand.pivot);return {...d,...hand.sourceRailSpritePoint};}const d=this.board.dots.find(d=>d.id===hand.pivot);return this.board.slidingConnectorRules?slidingPoint(hand,d):d;}
  collider(hand){return hand.visible===false?null:worldOutline(this.outlines,hand.group,hand.program||hand.canonicalFrame?hand.frame:sourceFrame(hand.angle),this.point(hand));}
@@ -433,7 +451,7 @@ export class SourceRound extends MovementGame {
   const hero=this.collider(this.player);
   for(const enemy of this.enemies)if(!(this.point(this.player).protected&&[1,2,3].includes(enemy.sourceActorType))&&enemyFrameGate(this.player.pivot,enemy.pivot,this.player.canonicalFrame?this.player.frame:sourceFrame(this.player.angle),enemy.program||enemy.canonicalFrame?enemy.frame:sourceFrame(enemy.angle))&&outlineCollision(hero,this.collider(enemy))){
    if(this.board.freeBusterRules&&enemy.sourceActorType===5){
-    this.emitGunTriggerEvents([{type:'sound',id:41},...this.gunTriggers.launchBuster(enemy,this.point(enemy),busterVelocity(this.player.frame,this.player.direction))],this.player);
+    this.emitGunTriggerEvents([{type:'sound',id:41},...this.gunTriggers.launchBuster(enemy,this.point(enemy),busterVelocity(this.player.canonicalFrame?this.player.frame:sourceFrame(this.player.angle),this.player.direction))],this.player);
     enemy.visible=false;enemy.hiddenUntil=this.guestTicks+300;this.event('buster-hidden',enemy);continue;
    }
    return {reason:'enemy',object:enemy.name,...(enemy.sourceActorType===4?{sourceReason:0}:{})};
@@ -446,7 +464,7 @@ export class SourceRound extends MovementGame {
  }
  contactGunTrigger(hand){
   const actor=this.collider(hand),g=this.gunTriggers;
-  if(hand.sourceActorType===5||this.board.freeBusterRules&&!this.board.gunSlidingBusterRules&&!this.board.gunBusterRules)return;
+  if(hand.sourceActorType===5||this.board.freeBusterRules&&!this.board.multiDifficulty&&!this.board.gunSlidingBusterRules&&!this.board.gunBusterRules)return;
   this.emitGunTriggerEvents(g.contact(hand,t=>outlineCollision(actor,worldOutline(this.gunOutlines,3300,t.frame,g.pointFor(t.rawBase)))),hand);
  }
  projectileHitsWall(p){
@@ -475,7 +493,7 @@ export class SourceRound extends MovementGame {
   this.board.wallRevision=(this.board.wallRevision??0)+1;this.event('buster-wall-shatter',this.player,{id:w.id});
  }
  projectileCollision(){
-  if(this.board.freeBusterRules&&!this.board.gunSlidingBusterRules&&!this.board.gunBusterRules)return null;
+  if(!this.board.multiDifficulty&&this.board.freeBusterRules&&!this.board.gunSlidingBusterRules&&!this.board.gunBusterRules)return null;
   const actor=this.collider(this.player),g=this.gunTriggers;
   return g.humanHit(this.player,p=>outlineCollision(actor,worldOutline(this.gunOutlines,4200,p.frame,g.pointFor(p.rawBase))));
  }
@@ -499,9 +517,9 @@ export class SourceRound extends MovementGame {
   this.presentCanonicalEnemy(hand,timing,upstream);
  }
  animateStaticEnemy(hand,delta,timing,upstream,dispatched){
-  if(this.board.freeBusterRules&&!this.board.staticSlowdownBusterRules&&!this.board.staticTeleportBusterRules&&!this.board.movingProgrammedBusterRules&&hand.sourceActorType===5){for(const e of advanceFreeBuster(hand,dispatched?delta:0,this.guestTicks,{allowGunSlidingBusters:this.board.gunSlidingBusterRules===true,scope:this.board}))this.event(e.type,hand);this.presentCanonicalEnemy(hand,timing,upstream);return;}
+  if(!this.board.multiDifficulty&&this.board.freeBusterRules&&!this.board.staticSlowdownBusterRules&&!this.board.staticTeleportBusterRules&&!this.board.movingProgrammedBusterRules&&hand.sourceActorType===5){for(const e of advanceFreeBuster(hand,dispatched?delta:0,this.guestTicks,{allowGunSlidingBusters:this.board.gunSlidingBusterRules===true,scope:this.board}))this.event(e.type,hand);this.presentCanonicalEnemy(hand,timing,upstream);return;}
   if(dispatched){
-   const previousVisible=hand.visible,callback=this.board.staticMarkedOrbitalRules?(state,count,options)=>advanceStaticMarkedOrbitalCallback(this.board,state,count,options,{allowStaticMarkedOrbitals:true}):advanceStaticEnemyCallback,result=callback(hand,delta,{program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60),allowStaticGunRails:this.board.staticGunRailRules===true,staticGunRailScope:this.board,allowMovingTeleportCheckpoints:this.board.movingTeleportCheckpointRules===true,movingTeleportCheckpointScope:this.board,allowStaticRingDoors:this.board.staticRingDoorRules===true,staticRingDoorScope:this.board,allowStaticRingRails:this.board.staticRingRailRules===true,staticRingRailScope:this.board,allowMovingGoalRails:this.board.movingGoalRailRules===true,movingGoalRailScope:this.board,allowMovingTeleportDoors:this.board.movingTeleportDoorRules===true,movingTeleportDoorScope:this.board,allowMovingProtectedBusters:this.board.movingProtectedBusterRules===true,movingProtectedBusterScope:this.board,allowMovingSlowdownBusters:this.board.movingSlowdownBusterRules===true,movingSlowdownBusterScope:this.board,allowStaticSlowdownBusters:this.board.staticSlowdownBusterRules===true,staticSlowdownBusterScope:this.board,allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowClass2RotatingSpikes:this.board.class2RotatingSpikeRules===true,allowClass3RotatingSpikes:this.board.class3RotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,allowMovingProtectedPassage:this.board.movingProtectedPassageRules===true,movingProtectedPassageScope:this.board,allowMovingGoalOrdinary:this.board.movingGoalOrdinaryRules===true,movingGoalOrdinaryScope:this.board,allowMovingWaystation:this.board.movingWaystationRules===true,movingWaystationScope:this.board,allowMovingGoalGoodies:this.board.movingGoalGoodieRules===true,movingGoalGoodieScope:this.board,allowStaticTeleportBusters:this.board.staticTeleportBusterRules===true,staticTeleportBusterScope:this.board,allowGunSlidingBusters:this.board.gunSlidingBusterRules===true,gunSlidingBusterScope:this.board,allowMovingProgrammedBusters:this.board.movingProgrammedBusterRules===true,movingProgrammedBusterScope:this.board,allowMovingCheckpointControls:this.board.movingCheckpointControlRules===true,movingCheckpointControlScope:this.board,allowMovingCheckpointRails:this.board.movingCheckpointRailRules===true,movingCheckpointRailScope:this.board,allowMovingBusterBombs:this.board.movingBusterBombRules===true,movingBusterBombScope:this.board,allowMovingDots:this.board.movingDotRules===true,allowMovingTubes:this.board.movingTubesRules===true,allowMovingDoorCheckpoint:this.board.movingDoorCheckpointRules===true,allowMovingDoorGoodies:this.board.movingDoorGoodieRules===true,allowMovingDoorOil:this.board.movingDoorOilRules===true,allowMovingMarkedOrdinary:this.board.movingMarkedOrdinaryRules===true,movingMarkedOrdinaryScope:this.board,allowMovingFuseOrdinary:this.board.movingFuseOrdinaryRules===true,movingFuseOrdinaryScope:this.board,allowMovingBombSpikeWaystation:this.board.movingBombSpikeWaystationRules===true,movingBombSpikeWaystationScope:this.board,allowMovingSpikes:this.board.movingSpikeRules===true,movingSpikeScope:this.board,allowMovingBombs:this.board.movingBombRules===true,allowMovingMarkedGoals:this.board.movingMarkedGoalRules===true,allowMovingCheckpointRings:this.board.movingCheckpointRingRules===true,allowMovingMarkedBonuses:this.board.movingMarkedBonusRules===true,movingSpecialScope:this.board,allowMovingElevators:this.board.movingElevatorRules===true,movingElevatorScope:this.board,onMissingSlideTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a),sourceQuery:(a)=>this.sourceGrabQuery(a,false),allowTeleports:this.board.teleportRules===true,allowSlidingTeleports:this.board.slidingTeleportRules===true,onSourceEvent:(event,s)=>this.sourceActorEvent(event,s),allowSliding:this.board.slidingConnectorRules===true,allowSlidingPrograms:this.board.staticSlidingProgramRules===true,allowGunTriggerSliding:this.board.gunTriggerSlidingRules===true,allowStaticSlidingBombGoodies:this.board.staticSlidingBombGoodieRules===true,staticSlidingBombGoodieScope:this.board,allowSlidingBombs:this.board.slidingBombRules===true,allowSlidingBombOrbitals:this.board.slidingBombOrbitalRules===true,allowSlidingBombCheckpoints:this.board.slidingBombCheckpointRules===true,allowSlidingOil:this.board.slidingOilRules===true,allowSlidingOilGoodieRings:this.board.slidingOilGoodieRingRules===true,allowSlidingGoodies:this.board.slidingGoodieRules===true,allowSlidingGoodiePrograms:this.board.slidingGoodieProgramRules===true,
+   const previousVisible=hand.visible,callback=this.board.staticMarkedOrbitalRules?(state,count,options)=>advanceStaticMarkedOrbitalCallback(this.board,state,count,options,{allowStaticMarkedOrbitals:true}):advanceStaticEnemyCallback,result=callback(hand,delta,{multiDifficulty:this.board.multiDifficulty===true,program:hand.program,dots:this.board.dots,guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n),allowStaticGunRails:this.board.staticGunRailRules===true,staticGunRailScope:this.board,allowMovingTeleportCheckpoints:this.board.movingTeleportCheckpointRules===true,movingTeleportCheckpointScope:this.board,allowStaticRingDoors:this.board.staticRingDoorRules===true,staticRingDoorScope:this.board,allowStaticRingRails:this.board.staticRingRailRules===true,staticRingRailScope:this.board,allowMovingGoalRails:this.board.movingGoalRailRules===true,movingGoalRailScope:this.board,allowMovingTeleportDoors:this.board.movingTeleportDoorRules===true,movingTeleportDoorScope:this.board,allowMovingProtectedBusters:this.board.movingProtectedBusterRules===true,movingProtectedBusterScope:this.board,allowMovingSlowdownBusters:this.board.movingSlowdownBusterRules===true,movingSlowdownBusterScope:this.board,allowStaticSlowdownBusters:this.board.staticSlowdownBusterRules===true,staticSlowdownBusterScope:this.board,allowRotatingSpikes:this.board.rotatingSpikeRules===true,allowFastRotatingSpikes:this.board.fastRotatingSpikeRules===true,allowSlowRotatingSpikes:this.board.slowRotatingSpikeRules===true,allowClass2RotatingSpikes:this.board.class2RotatingSpikeRules===true,allowClass3RotatingSpikes:this.board.class3RotatingSpikeRules===true,allowRotatingSpikeTransfers:this.board.rotatingSpikeTransferRules===true,allowRotatingSpikeBounces:this.board.rotatingSpikeBounceRules===true,allowUpDownDots:this.board.elevatorRules===true,allowMovingProtectedPassage:this.board.movingProtectedPassageRules===true,movingProtectedPassageScope:this.board,allowMovingGoalOrdinary:this.board.movingGoalOrdinaryRules===true,movingGoalOrdinaryScope:this.board,allowMovingWaystation:this.board.movingWaystationRules===true,movingWaystationScope:this.board,allowMovingGoalGoodies:this.board.movingGoalGoodieRules===true,movingGoalGoodieScope:this.board,allowStaticTeleportBusters:this.board.staticTeleportBusterRules===true,staticTeleportBusterScope:this.board,allowGunSlidingBusters:this.board.gunSlidingBusterRules===true,gunSlidingBusterScope:this.board,allowMovingProgrammedBusters:this.board.movingProgrammedBusterRules===true,movingProgrammedBusterScope:this.board,allowMovingCheckpointControls:this.board.movingCheckpointControlRules===true,movingCheckpointControlScope:this.board,allowMovingCheckpointRails:this.board.movingCheckpointRailRules===true,movingCheckpointRailScope:this.board,allowMovingBusterBombs:this.board.movingBusterBombRules===true,movingBusterBombScope:this.board,allowMovingDots:this.board.movingDotRules===true,allowMovingTubes:this.board.movingTubesRules===true,allowMovingDoorCheckpoint:this.board.movingDoorCheckpointRules===true,allowMovingDoorGoodies:this.board.movingDoorGoodieRules===true,allowMovingDoorOil:this.board.movingDoorOilRules===true,allowMovingMarkedOrdinary:this.board.movingMarkedOrdinaryRules===true,movingMarkedOrdinaryScope:this.board,allowMovingFuseOrdinary:this.board.movingFuseOrdinaryRules===true,movingFuseOrdinaryScope:this.board,allowMovingBombSpikeWaystation:this.board.movingBombSpikeWaystationRules===true,movingBombSpikeWaystationScope:this.board,allowMovingSpikes:this.board.movingSpikeRules===true,movingSpikeScope:this.board,allowMovingBombs:this.board.movingBombRules===true,allowMovingMarkedGoals:this.board.movingMarkedGoalRules===true,allowMovingCheckpointRings:this.board.movingCheckpointRingRules===true,allowMovingMarkedBonuses:this.board.movingMarkedBonusRules===true,movingSpecialScope:this.board,allowMovingElevators:this.board.movingElevatorRules===true,movingElevatorScope:this.board,onMissingSlideTarget:(facts,a)=>this.unsupportedSlideContinuation(facts,a),sourceQuery:(a)=>this.sourceGrabQuery(a,false),allowTeleports:this.board.teleportRules===true,allowSlidingTeleports:this.board.slidingTeleportRules===true,onSourceEvent:(event,s)=>this.sourceActorEvent(event,s),allowSliding:this.board.slidingConnectorRules===true,allowSlidingPrograms:this.board.staticSlidingProgramRules===true,allowGunTriggerSliding:this.board.gunTriggerSlidingRules===true,allowStaticSlidingBombGoodies:this.board.staticSlidingBombGoodieRules===true,staticSlidingBombGoodieScope:this.board,allowSlidingBombs:this.board.slidingBombRules===true,allowSlidingBombOrbitals:this.board.slidingBombOrbitalRules===true,allowSlidingBombCheckpoints:this.board.slidingBombCheckpointRules===true,allowSlidingOil:this.board.slidingOilRules===true,allowSlidingOilGoodieRings:this.board.slidingOilGoodieRingRules===true,allowSlidingGoodies:this.board.slidingGoodieRules===true,allowSlidingGoodiePrograms:this.board.slidingGoodieProgramRules===true,
     afterAnimate:s=>{
      if((this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.movingProgrammedBusterRules)&&s.sourceActorType===5)return;
      const wall=this.board.staticEnemyWallRules?this.wallCollision(s):null;
@@ -509,7 +527,7 @@ export class SourceRound extends MovementGame {
      this.contactSwitch(s);
      this.contactElevators(s);
      if(this.gunTriggers)this.contactGunTrigger(s);
-     if(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownBusterRules&&s.sourceActorType!==4||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingBusterBombRules||this.board.movingFuseOrdinaryRules||(this.board.movingBombSpikeWaystationRules&&s.sourceActorType!==4)||this.board.slidingBombRules&&s.sourceActorType!==4||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene?.runtime.checkMatch(s);
+     if(this.board.multiDifficulty&&![4,5].includes(s.sourceActorType)||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownBusterRules&&s.sourceActorType!==4||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingBusterBombRules||this.board.movingFuseOrdinaryRules||(this.board.movingBombSpikeWaystationRules&&s.sourceActorType!==4)||this.board.slidingBombRules&&s.sourceActorType!==4||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene?.runtime.checkMatch(s);
     },onDotRelease:()=>{},onDotGrabFirst:(s,d)=>{if(this.board.movingDotRules)s.movingPivot=d.motion==='moving-program';},afterDotGrab:(s,d)=>this.afterActorDotGrab(s,d)});
    Object.assign(hand,result.state);
    if(previousVisible!==hand.visible)this.contactSwitch(hand);
@@ -531,7 +549,8 @@ export class SourceRound extends MovementGame {
   // The upstream strict> client starts with one uncounted base event. Clamp
   // prediction at the next pose until the canonical callback decides a turn.
   // Render frequency and displayed angle never choose program commands.
-  const basePhase=(38-upstream.remaining+16*this.guestTickRemainder)/38;
+  const period=this.adjustPeriod(23);
+  const basePhase=(period-upstream.remaining+16*this.guestTickRemainder)/period;
   const pending=Math.max(0,basePhase+upstream.clientRemainder-1);
   hand.presentationPhase=Math.max(0,Math.min(1,(timing.remainder+pending*timing.multiplier)/timing.divisor));
   hand.angle=(hand.unwrappedFrame+(hand.sliding?0:hand.direction*hand.presentationPhase))*TAU/64;
@@ -588,7 +607,7 @@ export class SourceRound extends MovementGame {
  onHumanGrab(dot){
   const deaths=this.oil?.humanGrab(dot.id)||[];
   for(const event of deaths)this.beginDeath({reason:'oil',sourceReason:event.reason,object:dot.id});
-  this.slowdown?.humanGrab(dot);
+  this.slowdown?.humanGrab(this.board.multiDifficulty?this.board.dots.find(d=>d.id===dot.id):dot);
   if(this.death&&!this.board.slidingConnectorRules)return false;
   if(this.dotAnimations){
    const result=this.dotAnimations.humanGrab(dot.id,this.remainingTime);
@@ -598,7 +617,7 @@ export class SourceRound extends MovementGame {
   return !this.death;
  }
  afterActorDotGrab(hand,dot){
-  if(!this.teleports||this.board.staticTeleportBusterRules&&hand.sourceActorType===5)return;
+  if(!this.teleports||(this.board.multiDifficulty||this.board.staticTeleportBusterRules)&&hand.sourceActorType===5)return;
   const from=hand.pivot,faderIndex=this.teleports.faders.length;
   const moved=this.teleports.teleport(hand,dot,{
    sound:id=>this.event('teleport-sound',hand,{id}),
@@ -606,7 +625,7 @@ export class SourceRound extends MovementGame {
    // The explicit static HY/buster family admits WL: perform the complete
    // bounce/reversal before WATeleport dispatches death36. Earlier wall-free
    // families retain their false result and reject unqualified WL joins.
-   checkWalls:a=>{if(this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.staticTeleportBusterRules){if(this.board.movingTeleportCheckpointRules)assertMovingTeleportCheckpointActor(a);else if(this.board.movingTeleportDoorRules)assertMovingTeleportDoorActor(a);else assertStaticTeleportBusterActor(a);const wall=this.wallCollision(a);if(wall){this.bounceFromWall(a,wall);return true;}return false;}if(this.board.walls?.length)throw new Error('HY wall composition is unqualified');return false;},
+   checkWalls:a=>{if(this.board.multiDifficulty){const wall=this.wallCollision(a);if(wall)this.bounceFromWall(a,wall);return Boolean(wall);}if(this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.staticTeleportBusterRules){if(this.board.movingTeleportCheckpointRules)assertMovingTeleportCheckpointActor(a);else if(this.board.movingTeleportDoorRules)assertMovingTeleportDoorActor(a);else assertStaticTeleportBusterActor(a);const wall=this.wallCollision(a);if(wall){this.bounceFromWall(a,wall);return true;}return false;}if(this.board.walls?.length)throw new Error('HY wall composition is unqualified');return false;},
    onWallDeath:(s,{reason})=>this.beginDeath({reason:'teleport-wall',sourceReason:reason,actor:s.name})
   });
   if(moved){this.event('teleport',hand,{id:hand.pivot});this.events.at(-1).from=from;if(this.board.slidingTeleportRules){const f=this.teleports.faders[faderIndex];Object.assign(this.events.at(-1),{to:hand.pivot,fader:f?{...f}:null});}
@@ -625,22 +644,22 @@ export class SourceRound extends MovementGame {
  onHumanRelease(dot,hand){
   // Moving queries use detached position records. Slow appearance belongs to
   // the board dot, so resolve the released source ID before its callback.
-  if(this.board.movingSlowdownBusterRules)dot=this.board.dots.find(d=>d.id===dot.id);
+  if(this.board.multiDifficulty||this.board.movingSlowdownBusterRules)dot=this.board.dots.find(d=>d.id===dot.id);
   this.slowdown?.humanRelease(dot);
   this.dotAnimations?.humanRelease(dot.id,{releasingActor:hand.name,orphanOccupants:id=>{
-   for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});
+   for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});
   }});
  }
- onBonus(dot){if(this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingGoalOrdinaryRules||this.board.movingWaystationRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingGoalGoodieRules||this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingDoorCheckpointRules||this.board.movingTubesRules||this.board.movingMarkedOrdinaryRules||this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){dot.bonus=false;dot.cell&=~2;if(dot.kind==='bonus')dot.kind='dot';}if(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.movingProgrammedBusterRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules||this.board.slidingBombRules||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore?.bonusDot();}
+ onBonus(dot){if(this.board.multiDifficulty||this.board.movingTeleportCheckpointRules||this.board.movingTeleportDoorRules||this.board.movingProtectedPassageRules||this.board.staticRingDoorRules||this.board.staticGunRailRules||this.board.movingGoalRailRules||this.board.movingGoalOrdinaryRules||this.board.movingWaystationRules||this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticSlowdownRules||this.board.movingGoalGoodieRules||this.board.staticSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.gunSlidingBusterRules||this.board.movingProgrammedBusterRules||this.board.movingCheckpointControlRules||this.board.movingCheckpointRailRules||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules||this.board.movingDoorCheckpointRules||this.board.movingTubesRules||this.board.movingMarkedOrdinaryRules||this.board.staticMarkedOrbitalRules||this.board.movingSpikeRules||this.board.movingMarkedGoalRules||this.board.movingElevatorRules||this.board.movingCheckpointRingRules||this.board.movingMarkedBonusRules){dot.bonus=false;dot.cell&=~2;if(dot.kind==='bonus')dot.kind='dot';}if(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.movingProgrammedBusterRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules||this.board.slidingBombRules||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore?.bonusDot();}
  onGoalBonus(dot){if(this.board.movingProtectedBusterRules||this.board.movingSlowdownBusterRules||this.board.staticTeleportBusterRules||this.board.movingProgrammedBusterRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules||this.board.slidingBombRules||this.board.staticSlidingBombGoodieRules||this.board.movingBombRules)this.bombScene.unbonus(dot,false);else if(this.board.slidingConnectorRules)consumeConnectorBonus(this.board.connectors,this.board.dots,dot.id);return this.childScore.bonusDotAfterGoal();}
- onGoal(){this.childScore?.complete();this.bombScene?.finish();}
+ onGoal(){this.childScore?.complete(this.remainingTime);this.bombScene?.finish(completionBonusForDifficulty(this.board.difficulty));}
  restartAfterDeath(){
   const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,
    events:this.events,roundRestarts:this.roundRestarts+1,elapsedTime:this.elapsedTime};
   this.reset({preserveCheckpoint:true});Object.assign(this,history);this.event('round-reset',this.player);
  }
  unsupportedSlideContinuation(facts,hand){
-  if(!this.board.pilotAbsentSlideRecoveryRules)throw new Error('Unqualified source slide continuation');
+  if(!this.board.multiDifficulty&&!this.board.pilotAbsentSlideRecoveryRules)throw new Error('Unqualified source slide continuation');
   const p=this.point(hand),details={...facts,lastKnownPhysical:{x:p.x,y:p.y},sourceSlot:hand.sourceSlot,sourceActorType:hand.sourceActorType,frame:hand.frame,direction:hand.direction,pilotRecovery:true};
   if(!Number.isInteger(p.x)||!Number.isInteger(p.y))throw new Error('Last known source physical point required');
   Object.assign(this.event('unsupported-continuation',hand,{id:hand.pivot}),{pilotRecovery:details});throw new PilotAbsentSlideContinuation(details);
@@ -650,7 +669,7 @@ export class SourceRound extends MovementGame {
   this.reset({preserveCheckpoint:true});Object.assign(this,history);Object.assign(this.event('pilot-round-restart',this.player),{pilotRecovery:true,recoveries:this.pilotRecoveries});
  }
  update(dt,input={}){
-  if(!this.board.pilotAbsentSlideRecoveryRules)return this.updateSource(dt,input);
+  if(!this.board.multiDifficulty&&!this.board.pilotAbsentSlideRecoveryRules)return this.updateSource(dt,input);
   if(this.pilotInputLatch){if(['swing','flip','bounce','reverse'].some(k=>input[k]))input={};else this.pilotInputLatch=false;}
   const before={steps:this.steps,activeSteps:this.activeSteps};try{return this.updateSource(dt,input);}catch(error){
    if(!(error instanceof PilotAbsentSlideContinuation))throw error;
@@ -666,6 +685,7 @@ export class SourceRound extends MovementGame {
   this.guestTickRemainder+=dt*this.guestTicksPerSecond;
   const elapsed=Math.floor(this.guestTickRemainder+1e-9);this.guestTickRemainder-=elapsed;
   this.guestTicks+=elapsed;
+  this.advanceCountdown(elapsed,this.guestTicksPerSecond);
   this.spikeCount=this.spikeClock.advance(elapsed).clientCount;
   this.deathClock.advance(elapsed);
   this.oil?.advanceClocks(elapsed);
@@ -687,12 +707,12 @@ export class SourceRound extends MovementGame {
   if(!this.death&&!this.board.movingProgrammedBusterRules&&!this.board.movingElevatorRules&&!this.board.movingCheckpointControlRules)this.elevators?.observeClock(actorState.classes[1].count,{
    onPhase:id=>{
     this.syncElevatorDots();
-    if(this.board.elevatorOilRiderRules)this.oil.positionElevatorRiders(this.oil.index(id));
+    if(this.board.elevatorOilRiderRules||this.board.multiDifficulty&&this.oil)this.oil.positionElevatorRiders(this.oil.index(id));
    },
    onLowered:id=>{
     if(this.player.pivot===id)this.beginDeath({reason:'lowered-dot',sourceReason:38,object:id});
-    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>Math.floor(n*100/60)});
-    if(this.board.elevatorOilRiderRules)this.oil.orphanElevatorDroplets(this.oil.index(id));
+    for(const enemy of this.enemies)if(enemy.pivot===id)markEnemyOrphaned(enemy,{guestTick:this.guestTicks,adjustPeriod:n=>this.adjustPeriod(n)});
+    if(this.board.elevatorOilRiderRules||this.board.multiDifficulty&&this.oil)this.oil.orphanElevatorDroplets(this.oil.index(id));
    },isFrozen:()=>!!this.death
   });
   if(!this.death&&!this.board.movingProgrammedBusterRules&&!this.board.movingElevatorRules&&!this.board.movingCheckpointControlRules)this.elevators?.observeSurfaceClock(elevatorSurfaceCount);
@@ -712,9 +732,9 @@ export class SourceRound extends MovementGame {
   this.bombScene?.processExplosions();
   // The original logical PR9 layer precedes both WA layers in the universe
   // list. WA entrants append later, after this traversal has passed PR9.
-  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.freeBusterRules?{...((this.board.gunSlidingBusterRules||this.board.gunBusterRules)?{wall:p=>this.projectileHitsWall(p)}:{}),classes:actorState.classes,busterWall:p=>this.busterHitsWall(p),busterDoor:p=>this.busterHitsDoor(p),shatter:(w,p)=>this.shatterBusterWall(w,p)}:(this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:(this.board.gunTriggerWallRules||this.board.staticGunRailHazardRules||this.board.gunTriggerOilRules)?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
+  if(!this.death&&this.gunTriggers)this.emitGunTriggerEvents(this.gunTriggers.advance(actorState.classes[0].count,this.board.freeBusterRules?{...(this.board.multiDifficulty?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:(this.board.gunSlidingBusterRules||this.board.gunBusterRules)?{wall:p=>this.projectileHitsWall(p)}:{}),classes:actorState.classes,busterWall:p=>this.busterHitsWall(p),busterDoor:p=>this.busterHitsDoor(p),shatter:(w,p)=>this.shatterBusterWall(w,p)}:(this.board.multiDifficulty||this.board.movingDoorGoodieRules||this.board.movingDoorOilRules)?{wall:p=>this.projectileHitsWall(p),door:p=>this.projectileHitsDoor(p)}:(this.board.gunTriggerWallRules||this.board.staticGunRailHazardRules||this.board.gunTriggerOilRules)?{wall:p=>this.projectileHitsWall(p)}:undefined),this.player);
   if(!this.death)for(const enemy of this.enemies){
-   if(![4,5].includes(enemy.sourceActorType)&&!this.board.staticTeleportBusterRules&&!this.board.movingProgrammedBusterRules&&!this.board.movingBusterBombRules&&!this.board.movingFuseOrdinaryRules&&!this.board.movingBombSpikeWaystationRules&&!this.board.slidingBombRules&&!this.board.staticSlidingBombGoodieRules&&!this.board.movingBombRules)this.bombScene?.runtime.checkMatch(enemy);
+   if(!this.board.multiDifficulty&&![4,5].includes(enemy.sourceActorType)&&!this.board.staticTeleportBusterRules&&!this.board.movingProgrammedBusterRules&&!this.board.movingBusterBombRules&&!this.board.movingFuseOrdinaryRules&&!this.board.movingBombSpikeWaystationRules&&!this.board.slidingBombRules&&!this.board.staticSlidingBombGoodieRules&&!this.board.movingBombRules)this.bombScene?.runtime.checkMatch(enemy);
    if(this.board.staticEnemyCallbacks){this.animateStaticEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer,substeps.has(enemy));continue;}
    if(enemy.program){this.animateProgramEnemy(enemy,substeps.get(enemy)||0,actorState.classes[enemy.speedClass??0],actorTimer);continue;}
    enemy.angle+=this.board.angularSpeed*dt*enemy.direction*(enemy.speedScale??1);
@@ -765,13 +785,13 @@ export class SourceRound extends MovementGame {
    this.death.update(elapsed);
    if(this.death.complete)this.restartAfterDeath();
   }else{
-   super.update(dt,input);if(this.complete){if(latchMovingSpikeBank)this.movingSpikes.latchBank(this.spikeCount);return;}
+   super.update(dt,input,{sourceClock:true});if(this.complete){if(latchMovingSpikeBank)this.movingSpikes.latchBank(this.spikeCount);return;}
    // Hero/enemy overlaps are a separate periodic pass after sprite processing.
    if(!this.death){const hit=this.enemyCollision();if(hit)this.beginDeath(hit);}
    if(this.board.canonicalPlayerRules&&!this.death)this.presentCanonicalEnemy(this.player,actorState.classes[this.player.speedClass??0],actorTimer);
   }  // RO periodic SPI bank follows universe processing; upstream MT keeps running.
   if(latchMovingSpikeBank)this.movingSpikes.latchBank(this.spikeCount);
  }
-  snapshot(){return {...super.snapshot(),...(this.busterWallEffects?{busterWalls:{effects:structuredClone(this.busterWallEffects),clock:this.busterWallClock.advance(0)}}:{}),...((this.board.movingSpikeRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules)?{movingSpikes:this.movingSpikes.snapshot()}:{}),...(this.movingDots?{movingDots:[...this.movingDots.values()].map(r=>r.snapshot())}:{}),...(this.board.slidingConnectorRules?{connectors:this.board.connectors.map(e=>({...e,frame:connectorLook(e,this.board.dots)}))}:{}),...(this.teleports?{teleports:this.teleports.snapshot(),teleportClocks:this.teleportClocks.snapshot()}:{}),...(this.elevators?{elevators:this.elevators.snapshot()}:{}),enemies:this.enemies.map(h=>({...h})),...(this.slowdown?{slowdown:this.slowdown.snapshot()}:{}),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),...(this.gunTriggers?{gunTriggers:this.gunTriggers.snapshot()}:{}),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations?{enabled:false,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
+  snapshot(){return {...super.snapshot(),...(this.busterWallEffects?{busterWalls:{effects:structuredClone(this.busterWallEffects),clock:this.busterWallClock.advance(0)}}:{}),...((this.board.movingSpikeRules||this.board.movingFuseOrdinaryRules||this.board.movingBombSpikeWaystationRules)?{movingSpikes:this.movingSpikes.snapshot()}:{}),...(this.movingDots?{movingDots:[...this.movingDots.values()].map(r=>r.snapshot())}:{}),...(this.board.slidingConnectorRules?{connectors:this.board.connectors.map(e=>({...e,frame:connectorLook(e,this.board.dots)}))}:{}),...(this.teleports?{teleports:this.teleports.snapshot(),teleportClocks:this.teleportClocks.snapshot()}:{}),...(this.elevators?{elevators:this.elevators.snapshot()}:{}),enemies:this.enemies.map(h=>({...h})),...(this.slowdown?{slowdown:this.slowdown.snapshot()}:{}),actorClasses:this.actorClasses.snapshot(),actorUpstream:{...this.actorClock.advance(0),guestTickRemainder:this.guestTickRemainder},doors:this.doorSystem.snapshot(),oil:this.oil?.snapshot(),bombs:this.bombScene?.snapshot(),...(this.gunTriggers?{gunTriggers:this.gunTriggers.snapshot()}:{}),childScore:this.childScore?.snapshot(),specialDots:this.dotAnimations?.snapshot(),roundTimer:this.dotAnimations||this.timed?{enabled:this.timed,original:this.board.timeLimit,current:this.remainingTime,saved:this.dotAnimations?.savedTime}:undefined,guestTicks:this.guestTicks,roundRestarts:this.roundRestarts,elapsedTime:this.elapsedTime,pendingReverse:this.pendingReverse,
   ...(this.board.movingElevatorRules?{pilotRecoveries:this.pilotRecoveries??0,pilotInputLatch:this.pilotInputLatch===true}:{}),dying:!!this.death,deathParticles:this.death?.snapshot()||[],spikeFrames:this.board.spikes.map(s=>({id:s.id,frame:this.spikeFrame(s)}))};}
 }

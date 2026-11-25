@@ -155,14 +155,14 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     for (const id of [
       'game-slots', 'game-level-grid', 'game-free-play', 'game-chapters', 'game-menu-status',
       'slot-confirm', 'slot-keep', 'slot-erase', 'slot-play', 'slot-levels', 'slot-hand', 'slot-sound',
-      'slot-music', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
+      'slot-music', 'slot-difficulty', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
       'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-round-bonus',
-      'game-finish-bonus', 'game-level-total', 'game-campaign-total', 'game-score-delta',
+      'game-finish-bonus', 'game-time-row', 'game-time-bonus', 'game-level-total', 'game-campaign-total', 'game-score-delta',
       'game-complete-controls',
     ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') ? 'button' : 'div', id);
 
     const pauseActions = makeNode('div', 'pause-actions');
-    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-save-slots'].map(id => makeNode('button', id));
+    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-difficulty', 'game-save-slots'].map(id => makeNode('button', id));
     pauseActions.append(...pauseButtons);
     pauseActions.querySelectorAll = () => pauseButtons;
 
@@ -182,7 +182,7 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
       onPlay: (slot, level) => played.push([slot, level]),
       onResume() {},
       onRestart: () => restarted++,
-      onSetting(slot, name) { settingsToggled.push([slot, name]); slotState[name] = !slotState[name]; },
+      onSetting(slot, name, value) { settingsToggled.push([slot, name]); slotState[name] = value ?? !slotState[name]; },
       onReset() {},
       onExport() {},
     });
@@ -218,9 +218,26 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     menu.pad({pressed: {swing: true}});
     assert.equal(menu.view, 'title');
 
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'down', pressed: {}});
+    assert.equal(document.activeElement.id, 'slot-difficulty');
+    for (const difficulty of ['Easy', 'Medium', 'Hard', 'Child']) {
+      menu.pad({pressed: {swing: true}});
+      assert.equal(slotState.difficulty, difficulty);
+      assert.equal(byId.get('slot-difficulty').textContent, 'Difficulty: ' + difficulty);
+    }
+    menu.show('pause');
+    byId.get('game-difficulty').click();
+    assert.equal(slotState.difficulty, 'Easy');
+    menu.complete(completionDetails(2, 1000, 1500, 7800, true, {difficulty: 'Easy', remainingTime: 18.9}));
+    assert.equal(byId.get('game-time-row').hidden, false);
+    assert.equal(byId.get('game-finish-bonus').textContent, '5,000 pts');
+    assert.equal(byId.get('game-time-bonus').textContent, '1,800 pts');
+
     // On level 100 (nextLevel null), Level Select button is hidden and skipped by navigation.
     menu.complete({level: 100, bonus: 0, levelTotal: 1000, campaignTotal: 50000, delta: 0, nextLevel: null});
     assert.equal(byId.get('game-complete-levels').hidden, true);
+    assert.equal(byId.get('game-time-row').hidden, true);
     menu.pad({direction: 'down', pressed: {}});
     menu.pad({direction: 'down', pressed: {}});
     assert.equal(byId.get('game-complete-slots').hasAttribute('data-selected'), true);

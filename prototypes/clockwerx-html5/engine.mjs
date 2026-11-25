@@ -1,15 +1,52 @@
+import {RoundScore} from './score.mjs';
+import {createDeathEffect,createDeathClock} from './death.mjs';
+
 // ClockWerx Movement mechanics reconstructed from original embedded controls text.
 // No image-derived collision: dots and hand radius are logical coordinates.
 export const TAU=Math.PI*2;
 export function angleDelta(a,b){return ((a-b+Math.PI)%TAU+TAU)%TAU-Math.PI;}
 export class MovementGame {
   constructor(board){this.board=board;this.reset();}
-  reset(){this.time=0;this.paused=false;this.complete=false;this.events=[];this.steps=0;this.activeSteps=0;this.eventSequence=0;this.reverseHeld=false;for(const d of this.board.dots)delete d.collected;this.player=this.makeHand(this.board.player);this.demos=this.board.demos.map(x=>this.makeHand(x));}
+  reset(){this.time=0;this.paused=false;this.complete=false;this.events=[];this.steps=0;this.activeSteps=0;this.eventSequence=0;this.reverseHeld=false;this.death=null;this.remainingTime=this.board.timeLimit;this.countdownElapsed=0;this.deathTickRemainder=0;for(const d of this.board.dots)delete d.collected;this.player=this.makeHand(this.board.player);this.demos=this.board.demos.map(x=>this.makeHand(x));if(this.board.movement)this.roundScore=new RoundScore({difficulty:this.board.difficulty});}
+  get timed(){return Boolean(this.board.difficulty&&this.board.difficulty!=='Child'&&this.board.timeLimit>0);}
+  advanceCountdown(elapsed,second){
+    if(!this.timed||this.paused||this.complete||this.death)return;
+    this.countdownElapsed+=elapsed;
+    while(this.countdownElapsed+1e-9>=second&&!this.death){
+      this.countdownElapsed=Math.max(0,this.countdownElapsed-second);
+      this.remainingTime=Math.max(0,this.remainingTime-1);
+      if(this.remainingTime<=10)Object.assign(this.event('sound',this.player),{soundId:14});
+      if(this.remainingTime===0)this.beginDeath({reason:'timeout',type:'timeout',sourceReason:7});
+    }
+  }
+  beginDeath(cause){
+    const pivot=this.board.dots.find(d=>d.id===this.player.pivot);
+    this.death=createDeathEffect({pivot,frame:Math.floor(this.player.angle*64/TAU)&63,randomUnsigned:()=>Math.floor(Math.random()*65536),clock:createDeathClock()});
+    Object.assign(this.event('death',this.player),{cause});
+  }
+  onBonus(){return this.roundScore?.bonusDot();}
+  onGoal(){this.roundScore?.complete(this.remainingTime);}
   makeHand(h){return {...h,angle:h.angle||0,direction:h.direction||1,blocked:null,transfers:0};}
   event(type,hand,dot){const e={sequence:++this.eventSequence,type,time:this.time,hand:hand.name,dot:dot?.id};this.events.push(e);if(this.events.length>100)this.events.shift();return e;}
   reverse(){if(!this.paused&&!this.complete){this.player.direction*=-1;this.event('reverse',this.player);}}
-  update(dt,input={}){
-    this.steps++;if(this.paused||this.complete)return;this.activeSteps++;this.time+=dt;
+  update(dt,input={}, {sourceClock=false}={}){
+    this.steps++;if(this.paused||this.complete)return;this.activeSteps++;
+    if(!sourceClock){
+      if(this.death){
+        this.deathTickRemainder+=dt*60;
+        const ticks=Math.floor(this.deathTickRemainder+1e-9);this.deathTickRemainder-=ticks;
+        this.death.update(ticks);
+        if(this.death.complete){
+          const history={steps:this.steps,activeSteps:this.activeSteps,eventSequence:this.eventSequence,events:this.events};
+          const score=this.roundScore;score?.startRound();
+          this.reset();Object.assign(this,history,{roundScore:score});this.event('round-reset',this.player);
+        }
+        return;
+      }
+      this.advanceCountdown(dt,1);
+      if(this.death)return;
+    }
+    this.time+=dt;
     if(input.reverse&&!this.reverseHeld)this.reverse();this.reverseHeld=!!input.reverse;
     this.move(this.player,dt,input.flip?'flip':input.swing&&input.bounce?'flip':input.swing?'swing':input.bounce?'bounce':null);
     for(const h of this.demos)this.move(h,dt,h.action);
@@ -66,5 +103,5 @@ export class MovementGame {
       this.onAfterHumanGrab?.(target);
     }
   }
-  snapshot(){return {time:this.time,steps:this.steps,activeSteps:this.activeSteps,paused:this.paused,complete:this.complete,player:{...this.player},demos:this.demos.map(h=>({...h})),events:[...this.events]};}
+  snapshot(){return {time:this.time,steps:this.steps,activeSteps:this.activeSteps,paused:this.paused,complete:this.complete,player:{...this.player},demos:this.demos.map(h=>({...h})),events:[...this.events],...(this.board.movement?{roundTimer:{enabled:this.timed,original:this.board.timeLimit,current:this.remainingTime},roundScore:this.roundScore.snapshot(),dying:Boolean(this.death)}:{})};}
 }

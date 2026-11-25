@@ -20,6 +20,70 @@ function canonicalFixture(){
  const f=fixture();Object.assign(f.board,{canonicalPlayerRules:true,staticEnemyCallbacks:true,enemies:[],spikes:[]});
  Object.assign(f.board.player,{sourceActorType:0,speedClass:0});return f;
 }
+
+function timedFixture(difficulty){
+ const {board,options}=canonicalFixture();
+ Object.assign(board,{difficulty,multiDifficulty:true,timeLimit:120,specialDotRules:true,childScoreRules:true,
+  origin:{x:0,y:0},walls:[],doors:[],switches:[],puddles:[]});
+ board.dots[1].waystation={halfIndex:4,direction:-1};
+ return {board,options};
+}
+
+test('source countdown uses guest ticks, freezes on pause and timeout, then restores checkpoint time',()=>{
+ const {board,options}=timedFixture('Hard'),game=new SourceRound(board,options);
+ const step=count=>{for(let i=0;i<count;i++)game.update(1/120);};
+ assert.equal(game.remainingTime,120);
+ assert.equal(game.snapshot().actorUpstream.remaining,15);
+ assert.equal(game.doorClock.advance(0).remaining,53);
+ game.remainingTime=11;
+ step(119);
+ assert.equal(game.remainingTime,11);
+ game.paused=true;step(120);game.paused=false;
+ assert.equal(game.remainingTime,11);
+ step(1);
+ assert.equal(game.remainingTime,10);
+ assert.equal(game.events.at(-1).soundId,14);
+ game.onHumanGrab(board.dots[1]);
+ assert.equal(game.dotAnimations.savedTime,10);
+ game.remainingTime=1;step(120);
+ assert.deepEqual(game.events.at(-1).cause,{reason:'timeout',type:'timeout',sourceReason:7});
+ assert.equal(game.remainingTime,0);
+ step(12);
+ assert.equal(game.death,null);
+ assert.equal(game.player.pivot,'b');
+ assert.equal(game.remainingTime,10);
+ game.dotAnimations.savedTime=0;
+ game.reset({preserveCheckpoint:true});
+ assert.equal(game.player.pivot,'b');
+ assert.equal(game.remainingTime,120);
+});
+
+test('source hourglass awards ten seconds and a flat bonus once and a clear freezes the timer',()=>{
+ const {board,options}=timedFixture('Easy');
+ Object.assign(board,{bombs:[],goodies:[{row:2,column:2,initialFrame:188,activationMask:2}],activeMask:2,goodieOnlyRules:true});
+ options.bombOutlines={groups:{}};
+ const game=new SourceRound(board,options);
+ assert.equal(game.bombScene.runtime.goodies[0].frame,12);
+ game.remainingTime=6;
+ game.bombScene.runtime.collectGoodie(0,game.player);
+ game.bombScene.runtime.collectGoodie(0,game.player);
+ assert.equal(game.remainingTime,16);
+ assert.equal(game.childScore.roundBonus,1000);
+ assert.deepEqual(game.events.flatMap(e=>e.soundId??[]),[22]);
+ game.onGoal();game.complete=true;
+ for(let i=0;i<120;i++)game.update(1/60);
+ assert.equal(game.remainingTime,16);
+ assert.equal(game.childScore.roundBonus,7600);
+});
+
+test('Child source rounds never expire',()=>{
+ const {board,options}=timedFixture('Child'),game=new SourceRound(board,options);
+ game.remainingTime=1;
+ for(let i=0;i<120;i++)game.update(1/60);
+ assert.equal(game.remainingTime,1);
+ assert.equal(game.death,null);
+ assert.equal(game.snapshot().roundTimer.enabled,false);
+});
 function canonicalOilFixture(){
  const f=canonicalFixture();Object.assign(f.board,{canonicalOilRules:true,specialDotRules:true,childScoreRules:true,difficulty:'Child',timeLimit:90,origin:{x:0,y:0},sourceDotPermissions:true,puddles:[{row:0,column:0,kind:1}]});
  f.board.dots.forEach((d,i)=>Object.assign(d,{sourceIndex:i,cell:1,flags:15,color:0,present:true,humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,motion:'static',slideMask:0,teleport:false}));
@@ -27,6 +91,15 @@ function canonicalOilFixture(){
  f.options.oilOutlines={groups:{1200:{frames:Array.from({length:52},()=>({...frame}))},2200:{frames:Array.from({length:107},()=>({...frame}))}}};
  f.options.dotOutlines={groups:{300:{frames:Array.from({length:17},()=>({...frame}))}}};f.options.oilBounds={left:-100,top:-100,right:500,bottom:500};return f;
 }
+
+test('timed oil droplets can query the live main-dot descriptor',()=>{
+ const {board,options}=canonicalOilFixture();
+ Object.assign(board,{difficulty:'Hard',multiDifficulty:true});
+ for(const dot of board.dots)Object.assign(dot,{sourceInBackground:true,bonus:false});
+ const game=new SourceRound(board,options);
+ assert.equal(game.oil.collideDot({frame:0,base:{x:-16,y:-15}}),0);
+});
+
 function elevatorFixture(){
  const f=canonicalFixture();Object.assign(f.board,{elevatorRules:true,specialDotRules:true,childScoreRules:true,difficulty:'Child',timeLimit:90,origin:{x:12,y:11},sourceDotPermissions:true,elevators:[{row:0,column:0,subcell:3,group:1}]});
  f.board.dots.forEach((d,i)=>Object.assign(d,{sourceIndex:i,cell:1,flags:15,color:0,present:true,humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,motion:'static',slideMask:0,teleport:false,kind:'dot'}));

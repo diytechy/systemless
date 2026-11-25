@@ -33,6 +33,19 @@ export function decodeBombRecord(record) {
     role:w[2]<4?'bomb':w[2]<10?'fuse':'match'};
 }
 
+// Spark path samples belong to each BO kind. A scene can reuse the same
+// validated path from another scene when its own route table is incomplete.
+export function resolveBombRoutes(bombs, ...routeTables) {
+  const kinds = new Set(bombs.map(bomb => bomb.kind ?? decodeBombRecord(bomb).kind));
+  const routes = [];
+  for (const table of routeTables) {
+    for (const route of table ?? []) if (kinds.delete(route.kind)) routes.push(route);
+    if (!kinds.size) break;
+  }
+  if (kinds.size) throw new Error('Missing source fuse routes for BO kinds ' + [...kinds].join(', '));
+  return routes;
+}
+
 /** Match ignition consumes the match even if the synchronous spark allocator
  * has no free slot. Nonhuman callers require any nonzero BO flags byte. */
 export function createBombMatch({kind,flags=0,index=0}) {

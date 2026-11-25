@@ -1,3 +1,7 @@
+import {DIFFICULTIES,DIFFICULTY_MASK,DIFFICULTY_MASTER_RATE} from './actor-clocks.mjs';
+import {decodeBombRecord} from './bombs.mjs';
+import {activeGunTriggerSpecs} from './gun-triggers.mjs';
+import {resolveActorProgram} from './programs.mjs';
 import {assertMovingFuseOrdinaryRecipe,assertMovingFuseOrdinarySource,buildMovingFuseOrdinaryBoard} from './moving-fuse-ordinary.mjs';
 import {gunTriggerOilSource} from './gun-trigger-oil.mjs';
 import {assertStaticGunRailRecipe,assertStaticGunRailSource,buildStaticGunRailBoard} from './static-gun-rails.mjs';
@@ -480,7 +484,13 @@ if(allowGunsTriggers&&!allowGunTriggerSliding&&!allowGunTriggerWalls&&!allowGunT
  return [...new Set(unsupported)];
 }
 
-export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowProtectedBonuses=false,allowInactiveProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowElevatorGoodies=false,allowColoredElevatorGoodies=false,allowElevatorOilSpikes=false,allowBombOilElevators=false,allowElevatorOilRiders=false,allowGunsTriggers=false,allowGunTriggerSliding=false,allowGunTriggerWalls=false,allowGunTriggerTeleports=false,allowGunTriggerOil=false,allowStaticBombElevators=false,allowMovingBombSpikeWaystation=false,allowStaticSlidingBombGoodies=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingPrograms=false,allowSlidingConnectors=false,allowTeleports=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingDoorOil=false,allowMovingFuseOrdinary=false,allowStaticGunRails=false,allowMovingTeleportCheckpoints=false,allowStaticRingDoors=false,allowMovingGoalRails=false,allowMovingTeleportDoors=false,allowMovingProtectedBusters=false,allowStaticRingRails=false,allowMovingSlowdownBusters=false,allowStaticSlowdownBusters=false,allowSlowdownWaystation=false,allowSlowdownClass4=false,allowSlowdownWalls=false,allowStaticSlowdown=false,allowMovingProtectedPassage=false,allowMovingGoalOrdinary=false,allowMovingWaystation=false,allowMovingGoalGoodies=false,allowStaticTeleportBusters=false,allowGunSlidingBusters=false,allowMovingProgrammedBusters=false,allowMovingCheckpointControls=false,allowMovingCheckpointRails=false,allowOilBusters=false,allowMovingBusterBombs=false,allowGunBusters=false,allowFreeBusters=false,allowMovingDoorGoodies=false,allowMovingTubes=false,allowMovingSpikes=false,allowStaticMarkedOrbitals=false,allowMovingMarkedOrdinary=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,allowMarkedTransfers=false,allowMovingMarkedGoals=false,allowMovingElevators=false,allowPilotAbsentSlideRecovery=false,allowMovingBombs=false,allowImportedGoodie169=false,allowCombinedGoalBonus=false}={}){
+export function buildDecodedBoard(level,{ordinal,title,angularSpeed,difficulty,allowDifficultyModes=false,activeMask=1,allowOil=false,allowInactiveSpikes=false,allowEnemyBouncePrograms=false,allowEnemyStaticPrograms=false,allowSpecialDots=false,allowBombs=false,allowClass3Enemies=false,allowActiveDotMasks=false,allowInactivePlainDotMasks=false,allowChildScoring=false,allowProtectedWaypoints=false,allowProtectedBonuses=false,allowInactiveProtectedWaypoints=false,allowGoodies=false,allowStaticEnemyWalls=false,allowExtendedEnemyClocks=false,allowProgrammedEnemyWalls=false,allowInitiallyOpenDoors=false,allowRotatingSpikes=false,allowFastRotatingSpikes=false,allowSlowRotatingSpikes=false,allowClass2RotatingSpikes=false,allowClass3RotatingSpikes=false,allowRotatingSpikeTransfers=false,allowRotatingSpikeBounces=false,allowInactiveElevators=false,allowInactiveUpDownDots=false,allowInactiveRings=false,allowBombObjectInteractions=false,allowCanonicalPlayer=false,allowCanonicalOil=false,allowCanonicalOilSpikes=false,allowElevators=false,allowElevatorGoodies=false,allowColoredElevatorGoodies=false,allowElevatorOilSpikes=false,allowBombOilElevators=false,allowElevatorOilRiders=false,allowGunsTriggers=false,allowGunTriggerSliding=false,allowGunTriggerWalls=false,allowGunTriggerTeleports=false,allowGunTriggerOil=false,allowStaticBombElevators=false,allowMovingBombSpikeWaystation=false,allowStaticSlidingBombGoodies=false,allowSlidingBombs=false,allowSlidingBombOrbitals=false,allowSlidingBombCheckpoints=false,allowSlidingOil=false,allowSlidingOilGoodieRings=false,allowSlidingGoodiePrograms=false,allowSlidingGoodies=false,allowStaticSlidingPrograms=false,allowSlidingConnectors=false,allowTeleports=false,allowSlidingTeleports=false,allowMovingDots=false,allowMovingDoorCheckpoint=false,allowMovingDoorOil=false,allowMovingFuseOrdinary=false,allowStaticGunRails=false,allowMovingTeleportCheckpoints=false,allowStaticRingDoors=false,allowMovingGoalRails=false,allowMovingTeleportDoors=false,allowMovingProtectedBusters=false,allowStaticRingRails=false,allowMovingSlowdownBusters=false,allowStaticSlowdownBusters=false,allowSlowdownWaystation=false,allowSlowdownClass4=false,allowSlowdownWalls=false,allowStaticSlowdown=false,allowMovingProtectedPassage=false,allowMovingGoalOrdinary=false,allowMovingWaystation=false,allowMovingGoalGoodies=false,allowStaticTeleportBusters=false,allowGunSlidingBusters=false,allowMovingProgrammedBusters=false,allowMovingCheckpointControls=false,allowMovingCheckpointRails=false,allowOilBusters=false,allowMovingBusterBombs=false,allowGunBusters=false,allowFreeBusters=false,allowMovingDoorGoodies=false,allowMovingTubes=false,allowMovingSpikes=false,allowStaticMarkedOrbitals=false,allowMovingMarkedOrdinary=false,allowMovingCheckpointRings=false,allowMovingMarkedBonuses=false,allowMarkedTransfers=false,allowMovingMarkedGoals=false,allowMovingElevators=false,allowPilotAbsentSlideRecovery=false,allowMovingBombs=false,allowImportedGoodie169=false,allowCombinedGoalBonus=false}={}){
+ if(difficulty!==undefined&&!DIFFICULTIES.includes(difficulty))throw new RangeError('Unknown difficulty');
+ if(allowDifficultyModes===true||difficulty&&difficulty!=='Child'){
+  const selected=difficulty??DIFFICULTIES.find(name=>DIFFICULTY_MASK[name]===activeMask);
+  if(!selected)throw new RangeError('Expected a single difficulty mask');
+  return buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty:selected,canonicalPlayer:allowCanonicalPlayer});
+ }
  if(allowMovingFuseOrdinary)return buildMovingFuseOrdinaryBoard(level,arguments[1]);
  if(allowStaticGunRails)return buildStaticGunRailBoard(level,arguments[1]);
  if(allowMovingTeleportCheckpoints)return buildMovingTeleportCheckpointBoard(level,arguments[1]);
@@ -554,7 +564,7 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
   player:hand(actors[0],0),demos:[],enemies:actors.slice(2).map((a,i)=>hand(a,i+2)),spikes,walls,doors,switches,
   puddles:allowOil?activePuddleSpecs(records('PU'),activeMask):[],
   ...(allowTeleports?{teleportRules:true,teleports,teleportHumanStarts:actors.slice(0,2).map(a=>`${a.gridPosition.column},${a.gridPosition.row}`)}:{}),...(allowCanonicalPlayer?{canonicalPlayerRules:true}:{}),...(allowCanonicalOil?{canonicalOilRules:true}:{}),...(allowCanonicalOilSpikes?{canonicalOilSpikeRules:true}:{}),...(allowBombObjectInteractions?{bombObjectInteractionRules:true}:{}),...(allowCombinedGoalBonus?{combinedGoalBonusRules:true}:{}),...(allowRotatingSpikes?{rotatingSpikeRules:true,...(allowFastRotatingSpikes?{fastRotatingSpikeRules:true}:{}),...(allowSlowRotatingSpikes?{slowRotatingSpikeRules:true}:{}),...(allowClass2RotatingSpikes?{class2RotatingSpikeRules:true}:{}),...(allowClass3RotatingSpikes?{class3RotatingSpikeRules:true}:{}),...(allowRotatingSpikeTransfers?{rotatingSpikeTransferRules:true}:{}),...(allowRotatingSpikeBounces?{rotatingSpikeBounceRules:true}:{})}:{}),bombRules:allowBombs,goodieOnlyRules:allowGoodies&&!allowMovingBombs&&!allowMovingBombSpikeWaystation,staticEnemyWallRules:allowStaticEnemyWalls,bombs:allowBombs?records('BO'):[],goodies:(allowBombs||allowGoodies)?records('GO').filter(r=>(r.rawWords[3]*65536+r.rawWords[4])&activeMask).map(r=>(allowFreeBusters||allowMovingBombs||allowMovingBombSpikeWaystation)?importMovingGoodie(r,{sha256:level.sha256,byteLength:level.byteLength,resourceId:level.resourceId},{allowImportedGoodie169,allowImportedGoodieOutOfRange:allowStaticBombElevators}):({row:r.rawWords[0],column:r.rawWords[1],initialFrame:r.rawWords[2]})):[],
-  activeMask,difficulty:'Child',childScoreRules:allowChildScoring,sourceDotPermissions:true,specialDotRules:allowSpecialDots,staticEnemyCallbacks:allowEnemyStaticPrograms,timeLimit:level.header.timeLimitRaw,
+  activeMask,difficulty:'Child',masterRate:DIFFICULTY_MASTER_RATE.Child,childScoreRules:allowChildScoring,sourceDotPermissions:true,specialDotRules:allowSpecialDots,staticEnemyCallbacks:allowEnemyStaticPrograms,timeLimit:level.header.timeLimitRaw,
   inactiveActorCount:records('WA').length-actors.length,
   texts:records('TX').map(t=>({font:t.fontName,size:t.fontSize,face:t.fontFaceRaw,
    style:t.renderingStyleByteRaw,x:t.positionWords[0]+28,y:t.positionWords[1]+28,
@@ -574,4 +584,83 @@ export function buildDecodedBoard(level,{ordinal,title,angularSpeed,activeMask=1
  if(allowStaticMarkedOrbitals)assertStaticMarkedOrbitalScope(board,{initial:true});
  if(allowMovingBombSpikeWaystation)assertMovingBombSpikeWaystationScope(board,{initial:true});
  return board;
+}
+
+// RND2 records without an activation word (e.g. EX/BO/doors) apply in every
+// mode. Use the original record index for actors and source dot queries.
+function buildDifficultyBoard(level,{ordinal,title,angularSpeed,difficulty,canonicalPlayer}){
+ const activeMask=DIFFICULTY_MASK[difficulty],masterRate=DIFFICULTY_MASTER_RATE[difficulty];
+ const origin=decodedGridOrigin(level.header);
+ const records=kind=>(level.blocks.find(b=>b.kind===kind)?.records??[])
+  .filter(r=>r.activationMaskRaw===undefined||Boolean(r.activationMaskRaw&activeMask));
+ const maskedRecords=kind=>records(kind).filter(({rawWords:w})=>((w.at(-2)*65536+w.at(-1))&activeMask)!==0);
+ const point=(row,column)=>({x:origin.x+column*48,y:origin.y+row*48});
+ const dots=level.cells.filter(c=>c.present).map(c=>{
+  const cell=effectiveMovingCell(c.flagsRaw,c.secondaryRaw,activeMask),position=point(c.row,c.column);
+  const {bonus,goal,initialLowered}=decodeDot(cell),moving=Boolean(cell&0x80),channel=(cell>>8)&3;
+  const upDown=channel?{group:channel-1,initialLowered,...position}:undefined;
+  const sourceInBackground=!(moving||upDown||cell&0x207e);
+  return {id:`${c.column},${c.row}`,row:c.row,column:c.column,sourceIndex:c.row*11+c.column,...position,
+   cell,flags:c.secondaryRaw,kind:goal?'goal':bonus?'bonus':'dot',color:dotColorOffset(c.secondaryRaw,DIFFICULTIES.indexOf(difficulty)),
+   present:true,humanCanGrab:true,nonhumanCanGrab:true,sourceCollidable:true,sourceInBackground,sourceHasSprite:!sourceInBackground,
+   bonus,sourceInitialBonus:bonus,ring:Boolean(cell&8),protected:Boolean(cell&0x40),slowdown:Boolean(cell&32),transferDeath:Boolean(cell&0x2000),
+   slideMask:0,teleport:false,motion:moving?'moving-program':upDown?'up-down':'static',motionType:moving?1:upDown?2:0,
+   upDown,sourceInitialPosition:position,...(moving?{movingProgram:movingProgramCell(c,{allowStationaryLR:true}).text}:{})};
+ });
+ const dotAt=(row,column)=>dots.find(d=>d.row===row&&d.column===column);
+ for(const {rawWords:w} of maskedRecords('WY')){
+  const dot=dotAt(w[0],w[1]);
+  if(!dot)throw new Error('Checkpoint on an absent dot');
+  dot.waystation={halfIndex:w[2],direction:signedWord(w[3])};
+ }
+ const connectors=connectorSpecs(records('EX'),dots);
+ initializeConnectorBonuses(connectors,dots);
+ initializeSlidingBombConnectors(connectors);
+ const teleports=pairTeleportSpecs(activeTeleportSpecs(records('HY'),activeMask),dots);
+ for(const endpoint of teleports)dots.find(d=>d.id===endpoint.dot).teleport=true;
+ const programs=records('WP').map(r=>r.text);
+ const actors=(level.blocks.find(b=>b.kind==='WA')?.records??[]).flatMap((a,sourceSlot)=>{
+  if(!(a.activationMaskRaw&activeMask))return [];
+  const sourceActorType=a.actorTypeRaw,frame=sourceInitialFrame(a.initialFrameHalfIndexRaw),speedClass=a.rawWords[7];
+  const {row,column}=a.gridPosition,pivot=dotAt(row,column)?.id;
+  if(!pivot||GROUPS[sourceActorType]===undefined)throw new Error('Invalid source actor declaration');
+  const program=resolveActorProgram(a.programReferenceRaw,programs);
+  const sourcePC=program&&a.rawWords[6]<=program.length?a.rawWords[6]:1;
+  return [{name:sourceSlot===0?'player':`enemy-${sourceSlot}`,sourceSlot,sourceActorType,group:GROUPS[sourceActorType],pivot,
+   angle:frame*TAU/64,frame,unwrappedFrame:frame,direction:signedWord(a.rawWords[4]),speedClass,
+   speedScale:actorTiming(speedClass).speedScale,program,sourcePC,canonicalFrame:sourceSlot>=2,visible:true,orphaned:false,hiddenUntil:0,
+   checksWalls:actorChecksWalls(a.version12ByteRaw??0)}];
+ });
+ const [player,secondPlayer,...enemies]=actors;
+ if(player?.sourceActorType!==0||secondPlayer?.sourceActorType!==6)throw new Error('Expected two source human starts');
+ const spikes=maskedRecords('SP').map((r,id)=>({id,...spikeGridPoint(r,origin),row:r.rawWords[0],column:r.rawWords[1],
+  subrow:r.rawWords[2],subcolumn:r.rawWords[3],phase:id%4,visible:true}));
+ const tiles=compileWallTiles(records('WL').map(({rawWords:w})=>({axis:w[0]>>>8,fixed:signedWord(w[1]),start:signedWord(w[2]),
+  startInset:signedWord(w[3]),end:signedWord(w[4]),endInset:signedWord(w[5])})));
+ const walls=tiles.map((tile,id)=>({id,...tile,...point(tile.row,tile.column)}));
+ const hasWallArm=(row,column,mask)=>tiles.some(t=>t.row===row&&t.column===column&&t.frame>=4&&((t.frame-4)&mask));
+ const doors=records('DR').map((r,id)=>{const spec=decodeDoorRecord(r);return {id,...spec,...doorGeometry(spec,origin,hasWallArm)};});
+ const switches=records('DS').map((r,id)=>{const spec=decodeSwitchRecord(r);return {id,...spec,...switchGeometry(spec,origin)};});
+ const puddles=activePuddleSpecs(records('PU'),activeMask),elevators=activeElevatorSpecs(records('EL'),activeMask);
+ const bombs=records('BO').map(decodeBombRecord);
+ const goodies=maskedRecords('GO').map(({rawWords:[row,column,frame,hi,lo]})=>({row,column,initialFrame:((frame%16)+16)%16,activationMask:hi*65536+lo}));
+ const frameOrigin={x:28,y:28},rawBounds={left:0,top:0,right:584,bottom:424};
+ const guns=activeGunTriggerSpecs(records('GN'),{kind:'GN',activeMask,gridOrigin:origin,frameOrigin});
+ const triggers=activeGunTriggerSpecs(records('TR'),{kind:'TR',activeMask,gridOrigin:origin,frameOrigin});
+ const movingDotRules=dots.some(d=>d.motion==='moving-program'),elevatorRules=Boolean(elevators.length||dots.some(d=>d.upDown));
+ const freeBusterRules=enemies.some(e=>e.sourceActorType===5),markedTransferRules=dots.some(d=>d.transferDeath);
+ return {ordinal,title,origin,activeMask,difficulty,masterRate,multiDifficulty:true,timeLimit:level.header.timeLimitRaw,
+  radius:48,distanceTolerance:1,handOffsetY:0,angularSpeed:(angularSpeed??TAU*960/(76*64))*masterRate/60,
+  dots,player,demos:[],enemies,spikes,walls,doors,switches,puddles,elevators,bombs,goodies,connectors,teleports,guns,triggers,
+  canonicalPlayerRules:Boolean(canonicalPlayer||puddles.length||elevatorRules||connectors.length||movingDotRules||teleports.length||markedTransferRules),
+  canonicalOilRules:puddles.length>0,elevatorRules,teleportRules:teleports.length>0,
+  teleportHumanStarts:[player.pivot,secondPlayer.pivot],
+  staticEnemyCallbacks:true,staticEnemyWallRules:true,rotatingSpikeRules:enemies.some(e=>e.sourceActorType===4),
+  freeBusterRules,movingDotRules,slidingConnectorRules:connectors.length>0,staticSlowdownRules:dots.some(d=>d.slowdown),
+  markedTransferRules,specialDotRules:true,childScoreRules:true,sourceDotPermissions:true,
+  combinedGoalBonusRules:true,bombRules:bombs.length>0,goodieOnlyRules:goodies.length>0&&!bombs.length,
+  bombObjectInteractionRules:bombs.length>0,gunTriggerProjectileRules:Boolean(guns.length||triggers.length||freeBusterRules),
+  gunTriggerChild:{guns,triggers,rawBounds,frameOrigin},
+  texts:records('TX').map(t=>({font:t.fontName,size:t.fontSize,face:t.fontFaceRaw,style:t.renderingStyleByteRaw,
+   x:t.positionWords[0]+28,y:t.positionWords[1]+28,text:t.text.replace(/^@./,''),condition:t.text.startsWith('@')?t.text.slice(0,2):null}))};
 }

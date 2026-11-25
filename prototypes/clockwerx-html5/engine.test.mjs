@@ -1,7 +1,29 @@
 import {MovementGame,TAU} from './engine.mjs';
+import {buildBoard} from './board.mjs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 function fixture(){return {radius:48,distanceTolerance:1,angularSpeed:TAU,dots:[{id:'a',x:0,y:0,group:'p'},{id:'b',x:48,y:0,group:'p',kind:'goal'}],player:{name:'player',pivot:'a',angle:-.1,direction:1},demos:[]};}
+
+test('Movement uses a 120-second countdown and scaled motion, and resumes play after timeout',()=>{
+ const manifest={board:{cells:Array.from({length:88},()=>[1,15])}};
+ const child=buildBoard(manifest),hard=buildBoard(manifest,{difficulty:'Hard'});
+ assert.equal(hard.angularSpeed,child.angularSpeed*2.5);
+ const game=new MovementGame(hard);
+ assert.equal(game.remainingTime,120);
+ game.remainingTime=11;
+ for(let i=0;i<120;i++)game.update(1/120);
+ assert.equal(game.remainingTime,10);
+ assert.equal(game.events.at(-1).soundId,14);
+ game.remainingTime=1;
+ for(let i=0;i<120;i++)game.update(1/120);
+ assert.equal(game.events.at(-1).cause.sourceReason,7);
+ assert.ok(game.death);
+ for(let i=0;game.death&&i<360;i++)game.update(1/120);
+ assert.equal(game.death,null);
+ assert.equal(game.player.pivot,hard.player.pivot);
+ assert.equal(game.remainingTime,120);
+ assert.equal(game.events.at(-1).type,'round-reset');
+});
 test('up/down queries require exact current pixels and preserve the cardinal transfer frame',()=>{
  const b=fixture();b.elevatorRules=true;b.sourceDotPermissions=true;Object.assign(b.player,{angle:0,canonicalFrame:true,frame:0});b.dots.forEach(d=>Object.assign(d,{present:true,humanCanGrab:true}));
  const aligned=new MovementGame(b);aligned.update(0,{flip:true});assert.equal(aligned.player.pivot,'b');assert.equal(aligned.player.angle,Math.PI);

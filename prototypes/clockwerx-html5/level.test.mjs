@@ -14,6 +14,34 @@ function fixture(){
    {kind:'SP',count:2,records:[{rawWords:[0,0,0,2,0,15]},{rawWords:[0,0,2,0,0,15]}]}]};
 }
 
+test('difficulty filters source inventories and all GO frame requests wrap in the same animation',()=>{
+ const level=fixture();
+ level.header.timeLimitRaw=120;
+ level.cells[1].secondaryRaw=10;
+ level.blocks[0].records[2].activationMaskRaw=5;
+ level.blocks[1].records[0].rawWords[5]=3;
+ const goFrames=[0,54,59,169,188];
+ level.blocks.push(
+  {kind:'PU',records:[{rawWords:[0,0,0,0,8]}]},
+  {kind:'WY',records:[{rawWords:[0,1,4,65535,0,4]}]},
+  {kind:'GO',records:goFrames.map((frame,i)=>({rawWords:[1,i,frame,0,i===4?15:1<<i]}))},
+ );
+ for(const [i,difficulty] of ['Child','Easy','Medium','Hard'].entries()){
+  const mask=1<<i,masterRate=[60,75,100,150][i];
+  const board=buildDecodedBoard(level,{allowDifficultyModes:true,activeMask:mask,angularSpeed:2});
+  assert.deepEqual([board.difficulty,board.activeMask,board.masterRate,board.timeLimit,board.angularSpeed],
+   [difficulty,mask,masterRate,120,2*masterRate/60]);
+  assert.equal(board.dots[1].bonus,Boolean(10&mask));
+  assert.equal(board.enemies.length,Number(Boolean(5&mask)));
+  assert.equal(board.spikes.length,i<2?2:1);
+  assert.equal(board.puddles.length,i===3?1:0);
+  assert.equal(Boolean(board.dots[1].waystation),i===2);
+  assert.deepEqual(board.goodies.map(g=>g.initialFrame),[goFrames[i]%16,12]);
+  if(i)assert.deepEqual(buildDecodedBoard(level,{difficulty,angularSpeed:2}),board);
+ }
+ assert.throws(()=>buildDecodedBoard(level,{allowDifficultyModes:true,activeMask:3}),/single difficulty mask/);
+});
+
 test('colored elevator composition preserves channel permissions and inactive pivots behind a separate gate',()=>{
  const level=fixture();level.header.timeLimitRaw=90;level.blocks[0].records[2].version12ByteRaw=0;
  for(const [column,flagsRaw,secondaryRaw]of [[0,0x101,0xf00f],[1,0x201,0xf0f],[2,0x301,0xff],[3,0x201,0xf0e]])level.cells.push({present:true,row:1,column,flagsRaw,secondaryRaw});

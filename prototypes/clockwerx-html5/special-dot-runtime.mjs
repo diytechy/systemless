@@ -1,20 +1,19 @@
-// FUTURE/UNLINKED: static Child rings, WY checkpoints and ordinary-hand
-// protection. Caller supplies persistent unscaled80/unscaled50 counts and
-// guest ticks at the actual sprite callback stage. No countdown is invented.
+// Source ring, checkpoint and protection callbacks. The round supplies
+// persistent animation counts, guest ticks and the current countdown value.
 import {createStaticRingDot,createCheckpointDot,createProtectionOverlay,createGoalMisc} from './special-dots.mjs';
 import {TAU} from './engine.mjs';
 
 const count=n=>{if(!Number.isInteger(n)||n<0)throw new RangeError('Nonnegative source count required');};
 const time=n=>{if(!Number.isInteger(n)||n<0)throw new RangeError('Nonnegative integer source time required');};
 export class StaticDotRuntime {
- constructor(dots,playerSpec,{originalTime,dotCount=0,overlayCount=0,allowGoalMisc=false}={}){
+ constructor(dots,playerSpec,{originalTime,dotCount=0,overlayCount=0,difficulty=0,allowGoalMisc=false}={}){
   if(!Array.isArray(dots)||!playerSpec||!dots.some(d=>d.id===playerSpec.pivot))throw new TypeError('Static dots and original player spawn required');
   time(originalTime);count(dotCount);count(overlayCount);
   this.dots=dots;this.originalSpawn={...playerSpec};this.savedSpawn={...playerSpec};
   this.originalTime=originalTime;this.savedTime=originalTime;this.special=new Map();this.overlays=new Map();if(allowGoalMisc===true)this.goals=new Map();
   for(const dot of dots){
    if(dot.ring&&dot.waystation)throw new Error('Combined ring/checkpoint is unqualified');
-   if(dot.ring)this.special.set(dot.id,createStaticRingDot({color:dot.color??0,clockCount:dotCount}));
+   if(dot.ring)this.special.set(dot.id,createStaticRingDot({color:dot.color??0,difficulty,clockCount:dotCount}));
    if(dot.waystation){
     if(!Number.isInteger(dot.waystation.halfIndex)||![-1,1].includes(dot.waystation.direction))throw new Error('Explicit WY reset specification required');
     this.special.set(dot.id,createCheckpointDot(dotCount));

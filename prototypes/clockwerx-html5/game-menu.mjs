@@ -1,6 +1,7 @@
 import {isLevelUnlocked, slotLabels, slotSummary} from './progress.mjs';
 import {DIFFICULTIES} from './actor-clocks.mjs';
 import {completionBonusForDifficulty,timeBonusForDifficulty} from './score.mjs';
+import {ratingForScore, sanitizeInitials, stepInitialChar} from './leaderboard.mjs';
 
 export const campaignLevels = 100;
 export const completionBonus = 1000;
@@ -201,10 +202,19 @@ export function menuPadAction(view, pressed, confirming = false) {
   if (view === 'complete') {
     if (pressed.swing) return 'activate';
   }
+  if (view === 'scores') {
+    if (pressed.levels || pressed.reverse) return 'game-scores-back';
+    if (pressed.flip) return 'previous-scores-tab';
+    if (pressed.bounce) return 'next-scores-tab';
+    if (pressed.swing) return 'activate';
+  }
   return null;
 }
 
-export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, onPlay, onResume, onRestart, onSetting, onReset, onExport}) {
+export function createGameMenu({
+  root, getSlot, getLeaderboard = () => ({lastInitials: 'AAA', tables: {}}),
+  onView, onSlotChange = () => {}, onPlay, onResume, onRestart, onSetting, onReset, onExport, onRecordScore = () => null,
+}) {
   const $ = id => document.getElementById(id);
   const screen = Object.fromEntries(Array.from(root.querySelectorAll('[data-screen]'), node => [node.dataset.screen, node]));
   const cards = $('game-slots');
@@ -219,8 +229,13 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
   const titles = new Map();
   const chapterButtons = [];
   const slotButtons = [];
+  const scoresTabs = $('game-scores-tabs');
+  const scoresList = $('game-scores-list');
+  const scoreTabButtons = [];
+  const initialButtons = ['initial-0', 'initial-1', 'initial-2'].map(id => $(id)).filter(Boolean);
   let levelButtons = [];
-  let view = 'title', levelReturn = 'title', selectedSlot = 1, selectedLevel = 1, roundLevel = 1;
+  let view = 'title', levelReturn = 'title', scoresReturn = 'title', selectedSlot = 1, selectedLevel = 1, roundLevel = 1;
+  let scoresDifficulty = 'Child', initialsChars = ['A', 'A', 'A'], scoreRecorded = false;
   let needleAngle = 0, connected = false, padFamily = null, connectedCount = 0, busy = false, confirming = false, command = 0, result;
 
   const focus = node => node?.focus({preventScroll: true});
@@ -261,6 +276,9 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       : 'Arrows choose · Enter play · PgUp / PgDn change chapter');
     $('game-complete-controls').hidden = !connected;
     text('game-complete-controls', `Stick / D-pad choose · ${g.swing} select`);
+    text('game-scores-controls', connected
+      ? `Stick / D-pad or ${g.flip} / ${g.bounce} difficulty · ${g.reverse} back`
+      : 'Left / Right difficulty · Esc back');
     text('game-replay', connected ? 'Replay Level' : 'Replay Level · R');
     text('game-complete-levels', 'Level Select');
     text('game-complete-slots', 'Save Slots');
@@ -319,9 +337,10 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       const title = titles.get(level);
       const detail = summary.started ? 'Lv ' + level + (title ? ' · ' + title : '') : 'Empty Slot';
       const saved = summary.updatedUtc ? lastPlayed.format(new Date(summary.updatedUtc)) : '—';
+      const rating = ratingForScore(summary.campaignScore).title;
       button.replaceChildren(
         part('span', 'slot-roman', summary.label), part('span', 'slot-level', detail),
-        part('span', 'slot-progress', summary.cleared + ' / ' + summary.totalLevels),
+        part('span', 'slot-progress', summary.cleared + ' / ' + summary.totalLevels + ' · ' + rating),
         part('strong', 'slot-score', points(summary.campaignScore)),
         part('span', 'slot-hand' + (slot.black ? ' black' : ''), summary.hand),
         part('span', 'slot-time', 'Last played ' + saved),
@@ -396,6 +415,7 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
     onView(next, coversBoard());
     if (next === 'title') renderSlots(true);
     else if (next === 'levels') renderLevels();
+    else if (next === 'scores') renderScores(true);
     else if (next === 'pause') {
       text('game-pause-level', 'Lv ' + roundLevel + ' · ' + titles.get(roundLevel));
       command = 0;
@@ -408,7 +428,57 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
   }
 
   function coversBoard() {
-    return view === 'title' || view === 'loading' || (view === 'levels' && levelReturn === 'title');
+    return view === 'title' || view === 'loading' || (view === 'levels' && levelReturn === 'title')
+      || (view === 'scores' && scoresReturn === 'title');
+  }
+
+  function renderScores(takeFocus = false) {
+    if (!scoresList) return;
+    for (const [i, button] of scoreTabButtons.entries()) {
+      const active = DIFFICULTIES[i] === scoresDifficulty;
+      button.setAttribute('aria-pressed', String(active));
+      button.classList.toggle('primary', active);
+    }
+    const board = getLeaderboard();
+    const entries = board?.tables?.[scoresDifficulty] ?? [];
+    if (!entries.length) {
+      const li = document.createElement('li');
+      li.className = 'scores-empty';
+      li.textContent = `No ${scoresDifficulty} scores recorded yet. Complete levels to claim a spot!`;
+      scoresList.replaceChildren(li);
+    } else {
+      scoresList.replaceChildren(...entries.map((entry, idx) => {
+        const li = document.createElement('li');
+        li.className = 'scores-row' + (idx < 3 ? ' top-rank' : '');
+        li.append(
+          part('span', 'scores-rank', '#' + (idx + 1)),
+          part('span', 'scores-initials', entry.initials),
+          part('span', 'scores-rating', entry.rating + ' · Slot ' + entry.slotLabel),
+          part('span', 'scores-level', 'Lv ' + entry.highestLevel),
+          part('strong', 'scores-points', points(entry.score)),
+        );
+        return li;
+      }));
+    }
+    if (takeFocus) focus($('game-scores-back'));
+  }
+
+  function openScores(from, difficulty) {
+    scoresReturn = from;
+    scoresDifficulty = DIFFICULTIES.includes(difficulty) ? difficulty : (getSlot(selectedSlot)?.difficulty ?? 'Child');
+    show('scores');
+  }
+
+  function stepScoresTab(offset) {
+    const idx = Math.max(0, DIFFICULTIES.indexOf(scoresDifficulty));
+    scoresDifficulty = DIFFICULTIES[(idx + offset + DIFFICULTIES.length) % DIFFICULTIES.length];
+    renderScores(false);
+  }
+
+  function renderInitials() {
+    for (let i = 0; i < initialButtons.length; i++) {
+      initialButtons[i].textContent = initialsChars[i] ?? 'A';
+    }
   }
 
   function levels(from) {
@@ -475,6 +545,45 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
   $('slot-difficulty').onclick = $('game-difficulty').onclick = () => setting('difficulty');
   if ($('slot-players')) $('slot-players').onclick = () => setting('players');
   if ($('game-players')) $('game-players').onclick = () => setting('players');
+  if (scoresTabs) {
+    for (const diff of DIFFICULTIES) {
+      const button = makeButton('');
+      button.textContent = diff;
+      button.onclick = () => { scoresDifficulty = diff; renderScores(false); };
+      scoreTabButtons.push(button);
+      scoresTabs.append(button);
+    }
+  }
+  for (let i = 0; i < initialButtons.length; i++) {
+    initialButtons[i].onclick = () => {
+      initialsChars[i] = stepInitialChar(initialsChars[i], 1);
+      renderInitials();
+    };
+  }
+  if ($('game-record-score')) {
+    $('game-record-score').onclick = () => {
+      if (!result || scoreRecorded) return;
+      const slot = getSlot(selectedSlot);
+      const highestLevel = Math.max(result.level ?? 1, slot?.completedLevels?.at(-1) ?? 1);
+      const saved = onRecordScore({
+        initials: sanitizeInitials(initialsChars.join(''), 'AAA'),
+        difficulty: result.difficulty ?? slot?.difficulty ?? 'Child',
+        score: result.campaignTotal,
+        highestLevel,
+        slotLabel: slotLabels[selectedSlot - 1],
+      });
+      if (saved?.qualified) {
+        scoreRecorded = true;
+        text('game-initials-prompt', `Saved #${saved.rank} on ${saved.entry.difficulty} Top Scores!`);
+        $('game-record-score').disabled = true;
+        mark(completionButtons, command, true);
+      }
+    };
+  }
+  if ($('slot-scores')) $('slot-scores').onclick = () => openScores('title');
+  if ($('game-pause-scores')) $('game-pause-scores').onclick = () => openScores('pause');
+  if ($('game-complete-scores')) $('game-complete-scores').onclick = () => openScores('complete', result?.difficulty);
+  if ($('game-scores-back')) $('game-scores-back').onclick = () => { if (!busy) show(scoresReturn); };
   $('slot-reset').onclick = startConfirm;
   $('slot-keep').onclick = endConfirm;
   $('slot-erase').onclick = () => { onReset(selectedSlot); endConfirm(); };
@@ -499,20 +608,38 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
 
   function navigate(direction) {
     if (view === 'title' && !confirming) {
-      const diffBtn = $('slot-difficulty'), playersBtn = $('slot-players');
-      if (document.activeElement === diffBtn) {
+      const diffBtn = $('slot-difficulty'), playersBtn = $('slot-players'), scoresBtn = $('slot-scores');
+      const bottomRow = [diffBtn, playersBtn, scoresBtn].filter(Boolean);
+      const rowIndex = bottomRow.indexOf(document.activeElement);
+      if (rowIndex >= 0) {
         if (direction === 'up') focus(slotButtons[selectedSlot - 1]);
-        else if (direction === 'right' && playersBtn) focus(playersBtn);
-        return;
-      }
-      if (playersBtn && document.activeElement === playersBtn) {
-        if (direction === 'up') focus(slotButtons[selectedSlot - 1]);
-        else if (direction === 'left' && diffBtn) focus(diffBtn);
+        else if (direction === 'right' && rowIndex + 1 < bottomRow.length) focus(bottomRow[rowIndex + 1]);
+        else if (direction === 'left' && rowIndex > 0) focus(bottomRow[rowIndex - 1]);
         return;
       }
       const next = moveSlot(selectedSlot, direction, connected);
       if (direction === 'down' && selectedSlot >= 3 && next === selectedSlot) focus(diffBtn);
       else selectSlot(next);
+    }
+    else if (view === 'scores') {
+      if (direction === 'left') stepScoresTab(-1);
+      else if (direction === 'right') stepScoresTab(1);
+      return;
+    }
+    else if (view === 'complete' && (initialButtons.includes(document.activeElement) || document.activeElement === $('game-record-score'))) {
+      const saveBtn = $('game-record-score');
+      if (document.activeElement === saveBtn) {
+        if (direction === 'left' && initialButtons.length) focus(initialButtons.at(-1));
+        else if (direction === 'down') mark(completionButtons, command, true);
+        return;
+      }
+      const idx = initialButtons.indexOf(document.activeElement);
+      if (direction === 'up') { initialsChars[idx] = stepInitialChar(initialsChars[idx], 1); renderInitials(); return; }
+      if (direction === 'down') { initialsChars[idx] = stepInitialChar(initialsChars[idx], -1); renderInitials(); return; }
+      if (direction === 'right') { focus(initialButtons[idx + 1] ?? saveBtn); return; }
+      if (direction === 'left' && idx > 0) { focus(initialButtons[idx - 1]); return; }
+      if (direction === 'left' && idx === 0) { mark(completionButtons, command, true); return; }
+      return;
     }
     else if (view === 'levels') {
       const currentIndex = (selectedLevel - 1) % chapterSize;
@@ -528,6 +655,10 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       selectedLevel = chapterOf(selectedLevel) * chapterSize + index + 1;
       mark(levelButtons, index, true);
     } else if (view === 'pause' || view === 'complete' || confirming) {
+      if (view === 'complete' && direction === 'up' && command === 0 && !scoreRecorded && $('game-initials-box') && !$('game-initials-box').hidden && initialButtons.length) {
+        focus(initialButtons[0]);
+        return;
+      }
       const buttons = confirming ? confirmButtons : view === 'pause' ? pauseButtons : completionButtons;
       const step = direction === 'up' || direction === 'left' ? -1 : 1;
       do { command = (command + step + buttons.length) % buttons.length; } while (buttons[command].hidden);
@@ -547,7 +678,11 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       else levelButtons[(selectedLevel - 1) % chapterSize].click();
     }
     else if (view === 'pause') pauseButtons[command].click();
-    else if (view === 'complete') completionButtons[command].click();
+    else if (view === 'complete') {
+      const active = document.activeElement;
+      if (initialButtons.includes(active) || active === $('game-record-score')) active.click();
+      else completionButtons[command].click();
+    } else if (view === 'scores') $('game-scores-back')?.click();
   }
 
   return {
@@ -559,6 +694,7 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
     message,
     show,
     levels,
+    scores: openScores,
     setScenes(scenes) {
       for (const [index, scene] of scenes.entries()) titles.set(scene.ordinal ?? index + 1, scene.title);
       renderSlots();
@@ -601,6 +737,28 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       text('game-time-bonus', points(details.timeBonus ?? 0));
       text('game-level-total', points(details.levelTotal));
       text('game-campaign-total', points(details.campaignTotal));
+      text('game-skill-rating', ratingForScore(details.campaignTotal).title);
+      const ratingBanner = $('game-rating-banner');
+      if (ratingBanner) {
+        ratingBanner.hidden = !details.ratingPromoted;
+        if (details.ratingPromoted) {
+          text('game-rating-title', 'Congratulations! New Rating: ' + details.ratingPromoted.title);
+          text('game-rating-text', 'Because of your successes so far, keep up the good work!');
+        }
+      }
+      const initialsBox = $('game-initials-box');
+      if (initialsBox) {
+        scoreRecorded = false;
+        const showInitials = Boolean(details.qualifiesLeaderboard);
+        initialsBox.hidden = !showInitials;
+        if (showInitials) {
+          const seed = sanitizeInitials(getLeaderboard()?.lastInitials, 'AAA').padEnd(3, 'A');
+          initialsChars = [seed[0], seed[1], seed[2]];
+          renderInitials();
+          text('game-initials-prompt', 'New Top Score! Enter initials:');
+          if ($('game-record-score')) $('game-record-score').disabled = false;
+        }
+      }
       text('game-score-delta', '+' + points(details.delta));
       $('game-score-delta').hidden = details.delta <= 0;
       text('game-next', details.nextLevel ? 'Next Level · Lv ' + details.nextLevel
@@ -618,7 +776,14 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
         if (confirming) endConfirm();
         else if (view === 'pause') onResume();
         else if (view === 'levels') show(levelReturn);
+        else if (view === 'scores') show(scoresReturn);
         else return false;
+      } else if (view === 'complete' && initialButtons.includes(document.activeElement) && /^[A-Za-z0-9]$/.test(event.key ?? '')) {
+        const idx = initialButtons.indexOf(document.activeElement);
+        initialsChars[idx] = event.key.toUpperCase();
+        renderInitials();
+        if (idx + 1 < initialButtons.length) focus(initialButtons[idx + 1]);
+        else focus($('game-record-score'));
       } else if (!event.repeat && view === 'complete' && event.code === 'KeyR') onRestart();
       else if (event.code === 'Enter') {
         if (event.repeat) return true;
@@ -640,7 +805,8 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
     pad({direction, pressed}) {
       if (busy) return;
       if (direction) navigate(direction);
-      if (view === 'title' && !confirming && pressed.swing && (document.activeElement === $('slot-difficulty') || ($('slot-players') && document.activeElement === $('slot-players')))) {
+      if (view === 'title' && !confirming && pressed.swing &&
+        [$('slot-difficulty'), $('slot-players'), $('slot-scores')].filter(Boolean).includes(document.activeElement)) {
         document.activeElement.click();
         return;
       }
@@ -648,6 +814,7 @@ export function createGameMenu({root, getSlot, onView, onSlotChange = () => {}, 
       if (action === 'activate') activate();
       else if (action === 'previous' || action === 'next') navigate(action);
       else if (action === 'previous-chapter' || action === 'next-chapter') changeChapter(action === 'previous-chapter' ? -1 : 1);
+      else if (action === 'previous-scores-tab' || action === 'next-scores-tab') stepScoresTab(action === 'previous-scores-tab' ? -1 : 1);
       else if (action) $(action).click();
     },
   };

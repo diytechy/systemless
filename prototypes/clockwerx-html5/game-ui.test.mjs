@@ -68,7 +68,12 @@ test('controller buttons resolve to the actions of their current screen', () => 
   assert.equal(menuPadAction('complete', {restart: true}), null);
   assert.equal(menuPadAction('complete', {levels: true}), null);
   assert.equal(menuPadAction('complete', {pause: true}), null);
-  for (const view of ['title', 'levels', 'pause', 'complete', 'play', 'loading']) {
+  assert.equal(menuPadAction('scores', {reverse: true}), 'game-scores-back');
+  assert.equal(menuPadAction('scores', {levels: true}), 'game-scores-back');
+  assert.equal(menuPadAction('scores', {flip: true}), 'previous-scores-tab');
+  assert.equal(menuPadAction('scores', {bounce: true}), 'next-scores-tab');
+  assert.equal(menuPadAction('scores', {swing: true}), 'activate');
+  for (const view of ['title', 'levels', 'pause', 'complete', 'scores', 'play', 'loading']) {
     assert.equal(menuPadAction(view, {}), null);
   }
 });
@@ -150,25 +155,31 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     const loadingSection = makeNode('section', 'game-loading');
     loadingSection.dataset.screen = 'loading';
     loadingSection.append(makeNode('h2', 'game-loading-title'));
-    root.append(titleSection, levelsSection, pauseSection, completeSection, loadingSection);
+    const scoresSection = makeNode('section', 'game-scores-screen');
+    scoresSection.dataset.screen = 'scores';
+    scoresSection.append(makeNode('h2', 'game-scores-title'));
+    root.append(titleSection, levelsSection, pauseSection, completeSection, scoresSection, loadingSection);
 
     for (const id of [
       'game-slots', 'game-level-grid', 'game-free-play', 'game-chapters', 'game-menu-status',
       'slot-confirm', 'slot-keep', 'slot-erase', 'slot-play', 'slot-levels', 'slot-hand', 'slot-sound',
-      'slot-music', 'slot-difficulty', 'slot-players', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
+      'slot-music', 'slot-difficulty', 'slot-players', 'slot-scores', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
       'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-complete-2p', 'game-complete-winner',
       'game-p1-label', 'game-p2-label', 'game-p1-summary', 'game-p2-summary', 'game-round-bonus',
       'game-finish-bonus', 'game-time-row', 'game-time-bonus', 'game-level-total', 'game-campaign-total', 'game-score-delta',
+      'game-skill-rating', 'game-rating-banner', 'game-rating-title', 'game-rating-text',
+      'game-initials-box', 'game-initials-prompt', 'initial-0', 'initial-1', 'initial-2', 'game-record-score',
+      'game-scores-tabs', 'game-scores-list', 'game-scores-back', 'game-scores-controls',
       'game-complete-controls',
-    ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') ? 'button' : 'div', id);
+    ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') || id.includes('initial-') || id === 'game-record-score' || id === 'game-scores-back' ? 'button' : 'div', id);
 
     const pauseActions = makeNode('div', 'pause-actions');
-    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-difficulty', 'game-players', 'game-save-slots'].map(id => makeNode('button', id));
+    const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-difficulty', 'game-players', 'game-pause-scores', 'game-save-slots'].map(id => makeNode('button', id));
     pauseActions.append(...pauseButtons);
     pauseActions.querySelectorAll = () => pauseButtons;
 
     const completeActions = makeNode('div', 'complete-actions');
-    const completeButtons = ['game-next', 'game-replay', 'game-complete-levels', 'game-complete-slots'].map(id => makeNode('button', id));
+    const completeButtons = ['game-next', 'game-replay', 'game-complete-levels', 'game-complete-scores', 'game-complete-slots'].map(id => makeNode('button', id));
     completeActions.append(...completeButtons);
     completeActions.querySelectorAll = () => completeButtons;
 
@@ -176,9 +187,12 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     const played = [];
     const slotState = {started: false, currentLevel: 1, completedLevels: [], bestLevelScores: {}, campaignScore: 0, black: false, sound: true, music: true, freePlay: false};
     const settingsToggled = [];
+    const recordedScores = [];
+    const leaderboardState = {lastInitials: 'ABC', tables: {Child: [{initials: 'ACE', slotLabel: 'I', score: 250000, highestLevel: 12, rating: 'Tyro'}], Easy: [], Medium: [], Hard: []}};
     const menu = createGameMenu({
       root,
       getSlot: () => slotState,
+      getLeaderboard: () => leaderboardState,
       onView() {},
       onPlay: (slot, level) => played.push([slot, level]),
       onResume() {},
@@ -186,6 +200,7 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
       onSetting(slot, name, value) { settingsToggled.push([slot, name]); slotState[name] = value ?? !slotState[name]; },
       onReset() {},
       onExport() {},
+      onRecordScore(entry) { recordedScores.push(entry); return {qualified: true, rank: 1, entry}; },
     });
 
     assert.equal(byId.get('slot-music').textContent, 'Music: On');
@@ -212,6 +227,7 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
 
     // Navigate down to Save Slots and activate.
     menu.complete({level: 1, bonus: 500, levelTotal: 1500, campaignTotal: 1500, delta: 1500, nextLevel: 2});
+    menu.pad({direction: 'down', pressed: {}});
     menu.pad({direction: 'down', pressed: {}});
     menu.pad({direction: 'down', pressed: {}});
     menu.pad({direction: 'down', pressed: {}});
@@ -242,6 +258,7 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     assert.equal(byId.get('game-complete-2p').hidden, true);
     menu.pad({direction: 'down', pressed: {}});
     menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'down', pressed: {}});
     assert.equal(byId.get('game-complete-slots').hasAttribute('data-selected'), true);
     assert.equal(played.length, 0);
 
@@ -269,6 +286,43 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     assert.equal(byId.get('game-complete-winner').textContent, 'Player 2 (Black) Wins!');
     assert.equal(byId.get('game-p1-label').textContent, 'P1 (Gold) · Out');
     assert.equal(byId.get('game-p2-label').textContent, 'P2 (Black) · Goal');
+
+    // Rating milestone banner + controller initials navigation & recording + Top Scores navigation.
+    slotState.completedLevels = [1, 12, 25];
+    menu.complete({
+      level: 12, bonus: 3000, levelTotal: 18000, campaignTotal: 210000, delta: 18000, nextLevel: 13,
+      difficulty: 'Medium', completionBonus: 15000, timeBonus: 0,
+      ratingPromoted: {title: 'Tyro'}, qualifiesLeaderboard: true,
+    });
+    assert.equal(byId.get('game-rating-banner').hidden, false);
+    assert.match(byId.get('game-rating-title').textContent, /Tyro/);
+    assert.equal(byId.get('game-skill-rating').textContent, 'Tyro');
+    assert.equal(byId.get('game-initials-box').hidden, false);
+    // Enter initials picker from #game-next via Up, cycle letter 0 via Up, move right to Save, press Cross/A.
+    menu.pad({direction: 'up', pressed: {}});
+    assert.equal(document.activeElement.id, 'initial-0');
+    menu.pad({direction: 'up', pressed: {}});
+    menu.pad({direction: 'right', pressed: {}});
+    menu.pad({direction: 'right', pressed: {}});
+    menu.pad({direction: 'right', pressed: {}});
+    assert.equal(document.activeElement.id, 'game-record-score');
+    menu.pad({direction: 'left', pressed: {}});
+    assert.equal(document.activeElement.id, 'initial-2');
+    menu.pad({direction: 'right', pressed: {}});
+    menu.pad({pressed: {swing: true}});
+    assert.equal(recordedScores.length, 1);
+    assert.equal(recordedScores[0].initials, 'BBC');
+    assert.equal(recordedScores[0].highestLevel, 25);
+    assert.equal(document.activeElement.id, 'game-next');
+
+    // Open Top Scores from title, switch difficulty tabs, and return with B.
+    menu.show('title');
+    byId.get('slot-scores').click();
+    assert.equal(menu.view, 'scores');
+    assert.equal(byId.get('game-scores-list').children.length, 1);
+    menu.pad({pressed: {bounce: true}});
+    menu.pad({pressed: {reverse: true}});
+    assert.equal(menu.view, 'title');
   } finally {
     delete globalThis.document;
   }

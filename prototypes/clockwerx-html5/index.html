@@ -32,7 +32,7 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
       </svg>
     </div>
     <div class="game-actions" id="slot-actions">
-      <button class="game-button primary" id="slot-play" data-needs-levels>Play</button><button class="game-button" id="slot-levels" data-needs-levels>Level Select</button><button class="game-button" id="slot-hand">Hand: Gold</button><button class="game-button" id="slot-sound">Sound: On</button><button class="game-button" id="slot-music">Music: On</button><button class="game-button" id="slot-difficulty">Difficulty: Child</button><button class="game-button" id="slot-players">Players: 1P</button><button class="game-button" id="slot-reset">Reset</button>
+      <button class="game-button primary" id="slot-play" data-needs-levels>Play</button><button class="game-button" id="slot-levels" data-needs-levels>Level Select</button><button class="game-button" id="slot-hand">Hand: Gold</button><button class="game-button" id="slot-sound">Sound: On</button><button class="game-button" id="slot-music">Music: On</button><button class="game-button" id="slot-difficulty">Difficulty: Child</button><button class="game-button" id="slot-players">Players: 1P</button><button class="game-button" id="slot-scores">Top Scores</button><button class="game-button" id="slot-reset">Reset</button>
     </div>
     <div id="slot-confirm" class="game-confirm" hidden><p id="slot-confirm-label"></p><div class="game-actions"><button class="game-button" id="slot-keep">Cancel</button><button class="game-button" id="slot-erase">Reset Slot</button></div></div>
     <footer class="game-footer"><p id="slot-controls" hidden>Stick / D-pad choose · A play · X levels · Y hand · B sound · Start reset</p><button class="game-button quiet" id="slot-export">Export Saves</button></footer>
@@ -46,11 +46,12 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
   <section id="game-pause-screen" class="game-plaque game-small" data-screen="pause" hidden>
     <header class="game-heading"><h2 id="game-pause-title" tabindex="-1">Paused</h2><p id="game-pause-level"></p></header>
     <div class="game-command-list" id="pause-actions">
-      <button class="game-button primary" id="game-resume">Resume</button><button class="game-button" id="game-restart">Restart Level</button><button class="game-button" id="game-pause-levels">Level Select</button><button class="game-button" id="game-sound">Sound: On</button><button class="game-button" id="game-music">Music: On</button><button class="game-button" id="game-hand">Hand: Gold</button><button class="game-button" id="game-difficulty">Difficulty: Child</button><button class="game-button" id="game-players">Players: 1P</button><button class="game-button" id="game-save-slots">Save Slots</button>
+      <button class="game-button primary" id="game-resume">Resume</button><button class="game-button" id="game-restart">Restart Level</button><button class="game-button" id="game-pause-levels">Level Select</button><button class="game-button" id="game-sound">Sound: On</button><button class="game-button" id="game-music">Music: On</button><button class="game-button" id="game-hand">Hand: Gold</button><button class="game-button" id="game-difficulty">Difficulty: Child</button><button class="game-button" id="game-players">Players: 1P</button><button class="game-button" id="game-pause-scores">Top Scores</button><button class="game-button" id="game-save-slots">Save Slots</button>
     </div>
   </section>
   <section id="game-complete-screen" class="game-plaque game-small" data-screen="complete" hidden>
     <header class="game-heading"><h2 id="game-complete-title" tabindex="-1">Level Complete</h2><p id="game-complete-level"></p></header>
+    <div id="game-rating-banner" class="game-rating-banner" hidden><strong id="game-rating-title"></strong><span id="game-rating-text"></span></div>
     <div id="game-complete-2p" class="game-tally-2p" hidden>
       <p id="game-complete-winner" class="game-winner"></p>
       <dl class="game-tally">
@@ -64,11 +65,27 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
       <div id="game-time-row" hidden><dt>Time Bonus</dt><dd id="game-time-bonus"></dd></div>
       <div><dt>Level Total</dt><dd id="game-level-total"></dd></div>
       <div><dt>Campaign Total</dt><dd><span id="game-campaign-total"></span><span id="game-score-delta" hidden></span></dd></div>
+      <div id="game-rating-row"><dt>Skill Rating</dt><dd id="game-skill-rating"></dd></div>
     </dl>
+    <div id="game-initials-box" class="game-initials-box" hidden>
+      <p id="game-initials-prompt">New Top Score! Enter initials:</p>
+      <div class="initials-row">
+        <button type="button" class="game-button initial-slot" id="initial-0" aria-label="First initial">A</button>
+        <button type="button" class="game-button initial-slot" id="initial-1" aria-label="Second initial">A</button>
+        <button type="button" class="game-button initial-slot" id="initial-2" aria-label="Third initial">A</button>
+        <button type="button" class="game-button primary" id="game-record-score">Save</button>
+      </div>
+    </div>
     <div class="game-command-list" id="complete-actions">
-      <button id="game-next" class="game-button primary" data-needs-levels></button><button id="game-replay" class="game-button">Replay Level</button><button id="game-complete-levels" class="game-button">Level Select</button><button id="game-complete-slots" class="game-button">Save Slots</button>
+      <button id="game-next" class="game-button primary" data-needs-levels></button><button id="game-replay" class="game-button">Replay Level</button><button id="game-complete-levels" class="game-button">Level Select</button><button id="game-complete-scores" class="game-button">Top Scores</button><button id="game-complete-slots" class="game-button">Save Slots</button>
     </div>
     <footer id="game-complete-controls" class="game-footer game-complete-footer" hidden>Stick / D-pad choose · ✕ / A select</footer>
+  </section>
+  <section id="game-scores-screen" class="game-plaque" data-screen="scores" hidden>
+    <header class="game-heading"><img id="game-scores-banner" class="pict-banner" hidden alt=""><h2 id="game-scores-title" tabindex="-1">Top Scores</h2><p id="game-scores-subtitle">Local Hall of Fame</p></header>
+    <nav id="game-scores-tabs" class="scores-tabs" aria-label="Leaderboard difficulty"></nav>
+    <ol id="game-scores-list" class="scores-list" aria-label="Top ten scores"></ol>
+    <footer class="game-footer"><button id="game-scores-back" class="game-button">Back</button><p id="game-scores-controls">Left / Right difficulty · Esc back</p></footer>
   </section>
   <section id="game-loading" class="game-plaque game-small" data-screen="loading" hidden><h2 id="game-loading-title" tabindex="-1">ClockWerx</h2></section>
   <p id="game-menu-status" role="status" hidden></p>

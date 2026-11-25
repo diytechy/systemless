@@ -19,20 +19,25 @@ import {planPlayLayout} from './touch-layout.mjs';
 import {createMouseControls} from './mouse-controls.mjs';
 import {createGamepadControls} from './gamepad-controls.mjs';
 import {createSoundLimiter,musicTrackForState,soundKeyForEvent} from './audio-engine.mjs';
+import {createScorePopups} from './score-popups.mjs';
+import {leaderboardKey,readLeaderboard,qualifiesForLeaderboard,recordLeaderboardScore,promotedRating} from './leaderboard.mjs';
 import {progressKey,readProgress,recordCompletion,slotStoreKey,readSlotStore,migrateLegacyProgress,
  recordSlotLevelCompletion,resetSlot,updateSlot} from './progress.mjs';
 import {campaignLevels,completionBonus,completionDetails,createGameMenu,levelMechanicCues,sideControlsSpec,canShowSideControls,padGlyphs} from './game-menu.mjs';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 const bootUtc=new Date().toISOString(),bootStart=performance.now(),STEP=1/120;
 const params=new URLSearchParams(location.search),gameMode=document.documentElement.classList.contains('game-mode');
-let storedProgress,storedSlots;
+let storedProgress,storedSlots,storedLeaderboard;
 try{
  storedProgress=localStorage.getItem(progressKey);
  storedSlots=localStorage.getItem(slotStoreKey);
+ storedLeaderboard=localStorage.getItem(leaderboardKey);
 }catch{}
 const progress=readProgress(storedProgress),settings={sound:false,music:false};
 const gamepad=createGamepadControls(),levelMenu=$('controller-level-menu'),menuLevel=$('controller-level');
 let slotStore=storedSlots==null?migrateLegacyProgress(progress):readSlotStore(storedSlots);
+let leaderboard=readLeaderboard(storedLeaderboard);
+const scorePopups=createScorePopups();
 let activeSlotId=slotStore.activeSlotId,slotsUnsaved=false,gameMenu,gameScenes=new Map(),loadingScene=false;
 const soundBuffers=new Map(),allowSound=createSoundLimiter();
 let soundContext,musicPlayer,activeEffects=0,bombBonusBaseline=0;
@@ -63,6 +68,14 @@ function persistSlots(){
   localStorage.setItem(slotStoreKey,JSON.stringify(slotStore));
   slotsUnsaved=false;
  }catch{slotsUnsaved=true;}
+}
+function persistLeaderboard(){
+ try{localStorage.setItem(leaderboardKey,JSON.stringify(leaderboard));}catch{}
+}
+function recordTopScore(entry){
+ const saved=recordLeaderboardScore(leaderboard,{...entry,updatedUtc:new Date().toISOString()});
+ if(saved.qualified){leaderboard=saved.board;persistLeaderboard();}
+ return saved;
 }
 const getSlot=id=>slotStore.slots[id-1];
 const blackHand=()=>gameMode?getSlot(activeSlotId).black:progress.black;
@@ -114,7 +127,7 @@ function download(name,blob){const a=document.createElement('a');a.href=URL.crea
 function action(name,on){inputReplay=null;buttonHeld[name]=on;if(on)canvas.focus({preventScroll:true})}
 function clearInputs(){heldCodes.clear();heldCodes2.clear();held={};held2={};buttonHeld={};padHeld={};padHeld2={};mouseHeld={};gamepad.reset();touch.reset();mouse.reset();touchHeld={};}
 function pause(){if(!ready)return;game.paused=!game.paused;pauseLabels(game.paused);syncMusic();message(game.paused?'Paused. Press R1 or P, or tap Resume.':'Play resumed.');}
-function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();bombBonusBaseline=0;resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);syncMusic();message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
+function restart(){if(!ready)return;inputReplay=null;if(capture)capture.invalidReasons.add('board restart during capture');game.board.dots.forEach(d=>delete d.collected);game.reset();scorePopups.reset();bombBonusBaseline=0;resetSparkles();renderPrevious=null;lastEvent=0;recordedUntil=0;clearInputs();pauseLabels(false);syncMusic();message((game.board.title||'Movement')+' restarted. '+controlsHint());canvas.focus({preventScroll:true});}
 async function toggleFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else{await $('play').requestFullscreen({navigationUI:'hide'});await screen.orientation?.lock?.('landscape')?.catch(()=>{});}}catch(e){message('Fullscreen unavailable: '+e.message,true);}}
 $('pause').onclick=pause;$('touch-pause').onclick=pause;$('panel-pause').onclick=pause;$('fullscreen').onclick=toggleFullscreen;$('panel-fullscreen').onclick=toggleFullscreen;$('restart').onclick=restart;$('panel-restart').onclick=restart;
 // iPhone Safari has no element fullscreen; hide the button rather than show a failing control.
@@ -125,7 +138,7 @@ $('music').onchange=()=>{if(capture)capture.invalidReasons.add('music changed du
 $('export-progress').onclick=()=>download('clockwerx-progress.json',new Blob([JSON.stringify(progress,null,2)],{type:'application/json'}));
 function exportSlots(){
  refreshSlotStore();
- download('clockwerx-save-slots.json',new Blob([JSON.stringify(slotStore,null,2)],{type:'application/json'}));
+ download('clockwerx-save-slots.json',new Blob([JSON.stringify({...slotStore,leaderboard},null,2)],{type:'application/json'}));
 }
 $('export-slots').onclick=exportSlots;
 const keys={Space:'swing',KeyD:'swing',KeyZ:'bounce',ShiftLeft:'flip',KeyX:'flip'};
@@ -405,6 +418,47 @@ function updateSparkles(dt){for(const {system,anchor} of sparkleSystems)system.u
 function drawSparkles(){
  const spec=manifest.vectorAssets?.starbursts;if(!spec)return;const a=spec.animation;
  for(const {system} of sparkleSystems)for(const p of system.snapshot()){const index=a.frameOrder?.[p.frame]??p.frame;ctx.drawImage(images[spec.file],index*a.frameWidth,0,a.frameWidth,a.frameHeight,p.x+spec.x,p.y+spec.y,spec.width,spec.height);}
+}
+function drawScorePopups(){
+ const list=scorePopups.snapshot();
+ if(!list.length)return;
+ ctx.save();
+ ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';
+ for(const p of list){
+  ctx.globalAlpha=p.alpha;
+  ctx.font='bold 14px "Courier New",monospace';
+  ctx.lineWidth=3.5;ctx.strokeStyle='#151008';
+  ctx.strokeText(p.text,p.x,p.y);
+  ctx.fillStyle=p.color;
+  ctx.fillText(p.text,p.x,p.y);
+  if(p.subtext){
+   ctx.font='bold 11px "Courier New",monospace';
+   ctx.lineWidth=3;
+   ctx.strokeText(p.subtext,p.x,p.y+13);
+   ctx.fillStyle='#8cf3ff';
+   ctx.fillText(p.subtext,p.x,p.y+13);
+  }
+ }
+ ctx.restore();
+}
+function spawnEventPopup(e){
+ const dot=e.dot!=null?game.board.dots.find(d=>d.id===e.dot):null;
+ const hand=e.hand==='player2'&&game.player2?game.player2:game.player;
+ const anchor=dot||(game.point?game.point(hand):game.board.dots.find(d=>d.id===hand?.pivot));
+ if(!anchor)return;
+ const x=Math.max(96,Math.min(544,anchor.x)),y=Math.max(88,anchor.y-16);
+ if(e.type==='bonus'){
+  const pts=e.points??1000;
+  const palette={1000:'#ffe66b',2000:'#ffd24c',3000:'#ffb84c',4000:'#ff965a',5000:'#fff3a1'};
+  scorePopups.spawn({x,y,text:'+'+pts.toLocaleString(),color:palette[pts]??'#ffe66b'});
+ }else if(e.type==='goodie'){
+  const hasSprite=game.bombScene?.effects?.some(ef=>ef.kind==='floating-score'&&ef.visible);
+  if(hasSprite){if(game.timed)scorePopups.spawn({x,y:y-12,text:'+10s',color:'#8cf3ff'});}
+  else scorePopups.spawn({x,y,text:'+1,000',subtext:game.timed?'+10s':'',color:'#ffe66b'});
+ }else if(e.type==='goal'){
+  const pts=completionBonusForDifficulty(game.board.difficulty??'Child');
+  scorePopups.spawn({x,y,text:'+'+pts.toLocaleString(),color:'#fff3a1',duration:1.3});
+ }
 }
 function sprite(gid,index,x,y){const g=manifest.groups[gid],f=g.frames[index%g.frames.length],im=images[g.images[f.image]];if(!im)return;ctx.save();ctx.translate(Math.round(x+f.x),Math.round(y+f.y));if(f.flipY){ctx.scale(1,-1);ctx.drawImage(im,0,-im.height)}else ctx.drawImage(im,0,0);ctx.restore();}
 function drawBuster(p,angle){const a=manifest.vectorAssets.busters;if(!a)throw Error('Buster artwork required');ctx.drawImage(images[a.file],p.x+a.radius*Math.cos(angle)+a.x,p.y+(game.board.handOffsetY||0)+a.radius*Math.sin(angle)+a.y,a.width,a.height);}
@@ -721,6 +775,7 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
  drawDeath();
  drawBombs('effects');
  drawSparkles();
+ drawScorePopups();
  if(sourcePaint)ctx.restore();
  if(game.complete&&!gameMode){
   const score=game.childScore??game.roundScore;
@@ -776,10 +831,13 @@ function onRoundComplete2P(event){
   const bestTotal=Math.max(p1.levelTotal,p2.levelTotal);
   slotStore=recordSlotLevelCompletion(slotStore,activeSlotId,level,bestTotal,campaignLevels,new Date().toISOString(),difficulty);
   persistSlots();
-  const details=completionDetails(level,leadBonus,before,getSlot(activeSlotId).campaignScore,gameScenes.has(level+1),{difficulty,remainingTime:0});
+  const after=getSlot(activeSlotId).campaignScore;
+  const details=completionDetails(level,leadBonus,before,after,gameScenes.has(level+1),{difficulty,remainingTime:0});
   details.completionBonus=lead.completionBonus??0;
   details.timeBonus=lead.timeBonus??0;
   details.levelTotal=bestTotal;
+  details.ratingPromoted=promotedRating(before,after);
+  details.qualifiesLeaderboard=after>before&&qualifiesForLeaderboard(leaderboard,difficulty,after);
   details.twoPlayer={winner,player1:p1,player2:p2,p1Hand:blackHand()?'Black':'Gold',p2Hand:blackHand()?'Gold':'Black'};
   gameMenu.complete(details);
  }else{
@@ -799,7 +857,11 @@ function onGoal(){
   const total=bonus+completionBonusForDifficulty(timing.difficulty)+timeBonusForDifficulty(timing.difficulty,timing.remainingTime);
   slotStore=recordSlotLevelCompletion(slotStore,activeSlotId,level,total,campaignLevels,new Date().toISOString(),timing.difficulty);
   persistSlots();
-  gameMenu.complete(completionDetails(level,bonus,before,getSlot(activeSlotId).campaignScore,gameScenes.has(level+1),timing));
+  const after=getSlot(activeSlotId).campaignScore;
+  const details=completionDetails(level,bonus,before,after,gameScenes.has(level+1),timing);
+  details.ratingPromoted=promotedRating(before,after);
+  details.qualifiesLeaderboard=after>before&&qualifiesForLeaderboard(leaderboard,timing.difficulty,after);
+  gameMenu.complete(details);
  }else{
   recordCompletion(progress,activeScene.ordinal);
   persist();
@@ -817,7 +879,7 @@ $('png').onclick=()=>{if(capture)capture.invalidReasons.add('PNG export during t
 $('memory').onclick=async()=>{if(capture){$('diagnostics').textContent='Memory measurement is disabled during capture.';return;}const start=new Date().toISOString();memoryPending=true;$('capture').disabled=true;$('capture-reset').disabled=true;$('memory').disabled=true;$('diagnostics').textContent='Measuring page memory…';try{if(performance.measureUserAgentSpecificMemory){const m=await performance.measureUserAgentSpecificMemory();memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'completed',method:'measureUserAgentSpecificMemory',boundary:'browser-reported page-associated memory; not process RSS or physical RAM',result:m};}else memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'unavailable',boundary:'No supported page memory API; no estimate invented'};}catch(e){memoryResult={startUtc:start,completionUtc:new Date().toISOString(),status:'failed',error:String(e),boundary:'No memory result'}}finally{memoryPending=false;$('capture').disabled=false;$('capture-reset').disabled=false;$('memory').disabled=false;$('diagnostics').textContent=JSON.stringify(memoryResult);}};
 $('route').onclick=async()=>{if(!ready||!checkedRoute)return;try{await loadScene(activeScene);inputReplay=createInputReplay(checkedRoute);message('Replaying a checked input route from a new scene.');canvas.focus({preventScroll:true});}catch(e){message('Checked route unavailable: '+e.message,true);}};
 $('workload').onclick=()=>{restart();recordedUntil=12;message('Recorded input demo: swing held for 12 simulation seconds; no other actions.');};
-function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();pollMouse();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open&&(!gameMode||gameMenu.view==='play')){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k];let input2=game.player2?{...held2}:null;if(input2)for(const k of ['swing','bounce','flip'])input2[k]=input2[k]||padHeld2[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(held2).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!Object.values(padHeld2).some(Boolean)&&!touch.active&&!mouse.active)pilotInputBlocked=false;input={};if(input2)input2={};}if(game.player2)game.update(STEP,input,input2);else game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){bombBonusBaseline=game.bombScene?.score??0;inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message(game.player2?'A player was caught.':'Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){bombBonusBaseline=game.bombScene?.score??0;resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!(game.worldFrozen??game.death))updateSparkles(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){const key=soundKeyForEvent(e,manifest.sounds);if(key)playSound(key,['wall-bounce','door-bounce'].includes(e.type) ? .16 : .32);if(game.player2){if(e.type==='goal')message((e.playerIndex===1?'Player 2':'Player 1')+' reached the goal!');if(e.type==='round-complete')onRoundComplete2P(e);}else if(e.type==='goal')onGoal();}lastEvent=game.eventSequence;}const drawStart=performance.now();try{if(!gameMode||(gameMenu.boardVisible&&!loadingScene))draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
+function frame(now){const entry=performance.now(),delta=Math.max(0,(now-last)/1000);last=now;rafCalls++;pollGamepad();pollTouch();pollMouse();if(game?.events.some(e=>e.sequence>lastEvent&&playerAttentionAction(e)))stopSparkles();let n=0,activeN=0;if(ready&&!document.hidden&&!levelMenu.open&&(!gameMode||gameMenu.view==='play')){const cap=Math.min(delta,.25);if(capture&&delta>.25)capture.invalidReasons.add('simulation catch-up capped');droppedSeconds+=Math.max(0,delta-cap);accumulator+=cap;while(accumulator>=STEP){let input={...held};for(const k of ['swing','bounce','flip'])input[k]=input[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k];let input2=game.player2?{...held2}:null;if(input2)for(const k of ['swing','bounce','flip'])input2[k]=input2[k]||padHeld2[k];if(recordedUntil>workloadTime())input.swing=true;if(inputReplay&&!game.paused&&!game.complete)input=inputReplay.next();const activeBefore=game.activeSteps;renderPrevious=handPoses(game);const sequenceBefore=game.eventSequence;if(pilotInputBlocked){if(!Object.values(held).some(Boolean)&&!Object.values(held2).some(Boolean)&&!Object.values(buttonHeld).some(Boolean)&&!Object.values(padHeld).some(Boolean)&&!Object.values(padHeld2).some(Boolean)&&!touch.active&&!mouse.active)pilotInputBlocked=false;input={};if(input2)input2={};}if(game.player2)game.update(STEP,input,input2);else game.update(STEP,input);if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='pilot-round-restart')){bombBonusBaseline=game.bombScene?.score??0;inputReplay=null;recordedUntil=0;pilotInputBlocked=true;resetSparkles();renderPrevious=null;message('Round restarted.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='death')){inputReplay=null;message(game.player2?'A player was caught.':'Caught. The round will restart after the effect.');}if(game.events.some(e=>e.sequence>sequenceBefore&&e.type==='round-reset')){bombBonusBaseline=game.bombScene?.score??0;scorePopups.reset();resetSparkles();renderPrevious=null;message((game.board.title||'Movement')+' restarted after contact.');}if(game.events.some(e=>e.sequence>sequenceBefore&&playerAttentionAction(e)))stopSparkles();if(game.activeSteps>activeBefore&&!(game.worldFrozen??game.death))updateSparkles(STEP);if(!game.paused)scorePopups.update(STEP);activeN+=game.activeSteps-activeBefore;accumulator-=STEP;n++;}for(const e of game.events.filter(e=>e.sequence>lastEvent)){const key=soundKeyForEvent(e,manifest.sounds);if(key)playSound(key,['wall-bounce','door-bounce'].includes(e.type) ? .16 : .32);if(e.type==='bonus'||e.type==='goodie'||e.type==='goal')spawnEventPopup(e);if(game.player2){if(e.type==='goal')message((e.playerIndex===1?'Player 2':'Player 1')+' reached the goal!');if(e.type==='round-complete')onRoundComplete2P(e);}else if(e.type==='goal')onGoal();}lastEvent=game.eventSequence;}const drawStart=performance.now();try{if(!gameMode||(gameMenu.boardVisible&&!loadingScene))draw();}catch(error){if(!drawFailure){drawFailure=error;message('Rendering error: '+error.message,true);}}const end=performance.now();if(capture){if(document.hidden)capture.invalidReasons.add('document hidden');if(!document.hasFocus())capture.invalidReasons.add('window unfocused');capture.frames.push({tMs:now-capture.start,rafTimestampMs:now,rafDeltaMs:delta*1000,fixedStepCalls:n,activeSimulationSteps:activeN,renderCalls:1,updateAndInputMs:drawStart-entry,renderMs:end-drawStart,totalWorkMs:end-entry,visible:!document.hidden,focused:document.hasFocus(),gamePaused:game.paused,gameComplete:game.complete,gameTimeSeconds:game.time,recordedSwingActive:recordedUntil>workloadTime(),presentedStarbursts:sparkleSystems.map(({system})=>system.snapshot()),presentedPlayer:{angle:presentedAngle(game.player,renderPrevious?.player,accumulator/STEP,!!manifest.vectorAssets),pivot:game.player.pivot,direction:game.player.direction},replayedInput:inputReplay?.snapshot()||null,heldActions:Object.fromEntries(Object.keys({swing:0,bounce:0,flip:0}).map(k=>[k,!!(held[k]||buttonHeld[k]||padHeld[k]||touchHeld[k]||mouseHeld[k])]))});if(now-capture.start>=20000)finishCapture(now);}requestAnimationFrame(frame);}
 function buildChildSceneBoard(reference){
  const board=buildDecodedBoard(reference.data,{ordinal:reference.ordinal,title:reference.title,angularSpeed:TAU*960/(76*64),allowOil:reference.oilQualified===true,allowInactiveSpikes:reference.inactiveSpikesQualified===true,allowEnemyBouncePrograms:reference.enemyBounceProgramsQualified===true,allowEnemyStaticPrograms:reference.enemyStaticProgramsQualified===true,allowSpecialDots:reference.specialDotsQualified===true,allowBombs:reference.bombsQualified===true,allowGoodies:reference.goodiesQualified===true,allowProtectedWaypoints:reference.protectedWaypointsQualified===true,allowProtectedBonuses:reference.protectedBonusesQualified===true,allowInactiveProtectedWaypoints:reference.inactiveProtectedWaypointsQualified===true,allowStaticEnemyWalls:reference.staticEnemyWallsQualified===true,allowClass3Enemies:reference.class3EnemiesQualified===true,allowExtendedEnemyClocks:reference.extendedEnemyClocksQualified===true,allowProgrammedEnemyWalls:reference.programmedEnemyWallsQualified===true,allowInitiallyOpenDoors:reference.initiallyOpenDoorsQualified===true,allowRotatingSpikes:reference.rotatingSpikesQualified===true,allowFastRotatingSpikes:reference.fastRotatingSpikesQualified===true,allowSlowRotatingSpikes:reference.slowRotatingSpikesQualified===true,allowClass2RotatingSpikes:reference.class2RotatingSpikesQualified===true,allowClass3RotatingSpikes:reference.class3RotatingSpikesQualified===true,allowRotatingSpikeTransfers:reference.rotatingSpikeTransfersQualified===true,allowRotatingSpikeBounces:reference.rotatingSpikeBouncesQualified===true,allowInactiveElevators:reference.inactiveElevatorsQualified===true,allowInactiveUpDownDots:reference.inactiveUpDownDotsQualified===true,allowInactiveRings:reference.inactiveRingsQualified===true,allowBombObjectInteractions:reference.bombObjectInteractionsQualified===true,allowCanonicalPlayer:reference.canonicalPlayerQualified===true,allowCanonicalOil:reference.canonicalOilQualified===true,allowCanonicalOilSpikes:reference.canonicalOilSpikesQualified===true,allowElevators:reference.elevatorsQualified===true,allowElevatorGoodies:reference.elevatorGoodiesQualified===true,allowColoredElevatorGoodies:reference.coloredElevatorGoodiesQualified===true,allowElevatorOilSpikes:reference.elevatorOilSpikesQualified===true,allowBombOilElevators:reference.bombOilElevatorsQualified===true,allowSlidingConnectors:reference.slidingConnectorsQualified===true,allowStaticSlidingBombGoodies:reference.staticSlidingBombGoodiesQualified===true,allowSlidingBombs:reference.slidingBombsQualified===true,allowSlidingBombOrbitals:reference.slidingBombOrbitalsQualified===true,allowSlidingBombCheckpoints:reference.slidingBombCheckpointsQualified===true,allowSlidingOil:reference.slidingOilQualified===true,allowSlidingOilGoodieRings:reference.slidingOilGoodieRingsQualified===true,allowStaticSlidingPrograms:reference.staticSlidingProgramsQualified===true,allowSlidingGoodies:reference.slidingGoodiesQualified===true,allowSlidingGoodiePrograms:reference.slidingGoodieProgramsQualified===true,allowTeleports:reference.teleportsQualified===true,allowSlidingTeleports:reference.slidingTeleportsQualified===true,allowMovingDots:reference.movingDotsQualified===true,allowMovingDoorCheckpoint:reference.movingDoorCheckpointQualified===true,allowMovingDoorOil:reference.movingDoorOilQualified===true,allowStaticRingRails:reference.staticRingRailsQualified===true,allowMovingFuseOrdinary:reference.movingFuseOrdinaryQualified===true,allowStaticGunRails:reference.staticGunRailsQualified===true,allowStaticGunRailHazards:reference.staticGunRailHazardsQualified===true,allowMovingTeleportCheckpoints:reference.movingTeleportCheckpointsQualified===true,allowStaticRingDoors:reference.staticRingDoorsQualified===true,allowMovingGoalRails:reference.movingGoalRailsQualified===true,allowMovingTeleportDoors:reference.movingTeleportDoorsQualified===true,allowMovingProtectedBusters:reference.movingProtectedBustersQualified===true,allowMovingSlowdownBusters:reference.movingSlowdownBustersQualified===true,allowStaticSlowdownBusters:reference.staticSlowdownBustersQualified===true,allowSlowdownWaystation:reference.slowdownWaystationQualified===true,allowSlowdownClass4:reference.slowdownClass4Qualified===true,allowSlowdownWalls:reference.slowdownWallsQualified===true,allowStaticSlowdown:reference.staticSlowdownQualified===true,allowMovingProtectedPassage:reference.movingProtectedPassageQualified===true,allowMovingGoalOrdinary:reference.movingGoalOrdinaryQualified===true,allowMovingWaystation:reference.movingWaystationQualified===true,allowMovingGoalGoodies:reference.movingGoalGoodiesQualified===true,allowStaticTeleportBusters:reference.staticTeleportBustersQualified===true,allowGunSlidingBusters:reference.gunSlidingBustersQualified===true,allowMovingProgrammedBusters:reference.movingProgrammedBustersQualified===true,allowMovingCheckpointControls:reference.movingCheckpointControlsQualified===true,allowMovingCheckpointRails:reference.movingCheckpointRailsQualified===true,allowOilBusters:reference.oilBustersQualified===true,allowMovingBusterBombs:reference.movingBusterBombsQualified===true,allowGunBusters:reference.gunBustersQualified===true,allowFreeBusters:reference.freeBustersQualified===true,allowMovingDoorGoodies:reference.movingDoorGoodiesQualified===true,allowMovingTubes:reference.movingTubesQualified===true,allowGunsTriggers:reference.gunsTriggersQualified===true,allowGunTriggerSliding:reference.gunTriggerSlidingQualified===true,allowGunTriggerWalls:reference.gunTriggerWallsQualified===true,allowGunTriggerTeleports:reference.gunTriggerTeleportsQualified===true,allowGunTriggerOil:reference.gunTriggerOilQualified===true,allowStaticBombElevators:reference.staticBombElevatorsQualified===true,allowElevatorOilRiders:reference.elevatorOilRidersQualified===true,allowMovingBombSpikeWaystation:reference.movingBombSpikeWaystationQualified===true,allowMovingSpikes:reference.movingSpikesQualified===true,allowStaticMarkedOrbitals:reference.staticMarkedOrbitalsQualified===true,allowMovingMarkedOrdinary:reference.movingMarkedOrdinaryQualified===true,allowMovingCheckpointRings:reference.movingCheckpointRingsQualified===true,allowMovingMarkedBonuses:reference.movingMarkedBonusesQualified===true,allowMovingElevators:reference.movingElevatorsQualified===true,allowPilotAbsentSlideRecovery:reference.pilotAbsentSlideRecoveryQualified===true,allowMarkedTransfers:reference.markedTransfersQualified===true,allowMovingMarkedGoals:reference.movingMarkedGoalsQualified===true,allowMovingBombs:reference.movingBombsQualified===true,allowImportedGoodie169:reference.importedGoodie169Qualified===true,allowCombinedGoalBonus:reference.combinedGoalBonusQualified===true,allowActiveDotMasks:reference.activeDotMasksQualified===true,allowInactivePlainDotMasks:reference.inactivePlainDotMasksQualified===true,allowChildScoring:reference.childScoringQualified===true});
  return board;
@@ -868,7 +930,7 @@ async function loadScene(scene,black=blackHand(),difficulty=gameMode?getSlot(act
  const title=game.board.title||'Movement';document.title=gameMode?`ClockWerx · ${title}`:`ClockWerx ${title} — HTML5 pilot`;
  document.querySelector('h1').textContent=`ClockWerx · ${title}`;canvas.setAttribute('aria-label',title+' game');
  activeBackdrop=scene.backdrop||manifest.backdrop;activePlayfield=scene.playfield||null;
- activeScene=scene;bombBonusBaseline=0;clearInputs();pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
+ activeScene=scene;bombBonusBaseline=0;scorePopups.reset();clearInputs();pilotInputBlocked=false;pauseLabels(false);resetSparkles();last=performance.now();accumulator=0;ready=true;
  syncMusic();
  updateSideControlsPanel();
  message(playLayout?`${title} ready. ${controlsHint()}`:`${title} ready · ${manifest.vectorAssets?'SVG foreground, continuous rotation':'original bitmap foreground'}. ${controlsHint()}`);
@@ -1083,9 +1145,9 @@ startup.assetReadyUtc=new Date().toISOString();startup.readyMs=performance.now()
 if(gameMode){
  if(storedSlots==null)persistSlots();
  gameMenu=createGameMenu({
-  root:$('game-overlay'),getSlot,onView:setGameView,onSlotChange:syncMusic,onPlay:playLevel,onResume:()=>gameMenu.show('play'),
+  root:$('game-overlay'),getSlot,getLeaderboard:()=>leaderboard,onView:setGameView,onSlotChange:syncMusic,onPlay:playLevel,onResume:()=>gameMenu.show('play'),
   onRestart:()=>{if(!loadingScene){gameMenu.show('play');restart();}},
-  onSetting:changeSlotSetting,onReset:id=>{refreshSlotStore();slotStore=resetSlot(slotStore,id);persistSlots();syncMusic();},onExport:exportSlots,
+  onSetting:changeSlotSetting,onReset:id=>{refreshSlotStore();slotStore=resetSlot(slotStore,id);persistSlots();syncMusic();},onExport:exportSlots,onRecordScore:recordTopScore,
  });
  // A valid explicit link stays in the URL until the player returns to Save Slots.
  gameMenu.selectSlot(activeSlotId,false);

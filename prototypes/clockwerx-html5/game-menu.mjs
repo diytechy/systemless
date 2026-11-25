@@ -15,6 +15,7 @@ const number = new Intl.NumberFormat();
 const lastPlayed = new Intl.DateTimeFormat(undefined, {dateStyle: 'medium', timeStyle: 'short'});
 const points = value => number.format(value) + ' pts';
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+const safeAssetFile = f => (typeof f === 'string' && /^[A-Za-z0-9_.-]+$/.test(f) && f !== '.' && f !== '..' ? f : null);
 
 export function moveInGrid(index, direction, width, count) {
   const rowStart = index - index % width;
@@ -208,6 +209,9 @@ export function menuPadAction(view, pressed, confirming = false) {
     if (pressed.bounce) return 'next-scores-tab';
     if (pressed.swing) return 'activate';
   }
+  if (view === 'credits') {
+    if (pressed.levels || pressed.reverse || pressed.swing) return 'game-credits-back';
+  }
   return null;
 }
 
@@ -235,7 +239,7 @@ export function createGameMenu({
   const initialButtons = ['initial-0', 'initial-1', 'initial-2'].map(id => $(id)).filter(Boolean);
   let levelButtons = [];
   let view = 'title', levelReturn = 'title', scoresReturn = 'title', selectedSlot = 1, selectedLevel = 1, roundLevel = 1;
-  let scoresDifficulty = 'Child', initialsChars = ['A', 'A', 'A'], scoreRecorded = false;
+  let scoresDifficulty = 'Child', initialsChars = ['A', 'A', 'A'], scoreRecorded = false, pictAssets = null;
   let needleAngle = 0, connected = false, padFamily = null, connectedCount = 0, busy = false, confirming = false, command = 0, result;
 
   const focus = node => node?.focus({preventScroll: true});
@@ -279,6 +283,7 @@ export function createGameMenu({
     text('game-scores-controls', connected
       ? `Stick / D-pad or ${g.flip} / ${g.bounce} difficulty · ${g.reverse} back`
       : 'Left / Right difficulty · Esc back');
+    text('game-credits-controls', connected ? `${g.reverse} back` : 'Esc back');
     text('game-replay', connected ? 'Replay Level' : 'Replay Level · R');
     text('game-complete-levels', 'Level Select');
     text('game-complete-slots', 'Save Slots');
@@ -416,6 +421,7 @@ export function createGameMenu({
     if (next === 'title') renderSlots(true);
     else if (next === 'levels') renderLevels();
     else if (next === 'scores') renderScores(true);
+    else if (next === 'credits') focus($('game-credits-back'));
     else if (next === 'pause') {
       text('game-pause-level', 'Lv ' + roundLevel + ' · ' + titles.get(roundLevel));
       command = 0;
@@ -428,7 +434,7 @@ export function createGameMenu({
   }
 
   function coversBoard() {
-    return view === 'title' || view === 'loading' || (view === 'levels' && levelReturn === 'title')
+    return view === 'title' || view === 'loading' || view === 'credits' || (view === 'levels' && levelReturn === 'title')
       || (view === 'scores' && scoresReturn === 'title');
   }
 
@@ -581,9 +587,11 @@ export function createGameMenu({
     };
   }
   if ($('slot-scores')) $('slot-scores').onclick = () => openScores('title');
+  if ($('slot-credits')) $('slot-credits').onclick = () => { if (!busy) show('credits'); };
   if ($('game-pause-scores')) $('game-pause-scores').onclick = () => openScores('pause');
   if ($('game-complete-scores')) $('game-complete-scores').onclick = () => openScores('complete', result?.difficulty);
   if ($('game-scores-back')) $('game-scores-back').onclick = () => { if (!busy) show(scoresReturn); };
+  if ($('game-credits-back')) $('game-credits-back').onclick = () => { if (!busy) show('title'); };
   $('slot-reset').onclick = startConfirm;
   $('slot-keep').onclick = endConfirm;
   $('slot-erase').onclick = () => { onReset(selectedSlot); endConfirm(); };
@@ -608,8 +616,8 @@ export function createGameMenu({
 
   function navigate(direction) {
     if (view === 'title' && !confirming) {
-      const diffBtn = $('slot-difficulty'), playersBtn = $('slot-players'), scoresBtn = $('slot-scores');
-      const bottomRow = [diffBtn, playersBtn, scoresBtn].filter(Boolean);
+      const diffBtn = $('slot-difficulty'), playersBtn = $('slot-players'), scoresBtn = $('slot-scores'), creditsBtn = $('slot-credits');
+      const bottomRow = [diffBtn, playersBtn, scoresBtn, creditsBtn].filter(Boolean);
       const rowIndex = bottomRow.indexOf(document.activeElement);
       if (rowIndex >= 0) {
         if (direction === 'up') focus(slotButtons[selectedSlot - 1]);
@@ -699,6 +707,48 @@ export function createGameMenu({
       for (const [index, scene] of scenes.entries()) titles.set(scene.ordinal ?? index + 1, scene.title);
       renderSlots();
     },
+    setPictAssets(assets) {
+      if (assets && typeof assets === 'object') {
+        pictAssets = Object.fromEntries(
+          Object.entries(assets).flatMap(([k, v]) => {
+            const safe = safeAssetFile(v);
+            return safe ? [[k, safe]] : [];
+          }),
+        );
+      } else {
+        pictAssets = null;
+      }
+      const applyBg = (id, file) => {
+        const el = $(id);
+        if (!el) return;
+        const safe = safeAssetFile(file);
+        if (safe) {
+          el.style?.setProperty?.('--pict-bg', `url("./assets/${safe}")`);
+          el.classList?.toggle?.('has-pict-bg', true);
+        } else {
+          el.classList?.toggle?.('has-pict-bg', false);
+        }
+      };
+      applyBg('game-title-screen', pictAssets?.title);
+      applyBg('game-scores-screen', pictAssets?.frame);
+      applyBg('game-pause-screen', pictAssets?.options);
+      const setImg = (id, file) => {
+        const img = $(id);
+        if (!img) return false;
+        const safe = safeAssetFile(file);
+        if (safe) {
+          img.src = `./assets/${safe}`;
+          img.hidden = false;
+          return true;
+        }
+        img.hidden = true;
+        return false;
+      };
+      setImg('game-scores-banner', pictAssets?.topScores);
+      const hasCredits = setImg('game-credits-art', pictAssets?.credits);
+      setImg('game-logo-art', pictAssets?.logo);
+      if ($('game-credits-fallback')) $('game-credits-fallback').hidden = hasCredits;
+    },
     setConnected(value, family = null, count = value ? 1 : 0) {
       const nextFamily = value ? family : null;
       const nextCount = value ? Math.max(1, count) : 0;
@@ -715,6 +765,17 @@ export function createGameMenu({
       result = details;
       text('game-complete-title', details.level === campaignLevels ? 'Victory' : 'Level Complete');
       text('game-complete-level', 'Lv ' + details.level + ' · ' + titles.get(details.level));
+      const completeArt = $('game-complete-art');
+      if (completeArt) {
+        const milestone = details.level === campaignLevels || details.level % chapterSize === 0;
+        const file = milestone ? pictAssets?.completed : null;
+        if (file) {
+          completeArt.src = `./assets/${file}`;
+          completeArt.hidden = false;
+        } else {
+          completeArt.hidden = true;
+        }
+      }
       const box2p = $('game-complete-2p');
       if (box2p) {
         const two = details.twoPlayer;
@@ -777,6 +838,7 @@ export function createGameMenu({
         else if (view === 'pause') onResume();
         else if (view === 'levels') show(levelReturn);
         else if (view === 'scores') show(scoresReturn);
+        else if (view === 'credits') show('title');
         else return false;
       } else if (view === 'complete' && initialButtons.includes(document.activeElement) && /^[A-Za-z0-9]$/.test(event.key ?? '')) {
         const idx = initialButtons.indexOf(document.activeElement);
@@ -806,7 +868,7 @@ export function createGameMenu({
       if (busy) return;
       if (direction) navigate(direction);
       if (view === 'title' && !confirming && pressed.swing &&
-        [$('slot-difficulty'), $('slot-players'), $('slot-scores')].filter(Boolean).includes(document.activeElement)) {
+        [$('slot-difficulty'), $('slot-players'), $('slot-scores'), $('slot-credits')].filter(Boolean).includes(document.activeElement)) {
         document.activeElement.click();
         return;
       }

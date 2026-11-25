@@ -40,7 +40,8 @@ def package(dist,assets):
             raise ValueError('Missing, duplicate or changed private asset: '+name)
         files[name]=row
     references={manifest['backdrop'],*manifest['sounds'].values()}
-    references.update(manifest.get('music', {}).get('tracks', {}).values())
+    references.update((manifest.get('music') or {}).get('tracks', {}).values())
+    references.update((manifest.get('pictAssets') or {}).values())
     references.update(scene['backdrop'] for scene in manifest.get('scenes',[]) if scene.get('backdrop'))
     for group in manifest['groups'].values():references.update(group['images'])
     if manifest.get('vectorAssets'):

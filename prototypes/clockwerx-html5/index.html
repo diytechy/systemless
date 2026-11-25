@@ -35,7 +35,7 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
       <button class="game-button primary" id="slot-play" data-needs-levels>Play</button><button class="game-button" id="slot-levels" data-needs-levels>Level Select</button><button class="game-button" id="slot-hand">Hand: Gold</button><button class="game-button" id="slot-sound">Sound: On</button><button class="game-button" id="slot-music">Music: On</button><button class="game-button" id="slot-difficulty">Difficulty: Child</button><button class="game-button" id="slot-players">Players: 1P</button><button class="game-button" id="slot-scores">Top Scores</button><button class="game-button" id="slot-reset">Reset</button>
     </div>
     <div id="slot-confirm" class="game-confirm" hidden><p id="slot-confirm-label"></p><div class="game-actions"><button class="game-button" id="slot-keep">Cancel</button><button class="game-button" id="slot-erase">Reset Slot</button></div></div>
-    <footer class="game-footer"><p id="slot-controls" hidden>Stick / D-pad choose · A play · X levels · Y hand · B sound · Start reset</p><button class="game-button quiet" id="slot-export">Export Saves</button></footer>
+    <footer class="game-footer"><p id="slot-controls" hidden>Stick / D-pad choose · A play · X levels · Y hand · B sound · Start reset</p><button class="game-button quiet" id="slot-credits">Credits</button><button class="game-button quiet" id="slot-export">Export Saves</button></footer>
   </section>
   <section id="game-level-screen" class="game-plaque" data-screen="levels" hidden>
     <header class="game-level-heading"><h2 id="game-level-title" tabindex="-1">Level Select</h2><label><input type="checkbox" id="game-free-play"> All 100 Levels (Free Play)</label></header>
@@ -51,6 +51,7 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
   </section>
   <section id="game-complete-screen" class="game-plaque game-small" data-screen="complete" hidden>
     <header class="game-heading"><h2 id="game-complete-title" tabindex="-1">Level Complete</h2><p id="game-complete-level"></p></header>
+    <img id="game-complete-art" class="pict-art" hidden alt="ClockWerx Completed artwork">
     <div id="game-rating-banner" class="game-rating-banner" hidden><strong id="game-rating-title"></strong><span id="game-rating-text"></span></div>
     <div id="game-complete-2p" class="game-tally-2p" hidden>
       <p id="game-complete-winner" class="game-winner"></p>
@@ -86,6 +87,15 @@ button{font:inherit;padding:7px 10px;margin:4px 3px 4px 0}button:disabled{opacit
     <nav id="game-scores-tabs" class="scores-tabs" aria-label="Leaderboard difficulty"></nav>
     <ol id="game-scores-list" class="scores-list" aria-label="Top ten scores"></ol>
     <footer class="game-footer"><button id="game-scores-back" class="game-button">Back</button><p id="game-scores-controls">Left / Right difficulty · Esc back</p></footer>
+  </section>
+  <section id="game-credits-screen" class="game-plaque" data-screen="credits" hidden>
+    <header class="game-heading"><h2 id="game-credits-title" tabindex="-1">Credits</h2><p>ClockWerx (1995) · Callisto Corporation</p></header>
+    <div class="pict-credits-wrap">
+      <img id="game-credits-art" class="pict-art" hidden alt="ClockWerx original credits artwork">
+      <img id="game-logo-art" class="pict-art pict-logo" hidden alt="ClockWerx logo artwork">
+      <p id="game-credits-fallback" class="credits-fallback">ClockWerx — originally created by Callisto Corporation (1995). HTML5 modernization with full 100-level parity, multi-difficulty timing, two-player mode, and original audio.</p>
+    </div>
+    <footer class="game-footer"><button id="game-credits-back" class="game-button">Back</button><p id="game-credits-controls">Esc back</p></footer>
   </section>
   <section id="game-loading" class="game-plaque game-small" data-screen="loading" hidden><h2 id="game-loading-title" tabindex="-1">ClockWerx</h2></section>
   <p id="game-menu-status" role="status" hidden></p>

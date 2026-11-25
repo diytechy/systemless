@@ -729,7 +729,13 @@ function draw(){renderCalls++;const scale=resizeCanvas(canvas,window.devicePixel
   const p1Tag=game.player1Won?' ✓':game.player1Dead?' ✕':'';
   const p2Tag=game.player2Won?' ✓':game.player2Dead?' ✕':'';
   ctx.fillStyle='#ffe66b';ctx.fillText('P1'+p1Tag+':',422,49);
-  ctx.fillStyle='#e2e8f0';ctx.fillText('P2'+p2Tag+':',504,49);
+  const p2Pict=manifest.pictAssets?.player2?images[manifest.pictAssets.player2]:null;
+  if(p2Pict){
+   ctx.drawImage(p2Pict,502,38,57,13);
+   if(p2Tag){ctx.fillStyle='#e2e8f0';ctx.fillText(p2Tag.trim(),560,49);}
+  }else{
+   ctx.fillStyle='#e2e8f0';ctx.fillText('P2'+p2Tag+':',504,49);
+  }
   ctx.textAlign='right';
   ctx.fillStyle='#ffe66b';ctx.fillText(p1Score.toLocaleString(),492,62);
   ctx.fillStyle='#e2e8f0';ctx.fillText(p2Score.toLocaleString(),568,62);
@@ -1040,9 +1046,14 @@ async function load(){
   ]:Object.entries(manifest.groups).flatMap(([gid,g])=>gid==='401'?[]:gid==='300'?g.images.slice(0,16):g.images);
   const names=[...new Set([...foreground,manifest.backdrop,...(manifest.scenes||[]).map(s=>s.backdrop).filter(Boolean)])];
   await Promise.all(names.map(async name=>{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}));
+  const safeAssetName=f=>typeof f==='string'&&/^[A-Za-z0-9_.-]+$/.test(f)&&f!=='.'&&f!=='..';
+  const pictEntries=Object.entries(manifest.pictAssets||{}).filter(([,name])=>safeAssetName(name));
+  await Promise.all([...new Set(pictEntries.map(([,name])=>name))].map(async name=>{try{const im=new Image();im.src='./assets/'+name;await im.decode();images[name]=im;}catch{}}));
+  const loadedPictAssets=Object.fromEntries(pictEntries.filter(([,name])=>Boolean(images[name])));
   const scenes=manifest.scenes||[{id:'single',title:manifest.levelDefinition?.title||'Movement',levelDefinition:manifest.levelDefinition,checkedRoute:manifest.checkedRoute}];
   if(gameMode){
    gameScenes=new Map(scenes.map((scene,index)=>[scene.ordinal??index+1,scene]));
+   gameMenu.setPictAssets(loadedPictAssets);
    gameMenu.setScenes(scenes);
    gameMenu.setBusy(false);
    syncMusic();

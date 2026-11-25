@@ -192,5 +192,19 @@ class PilotPackagingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
         self.assertFalse((self.dist/'clockwerx-html5').exists())
 
+    def test_pict_assets_are_verified_and_copied(self):
+        pict=self.assets/'pict-title.png';pict.write_bytes(b'\x89PNG synthetic title')
+        self.manifest['files'].append(dict(name=pict.name,sha256=sha256_file(pict),bytes=pict.stat().st_size))
+        self.manifest['pictAssets']=dict(title='pict-title.png')
+        self.save_manifest()
+        package(self.dist,self.assets)
+        self.assertEqual((self.dist/'clockwerx-html5/assets/pict-title.png').read_bytes(),b'\x89PNG synthetic title')
+
+    def test_unlisted_pict_asset_is_rejected_before_copy(self):
+        self.manifest['pictAssets']=dict(title='missing-pict.png')
+        self.save_manifest()
+        with self.assertRaisesRegex(ValueError,'unverified asset'):package(self.dist,self.assets)
+        self.assertFalse((self.dist/'clockwerx-html5').exists())
+
 
 if __name__=='__main__':unittest.main()

@@ -73,7 +73,9 @@ test('controller buttons resolve to the actions of their current screen', () => 
   assert.equal(menuPadAction('scores', {flip: true}), 'previous-scores-tab');
   assert.equal(menuPadAction('scores', {bounce: true}), 'next-scores-tab');
   assert.equal(menuPadAction('scores', {swing: true}), 'activate');
-  for (const view of ['title', 'levels', 'pause', 'complete', 'scores', 'play', 'loading']) {
+  assert.equal(menuPadAction('credits', {reverse: true}), 'game-credits-back');
+  assert.equal(menuPadAction('credits', {levels: true}), 'game-credits-back');
+  for (const view of ['title', 'levels', 'pause', 'complete', 'scores', 'credits', 'play', 'loading']) {
     assert.equal(menuPadAction(view, {}), null);
   }
 });
@@ -158,20 +160,24 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     const scoresSection = makeNode('section', 'game-scores-screen');
     scoresSection.dataset.screen = 'scores';
     scoresSection.append(makeNode('h2', 'game-scores-title'));
-    root.append(titleSection, levelsSection, pauseSection, completeSection, scoresSection, loadingSection);
+    const creditsSection = makeNode('section', 'game-credits-screen');
+    creditsSection.dataset.screen = 'credits';
+    creditsSection.append(makeNode('h2', 'game-credits-title'));
+    root.append(titleSection, levelsSection, pauseSection, completeSection, scoresSection, creditsSection, loadingSection);
 
     for (const id of [
       'game-slots', 'game-level-grid', 'game-free-play', 'game-chapters', 'game-menu-status',
       'slot-confirm', 'slot-keep', 'slot-erase', 'slot-play', 'slot-levels', 'slot-hand', 'slot-sound',
-      'slot-music', 'slot-difficulty', 'slot-players', 'slot-scores', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
-      'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-complete-2p', 'game-complete-winner',
+      'slot-music', 'slot-difficulty', 'slot-players', 'slot-scores', 'slot-credits', 'slot-reset', 'slot-export', 'slot-controls', 'slot-confirm-label', 'game-level-back',
+      'game-level-controls', 'game-pause-level', 'game-complete-level', 'game-complete-art', 'game-complete-2p', 'game-complete-winner',
       'game-p1-label', 'game-p2-label', 'game-p1-summary', 'game-p2-summary', 'game-round-bonus',
       'game-finish-bonus', 'game-time-row', 'game-time-bonus', 'game-level-total', 'game-campaign-total', 'game-score-delta',
       'game-skill-rating', 'game-rating-banner', 'game-rating-title', 'game-rating-text',
       'game-initials-box', 'game-initials-prompt', 'initial-0', 'initial-1', 'initial-2', 'game-record-score',
-      'game-scores-tabs', 'game-scores-list', 'game-scores-back', 'game-scores-controls',
+      'game-scores-banner', 'game-scores-tabs', 'game-scores-list', 'game-scores-back', 'game-scores-controls',
+      'game-credits-art', 'game-logo-art', 'game-credits-fallback', 'game-credits-back', 'game-credits-controls',
       'game-complete-controls',
-    ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') || id.includes('initial-') || id === 'game-record-score' || id === 'game-scores-back' ? 'button' : 'div', id);
+    ]) makeNode(id === 'game-free-play' ? 'input' : id.includes('slot-') || id.includes('game-level-back') || id.includes('initial-') || id === 'game-record-score' || id === 'game-scores-back' || id === 'game-credits-back' ? 'button' : 'div', id);
 
     const pauseActions = makeNode('div', 'pause-actions');
     const pauseButtons = ['game-resume', 'game-restart', 'game-pause-levels', 'game-sound', 'game-music', 'game-hand', 'game-difficulty', 'game-players', 'game-pause-scores', 'game-save-slots'].map(id => makeNode('button', id));
@@ -323,6 +329,40 @@ test('completion plaque navigates with D-pad/stick and activates highlighted com
     menu.pad({pressed: {bounce: true}});
     menu.pad({pressed: {reverse: true}});
     assert.equal(menu.view, 'title');
+
+    // PICT assets wiring rejects unsafe filenames and supports controller Credits navigation + milestone art.
+    menu.setPictAssets({
+      title: 'pict-title.png', frame: 'pict-frame.png', topScores: 'pict-top-scores.png',
+      credits: '../escape.png', logo: 'bad")url(x)', completed: 'pict-completed.png',
+    });
+    assert.equal(byId.get('game-scores-banner').hidden, false);
+    assert.equal(byId.get('game-credits-art').hidden, true);
+    assert.equal(byId.get('game-logo-art').hidden, true);
+    assert.equal(byId.get('game-credits-fallback').hidden, false);
+
+    menu.setPictAssets({
+      title: 'pict-title.png', frame: 'pict-frame.png', topScores: 'pict-top-scores.png',
+      credits: 'pict-credits.png', logo: 'pict-logo.png', completed: 'pict-completed.png',
+    });
+    assert.equal(byId.get('game-credits-art').hidden, false);
+    assert.equal(byId.get('game-credits-fallback').hidden, true);
+    // Navigate from Title slots via controller D-pad down -> right x3 -> Credits -> Cross/A -> B back.
+    menu.show('title');
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'down', pressed: {}});
+    menu.pad({direction: 'right', pressed: {}});
+    menu.pad({direction: 'right', pressed: {}});
+    menu.pad({direction: 'right', pressed: {}});
+    assert.equal(document.activeElement.id, 'slot-credits');
+    menu.pad({pressed: {swing: true}});
+    assert.equal(menu.view, 'credits');
+    assert.equal(menu.boardVisible, false);
+    menu.pad({pressed: {reverse: true}});
+    assert.equal(menu.view, 'title');
+    menu.complete({level: 10, bonus: 0, levelTotal: 1000, campaignTotal: 10000, delta: 1000, nextLevel: 11});
+    assert.equal(byId.get('game-complete-art').hidden, false);
+    menu.complete({level: 11, bonus: 0, levelTotal: 1000, campaignTotal: 11000, delta: 1000, nextLevel: 12});
+    assert.equal(byId.get('game-complete-art').hidden, true);
   } finally {
     delete globalThis.document;
   }

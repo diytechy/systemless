@@ -13459,6 +13459,90 @@ fn standard_put_click_places_the_insertion_point_and_drag_selects() {
     assert!(disp.is_standard_file_put_tracking());
 }
 
+// Characterization of HomeHub WI-233 (Blobbo's Save once stored the game as
+// "s"; see docs/iterations/2026-11-11-ottertube-link/plan.md). This pins the
+// current behaviour, it does not endorse it:
+//
+// 1. Drop (the S key) is held to KeyThresh, so an auto-key for it is posted
+//    to the queue at the tick advance, with no Command bit (Command is up).
+// 2. Before the guest polls again, S goes up and Command-S goes down (the
+//    page releases Drop and its Save script presses Command-S in the same
+//    gap between frames).
+// 3. GetNextEvent selects the later key-down ahead of the earlier auto-key
+//    (Macintosh Toolbox Essentials, 1992, pp. 2-18--2-19: key-downs in FIFO
+//    order, then auto-keys), so the application opens Save first...
+// 4. ...and the auto-key, which survives its key's release by design
+//    (`autokey_is_posted_when_ticks_advance_before_the_next_poll`), is the
+//    next event the Save dialog reads: a plain "s" over the selected default
+//    name.
+//
+// Whether a real Mac can leave an auto-key queued behind a later key-down is
+// not settled here. If the Event Manager's auto-key model changes, flip the
+// final assertion and revisit Blobbo's save-name guard in
+// src/ottertube-games.json.
+#[test]
+fn standard_put_reads_an_auto_key_that_a_later_command_key_overtook() {
+    const S_KEY: u8 = 0x01;
+    const COMMAND_KEY: u8 = 0x37;
+    const CMD_MODIFIER: u16 = 0x0100;
+    let (mut disp, mut cpu, mut bus) = setup();
+    let base = bus.alloc(64 * 342);
+    disp.set_screen_mode_for_test(base, 64, 512, 342, 1);
+    disp.yield_for_ui = true;
+    disp.set_sent_open_app_event_for_test(true);
+
+    // Drop: the key-down reaches the game; S stays down to the threshold.
+    disp.push_key_down(S_KEY, b's');
+    let (what, _, _, _, _, _, delivered) =
+        disp.dequeue_toolbox_event(&mut cpu, &mut bus, 0xFFFF);
+    assert!(delivered && what == 3, "Drop's key-down is delivered");
+    let due = disp
+        .current_tick()
+        .wrapping_add(TrapDispatcher::AUTO_KEY_THRESHOLD_TICKS);
+    disp.set_tick_count_for_test(&mut bus, due);
+    disp.post_auto_key_if_due(
+        bus.read_word(addr::SYS_EVT_MASK),
+        bus.read_word(addr::KEY_REP_THRESH),
+    );
+
+    // Drop let go and Command-S pressed before the game polls again.
+    disp.push_key_up(S_KEY, b's');
+    disp.push_key_down(COMMAND_KEY, 0);
+    disp.push_key_down(S_KEY, b's');
+    let queued: Vec<_> = disp
+        .event_queue
+        .iter()
+        .map(|event| (event.what, event.modifiers & CMD_MODIFIER))
+        .collect();
+    assert_eq!(queued, [(5, 0), (3, CMD_MODIFIER)], "stale auto-key ahead");
+
+    // The game's GetNextEvent takes Command-S first, and opens Save.
+    let (what, message, _, _, _, modifiers, delivered) =
+        disp.dequeue_toolbox_event(&mut cpu, &mut bus, 0xFFFF);
+    assert!(delivered);
+    assert_eq!((what, message & 0xFF), (3, u32::from(b's')));
+    assert_ne!(modifiers & CMD_MODIFIER, 0, "Command-S overtook the auto-key");
+    disp.push_key_up(S_KEY, b's');
+    disp.push_key_up(COMMAND_KEY, 0);
+
+    let name_ptr = 0x320E00u32;
+    bus.write_pstring(name_ptr, b"Untitled");
+    bus.write_word(TEST_SP, 0x0005); // StandardPutFile selector
+    bus.write_long(TEST_SP + 2, 0x3201c0);
+    bus.write_long(TEST_SP + 6, name_ptr);
+    disp.dispatch_toolbox(true, 0x1EA, &mut cpu, &mut bus)
+        .unwrap()
+        .unwrap();
+    disp.dispatch_toolbox(true, 0x1EA, &mut cpu, &mut bus)
+        .unwrap()
+        .unwrap();
+    assert_eq!(
+        disp.standard_file_put_tracking.as_ref().unwrap().name,
+        "s",
+        "the stale auto-key replaced the selected default name"
+    );
+}
+
 // The insertion point of a name wider than the field isn't drawn past the
 // field's right edge, outside the dialog.
 #[test]

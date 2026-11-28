@@ -264,3 +264,76 @@ nothing, Sol one MEDIUM, fixed; round 7 recheck: both nothing).
   `D:\SystemlessBuild\ottertube-link\site\` (ready marker `macgames-build.json`); the
   list's key is outside every repository.
 - NOT proven: real OtterTube, a real https name, a real controller, real fingers, sound.
+
+## Blobbo's "s" save: cause investigation, 2026-11-28 (HomeHub WI-233)
+
+Question: why did Blobbo's Save once store the game as "s" (status of 2026-11-11 above)?
+Answer: a likely cause, shown in the emulator but not proven against the real game. No
+behaviour was changed; the guard stays.
+
+**Most likely cause (U for the real game, V for the emulator mechanism).** A stale
+auto-key for Drop, overtaken by Command-S:
+
+1. Drop (the S key) is held to KeyThresh (16 ticks, about 267 ms). At that tick advance
+   the emulator posts an auto-key "s" to the event queue, with no Command bit
+   (`post_auto_key_if_due`, `src/systems/macintosh/trap/event.rs`, called from
+   `advance_guest_tick` in `runner/mod.rs`). The run slice can end right after a tick
+   advance, so the game may not poll before the page's next input.
+2. In that gap the page lets go of S (the Save script takes the keys over) and the
+   script presses Command-S.
+3. The game's GetNextEvent picks the later key-down before the earlier auto-key: the
+   Event Manager ranks key-downs (FIFO) above auto-keys (`toolbox_event_priority`, per
+   Macintosh Toolbox Essentials pp. 2-18 to 2-19). The game opens Save.
+4. The auto-key outlives its key's release by design (existing test
+   `autokey_is_posted_when_ticks_advance_before_the_next_poll`), so the next event the
+   native Save dialog takes (`service_standard_file_put_tracking` pops the queue front)
+   is a plain "s". It replaces the selected "Untitled".
+
+Evidence:
+- Unit reproduction, committed as a characterization test:
+  `standard_put_reads_an_auto_key_that_a_later_command_key_overtook`
+  (`src/systems/macintosh/trap/toolbox/tests.rs`). It runs the four steps above against
+  the dispatcher and ends with the dialog's name "s". It records the present behaviour
+  and does not endorse it.
+- Timing fits the observation. The controller test holds B (Drop) for 250 ms, about 15
+  ticks, then releases B and presses R2 together
+  (`www/scripts/verify-ottertube-controls-cdp.mjs`, "blobbo by controller"). With
+  message latency, that release lands near the 16-tick threshold, which fits "once in
+  six tries".
+- The symptom is exact: one character over a fully selected default name, and that
+  character is Drop's.
+
+Ruled out (V, by reading the code; covered by existing tests where they exist):
+- Page key owners (`KeyOwners::transitions`, `src/controller_router.rs`): a script's
+  takeover sends S up before the script's Command-S, and a chord is let go in reverse
+  (S before Command).
+- Worker hold-down (`press`/`release`, `www/src/emulator-worker.js`, MIN_PRESS_TICKS 6):
+  a deferred release is applied before the same key goes down again. Command and S
+  pressed in one task share a start tick, and S's release is queued first.
+- Worker command queue (`postSystemlessWorkerCommand`, `www/src/browser_bridge.rs`):
+  order is kept. Only a trailing mouse move is coalesced.
+- Emulator key-down de-duplication (`push_key_down_with_threshold`): it drops a down only
+  while that key is still down. The page always sends the up first.
+- A Command-modified "s" reaching the dialog: the dialog ignores characters typed with
+  Command (`standard_file_put_key_action`). So the stray event was posted before Command
+  went down, which matches an auto-key from Drop.
+
+Not settled, and why nothing was changed:
+- Inside Macintosh says auto-keys are generated "while the original key is still held
+  down" and ranks them below key-downs, but does not say whether they sit in the OS
+  queue. The emulator queues them eagerly, keeps them after release (a deliberate,
+  tested choice), and still gives them the lower rank. That mix is what lets a later
+  key-down overtake an earlier auto-key, and it reaches all 61 games. Changing it needs
+  an Owner decision and a real-Mac reference. Possible changes: (a) keep a queued
+  auto-key in FIFO order with key events; (b) drop queued auto-keys when a new
+  non-modifier key-down is posted; (c) generate auto-keys only at poll time, while the
+  key is still down (this reverses the existing survive-release test).
+- Not reproduced with Blobbo itself: the game and the browser rig are not in this
+  environment.
+
+Guard decision: **the guard stays** (`save-confirm` in `src/ottertube-games.json`, test
+`blobbo_save_checks_the_name_before_it_confirms`). The cause is not fixed, and the
+guard handles this mechanism: the first dialog uses up the stale auto-key, and the
+retried dialog opens clean. The same gap could put any printable held key into a Save
+name, in any game whose Save comes from a script while a key may be held. If the
+emulator's auto-key model changes, flip the characterization test and review the guard.
